@@ -238,6 +238,10 @@ func comma_formatting() -> void:
 	var c_pct2: Array = UM.answer_match_candidates("1.5%")
 	must_have(c_pct2, "1.5 percent", "1.5% -> 1.5 percent")
 	must_have(c_pct2, "one point five percent", "1.5% -> the spelled-out decimal")
+	# The BARE number must NOT be a candidate: an "8%" answer would then blank
+	# the 8 in "8 AWG" and in "conductors numbered 8, 9 and 10", shredding
+	# unrelated pre-answer text. Verified by printing the redaction output.
+	t.check(not c_pct2.has("1.5"), "a percent answer does not contribute its bare number")
 
 
 # --------------------------------------------------------------------------

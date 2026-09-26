@@ -34,7 +34,12 @@ one as a child Godot process and reads its exit code. Slower than an in-process
 runner, but it exercises exactly the path a developer runs by hand, and one
 suite's failure cannot abort the rest.
 
-**Current status: 1042 checks, 0 failures, 16 documented product defects.**
+**Current status: 1129 checks, 0 failures, 0 documented product defects.**
+
+Every defect this suite used to pin has been fixed and promoted to a real
+assertion, so the count is now zero by construction — a defect that comes back
+fails the suite rather than hiding in the `defect()` list. `defect()` is still
+the right tool for the *next* one.
 
 ## Layout
 
@@ -117,9 +122,8 @@ thousands separators (`1200` <-> `1,200`), unit spellings, and the leading-`#` f
 **Assertions vs. documented defects.** A behaviour we assert goes through
 `check()`, and a failure is red. A *known* defect in the product goes through
 `defect()`, which prints the file, the actual output, the expected output, and
-how many real records it reaches — but does not fail the suite. That keeps the
-suite green and CI-able while making the bugs impossible to miss. **When you fix
-one, promote it to a `check()`.** There are 16 today.
+one, promote it to a `check()`.** There are none left — see the table below
+for what was closed and where the assertion now lives.
 
 **Never write `dict.get(k, "") or ""` in GDScript.** `or` is a *boolean*
 operator, so that expression yields `str(true) == "true"`, not a fallback. It
@@ -127,28 +131,29 @@ silently turns a whole-bank sweep into a sweep of the literal string `"true"`,
 which passes while testing nothing. Every test file here routes optional reads
 through a `field()` / `_str()` helper instead.
 
-## Known product defects found by this suite
+## Defects this suite found, and where they went
 
-All 16 are reproduced in the suite with exact actual/expected output. The ones
-that reach real bank data:
+All 16 are fixed and now asserted. The `defect()` pins that recorded them were
+removed, so a regression is red rather than a printed warning.
 
-| # | Where | What | Reach |
+| # | Where | What it was | Now asserted in |
 |---|---|---|---|
-| 1 | `speech_text.gd:127` | a lone `_` is not converted, so `R_total` is read aloud as an underscore | **2 live records** (`final-exam-#3-055`, `final-exam-#1-062`) reach the voice; the same subscripts appear in `reference_text` for both and in `info_tip` for ~18 more |
-| 2 | `speech_text.gd:94` | no foot-mark rule, so `"5'"` is narrated with a literal apostrophe | **14 narrated answer choices** (`final-exam-#3-013/-018/-035/-049`) plus the answer callout |
-| 3 | `table_viewer.gd:41` | `is_note_row` rejects `NOTE 1:`, contradicting its own docstring, so a numbered note renders as a data row | **1 live record** (`final-exam-#1-021`) — row count inflated, a 165-char sentence shown in a table cell |
-| 4 | `unit_matcher.gd:47` | a fractional inch answer gets no `N/M in.` candidate, so it cannot match the `15/16 in.` wording used everywhere | **1 live record** (`final-exam-#3-034`) — its answer is never highlighted |
-| 5 | `audio_explanation_generator.gd:8` | a 4-underscore blank leaves a stray `_` and the fill glues the answer to the next word | **1 live record** (`final-exam-#5-050`) |
-| 6 | `audio_explanation_generator.gd:192` | `Article__.` fills as `Article100.` with no space | **1 live record** (`final-exam-#3-058`) |
-| 7 | `audio_explanation_generator.gd:285` | `plain_words` has no plural entries, so plurals are narrated as code jargon | **26 of 279 records** (luminaires, ungrounded conductors, dwelling units, overcurrent devices, …) |
-| 8 | `question_bank.json` | `final-exam-#3-030` writes its blank as a single `_`, so the fill-in is invisible and the underscore is narrated | **1 live record** (a data bug, not a logic bug) |
-
-The rest (`unit_matcher` percent candidates, `speakable` Roman numerals above
-`X`, hyphenated mixed numbers, cable designations, `_strip_note_prefix` `NOTED:`)
-are latent — not reachable from today's bank, but recorded so a future edit that
-does reach them has a failing test waiting.
+| 1 | `speech_text.gd` | a lone `_` was read aloud as the word "underscore", so `R_total` reached the voice | `speakable("R_total = R / n")` -> `"R total = R / n"` |
+| 2 | `speech_text.gd` | no foot-mark rule, so `"5'"` was narrated with a raw apostrophe | `speakable("5'")` -> `"5 feet"`; a possessive (`the Code's`) stays whole |
+| 3 | `table_viewer.gd` | `is_note_row` rejected `NOTE 1:`, so a numbered note rendered as a data row | `is_note_row(["NOTE 1: x"])` is true; `_strip_note_prefix` and the classifier share `_is_note_separator` |
+| 4 | `unit_matcher.gd` | a fractional inch answer got no `N/M in.` candidate, so `15/16"` could not match its own reference text | `15/16"` -> `15/16 in.` / `15/16 inches`; the bank sweep asserts **0** records whose answer is unfindable |
+| 5 | `audio_explanation_generator.gd` | a 4-underscore blank left a stray `_` and glued the answer to the next word | `prompt_intent` / `prompt_with_answer` match `_{2,}`; `"a____at"` fills as `"a vapor seal at"` |
+| 6 | `audio_explanation_generator.gd` | `Article__.` filled as `Article100.` | fills as `Article 100.` — the run plus its surrounding space is replaced |
+| 7 | `audio_explanation_generator.gd` | `plain_words` had no plural entries, so 26 records narrated code jargon | `plain_words("Luminaires in dwelling units ...")` -> `"light fixtures in houses ..."` |
+| 8 | `question_bank.json` | `final-exam-#3-030` wrote its blank as a single `_`, invisible on screen and narrated | fixed in the data: `"... minimum of ___ lbs-inch"`; the bank has **0** lone underscores |
+| 9 | `speech_text.gd` | Roman `VIII`/`XII`/`XIII` degraded to `V3`/`X2`/`X3` | longest-first table behind a word boundary; a bare `I` in `W = E x I` is deliberately left alone |
+| 10 | `speech_text.gd` | `12/3` was read as "twelve thirds" | `12/3` -> `"12 slash 3"`, while `1/3` and `15/16` stay real fractions |
+| 11 | `speech_text.gd` | `1-1/4"` needed whitespace, so the hyphenated form was unconverted | hyphenated mixed numbers normalise to the spaced form |
+| 12 | `table_viewer.gd` | `_strip_note_prefix` ate 4 characters off any word starting with `note` | `strip("NOTED: x")` -> `"NOTED: x"` |
+| 13 | `unit_matcher.gd` | an `NN%` answer had no `N percent` candidate, so it was never redacted | `83%` -> `83 percent`, `eighty-three percent`. The **bare** number is deliberately excluded: as a candidate it blanked the 8 in `8 AWG` |
+| 14 | `speech_text.gd` | `unspaced_mixed` rewrote the live `15/16` fraction as `"1 and five sixteenths"` | the numerator is pinned to `1`, so `15/16 in.` stays `Fifteen sixteenths inches` |
 
 **The leak guarantee itself currently holds:** 0 of 279 records leak a surviving
-answer into any pre-answer field. The gaps found are in *fidelity* (a number that
-reads as a unit the TTS mangles, a lesson that cannot highlight its answer), not
-in the no-leak property.
+answer into any pre-answer field. The gaps that were found are now closed in
+fidelity as well — a number that reads as a unit the TTS mangles, and a lesson
+that could not highlight its own answer, are both fixed.

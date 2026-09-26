@@ -57,11 +57,17 @@ static func answer_match_candidates(answer: String) -> Array[String]:
 	# open-book-exam-#4-022); the field is post-answer today, so this closes a
 	# latent leak rather than a live one, but the candidate set is the same set
 	# the highlight and the redaction both key off.
+	#
+	# The BARE number ("83" for "83%") is deliberately NOT a candidate. It was
+	# tried and removed: redaction is boundary-anchored, so an "8%" answer blanked
+	# the 8 in "8 AWG" and the 8 in "conductors numbered 8, 9 and 10" -- shredding
+	# unrelated pre-answer text. Only forms that actually carry the percent
+	# meaning are offered.
 	var percent := RegEx.create_from_string("^\\s*([0-9]+(?:\\.[0-9]+)?)\\s*%\\s*$")
 	var pct_match := percent.search(direct)
 	if pct_match:
 		var pct_num := pct_match.get_string(1)
-		for pct_form in [pct_num + " percent", pct_num + " per cent", pct_num]:
+		for pct_form in [pct_num + " percent", pct_num + " per cent", pct_num + "%"]:
 			if not candidates.has(pct_form):
 				candidates.append(pct_form)
 		# The spelled-out number, e.g. "1.5%" -> "one point five percent".
