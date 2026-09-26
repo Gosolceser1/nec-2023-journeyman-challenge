@@ -1,0 +1,57 @@
+name: verify
+
+# Mirrors tools/verify.sh so the same checks run locally and in CI.
+# The Godot binary is committed-out (see .gitignore); CI downloads it.
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: windows-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Godot binary
+        id: godot-cache
+        uses: actions/cache@v4
+        with:
+          path: Godot_v4.7.2-stable_win64_console.exe
+          key: godot-4.7.2-console
+
+      - name: Download Godot (console build)
+        if: steps.godot-cache.outputs.cache-hit != 'true'
+        shell: pwsh
+        run: |
+          $url = "https://github.com/godotengine/godot/releases/download/4.7.2-stable/Godot_v4.7.2-stable_win64.exe.zip"
+          Invoke-WebRequest -Uri $url -OutFile godot.zip
+          Expand-Archive -Path godot.zip -DestinationPath . -Force
+          # The console wrapper is a separate small download.
+          $curl = "https://github.com/godotengine/godot/releases/download/4.7.2-stable/Godot_v4.7.2-stable_win64_console.exe"
+          Invoke-WebRequest -Uri $curl -OutFile Godot_v4.7.2-stable_win64_console.exe
+          Remove-Item godot.zip
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # The harness calls --script, which needs the editor binary, and
+      # headless rendering must initialise. No display needed on the runner.
+      - name: Verify (parse, unit, scene desktop, scene mobile, bank schema)
+        shell: bash
+        run: ./tools/verify.sh
+
+      - name: Archive Godot logs on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-logs
+          path: |
+            **/*.log
+          retention-days: 7

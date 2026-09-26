@@ -18,7 +18,19 @@ func field(rec: Dictionary, key: String) -> String:
 	return str(v)
 
 
+## SceneTree entry point. When the file is run on its own this calls run();
+## when run_all.gd drives it, the runner calls run() directly so a failing
+## assertion in one suite cannot abort the others.
 func _init() -> void:
+	# Standalone execution: run and set the exit code. The combined runner sets
+	# t_report.autostart_disabled so this becomes a no-op there (it calls run()).
+	if not t.run_suite_body():
+		return
+	run()
+	quit(0 if t.failures.is_empty() else 1)
+
+
+func run() -> void:
 	normalize_for_compare()
 	is_duplicate_text()
 	rule_adds_value()
@@ -30,7 +42,7 @@ func _init() -> void:
 	lesson_lines_and_format()
 	generate_explanation_shape()
 	known_defects()
-	report_and_quit()
+	report()
 
 
 # --------------------------------------------------------------------------
@@ -414,6 +426,5 @@ func aeg_plain(text: String) -> String:
 	return AEG.plain_words(text)
 
 
-func report_and_quit() -> void:
-	var res: Dictionary = t.report()
-	quit(0 if (res["failures"] as Array).is_empty() else 1)
+func report() -> void:
+	t.report()

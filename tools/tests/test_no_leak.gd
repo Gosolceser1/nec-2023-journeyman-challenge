@@ -48,7 +48,19 @@ func field(rec: Dictionary, key: String) -> String:
 	return str(v)
 
 
+## SceneTree entry point. When the file is run on its own this calls run();
+## when run_all.gd drives it, the runner calls run() directly so a failing
+## assertion in one suite cannot abort the others.
 func _init() -> void:
+	# Standalone execution: run and set the exit code. The combined runner sets
+	# t_report.autostart_disabled so this becomes a no-op there (it calls run()).
+	if not t.run_suite_body():
+		return
+	run()
+	quit(0 if t.failures.is_empty() else 1)
+
+
+func run() -> void:
 	redact_table()
 	redact_boundaries()
 	redact_word_answers()
@@ -58,7 +70,7 @@ func _init() -> void:
 	match_in_semantics()
 	bank_wide_sweep()
 	known_defects()
-	report_and_quit()
+	report()
 
 
 # --------------------------------------------------------------------------
@@ -413,6 +425,5 @@ func known_defects() -> void:
 		+ "spell the number in reference_text, but that field is post-answer only, so no leak today")
 
 
-func report_and_quit() -> void:
-	var res: Dictionary = t.report()
-	quit(0 if (res["failures"] as Array).is_empty() else 1)
+func report() -> void:
+	t.report()
