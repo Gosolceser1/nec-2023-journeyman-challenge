@@ -131,6 +131,15 @@ silently turns a whole-bank sweep into a sweep of the literal string `"true"`,
 which passes while testing nothing. Every test file here routes optional reads
 through a `field()` / `_str()` helper instead.
 
+**Never put `\t` in a GDScript double-quoted string.** GDScript recognises a
+much smaller escape set than C, and `"[ \t]"` is a *parse* error ("Invalid
+escape in string"), not a silent wrong answer. For a whitespace class write a
+literal tab inside the brackets, or use `\s`. A parse error in one of these
+files surfaces as `Could not preload resource script` in whatever *other* file
+preloads it — including the test suites, so the suite appears to break for an
+unrelated reason. Same trap applies to `\"` inside a `#` comment: it is fine,
+but a stray `"` in a comment is not.
+
 ## Defects this suite found, and where they went
 
 All 16 are fixed and now asserted. The `defect()` pins that recorded them were
