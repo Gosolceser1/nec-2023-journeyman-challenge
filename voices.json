@@ -1,0 +1,102 @@
+[
+  {
+    "label": "Ana \u00b7 US \u00b7 Female",
+    "id": "en-US-AnaNeural"
+  },
+  {
+    "label": "Andrew \u00b7 US \u00b7 Male",
+    "id": "en-US-AndrewNeural"
+  },
+  {
+    "label": "Aria \u00b7 US \u00b7 Female",
+    "id": "en-US-AriaNeural"
+  },
+  {
+    "label": "Ava \u00b7 US \u00b7 Female",
+    "id": "en-US-AvaNeural"
+  },
+  {
+    "label": "Brian \u00b7 US \u00b7 Male",
+    "id": "en-US-BrianNeural"
+  },
+  {
+    "label": "Christopher \u00b7 US \u00b7 Male",
+    "id": "en-US-ChristopherNeural"
+  },
+  {
+    "label": "Clara \u00b7 Canada \u00b7 Female",
+    "id": "en-CA-ClaraNeural"
+  },
+  {
+    "label": "Connor \u00b7 Ireland \u00b7 Male",
+    "id": "en-IE-ConnorNeural"
+  },
+  {
+    "label": "Emily \u00b7 Ireland \u00b7 Female",
+    "id": "en-IE-EmilyNeural"
+  },
+  {
+    "label": "Emma \u00b7 US \u00b7 Female",
+    "id": "en-US-EmmaNeural"
+  },
+  {
+    "label": "Eric \u00b7 US \u00b7 Male",
+    "id": "en-US-EricNeural"
+  },
+  {
+    "label": "Guy \u00b7 US \u00b7 Male",
+    "id": "en-US-GuyNeural"
+  },
+  {
+    "label": "Jenny \u00b7 US \u00b7 Female",
+    "id": "en-US-JennyNeural"
+  },
+  {
+    "label": "Liam \u00b7 Canada \u00b7 Male",
+    "id": "en-CA-LiamNeural"
+  },
+  {
+    "label": "Libby \u00b7 UK \u00b7 Female",
+    "id": "en-GB-LibbyNeural"
+  },
+  {
+    "label": "Maisie \u00b7 UK \u00b7 Female",
+    "id": "en-GB-MaisieNeural"
+  },
+  {
+    "label": "Michelle \u00b7 US \u00b7 Female",
+    "id": "en-US-MichelleNeural"
+  },
+  {
+    "label": "Mitchell \u00b7 New Zealand \u00b7 Male",
+    "id": "en-NZ-MitchellNeural"
+  },
+  {
+    "label": "Molly \u00b7 New Zealand \u00b7 Female",
+    "id": "en-NZ-MollyNeural"
+  },
+  {
+    "label": "Natasha \u00b7 Australia \u00b7 Female",
+    "id": "en-AU-NatashaNeural"
+  },
+  {
+    "label": "Roger \u00b7 US \u00b7 Male",
+    "id": "en-US-RogerNeural"
+  },
+  {
+    "label": "Ryan \u00b7 UK \u00b7 Male",
+    "id": "en-GB-RyanNeural"
+  },
+  {
+    "label": "Sonia \u00b7 UK \u00b7 Female",
+    "id": "en-GB-SoniaNeural"
+  },
+  {
+    "label": "Steffan \u00b7 US \u00b7 Male",
+    "id": "en-US-SteffanNeural"
+  },
+  {
+    "label": "Thomas \u00b7 UK \u00b7 Male",
+    "id": "en-GB-ThomasNeural"
+  }
+]

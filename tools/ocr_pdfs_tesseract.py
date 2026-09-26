@@ -1,0 +1,37 @@
+import subprocess
+from pathlib import Path
+
+import fitz
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = Path(r"C:\Users\vadim\AppData\Local\Temp\opencode\wire_tesseract")
+TESSERACT = Path(r"C:\Program Files\Tesseract-OCR\tesseract.exe")
+
+PDF_DIR = ROOT / "exams_source_pdf" if (ROOT / "exams_source_pdf").exists() else ROOT
+PDFS = [
+    path for path in PDF_DIR.glob("*.pdf")
+    if "answer key" not in path.name.lower()
+]
+
+OUT.mkdir(parents=True, exist_ok=True)
+
+for pdf_path in PDFS:
+    output_path = OUT / f"{pdf_path.stem}.txt"
+    if output_path.exists():
+        continue
+    document = fitz.open(pdf_path)
+    chunks = []
+    for page_number, page in enumerate(document, 1):
+        pixmap = page.get_pixmap(matrix=fitz.Matrix(2.0, 2.0), alpha=False)
+        image_path = OUT / f"{pdf_path.stem}__page_{page_number:03d}.png"
+        pixmap.save(image_path)
+        result = subprocess.run(
+            [str(TESSERACT), str(image_path), "stdout", "--psm", "6"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        chunks.append(f"=== PAGE {page_number} ===\n{result.stdout}")
+        image_path.unlink(missing_ok=True)
+    output_path.write_text("\n".join(chunks), encoding="utf-8")
+    print(f"OCR complete: {pdf_path.name} -> {output_path}")

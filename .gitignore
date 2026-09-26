@@ -1,0 +1,44 @@
+# Godot 4 — regenerate on open, never commit
+.godot/
+.import/
+export_presets.cfg.bak
+*.translation
+
+# Godot editor binaries live here but are 172MB of vendored toolchain.
+# Keep them out of history; re-download or re-link if you need them.
+/Godot_v*.exe
+/Godot_v*.zip
+
+# Build output
+/build/
+*.apk
+*.aab
+*.idsig
+*.pck
+*.exe
+*.TMP
+*.tmp
+
+# Generated speech is derived from question_bank.json + pregenerate_speech.py.
+# ~71MB of mp3s. Regenerate with: python tools/pregenerate_speech.py
+/speech/
+
+# Question-bank backups are throwaway; question_bank.json is the source of truth.
+/question_bank.bak*.json
+
+# Scratch output from OCR/audit tooling
+/tools/__pycache__/
+/tools/*.txt
+/tools/*.png
+/tools/*.png.import
+/tools/anomalies.json
+/tools/exam5_key_text.txt
+/tools/tables_out.txt
+/tools/out_*.txt
+
+# Local editor / OS noise
+.vscode/
+Thumbs.db
+desktop.ini
+.DS_Store
+*.log
