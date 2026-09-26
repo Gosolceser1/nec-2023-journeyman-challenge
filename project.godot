@@ -22,8 +22,15 @@ general/text_to_speech=true
 
 [input_devices]
 
-# Touch is handled directly (AnswerCard tracks ScreenTouch; Buttons and
-# ScrollContainers are touch-native). Mouse emulation would double-fire taps.
+; Touch is handled directly (AnswerCard tracks ScreenTouch; Buttons and
+; ScrollContainers are touch-native). Mouse emulation would double-fire taps.
+;
+; NOTE: these comments MUST start with ";", not "#". project.godot is parsed by
+; ConfigFile, whose only comment character is ";". With "#" the two comment lines
+; were glued onto the next setting's NAME, producing a junk key and leaving
+; emulate_mouse_from_touch at Godot's default of TRUE - which silently routes
+; every tap through the mouse branch in answer_card.gd, whose release handler
+; has no drag-slop check, so scrolling off an answer card selects it.
 pointing/emulate_mouse_from_touch=false
 pointing/emulate_touch_from_mouse=false
 

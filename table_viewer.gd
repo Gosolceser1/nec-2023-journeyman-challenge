@@ -42,13 +42,24 @@ static func is_note_row(row: Array) -> bool:
 	# NEC tables number their notes ("NOTE:", "NOTE 1:", "NOTE 2:", "NOTE No. 1:").
 	# Only matching the bare "NOTE:" prefix left numbered notes to be rendered as
 	# data rows, inflating the row count and hiding the note from the note strip.
+	#
+	# Do NOT strip_edges() before the prefix test: the separator IS the evidence.
+	# "NOTE 1:" -> " 1:" and "NOTE No. 1:" -> " NO. 1:". Testing the stripped form
+	# for a leading space is dead code (nothing follows strip_edges() with one),
+	# so every numbered note fell through as a data row - the exact bug the
+	# function was written to fix. Verified against final-exam-#1-021.
 	if row.size() != 1:
 		return false
 	var head := str(row[0]).strip_edges().to_upper()
 	if not head.begins_with("NOTE"):
 		return false
-	var rest := head.substr(4).strip_edges()
-	return rest == "" or rest.begins_with(" ") or rest.begins_with(":") or rest.begins_with(".")
+	# A data cell that merely starts with the letters NOTE (e.g. "NOTES ON
+	# SUPPLIES") is not a note row; a real note is "NOTE" then a separator.
+	var tail := head.substr(4)
+	if tail == "":
+		return true
+	var first := tail.substr(0, 1)
+	return first == ":" or first == " " or first == "." or first == ","
 
 static func preview_layout(rows: Array, max_scroll_height: float = 220.0) -> Dictionary:
 	var row_count := 0

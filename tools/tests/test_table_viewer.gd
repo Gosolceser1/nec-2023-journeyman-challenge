@@ -74,9 +74,14 @@ func is_note_row_classification() -> void:
 	# logged type error, so it is asserted as returning false without the noise.
 	t.eq(TV.is_note_row([["a"], ["b"]]), false, "is_note_row: a normal two-row table is not a note")
 
-	# The docstring promises numbered notes too -- this is the recorded defect.
-	t.eq(TV.is_note_row(["NOTE 1: text"]), false, "KNOWN DEFECT: 'NOTE 1:' is not classified as a note")
-	t.eq(TV.is_note_row(["NOTE No. 1: text"]), false, "KNOWN DEFECT: 'NOTE No. 1:' is not classified as a note")
+	# Numbered notes are now classified correctly. These were recorded as a
+	# defect pin (expecting false); the fix in is_note_row made them true, which
+	# is the intended behaviour, so the pins are gone rather than flipped.
+	t.eq(TV.is_note_row(["NOTE 1: text"]), true, "is_note_row: 'NOTE 1:' is a note row")
+	t.eq(TV.is_note_row(["NOTE No. 1: text"]), true, "is_note_row: 'NOTE No. 1:' is a note row")
+	# A data cell that merely begins with the letters NOTE is not a note.
+	t.eq(TV.is_note_row(["NOTES ON SUPPLIES"]), false, "is_note_row: 'NOTES ON SUPPLIES' is data, not a note")
+	t.eq(TV.is_note_row(["NOTED"]), false, "is_note_row: 'NOTED' is data, not a note")
 
 
 # --------------------------------------------------------------------------
@@ -256,23 +261,14 @@ func note_row_bank_consistency() -> void:
 			mismatch += 1
 	t.check(tables > 0, "the bank contains reference tables (got %d)" % tables)
 	t.eq(mismatch, 0, "preview_layout row counts agree with is_note_row for every table")
-	# The two numbered notes the docstring promises; pinned so a fix flips this.
-	t.eq(note_ids, ["final-exam-#1-021"],
-		"the only unclassified numbered note is the known is_note_row defect")
+	# Every numbered NEC note in the bank is now classified as a note. This was
+	# a defect pin expecting final-exam-#1-021 to slip through; the is_note_row
+	# fix closed it, so there is nothing left to list.
+	t.eq(note_ids, [], "no numbered NEC note in the bank is left unclassified")
 
 
 func known_defects() -> void:
 	print("=== known defects (documented, not failures) ===")
-	t.defect("table_viewer.gd:41 is_note_row",
-		"numbered NEC notes are not recognised, contradicting the function's own docstring "
-		+ "('NOTE 1:', 'NOTE No. 1:'), so they render as data rows and skip the note strip",
-		"is_note_row(['NOTE 1: x']) = " + str(TV.is_note_row(["NOTE 1: x"]))
-			+ " while _strip_note_prefix('NOTE 1: x') = '" + TV._strip_note_prefix("NOTE 1: x") + "'",
-		"is_note_row = true, routing the row to the note strip",
-		"1 live record: final-exam-#1-021. Its table's 'NOTE 1:' row is counted as data, so the "
-		+ "row count is inflated by 1 and a 165-character sentence is rendered in a table cell "
-		+ "instead of the note strip")
-
 	t.defect("table_viewer.gd:13 _strip_note_prefix",
 		"the prefix strip tests only 'begins_with(\"NOTE\")', so a word that merely STARTS "
 		+ "with 'note' has 3 characters cut off it",

@@ -176,13 +176,18 @@ var is_speaking := false
 # instead of relying on emulated mouse events.
 var _touch_press_index: int = -1
 var _touch_press_pos: Vector2 = Vector2.ZERO
+var _mouse_press_pos: Vector2 = Vector2.ZERO
 const TOUCH_SLOP_PX := 20.0
 
 func cancel_press() -> void:
 	# Called when a scroll starts under the finger: silently leave PRESSED.
-	if _touch_press_index >= 0 and current_state == State.PRESSED:
+	# The state must be reset too. This only cleared _touch_press_index and then
+	# called _apply_styling(), which re-applies the PRESSED style and leaves
+	# current_state == PRESSED - so a card whose release landed elsewhere kept
+	# the pressed fill forever, looking stuck.
+	if current_state == State.PRESSED:
 		_touch_press_index = -1
-		_apply_styling()
+		set_state(State.NORMAL)
 		pivot_offset = size / 2.0
 		var tw := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 		tw.parallel().tween_property(self, "scale", Vector2.ONE, 0.15)
@@ -414,14 +419,28 @@ func _on_gui_input(event: InputEvent) -> void:
 			cancel_press()
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		# Defence in depth for the mouse/emulated path. project.godot now really
+		# sets emulate_mouse_from_touch=false, so a real finger reaches the
+		# ScreenTouch branch above (which HAS a slop check). But this branch used
+		# to emit card_clicked unconditionally on release, so on a device where
+		# emulation was on - which it was, because "#" comments silently broke
+		# that project setting - dragging down the page to scroll committed an
+		# answer. Track the press position and refuse a release that moved.
 		if event.pressed:
+			if _touch_press_index < 0:
+				_mouse_press_pos = event.position
 			set_state(State.PRESSED)
 			var tween: Tween = create_tween()
 			tween.tween_property(self, "scale", Vector2(0.985, 0.985), 0.05)
 		else:
+			var moved: float = _mouse_press_pos.distance_to(event.position)
 			set_state(State.HOVER)
 			var tween: Tween = create_tween()
 			tween.tween_property(self, "scale", Vector2.ONE, 0.08)
+			if moved > TOUCH_SLOP_PX:
+				# A drag that ends here is a scroll, not a selection.
+				accept_event()
+				return
 			card_clicked.emit(option_index)
 	elif event.is_action_pressed("ui_accept"):
 		card_clicked.emit(option_index)
