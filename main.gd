@@ -223,7 +223,12 @@ func _load_bank() -> void:
 		return
 	var parsed = JSON.parse_string(file.get_as_text())
 	if parsed is Dictionary:
-		var source = parsed.get("records", parsed.get("questions", []))
+		# ONLY "records" is authoritative. The old fallback chain also accepted a
+		# top-level "questions" key, which holds the RAW pre-curation rows:
+		# un-redacted stems and answers in their original units (36" instead of
+		# "36 inches"). If "records" were ever missing, that fallback would have
+		# silently loaded stale, partly-unredacted data - a latent answer leak.
+		var source = parsed.get("records", [])
 		if source is Array:
 			for raw in source:
 				var record := _normalize_record(raw)

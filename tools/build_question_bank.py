@@ -2317,7 +2317,10 @@ for item in bank:
         "choice_notes": choice_notes_for(item[2]),
         "available": True,
     })
-payload = {"version": 2, "total_expected": 310, "playable": len(bank), "missing_source_items": missing, "audit_notes": report, "records": records, "questions": bank}
+# "questions" held the RAW pre-curation rows (un-redacted stems, original
+# units). main.gd read only "records"; keeping both doubled the file and left a
+# latent fallback to unredacted data. Curated rows only.
+payload = {"version": 2, "total_expected": 310, "playable": len(bank), "missing_source_items": missing, "audit_notes": report, "records": records}
 manifest = []
 for stem, source in SOURCES.items():
     count = 70 if "Final" in source else 25
