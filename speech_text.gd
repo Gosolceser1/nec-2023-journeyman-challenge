@@ -113,6 +113,21 @@ static func speakable(text: String) -> String:
 	inches.compile("(\\d+)\\s*\"")
 	spoken = inches.sub(spoken, "$1 inches", true)
 	spoken = spoken.replace("\"", "")
+	# Foot mark: "5'" -> "5 feet", mirroring the inch-mark path above. Without
+	# this the TTS read a literal apostrophe in 9 records' worth of narrated
+	# choices. Two guards keep it from mangling anything else: the mark must
+	# follow a digit, and must NOT be followed by a letter (that would be a
+	# possessive like "5's"). A feet-and-inches height "5'9\"" therefore becomes
+	# "5 feet 9 inches" -- the inch-mark rules above already converted the 9".
+	var feet_mark2 := RegEx.new()
+	feet_mark2.compile("(\\d+)\\s*'(?![A-Za-z])")
+	spoken = feet_mark2.sub(spoken, "$1 feet", true)
+	# A height reaches this point as "5 feet9 inches", because the inch-mark
+	# rules above already consumed the 9" and the mark between the two numbers
+	# was the apostrophe. Re-open the seam so the two units do not run together.
+	var feet_seam := RegEx.new()
+	feet_seam.compile("\\b(feet|foot)(\\d)")
+	spoken = feet_seam.sub(spoken, "$1 $2", true)
 	spoken = spoken.replace("srating", "stating")
 	spoken = spoken.replace("Article__", "which article")
 	spoken = spoken.replace("Article ___", "which article")
@@ -127,6 +142,17 @@ static func speakable(text: String) -> String:
 	var blank_run := RegEx.new()
 	blank_run.compile("_{2,}")
 	spoken = blank_run.sub(spoken, " blank ", true)
+	# A LONE underscore is a variable subscript, not a blank: "R_total" and
+	# "V_load" are formula symbols, and the TTS read them as the word
+	# "underscore" in 2 records. Only an underscore with a letter/digit on both
+	# sides is a subscript -- a lone "_" with a space or punctuation after it is
+	# a malformed bank blank (final-exam-#3-030) and must stay loud, because it
+	# is a DATA bug, not a notation one. Spoken as "R total" / "V load": the
+	# subscript's own name carries the meaning and the value is already in the
+	# formula around it.
+	var subscript := RegEx.new()
+	subscript.compile("(?<=[A-Za-z0-9])_(?=[A-Za-z])")
+	spoken = subscript.sub(spoken, " ", true)
 	var junk := RegEx.new()
 	junk.compile("\\s+\\.\\s+[a-zA-Z]\\s*$")
 	spoken = junk.sub(spoken, ".", true)
@@ -224,9 +250,41 @@ static func speakable(text: String) -> String:
 	volts.compile("(?i)\\b(\\d+)\\s*/\\s*(\\d+)\\s*v(?:olts)?\\b")
 	spoken = volts.sub(spoken, "$1 slash $2 volts", true)
 
+	# N/M cable designations (12/3, 10/2) are a conductor count over a
+	# live count, NOT a fraction -- the fraction rule below would have read
+	# them as "twelve thirds". Only a 2- or 3-conductor cable with a single- or
+	# double-digit count qualifies, which keeps every real fraction in the bank
+	# safe: the fractions there are 1/2, 1/3, 2/5, 15/16, 15/20, 40/100, 60/100
+	# and 120/240 (denominator outside 2-3, or numerator below 8). Verified: no
+	# live fraction has a numerator >= 8 with a denominator in {2, 3}.
+	#
+	# Replaced by "slash N/M" rather than a spoken digit-word, because the number
+	# of conductors is what the learner must hear ("12 slash 3 cable" is how
+	# electricians say it) and a digit word here would be indistinguishable from
+	# the fraction reading. The later fraction rule cannot match it: the token is
+	# now "slash"-prefixed, so no bare N/M remains.
+	var cable := RegEx.new()
+	cable.compile("(?<![\\d/])([89]|[1-9]\\d)/([23])(?![\\d/])")
+	spoken = cable.sub(spoken, "$1 slash $2", true)
+
+	# An unspaced mixed number ("11/2" typed for 1 1/2) needs a space before the
+	# mixed-number rule below can see it. The fraction numerator is pinned to "1"
+	# deliberately: an unspaced N 1/M is almost always a whole number plus one
+	# half/third/quarter, but "15/16" is a real inch fraction, not "1 5/16".
+	# Allowing any numerator here silently rewrote the live 15/16 in
+	# final-exam-#3-034 as "1 and five sixteenths". The spaced form ("3 5/16")
+	# never needed this rule.
 	var unspaced_mixed := RegEx.new()
-	unspaced_mixed.compile("(?<!\\d)([1-9])([1357])/([248]|16)(?!\\d)")
+	unspaced_mixed.compile("(?<![\\d/])([1-9])(1)/([248]|16)(?!\\d)")
 	spoken = unspaced_mixed.sub(spoken, "$1 $2/$3", true)
+
+	# A HYPHENATED mixed number (1-1/4") is the drafting form of 1 1/4". The
+	# mixed-number rule below needs whitespace, so normalise the hyphen to a
+	# space first. Only a FRACTION after the hyphen qualifies, so a numeric
+	# range ("100-400 A") is untouched.
+	var hyphen_mixed := RegEx.new()
+	hyphen_mixed.compile("\\b(\\d+)-(\\d+)/(\\d+)\\b")
+	spoken = hyphen_mixed.sub(spoken, "$1 $2/$3", true)
 
 	# 1. Mixed numbers: e.g. "1 1/8", "2 1/2", "3 5/16"
 	var mixed_num := RegEx.new()
@@ -340,9 +398,30 @@ static func speakable(text: String) -> String:
 		search_from = letter_hit.get_end()
 	spoken = rebuilt
 
-	spoken = spoken.replace("III", "3")
-	spoken = spoken.replace("II", "2")
-	spoken = spoken.replace("IV", "4")
+	# Roman numerals. A plain ordered string replace degrades "VIII" to "V3"
+	# (I -> nothing, then III -> 3), so the forms are matched longest-first
+	# behind a word boundary. Only the MULTI-character numerals are listed: a
+	# single "I"/"V"/"X" is real content in this bank (final-exam-#1-019 asks
+	# what the LETTER I represents in W = E x I, and "240 V" / "X-ray" are
+	# everywhere), so substituting those would corrupt live text. I, II and III
+	# are the only ones the bank actually uses today.
+	var roman := {
+		"VIII": "8", "XIII": "13", "XIV": "14", "XII": "12", "VII": "7",
+		"VI": "6", "XI": "11", "IX": "9", "IV": "4", "III": "3", "II": "2",
+	}
+	var roman_re := RegEx.new()
+	roman_re.compile("\\b(?:" + "|".join(PackedStringArray(roman.keys())) + ")\\b")
+	var roman_out := ""
+	var roman_from := 0
+	while true:
+		var roman_hit := roman_re.search(spoken, roman_from)
+		if roman_hit == null:
+			roman_out += spoken.substr(roman_from)
+			break
+		roman_out += spoken.substr(roman_from, roman_hit.get_start() - roman_from)
+		roman_out += str(roman.get(roman_hit.get_string(0), roman_hit.get_string(0)))
+		roman_from = roman_hit.get_end()
+	spoken = roman_out
 	spoken = spoken.replace("Class I", "class 1")
 	spoken = spoken.replace("class I", "class 1")
 	spoken = spoken.replace("#", "number ")

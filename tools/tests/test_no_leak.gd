@@ -416,13 +416,10 @@ func bank_wide_sweep() -> void:
 func known_defects() -> void:
 	print("=== known defects (documented, not failures) ===")
 	# A percent answer has NO word candidate, so the spelled-out form survives.
-	t.defect("unit_matcher.gd:10",
-		"a 'NN%' answer has no spelled-out candidate, so 'N percent' is not redacted",
-		"redact_answer_spans('83 percent of the rating', '83%') = '"
-			+ AEG.redact_answer_spans("83 percent of the rating", "83%") + "'",
-		"'___ percent of the rating' -- the number should be blanked too",
-		"3 bank records (final-exam-#1-036, open-book-exam-#1-006, open-book-exam-#4-022) "
-		+ "spell the number in reference_text, but that field is post-answer only, so no leak today")
+	# The percent-answer defect that used to be pinned here is FIXED: '83%' now
+	# yields the candidates '83 percent' and 'eighty-three percent', so the
+	# number is redacted wherever the reference text spells it. Asserted in
+	# test_unit_matcher.gd (percent_form_candidates) and swept above.
 
 
 func report() -> void:

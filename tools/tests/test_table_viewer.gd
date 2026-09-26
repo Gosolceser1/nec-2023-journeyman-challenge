@@ -102,7 +102,7 @@ func strip_note_prefix() -> void:
 		["NOTE 1. text", "1. text", "a '.' separator stops the number strip"],
 		["", "", "empty stays empty"],
 		["Just some text", "Just some text", "text without a NOTE prefix is untouched"],
-		["NOTED: x", "D: x", "KNOWN DEFECT: 'NOTED' is treated as a NOTE prefix"],
+		["NOTED: x", "NOTED: x", "'NOTED' is not a NOTE prefix, so nothing is stripped"],
 	]
 	for row in rows:
 		t.eq(TV._strip_note_prefix(row[0]), row[1], "strip(%s) [%s]" % [row[0], row[2]])

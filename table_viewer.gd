@@ -10,13 +10,29 @@ static func panel_style(fill: String, border: String, width: int, radius: int) -
 	style.set_corner_radius_all(radius)
 	return style
 
+## The characters that may follow the word NOTE in a real note row: a colon,
+## a number separator, or plain whitespace. Shared by is_note_row() and
+## _strip_note_prefix() so the classifier and the strip can never disagree --
+## that disagreement is what let a "NOTE 1:" row render as data while
+## "NOTED:" had its first four characters eaten.
+static func _is_note_separator(ch: String) -> bool:
+	return ch == ":" or ch == " " or ch == "." or ch == ","
+
 static func _strip_note_prefix(text: String) -> String:
 	# "NOTE: x" / "NOTE 1: x" / "NOTE No. 1: x" -> "x"
 	var out := text.strip_edges()
 	var upper := out.to_upper()
 	if not upper.begins_with("NOTE"):
 		return out
-	out = out.substr(4).strip_edges()
+	# "NOTE" must be the whole word. Without this test a cell beginning with a
+	# word that merely STARTS with "note" had 4 characters cut off it: "NOTED: x"
+	# became "D: x". is_note_row() already draws this line; the two must agree,
+	# because is_note_row decides whether the text is a note at all and this
+	# function decides what the note says.
+	var after_word := out.substr(4)
+	if after_word != "" and not _is_note_separator(after_word.substr(0, 1)):
+		return out
+	out = after_word.strip_edges()
 	# Drop a leading note number / label ("1:", "No. 1:").
 	while out != "":
 		if out.begins_with(":"):
@@ -58,8 +74,7 @@ static func is_note_row(row: Array) -> bool:
 	var tail := head.substr(4)
 	if tail == "":
 		return true
-	var first := tail.substr(0, 1)
-	return first == ":" or first == " " or first == "." or first == ","
+	return _is_note_separator(tail.substr(0, 1))
 
 static func preview_layout(rows: Array, max_scroll_height: float = 220.0) -> Dictionary:
 	var row_count := 0

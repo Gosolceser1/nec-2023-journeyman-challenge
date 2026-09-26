@@ -142,10 +142,31 @@ func length_conversions() -> void:
 	# only the inch/foot arms convert. Locked in so a future change is deliberate.
 	t.eq(str(UM.answer_match_candidates("1.5 m")), "[\"1.5 m\"]", "a metric answer is left alone")
 	t.check(UM.answer_match_candidates("1/2 inch").has("1/2 in."), "inch spelling variant")
-	# Fraction inches are NOT expanded (no rule for them), which is correct --
-	# there is no shorter form of 1/2 inch.
-	t.eq(str(UM.answer_match_candidates("1/2 inch")), "[\"1/2 inch\", \"1/2 in.\"]",
-		"1/2 inch has only the spelling variant")
+	# A FRACTIONAL inch answer gets its own N/M forms plus a feet equivalent.
+	# This used to return only the spelling variant, which is why final-exam-#3-034
+	# (answer 15/16", written "15/16 in." in its own reference_text) could never
+	# match itself and never highlighted. Verified against the live record.
+	var c_frac_half: Array = UM.answer_match_candidates("1/2 inch")
+	must_have(c_frac_half, "1/2 inches", "1/2 inch -> 1/2 inches")
+	must_have(c_frac_half, '1/2"', "1/2 inch -> bare inch mark")
+	must_have(c_frac_half, "0.04 ft", "1/2 inch -> feet equivalent")
+	var c_frac_916: Array = UM.answer_match_candidates('15/16"')
+	must_have(c_frac_916, "15/16 in.", '15/16" -> the 15/16 in. form used in reference_text')
+	must_have(c_frac_916, "15/16 inches", '15/16" -> the 15/16 inches form')
+	# A slash-voltage and a cable designation must NOT be swallowed by the
+	# fractional rule. Verified by printing the live candidate sets: both come
+	# back as a single element, and the fraction forms only appear for a real
+	# inch fraction.
+	t.eq(str(UM.answer_match_candidates("240/120 V")), "[\"240/120 V\"]",
+		"a slash-voltage is not an inch fraction")
+	t.eq(str(UM.answer_match_candidates("12/3")), "[\"12/3\"]",
+		"a bare 12/3 is a cable designation, not an inch fraction")
+	t.eq(str(UM.answer_match_candidates("10/2")), "[\"10/2\"]",
+		"a bare 10/2 is a cable designation, not an inch fraction")
+	# ...but an UNSPACED MIXED number with a non-cable numerator is a fraction:
+	# final-exam-#5-053 offers '41/2' (4 1/2), so 41 must not be read as a cable.
+	t.check(UM.answer_match_candidates("41/2").has("41/2 in."),
+		"41/2 is an unspaced mixed number, not a 41-conductor cable")
 
 
 # --------------------------------------------------------------------------
@@ -208,8 +229,15 @@ func comma_formatting() -> void:
 	must_have(c4, "4", "#4 -> 4")
 	must_have(c4, "4 VA", "#4 -> 4 VA")
 	t.eq(UM.answer_match_candidates("#6").has("6"), true, "#6 -> 6")
-	# A percent answer is opaque: no candidates beyond itself.
-	t.eq(str(UM.answer_match_candidates("83%")), "[\"83%\"]", "83% has no numeric twin (see the known defect)")
+	# A percent answer gets its phrase forms, so the number can be found in the
+	# "83 percent" wording the reference text actually uses. It used to return
+	# only itself, which meant a pre-answer "83 percent" was never redacted.
+	var c_pct: Array = UM.answer_match_candidates("83%")
+	must_have(c_pct, "83 percent", "83% -> 83 percent")
+	must_have(c_pct, "eighty-three percent", "83% -> the spelled-out form")
+	var c_pct2: Array = UM.answer_match_candidates("1.5%")
+	must_have(c_pct2, "1.5 percent", "1.5% -> 1.5 percent")
+	must_have(c_pct2, "one point five percent", "1.5% -> the spelled-out decimal")
 
 
 # --------------------------------------------------------------------------
@@ -294,35 +322,17 @@ func bank_candidate_sweep() -> void:
 			nowhere_ids.append(_str(rec2.get("id", "")))
 			if nowhere <= 10:
 				print("  answer %s appears NOWHERE in record %s" % [ans2, _str(rec2.get("id", ""))])
-	t.eq(nowhere_ids, ["final-exam-#3-034"],
-		"the only record whose answer is unfindable anywhere is the known fractional-inch defect")
+	t.eq(nowhere_ids, [],
+		"every record's answer is findable somewhere in its own teaching material")
 
 
 func known_defects() -> void:
 	print("=== known defects (documented, not failures) ===")
-	# DEFECT: a FRACTIONAL inch answer has no candidate in the "N/M in." spelling,
-	# so it cannot match the very text that states it.
-	t.defect("unit_matcher.gd:47 number_pattern",
-		"a fractional inch answer ('15/16\"') gets no 'N/M in.' candidate, so it cannot match "
-		+ "the '15/16 in.' / '15/16 inch' wording used in every text field",
-		"candidates('15/16\\\"') = " + str(UM.answer_match_candidates("15/16\""))
-			+ "; find_match_in('not less than 15/16 in. deep.', '15/16\\\"') = "
-			+ str(preload("res://audio_explanation_generator.gd").find_match_in("not less than 15/16 in. deep.", "15/16\"")),
-		"'15/16 in.' and '15/16 inch' should be candidates, as they already are for whole inches ('12\\\"' -> '12 in.')",
-		"1 live record: final-exam-#3-034 (answer '15/16\"'). The post-answer table/text highlight "
-		+ "and the answer-bearring lesson line both fail to find it, so this question never "
-		+ "highlights its answer. The '1\\\"' distractor in the same record is a whole inch and works.")
-
-	# DEFECT: a percent answer has no numeric twin, so its spelled-out form leaks.
-	t.defect("unit_matcher.gd:10",
-		"a 'NN%' answer has no numeric candidate, so 'N percent' is not redacted",
-		"candidates('83%') = " + str(UM.answer_match_candidates("83%"))
-			+ "; redact_answer_spans('83 percent of the rating', '83%') = '"
-			+ preload("res://audio_explanation_generator.gd").redact_answer_spans("83 percent of the rating", "83%") + "'",
-		"'___ percent of the rating' -- the number should be blanked too",
-		"3 bank records spell the number in reference_text (final-exam-#1-036, "
-		+ "open-book-exam-#1-006, open-book-exam-#4-022), but that field is post-answer only, "
-		+ "so there is no pre-answer leak today")
+	# The fractional-inch and percent-answer defects that used to be pinned here
+	# are FIXED and are now asserted as behaviour in the suites above:
+	#   - '15/16"' -> '15/16 in.' / '15/16 inches' (final-exam-#3-034 now
+	#     highlights its own answer; the whole-bank sweep asserts 0 unfindable).
+	#   - '83%' -> '83 percent' / 'eighty-three percent' (redaction + highlight).
 
 
 func report() -> void:

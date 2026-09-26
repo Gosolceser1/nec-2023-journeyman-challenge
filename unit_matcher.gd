@@ -7,6 +7,24 @@ static func format_answer_number(value: float) -> String:
 		return str(int(roundf(value)))
 	return String.num(value, 2).trim_suffix("0").trim_suffix(".")
 
+## Spells 0-99 the way the NEC reference text writes them, so a percent answer
+## can be matched against "eighty-three percent" as well as "83 percent".
+## Returns "" above 99, which simply means no spelled candidate is offered --
+## a number that large is not written out in a table note.
+static func _spell_small(n: int) -> String:
+	var ones := ["zero", "one", "two", "three", "four", "five", "six", "seven",
+		"eight", "nine", "ten", "eleven", "twelve", "thirteen", "fourteen",
+		"fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+	if n < 0 or n > 99:
+		return ""
+	if n < 20:
+		return str(ones[n])
+	var tens := ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy",
+		"eighty", "ninety"]
+	if n % 10 == 0:
+		return str(tens[n / 10])
+	return str(tens[n / 10]) + "-" + str(ones[n % 10])
+
 static func answer_match_candidates(answer: String) -> Array[String]:
 	var candidates: Array[String] = []
 	var direct := answer.strip_edges().replace("’", "'").replace("″", "\"")
@@ -31,6 +49,36 @@ static func answer_match_candidates(answer: String) -> Array[String]:
 		if direct_num_only == word_numbers[num_key] and not candidates.has(num_key):
 			candidates.append(num_key)
 
+	# A PERCENT answer ("83%", "1.5%") is a number the reference text usually
+	# spells as a word -- "83 percent", "eighty-five percent". Neither the
+	# percent sign nor the spelled-out form is a candidate without this branch,
+	# so the number survived redaction whenever it was written as a phrase.
+	# 3 records spell it that way (final-exam-#1-036, open-book-exam-#1-006,
+	# open-book-exam-#4-022); the field is post-answer today, so this closes a
+	# latent leak rather than a live one, but the candidate set is the same set
+	# the highlight and the redaction both key off.
+	var percent := RegEx.create_from_string("^\\s*([0-9]+(?:\\.[0-9]+)?)\\s*%\\s*$")
+	var pct_match := percent.search(direct)
+	if pct_match:
+		var pct_num := pct_match.get_string(1)
+		for pct_form in [pct_num + " percent", pct_num + " per cent", pct_num]:
+			if not candidates.has(pct_form):
+				candidates.append(pct_form)
+		# The spelled-out number, e.g. "1.5%" -> "one point five percent".
+		var parts := pct_num.split(".")
+		var spelled := ""
+		if parts.size() == 2:
+			var ones := _spell_small(int(parts[0]))
+			var tenths := _spell_small(int(parts[1]))
+			if ones != "" and tenths != "":
+				spelled = ones + " point " + tenths
+		else:
+			spelled = _spell_small(int(pct_num))
+		if spelled != "":
+			for pct_word_form in [spelled + " percent", spelled + " per cent"]:
+				if not candidates.has(pct_word_form):
+					candidates.append(pct_word_form)
+
 	# Fractional feet / inches handling (e.g. 2 1/2 feet <-> 30 in. / 30")
 	var fraction_feet := RegEx.create_from_string("^([0-9]+)\\s+1/2\\s*(?:feet|foot|ft|ft\\.|')?$")
 	var ff_match := fraction_feet.search(direct.to_lower())
@@ -44,6 +92,50 @@ static func answer_match_candidates(answer: String) -> Array[String]:
 		candidates.append(in_text)
 
 	var direct_clean := direct.replace(",", "")
+	# A FRACTIONAL answer like 15/16" or 1/2 inch must be handled before the
+	# plain-number pattern below: that pattern matches the leading "15" and then
+	# reads "/16 in." as a unit, so the fraction never got a candidate and the
+	# reference wording ("15/16 in.") could not match its own answer -- that is
+	# why final-exam-#3-034 never highlighted its own 15/16" answer.
+	#
+	# The denominator must be a REAL inch fraction (2,3,4,8,16,32,64).
+	# Without that guard this rule also swallowed the slash-voltage "240/120 V",
+	# verified by printing the candidate sets.
+	#
+	# A BARE "N/2" or "N/3" with no unit is ambiguous: it is either an unspaced
+	# mixed number (the bank has '41/2' in final-exam-#5-053, meaning 4 1/2) or a
+	# N-conductor cable designation (12/3, 10/2). The tie is broken on the
+	# numerator: NEC cable sizes are 8, 10, 12 and 14, so only those are read as
+	# a cable. A numerator outside that set stays a fraction, which keeps
+	# '41/2' correct while '12/3' keeps only its own form.
+	var frac_answer := RegEx.create_from_string("^\\s*(\\d+)\\s*/\\s*(2|3|4|8|16|32|64)\\s*(\"|''|in\\.?|inch|inches)?\\s*$")
+	var frac_match := frac_answer.search(direct.to_lower())
+	if frac_match:
+		var f_num := frac_match.get_string(1)
+		var f_den := frac_match.get_string(2)
+		var f_unit := frac_match.get_string(3)
+		var looks_like_cable := f_unit == "" and (f_den == "2" or f_den == "3") \
+			and ["8", "10", "12", "14"].has(f_num)
+		if not int(f_num) == 0 and not int(f_den) == 0 and not looks_like_cable:
+			var frac_forms: Array[String] = [f_num + "/" + f_den]
+			for spelling in [f_num + "/" + f_den + " in.", f_num + "/" + f_den + " inches",
+					f_num + "/" + f_den + " inch", f_num + "/" + f_den + "\"",
+					f_num + "/" + f_den]:
+				if not frac_forms.has(spelling):
+					frac_forms.append(spelling)
+			for form in frac_forms:
+				if not candidates.has(form):
+					candidates.append(form)
+			# Feet equivalent, for the times a table states the depth in feet.
+			var total_in := float(f_num) / float(f_den)
+			var feet_val := total_in / 12.0
+			if not is_equal_approx(feet_val, 0.0):
+				for ft_form in [format_answer_number(feet_val) + " ft",
+						format_answer_number(feet_val) + " feet"]:
+					if not candidates.has(ft_form):
+						candidates.append(ft_form)
+			return candidates
+
 	var number_pattern := RegEx.create_from_string("^\\s*#?([0-9]+(?:\\.[0-9]+)?)\\s*(.*?)\\s*$")
 	var number_match := number_pattern.search(direct_clean)
 	if number_match == null:

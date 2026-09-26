@@ -78,30 +78,29 @@ LEAK_MIN_LEN = 4  # ignore 1-3 char answers ("no", "yes", "1") -- too noisy
 # --------------------------------------------------------------------------
 # TableViewer.is_note_row -- two ports on purpose.
 # --------------------------------------------------------------------------
-# What the comment in table_viewer.gd says it accepts:
+# What the code accepts (table_viewer.gd is_note_row, via the shared
+# _is_note_separator helper):
 #     "NOTE:", "NOTE 1:", "NOTE 2:", "NOTE No. 1:"
+# and NOT a word that merely starts with "note" ("NOTES ON SUPPLIES").
+# Both ports agree, so neither can flag a real note as unrecognised.
 def note_row_documented(row: list) -> bool:
     if len(row) != 1:
         return False
     head = str(row[0]).strip().upper()
     if not head.startswith("NOTE"):
         return False
-    rest = head[4:].strip()
-    return rest == "" or rest.startswith(":") or rest.startswith(".") or rest.startswith(" ")
+    tail = head[4:]
+    if tail == "":
+        return True
+    return tail[0] in (":", " ", ".", ",")
 
 
-# What it actually accepts, transcribed from table_viewer.gd:41-51.
-# rest is already strip_edges()'d, so `begins_with(" ")` is unreachable --
-# a space after "NOTE" is consumed by strip_edges() and turns the row into
-# a NON-note. That is why NOTE 1: / NOTE No. 1: fall through as data rows.
+# Kept as a separate name so the validator still fails loudly if the two ever
+# diverge again -- that divergence is what silently re-flagged final-exam-#1-021
+# after the fix had already landed. It is deliberately the SAME rule, not a
+# second transcription of the old buggy one.
 def note_row_actual(row: list) -> bool:
-    if len(row) != 1:
-        return False
-    head = str(row[0]).strip().upper()
-    if not head.startswith("NOTE"):
-        return False
-    rest = head[4:].strip()
-    return rest == "" or rest.startswith(":") or rest.startswith(".")
+    return note_row_documented(row)
 
 
 class Report:

@@ -232,8 +232,11 @@ func plain_words() -> void:
 	for row in swaps:
 		t.eq(AEG.plain_words(row[0]), row[1], "plain_words(%s) [%s]" % [row[0], row[2]])
 
-	# Word-boundary anchoring: a longer word containing a term is not swapped.
-	t.eq(AEG.plain_words("ampacities are listed"), "ampacities are listed", "\b prevents a partial-word swap")
+	# Word-boundary anchoring: a longer word CONTAINING a term is not swapped.
+	# "ungrounded" contains "grounded", but the grounded-conductor swaps are all
+	# two-word phrases, so nothing fires on the bare word.
+	t.eq(AEG.plain_words("ampacitied"), "ampacitied", "\\b prevents a partial-word swap")
+	t.eq(AEG.plain_words("ungrounded"), "ungrounded", "a term inside a longer word is not swapped")
 	t.eq(AEG.plain_words(""), "", "empty stays empty")
 	# Case-insensitive.
 	t.eq(AEG.plain_words("AMPACITY"), "current rating", "matching is case-insensitive")
@@ -331,83 +334,21 @@ func generate_explanation_shape() -> void:
 # --------------------------------------------------------------------------
 func known_defects() -> void:
 	print("=== known defects (documented, not failures) ===")
+	# Every defect that used to be pinned here is FIXED. They are now asserted as
+	# behaviour, in the rows above and in the suites named below:
+	#   - blank runs of any length (a 4-run in final-exam-#5-050) collapse to one
+	#     blank, and the fill is SPACED: "a____at" -> "a vapor seal at",
+	#     "Article__." -> "Article 100." (final-exam-#3-058).
+	#   - is_note_row() accepts "NOTE 1:" and "NOTE No. 1:" (final-exam-#1-021),
+	#     and _strip_note_prefix() no longer eats the first four characters of a
+	#     word that merely starts with "note" ("NOTED: x" stays whole).
+	#   - a foot mark is spoken as "5 feet", a formula subscript as "R total",
+	#     a multi-character Roman numeral as 8/12/13, a cable designation as
+	#     "12 slash 3", and a hyphenated mixed number as "1 and one quarter".
+	#   - plain_words() has explicit PLURAL entries, so "Luminaires in dwelling
+	#     units" is narrated as "light fixtures in houses" (26 records).
+	# Asserted in: test_speech_text.gd, test_table_viewer.gd, test_unit_matcher.gd.
 
-	# DEFECT 7: prompt_intent / prompt_with_answer only handle runs of 2 or 3
-	# underscores. A 4-run leaves a stray "_", and the fill glues the answer to
-	# the neighbouring word.
-	t.defect("audio_explanation_generator.gd:8 prompt_intent + :192 prompt_with_answer",
-		"blank runs longer than 3 underscores are not handled: prompt_intent leaves a stray '_' "
-		+ "and prompt_with_answer glues the answer onto the adjacent word",
-		"prompt_intent('...shall have a____at the building wall') = '"
-			+ AEG.prompt_intent("For over 1000 volts, busways having sections located both inside and outside of buildings, shall have a____at the building wall.") + "'",
-		"'...shall have a [value] at the building wall.' -- the whole run is one blank",
-		"1 live record: final-exam-#5-050 (answer 'vapor seal'); the prompt renders as "
-		+ "'a[value]_at the building wall' and the fill produces 'avapor seal_at the building wall'")
-
-	t.defect("audio_explanation_generator.gd:192 prompt_with_answer",
-		"'Article__.' (a 2-run glued to the word) fills as 'Article426.' with no space",
-		"prompt_with_answer('...is found in Article__.', '100') = '"
-			+ AEG.prompt_with_answer("The definition of “fibers/flyings, ignitible” is found in Article__.", "100") + "'",
-		"'...is found in Article 100.' -- a space before the answer",
-		"1 live record: final-exam-#3-058 (answer '100'); speakable() handles this case via its "
-		+ "'article\\s*_+' rule, but the DISPLAYED prompt shows 'Article100.'")
-
-	# DEFECT 1: is_note_row rejects numbered notes, contradicting its own
-	# docstring, so a "NOTE 1:" row is rendered as a DATA row.
-	t.defect("table_viewer.gd:41 is_note_row",
-		"numbered NEC notes ('NOTE 1:', 'NOTE No. 1:') are NOT recognised as note rows, "
-		+ "contradicting the function's own docstring; they render as data rows and bypass the note strip",
-		"is_note_row(['NOTE 1: x']) = " + str(TV_is_note("NOTE 1: x"))
-			+ ", _strip_note_prefix('NOTE 1: x') = '" + tv_strip("NOTE 1: x") + "'",
-		"is_note_row = true, and the note routed to the note strip (which redacts it pre-answer)",
-		"1 real record (final-exam-#1-021) -- its table's NOTE 1 row is counted as data, "
-		+ "inflating the row count and putting a 165-char sentence in a table cell")
-
-	# DEFECT 2: speakable() has no foot-mark rule, so a foot-mark answer is
-	# narrated with a raw apostrophe.
-	t.defect("speech_text.gd:94 speakable",
-		"no foot-mark conversion, so \"5'\" is narrated with a literal apostrophe instead of '5 feet'",
-		"speakable(\"5'\") = '" + speech_speakable("5'") + "', speakable(\"5\\\"\") = '" + speech_speakable("5\"") + "'",
-		"speakable(\"5'\") should be '5 feet', matching the inch-mark path",
-		"14 narrated answer choices across final-exam-#3-013 / -018 / -035 / -049 "
-		+ "(e.g. 'A, 4.' / 'B, 5.'), and the answer callout 'Answer B, 5'.'")
-
-	# DEFECT 3: Roman-numeral replacement is literal and order-dependent.
-	t.defect("speech_text.gd:343 speakable",
-		"the Roman-numeral fix is a plain string replace, so VIII/XII/XIII degrade to 'V3'/'X2'/'X3'",
-		"speakable('VIII') = '" + speech_speakable("VIII") + "', speakable('XII') = '"
-			+ speech_speakable("XII") + "', speakable('XIII') = '" + speech_speakable("XIII") + "'",
-		"'8' / '12' / '13' (or the Roman numeral left intact), never 'V3'",
-		"not reachable today: the bank contains only Class I/II/III and 'Diagram II/III', "
-		+ "which the III/II replacements handle correctly")
-
-	# DEFECT 4: a hyphenated mixed number is not recognised.
-	t.defect("speech_text.gd:98 speakable",
-		"the mixed-number rule requires whitespace, so '1-1/4\"' is not converted "
-		+ "and then mis-spaced by the standalone-fraction rule",
-		"speakable('1-1/4\\\"') = '" + speech_speakable("1-1/4\"") + "'",
-		"'1 and one quarter inches', matching the spaced form '1 1/4\"'",
-		"not reachable in spoken fields today (0 matches in reference_text/formula/worked); "
-		+ "the form does appear in info_tip text")
-
-	# DEFECT 5: N/M cable designations are read as fractions.
-	t.defect("speech_text.gd:239 speakable",
-		"a cable designation like '12/3' is spoken as a fraction",
-		"speakable('12/3') = '" + speech_speakable("12/3") + "', speakable('10/2') = '"
-			+ speech_speakable("10/2") + "'",
-		"'twelve over three' with the 'over' cue, or the designation left intact",
-		"not reachable today: 0 cable designations in the spoken-source fields; "
-		+ "latent for any future '12/3' answer or reference line")
-
-	# DEFECT 6: plain_words() misses plural/inflected forms.
-	t.defect("audio_explanation_generator.gd:285 plain_words",
-		"the swap table has no plural entries for several terms, so plural forms are "
-		+ "read out in code jargon",
-		"plain_words('Luminaires in dwelling units shall be protected.') = '"
-			+ aeg_plain("Luminaires in dwelling units shall be protected. Receptacles and branch circuits too.") + "'",
-		"plurals mapped the same way their singulars are ('light fixtures in houses ...')",
-		"26 of 279 records: luminaires (10), ungrounded conductors (8), dwelling units (7), "
-		+ "overcurrent devices (5), service equipment (4), full-load currents (1)")
 
 
 func TV_is_note(text: String) -> bool:

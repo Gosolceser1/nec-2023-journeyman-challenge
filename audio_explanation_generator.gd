@@ -7,11 +7,13 @@ const ANSWER_LETTERS := ["A", "B", "C", "D"]
 
 static func prompt_intent(prompt: String) -> String:
 	var clean := prompt.strip_edges()
-	if clean.contains("___"):
-		return clean.replace("___", "[value]")
-	if clean.contains("__"):
-		return clean.replace("__", "[value]")
-	return clean
+	# ANY run of 2+ underscores is one blank. Matching the literal "___" and then
+	# "__" left a stray "_" on longer runs: a 4-underscore blank in the bank
+	# rendered as "a[value]_at the building wall" (final-exam-#5-050), and the
+	# stray underscore then reached the voice as the word "underscore".
+	var blank := RegEx.new()
+	blank.compile("_{2,}")
+	return blank.sub(clean, "[value]", true)
 
 static func generate_explanation(record: Dictionary, answer: String = "") -> Dictionary:
 	var prompt := str(record.get("prompt", "")).strip_edges()
@@ -190,10 +192,33 @@ static func lesson_point(prompt: String, body: String, worked: String, answer: S
 	return answer
 
 static func prompt_with_answer(prompt: String, answer: String) -> String:
-	if prompt.contains("___"):
-		return prompt.replace("___", answer)
-	if prompt.contains("__"):
-		return prompt.replace("__", answer)
+	# Any run of 2+ underscores is one blank, and the answer must be SPACED away
+	# from whatever word the run was glued to. Two live records needed this:
+	# "a____at" (final-exam-#5-050) filled as "avapor seal_at" because the run
+	# was a 4-underscore the old "__" branch never matched, and "Article__."
+	# (final-exam-#3-058) filled as "Article100." with no space.
+	#
+	# The run's own surrounding whitespace is consumed with it, so a blank that
+	# already had a space on one side ("___ volts") does not gain a second one.
+	# The whitespace class is written as a literal tab inside the class -- GDScript
+	# has no 	 escape in a double-quoted string, so "[ 	]" is a syntax error.
+	var blank_run := RegEx.new()
+	blank_run.compile("[ 	]*_{2,}[ 	]*")
+	var filled := blank_run.sub(prompt, " " + answer + " ", true)
+	if filled != prompt:
+		# A blank at the very start or end would leave a leading/trailing space,
+		# and one sitting in front of punctuation ("on the ___." -> "on the front.")
+		# would put a space before the full stop. Tidy both.
+		filled = filled.strip_edges()
+		for punct in [".", ",", ";", ":", "?", "!"]:
+			filled = filled.replace(" " + punct, punct)
+		# An EMPTY answer deliberately leaves a double space, so the gap where the
+		# blank was stays visible on screen instead of the words closing up into
+		# "Value is volts." Collapsing runs would hide the missing answer, so the
+		# tidy-up is skipped in that one case.
+		if answer.strip_edges() == "":
+			return filled
+		return filled.replace("  ", " ").strip_edges()
 	var trimmed := prompt.strip_edges()
 	if trimmed.ends_with("..."):
 		return trimmed.trim_suffix("...").strip_edges() + " " + answer + "."
@@ -283,22 +308,39 @@ static func redact_answer_spans(text: String, answer: String) -> String:
 	return out
 
 static func plain_words(text: String) -> String:
+	# ORDER MATTERS: the longest / most specific phrase must come first, because
+	# each entry is applied as a whole-word regex substitution in sequence. A
+	# later, shorter entry can still fire on text an earlier one already
+	# rewrote, so the singulars that are prefixes of a plural must be harmless.
+	# The PLURAL forms are listed explicitly next to their singulars: the swap
+	# table is applied with \b...\b, and "receptacle outlets" is two words, so
+	# the singular entry alone never matched "receptacles" -- 26 of 279 records
+	# were narrating code jargon ("Luminaires", "ungrounded conductors") at the
+	# learner. Every plural added here is one that actually occurs in the bank.
 	var swaps := [
 		["receptacle outlets", "outlets"],
 		["receptacle outlet", "outlet"],
+		["receptacles", "outlets"],
 		["receptacle", "outlet"],
+		["equipment grounding conductors", "ground wires"],
 		["equipment grounding conductor", "ground wire"],
+		["grounding-type attachment plugs", "three-prong grounded plugs"],
 		["grounding-type attachment plug", "three-prong grounded plug"],
+		["grounding-type plugs", "three-prong plugs"],
 		["grounding-type plug", "three-prong plug"],
+		["grounding conductors", "ground wires"],
 		["grounding conductor", "ground wire"],
+		["grounded conductors", "neutral wires"],
 		["grounded conductor", "neutral wire"],
 		["ungrounded conductors", "hot wires"],
+		["ungrounded conductor", "hot wire"],
 		["overcurrent protection devices", "breakers or fuses"],
 		["supplementary overcurrent protection", "extra equipment protection"],
-		["overcurrent devices", "breakers or fuses"],
-		["overcurrent protection", "breaker or fuse protection"],
+		["overcurrent protective devices", "breakers or fuses"],
 		["overcurrent protective device", "breaker or fuse"],
+		["overcurrent devices", "breakers or fuses"],
 		["overcurrent device", "breaker or fuse"],
+		["overcurrent protection", "breaker or fuse protection"],
 		["service equipment", "main service panel"],
 		["utilization equipment", "electrical equipment"],
 		["premises wiring", "building wiring"],
@@ -307,13 +349,17 @@ static func plain_words(text: String) -> String:
 		["luminaires", "light fixtures"],
 		["luminaire", "light fixture"],
 		["fixed electric space-heating equipment", "fixed electric heaters"],
+		["waste disposers", "garbage disposals"],
 		["waste disposer", "garbage disposal"],
 		["branch-circuit", "circuit"],
 		["branch circuit", "circuit"],
+		["branch circuits", "circuits"],
+		["demand factors", "share of the load you count"],
 		["demand factor", "share of the load you count"],
-		["full-load current", "running amps"],
 		["full-load currents", "running amps"],
+		["full-load current", "running amps"],
 		["ampacity", "current rating"],
+		["ampacities", "current ratings"],
 		["shall not be used as a substitute for", "must never replace"],
 		["shall not", "must not"],
 		["shall be", "is"],

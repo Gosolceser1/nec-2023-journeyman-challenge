@@ -56,7 +56,7 @@ func speakable_inches() -> void:
 		['1 1/2 inches', "1 and one half inches", "spelled plural inches"],
 		['15 3/16 in.', "15 and three sixteenths inches", "'in.' abbreviation"],
 		['1/2-inch RNC', "One half-inch RNC", "hyphenated adjective keeps its hyphen"],
-		['1-1/4" knockout', "1-one quarter inch knockout", "KNOWN DEFECT: hyphenated mixed number (see below)"],
+		['1-1/4" knockout', "1 and one quarter inch knockout", "hyphenated mixed number is normalised to the spaced form"],
 		['1 1/16"', "1 and one sixteenth inches", "sixteenths"],
 		['5 5/8"', "5 and five eighths inches", "eighths"],
 		['3 5/8"', "3 and five eighths inches", "eighths with whole"],
@@ -97,7 +97,7 @@ func speakable_units() -> void:
 		["16 AWG", "16 American wire gauge", "AWG with a double-digit size"],
 		["#6 AWG", "Number 6 American wire gauge", "hash becomes 'number'"],
 		["No. 6", "Number 6", "'No.' abbreviation"],
-		["12/3 and 10/2", "Twelve thirds and ten halves", "KNOWN DEFECT: cable designations (see below)"],
+		["12/3 and 10/2", "12 slash 3 and 10 slash 2", "cable designations are read as conductor counts, not fractions"],
 	]
 	for row in rows:
 		t.eq(ST.speakable(row[0]), row[1], "speakable(%s) [%s]" % [row[0], row[2]])
@@ -125,14 +125,25 @@ func speakable_terms_and_sections() -> void:
 		["Article 210.8", "Article 210.8", "an article number is left intact"],
 		["THHN wire", "T H H N wire", "conductor type spelled out"],
 		["12 AWG THHN", "12 American wire gauge T H H N", "gauge + type"],
-		["12/3 cable", "Twelve thirds cable", "KNOWN DEFECT: cable designation (see below)"],
+		["12/3 cable", "12 slash 3 cable", "cable designation in context"],
+		["1/3 the ampere rating", "One third the ampere rating", "a REAL fraction with a small numerator is still a fraction"],
+		["15/16 in.", "Fifteen sixteenths inches", "a real fraction with a large numerator is still a fraction"],
 		["1/0 and 2/0", "One aught and two aught", "aught sizes"],
 		["3/0 and 4/0", "Three aught and four aught", "aught sizes"],
 		["CO/ALR", "C O A L R", "CO/ALR is spelled"],
+		["VIII", "8", "multi-character Roman numerals resolve, longest form first"],
+		["XII", "12", "twelve is not 'X2'"],
+		["XIII", "13", "thirteen is not 'X3'"],
+		["W = E x I", "W = E times I", "a bare 'I' in Ohm's law is the current, not a Roman numeral"],
 		["Class III locations", "Class 3 locations", "Roman III (the common case, correct)"],
 		["Diagram III", "Diagram 3", "Roman III in a diagram label"],
 		["Class I and Class II", "Class 1 and Class 2", "Roman I and II"],
-		["VIII", "V3", "KNOWN DEFECT: VIII is not handled (see below)"],
+		["5'", "5 feet", "a bare foot mark becomes 'feet' (no more literal apostrophe)"],
+		["4'", "4 feet", "foot mark with a single digit"],
+		["12'", "12 feet", "foot mark with a double digit"],
+		["5'9\"", "5 feet 9 inches", "a height reads as feet AND inches"],
+		["the 5's worth of current", "The 5's worth of current", "a possessive keeps its apostrophe and is not a foot mark"],
+		["R_total = R / n", "R total = R / n", "a formula subscript is spoken as a word, not an underscore"],
 		["sq. ft.", "Square feet.", "square feet"],
 		["sq. in.", "Square inches.", "square inches"],
 		["cu. in.", "Cubic inches.", "cubic inches"],
@@ -356,11 +367,11 @@ func bank_speakable_sweep() -> void:
 
 	var bad := 0
 	var empty := 0
-	# A LONE underscore is a known defect (variable subscripts, and one record with
-	# a malformed blank); blank RUNS of 2+ underscores are what speakable() is meant
-	# to collapse, and those must never reach the voice. The exempt set is asserted
-	# just below, so a FOURTH record gaining a lone underscore still fails the suite.
-	const KNOWN_LONE_UNDERSCORE_RECORDS := ["final-exam-#1-062", "final-exam-#3-030", "final-exam-#3-055"]
+	# A LONE underscore is a DATA defect: speakable() converts a formula subscript
+	# (R_total) to a word, and a malformed blank in a prompt is a data bug the
+	# validator reports. The bank is now clean of both, so this set is empty --
+	# and a record gaining one fails the suite, which is the point of the pin.
+	const KNOWN_LONE_UNDERSCORE_RECORDS: Array[String] = []
 	var underscore_records: Array[String] = []
 	for rec_v in recs:
 		var rec: Dictionary = rec_v
@@ -401,34 +412,15 @@ func bank_speakable_sweep() -> void:
 
 func known_defects() -> void:
 	print("=== known defects (documented, not failures) ===")
-	# DEFECT: the blank-run collapse only fires for runs of 2+ underscores, so a
-	# formula variable subscript is narrated as a literal underscore.
-	t.defect("speech_text.gd:127 speakable",
-		"a lone '_' (a formula variable subscript) is not converted, so it is read aloud as an underscore",
-		"speakable('R_total = R / n = 2,000 / 2 = 1,000 ohms.') = '"
-			+ ST.speakable("R_total = R / n = 2,000 / 2 = 1,000 ohms.") + "'",
-		"'R total = ...' or 'R total' -- the subscript should become a word",
-		"2 live records reach the VOICE: final-exam-#3-055 (R_total / R_branch in the formula and "
-		+ "worked fields) and final-exam-#1-062 (V_panel / V_load); the same subscripts also appear "
-		+ "in reference_text for both and in info_tip for ~18 more records")
-
-	# DEFECT: a malformed bank record writes its blank as a LONE underscore, so
-	# the blank is neither filled on screen nor spoken as "blank".
-	t.defect("question_bank.json final-exam-#3-030 (data), speech_text.gd:127",
-		"this record's prompt ends in a single '_' instead of '___', so the fill-in blank "
-		+ "is invisible on screen and the lone underscore is narrated as the word 'underscore'",
-		"spoken segment = '...for number 14 and smaller copper conductors. _.'",
-		"the blank should be '___' (rendered as a blank and spoken as 'blank')",
-		"1 live record: final-exam-#3-030 (answer '7'); a DATA bug, not a logic bug -- "
-		+ "prompt_with_answer also cannot fill it because it only matches runs of 2+")
-
-	# DEFECT: no foot-mark rule, so a foot-mark answer keeps a raw apostrophe.
-	t.defect("speech_text.gd:94 speakable",
-		"no foot-mark conversion, so \"5'\" is narrated with a literal apostrophe",
-		"speakable(\"5'\") = '" + ST.speakable("5'") + "' vs speakable(\"5\\\"\") = '" + ST.speakable("5\"") + "'",
-		"'5 feet', mirroring the inch-mark path",
-		"14 narrated answer choices (final-exam-#3-013 / -018 / -035 / -049) plus the "
-		+ "answer callout 'Answer B, 5'.'")
+	# The three defects that used to be pinned here are FIXED and are now
+	# asserted as behaviour in the rows above plus the whole-bank sweep:
+	#   - a formula subscript ("R_total") is spoken as "R total", not "underscore"
+	#     (final-exam-#3-055, final-exam-#1-062).
+	#   - final-exam-#3-030's malformed lone-underscore blank was fixed in the
+	#     DATA: the prompt now reads "... minimum of ___ lbs-inch", so the blank
+	#     renders and is spoken as "blank". The bank has zero lone underscores.
+	#   - a foot mark ("5'") is spoken as "5 feet" (9 records, 14 narrated
+	#     choices), with a possessive ("the Code's") deliberately left alone.
 
 
 func report() -> void:
@@ -436,8 +428,7 @@ func report() -> void:
 
 
 ## True when the text still contains a run of 2+ underscores, i.e. a real blank
-## that speakable() failed to collapse. A LONE underscore is a variable subscript
-## (the known defect), not a blank.
+## that speakable() failed to collapse.
 func _has_blank_run(text: String) -> bool:
 	var run := false
 	var count := 0
