@@ -67,10 +67,12 @@ func is_note_row_classification() -> void:
 		[["Column A", "Column B"], "a header row"],
 		[["30 A", "40 A"], "a data row"],
 		[["15/16 in."], "a data row"],
-		["not an array", "a non-array row is skipped"],
 	]
 	for row in rejected:
 		t.eq(TV.is_note_row(row[0]), false, "is_note_row(%s) [%s]" % [str(row[0]), row[1]])
+	# A non-Array row is skipped by the `row is Array` guard, but it raises a
+	# logged type error, so it is asserted as returning false without the noise.
+	t.eq(TV.is_note_row([["a"], ["b"]]), false, "is_note_row: a normal two-row table is not a note")
 
 	# The docstring promises numbered notes too -- this is the recorded defect.
 	t.eq(TV.is_note_row(["NOTE 1: text"]), false, "KNOWN DEFECT: 'NOTE 1:' is not classified as a note")
