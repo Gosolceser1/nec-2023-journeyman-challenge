@@ -36,6 +36,16 @@ that produced false results before. Fixed defects are in git history
   awaits (only the tool scripts do), so the crash is most likely in the
   measuring loop or the engine; the Windows build opens at 540x960, so it is
   worth a look.
+- **`measure_fit.gd` crashes the engine on the mobile layout at 1024x768.**
+  The run dies inside the engine (message queue overflow under
+  `Container::_sort_children`) before it finishes. The base commit
+  (`2d6b960`, before the premium visual pass) crashes the same way, so it is
+  not caused by the restyle. Desktop at all six sizes and mobile at the other
+  five finish with 0% scroll. A phone never gets a 1024x768 window with the
+  mobile UI, but a tablet in landscape could.
+- **`start.wav` is a placeholder.** The session start sound ships as is and
+  will be replaced by the final recording; keep its name, length budget
+  (onset at `Widgets.START_CUE_ONSET`) and bus so `test_sfx` still holds.
 - **`NecReference.lookup_path` reads any 3-digit number as an NEC article.**
   An `article` of "NFPA 70E 130.5" would show "Chapter 1 ► Article 130"
   instead of the NFPA 70E line. The bank only uses the bare "NFPA 70E", which
@@ -79,8 +89,9 @@ that produced false results before. Fixed defects are in git history
   container puts the child back in its slot on every re-sort (text change,
   resize, theme change), and a quick enter/exit overlaps two tweens, so the
   return leg lands off the slot and stays there: the menu cards ended up 1-7 px
-  apart. Slide with `UiFx.slide_x` (absolute target, one tween per control);
-  `test_menu_alignment.gd` pins it.
+  apart. Mode cards no longer slide at all (hover is glow and shine); where
+  something must slide, use `UiFx.slide_x` (absolute target, one tween per
+  control). `test_menu_cards.gd` pins it.
 - New or moved `class_name` scripts need
   `Godot --headless --path . --import` before `--script` runs can resolve
   them (verify.sh stage 0 does this).
@@ -97,10 +108,10 @@ that produced false results before. Fixed defects are in git history
 - **`MOUSE_FILTER_PASS` on children.** `_touch_filter_walk` assigns PASS to
   BaseButtons and IGNORE to decoration, matching the documented behaviour.
 - **Contrast.** The palette is dark by design; body text and the small
-  SLATE_400 helper labels pass WCAG AA (6.6:1+). The Next button's white label
-  on SKY_600 is 4.1:1, just under AA for its size; SKY_700 would pass (5.9:1)
-  but changes the look, so it waits for a design call. Answer state is carried
-  by colour plus an icon and a border.
+  SLATE_400 helper labels pass WCAG AA (6.6:1+). The primary buttons (Next,
+  Return to menu) now sit on SKY_700 with a SKY_700 -> BLUE_800 tint: behind
+  the label the rendered fill measures 4.9-7.1:1 against white. Answer state
+  is carried by colour plus an icon and a border.
 - **48 dp touch targets.** Canvas px are not dp: the 540 px canvas maps to
   ~0.76 dp/px on a 1080 px, 420 dpi phone, so 48 px dock buttons are ~37 dp and
   56 px cards ~43 dp. A density-aware content_scale_factor (clamped to 1.15 to

@@ -34,10 +34,13 @@ src/
           info_panel_renderer.gd  InfoPanelRenderer: the explanation RichTextLabel
           results_view.gd   ResultsView: graded and listen results, confetti
           audio_section.gd  AudioSection: the menu's Audio & Voice block
+          icons.gd          Icons: small SDF glyphs drawn in code (tinted by modulate)
           answer_card.gd  table_viewer.gd  diagram_view.gd  voice_visualizer.gd
-  fx/     quiz_fx.gd        QuizFx: fx layer, streak meter, time gauges, answer burst
-          sfx.gd  speech_chain.gd  ui_fx.gd  time_gauge.gd  streak_meter.gd
-          result_gauge.gd  chapter_bars.gd  mode_badge.gd  shaders/
+  fx/     quiz_fx.gd        QuizFx: fx layer, segmented progress, time gauges, answer burst
+          ui_fx.gd          UiFx: surface material, glass/shine/current, screen enter, Reduce motion
+          sfx.gd  speech_chain.gd  time_gauge.gd  progress_segments.gd  readiness_ring.gd
+          result_gauge.gd  chapter_bars.gd  pace_sparkline.gd  mode_badge.gd
+          shaders/          surface (panels, cards, buttons), circuit_backdrop, electric_title
 data/     question_bank.json (never edited by hand)  voices.json
           exam_blueprint.json (content outline, chapter map, area overrides)
 assets/   diagrams/  sfx/  speech/<qid>__<voice>/ (generated, gitignored)
@@ -45,7 +48,7 @@ docs/     this file, DATA_PIPELINE, VOICE_READING_RULES, SFX_PLAN, KNOWN_ISSUES,
 tools/    verify.sh  harness.gd  list_pck.py
           pipeline/  bank build, overrides, validator, spellcheck, OCR
           speech/    dump_speech.gd  pregenerate_speech.py  test_bundle.gd  check_export_pack.gd
-          visual/    snap.gd  snap_all.gd  measure_fit.gd  compare_shots.py (output: .audit_tmp/)
+          visual/    snap.gd  snap_all.gd  snap_motion.gd  measure_fit.gd  compare_shots.py (output: .audit_tmp/)
           tests/     run_all.gd + suites, golden/ layout snapshots
           study/     blueprint_report.gd (pool per subject area, overrides, draws per mode)
 ```
@@ -141,6 +144,25 @@ the legacy Windows UI exactly. Shared pieces are factored into `Widgets`,
 `AppTheme` and `AudioSection`. Anything else that differs goes in the
 builder, not behind `if ui_mobile` in main.
 
+## Visual system
+
+- **Tokens** live in `AppTheme`: palette (Tailwind names plus roles such as
+  `SURFACE_BOTTOM`, `HAIRLINE_BRIGHT`, `PAPER_*`), gradient pairs (`GRAD_*`),
+  spacing (`SPACE_*`), radii, elevation, type scale (`TYPE_*`), weights and
+  motion durations (`MOTION_*`). `test_app_theme` keeps them unique and ordered.
+- **Surfaces** are a `StyleBoxFlat` from `AppTheme.surface()` plus one shared
+  canvas_item shader (`surface.gdshader`) applied by `UiFx.add_glass` /
+  `add_tint` / `add_shine`: fill lift, bevel, a gradient tint, a hover shine
+  and a "current" that runs around the border. Labels (pure white) are skipped
+  by the shader, so text keeps its exact colour.
+- **Type**: `ui_font(weight)`, tracked `meta_font()` for small caps labels,
+  tabular `numeric_font()` for clocks and scores.
+- **Motion never moves layout.** Hover and press use `scale` about the centre,
+  offsets that return to rest, colour and shader uniforms; state styleboxes
+  share content margins (checked by `test_menu_cards` and `test_app_theme`).
+  Everything that animates on its own joins `UiFx.MOTION_GROUP`, and
+  `UiFx.apply_reduce_motion` freezes it when Reduce motion is on.
+
 ## The harness facade
 
 `tools/harness.gd`, the snapshot tools and several tests read and write
@@ -164,7 +186,7 @@ tests and the native TTS callbacks refer to them by name.
 - `tools/tests/run_all.gd`: 25 suites, including `test_no_leak` (nothing
   before answering reveals the answer), `test_layout_tree` (serialised node
   tree of both layouts against `tools/tests/golden/`; `-- --update` rewrites
-  the snapshots after an intended change), `test_menu_alignment` (cards stay
+  the snapshots after an intended change), `test_menu_cards` (cards stay
   in their column slot through hover, focus and a quiz round-trip) and
   `test_quiz_session`;
 - `tools/harness.gd` on both layouts (quiz flow, speech queue, teach gate);
