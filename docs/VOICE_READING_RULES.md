@@ -122,7 +122,7 @@ shouted in capitals is lowercased. `ON`, `OFF`, `NOT` and `ONLY` are read as wor
 Every rule applies to all 13 voices in `voices.json`; there are no per-voice
 tweaks. Each spelling above was picked by rendering the candidates through
 every voice and transcribing them with Whisper (`small.en`, no prompt). The
-scripts and results are in `.audit_tmp/voice_tune/`. What that showed:
+tuning renders were scratch and are not kept; what they showed:
 
 - Spaced capitals ("T H H N") are the only form every voice spells. Hyphens
   ("T-H-H-N") and dots are voiced as "THN" or "teach", and commas between

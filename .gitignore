@@ -20,27 +20,28 @@ export_presets.cfg.bak
 *.tmp
 
 # Generated speech is derived from question_bank.json + pregenerate_speech.py.
-# ~71MB of mp3s. Regenerate with: python tools/pregenerate_speech.py
+# ~138MB of mp3s at 96 kbps. Regenerate with: python tools/pregenerate_speech.py --bundle
 /speech/
 
-# Question-bank backups are throwaway; question_bank.json is the source of truth.
+# Backups are throwaway; git history is the backup.
 /question_bank.bak*.json
+*.bak
+*.bak.*
 
 # Scratch output from OCR/audit tooling
-/tools/__pycache__/
-/tools/tests/__pycache__/
+__pycache__/
+/tools/**/*.png
+/tools/**/*.png.import
 /tools/*.txt
-/tools/*.png
-/tools/*.png.import
+!/tools/spellcheck_allowlist.txt
+!/tools/spellcheck_lexicon.txt
 /tools/anomalies.json
-/tools/exam5_key_text.txt
-/tools/tables_out.txt
 /tools/out_*.txt
 
 # Local editor / OS noise
-.vscode/
+/.vscode/
 Thumbs.db
 desktop.ini
 .DS_Store
 *.log
-.audit_tmp/
+/.audit_tmp/

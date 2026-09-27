@@ -1,0 +1,68 @@
+# Known issues
+
+Open items that could not be closed headless, plus the verification traps
+that produced false results before. Fixed defects are in git history
+(`77e2cf7`, `16589d5`, `3c5971f`, `3bfc526`, `c8ff389`), each pinned by a test.
+
+## Open: needs a real device
+
+- **TalkBack / AccessibilityServer on Android.** Godot 4.5+ has
+  `AccessibilityServer` (AccessKit) with `ROLE_BUTTON`, `ROLE_RADIO_BUTTON`
+  etc., but Godot's own dev log still lists mobile accessibility as
+  incomplete. Verify on a device before assuming any screen-reader support.
+- **Android font scale (`sp`).** Godot `font_size` is pixels. If Godot does
+  not map it to Android's font-scale setting, the UI ignores the user's
+  accessibility font size. Test with Font size = Large.
+- **`get_display_safe_area()` accuracy.** godot#105462 reports a too-narrow
+  safe area on Pixel 9 in some orientations. The inset scaling in
+  `safe_area_margins` is correct in principle; confirm on a notched device.
+- **`exam_label` / `question_diagram_label` use `AUTOWRAP_OFF`.** Long NEC
+  values may clip on narrow phones.
+- **Native-TTS watchdog tweens accumulate** (min 6 s each, bounded by
+  teardown). Minor, not a correctness bug.
+
+## Open: found during the refactor
+
+- **`measure_fit.gd` crashes the engine on the desktop layout at 540x960.**
+  After ~250 of the 279 records the run prints "Object was deleted while
+  awaiting a callback" and dies with signal 11. It reproduces on the
+  pre-refactor checkpoint (`c0aaa1b`), so it is not caused by the moves.
+  The other six measured sizes finish with 0% scroll. The app itself never
+  awaits (only the tool scripts do), so the crash is most likely in the
+  measuring loop or the engine; the Windows build opens at 540x960, so it is
+  worth a look.
+
+## Verification traps
+
+- `ui_mobile` is set in `_ready()` from the command line, so setting it on
+  the instance before `add_child` is silently overwritten. A layout check
+  must pass `-- --mobile-ui` or it measures the desktop build.
+- Headless, `get_combined_minimum_size()` returns 0 (no layout pass) and
+  `get_visible_rect()` ignores `window_set_size` (reports 960x960). Measure
+  `custom_minimum_size`, or run windowed (`tools/visual/measure_fit.gd`).
+- Screenshots from `tools/visual/snap_all.gd` only compare cleanly with
+  `--fixed-fps 60 --disable-vsync` and `-- --det`: without them shader time
+  and particle bursts differ run to run.
+- `bash` from PowerShell is WSL's bash, which has no `python`; verify.sh now
+  finds `python.exe` there, but a script that passes absolute `/mnt/c/...`
+  paths to a Windows program still needs `wslpath -m`.
+- New or moved `class_name` scripts need
+  `Godot --headless --path . --import` before `--script` runs can resolve
+  them (verify.sh stage 0 does this).
+
+## Researched, deliberately not changed
+
+- **Back-button double-fire** (godot#123454: one press delivers
+  `NOTIFICATION_WM_GO_BACK_REQUEST` twice ~1 ms apart on 4.7 at targetSdk 36).
+  `_on_go_back()` debounces at 600 ms.
+- **Mouse/touch double-firing.** The engine guards every ScrollContainer touch
+  branch with `event_device_id != DEVICE_ID_EMULATION`, so
+  `emulate_mouse_from_touch=false` is not required for scrolling, but it is
+  required for the answer cards (see the note in `project.godot`).
+- **`MOUSE_FILTER_PASS` on children.** `_touch_filter_walk` assigns PASS to
+  BaseButtons and IGNORE to decoration, matching the documented behaviour.
+- **Contrast.** The palette is dark by design and computes well
+  above WCAG AA; answer state is carried by colour plus an icon and a border.
+- **48 dp touch targets.** The mobile builder uses 56 px minimums for the dock
+  and Next buttons; the 42 px values in the desktop builder follow the 44 dp
+  pointer guideline for Windows.

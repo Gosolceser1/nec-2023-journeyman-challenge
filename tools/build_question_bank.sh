@@ -27,6 +27,7 @@
 #   WIRE_OCR_KEYS   directory of OCR'd answer keys   (default: %TEMP%/opencode/wire_ocr_keys)
 #   WIRE_BANK_OUT   output bank path                 (default: <repo>/question_bank.json)
 #   PYTHON          interpreter to use               (default: python)
+#   GODOT           Godot console binary             (default: <repo>/Godot_v4.7.2-stable_win64_console.exe)
 #
 # Exit codes: 0 = bank valid, 1 = a step failed or the bank is invalid.
 #
@@ -40,6 +41,9 @@ cd "$ROOT"
 # C:/... form, which git-bash, python and Godot all accept.
 if command -v cygpath >/dev/null 2>&1; then
   winpath() { cygpath -m "$1"; }
+elif command -v wslpath >/dev/null 2>&1 && [[ "${PYTHON:-python}" == *.exe ]]; then
+  # WSL bash driving Windows python.exe (what verify.sh picks there).
+  winpath() { case "$1" in /mnt/*) wslpath -m "$1" ;; *) printf '%s\n' "$1" ;; esac; }
 else
   winpath() { case "$1" in
     /[A-Za-z]/*) printf '%s:%s\n' "$(printf '%s' "$1" | cut -c2)" "$(printf '%s' "$1" | cut -c4-)" ;;
@@ -56,7 +60,7 @@ case "$BANK" in
   *) BANK="$ROOT/$BANK" ;;
 esac
 BANK_W="$(winpath "$BANK")"
-GODOT="$ROOT/Godot_v4.7.2-stable_win64_console.exe"
+GODOT="${GODOT:-$ROOT/Godot_v4.7.2-stable_win64_console.exe}"
 GODOT_W="$(winpath "$GODOT")"
 BUILDER_W="$(winpath "$ROOT/tools/build_question_bank.py")"
 VALIDATOR_W="$(winpath "$ROOT/tools/validate_question_bank.py")"

@@ -300,6 +300,9 @@ class _ZoomSheet extends Control:
 			view.close_zoom()
 
 	func _input(event: InputEvent) -> void:
-		if event is InputEventKey and event.pressed:
+		# Android Back goes to the host's debounced go-back handler, which closes
+		# the zoom; closing it here too would let the paired go-back
+		# notification that follows fall through and leave the screen.
+		if event is InputEventKey and event.pressed and event.keycode != KEY_BACK:
 			get_viewport().set_input_as_handled()
 			view.close_zoom()

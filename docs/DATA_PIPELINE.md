@@ -46,7 +46,7 @@ WIRE_BANK_OUT=/path/to/candidate.json bash tools/build_question_bank.sh --build
 python tools/validate_question_bank.py --no-warn /path/to/candidate.json
 ```
 
-Review the generated overlay and candidate diff before accepting either. The refresh script does not replace the curated bank. Do not run the one-off mutation scripts blindly; several edit the bank and some also edit builder/gist sources.
+Review the generated overlay and candidate diff before accepting either. The refresh script does not replace the curated bank. The old one-off scripts that rewrote `question_bank.json` in place were removed; every bank change goes through the overlay and a candidate build.
 
 ## Wording rule: PDF wording, typos corrected
 

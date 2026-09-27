@@ -5,7 +5,7 @@
     python tools/spellcheck_bank.py --offline    # reviewed-lexicon check, no dependencies
     python tools/spellcheck_bank.py --update-lexicon
 
-Policy (see tools/DATA_PIPELINE.md, "PDF wording, typos corrected"): stems and
+Policy (see docs/DATA_PIPELINE.md, "PDF wording, typos corrected"): stems and
 choices follow the source PDF word for word, but genuine misspellings and slips
 are corrected through tools/question_bank_overrides.json. Quoted NEC text
 (reference_text) must still match the 2023 wording, so a finding there is fixed

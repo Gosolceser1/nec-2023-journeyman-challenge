@@ -6,8 +6,6 @@ const SESSION_LENGTH := 10
 const EXAM_NAME := "NE JOURNEYMAN ELECTRICIAN"
 const EXAM_SCORED_ITEMS := 80
 const EXAM_MINUTES := 240
-const EXAM_NON_SCORED_ITEMS := 8
-const EXAM_NON_SCORED_MINUTES := 30
 const PASS_PERCENT := 75
 const SECONDS_PER_SCORED_ITEM: int = (EXAM_MINUTES * 60) / EXAM_SCORED_ITEMS
 const SESSION_TIME_SECONDS: int = SECONDS_PER_SCORED_ITEM * SESSION_LENGTH
@@ -4510,6 +4508,9 @@ func _on_go_back() -> void:
 	if now - _last_go_back_msec < 600:
 		return
 	_last_go_back_msec = now
+	if is_instance_valid(question_diagram_view) and question_diagram_view.is_zoomed():
+		question_diagram_view.close_zoom()
+		return
 	if session_audio_mode == AudioSettings.Mode.LISTEN and listen_phase != AudioSettings.ListenPhase.IDLE \
 			and not listen_paused and not menu_overlay.visible:
 		_toggle_listen_pause()

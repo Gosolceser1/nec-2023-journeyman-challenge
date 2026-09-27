@@ -115,6 +115,21 @@ func _sweep() -> void:
 		view.close_zoom()
 		await _frames(2)
 		t.check(not view.is_zoomed(), "%s: zoom closes" % qid)
+		# Android Back on a zoomed figure closes the zoom and stays on the
+		# question. One press can arrive as KEY_BACK and a go-back notification
+		# ~1 ms apart; together they must still count as one Back.
+		view.open_zoom()
+		await _frames(2)
+		main._last_go_back_msec = -100000
+		var back := InputEventKey.new()
+		back.keycode = KEY_BACK
+		back.pressed = true
+		root.push_input(back)
+		main._notification(Control.NOTIFICATION_WM_GO_BACK_REQUEST)
+		await _frames(2)
+		t.check(not view.is_zoomed(), "%s: Android Back closes the zoom" % qid)
+		t.check(not main.menu_overlay.visible, "%s: Android Back on a zoomed figure stays on the question" % qid)
+		main._last_go_back_msec = -100000
 		var ci := int(rec.get("correct_index", 0))
 		main._answer_selected(ci)
 		main._auto_token += 1

@@ -1,0 +1,28 @@
+# Words tools/spellcheck_bank.py accepts in addition to its dictionary.
+# One or more words per line, case-insensitive; "#" starts a comment.
+# ALL-CAPS tokens (AWG, THHN, GFCI, EMT, ...) are never spell-checked, so only
+# mixed- or lower-case forms need to be listed here.
+#
+# Ignore a specific mechanical finding with a line of the form
+#   !<record id>|<check>|<detail exactly as printed>
+
+# NEC 2023 defined terms and wiring-method vocabulary
+ampacity ampacities busbar busbars busway busways cablebus lampholder lampholders
+liquidtight luminaire luminaires multiconductor multioutlet multiwire overcurrent
+overcurrents panelboard panelboards raceway raceways switchgear wireway wireways
+wrenchtight occupiable hoistways multibuilding barriered noncinder nonheating
+noninsulated nonlighting nonlocking nonshielded unjacketed thermoset relamping
+explosible flyings plexed storable prefinished centerline
+kcmil kVA kft ft ft² µm mm ml kg lb lbs hp rms std
+AWG THHN THWN NM EMT RMC IMC GFCI AFCI NEMA
+
+# Plurals of acronyms as they appear lower-cased by the tokenizer
+afcis ocpds acs
+
+# Trade usage in explanations
+condulet deburred derate derated derating rebar rebars romex smurf subpanel tagout
+countertops chemistries insulations metallurgically onsite unadaptable multi
+distractor lookup etc attaches
+
+# French etymology quoted in final-exam-#1-019 ("intensité du courant")
+intensité courant
