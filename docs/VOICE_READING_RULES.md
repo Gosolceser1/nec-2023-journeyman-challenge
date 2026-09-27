@@ -171,6 +171,11 @@ tuning renders were scratch and are not kept; what they showed:
   default). The dock button shows **Stop** while speaking and **Replay rule**
   after.
 - **Tap to hear**: nothing plays on its own. The button reads **Hear the rule**.
+- The rule line is the provision sentence that contains the answer, with Code
+  jargon swapped for plain words (`plain_words`). "Shall" becomes a modal that
+  agrees with any subject: "shall be" is "must be", "shall be permitted to" is
+  "may", "shall be provided with" is "must have". The old "shall be" to "is"
+  read "garbage disposals is permitted" and "is has".
 - Right or wrong is shown visually and by the sound effect. It is not spoken,
   because the clips are rendered once per question.
 - Navigating to another question, or leaving the quiz, stops all speech
@@ -184,8 +189,10 @@ tuning renders were scratch and are not kept; what they showed:
 manifests store it, along with the Edge output `format`. A clip is reused only
 when text, choice/teach flags, `rules` and `format` all match; `format` must
 equal `SPEECH_FORMAT` in `src/speech/speech_controller.gd`, which is kept in sync with `OUTPUT_FORMAT`
-in `src/speech/speak_question.py`. **Bump `VERSION` whenever a rule changes spoken
-output**, then refresh the shipped clips:
+in `src/speech/speak_question.py`. A rule change that alters segment text already
+makes exactly the affected questions stale, so refreshing re-renders only those.
+**Bump `VERSION` when every clip must be re-rendered** (a change to how the same
+text is spoken, or a clip-format change), then refresh the shipped clips:
 
 ```
 Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/speech/dump_speech.gd

@@ -17,8 +17,8 @@ static func format_answer_number(value: float) -> String:
 static func answer_match_candidates(answer: String) -> Array[String]:
 	return UnitMatcher.answer_match_candidates(answer)
 
-static func find_answer_match(text: String, answer: String) -> Dictionary:
-	return AudioExplanationGenerator.find_match_in(text, answer)
+static func find_answer_match(text: String, answer: String, prompt: String = "") -> Dictionary:
+	return AudioExplanationGenerator.find_match_in(text, answer, prompt)
 
 static func _normalize_spoken(text: String) -> String:
 	var lower := text.to_lower().strip_edges()

@@ -17,7 +17,7 @@ func has_record() -> bool:
 	return not _record.is_empty()
 
 func append_answer_highlight(text: String, answer: String) -> bool:
-	var match_info := SpeechText.find_answer_match(text, answer)
+	var match_info := SpeechText.find_answer_match(text, answer, str(_record.get("prompt", "")))
 	if match_info.is_empty():
 		label.add_text(text)
 		return false
@@ -114,12 +114,15 @@ func render() -> void:
 	var gist_text := str(record.get("gist", "")).strip_edges()
 
 	# --- MEMORY TIP section (plain-English mnemonic, folded to two lines) ---
-	# Skipped when it merely requotes the gist or the provision — generic echoes stay out.
+	# A plain tip is skipped when it merely requotes the gist or the provision. A tip
+	# with per-choice rows never is: its notes often quote a short provision, which
+	# made the echo filter hide every choice explanation.
 	var tip := str(record.get("tip_short", "")).strip_edges()
 	var tip_title := str(record.get("tip_title", "")).strip_edges()
 	if tip == "":
 		tip = str(record.get("info_tip", "")).strip_edges()
-	if tip != "" and not echoes_any(tip, [source_text, gist_text]):
+	var has_choice_rows := tip.find(" Correct: ") > 0
+	if tip != "" and (has_choice_rows or not echoes_any(tip, [source_text, gist_text])):
 		if tip_title != "":
 			append_heading("MEMORY TIP — " + tip_title + "\n", AppTheme.AMBER_500)
 		else:

@@ -154,7 +154,16 @@ static func lesson_lines(record: Dictionary, answer: String = "") -> PackedStrin
 		lines.append(rule)
 	if math != "":
 		var dupe := false
+		# A calculation that reaches the answer is never a repeat of a rule line
+		# that does not state it (a long provision can share every word of
+		# "Table 630.31(A)(2): ... = 8.19 A." except the numbers).
+		var answers: Array = record.get("answers", [])
+		var ci := int(record.get("correct_index", -1))
+		var answer_text := answer if answer != "" else (str(answers[ci]) if ci >= 0 and ci < answers.size() else "")
+		var math_has_answer := answer_text != "" and not find_match_in(math, answer_text).is_empty()
 		for existing in lines:
+			if math_has_answer and find_match_in(existing, answer_text).is_empty():
+				continue
 			if _is_duplicate_text(math, existing):
 				dupe = true
 				break
@@ -236,29 +245,96 @@ static func answer_sentence(body: String, answer: String) -> String:
 	if body.length() > 420:
 		var truncated := body.substr(0, 420).strip_edges()
 		var last_period := truncated.rfind(".")
+		# Not the point of "630.31": the cut used to leave "Table 630." dangling.
+		while last_period > 0 and last_period + 1 < body.length() and body.substr(last_period + 1, 1).is_valid_int():
+			last_period = truncated.rfind(".", last_period - 1)
 		if last_period > 200:
 			return truncated.substr(0, last_period + 1)
+		# No sentence end: a line break still ends a list item, where the raw cut
+		# stopped mid-word ("Wher.").
+		var last_break := truncated.rfind("\n")
+		if last_break > 200:
+			var head := truncated.substr(0, last_break).strip_edges()
+			return head if head.ends_with(".") else head + "."
 		return truncated + "."
 	return body
 
-static func find_match_in(text: String, answer: String) -> Dictionary:
+## prompt is optional: when it has a "___" blank, the occurrence whose surrounding
+## words best match the words around the blank wins; otherwise the first one does.
+static func find_match_in(text: String, answer: String, prompt: String = "") -> Dictionary:
+	var lower := text.to_lower()
+	var hits: Array = []
+	var order := 0
 	for candidate in UnitMatcher.answer_match_candidates(answer):
+		order += 1
 		if candidate == "":
 			continue
 		var start := 0
 		while start < text.length():
-			var index := text.to_lower().find(candidate.to_lower(), start)
+			var index := lower.find(candidate.to_lower(), start)
 			if index < 0:
 				break
 			var before := text.substr(index - 1, 1) if index > 0 else ""
 			var after_index := index + candidate.length()
 			var after := text.substr(after_index, 1) if after_index < text.length() else ""
-			var has_left_boundary := candidate.length() == 0 or not _is_word_char(candidate.substr(0, 1)) or not _is_word_char(before)
-			var has_right_boundary := candidate.length() == 0 or not _is_word_char(candidate.substr(candidate.length() - 1, 1)) or not _is_word_char(after)
+			var has_left_boundary := not _is_word_char(candidate.substr(0, 1)) or not _is_word_char(before)
+			var has_right_boundary := not _is_word_char(candidate.substr(candidate.length() - 1, 1)) or not _is_word_char(after)
+			# "2" must not match the tail of "1/2", "7" the tail of "3.7", "200" the tail of "1,200".
+			if candidate.substr(0, 1).is_valid_int() and _is_number_glue(text, index - 1, -1):
+				has_left_boundary = false
+			if candidate.substr(candidate.length() - 1, 1).is_valid_int() and _is_number_glue(text, after_index, 1):
+				has_right_boundary = false
 			if has_left_boundary and has_right_boundary:
-				return {"start": index, "length": candidate.length()}
+				hits.append([order, index, candidate.length()])
 			start = index + 1
-	return {}
+	if hits.is_empty():
+		return {}
+	var best: Array = hits[0]
+	var best_score := -999
+	var blank_words := _blank_context_words(prompt)
+	var prompt_negated := _blank_is_negated(prompt)
+	for hit in hits:
+		var score := 0
+		if not blank_words.is_empty():
+			var window := (text.substr(maxi(0, hit[1] - 40), mini(40, hit[1])) + " " + text.substr(hit[1] + hit[2], 40)).to_lower()
+			for w in blank_words:
+				if RegEx.create_from_string("\\b" + w + "\\b").search(window) != null:
+					score += 1
+			if not prompt_negated and RegEx.create_from_string("\\bnot\\s*$").search(text.substr(maxi(0, hit[1] - 8), mini(8, hit[1])).to_lower()) != null:
+				score -= 2
+		if score > best_score or (score == best_score and (hit[0] < best[0] or (hit[0] == best[0] and hit[1] < best[1]))):
+			best = hit
+			best_score = score
+	return {"start": best[1], "length": best[2]}
+
+static func _is_number_glue(text: String, index: int, step: int) -> bool:
+	if index < 0 or index >= text.length() or not (text.substr(index, 1) in [".", ",", "/"]):
+		return false
+	var next := index + step
+	return next >= 0 and next < text.length() and text.substr(next, 1).is_valid_int()
+
+const _BLANK_STOPWORDS := ["the", "a", "an", "of", "to", "and", "or", "in", "on", "for", "be", "is", "shall", "not", "than", "that", "with", "by", "at", "as", "are"]
+
+static func _blank_context_words(prompt: String) -> Array[String]:
+	var out: Array[String] = []
+	var blank := RegEx.create_from_string("_{2,}").search(prompt)
+	if blank == null:
+		return out
+	var word := RegEx.create_from_string("[a-z0-9]+")
+	var left: Array[String] = []
+	for m in word.search_all(prompt.substr(0, blank.get_start()).to_lower()):
+		left.append(m.get_string())
+	var right: Array[String] = []
+	for m in word.search_all(prompt.substr(blank.get_end()).to_lower()):
+		right.append(m.get_string())
+	for w in left.slice(maxi(0, left.size() - 4)) + right.slice(0, 4):
+		if not (w in _BLANK_STOPWORDS) and not out.has(w):
+			out.append(w)
+	return out
+
+static func _blank_is_negated(prompt: String) -> bool:
+	var blank := RegEx.create_from_string("_{2,}").search(prompt)
+	return blank != null and RegEx.create_from_string("\\bnot\\s*$").search(prompt.substr(0, blank.get_start()).to_lower()) != null
 
 static func _is_word_char(c: String) -> bool:
 	if c.is_empty():
@@ -361,8 +437,15 @@ static func plain_words(text: String) -> String:
 		["ampacity", "current rating"],
 		["ampacities", "current ratings"],
 		["shall not be used as a substitute for", "must never replace"],
+		# Modals agree with any subject: "shall be" -> "is" read "garbage disposals
+		# is permitted", and ran before "provided with" -> "has" ("is has").
+		["shall be provided with", "must have"],
+		["shall not be permitted", "is not permitted"],
+		["shall be permitted to be", "may be"],
+		["shall be permitted to", "may"],
+		["shall be permitted", "is permitted"],
 		["shall not", "must not"],
-		["shall be", "is"],
+		["shall be", "must be"],
 		["shall have", "must have"],
 		["shall", "must"],
 		["in accordance with", "under"],

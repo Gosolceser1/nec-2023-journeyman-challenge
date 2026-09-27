@@ -22,6 +22,7 @@ const SUITES := [
 	{"name": "speech_text", "path": "res://tools/tests/test_speech_text.gd"},
 	{"name": "speech_rules", "path": "res://tools/tests/test_speech_rules.gd"},
 	{"name": "unit_matcher", "path": "res://tools/tests/test_unit_matcher.gd"},
+	{"name": "info panel (memory tip, answer chip)", "path": "res://tools/tests/test_info_panel.gd"},
 	{"name": "table_viewer (pure)", "path": "res://tools/tests/test_table_viewer.gd"},
 	# Layout regression guard. The scene harness asserts quiz LOGIC and never
 	# inspects a margin, so a broken safe-area calculation shipped green and left

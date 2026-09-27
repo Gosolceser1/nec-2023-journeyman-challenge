@@ -229,6 +229,18 @@ func comma_formatting() -> void:
 	must_have(c4, "4", "#4 -> 4")
 	must_have(c4, "4 VA", "#4 -> 4 VA")
 	t.eq(UM.answer_match_candidates("#6").has("6"), true, "#6 -> 6")
+	# The NEC writes screw sizes "No. 6" and wire sizes "6 AWG"; the literal stays first.
+	var c6: Array = UM.answer_match_candidates("#6")
+	must_have(c6, "No. 6", "#6 -> No. 6")
+	must_have(c6, "6 AWG", "#6 -> 6 AWG")
+	t.eq(str(c6[0]), "#6", "the literal answer is still tried first")
+	# Spellings the provision text uses for the same value.
+	must_have(UM.answer_match_candidates("72”"), "6 ft", "curly closing quote 72” -> 6 ft")
+	must_have(UM.answer_match_candidates("6'6\""), "6 1/2 ft", "6'6\" -> 6 1/2 ft")
+	must_have(UM.answer_match_candidates("194 degrees F"), "194°F", "194 degrees F -> 194°F")
+	must_have(UM.answer_match_candidates("60 degrees C"), "60°C", "60 degrees C -> 60°C")
+	must_have(UM.answer_match_candidates("24 1/2"), "24.5 ft", "24 1/2 -> 24.5 ft")
+	must_have(UM.answer_match_candidates("GFCI"), "ground-fault circuit-interrupter", "GFCI spelled out")
 	# A percent answer gets its phrase forms, so the number can be found in the
 	# "83 percent" wording the reference text actually uses. It used to return
 	# only itself, which meant a pre-answer "83 percent" was never redacted.

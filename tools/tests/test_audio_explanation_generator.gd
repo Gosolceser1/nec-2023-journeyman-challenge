@@ -163,6 +163,16 @@ func answer_sentence() -> void:
 	t.check(out.ends_with("."), "truncated body still ends on a sentence boundary")
 	t.check(out.length() > 200, "truncation keeps a useful amount of text (got %d)" % out.length())
 
+	# The cut never lands on the point of a section number ("Table 630." dangling).
+	var decimal_body := "x".repeat(250) + " rule text ends here. Then more words follow" + " w".repeat(40) \
+		+ " and the table Table 630.31(A)(2) follows" + " z".repeat(80)
+	t.check(AEG.answer_sentence(decimal_body, "zzz-not-present").ends_with("rule text ends here."),
+		"the truncation skips the point of 630.31")
+	# No sentence end past 200 chars: cut at the last list line, not mid-word.
+	var list_body := "y".repeat(210) + ":\n" + "Item one\nItem two\n" + "Item three is long ".repeat(12)
+	t.check(AEG.answer_sentence(list_body, "zzz-not-present").ends_with("\nItem two."),
+		"a list with no periods is cut at a line break")
+
 
 # --------------------------------------------------------------------------
 # lesson_point -- the TEACH ORDER: code sentence > worked > prompt fill > answer
@@ -187,9 +197,9 @@ func lesson_point() -> void:
 func plain_words() -> void:
 	print("=== plain_words ===")
 	var swaps := [
-		["Receptacle outlets shall be listed.", "outlets is listed.", "receptacle outlets + shall be"],
+		["Receptacle outlets shall be listed.", "outlets must be listed.", "receptacle outlets + shall be"],
 		["equipment grounding conductor", "ground wire", "singular EGC"],
-		["Overcurrent protection shall be provided.", "breaker or fuse protection is provided.", "OCPD"],
+		["Overcurrent protection shall be provided.", "breaker or fuse protection must be provided.", "OCPD"],
 		["Overcurrent protective device", "breaker or fuse", "longest OCPD form first"],
 		["Overcurrent device", "breaker or fuse", "shorter OCPD form"],
 		["supplementary overcurrent protection", "extra equipment protection", "longest first, so it wins"],
@@ -198,7 +208,18 @@ func plain_words() -> void:
 		["ampacity", "current rating", "ampacity"],
 		["shall not be used as a substitute for grounding", "must never replace grounding", "double swap"],
 		["shall not", "must not", "shall not"],
-		["shall be", "is", "shall be"],
+		["shall be", "must be", "shall be"],
+		# Modal verbs agree with any subject; "is" did not ("garbage disposals is").
+		["Waste disposers shall be permitted to be cord-and-plug-connected.",
+			"garbage disposals may be cord-and-plug-connected.", "plural subject, permitted to be"],
+		["Each transformer shall be provided with a nameplate.", "Each transformer must have a nameplate.",
+			"provided with, no 'is has'"],
+		["they shall be reevaluated", "they must be reevaluated", "no 'they is'"],
+		["Cables shall not be permitted in ducts.", "Cables is not permitted in ducts.",
+			"no 'must not be permitted' (plural agreement is still off here)"],
+		["Transformers shall be permitted to supply circuits.", "Transformers may supply circuits.",
+			"permitted to"],
+		["Cablebus shall be permitted as follows", "Cablebus is permitted as follows", "bare permitted"],
 		["shall have a disconnect", "must have a disconnect", "shall have"],
 		["shall", "must", "bare shall"],
 		["in accordance with", "under", "in accordance with"],
@@ -227,7 +248,7 @@ func plain_words() -> void:
 		["grounded conductor", "neutral wire", "singular grounded conductor"],
 		["ungrounded conductors", "hot wires", "plural ungrounded conductors"],
 		["A outlet shall", "An outlet must", "a -> an article fix"],
-		["Article 210.8 shall be used", "Article 210.8 is used", "shall be"],
+		["Article 210.8 shall be used", "Article 210.8 must be used", "shall be"],
 	]
 	for row in swaps:
 		t.eq(AEG.plain_words(row[0]), row[1], "plain_words(%s) [%s]" % [row[0], row[2]])
@@ -268,6 +289,18 @@ func lesson_lines_and_format() -> void:
 	var rec3: Dictionary = rec.duplicate(true)
 	rec3["worked"] = "For a range over 12 kW use column c of table 220.55."
 	t.eq(AEG.lesson_lines(rec3).size(), 2, "worked text that duplicates the rule is dropped")
+	# A calculation that reaches the answer stays even when its few long words
+	# ("table 630 31a2") all appear in a rule that never states the answer.
+	var rec4 := {
+		"id": "test-4", "prompt": "The conductor ampacity is ___.",
+		"answers": ["8.19 amps", "9.45 amps"], "correct_index": 0,
+		"reference_text": "630.31(A)(2) Specific Operation\nThe ampacity shall not be less than the product of the primary current and the multiplier in Table 630.31(A)(2) for the duty cycle.",
+		"formula": "", "worked": "Table 630.31(A)(2): 15% → 0.39; 21 × 0.39 = 8.19 A.", "article": "630.31(A)(2)",
+	}
+	var lines4: PackedStringArray = AEG.lesson_lines(rec4)
+	t.eq(lines4.size(), 3, "a calculation carrying the answer is not a duplicate of the rule")
+	if lines4.size() == 3:
+		t.has(lines4[2], "8.19", "the calculation line is the one kept")
 
 	# An explicit answer argument overrides the record's correct choice.
 	var lines2: PackedStringArray = AEG.lesson_lines(rec, "8.4 kW")

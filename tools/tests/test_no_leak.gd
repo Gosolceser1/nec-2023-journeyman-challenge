@@ -299,6 +299,23 @@ func match_in_semantics() -> void:
 			t.check(not AEG._is_word_char(before), "left boundary clean for %s in %s" % [ans, text])
 			t.check(not AEG._is_word_char(after), "right boundary clean for %s in %s" % [ans, text])
 
+	# A digit glued to another number by "/", "." or "," is part of that number.
+	t.eq(AEG.find_match_in("not more than 1.7 m (5 1/2 ft) above the floor", "two").is_empty(), true,
+		"'two' does not match the 2 of 5 1/2 (final-exam-#1-022)")
+	t.eq(AEG.find_match_in("rated 3.7 m", "7").is_empty(), true, "7 does not match the tail of 3.7")
+	t.eq(AEG.find_match_in("up to 1,200 VA", "200").is_empty(), true, "200 does not match the tail of 1,200")
+	# With a prompt, the occurrence next to the blank's words wins; without one,
+	# the first occurrence still does.
+	var two_tens := "Solid aluminum conductors 8, 10, and 12 AWG. The copper shall form a minimum 10 percent of the cross-sectional area."
+	var tens_prompt := "Copper-clad aluminum: the copper shall form a minimum of ___ percent of the cross-sectional area."
+	t.eq(int(AEG.find_match_in(two_tens, "10", tens_prompt).get("start", -1)), two_tens.rfind("10"),
+		"the prompt's blank context picks 'minimum 10 percent' (open-book-exam-#10-015)")
+	t.eq(int(AEG.find_match_in(two_tens, "10").get("start", -1)), two_tens.find("10"),
+		"without a prompt the first occurrence wins, as before")
+	var negated := "Boxes shall be required at splices. Boxes shall not be required for splices in raceways."
+	t.eq(int(AEG.find_match_in(negated, "be required", "Boxes shall ___ at splices.").get("start", -1)),
+		negated.find("be required"), "an occurrence after 'not' loses when the stem is not negated")
+
 	# find_match_in and redact_answer_spans must agree.
 	for pair in [["A 125-volt circuit requires 25 amps.", "25"], ["Chapter 3: Wiring", "3"],
 			["strain relief devices", "strain relief devices"], ["Class III", "3"], ["front", "front"]]:

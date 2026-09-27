@@ -27,9 +27,47 @@ static func _spell_small(n: int) -> String:
 
 static func answer_match_candidates(answer: String) -> Array[String]:
 	var candidates: Array[String] = []
-	var direct := answer.strip_edges().replace("’", "'").replace("″", "\"")
+	var direct := answer.strip_edges().replace("’", "'").replace("‘", "'").replace("′", "'") \
+		.replace("″", "\"").replace("”", "\"").replace("“", "\"")
 	if direct != "":
 		candidates.append(direct)
+	if answer.strip_edges() != direct:
+		candidates.append(answer.strip_edges())
+
+	# "194 degrees F" / "60 degrees C" -> the NEC's "194°F" / "60°C".
+	var degrees := RegEx.create_from_string("(?i)^\\s*([0-9]+)\\s*(?:degrees?|deg\\.?|°)\\s*([CF])\\s*$").search(direct)
+	if degrees:
+		for form in [degrees.get_string(1) + "°" + degrees.get_string(2).to_upper(),
+				degrees.get_string(1) + " °" + degrees.get_string(2).to_upper()]:
+			if not candidates.has(form):
+				candidates.append(form)
+		return candidates
+
+	# 6'6" -> "6 1/2 ft", "6 ft 6 in.", "78 in."
+	var ft_in := RegEx.create_from_string("^\\s*([0-9]+)\\s*'\\s*([0-9]+)\\s*\"?\\s*$").search(direct)
+	if ft_in:
+		var ft := int(ft_in.get_string(1))
+		var inch := int(ft_in.get_string(2))
+		var forms: Array[String] = [str(ft) + " ft " + str(inch) + " in.", str(ft * 12 + inch) + " in."]
+		if inch == 6:
+			forms.append(str(ft) + " 1/2 ft")
+		for form in forms:
+			if not candidates.has(form):
+				candidates.append(form)
+		return candidates
+
+	# The NEC spells the protective-device acronyms out in rule text.
+	var spelled_out := {"gfci": "ground-fault circuit-interrupter", "afci": "arc-fault circuit interrupter"}
+	if spelled_out.has(direct.to_lower()):
+		candidates.append(spelled_out[direct.to_lower()])
+
+	# "#6" / "No. 6" / "6 AWG": the NEC writes screw sizes as "No. 6" and wire sizes as "6 AWG".
+	# After `direct`, so the literal answer is still tried first.
+	var gauge := RegEx.create_from_string("^\\s*(?:#|No\\.\\s*)([0-9]+)\\s*$").search(direct)
+	if gauge:
+		for form in ["No. " + gauge.get_string(1), gauge.get_string(1) + " AWG"]:
+			if not candidates.has(form):
+				candidates.append(form)
 	var common_spelling := direct.to_lower().replace("inches", "in.").replace("inch", "in.").replace("feet", "ft").replace("foot", "ft")
 	if common_spelling != direct.to_lower() and not candidates.has(common_spelling):
 		candidates.append(common_spelling)
@@ -90,6 +128,9 @@ static func answer_match_candidates(answer: String) -> Array[String]:
 	var ff_match := fraction_feet.search(direct.to_lower())
 	if ff_match:
 		var whole := float(ff_match.get_string(1))
+		for dec_form in [ff_match.get_string(1) + ".5 ft", ff_match.get_string(1) + ".5"]:
+			if not candidates.has(dec_form):
+				candidates.append(dec_form)
 		var total_inches := (whole + 0.5) * 12.0
 		var in_text := format_answer_number(total_inches)
 		candidates.append(in_text + " in.")

@@ -50,6 +50,7 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | `test_speech_text.gd` | `speakable`, `spoken_fraction`, `_normalize_spoken`, `spoken_segments`, `teach_segments`, `speech_plan`, the delegation shims + a sweep of all 279 speech plans |
 | `test_speech_rules.gd` | `speech_rules.gd`: golden input -> spoken cases for every pipeline rule (fails if a rule has none), idempotence, reading order and "Option X," lettering, the rules version stamp, no answer before answering, and a whole-bank sweep for unspelled caps / raw symbols / doubled periods (spec: `docs/VOICE_READING_RULES.md`) |
 | `test_unit_matcher.gd` | `format_answer_number`, `answer_match_candidates` + a sweep of all 279 answers |
+| `test_info_panel.gd` | `InfoPanelRenderer`: a MEMORY TIP with per-choice rows is never hidden as an echo (plus a 279-record sweep), and the answer chip lands on the occurrence next to the stem's blank |
 | `test_table_viewer.gd` | the pure parts: `preview_layout`, `extract_target_keyword`, `is_note_row`, `_strip_note_prefix` + a sweep of all 25 bank tables |
 | `run_all.gd` | combined runner |
 | `test_validate_question_bank.py` | Python regression checks for validator/render parity and shared OCR path resolution |
