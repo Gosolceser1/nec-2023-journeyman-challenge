@@ -27,6 +27,9 @@ const SUITES := [
 	# inspects a margin, so a broken safe-area calculation shipped green and left
 	# the app rendering a blank strip where the question should be.
 	{"name": "safe_area margins (layout)", "path": "res://tools/tests/test_safe_area.gd"},
+	# Pins the full node tree both builders make, so they can be moved and
+	# refactored with proof that nothing on screen changed.
+	{"name": "layout tree golden (both layouts)", "path": "res://tools/tests/test_layout_tree.gd"},
 	{"name": "app theme (palette, factories)", "path": "res://tools/tests/test_app_theme.gd"},
 	{"name": "nec reference (titles, lookup path)", "path": "res://tools/tests/test_nec_reference.gd"},
 	{"name": "bank loader (shapes, leak guard)", "path": "res://tools/tests/test_bank_loader.gd"},

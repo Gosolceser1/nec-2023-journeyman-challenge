@@ -1,0 +1,2281 @@
+Main <Control> res://src/app/main.gd
+  .anchors_preset = 15
+  .anchor_right = 1.0
+  .anchor_bottom = 1.0
+  .grow_horizontal = 2
+  .grow_vertical = 2
+  on child_order_changed -> lambda
+  on item_rect_changed -> lambda
+  on item_rect_changed -> lambda
+  on item_rect_changed -> lambda
+  on item_rect_changed -> lambda
+  on item_rect_changed -> lambda
+  SpeechHelper <Node> res://src/speech/speech_helper.gd
+    on clip_ready -> main._on_helper_clip
+    on request_failed -> main._on_helper_failed
+  @TextureRect@2 <TextureRect>
+    .layout_mode = 0
+    .anchor_right = 1.0
+    .anchor_bottom = 1.0
+    .mouse_filter = 2
+    .texture = GradientTexture2D{fill_from=Vector2(0.5, 0), fill_to=Vector2(0.5, 1), size=(64.0, 64.0)}
+    .expand_mode = 1
+  @ColorRect@3 <ColorRect>
+    .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Faint circuit-board traces with current pulses running along some of them.\n// rect_size must track the node's size (canvas units) so cells stay square.\nuniform vec2 rect_size = vec2(540.0, 960.0);\nuniform float cell = 46.0;\nuniform vec4 trace_color : source_color = vec4(0.22, 0.74, 0.97, 0.06);\nuniform vec4 pad_color : source_color = vec4(0.22, 0.74, 0.97, 0.10);\nuniform vec4 pulse_color : source_color = vec4(0.49, 0.83, 0.99, 0.55);\nuniform float speed = 0.12;\nuniform float intensity : hint_range(0.0, 1.0) = 1.0;\n\nfloat hash(vec2 p) {\n	return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);\n}\n\nfloat line_mask(float d, float half_w) {\n	return 1.0 - smoothstep(half_w, half_w + 1.0, d);\n}\n\n// Pulse head moving along 0..1 with a fading tail behind it.\nfloat pulse_at(float pos, float seed) {\n	float t = fract(TIME * speed * (0.6 + seed) + seed * 7.0);\n	float behind = t - pos;\n	if (behind < 0.0) {\n		behind += 1.0;\n	}\n	return pow(clamp(1.0 - behind / 0.10, 0.0, 1.0), 3.0);\n}\n\nvoid fragment() {\n	vec2 px = UV * rect_size;\n	vec2 id = floor(px / cell);\n	vec2 local = px - id * cell;\n	float h_row = hash(id);\n	float h_col = hash(id + vec2(17.3, 5.1));\n\n	float trace = 0.0;\n	float pulse = 0.0;\n	bool has_h = h_row > 0.42;\n	bool has_v = h_col > 0.62;\n\n	if (has_h) {\n		float m = line_mask(abs(local.y - cell * 0.5), 0.6);\n		trace = max(trace, m);\n		float seed = hash(vec2(id.y, 3.7));\n		if (seed > 0.55) {\n			pulse = max(pulse, m * pulse_at(px.x / rect_size.x, seed));\n		}\n	}\n	if (has_v) {\n		float m = line_mask(abs(local.x - cell * 0.5), 0.6);\n		trace = max(trace, m);\n		float seed = hash(vec2(id.x, 9.2));\n		if (seed > 0.7) {\n			pulse = max(pulse, m * pulse_at(px.y / rect_size.y, seed));\n		}\n	}\n\n	float pad = 0.0;\n	if (has_h && has_v) {\n		float r = length(local - vec2(cell * 0.5));\n		pad = 1.0 - smoothstep(2.6, 3.8, r);\n	}\n\n	float a_trace = trace * trace_color.a;\n	float a_pad = pad * pad_color.a;\n	float a_pulse = pulse * pulse_color.a;\n	float a = max(max(a_trace, a_pad), a_pulse) * intensity;\n	vec3 rgb = trace_color.rgb;\n	if (a_pulse > a_trace) {\n		rgb = pulse_color.rgb;\n	}\n	COLOR = vec4(rgb, a);\n}\n"}, shader_parameter/rect_size=Vector2(960, 960), shader_parameter/cell=null, shader_parameter/trace_color=null, shader_parameter/pad_color=null, shader_parameter/pulse_color=null, shader_parameter/speed=null, shader_parameter/intensity=1.0}
+    .layout_mode = 0
+    .anchor_right = 1.0
+    .anchor_bottom = 1.0
+    .mouse_filter = 2
+    on resized -> lambda
+  @MarginContainer@4 <MarginContainer>
+    .layout_mode = 0
+    .anchor_right = 1.0
+    .anchor_bottom = 1.0
+    .mouse_filter = 2
+    .theme_override_constants/margin_left = 16
+    .theme_override_constants/margin_top = 16
+    .theme_override_constants/margin_right = 16
+    .theme_override_constants/margin_bottom = 16
+    on child_order_changed -> lambda
+    on item_rect_changed -> lambda
+    @VBoxContainer@5 <VBoxContainer>
+      .mouse_filter = 2
+      .theme_override_constants/separation = 10
+      on child_order_changed -> lambda
+      on visibility_changed -> lambda
+      on item_rect_changed -> lambda
+      on item_rect_changed -> lambda
+      on item_rect_changed -> lambda
+      on item_rect_changed -> lambda
+      on size_flags_changed -> lambda
+      on maximum_size_changed -> lambda
+      on minimum_size_changed -> lambda
+      on _desired_size_changed -> lambda
+      @VBoxContainer@6 <VBoxContainer>
+        .mouse_filter = 2
+        .theme_override_constants/separation = 6
+        on child_order_changed -> lambda
+        on visibility_changed -> lambda
+        on item_rect_changed -> lambda
+        on item_rect_changed -> lambda
+        on size_flags_changed -> lambda
+        on maximum_size_changed -> lambda
+        on minimum_size_changed -> lambda
+        on _desired_size_changed -> lambda
+        @HBoxContainer@7 <HBoxContainer>
+          .mouse_filter = 2
+          .theme_override_constants/separation = 10
+          on child_order_changed -> lambda
+          on visibility_changed -> lambda
+          on item_rect_changed -> lambda
+          on item_rect_changed -> lambda
+          on size_flags_changed -> lambda
+          on maximum_size_changed -> lambda
+          on minimum_size_changed -> lambda
+          on _desired_size_changed -> lambda
+          @Label@8 <Label>
+            .size_flags_horizontal = 3
+            .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+            .theme_override_font_sizes/font_size = 16
+            .theme_override_colors/font_color = Color(0.972549, 0.98039216, 0.9882353, 1)
+            .text = "NEC 2023 // JOURNEYMAN"
+            .clip_text = true
+            on visibility_changed -> lambda
+            on size_flags_changed -> lambda
+            on maximum_size_changed -> lambda
+            on maximum_size_changed -> lambda
+            on minimum_size_changed -> lambda
+            on _desired_size_changed -> lambda
+          @HBoxContainer@177 <HBoxContainer>
+            .mouse_filter = 2
+            .theme_override_constants/separation = 12
+            on child_order_changed -> lambda
+            on visibility_changed -> lambda
+            on item_rect_changed -> lambda
+            on item_rect_changed -> lambda
+            on size_flags_changed -> lambda
+            on maximum_size_changed -> lambda
+            on minimum_size_changed -> lambda
+            on _desired_size_changed -> lambda
+            @Label@9 <Label>
+              .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+              .theme_override_font_sizes/font_size = 13
+              .theme_override_colors/font_color = Color(0.21960784, 0.7411765, 0.972549, 1)
+              .horizontal_alignment = 2
+              on visibility_changed -> lambda
+              on size_flags_changed -> lambda
+              on maximum_size_changed -> lambda
+              on maximum_size_changed -> lambda
+              on minimum_size_changed -> lambda
+              on _desired_size_changed -> lambda
+            @Control@178 <Control> res://src/fx/streak_meter.gd
+              .custom_minimum_size = Vector2(118, 16)
+              .size_flags_vertical = 4
+              .mouse_filter = 2
+              on visibility_changed -> lambda
+              on size_flags_changed -> lambda
+              on maximum_size_changed -> lambda
+              on minimum_size_changed -> lambda
+              on _desired_size_changed -> lambda
+        @HBoxContainer@10 <HBoxContainer>
+          .mouse_filter = 2
+          .theme_override_constants/separation = 8
+          on child_order_changed -> lambda
+          on visibility_changed -> lambda
+          on item_rect_changed -> lambda
+          on item_rect_changed -> lambda
+          on item_rect_changed -> lambda
+          on item_rect_changed -> lambda
+          on size_flags_changed -> lambda
+          on maximum_size_changed -> lambda
+          on minimum_size_changed -> lambda
+          on _desired_size_changed -> lambda
+          @PanelContainer@11 <PanelContainer>
+            .size_flags_horizontal = 3
+            .mouse_filter = 2
+            .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.05882353, 0.16078432, 0.11764706, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.019607844, 0.5882353, 0.4117647, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8}
+            on child_order_changed -> lambda
+            on visibility_changed -> lambda
+            on item_rect_changed -> lambda
+            on size_flags_changed -> lambda
+            on maximum_size_changed -> lambda
+            on minimum_size_changed -> lambda
+            on _desired_size_changed -> lambda
+            @MarginContainer@12 <MarginContainer>
+              .mouse_filter = 2
+              .theme_override_constants/margin_left = 6
+              .theme_override_constants/margin_top = 5
+              .theme_override_constants/margin_right = 6
+              .theme_override_constants/margin_bottom = 5
+              on child_order_changed -> lambda
+              on visibility_changed -> lambda
+              on item_rect_changed -> lambda
+              on size_flags_changed -> lambda
+              on maximum_size_changed -> lambda
+              on minimum_size_changed -> lambda
+              on _desired_size_changed -> lambda
+              @Label@13 <Label>
+                .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                .theme_override_font_sizes/font_size = 12
+                .theme_override_colors/font_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                .horizontal_alignment = 1
+                on visibility_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+          @PanelContainer@14 <PanelContainer>
+            .size_flags_horizontal = 3
+            .mouse_filter = 2
+            .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.07450981, 0.1254902, 0.20784314, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.11764706, 0.22745098, 0.37254903, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8}
+            on child_order_changed -> lambda
+            on visibility_changed -> lambda
+            on item_rect_changed -> lambda
+            on size_flags_changed -> lambda
+            on maximum_size_changed -> lambda
+            on minimum_size_changed -> lambda
+            on _desired_size_changed -> lambda
+            @MarginContainer@15 <MarginContainer>
+              .mouse_filter = 2
+              .theme_override_constants/margin_left = 6
+              .theme_override_constants/margin_top = 5
+              .theme_override_constants/margin_right = 6
+              .theme_override_constants/margin_bottom = 5
+              on child_order_changed -> lambda
+              on visibility_changed -> lambda
+              on item_rect_changed -> lambda
+              on size_flags_changed -> lambda
+              on maximum_size_changed -> lambda
+              on minimum_size_changed -> lambda
+              on _desired_size_changed -> lambda
+              @Label@16 <Label>
+                .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                .theme_override_font_sizes/font_size = 12
+                .theme_override_colors/font_color = Color(0.49019608, 0.827451, 0.9882353, 1)
+                .horizontal_alignment = 1
+                on visibility_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+          @PanelContainer@17 <PanelContainer>
+            .size_flags_horizontal = 3
+            .mouse_filter = 2
+            .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.078431375, 0.10980392, 0.16470589, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.2, 0.25490198, 0.33333334, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8}
+            on child_order_changed -> lambda
+            on visibility_changed -> lambda
+            on item_rect_changed -> lambda
+            on item_rect_changed -> lambda
+            on size_flags_changed -> lambda
+            on maximum_size_changed -> lambda
+            on minimum_size_changed -> lambda
+            on _desired_size_changed -> lambda
+            @Control@179 <Control> res://src/fx/time_gauge.gd
+              .mouse_filter = 2
+              on visibility_changed -> lambda
+              on size_flags_changed -> lambda
+              on maximum_size_changed -> lambda
+              on minimum_size_changed -> lambda
+              on _desired_size_changed -> lambda
+            @MarginContainer@18 <MarginContainer>
+              .mouse_filter = 2
+              .theme_override_constants/margin_left = 6
+              .theme_override_constants/margin_top = 5
+              .theme_override_constants/margin_right = 6
+              .theme_override_constants/margin_bottom = 5
+              on child_order_changed -> lambda
+              on visibility_changed -> lambda
+              on item_rect_changed -> lambda
+              on size_flags_changed -> lambda
+              on maximum_size_changed -> lambda
+              on minimum_size_changed -> lambda
+              on _desired_size_changed -> lambda
+              @Label@19 <Label>
+                .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                .theme_override_font_sizes/font_size = 12
+                .theme_override_colors/font_color = Color(0.972549, 0.98039216, 0.9882353, 1)
+                .horizontal_alignment = 1
+                on visibility_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+          @PanelContainer@20 <PanelContainer>
+            .size_flags_horizontal = 3
+            .mouse_filter = 2
+            .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.05882353, 0.13725491, 0.20392157, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8}
+            on child_order_changed -> lambda
+            on visibility_changed -> lambda
+            on item_rect_changed -> lambda
+            on item_rect_changed -> lambda
+            on size_flags_changed -> lambda
+            on maximum_size_changed -> lambda
+            on minimum_size_changed -> lambda
+            on _desired_size_changed -> lambda
+            @Control@180 <Control> res://src/fx/time_gauge.gd
+              .mouse_filter = 2
+              on visibility_changed -> lambda
+              on size_flags_changed -> lambda
+              on maximum_size_changed -> lambda
+              on minimum_size_changed -> lambda
+              on _desired_size_changed -> lambda
+            @MarginContainer@21 <MarginContainer>
+              .mouse_filter = 2
+              .theme_override_constants/margin_left = 6
+              .theme_override_constants/margin_top = 5
+              .theme_override_constants/margin_right = 6
+              .theme_override_constants/margin_bottom = 5
+              on child_order_changed -> lambda
+              on visibility_changed -> lambda
+              on item_rect_changed -> lambda
+              on size_flags_changed -> lambda
+              on maximum_size_changed -> lambda
+              on minimum_size_changed -> lambda
+              on _desired_size_changed -> lambda
+              @Label@22 <Label>
+                .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                .theme_override_font_sizes/font_size = 12
+                .theme_override_colors/font_color = Color(0.21960784, 0.7411765, 0.972549, 1)
+                .horizontal_alignment = 1
+                on visibility_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+      @ScrollContainer@25 <ScrollContainer>
+        .size_flags_horizontal = 3
+        .size_flags_vertical = 3
+        .horizontal_scroll_mode = 0
+        .scroll_deadzone = 16
+        on child_order_changed -> lambda
+        on visibility_changed -> lambda
+        on item_rect_changed -> lambda
+        on item_rect_changed -> lambda
+        on item_rect_changed -> lambda
+        on item_rect_changed -> lambda
+        on item_rect_changed -> lambda
+        on item_rect_changed -> lambda
+        on size_flags_changed -> lambda
+        on maximum_size_changed -> lambda
+        on minimum_size_changed -> lambda
+        on _desired_size_changed -> lambda
+        on scroll_started -> main._reset_pressed_cards
+        @VBoxContainer@26 <VBoxContainer>
+          .size_flags_horizontal = 3
+          .size_flags_vertical = 3
+          .mouse_filter = 2
+          .theme_override_constants/separation = 10
+          on child_order_changed -> lambda
+          on visibility_changed -> lambda
+          on item_rect_changed -> lambda
+          on item_rect_changed -> lambda
+          on item_rect_changed -> lambda
+          on size_flags_changed -> lambda
+          on maximum_size_changed -> lambda
+          on minimum_size_changed -> lambda
+          on _desired_size_changed -> lambda
+          @PanelContainer@27 <PanelContainer>
+            .mouse_filter = 2
+            .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.039215688, 0.05882353, 0.11372549, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.11764706, 0.16078432, 0.23137255, 1), corner_radius_top_left=14, corner_radius_top_right=14, corner_radius_bottom_right=14, corner_radius_bottom_left=14, shadow_color=Color(0.22, 0.74, 0.97, 0.09), shadow_size=16}
+            on child_order_changed -> lambda
+            on visibility_changed -> lambda
+            on item_rect_changed -> lambda
+            on size_flags_changed -> lambda
+            on maximum_size_changed -> lambda
+            on minimum_size_changed -> lambda
+            on _desired_size_changed -> lambda
+            @MarginContainer@28 <MarginContainer>
+              .mouse_filter = 2
+              .theme_override_constants/margin_left = 14
+              .theme_override_constants/margin_top = 12
+              .theme_override_constants/margin_right = 14
+              .theme_override_constants/margin_bottom = 12
+              on child_order_changed -> lambda
+              on visibility_changed -> lambda
+              on item_rect_changed -> lambda
+              on size_flags_changed -> lambda
+              on maximum_size_changed -> lambda
+              on minimum_size_changed -> lambda
+              on _desired_size_changed -> lambda
+              @VBoxContainer@29 <VBoxContainer>
+                .mouse_filter = 2
+                .theme_override_constants/separation = 8
+                on child_order_changed -> lambda
+                on visibility_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+                @HBoxContainer@30 <HBoxContainer>
+                  .visible = false
+                  .mouse_filter = 2
+                  .theme_override_constants/separation = 8
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  @Label@31 <Label>
+                    .visible = false
+                    on visibility_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                  @PanelContainer@34 <PanelContainer>
+                    .mouse_filter = 2
+                    .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.07450981, 0.1254902, 0.20784314, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.11764706, 0.22745098, 0.37254903, 1), corner_radius_top_left=6, corner_radius_top_right=6, corner_radius_bottom_right=6, corner_radius_bottom_left=6}
+                    on child_order_changed -> lambda
+                    on visibility_changed -> lambda
+                    on item_rect_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                    @MarginContainer@32 <MarginContainer>
+                      .mouse_filter = 2
+                      .theme_override_constants/margin_left = 8
+                      .theme_override_constants/margin_top = 4
+                      .theme_override_constants/margin_right = 8
+                      .theme_override_constants/margin_bottom = 4
+                      on child_order_changed -> lambda
+                      on visibility_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on size_flags_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on minimum_size_changed -> lambda
+                      on _desired_size_changed -> lambda
+                      @Label@33 <Label>
+                        .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                        .theme_override_font_sizes/font_size = 12
+                        .theme_override_colors/font_color = Color(0.21960784, 0.7411765, 0.972549, 1)
+                        on visibility_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                  @PanelContainer@37 <PanelContainer>
+                    .mouse_filter = 2
+                    .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.078431375, 0.10980392, 0.16470589, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.2, 0.25490198, 0.33333334, 1), corner_radius_top_left=6, corner_radius_top_right=6, corner_radius_bottom_right=6, corner_radius_bottom_left=6}
+                    on child_order_changed -> lambda
+                    on visibility_changed -> lambda
+                    on item_rect_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                    @MarginContainer@35 <MarginContainer>
+                      .mouse_filter = 2
+                      .theme_override_constants/margin_left = 8
+                      .theme_override_constants/margin_top = 4
+                      .theme_override_constants/margin_right = 8
+                      .theme_override_constants/margin_bottom = 4
+                      on child_order_changed -> lambda
+                      on visibility_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on size_flags_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on minimum_size_changed -> lambda
+                      on _desired_size_changed -> lambda
+                      @Label@36 <Label>
+                        .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                        .theme_override_font_sizes/font_size = 12
+                        .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
+                        on visibility_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                @Label@38 <Label>
+                  .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                  .theme_override_font_sizes/font_size = 23
+                  .theme_override_colors/font_color = Color(1, 1, 1, 1)
+                  .autowrap_mode = 3
+                  on visibility_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                @HBoxContainer@39 <HBoxContainer>
+                  .mouse_filter = 2
+                  .theme_override_constants/separation = 10
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  @ColorRect@40 <ColorRect>
+                    .custom_minimum_size = Vector2(3, 18)
+                    .mouse_filter = 2
+                    .color = Color(0.21960784, 0.7411765, 0.972549, 1)
+                    on visibility_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                  @Label@41 <Label>
+                    .size_flags_horizontal = 3
+                    .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
+                    .theme_override_font_sizes/font_size = 15
+                    .theme_override_colors/font_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                    .autowrap_mode = 3
+                    on visibility_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                @PanelContainer@42 <PanelContainer>
+                  .visible = false
+                  .mouse_filter = 2
+                  .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.050980393, 0.09803922, 0.17254902, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.11764706, 0.22745098, 0.37254903, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8}
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  @MarginContainer@43 <MarginContainer>
+                    .mouse_filter = 2
+                    .theme_override_constants/margin_left = 12
+                    .theme_override_constants/margin_top = 8
+                    .theme_override_constants/margin_right = 12
+                    .theme_override_constants/margin_bottom = 8
+                    on child_order_changed -> lambda
+                    on visibility_changed -> lambda
+                    on item_rect_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                    @Label@44 <Label>
+                      .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
+                      .theme_override_font_sizes/font_size = 13
+                      .theme_override_colors/font_color = Color(0.21960784, 0.7411765, 0.972549, 1)
+                      .autowrap_mode = 3
+                      on visibility_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on size_flags_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on minimum_size_changed -> lambda
+                      on _desired_size_changed -> lambda
+                @PanelContainer@45 <PanelContainer>
+                  .visible = false
+                  .custom_minimum_size = Vector2(0, 120)
+                  .size_flags_horizontal = 3
+                  .mouse_filter = 2
+                  .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.03529412, 0.07450981, 0.13333334, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.11764706, 0.22745098, 0.37254903, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  @MarginContainer@46 <MarginContainer>
+                    .mouse_filter = 2
+                    .theme_override_constants/margin_left = 10
+                    .theme_override_constants/margin_top = 7
+                    .theme_override_constants/margin_right = 10
+                    .theme_override_constants/margin_bottom = 7
+                    on child_order_changed -> lambda
+                    on visibility_changed -> lambda
+                    on item_rect_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                    @VBoxContainer@47 <VBoxContainer>
+                      .mouse_filter = 2
+                      .theme_override_constants/separation = 5
+                      on child_order_changed -> lambda
+                      on visibility_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on size_flags_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on minimum_size_changed -> lambda
+                      on _desired_size_changed -> lambda
+                      @Label@48 <Label>
+                        .theme_override_font_sizes/font_size = 13
+                        .theme_override_colors/font_color = Color(0.49019608, 0.827451, 0.9882353, 1)
+                        .autowrap_mode = 3
+                        on visibility_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                      @ScrollContainer@51 <ScrollContainer>
+                        .custom_minimum_size = Vector2(0, 42)
+                        .size_flags_horizontal = 3
+                        .scroll_deadzone = 16
+                        on child_order_changed -> lambda
+                        on visibility_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                        @GridContainer@52 <GridContainer>
+                          .size_flags_horizontal = 3
+                          .mouse_filter = 2
+                          .theme_override_constants/h_separation = 0
+                          .theme_override_constants/v_separation = 0
+                          on visibility_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                      @Label@53 <Label>
+                        .theme_override_font_sizes/font_size = 12
+                        .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
+                        .autowrap_mode = 3
+                        on visibility_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                @PanelContainer@54 <PanelContainer>
+                  .visible = false
+                  .size_flags_horizontal = 3
+                  .mouse_filter = 2
+                  .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.972549, 0.98039216, 0.9882353, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  @MarginContainer@55 <MarginContainer>
+                    .mouse_filter = 2
+                    .theme_override_constants/margin_left = 8
+                    .theme_override_constants/margin_top = 6
+                    .theme_override_constants/margin_right = 8
+                    .theme_override_constants/margin_bottom = 6
+                    on child_order_changed -> lambda
+                    on visibility_changed -> lambda
+                    on item_rect_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                    @Control@56 <Control> res://src/ui/diagram_view.gd
+                      .texture_filter = 4
+                      .size_flags_horizontal = 3
+                      .tooltip_text = "Tap to enlarge"
+                      .mouse_filter = 1
+                      .mouse_default_cursor_shape = 2
+                      on visibility_changed -> lambda
+                      on resized -> @MarginContainer@4/@VBoxContainer@5/@ScrollContainer@25/@VBoxContainer@26/@PanelContainer@27/@MarginContainer@28/@VBoxContainer@29/@PanelContainer@54/@MarginContainer@55/@Control@56._update_height
+                      on size_flags_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on minimum_size_changed -> lambda
+                      on _desired_size_changed -> lambda
+                @PanelContainer@57 <PanelContainer>
+                  .visible = false
+                  .mouse_filter = 2
+                  .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.078431375, 0.10980392, 0.16470589, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.14509805, 0.3882353, 0.92156863, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8}
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  @MarginContainer@58 <MarginContainer>
+                    .mouse_filter = 2
+                    .theme_override_constants/margin_left = 12
+                    .theme_override_constants/margin_top = 8
+                    .theme_override_constants/margin_right = 12
+                    .theme_override_constants/margin_bottom = 8
+                    on child_order_changed -> lambda
+                    on visibility_changed -> lambda
+                    on item_rect_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                    @Label@59 <Label>
+                      .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
+                      .theme_override_font_sizes/font_size = 14
+                      .theme_override_colors/font_color = Color(0.5764706, 0.77254903, 0.99215686, 1)
+                      .autowrap_mode = 3
+                      on visibility_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on size_flags_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on minimum_size_changed -> lambda
+                      on _desired_size_changed -> lambda
+                @ProgressBar@60 <ProgressBar>
+                  .custom_minimum_size = Vector2(0, 8)
+                  .mouse_filter = 2
+                  .theme_override_styles/background = StyleBoxFlat{bg_color=Color(0.05882353, 0.09019608, 0.16470589, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.11764706, 0.16078432, 0.23137255, 1), corner_radius_top_left=3, corner_radius_top_right=3, corner_radius_bottom_right=3, corner_radius_bottom_left=3}
+                  .theme_override_styles/fill = StyleBoxFlat{bg_color=Color(0.007843138, 0.5176471, 0.78039217, 1), border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=3, corner_radius_top_right=3, corner_radius_bottom_right=3, corner_radius_bottom_left=3}
+                  .show_percentage = false
+                  on visibility_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+          @VBoxContainer@61 <VBoxContainer>
+            .mouse_filter = 2
+            .theme_override_constants/separation = 8
+            on visibility_changed -> lambda
+            on size_flags_changed -> lambda
+            on maximum_size_changed -> lambda
+            on minimum_size_changed -> lambda
+            on _desired_size_changed -> lambda
+          @PanelContainer@62 <PanelContainer>
+            .visible = false
+            .size_flags_vertical = 3
+            .mouse_filter = 2
+            .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.07450981, 0.12941177, 0.22745098, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.16078432, 0.2784314, 0.43529412, 1), corner_radius_top_left=14, corner_radius_top_right=14, corner_radius_bottom_right=14, corner_radius_bottom_left=14}
+            on child_order_changed -> lambda
+            on visibility_changed -> lambda
+            on item_rect_changed -> lambda
+            on size_flags_changed -> lambda
+            on maximum_size_changed -> lambda
+            on minimum_size_changed -> lambda
+            on _desired_size_changed -> lambda
+            @MarginContainer@63 <MarginContainer>
+              .mouse_filter = 2
+              .theme_override_constants/margin_left = 16
+              .theme_override_constants/margin_top = 14
+              .theme_override_constants/margin_right = 16
+              .theme_override_constants/margin_bottom = 14
+              on child_order_changed -> lambda
+              on visibility_changed -> lambda
+              on item_rect_changed -> lambda
+              on size_flags_changed -> lambda
+              on maximum_size_changed -> lambda
+              on minimum_size_changed -> lambda
+              on _desired_size_changed -> lambda
+              @VBoxContainer@64 <VBoxContainer>
+                .mouse_filter = 2
+                .theme_override_constants/separation = 10
+                on child_order_changed -> lambda
+                on visibility_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+                @Label@65 <Label>
+                  .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                  .theme_override_font_sizes/font_size = 19
+                  on visibility_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                @Label@66 <Label>
+                  .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
+                  .theme_override_font_sizes/font_size = 15
+                  .theme_override_colors/font_color = Color(0.94509804, 0.9607843, 0.9764706, 1)
+                  .autowrap_mode = 3
+                  on visibility_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                @Label@67 <Label>
+                  .visible = false
+                  .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                  .theme_override_font_sizes/font_size = 14
+                  .theme_override_colors/font_color = Color(0.49019608, 0.827451, 0.9882353, 1)
+                  .autowrap_mode = 3
+                  on visibility_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                @ScrollContainer@70 <ScrollContainer>
+                  .custom_minimum_size = Vector2(0, 150)
+                  .size_flags_horizontal = 3
+                  .size_flags_vertical = 3
+                  .horizontal_scroll_mode = 0
+                  .scroll_deadzone = 16
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  @VBoxContainer@71 <VBoxContainer>
+                    .size_flags_horizontal = 3
+                    .mouse_filter = 2
+                    .theme_override_constants/separation = 10
+                    on child_order_changed -> lambda
+                    on visibility_changed -> lambda
+                    on item_rect_changed -> lambda
+                    on item_rect_changed -> lambda
+                    on item_rect_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                    @ScrollContainer@74 <ScrollContainer>
+                      .visible = false
+                      .custom_minimum_size = Vector2(0, 42)
+                      .size_flags_horizontal = 3
+                      .scroll_deadzone = 16
+                      on child_order_changed -> lambda
+                      on visibility_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on size_flags_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on minimum_size_changed -> lambda
+                      on _desired_size_changed -> lambda
+                      @GridContainer@75 <GridContainer>
+                        .size_flags_horizontal = 3
+                        .mouse_filter = 2
+                        .theme_override_constants/h_separation = 0
+                        .theme_override_constants/v_separation = 0
+                        on visibility_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                    @Label@76 <Label>
+                      .visible = false
+                      .theme_override_font_sizes/font_size = 12
+                      .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
+                      .autowrap_mode = 3
+                      on visibility_changed -> lambda
+                      on size_flags_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on minimum_size_changed -> lambda
+                      on _desired_size_changed -> lambda
+                    @RichTextLabel@79 <RichTextLabel>
+                      .visible = false
+                      .mouse_filter = 2
+                      .theme_override_constants/line_separation = 4
+                      .theme_override_fonts/normal_font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
+                      .theme_override_font_sizes/normal_font_size = 15
+                      .theme_override_colors/default_color = Color(0.94509804, 0.9607843, 0.9764706, 1)
+                      .theme_override_fonts/bold_font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                      .theme_override_font_sizes/bold_font_size = 15
+                      .fit_content = true
+                      .scroll_active = false
+                      on tree_exiting -> lambda
+                      on child_order_changed -> lambda
+                      on visibility_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on gui_input -> lambda
+                      on size_flags_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on minimum_size_changed -> lambda
+                      on _desired_size_changed -> lambda
+      @Button@80 <Button>
+        .visible = false
+        .custom_minimum_size = Vector2(0, 52)
+        .size_flags_horizontal = 3
+        .mouse_filter = 1
+        .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.007843138, 0.5176471, 0.78039217, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+        .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.02745098, 0.34901962, 0.52156866, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+        .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.011764706, 0.4117647, 0.6313726, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+        .theme_override_styles/disabled = StyleBoxFlat{bg_color=Color(0.11764706, 0.16078432, 0.23137255, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.2, 0.25490198, 0.33333334, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+        .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+        .theme_override_colors/font_color = Color(1, 1, 1, 1)
+        .theme_override_colors/font_pressed_color = Color(0.8784314, 0.9490196, 0.99607843, 1)
+        .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+        .theme_override_font_sizes/font_size = 18
+        .text = "Next question"
+        on visibility_changed -> lambda
+        on size_flags_changed -> lambda
+        on maximum_size_changed -> lambda
+        on minimum_size_changed -> lambda
+        on _desired_size_changed -> lambda
+        on pressed -> main._on_next_button_pressed
+      @PanelContainer@81 <PanelContainer>
+        .mouse_filter = 2
+        .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.039215688, 0.05882353, 0.11372549, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.11764706, 0.16078432, 0.23137255, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12}
+        on child_order_changed -> lambda
+        on visibility_changed -> lambda
+        on item_rect_changed -> lambda
+        on size_flags_changed -> lambda
+        on maximum_size_changed -> lambda
+        on minimum_size_changed -> lambda
+        on _desired_size_changed -> lambda
+        @MarginContainer@82 <MarginContainer>
+          .mouse_filter = 2
+          .theme_override_constants/margin_left = 12
+          .theme_override_constants/margin_top = 6
+          .theme_override_constants/margin_right = 12
+          .theme_override_constants/margin_bottom = 6
+          on child_order_changed -> lambda
+          on visibility_changed -> lambda
+          on item_rect_changed -> lambda
+          on size_flags_changed -> lambda
+          on maximum_size_changed -> lambda
+          on minimum_size_changed -> lambda
+          on _desired_size_changed -> lambda
+          @VBoxContainer@83 <VBoxContainer>
+            .mouse_filter = 2
+            .theme_override_constants/separation = 0
+            on child_order_changed -> lambda
+            on visibility_changed -> lambda
+            on item_rect_changed -> lambda
+            on item_rect_changed -> lambda
+            on size_flags_changed -> lambda
+            on maximum_size_changed -> lambda
+            on minimum_size_changed -> lambda
+            on _desired_size_changed -> lambda
+            @HBoxContainer@84 <HBoxContainer>
+              .mouse_filter = 2
+              .theme_override_constants/separation = 10
+              on child_order_changed -> lambda
+              on visibility_changed -> lambda
+              on item_rect_changed -> lambda
+              on item_rect_changed -> lambda
+              on item_rect_changed -> lambda
+              on item_rect_changed -> lambda
+              on item_rect_changed -> lambda
+              on size_flags_changed -> lambda
+              on maximum_size_changed -> lambda
+              on minimum_size_changed -> lambda
+              on _desired_size_changed -> lambda
+              @Button@85 <Button>
+                .custom_minimum_size = Vector2(112, 48)
+                .size_flags_horizontal = 3
+                .mouse_filter = 1
+                .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.11372549, 0.19215687, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.13333334, 0.21176471, 0.34901962, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.101960786, 0.17254902, 0.29411766, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                .theme_override_font_sizes/font_size = 14
+                .text = "Audio off · Turn on"
+                on visibility_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+                on pressed -> main._toggle_session_mute
+              @Button@86 <Button>
+                .visible = false
+                .custom_minimum_size = Vector2(0, 48)
+                .size_flags_horizontal = 3
+                .mouse_filter = 1
+                .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.078431375, 0.13333334, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.1764706, 0.2901961, 0.46666667, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.11764706, 0.20392157, 0.34509805, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                .theme_override_colors/font_color = Color(0.94509804, 0.9607843, 0.9764706, 1)
+                .theme_override_colors/font_pressed_color = Color(0.49019608, 0.827451, 0.9882353, 1)
+                .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                .theme_override_font_sizes/font_size = 16
+                .text = "Read question"
+                on visibility_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+                on pressed -> main._toggle_read
+              @Button@87 <Button>
+                .visible = false
+                .custom_minimum_size = Vector2(0, 48)
+                .size_flags_horizontal = 3
+                .mouse_filter = 1
+                .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.11372549, 0.19215687, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.13333334, 0.21176471, 0.34901962, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.101960786, 0.17254902, 0.29411766, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
+                .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                .theme_override_font_sizes/font_size = 16
+                .text = "Pause"
+                on visibility_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+                on pressed -> main._toggle_listen_pause
+              @Button@88 <Button>
+                .visible = false
+                .custom_minimum_size = Vector2(96, 48)
+                .mouse_filter = 1
+                .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.11372549, 0.19215687, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.13333334, 0.21176471, 0.34901962, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.101960786, 0.17254902, 0.29411766, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
+                .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                .theme_override_font_sizes/font_size = 16
+                .text = "Skip  ›"
+                on visibility_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+                on pressed -> main._listen_skip
+              @Button@89 <Button>
+                .custom_minimum_size = Vector2(96, 48)
+                .mouse_filter = 1
+                .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.11372549, 0.19215687, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.13333334, 0.21176471, 0.34901962, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.101960786, 0.17254902, 0.29411766, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.2784314, 0.33333334, 0.4117647, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                .theme_override_colors/font_pressed_color = Color(0.49019608, 0.827451, 0.9882353, 1)
+                .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
+                .theme_override_font_sizes/font_size = 14
+                .text = "Menu"
+                on visibility_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+                on pressed -> main._show_menu
+            @HBoxContainer@90 <HBoxContainer>
+              .mouse_filter = 2
+              .theme_override_constants/separation = 8
+              on child_order_changed -> lambda
+              on visibility_changed -> lambda
+              on item_rect_changed -> lambda
+              on item_rect_changed -> lambda
+              on size_flags_changed -> lambda
+              on maximum_size_changed -> lambda
+              on minimum_size_changed -> lambda
+              on _desired_size_changed -> lambda
+              @Control@91 <Control> res://src/ui/voice_visualizer.gd
+                .visible = false
+                .custom_minimum_size = Vector2(40, 24)
+                .size_flags_vertical = 4
+                .mouse_filter = 2
+                .bar_count = 6
+                .bar_width = 3.5
+                .bar_gap = 3.0
+                .active_color = Color(0.21960784, 0.7411765, 0.972549, 1)
+                .secondary_color = Color(0.20392157, 0.827451, 0.6, 1)
+                .idle_color = Color(0.2, 0.25490198, 0.33333334, 1)
+                on visibility_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+              @Label@92 <Label>
+                .visible = false
+                .size_flags_horizontal = 3
+                .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                .theme_override_font_sizes/font_size = 13
+                .theme_override_colors/font_color = Color(0.21960784, 0.7411765, 0.972549, 1)
+                .clip_text = true
+                on visibility_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+  @Control@93 <Control>
+    .modulate = Color(1, 1, 1, 0)
+    .z_index = 20
+    .layout_mode = 0
+    .anchor_right = 1.0
+    .anchor_bottom = 1.0
+    .mouse_filter = 2
+    on child_order_changed -> lambda
+    on item_rect_changed -> lambda
+    on item_rect_changed -> lambda
+    on item_rect_changed -> lambda
+    @ColorRect@94 <ColorRect>
+      .layout_mode = 0
+      .anchor_right = 1.0
+      .anchor_bottom = 1.0
+      .mouse_filter = 2
+      .color = Color(0.007843138, 0.015686275, 0.03137255, 1)
+    @ColorRect@95 <ColorRect>
+      .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Faint circuit-board traces with current pulses running along some of them.\n// rect_size must track the node's size (canvas units) so cells stay square.\nuniform vec2 rect_size = vec2(540.0, 960.0);\nuniform float cell = 46.0;\nuniform vec4 trace_color : source_color = vec4(0.22, 0.74, 0.97, 0.06);\nuniform vec4 pad_color : source_color = vec4(0.22, 0.74, 0.97, 0.10);\nuniform vec4 pulse_color : source_color = vec4(0.49, 0.83, 0.99, 0.55);\nuniform float speed = 0.12;\nuniform float intensity : hint_range(0.0, 1.0) = 1.0;\n\nfloat hash(vec2 p) {\n	return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);\n}\n\nfloat line_mask(float d, float half_w) {\n	return 1.0 - smoothstep(half_w, half_w + 1.0, d);\n}\n\n// Pulse head moving along 0..1 with a fading tail behind it.\nfloat pulse_at(float pos, float seed) {\n	float t = fract(TIME * speed * (0.6 + seed) + seed * 7.0);\n	float behind = t - pos;\n	if (behind < 0.0) {\n		behind += 1.0;\n	}\n	return pow(clamp(1.0 - behind / 0.10, 0.0, 1.0), 3.0);\n}\n\nvoid fragment() {\n	vec2 px = UV * rect_size;\n	vec2 id = floor(px / cell);\n	vec2 local = px - id * cell;\n	float h_row = hash(id);\n	float h_col = hash(id + vec2(17.3, 5.1));\n\n	float trace = 0.0;\n	float pulse = 0.0;\n	bool has_h = h_row > 0.42;\n	bool has_v = h_col > 0.62;\n\n	if (has_h) {\n		float m = line_mask(abs(local.y - cell * 0.5), 0.6);\n		trace = max(trace, m);\n		float seed = hash(vec2(id.y, 3.7));\n		if (seed > 0.55) {\n			pulse = max(pulse, m * pulse_at(px.x / rect_size.x, seed));\n		}\n	}\n	if (has_v) {\n		float m = line_mask(abs(local.x - cell * 0.5), 0.6);\n		trace = max(trace, m);\n		float seed = hash(vec2(id.x, 9.2));\n		if (seed > 0.7) {\n			pulse = max(pulse, m * pulse_at(px.y / rect_size.y, seed));\n		}\n	}\n\n	float pad = 0.0;\n	if (has_h && has_v) {\n		float r = length(local - vec2(cell * 0.5));\n		pad = 1.0 - smoothstep(2.6, 3.8, r);\n	}\n\n	float a_trace = trace * trace_color.a;\n	float a_pad = pad * pad_color.a;\n	float a_pulse = pulse * pulse_color.a;\n	float a = max(max(a_trace, a_pad), a_pulse) * intensity;\n	vec3 rgb = trace_color.rgb;\n	if (a_pulse > a_trace) {\n		rgb = pulse_color.rgb;\n	}\n	COLOR = vec4(rgb, a);\n}\n"}, shader_parameter/rect_size=Vector2(960, 960), shader_parameter/cell=null, shader_parameter/trace_color=null, shader_parameter/pad_color=null, shader_parameter/pulse_color=null, shader_parameter/speed=null, shader_parameter/intensity=1.0}
+      .layout_mode = 0
+      .anchor_right = 1.0
+      .anchor_bottom = 1.0
+      .mouse_filter = 2
+      on resized -> lambda
+    @ScrollContainer@98 <ScrollContainer>
+      .layout_mode = 0
+      .anchor_right = 1.0
+      .anchor_bottom = 1.0
+      .horizontal_scroll_mode = 0
+      .vertical_scroll_mode = 3
+      .scroll_deadzone = 16
+      on child_order_changed -> lambda
+      on item_rect_changed -> lambda
+      on item_rect_changed -> lambda
+      on item_rect_changed -> lambda
+      on item_rect_changed -> lambda
+      on item_rect_changed -> lambda
+      on item_rect_changed -> lambda
+      @MarginContainer@99 <MarginContainer>
+        .size_flags_horizontal = 3
+        .size_flags_vertical = 3
+        .mouse_filter = 2
+        .theme_override_constants/margin_left = 16
+        .theme_override_constants/margin_top = 16
+        .theme_override_constants/margin_right = 16
+        .theme_override_constants/margin_bottom = 16
+        on child_order_changed -> lambda
+        on visibility_changed -> lambda
+        on item_rect_changed -> lambda
+        on size_flags_changed -> lambda
+        on maximum_size_changed -> lambda
+        on minimum_size_changed -> lambda
+        on _desired_size_changed -> lambda
+        @CenterContainer@100 <CenterContainer>
+          .size_flags_horizontal = 3
+          .size_flags_vertical = 3
+          .mouse_filter = 2
+          on child_order_changed -> lambda
+          on visibility_changed -> lambda
+          on item_rect_changed -> lambda
+          on size_flags_changed -> lambda
+          on maximum_size_changed -> lambda
+          on minimum_size_changed -> lambda
+          on _desired_size_changed -> lambda
+          @PanelContainer@101 <PanelContainer>
+            .custom_minimum_size = Vector2(912, 0)
+            .mouse_filter = 2
+            .theme_override_styles/panel = StyleBoxFlat{bg_color=Color(0.047058824, 0.07450981, 0.13333334, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=16, corner_radius_top_right=16, corner_radius_bottom_right=16, corner_radius_bottom_left=16, shadow_color=Color(0, 0, 0, 0.5), shadow_size=14}
+            on child_order_changed -> lambda
+            on visibility_changed -> lambda
+            on item_rect_changed -> lambda
+            on size_flags_changed -> lambda
+            on maximum_size_changed -> lambda
+            on minimum_size_changed -> lambda
+            on _desired_size_changed -> lambda
+            @MarginContainer@102 <MarginContainer>
+              .mouse_filter = 2
+              .theme_override_constants/margin_left = 20
+              .theme_override_constants/margin_top = 18
+              .theme_override_constants/margin_right = 20
+              .theme_override_constants/margin_bottom = 18
+              on child_order_changed -> lambda
+              on visibility_changed -> lambda
+              on item_rect_changed -> lambda
+              on size_flags_changed -> lambda
+              on maximum_size_changed -> lambda
+              on minimum_size_changed -> lambda
+              on _desired_size_changed -> lambda
+              @VBoxContainer@103 <VBoxContainer>
+                .mouse_filter = 2
+                .theme_override_constants/separation = 10
+                on child_order_changed -> lambda
+                on visibility_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on item_rect_changed -> lambda
+                on size_flags_changed -> lambda
+                on maximum_size_changed -> lambda
+                on minimum_size_changed -> lambda
+                on _desired_size_changed -> lambda
+                @HBoxContainer@104 <HBoxContainer>
+                  .mouse_filter = 2
+                  .alignment = 1
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  @Label@105 <Label>
+                    .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=4.0, content_margin_right=12.0, content_margin_bottom=4.0, bg_color=Color(0.05882353, 0.13725491, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=6, corner_radius_top_right=6, corner_radius_bottom_right=6, corner_radius_bottom_left=6}
+                    .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                    .theme_override_font_sizes/font_size = 11
+                    .theme_override_colors/font_color = Color(0.21960784, 0.7411765, 0.972549, 1)
+                    .text = " NFPA 70 • NEC 2023 • PSI STANDARDS "
+                    on visibility_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                @Label@106 <Label>
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Label glyph shader: a cyan energy band sweeps across the text, with a rare\n// brief flicker like an arcing sign. Works on the glyph alpha only.\nuniform float text_width = 400.0;\nuniform vec4 band_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float period = 3.6;\n\nvarying vec2 local_pos;\n\nfloat hash(float n) {\n	return fract(sin(n) * 43758.5453);\n}\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	float t = mod(TIME, period) / period;\n	float x = local_pos.x / max(text_width, 1.0);\n	float band = 1.0 - smoothstep(0.0, 0.09, abs(x - (t * 1.6 - 0.3)));\n	vec3 rgb = mix(base.rgb, band_color.rgb, band * 0.85);\n	float slot = floor(TIME * 12.0);\n	float flicker = hash(slot) > 0.985 ? 0.55 : 1.0;\n	COLOR = vec4(rgb, base.a * flicker);\n}\n"}, shader_parameter/text_width=null, shader_parameter/band_color=null, shader_parameter/period=null}
+                  .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                  .theme_override_font_sizes/font_size = 24
+                  .theme_override_colors/font_color = Color(0.972549, 0.98039216, 0.9882353, 1)
+                  .text = "NEC 2023 // JOURNEYMAN CHALLENGE"
+                  .horizontal_alignment = 1
+                  .autowrap_mode = 3
+                  on visibility_changed -> lambda
+                  on resized -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                @Label@107 <Label>
+                  .theme_override_font_sizes/font_size = 13
+                  .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                  .text = "Master the National Electrical Code • Comprehensive Exam Prep"
+                  .horizontal_alignment = 1
+                  .autowrap_mode = 3
+                  on visibility_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                @HSeparator@108 <HSeparator>
+                  .mouse_filter = 2
+                  on visibility_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                @PanelContainer@112 <PanelContainer>
+                  .mouse_filter = 2
+                  .theme_override_styles/panel = StyleBoxFlat{content_margin_left=14.0, content_margin_top=14.0, content_margin_right=14.0, content_margin_bottom=14.0, bg_color=Color(0.039215688, 0.06666667, 0.1254902, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.11764706, 0.16078432, 0.23137255, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12}
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  @VBoxContainer@113 <VBoxContainer>
+                    .mouse_filter = 2
+                    .theme_override_constants/separation = 10
+                    on child_order_changed -> lambda
+                    on visibility_changed -> lambda
+                    on item_rect_changed -> lambda
+                    on item_rect_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                    @HBoxContainer@114 <HBoxContainer>
+                      .mouse_filter = 2
+                      .theme_override_constants/separation = 8
+                      on child_order_changed -> lambda
+                      on visibility_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on size_flags_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on minimum_size_changed -> lambda
+                      on _desired_size_changed -> lambda
+                      @ColorRect@115 <ColorRect>
+                        .custom_minimum_size = Vector2(4, 16)
+                        .mouse_filter = 2
+                        .color = Color(0.20392157, 0.827451, 0.6, 1)
+                        on visibility_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                      @Label@116 <Label>
+                        .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                        .theme_override_font_sizes/font_size = 12
+                        .theme_override_colors/font_color = Color(0.20392157, 0.827451, 0.6, 1)
+                        .text = "AUDIO & VOICE"
+                        on visibility_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                      @Label@117 <Label>
+                        .size_flags_horizontal = 3
+                        .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                        .theme_override_font_sizes/font_size = 14
+                        .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
+                        .text = "Silent  ·  Sounds medium"
+                        .clip_text = true
+                        on visibility_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                      @Button@118 <Button>
+                        .custom_minimum_size = Vector2(92, 44)
+                        .mouse_filter = 1
+                        .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.11372549, 0.19215687, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.13333334, 0.21176471, 0.34901962, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                        .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                        .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.101960786, 0.17254902, 0.29411766, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                        .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                        .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
+                        .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                        .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                        .theme_override_font_sizes/font_size = 14
+                        .text = "Change"
+                        on visibility_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                        on pressed -> main._toggle_audio_section
+                    @VBoxContainer@119 <VBoxContainer>
+                      .visible = false
+                      .mouse_filter = 2
+                      .theme_override_constants/separation = 10
+                      on child_order_changed -> lambda
+                      on visibility_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
+                      on size_flags_changed -> lambda
+                      on maximum_size_changed -> lambda
+                      on minimum_size_changed -> lambda
+                      on _desired_size_changed -> lambda
+                      @GridContainer@120 <GridContainer>
+                        .mouse_filter = 2
+                        .theme_override_constants/h_separation = 8
+                        .theme_override_constants/v_separation = 8
+                        .columns = 2
+                        on child_order_changed -> lambda
+                        on visibility_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                        @Button@121 <Button>
+                          .custom_minimum_size = Vector2(0, 56)
+                          .size_flags_horizontal = 3
+                          .mouse_filter = 1
+                          .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                          .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                          .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                          .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                          .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                          .theme_override_font_sizes/font_size = 15
+                          .toggle_mode = true
+                          .button_pressed = true
+                          .button_group = ButtonGroup{}
+                          .text = "Silent"
+                          on visibility_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                          on pressed -> lambda
+                        @Button@122 <Button>
+                          .custom_minimum_size = Vector2(0, 56)
+                          .size_flags_horizontal = 3
+                          .mouse_filter = 1
+                          .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                          .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                          .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                          .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                          .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                          .theme_override_font_sizes/font_size = 15
+                          .toggle_mode = true
+                          .button_group = ButtonGroup{}
+                          .text = "Tap to hear"
+                          on visibility_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                          on pressed -> lambda
+                        @Button@123 <Button>
+                          .custom_minimum_size = Vector2(0, 56)
+                          .size_flags_horizontal = 3
+                          .mouse_filter = 1
+                          .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                          .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                          .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                          .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                          .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                          .theme_override_font_sizes/font_size = 15
+                          .toggle_mode = true
+                          .button_group = ButtonGroup{}
+                          .text = "Auto-read"
+                          on visibility_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                          on pressed -> lambda
+                        @Button@124 <Button>
+                          .custom_minimum_size = Vector2(0, 56)
+                          .size_flags_horizontal = 3
+                          .mouse_filter = 1
+                          .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                          .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                          .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                          .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                          .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                          .theme_override_font_sizes/font_size = 15
+                          .toggle_mode = true
+                          .button_group = ButtonGroup{}
+                          .text = "Listen"
+                          on visibility_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                          on pressed -> lambda
+                      @Label@125 <Label>
+                        .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
+                        .theme_override_font_sizes/font_size = 13
+                        .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                        .text = "Text only. No audio unless you turn sound on from the quiz dock. Best for the library, job site breaks, or real-exam feel."
+                        .autowrap_mode = 3
+                        on visibility_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                      @VBoxContainer@126 <VBoxContainer>
+                        .visible = false
+                        .mouse_filter = 2
+                        .theme_override_constants/separation = 10
+                        on child_order_changed -> lambda
+                        on visibility_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                        @VBoxContainer@127 <VBoxContainer>
+                          .mouse_filter = 2
+                          .theme_override_constants/separation = 10
+                          on child_order_changed -> lambda
+                          on visibility_changed -> lambda
+                          on item_rect_changed -> lambda
+                          on item_rect_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                          @HBoxContainer@128 <HBoxContainer>
+                            .size_flags_horizontal = 3
+                            .mouse_filter = 2
+                            .theme_override_constants/separation = 8
+                            on child_order_changed -> lambda
+                            on visibility_changed -> lambda
+                            on item_rect_changed -> lambda
+                            on item_rect_changed -> lambda
+                            on item_rect_changed -> lambda
+                            on size_flags_changed -> lambda
+                            on maximum_size_changed -> lambda
+                            on minimum_size_changed -> lambda
+                            on _desired_size_changed -> lambda
+                            @Label@129 <Label>
+                              .custom_minimum_size = Vector2(62, 0)
+                              .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                              .theme_override_font_sizes/font_size = 11
+                              .theme_override_colors/font_color = Color(0.39215687, 0.45490196, 0.54509807, 1)
+                              .text = "VOICE"
+                              on visibility_changed -> lambda
+                              on size_flags_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on minimum_size_changed -> lambda
+                              on _desired_size_changed -> lambda
+                            @OptionButton@140 <OptionButton>
+                              .custom_minimum_size = Vector2(0, 56)
+                              .size_flags_horizontal = 3
+                              .mouse_filter = 1
+                              .theme_override_styles/normal = StyleBoxFlat{content_margin_left=10.0, content_margin_right=8.0, bg_color=Color(0.05882353, 0.101960786, 0.18039216, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.11764706, 0.22745098, 0.37254903, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=10.0, content_margin_right=8.0, bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/hover = StyleBoxFlat{content_margin_left=10.0, content_margin_right=8.0, bg_color=Color(0.08627451, 0.14901961, 0.2509804, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/focus = StyleBoxFlat{content_margin_left=10.0, content_margin_right=8.0, bg_color=Color(0.08627451, 0.14901961, 0.2509804, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_colors/font_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                              .theme_override_colors/font_pressed_color = Color(0.21960784, 0.7411765, 0.972549, 1)
+                              .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                              .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
+                              .theme_override_font_sizes/font_size = 14
+                              .clip_text = true
+                              .selected = 0
+                              .fit_to_longest_item = false
+                              on visibility_changed -> lambda
+                              on size_flags_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on minimum_size_changed -> lambda
+                              on _desired_size_changed -> lambda
+                              on item_selected -> main._on_voice_picked
+                              on item_selected -> lambda
+                            @Button@141 <Button>
+                              .custom_minimum_size = Vector2(96, 56)
+                              .mouse_filter = 1
+                              .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.11372549, 0.19215687, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.13333334, 0.21176471, 0.34901962, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.101960786, 0.17254902, 0.29411766, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                              .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
+                              .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                              .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                              .theme_override_font_sizes/font_size = 14
+                              .text = "Preview"
+                              on visibility_changed -> lambda
+                              on size_flags_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on minimum_size_changed -> lambda
+                              on _desired_size_changed -> lambda
+                              on pressed -> main._preview_voice
+                          @HBoxContainer@142 <HBoxContainer>
+                            .mouse_filter = 2
+                            .theme_override_constants/separation = 6
+                            on child_order_changed -> lambda
+                            on visibility_changed -> lambda
+                            on item_rect_changed -> lambda
+                            on item_rect_changed -> lambda
+                            on item_rect_changed -> lambda
+                            on item_rect_changed -> lambda
+                            on item_rect_changed -> lambda
+                            on size_flags_changed -> lambda
+                            on maximum_size_changed -> lambda
+                            on minimum_size_changed -> lambda
+                            on _desired_size_changed -> lambda
+                            @Label@143 <Label>
+                              .custom_minimum_size = Vector2(62, 0)
+                              .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                              .theme_override_font_sizes/font_size = 11
+                              .theme_override_colors/font_color = Color(0.39215687, 0.45490196, 0.54509807, 1)
+                              .text = "SPEED"
+                              on visibility_changed -> lambda
+                              on size_flags_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on minimum_size_changed -> lambda
+                              on _desired_size_changed -> lambda
+                            @Button@144 <Button>
+                              .custom_minimum_size = Vector2(0, 56)
+                              .size_flags_horizontal = 3
+                              .mouse_filter = 1
+                              .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/focus = StyleBoxEmpty{}
+                              .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                              .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                              .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                              .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                              .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                              .theme_override_font_sizes/font_size = 14
+                              .toggle_mode = true
+                              .button_group = ButtonGroup{}
+                              .text = "0.9×"
+                              on visibility_changed -> lambda
+                              on size_flags_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on minimum_size_changed -> lambda
+                              on _desired_size_changed -> lambda
+                              on pressed -> lambda
+                            @Button@145 <Button>
+                              .custom_minimum_size = Vector2(0, 56)
+                              .size_flags_horizontal = 3
+                              .mouse_filter = 1
+                              .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/focus = StyleBoxEmpty{}
+                              .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                              .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                              .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                              .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                              .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                              .theme_override_font_sizes/font_size = 14
+                              .toggle_mode = true
+                              .button_pressed = true
+                              .button_group = ButtonGroup{}
+                              .text = "1×"
+                              on visibility_changed -> lambda
+                              on size_flags_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on minimum_size_changed -> lambda
+                              on _desired_size_changed -> lambda
+                              on pressed -> lambda
+                            @Button@146 <Button>
+                              .custom_minimum_size = Vector2(0, 56)
+                              .size_flags_horizontal = 3
+                              .mouse_filter = 1
+                              .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/focus = StyleBoxEmpty{}
+                              .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                              .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                              .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                              .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                              .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                              .theme_override_font_sizes/font_size = 14
+                              .toggle_mode = true
+                              .button_group = ButtonGroup{}
+                              .text = "1.15×"
+                              on visibility_changed -> lambda
+                              on size_flags_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on minimum_size_changed -> lambda
+                              on _desired_size_changed -> lambda
+                              on pressed -> lambda
+                            @Button@147 <Button>
+                              .custom_minimum_size = Vector2(0, 56)
+                              .size_flags_horizontal = 3
+                              .mouse_filter = 1
+                              .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/focus = StyleBoxEmpty{}
+                              .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                              .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                              .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                              .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                              .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                              .theme_override_font_sizes/font_size = 14
+                              .toggle_mode = true
+                              .button_group = ButtonGroup{}
+                              .text = "1.3×"
+                              on visibility_changed -> lambda
+                              on size_flags_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on minimum_size_changed -> lambda
+                              on _desired_size_changed -> lambda
+                              on pressed -> lambda
+                        @CheckButton@148 <CheckButton>
+                          .visible = false
+                          .custom_minimum_size = Vector2(0, 44)
+                          .mouse_filter = 1
+                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
+                          .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                          .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                          .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                          .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
+                          .theme_override_font_sizes/font_size = 14
+                          .button_pressed = true
+                          .text = "Also read the rule after I answer"
+                          on visibility_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                          on toggled -> main._on_auto_teach_toggled
+                        @HBoxContainer@149 <HBoxContainer>
+                          .visible = false
+                          .mouse_filter = 2
+                          .theme_override_constants/separation = 6
+                          on child_order_changed -> lambda
+                          on visibility_changed -> lambda
+                          on item_rect_changed -> lambda
+                          on item_rect_changed -> lambda
+                          on item_rect_changed -> lambda
+                          on item_rect_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                          @Label@150 <Label>
+                            .custom_minimum_size = Vector2(62, 0)
+                            .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                            .theme_override_font_sizes/font_size = 11
+                            .theme_override_colors/font_color = Color(0.39215687, 0.45490196, 0.54509807, 1)
+                            .text = "THINK"
+                            on visibility_changed -> lambda
+                            on size_flags_changed -> lambda
+                            on maximum_size_changed -> lambda
+                            on maximum_size_changed -> lambda
+                            on minimum_size_changed -> lambda
+                            on _desired_size_changed -> lambda
+                          @Button@151 <Button>
+                            .custom_minimum_size = Vector2(0, 56)
+                            .size_flags_horizontal = 3
+                            .mouse_filter = 1
+                            .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                            .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                            .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                            .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                            .theme_override_styles/focus = StyleBoxEmpty{}
+                            .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                            .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                            .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                            .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                            .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                            .theme_override_font_sizes/font_size = 14
+                            .toggle_mode = true
+                            .button_group = ButtonGroup{}
+                            .text = "5 s"
+                            on visibility_changed -> lambda
+                            on size_flags_changed -> lambda
+                            on maximum_size_changed -> lambda
+                            on minimum_size_changed -> lambda
+                            on _desired_size_changed -> lambda
+                            on pressed -> lambda
+                          @Button@152 <Button>
+                            .custom_minimum_size = Vector2(0, 56)
+                            .size_flags_horizontal = 3
+                            .mouse_filter = 1
+                            .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                            .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                            .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                            .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                            .theme_override_styles/focus = StyleBoxEmpty{}
+                            .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                            .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                            .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                            .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                            .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                            .theme_override_font_sizes/font_size = 14
+                            .toggle_mode = true
+                            .button_pressed = true
+                            .button_group = ButtonGroup{}
+                            .text = "10 s"
+                            on visibility_changed -> lambda
+                            on size_flags_changed -> lambda
+                            on maximum_size_changed -> lambda
+                            on minimum_size_changed -> lambda
+                            on _desired_size_changed -> lambda
+                            on pressed -> lambda
+                          @Button@153 <Button>
+                            .custom_minimum_size = Vector2(0, 56)
+                            .size_flags_horizontal = 3
+                            .mouse_filter = 1
+                            .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                            .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                            .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                            .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                            .theme_override_styles/focus = StyleBoxEmpty{}
+                            .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                            .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                            .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                            .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                            .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                            .theme_override_font_sizes/font_size = 14
+                            .toggle_mode = true
+                            .button_group = ButtonGroup{}
+                            .text = "15 s"
+                            on visibility_changed -> lambda
+                            on size_flags_changed -> lambda
+                            on maximum_size_changed -> lambda
+                            on minimum_size_changed -> lambda
+                            on _desired_size_changed -> lambda
+                            on pressed -> lambda
+                        @Label@154 <Label>
+                          .visible = false
+                          .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
+                          .theme_override_font_sizes/font_size = 12
+                          .theme_override_colors/font_color = Color(0.99215686, 0.6431373, 0.6862745, 1)
+                          .text = "The Full Journeyman Simulator stays exam-quiet: nothing plays by itself, like the real exam. The Read button still works there."
+                          .autowrap_mode = 3
+                          on visibility_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                      @HBoxContainer@155 <HBoxContainer>
+                        .mouse_filter = 2
+                        .theme_override_constants/separation = 6
+                        on child_order_changed -> lambda
+                        on visibility_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                        @Label@156 <Label>
+                          .custom_minimum_size = Vector2(62, 0)
+                          .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                          .theme_override_font_sizes/font_size = 11
+                          .theme_override_colors/font_color = Color(0.39215687, 0.45490196, 0.54509807, 1)
+                          .text = "SOUNDS"
+                          on visibility_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                        @Button@157 <Button>
+                          .custom_minimum_size = Vector2(0, 56)
+                          .size_flags_horizontal = 3
+                          .mouse_filter = 1
+                          .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                          .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                          .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                          .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                          .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                          .theme_override_font_sizes/font_size = 14
+                          .toggle_mode = true
+                          .button_group = ButtonGroup{}
+                          .text = "Off"
+                          on visibility_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                          on pressed -> lambda
+                        @Button@158 <Button>
+                          .custom_minimum_size = Vector2(0, 56)
+                          .size_flags_horizontal = 3
+                          .mouse_filter = 1
+                          .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                          .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                          .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                          .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                          .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                          .theme_override_font_sizes/font_size = 14
+                          .toggle_mode = true
+                          .button_group = ButtonGroup{}
+                          .text = "Low"
+                          on visibility_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                          on pressed -> lambda
+                        @Button@159 <Button>
+                          .custom_minimum_size = Vector2(0, 56)
+                          .size_flags_horizontal = 3
+                          .mouse_filter = 1
+                          .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                          .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                          .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                          .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                          .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                          .theme_override_font_sizes/font_size = 14
+                          .toggle_mode = true
+                          .button_pressed = true
+                          .button_group = ButtonGroup{}
+                          .text = "Medium"
+                          on visibility_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                          on pressed -> lambda
+                        @Button@160 <Button>
+                          .custom_minimum_size = Vector2(0, 56)
+                          .size_flags_horizontal = 3
+                          .mouse_filter = 1
+                          .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                          .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                          .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                          .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                          .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                          .theme_override_font_sizes/font_size = 14
+                          .toggle_mode = true
+                          .button_group = ButtonGroup{}
+                          .text = "High"
+                          on visibility_changed -> lambda
+                          on size_flags_changed -> lambda
+                          on maximum_size_changed -> lambda
+                          on minimum_size_changed -> lambda
+                          on _desired_size_changed -> lambda
+                          on pressed -> lambda
+                @HBoxContainer@109 <HBoxContainer>
+                  .mouse_filter = 2
+                  .theme_override_constants/separation = 8
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  @ColorRect@110 <ColorRect>
+                    .custom_minimum_size = Vector2(4, 16)
+                    .mouse_filter = 2
+                    .color = Color(0.21960784, 0.7411765, 0.972549, 1)
+                    on visibility_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                  @Label@111 <Label>
+                    .theme_override_font_sizes/font_size = 12
+                    .theme_override_colors/font_color = Color(0.21960784, 0.7411765, 0.972549, 1)
+                    .text = "RAPID PRACTICE DRILLS"
+                    on visibility_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                @Button@162 <Button>
+                  .modulate = Color(1, 1, 1, 0)
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(86, 64), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null}
+                  .custom_minimum_size = Vector2(0, 64)
+                  .mouse_filter = 1
+                  .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=20.0, content_margin_right=66.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/hover = StyleBoxFlat{content_margin_left=22.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=8, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                  .theme_override_colors/font_color = Color(1, 1, 1, 1)
+                  .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                  .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                  .theme_override_font_sizes/font_size = 15
+                  .text = "10 QUESTIONS\nQuick warm-up drill • 30 minutes timed"
+                  .alignment = 0
+                  .autowrap_mode = 3
+                  meta base_text = "10 QUESTIONS\nQuick warm-up drill • 30 minutes timed"
+                  meta full_exam = false
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on resized -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_exited -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  on pressed -> lambda
+                  @Control@161 <Control> res://src/fx/mode_badge.gd
+                    .layout_mode = 0
+                    .anchor_left = 1.0
+                    .anchor_top = 0.5
+                    .anchor_right = 1.0
+                    .anchor_bottom = 0.5
+                    .offset_left = -58.0
+                    .offset_top = -22.0
+                    .offset_right = -14.0
+                    .offset_bottom = 22.0
+                    .mouse_filter = 2
+                @Button@164 <Button>
+                  .modulate = Color(1, 1, 1, 0)
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(86, 64), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null}
+                  .custom_minimum_size = Vector2(0, 64)
+                  .mouse_filter = 1
+                  .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=20.0, content_margin_right=66.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/hover = StyleBoxFlat{content_margin_left=22.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=8, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                  .theme_override_colors/font_color = Color(1, 1, 1, 1)
+                  .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                  .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                  .theme_override_font_sizes/font_size = 15
+                  .text = "20 QUESTIONS\nStandard focused session • 60 minutes timed"
+                  .alignment = 0
+                  .autowrap_mode = 3
+                  meta base_text = "20 QUESTIONS\nStandard focused session • 60 minutes timed"
+                  meta full_exam = false
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on resized -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_exited -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  on pressed -> lambda
+                  @Control@163 <Control> res://src/fx/mode_badge.gd
+                    .layout_mode = 0
+                    .anchor_left = 1.0
+                    .anchor_top = 0.5
+                    .anchor_right = 1.0
+                    .anchor_bottom = 0.5
+                    .offset_left = -58.0
+                    .offset_top = -22.0
+                    .offset_right = -14.0
+                    .offset_bottom = 22.0
+                    .mouse_filter = 2
+                @Button@166 <Button>
+                  .modulate = Color(1, 1, 1, 0)
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(86, 64), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null}
+                  .custom_minimum_size = Vector2(0, 64)
+                  .mouse_filter = 1
+                  .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=20.0, content_margin_right=66.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/hover = StyleBoxFlat{content_margin_left=22.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=8, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                  .theme_override_colors/font_color = Color(1, 1, 1, 1)
+                  .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                  .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                  .theme_override_font_sizes/font_size = 15
+                  .text = "30 QUESTIONS\nExtended study block • 90 minutes timed"
+                  .alignment = 0
+                  .autowrap_mode = 3
+                  meta base_text = "30 QUESTIONS\nExtended study block • 90 minutes timed"
+                  meta full_exam = false
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on resized -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_exited -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  on pressed -> lambda
+                  @Control@165 <Control> res://src/fx/mode_badge.gd
+                    .layout_mode = 0
+                    .anchor_left = 1.0
+                    .anchor_top = 0.5
+                    .anchor_right = 1.0
+                    .anchor_bottom = 0.5
+                    .offset_left = -58.0
+                    .offset_top = -22.0
+                    .offset_right = -14.0
+                    .offset_bottom = 22.0
+                    .mouse_filter = 2
+                @Button@168 <Button>
+                  .modulate = Color(1, 1, 1, 0)
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(86, 64), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null}
+                  .custom_minimum_size = Vector2(0, 64)
+                  .mouse_filter = 1
+                  .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=20.0, content_margin_right=66.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/hover = StyleBoxFlat{content_margin_left=22.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=8, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                  .theme_override_colors/font_color = Color(1, 1, 1, 1)
+                  .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                  .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                  .theme_override_font_sizes/font_size = 15
+                  .text = "40 QUESTIONS\nHalf-length diagnostic test • 120 minutes timed"
+                  .alignment = 0
+                  .autowrap_mode = 3
+                  meta base_text = "40 QUESTIONS\nHalf-length diagnostic test • 120 minutes timed"
+                  meta full_exam = false
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on resized -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_exited -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  on pressed -> lambda
+                  @Control@167 <Control> res://src/fx/mode_badge.gd
+                    .layout_mode = 0
+                    .anchor_left = 1.0
+                    .anchor_top = 0.5
+                    .anchor_right = 1.0
+                    .anchor_bottom = 0.5
+                    .offset_left = -58.0
+                    .offset_top = -22.0
+                    .offset_right = -14.0
+                    .offset_bottom = 22.0
+                    .mouse_filter = 2
+                @Button@170 <Button>
+                  .modulate = Color(1, 1, 1, 0)
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(86, 64), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null}
+                  .custom_minimum_size = Vector2(0, 64)
+                  .mouse_filter = 1
+                  .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=20.0, content_margin_right=66.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/hover = StyleBoxFlat{content_margin_left=22.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=8, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                  .theme_override_colors/font_color = Color(1, 1, 1, 1)
+                  .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                  .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                  .theme_override_font_sizes/font_size = 15
+                  .text = "50 QUESTIONS\nIntensive endurance drill • 150 minutes timed"
+                  .alignment = 0
+                  .autowrap_mode = 3
+                  meta base_text = "50 QUESTIONS\nIntensive endurance drill • 150 minutes timed"
+                  meta full_exam = false
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on resized -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_exited -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  on pressed -> lambda
+                  @Control@169 <Control> res://src/fx/mode_badge.gd
+                    .layout_mode = 0
+                    .anchor_left = 1.0
+                    .anchor_top = 0.5
+                    .anchor_right = 1.0
+                    .anchor_bottom = 0.5
+                    .offset_left = -58.0
+                    .offset_top = -22.0
+                    .offset_right = -14.0
+                    .offset_bottom = 22.0
+                    .mouse_filter = 2
+                @HBoxContainer@171 <HBoxContainer>
+                  .mouse_filter = 2
+                  .theme_override_constants/separation = 8
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  @ColorRect@172 <ColorRect>
+                    .custom_minimum_size = Vector2(4, 16)
+                    .mouse_filter = 2
+                    .color = Color(0.95686275, 0.24705882, 0.36862746, 1)
+                    on visibility_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                  @Label@173 <Label>
+                    .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                    .theme_override_font_sizes/font_size = 12
+                    .theme_override_colors/font_color = Color(0.95686275, 0.24705882, 0.36862746, 1)
+                    .text = "OFFICIAL LICENSING SIMULATION"
+                    on visibility_changed -> lambda
+                    on size_flags_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on maximum_size_changed -> lambda
+                    on minimum_size_changed -> lambda
+                    on _desired_size_changed -> lambda
+                @Button@175 <Button>
+                  .modulate = Color(1, 1, 1, 0)
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(86, 72), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null}
+                  .custom_minimum_size = Vector2(0, 72)
+                  .mouse_filter = 1
+                  .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.11764706, 0.078431375, 0.11372549, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.95686275, 0.24705882, 0.36862746, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=20.0, content_margin_right=66.0, bg_color=Color(0.11764706, 0.078431375, 0.11372549, 1), border_width_left=6, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.95686275, 0.24705882, 0.36862746, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/hover = StyleBoxFlat{content_margin_left=22.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.18039216, 0.08235294, 0.11764706, 1), border_width_left=8, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.95686275, 0.24705882, 0.36862746, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                  .theme_override_colors/font_color = Color(1, 1, 1, 1)
+                  .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                  .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                  .theme_override_font_sizes/font_size = 15
+                  .text = "FULL JOURNEYMAN SIMULATOR\n80 scored questions • 240 minutes • 75% required to pass"
+                  .alignment = 0
+                  .autowrap_mode = 3
+                  meta base_text = "FULL JOURNEYMAN SIMULATOR\n80 scored questions • 240 minutes • 75% required to pass"
+                  meta full_exam = true
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on resized -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_exited -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  on pressed -> lambda
+                  @Control@174 <Control> res://src/fx/mode_badge.gd
+                    .layout_mode = 0
+                    .anchor_left = 1.0
+                    .anchor_top = 0.5
+                    .anchor_right = 1.0
+                    .anchor_bottom = 0.5
+                    .offset_left = -58.0
+                    .offset_top = -22.0
+                    .offset_right = -14.0
+                    .offset_bottom = 22.0
+                    .mouse_filter = 2
+                @Label@176 <Label>
+                  .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
+                  .theme_override_font_sizes/font_size = 11
+                  .theme_override_colors/font_color = Color(0.39215687, 0.45490196, 0.54509807, 1)
+                  .text = "Aligned with NFPA 70 (NEC 2023) & Nebraska State Electrical Division / PSI Standards\nPacing standard: 3:00 per scored item • 80 questions timed"
+                  .horizontal_alignment = 1
+                  .autowrap_mode = 3
+                  on visibility_changed -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+  FxLayer <Control>
+    .z_index = 40
+    .layout_mode = 0
+    .anchor_right = 1.0
+    .anchor_bottom = 1.0
+    .mouse_filter = 2
+  @Timer@181 <Timer>
+    on timeout -> main._tick_timer
+  @AudioStreamPlayer@182 <AudioStreamPlayer>
+    .bus = &"Speech"
+    on finished -> main._on_reader_finished
+  Sfx <Node> res://src/fx/sfx.gd
+    Sfx_correct <AudioStreamPlayer>
+      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[5376], format=3}}
+      .max_polyphony = 2
+      .bus = &"SFX"
+    Sfx_wrong <AudioStreamPlayer>
+      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[5376], format=3}}
+      .max_polyphony = 2
+      .bus = &"SFX"
+    Sfx_warning <AudioStreamPlayer>
+      .stream = AudioStreamWAV{data=bytes[14288], format=3}
+      .max_polyphony = 2
+      .bus = &"SFX"
+    Sfx_pass <AudioStreamPlayer>
+      .stream = AudioStreamWAV{data=bytes[25904], format=3}
+      .max_polyphony = 2
+      .bus = &"SFX"
+    Sfx_fail <AudioStreamPlayer>
+      .stream = AudioStreamWAV{data=bytes[21440], format=3}
+      .max_polyphony = 2
+      .bus = &"SFX"
+  @Timer@183 <Timer>
+    on timeout -> main._on_listen_tick
