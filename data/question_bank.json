@@ -4641,25 +4641,25 @@
       "gist": "Rigid PVC has a list of permitted uses and a list of uses that are not permitted. The question asks which choice is permitted.",
       "scene": "",
       "correct_index": 0,
-      "article": "352.10(G) and 352.12(B)",
+      "article": "352.100, 352.12(B), and 352.60",
       "article_title": "Rigid Polyvinyl Chloride Conduit: Type PVC",
       "difficulty": "medium",
       "keywords": [
         "equipment grounding conductor",
         "conduit"
       ],
-      "lookup_summary": "Lookup clues: equipment grounding conductor, conduit. Start with 352.10(G) and 352.12(B), then read the matching subsection and exceptions.",
+      "lookup_summary": "Lookup clues: rigid PVC conduit, sunlight, luminaire support, equipment grounding conductor. Start with 352.100 (Construction), then check 352.12(B) and 352.60.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nDecode the letters first: EMT = Electrical Metallic Tubing (thin-wall, hand-bendable). RMC = Rigid Metal Conduit (thick threaded steel). IMC = Intermediate (in between). FMC = Flexible Metal Conduit (bendable whip). ENT = Electrical Nonmetallic Tubing (blue smurf tube). LFMC = Liquidtight Flexible Metal (sealed whip). RNC = Rigid Nonmetallic Conduit (PVC). Rules answer three things: clearance from wood framing (1-1/4 in. or a nail plate), burial depth, and strapping (within a foot of every box, then every few feet by type).\n\nThis asks which wiring-method rule fits this installation. Subject: conduit. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\nequipment grounding conductor, conduit",
-      "reference_text": "352.10(G) and 352.12(B)\n352.10(G) Exposed\nPVC conduit shall be permitted for exposed work. PVC conduit used exposed in areas of physical damage shall be identified for the use.\n352.12(B) Support of Luminaires\nFor the support of luminaires or other equipment not described in 352.10(I).",
+      "reference_text": "352.100, 352.12(B), and 352.60\n352.100 Construction\nPVC conduit shall be made of rigid (nonplasticized) polyvinyl chloride (PVC). PVC conduit and fittings for use above ground shall have flame-retardant properties and shall be resistant to impact and crushing, distortion from heat under conditions likely to be encountered in service, and low temperature and sunlight effects.\n352.12(B) Support of Luminaires\nFor the support of luminaires or other equipment not described in 352.10(I).\n352.60 Equipment Grounding Conductor\nWhere equipment grounding is required, a separate equipment grounding conductor shall be installed in the conduit.",
       "reference_table": [],
       "tip_title": "Conduit and raceways",
-      "tip_short": "PVC can run exposed outdoors in sunlight if marked sunlight resistant, but never supports luminaires or serves as the EGC. Correct: A — above ground in direct sunlight. 352.10(G) permits PVC for exposed work, such as above ground in direct sunlight. Not B: 352.12(B) prohibits PVC conduit from supporting luminaires or other equipment. Not C: PVC is nonmetallic and cannot carry fault current; a separate equipment grounding conductor is required. Not D: PVC cannot support luminaires or act as a grounding conductor, so all of these is wrong.",
+      "tip_short": "Rigid PVC is built to resist sunlight, so it can run above ground in direct sunlight, but it never supports luminaires or serves as the EGC. Correct: A — above ground in direct sunlight. 352.100 requires above-ground PVC to resist sunlight effects, so direct sunlight is permitted. Not B: 352.12(B) prohibits PVC conduit from supporting luminaires or other equipment. Not C: 352.60 requires a separate equipment grounding conductor inside PVC conduit. Not D: PVC cannot support luminaires or act as a grounding conductor, so all of these is wrong.",
       "formula": "",
       "worked": "",
       "choice_notes": [
-        "352.10(G) permits PVC for exposed work, such as above ground in direct sunlight.",
+        "352.100 requires above-ground PVC to resist sunlight effects, so direct sunlight is permitted.",
         "352.12(B) prohibits PVC conduit from supporting luminaires or other equipment.",
-        "PVC is nonmetallic and cannot carry fault current; a separate equipment grounding conductor is required.",
+        "352.60 requires a separate equipment grounding conductor inside PVC conduit.",
         "PVC cannot support luminaires or act as a grounding conductor, so all of these is wrong."
       ],
       "available": true
@@ -5651,7 +5651,7 @@
       "gist": "The single-phase dwelling service table lets conductors be sized at a reduced percentage, but only for certain services. The question asks which services may use it.",
       "scene": "",
       "correct_index": 3,
-      "article": "Table 310.12(A)",
+      "article": "310.12(A)",
       "article_title": "Conductors for General Wiring",
       "difficulty": "hard",
       "keywords": [
@@ -5659,9 +5659,9 @@
         "conductors",
         "dwelling unit"
       ],
-      "lookup_summary": "Lookup clues: feeder, conductors, dwelling unit. Start with Table 310.12(A), then read the matching subsection and exceptions.",
+      "lookup_summary": "Lookup clues: feeder, conductors, dwelling unit. Start with 310.12(A); NEC 2023 deleted former Table 310.12, so apply the 83 percent rule with Table 310.16.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nLoad calculations never just add everything up, because a home never runs all loads at once. Start with 3 VA per square foot of living space (outside dimensions, minus open porches and unfinished spaces), add 1,500 VA for each small-appliance and laundry circuit, then shrink the subtotal with the demand factor (first 3,000 VA at full value, 3,001 to 120,000 VA at 35%, the remainder at 25%). Ranges and dryers use their own tables — a range nameplate is only the starting point. Heat and AC: count the larger one, never both.\n\nIn plain terms, the question is: \"Service and feeder conductors may be sized using Table 310.12(A) for...\" Subject: feeder. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nfeeder, conductors, dwelling unit",
-      "reference_text": "310.12(A) Single-Phase Dwelling Services and Feeders (2023)\nFor a service rated 100 through 400 amperes, 120/240-volt, 3-wire, single-phase, supplying the entire load of a one-family dwelling or an individual dwelling unit, the service conductors shall have an ampacity of not less than 83 percent of the service rating. NEC 2023 deleted former Table 310.12; apply the 83 percent rule with Table 310.16.",
+      "reference_text": "310.12(A) Services\nFor a service rated 100 through 400 amperes, the service conductors supplying the entire load associated with a one-family dwelling, or the service conductors supplying the entire load associated with an individual dwelling unit in a two-family or multifamily dwelling, shall be permitted to have an ampacity not less than 83 percent of the service rating. NEC 2023 deleted former Table 310.12; the 83 percent rule in 310.12(A) replaces it and applies only to 120/240-volt, 3-wire, single-phase dwelling services and feeders.",
       "reference_table": [
         [
           "Table 310.12(A) applies to",

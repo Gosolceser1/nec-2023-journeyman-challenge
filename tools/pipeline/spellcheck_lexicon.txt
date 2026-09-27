@@ -603,6 +603,7 @@ critical
 cross
 crossing
 crowded
+crushing
 cu
 cubic
 cultivated
@@ -646,6 +647,7 @@ degradation
 degree
 degrees
 deicing
+deleted
 deletions
 delicate
 deliver
@@ -735,6 +737,7 @@ distinguishable
 distinguished
 distinguishes
 distinguishing
+distortion
 distributed
 distributes
 disturbing
@@ -816,6 +819,7 @@ education
 effect
 effective
 effectively
+effects
 efficiency
 egress
 eight
@@ -856,6 +860,7 @@ enclose
 enclosed
 enclosure
 enclosures
+encountered
 end
 ends
 energize
@@ -1077,6 +1082,7 @@ foreign
 forest
 form
 formed
+former
 forms
 formula
 formulas
@@ -1280,6 +1286,7 @@ ignores
 illumination
 immediate
 immersion
+impact
 impedance
 impede
 impeded
