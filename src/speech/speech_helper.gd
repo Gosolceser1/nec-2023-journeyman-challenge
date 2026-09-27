@@ -14,7 +14,7 @@ signal request_failed(request_id: int, reason: String)
 
 enum State { OFF, STARTING, READY, DEAD }
 
-const SCRIPT_RES := "res://tools/speak_question.py"
+const SCRIPT_RES := "res://src/speech/speak_question.py"
 const PRIO_LIVE := 0
 const PRIO_PREFETCH := 1
 ## A helper that keeps dying is not restarted forever.
@@ -43,11 +43,10 @@ var _alive_check := 0.0
 ## carries it inside the pack (export include_filter), copied out on first use.
 static func resolve_script() -> String:
 	var dev := ProjectSettings.globalize_path(SCRIPT_RES)
-	if FileAccess.file_exists(dev):
+	# From a pack, globalize_path returns the path relative (no project folder)
+	# and file_exists then finds it inside the pack, where Python cannot read it.
+	if dev.is_absolute_path() and FileAccess.file_exists(dev):
 		return dev
-	var beside := OS.get_executable_path().get_base_dir().path_join("tools").path_join("speak_question.py")
-	if FileAccess.file_exists(beside):
-		return beside
 	var source := FileAccess.get_file_as_string(SCRIPT_RES)
 	if source == "":
 		return ""

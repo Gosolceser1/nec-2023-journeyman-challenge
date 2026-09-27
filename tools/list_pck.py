@@ -80,7 +80,7 @@ def main():
 
     bad = shipped(lambda r: (
         r.startswith(("tools/tests/", "tools/visual/", "tools/pipeline/", "docs/", "exams_source_pdf/", "build/"))
-        or (r.startswith("tools/") and not r.endswith("speak_question.py"))
+        or r.startswith("tools/")
         or r.endswith((".pdf", ".md"))
     ))
     # Imported textures live under .godot/imported; flag any OCR/tool PNG import.

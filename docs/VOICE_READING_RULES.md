@@ -8,7 +8,7 @@ One normaliser does all of this: `speech_rules.gd` (`Rules.normalize`), a
 table-driven pipeline of named rules run in order. `speech_text.gd` turns a
 record into segments (one audio clip each), and both voices use it:
 
-- Recorded clips: the Edge neural voice (`tools/speak_question.py`, default
+- Recorded clips: the Edge neural voice (`src/speech/speak_question.py`, default
   en-US-AndrewNeural, 96 kbps / 24 kHz mono MP3). Python only synthesises the
   text it is handed. Andrew's clips for every question ship in `res://assets/speech`
   and play on desktop **and Android**. Other desktop voices are synthesised on
@@ -184,7 +184,7 @@ tuning renders were scratch and are not kept; what they showed:
 manifests store it, along with the Edge output `format`. A clip is reused only
 when text, choice/teach flags, `rules` and `format` all match; `format` must
 equal `SPEECH_FORMAT` in `main.gd`, which is kept in sync with `OUTPUT_FORMAT`
-in `tools/speak_question.py`. **Bump `VERSION` whenever a rule changes spoken
+in `src/speech/speak_question.py`. **Bump `VERSION` whenever a rule changes spoken
 output**, then refresh the shipped clips:
 
 ```

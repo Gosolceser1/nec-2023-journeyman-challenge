@@ -9,7 +9,7 @@ from pathlib import Path
 import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
-spec = importlib.util.spec_from_file_location("speak_question", ROOT / "tools" / "speak_question.py")
+spec = importlib.util.spec_from_file_location("speak_question", ROOT / "src" / "speech" / "speak_question.py")
 speak = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(speak)
 

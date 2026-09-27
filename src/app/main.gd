@@ -3569,7 +3569,7 @@ func _toggle_read() -> void:
 const BUNDLED_VOICE_ID := DEFAULT_VOICE_ID
 const BUNDLED_VOICE_LABEL := "Andrew · Recorded (offline)"
 const VOICE_CONFIG_VERSION := 2
-## Edge output format every clip must be recorded in (tools/speak_question.py
+## Edge output format every clip must be recorded in (src/speech/speak_question.py
 ## OUTPUT_FORMAT). A manifest row in any other format is stale.
 const SPEECH_FORMAT := "audio-24khz-96kbitrate-mono-mp3"
 

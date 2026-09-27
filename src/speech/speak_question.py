@@ -3,8 +3,7 @@
     speak_question.py LINE_JSON FOLDER [VOICE]   one-shot: synthesize, write manifest
     speak_question.py --serve                    persistent helper (JSON lines on stdio)
 
-The one-shot form is what tools/speech/pregenerate_speech.py and the game's fallback
-use. The game normally keeps one --serve helper running so the ~3 s import of
+The one-shot form is what tools/speech/pregenerate_speech.py uses. The game keeps one --serve helper running so the ~3 s import of
 edge_tts + aiohttp is paid once, and clips stream back as each one finishes.
 
 --serve protocol, one JSON object per line.
