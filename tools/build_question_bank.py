@@ -759,7 +759,7 @@ def _tip_note_ok(note, choice):
     return s if s.endswith(".") else s + "."
 
 def concept_tip_short(concept_key, choices, correct_index):
-    # Principle + per-record verdict, mirroring tools/fix_memory_tips.py so rebuilds
+    # Principle + per-record verdict, mirroring the retired fix_memory_tips.py so rebuilds
     # stay answer-aligned: "Correct: <L> — <answer>." plus substantive choice notes.
     principle = CONCEPT_SHORT.get(concept_key, ("In plain language", ""))[1]
     if not isinstance(choices, list) or correct_index < 0 or correct_index >= len(choices):
