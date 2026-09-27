@@ -7,14 +7,14 @@ import json
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("baseline", type=Path, help="raw builder output (built with overrides skipped)")
-    parser.add_argument("--bank", type=Path, default=ROOT / "question_bank.json")
-    parser.add_argument("--output", type=Path, default=ROOT / "tools" / "question_bank_overrides.json")
+    parser.add_argument("--bank", type=Path, default=ROOT / "data" / "question_bank.json")
+    parser.add_argument("--output", type=Path, default=ROOT / "tools" / "pipeline" / "question_bank_overrides.json")
     args = parser.parse_args()
 
     baseline = json.loads(args.baseline.read_text(encoding="utf-8"))

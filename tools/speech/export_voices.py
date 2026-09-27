@@ -57,7 +57,7 @@ async def main() -> None:
             label += " · " + trait
         rows.append({"label": label, "id": short, "tier": tier_of(voice)})
     rows.sort(key=lambda row: (TIER_ORDER[row["tier"]], row["label"]))
-    path = Path(__file__).resolve().parents[1] / "voices.json"
+    path = Path(__file__).resolve().parents[2] / "data" / "voices.json"
     path.write_text(json.dumps(rows, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(len(rows))
 

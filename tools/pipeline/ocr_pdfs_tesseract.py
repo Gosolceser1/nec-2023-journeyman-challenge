@@ -5,7 +5,7 @@ import fitz
 
 from pipeline_paths import exam_ocr_dir
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 OUT = exam_ocr_dir()
 TESSERACT = Path(r"C:\Program Files\Tesseract-OCR\tesseract.exe")
 

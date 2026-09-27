@@ -1,13 +1,13 @@
 extends SceneTree
 ## Headless check: every record's live speech plan must resolve to its bundled
-## default-voice folder (after tools/fix step copies pregenerated clips to res://speech).
-## Run: Godot --headless --path . --script tools/test_bundle.gd
+## default-voice folder (after tools/fix step copies pregenerated clips to res://assets/speech).
+## Run: Godot --headless --path . --script tools/speech/test_bundle.gd
 
 func _init() -> void:
 	var main_script = load("res://src/app/main.gd")
 	var holder = main_script.new()
 	var speech_text = load("res://src/speech/speech_text.gd")
-	var bank = JSON.parse_string(FileAccess.get_file_as_string("res://question_bank.json"))
+	var bank = JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json"))
 	if bank == null or not bank is Dictionary or not bank.has("records"):
 		push_error("question bank unreadable")
 		quit(1)

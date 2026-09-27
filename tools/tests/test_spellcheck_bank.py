@@ -5,7 +5,7 @@ from pathlib import Path
 import unittest
 
 ROOT = Path(__file__).resolve().parents[2]
-spec = importlib.util.spec_from_file_location("spellcheck_bank", ROOT / "tools" / "spellcheck_bank.py")
+spec = importlib.util.spec_from_file_location("spellcheck_bank", ROOT / "tools" / "pipeline" / "spellcheck_bank.py")
 spellcheck = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(spellcheck)
 

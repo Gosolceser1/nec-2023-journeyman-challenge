@@ -34,7 +34,7 @@ var t: R = R.new()
 ##   final-exam-#3-042|an accessible
 ##                             the PDF stem quotes 422.33(A), which says "an accessible"
 ##                             twice and blanks only the second; mirrors
-##                             PROMPT_LEAK_EXCEPTIONS in tools/validate_question_bank.py.
+##                             PROMPT_LEAK_EXCEPTIONS in tools/pipeline/validate_question_bank.py.
 var prompt_allowlist := {
 	"final-exam-#3-042|an accessible": true,
 	"final-exam-#1-024|20": true,
@@ -321,7 +321,7 @@ func match_in_semantics() -> void:
 func bank_wide_sweep() -> void:
 	print("=== bank-wide leak sweep (279 real records) ===")
 	var prompt_hits: Array[String] = []
-	var parsed = JSON.parse_string(FileAccess.get_file_as_string("res://question_bank.json"))
+	var parsed = JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json"))
 	if not (parsed is Dictionary):
 		t.check(false, "question_bank.json parses to a Dictionary")
 		return

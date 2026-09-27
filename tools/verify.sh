@@ -127,8 +127,8 @@ bank_validate() {
   export PYTHON="$py"
   bash tools/tests/test_build_guard.sh || return $?
   "$py" -m unittest tools.tests.test_validate_question_bank tools.tests.test_spellcheck_bank tools.tests.test_speak_question || return $?
-  "$py" tools/spellcheck_bank.py --offline || return $?
-  "$py" tools/validate_question_bank.py --no-warn
+  "$py" tools/pipeline/spellcheck_bank.py --offline || return $?
+  "$py" tools/pipeline/validate_question_bank.py --no-warn
   return $?
 }
 

@@ -270,7 +270,7 @@ func edge_cases() -> void:
 # --------------------------------------------------------------------------
 func bank_candidate_sweep() -> void:
 	print("=== bank candidate sweep (279 records) ===")
-	var recs: Array = (JSON.parse_string(FileAccess.get_file_as_string("res://question_bank.json")) as Dictionary).get("records", [])
+	var recs: Array = (JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json")) as Dictionary).get("records", [])
 	t.eq(recs.size(), 279, "bank read is not vacuous")
 
 	var empty_sets := 0

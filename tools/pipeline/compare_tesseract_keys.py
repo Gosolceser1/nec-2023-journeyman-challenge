@@ -4,7 +4,7 @@ from pathlib import Path
 
 from pipeline_paths import answer_key_ocr_dir
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 KEYS = answer_key_ocr_dir()
 
 STEMS = {
@@ -17,7 +17,7 @@ STEMS = {
     "Journeyman open book exam #10 Answer key": "Open Book Exam #10",
 }
 
-bank = json.loads((ROOT / "question_bank.json").read_text(encoding="utf-8"))
+bank = json.loads((ROOT / "data" / "question_bank.json").read_text(encoding="utf-8"))
 recs = {(r["exam"], r["question_number"]): r for r in bank["records"]}
 
 total = 0

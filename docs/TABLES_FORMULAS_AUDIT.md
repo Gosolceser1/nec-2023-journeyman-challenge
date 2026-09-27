@@ -5,8 +5,8 @@ Scope: every `reference_table`, table-titled `reference_text`, `formula` and `wo
 authority. Stems (`prompt`), choices (`answers`) and `correct_index` were not touched — see
 *Verification*.
 
-All fixes go through `tools/question_bank_overrides.json` (plus one builder string in
-`tools/build_question_bank.py`) and a candidate build; the bank was never hand-edited.
+All fixes go through `tools/pipeline/question_bank_overrides.json` (plus one builder string in
+`tools/pipeline/build_question_bank.py`) and a candidate build; the bank was never hand-edited.
 
 ## Sources and how each edition was used
 
@@ -65,7 +65,7 @@ There are no questions on box fill (314.16(B)), conduit-fill calculations, 250.1
 
 ## Formulas and worked solutions
 
-`tools/check_worked_solutions.py` (new) holds the NEC 2023 table constants and recomputes the keyed answer for 30 records from first principles. It also re-evaluates every arithmetic chain ("a × b = c", percent forms, and unit-bearing chains) found in `formula`, `worked`, `reference_text`, `tip_short`, `info_tip` and `choice_notes`.
+`tools/pipeline/check_worked_solutions.py` (new) holds the NEC 2023 table constants and recomputes the keyed answer for 30 records from first principles. It also re-evaluates every arithmetic chain ("a × b = c", percent forms, and unit-bearing chains) found in `formula`, `worked`, `reference_text`, `tip_short`, `info_tip` and `choice_notes`.
 
 - The 30 recomputed records cover lighting loads, dryer and range demand, EGC sizing, ampacity derating, motor FLC, welder duty cycle, busbar capacity, receptacle loads, FMC fill, PVC support, and Chapter 9 resistance.
 - 2 records have non-numeric formulas: final-exam-#3-069 and open-book-exam-#7-004.
@@ -96,6 +96,6 @@ Formula text changed in: final-exam-#3-026, #3-040, #3-063, #5-039, and open-boo
   - Every changed table highlights exactly the answer cell (220.54 "85%", 250.122 "10", 430.37 "Three*", Note (4) "60%").
   - 310.16, 220.42(A) and 630.31(A) highlight no cell, instead of a wrong one.
 - **Fit check** (`.audit_tmp/measure_fit.gd`): 0% of the 279 records need scrolling, before or after answering, on desktop (1280×720) and mobile (540×960).
-- `python tools/validate_question_bank.py --no-warn`: VALID, 0 errors, 0 warnings.
+- `python tools/pipeline/validate_question_bank.py --no-warn`: VALID, 0 errors, 0 warnings.
 - `bash tools/verify.sh` (Git Bash): all 5 stages passed.
 - **Screenshots** (desktop and mobile, before and after answering) are in `.audit_tmp/tf/shots/`, taken with `.audit_tmp/tf/snap_tables.gd`. They cover #1-040, #1-068, #1-014, #3-052, #1-067, #1-004, #1-021 and #3-040, and confirm that ², ¾ and φ render.

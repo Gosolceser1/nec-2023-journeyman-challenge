@@ -10,47 +10,47 @@ The bank validator is a structural and spoiler-safety gate, not a proof that eac
 
 ```bash
 ./tools/verify.sh                         # full app/test gate, including strict bank validation
-python tools/validate_question_bank.py --no-warn
-bash tools/build_question_bank.sh --validate
-WIRE_BANK_OUT=/path/to/candidate.json bash tools/build_question_bank.sh --build
-WIRE_BANK_OUT=/path/to/candidate.json bash tools/build_question_bank.sh --full
+python tools/pipeline/validate_question_bank.py --no-warn
+bash tools/pipeline/build_question_bank.sh --validate
+WIRE_BANK_OUT=/path/to/candidate.json bash tools/pipeline/build_question_bank.sh --build
+WIRE_BANK_OUT=/path/to/candidate.json bash tools/pipeline/build_question_bank.sh --full
 ```
 
 `--no-warn` makes validator warnings fail the gate. The local and CI gates use it. `tools/tests/test_validate_question_bank.py` and `tools/tests/test_build_guard.sh` run inside the gate before the strict bank validator. The Godot suites cover app behavior and the no-answer-leak guarantee.
 
 ## OCR input/output locations
 
-`tools/pipeline_paths.py` is the shared path definition for both OCR scripts, the builder, and the answer-key comparison tool:
+`tools/pipeline/pipeline_paths.py` is the shared path definition for both OCR scripts, the builder, and the answer-key comparison tool:
 
 | Variable | Default | Purpose |
 |---|---|---|
 | `WIRE_OCR_PATH` | `<system temp>/opencode/wire_ocr` | OCR'd exam text; OCR script output and builder input |
 | `WIRE_OCR_KEYS` | `<system temp>/opencode/wire_ocr_keys` | OCR'd answer keys; OCR script output and builder input |
 | `WIRE_BANK_OUT` | `<repo>/question_bank.json` | generated bank output |
-| `PYTHON` | `python` | interpreter used by `tools/build_question_bank.sh` |
+| `PYTHON` | `python` | interpreter used by `tools/pipeline/build_question_bank.sh` |
 
 The OCR scripts skip output files that already exist. Remove or replace a stale OCR text file when the source PDF needs to be processed again.
 
 ## Curated bank reproducibility
 
-The raw OCR/parser output is normalized by the deterministic field overlay in `tools/question_bank_overrides.json`. `tools/bank_overrides.py` applies those reviewed, record-ID keyed changes after parsing, preserving the curated bank without scattering one-off edits through the OCR pipeline.
+The raw OCR/parser output is normalized by the deterministic field overlay in `tools/pipeline/question_bank_overrides.json`. `tools/pipeline/bank_overrides.py` applies those reviewed, record-ID keyed changes after parsing, preserving the curated bank without scattering one-off edits through the OCR pipeline.
 
-Every build still writes to a separate candidate path. `tools/build_question_bank.sh` refuses the checked-in `question_bank.json` so an unreviewed candidate cannot overwrite the learner bank. A controlled build with the current source and overlay produced all 279 records and exactly matched the checked-in bank; strict validation reported 0 errors and 0 warnings. This proves reproducibility and schema validity, not NEC answer correctness.
+Every build still writes to a separate candidate path. `tools/pipeline/build_question_bank.sh` refuses the checked-in `question_bank.json` so an unreviewed candidate cannot overwrite the learner bank. A controlled build with the current source and overlay produced all 279 records and exactly matched the checked-in bank; strict validation reported 0 errors and 0 warnings. This proves reproducibility and schema validity, not NEC answer correctness.
 
 To intentionally refresh the overlay after a reviewed bank change:
 
 ```bash
-WIRE_SKIP_BANK_OVERRIDES=1 WIRE_BANK_OUT=/path/to/raw.json python tools/build_question_bank.py
-python tools/refresh_question_bank_overrides.py /path/to/raw.json
-WIRE_BANK_OUT=/path/to/candidate.json bash tools/build_question_bank.sh --build
-python tools/validate_question_bank.py --no-warn /path/to/candidate.json
+WIRE_SKIP_BANK_OVERRIDES=1 WIRE_BANK_OUT=/path/to/raw.json python tools/pipeline/build_question_bank.py
+python tools/pipeline/refresh_question_bank_overrides.py /path/to/raw.json
+WIRE_BANK_OUT=/path/to/candidate.json bash tools/pipeline/build_question_bank.sh --build
+python tools/pipeline/validate_question_bank.py --no-warn /path/to/candidate.json
 ```
 
 Review the generated overlay and candidate diff before accepting either. The refresh script does not replace the curated bank. The old one-off scripts that rewrote `question_bank.json` in place were removed; every bank change goes through the overlay and a candidate build.
 
 ## Wording rule: PDF wording, typos corrected
 
-Question stems and answer choices follow the source exam PDF word for word, odd phrasing included. Two kinds of change are allowed, both through the override overlay (hints through `tools/gists.py`):
+Question stems and answer choices follow the source exam PDF word for word, odd phrasing included. Two kinds of change are allowed, both through the override overlay (hints through `tools/pipeline/gists.py`):
 
 - **OCR damage** is restored from the PDF page image: dropped `___` blanks, stray letters, `:` read in place of a blank, merged words, `3g` for `3ø`.
 - **Typos in the PDF itself** are corrected: misspellings (`sevices` → services, `kvVA` → kVA), dropped words (`roofs which they pass` → roofs *above* which they pass), split compounds (`name plate` → nameplate), and obvious grammar slips (`installations requires` → require). Meaning and numbers never change.
@@ -59,7 +59,7 @@ Quoted NEC provision text (`reference_text`) must still match the 2023 edition w
 
 The one stem that intentionally contains its answer is `final-exam-#3-042` (422.33(A) says "accessible" twice and the exam blanks only the second). `PROMPT_LEAK_EXCEPTIONS` in the validator and `prompt_allowlist` in `tools/tests/test_no_leak.gd` pin that record id and exact wording; any other record with a prompt leak is still an error.
 
-`tools/spellcheck_bank.py` checks every learner-facing string (bank fields and `tools/gists.py`) for misspellings, doubled words, punctuation spacing, unit case (kVA, kW, kcmil, AWG) and unbalanced brackets or quotes. Domain words go in `tools/spellcheck_allowlist.txt`. `verify.sh` runs it with `--offline`, against `tools/spellcheck_lexicon.txt`, so it needs no extra packages; install `pyspellchecker` for the full dictionary run and `--update-lexicon`.
+`tools/pipeline/spellcheck_bank.py` checks every learner-facing string (bank fields and `tools/pipeline/gists.py`) for misspellings, doubled words, punctuation spacing, unit case (kVA, kW, kcmil, AWG) and unbalanced brackets or quotes. Domain words go in `tools/pipeline/spellcheck_allowlist.txt`. `verify.sh` runs it with `--offline`, against `tools/pipeline/spellcheck_lexicon.txt`, so it needs no extra packages; install `pyspellchecker` for the full dictionary run and `--update-lexicon`.
 
 ## What validation checks
 
@@ -74,4 +74,4 @@ Current validation result: **0 errors, 0 warnings**. That is not an NEC answer-k
 
 ## Speech assets
 
-`tools/dump_speech.gd` exports the speech plan; `tools/pregenerate_speech.py --bundle` writes bundled MP3s into `speech/` (without `--bundle` it fills the per-user cache). Spoken text comes from `speech_rules.gd` (see `docs/VOICE_READING_RULES.md`); bump its `VERSION` when a rule changes output so stale clips are re-rendered. Generated `speech/` assets are gitignored and can be rebuilt with `bash tools/build_question_bank.sh --full` after the bank build is safe to run.
+`tools/speech/dump_speech.gd` exports the speech plan; `tools/speech/pregenerate_speech.py --bundle` writes bundled MP3s into `speech/` (without `--bundle` it fills the per-user cache). Spoken text comes from `speech_rules.gd` (see `docs/VOICE_READING_RULES.md`); bump its `VERSION` when a rule changes output so stale clips are re-rendered. Generated `speech/` assets are gitignored and can be rebuilt with `bash tools/pipeline/build_question_bank.sh --full` after the bank build is safe to run.

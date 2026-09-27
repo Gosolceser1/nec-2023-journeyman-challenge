@@ -14,7 +14,7 @@ Two passes:
    stated result does not match to the precision it is written with.
 
 Usage:
-    python tools/check_worked_solutions.py [bank.json]
+    python tools/pipeline/check_worked_solutions.py [bank.json]
 Exit 0 = no mismatches.
 """
 from __future__ import annotations
@@ -26,7 +26,7 @@ import sys
 from fractions import Fraction
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 
 # --- NEC 2023 values used by the calculation records -------------------------
 # Table 220.42(A) General Lighting Loads by Non-Dwelling Occupancy (VA/ft2)
@@ -219,7 +219,7 @@ def scan_text(rid: str, field: str, text: str, problems: list):
 
 def main() -> int:
     args = [a for a in sys.argv[1:] if a != "-v"]
-    bank_path = Path(args[0]) if args else ROOT / "question_bank.json"
+    bank_path = Path(args[0]) if args else ROOT / "data" / "question_bank.json"
     records = json.loads(bank_path.read_text(encoding="utf-8"))["records"]
     problems: list[str] = []
     checked = 0

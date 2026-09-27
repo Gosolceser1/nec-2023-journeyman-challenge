@@ -1,6 +1,6 @@
 """One-time batch generator: pre-synthesize every question's voice clips.
 
-Reads speech plans from the Godot user folder (written by tools/dump_speech.gd),
+Reads speech plans from the Godot user folder (written by tools/speech/dump_speech.gd),
 then records the Edge neural voice for each question into
     <user>\\speech\\<question-id>__<voice>\\
 The game plays those local files first and only synthesizes live when a question
@@ -8,13 +8,13 @@ changed or the voice was switched, so practice works offline after this run.
 
 Usage:
     run the Godot dump step below first, then:
-    python tools\\pregenerate_speech.py [--voice VOICE] [--limit N] [--force] [--bundle]
+    python tools\\speech\\pregenerate_speech.py [--voice VOICE] [--limit N] [--force] [--bundle]
 
 --bundle writes the shipped clips into <project>\\speech\\ (checked by
-tools/test_bundle.gd) instead of the per-user cache.
+tools/speech/test_bundle.gd) instead of the per-user cache.
 
 Godot step (run from the project folder):
-    Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/dump_speech.gd
+    Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/speech/dump_speech.gd
 """
 
 import argparse
@@ -24,10 +24,10 @@ import re
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from speak_question import DEFAULT_VOICE, OUTPUT_FORMAT, synthesize
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def app_name() -> str:
@@ -98,14 +98,14 @@ def main() -> None:
     args_parser.add_argument(
         "--bundle",
         action="store_true",
-        help="write into the project's res://speech (the clips shipped with the app) "
+        help="write into the project's res://assets/speech (the clips shipped with the app) "
         "instead of the user cache; voice defaults to the bundled default voice",
     )
     args = args_parser.parse_args()
 
     userdata = user_dir()
     voice = args.voice or (DEFAULT_VOICE if args.bundle else saved_voice(userdata))
-    out_root = ROOT / "speech" if args.bundle else userdata / "speech"
+    out_root = ROOT / "assets" / "speech" if args.bundle else userdata / "speech"
     src = userdata / "speech_src"
     if not src.exists():
         raise SystemExit("speech plans not found. Run the Godot dump step first (see module docstring).")

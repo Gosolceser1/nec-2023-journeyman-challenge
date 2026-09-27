@@ -9,11 +9,11 @@ from gists import GISTS, SCENES
 from pipeline_paths import answer_key_ocr_dir, exam_ocr_dir
 from bank_overrides import apply_overrides
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 OCR = exam_ocr_dir()
 KEYS = answer_key_ocr_dir()
-OUT = Path(os.environ.get("WIRE_BANK_OUT", str(ROOT / "question_bank.json")))
-if OUT.resolve() == (ROOT / "question_bank.json").resolve():
+OUT = Path(os.environ.get("WIRE_BANK_OUT", str(ROOT / "data" / "question_bank.json")))
+if OUT.resolve() == (ROOT / "data" / "question_bank.json").resolve():
     raise SystemExit("Refusing to write over the curated bank; set WIRE_BANK_OUT to a candidate file.")
 
 SOURCES = {

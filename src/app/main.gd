@@ -1,6 +1,6 @@
 extends Control
 
-const BANK_PATH := "res://question_bank.json"
+const BANK_PATH := "res://data/question_bank.json"
 const ANSWER_LETTERS := ["A", "B", "C", "D"]
 const SESSION_LENGTH := 10
 const EXAM_NAME := "NE JOURNEYMAN ELECTRICIAN"
@@ -118,7 +118,7 @@ var voice_tiers: Dictionary = {}  # picker label -> "natural" / "general" / "cla
 
 # Study audio (menu "Audio & Voice" section + compact quiz dock controls)
 const PREVIEW_TEXT := "Hi. This is the voice that will read your National Electrical Code questions and answer choices."
-## Speech folder id of the preview line; tools/dump_speech.gd bundles it too.
+## Speech folder id of the preview line; tools/speech/dump_speech.gd bundles it too.
 const PREVIEW_ID := "voice-preview"
 const SPEECH_BUS := "Speech"
 var audio := AudioSettings.new()
@@ -3320,7 +3320,7 @@ func _do_render_info_label() -> void:
 func _load_voice_catalog() -> void:
 	voice_ids.clear()
 	voice_tiers.clear()
-	var file := FileAccess.open("res://voices.json", FileAccess.READ)
+	var file := FileAccess.open("res://data/voices.json", FileAccess.READ)
 	if file == null:
 		voice_ids["Andrew · Male · Warm"] = DEFAULT_VOICE_ID
 		return
@@ -3598,13 +3598,13 @@ func _load_clip(path: String) -> AudioStream:
 	return stream
 
 func _bundled_speech_folder(safe_qid: String, voice_id: String, segments: Array) -> String:
-	# Pre-generated default-voice clips shipped inside the app (tools/pregenerate_speech.py).
+	# Pre-generated default-voice clips shipped inside the app (tools/speech/pregenerate_speech.py).
 	# Same neural voice as desktop, zero network, zero quota, exact clip sync.
 	# The manifest comparison guarantees the bundle matches the CURRENT speech plan;
 	# a stale bundle simply misses and falls through to live synthesis.
 	if voice_id != BUNDLED_VOICE_ID or safe_qid == "":
 		return ""
-	var folder := "res://speech".path_join(safe_qid + "__" + voice_id)
+	var folder := "res://assets/speech".path_join(safe_qid + "__" + voice_id)
 	if _speech_cache_matches(folder, segments):
 		return folder
 	# A teach-only request ("Hear the rule") is a contiguous TAIL of the bundled

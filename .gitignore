@@ -20,8 +20,8 @@ export_presets.cfg.bak
 *.tmp
 
 # Generated speech is derived from question_bank.json + pregenerate_speech.py.
-# ~138MB of mp3s at 96 kbps. Regenerate with: python tools/pregenerate_speech.py --bundle
-/speech/
+# ~138MB of mp3s at 96 kbps. Regenerate with: python tools/speech/pregenerate_speech.py --bundle
+/assets/speech/
 
 # Backups are throwaway; git history is the backup.
 /question_bank.bak*.json
@@ -33,8 +33,6 @@ __pycache__/
 /tools/**/*.png
 /tools/**/*.png.import
 /tools/*.txt
-!/tools/spellcheck_allowlist.txt
-!/tools/spellcheck_lexicon.txt
 /tools/anomalies.json
 /tools/out_*.txt
 

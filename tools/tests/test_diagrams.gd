@@ -10,7 +10,7 @@ extends SceneTree
 ## cannot be flipped in-process).
 
 const R = preload("res://tools/tests/t_report.gd")
-const MAP_PATH := "res://diagrams/diagrams.json"
+const MAP_PATH := "res://assets/diagrams/diagrams.json"
 ## Prompt/choice wording that only makes sense with a picture next to it.
 const NEEDS_FIGURE := "(?i)(refer to the figure|figure below|shown below|diagram [a-d]\\b|which of the following is an? (ammeter|voltmeter|wattmeter|ohmmeter)\\b)"
 
@@ -52,7 +52,7 @@ func _map() -> Dictionary:
 func _data_checks() -> void:
 	var m := _map()
 	t.check(not m.is_empty(), "diagrams.json parses and is not empty")
-	var bank = JSON.parse_string(FileAccess.get_file_as_string("res://question_bank.json"))
+	var bank = JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json"))
 	var recs: Array = bank.get("records", []) if bank is Dictionary else []
 	var by_id := {}
 	for r in recs:

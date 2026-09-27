@@ -10,21 +10,21 @@ from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = importlib.util.spec_from_file_location(
-    "validate_question_bank", ROOT / "tools" / "validate_question_bank.py"
+    "validate_question_bank", ROOT / "tools" / "pipeline" / "validate_question_bank.py"
 )
 assert SPEC is not None and SPEC.loader is not None
 validator = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(validator)
 
 PATHS_SPEC = importlib.util.spec_from_file_location(
-    "pipeline_paths", ROOT / "tools" / "pipeline_paths.py"
+    "pipeline_paths", ROOT / "tools" / "pipeline" / "pipeline_paths.py"
 )
 assert PATHS_SPEC is not None and PATHS_SPEC.loader is not None
 pipeline_paths = importlib.util.module_from_spec(PATHS_SPEC)
 PATHS_SPEC.loader.exec_module(pipeline_paths)
 
 OVERRIDES_SPEC = importlib.util.spec_from_file_location(
-    "bank_overrides", ROOT / "tools" / "bank_overrides.py"
+    "bank_overrides", ROOT / "tools" / "pipeline" / "bank_overrides.py"
 )
 assert OVERRIDES_SPEC is not None and OVERRIDES_SPEC.loader is not None
 bank_overrides = importlib.util.module_from_spec(OVERRIDES_SPEC)
@@ -84,7 +84,7 @@ class ValidatorRuleTests(unittest.TestCase):
 
     def test_switch_troubleshooting_is_not_mislabeled_as_a_nec_article(self):
         bank = __import__("json").loads(
-            (ROOT / "question_bank.json").read_text(encoding="utf-8")
+            (ROOT / "data" / "question_bank.json").read_text(encoding="utf-8")
         )
         record = next(
             row for row in bank["records"] if row["id"] == "final-exam-#1-005"
@@ -115,7 +115,7 @@ class ValidatorRuleTests(unittest.TestCase):
         )
 
     def _prompt_leak_errors(self, record_id, prompt):
-        bank = __import__("json").loads((ROOT / "question_bank.json").read_text(encoding="utf-8"))
+        bank = __import__("json").loads((ROOT / "data" / "question_bank.json").read_text(encoding="utf-8"))
         source = next(r for r in bank["records"] if r["id"] == "final-exam-#3-042")
         target = next(r for r in bank["records"] if r["id"] == record_id)
         target.update(prompt=prompt, answers=list(source["answers"]), correct_index=source["correct_index"])

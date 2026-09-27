@@ -1,8 +1,8 @@
-"""Synthesize the app's sound effects into res://sfx/ (see docs/SFX_PLAN.md).
+"""Synthesize the app's sound effects into res://assets/sfx/ (see docs/SFX_PLAN.md).
 
-    python tools/make_sfx.py                   # default family -> sfx/*.wav
-    python tools/make_sfx.py --family mallet   # ship another family instead
-    python tools/make_sfx.py --preview         # also every family -> .audit_tmp/sfx_preview/v2/
+    python tools/sfx/make_sfx.py                   # default family -> sfx/*.wav
+    python tools/sfx/make_sfx.py --family mallet   # ship another family instead
+    python tools/sfx/make_sfx.py --preview         # also every family -> .audit_tmp/sfx_preview/v2/
 
 Five cues only: correct, wrong, pass, fail, warning. Each family plays the same
 notes (C major) with a different instrument, so picking one is purely a timbre
@@ -27,8 +27,8 @@ import numpy as np
 SR = 44100
 FAMILIES = ("keys", "mallet", "pluck")
 DEFAULT_FAMILY = "keys"
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-OUT_DIR = os.path.join(ROOT, "sfx")
+ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+OUT_DIR = os.path.join(ROOT, "assets", "sfx")
 PREVIEW_DIR = os.path.join(ROOT, ".audit_tmp", "sfx_preview", "v2")
 
 ## Target max momentary loudness (LUFS, K-weighted) and total length per cue.

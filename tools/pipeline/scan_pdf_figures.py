@@ -1,6 +1,6 @@
 """Find every picture on every page of the source PDFs.
 
-    python tools/scan_pdf_figures.py   # writes .audit_tmp/figscan/*.png + candidates.json
+    python tools/pipeline/scan_pdf_figures.py   # writes .audit_tmp/figscan/*.png + candidates.json
 
 The PDFs are scans: each page is one full-page raster, with no text layer and
 no vector drawings, so page.get_images()/get_drawings() cannot isolate figures.
@@ -8,7 +8,7 @@ Instead each page is rendered and split into horizontal ink bands; text lines
 are short, uniform bands, so a band much taller than the page's typical line,
 or one whose ink is mostly thin strokes spread across a wide area, is a
 figure candidate. Every candidate is saved with context above it (to read the
-question number) for manual review; tools/extract_diagrams.py holds the final,
+question number) for manual review; tools/pipeline/extract_diagrams.py holds the final,
 hand-checked crop per question.
 """
 import json
@@ -18,7 +18,7 @@ import numpy as np
 import pymupdf
 from PIL import Image
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parents[2]
 PDF_DIR = ROOT / "exams_source_pdf"
 OUT = ROOT / ".audit_tmp" / "figscan"
 DPI = 100

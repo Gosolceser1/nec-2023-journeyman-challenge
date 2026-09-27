@@ -2,13 +2,13 @@
 """Schema validator for question_bank.json.
 
 This is the ONLY gate between the builder and shipping. Run it after
-tools/build_question_bank.py and before tools/pregenerate_speech.py.
+tools/pipeline/build_question_bank.py and before tools/speech/pregenerate_speech.py.
 
 Usage:
-    python tools/validate_question_bank.py                      # validates repo-root question_bank.json
-    python tools/validate_question_bank.py path/to/bank.json
-    python tools/validate_question_bank.py --json              # machine-readable output
-    python tools/validate_question_bank.py --no-warn           # strict: treat warnings as errors
+    python tools/pipeline/validate_question_bank.py                      # validates repo-root question_bank.json
+    python tools/pipeline/validate_question_bank.py path/to/bank.json
+    python tools/pipeline/validate_question_bank.py --json              # machine-readable output
+    python tools/pipeline/validate_question_bank.py --no-warn           # strict: treat warnings as errors
 
 Exit codes:
     0  valid (warnings may still be reported)
@@ -35,8 +35,8 @@ import unicodedata
 from collections import Counter
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_BANK = ROOT / "question_bank.json"
+ROOT = Path(__file__).resolve().parents[2]
+DEFAULT_BANK = ROOT / "data" / "question_bank.json"
 
 SCHEMA_VERSION = 2
 

@@ -43,7 +43,7 @@ func _init() -> void:
 	check(StreakMeter.segment_color(StreakMeter.SEGMENTS - 1).is_equal_approx(Color("fbbf24")), "last segment amber")
 
 	print("=== bank sweep: article -> chapter bucket ===")
-	var bank = JSON.parse_string(FileAccess.get_file_as_string("res://question_bank.json"))
+	var bank = JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json"))
 	var bad: Array[String] = []
 	var n := 0
 	if bank is Dictionary:

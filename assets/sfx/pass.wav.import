@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://c1gk03y4ldqih"
-path="res://.godot/imported/pass.wav-23e4c001f3c49eb8b0184916bf1b8c7a.sample"
+path="res://.godot/imported/pass.wav-c35401b4d374ff25f1005dd8f2454330.sample"
 
 [deps]
 
-source_file="res://sfx/pass.wav"
-dest_files=["res://.godot/imported/pass.wav-23e4c001f3c49eb8b0184916bf1b8c7a.sample"]
+source_file="res://assets/sfx/pass.wav"
+dest_files=["res://.godot/imported/pass.wav-c35401b4d374ff25f1005dd8f2454330.sample"]
 
 [params]
 

@@ -19,8 +19,8 @@ The bundled voice clips (`speech/`, ~138 MB) are generated, not committed.
 Without them the app falls back to the system voice. To build them:
 
 ```
-Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/dump_speech.gd
-python tools/pregenerate_speech.py --bundle
+Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/speech/dump_speech.gd
+python tools/speech/pregenerate_speech.py --bundle
 Godot_v4.7.2-stable_win64_console.exe --headless --path . --import
 ```
 
@@ -28,7 +28,7 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . --import
 
 ```
 bash tools/verify.sh                               # import, parse, unit suites, harness x2, bank checks
-python tools/validate_question_bank.py --no-warn   # bank schema + spoiler gate
+python tools/pipeline/validate_question_bank.py --no-warn   # bank schema + spoiler gate
 ```
 
 `GODOT` and `PYTHON` override the binaries verify.sh uses.

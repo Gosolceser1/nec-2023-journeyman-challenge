@@ -1,11 +1,11 @@
 extends SceneTree
 ## Headless exporter: builds the exact speech segments the game would speak
-## for every question and writes them as JSON for tools/pregenerate_speech.py.
-## Run: Godot --headless --path . --script tools/dump_speech.gd
+## for every question and writes them as JSON for tools/speech/pregenerate_speech.py.
+## Run: Godot --headless --path . --script tools/speech/dump_speech.gd
 
 func _init() -> void:
 	var speech_text = load("res://src/speech/speech_text.gd")
-	var bank_path := "res://question_bank.json"
+	var bank_path := "res://data/question_bank.json"
 	if not FileAccess.file_exists(bank_path):
 		push_error("question bank not found: " + bank_path)
 		quit(1)

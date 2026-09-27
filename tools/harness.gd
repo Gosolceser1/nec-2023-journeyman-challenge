@@ -26,6 +26,7 @@ func _init() -> void:
 
 	print("=== bank load ===")
 	check(main.records.size() == 279, "records count == 279, got %d" % main.records.size())
+	check(main.voice_ids.size() > 0, "voice catalog (data/voices.json) loaded: %d voices" % main.voice_ids.size())
 
 	print("=== sessions ===")
 	await _run_session(main, 10, false)
@@ -280,7 +281,7 @@ func _voice_routing(main: Node) -> void:
 	check(not main._clip_available("res://does_not_exist.mp3"), "a missing bundled clip reports available")
 	check(main._load_clip("res://does_not_exist.mp3") == null, "a missing bundled clip loaded")
 	# The bundle is gitignored; only check it where it has been generated.
-	if DirAccess.dir_exists_absolute("res://speech"):
+	if DirAccess.dir_exists_absolute("res://assets/speech"):
 		var rec: Dictionary = main.records[0]
 		var qid := str(rec.get("id", "")).replace("/", "_")
 		var folder: String = main._bundled_speech_folder(qid, main.BUNDLED_VOICE_ID, SpeechText.speech_plan(rec))

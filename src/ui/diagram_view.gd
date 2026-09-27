@@ -2,7 +2,7 @@ class_name DiagramView
 extends Control
 
 ## A question's figure, as printed in the source exam: a crop of the scanned
-## PDF page (diagrams/diagrams.json, produced by tools/extract_diagrams.py),
+## PDF page (diagrams/diagrams.json, produced by tools/pipeline/extract_diagrams.py),
 ## shown on a paper-white card so the black line art reads on the dark theme.
 ## Records with no PDF figure fall back to their ASCII "diagram" text in a
 ## monospace font. The drawing scales to the width it is given (no minimum
@@ -11,7 +11,7 @@ extends Control
 ## Pre-answer nothing is marked. reveal(correct_index) outlines the part of the
 ## figure the answer key points at (the mapping's "highlight" box).
 
-const MAP_PATH := "res://diagrams/diagrams.json"
+const MAP_PATH := "res://assets/diagrams/diagrams.json"
 const PAD := 4.0
 const TAP_SLOP := 14.0
 const HINT_GUTTER := 36.0

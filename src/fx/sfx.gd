@@ -8,12 +8,12 @@ extends Node
 ## when a cue plays; it is pure and unit-tested. Every instance method is a
 ## quiet no-op without a tree, bus or imported asset (headless harness).
 ##
-## Assets are synthesized by tools/make_sfx.py (CC0, see sfx/CREDITS.md) and
+## Assets are synthesized by tools/sfx/make_sfx.py (CC0, see sfx/CREDITS.md) and
 ## loudness-matched there, so the trims below stay near zero.
 
 const BUS := "SFX"
 const SPEECH_BUS := "Speech"
-const DIR := "res://sfx/"
+const DIR := "res://assets/sfx/"
 
 ## db: trim on top of the bus level. vary_db: random level spread per play, so
 ## the 100th answer tone is not a byte-identical copy of the first.

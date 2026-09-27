@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://be4qgooo0ru7i"
-path="res://.godot/imported/final-exam-1-047.png-13a3942e1f851c021e83399b279079ba.ctex"
+uid="uid://bbbb4jgtb62di"
+path="res://.godot/imported/final-exam-1-013.png-d0af14c313dd1bd5906f3d5a282eeae6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://diagrams/final-exam-1-047.png"
-dest_files=["res://.godot/imported/final-exam-1-047.png-13a3942e1f851c021e83399b279079ba.ctex"]
+source_file="res://assets/diagrams/final-exam-1-013.png"
+dest_files=["res://.godot/imported/final-exam-1-013.png-d0af14c313dd1bd5906f3d5a282eeae6.ctex"]
 
 [params]
 

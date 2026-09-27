@@ -10,7 +10,7 @@ record into segments (one audio clip each), and both voices use it:
 
 - Recorded clips: the Edge neural voice (`tools/speak_question.py`, default
   en-US-AndrewNeural, 96 kbps / 24 kHz mono MP3). Python only synthesises the
-  text it is handed. Andrew's clips for every question ship in `res://speech`
+  text it is handed. Andrew's clips for every question ship in `res://assets/speech`
   and play on desktop **and Android**. Other desktop voices are synthesised on
   demand and cached (see "Runtime synthesis" below).
 - Device voice (`DisplayServer.tts_speak`): the Android fallback when no
@@ -188,10 +188,10 @@ in `tools/speak_question.py`. **Bump `VERSION` whenever a rule changes spoken
 output**, then refresh the shipped clips:
 
 ```
-Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/dump_speech.gd
-python tools/pregenerate_speech.py --bundle
+Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/speech/dump_speech.gd
+python tools/speech/pregenerate_speech.py --bundle
 Godot_v4.7.2-stable_win64_console.exe --headless --path . --import
-Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/test_bundle.gd   # expect 279/279
+Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/speech/test_bundle.gd   # expect 279/279
 ```
 
 The `--import` step matters. Bundled clips are loaded as imported

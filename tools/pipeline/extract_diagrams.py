@@ -1,7 +1,7 @@
 """Crop question figures out of the source PDFs.
 
-    python tools/extract_diagrams.py            # writes diagrams/*.png + diagrams/diagrams.json
-    python tools/extract_diagrams.py --preview  # also writes .audit_tmp/diagram_crops/*_page.png with boxes drawn
+    python tools/pipeline/extract_diagrams.py            # writes diagrams/*.png + diagrams/diagrams.json
+    python tools/pipeline/extract_diagrams.py --preview  # also writes .audit_tmp/diagram_crops/*_page.png with boxes drawn
 
 Every figure is a region of a scanned page, so it is rendered at DPI and cropped,
 never redrawn. Boxes are fractions of the page (x0, y0, x1, y1) so they do not
@@ -18,9 +18,9 @@ import numpy as np
 import pymupdf
 from PIL import Image, ImageDraw
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parents[2]
 PDF_DIR = ROOT / "exams_source_pdf"
-OUT_DIR = ROOT / "diagrams"
+OUT_DIR = ROOT / "assets" / "diagrams"
 DPI = 300
 PAD_PX = 14
 INK_THRESHOLD = 200
@@ -88,7 +88,7 @@ def extract(qid, spec, preview_dir=None):
     fig.save(out, optimize=True)
 
     entry = {
-        "file": f"res://diagrams/{out.name}",
+        "file": f"res://assets/diagrams/{out.name}",
         "pdf": spec["pdf"],
         "page": spec["page"],
         "crop_px_at_dpi": [x0, y0, x1, y1],

@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 """Spelling and typography check for every learner-facing string in the bank.
 
-    python tools/spellcheck_bank.py              # full check (pyspellchecker if installed)
-    python tools/spellcheck_bank.py --offline    # reviewed-lexicon check, no dependencies
-    python tools/spellcheck_bank.py --update-lexicon
+    python tools/pipeline/spellcheck_bank.py              # full check (pyspellchecker if installed)
+    python tools/pipeline/spellcheck_bank.py --offline    # reviewed-lexicon check, no dependencies
+    python tools/pipeline/spellcheck_bank.py --update-lexicon
 
 Policy (see docs/DATA_PIPELINE.md, "PDF wording, typos corrected"): stems and
 choices follow the source PDF word for word, but genuine misspellings and slips
-are corrected through tools/question_bank_overrides.json. Quoted NEC text
+are corrected through tools/pipeline/question_bank_overrides.json. Quoted NEC text
 (reference_text) must still match the 2023 wording, so a finding there is fixed
 only when the NEC itself spells it the other way.
 
 Checks
-  spelling      word unknown to the dictionary and to tools/spellcheck_allowlist.txt
+  spelling      word unknown to the dictionary and to tools/pipeline/spellcheck_allowlist.txt
   doubled       the same word twice in a row ("the the")
   spacing       missing space after , ; : ? ! or a sentence period, space before
                 , ; : ? !, doubled spaces, doubled punctuation
@@ -21,7 +21,7 @@ Checks
 
 Dictionary
   Full mode uses pyspellchecker (pip install pyspellchecker) plus the allowlist.
-  Offline mode (used by tools/verify.sh) uses tools/spellcheck_lexicon.txt, the
+  Offline mode (used by tools/verify.sh) uses tools/pipeline/spellcheck_lexicon.txt, the
   vocabulary of the bank as last reviewed in full mode, plus the allowlist, so
   any NEW word must be reviewed once. Regenerate the lexicon with
   --update-lexicon (needs pyspellchecker; it stores only dictionary words, so
@@ -37,10 +37,10 @@ import re
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-BANK = ROOT / "question_bank.json"
-ALLOWLIST = ROOT / "tools" / "spellcheck_allowlist.txt"
-LEXICON = ROOT / "tools" / "spellcheck_lexicon.txt"
+ROOT = Path(__file__).resolve().parents[2]
+BANK = ROOT / "data" / "question_bank.json"
+ALLOWLIST = ROOT / "tools" / "pipeline" / "spellcheck_allowlist.txt"
+LEXICON = ROOT / "tools" / "pipeline" / "spellcheck_lexicon.txt"
 
 TEXT_FIELDS = [
     "prompt", "answers", "gist", "article_title", "lookup_summary", "info_tip",
@@ -98,7 +98,7 @@ def bank_sources():
 
 
 def gist_sources():
-    sys.path.insert(0, str(ROOT / "tools"))
+    sys.path.insert(0, str(ROOT / "tools" / "pipeline"))
     try:
         from gists import GISTS
     finally:

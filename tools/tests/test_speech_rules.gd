@@ -270,7 +270,7 @@ func rules_version_stamp() -> void:
 
 func no_answer_before_answering() -> void:
 	print("=== pre-answer segments never narrate the answer or the rule ===")
-	var recs: Array = (JSON.parse_string(FileAccess.get_file_as_string("res://question_bank.json")) as Dictionary).get("records", [])
+	var recs: Array = (JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json")) as Dictionary).get("records", [])
 	var leaks := 0
 	for rec_v in recs:
 		var rec: Dictionary = rec_v
@@ -292,7 +292,7 @@ func no_answer_before_answering() -> void:
 
 func bank_sweep() -> void:
 	print("=== bank sweep: every spoken line of all 279 records ===")
-	var recs: Array = (JSON.parse_string(FileAccess.get_file_as_string("res://question_bank.json")) as Dictionary).get("records", [])
+	var recs: Array = (JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json")) as Dictionary).get("records", [])
 	t.eq(recs.size(), 279, "bank read is not vacuous")
 	var caps := RegEx.create_from_string("\\b[A-Z]{2,}s?\\b")
 	var hostile := RegEx.create_from_string("[\\t\\n_\"“”‘’—–→÷×√≈Ω½¼¾≤≥±−²³•…%#=]|\\.\\.|\\s[,.;:](?!\\d)|\\b\\d{2,3}\\.\\d+\\(|\\bft\\b|\\blbs?\\b|\\bkcmil\\b")

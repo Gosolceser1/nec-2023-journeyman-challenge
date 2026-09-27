@@ -1,6 +1,6 @@
 {
   "final-exam-#1-005": {
-    "file": "res://diagrams/final-exam-1-005.png",
+    "file": "res://assets/diagrams/final-exam-1-005.png",
     "pdf": "Journeyman open book final exam #1.pdf",
     "page": 3,
     "crop_px_at_dpi": [
@@ -22,7 +22,7 @@
     ]
   },
   "final-exam-#1-013": {
-    "file": "res://diagrams/final-exam-1-013.png",
+    "file": "res://assets/diagrams/final-exam-1-013.png",
     "pdf": "Journeyman open book final exam #1.pdf",
     "page": 4,
     "crop_px_at_dpi": [
@@ -44,7 +44,7 @@
     ]
   },
   "final-exam-#1-047": {
-    "file": "res://diagrams/final-exam-1-047.png",
+    "file": "res://assets/diagrams/final-exam-1-047.png",
     "pdf": "Journeyman open book final exam #1.pdf",
     "page": 8,
     "crop_px_at_dpi": [

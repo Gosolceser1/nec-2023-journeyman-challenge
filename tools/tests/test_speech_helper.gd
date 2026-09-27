@@ -33,7 +33,7 @@ func _initialize() -> void:
 
 func _run() -> void:
 	var fixture := _fixture_clip()
-	check(fixture != "", "a fixture MP3 exists under res://speech")
+	check(fixture != "", "a fixture MP3 exists under res://assets/speech")
 	if fixture == "":
 		_finish()
 		return
@@ -223,7 +223,7 @@ func _select_voice(main: Node, voice_id: String) -> void:
 
 
 func _fixture_clip() -> String:
-	var speech := ProjectSettings.globalize_path("res://speech")
+	var speech := ProjectSettings.globalize_path("res://assets/speech")
 	for dir in DirAccess.get_directories_at(speech):
 		var clip := speech.path_join(dir).path_join("0.mp3")
 		if FileAccess.file_exists(clip):

@@ -1,7 +1,7 @@
 # Sound effects — source and license
 
 All files in this folder are **original, procedurally synthesized** audio made
-for this project by `tools/make_sfx.py` (FM electric-piano voice, small damped
+for this project by `tools/sfx/make_sfx.py` (FM electric-piano voice, small damped
 room reverb, soft saturation; 44.1 kHz mono 16-bit WAV, loudness-matched to
 about -20 LUFS momentary). No third-party samples or recordings are used.
 
@@ -10,9 +10,9 @@ https://creativecommons.org/publicdomain/zero/1.0/
 
 Regenerate (deterministic, overwrites these files):
 
-    python tools/make_sfx.py                   # shipped family: keys
-    python tools/make_sfx.py --family mallet   # or: pluck
-    python tools/make_sfx.py --preview         # all families -> .audit_tmp/sfx_preview/v2/
+    python tools/sfx/make_sfx.py                   # shipped family: keys
+    python tools/sfx/make_sfx.py --family mallet   # or: pluck
+    python tools/sfx/make_sfx.py --preview         # all families -> .audit_tmp/sfx_preview/v2/
 
 | File | Plays when | Length |
 |---|---|---|
