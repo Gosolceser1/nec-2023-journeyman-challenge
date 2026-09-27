@@ -42,7 +42,7 @@ func _init() -> void:
 	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	tooltip_text = "Tap to enlarge"
+	tooltip_text = "Click or tap to enlarge"
 	resized.connect(_update_height)
 
 
@@ -223,6 +223,19 @@ func _draw_zoom_hint() -> void:
 func _gui_input(event: InputEvent) -> void:
 	if not has_content():
 		return
+	# project.godot turns mouse emulation off, so a finger only ever arrives as
+	# ScreenTouch / ScreenDrag.
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			_press_pos = event.position
+		elif _press_pos != Vector2.INF and event.position.distance_to(_press_pos) <= TAP_SLOP:
+			_press_pos = Vector2.INF
+			open_zoom()
+		return
+	if event is InputEventScreenDrag:
+		if _press_pos != Vector2.INF and event.position.distance_to(_press_pos) > TAP_SLOP:
+			_press_pos = Vector2.INF
+		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			_press_pos = event.position
@@ -295,7 +308,7 @@ class _ZoomSheet extends Control:
 		draw_string(font, Vector2((get_viewport_rect().size.x - w) * 0.5, card.end.y + 30), hint, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, AppTheme.SLATE_400)
 
 	func _gui_input(event: InputEvent) -> void:
-		if event is InputEventMouseButton and not event.pressed:
+		if (event is InputEventMouseButton or event is InputEventScreenTouch) and not event.pressed:
 			accept_event()
 			view.close_zoom()
 

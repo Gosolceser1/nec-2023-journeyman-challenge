@@ -83,7 +83,7 @@ static func make_dock_button(text: String, min_w: float, h: float, font_size: in
 	button.add_theme_stylebox_override("normal", AppTheme.panel_style(AppTheme.DOCK_BUTTON_BG, AppTheme.DOCK_BUTTON_BORDER, 1, 9))
 	button.add_theme_stylebox_override("hover", AppTheme.panel_style(AppTheme.DOCK_BUTTON_HOVER_BG, AppTheme.SKY_400, 1, 9))
 	button.add_theme_stylebox_override("pressed", AppTheme.panel_style(AppTheme.BUTTON_PRESSED_BG, AppTheme.SKY_600, 1, 9))
-	button.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	button.add_theme_stylebox_override("focus", AppTheme.focus_ring(9))
 	button.add_theme_font_override("font", AppTheme.ui_font(600))
 	button.add_theme_font_size_override("font_size", font_size)
 	button.add_theme_color_override("font_color", AppTheme.SLATE_300)
@@ -152,7 +152,7 @@ static func make_chip(text: String, h: float, font_size: int, group: ButtonGroup
 	chip.add_theme_stylebox_override("hover", AppTheme.panel_style(AppTheme.BUTTON_HOVER_BG, AppTheme.SKY_400, 1, 9))
 	chip.add_theme_stylebox_override("pressed", on)
 	chip.add_theme_stylebox_override("hover_pressed", on)
-	chip.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	chip.add_theme_stylebox_override("focus", AppTheme.focus_ring(8))
 	chip.add_theme_font_override("font", AppTheme.ui_font(600))
 	chip.add_theme_font_size_override("font_size", font_size)
 	chip.add_theme_color_override("font_color", AppTheme.SLATE_400)
@@ -169,5 +169,5 @@ static func audio_row_label(text: String, min_w: float) -> Label:
 	label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	label.add_theme_font_override("font", AppTheme.ui_font(700))
 	label.add_theme_font_size_override("font_size", 11)
-	label.add_theme_color_override("font_color", AppTheme.SLATE_500)
+	label.add_theme_color_override("font_color", AppTheme.SLATE_400)
 	return label

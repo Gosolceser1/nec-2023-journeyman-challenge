@@ -663,4 +663,5 @@ func _on_gui_input(event: InputEvent) -> void:
 				return
 			card_clicked.emit(option_index)
 	elif event.is_action_pressed("ui_accept"):
+		accept_event()
 		card_clicked.emit(option_index)

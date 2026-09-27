@@ -31,6 +31,7 @@ Main <Control> res://src/app/main.gd
     .layout_mode = 0
     .anchor_right = 1.0
     .anchor_bottom = 1.0
+    .focus_behavior_recursive = 1
     .mouse_filter = 2
     .theme_override_constants/margin_left = 16
     .theme_override_constants/margin_top = 16
@@ -636,7 +637,7 @@ Main <Control> res://src/app/main.gd
                     @Control@56 <Control> res://src/ui/diagram_view.gd
                       .texture_filter = 4
                       .size_flags_horizontal = 3
-                      .tooltip_text = "Tap to enlarge"
+                      .tooltip_text = "Click or tap to enlarge"
                       .mouse_filter = 1
                       .mouse_default_cursor_shape = 2
                       on visibility_changed -> lambda
@@ -869,7 +870,7 @@ Main <Control> res://src/app/main.gd
         .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.02745098, 0.34901962, 0.52156866, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
         .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.011764706, 0.4117647, 0.6313726, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
         .theme_override_styles/disabled = StyleBoxFlat{bg_color=Color(0.11764706, 0.16078432, 0.23137255, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.2, 0.25490198, 0.33333334, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
-        .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+        .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
         .theme_override_colors/font_color = Color(1, 1, 1, 1)
         .theme_override_colors/font_pressed_color = Color(0.8784314, 0.9490196, 0.99607843, 1)
         .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
@@ -936,18 +937,20 @@ Main <Control> res://src/app/main.gd
                 .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.11372549, 0.19215687, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.13333334, 0.21176471, 0.34901962, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                 .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                 .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.101960786, 0.17254902, 0.29411766, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                 .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                 .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
                 .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
                 .theme_override_font_sizes/font_size = 14
-                .text = "Audio off · Turn on"
+                .text = "Voice off · Turn on"
                 on visibility_changed -> lambda
                 on size_flags_changed -> lambda
                 on maximum_size_changed -> lambda
                 on minimum_size_changed -> lambda
                 on _desired_size_changed -> lambda
                 on pressed -> main._toggle_session_mute
+                on pressed -> lambda
+                on button_down -> lambda
               @Button@86 <Button>
                 .visible = false
                 .custom_minimum_size = Vector2(0, 48)
@@ -956,7 +959,7 @@ Main <Control> res://src/app/main.gd
                 .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.078431375, 0.13333334, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.1764706, 0.2901961, 0.46666667, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                 .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                 .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.11764706, 0.20392157, 0.34509805, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                 .theme_override_colors/font_color = Color(0.94509804, 0.9607843, 0.9764706, 1)
                 .theme_override_colors/font_pressed_color = Color(0.49019608, 0.827451, 0.9882353, 1)
                 .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
@@ -969,6 +972,8 @@ Main <Control> res://src/app/main.gd
                 on minimum_size_changed -> lambda
                 on _desired_size_changed -> lambda
                 on pressed -> main._toggle_read
+                on pressed -> lambda
+                on button_down -> lambda
               @Button@87 <Button>
                 .visible = false
                 .custom_minimum_size = Vector2(0, 48)
@@ -977,7 +982,7 @@ Main <Control> res://src/app/main.gd
                 .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.11372549, 0.19215687, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.13333334, 0.21176471, 0.34901962, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                 .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                 .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.101960786, 0.17254902, 0.29411766, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                 .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
                 .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
                 .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
@@ -989,6 +994,8 @@ Main <Control> res://src/app/main.gd
                 on minimum_size_changed -> lambda
                 on _desired_size_changed -> lambda
                 on pressed -> main._toggle_listen_pause
+                on pressed -> lambda
+                on button_down -> lambda
               @Button@88 <Button>
                 .visible = false
                 .custom_minimum_size = Vector2(96, 48)
@@ -996,7 +1003,7 @@ Main <Control> res://src/app/main.gd
                 .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.11372549, 0.19215687, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.13333334, 0.21176471, 0.34901962, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                 .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                 .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.101960786, 0.17254902, 0.29411766, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                 .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
                 .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
                 .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
@@ -1008,13 +1015,15 @@ Main <Control> res://src/app/main.gd
                 on minimum_size_changed -> lambda
                 on _desired_size_changed -> lambda
                 on pressed -> main._listen_skip
+                on pressed -> lambda
+                on button_down -> lambda
               @Button@89 <Button>
                 .custom_minimum_size = Vector2(96, 48)
                 .mouse_filter = 1
                 .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.11372549, 0.19215687, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.13333334, 0.21176471, 0.34901962, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                 .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                 .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.101960786, 0.17254902, 0.29411766, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.2784314, 0.33333334, 0.4117647, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                 .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                 .theme_override_colors/font_pressed_color = Color(0.49019608, 0.827451, 0.9882353, 1)
                 .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
@@ -1026,7 +1035,9 @@ Main <Control> res://src/app/main.gd
                 on maximum_size_changed -> lambda
                 on minimum_size_changed -> lambda
                 on _desired_size_changed -> lambda
-                on pressed -> main._show_menu
+                on pressed -> main._request_menu
+                on pressed -> lambda
+                on button_down -> lambda
             @HBoxContainer@90 <HBoxContainer>
               .mouse_filter = 2
               .theme_override_constants/separation = 8
@@ -1307,7 +1318,7 @@ Main <Control> res://src/app/main.gd
                         .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.11372549, 0.19215687, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.13333334, 0.21176471, 0.34901962, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                         .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                         .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.101960786, 0.17254902, 0.29411766, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                        .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                        .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                         .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
                         .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
                         .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
@@ -1357,7 +1368,7 @@ Main <Control> res://src/app/main.gd
                           .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                           .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                           .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                           .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1382,7 +1393,7 @@ Main <Control> res://src/app/main.gd
                           .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                           .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                           .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                           .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1406,7 +1417,7 @@ Main <Control> res://src/app/main.gd
                           .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                           .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                           .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                           .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1430,7 +1441,7 @@ Main <Control> res://src/app/main.gd
                           .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                           .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                           .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                           .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1500,7 +1511,7 @@ Main <Control> res://src/app/main.gd
                               .custom_minimum_size = Vector2(62, 0)
                               .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                               .theme_override_font_sizes/font_size = 11
-                              .theme_override_colors/font_color = Color(0.39215687, 0.45490196, 0.54509807, 1)
+                              .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                               .text = "VOICE"
                               on visibility_changed -> lambda
                               on size_flags_changed -> lambda
@@ -1537,7 +1548,7 @@ Main <Control> res://src/app/main.gd
                               .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.11372549, 0.19215687, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.13333334, 0.21176471, 0.34901962, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                               .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                               .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.101960786, 0.17254902, 0.29411766, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                              .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                              .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                               .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
                               .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
                               .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
@@ -1567,7 +1578,7 @@ Main <Control> res://src/app/main.gd
                               .custom_minimum_size = Vector2(62, 0)
                               .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                               .theme_override_font_sizes/font_size = 11
-                              .theme_override_colors/font_color = Color(0.39215687, 0.45490196, 0.54509807, 1)
+                              .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                               .text = "SPEED"
                               on visibility_changed -> lambda
                               on size_flags_changed -> lambda
@@ -1583,7 +1594,7 @@ Main <Control> res://src/app/main.gd
                               .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                               .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                               .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                              .theme_override_styles/focus = StyleBoxEmpty{}
+                              .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                               .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                               .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                               .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1607,7 +1618,7 @@ Main <Control> res://src/app/main.gd
                               .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                               .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                               .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                              .theme_override_styles/focus = StyleBoxEmpty{}
+                              .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                               .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                               .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                               .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1632,7 +1643,7 @@ Main <Control> res://src/app/main.gd
                               .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                               .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                               .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                              .theme_override_styles/focus = StyleBoxEmpty{}
+                              .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                               .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                               .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                               .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1656,7 +1667,7 @@ Main <Control> res://src/app/main.gd
                               .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                               .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                               .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                              .theme_override_styles/focus = StyleBoxEmpty{}
+                              .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                               .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                               .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                               .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1676,7 +1687,7 @@ Main <Control> res://src/app/main.gd
                           .visible = false
                           .custom_minimum_size = Vector2(0, 44)
                           .mouse_filter = 1
-                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                           .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
                           .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                           .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
@@ -1709,7 +1720,7 @@ Main <Control> res://src/app/main.gd
                             .custom_minimum_size = Vector2(62, 0)
                             .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                             .theme_override_font_sizes/font_size = 11
-                            .theme_override_colors/font_color = Color(0.39215687, 0.45490196, 0.54509807, 1)
+                            .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                             .text = "THINK"
                             on visibility_changed -> lambda
                             on size_flags_changed -> lambda
@@ -1725,7 +1736,7 @@ Main <Control> res://src/app/main.gd
                             .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                             .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                             .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                            .theme_override_styles/focus = StyleBoxEmpty{}
+                            .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                             .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                             .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                             .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1749,7 +1760,7 @@ Main <Control> res://src/app/main.gd
                             .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                             .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                             .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                            .theme_override_styles/focus = StyleBoxEmpty{}
+                            .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                             .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                             .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                             .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1774,7 +1785,7 @@ Main <Control> res://src/app/main.gd
                             .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                             .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                             .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                            .theme_override_styles/focus = StyleBoxEmpty{}
+                            .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                             .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                             .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                             .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1821,7 +1832,7 @@ Main <Control> res://src/app/main.gd
                           .custom_minimum_size = Vector2(62, 0)
                           .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                           .theme_override_font_sizes/font_size = 11
-                          .theme_override_colors/font_color = Color(0.39215687, 0.45490196, 0.54509807, 1)
+                          .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                           .text = "SOUNDS"
                           on visibility_changed -> lambda
                           on size_flags_changed -> lambda
@@ -1837,7 +1848,7 @@ Main <Control> res://src/app/main.gd
                           .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                           .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                           .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                           .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1861,7 +1872,7 @@ Main <Control> res://src/app/main.gd
                           .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                           .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                           .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                           .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1885,7 +1896,7 @@ Main <Control> res://src/app/main.gd
                           .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                           .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                           .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                           .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1910,7 +1921,7 @@ Main <Control> res://src/app/main.gd
                           .theme_override_styles/pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover = StyleBoxFlat{bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
                           .theme_override_styles/hover_pressed = StyleBoxFlat{bg_color=Color(0.047058824, 0.16470589, 0.14117648, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
-                          .theme_override_styles/focus = StyleBoxEmpty{}
+                          .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                           .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                           .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                           .theme_override_colors/font_hover_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
@@ -1929,7 +1940,7 @@ Main <Control> res://src/app/main.gd
                       @CheckButton@161 <CheckButton>
                         .custom_minimum_size = Vector2(0, 44)
                         .mouse_filter = 1
-                        .theme_override_styles/focus = StyleBoxEmpty{}
+                        .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                         .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
                         .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
                         .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
@@ -1981,7 +1992,7 @@ Main <Control> res://src/app/main.gd
                   .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
                   .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=20.0, content_margin_right=66.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
                   .theme_override_styles/hover = StyleBoxFlat{content_margin_left=22.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=8, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
-                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                   .theme_override_colors/font_color = Color(1, 1, 1, 1)
                   .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
                   .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
@@ -2022,7 +2033,7 @@ Main <Control> res://src/app/main.gd
                   .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
                   .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=20.0, content_margin_right=66.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
                   .theme_override_styles/hover = StyleBoxFlat{content_margin_left=22.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=8, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
-                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                   .theme_override_colors/font_color = Color(1, 1, 1, 1)
                   .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
                   .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
@@ -2063,7 +2074,7 @@ Main <Control> res://src/app/main.gd
                   .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
                   .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=20.0, content_margin_right=66.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
                   .theme_override_styles/hover = StyleBoxFlat{content_margin_left=22.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=8, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
-                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                   .theme_override_colors/font_color = Color(1, 1, 1, 1)
                   .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
                   .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
@@ -2104,7 +2115,7 @@ Main <Control> res://src/app/main.gd
                   .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
                   .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=20.0, content_margin_right=66.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
                   .theme_override_styles/hover = StyleBoxFlat{content_margin_left=22.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=8, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
-                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                   .theme_override_colors/font_color = Color(1, 1, 1, 1)
                   .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
                   .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
@@ -2145,7 +2156,7 @@ Main <Control> res://src/app/main.gd
                   .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
                   .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=20.0, content_margin_right=66.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
                   .theme_override_styles/hover = StyleBoxFlat{content_margin_left=22.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=8, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
-                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                   .theme_override_colors/font_color = Color(1, 1, 1, 1)
                   .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
                   .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
@@ -2217,7 +2228,7 @@ Main <Control> res://src/app/main.gd
                   .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.11764706, 0.078431375, 0.11372549, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.95686275, 0.24705882, 0.36862746, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
                   .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=20.0, content_margin_right=66.0, bg_color=Color(0.11764706, 0.078431375, 0.11372549, 1), border_width_left=6, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.95686275, 0.24705882, 0.36862746, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
                   .theme_override_styles/hover = StyleBoxFlat{content_margin_left=22.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.18039216, 0.08235294, 0.11764706, 1), border_width_left=8, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.95686275, 0.24705882, 0.36862746, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
-                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.22, 0.74, 0.97, 0.55), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=2.0, expand_margin_top=2.0, expand_margin_right=2.0, expand_margin_bottom=2.0}
+                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                   .theme_override_colors/font_color = Color(1, 1, 1, 1)
                   .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
                   .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
@@ -2253,7 +2264,7 @@ Main <Control> res://src/app/main.gd
                 @Label@177 <Label>
                   .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                   .theme_override_font_sizes/font_size = 11
-                  .theme_override_colors/font_color = Color(0.39215687, 0.45490196, 0.54509807, 1)
+                  .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
                   .text = "Aligned with NFPA 70 (NEC 2023) & Nebraska State Electrical Division / PSI Standards\nPacing standard: 3:00 per scored item • 80 questions timed"
                   .horizontal_alignment = 1
                   .autowrap_mode = 3

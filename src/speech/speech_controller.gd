@@ -503,8 +503,19 @@ func _pick_native_voice() -> String:
 			return str(voices[0])
 	return ""
 
+## Utterance ids carry the generation as well as the segment, so an event for
+## segment N of an earlier readout never matches segment N of the current one.
+func _native_utterance_id(generation: int, seg_idx: int) -> int:
+	return (generation % 100000) * 1000 + seg_idx + 1
+
+## Segment index of a current-generation utterance id, or -1 for a stale one.
+func _native_seg_of(utterance_id: int) -> int:
+	if utterance_id / 1000 != _native_generation % 100000:
+		return -1
+	return utterance_id % 1000 - 1
+
 func _on_native_utterance_ended(utterance_id: int) -> void:
-	var seg := utterance_id - 1
+	var seg := _native_seg_of(utterance_id)
 	if seg < 0 or seg != _native_seg:
 		return
 	if _native_generation != speak_generation:
@@ -519,7 +530,7 @@ func _on_native_utterance_canceled(utterance_id: int) -> void:
 	# ENDED and the watchdog then failed their _native_seg checks, so playback
 	# ran out and never advanced - silence with the button stuck on "Stop").
 	# Match the id/generation guards the ENDED and STARTED handlers already use.
-	var seg := utterance_id - 1
+	var seg := _native_seg_of(utterance_id)
 	if seg < 0 or seg != _native_seg:
 		return
 	if _native_generation != speak_generation:
@@ -530,7 +541,7 @@ func _on_native_utterance_canceled(utterance_id: int) -> void:
 	host._notify_playback_complete()
 
 func _on_native_utterance_started(utterance_id: int) -> void:
-	var seg := utterance_id - 1
+	var seg := _native_seg_of(utterance_id)
 	if seg < 0 or seg != _native_seg:
 		return
 	if _native_generation != speak_generation:
@@ -631,7 +642,7 @@ func _play_next_native_tts_segment(segments: Array, seg_idx: int, generation: in
 	# into the OS queue while the highlight runs ahead (the Android skip bug).
 	# Volume 100: Godot's default of 50 made the native voice half as loud as the
 	# desktop clips (Android maps it to a 0.5 TextToSpeech volume).
-	DisplayServer.tts_speak(text, _native_voice_id, 100, 1.0, host.audio.speed, seg_idx + 1, true)
+	DisplayServer.tts_speak(text, _native_voice_id, 100, 1.0, host.audio.speed, _native_utterance_id(generation, seg_idx), true)
 	_start_native_watchdog(segments, seg_idx, generation)
 
 func _speech_cache_matches(folder: String, segments: Array) -> bool:

@@ -138,23 +138,31 @@ static func panel_style(fill: Color, border: Color, width: int, radius: int) -> 
 	return style
 
 
-## Thin cyan outline: visible for keyboard users, but unlike reusing the hover
-## box it doesn't look like the last-clicked button is stuck highlighted.
+## Cyan outline for keyboard focus. Pointer clicks don't draw focus
+## (gui/common/show_focus_state_on_pointer_event), so it can be strong.
 static func focus_ring(radius: int = 10) -> StyleBoxFlat:
 	var ring := StyleBoxFlat.new()
 	ring.draw_center = false
-	ring.border_color = Color(0.22, 0.74, 0.97, 0.55)
-	ring.set_border_width_all(1)
+	ring.border_color = SKY_300
+	ring.set_border_width_all(2)
 	ring.set_corner_radius_all(radius)
-	ring.set_expand_margin_all(2)
+	ring.set_expand_margin_all(3)
 	return ring
 
 
+static var _ui_fonts: Dictionary = {}
+
+## Shared per weight: every SystemFont resolves the OS font and keeps its own
+## glyph cache, so building one per label stalled startup and each question.
+## Callers must not mutate the returned font (duplicate() it first).
 static func ui_font(weight: int = 500) -> SystemFont:
+	if _ui_fonts.has(weight):
+		return _ui_fonts[weight]
 	var font := SystemFont.new()
 	font.font_names = PackedStringArray(["Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"])
 	font.font_weight = weight
 	font.subpixel_positioning = TextServer.SUBPIXEL_POSITIONING_AUTO
+	_ui_fonts[weight] = font
 	return font
 
 

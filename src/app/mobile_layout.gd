@@ -441,7 +441,7 @@ static func build(host: Main) -> void:
 	host.restart_button = Button.new()
 	host.restart_button.text = "Menu"
 	host.restart_button.custom_minimum_size = Vector2(96, 48)
-	host.restart_button.pressed.connect(host._show_menu)
+	host.restart_button.pressed.connect(host._request_menu)
 	var rst_norm := AppTheme.panel_style(AppTheme.DOCK_BUTTON_BG, AppTheme.DOCK_BUTTON_BORDER, 1, 9)
 	var rst_hov := AppTheme.panel_style(AppTheme.DOCK_BUTTON_HOVER_BG, AppTheme.SLATE_600, 1, 9)
 	host.restart_button.add_theme_stylebox_override("normal", rst_norm)
@@ -592,5 +592,5 @@ static func build(host: Main) -> void:
 	menu_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	menu_note.add_theme_font_override("font", AppTheme.ui_font(400))
 	menu_note.add_theme_font_size_override("font_size", 11)
-	menu_note.add_theme_color_override("font_color", AppTheme.SLATE_500)
+	menu_note.add_theme_color_override("font_color", AppTheme.SLATE_400)
 	menu_column.add_child(menu_note)

@@ -169,7 +169,7 @@ static func _make_toggle(host: Main, text: String, fs: int) -> CheckButton:
 	toggle.add_theme_color_override("font_hover_color", AppTheme.WHITE)
 	toggle.add_theme_color_override("font_pressed_color", AppTheme.EMERALD_300)
 	toggle.add_theme_color_override("font_hover_pressed_color", AppTheme.EMERALD_200)
-	toggle.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	toggle.add_theme_stylebox_override("focus", AppTheme.focus_ring(8))
 	return toggle
 
 

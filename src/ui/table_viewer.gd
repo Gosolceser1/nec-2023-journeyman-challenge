@@ -204,6 +204,10 @@ static func populate_table(
 	}
 
 static func scroll_to_row(scroll_container: ScrollContainer, grid: GridContainer, match_row: int, row_count: int) -> void:
+	if is_instance_valid(scroll_container):
+		scroll_container.scroll_horizontal = 0
+		if match_row <= 0:
+			scroll_container.scroll_vertical = 0
 	if row_count <= 0 or match_row <= 0:
 		return
 	if not is_instance_valid(scroll_container) or not is_instance_valid(grid):

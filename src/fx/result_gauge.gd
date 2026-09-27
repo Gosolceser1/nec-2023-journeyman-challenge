@@ -85,7 +85,7 @@ func _draw() -> void:
 	var font := get_theme_default_font()
 	draw_string(font, Vector2(0, c.y + 8.0), "%d%%" % roundi(_shown), HORIZONTAL_ALIGNMENT_CENTER, size.x, 38, AppTheme.SLATE_50)
 	var verdict := "PASS" if target_pct >= pass_pct else "BELOW %d%%" % roundi(pass_pct)
-	var verdict_col := tint_for(target_pct, pass_pct) if is_equal_approx(_shown, target_pct) else AppTheme.SLATE_500
+	var verdict_col := tint_for(target_pct, pass_pct) if is_equal_approx(_shown, target_pct) else AppTheme.SLATE_400
 	draw_string(font, Vector2(0, c.y + 30.0), verdict, HORIZONTAL_ALIGNMENT_CENTER, size.x, 13, verdict_col)
 	var label_at := c + dir * (r + 22.0)
 	draw_string(font, label_at + Vector2(-20, 4), "%d%%" % roundi(pass_pct), HORIZONTAL_ALIGNMENT_CENTER, 40, 10, AppTheme.SLATE_400)

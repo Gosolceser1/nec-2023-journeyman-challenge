@@ -6,8 +6,11 @@ extends RefCounted
 static func show(host: Main) -> void:
 	host.timer.stop()
 	host.speech._stop_reading()
+	# The report is not a question: keys 1-4 / A-D must not grade anything here.
+	host.current_answered = true
 	clear_confetti(host)
-	host.question_label.text = "Official Examination Report"
+	var is_exam := host.session_name.begins_with("Full Journeyman Exam")
+	host.question_label.text = "Official Examination Report" if is_exam else "Practice Report"
 	host.chapter_hint_label.visible = false
 	host.lookup_box.visible = false
 	host.formula_box.visible = false
@@ -44,7 +47,10 @@ static func show(host: Main) -> void:
 		show_listen(host)
 		host._update_key_hint()
 		return
-	var accuracy := 100.0 * float(host.score) / maxf(1.0, float(host.answered_count))
+	# Items left unanswered when the session clock ran out count against the score.
+	var total := maxi(host.answered_count, host.order.size())
+	var unanswered := total - host.answered_count
+	var accuracy := 100.0 * float(host.score) / maxf(1.0, float(total))
 	var passed := accuracy >= Main.PASS_PERCENT
 	if passed:
 		host.score_label.text = "RESULT: PASSED"
@@ -56,30 +62,36 @@ static func show(host: Main) -> void:
 		host.score_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
 		if is_instance_valid(host.pass_badge):
 			host.pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_RED_BG, AppTheme.ROSE_800, 1, 8))
-	host.streak_label.text = "FINAL: %d/%d (%d%%)" % [host.score, host.answered_count, roundi(accuracy)]
+	host.streak_label.text = "FINAL: %d/%d (%d%%)" % [host.score, total, roundi(accuracy)]
 	for child in host.answers_box.get_children():
+		host.answers_box.remove_child(child)
 		child.queue_free()
 	host.feedback_panel.visible = true
 	host.feedback_reference.visible = false
 	if passed:
-		host.feedback_title.text = "EXAMINATION RESULT: PASS"
+		host.feedback_title.text = ("EXAMINATION" if is_exam else "PRACTICE") + " RESULT: PASS"
 		host.feedback_title.add_theme_color_override("font_color", AppTheme.EMERALD_400)
 	else:
-		host.feedback_title.text = "EXAMINATION RESULT: DID NOT PASS"
+		host.feedback_title.text = ("EXAMINATION" if is_exam else "PRACTICE") + " RESULT: DID NOT PASS"
 		host.feedback_title.add_theme_color_override("font_color", AppTheme.RED_400)
 	
 	# The gauge and the title already state the percentage and the verdict.
 	var summary_text := "%d of %d correct  •  %d%% needed to pass  •  %s" % [
-		host.score, host.answered_count, Main.PASS_PERCENT,
+		host.score, total, Main.PASS_PERCENT,
 		"%d missed item%s to review below" % [host.missed_questions.size(), "" if host.missed_questions.size() == 1 else "s"] if not host.missed_questions.is_empty() else "no misses"
 	]
+	if unanswered > 0:
+		summary_text += "  •  %d unanswered" % unanswered
 	# The results screen reuses this label after it may have been hidden by a "Correct" verdict.
 	host.feedback_body.text = summary_text
 	host.feedback_body.visible = true
 	show_visual(host, accuracy, passed)
 
 	host.info_label.clear()
-	if host.missed_questions.is_empty():
+	if host.missed_questions.is_empty() and unanswered > 0:
+		host.info_panel.append_heading("TIME EXPIRED\n", AppTheme.AMBER_400)
+		host.info_label.add_text("Every question you reached was correct, but %d were left unanswered when the session clock ran out." % unanswered)
+	elif host.missed_questions.is_empty():
 		host.info_panel.append_heading("PERFECT SCORE ACHIEVED\n", AppTheme.EMERALD_400)
 		host.info_label.add_text("Congratulations! You answered 100% of questions correctly. You have demonstrated full mastery of these NEC 2023 provisions.")
 	else:
@@ -138,6 +150,7 @@ static func show_listen(host: Main) -> void:
 	host.article_label.text = "HANDS-FREE REVIEW  •  NEC 2023 STANDARDS"
 	host._update_score_badges()
 	for child in host.answers_box.get_children():
+		host.answers_box.remove_child(child)
 		child.queue_free()
 	if is_instance_valid(host.results_visual):
 		host.results_visual.visible = false

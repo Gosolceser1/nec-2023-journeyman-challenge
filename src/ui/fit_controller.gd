@@ -115,8 +115,16 @@ func apply_answers_row_layout() -> void:
 
 func on_viewport_resized() -> void:
 	apply_answers_row_layout()
-	if not host.current_answered and not host.order.is_empty():
+	if host.order.is_empty():
+		return
+	if not host.current_answered:
 		begin()
+	elif is_instance_valid(host.feedback_scroll) and host.feedback_scroll.visible:
+		# Answered: give the sheet its preferred height back, then let
+		# _fit_answered shrink it again for the new size.
+		host.feedback_scroll.custom_minimum_size.y = feedback_min_h()
+		_fit_gen += 1
+		_fit_after_frames(_fit_gen, 2)
 
 ## After answering, drop what only mattered while choosing: the eliminated
 ## cards (their notes are in the explanation), session pills, gist, lookup

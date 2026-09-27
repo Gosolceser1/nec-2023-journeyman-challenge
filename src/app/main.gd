@@ -197,6 +197,12 @@ var answers_row: BoxContainer  # desktop only: choices | lookup material
 var ref_column: VBoxContainer  # desktop only
 var feedback_scroll: ScrollContainer
 var fit := FitController.new()
+var _verdict_scroll_tween: Tween
+var _start_tween: Tween
+var _leave_armed_until := 0
+## The 860 px menu card and ~823 px quiz header clip below this; narrower
+## windows scale the desktop canvas down instead.
+const DESKTOP_MIN_CANVAS_WIDTH := 900
 
 var pause_button: Button
 var skip_button: Button
@@ -229,6 +235,8 @@ func _ready() -> void:
 	speech._load_voice_catalog()
 	audio.load_from(audio_cfg_path)
 	ui_mobile = "--mobile-ui" in OS.get_cmdline_args() or "--mobile-ui" in OS.get_cmdline_user_args() or OS.get_name() in ["Android", "iOS"]
+	if not ui_mobile:
+		get_window().content_scale_size = Vector2i(DESKTOP_MIN_CANVAS_WIDTH, 960)
 	speech.speech_helper = SpeechHelper.new()
 	speech.speech_helper.name = "SpeechHelper"
 	add_child(speech.speech_helper)
@@ -283,6 +291,17 @@ func _polish_controls() -> void:
 	for b in [mute_button, pause_button, skip_button, preview_button]:
 		if is_instance_valid(b):
 			b.add_theme_stylebox_override("focus", ring)
+	# A mouse click must not leave a dock button holding keyboard focus, or the
+	# next Enter/Space presses it instead of running the quiz shortcut.
+	# Keyboard activation keeps focus so Tab navigation still works; releasing on
+	# button_down would cancel the press, so it happens after pressed.
+	for b in [read_button, mute_button, pause_button, skip_button, restart_button]:
+		if is_instance_valid(b):
+			b.button_down.connect(func() -> void:
+				b.set_meta("pointer_press", Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)))
+			b.pressed.connect(func() -> void:
+				if b.get_meta("pointer_press", false):
+					b.release_focus.call_deferred())
 	if is_instance_valid(next_button):
 		next_button.add_theme_stylebox_override("focus", AppTheme.focus_ring(10))
 		next_button.add_theme_stylebox_override("disabled", AppTheme.panel_style(AppTheme.SLATE_800, AppTheme.SLATE_700, 1, 10))
@@ -297,7 +316,7 @@ func _polish_controls() -> void:
 		key_hint_label.clip_text = true
 		key_hint_label.add_theme_font_override("font", AppTheme.ui_font(600))
 		key_hint_label.add_theme_font_size_override("font_size", 11)
-		key_hint_label.add_theme_color_override("font_color", AppTheme.SLATE_500)
+		key_hint_label.add_theme_color_override("font_color", AppTheme.SLATE_400)
 		var dock_row := restart_button.get_parent()
 		dock_row.add_child(key_hint_label)
 		dock_row.move_child(key_hint_label, restart_button.get_index())
@@ -368,6 +387,8 @@ func _apply_safe_area() -> void:
 		menu_panel.custom_minimum_size = mms
 
 func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION_TIME_SECONDS, timed: bool = true, mode_name: String = "Practice Test") -> void:
+	if records.is_empty():
+		return
 	session_audio_mode = AudioSettings.session_mode(audio.mode, mode_name == "Full Journeyman Exam")
 	session_muted = AudioSettings.starts_muted(session_audio_mode)
 	listen_phase = AudioSettings.ListenPhase.IDLE
@@ -380,9 +401,13 @@ func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION
 	else:
 		timer.stop()
 	speech._stop_reading()
-	var tw := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tw.tween_property(menu_overlay, "modulate:a", 0.0, 0.15)
-	tw.tween_callback(func():
+	# A second tap during the fade restarts it instead of queueing a second
+	# _show_question for the same session.
+	if _start_tween != null and _start_tween.is_valid():
+		_start_tween.kill()
+	_start_tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	_start_tween.tween_property(menu_overlay, "modulate:a", 0.0, 0.15)
+	_start_tween.tween_callback(func():
 		menu_overlay.visible = false
 		_show_question()
 	)
@@ -459,7 +484,7 @@ func _refresh_dock_audio() -> void:
 		return
 	var listening := session_audio_mode == AudioSettings.Mode.LISTEN and listen_phase != AudioSettings.ListenPhase.IDLE
 	mute_button.visible = not listening
-	mute_button.text = "Audio off · Turn on" if session_muted else "Mute"
+	mute_button.text = "Voice off · Turn on" if session_muted else "Mute"
 	mute_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL if session_muted and ui_mobile else Control.SIZE_FILL
 	mute_button.add_theme_color_override("font_color", AppTheme.SLATE_400 if session_muted else AppTheme.SLATE_300)
 	read_button.visible = not listening and not session_muted
@@ -612,6 +637,8 @@ func _practice_time(question_count: int) -> int:
 
 func _show_menu() -> void:
 	timer.stop()
+	if _start_tween != null and _start_tween.is_valid():
+		_start_tween.kill()
 	_auto_token += 1
 	ResultsView.clear_confetti(self)
 	if is_instance_valid(_listen_timer):
@@ -624,6 +651,10 @@ func _show_menu() -> void:
 	_update_key_hint()
 	if menu_overlay:
 		menu_overlay.visible = true
+		if is_instance_valid(main_margin):
+			main_margin.focus_behavior_recursive = Control.FOCUS_BEHAVIOR_DISABLED
+		if not ui_mobile and not menu_mode_buttons.is_empty():
+			menu_mode_buttons[0].grab_focus.call_deferred()
 		menu_overlay.modulate.a = 0.0
 		var ov_tw := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		ov_tw.tween_property(menu_overlay, "modulate:a", 1.0, 0.2)
@@ -661,6 +692,7 @@ func _scroll_feedback_table_to_match() -> void:
 func _scroll_question_table_to_top() -> void:
 	if not is_instance_valid(question_table_scroll):
 		return
+	question_table_scroll.scroll_horizontal = 0
 	var bar := question_table_scroll.get_v_scroll_bar()
 	if bar != null:
 		bar.value = 0.0
@@ -677,11 +709,19 @@ func _show_question() -> void:
 		return
 	var record := session.current_record()
 	session.start_question()
+	if is_instance_valid(main_margin):
+		main_margin.focus_behavior_recursive = Control.FOCUS_BEHAVIOR_INHERITED
 	speech._stop_reading()
 	speech._prefetch_speech()
 	question_label.text = str(record.get("prompt", "Question unavailable"))
 	question_panel.modulate.a = 0.0
 	question_panel.position.x = 28.0
+	# A new question always opens at the top: the verdict glide on a phone may
+	# still be running, and the page may have been scrolled on the last one.
+	if _verdict_scroll_tween != null and _verdict_scroll_tween.is_valid():
+		_verdict_scroll_tween.kill()
+	if is_instance_valid(quiz_scroll_box):
+		quiz_scroll_box.scroll_vertical = 0
 	var q_tw := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	q_tw.parallel().tween_property(question_panel, "modulate:a", 1.0, 0.28)
 	q_tw.parallel().tween_property(question_panel, "position:x", 0.0, 0.32)
@@ -754,7 +794,7 @@ func _show_question() -> void:
 	formula_box.visible = question_formula_label.visible
 	progress_label.text = "QUESTION %02d OF %02d" % [current_index + 1, order.size()]
 	_update_score_badges()
-	timer_label.text = "TOTAL " + _format_time(time_left) if timed_session else "UNTIMED"
+	timer_label.text = "TOTAL " + _format_time(maxi(time_left, 0)) if timed_session else "UNTIMED"
 	question_timer_label.text = "ITEM " + _format_time(question_time_left) if timed_session else ""
 	question_timer_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	timer_bar.visible = timed_session
@@ -764,6 +804,7 @@ func _show_question() -> void:
 	_apply_exam_time_tint()
 
 	for child in answers_box.get_children():
+		answers_box.remove_child(child)
 		child.queue_free()
 	for i in answers.size():
 		var card := AnswerCard.new()
@@ -901,6 +942,8 @@ func _answer_selected(selected: int) -> void:
 		_listen_enter(AudioSettings.ListenPhase.TEACH)
 	elif not session_muted and AudioSettings.autoplays_teach(session_audio_mode, audio.auto_teach):
 		_after_delay(0.6, _auto_read_teach)
+	if timed_session and time_left <= 0:
+		next_button.text = "See results"
 	if ui_mobile:
 		call_deferred("_scroll_to_verdict", correct)
 	_update_key_hint()
@@ -930,8 +973,8 @@ func _scroll_to_verdict(correct: int) -> void:
 	target = clampi(target, 0, maxi(0, int(content.size.y - scroll.size.y)))
 	if target <= scroll.scroll_vertical:
 		return
-	var tw := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tw.tween_property(scroll, "scroll_vertical", target, 0.35)
+	_verdict_scroll_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	_verdict_scroll_tween.tween_property(scroll, "scroll_vertical", target, 0.35)
 
 func _update_score_badges() -> void:
 	if is_instance_valid(streak_meter):
@@ -1090,7 +1133,7 @@ func _apply_exam_time_tint() -> void:
 func _tick_timer() -> void:
 	if not timed_session:
 		return
-	var tick := session.tick(not speech.speak_busy and not speech.reader.playing)
+	var tick := session.tick(not speech.speak_busy and not speech.reader.playing and not DisplayServer.tts_is_speaking())
 	timer_label.text = "TOTAL " + _format_time(max(time_left, 0))
 	timer_bar.value = max(time_left, 0)
 	_apply_exam_time_tint()
@@ -1115,11 +1158,17 @@ func _tick_timer() -> void:
 			_answer_selected(-1)
 		QuizSession.Tick.STOP_CLOCK:
 			timer.stop()
+			next_button.text = "See results"
+			_update_key_hint()
 
 func _format_time(seconds: int) -> String:
 	return "%02d:%02d" % [seconds / 60, seconds % 60]
 
 func _next_question() -> void:
+	# The session clock ran out: the exam is over, like the real one.
+	if timed_session and time_left <= 0:
+		ResultsView.show(self)
+		return
 	if session.advance():
 		_show_question()
 	else:
@@ -1129,6 +1178,12 @@ func _show_results() -> void:
 	ResultsView.show(self)
 
 func _show_error(message: String) -> void:
+	if is_instance_valid(timer):
+		timer.stop()
+	if menu_overlay:
+		menu_overlay.visible = false
+	if is_instance_valid(restart_button):
+		restart_button.get_parent().visible = false
 	question_label.text = "Project error"
 	exam_label.text = "NEC 2023 JOURNEYMAN CHALLENGE"
 	article_label.text = ""
@@ -1137,7 +1192,7 @@ func _show_error(message: String) -> void:
 	next_button.visible = false
 	feedback_title.text = "Question bank unavailable"
 	feedback_body.text = message
-	answers_box.queue_free()
+	answers_box.visible = false
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_GO_BACK_REQUEST:
@@ -1160,10 +1215,32 @@ func _on_go_back() -> void:
 	if speech.reader != null and speech.reader.playing or speech.speak_busy or DisplayServer.tts_is_speaking():
 		speech._stop_reading()
 		return
-	if menu_overlay != null and menu_overlay.visible:
+	var starting := _start_tween != null and _start_tween.is_running()
+	if menu_overlay != null and menu_overlay.visible and not starting:
 		get_tree().quit()
 		return
-	_show_menu()
+	_request_menu()
+
+## Menu button / Back mid-session: the first press arms, a second within 3 s
+## leaves. Nothing to lose (no answers yet, or the report) leaves at once.
+func _request_menu() -> void:
+	var in_progress := answered_count > 0 and not menu_overlay.visible \
+			and next_button.text != "Return to Main Menu"
+	if not in_progress or Time.get_ticks_msec() < _leave_armed_until:
+		_leave_armed_until = 0
+		if restart_button.has_meta("idle_text"):
+			restart_button.text = restart_button.get_meta("idle_text")
+		_show_menu()
+		return
+	_leave_armed_until = Time.get_ticks_msec() + 3000
+	if not restart_button.has_meta("idle_text"):
+		restart_button.set_meta("idle_text", restart_button.text)
+	restart_button.text = "Leave?"
+	read_status_label.text = "Press again to leave. This session's progress will be lost."
+	get_tree().create_timer(3.0).timeout.connect(func() -> void:
+		if is_instance_valid(restart_button) and Time.get_ticks_msec() >= _leave_armed_until:
+			restart_button.text = restart_button.get_meta("idle_text", restart_button.text)
+			read_status_label.text = "")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
@@ -1174,6 +1251,11 @@ func _unhandled_input(event: InputEvent) -> void:
 		if menu_overlay and menu_overlay.visible:
 			return
 		var key: Key = event.keycode
+		# A focused button already acted on Enter/Space (ui_accept); running the
+		# quiz shortcut too would fire a second, different action.
+		var focus_owner := get_viewport().gui_get_focus_owner()
+		if focus_owner is BaseButton and key in [KEY_ENTER, KEY_KP_ENTER, KEY_SPACE]:
+			return
 		if session_audio_mode == AudioSettings.Mode.LISTEN and next_button.text != "Return to Main Menu":
 			if key == KEY_SPACE:
 				_toggle_listen_pause()
