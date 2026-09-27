@@ -286,7 +286,7 @@ static func build(host: Main) -> void:
 	diagram_margin.add_theme_constant_override("margin_bottom", 6)
 	host.question_diagram_panel.add_child(diagram_margin)
 	host.question_diagram_view = DiagramView.new()
-	host.question_diagram_view.max_height = Main.DIAGRAM_MAX_H_MOBILE
+	host.question_diagram_view.max_height = FitController.DIAGRAM_MAX_H_MOBILE
 	diagram_margin.add_child(host.question_diagram_view)
 
 	host.formula_box = PanelContainer.new()

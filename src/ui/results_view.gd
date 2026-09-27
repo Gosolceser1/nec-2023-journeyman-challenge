@@ -20,10 +20,10 @@ static func show(host: Main) -> void:
 		host.question_hint_row.visible = true
 	host.exam_pills_row.visible = not host.ui_mobile
 	host.timer_bar.visible = false
-	host._refresh_ref_column()
+	host.fit.refresh_ref_column()
 	host.feedback_scroll.visible = true
 	host.feedback_scroll.scroll_vertical = 0
-	host._fit_apply(0)
+	host.fit.apply_level(0)
 	host._auto_token += 1
 	if is_instance_valid(host._listen_timer):
 		host._listen_timer.stop()

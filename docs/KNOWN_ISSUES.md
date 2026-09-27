@@ -53,6 +53,11 @@ that produced false results before. Fixed defects are in git history
 - Screenshots from `tools/visual/snap_all.gd` only compare cleanly with
   `--fixed-fps 60 --disable-vsync` and `-- --det`: without them shader time
   and particle bursts differ run to run.
+- `snap_all.gd` switches to `user://snap_audio.cfg` only after `main._ready()`
+  has loaded the real `user://audio.cfg`, so the menu shots show whatever
+  sound level the app was last set to (and a running copy of the game keeps
+  changing it). Compare shots against a copied user folder: point `APPDATA`
+  at a temp directory holding a fixed `audio.cfg` for the run.
 - `bash` from PowerShell is WSL's bash, which has no `python`; verify.sh now
   finds `python.exe` there, but a script that passes absolute `/mnt/c/...`
   paths to a Windows program still needs `wslpath -m`.

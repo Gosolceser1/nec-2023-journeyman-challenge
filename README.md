@@ -15,7 +15,7 @@ Godot_v4.7.2-stable_win64_console.exe --path .                 # desktop layout
 Godot_v4.7.2-stable_win64_console.exe --path . -- --mobile-ui  # Android layout on desktop
 ```
 
-The bundled voice clips (`speech/`, ~138 MB) are generated, not committed.
+The bundled voice clips (`assets/speech/`, ~138 MB) are generated, not committed.
 Without them the app falls back to the system voice. To build them:
 
 ```
@@ -44,7 +44,7 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . --export-release "Wind
 
 ## Docs
 
-- `ARCHITECTURE.md`: how the code is organised
+- `docs/ARCHITECTURE.md`: how the code is organised
 - `docs/DATA_PIPELINE.md`: how the question bank is built and validated
 - `docs/VOICE_READING_RULES.md`: how questions are spoken
 - `docs/SFX_PLAN.md`: which moments get a sound

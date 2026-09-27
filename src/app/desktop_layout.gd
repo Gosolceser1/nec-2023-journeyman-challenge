@@ -326,7 +326,7 @@ static func build(host: Main) -> void:
 	diagram_margin.add_theme_constant_override("margin_bottom", 6)
 	host.question_diagram_panel.add_child(diagram_margin)
 	host.question_diagram_view = DiagramView.new()
-	host.question_diagram_view.max_height = Main.DIAGRAM_MAX_H_DESKTOP
+	host.question_diagram_view.max_height = FitController.DIAGRAM_MAX_H_DESKTOP
 	diagram_margin.add_child(host.question_diagram_view)
 
 	# Calculation Reference Box

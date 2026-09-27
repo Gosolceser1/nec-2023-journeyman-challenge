@@ -149,7 +149,7 @@ tuning renders were scratch and are not kept; what they showed:
 - The answer callout ("Answer X, …"), the rule text, the reference and the
   calculation are **teach** segments. They always form a contiguous tail of the
   plan.
-- The player (`_play_speech_clip`) stops at the first teach clip unless
+- The player (`SpeechController._play_speech_clip`) stops at the first teach clip unless
   `want_teach` is set. A cached or bundled clip therefore cannot leak the answer.
 - The spoken stem and choices come from the same fields shown on screen, so
   nothing is read that the student can't see.
@@ -183,7 +183,7 @@ tuning renders were scratch and are not kept; what they showed:
 `Rules.VERSION` is stamped on every segment as `rules`. Cached and bundled clip
 manifests store it, along with the Edge output `format`. A clip is reused only
 when text, choice/teach flags, `rules` and `format` all match; `format` must
-equal `SPEECH_FORMAT` in `main.gd`, which is kept in sync with `OUTPUT_FORMAT`
+equal `SPEECH_FORMAT` in `src/speech/speech_controller.gd`, which is kept in sync with `OUTPUT_FORMAT`
 in `src/speech/speak_question.py`. **Bump `VERSION` whenever a rule changes spoken
 output**, then refresh the shipped clips:
 

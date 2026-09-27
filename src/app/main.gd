@@ -195,22 +195,8 @@ var quiz_scroll_box: ScrollContainer
 var answers_row: BoxContainer  # desktop only: choices | lookup material
 var ref_column: VBoxContainer  # desktop only
 var feedback_scroll: ScrollContainer
-var _fit_gen := 0
-var _fit_level := 0
-var _table_natural_h := 0.0
+var fit := FitController.new()
 
-## Auto-fit steps for the unanswered screen, roomy -> dense. Answer text never
-## goes below 15 px, the readable floor on a phone.
-const FIT_QUESTION_MOBILE := [23, 21, 19, 18]
-const FIT_QUESTION_DESKTOP := [21, 19, 18, 17]
-const FIT_ANSWER := [17, 16, 15, 15]
-const FIT_HINT_MOBILE := [15, 14, 14, 13]
-const FIT_HINT_DESKTOP := [14, 13, 13, 12]
-const FIT_TABLE_MIN_H := 64.0
-const DIAGRAM_MAX_H_DESKTOP := 320.0
-const DIAGRAM_MAX_H_MOBILE := 250.0
-const FIT_DIAGRAM_MIN_H := 96.0
-const SIDE_BY_SIDE_MIN_WIDTH := 1100.0
 var pause_button: Button
 var skip_button: Button
 
@@ -229,6 +215,7 @@ var sfx_level_buttons: Array[Button] = []  # Off, then one per AudioSettings.SFX
 
 func _init() -> void:
 	speech.host = self
+	fit.host = self
 
 func _exit_tree() -> void:
 	# The TTS worker runs on speak_thread. Destroying the node while that thread is
@@ -249,7 +236,7 @@ func _ready() -> void:
 	_build_ui()
 	info_panel.label = info_label
 	speech._warm_speech_helper()
-	_attach_fx()
+	QuizFx.attach(self)
 	_polish_controls()
 	_apply_touch_filters()
 	_apply_safe_area()
@@ -258,8 +245,8 @@ func _ready() -> void:
 	if ui_mobile or not OS.has_feature("pc"):
 		get_tree().create_timer(4.0).timeout.connect(speech._refresh_native_voices)
 	get_viewport().size_changed.connect(_apply_safe_area)
-	get_viewport().size_changed.connect(_on_viewport_resized)
-	_apply_answers_row_layout()
+	get_viewport().size_changed.connect(fit.on_viewport_resized)
+	fit.apply_answers_row_layout()
 	timer = Timer.new()
 	timer.wait_time = 1.0
 	timer.timeout.connect(_tick_timer)
@@ -280,26 +267,6 @@ func _ready() -> void:
 		_show_error("Question bank could not be loaded.")
 	else:
 		_show_menu()
-
-## Decoration shared by both layouts, attached after the builder ran so the two
-## builders stay separate: the fx layer for particles/flashes, the streak meter
-## beside the progress line, and the countdown gauges on the time badges.
-func _attach_fx() -> void:
-	fx_layer = UiFx.make_fx_layer()
-	add_child(fx_layer)
-
-	streak_meter = StreakMeter.new()
-	streak_meter.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	var progress_row := HBoxContainer.new()
-	progress_row.add_theme_constant_override("separation", 12)
-	var progress_parent := progress_label.get_parent()
-	progress_parent.add_child(progress_row)
-	progress_parent.move_child(progress_row, progress_label.get_index())
-	progress_label.reparent(progress_row)
-	progress_row.add_child(streak_meter)
-
-	exam_gauge = _attach_time_gauge(timer_label)
-	pace_gauge = _attach_time_gauge(question_timer_label)
 
 ## Shared state styling for both layouts, applied after the builder ran:
 ## several buttons only had normal/hover boxes and flashed the stock grey
@@ -359,219 +326,13 @@ func _make_feedback_detail(column: VBoxContainer) -> VBoxContainer:
 	feedback_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	feedback_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	feedback_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	feedback_scroll.custom_minimum_size = Vector2(0, _feedback_min_h())
+	feedback_scroll.custom_minimum_size = Vector2(0, fit.feedback_min_h())
 	column.add_child(feedback_scroll)
 	var detail := VBoxContainer.new()
 	detail.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	detail.add_theme_constant_override("separation", 10 if ui_mobile else 8)
 	feedback_scroll.add_child(detail)
 	return detail
-
-func _quiz_overflow() -> float:
-	if not is_instance_valid(quiz_scroll_box) or quiz_scroll_box.get_child_count() == 0:
-		return 0.0
-	var content := quiz_scroll_box.get_child(0) as Control
-	return content.get_combined_minimum_size().y - quiz_scroll_box.size.y
-
-func _live_cards() -> Array:
-	var out: Array = []
-	for c in answers_box.get_children():
-		if c is AnswerCard and not c.is_queued_for_deletion():
-			out.append(c)
-	return out
-
-func _fit_apply(level: int) -> void:
-	_fit_level = clampi(level, 0, FIT_ANSWER.size() - 1)
-	var q_steps: Array = FIT_QUESTION_MOBILE if ui_mobile else FIT_QUESTION_DESKTOP
-	var h_steps: Array = FIT_HINT_MOBILE if ui_mobile else FIT_HINT_DESKTOP
-	question_label.add_theme_font_size_override("font_size", int(q_steps[_fit_level]))
-	article_label.add_theme_font_size_override("font_size", int(h_steps[_fit_level]))
-	for card in _live_cards():
-		card.set_text_size(int(FIT_ANSWER[_fit_level]))
-		card.set_density(1 if _fit_level >= 2 else 0)
-
-## Restart the unanswered-screen fit: roomy first, then step down once the
-## new cards have been laid out (they need a frame to get their width).
-func _fit_begin() -> void:
-	_fit_gen += 1
-	_fit_apply(0)
-	if question_table_panel.visible and _table_natural_h > 0.0:
-		question_table_scroll.custom_minimum_size.y = _table_natural_h
-	if is_instance_valid(question_diagram_view):
-		question_diagram_view.max_height = DIAGRAM_MAX_H_MOBILE if ui_mobile else DIAGRAM_MAX_H_DESKTOP
-	_fit_after_frames(_fit_gen, 2)
-
-func _fit_after_frames(gen: int, frames: int) -> void:
-	if gen != _fit_gen or not is_inside_tree():
-		return
-	if frames <= 0:
-		_fit_run(gen)
-		return
-	var next := _fit_after_frames.bind(gen, frames - 1)
-	if not get_tree().process_frame.is_connected(next):
-		get_tree().process_frame.connect(next, CONNECT_ONE_SHOT)
-
-func _fit_run(gen: int) -> void:
-	if gen != _fit_gen or order.is_empty():
-		return
-	if current_answered:
-		_fit_answered()
-		return
-	# Font and min-size changes re-measure synchronously at a fixed width, so
-	# the whole step-down happens in this one call.
-	var over := _quiz_overflow()
-	while over > 0.5 and _fit_level < FIT_ANSWER.size() - 1:
-		_fit_apply(_fit_level + 1)
-		over = _quiz_overflow()
-	if over > 0.5 and question_table_panel.visible:
-		question_table_panel.custom_minimum_size.y = 0.0
-		question_table_scroll.custom_minimum_size.y = maxf(FIT_TABLE_MIN_H, question_table_scroll.custom_minimum_size.y - over)
-		over = _quiz_overflow()
-	# The table heading already says where to look; the chapter path is the
-	# expendable duplicate (kept when the heading had to be redacted).
-	if over > 0.5 and question_table_panel.visible and lookup_box.visible \
-			and not question_table_heading.text.ends_with("REFERENCE TABLE"):
-		chapter_hint_label.visible = false
-		lookup_box.visible = false
-		over = _quiz_overflow()
-	if over > 0.5 and question_diagram_panel.visible:
-		_shrink_diagram(over)
-
-func _shrink_diagram(over: float) -> void:
-	var cur := question_diagram_view.custom_minimum_size.y
-	question_diagram_view.max_height = maxf(FIT_DIAGRAM_MIN_H, cur - over)
-
-func _refresh_ref_column() -> void:
-	if not is_instance_valid(ref_column):
-		return
-	ref_column.visible = question_table_panel.visible or question_diagram_panel.visible or formula_box.visible
-
-func _side_by_side() -> bool:
-	return is_instance_valid(answers_row) and get_viewport().get_visible_rect().size.x >= SIDE_BY_SIDE_MIN_WIDTH
-
-func _apply_answers_row_layout() -> void:
-	if not is_instance_valid(answers_row):
-		return
-	var wide := _side_by_side()
-	answers_row.vertical = not wide
-	# Stacked, the lookup material reads first, like the book open above the sheet.
-	answers_row.move_child(ref_column, 1 if wide else 0)
-
-func _on_viewport_resized() -> void:
-	_apply_answers_row_layout()
-	if not current_answered and not order.is_empty():
-		_fit_begin()
-
-## After answering, drop what only mattered while choosing: the eliminated
-## cards (their notes are in the explanation), session pills, gist, lookup
-## path and item bar. What remains is the question, the verdict cards and the
-## explanation sheet.
-func _compact_answered(correct: int, selected: int) -> void:
-	var cards := answers_box.get_children()
-	for i in cards.size():
-		if i != correct and i != selected:
-			(cards[i] as Control).visible = false
-	exam_pills_row.visible = false
-	if is_instance_valid(question_hint_row):
-		question_hint_row.visible = false
-	chapter_hint_label.visible = false
-	lookup_box.visible = false
-	timer_bar.visible = false
-	_refresh_ref_column()
-	feedback_scroll.visible = true
-	feedback_scroll.scroll_vertical = 0
-	feedback_scroll.custom_minimum_size.y = _feedback_min_h()
-	_fit_gen += 1
-	_fit_after_frames(_fit_gen, 2)
-
-func _feedback_min_h() -> float:
-	return 150.0 if ui_mobile else 170.0
-
-## Answered-state fit: a long stem can leave less than the sheet's preferred
-## height; let the sheet give way (it scrolls inside) before the page does.
-func _fit_answered() -> void:
-	var over := _quiz_overflow()
-	if over > 0.5:
-		feedback_scroll.custom_minimum_size.y = maxf(84.0, feedback_scroll.custom_minimum_size.y - over)
-		over = _quiz_overflow()
-	if over > 0.5 and question_diagram_panel.visible:
-		_shrink_diagram(over)
-
-func _attach_time_gauge(label: Label) -> TimeGauge:
-	var gauge := TimeGauge.new()
-	var margin := label.get_parent()
-	if ui_mobile:
-		gauge.mode = TimeGauge.Mode.EDGE
-		var badge := margin.get_parent()
-		badge.add_child(gauge)
-		badge.move_child(gauge, 0)
-		return gauge
-	gauge.custom_minimum_size = Vector2(18, 18)
-	gauge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 8)
-	margin.add_child(row)
-	label.reparent(row)
-	row.add_child(gauge)
-	row.move_child(gauge, 0)
-	return gauge
-
-func _update_time_gauges() -> void:
-	if is_instance_valid(exam_gauge):
-		exam_gauge.visible = timed_session
-		var exam_col := UiFx.CYAN
-		if time_left <= 300:
-			exam_col = UiFx.RED
-		elif time_left <= 900:
-			exam_col = UiFx.AMBER
-		exam_gauge.set_value(float(maxi(time_left, 0)) / float(maxi(session_time_limit, 1)), exam_col,
-			not timer.is_stopped() and time_left > 0 and time_left <= 60)
-	if is_instance_valid(question_timer_label):
-		var pace_badge: Node = question_timer_label.get_parent()
-		while pace_badge != null and not pace_badge is PanelContainer:
-			pace_badge = pace_badge.get_parent()
-		if pace_badge != null:
-			pace_badge.visible = timed_session
-	if is_instance_valid(pace_gauge):
-		pace_gauge.visible = timed_session
-		var pace_col := UiFx.CYAN
-		if current_answered:
-			pace_col = UiFx.EMERALD
-		elif question_time_left <= 30:
-			pace_col = UiFx.RED
-		elif question_time_left <= 60:
-			pace_col = UiFx.AMBER
-		pace_gauge.set_value(float(maxi(question_time_left, 0)) / float(SECONDS_PER_SCORED_ITEM), pace_col,
-			not current_answered and question_time_left > 0 and question_time_left <= 30)
-
-func _play_answer_fx(cards: Array, correct: int, selected: int) -> void:
-	var is_right := selected == correct and selected >= 0
-	_sfx(Sfx.answer_sound(AudioSettings.grades_answers(session_audio_mode), is_right))
-	if ui_mobile:
-		Input.vibrate_handheld(25 if is_right else 90)
-	if correct >= 0 and correct < cards.size():
-		var right_card: AnswerCard = cards[correct]
-		UiFx.glow_pulse(right_card, UiFx.EMERALD, 30 if is_right else 18)
-		if is_right:
-			var spark_at := right_card.vector_state_icon.get_global_rect().get_center()
-			if _quiz_view_rect().has_point(spark_at):
-				UiFx.spark_burst(fx_layer, spark_at, UiFx.EMERALD)
-			UiFx.screen_flash(fx_layer, UiFx.EMERALD, 0.07)
-	if not is_right:
-		UiFx.screen_flash(fx_layer, UiFx.RED, 0.11)
-		if selected >= 0 and selected < cards.size():
-			UiFx.glow_pulse(cards[selected], UiFx.RED, 24)
-	UiFx.pop(pass_badge, 1.06)
-	UiFx.pop(feedback_title, 1.12, 0.3)
-	UiFx.glow_pulse(feedback_panel, UiFx.EMERALD if is_right else UiFx.RED, 22, 0.8)
-
-## On-screen rect of the scrolling quiz column (sparks outside it would land on
-## the Next button or dock).
-func _quiz_view_rect() -> Rect2:
-	var n: Node = answers_box
-	while n != null and not n is ScrollContainer:
-		n = n.get_parent()
-	return (n as Control).get_global_rect() if n != null else get_global_rect()
 
 func _question_panel_style() -> StyleBoxFlat:
 	var style := AppTheme.panel_style(AppTheme.SURFACE_DEEP, AppTheme.SLATE_800, 1, 14)
@@ -922,9 +683,9 @@ func _show_question() -> void:
 	var question_table = record.get("reference_table", [])
 	question_table_panel.visible = question_table is Array and not question_table.is_empty()
 	if question_table_panel.visible:
-		var table_layout := _table_preview_layout(question_table, 340.0 if _side_by_side() else 220.0)
-		_table_natural_h = float(table_layout["scroll_height"])
-		question_table_scroll.custom_minimum_size.y = _table_natural_h
+		var table_layout := _table_preview_layout(question_table, 340.0 if fit.side_by_side() else 220.0)
+		fit.table_natural_h = float(table_layout["scroll_height"])
+		question_table_scroll.custom_minimum_size.y = fit.table_natural_h
 		question_table_panel.custom_minimum_size.y = float(table_layout["panel_height"])
 		var reference_lines := str(record.get("reference_text", "")).split("\n", false)
 		var table_title := reference_lines[0] if not reference_lines.is_empty() else str(record.get("article", "Reference table"))
@@ -1003,7 +764,7 @@ func _show_question() -> void:
 		answers_box.add_child(card)
 		UiFx.add_shine(card)
 		card.animate_entrance(0.08 + float(i) * 0.07)
-	_update_time_gauges()
+	QuizFx.update_time_gauges(self)
 	if is_instance_valid(results_visual):
 		results_visual.visible = false
 
@@ -1018,8 +779,8 @@ func _show_question() -> void:
 		dock_panel.visible = true
 	exam_pills_row.visible = not ui_mobile
 	feedback_scroll.visible = false
-	_refresh_ref_column()
-	_fit_begin()
+	fit.refresh_ref_column()
+	fit.begin()
 	_schedule_auto_read()
 	_update_key_hint()
 
@@ -1119,7 +880,7 @@ func _answer_selected(selected: int) -> void:
 		call_deferred("_scroll_feedback_table_to_match")
 	info_panel.show(record, correct_text, table_highlighted)
 	info_label.visible = true
-	_compact_answered(correct, selected)
+	fit.compact_answered(correct, selected)
 	# Answering always stops the readout in progress. The rule then plays by
 	# itself in Auto-read (unless "Also read the rule" is off) and in Listen;
 	# Tap to hear keeps it behind the "Hear the rule" button.
@@ -1137,8 +898,8 @@ func _answer_selected(selected: int) -> void:
 	_update_key_hint()
 	question_timer_label.text = "ITEM COMPLETED"
 	_update_score_badges()
-	_update_time_gauges()
-	_play_answer_fx(cards, correct, selected)
+	QuizFx.update_time_gauges(self)
+	QuizFx.play_answer(self, cards, correct, selected)
 
 
 ## Phone: after answering, the green card and the feedback usually sit below
@@ -1340,7 +1101,7 @@ func _tick_timer() -> void:
 			question_timer_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	if Sfx.time_warning(timed_session, time_left):
 		_sfx("warning")
-	_update_time_gauges()
+	QuizFx.update_time_gauges(self)
 	match tick["action"]:
 		QuizSession.Tick.TIME_OUT:
 			_answer_selected(-1)

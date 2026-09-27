@@ -100,7 +100,9 @@ thousands separators (`1200` <-> `1,200`), unit spellings, and the leading-`#` f
 
 ## What is NOT covered (and why)
 
-- **`main.gd`** — 150 KB of stateful UI. It has its own end-to-end harness at
+- **`main.gd` and the UI-bound components** (`SpeechController`,
+  `FitController`, the layout builders). The builders are pinned by
+  `test_layout_tree.gd`; the rest has its own end-to-end harness at
   `tools/harness.gd`, which drives the real quiz flow headlessly (279 records, all
   render branches, the teach gate, the speech thread join, timer expiry, stale
   speech callbacks). That is the right tool for those; these unit tests are for
