@@ -1,14 +1,14 @@
 class_name Main
 extends Control
 
-const ANSWER_LETTERS := ["A", "B", "C", "D"]
-const SESSION_LENGTH := 10
+const ANSWER_LETTERS := QuizSession.ANSWER_LETTERS
+const SESSION_LENGTH := QuizSession.SESSION_LENGTH
 const EXAM_NAME := "NE JOURNEYMAN ELECTRICIAN"
-const EXAM_SCORED_ITEMS := 80
-const EXAM_MINUTES := 240
-const PASS_PERCENT := 75
-const SECONDS_PER_SCORED_ITEM: int = (EXAM_MINUTES * 60) / EXAM_SCORED_ITEMS
-const SESSION_TIME_SECONDS: int = SECONDS_PER_SCORED_ITEM * SESSION_LENGTH
+const EXAM_SCORED_ITEMS := QuizSession.EXAM_SCORED_ITEMS
+const EXAM_MINUTES := QuizSession.EXAM_MINUTES
+const PASS_PERCENT := QuizSession.PASS_PERCENT
+const SECONDS_PER_SCORED_ITEM := QuizSession.SECONDS_PER_SCORED_ITEM
+const SESSION_TIME_SECONDS := QuizSession.SESSION_TIME_SECONDS
 const SpeechText = preload("res://src/speech/speech_text.gd")
 const SpeechChain = preload("res://src/fx/speech_chain.gd")
 ## Microsoft's conversational "Copilot" persona: the most human-sounding US voice
@@ -20,20 +20,54 @@ const VOICE_TIER_HEADINGS := {
 	"classic": "CLASSIC NARRATORS",
 }
 
-var records: Array = []
-var order: Array[int] = []
-var current_index := 0
-var score := 0
-var streak := 0
-var answered_count := 0
-var current_answered := false
-var missed_questions: Array[Dictionary] = []
-var time_left := SESSION_TIME_SECONDS
-var session_length := SESSION_LENGTH
-var session_time_limit := SESSION_TIME_SECONDS
-var timed_session := true
-var session_name := "Practice Test"
-var question_time_left := SECONDS_PER_SCORED_ITEM
+var session := QuizSession.new()
+# The session's fields under their old names: the harness, tests and snapshot
+# tools read and assign these on main.
+var records: Array:
+	get: return session.records
+	set(v): session.records = v
+var order: Array[int]:
+	get: return session.order
+	set(v): session.order = v
+var current_index: int:
+	get: return session.current_index
+	set(v): session.current_index = v
+var score: int:
+	get: return session.score
+	set(v): session.score = v
+var streak: int:
+	get: return session.streak
+	set(v): session.streak = v
+var answered_count: int:
+	get: return session.answered_count
+	set(v): session.answered_count = v
+var current_answered: bool:
+	get: return session.current_answered
+	set(v): session.current_answered = v
+var missed_questions: Array[Dictionary]:
+	get: return session.missed_questions
+	set(v): session.missed_questions = v
+var chapter_stats: Dictionary:
+	get: return session.chapter_stats
+	set(v): session.chapter_stats = v
+var time_left: int:
+	get: return session.time_left
+	set(v): session.time_left = v
+var session_length: int:
+	get: return session.session_length
+	set(v): session.session_length = v
+var session_time_limit: int:
+	get: return session.session_time_limit
+	set(v): session.session_time_limit = v
+var timed_session: bool:
+	get: return session.timed_session
+	set(v): session.timed_session = v
+var session_name: String:
+	get: return session.session_name
+	set(v): session.session_name = v
+var question_time_left: int:
+	get: return session.question_time_left
+	set(v): session.question_time_left = v
 var timer: Timer
 
 var progress_label: Label
@@ -185,7 +219,6 @@ var pace_gauge: TimeGauge
 var results_visual: BoxContainer
 var result_gauge: ResultGauge
 var chapter_bars: ChapterBars
-var chapter_stats: Dictionary = {}  # chapter:int -> [correct, total] for the results breakdown
 var sfx: Sfx
 var sfx_level_buttons: Array[Button] = []  # Off, then one per AudioSettings.SFX_LEVEL_TITLES
 
@@ -572,31 +605,13 @@ func _apply_safe_area() -> void:
 		menu_panel.custom_minimum_size = mms
 
 func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION_TIME_SECONDS, timed: bool = true, mode_name: String = "Practice Test") -> void:
-	order.clear()
-	for i in records.size():
-		order.append(i)
-	order.shuffle()
-	session_length = mini(question_count, records.size())
-	if order.size() > session_length:
-		order.resize(session_length)
-	session_time_limit = time_limit
 	session_audio_mode = AudioSettings.session_mode(audio.mode, mode_name == "Full Journeyman Exam")
 	session_muted = AudioSettings.starts_muted(session_audio_mode)
 	listen_phase = AudioSettings.ListenPhase.IDLE
 	listen_paused = false
 	var listening := session_audio_mode == AudioSettings.Mode.LISTEN
-	timed_session = timed and not listening
-	session_name = mode_name + (" · Listen" if listening else "")
+	session.begin(question_count, time_limit, timed and not listening, mode_name + (" · Listen" if listening else ""))
 	_refresh_dock_audio()
-	current_index = 0
-	score = 0
-	streak = 0
-	answered_count = 0
-	current_answered = false
-	missed_questions.clear()
-	chapter_stats.clear()
-	time_left = session_time_limit
-	question_time_left = SECONDS_PER_SCORED_ITEM
 	if timed_session:
 		timer.start()
 	else:
@@ -1128,11 +1143,10 @@ func _table_preview_layout(rows: Array, max_scroll_height: float = 220.0) -> Dic
 func _show_question() -> void:
 	if order.is_empty():
 		return
-	var record: Dictionary = records[order[current_index]]
-	current_answered = false
+	var record := session.current_record()
+	session.start_question()
 	_stop_reading()
 	_prefetch_speech()
-	question_time_left = SECONDS_PER_SCORED_ITEM
 	question_label.text = str(record.get("prompt", "Question unavailable"))
 	question_panel.modulate.a = 0.0
 	question_panel.position.x = 28.0
@@ -1264,16 +1278,12 @@ func _gist_task_sentence(record: Dictionary) -> String:
 	return task
 
 func _answer_selected(selected: int) -> void:
-	if current_answered:
+	var result := session.submit(selected, AudioSettings.grades_answers(session_audio_mode))
+	if result.is_empty():
 		return
-	current_answered = true
-	var record_index: int = order[current_index]
-	var record: Dictionary = records[record_index]
-	answered_count += 1
-	var correct := int(record.get("correct_index", -1))
-	var answers: Array = record.get("answers", [])
-	var correct_text: String = str(answers[correct]) if correct >= 0 and correct < answers.size() else ANSWER_LETTERS[correct]
-	var selected_text: String = str(answers[selected]) if selected >= 0 and selected < answers.size() else "No answer"
+	var record: Dictionary = result["record"]
+	var correct: int = result["correct"]
+	var correct_text: String = result["correct_text"]
 	var cards := answers_box.get_children()
 	for i in cards.size():
 		var card = cards[i]
@@ -1283,59 +1293,31 @@ func _answer_selected(selected: int) -> void:
 			card.set_state(AnswerCard.State.WRONG)
 		else:
 			card.set_eliminated()
-	var graded := AudioSettings.grades_answers(session_audio_mode)
-	if graded:
-		var chapter := ChapterBars.chapter_of(str(record.get("article", "")))
-		var tally: Array = chapter_stats.get(chapter, [0, 0])
-		chapter_stats[chapter] = [int(tally[0]) + (1 if selected == correct else 0), int(tally[1]) + 1]
 
-	if not graded:
-		# Listen mode reviews, it does not test: no score, streak or missed list.
-		feedback_title.text = "Answer"
-		feedback_title.add_theme_color_override("font_color", AppTheme.SKY_400)
-		feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
-		feedback_body.visible = true
-	elif selected == -1:
-		streak = 0
-		feedback_title.text = "Time expired"
-		feedback_title.add_theme_color_override("font_color", AppTheme.RED_400)
-		feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
-		feedback_body.visible = true
-		missed_questions.append({
-			"index": current_index + 1,
-			"prompt": str(record.get("prompt", "")),
-			"selected": "Time expired",
-			"correct": "%s — %s" % [ANSWER_LETTERS[correct], correct_text],
-			"article": str(record.get("article", "General")),
-			"article_title": str(record.get("article_title", "")),
-			"tip_short": str(record.get("tip_short", record.get("gist", ""))),
-			"record_index": record_index,
-		})
-	elif selected == correct:
-		score += 1
-		streak += 1
-		feedback_title.text = "Correct"
-		# The green card already shows the pick — a text echo of it is clutter.
-		feedback_body.text = ""
-		feedback_body.visible = false
-		feedback_title.add_theme_color_override("font_color", AppTheme.EMERALD_400)
-	else:
-		streak = 0
-		feedback_title.text = "Not quite"
-		feedback_title.add_theme_color_override("font_color", AppTheme.RED_400)
-		# One verdict line: your pick is already red on its card, no need to restate it.
-		feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
-		feedback_body.visible = true
-		missed_questions.append({
-			"index": current_index + 1,
-			"prompt": str(record.get("prompt", "")),
-			"selected": "%s — %s" % [ANSWER_LETTERS[selected], selected_text],
-			"correct": "%s — %s" % [ANSWER_LETTERS[correct], correct_text],
-			"article": str(record.get("article", "General")),
-			"article_title": str(record.get("article_title", "")),
-			"tip_short": str(record.get("tip_short", record.get("gist", ""))),
-			"record_index": record_index,
-		})
+	match result["verdict"]:
+		QuizSession.Verdict.REVIEWED:
+			# Listen mode reviews, it does not test: no score, streak or missed list.
+			feedback_title.text = "Answer"
+			feedback_title.add_theme_color_override("font_color", AppTheme.SKY_400)
+			feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
+			feedback_body.visible = true
+		QuizSession.Verdict.TIMED_OUT:
+			feedback_title.text = "Time expired"
+			feedback_title.add_theme_color_override("font_color", AppTheme.RED_400)
+			feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
+			feedback_body.visible = true
+		QuizSession.Verdict.CORRECT:
+			feedback_title.text = "Correct"
+			# The green card already shows the pick — a text echo of it is clutter.
+			feedback_body.text = ""
+			feedback_body.visible = false
+			feedback_title.add_theme_color_override("font_color", AppTheme.EMERALD_400)
+		QuizSession.Verdict.WRONG:
+			feedback_title.text = "Not quite"
+			feedback_title.add_theme_color_override("font_color", AppTheme.RED_400)
+			# One verdict line: your pick is already red on its card, no need to restate it.
+			feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
+			feedback_body.visible = true
 	feedback_panel.visible = true
 	feedback_panel.modulate.a = 0.0
 	feedback_panel.pivot_offset = feedback_panel.size / 2.0
@@ -2594,12 +2576,11 @@ func _apply_exam_time_tint() -> void:
 func _tick_timer() -> void:
 	if not timed_session:
 		return
-	time_left -= 1
+	var tick := session.tick(not speak_busy and not reader.playing)
 	timer_label.text = "TOTAL " + _format_time(max(time_left, 0))
 	timer_bar.value = max(time_left, 0)
 	_apply_exam_time_tint()
-	if not current_answered and not speak_busy and not reader.playing:
-		question_time_left -= 1
+	if tick["item_ticked"]:
 		question_timer_label.text = "ITEM " + _format_time(max(question_time_left, 0))
 		if question_time_left <= 30:
 			question_timer_label.add_theme_color_override("font_color", AppTheme.RED_400)
@@ -2615,20 +2596,17 @@ func _tick_timer() -> void:
 	if Sfx.time_warning(timed_session, time_left):
 		_sfx("warning")
 	_update_time_gauges()
-	if not current_answered and question_time_left <= 0 and not speak_busy and not reader.playing:
-		_answer_selected(-1)
-	elif time_left <= 0:
-		if current_answered:
-			timer.stop()
-		else:
+	match tick["action"]:
+		QuizSession.Tick.TIME_OUT:
 			_answer_selected(-1)
+		QuizSession.Tick.STOP_CLOCK:
+			timer.stop()
 
 func _format_time(seconds: int) -> String:
 	return "%02d:%02d" % [seconds / 60, seconds % 60]
 
 func _next_question() -> void:
-	if current_index < order.size() - 1:
-		current_index += 1
+	if session.advance():
 		_show_question()
 	else:
 		_show_results()

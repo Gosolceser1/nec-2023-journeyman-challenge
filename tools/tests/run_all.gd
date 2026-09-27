@@ -30,6 +30,7 @@ const SUITES := [
 	# Pins the full node tree both builders make, so they can be moved and
 	# refactored with proof that nothing on screen changed.
 	{"name": "layout tree golden (both layouts)", "path": "res://tools/tests/test_layout_tree.gd"},
+	{"name": "quiz session (grading, missed list, clocks)", "path": "res://tools/tests/test_quiz_session.gd"},
 	{"name": "app theme (palette, factories)", "path": "res://tools/tests/test_app_theme.gd"},
 	{"name": "nec reference (titles, lookup path)", "path": "res://tools/tests/test_nec_reference.gd"},
 	{"name": "bank loader (shapes, leak guard)", "path": "res://tools/tests/test_bank_loader.gd"},
