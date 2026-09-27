@@ -16,7 +16,7 @@ WIRE_BANK_OUT=/path/to/candidate.json bash tools/pipeline/build_question_bank.sh
 WIRE_BANK_OUT=/path/to/candidate.json bash tools/pipeline/build_question_bank.sh --full
 ```
 
-`--no-warn` makes validator warnings fail the gate. The local and CI gates use it. `tools/tests/test_validate_question_bank.py` and `tools/tests/test_build_guard.sh` run inside the gate before the strict bank validator. The Godot suites cover app behavior and the no-answer-leak guarantee.
+`--no-warn` makes validator warnings fail the gate. The local and CI gates use it. `tools/tests/test_build_guard.sh`, the Python tests (`test_validate_question_bank.py`, `test_spellcheck_bank.py`, `test_speak_question.py`) and `spellcheck_bank.py --offline` run inside the gate before the strict bank validator. The Godot suites cover app behavior and the no-answer-leak guarantee.
 
 ## OCR input/output locations
 
@@ -26,7 +26,7 @@ WIRE_BANK_OUT=/path/to/candidate.json bash tools/pipeline/build_question_bank.sh
 |---|---|---|
 | `WIRE_OCR_PATH` | `<system temp>/opencode/wire_ocr` | OCR'd exam text; OCR script output and builder input |
 | `WIRE_OCR_KEYS` | `<system temp>/opencode/wire_ocr_keys` | OCR'd answer keys; OCR script output and builder input |
-| `WIRE_BANK_OUT` | `<repo>/question_bank.json` | generated bank output |
+| `WIRE_BANK_OUT` | none — required for `--build`/`--no-speech`/`--full`; `<repo>/data/question_bank.json` is refused | generated candidate bank |
 | `PYTHON` | `python` | interpreter used by `tools/pipeline/build_question_bank.sh` |
 
 The OCR scripts skip output files that already exist. Remove or replace a stale OCR text file when the source PDF needs to be processed again.
@@ -74,4 +74,4 @@ Current validation result: **0 errors, 0 warnings**. That is not an NEC answer-k
 
 ## Speech assets
 
-`tools/speech/dump_speech.gd` exports the speech plan; `tools/speech/pregenerate_speech.py --bundle` writes bundled MP3s into `speech/` (without `--bundle` it fills the per-user cache). Spoken text comes from `speech_rules.gd` (see `docs/VOICE_READING_RULES.md`); bump its `VERSION` when a rule changes output so stale clips are re-rendered. Generated `speech/` assets are gitignored and can be rebuilt with `bash tools/pipeline/build_question_bank.sh --full` after the bank build is safe to run.
+`tools/speech/dump_speech.gd` exports the speech plan of the checked-in `data/question_bank.json`; `tools/speech/pregenerate_speech.py --bundle` writes bundled MP3s into `assets/speech/` (without `--bundle` it fills the per-user cache). Spoken text comes from `src/speech/speech_rules.gd` (see `docs/VOICE_READING_RULES.md`); bump its `VERSION` when a rule changes output so stale clips are re-rendered. Generated `assets/speech/` clips are gitignored. Rebuild them with the three commands in `README.md`; `build_question_bank.sh --full` also runs them, but always against the checked-in bank, not the candidate it just built.

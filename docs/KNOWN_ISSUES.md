@@ -16,8 +16,8 @@ that produced false results before. Fixed defects are in git history
 - **`get_display_safe_area()` accuracy.** godot#105462 reports a too-narrow
   safe area on Pixel 9 in some orientations. The inset scaling in
   `SafeArea.margins` is correct in principle; confirm on a notched device.
-- **`exam_label` / `question_diagram_label` use `AUTOWRAP_OFF`.** Long NEC
-  values may clip on narrow phones.
+- **`exam_label` has no autowrap (Label default `AUTOWRAP_OFF`).** Long
+  session names may clip on narrow phones.
 - **Native-TTS watchdog tweens accumulate** (min 6 s each, bounded by
   teardown). Minor, not a correctness bug.
 - **Speech on Android after the SpeechController move.** The native-TTS
@@ -90,8 +90,14 @@ that produced false results before. Fixed defects are in git history
   required for the answer cards (see the note in `project.godot`).
 - **`MOUSE_FILTER_PASS` on children.** `_touch_filter_walk` assigns PASS to
   BaseButtons and IGNORE to decoration, matching the documented behaviour.
-- **Contrast.** The palette is dark by design and computes well
-  above WCAG AA; answer state is carried by colour plus an icon and a border.
-- **48 dp touch targets.** The mobile builder uses 56 px minimums for the dock
-  and Next buttons; the 42 px values in the desktop builder follow the 44 dp
-  pointer guideline for Windows.
+- **Contrast.** The palette is dark by design; body text and the small
+  SLATE_400 helper labels pass WCAG AA (6.6:1+). The Next button's white label
+  on SKY_600 is 4.1:1, just under AA for its size; SKY_700 would pass (5.9:1)
+  but changes the look, so it waits for a design call. Answer state is carried
+  by colour plus an icon and a border.
+- **48 dp touch targets.** Canvas px are not dp: the 540 px canvas maps to
+  ~0.76 dp/px on a 1080 px, 420 dpi phone, so 48 px dock buttons are ~37 dp and
+  56 px cards ~43 dp. A density-aware content_scale_factor (clamped to 1.15 to
+  keep the no-scroll rule) needs a device check. Mobile minimums today: 56 px
+  answer cards, 52 px Next, 48 px dock buttons; the 42 px values in the desktop
+  builder follow the 44 dp pointer guideline for Windows.

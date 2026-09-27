@@ -39,8 +39,13 @@ Presets live in `export_presets.cfg` (Windows Desktop, Android Debug/Release).
 Their exclude filters keep tests, tools, docs and source PDFs out of the build.
 
 ```
+mkdir build
 Godot_v4.7.2-stable_win64_console.exe --headless --path . --export-release "Windows Desktop" build/NEC2023JourneymanChallenge.exe
+python tools/list_pck.py build/NEC2023JourneymanChallenge.pck --desktop   # fails if the voice bundle or a runtime file is missing
 ```
+
+Godot will not create `build/`, and an export without `assets/speech/`
+succeeds silently with no recorded voice, so generate the bundle first.
 
 ## Docs
 

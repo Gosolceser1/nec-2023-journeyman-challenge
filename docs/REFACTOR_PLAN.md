@@ -1,6 +1,8 @@
 # REFACTOR PLAN — project organization + `main.gd` decomposition
 
-**Status:** Phase 1 (audit + plan) only. Nothing in the project has been moved, edited or deleted.
+**Status:** executed through S11 (commit 83104fd); `docs/ARCHITECTURE.md` describes the result. The inventory, line numbers and paths below (`Main.tscn`, `res://main.gd`, `sfx/`,
+`speech/`, `tools/speak_question.py`, "12 unit suites") are the pre-move audit, kept as history.
+**Original status:** Phase 1 (audit + plan) only. Nothing in the project has been moved, edited or deleted.
 **Audited:** 2026-09-26 ~23:15, while another agent was still editing `main.gd`, `speech_rules.gd`,
 `speech_text.gd`, `audio_settings.gd`, `tools/speak_question.py`, `tools/pregenerate_speech.py`,
 `tools/tests/*` and regenerating `speech/`. **Every line number below must be re-measured before

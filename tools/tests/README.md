@@ -5,8 +5,9 @@ functions that decide what the learner sees and hears, and the ones that enforce
 the product's core promise: **the answer must not appear anywhere above the
 question until the learner answers.**
 
-Everything here runs headless, with no scene, no autoloads, and no engine
-resources, in a few seconds.
+Everything here runs headless with no autoloads. Most suites are node-free;
+the layout-tree, figure and speech-helper suites instantiate
+`scenes/main.tscn`. A full run takes about a minute.
 
 ## Running
 
@@ -35,7 +36,7 @@ one as a child Godot process and reads its exit code. Slower than an in-process
 runner, but it exercises exactly the path a developer runs by hand, and one
 suite's failure cannot abort the rest.
 
-**Current status: 1891 Godot checks across 12 suites, 9 Python validator/pipeline/data checks, 1 build-guard shell test, 0 failures, 0 documented product defects.**
+**Current status: 5,471 Godot checks across 21 suites, 22 Python tests (validator, spellcheck, speak_question), 1 build-guard shell test, 0 failures, 0 documented product defects.** The scene harness adds 372 (desktop) / 376 (mobile) checks. The speech-helper suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
 
 Every formerly pinned defect is fixed and promoted to a real assertion, so a
 regression fails its suite rather than appearing in the defect list. The test table prefix case is covered directly: `NOTED: x` must remain unchanged.
@@ -91,12 +92,12 @@ sizes, conductor types, blank runs, and every symbol. Plus `spoken_fraction`,
 the segment planners, and the guarantee that teach clips are a contiguous tail of
 the speech plan (the playback gate depends on that).
 
-**Answer matching** (`test_unit_matcher.gd`, 177 checks) — `answer_match_candidates`
+**Answer matching** (`test_unit_matcher.gd`, 189 checks) — `answer_match_candidates`
 is the foundation of redaction: a missing candidate is a leak. Asserts the
 number-word map both ways, feet<->inches<->metric conversion in both directions,
 thousands separators (`1200` <-> `1,200`), unit spellings, and the leading-`#` form.
 
-**Table layout** (`test_table_viewer.gd`, 75 checks) — the geometry formula, the
+**Table layout** (`test_table_viewer.gd`, 77 checks) — the geometry formula, the
 220/190 caps, the note-strip allowance, degenerate input, and keyword extraction.
 
 ## What is NOT covered (and why)
@@ -128,7 +129,8 @@ thousands separators (`1200` <-> `1,200`), unit spellings, and the leading-`#` f
 **Assertions vs. documented defects.** A behaviour we assert goes through
 `check()`, and a failure is red. A *known* defect in the product goes through
 `defect()`, which prints the file, the actual output, the expected output, and
-one, promote it to a `check()`.** There are none left — see the table below
+its reach, without failing the run. **When you fix one, promote it to a
+`check()`.** There are none left — see the table below
 for what was closed and where the assertion now lives.
 
 **Never write `dict.get(k, "") or ""` in GDScript.** `or` is a *boolean*
@@ -148,7 +150,7 @@ but a stray `"` in a comment is not.
 
 ## Defects this suite found, and where they went
 
-All 16 are fixed and now asserted. The `defect()` pins that recorded them were
+All 14 are fixed and now asserted. The `defect()` pins that recorded them were
 removed, so a regression is red rather than a printed warning.
 
 | # | Where | What it was | Now asserted in |
