@@ -1,19 +1,22 @@
 class_name Sfx
 extends Node
 
-## The few sound effects the app plays (docs/SFX_PLAN.md): answer correct /
-## wrong, results pass / fail, and an exam-clock warning. They live on their own
-## "SFX" bus, separate from the voice, with one pre-loaded player each so a cue
-## never waits on a load. Only the clock warning can overlap the voice (answers
-## and results stop it first), so only the warning goes through the ducker: a
-## compressor keyed by the Speech bus stays clamped for a while after the voice
-## is cut off, and would swallow an answer tone fired in that same instant. The
+## The few sound effects the app plays (docs/SFX_PLAN.md): session start,
+## answer correct / wrong, results pass / fail, and an exam-clock warning. They
+## live on their own "SFX" bus, separate from the voice, with one pre-loaded
+## player each so a cue never waits on a load. Only the clock warning can
+## overlap the voice (starting a session, answers and results stop it first,
+## and auto-read waits past the start cue), so only the warning goes through
+## the ducker: a compressor keyed by the Speech bus stays clamped for a while
+## after the voice is cut off, and would swallow an answer tone fired in that
+## same instant. The
 ## static part is the sound map and the rules for when a cue plays; it is pure
 ## and unit-tested. Every instance method is a quiet no-op without a tree, bus
 ## or imported asset (headless harness).
 ##
-## Assets are synthesized by tools/sfx/make_sfx.py (CC0, see assets/sfx/CREDITS.md)
-## and loudness-matched there, so the trims below stay near zero.
+## Assets are synthesized by tools/sfx/make_sfx.py (CC0), except start.wav, a
+## sourced recording (Pixabay Content License); see assets/sfx/CREDITS.md. All
+## are loudness-matched, so the trims below stay near zero.
 
 const BUS := "SFX"
 ## Sub-bus of SFX carrying the sidechain ducker; only "duck" cues play on it.
@@ -30,7 +33,10 @@ const SOUNDS := {
 	"warning": {"db": 0.0, "vary_db": 0.0, "duck": true},
 	"pass": {"db": 0.0, "vary_db": 0.0, "duck": false},
 	"fail": {"db": 0.0, "vary_db": 0.0, "duck": false},
+	"start": {"db": 0.0, "vary_db": 0.0, "duck": false},
 }
+## Played by every menu mode button that starts a session (Widgets.add_mode_button).
+const START := "start"
 
 ## Semitones the correct tone rises on a streak (index = streak, last entry
 ## holds): 3 in a row +2, 5 +4, 8 (a full streak meter) +5. The tone is a rising

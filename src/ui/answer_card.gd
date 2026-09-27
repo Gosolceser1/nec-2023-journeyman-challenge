@@ -18,6 +18,13 @@ var vector_state_icon: Control
 var accent_bar: ColorRect
 var voice_visualizer: VoiceVisualizer
 var _margin: MarginContainer
+## The learner's pick, set by main before grading: after grading its accent
+## bar becomes the thicker energized bus bar (right or wrong).
+var chosen := false
+
+const LUG_SIZE := 34
+## Recessed look of the letter lug: the chip's fill darkens toward its top.
+const LUG_GRADIENT := [AppTheme.SURFACE_BOTTOM, AppTheme.LUG_BG]
 
 func _init() -> void:
 	custom_minimum_size = Vector2(0, 56)
@@ -37,42 +44,42 @@ func _init() -> void:
 
 	_margin = MarginContainer.new()
 	_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_margin.add_theme_constant_override("margin_left", 14)
-	_margin.add_theme_constant_override("margin_right", 14)
+	_margin.add_theme_constant_override("margin_left", AppTheme.SPACE_MD)
+	_margin.add_theme_constant_override("margin_right", AppTheme.SPACE_MD)
 	add_child(_margin)
 
 	var hbox := HBoxContainer.new()
 	hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	hbox.add_theme_constant_override("separation", 14)
+	hbox.add_theme_constant_override("separation", AppTheme.SPACE_MD)
 	_margin.add_child(hbox)
 
-	# Left Accent Indicator Strip (4px)
+	# Accent bar: always BUS_BAR_W wide in the layout, drawn at ACCENT_BAR_W
+	# (scale.x) until it becomes the chosen card's bus bar.
 	accent_bar = ColorRect.new()
 	accent_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	accent_bar.custom_minimum_size = Vector2(4, 28)
+	accent_bar.custom_minimum_size = Vector2(AppTheme.BUS_BAR_W, 28)
 	accent_bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	accent_bar.color = AppTheme.SKY_400
+	accent_bar.resized.connect(func(): accent_bar.pivot_offset = Vector2(0.0, accent_bar.size.y * 0.5))
 	hbox.add_child(accent_bar)
 
-	# Letter Pill (A, B, C, D)
+	# Letter lug (A, B, C, D): a recessed terminal chip.
 	letter_panel = PanelContainer.new()
 	letter_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	letter_panel.custom_minimum_size = Vector2(34, 34)
+	letter_panel.custom_minimum_size = Vector2(LUG_SIZE, LUG_SIZE)
 	letter_panel.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	var pill_style := StyleBoxFlat.new()
-	pill_style.bg_color = AppTheme.CARD_PILL_BG
-	pill_style.border_color = AppTheme.DOCK_BUTTON_BORDER
-	pill_style.set_border_width_all(1)
-	pill_style.set_corner_radius_all(10)
+	letter_panel.resized.connect(func(): letter_panel.pivot_offset = letter_panel.size * 0.5)
+	var pill_style := AppTheme.panel_style(AppTheme.LUG_BG, AppTheme.LUG_RIM, AppTheme.BORDER_HAIRLINE, AppTheme.RADIUS_INNER)
 	letter_panel.add_theme_stylebox_override("panel", pill_style)
+	UiFx.add_glass(letter_panel, LUG_GRADIENT, AppTheme.RADIUS_INNER, 0.0)
 	hbox.add_child(letter_panel)
 
 	letter_label = Label.new()
 	letter_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	letter_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	letter_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	letter_label.add_theme_font_override("font", AppTheme.ui_font(700))
-	letter_label.add_theme_font_size_override("font_size", 16)
+	letter_label.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_BOLD))
+	letter_label.add_theme_font_size_override("font_size", AppTheme.TYPE_BODY_LG - 1)
 	letter_label.add_theme_color_override("font_color", AppTheme.WHITE)
 	letter_panel.add_child(letter_label)
 
@@ -82,8 +89,8 @@ func _init() -> void:
 	answer_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	answer_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	answer_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	answer_label.add_theme_font_override("font", AppTheme.ui_font(600))
-	answer_label.add_theme_font_size_override("font_size", 17)
+	answer_label.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_MEDIUM))
+	answer_label.add_theme_font_size_override("font_size", AppTheme.TYPE_BODY_LG)
 	answer_label.add_theme_color_override("font_color", AppTheme.WHITE)
 	hbox.add_child(answer_label)
 
@@ -111,8 +118,46 @@ func _init() -> void:
 	focus_exited.connect(_on_focus_exited)
 	gui_input.connect(_on_gui_input)
 
+	UiFx.add_glass(self)
 	set_density(0)
 	_apply_styling()
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PARENTED:
+		var box := get_parent() as Container
+		if box != null and not box.sort_children.is_connected(_reapply_lift):
+			box.sort_children.connect(_reapply_lift)
+
+# Hover/focus lift: a y offset on top of wherever the answers box placed the
+# card, so the fitted layout never moves. The box resets positions whenever
+# it sorts, so the offset is put back after every sort.
+var _lift := 0.0
+var _lift_tween: Tween
+
+func _set_lift(v: float) -> void:
+	position.y += v - _lift
+	_lift = v
+
+func _reapply_lift() -> void:
+	if _lift != 0.0:
+		position.y += _lift
+
+func _lift_to(target: float) -> void:
+	if _lift_tween != null and _lift_tween.is_valid():
+		_lift_tween.kill()
+	if UiFx.reduce_motion or not is_inside_tree():
+		_set_lift(target)
+		return
+	_lift_tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	_lift_tween.tween_method(_set_lift, _lift, target, AppTheme.MOTION_FAST)
+
+## Press pulse on the letter lug.
+func _pulse_lug() -> void:
+	if UiFx.reduce_motion:
+		return
+	var tw := letter_panel.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	letter_panel.scale = Vector2(0.86, 0.86)
+	tw.tween_property(letter_panel, "scale", Vector2.ONE, 0.22)
 
 ## 0 = roomy, 1 = tight: vertical padding only; the tap target stays >= 48 px.
 func set_density(level: int) -> void:
@@ -135,6 +180,9 @@ func set_state(state: State) -> void:
 	current_state = state
 	if state == State.CORRECT or state == State.WRONG or state == State.ELIMINATED:
 		_touch_press_index = -1
+		if _lift_tween != null and _lift_tween.is_valid():
+			_lift_tween.kill()
+		_set_lift(0.0)
 	_apply_styling()
 	vector_state_icon.queue_redraw()
 
@@ -187,6 +235,7 @@ func celebrate(strength: float = 1.0, calm: bool = false, pitch: float = 1.0) ->
 	_stop_verdict()
 	if calm:
 		return
+	_energize_bus()
 	var land := 0.1 / maxf(pitch, 0.5)
 	_flash_style(Color(AppTheme.EMERALD_400, 0.35), AppTheme.SKY_300, int(14 + 6 * strength), Color(AppTheme.SKY_400, 0.45), 0.45)
 	pivot_offset = size / 2.0
@@ -216,6 +265,7 @@ func reject(calm: bool = false) -> void:
 	_stop_verdict()
 	if calm:
 		return
+	_energize_bus()
 	var muted_red := AppTheme.ROSE_400.lerp(AppTheme.SLATE_500, 0.35)
 	_flash_style(Color(muted_red, 0.4), AppTheme.RED_300, 16, Color(AppTheme.RED_400, 0.4), 0.4)
 	icon_progress = 0.0
@@ -255,18 +305,17 @@ func reveal_right(delay: float = 0.2, calm: bool = false) -> void:
 	icon.tween_property(self, "icon_heat", 0.0, 0.2)
 	_run_current(delay, 0.36, 0.55)
 
-## Current runs once around the border via the card shader (UiFx.add_shine).
-func _run_current(delay: float, duration: float, power: float) -> void:
-	var mat := material as ShaderMaterial
-	if mat == null:
+## The chosen card's bus bar charges up: an over-bright flash that settles.
+func _energize_bus() -> void:
+	if not chosen:
 		return
-	mat.set_shader_parameter("current_strength", power)
-	var tail := 0.22
-	mat.set_shader_parameter("current_tail", tail)
-	var tw := _verdict_tween()
-	tw.tween_interval(delay)
-	tw.tween_method(func(v: float): mat.set_shader_parameter("current_pos", v), 0.0, 1.0 + tail, duration)
-	tw.tween_callback(func(): mat.set_shader_parameter("current_pos", -1.0))
+	accent_bar.modulate = Color(2.2, 2.2, 2.2)
+	var tw := _verdict_tween().set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+	tw.tween_property(accent_bar, "modulate", Color.WHITE, 0.5)
+
+## Current runs once around the border via the surface shader (UiFx.add_glass).
+func _run_current(delay: float, duration: float, power: float) -> void:
+	_verdict_tweens.append(UiFx.run_current(self, delay, duration, power))
 
 func _verdict_tween() -> Tween:
 	var tw := create_tween()
@@ -282,6 +331,7 @@ func _stop_verdict() -> void:
 	scale = Vector2.ONE
 	modulate.a = 1.0
 	UiFx.slide_x(self, 0.0, 0.0)
+	accent_bar.modulate = Color.WHITE
 	icon_progress = 1.0
 	icon_heat = 0.0
 	icon_pad = 0.0
@@ -376,9 +426,8 @@ func set_speaking(on: bool) -> void:
 			style = style.duplicate()
 			style.bg_color = AppTheme.CARD_SPEAKING_BG
 			style.border_color = AppTheme.SKY_400
-			style.set_border_width_all(2)
-			style.shadow_color = Color(0.22, 0.74, 0.97, 0.35)
-			style.shadow_size = 12
+			style.set_border_width_all(AppTheme.BORDER_STRONG)
+			AppTheme.elevate(style, AppTheme.ELEVATION_CARD + 2, AppTheme.GLOW_CYAN)
 			add_theme_stylebox_override("panel", style)
 		
 		# Pill badge glows electric cyan
@@ -406,6 +455,7 @@ func set_eliminated() -> void:
 	is_disabled = true
 	current_state = State.ELIMINATED
 	_touch_press_index = -1
+	_lift_to(0.0)
 	mouse_default_cursor_shape = Control.CURSOR_ARROW
 	var tween: Tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	tween.tween_property(self, "modulate:a", 0.38, 0.22)
@@ -485,121 +535,96 @@ static func _partial_stroke(pts: PackedVector2Array, t: float) -> PackedVector2A
 			break
 	return out
 
+## One StyleBox per state. Every state keeps the same content margins, so a
+## state change (thicker border, glow) never changes the card's size.
 func _apply_styling() -> void:
 	pivot_offset = size / 2.0
 	var style := StyleBoxFlat.new()
-	style.set_corner_radius_all(14)
-	style.content_margin_left = 12
-	style.content_margin_right = 12
-	style.content_margin_top = 6
-	style.content_margin_bottom = 6
+	style.set_corner_radius_all(AppTheme.RADIUS)
+	AppTheme.pad(style, AppTheme.SPACE_MD, AppTheme.SPACE_XS + 2)
 
 	var pill_style: StyleBoxFlat = letter_panel.get_theme_stylebox("panel")
-	if not pill_style:
-		pill_style = StyleBoxFlat.new()
-		pill_style.set_corner_radius_all(9)
-		letter_panel.add_theme_stylebox_override("panel", pill_style)
+	var bus := chosen and current_state in [State.CORRECT, State.WRONG]
+	accent_bar.scale.x = 1.0 if bus else float(AppTheme.ACCENT_BAR_W) / float(AppTheme.BUS_BAR_W)
+	accent_bar.size_flags_vertical = Control.SIZE_FILL if bus else Control.SIZE_SHRINK_CENTER
 
-	# Clean, professional exam styling for choices:
-	# Keep all cards in a uniform, crisp state so choices C & D don't look pre-answered as green/red.
-	var card_accent := AppTheme.SKY_400 # Clean cyan highlight on hover/focus
-
+	# Unanswered cards all share one neutral look, so no choice looks
+	# pre-answered green or red.
 	match current_state:
 		State.CORRECT:
-			style.bg_color = AppTheme.CARD_CORRECT_BG
-			style.border_color = AppTheme.EMERALD_500
-			style.set_border_width_all(2)
-			style.shadow_color = Color(0.06, 0.72, 0.5, 0.25)
-			style.shadow_size = 10
-			accent_bar.color = AppTheme.EMERALD_400
+			_state_style(style, AppTheme.CARD_CORRECT_BG, AppTheme.EMERALD_500, AppTheme.BORDER_STRONG, AppTheme.ELEVATION_CARD, AppTheme.GLOW_EMERALD)
+			accent_bar.color = AppTheme.EMERALD_300 if bus else AppTheme.EMERALD_400
 			pill_style.bg_color = AppTheme.EMERALD_500
-			pill_style.border_color = AppTheme.EMERALD_400
+			pill_style.border_color = AppTheme.EMERALD_300
 			letter_label.add_theme_color_override("font_color", AppTheme.CARD_CORRECT_INK)
 			answer_label.add_theme_color_override("font_color", AppTheme.GREEN_50)
 		State.WRONG:
-			style.bg_color = AppTheme.CARD_WRONG_BG
-			style.border_color = AppTheme.RED_500
-			style.set_border_width_all(2)
-			style.shadow_color = Color(0.95, 0.24, 0.36, 0.25)
-			style.shadow_size = 10
+			_state_style(style, AppTheme.CARD_WRONG_BG, AppTheme.RED_500, AppTheme.BORDER_STRONG, AppTheme.ELEVATION_CARD, AppTheme.GLOW_RED)
 			accent_bar.color = AppTheme.ROSE_400
 			pill_style.bg_color = AppTheme.RED_500
 			pill_style.border_color = AppTheme.RED_300
 			letter_label.add_theme_color_override("font_color", AppTheme.CARD_WRONG_INK)
 			answer_label.add_theme_color_override("font_color", AppTheme.ROSE_50)
 		State.ELIMINATED:
-			style.bg_color = AppTheme.CARD_ELIMINATED_BG
-			style.border_color = AppTheme.CARD_ELIMINATED_BORDER
-			style.set_border_width_all(1)
-			style.shadow_size = 0
-			accent_bar.color = Color(0.3, 0.35, 0.45, 0.2)
+			_state_style(style, AppTheme.CARD_ELIMINATED_BG, AppTheme.CARD_ELIMINATED_BORDER, AppTheme.BORDER_HAIRLINE, AppTheme.ELEVATION_FLAT)
+			accent_bar.color = Color(AppTheme.SLATE_500, 0.2)
 			pill_style.bg_color = AppTheme.GRAY_900
 			pill_style.border_color = AppTheme.CARD_ELIMINATED_PILL_BORDER
 			letter_label.add_theme_color_override("font_color", AppTheme.SLATE_600)
 			answer_label.add_theme_color_override("font_color", AppTheme.SLATE_500)
 		State.HOVER:
-			style.bg_color = AppTheme.CARD_HOVER_BG
-			style.border_color = AppTheme.SKY_400
-			style.set_border_width_all(2)
-			style.shadow_color = Color(0, 0, 0, 0.45)
-			style.shadow_size = 8
-			accent_bar.color = AppTheme.SKY_400
-			pill_style.bg_color = AppTheme.SKY_600
-			pill_style.border_color = AppTheme.SKY_400
+			_state_style(style, AppTheme.CARD_HOVER_BG, AppTheme.SKY_300, AppTheme.BORDER_STRONG, AppTheme.ELEVATION_CARD, AppTheme.GLOW_CYAN)
+			accent_bar.color = AppTheme.SKY_300
+			pill_style.bg_color = AppTheme.SKY_700
+			pill_style.border_color = AppTheme.SKY_300
 			letter_label.add_theme_color_override("font_color", AppTheme.WHITE)
 			answer_label.add_theme_color_override("font_color", AppTheme.WHITE)
 		State.PRESSED:
-			style.bg_color = AppTheme.CARD_PRESSED_BG
-			style.border_color = AppTheme.SKY_500
-			style.set_border_width_all(2)
-			style.shadow_color = Color(0, 0, 0, 0.3)
-			style.shadow_size = 4
+			_state_style(style, AppTheme.CARD_PRESSED_BG, AppTheme.SKY_500, AppTheme.BORDER_STRONG, AppTheme.ELEVATION_REST, AppTheme.GLOW_CYAN_SOFT)
 			accent_bar.color = AppTheme.SKY_500
-			pill_style.bg_color = AppTheme.SKY_700
-			pill_style.border_color = AppTheme.SKY_500
+			pill_style.bg_color = AppTheme.SKY_800
+			pill_style.border_color = AppTheme.SKY_400
 			letter_label.add_theme_color_override("font_color", AppTheme.WHITE)
 			answer_label.add_theme_color_override("font_color", AppTheme.WHITE)
 		_: # NORMAL
-			style.bg_color = AppTheme.BUTTON_BG
-			style.border_color = AppTheme.BUTTON_BORDER
-			style.set_border_width_all(1)
-			style.shadow_color = Color(0, 0, 0, 0.35)
-			style.shadow_size = 6
+			_state_style(style, AppTheme.SURFACE_BOTTOM, AppTheme.BUTTON_BORDER, AppTheme.BORDER_HAIRLINE, AppTheme.ELEVATION_REST)
 			accent_bar.color = AppTheme.SKY_400
-			pill_style.bg_color = AppTheme.SLATE_800
-			pill_style.border_color = AppTheme.SLATE_600
+			pill_style.bg_color = AppTheme.LUG_BG
+			pill_style.border_color = AppTheme.LUG_RIM
 			letter_label.add_theme_color_override("font_color", AppTheme.WHITE)
 			answer_label.add_theme_color_override("font_color", AppTheme.WHITE)
 
 	add_theme_stylebox_override("panel", style)
 
+static func _state_style(style: StyleBoxFlat, fill: Color, border: Color, width: int, elevation: int, glow: Color = Color.TRANSPARENT) -> void:
+	style.bg_color = fill
+	style.border_color = border
+	style.set_border_width_all(width)
+	AppTheme.elevate(style, elevation, glow)
+
 func _on_mouse_entered() -> void:
 	if is_disabled or current_state in [State.CORRECT, State.WRONG, State.ELIMINATED]:
 		return
 	set_state(State.HOVER)
-	var tween: Tween = create_tween()
-	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "scale", Vector2(1.016, 1.016), 0.12)
-	UiFx.slide_x(self, 4.0)
+	_lift_to(-AppTheme.LIFT_PX)
 
 func _on_mouse_exited() -> void:
 	if is_disabled or current_state in [State.CORRECT, State.WRONG, State.ELIMINATED]:
 		return
 	set_state(State.NORMAL)
-	var tween: Tween = create_tween()
-	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "scale", Vector2.ONE, 0.12)
-	UiFx.slide_x(self, 0.0)
+	_lift_to(0.0)
 
 func _on_focus_entered() -> void:
 	if is_disabled or current_state in [State.CORRECT, State.WRONG, State.ELIMINATED]:
 		return
 	set_state(State.HOVER)
+	_lift_to(-AppTheme.LIFT_PX)
 
 func _on_focus_exited() -> void:
 	if is_disabled or current_state in [State.CORRECT, State.WRONG, State.ELIMINATED]:
 		return
 	set_state(State.NORMAL)
+	_lift_to(0.0)
 
 func _touch_release_counts(release_pos: Vector2) -> bool:
 	if _touch_press_pos.distance_to(release_pos) > TOUCH_SLOP_PX:
@@ -615,6 +640,7 @@ func _on_gui_input(event: InputEvent) -> void:
 				_touch_press_index = event.index
 				_touch_press_pos = event.position
 				set_state(State.PRESSED)
+				_pulse_lug()
 				var tween: Tween = create_tween()
 				tween.tween_property(self, "scale", Vector2(0.985, 0.985), 0.05)
 		elif event.index == _touch_press_index:
@@ -650,6 +676,7 @@ func _on_gui_input(event: InputEvent) -> void:
 			if _touch_press_index < 0:
 				_mouse_press_pos = event.position
 			set_state(State.PRESSED)
+			_pulse_lug()
 			var tween: Tween = create_tween()
 			tween.tween_property(self, "scale", Vector2(0.985, 0.985), 0.05)
 		else:

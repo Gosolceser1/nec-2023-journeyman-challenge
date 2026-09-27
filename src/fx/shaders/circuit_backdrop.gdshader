@@ -2,6 +2,8 @@ shader_type canvas_item;
 
 // Faint circuit-board traces with current pulses running along some of them.
 // rect_size must track the node's size (canvas units) so cells stay square.
+// drift slides the whole board (px per second) for a slow parallax behind
+// the panels; motion 0 (Reduce motion) freezes both the drift and the pulses.
 uniform vec2 rect_size = vec2(540.0, 960.0);
 uniform float cell = 46.0;
 uniform vec4 trace_color : source_color = vec4(0.22, 0.74, 0.97, 0.06);
@@ -9,6 +11,8 @@ uniform vec4 pad_color : source_color = vec4(0.22, 0.74, 0.97, 0.10);
 uniform vec4 pulse_color : source_color = vec4(0.49, 0.83, 0.99, 0.55);
 uniform float speed = 0.12;
 uniform float intensity : hint_range(0.0, 1.0) = 1.0;
+uniform vec2 drift = vec2(0.0);
+uniform float motion : hint_range(0.0, 1.0) = 1.0;
 
 float hash(vec2 p) {
 	return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
@@ -20,7 +24,7 @@ float line_mask(float d, float half_w) {
 
 // Pulse head moving along 0..1 with a fading tail behind it.
 float pulse_at(float pos, float seed) {
-	float t = fract(TIME * speed * (0.6 + seed) + seed * 7.0);
+	float t = fract(TIME * motion * speed * (0.6 + seed) + seed * 7.0);
 	float behind = t - pos;
 	if (behind < 0.0) {
 		behind += 1.0;
@@ -29,7 +33,7 @@ float pulse_at(float pos, float seed) {
 }
 
 void fragment() {
-	vec2 px = UV * rect_size;
+	vec2 px = UV * rect_size + TIME * motion * drift;
 	vec2 id = floor(px / cell);
 	vec2 local = px - id * cell;
 	float h_row = hash(id);
@@ -45,7 +49,7 @@ void fragment() {
 		trace = max(trace, m);
 		float seed = hash(vec2(id.y, 3.7));
 		if (seed > 0.55) {
-			pulse = max(pulse, m * pulse_at(px.x / rect_size.x, seed));
+			pulse = max(pulse, m * pulse_at(fract(px.x / rect_size.x), seed));
 		}
 	}
 	if (has_v) {
@@ -53,7 +57,7 @@ void fragment() {
 		trace = max(trace, m);
 		float seed = hash(vec2(id.x, 9.2));
 		if (seed > 0.7) {
-			pulse = max(pulse, m * pulse_at(px.y / rect_size.y, seed));
+			pulse = max(pulse, m * pulse_at(fract(px.y / rect_size.y), seed));
 		}
 	}
 

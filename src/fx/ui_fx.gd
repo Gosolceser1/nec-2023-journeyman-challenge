@@ -7,7 +7,7 @@ extends RefCounted
 
 const CIRCUIT_SHADER := preload("res://src/fx/shaders/circuit_backdrop.gdshader")
 const TITLE_SHADER := preload("res://src/fx/shaders/electric_title.gdshader")
-const SHINE_SHADER := preload("res://src/fx/shaders/card_shine.gdshader")
+const SURFACE_SHADER := preload("res://src/fx/shaders/surface.gdshader")
 
 const CYAN := AppTheme.SKY_400
 const EMERALD := AppTheme.EMERALD_400
@@ -18,18 +18,122 @@ const AMBER := AppTheme.AMBER_400
 ## headless harness answering hundreds of items without frames) can't pile up.
 const MAX_LIVE_BURSTS := 8
 
+## The circuit board sits well behind the panels: 40% of its old strength,
+## pulses at half speed, and a slow drift (px/s) that differs between the
+## quiz and the menu so screen changes read as parallax.
+const BACKDROP_INTENSITY := 0.4
+const BACKDROP_PULSE_SPEED := 0.06
+const BACKDROP_DRIFT_QUIZ := Vector2(2.4, 1.2)
+const BACKDROP_DRIFT_MENU := Vector2(-1.6, 2.2)
+## Nodes whose motion follows the Reduce-motion setting (apply_reduce_motion).
+const MOTION_GROUP := &"ui_motion"
+## Mirrors the setting for decoration that has no host to ask (hover shine,
+## card lift, ring sweeps).
+static var reduce_motion := false
 
-static func make_circuit_backdrop(intensity: float = 1.0) -> ColorRect:
+
+static func make_circuit_backdrop(drift: Vector2 = BACKDROP_DRIFT_QUIZ) -> ColorRect:
 	var rect := ColorRect.new()
 	rect.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	rect.color = Color.WHITE
 	var mat := ShaderMaterial.new()
 	mat.shader = CIRCUIT_SHADER
-	mat.set_shader_parameter("intensity", intensity)
+	mat.set_shader_parameter("intensity", BACKDROP_INTENSITY)
+	mat.set_shader_parameter("speed", BACKDROP_PULSE_SPEED)
+	mat.set_shader_parameter("drift", drift)
 	rect.material = mat
 	rect.resized.connect(func(): mat.set_shader_parameter("rect_size", rect.size))
+	rect.add_to_group(MOTION_GROUP)
 	return rect
+
+
+## Reduce motion: freezes the backdrop drift and pulses, the official card's
+## border flow and the timer rings' light sweep. Each node in MOTION_GROUP
+## either has set_motion(on) or a ShaderMaterial with a "motion" or
+## "flow_strength" parameter.
+static func apply_reduce_motion(tree: SceneTree, calm: bool) -> void:
+	reduce_motion = calm
+	for node in tree.get_nodes_in_group(MOTION_GROUP):
+		if node.has_method("set_motion"):
+			node.set_motion(not calm)
+			continue
+		var mat := (node as CanvasItem).material as ShaderMaterial
+		if mat == null:
+			continue
+		if mat.shader == CIRCUIT_SHADER:
+			mat.set_shader_parameter("motion", 0.0 if calm else 1.0)
+		elif node.has_meta("flow_strength"):
+			mat.set_shader_parameter("flow_strength", 0.0 if calm else float(node.get_meta("flow_strength")))
+
+
+## The surface material of a control, created on first use. Glass, shine,
+## current and flow are all parameters of this one material.
+static func surface_material(ctrl: Control, radius: int = AppTheme.RADIUS) -> ShaderMaterial:
+	var mat := ctrl.material as ShaderMaterial
+	if mat != null and mat.shader == SURFACE_SHADER:
+		return mat
+	mat = ShaderMaterial.new()
+	mat.shader = SURFACE_SHADER
+	mat.set_shader_parameter("corner_radius", float(radius))
+	ctrl.material = mat
+	ctrl.resized.connect(func(): mat.set_shader_parameter("rect_size", ctrl.size))
+	return mat
+
+
+## Glass look on a control whose StyleBox fill is pair[1]: the top edge is
+## lifted to pair[0] (vertical gradient) with a 1 px highlight under it.
+static func add_glass(ctrl: Control, pair: Array = AppTheme.GRAD_SURFACE, radius: int = AppTheme.RADIUS, bevel: float = AppTheme.BEVEL) -> ShaderMaterial:
+	var mat := surface_material(ctrl, radius)
+	var top: Color = pair[0]
+	var bottom: Color = pair[1]
+	mat.set_shader_parameter("fill_lift", Vector3(top.r - bottom.r, top.g - bottom.g, top.b - bottom.b))
+	mat.set_shader_parameter("bevel", bevel)
+	return mat
+
+
+## Left -> right gradient from the StyleBox fill toward pair[1] (primary
+## button, official card). The label is not tinted.
+static func add_tint(ctrl: Control, pair: Array, amount: float = 1.0) -> void:
+	var mat := surface_material(ctrl)
+	mat.set_shader_parameter("tint_to", pair[1])
+	mat.set_shader_parameter("tint_amount", amount)
+
+
+## One pulse of current around the border of a control with a surface
+## material: after `delay`, the head runs the full outline in `duration`.
+static func run_current(ctrl: Control, delay: float, duration: float, power: float, tail: float = 0.22) -> Tween:
+	var mat := surface_material(ctrl)
+	mat.set_shader_parameter("current_strength", power)
+	mat.set_shader_parameter("current_tail", tail)
+	var tw := ctrl.create_tween()
+	tw.tween_interval(delay)
+	tw.tween_method(func(v: float): mat.set_shader_parameter("current_pos", v), 0.0, 1.0 + tail, duration)
+	tw.tween_callback(func(): mat.set_shader_parameter("current_pos", -1.0))
+	return tw
+
+
+## Slow endless light on the border; Reduce motion stops it.
+static func add_border_flow(ctrl: Control, color: Color, strength: float = 0.8) -> void:
+	var mat := surface_material(ctrl)
+	mat.set_shader_parameter("flow_color", color)
+	mat.set_shader_parameter("flow_strength", strength)
+	ctrl.set_meta("flow_strength", strength)
+	ctrl.add_to_group(MOTION_GROUP)
+
+
+## Screen entrance: fade in over MOTION_SCREEN and slide MOTION_SLIDE_PX into
+## place along x. Only for controls resting at x = 0 (a container child
+## flush left, or an anchored full-rect node): the slide ends at 0.
+## calm (Reduce motion): the fade only.
+static func screen_enter(ctrl: Control, calm: bool, delay: float = 0.0) -> Tween:
+	ctrl.modulate.a = 0.0
+	ctrl.position.x = 0.0 if calm else AppTheme.MOTION_SLIDE_PX
+	var tw := ctrl.create_tween().set_parallel().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tw.tween_property(ctrl, "modulate:a", 1.0, AppTheme.MOTION_SCREEN).set_delay(delay)
+	if not calm:
+		tw.tween_property(ctrl, "position:x", 0.0, AppTheme.MOTION_SCREEN).set_delay(delay)
+	return tw
 
 
 static func make_fx_layer() -> Control:
@@ -244,16 +348,13 @@ static func electrify_title(label: Label) -> void:
 
 
 static func add_shine(ctrl: Control) -> void:
-	var mat := ShaderMaterial.new()
-	mat.shader = SHINE_SHADER
-	ctrl.material = mat
-	ctrl.resized.connect(func(): mat.set_shader_parameter("rect_size", ctrl.size))
+	surface_material(ctrl)
 	ctrl.mouse_entered.connect(func(): shine_sweep(ctrl))
 
 
 static func shine_sweep(ctrl: Control, duration: float = 0.6, delay: float = 0.0) -> void:
 	var mat := ctrl.material as ShaderMaterial
-	if mat == null:
+	if mat == null or reduce_motion:
 		return
 	var tw := ctrl.create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	if delay > 0.0:

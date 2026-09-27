@@ -94,6 +94,7 @@ var timer_bar: ProgressBar
 var answers_box: VBoxContainer
 var feedback_panel: PanelContainer
 var feedback_title: Label
+var feedback_icon: TextureRect
 var feedback_body: Label
 var feedback_reference: Label
 var feedback_table_scroll: ScrollContainer
@@ -168,6 +169,9 @@ var _menu_separation := -1
 var menu_mode_buttons: Array[Button] = []
 ## The weakest-area drill; its subtitle shows the area and the readiness.
 var study_button: Button
+## Menu hero (Widgets.add_menu_hero): readiness dial and weakest-area chip.
+var readiness_ring: ReadinessRing
+var weakest_chip: Button
 
 # Study audio (menu "Audio & Voice" section + compact quiz dock controls)
 var audio := AudioSettings.new()
@@ -216,7 +220,7 @@ var skip_button: Button
 var info_panel := InfoPanelRenderer.new()
 var _question_stem_glow_style: StyleBoxFlat = null  # cached glow style for question panel
 var fx_layer: Control
-var streak_meter: StreakMeter
+var progress_segments: ProgressSegments
 var exam_gauge: TimeGauge
 var pace_gauge: TimeGauge
 var results_visual: BoxContainer
@@ -254,6 +258,7 @@ func _ready() -> void:
 	info_panel.label = info_label
 	speech._warm_speech_helper()
 	QuizFx.attach(self)
+	UiFx.apply_reduce_motion(get_tree(), audio.reduce_motion)
 	_polish_controls()
 	_apply_touch_filters()
 	_apply_safe_area()
@@ -285,20 +290,12 @@ func _ready() -> void:
 	else:
 		_show_menu()
 
-## Shared state styling for both layouts, applied after the builder ran:
-## several buttons only had normal/hover boxes and flashed the stock grey
-## theme when pressed or focused.
+## Shared behaviour for both layouts, applied after the builder ran. The dock
+## buttons are ghost buttons and Next the primary one (AppTheme), so every
+## state already has a style; this adds the focus handling and the key hint.
 func _polish_controls() -> void:
-	var ring := AppTheme.focus_ring(9)
-	for b in [read_button, restart_button]:
-		if is_instance_valid(b):
-			b.add_theme_stylebox_override("pressed", AppTheme.panel_style(AppTheme.BUTTON_PRESSED_BG, AppTheme.SKY_600, 1, 9))
-			b.add_theme_stylebox_override("focus", ring)
-			b.add_theme_color_override("font_hover_color", AppTheme.WHITE)
-			b.add_theme_color_override("font_pressed_color", AppTheme.SKY_300)
-	for b in [mute_button, pause_button, skip_button, preview_button]:
-		if is_instance_valid(b):
-			b.add_theme_stylebox_override("focus", ring)
+	if is_instance_valid(preview_button):
+		preview_button.add_theme_stylebox_override("focus", AppTheme.focus_ring(AppTheme.RADIUS_INNER))
 	# A mouse click must not leave a dock button holding keyboard focus, or the
 	# next Enter/Space presses it instead of running the quiz shortcut.
 	# Keyboard activation keeps focus so Tab navigation still works; releasing on
@@ -310,11 +307,6 @@ func _polish_controls() -> void:
 			b.pressed.connect(func() -> void:
 				if b.get_meta("pointer_press", false):
 					b.release_focus.call_deferred())
-	if is_instance_valid(next_button):
-		next_button.add_theme_stylebox_override("focus", AppTheme.focus_ring(10))
-		next_button.add_theme_stylebox_override("disabled", AppTheme.panel_style(AppTheme.SLATE_800, AppTheme.SLATE_700, 1, 10))
-		next_button.add_theme_color_override("font_hover_color", AppTheme.WHITE)
-		next_button.add_theme_color_override("font_pressed_color", AppTheme.SKY_100)
 	if not ui_mobile and is_instance_valid(restart_button):
 		key_hint_label = Label.new()
 		key_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -322,8 +314,8 @@ func _polish_controls() -> void:
 		key_hint_label.size_flags_stretch_ratio = 0.7
 		key_hint_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		key_hint_label.clip_text = true
-		key_hint_label.add_theme_font_override("font", AppTheme.ui_font(600))
-		key_hint_label.add_theme_font_size_override("font_size", 11)
+		key_hint_label.add_theme_font_override("font", AppTheme.meta_font(AppTheme.WEIGHT_SEMIBOLD))
+		key_hint_label.add_theme_font_size_override("font_size", AppTheme.TYPE_MICRO)
 		key_hint_label.add_theme_color_override("font_color", AppTheme.SLATE_400)
 		var dock_row := restart_button.get_parent()
 		dock_row.add_child(key_hint_label)
@@ -363,10 +355,7 @@ func _make_feedback_detail(column: VBoxContainer) -> VBoxContainer:
 	return detail
 
 func _question_panel_style() -> StyleBoxFlat:
-	var style := AppTheme.panel_style(AppTheme.SURFACE_DEEP, AppTheme.SLATE_800, 1, 14)
-	style.shadow_color = Color(0.22, 0.74, 0.97, 0.09)
-	style.shadow_size = 16
-	return style
+	return AppTheme.surface(AppTheme.SURFACE_BOTTOM, AppTheme.HAIRLINE_BRIGHT, AppTheme.ELEVATION_CARD)
 
 func _apply_safe_area() -> void:
 	var vp_size: Vector2 = get_viewport().get_visible_rect().size
@@ -415,7 +404,7 @@ func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION
 	if _start_tween != null and _start_tween.is_valid():
 		_start_tween.kill()
 	_start_tween = create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	_start_tween.tween_property(menu_overlay, "modulate:a", 0.0, 0.15)
+	_start_tween.tween_property(menu_overlay, "modulate:a", 0.0, AppTheme.MOTION_SCREEN)
 	_start_tween.tween_callback(func():
 		menu_overlay.visible = false
 		_show_question()
@@ -458,6 +447,7 @@ func _on_reduce_motion_toggled(on: bool) -> void:
 	audio.reduce_motion = on
 	audio.reduce_motion_picked = true
 	audio.save_to(audio_cfg_path)
+	UiFx.apply_reduce_motion(get_tree(), on)
 	AudioSection.refresh(self)
 
 ## level -1 = Off; otherwise an index into AudioSettings.SFX_LEVEL_TITLES.
@@ -497,10 +487,14 @@ func _refresh_dock_audio() -> void:
 	mute_button.text = "Voice off · Turn on" if session_muted else "Mute"
 	mute_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL if session_muted and ui_mobile else Control.SIZE_FILL
 	mute_button.add_theme_color_override("font_color", AppTheme.SLATE_400 if session_muted else AppTheme.SLATE_300)
+	if mute_button.icon != null:
+		mute_button.icon = Icons.texture("speaker_off" if session_muted else "speaker", mute_button.icon.get_width())
 	read_button.visible = not listening and not session_muted
 	pause_button.visible = listening
 	skip_button.visible = listening
 	pause_button.text = "Resume" if listen_paused else "Pause"
+	if pause_button.icon != null:
+		pause_button.icon = Icons.texture("play" if listen_paused else "pause", pause_button.icon.get_width())
 	pause_button.add_theme_color_override("font_color", AppTheme.EMERALD_300 if listen_paused else AppTheme.SLATE_300)
 
 func _toggle_session_mute() -> void:
@@ -666,6 +660,13 @@ func _refresh_study_button() -> void:
 	var base := str(study_button.get_meta("base_text", ""))
 	study_button.set_meta("base_text", base.get_slice("\n", 0) + "\n" + _study_button_subtitle())
 	study_button.text = str(study_button.get_meta("base_text"))
+	if records.is_empty():
+		return
+	var mastery := session.deck.mastery(records)
+	if is_instance_valid(readiness_ring):
+		readiness_ring.set_value(QuestionDeck.readiness(mastery))
+	if is_instance_valid(weakest_chip):
+		weakest_chip.text = "Weakest: " + ExamBlueprint.title(QuestionDeck.weakest_area(mastery, records))
 
 ## Tightens the menu's row spacing just enough that the whole menu fits the
 ## screen without scrolling, down to 4 px; a roomy screen keeps the layout's
@@ -710,23 +711,27 @@ func _show_menu() -> void:
 			main_margin.focus_behavior_recursive = Control.FOCUS_BEHAVIOR_DISABLED
 		if not ui_mobile and not menu_mode_buttons.is_empty():
 			menu_mode_buttons[0].grab_focus.call_deferred()
-		menu_overlay.modulate.a = 0.0
-		var ov_tw := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-		ov_tw.tween_property(menu_overlay, "modulate:a", 1.0, 0.2)
-
-		if menu_panel:
-			menu_panel.pivot_offset = menu_panel.size / 2.0
-			menu_panel.scale = Vector2(0.96, 0.96)
-			var p_tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-			p_tw.tween_property(menu_panel, "scale", Vector2.ONE, 0.24)
+		UiFx.screen_enter(menu_overlay, audio.reduce_motion)
 
 		# Staggered entrance for mode buttons
 		for i in menu_mode_buttons.size():
 			var btn := menu_mode_buttons[i]
 			if is_instance_valid(btn):
+				var badge := btn.get_node_or_null("ModeBadge") as ModeBadge
+				if badge != null:
+					badge.charge = 0.0
+				# A second _show_menu restarts the entrance rather than racing it,
+				# and the scale grows from the centre: every card ends at rest in
+				# its column slot.
+				if btn.has_meta("entrance_tween"):
+					var prev := btn.get_meta("entrance_tween") as Tween
+					if prev != null and prev.is_valid():
+						prev.kill()
+				btn.pivot_offset = btn.size * 0.5
 				btn.modulate.a = 0.0
 				btn.scale = Vector2(0.97, 0.97)
-				var b_tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+				var b_tw := btn.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+				btn.set_meta("entrance_tween", b_tw)
 				b_tw.tween_interval(0.04 * float(i))
 				b_tw.tween_property(btn, "modulate:a", 1.0, 0.18)
 				b_tw.parallel().tween_property(btn, "scale", Vector2.ONE, 0.22)
@@ -770,17 +775,13 @@ func _show_question() -> void:
 	speech._stop_reading()
 	speech._prefetch_speech()
 	question_label.text = str(record.get("prompt", "Question unavailable"))
-	question_panel.modulate.a = 0.0
-	question_panel.position.x = 28.0
+	UiFx.screen_enter(question_panel, audio.reduce_motion)
 	# A new question always opens at the top: the verdict glide on a phone may
 	# still be running, and the page may have been scrolled on the last one.
 	if _verdict_scroll_tween != null and _verdict_scroll_tween.is_valid():
 		_verdict_scroll_tween.kill()
 	if is_instance_valid(quiz_scroll_box):
 		quiz_scroll_box.scroll_vertical = 0
-	var q_tw := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	q_tw.parallel().tween_property(question_panel, "modulate:a", 1.0, 0.28)
-	q_tw.parallel().tween_property(question_panel, "position:x", 0.0, 0.32)
 	var correct_idx := int(record.get("correct_index", -1))
 	var answers: Array = record.get("answers", [])
 	var current_correct_text: String = str(answers[correct_idx]) if correct_idx >= 0 and correct_idx < answers.size() else ""
@@ -917,6 +918,7 @@ func _answer_selected(selected: int) -> void:
 	var cards := answers_box.get_children()
 	for i in cards.size():
 		var card = cards[i]
+		card.chosen = i == selected
 		if i == correct:
 			card.set_state(AnswerCard.State.CORRECT)
 		elif i == selected:
@@ -927,24 +929,20 @@ func _answer_selected(selected: int) -> void:
 	match result["verdict"]:
 		QuizSession.Verdict.REVIEWED:
 			# Listen mode reviews, it does not test: no score, streak or missed list.
-			feedback_title.text = "Answer"
-			feedback_title.add_theme_color_override("font_color", AppTheme.SKY_400)
+			_set_feedback_verdict("Answer", AppTheme.SKY_400, "tip")
 			feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
 			feedback_body.visible = true
 		QuizSession.Verdict.TIMED_OUT:
-			feedback_title.text = "Time expired"
-			feedback_title.add_theme_color_override("font_color", AppTheme.RED_400)
+			_set_feedback_verdict("Time expired", AppTheme.RED_400, "clock")
 			feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
 			feedback_body.visible = true
 		QuizSession.Verdict.CORRECT:
-			feedback_title.text = "Correct"
+			_set_feedback_verdict("Correct", AppTheme.EMERALD_400, "check")
 			# The green card already shows the pick — a text echo of it is clutter.
 			feedback_body.text = ""
 			feedback_body.visible = false
-			feedback_title.add_theme_color_override("font_color", AppTheme.EMERALD_400)
 		QuizSession.Verdict.WRONG:
-			feedback_title.text = "Not quite"
-			feedback_title.add_theme_color_override("font_color", AppTheme.RED_400)
+			_set_feedback_verdict("Not quite", AppTheme.RED_400, "cross")
 			# One verdict line: your pick is already red on its card, no need to restate it.
 			feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
 			feedback_body.visible = true
@@ -1010,6 +1008,15 @@ func _answer_selected(selected: int) -> void:
 	QuizFx.play_answer(self, cards, correct, selected)
 
 
+func _set_feedback_verdict(title: String, color: Color, icon_name: String) -> void:
+	feedback_title.text = title
+	feedback_title.add_theme_color_override("font_color", color)
+	if is_instance_valid(feedback_icon):
+		feedback_icon.texture = Icons.texture(icon_name, int(feedback_icon.custom_minimum_size.y))
+		feedback_icon.modulate = color
+		feedback_icon.visible = true
+
+
 ## Phone: after answering, the green card and the feedback usually sit below
 ## the fold (a wrong pick near the top leaves only the red card in view).
 ## Glide so the correct card sits at the top of the viewport.
@@ -1034,13 +1041,14 @@ func _scroll_to_verdict(correct: int) -> void:
 	_verdict_scroll_tween.tween_property(scroll, "scroll_vertical", target, 0.35)
 
 func _update_score_badges() -> void:
-	if is_instance_valid(streak_meter):
-		streak_meter.set_streak(streak)
+	if is_instance_valid(progress_segments):
+		progress_segments.set_progress(ProgressSegments.outcomes_for(order.size(), current_index, current_answered,
+			missed_questions, AudioSettings.grades_answers(session_audio_mode)), streak)
 	if session_audio_mode == AudioSettings.Mode.LISTEN:
 		score_label.text = "LISTEN MODE"
 		score_label.add_theme_color_override("font_color", AppTheme.SKY_300)
 		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_BLUE_BG, AppTheme.SKY_600, 1, 8))
+			Widgets.tint_hud_segment(pass_badge, AppTheme.SKY_400)
 		streak_label.text = "%d / %d REVIEWED" % [answered_count, session_length]
 		streak_label.add_theme_color_override("font_color", AppTheme.SKY_300)
 		return
@@ -1048,7 +1056,7 @@ func _update_score_badges() -> void:
 		score_label.text = "TARGET: 75%"
 		score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
 		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_GREEN_BG, AppTheme.EMERALD_600, 1, 8))
+			Widgets.tint_hud_segment(pass_badge, AppTheme.EMERALD_400)
 		streak_label.text = "0 / %d ITEMS" % session_length
 		streak_label.add_theme_color_override("font_color", AppTheme.SKY_300)
 		return
@@ -1061,19 +1069,19 @@ func _update_score_badges() -> void:
 		score_label.text = "PASSING: " + str(pct_int) + "%"
 		score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
 		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_GREEN_BG, AppTheme.EMERALD_600, 1, 8))
+			Widgets.tint_hud_segment(pass_badge, AppTheme.EMERALD_400)
 		streak_label.add_theme_color_override("font_color", AppTheme.EMERALD_400)
 	elif pct >= 60.0:
 		score_label.text = "AT RISK: " + str(pct_int) + "%"
 		score_label.add_theme_color_override("font_color", AppTheme.YELLOW_300)
 		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_AMBER_BG, AppTheme.YELLOW_700, 1, 8))
+			Widgets.tint_hud_segment(pass_badge, AppTheme.AMBER_400)
 		streak_label.add_theme_color_override("font_color", AppTheme.YELLOW_300)
 	else:
 		score_label.text = "BELOW 75%: " + str(pct_int) + "%"
 		score_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
 		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_RED_BG, AppTheme.ROSE_800, 1, 8))
+			Widgets.tint_hud_segment(pass_badge, AppTheme.RED_400)
 		streak_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
 
 
@@ -1166,10 +1174,13 @@ func _set_question_stem_glow(on: bool) -> void:
 			_question_stem_glow_style = StyleBoxFlat.new()
 			_question_stem_glow_style.bg_color = AppTheme.STEM_GLOW_BG
 			_question_stem_glow_style.border_color = AppTheme.SKY_400
-			_question_stem_glow_style.set_border_width_all(3)
-			_question_stem_glow_style.set_corner_radius_all(14)
-			_question_stem_glow_style.shadow_color = Color(0.22, 0.74, 0.97, 0.65)
-			_question_stem_glow_style.shadow_size = 20
+			_question_stem_glow_style.set_border_width_all(AppTheme.BORDER_STRONG + 1)
+			# Same content box as the resting hairline style: the glow must not
+			# resize the panel mid-question.
+			AppTheme.pad(_question_stem_glow_style, AppTheme.BORDER_HAIRLINE, AppTheme.BORDER_HAIRLINE)
+			_question_stem_glow_style.set_corner_radius_all(AppTheme.RADIUS)
+			_question_stem_glow_style.shadow_color = Color(AppTheme.GLOW_CYAN, 0.65)
+			_question_stem_glow_style.shadow_size = AppTheme.ELEVATION_FLOAT + 2
 		question_panel.add_theme_stylebox_override("panel", _question_stem_glow_style)
 	else:
 		question_panel.add_theme_stylebox_override("panel", _question_panel_style())

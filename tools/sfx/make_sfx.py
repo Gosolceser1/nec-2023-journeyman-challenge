@@ -4,7 +4,8 @@
     python tools/sfx/make_sfx.py --family mallet   # ship another family instead
     python tools/sfx/make_sfx.py --preview         # also every family -> .audit_tmp/sfx_preview/v2/
 
-Five cues only: correct, wrong, pass, fail, warning. Each family plays the same
+Five cues: correct, wrong, pass, fail, warning. The sixth, start.wav, is a
+sourced recording (assets/sfx/CREDITS.md) and is never written here. Each family plays the same
 notes (C major) with a different instrument, so picking one is purely a timbre
 choice:
 

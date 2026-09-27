@@ -45,6 +45,7 @@ func _draw() -> void:
 		if fraction > 0.0:
 			var start := -PI * 0.5
 			var end := start + TAU * fraction
+			draw_arc(c, r, start, end, 48, Color(color, 0.22), 5.0, true)
 			draw_arc(c, r, start, end, 48, color, 2.5, true)
 			draw_circle(c + Vector2(cos(end), sin(end)) * r, 2.2, color.lightened(0.35))
 		if _pulse > 0.0:
@@ -58,4 +59,5 @@ func _draw() -> void:
 		draw_line(Vector2(x0, y), Vector2(x1, y), track_color, 2.0, true)
 		if fraction > 0.0:
 			var tip := x0 + (x1 - x0) * fraction
+			draw_line(Vector2(x0, y), Vector2(tip, y), Color(color, 0.2), 4.0, true)
 			draw_line(Vector2(x0, y), Vector2(tip, y), Color(color, 0.85 + 0.15 * _pulse), 2.0 + _pulse, true)

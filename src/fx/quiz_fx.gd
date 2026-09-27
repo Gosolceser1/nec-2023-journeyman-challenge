@@ -1,43 +1,49 @@
 class_name QuizFx
 extends RefCounted
-## Quiz-screen decoration: the fx layer, streak meter and countdown gauges
-## attached after the layout builders, and the answer feedback burst.
+## Quiz-screen decoration: the fx layer, segmented progress bar and countdown
+## gauges attached after the layout builders, and the answer feedback burst.
 
 ## Decoration shared by both layouts, attached after the builder ran so the two
-## builders stay separate: the fx layer for particles/flashes, the streak meter
-## beside the progress line, and the countdown gauges on the time badges.
+## builders stay separate: the fx layer for particles/flashes, the segmented
+## progress bar (desktop: beside the progress line; phone: a full-width row
+## under the header) and the countdown gauges on the HUD time cells.
 static func attach(host: Main) -> void:
 	host.fx_layer = UiFx.make_fx_layer()
 	host.add_child(host.fx_layer)
 
-	host.streak_meter = StreakMeter.new()
-	host.streak_meter.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	var progress_row := HBoxContainer.new()
-	progress_row.add_theme_constant_override("separation", 12)
+	host.progress_segments = ProgressSegments.new()
 	var progress_parent := host.progress_label.get_parent()
-	progress_parent.add_child(progress_row)
-	progress_parent.move_child(progress_row, host.progress_label.get_index())
-	host.progress_label.reparent(progress_row)
-	progress_row.add_child(host.streak_meter)
+	if host.ui_mobile:
+		var header := progress_parent.get_parent()
+		header.add_child(host.progress_segments)
+		header.move_child(host.progress_segments, progress_parent.get_index() + 1)
+	else:
+		var progress_row := HBoxContainer.new()
+		progress_row.add_theme_constant_override("separation", AppTheme.SPACE_MD)
+		progress_parent.add_child(progress_row)
+		progress_parent.move_child(progress_row, host.progress_label.get_index())
+		host.progress_label.reparent(progress_row)
+		progress_row.add_child(host.progress_segments)
 
 	host.exam_gauge = attach_time_gauge(host, host.timer_label)
 	host.pace_gauge = attach_time_gauge(host, host.question_timer_label)
 
 
+## The label sits directly in its HUD cell (a PanelContainer). Phone: a thin
+## bar along the cell's bottom edge; desktop: a ring beside the time.
 static func attach_time_gauge(host: Main, label: Label) -> TimeGauge:
 	var gauge := TimeGauge.new()
-	var margin := label.get_parent()
+	var cell := label.get_parent()
 	if host.ui_mobile:
 		gauge.mode = TimeGauge.Mode.EDGE
-		var badge := margin.get_parent()
-		badge.add_child(gauge)
-		badge.move_child(gauge, 0)
+		cell.add_child(gauge)
+		cell.move_child(gauge, 0)
 		return gauge
 	gauge.custom_minimum_size = Vector2(18, 18)
 	gauge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 8)
-	margin.add_child(row)
+	row.add_theme_constant_override("separation", AppTheme.SPACE_SM)
+	cell.add_child(row)
 	label.reparent(row)
 	row.add_child(gauge)
 	row.move_child(gauge, 0)
@@ -104,7 +110,7 @@ static func play_answer(host: Main, cards: Array, correct: int, selected: int) -
 		(cards[selected] as AnswerCard).reject(calm)
 	if calm:
 		return
-	UiFx.pop(host.pass_badge, 1.06)
+	UiFx.pop(host.pass_badge, 1.04)
 	UiFx.pop(host.feedback_title, 1.06 if is_right else 1.03, 0.3, Vector2(0.0, 0.5))
 	UiFx.glow_pulse(host.feedback_panel, UiFx.CYAN if is_right else AppTheme.ROSE_400, 20 if is_right else 14, 0.55)
 

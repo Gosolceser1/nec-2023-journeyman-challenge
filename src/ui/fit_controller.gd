@@ -8,7 +8,7 @@ extends RefCounted
 ## Auto-fit steps for the unanswered screen, roomy -> dense. Answer text never
 ## goes below 15 px, the readable floor on a phone.
 const FIT_QUESTION_MOBILE := [23, 21, 19, 18]
-const FIT_QUESTION_DESKTOP := [21, 19, 18, 17]
+const FIT_QUESTION_DESKTOP := [22, 20, 18, 17]
 const FIT_ANSWER := [17, 16, 15, 15]
 const FIT_HINT_MOBILE := [15, 14, 14, 13]
 const FIT_HINT_DESKTOP := [14, 13, 13, 12]
@@ -92,7 +92,6 @@ func _fit_run(gen: int) -> void:
 		over = _quiz_overflow()
 	if over > 0.5 and host.question_diagram_panel.visible:
 		_shrink_diagram(over)
-
 func _shrink_diagram(over: float) -> void:
 	var cur := host.question_diagram_view.custom_minimum_size.y
 	host.question_diagram_view.max_height = maxf(FIT_DIAGRAM_MIN_H, cur - over)
@@ -152,11 +151,15 @@ func feedback_min_h() -> float:
 	return 150.0 if host.ui_mobile else 170.0
 
 ## Answered-state fit: a long stem can leave less than the sheet's preferred
-## height; let the sheet give way (it scrolls inside) before the page does.
+## height; let the sheet give way (it scrolls inside), then the type steps
+## down, before the page scrolls.
 func _fit_answered() -> void:
 	var over := _quiz_overflow()
 	if over > 0.5:
 		host.feedback_scroll.custom_minimum_size.y = maxf(84.0, host.feedback_scroll.custom_minimum_size.y - over)
+		over = _quiz_overflow()
+	while over > 0.5 and _fit_level < FIT_ANSWER.size() - 1:
+		apply_level(_fit_level + 1)
 		over = _quiz_overflow()
 	if over > 0.5 and host.question_diagram_panel.visible:
 		_shrink_diagram(over)
