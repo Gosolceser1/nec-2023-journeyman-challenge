@@ -43,9 +43,6 @@ that produced false results before. Fixed defects are in git history
   not caused by the restyle. Desktop at all six sizes and mobile at the other
   five finish with 0% scroll. A phone never gets a 1024x768 window with the
   mobile UI, but a tablet in landscape could.
-- **`start.wav` is a placeholder.** The session start sound ships as is and
-  will be replaced by the final recording; keep its name, length budget
-  (onset at `Widgets.START_CUE_ONSET`) and bus so `test_sfx` still holds.
 - **`NecReference.lookup_path` reads any 3-digit number as an NEC article.**
   An `article` of "NFPA 70E 130.5" would show "Chapter 1 ► Article 130"
   instead of the NFPA 70E line. The bank only uses the bare "NFPA 70E", which

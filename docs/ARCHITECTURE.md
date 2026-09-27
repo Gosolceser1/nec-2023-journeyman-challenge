@@ -136,6 +136,27 @@ The native TTS callbacks are registered as `Callable(self, "...")` on the
 controller. Signal targets that the golden layout test records are
 `main.speech._on_...`.
 
+### Sound effects
+
+`main.sfx` (Sfx, a child node with one pre-loaded player per sound on the
+`SFX` bus) plays everything through `main._sfx(id)`; docs/SFX_PLAN.md has the
+sounds and the rules. Event cues come from the flow: `Widgets.connect_session_start`
+(start), `QuizFx.play_answer` (correct / wrong), `ResultsView.land`
+(pass / fail), `_tick_timer` (warning). Interface sounds:
+
+- `main._wire_ui_sounds` walks every BaseButton once, after `_setup_sfx`:
+  toggle for toggle-mode buttons (chips, CheckButtons) and `mute_button`,
+  click for the rest, except session starts (`starts_session` meta), which
+  play the start cue alone; hover on `mouse_entered` for plain buttons on
+  the desktop layout. A button built later is not covered.
+- Answer cards are wired in `_show_question`: `focus_entered` plays select
+  when the last input was a key or controller (`main._input` sets
+  `_nav_input`). Nothing is added inside `answers_box`.
+- transition: `_start_quiz`, `ResultsView.show`, and `_show_menu` after the
+  first time.
+- `Sfx.play` queues interface sounds and `Sfx.flush_ui` plays one at the end
+  of the frame; an event cue in the same moment silences them.
+
 ### The two layouts
 
 Desktop and mobile have separate builders on purpose. They are about 90%
