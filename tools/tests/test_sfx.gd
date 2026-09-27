@@ -1,12 +1,17 @@
 extends SceneTree
-## Sfx: the five cues from docs/SFX_PLAN.md and the rules for when they play.
+## Sfx: the six cues from docs/SFX_PLAN.md and the rules for when they play.
 ## The promises: only the planned cues exist (no click/whoosh/tick creep), each
 ## ships as a short mono clip within its length budget, answers and results map
 ## to the right cue, the exam clock warns exactly twice, only the cue that can
 ## overlap the voice (the warning) is ducked, SFX live on their own bus, and a
 ## missing tree/asset is a no-op.
 
-const PLANNED := {"correct": 0.3, "wrong": 0.3, "warning": 0.8, "pass": 1.5, "fail": 1.5}
+const PLANNED := {"correct": 0.3, "wrong": 0.3, "warning": 0.8, "pass": 1.5, "fail": 1.5, "start": 0.6}
+## Auto-read waits this long after the question appears (main._schedule_auto_read),
+## and the question appears after the menu's MOTION_SCREEN fade: the start cue
+## must be over by then so the voice never lands on it.
+const AUTO_READ_DELAY := 0.45
+const MAX_TOTAL_KB := 450
 
 var failures: Array[String] = []
 var checks := 0
@@ -57,6 +62,7 @@ func _initialize() -> void:
 
 	print("=== assets ===")
 	var total_bytes := 0
+	var seconds := {}
 	for id in Sfx.SOUNDS:
 		var spec: Dictionary = Sfx.SOUNDS[id]
 		check(float(spec["db"]) <= 0.0 and float(spec["db"]) >= -12.0, "%s: trim is a small attenuation" % id)
@@ -69,15 +75,20 @@ func _initialize() -> void:
 		check(int(info.get("channels", 0)) == 1 and int(info.get("bits", 0)) == 16, "%s: mono 16-bit" % id)
 		check(int(info.get("rate", 0)) >= 44100, "%s: full-band sample rate" % id)
 		var secs := float(info.get("data", 0)) / (2.0 * float(maxi(1, int(info.get("rate", 1)))))
+		seconds[id] = secs
 		check(secs > 0.1 and secs <= float(PLANNED.get(id, 0.0)) + 0.001, "%s: %.2f s within its %.2f s budget" % [id, secs, float(PLANNED.get(id, 0.0))])
 		check(ResourceLoader.exists(Sfx.path_for(id)), "%s: imported" % id)
-	check(total_bytes < 400 * 1024, "all sfx under 400 KB (%d KB)" % (total_bytes / 1024))
+	check(total_bytes < MAX_TOTAL_KB * 1024, "all sfx under %d KB (%d KB)" % [MAX_TOTAL_KB, total_bytes / 1024])
 
 	print("=== answer and result cues ===")
 	check(Sfx.answer_sound(true, true) == "correct", "right -> correct")
 	check(Sfx.answer_sound(true, false) == "wrong", "wrong or timed out -> wrong")
 	check(Sfx.answer_sound(false, true) == "" and Sfx.answer_sound(false, false) == "", "Listen mode (ungraded) is silent")
 	check(Sfx.result_sound(true) == "pass" and Sfx.result_sound(false) == "fail", "results map to pass / fail")
+	check(Sfx.START == "start" and Sfx.SOUNDS.has(Sfx.START), "session start -> start")
+	var start_secs := float(seconds.get("start", PLANNED["start"]))
+	check(start_secs < AppTheme.MOTION_SCREEN + AUTO_READ_DELAY, "start cue (%.2f s) ends before auto-read can begin (%.2f s)" % [start_secs, AppTheme.MOTION_SCREEN + AUTO_READ_DELAY])
+	check(float(Sfx.SOUNDS["start"]["vary_db"]) == 0.0, "start plays as-is (once per session)")
 
 	print("=== streak pitch ===")
 	check(Sfx.streak_pitch(0) == 1.0 and Sfx.streak_pitch(2) == 1.0, "no step before 3 in a row")
@@ -102,7 +113,7 @@ func _initialize() -> void:
 	print("=== voice policy ===")
 	check(Sfx.voice_offset_db("correct", false) == 0.0, "no voice: full level")
 	check(is_equal_approx(Sfx.voice_offset_db("warning", true), Sfx.VOICE_DUCK_DB), "warning ducks under a system voice")
-	for id in ["correct", "wrong", "pass", "fail"]:
+	for id in ["correct", "wrong", "pass", "fail", "start"]:
 		check(not bool(Sfx.SOUNDS[id]["duck"]) and Sfx.voice_offset_db(id, true) == 0.0,
 			"%s plays right after the voice is stopped: never ducked" % id)
 	check(Sfx.VOICE_DUCK_DB <= -6.0 and Sfx.VOICE_DUCK_DB >= -10.0, "duck is audible but not a mute")

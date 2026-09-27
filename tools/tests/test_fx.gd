@@ -38,9 +38,13 @@ func _init() -> void:
 	check(ResultGauge.tint_for(74.9, 75.0) == Color("fbbf24"), "just below is amber")
 	check(ResultGauge.tint_for(59.0, 75.0) == Color("f87171"), "well below is red")
 
-	print("=== StreakMeter.segment_color ===")
-	check(StreakMeter.segment_color(0).is_equal_approx(Color("38bdf8")), "first segment cyan")
-	check(StreakMeter.segment_color(StreakMeter.SEGMENTS - 1).is_equal_approx(Color("fbbf24")), "last segment amber")
+	print("=== ProgressSegments.outcomes_for ===")
+	var O := ProgressSegments.Outcome
+	var missed := [{"index": 2}]
+	check(ProgressSegments.outcomes_for(4, 2, false, missed, true) == [O.RIGHT, O.WRONG, O.CURRENT, O.AHEAD], "right / missed / current / ahead")
+	check(ProgressSegments.outcomes_for(3, 2, true, [{"index": 3}], true) == [O.RIGHT, O.RIGHT, O.WRONG], "the answered current item shows its verdict")
+	check(ProgressSegments.outcomes_for(3, 1, true, [], false) == [O.REVIEWED, O.REVIEWED, O.AHEAD], "Listen mode marks answered items reviewed, never right/wrong")
+	check(ProgressSegments.outcome_color(O.RIGHT) == Color("34d399") and ProgressSegments.outcome_color(O.WRONG) == Color("f87171"), "green right, red missed")
 
 	print("=== bank sweep: article -> chapter bucket ===")
 	var bank = JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json"))

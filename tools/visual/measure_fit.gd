@@ -1,10 +1,12 @@
 extends SceneTree
 ## Does each record fit its viewport without scrolling, before and after answering?
-##   Godot --path . --script tools/visual/measure_fit.gd -- [--mobile-ui] --win=1280x720 --label=before
+##   Godot --path . --script tools/visual/measure_fit.gd -- [--mobile-ui] [--shuffle] --win=1280x720 --label=before
+## --shuffle gives every record a seeded choice order, as a session would.
 
 var main: Node
 var label := "run"
 var win := Vector2i(540, 960)
+var shuffle := false
 
 func _frames(n: int) -> void:
 	for i in n:
@@ -27,6 +29,8 @@ func _initialize() -> void:
 		elif a.begins_with("--win="):
 			var p := a.trim_prefix("--win=").split("x")
 			win = Vector2i(int(p[0]), int(p[1]))
+		elif a == "--shuffle":
+			shuffle = true
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	DisplayServer.window_set_size(win)
 	main = load("res://scenes/main.tscn").instantiate()
@@ -37,10 +41,19 @@ func _initialize() -> void:
 	main._on_audio_mode_picked(AudioSettings.Mode.SILENT)
 	main._start_quiz(10, 1800, true, "10-Question Practice")
 	main.timer.stop()
+	# The menu fade ends in its own _show_question; measuring during it races
+	# that call's fit reset.
+	while main._start_tween != null and main._start_tween.is_running():
+		await process_frame
 	await _frames(4)
 	var scroll := _quiz_scroll()
 	var vp := root.get_viewport().get_visible_rect().size
 	var n: int = main.records.size()
+	if shuffle:
+		var rng := RandomNumberGenerator.new()
+		rng.seed = 2023
+		for i in n:
+			main.session.choice_orders[i] = ChoiceOrder.shuffled(main.records[i], rng)
 	var pre_bad := 0
 	var post_bad := 0
 	var kinds := {"table": [0, 0, 0], "diagram": [0, 0, 0], "formula": [0, 0, 0], "plain": [0, 0, 0]}
@@ -48,7 +61,7 @@ func _initialize() -> void:
 	var worst_post: Array = []
 	var post_sum := 0.0
 	for i in n:
-		var rec: Dictionary = main.records[i]
+		var rec: Dictionary = main.session.display_record(i)
 		main.order = [i, (i + 1) % n] as Array[int]
 		main.current_index = 0
 		main._show_question()

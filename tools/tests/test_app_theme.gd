@@ -16,14 +16,31 @@ func _init() -> void:
 	print("=== palette ===")
 	var consts: Dictionary = (AppTheme as Script).get_script_constant_map()
 	var seen := {}
+	var colours := 0
 	for name in consts:
 		var value = consts[name]
-		check(value is Color, "%s is a Color" % name)
 		if value is Color:
+			colours += 1
 			var key: String = (value as Color).to_html(true)
 			check(not seen.has(key), "%s duplicates %s (%s): one name per value" % [name, seen.get(key, ""), key])
 			seen[key] = name
-	check(consts.size() >= 100, "palette has every colour the screens use (%d)" % consts.size())
+		elif value is Array:
+			check(name.begins_with("GRAD_") and value.size() == 2 and value[0] is Color and value[1] is Color,
+					"%s: gradient tokens are GRAD_ [from, to] colour pairs" % name)
+		else:
+			check((value is int or value is float) and value >= 0, "%s: a design token is a colour, a colour pair or a non-negative number" % name)
+	check(colours >= 100, "palette has every colour the screens use (%d)" % colours)
+
+	print("=== tokens ===")
+	check(AppTheme.SPACE_XS < AppTheme.SPACE_SM and AppTheme.SPACE_SM < AppTheme.SPACE_MD \
+			and AppTheme.SPACE_MD < AppTheme.SPACE_LG and AppTheme.SPACE_LG < AppTheme.SPACE_XL, "spacing scale ascends")
+	check(AppTheme.TYPE_MICRO < AppTheme.TYPE_META and AppTheme.TYPE_META < AppTheme.TYPE_CAPTION \
+			and AppTheme.TYPE_CAPTION < AppTheme.TYPE_BODY_SM and AppTheme.TYPE_BODY_SM < AppTheme.TYPE_BODY \
+			and AppTheme.TYPE_BODY < AppTheme.TYPE_BODY_LG and AppTheme.TYPE_BODY_LG < AppTheme.TYPE_HEADING \
+			and AppTheme.TYPE_HEADING < AppTheme.TYPE_TITLE and AppTheme.TYPE_TITLE < AppTheme.TYPE_DISPLAY, "type scale ascends")
+	check(AppTheme.ELEVATION_FLAT < AppTheme.ELEVATION_REST and AppTheme.ELEVATION_REST < AppTheme.ELEVATION_CARD \
+			and AppTheme.ELEVATION_CARD < AppTheme.ELEVATION_FLOAT, "elevation levels ascend")
+	check(AppTheme.RADIUS_INNER < AppTheme.RADIUS, "inner radius nests inside the surface radius")
 	# The look the screenshots are judged against.
 	check(AppTheme.SKY_400 == Color("38bdf8"), "accent cyan is 38bdf8")
 	check(AppTheme.BG_TOP == Color("020408") and AppTheme.BG_BOTTOM == Color("08101e"), "slate background gradient")
@@ -52,6 +69,20 @@ func _init() -> void:
 	check(font.font_weight == 700 and font.font_names[0] == "Segoe UI", "ui_font weight and family")
 	check(AppTheme.ui_font().font_weight == 500, "ui_font default weight")
 	check(AppTheme.monospace_font().font_names[0] == "Consolas", "monospace_font family")
+	var card := AppTheme.surface(AppTheme.SURFACE_BOTTOM, AppTheme.HAIRLINE, AppTheme.ELEVATION_CARD)
+	check(card.shadow_size == AppTheme.ELEVATION_CARD and card.shadow_color == AppTheme.SHADOW_CARD, "surface elevation sets the shadow")
+	check(card.corner_radius_top_left == AppTheme.RADIUS and card.border_width_top == AppTheme.BORDER_HAIRLINE, "surface radius and hairline")
+	check(AppTheme.meta_font().spacing_glyph == AppTheme.TRACKING_META, "meta font is tracked")
+	check(AppTheme.numeric_font().opentype_features.size() == 1, "numeric font turns on tabular figures")
+	var primary := Button.new()
+	AppTheme.style_primary_button(primary)
+	var ghost := Button.new()
+	AppTheme.style_ghost_button(ghost)
+	for b: Button in [primary, ghost]:
+		var normal := b.get_theme_stylebox("normal")
+		for state in ["hover", "disabled"]:
+			check(is_equal_approx(b.get_theme_stylebox(state).get_margin(SIDE_LEFT), normal.get_margin(SIDE_LEFT)), "button %s keeps the normal content box" % state)
+		b.free()
 
 	print("")
 	print("checks: %d  failures: %d" % [checks, failures.size()])

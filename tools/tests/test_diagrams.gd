@@ -31,6 +31,10 @@ func _initialize() -> void:
 	main._on_audio_mode_picked(AudioSettings.Mode.SILENT)
 	main._start_quiz(10, 1800, true, "Practice Test")
 	main.timer.stop()
+	# The menu fade ends in its own _show_question, which would close a zoom
+	# the sweep just opened.
+	while main._start_tween != null and main._start_tween.is_running():
+		await process_frame
 	await _frames(2)
 	await _sweep()
 	var child_ok := true

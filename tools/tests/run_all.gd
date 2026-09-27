@@ -31,9 +31,6 @@ const SUITES := [
 	# Pins the full node tree both builders make, so they can be moved and
 	# refactored with proof that nothing on screen changed.
 	{"name": "layout tree golden (both layouts)", "path": "res://tools/tests/test_layout_tree.gd"},
-	# Hover slides once tweened position:x as_relative, so container re-sorts
-	# and quick mouse passes left each menu card a different few px off its slot.
-	{"name": "menu and answer card alignment (both layouts)", "path": "res://tools/tests/test_menu_alignment.gd"},
 	{"name": "quiz session (grading, missed list, clocks)", "path": "res://tools/tests/test_quiz_session.gd"},
 	# Every new run reshuffles questions and choices; letters on screen and in
 	# the voice follow the shuffled choices, grading uses the bank's index.
@@ -54,6 +51,11 @@ const SUITES := [
 	# commits an answer is the worst failure mode in an exam app.
 	{"name": "answer card tap-vs-drag", "path": "res://tools/tests/test_answer_card_input.gd"},
 	{"name": "fx helpers (chapter map, gauges)", "path": "res://tools/tests/test_fx.gd"},
+	# Hover slides once tweened position:x as_relative, so container re-sorts
+	# and quick mouse passes left each menu card a different few px off its
+	# slot. Mode and answer cards now line up in every state and after every
+	# animation, and the desktop menu (State Law section included) fits.
+	{"name": "menu and answer cards (alignment, state margins, fit)", "path": "res://tools/tests/test_menu_cards.gd"},
 	{"name": "audio settings (modes, autoplay rules)", "path": "res://tools/tests/test_audio_settings.gd"},
 	{"name": "sfx (sound map, voice ducking, bus)", "path": "res://tools/tests/test_sfx.gd"},
 	{"name": "speech bus chain (anti-image, pitch bypass)", "path": "res://tools/tests/test_speech_chain.gd"},
