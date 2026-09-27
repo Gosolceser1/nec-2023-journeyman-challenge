@@ -207,10 +207,7 @@ var pause_button: Button
 var skip_button: Button
 
 # Reading highlight state
-var _current_record: Dictionary = {}
-var _current_correct_answer: String = ""
-var _info_table_highlighted: bool = false
-var _active_teach_line: int = -1  # index into teach lines being highlighted
+var info_panel := InfoPanelRenderer.new()
 var _question_stem_glow_style: StyleBoxFlat = null  # cached glow style for question panel
 var fx_layer: Control
 var streak_meter: StreakMeter
@@ -247,6 +244,7 @@ func _ready() -> void:
 	speech_helper.clip_ready.connect(_on_helper_clip)
 	speech_helper.request_failed.connect(_on_helper_failed)
 	_build_ui()
+	info_panel.label = info_label
 	_warm_speech_helper()
 	_attach_fx()
 	_polish_controls()
@@ -272,7 +270,7 @@ func _ready() -> void:
 	_listen_timer.wait_time = 1.0
 	_listen_timer.timeout.connect(_on_listen_tick)
 	add_child(_listen_timer)
-	_refresh_audio_section()
+	AudioSection.refresh(self)
 	_refresh_dock_audio()
 	records = BankLoader.load_records()
 	if records.is_empty():
@@ -630,226 +628,27 @@ func _build_ui() -> void:
 	else:
 		DesktopLayout.build(self)
 
-## "Audio & Voice" menu section, shared by both layouts (sizes follow ui_mobile).
-## Returns the section so the caller can position it.
-func _build_audio_section(parent: VBoxContainer) -> Control:
-	var h: float = 56.0 if ui_mobile else 40.0
-	var fs: int = 14 if ui_mobile else 13
-	var label_w: float = 62.0 if ui_mobile else 48.0
-	var section := PanelContainer.new()
-	var section_style := AppTheme.panel_style(AppTheme.SECTION_BG, AppTheme.SLATE_800, 1, 12)
-	section_style.set_content_margin_all(14.0 if ui_mobile else 16.0)
-	section.add_theme_stylebox_override("panel", section_style)
-	parent.add_child(section)
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", 10)
-	section.add_child(col)
-
-	var hdr := HBoxContainer.new()
-	hdr.add_theme_constant_override("separation", 8)
-	col.add_child(hdr)
-	var bar := ColorRect.new()
-	bar.custom_minimum_size = Vector2(4, 16)
-	bar.color = AppTheme.EMERALD_400
-	hdr.add_child(bar)
-	var heading := Label.new()
-	heading.text = "AUDIO & VOICE"
-	heading.add_theme_font_override("font", AppTheme.ui_font(700))
-	heading.add_theme_font_size_override("font_size", 12)
-	heading.add_theme_color_override("font_color", AppTheme.EMERALD_400)
-	heading.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	hdr.add_child(heading)
-	# Collapsed by default: one line says what is set, the full panel is a tap
-	# away, and the session buttons move up above the fold.
-	audio_summary_label = Label.new()
-	audio_summary_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	audio_summary_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	audio_summary_label.clip_text = true
-	audio_summary_label.add_theme_font_override("font", AppTheme.ui_font(600))
-	audio_summary_label.add_theme_font_size_override("font_size", fs)
-	audio_summary_label.add_theme_color_override("font_color", AppTheme.SLATE_300)
-	hdr.add_child(audio_summary_label)
-	audio_toggle_button = Widgets.make_dock_button("Change", 92.0 if ui_mobile else 84.0, 44.0 if ui_mobile else 32.0, fs, _toggle_audio_section)
-	audio_toggle_button.add_theme_stylebox_override("focus", AppTheme.focus_ring(9))
-	hdr.add_child(audio_toggle_button)
-	audio_body = VBoxContainer.new()
-	audio_body.add_theme_constant_override("separation", 10)
-	audio_body.visible = false
-	col.add_child(audio_body)
-
-	var modes := GridContainer.new()
-	modes.columns = 2 if ui_mobile else 4
-	modes.add_theme_constant_override("h_separation", 8)
-	modes.add_theme_constant_override("v_separation", 8)
-	audio_body.add_child(modes)
-	var mode_group := ButtonGroup.new()
-	audio_mode_buttons.clear()
-	for m in [AudioSettings.Mode.SILENT, AudioSettings.Mode.TAP, AudioSettings.Mode.AUTO, AudioSettings.Mode.LISTEN]:
-		var chip := Widgets.make_chip(AudioSettings.MODE_TITLES[m], h, fs + 1, mode_group)
-		chip.pressed.connect(_on_audio_mode_picked.bind(m))
-		modes.add_child(chip)
-		audio_mode_buttons.append(chip)
-
-	audio_mode_blurb = Label.new()
-	audio_mode_blurb.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	audio_mode_blurb.add_theme_font_override("font", AppTheme.ui_font(400))
-	audio_mode_blurb.add_theme_font_size_override("font_size", 13 if ui_mobile else 12)
-	audio_mode_blurb.add_theme_color_override("font_color", AppTheme.SLATE_400)
-	audio_body.add_child(audio_mode_blurb)
-
-	audio_details_box = VBoxContainer.new()
-	audio_details_box.add_theme_constant_override("separation", 10)
-	audio_body.add_child(audio_details_box)
-	var opts: BoxContainer = VBoxContainer.new() if ui_mobile else HBoxContainer.new()
-	opts.add_theme_constant_override("separation", 10 if ui_mobile else 20)
-	audio_details_box.add_child(opts)
-
-	var voice_row := HBoxContainer.new()
-	voice_row.add_theme_constant_override("separation", 8)
-	voice_row.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	opts.add_child(voice_row)
-	voice_row.add_child(Widgets.audio_row_label("VOICE", label_w))
-	voice_row.add_child(Widgets.make_voice_picker(self, h, fs))
-	preview_button = Widgets.make_dock_button("Preview", 96.0 if ui_mobile else 84.0, h, fs, _preview_voice)
-	voice_row.add_child(preview_button)
-
-	var speed_row := HBoxContainer.new()
-	speed_row.add_theme_constant_override("separation", 6)
-	opts.add_child(speed_row)
-	speed_row.add_child(Widgets.audio_row_label("SPEED", label_w))
-	var speed_group := ButtonGroup.new()
-	audio_speed_buttons.clear()
-	for s in AudioSettings.SPEEDS:
-		var chip := Widgets.make_chip(AudioSettings.speed_label(s), h, fs, speed_group)
-		chip.custom_minimum_size.x = 0.0 if ui_mobile else 56.0
-		chip.pressed.connect(_on_audio_speed_picked.bind(s))
-		speed_row.add_child(chip)
-		audio_speed_buttons.append(chip)
-
-	auto_teach_toggle = CheckButton.new()
-	auto_teach_toggle.text = "Also read the rule after I answer"
-	auto_teach_toggle.custom_minimum_size = Vector2(0, 44.0 if ui_mobile else 32.0)
-	auto_teach_toggle.add_theme_font_override("font", AppTheme.ui_font(500))
-	auto_teach_toggle.add_theme_font_size_override("font_size", fs)
-	auto_teach_toggle.add_theme_color_override("font_color", AppTheme.SLATE_300)
-	auto_teach_toggle.add_theme_color_override("font_hover_color", AppTheme.WHITE)
-	auto_teach_toggle.add_theme_color_override("font_pressed_color", AppTheme.EMERALD_300)
-	auto_teach_toggle.add_theme_color_override("font_hover_pressed_color", AppTheme.EMERALD_200)
-	auto_teach_toggle.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
-	auto_teach_toggle.toggled.connect(_on_auto_teach_toggled)
-	audio_details_box.add_child(auto_teach_toggle)
-
-	audio_pause_row = HBoxContainer.new()
-	audio_pause_row.add_theme_constant_override("separation", 6)
-	audio_details_box.add_child(audio_pause_row)
-	audio_pause_row.add_child(Widgets.audio_row_label("THINK", label_w))
-	var pause_group := ButtonGroup.new()
-	audio_pause_buttons.clear()
-	for p in AudioSettings.THINK_PAUSES:
-		var chip := Widgets.make_chip("%d s" % p, h, fs, pause_group)
-		chip.custom_minimum_size.x = 0.0 if ui_mobile else 56.0
-		chip.size_flags_horizontal = Control.SIZE_EXPAND_FILL if ui_mobile else Control.SIZE_FILL
-		chip.pressed.connect(_on_audio_pause_picked.bind(p))
-		audio_pause_row.add_child(chip)
-		audio_pause_buttons.append(chip)
-	if not ui_mobile:
-		var pause_hint := Widgets.audio_row_label("pause before the answer is revealed", 0)
-		pause_hint.add_theme_font_override("font", AppTheme.ui_font(500))
-		pause_hint.add_theme_font_size_override("font_size", 12)
-		audio_pause_row.add_child(pause_hint)
-
-	audio_exam_note = Label.new()
-	audio_exam_note.text = "The Full Journeyman Simulator stays exam-quiet: nothing plays by itself, like the real exam. The Read button still works there."
-	audio_exam_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	audio_exam_note.add_theme_font_override("font", AppTheme.ui_font(400))
-	audio_exam_note.add_theme_font_size_override("font_size", 12 if ui_mobile else 11)
-	audio_exam_note.add_theme_color_override("font_color", AppTheme.ROSE_300)
-	audio_details_box.add_child(audio_exam_note)
-
-	# Sound effects sit outside the voice details: Silent mutes the voice only.
-	var sfx_row := HBoxContainer.new()
-	sfx_row.add_theme_constant_override("separation", 6)
-	audio_body.add_child(sfx_row)
-	sfx_row.add_child(Widgets.audio_row_label("SOUNDS", label_w))
-	var sfx_group := ButtonGroup.new()
-	sfx_level_buttons.clear()
-	var sfx_titles: Array[String] = ["Off"]
-	sfx_titles.append_array(AudioSettings.SFX_LEVEL_TITLES)
-	for i in sfx_titles.size():
-		var chip := Widgets.make_chip(sfx_titles[i], h, fs, sfx_group)
-		chip.custom_minimum_size.x = 0.0 if ui_mobile else 72.0
-		chip.size_flags_horizontal = Control.SIZE_EXPAND_FILL if ui_mobile else Control.SIZE_FILL
-		chip.pressed.connect(_on_sfx_level_picked.bind(i - 1))
-		sfx_row.add_child(chip)
-		sfx_level_buttons.append(chip)
-	if not ui_mobile:
-		var sfx_hint := Widgets.audio_row_label("answer tones, results and clock warnings", 0)
-		sfx_hint.add_theme_font_override("font", AppTheme.ui_font(500))
-		sfx_hint.add_theme_font_size_override("font_size", 12)
-		sfx_row.add_child(sfx_hint)
-	return section
-
-func _refresh_audio_section() -> void:
-	if audio_mode_buttons.is_empty():
-		return
-	for i in audio_mode_buttons.size():
-		audio_mode_buttons[i].set_pressed_no_signal(i == audio.mode)
-	for i in audio_speed_buttons.size():
-		audio_speed_buttons[i].set_pressed_no_signal(is_equal_approx(AudioSettings.SPEEDS[i], audio.speed))
-	for i in audio_pause_buttons.size():
-		audio_pause_buttons[i].set_pressed_no_signal(AudioSettings.THINK_PAUSES[i] == audio.think_pause)
-	audio_mode_blurb.text = AudioSettings.MODE_BLURBS[audio.mode]
-	if is_instance_valid(audio_summary_label):
-		var summary: String = AudioSettings.MODE_TITLES[audio.mode]
-		if audio.mode != AudioSettings.Mode.SILENT:
-			summary += "  ·  %s  ·  %s" % [_voice_short(), AudioSettings.speed_label(audio.speed)]
-			if audio.mode == AudioSettings.Mode.LISTEN:
-				summary += "  ·  %d s think" % audio.think_pause
-		summary += "  ·  " + AudioSettings.sfx_label(audio.sfx_enabled, audio.sfx_level)
-		audio_summary_label.text = summary
-		# Open, the chips below say the same thing in full.
-		audio_summary_label.modulate.a = 0.0 if audio_expanded else 1.0
-		audio_body.visible = audio_expanded
-		audio_toggle_button.text = "Done" if audio_expanded else "Change"
-	audio_details_box.visible = audio.mode != AudioSettings.Mode.SILENT
-	auto_teach_toggle.set_pressed_no_signal(audio.auto_teach)
-	auto_teach_toggle.visible = audio.mode == AudioSettings.Mode.AUTO
-	audio_pause_row.visible = audio.mode == AudioSettings.Mode.LISTEN
-	audio_exam_note.visible = AudioSettings.autoplays_question(audio.mode)
-	for i in sfx_level_buttons.size():
-		sfx_level_buttons[i].set_pressed_no_signal(i == (audio.sfx_level + 1 if audio.sfx_enabled else 0))
-	# Listen sessions run untimed, so "30 minutes timed" on the drills would lie.
-	for b in menu_mode_buttons:
-		if not is_instance_valid(b) or not b.has_meta("base_text") or bool(b.get_meta("full_exam")):
-			continue
-		var base := str(b.get_meta("base_text"))
-		if audio.mode == AudioSettings.Mode.LISTEN:
-			var cut := base.rfind(" • ")
-			b.text = (base.substr(0, cut) if cut > 0 else base) + " • hands-free, untimed"
-		else:
-			b.text = base
-
 func _toggle_audio_section() -> void:
 	audio_expanded = not audio_expanded
-	_refresh_audio_section()
+	AudioSection.refresh(self)
 
 func _on_audio_mode_picked(m: int) -> void:
 	audio.mode = AudioSettings.sanitize_mode(m)
 	if _previewing and audio.mode == AudioSettings.Mode.SILENT:
 		_stop_reading()
 	audio.save_to(audio_cfg_path)
-	_refresh_audio_section()
+	AudioSection.refresh(self)
 
 func _on_audio_speed_picked(s: float) -> void:
 	audio.speed = AudioSettings.sanitize_speed(s)
 	audio.save_to(audio_cfg_path)
 	_apply_speed()
-	_refresh_audio_section()
+	AudioSection.refresh(self)
 
 func _on_audio_pause_picked(p: int) -> void:
 	audio.think_pause = AudioSettings.sanitize_pause(p)
 	audio.save_to(audio_cfg_path)
-	_refresh_audio_section()
+	AudioSection.refresh(self)
 
 func _on_auto_teach_toggled(on: bool) -> void:
 	audio.auto_teach = on
@@ -862,7 +661,7 @@ func _on_sfx_level_picked(level: int) -> void:
 		audio.sfx_level = AudioSettings.sanitize_sfx_level(level)
 	audio.save_to(audio_cfg_path)
 	_apply_sfx_settings()
-	_refresh_audio_section()
+	AudioSection.refresh(self)
 	# Let the learner hear the new level on the sound they'll hear most.
 	_sfx("correct")
 
@@ -1081,14 +880,14 @@ func _practice_time(question_count: int) -> int:
 func _show_menu() -> void:
 	timer.stop()
 	_auto_token += 1
-	_clear_confetti()
+	ResultsView.clear_confetti(self)
 	if is_instance_valid(_listen_timer):
 		_listen_timer.stop()
 	listen_phase = AudioSettings.ListenPhase.IDLE
 	listen_paused = false
 	session_audio_mode = AudioSettings.Mode.SILENT
 	_stop_reading()
-	_refresh_audio_section()
+	AudioSection.refresh(self)
 	_update_key_hint()
 	if menu_overlay:
 		menu_overlay.visible = true
@@ -1354,7 +1153,7 @@ func _answer_selected(selected: int) -> void:
 		var target_kw := _extract_table_target_keyword(record, table)
 		table_highlighted = _populate_reference_table(feedback_table_grid, feedback_table_note, table, correct_text, true, target_kw)
 		call_deferred("_scroll_feedback_table_to_match")
-	_render_code_provision(record, correct_text, table_highlighted)
+	info_panel.show(record, correct_text, table_highlighted)
 	info_label.visible = true
 	_compact_answered(correct, selected)
 	# Answering always stops the readout in progress. The rule then plays by
@@ -1445,194 +1244,6 @@ func _update_score_badges() -> void:
 		streak_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
 
 
-func _append_answer_highlight(text: String, answer: String) -> bool:
-	var match_info := SpeechText.find_answer_match(text, answer)
-	if match_info.is_empty():
-		info_label.add_text(text)
-		return false
-	var start := int(match_info["start"])
-	var match_length := int(match_info["length"])
-	info_label.add_text(text.substr(0, start))
-	info_label.push_bgcolor(AppTheme.EMERALD_700)
-	info_label.push_color(AppTheme.WHITE)
-	info_label.push_bold()
-	info_label.add_text(" " + text.substr(start, match_length) + " ")
-	info_label.pop()
-	info_label.pop()
-	info_label.pop()
-	info_label.add_text(text.substr(start + match_length))
-	return true
-
-## tip_short reads "<tip> Correct: B — <answer>. <note> Not A: <note> ...". When
-## choice_notes lines up with the answers, render the tip sentence followed by one
-## row per choice (correct first) instead of that single run-on paragraph.
-## Returns true when the correct answer was shown.
-func _append_tip_rows(record: Dictionary, tip: String) -> bool:
-	var notes = record.get("choice_notes", [])
-	var answers: Array = record.get("answers", [])
-	var ci := int(record.get("correct_index", -1))
-	var cut := tip.find(" Correct: ")
-	if not (notes is Array) or notes.size() != answers.size() or ci < 0 or ci >= answers.size() or cut <= 0:
-		info_label.add_text(tip)
-		return false
-	info_label.add_text(tip.substr(0, cut))
-	var row_order: Array[int] = [ci]
-	for i in answers.size():
-		if i != ci:
-			row_order.append(i)
-	for i in row_order:
-		var is_correct := i == ci
-		info_label.add_text("\n")
-		info_label.push_bgcolor(AppTheme.EMERALD_700 if is_correct else AppTheme.WRONG_HIGHLIGHT_BG)
-		info_label.push_color(AppTheme.WHITE if is_correct else AppTheme.ROSE_200)
-		info_label.push_bold()
-		info_label.add_text(" %s %s " % ["✓" if is_correct else "✗", ANSWER_LETTERS[i]])
-		info_label.pop()
-		info_label.pop()
-		info_label.pop()
-		info_label.push_color(AppTheme.GREEN_50 if is_correct else AppTheme.SLATE_300)
-		if is_correct:
-			info_label.push_bold()
-		info_label.add_text("  " + str(answers[i]))
-		if is_correct:
-			info_label.pop()
-		info_label.pop()
-		var note := str(notes[i]).strip_edges()
-		if note != "":
-			info_label.push_color(AppTheme.EMERALD_200 if is_correct else AppTheme.SLATE_400)
-			info_label.add_text("  —  " + note)
-			info_label.pop()
-	return true
-
-func _echoes_any(line: String, others: Array) -> bool:
-	# True when line adds nothing over already-displayed text (declutter filter).
-	for other in others:
-		var o := str(other).strip_edges()
-		if o != "" and AudioExplanationGenerator._is_duplicate_text(line, o):
-			return true
-	return false
-
-func _append_provision_heading(text: String, heading_color: Color = AppTheme.SKY_300) -> void:
-	info_label.push_color(heading_color)
-	info_label.push_bold()
-	info_label.add_text(text)
-	info_label.pop()
-	info_label.pop()
-
-func _render_code_provision(record: Dictionary, correct_answer: String, table_answer_highlighted: bool) -> void:
-	# Store state so we can re-render with teach-line highlights during TTS
-	_current_record = record
-	_current_correct_answer = correct_answer
-	_info_table_highlighted = table_answer_highlighted
-	_active_teach_line = -1
-	_do_render_info_label()
-
-func _do_render_info_label() -> void:
-	var record := _current_record
-	var correct_answer := _current_correct_answer
-	var table_answer_highlighted := _info_table_highlighted
-	info_label.clear()
-	var highlighted := table_answer_highlighted
-
-	# Shared texts, read once: display filtering compares lesson lines against all of
-	# these so no sentence prints twice on one screen.
-	var source_text := str(record.get("reference_text", ""))
-	var worked_text := str(record.get("worked", ""))
-	var formula_text := str(record.get("formula", "")).strip_edges()
-	var gist_text := str(record.get("gist", "")).strip_edges()
-
-	# --- MEMORY TIP section (plain-English mnemonic, folded to two lines) ---
-	# Skipped when it merely requotes the gist or the provision — generic echoes stay out.
-	var tip := str(record.get("tip_short", "")).strip_edges()
-	var tip_title := str(record.get("tip_title", "")).strip_edges()
-	if tip == "":
-		tip = str(record.get("info_tip", "")).strip_edges()
-	if tip != "" and not _echoes_any(tip, [source_text, gist_text]):
-		if tip_title != "":
-			_append_provision_heading("MEMORY TIP — " + tip_title + "\n", AppTheme.AMBER_500)
-		else:
-			_append_provision_heading("MEMORY TIP\n", AppTheme.AMBER_500)
-		highlighted = _append_tip_rows(record, tip) or highlighted
-		info_label.add_text("\n\n")
-
-	# --- CODE PROVISION section (NEC statutory text) ---
-	_append_provision_heading("CODE PROVISION\n", AppTheme.EMERALD_400)
-	if source_text != "":
-		var heading_end := source_text.find("\n")
-		if heading_end >= 0:
-			info_label.push_color(AppTheme.BLUE_300)
-			info_label.push_bold()
-			info_label.add_text(source_text.substr(0, heading_end + 1))
-			info_label.pop()
-			info_label.pop()
-			var body := source_text.substr(heading_end + 1)
-			highlighted = _append_answer_highlight(body, correct_answer) or highlighted
-		else:
-			highlighted = _append_answer_highlight(source_text, correct_answer) or highlighted
-	else:
-		info_label.add_text("No source excerpt has been added yet. Use the NEC reference above to review the provision.")
-
-	# --- WHAT THE CODE SAYS (lesson lines with active-line highlight during TTS) ---
-	# Same shared list the voice speaks (lesson_lines index == teach index), but the
-	# panel skips anything already on screen: the "Answer D, ..." callout restates the
-	# verdict line above, and rule/math lines that requote CODE PROVISION / WORKED /
-	# FORMULA / TIP would print the same sentence twice. Skipped lines keep their
-	# original li so the spoken highlight index still lands on the right line, and an
-	# empty section is omitted entirely instead of echoing.
-	var shared_lesson := AudioExplanationGenerator.lesson_lines(record, correct_answer)
-	var lesson_echo_basis: Array = [correct_answer, source_text, worked_text, formula_text, gist_text]
-	if tip != "":
-		lesson_echo_basis.append(tip)
-	var render_lesson: Array = []
-	for li in shared_lesson.size():
-		var ln := str(shared_lesson[li]).strip_edges()
-		if ln == "" or _echoes_any(ln, lesson_echo_basis):
-			continue
-		render_lesson.append([li, ln])
-	if not render_lesson.is_empty():
-		info_label.add_text("\n\n")
-		_append_provision_heading("WHAT THE CODE SAYS\n", AppTheme.SKY_400)
-		var first_row := true
-		for pair in render_lesson:
-			var li: int = pair[0]
-			var ln: String = pair[1]
-			if li == _active_teach_line:
-				# Amber highlight on the currently-spoken line
-				if not first_row:
-					info_label.add_text("\n")
-				info_label.push_bgcolor(AppTheme.YELLOW_800)
-				info_label.push_color(AppTheme.AMBER_100)
-				info_label.push_bold()
-				info_label.add_text(" ▶  " + ln + " ")
-				info_label.pop()
-				info_label.pop()
-				info_label.pop()
-			else:
-				if not first_row:
-					info_label.add_text("\n")
-				if _active_teach_line >= 0:
-					info_label.push_color(Color(0.55, 0.60, 0.68, 1.0))
-					highlighted = _append_answer_highlight(ln, correct_answer) or highlighted
-					info_label.pop()
-				else:
-					highlighted = _append_answer_highlight(ln, correct_answer) or highlighted
-			first_row = false
-
-	# --- Optional extra sections (texts hoisted above for echo filtering) ---
-	var worked := worked_text
-	var formula := formula_text
-	if worked != "":
-		info_label.add_text("\n\n")
-		_append_provision_heading("WORKED SOLUTION\n", AppTheme.YELLOW_300)
-		highlighted = _append_answer_highlight(worked, correct_answer) or highlighted
-	elif formula != "":
-		info_label.add_text("\n\n")
-		_append_provision_heading("METHOD & FORMULA\n", AppTheme.PURPLE_400)
-		highlighted = _append_answer_highlight(formula, correct_answer) or highlighted
-	if not highlighted and correct_answer != "":
-		info_label.add_text("\n\n")
-		_append_provision_heading("ANSWER DETAIL\n", AppTheme.EMERALD_400)
-		_append_answer_highlight(correct_answer, correct_answer)
 func _load_voice_catalog() -> void:
 	voice_ids.clear()
 	voice_tiers.clear()
@@ -1695,7 +1306,7 @@ func _refresh_native_voices() -> void:
 
 func _on_voice_picked(_index: int) -> void:
 	_save_voice_choice()
-	_refresh_audio_section()
+	AudioSection.refresh(self)
 	_warm_speech_helper()
 	_prefetch_speech()
 
@@ -2235,9 +1846,9 @@ func _show_native_highlight(segments: Array, seg_idx: int) -> void:
 		for si in seg_idx:
 			if bool(segments[si].get("teach", false)):
 				teach_line_idx += 1
-		_active_teach_line = teach_line_idx
+		info_panel.active_teach_line = teach_line_idx
 		if is_instance_valid(info_label) and info_label.visible:
-			_do_render_info_label()
+			info_panel.render()
 	elif choice < 0:
 		# Reading question stem
 		if is_instance_valid(prompt_voice_badge):
@@ -2427,9 +2038,9 @@ func _play_speech_clip() -> void:
 		for si in speech_queue_index:
 			if bool(speech_queue[si].get("teach", false)):
 				teach_line_idx += 1
-		_active_teach_line = teach_line_idx
+		info_panel.active_teach_line = teach_line_idx
 		if is_instance_valid(info_label) and info_label.visible:
-			_do_render_info_label()
+			info_panel.render()
 	elif choice < 0:
 		# Reading question stem
 		if is_instance_valid(prompt_voice_badge):
@@ -2532,10 +2143,10 @@ func _clear_speech_highlight() -> void:
 	if is_instance_valid(prompt_visualizer):
 		prompt_visualizer.set_active(false)
 	# Clear teach line highlight in info_label
-	if _active_teach_line >= 0:
-		_active_teach_line = -1
-		if is_instance_valid(info_label) and info_label.visible and not _current_record.is_empty():
-			_do_render_info_label()
+	if info_panel.active_teach_line >= 0:
+		info_panel.active_teach_line = -1
+		if is_instance_valid(info_label) and info_label.visible and info_panel.has_record():
+			info_panel.render()
 	# Remove question stem glow
 	_set_question_stem_glow(false)
 	_set_read_status("")
@@ -2609,194 +2220,10 @@ func _next_question() -> void:
 	if session.advance():
 		_show_question()
 	else:
-		_show_results()
+		ResultsView.show(self)
 
 func _show_results() -> void:
-	timer.stop()
-	_stop_reading()
-	_clear_confetti()
-	question_label.text = "Official Examination Report"
-	chapter_hint_label.visible = false
-	lookup_box.visible = false
-	formula_box.visible = false
-	question_table_panel.visible = false
-	question_diagram_panel.visible = false
-	question_formula_label.visible = false
-	exam_label.text = "STATE ELECTRICAL DIVISION  •  NEBRASKA (NSED / PSI)"
-	article_label.text = "CANDIDATE PERFORMANCE SUMMARY  •  NEC 2023 STANDARDS"
-	if is_instance_valid(question_hint_row):
-		question_hint_row.visible = true
-	exam_pills_row.visible = not ui_mobile
-	timer_bar.visible = false
-	_refresh_ref_column()
-	feedback_scroll.visible = true
-	feedback_scroll.scroll_vertical = 0
-	_fit_apply(0)
-	_auto_token += 1
-	if is_instance_valid(_listen_timer):
-		_listen_timer.stop()
-	listen_phase = AudioSettings.ListenPhase.IDLE
-	listen_paused = false
-	_refresh_dock_audio()
-	# Quiz-only chrome would contradict the report ("QUESTION 01 OF 10",
-	# "Hear the rule" for a question no longer on screen, a second menu button).
-	if ui_mobile:
-		progress_label.text = "COMPLETE  •  %d / %d" % [answered_count, order.size()]
-	else:
-		progress_label.text = "SESSION COMPLETE  •  %d OF %d ANSWERED" % [answered_count, order.size()]
-	question_timer_label.text = "REVIEW"
-	question_timer_label.add_theme_color_override("font_color", AppTheme.SKY_400)
-	if is_instance_valid(dock_panel):
-		dock_panel.visible = false
-	if session_audio_mode == AudioSettings.Mode.LISTEN:
-		_show_listen_results()
-		_update_key_hint()
-		return
-	var accuracy := 100.0 * float(score) / maxf(1.0, float(answered_count))
-	var passed := accuracy >= PASS_PERCENT
-	if passed:
-		score_label.text = "RESULT: PASSED"
-		score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
-		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_GREEN_BG, AppTheme.EMERALD_600, 1, 8))
-	else:
-		score_label.text = "RESULT: DID NOT PASS"
-		score_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
-		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_RED_BG, AppTheme.ROSE_800, 1, 8))
-	streak_label.text = "FINAL: %d/%d (%d%%)" % [score, answered_count, roundi(accuracy)]
-	for child in answers_box.get_children():
-		child.queue_free()
-	feedback_panel.visible = true
-	feedback_reference.visible = false
-	if passed:
-		feedback_title.text = "EXAMINATION RESULT: PASS"
-		feedback_title.add_theme_color_override("font_color", AppTheme.EMERALD_400)
-	else:
-		feedback_title.text = "EXAMINATION RESULT: DID NOT PASS"
-		feedback_title.add_theme_color_override("font_color", AppTheme.RED_400)
-	
-	# The gauge and the title already state the percentage and the verdict.
-	var summary_text := "%d of %d correct  •  %d%% needed to pass  •  %s" % [
-		score, answered_count, PASS_PERCENT,
-		"%d missed item%s to review below" % [missed_questions.size(), "" if missed_questions.size() == 1 else "s"] if not missed_questions.is_empty() else "no misses"
-	]
-	# The results screen reuses this label after it may have been hidden by a "Correct" verdict.
-	feedback_body.text = summary_text
-	feedback_body.visible = true
-	_show_results_visual(accuracy, passed)
-
-	info_label.clear()
-	if missed_questions.is_empty():
-		_append_provision_heading("PERFECT SCORE ACHIEVED\n", AppTheme.EMERALD_400)
-		info_label.add_text("Congratulations! You answered 100% of questions correctly. You have demonstrated full mastery of these NEC 2023 provisions.")
-	else:
-		_append_provision_heading("AREAS FOR TARGETED CODE STUDY (%d FAILED ITEMS)\n" % missed_questions.size(), AppTheme.RED_400)
-		info_label.add_text("The following questions were answered incorrectly or timed out. Review each NEC article reference carefully before retaking the test:\n\n")
-
-		for i in missed_questions.size():
-			var item: Dictionary = missed_questions[i]
-			var num: int = int(item.get("index", i + 1))
-			var prompt: String = str(item.get("prompt", ""))
-			var selected: String = str(item.get("selected", ""))
-			var correct: String = str(item.get("correct", ""))
-			var article: String = str(item.get("article", "General"))
-			var art_title: String = str(item.get("article_title", ""))
-			var tip: String = str(item.get("tip_short", ""))
-
-			_append_provision_heading("ITEM #%d  •  NEC %s%s\n" % [num, article, " — " + art_title if art_title != "" else ""], AppTheme.SKY_300)
-			info_label.push_color(AppTheme.SLATE_200)
-			info_label.add_text("Question: %s\n" % prompt)
-			info_label.pop()
-			
-			info_label.push_color(AppTheme.RED_300)
-			info_label.add_text("Your answer:  %s\n" % selected)
-			info_label.pop()
-			
-			info_label.push_color(AppTheme.GREEN_300)
-			info_label.push_bold()
-			info_label.add_text("Correct NEC answer:  %s\n" % correct)
-			info_label.pop()
-			info_label.pop()
-
-			if tip != "":
-				var ri := int(item.get("record_index", -1))
-				if ri >= 0 and ri < records.size():
-					_append_provision_heading("Code key:  ", AppTheme.BLUE_300)
-					_append_tip_rows(records[ri], tip)
-					info_label.add_text("\n")
-				else:
-					info_label.push_color(AppTheme.BLUE_300)
-					info_label.add_text("Code Key:  %s\n" % tip)
-					info_label.pop()
-
-			info_label.add_text("\n")
-
-	info_label.visible = true
-	feedback_table_scroll.visible = false
-	feedback_table_note.visible = false
-	next_button.text = "Return to Main Menu"
-	next_button.visible = true
-	next_button.disabled = false
-	_update_key_hint()
-
-func _show_listen_results() -> void:
-	question_label.text = "Listening Session Summary"
-	article_label.text = "HANDS-FREE REVIEW  •  NEC 2023 STANDARDS"
-	_update_score_badges()
-	for child in answers_box.get_children():
-		child.queue_free()
-	if is_instance_valid(results_visual):
-		results_visual.visible = false
-	feedback_panel.visible = true
-	feedback_reference.visible = false
-	feedback_title.text = "LISTENING SESSION COMPLETE"
-	feedback_title.add_theme_color_override("font_color", AppTheme.SKY_400)
-	feedback_body.text = "Reviewed %d of %d questions hands-free.\nListen mode is not graded — run a drill in Tap or Auto-read mode to test yourself." % [answered_count, order.size()]
-	feedback_body.visible = true
-	info_label.clear()
-	info_label.visible = false
-	feedback_table_scroll.visible = false
-	feedback_table_note.visible = false
-	feedback_scroll.visible = false
-	next_button.text = "Return to Main Menu"
-	next_button.visible = true
-	next_button.disabled = false
-
-func _show_results_visual(accuracy: float, passed: bool) -> void:
-	if not is_instance_valid(results_visual):
-		results_visual = VBoxContainer.new() if ui_mobile else HBoxContainer.new()
-		results_visual.add_theme_constant_override("separation", 18)
-		result_gauge = ResultGauge.new()
-		result_gauge.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-		result_gauge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		results_visual.add_child(result_gauge)
-		chapter_bars = ChapterBars.new()
-		chapter_bars.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		results_visual.add_child(chapter_bars)
-		var column := feedback_body.get_parent()
-		column.add_child(results_visual)
-		column.move_child(results_visual, feedback_body.get_index() + 1)
-	results_visual.visible = true
-	result_gauge.play(accuracy, float(PASS_PERCENT))
-	chapter_bars.set_rows(ChapterBars.rows_from_stats(chapter_stats))
-	UiFx.glow_pulse(feedback_panel, UiFx.EMERALD if passed else UiFx.RED, 30, 1.2)
-	_sfx(Sfx.result_sound(passed))
-	_results_seq += 1
-	if passed:
-		get_tree().create_timer(1.1).timeout.connect(_launch_confetti.bind(_results_seq))
-
-func _launch_confetti(seq: int) -> void:
-	if seq == _results_seq and is_instance_valid(results_visual) and results_visual.visible:
-		UiFx.confetti(fx_layer)
-
-func _clear_confetti() -> void:
-	_results_seq += 1
-	if not is_instance_valid(fx_layer):
-		return
-	for child in fx_layer.get_children():
-		if child is CPUParticles2D:
-			child.queue_free()
+	ResultsView.show(self)
 
 func _show_error(message: String) -> void:
 	question_label.text = "Project error"

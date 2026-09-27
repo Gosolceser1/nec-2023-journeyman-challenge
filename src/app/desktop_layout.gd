@@ -638,7 +638,7 @@ static func build(host: Main) -> void:
 	practice_heading.add_theme_font_size_override("font_size", 12)
 	practice_heading.add_theme_color_override("font_color", AppTheme.SKY_400)
 	practice_hdr_box.add_child(practice_heading)
-	menu_column.move_child(host._build_audio_section(menu_column), practice_hdr_box.get_index())
+	menu_column.move_child(AudioSection.build(host, menu_column), practice_hdr_box.get_index())
 
 	host.menu_mode_buttons.clear()
 	Widgets.add_mode_button(host, menu_column, "10 QUESTIONS", "Quick warm-up drill • 30 minutes timed", host._start_quiz.bind(10, host._practice_time(10), true, "10-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG)
