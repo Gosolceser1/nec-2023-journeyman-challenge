@@ -50,11 +50,15 @@ Golden input → spoken cases for every rule live in
 | # | Segment | Example | When |
 |---|---------|---------|------|
 | 1 | Stem | "Which section requires G F C I protection in a garage?" | before answering |
-| 2–5 | Choices, lettered | "Option A, 20 amps." … "Option D, 1 only." | before answering |
-| 6 | Answer callout | "Answer D, 12 kilowatts." | after answering only |
-| 7+ | Rule, then calculation | "Section 210 point 8, paragraph A, item 2 …", "Calculation: …" | after answering only |
+| 2–9 | Choices: letter clip, then text clip | "Option A." "20 amps." … "Option D." "1 only." | before answering |
+| 10 | Answer callout | "Option B." "Answer: 12 kilowatts." (letter of the slot shown) | after answering only |
+| 11+ | Rule, then calculation | "Section 210 point 8, paragraph A, item 2 …", "Calculation: …" | after answering only |
 
-- Choices always start with "Option X,". A bare "A," is voiced as the article
+- Choices are shuffled per run, so a letter is never baked into a choice clip:
+  the player pairs the "Option X." clip for each display slot with that
+  choice's text clip (`SpeechText.display_order`). The callout is letter-free
+  and follows the correct slot's letter clip.
+- Letters are read as "Option X.". A bare "A," is voiced as the article
   "uh" and runs straight into the choice ("A20 amps").
 - Each segment ends with exactly one terminator. A trailing `: , ;` becomes
   `.`, and a `.` that is already there is not doubled.
@@ -148,7 +152,7 @@ tuning renders were scratch and are not kept; what they showed:
 
 ## 4. Never read before the answer
 
-- The answer callout ("Answer X, …"), the rule text, the reference and the
+- The answer callout ("Answer: …"), the rule text, the reference and the
   calculation are **teach** segments. They always form a contiguous tail of the
   plan.
 - The player (`SpeechController._play_speech_clip`) stops at the first teach clip unless

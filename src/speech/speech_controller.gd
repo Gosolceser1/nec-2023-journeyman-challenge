@@ -330,7 +330,9 @@ func _begin_reading(segments: Array) -> void:
 		if _selected_voice_id() == VoiceCatalog.BUNDLED_VOICE_ID:
 			_voice_fallback = "Device voice (no recording)"
 			push_warning("Speech: no recorded clip for %s, using the device voice." % safe_qid)
-		_begin_native_tts(segments)
+		# The whole plan even for the rule alone: it carries the letter line the
+		# rule opens with, and the native player skips to the teach part itself.
+		_begin_native_tts(SpeechText.speech_plan(record) if not record.is_empty() else segments)
 		return
 	_save_voice_choice()
 	# Always synthesize the whole question: "Hear the rule" is its tail, so one
@@ -369,11 +371,13 @@ func _read_with_helper(safe_id: String, plan: Array) -> void:
 		if seg is Dictionary and str(seg.get("text", "")).strip_edges() != "":
 			speech_queue.append({
 				"path": folder.path_join("%d.mp3" % i),
+				"text": str(seg.get("text", "")),
 				"choice": int(seg.get("choice", -1)),
 				"teach": bool(seg.get("teach", false)),
 				"request": rid,
 				"segment": i,
 			})
+	speech_queue = _display(speech_queue)
 	teach_from_index = -1
 	for i in speech_queue.size():
 		if bool(speech_queue[i]["teach"]):
@@ -407,8 +411,7 @@ func _fallback_to_native(why: String) -> void:
 		_begin_native_tts([{"text": PREVIEW_TEXT, "choice": -1, "teach": false}])
 		return
 	if not host.order.is_empty() and host.current_index >= 0 and host.current_index < host.order.size():
-		var fallback_record: Dictionary = host.records[host.order[host.current_index]]
-		_begin_native_tts(SpeechText.teach_segments(fallback_record) if want_teach else SpeechText.speech_plan(fallback_record))
+		_begin_native_tts(SpeechText.speech_plan(host.records[host.order[host.current_index]]))
 		return
 	host.read_button.text = _idle_read_label()
 	_set_read_status("")
@@ -451,18 +454,27 @@ func _set_read_status(text: String) -> void:
 		host.read_status_label.text = text
 		host.read_status_label.visible = true
 
+## A teach clip that is a lesson line; the letter line in front of the rule is not.
+static func _is_lesson_line(entry) -> bool:
+	return entry is Dictionary and bool(entry.get("teach", false)) and not bool(entry.get("aux", false))
+
+## A plan or queue for the current question, in the order its choices are shown.
+func _display(entries: Array) -> Array:
+	if host.order.is_empty() or host.current_index < 0 or host.current_index >= host.order.size():
+		return entries
+	return SpeechText.display_order(entries, host.session.choice_order(host.order[host.current_index]))
+
 func _count_teach(segments: Array) -> int:
 	var n := 0
 	for seg in segments:
-		if seg is Dictionary and bool(seg.get("teach", false)):
+		if _is_lesson_line(seg):
 			n += 1
 	return n
 
 func _teach_index_of(segments: Array, seg_idx: int) -> int:
 	var n := 0
 	for si in mini(seg_idx, segments.size()):
-		var row = segments[si]
-		if row is Dictionary and bool(row.get("teach", false)):
+		if _is_lesson_line(segments[si]):
 			n += 1
 	return n
 
@@ -567,11 +579,7 @@ func _show_native_highlight(segments: Array, seg_idx: int) -> void:
 			card.set_speaking(true)
 	elif is_teach:
 		# Count how many teach segments came before this one to find the teach-line index
-		var teach_line_idx := 0
-		for si in seg_idx:
-			if bool(segments[si].get("teach", false)):
-				teach_line_idx += 1
-		host.info_panel.active_teach_line = teach_line_idx
+		host.info_panel.active_teach_line = _teach_index_of(segments, seg_idx)
 		if is_instance_valid(host.info_label) and host.info_label.visible:
 			host.info_panel.render()
 	elif choice < 0:
@@ -599,6 +607,7 @@ func _start_native_watchdog(segments: Array, seg_idx: int, generation: int) -> v
 	)
 
 func _begin_native_tts(segments: Array) -> void:
+	segments = _display(segments)
 	speak_generation += 1
 	var generation := speak_generation
 	_register_native_tts_callbacks()
@@ -704,9 +713,11 @@ func _on_speech_ready(generation: int, folder: String, code: int, output: String
 			if row is Dictionary:
 				speech_queue.append({
 					"path": folder.path_join(str(row.get("file", ""))),
+					"text": str(row.get("text", "")),
 					"choice": int(row.get("choice", -1)),
 					"teach": bool(row.get("teach", false)),
 				})
+	speech_queue = _display(speech_queue)
 	teach_from_index = -1
 	for i in speech_queue.size():
 		if bool(speech_queue[i].get("teach", false)):
@@ -759,11 +770,7 @@ func _play_speech_clip() -> void:
 			card.set_speaking(true)
 	elif is_teach:
 		# Count how many teach clips came before this one in the queue
-		var teach_line_idx := 0
-		for si in speech_queue_index:
-			if bool(speech_queue[si].get("teach", false)):
-				teach_line_idx += 1
-		host.info_panel.active_teach_line = teach_line_idx
+		host.info_panel.active_teach_line = _teach_index_of(speech_queue, speech_queue_index)
 		if is_instance_valid(host.info_label) and host.info_label.visible:
 			host.info_panel.render()
 	elif choice < 0:

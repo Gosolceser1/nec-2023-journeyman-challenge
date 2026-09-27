@@ -127,7 +127,7 @@ static func show(host: Main) -> void:
 				var ri := int(item.get("record_index", -1))
 				if ri >= 0 and ri < host.records.size():
 					host.info_panel.append_heading("Code key:  ", AppTheme.BLUE_300)
-					host.info_panel.append_tip_rows(host.records[ri], tip)
+					host.info_panel.append_tip_rows(host.session.display_record(ri), tip)
 					host.info_label.add_text("\n")
 				else:
 					host.info_label.push_color(AppTheme.BLUE_300)

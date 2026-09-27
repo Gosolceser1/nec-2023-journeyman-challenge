@@ -22,6 +22,10 @@ func _init() -> void:
 	# menu, and never write the developer's real audio.cfg.
 	main.audio = AudioSettings.new()
 	main.audio_cfg_path = "user://harness_audio.cfg"
+	# Same questions and choice orders every run, and the saved question bag
+	# is never read or written.
+	main.session.bag_path = ""
+	main.session.rng.seed = 2023
 	await process_frame
 
 	print("=== bank load ===")

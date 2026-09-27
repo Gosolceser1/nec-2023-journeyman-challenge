@@ -78,13 +78,73 @@ static func spoken_segments(record: Dictionary) -> Array:
 	var answers: Array = record.get("answers", [])
 	var asks_for_reference := Rules._re("(?i)\\b(section|article|table)\\b").search(prompt) != null
 	for i in answers.size():
-		var letter: String = ANSWER_LETTERS[i] if i < ANSWER_LETTERS.size() else str(i + 1)
 		var raw := str(answers[i])
 		var spoken := Rules.bare_reference(raw) if asks_for_reference and Rules.is_bare_reference(raw) else speakable(raw)
-		# "Option A," not "A,": Edge reads a leading "A," as the article "uh" and
-		# runs it into the choice text with no pause. B, C and D were fine.
-		segments.append(_segment(_terminated("Option %s, %s" % [letter, spoken]), i, false))
+		# The letter is its own clip so the recorded choices can be played in
+		# any shuffled order (display_order). "Option A", not "A": Edge reads a
+		# bare "A" as the article "uh".
+		segments.append(_segment(letter_line(i), i, false))
+		var text := _terminated(spoken)
+		if text != "":
+			segments.append(_segment(text, i, false))
 	return segments
+
+## The spoken letter of a choice slot.
+static func letter_line(slot: int) -> String:
+	return "Option %s." % (ANSWER_LETTERS[slot] if slot >= 0 and slot < ANSWER_LETTERS.size() else str(slot + 1))
+
+## Rearranges a speech plan or play queue from bank order (stem, "Option A.",
+## choice 0, "Option B.", choice 1, ..., answer part) into the order the
+## choices are shown: slot d gets the letter line of d and the text of choice
+## perm[d]. Choice fields become display slots. When the answer part is
+## there, it opens with the letter line of the correct slot, marked teach
+## (it gives the answer away) and aux (it is not a lesson line).
+## Entries need "text", "choice" and "teach".
+static func display_order(entries: Array, perm: Array) -> Array:
+	var head: Array = []
+	var letters := {}
+	var texts := {}
+	var teach: Array = []
+	var count := 0
+	for e in entries:
+		var c := int(e.get("choice", -1))
+		if bool(e.get("teach", false)):
+			teach.append(e)
+		elif c < 0:
+			head.append(e)
+		elif str(e.get("text", "")) == letter_line(c):
+			letters[c] = e
+		else:
+			texts[c] = e
+		if not bool(e.get("teach", false)):
+			count = maxi(count, c + 1)
+	var slots: Array = perm
+	if count > 0 and slots.size() != count:
+		slots = range(count)
+	var out := head.duplicate()
+	for d in slots.size():
+		if letters.has(d):
+			out.append(letters[d])
+		if texts.has(slots[d]):
+			out.append(_in_slot(texts[slots[d]], d))
+	if not teach.is_empty():
+		var correct_slot := _slot_of(slots, int(teach[0].get("choice", -1)))
+		if letters.has(correct_slot):
+			var cue: Dictionary = letters[correct_slot].duplicate()
+			cue["teach"] = true
+			cue["aux"] = true
+			out.append(cue)
+		for e in teach:
+			out.append(_in_slot(e, _slot_of(slots, int(e.get("choice", -1)))))
+	return out
+
+static func _slot_of(slots: Array, choice: int) -> int:
+	return slots.find(choice) if not slots.is_empty() else choice
+
+static func _in_slot(entry: Dictionary, slot: int) -> Dictionary:
+	var moved := entry.duplicate()
+	moved["choice"] = slot
+	return moved
 
 static func _segment(text: String, choice: int, teach: bool) -> Dictionary:
 	return {"text": text, "choice": choice, "teach": teach, "rules": RULES_VERSION}

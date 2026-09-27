@@ -27,6 +27,7 @@ func _initialize() -> void:
 	var main: Node = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
 	main.audio_cfg_path = "user://snap_audio.cfg"
+	main.session.bag_path = ""
 	main._on_audio_mode_picked(AudioSettings.Mode.SILENT)
 	await _wait(70)
 	_snap("1_menu")

@@ -223,6 +223,7 @@ var sfx_level_buttons: Array[Button] = []  # Off, then one per AudioSettings.SFX
 func _init() -> void:
 	speech.host = self
 	fit.host = self
+	session.bag_path = QuizSession.BAG_PATH
 
 func _exit_tree() -> void:
 	# The TTS worker runs on speak_thread. Destroying the node while that thread is
@@ -389,12 +390,13 @@ func _apply_safe_area() -> void:
 func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION_TIME_SECONDS, timed: bool = true, mode_name: String = "Practice Test") -> void:
 	if records.is_empty():
 		return
-	session_audio_mode = AudioSettings.session_mode(audio.mode, mode_name == "Full Journeyman Exam")
+	var simulation := mode_name == "Full Journeyman Exam"
+	session_audio_mode = AudioSettings.session_mode(audio.mode, simulation)
 	session_muted = AudioSettings.starts_muted(session_audio_mode)
 	listen_phase = AudioSettings.ListenPhase.IDLE
 	listen_paused = false
 	var listening := session_audio_mode == AudioSettings.Mode.LISTEN
-	session.begin(question_count, time_limit, timed and not listening, mode_name + (" · Listen" if listening else ""))
+	session.begin(question_count, time_limit, timed and not listening, mode_name + (" · Listen" if listening else ""), simulation)
 	_refresh_dock_audio()
 	if timed_session:
 		timer.start()
@@ -581,7 +583,7 @@ func _on_listen_tick() -> void:
 		if current_answered:
 			_listen_enter(AudioSettings.ListenPhase.TEACH)
 		else:
-			_answer_selected(int(records[order[current_index]].get("correct_index", 0)))
+			_answer_selected(int(session.current_record().get("correct_index", 0)))
 	elif listen_phase == AudioSettings.ListenPhase.GAP:
 		_next_question()
 

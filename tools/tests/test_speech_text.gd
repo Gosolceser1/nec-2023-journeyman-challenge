@@ -255,22 +255,25 @@ func segment_planners() -> void:
 		"formula": "", "worked": "",
 	}
 	var segs: Array = ST.spoken_segments(rec)
-	t.eq(segs.size(), 5, "one stem + four choices")
+	t.eq(segs.size(), 9, "one stem + four choices, each a letter line then its text")
 	t.has(str(segs[0].get("text", "")), "The demand load is", "the stem is first")
 	t.has(str(segs[0].get("text", "")), "blank", "a prompt blank is spoken as 'blank'")
 	t.has(str(segs[0].get("text", "")), ".", "a stem without terminal punctuation gets a period")
 	t.eq(int(segs[0].get("choice", -1)), -1, "the stem is not tied to a choice")
 	for i in 4:
-		t.eq(int(segs[i + 1].get("choice", -99)), i, "segment %d is tied to choice %d" % [i + 1, i])
-		t.check(bool(segs[i + 1].get("teach", true)) == false, "segment %d is NOT a teach clip" % (i + 1))
-	t.has(str(segs[4].get("text", "")), "D, 12 kilowatts.", "the fourth choice is lettered D")
+		for k in [1 + 2 * i, 2 + 2 * i]:
+			t.eq(int(segs[k].get("choice", -99)), i, "segment %d is tied to choice %d" % [k, i])
+			t.check(bool(segs[k].get("teach", true)) == false, "segment %d is NOT a teach clip" % k)
+	t.eq(str(segs[7].get("text", "")), "Option D.", "the fourth choice is lettered D, in its own clip")
+	t.eq(str(segs[8].get("text", "")), "12 kilowatts.", "the choice text carries no letter")
 
 	# A stem that already ends in ? or . is not given a second terminator.
 	t.eq(str(ST.spoken_segments({"prompt": "What is it?", "answers": ["a"], "correct_index": 0})[0].get("text", "")),
 		"What is it?", "a stem ending in '?' is left alone")
 	# More than four answers fall back to a numeric label.
-	t.has(str(ST.spoken_segments({"prompt": "P", "answers": ["a", "b", "c", "d", "e"], "correct_index": 0})[5].get("text", "")),
-		"5, E.", "a fifth choice is labelled '5' (the answer text is capitalised)")
+	var five: Array = ST.spoken_segments({"prompt": "P", "answers": ["a", "b", "c", "d", "e"], "correct_index": 0})
+	t.eq(str(five[9].get("text", "")), "Option 5.", "a fifth choice is labelled '5'")
+	t.eq(str(five[10].get("text", "")), "E.", "the answer text is capitalised")
 
 	# speech_plan = pre-answer segments followed by teach segments.
 	var plan: Array = ST.speech_plan(rec)
@@ -300,7 +303,7 @@ func teach_gate_ordering() -> void:
 	}
 	var teach: Array = ST.teach_segments(rec)
 	t.check(teach.size() >= 1, "at least one teach segment is produced")
-	t.has(str(teach[0].get("text", "")), "Answer D, 12 kilowatts.",
+	t.has(str(teach[0].get("text", "")), "Answer: 12 kilowatts.",
 		"the FIRST teach clip states the answer (short confirmation first)")
 	for seg_v in teach:
 		t.check(bool(seg_v.get("teach", false)), "every teach segment is flagged teach=true")

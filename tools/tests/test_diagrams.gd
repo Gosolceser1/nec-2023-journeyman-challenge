@@ -27,6 +27,7 @@ func _initialize() -> void:
 	root.add_child(main)
 	await _frames(6)
 	main.audio_cfg_path = "user://test_diagrams_audio.cfg"
+	main.session.bag_path = ""
 	main._on_audio_mode_picked(AudioSettings.Mode.SILENT)
 	main._start_quiz(10, 1800, true, "Practice Test")
 	main.timer.stop()

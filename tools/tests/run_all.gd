@@ -32,6 +32,12 @@ const SUITES := [
 	# refactored with proof that nothing on screen changed.
 	{"name": "layout tree golden (both layouts)", "path": "res://tools/tests/test_layout_tree.gd"},
 	{"name": "quiz session (grading, missed list, clocks)", "path": "res://tools/tests/test_quiz_session.gd"},
+	# Every new run reshuffles questions and choices; letters on screen and in
+	# the voice follow the shuffled choices, grading uses the bank's index.
+	{"name": "shuffle (question order, choice order, statistics)", "path": "res://tools/tests/test_shuffle.gd"},
+	# Blueprint drills, per-area decks, missed-question reviews, the simulator's
+	# blueprint and the saved study state.
+	{"name": "question deck (exam blueprint, reviews, saved state)", "path": "res://tools/tests/test_question_deck.gd"},
 	{"name": "app theme (palette, factories)", "path": "res://tools/tests/test_app_theme.gd"},
 	{"name": "nec reference (titles, lookup path)", "path": "res://tools/tests/test_nec_reference.gd"},
 	{"name": "bank loader (shapes, leak guard)", "path": "res://tools/tests/test_bank_loader.gd"},

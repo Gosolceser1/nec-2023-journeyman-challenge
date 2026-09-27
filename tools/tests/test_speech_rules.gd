@@ -242,16 +242,16 @@ func reading_order() -> void:
 		"correct_index": 1, "reference_text": "310.4\nRHW-2 is rated 90°C.",
 	}
 	var segs: Array = ST.spoken_segments(rec)
-	t.eq(segs.size(), 5, "stem + 4 choices")
+	t.eq(segs.size(), 9, "stem + 4 choices, each a letter line then its text")
 	t.eq(str(segs[0]["text"]), "The conductor is marked R H W, dash 2 on the insulation, what does the -2 represent.",
 		"stem first, terminated once")
-	t.eq(str(segs[1]["text"]), "Option A, The cable has two conductors.", "a choice already ending in '.' is not doubled")
-	t.eq(str(segs[2]["text"]), "Option B, Double insulated.", "choice B")
-	t.eq(str(segs[3]["text"]), "Option C, 20 amps.", "choice C with a unit")
-	t.eq(str(segs[4]["text"]), "Option D, 1 only.", "a Roman choice is read as a number")
+	t.eq(str(segs[2]["text"]), "The cable has two conductors.", "a choice already ending in '.' is not doubled")
+	t.eq(str(segs[4]["text"]), "Double insulated.", "choice B")
+	t.eq(str(segs[6]["text"]), "20 amps.", "choice C with a unit")
+	t.eq(str(segs[8]["text"]), "1 only.", "a Roman choice is read as a number")
 	for i in 4:
-		t.check(str(segs[i + 1]["text"]).begins_with("Option %s, " % ["A", "B", "C", "D"][i]),
-			"choice %d is lettered 'Option X,' (a bare 'A,' is voiced as the article 'uh')" % i)
+		t.eq(str(segs[1 + 2 * i]["text"]), "Option %s." % ["A", "B", "C", "D"][i],
+			"choice %d is lettered 'Option X' in its own clip (a bare 'A' is voiced as the article 'uh')" % i)
 	t.eq(ST._terminated("Which one:"), "Which one.", "a trailing colon becomes one period")
 	t.eq(ST._terminated("Why?"), "Why?", "a question mark is kept")
 	t.eq(ST._terminated("only for work.;"), "only for work.", "stray punctuation after a period is dropped, not doubled")
@@ -264,13 +264,14 @@ func lost_blank_and_references() -> void:
 	var kept := ST.spoken_segments({"prompt": "The value is ___.", "answers": ["x"], "correct_index": 0})
 	t.eq(str(kept[0]["text"]), "The value is blank.", "a real blank is spoken once")
 	var ref := ST.spoken_segments({"prompt": "Which section covers AFCI protection?", "answers": ["210.12", "210.8(A)", "31.6", "Article 406"], "correct_index": 0})
-	t.eq(str(ref[1]["text"]), "Option A, 210 point 12.", "a bare section-number choice reads 'point 12', not 'point one two'")
-	t.eq(str(ref[2]["text"]), "Option B, 210 point 8, paragraph A.", "with its designator")
+	t.eq(str(ref[2]["text"]), "210 point 12.", "a bare section-number choice reads 'point 12', not 'point one two'")
+	t.eq(str(ref[4]["text"]), "210 point 8, paragraph A.", "with its designator")
 	var numeric := ST.spoken_segments({"prompt": "The ampacity is ___ amps.", "answers": ["31.6"], "correct_index": 0})
-	t.eq(str(numeric[1]["text"]), "Option A, 31.6.", "a decimal answer to a non-reference question stays a number")
+	t.eq(str(numeric[2]["text"]), "31.6.", "a decimal answer to a non-reference question stays a number")
 	var cited := ST.spoken_segments({"prompt": "Supply conductors are feeders or ___ as covered by 240.21.", "answers": ["taps", "0.5"], "correct_index": 0})
 	t.eq(str(cited[0]["text"]), "Supply conductors are feeders or blank as covered by section 240 point 21.", "a section cited in the stem is read as a section")
-	t.eq(str(cited[2]["text"]), "Option B, 0.5.", "a decimal choice stays a number")
+	t.eq(str(cited[3]["text"]), "Option B.", "choice B's letter is its own clip")
+	t.eq(str(cited[4]["text"]), "0.5.", "a decimal choice stays a number")
 	var rule := ST.teach_segments({"prompt": "Conductors shall have an ampacity ___ the rating.", "answers": ["of not less than", "equal to"],
 		"correct_index": 0, "article": "210.19(B)",
 		"reference_text": "210.19(B) Branch Circuits\nConductors shall have an ampacity of not less than the rating of the branch circuit."})
@@ -299,7 +300,7 @@ func no_answer_before_answering() -> void:
 		var teach: Array = ST.teach_segments(rec)
 		for seg in pre:
 			var txt := str(seg["text"])
-			if bool(seg["teach"]) or txt.begins_with("Answer ") or txt.contains("Calculation:") or txt.contains("Formula:"):
+			if bool(seg["teach"]) or txt.begins_with("Answer") or txt.contains("Calculation:") or txt.contains("Formula:"):
 				leaks += 1
 			for tseg in teach:
 				if txt == str(tseg["text"]):
@@ -326,7 +327,9 @@ func bank_sweep() -> void:
 	var bad := 0
 	for rec_v in recs:
 		var rec: Dictionary = rec_v
-		for seg in ST.speech_plan(rec):
+		var plan: Array = ST.speech_plan(rec)
+		for si in plan.size():
+			var seg: Dictionary = plan[si]
 			var txt := str(seg["text"])
 			var bs := bare_section.search(txt)
 			if bs != null:
@@ -344,7 +347,9 @@ func bank_sweep() -> void:
 				bad += 1
 				if bad <= 8:
 					print("  hostile '%s' in %s: %s" % [h.get_string(0), rec.get("id", ""), txt.left(100)])
-			if int(seg["choice"]) >= 0 and not bool(seg["teach"]) and not txt.begins_with("Option "):
+			var letter := ST.letter_line(int(seg["choice"]))
+			if int(seg["choice"]) >= 0 and not bool(seg["teach"]) and txt != letter \
+					and (si == 0 or str(plan[si - 1]["text"]) != letter):
 				bad += 1
 	t.eq(bad_caps, {}, "every all-caps token is spelled, expanded, lower-cased or a known word")
 	t.eq(bad, 0, "no raw symbol, table tab, doubled period, unconverted unit or unlettered choice reaches the voice")

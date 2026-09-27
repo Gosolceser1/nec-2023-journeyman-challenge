@@ -14,6 +14,9 @@ src/
           mobile_layout.gd  MobileLayout.build(host): the Android UI
   core/   node-free, unit-tested
           quiz_session.gd   QuizSession: order, score, streak, verdicts, missed list, clocks
+          question_deck.gd  QuestionDeck: which questions a run gets, reviews, study stats, question_bag.cfg
+          exam_blueprint.gd ExamBlueprint: the exam's subject areas, record -> area, apportionment
+          choice_order.gd   ChoiceOrder: per-run choice order, locked questions, pinned choices
           bank_loader.gd    BankLoader: reads data/question_bank.json, normalises records
           nec_reference.gd  NecReference: article titles, lookup paths
           safe_area.gd      SafeArea.margins: notch / cutout insets
@@ -36,6 +39,7 @@ src/
           sfx.gd  speech_chain.gd  ui_fx.gd  time_gauge.gd  streak_meter.gd
           result_gauge.gd  chapter_bars.gd  mode_badge.gd  shaders/
 data/     question_bank.json (never edited by hand)  voices.json
+          exam_blueprint.json (content outline, chapter map, area overrides)
 assets/   diagrams/  sfx/  speech/<qid>__<voice>/ (generated, gitignored)
 docs/     this file, DATA_PIPELINE, VOICE_READING_RULES, SFX_PLAN, KNOWN_ISSUES, ...
 tools/    verify.sh  harness.gd  list_pck.py
@@ -43,6 +47,7 @@ tools/    verify.sh  harness.gd  list_pck.py
           speech/    dump_speech.gd  pregenerate_speech.py  test_bundle.gd  check_export_pack.gd
           visual/    snap.gd  snap_all.gd  measure_fit.gd  compare_shots.py (output: .audit_tmp/)
           tests/     run_all.gd + suites, golden/ layout snapshots
+          study/     blueprint_report.gd (pool per subject area, overrides, draws per mode)
 ```
 
 ## How the pieces fit
@@ -71,6 +76,30 @@ screen until nothing scrolls. `_answer_selected` hands the pick to
 shows the feedback sheet, `QuizFx.play_answer` plays the burst, and
 `fit.compact_answered` hides what no longer matters. `_tick_timer` drives
 `session.tick()` once a second.
+
+### Question selection
+
+Every mode draws from the whole pool (all 279 questions, every exam) through
+`session.deck` (QuestionDeck), weighted by the licensing exam's content
+outline in `data/exam_blueprint.json` (ExamBlueprint). In short:
+
+- Each record has one subject area: an override by id, else the NEC
+  chapter of its `article` (Ch. 2 Wiring and Protection, Ch. 3 Wiring
+  Methods, ..., Ch. 1/8/9 and non-NEC items General Electrical Knowledge).
+- Drills split their slots over the areas in blueprint proportion (largest
+  remainder, the leftover fractions carried to the next drill) and take
+  them from one no-repeat deck per area, shared by every drill size.
+  Missed questions come back two runs later, at most a quarter of a drill.
+- The simulator takes exactly 10/20/15/15/10/5/5 per area, least recently
+  seen first, without reviews. An area short of records passes its share on.
+- Every run is interleaved so neighbours differ in article and area.
+- `begin(..., simulation, area)` picks the draw; an explicit `rng.seed`
+  (tests, harness) makes it repeatable, otherwise each session randomizes.
+- The deck, reviews and per-question stats persist by question id in
+  `user://question_bag.cfg`; `reset_progress()` clears them.
+
+`docs/STUDY_SYSTEM.md` has the blueprint, the pool counts, and the
+algorithms in detail.
 
 ### Speech
 

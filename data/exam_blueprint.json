@@ -1,0 +1,65 @@
+{
+  "source": "Nebraska Journeyman Electrician examination bulletin (NSED / PSI), content outline",
+  "scored_items": 80,
+  "minutes": 240,
+  "pass_percent": 75,
+  "unscored_items": 8,
+  "unscored_minutes": 30,
+  "areas": [
+    {
+      "key": "general",
+      "title": "General Electrical Knowledge",
+      "items": 10,
+      "chapters": [0, 1, 8, 9],
+      "covers": "NEC Ch. 1 (90, 100, 110), Ch. 8 and Ch. 9 tables and notes, theory, Ohm's law and calculations, NFPA 70E, trade knowledge (chapter 0 = no NEC article)"
+    },
+    {
+      "key": "wiring_protection",
+      "title": "Wiring and Protection",
+      "items": 20,
+      "chapters": [2],
+      "covers": "NEC Ch. 2, Articles 200-285"
+    },
+    {
+      "key": "wiring_methods",
+      "title": "Wiring Methods and Materials",
+      "items": 15,
+      "chapters": [3],
+      "covers": "NEC Ch. 3, Articles 300-399"
+    },
+    {
+      "key": "equipment",
+      "title": "Equipment for General Use",
+      "items": 15,
+      "chapters": [4],
+      "covers": "NEC Ch. 4, Articles 400-495"
+    },
+    {
+      "key": "special_occupancies",
+      "title": "Special Occupancies",
+      "items": 10,
+      "chapters": [5],
+      "covers": "NEC Ch. 5, Articles 500-590"
+    },
+    {
+      "key": "special_equipment",
+      "title": "Special Equipment",
+      "items": 5,
+      "chapters": [6],
+      "covers": "NEC Ch. 6, Articles 600-695"
+    },
+    {
+      "key": "special_conditions",
+      "title": "Special Conditions",
+      "items": 5,
+      "chapters": [7],
+      "covers": "NEC Ch. 7, Articles 700-770"
+    }
+  ],
+  "overrides": {
+    "final-exam-#1-067": {
+      "area": "wiring_methods",
+      "why": "Cited as Chapter 9, Note 4, but the question is raceway (nipple) fill, a Chapter 3 wiring-methods topic"
+    }
+  }
+}

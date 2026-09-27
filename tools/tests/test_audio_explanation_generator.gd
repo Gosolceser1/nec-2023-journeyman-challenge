@@ -280,7 +280,7 @@ func lesson_lines_and_format() -> void:
 	}
 	var lines: PackedStringArray = AEG.lesson_lines(rec)
 	t.eq(lines.size(), 2, "callout + code rule, math suppressed when empty")
-	t.has(lines[0], "Answer D, 12 kW.", "the answer callout comes FIRST")
+	t.has(lines[0], "Answer: 12 kW.", "the answer callout comes FIRST")
 	t.has(lines[1], "220.53", "the code rule follows")
 	t.check(AEG.format_lesson_text(rec) == "\n".join(lines), "format_lesson_text joins the same lines with newlines")
 	t.has(AEG.format_lesson_text(rec), "\n", "the panel text is multi-line when there are 2+ lines")
@@ -334,7 +334,7 @@ func generate_explanation_shape() -> void:
 	t.eq(script.get("intent", "x"), "", "intent is always empty in this build")
 	t.has(str(script.get("code_breakdown", "")), "220.53", "the citation prefixes the code breakdown")
 	t.has(str(script.get("math_explanation", "")), "Calculation:", "worked text becomes a Calculation line")
-	t.eq(script.get("answer_callout", ""), "Answer A, 12 kW.", "the callout names the letter and the value")
+	t.eq(script.get("answer_callout", ""), "Answer: 12 kW.", "the callout names the value, not a letter (choices are shuffled)")
 
 	# Worked wins over formula, and the label reflects which was used.
 	var rec_formula: Dictionary = rec.duplicate(true)

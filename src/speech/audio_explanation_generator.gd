@@ -23,7 +23,6 @@ static func generate_explanation(record: Dictionary, answer: String = "") -> Dic
 	var cite := str(record.get("article", "")).strip_edges()
 	var answers: Array = record.get("answers", [])
 	var correct := int(record.get("correct_index", -1))
-	var correct_letter: String = ANSWER_LETTERS[correct] if correct >= 0 and correct < ANSWER_LETTERS.size() else ""
 	var choice_text: String = answer if answer != "" else (str(answers[correct]) if correct >= 0 and correct < answers.size() else "")
 
 	var cite_header := ""
@@ -54,10 +53,10 @@ static func generate_explanation(record: Dictionary, answer: String = "") -> Dic
 		else:
 			math_explanation = "Formula: " + math_raw
 
+	# No letter: choices are shuffled per session, and the letter the learner
+	# saw is spoken as its own clip in front (SpeechText.display_order).
 	var answer_callout := ""
-	if correct_letter != "" and choice_text != "":
-		answer_callout = "Answer %s, %s." % [correct_letter, choice_text]
-	elif choice_text != "":
+	if choice_text != "":
 		answer_callout = "Answer: " + choice_text + "."
 
 	return {

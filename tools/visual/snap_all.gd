@@ -68,6 +68,7 @@ func _initialize() -> void:
 	root.add_child(main)
 	await _wait(10)
 	main.audio_cfg_path = "user://snap_audio.cfg"
+	main.session.bag_path = ""
 	main._on_audio_mode_picked(AudioSettings.Mode.SILENT)
 	await _wait(60)
 	_snap("01_menu")

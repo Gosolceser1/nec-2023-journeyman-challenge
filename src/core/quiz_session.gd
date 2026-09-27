@@ -1,10 +1,18 @@
 class_name QuizSession
 extends RefCounted
-## Quiz state and rules with no nodes: question order, score, streak, the
-## missed list, per-chapter tallies and both clocks. Main renders it and
-## exposes the same fields under the old names for the harness.
+## Quiz state and rules with no nodes: question order, choice order, score,
+## streak, the missed list, per-chapter tallies and both clocks. Main renders
+## it and exposes the same fields under the old names for the harness.
+##
+## Questions come from the whole pool through a QuestionDeck (blueprint
+## drills from per-area decks, review queue, blueprint simulator). Choices are shuffled per
+## question per session (ChoiceOrder). Everything shown uses display slots;
+## grading compares original indices, so the bank is never touched.
 
 const ANSWER_LETTERS := ["A", "B", "C", "D"]
+## Where main keeps the deck and study stats between launches. Question ids
+## only, no answers.
+const BAG_PATH := "user://question_bag.cfg"
 const SESSION_LENGTH := 10
 const EXAM_SCORED_ITEMS := 80
 const EXAM_MINUTES := 240
@@ -17,7 +25,22 @@ enum Verdict { REVIEWED, TIMED_OUT, CORRECT, WRONG }
 enum Tick { NONE, TIME_OUT, STOP_CLOCK }
 
 var records: Array = []
-var order: Array[int] = []
+## record index -> display slot -> original choice index, for this session.
+var choice_orders: Dictionary = {}
+## Record indices in play order. Assigning it directly (tools do) shows every
+## choice in bank order.
+var order: Array[int] = []:
+	set(v):
+		order = v
+		choice_orders.clear()
+## Randomized per session object; tests and the harness set rng.seed for a
+## repeatable run.
+var rng := RandomNumberGenerator.new()
+var deck := QuestionDeck.new()
+## "" keeps the deck and stats in memory only.
+var bag_path: String:
+	get: return deck.path
+	set(v): deck.path = v
 var current_index := 0
 var score := 0
 var streak := 0
@@ -33,15 +56,21 @@ var session_name := "Practice Test"
 var question_time_left := SECONDS_PER_SCORED_ITEM
 
 
-## A fresh shuffled session of up to question_count records.
-func begin(question_count: int, time_limit: int, timed: bool, name: String) -> void:
-	order.clear()
-	for i in records.size():
-		order.append(i)
-	order.shuffle()
-	session_length = mini(question_count, records.size())
-	if order.size() > session_length:
-		order.resize(session_length)
+func _init() -> void:
+	rng.randomize()
+
+
+## A fresh session of up to question_count records, each with a new choice
+## order: the next drill from the decks (from one subject area if area is
+## set), or with simulation a blueprint exam.
+func begin(question_count: int, time_limit: int, timed: bool, name: String, simulation := false, area := "") -> void:
+	if simulation:
+		order = deck.draw_exam(records, question_count, rng)
+	else:
+		order = deck.draw_drill(records, question_count, rng, area)
+	for i in order:
+		choice_orders[i] = ChoiceOrder.shuffled(records[i], rng)
+	session_length = order.size()
 	session_time_limit = time_limit
 	timed_session = timed
 	session_name = name
@@ -56,8 +85,27 @@ func begin(question_count: int, time_limit: int, timed: bool, name: String) -> v
 	question_time_left = SECONDS_PER_SCORED_ITEM
 
 
+## Clears the deck, the review queue and the per-question stats.
+func reset_progress() -> void:
+	deck.reset()
+
+
+## Display slot -> original choice index for a record; bank order when the
+## session did not shuffle it.
+func choice_order(record_index: int) -> Array[int]:
+	if choice_orders.has(record_index):
+		return choice_orders[record_index]
+	return ChoiceOrder.identity(records[record_index])
+
+
+## The record as the learner sees it: choices in display order, correct_index
+## on the display slot.
+func display_record(record_index: int) -> Dictionary:
+	return ChoiceOrder.apply(records[record_index], choice_order(record_index))
+
+
 func current_record() -> Dictionary:
-	return records[order[current_index]]
+	return display_record(order[current_index])
 
 
 ## The current question goes up: unanswered, full item time.
@@ -66,60 +114,74 @@ func start_question() -> void:
 	question_time_left = SECONDS_PER_SCORED_ITEM
 
 
-## Grades the pick (-1 = time ran out). Returns {} if the question was already
-## answered, else verdict, record, record_index, correct, correct_text and
-## selected_text. Ungraded (listen) answers count as reviewed and nothing else.
+## Grades the pick, a display slot (-1 = time ran out), against the bank's
+## original correct_index. Returns {} if the question was already answered,
+## else verdict, record (display copy), record_index, correct (display slot),
+## correct_text, selected_text, and the original indices correct_original and
+## selected_original. Ungraded (listen) answers count as reviewed and nothing else.
 func submit(selected: int, graded: bool) -> Dictionary:
 	if current_answered:
 		return {}
 	current_answered = true
 	var record_index: int = order[current_index]
 	var record: Dictionary = records[record_index]
+	var perm := choice_order(record_index)
 	answered_count += 1
-	var correct := int(record.get("correct_index", -1))
+	var correct_original := int(record.get("correct_index", -1))
+	var selected_original: int = perm[selected] if selected >= 0 and selected < perm.size() else -1
+	var correct := perm.find(correct_original)
 	var answers: Array = record.get("answers", [])
-	var correct_text: String = str(answers[correct]) if correct >= 0 and correct < answers.size() else ANSWER_LETTERS[correct]
-	var selected_text: String = str(answers[selected]) if selected >= 0 and selected < answers.size() else "No answer"
+	var correct_text: String = str(answers[correct_original]) if correct >= 0 else ANSWER_LETTERS[correct]
+	var selected_text: String = str(answers[selected_original]) if selected_original >= 0 else "No answer"
+	var right := selected_original >= 0 and selected_original == correct_original
 	if graded:
 		var chapter := ChapterBars.chapter_of(str(record.get("article", "")))
 		var tally: Array = chapter_stats.get(chapter, [0, 0])
-		chapter_stats[chapter] = [int(tally[0]) + (1 if selected == correct else 0), int(tally[1]) + 1]
+		chapter_stats[chapter] = [int(tally[0]) + (1 if right else 0), int(tally[1]) + 1]
+		deck.record_result(records, record_index, right)
 
 	var verdict: Verdict
+	var shown := ChoiceOrder.apply(record, perm)
 	if not graded:
 		verdict = Verdict.REVIEWED
 	elif selected == -1:
 		streak = 0
 		verdict = Verdict.TIMED_OUT
-		missed_questions.append(_missed(record, record_index, "Time expired", correct, correct_text))
-	elif selected == correct:
+		missed_questions.append(_missed(shown, record_index, "Time expired", correct, correct_text, -1, correct_original))
+	elif right:
 		score += 1
 		streak += 1
 		verdict = Verdict.CORRECT
 	else:
 		streak = 0
 		verdict = Verdict.WRONG
-		missed_questions.append(_missed(record, record_index, "%s — %s" % [ANSWER_LETTERS[selected], selected_text], correct, correct_text))
+		missed_questions.append(_missed(shown, record_index, "%s — %s" % [ANSWER_LETTERS[selected], selected_text], correct, correct_text, selected_original, correct_original))
 	return {
 		"verdict": verdict,
-		"record": record,
+		"record": shown,
 		"record_index": record_index,
 		"correct": correct,
 		"correct_text": correct_text,
 		"selected_text": selected_text,
+		"correct_original": correct_original,
+		"selected_original": selected_original,
 	}
 
 
-func _missed(record: Dictionary, record_index: int, selected_label: String, correct: int, correct_text: String) -> Dictionary:
+## Labels use the letters the learner saw; selected_index and correct_index
+## are original choice indices.
+func _missed(shown: Dictionary, record_index: int, selected_label: String, correct: int, correct_text: String, selected_original: int, correct_original: int) -> Dictionary:
 	return {
 		"index": current_index + 1,
-		"prompt": str(record.get("prompt", "")),
+		"prompt": str(shown.get("prompt", "")),
 		"selected": selected_label,
 		"correct": "%s — %s" % [ANSWER_LETTERS[correct], correct_text],
-		"article": str(record.get("article", "General")),
-		"article_title": str(record.get("article_title", "")),
-		"tip_short": str(record.get("tip_short", record.get("gist", ""))),
+		"article": str(shown.get("article", "General")),
+		"article_title": str(shown.get("article_title", "")),
+		"tip_short": str(shown.get("tip_short", shown.get("gist", ""))),
 		"record_index": record_index,
+		"selected_index": selected_original,
+		"correct_index": correct_original,
 	}
 
 
