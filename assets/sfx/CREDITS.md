@@ -1,13 +1,14 @@
 # Sound effects — source and license
 
 All eleven files in this folder are **processed recordings from Pixabay**
-(the "Set C" pick), used under the **Pixabay Content License**
+(the "Set C" pick, with wrong.wav replaced by a hand-picked electric boom), used under the **Pixabay Content License**
 (https://pixabay.com/service/license-summary/): free for commercial and
 non-commercial use, no attribution required, modifying and bundling inside an
 app allowed; selling or redistributing the files on their own (as stock or a
 sound pack) is not, nor implying the creator endorses the app. Credit is given
-here anyway. None of the sources is flagged AI-generated or low quality on
-Pixabay (checked at download, Sep 27, 2026).
+here anyway. None of the sources is flagged AI-generated on Pixabay (checked
+at download, Sep 27, 2026). Only Electric Boom 1 (wrong.wav) is flagged low
+quality there; it was kept as a deliberate pick after listening.
 
 Only the processed in-app WAVs are committed, never the source MP3s.
 
@@ -15,7 +16,7 @@ Only the processed in-app WAVs are committed, never the source MP3s.
 |---|---|---|---|---|---|
 | start.wav | a session starts from the menu | Interface 13 | SoundReality | https://pixabay.com/sound-effects/film-special-effects-interface-13-204784/ | 0.70 s |
 | correct.wav | right answer | Interface 9 | SoundReality | https://pixabay.com/sound-effects/film-special-effects-interface-9-204779/ | 0.90 s |
-| wrong.wav | wrong answer / item timed out | Notification Error | SoundReality | https://pixabay.com/sound-effects/film-special-effects-notification-error-427345/ | 0.83 s |
+| wrong.wav | wrong answer / item timed out | Electric Boom 1 | AleXZavesa | https://pixabay.com/sound-effects/electric-boom-1-463651/ | 0.90 s |
 | warning.wav | exam clock reaches 5:00 and 1:00 left | Beep warning | freesound_community | https://pixabay.com/sound-effects/film-special-effects-beep-warning-6387/ | 1.50 s |
 | pass.wav | results: passed | Level Up | SoundReality | https://pixabay.com/sound-effects/film-special-effects-level-up-140966/ | 2.13 s |
 | fail.wav | results: did not pass | Game Over 39 | Tuomas_Data | https://pixabay.com/sound-effects/musical-game-over-39-199830/ | 1.85 s |
@@ -30,7 +31,11 @@ pre-roll, 3 ms fade-in); the natural end kept when it fits the sound's length
 budget, otherwise cut at the quietest point near the end with an exponential
 fade to -60 dB; one gain change to a per-role max-momentary loudness (start
 -18 LUFS, correct / wrong -16, warning / pass -15, fail -17, click / toggle /
-select / transition -22, hover -25), true peak ≤ -1 dBTP; no EQ, no limiter.
+select / transition -22, hover -25), true peak ≤ -1 dBTP; no limiter, and no
+EQ except on wrong.wav. wrong.wav starts on the boom itself (source 0.44 s,
+skipping the rising crackle before it), ends with a 45 ms fade over the boom's
+natural drop (source 1.34 s), and has a -3 dB low shelf at 150 Hz so phone
+speakers get more of it.
 16-bit PCM, stereo kept (warning is mono at the source), 44.1 or 48 kHz.
 Details and the reasoning per sound: `docs/SFX_PLAN.md`.
 

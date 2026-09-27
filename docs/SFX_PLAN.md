@@ -5,7 +5,8 @@ reading questions, sometimes on headphones for an hour or more. Every sound has
 to earn its place: it must tell them something they would otherwise miss, and
 still be pleasant on the 100th repetition.
 
-The shipped set is "Set C" (sourced from Pixabay, processed per role; sources
+The shipped set is "Set C" with the wrong cue replaced by a hand-picked
+electric boom (sourced from Pixabay, processed per role; sources
 and license in `assets/sfx/CREDITS.md`): six event cues plus five quiet
 interface sounds. `tools/sfx/make_sfx.py` still renders the old synthesized
 set, but only writes into `assets/sfx/` with `--replace-shipped`.
@@ -16,7 +17,7 @@ set, but only writes into `assets/sfx/` with `--replace-shipped`.
 |---|---|---|
 | A session starts (any menu mode card, the weakest-area chip) | `start`: "Interface 13", a bright, glassy two-step chime (hits at ~40 and ~120 ms), 0.70 s | The one commitment point on the menu. Once per session, so it can't fatigue. It is also the menu → quiz transition: the press plays nothing else. |
 | Answer correct | `correct`: "Interface 9", a quick crystalline 4-hit chime, 0.90 s; up to a fourth higher on a streak | The core feedback loop; confirms the pick without having to read the verdict. |
-| Answer wrong / item timed out | `wrong`: "Notification Error", a soft low two-hit "bonk-bonk", 0.83 s | Equally important, but must feel like "not quite", never a buzzer or a punishment. |
+| Answer wrong / item timed out | `wrong`: "Electric Boom 1", a crackling electric short-circuit boom that hits at once and pulses, 0.90 s | Equally important; fits the X shorting out. A low boom rather than a buzzer. |
 | Results: passed | `pass`: "Level Up", a bright 5-step arpeggio, 2.13 s | Once per session, marks the end of real effort. |
 | Results: did not pass | `fail`: "Game Over 39", five gently descending notes, 1.85 s | Closes the session honestly. |
 | Exam clock at 5:00 and 1:00 left (timed sessions) | `warning`: "Beep warning", four classic clock-low beeps, 1.50 s | Heads-down on a lookup, you can miss the clock turning red; two cues per session, never per second. |
@@ -62,7 +63,8 @@ and only the result sound plays).
 ## Levels, the voice and settings
 
 - Loudness-matched per role (max momentary, 400 ms, K-weighted, true peak
-  ≤ -1 dBTP, one gain change, no EQ or limiter): start -18 LUFS, correct and
+  ≤ -1 dBTP, one gain change, no limiter; no EQ except a -3 dB low shelf at
+  150 Hz on `wrong` for phone speakers): start -18 LUFS, correct and
   wrong -16, warning and pass -15, fail -17, click / toggle / select /
   transition -22, hover -25. The per-sound trims in `Sfx.SOUNDS` stay at 0.
 - One bus: every sound, interface sounds included, plays on the `SFX` bus, so
@@ -85,7 +87,8 @@ and only the result sound plays).
   at the earliest. The 0.70 s start file is 40 dB under its peak from 0.58 s
   (-63 dB at 0.63 s). `test_sfx` pins that against the file's samples.
 - The rule after an answer (Auto-read) starts 0.6 s after the answer tone;
-  `correct` is below -30 dB and `wrong` below -40 dB by then.
+  `correct` is below -30 dB by then; the `wrong` boom is still near full level
+  and fades out under the first 0.3 s of the voice.
 - Independent of the voice mode: Silent mutes the voice, not these.
 - Files: 16-bit WAV, stereo except `warning` (mono), 44.1 or 48 kHz,
   1.45 MB together, imported with QOA compression (`compress/mode=2`).
@@ -113,7 +116,7 @@ Sounds Off and the Low / Medium / High level apply to it like every SFX.
 The answer animation (`AnswerCard`, started by `QuizFx.play_answer`) starts
 with the cue, lasts at most ~0.6 s and never delays grading or the layout.
 
-| Moment | `correct` (chime hits from ~10 ms) | `wrong` (first low hit at ~10 ms) |
+| Moment | `correct` (chime hits from ~10 ms) | `wrong` (boom hits at ~3 ms) |
 |---|---|---|
 | 0 ms | The check starts drawing itself as a hot cyan trace, an electron spark running down it | The two strokes of the X shoot in and cross; spark pop at the crossing |
 | 30 ms | The spark turns the check's corner | The card glitches sideways in steps (5 / 4 / 3 / 3 / 1.5 px), settled by ~0.2 s |

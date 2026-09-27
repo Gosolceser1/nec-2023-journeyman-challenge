@@ -2653,7 +2653,7 @@ Main <Control> res://src/app/main.gd
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_wrong <AudioStreamPlayer>
-      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[32056], format=3, mix_rate=48000, stereo=true}}
+      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[32088], format=3, stereo=true}}
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_warning <AudioStreamPlayer>

@@ -259,8 +259,8 @@ func celebrate(strength: float = 1.0, calm: bool = false, pitch: float = 1.0) ->
 	sparks.tween_callback(func(): UiFx.card_burst(self, _icon_path()[-1], TRACE_CYAN, roundi(8 * strength), 0.55))
 	_run_current(land, 0.36, 0.9 + 0.25 * (strength - 1.0) / 0.4)
 
-## The pick was wrong: the X shorts out on the first low hit of wrong.wav
-## (~10 ms; spark pop where the strokes cross), flickers, the card glitches.
+## The pick was wrong: the X shorts out on the boom of wrong.wav
+## (~3 ms; spark pop where the strokes cross), flickers, the card glitches.
 func reject(calm: bool = false) -> void:
 	_stop_verdict()
 	if calm:
