@@ -75,6 +75,12 @@ that produced false results before. Fixed defects are in git history
 - `bash` from PowerShell is WSL's bash, which has no `python`; verify.sh now
   finds `python.exe` there, but a script that passes absolute `/mnt/c/...`
   paths to a Windows program still needs `wslpath -m`.
+- Never tween a container child's `position` with `as_relative()`. The
+  container puts the child back in its slot on every re-sort (text change,
+  resize, theme change), and a quick enter/exit overlaps two tweens, so the
+  return leg lands off the slot and stays there: the menu cards ended up 1-7 px
+  apart. Slide with `UiFx.slide_x` (absolute target, one tween per control);
+  `test_menu_alignment.gd` pins it.
 - New or moved `class_name` scripts need
   `Godot --headless --path . --import` before `--script` runs can resolve
   them (verify.sh stage 0 does this).

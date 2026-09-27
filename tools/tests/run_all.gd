@@ -31,6 +31,9 @@ const SUITES := [
 	# Pins the full node tree both builders make, so they can be moved and
 	# refactored with proof that nothing on screen changed.
 	{"name": "layout tree golden (both layouts)", "path": "res://tools/tests/test_layout_tree.gd"},
+	# Hover slides once tweened position:x as_relative, so container re-sorts
+	# and quick mouse passes left each menu card a different few px off its slot.
+	{"name": "menu and answer card alignment (both layouts)", "path": "res://tools/tests/test_menu_alignment.gd"},
 	{"name": "quiz session (grading, missed list, clocks)", "path": "res://tools/tests/test_quiz_session.gd"},
 	# Every new run reshuffles questions and choices; letters on screen and in
 	# the voice follow the shuffled choices, grading uses the bank's index.

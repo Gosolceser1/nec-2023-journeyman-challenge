@@ -281,7 +281,7 @@ func _stop_verdict() -> void:
 	_verdict_tweens.clear()
 	scale = Vector2.ONE
 	modulate.a = 1.0
-	position.x = 0.0
+	UiFx.slide_x(self, 0.0, 0.0)
 	icon_progress = 1.0
 	icon_heat = 0.0
 	icon_pad = 0.0
@@ -359,8 +359,8 @@ func cancel_press() -> void:
 		set_state(State.NORMAL)
 		pivot_offset = size / 2.0
 		var tw := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tw.parallel().tween_property(self, "scale", Vector2.ONE, 0.15)
-		tw.parallel().tween_property(self, "position:x", 0.0, 0.15)
+		tw.tween_property(self, "scale", Vector2.ONE, 0.15)
+		UiFx.slide_x(self, 0.0, 0.15)
 
 func set_speaking(on: bool) -> void:
 	if is_disabled:
@@ -394,13 +394,13 @@ func set_speaking(on: bool) -> void:
 		pivot_offset = size / 2.0
 		var tw := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 		tw.tween_property(self, "scale", Vector2(1.025, 1.025), 0.12)
-		tw.tween_property(self, "position:x", 8.0, 0.12).as_relative()
+		UiFx.slide_x(self, 8.0)
 	else:
 		_apply_styling()
 		pivot_offset = size / 2.0
 		var tw := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tw.parallel().tween_property(self, "scale", Vector2.ONE, 0.15)
-		tw.parallel().tween_property(self, "position:x", 0.0, 0.15)
+		tw.tween_property(self, "scale", Vector2.ONE, 0.15)
+		UiFx.slide_x(self, 0.0, 0.15)
 
 func set_eliminated() -> void:
 	is_disabled = true
@@ -579,8 +579,8 @@ func _on_mouse_entered() -> void:
 	set_state(State.HOVER)
 	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(self, "scale", Vector2(1.016, 1.016), 0.12)
-	tween.parallel().tween_property(self, "position:x", 4.0, 0.12).as_relative()
+	tween.tween_property(self, "scale", Vector2(1.016, 1.016), 0.12)
+	UiFx.slide_x(self, 4.0)
 
 func _on_mouse_exited() -> void:
 	if is_disabled or current_state in [State.CORRECT, State.WRONG, State.ELIMINATED]:
@@ -588,8 +588,8 @@ func _on_mouse_exited() -> void:
 	set_state(State.NORMAL)
 	var tween: Tween = create_tween()
 	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	tween.parallel().tween_property(self, "scale", Vector2.ONE, 0.12)
-	tween.parallel().tween_property(self, "position:x", -4.0, 0.12).as_relative()
+	tween.tween_property(self, "scale", Vector2.ONE, 0.12)
+	UiFx.slide_x(self, 0.0)
 
 func _on_focus_entered() -> void:
 	if is_disabled or current_state in [State.CORRECT, State.WRONG, State.ELIMINATED]:
@@ -631,8 +631,8 @@ func _on_gui_input(event: InputEvent) -> void:
 				_apply_styling()
 				pivot_offset = size / 2.0
 				var tw2 := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-				tw2.parallel().tween_property(self, "scale", Vector2.ONE, 0.15)
-				tw2.parallel().tween_property(self, "position:x", 0.0, 0.15)
+				tw2.tween_property(self, "scale", Vector2.ONE, 0.15)
+				UiFx.slide_x(self, 0.0, 0.15)
 		return
 	if event is InputEventScreenDrag and event.index == _touch_press_index:
 		if _touch_press_pos.distance_to(event.position) > TOUCH_SLOP_PX:

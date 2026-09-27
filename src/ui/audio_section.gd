@@ -169,6 +169,12 @@ static func _make_toggle(host: Main, text: String, fs: int) -> CheckButton:
 	toggle.add_theme_color_override("font_hover_color", AppTheme.WHITE)
 	toggle.add_theme_color_override("font_pressed_color", AppTheme.EMERALD_300)
 	toggle.add_theme_color_override("font_hover_pressed_color", AppTheme.EMERALD_200)
+	# The engine theme pads the label a few px in from the row labels above it.
+	var flush := StyleBoxEmpty.new()
+	flush.content_margin_left = 0
+	flush.content_margin_right = 0
+	for state in ["normal", "hover", "pressed", "hover_pressed", "disabled"]:
+		toggle.add_theme_stylebox_override(state, flush)
 	toggle.add_theme_stylebox_override("focus", AppTheme.focus_ring(8))
 	return toggle
 

@@ -215,6 +215,27 @@ static func pop(ctrl: Control, amount: float = 1.08, duration: float = 0.22, piv
 	tw.tween_property(ctrl, "scale", Vector2.ONE, duration * 0.6)
 
 
+## Slides a VBoxContainer child to `dx` px right of its slot (x = 0); 0 slides
+## it home. Always an absolute target, never as_relative: the container resets
+## the child to its slot on every re-sort, so a relative return leg lands off
+## the slot and stays there, and cards drift apart hover by hover. One slide
+## tween per control, so a quick enter/exit can't leave two fighting.
+## duration 0 snaps.
+static func slide_x(ctrl: Control, dx: float, duration: float = 0.12) -> Tween:
+	if ctrl.has_meta("_slide_tween"):
+		var old := ctrl.get_meta("_slide_tween") as Tween
+		if old != null and old.is_valid():
+			old.kill()
+		ctrl.remove_meta("_slide_tween")
+	if duration <= 0.0:
+		ctrl.position.x = dx
+		return null
+	var tw := ctrl.create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tw.tween_property(ctrl, "position:x", dx, duration)
+	ctrl.set_meta("_slide_tween", tw)
+	return tw
+
+
 static func electrify_title(label: Label) -> void:
 	var mat := ShaderMaterial.new()
 	mat.shader = TITLE_SHADER

@@ -19,44 +19,32 @@ static func add_mode_button(host: Main, parent: VBoxContainer, title_text: Strin
 	var btn_norm := AppTheme.panel_style(bg, AppTheme.BUTTON_BORDER, 1, 10)
 	btn_norm.border_width_left = 6
 	btn_norm.border_color = accent
-	btn_norm.content_margin_left = 20
-	btn_norm.content_margin_right = 16
-	btn_norm.content_margin_top = 10
-	btn_norm.content_margin_bottom = 10
 
 	var btn_hov := AppTheme.panel_style(AppTheme.BUTTON_HOVER_BG if not is_major else AppTheme.EXAM_BUTTON_HOVER_BG, accent, 2, 10)
 	btn_hov.border_width_left = 8
-	btn_hov.content_margin_left = 22
-	btn_hov.content_margin_right = 16
-	btn_hov.content_margin_top = 10
-	btn_hov.content_margin_bottom = 10
 
 	var btn_pressed := AppTheme.panel_style(bg, accent, 2, 10)
 	btn_pressed.border_width_left = 6
-	btn_pressed.content_margin_left = 20
-	btn_pressed.content_margin_right = 16
+
+	# Every state shares one content box, so the title never shifts between
+	# states. The right margin clears the badge.
+	var ring := AppTheme.focus_ring(10)
+	for sb in [btn_norm, btn_hov, btn_pressed, ring]:
+		sb.content_margin_left = 20
+		sb.content_margin_right = 66
+		sb.content_margin_top = 10
+		sb.content_margin_bottom = 10
 
 	button.add_theme_stylebox_override("normal", btn_norm)
 	button.add_theme_stylebox_override("hover", btn_hov)
 	button.add_theme_stylebox_override("pressed", btn_pressed)
-	button.add_theme_stylebox_override("focus", AppTheme.focus_ring(10))
+	button.add_theme_stylebox_override("focus", ring)
 	button.add_theme_color_override("font_color", AppTheme.WHITE)
 	button.add_theme_color_override("font_hover_color", AppTheme.WHITE)
 
-	# Tactile hover animation: gentle slide on X
-	button.mouse_entered.connect(func():
-		var tw := button.create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tw.tween_property(button, "position:x", 5.0, 0.12).as_relative()
-	)
-	button.mouse_exited.connect(func():
-		var tw := button.create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tw.tween_property(button, "position:x", -5.0, 0.12).as_relative()
-	)
+	button.mouse_entered.connect(func(): UiFx.slide_x(button, 5.0))
+	button.mouse_exited.connect(func(): UiFx.slide_x(button, 0.0))
 
-	for sb_name in ["normal", "hover", "pressed"]:
-		var sb := button.get_theme_stylebox(sb_name) as StyleBoxFlat
-		if sb != null:
-			sb.content_margin_right = 66
 	button.set_meta("base_text", button.text)
 	button.set_meta("full_exam", is_major)
 	var badge := ModeBadge.new()

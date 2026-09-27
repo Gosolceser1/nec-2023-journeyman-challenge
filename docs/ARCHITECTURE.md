@@ -152,10 +152,12 @@ tests and the native TTS callbacks refer to them by name.
 `bash tools/verify.sh` runs everything below except the last three:
 
 - import and `--check-only` parse of every script;
-- `tools/tests/run_all.gd`: 20 suites, including `test_no_leak` (nothing
+- `tools/tests/run_all.gd`: 25 suites, including `test_no_leak` (nothing
   before answering reveals the answer), `test_layout_tree` (serialised node
   tree of both layouts against `tools/tests/golden/`; `-- --update` rewrites
-  the snapshots after an intended change) and `test_quiz_session`;
+  the snapshots after an intended change), `test_menu_alignment` (cards stay
+  in their column slot through hover, focus and a quiz round-trip) and
+  `test_quiz_session`;
 - `tools/harness.gd` on both layouts (quiz flow, speech queue, teach gate);
 - the Python tests and the bank validator (`--no-warn`: 0 errors, 0 warnings).
 

@@ -6,7 +6,7 @@ the product's core promise: **the answer must not appear anywhere above the
 question until the learner answers.**
 
 Everything here runs headless with no autoloads. Most suites are node-free;
-the layout-tree, figure and speech-helper suites instantiate
+the layout-tree, menu-alignment, figure and speech-helper suites instantiate
 `scenes/main.tscn`. A full run takes about a minute.
 
 ## Running
@@ -36,7 +36,7 @@ one as a child Godot process and reads its exit code. Slower than an in-process
 runner, but it exercises exactly the path a developer runs by hand, and one
 suite's failure cannot abort the rest.
 
-**Current status: 5,471 Godot checks across 21 suites, 22 Python tests (validator, spellcheck, speak_question), 1 build-guard shell test, 0 failures, 0 documented product defects.** The scene harness adds 372 (desktop) / 376 (mobile) checks. The speech-helper suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
+**Current status: 5,805 Godot checks across 25 suites, 22 Python tests (validator, spellcheck, speak_question), 1 build-guard shell test, 0 failures, 0 documented product defects.** The scene harness adds 372 (desktop) / 376 (mobile) checks. The speech-helper suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
 
 Every formerly pinned defect is fixed and promoted to a real assertion, so a
 regression fails its suite rather than appearing in the defect list. The test table prefix case is covered directly: `NOTED: x` must remain unchanged.
@@ -55,6 +55,7 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | `test_shuffle.gd` | question and choice shuffling: per-mode size and no duplicates, own seedable RNG, chi-square fairness of the first question and of choice slots, locked / pinned choices, grading and display letters under random choice orders, speech letter order |
 | `test_question_deck.gd` | `ExamBlueprint` and `QuestionDeck`: area classification and overrides, blueprint apportionment and remainder rotation, per-area no-repeat decks and coverage, article cap and interleaving, missed-question reviews (gap, cap), simulator blueprint, single-area drills, fixed seeds, save / relaunch / version-1 migration / damaged file / reset, mastery and readiness |
 | `test_study_feedback.gd` | session area tallies and pace (fake clock, 6:00 flag), area bars and weak rows, the report's study feedback (scored line, weak areas, pace, readiness) and the weakest-area menu button, desktop and mobile |
+| `test_menu_alignment.gd` | menu mode cards and answer cards sit in their column slot (same x and width as the VBoxContainer) after the menu settles, mouse passes, a hover spanning a re-sort, focus moves and a quiz round-trip; one content box for every card state; audio toggles flush with the row labels. Desktop and mobile |
 | `test_table_viewer.gd` | the pure parts: `preview_layout`, `extract_target_keyword`, `is_note_row`, `_strip_note_prefix` + a sweep of all 25 bank tables |
 | `run_all.gd` | combined runner |
 | `test_validate_question_bank.py` | Python regression checks for validator/render parity and shared OCR path resolution |
