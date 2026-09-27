@@ -17,6 +17,7 @@ var state_overlay: ColorRect
 var vector_state_icon: Control
 var accent_bar: ColorRect
 var voice_visualizer: VoiceVisualizer
+var _margin: MarginContainer
 
 static func _card_font(weight: int = 500) -> SystemFont:
 	var font := SystemFont.new()
@@ -26,7 +27,7 @@ static func _card_font(weight: int = 500) -> SystemFont:
 	return font
 
 func _init() -> void:
-	custom_minimum_size = Vector2(0, 70)
+	custom_minimum_size = Vector2(0, 56)
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	# PASS (not STOP): the card still receives its own input, but drags propagate
 	# up to the ScrollContainer — STOP grabs the whole touch gesture and kills
@@ -41,23 +42,21 @@ func _init() -> void:
 	state_overlay.color = Color.TRANSPARENT
 	add_child(state_overlay)
 
-	var margin := MarginContainer.new()
-	margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	margin.add_theme_constant_override("margin_left", 18)
-	margin.add_theme_constant_override("margin_right", 18)
-	margin.add_theme_constant_override("margin_top", 14)
-	margin.add_theme_constant_override("margin_bottom", 14)
-	add_child(margin)
+	_margin = MarginContainer.new()
+	_margin.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_margin.add_theme_constant_override("margin_left", 14)
+	_margin.add_theme_constant_override("margin_right", 14)
+	add_child(_margin)
 
 	var hbox := HBoxContainer.new()
 	hbox.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	hbox.add_theme_constant_override("separation", 16)
-	margin.add_child(hbox)
+	hbox.add_theme_constant_override("separation", 14)
+	_margin.add_child(hbox)
 
 	# Left Accent Indicator Strip (4px)
 	accent_bar = ColorRect.new()
 	accent_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	accent_bar.custom_minimum_size = Vector2(4, 34)
+	accent_bar.custom_minimum_size = Vector2(4, 28)
 	accent_bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	accent_bar.color = Color("38bdf8")
 	hbox.add_child(accent_bar)
@@ -65,7 +64,7 @@ func _init() -> void:
 	# Letter Pill (A, B, C, D)
 	letter_panel = PanelContainer.new()
 	letter_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	letter_panel.custom_minimum_size = Vector2(38, 38)
+	letter_panel.custom_minimum_size = Vector2(34, 34)
 	letter_panel.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	var pill_style := StyleBoxFlat.new()
 	pill_style.bg_color = Color("142035")
@@ -119,7 +118,17 @@ func _init() -> void:
 	focus_exited.connect(_on_focus_exited)
 	gui_input.connect(_on_gui_input)
 
+	set_density(0)
 	_apply_styling()
+
+## 0 = roomy, 1 = tight: vertical padding only; the tap target stays >= 48 px.
+func set_density(level: int) -> void:
+	var pad := 7 if level <= 0 else 3
+	_margin.add_theme_constant_override("margin_top", pad)
+	_margin.add_theme_constant_override("margin_bottom", pad)
+
+func set_text_size(px: int) -> void:
+	answer_label.add_theme_font_size_override("font_size", px)
 
 func set_card_data(idx: int, option_text: String) -> void:
 	option_index = idx
@@ -165,8 +174,8 @@ func animate_entrance(delay: float = 0.0) -> void:
 	var tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	if delay > 0.0:
 		tw.tween_interval(delay)
-	tw.parallel().tween_property(self, "modulate:a", 1.0, 0.18)
-	tw.parallel().tween_property(self, "scale", Vector2.ONE, 0.24)
+	tw.tween_property(self, "modulate:a", 1.0, 0.2)
+	tw.parallel().tween_property(self, "scale", Vector2.ONE, 0.28)
 
 var is_speaking := false
 
@@ -269,10 +278,10 @@ func _apply_styling() -> void:
 	pivot_offset = size / 2.0
 	var style := StyleBoxFlat.new()
 	style.set_corner_radius_all(14)
-	style.content_margin_left = 14
-	style.content_margin_right = 14
-	style.content_margin_top = 11
-	style.content_margin_bottom = 11
+	style.content_margin_left = 12
+	style.content_margin_right = 12
+	style.content_margin_top = 6
+	style.content_margin_bottom = 6
 
 	var pill_style: StyleBoxFlat = letter_panel.get_theme_stylebox("panel")
 	if not pill_style:

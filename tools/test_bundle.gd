@@ -1,6 +1,6 @@
 extends SceneTree
 ## Headless check: every record's live speech plan must resolve to its bundled
-## Aria folder (after tools/fix step copies pregenerated clips to res://speech).
+## default-voice folder (after tools/fix step copies pregenerated clips to res://speech).
 ## Run: Godot --headless --path . --script tools/test_bundle.gd
 
 func _init() -> void:
@@ -20,7 +20,7 @@ func _init() -> void:
 			continue
 		var segs: Array = speech_text.speech_plan(record)
 		var qid := str(record.get("id", "")).replace("/", "_").replace("\\", "_")
-		var folder: String = holder._bundled_speech_folder(qid, "en-US-AriaNeural", segs)
+		var folder: String = holder._bundled_speech_folder(qid, holder.BUNDLED_VOICE_ID, segs)
 		total += 1
 		if folder != "":
 			hits += 1

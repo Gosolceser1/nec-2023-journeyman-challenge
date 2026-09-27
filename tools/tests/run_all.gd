@@ -15,8 +15,12 @@ extends SceneTree
 
 const SUITES := [
 	{"name": "no-leak (product guarantee)", "path": "res://tools/tests/test_no_leak.gd"},
+	# PDF figures: shown before answering in both layouts, crop of the real page,
+	# no highlight or added caption until the answer is in.
+	{"name": "question figures (pre-answer, no leak, both layouts)", "path": "res://tools/tests/test_diagrams.gd"},
 	{"name": "audio_explanation_generator", "path": "res://tools/tests/test_audio_explanation_generator.gd"},
 	{"name": "speech_text", "path": "res://tools/tests/test_speech_text.gd"},
+	{"name": "speech_rules", "path": "res://tools/tests/test_speech_rules.gd"},
 	{"name": "unit_matcher", "path": "res://tools/tests/test_unit_matcher.gd"},
 	{"name": "table_viewer (pure)", "path": "res://tools/tests/test_table_viewer.gd"},
 	# Layout regression guard. The scene harness asserts quiz LOGIC and never
@@ -31,6 +35,12 @@ const SUITES := [
 	# Tap-vs-drag on the answer cards. Grading is irreversible, so a scroll that
 	# commits an answer is the worst failure mode in an exam app.
 	{"name": "answer card tap-vs-drag", "path": "res://tools/tests/test_answer_card_input.gd"},
+	{"name": "fx helpers (chapter map, gauges)", "path": "res://tools/tests/test_fx.gd"},
+	{"name": "audio settings (modes, autoplay rules)", "path": "res://tools/tests/test_audio_settings.gd"},
+	{"name": "sfx (sound map, voice ducking, bus)", "path": "res://tools/tests/test_sfx.gd"},
+	{"name": "speech bus chain (anti-image, pitch bypass)", "path": "res://tools/tests/test_speech_chain.gd"},
+	# Desktop Edge voices: warm helper, streamed clips, prefetch, cancel, honest fallback.
+	{"name": "speech helper (stream, prefetch, cancel, cache)", "path": "res://tools/tests/test_speech_helper.gd"},
 ]
 
 const NOISE := "Unreferenced static string|string_name\\.cpp:|NavMeshGeometryParser|PagedAllocator"
@@ -42,6 +52,9 @@ func _init() -> void:
 	var total_checks := 0
 	var total_failures := 0
 	var total_defects := 0
+
+	if not _should_print_suite_line("checks: 1") or _should_print_suite_line(" ") or _should_print_suite_line("Unreferenced static string"):
+		failed.append("runner output filtering")
 
 	print("==========================================================")
 	print("  pure-logic test suite -- combined run")
@@ -61,10 +74,9 @@ func _init() -> void:
 		for chunk in out:
 			text += str(chunk)
 		for line in text.split("\n"):
-			if RegEx.new().search(line) == null:
+			if not _should_print_suite_line(line):
 				continue
-			if line.strip_edges() != "" and not _is_noise(line):
-				print("  %s" % line)
+			print("  %s" % line)
 		# Pull the counters the suite printed.
 		total_checks += _grab(text, "checks: ")
 		total_failures += _grab_fail(text)
@@ -83,6 +95,10 @@ func _init() -> void:
 		print("  RESULT: FAIL -- failing suites: %s" % str(failed))
 	print("==========================================================")
 	quit(0 if failed.is_empty() else failed.size())
+
+
+func _should_print_suite_line(line: String) -> bool:
+	return not line.strip_edges().is_empty() and not _is_noise(line)
 
 
 func _is_noise(line: String) -> bool:

@@ -1,140 +1,77 @@
-# Data pipeline — the ONE correct path
+# Question-bank and speech data pipeline
 
-`question_bank.json` is **generated**, not hand-authored. Never edit it directly:
-every manual change is destroyed by the next build, and nothing catches the
-regression before it ships.
+## Current bank
 
-## The pipeline
+`question_bank.json` is schema v2. It contains 279 playable records across 7 exams, plus a 310-entry manifest and 31 unavailable source entries. Its current top-level keys are `version`, `total_expected`, `playable`, `missing_source_items`, `audit_notes`, `records`, and `manifest`. The old `questions` array is absent; the validator accepts it only as an optional legacy key and checks it if present.
 
-```
-  exams_source_pdf/*.pdf
-          |
-          |  (1) tools/ocr_pdfs_tesseract.py        OCR the exam text
-          v
-  $WIRE_OCR_PATH/*.txt
-          |
-          |  (2) tools/ocr_answer_keys_tesseract.py OCR the answer keys
-          v
-  $WIRE_OCR_KEYS/*.txt
-          |
-          |  (3) tools/build_question_bank.py       THE builder
-          v
-  question_bank.json                                 generated, never edited
-          |
-          |  (4) tools/validate_question_bank.py     THE GATE  <-- required
-          v
-      exit 0 = shippable
-          |
-          |  (5) tools/dump_speech.gd (headless Godot)
-          |      tools/pregenerate_speech.py
-          v
-  %APPDATA%/Godot/app_userdata/<app>/speech/*.mp3    gitignored, regenerated
-```
+The bank validator is a structural and spoiler-safety gate, not a proof that each answer is technically correct. The regression suite explicitly leaves NEC answer correctness to source review (`tools/tests/README.md`, “What is NOT covered”). Section-level NEC claims must be checked against the 2023 NEC.
 
-## Run it
+## Commands
 
 ```bash
-bash tools/build_question_bank.sh            # steps 3-4: build, then validate (default)
-bash tools/build_question_bank.sh --validate # step 4 only — the fast CI check
-bash tools/build_question_bank.sh --build    # steps 3-4
-bash tools/build_question_bank.sh --no-speech # steps 1-4, incl. OCR
-bash tools/build_question_bank.sh --full     # steps 1-5, incl. speech (~71 MB, slow)
+./tools/verify.sh                         # full app/test gate, including strict bank validation
+python tools/validate_question_bank.py --no-warn
+bash tools/build_question_bank.sh --validate
+WIRE_BANK_OUT=/path/to/candidate.json bash tools/build_question_bank.sh --build
+WIRE_BANK_OUT=/path/to/candidate.json bash tools/build_question_bank.sh --full
 ```
 
-The script **refuses to continue** when validation fails, and tells you to fix the
-builder rather than the bank. There is intentionally no "skip the gate" flag:
-if you need to bypass it, you are debugging the validator, not the data.
+`--no-warn` makes validator warnings fail the gate. The local and CI gates use it. `tools/tests/test_validate_question_bank.py` and `tools/tests/test_build_guard.sh` run inside the gate before the strict bank validator. The Godot suites cover app behavior and the no-answer-leak guarantee.
 
-The validator can also be run directly:
+## OCR input/output locations
 
-```bash
-python tools/validate_question_bank.py                      # repo-root bank
-python tools/validate_question_bank.py path/to/bank.json
-python tools/validate_question_bank.py --json               # machine-readable
-python tools/validate_question_bank.py --no-warn            # CI: warnings fail too
-```
-
-Exit codes: `0` valid · `1` invalid · `2` could not run (missing/unparseable).
-
-### Environment overrides
+`tools/pipeline_paths.py` is the shared path definition for both OCR scripts, the builder, and the answer-key comparison tool:
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `WIRE_OCR_PATH` | `%TEMP%/opencode/wire_ocr` | OCR'd exam text |
-| `WIRE_OCR_KEYS` | `%TEMP%/opencode/wire_ocr_keys` | OCR'd answer keys |
-| `WIRE_BANK_OUT` | `<repo>/question_bank.json` | output bank |
-| `PYTHON` | `python` | interpreter |
+| `WIRE_OCR_PATH` | `<system temp>/opencode/wire_ocr` | OCR'd exam text; OCR script output and builder input |
+| `WIRE_OCR_KEYS` | `<system temp>/opencode/wire_ocr_keys` | OCR'd answer keys; OCR script output and builder input |
+| `WIRE_BANK_OUT` | `<repo>/question_bank.json` | generated bank output |
+| `PYTHON` | `python` | interpreter used by `tools/build_question_bank.sh` |
 
-## What the validator checks
+The OCR scripts skip output files that already exist. Remove or replace a stale OCR text file when the source PDF needs to be processed again.
 
-**Top level** — `version == 2`, `total_expected`, `playable`, `records`,
-`questions`, `manifest`, `missing_source_items` present and correctly typed;
-unknown top-level keys warned.
+## Curated bank reproducibility
 
-**Duplication (`records` vs `questions`)** — lengths, element shape, and a
-field-by-field positional comparison. See "Known data bug" below.
+The raw OCR/parser output is normalized by the deterministic field overlay in `tools/question_bank_overrides.json`. `tools/bank_overrides.py` applies those reviewed, record-ID keyed changes after parsing, preserving the curated bank without scattering one-off edits through the OCR pipeline.
 
-**Per record** — required fields present; string/list types; non-empty where
-non-empty is required; `id` format and global uniqueness; `difficulty` domain;
-`article` looks like an NEC citation; `question_number` a positive int;
-`answers` is 2–6 non-empty, non-duplicate strings; `correct_index` in range;
-no correct answer leaking verbatim into `prompt`.
+Every build still writes to a separate candidate path. `tools/build_question_bank.sh` refuses the checked-in `question_bank.json` so an unreviewed candidate cannot overwrite the learner bank. A controlled build with the current source and overlay produced all 279 records and exactly matched the checked-in bank; strict validation reported 0 errors and 0 warnings. This proves reproducibility and schema validity, not NEC answer correctness.
 
-**Manifest arithmetic** — `total_expected == len(manifest)`,
-`playable == len(records)`, manifest `available`/`unavailable` split equals
-records/missing counts, `total_expected == playable + missing`, no duplicate
-manifest slots, every record maps to an `available` slot, and no record also
-appears in `missing_source_items`.
+To intentionally refresh the overlay after a reviewed bank change:
 
-**Reference tables** — `reference_table` is a list of lists of strings; ragged
-rows (width != header width) flagged; note rows flagged when
-`TableViewer.is_note_row` would **not** recognise them.
+```bash
+WIRE_SKIP_BANK_OVERRIDES=1 WIRE_BANK_OUT=/path/to/raw.json python tools/build_question_bank.py
+python tools/refresh_question_bank_overrides.py /path/to/raw.json
+WIRE_BANK_OUT=/path/to/candidate.json bash tools/build_question_bank.sh --build
+python tools/validate_question_bank.py --no-warn /path/to/candidate.json
+```
 
-**Answer leaks** — word-boundary match of the correct answer in `gist` and in
-each `info_tip` chapter, attributed to the chapter that shows it pre-answer.
+Review the generated overlay and candidate diff before accepting either. The refresh script does not replace the curated bank. Do not run the one-off mutation scripts blindly; several edit the bank and some also edit builder/gist sources.
 
-The validator is deliberately standalone: it re-implements the consumer
-semantics it checks against (`main.gd`, `table_viewer.gd`) rather than importing
-the builder, so a builder bug cannot silently redefine the contract.
+## Wording rule: PDF wording, typos corrected
 
-## Known data bug: `questions` is a stale duplicate
+Question stems and answer choices follow the source exam PDF word for word, odd phrasing included. Two kinds of change are allowed, both through the override overlay (hints through `tools/gists.py`):
 
-The shipped bank fails validation today. The cause is structural, not cosmetic:
+- **OCR damage** is restored from the PDF page image: dropped `___` blanks, stray letters, `:` read in place of a blank, merged words, `3g` for `3ø`.
+- **Typos in the PDF itself** are corrected: misspellings (`sevices` → services, `kvVA` → kVA), dropped words (`roofs which they pass` → roofs *above* which they pass), split compounds (`name plate` → nameplate), and obvious grammar slips (`installations requires` → require). Meaning and numbers never change.
 
-- `build_question_bank.py:2320` writes `"questions": bank` (the **raw,
-  pre-repair OCR tuples**, positional 8-element lists) alongside
-  `"records": records` (the **normalised, repaired dicts**).
-- `main.gd:226` does `parsed.get("records", parsed.get("questions", []))`, so
-  `records` always wins and `questions` is dead weight — ~280 KB of the 850 KB
-  file that no code path reads.
+Quoted NEC provision text (`reference_text`) must still match the 2023 edition word for word, so a finding there is fixed only where the NEC itself reads differently. Bank conventions: `3ø` is written "three-phase" and first letters are capitalised; hyphenation of number compounds ("125 volt", "one family") is left as printed. Every change against HEAD is listed in `docs/TYPO_FIXES.md`.
 
-It is not merely redundant; it is **inconsistent** with `records` on 60 fields
-across 49 of 279 entries (see the validator's `duplication:` errors). The
-`records` values are the correct, repaired ones.
+The one stem that intentionally contains its answer is `final-exam-#3-042` (422.33(A) says "accessible" twice and the exam blanks only the second). `PROMPT_LEAK_EXCEPTIONS` in the validator and `prompt_allowlist` in `tools/tests/test_no_leak.gd` pin that record id and exact wording; any other record with a prompt leak is still an error.
 
-**Fix:** drop the `"questions": bank` key from the builder payload and keep
-only `records`. The positional arrays are a v1 schema leftover; `version: 2`
-signals the move to dict records, and the v1 shape was never removed.
+`tools/spellcheck_bank.py` checks every learner-facing string (bank fields and `tools/gists.py`) for misspellings, doubled words, punctuation spacing, unit case (kVA, kW, kcmil, AWG) and unbalanced brackets or quotes. Domain words go in `tools/spellcheck_allowlist.txt`. `verify.sh` runs it with `--offline`, against `tools/spellcheck_lexicon.txt`, so it needs no extra packages; install `pyspellchecker` for the full dictionary run and `--update-lexicon`.
 
-## Repo hygiene
+## What validation checks
 
-- `tools/build_question_bank.bak.py` — a **duplicate builder that has already
-  diverged** from `build_question_bank.py` (45 diff lines, stale tip copy in
-  `CONCEPT_SHORT`). It is git-tracked. Delete it, or move it out of `tools/`
-  into an archive directory. There must be exactly one builder.
-- `tools/gists.bak.py` — same problem, same recommendation.
-- `question_bank.bak.json` / `question_bank.bak2.json` — throwaway snapshots of
-  past builds. Already covered by `.gitignore`
-  (`/question_bank.bak*.json`) and correctly untracked. Delete them.
-- One-off patch scripts (`apply_code_updates.py`, `fix_literal_language.py`,
-  `fix_memory_tips.py`, `apply_gist_corrections.py`, `update_explanations.py`)
-  mutate bank content as a side effect of running them. They are the reason the
-  generated file and the builder can drift apart: their fixes belong in
-  `build_question_bank.py` / `gists.py`, not in a post-hoc patch pass. Prefer
-  fixing the builder.
+- Required schema and field types, unique IDs, answer ranges, and manifest arithmetic.
+- Recognized NEC/standard citations or explicit non-code categories.
+- Table row shape, allowing recognized single-cell note rows.
+- Pre-answer answer mentions using the same visible-text precedence as the app (gist first; task-framing tip only when gist is empty).
+- Learner-facing editorial scaffolding that should not ship.
+- Correct answers leaking verbatim into the prompt (one pinned exception, see the wording rule).
 
-## Adding or fixing a question
+Current validation result: **0 errors, 0 warnings**. That is not an NEC answer-key audit.
 
-1. Fix it in `tools/build_question_bank.py` (or `gists.py` for tips/gists).
-2. `bash tools/build_question_bank.sh --build`
-3. Fix whatever the validator reports. Do not edit `question_bank.json`.
+## Speech assets
+
+`tools/dump_speech.gd` exports the speech plan; `tools/pregenerate_speech.py --bundle` writes bundled MP3s into `speech/` (without `--bundle` it fills the per-user cache). Spoken text comes from `speech_rules.gd` (see `docs/VOICE_READING_RULES.md`); bump its `VERSION` when a rule changes output so stale clips are re-rendered. Generated `speech/` assets are gitignored and can be rebuilt with `bash tools/build_question_bank.sh --full` after the bank build is safe to run.

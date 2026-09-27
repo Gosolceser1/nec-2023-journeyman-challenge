@@ -31,6 +31,12 @@ func _init() -> void:
 		file.store_string(JSON.stringify({"id": str(record.get("id", "")), "segments": plan}))
 		file.close()
 		count += 1
+	# The voice picker's preview line, so the recorded voice previews offline.
+	var main_script = load("res://main.gd")
+	var preview := FileAccess.open(out_dir.path_join(main_script.PREVIEW_ID + ".json"), FileAccess.WRITE)
+	preview.store_string(JSON.stringify({"id": main_script.PREVIEW_ID,
+		"segments": [{"text": main_script.PREVIEW_TEXT, "choice": -1, "teach": false}]}))
+	preview.close()
 	print("SPEECH_SRC_DIR=" + out_dir)
 	print("SPEECH_PLANS=" + str(count))
 	quit(0)

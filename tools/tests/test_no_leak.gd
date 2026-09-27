@@ -31,11 +31,17 @@ var t: R = R.new()
 ##   final-exam-#5-070|36 inches
 ##                             "secured within 36 inches of each termination" is the
 ##                             termination rule; the answer is the SUPPORT SPACING.
+##   final-exam-#3-042|an accessible
+##                             the PDF stem quotes 422.33(A), which says "an accessible"
+##                             twice and blanks only the second; mirrors
+##                             PROMPT_LEAK_EXCEPTIONS in tools/validate_question_bank.py.
 var prompt_allowlist := {
+	"final-exam-#3-042|an accessible": true,
 	"final-exam-#1-024|20": true,
 	"final-exam-#3-052|three": true,
 	"open-book-exam-#4-019|6": true,
-	"final-exam-#5-070|36 inches": true,
+	"final-exam-#5-070|3 ft": true,
+	"final-exam-#1-022|two": true,
 }
 
 

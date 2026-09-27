@@ -14,11 +14,13 @@
 # validation step between the builder and the repo until this script existed.
 #
 # Usage:
-#   bash tools/build_question_bank.sh              # validate + build + gate
-#   bash tools/build_question_bank.sh --validate   # step 4 only (fastest CI check)
-#   bash tools/build_question_bank.sh --build      # steps 3-4, skip speech
-#   bash tools/build_question_bank.sh --full       # steps 1-5 incl. OCR + speech
-#   bash tools/build_question_bank.sh --no-speech  # steps 1-4
+#   bash tools/build_question_bank.sh --validate
+#   WIRE_BANK_OUT=/path/to/candidate.json bash tools/build_question_bank.sh --build
+#   WIRE_BANK_OUT=/path/to/candidate.json bash tools/build_question_bank.sh --full
+#   WIRE_BANK_OUT=/path/to/candidate.json bash tools/build_question_bank.sh --no-speech
+#
+# Rebuilds always write to a separate candidate path; the checked-in bank is
+# protected so an unreviewed candidate cannot replace the curated question set.
 #
 # Env overrides:
 #   WIRE_OCR_PATH   directory of OCR'd exam text      (default: %TEMP%/opencode/wire_ocr)
@@ -48,6 +50,11 @@ fi
 PY="${PYTHON:-python}"
 ROOT_W="$(winpath "$ROOT")"
 BANK="${WIRE_BANK_OUT:-$ROOT/question_bank.json}"
+BANK="${BANK//\\//}"
+case "$BANK" in
+  /*|[A-Za-z]:/*) ;;
+  *) BANK="$ROOT/$BANK" ;;
+esac
 BANK_W="$(winpath "$BANK")"
 GODOT="$ROOT/Godot_v4.7.2-stable_win64_console.exe"
 GODOT_W="$(winpath "$GODOT")"
@@ -68,7 +75,7 @@ die()  { printf '\033[31m[FATAL]\033[0m %s\n' "$*" >&2; exit 1; }
 # ---------------------------------------------------------------------------
 validate() {
   say "VALIDATE $BANK"
-  if ! "$PY" "$VALIDATOR_W" "$BANK_W"; then
+  if ! "$PY" "$VALIDATOR_W" --no-warn "$BANK_W"; then
     die "question_bank.json FAILED validation.
     Do NOT hand-edit the bank -- it is generated. Fix the builder
     (tools/build_question_bank.py) or the upstream data, then rebuild:
@@ -77,8 +84,17 @@ validate() {
   say "VALIDATION PASSED"
 }
 
+require_safe_build_target() {
+  local repo_bank_w
+  repo_bank_w="$(winpath "$ROOT/question_bank.json")"
+  if [ -z "${WIRE_BANK_OUT:-}" ] || [ "$BANK_W" = "$repo_bank_w" ]; then
+    die "Refusing to overwrite the curated question_bank.json: builds must target a separate candidate file. Review the candidate before replacing the checked-in bank."
+  fi
+}
+
 # ---------------------------------------------------------------------------
 build() {
+  require_safe_build_target
   say "BUILD $BUILDER_W"
   "$PY" "$BUILDER_W"
   [ -f "$BANK" ] || die "builder reported success but $BANK does not exist"
@@ -97,7 +113,10 @@ speech() {
   [ -f "$GODOT" ] || die "Godot console binary not found: $GODOT"
   "$GODOT_W" --headless --path "$ROOT_W" --script "$(winpath "$ROOT/tools/dump_speech.gd")"
   say "SPEECH pregenerate clips"
-  "$PY" "$(winpath "$ROOT/tools/pregenerate_speech.py")"
+  "$PY" "$(winpath "$ROOT/tools/pregenerate_speech.py")" --bundle
+  # Exported builds load clips as imported resources, so import the new ones.
+  say "SPEECH import clips"
+  "$GODOT_W" --headless --path "$ROOT_W" --import
 }
 
 case "$MODE" in
@@ -108,9 +127,11 @@ case "$MODE" in
     build
     ;;
   --no-speech)
+    require_safe_build_target
     ocr; build
     ;;
   --full)
+    require_safe_build_target
     ocr; build; speech
     warn "speech/ is gitignored and regenerated -- do not commit it"
     ;;

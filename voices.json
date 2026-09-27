@@ -1,102 +1,67 @@
 [
   {
-    "label": "Ana \u00b7 US \u00b7 Female",
-    "id": "en-US-AnaNeural"
+    "label": "Andrew · Male · Warm",
+    "id": "en-US-AndrewNeural",
+    "tier": "natural"
   },
   {
-    "label": "Andrew \u00b7 US \u00b7 Male",
-    "id": "en-US-AndrewNeural"
+    "label": "Ava · Female · Expressive",
+    "id": "en-US-AvaNeural",
+    "tier": "natural"
   },
   {
-    "label": "Aria \u00b7 US \u00b7 Female",
-    "id": "en-US-AriaNeural"
+    "label": "Brian · Male · Approachable",
+    "id": "en-US-BrianNeural",
+    "tier": "natural"
   },
   {
-    "label": "Ava \u00b7 US \u00b7 Female",
-    "id": "en-US-AvaNeural"
+    "label": "Emma · Female · Cheerful",
+    "id": "en-US-EmmaNeural",
+    "tier": "natural"
   },
   {
-    "label": "Brian \u00b7 US \u00b7 Male",
-    "id": "en-US-BrianNeural"
+    "label": "Ryan · Male · Calm British narrator",
+    "id": "en-GB-RyanNeural",
+    "tier": "natural"
   },
   {
-    "label": "Christopher \u00b7 US \u00b7 Male",
-    "id": "en-US-ChristopherNeural"
+    "label": "Jenny · Female · Friendly",
+    "id": "en-US-JennyNeural",
+    "tier": "general"
   },
   {
-    "label": "Clara \u00b7 Canada \u00b7 Female",
-    "id": "en-CA-ClaraNeural"
+    "label": "Aria · Female · Positive",
+    "id": "en-US-AriaNeural",
+    "tier": "classic"
   },
   {
-    "label": "Connor \u00b7 Ireland \u00b7 Male",
-    "id": "en-IE-ConnorNeural"
+    "label": "Christopher · Male · Reliable",
+    "id": "en-US-ChristopherNeural",
+    "tier": "classic"
   },
   {
-    "label": "Emily \u00b7 Ireland \u00b7 Female",
-    "id": "en-IE-EmilyNeural"
+    "label": "Eric · Male · Rational",
+    "id": "en-US-EricNeural",
+    "tier": "classic"
   },
   {
-    "label": "Emma \u00b7 US \u00b7 Female",
-    "id": "en-US-EmmaNeural"
+    "label": "Guy · Male · Passionate",
+    "id": "en-US-GuyNeural",
+    "tier": "classic"
   },
   {
-    "label": "Eric \u00b7 US \u00b7 Male",
-    "id": "en-US-EricNeural"
+    "label": "Michelle · Female · Friendly",
+    "id": "en-US-MichelleNeural",
+    "tier": "classic"
   },
   {
-    "label": "Guy \u00b7 US \u00b7 Male",
-    "id": "en-US-GuyNeural"
+    "label": "Roger · Male · Lively",
+    "id": "en-US-RogerNeural",
+    "tier": "classic"
   },
   {
-    "label": "Jenny \u00b7 US \u00b7 Female",
-    "id": "en-US-JennyNeural"
-  },
-  {
-    "label": "Liam \u00b7 Canada \u00b7 Male",
-    "id": "en-CA-LiamNeural"
-  },
-  {
-    "label": "Libby \u00b7 UK \u00b7 Female",
-    "id": "en-GB-LibbyNeural"
-  },
-  {
-    "label": "Maisie \u00b7 UK \u00b7 Female",
-    "id": "en-GB-MaisieNeural"
-  },
-  {
-    "label": "Michelle \u00b7 US \u00b7 Female",
-    "id": "en-US-MichelleNeural"
-  },
-  {
-    "label": "Mitchell \u00b7 New Zealand \u00b7 Male",
-    "id": "en-NZ-MitchellNeural"
-  },
-  {
-    "label": "Molly \u00b7 New Zealand \u00b7 Female",
-    "id": "en-NZ-MollyNeural"
-  },
-  {
-    "label": "Natasha \u00b7 Australia \u00b7 Female",
-    "id": "en-AU-NatashaNeural"
-  },
-  {
-    "label": "Roger \u00b7 US \u00b7 Male",
-    "id": "en-US-RogerNeural"
-  },
-  {
-    "label": "Ryan \u00b7 UK \u00b7 Male",
-    "id": "en-GB-RyanNeural"
-  },
-  {
-    "label": "Sonia \u00b7 UK \u00b7 Female",
-    "id": "en-GB-SoniaNeural"
-  },
-  {
-    "label": "Steffan \u00b7 US \u00b7 Male",
-    "id": "en-US-SteffanNeural"
-  },
-  {
-    "label": "Thomas \u00b7 UK \u00b7 Male",
-    "id": "en-GB-ThomasNeural"
+    "label": "Steffan · Male · Rational",
+    "id": "en-US-SteffanNeural",
+    "tier": "classic"
   }
 ]

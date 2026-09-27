@@ -18,6 +18,10 @@ func check(cond: bool, label: String) -> void:
 func _init() -> void:
 	var main = load("res://Main.tscn").instantiate()
 	root.add_child(main)
+	# Pin the default (Silent, no autoplay) whatever this machine saved in the
+	# menu, and never write the developer's real audio.cfg.
+	main.audio = AudioSettings.new()
+	main.audio_cfg_path = "user://harness_audio.cfg"
 	await process_frame
 
 	print("=== bank load ===")
@@ -46,6 +50,12 @@ func _init() -> void:
 
 	print("=== stale speech callback must not clear the busy flag ===")
 	await _stale_callback(main)
+
+	print("=== audio modes: silent default, listen is ungraded + untimed, exam never autoplays ===")
+	await _audio_modes(main)
+
+	print("=== recorded voice: bundled clips load as resources; mobile picks them first ===")
+	_voice_routing(main)
 
 	print("=== timer expiry ===")
 	main._start_quiz(5, 3, true, "TimerTest")
@@ -193,9 +203,110 @@ func _teach_gate(main: Node, corrupt: bool = false) -> void:
 		check(main.read_button.text != "Stop",
 			"teach gate left the Read button stuck on 'Stop' (corrupt=%s)" % corrupt)
 
+func _audio_modes(main: Node) -> void:
+	# Every autoplay goes through a token-guarded delay, and _show_menu bumps the
+	# token, so nothing scheduled here can start real synthesis after the check.
+	main._start_quiz(3, 9999, true, "SilentTest")
+	check(main.session_audio_mode == AudioSettings.Mode.SILENT, "default session audio is Silent")
+	check(main.session_muted, "Silent sessions start muted")
+	check(not main.read_button.visible, "muted dock hides the Read button")
+	main._toggle_session_mute()
+	check(not main.session_muted and main.read_button.visible, "unmuting shows the Read button")
+	main._show_menu()
+
+	main.audio.mode = AudioSettings.Mode.AUTO
+	main._start_quiz(80, 9999, true, "Full Journeyman Exam")
+	check(main.session_audio_mode == AudioSettings.Mode.TAP, "simulator downgrades Auto-read to Tap")
+	main._show_menu()
+
+	# Auto-read: the rule is read by itself after answering, so the dock offers
+	# a replay instead of asking the learner to push "Hear the rule".
+	main.audio.mode = AudioSettings.Mode.AUTO
+	main._start_quiz(3, 9999, true, "AutoTest")
+	main.menu_overlay.visible = false
+	main._show_question()
+	main._auto_token += 1
+	check(main.audio.auto_teach, "Auto-read reads the rule after answering by default")
+	var auto_rec: Dictionary = main.records[main.order[main.current_index]]
+	var token_before: int = main._auto_token
+	main._answer_selected(int(auto_rec.get("correct_index", 0)))
+	check(main.want_teach, "answering in Auto-read arms the teach read")
+	check(AudioSettings.autoplays_teach(main.session_audio_mode, main.audio.auto_teach), "Auto-read session autoplays the rule")
+	check(main._auto_token == token_before, "nothing cancels the scheduled rule read at answer time")
+	check(main.read_button.text == "Replay rule", "Auto-read dock offers 'Replay rule', got '%s'" % main.read_button.text)
+	main._auto_token += 1
+	main.audio.auto_teach = false
+	check(main._idle_read_label() == "Hear the rule", "with the rule read switched off the dock asks for it")
+	main.audio.auto_teach = true
+	main._show_menu()
+
+	main.audio.mode = AudioSettings.Mode.TAP
+	main._start_quiz(3, 9999, true, "TapTest")
+	main.menu_overlay.visible = false
+	main._show_question()
+	var tap_rec: Dictionary = main.records[main.order[main.current_index]]
+	main._answer_selected(int(tap_rec.get("correct_index", 0)))
+	check(main.read_button.text == "Hear the rule", "Tap to hear keeps the manual 'Hear the rule' button, got '%s'" % main.read_button.text)
+	main._auto_token += 1
+	main._show_menu()
+
+	main.audio.mode = AudioSettings.Mode.LISTEN
+	main._start_quiz(3, 9999, true, "ListenTest")
+	check(main.session_audio_mode == AudioSettings.Mode.LISTEN, "listen session mode")
+	check(not main.timed_session, "listen sessions are untimed")
+	main.menu_overlay.visible = false
+	main._show_question()
+	check(main.listen_phase == AudioSettings.ListenPhase.QUESTION, "listen starts in QUESTION phase")
+	check(main.pause_button.visible and main.skip_button.visible, "listen dock shows Pause + Skip")
+	check(not main.read_button.visible, "listen dock hides the Read button")
+	var rec: Dictionary = main.records[main.order[main.current_index]]
+	var wrong := (int(rec.get("correct_index", 0)) + 1) % (rec.get("answers", []) as Array).size()
+	main._answer_selected(wrong)
+	check(main.score == 0 and main.streak == 0 and main.missed_questions.is_empty(), "listen answers are not graded")
+	check(main.chapter_stats.is_empty(), "listen answers stay out of the chapter breakdown")
+	check(main.answered_count == 1, "listen still counts the item as reviewed")
+	check(main.listen_phase == AudioSettings.ListenPhase.TEACH, "answering in listen moves to TEACH")
+	main._toggle_listen_pause()
+	check(main.listen_paused and main.pause_button.text == "Resume", "pause toggles to Resume")
+	main._toggle_listen_pause()
+	main._listen_skip()
+	check(main.current_index == 1 and main.listen_phase == AudioSettings.ListenPhase.QUESTION, "skip advances to the next question")
+	main._show_menu()
+	check(main.listen_phase == AudioSettings.ListenPhase.IDLE, "menu ends the listen loop")
+	main.audio = AudioSettings.new()
+	await process_frame
+
+func _voice_routing(main: Node) -> void:
+	check(not main._clip_available("res://does_not_exist.mp3"), "a missing bundled clip reports available")
+	check(main._load_clip("res://does_not_exist.mp3") == null, "a missing bundled clip loaded")
+	# The bundle is gitignored; only check it where it has been generated.
+	if DirAccess.dir_exists_absolute("res://speech"):
+		var rec: Dictionary = main.records[0]
+		var qid := str(rec.get("id", "")).replace("/", "_")
+		var folder: String = main._bundled_speech_folder(qid, main.BUNDLED_VOICE_ID, SpeechText.speech_plan(rec))
+		check(folder != "", "record 0 has no bundled clips at the current rules/format")
+		if folder != "":
+			var clip = main._load_clip(folder.path_join("0.mp3"))
+			check(clip is AudioStream and clip.get_length() > 0.5,
+				"bundled clip does not load through ResourceLoader (what an exported build uses)")
+		var preview_segs := [{"text": main.PREVIEW_TEXT, "choice": -1, "teach": false}]
+		check(main._bundled_speech_folder(main.PREVIEW_ID, main.BUNDLED_VOICE_ID, preview_segs) != "",
+			"the voice preview line is not bundled")
+	if main.ui_mobile:
+		main._populate_voice_picker_native()
+		check(main.voice_picker.get_item_text(0) == main.BUNDLED_VOICE_LABEL,
+			"mobile picker does not list the recorded voice first: '%s'" % main.voice_picker.get_item_text(0))
+		main.voice_picker.selected = 0
+		check(main._selected_voice_id() == main.BUNDLED_VOICE_ID, "recorded voice entry has the wrong id")
+		check(main._pick_native_voice() != main.BUNDLED_VOICE_ID,
+			"native fallback was handed the recorded voice id instead of a device voice")
+		for i in range(1, main.voice_picker.item_count):
+			check(main.voice_picker.get_item_text(i).begins_with("Device voice · "),
+				"device voice not labelled as one: '%s'" % main.voice_picker.get_item_text(i))
+
 func _thread_join(main: Node) -> void:
-	# _speak_worker is what gets threaded. Start one for real via a stubbed
-	# python path, then check the node joins it before the tree tears down.
+	# Start a thread on speak_thread, then check the node joins it before the
+	# tree tears down.
 	main.speak_thread = Thread.new()
 	main.speak_thread.start(func() -> void: OS.delay_msec(50))
 	check(main.speak_thread.is_started(), "thread started for join test")

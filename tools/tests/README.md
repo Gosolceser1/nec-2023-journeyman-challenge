@@ -23,6 +23,7 @@ cd "C:/Users/vadim/Desktop/All Projects/redigitalpracticetestsforresidentialwire
 ./Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/tests/test_no_leak.gd
 ./Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/tests/test_audio_explanation_generator.gd
 ./Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/tests/test_speech_text.gd
+./Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/tests/test_speech_rules.gd
 ./Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/tests/test_unit_matcher.gd
 ./Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/tests/test_table_viewer.gd
 ```
@@ -34,12 +35,10 @@ one as a child Godot process and reads its exit code. Slower than an in-process
 runner, but it exercises exactly the path a developer runs by hand, and one
 suite's failure cannot abort the rest.
 
-**Current status: 1129 checks, 0 failures, 0 documented product defects.**
+**Current status: 1891 Godot checks across 12 suites, 9 Python validator/pipeline/data checks, 1 build-guard shell test, 0 failures, 0 documented product defects.**
 
-Every defect this suite used to pin has been fixed and promoted to a real
-assertion, so the count is now zero by construction — a defect that comes back
-fails the suite rather than hiding in the `defect()` list. `defect()` is still
-the right tool for the *next* one.
+Every formerly pinned defect is fixed and promoted to a real assertion, so a
+regression fails its suite rather than appearing in the defect list. The test table prefix case is covered directly: `NOTED: x` must remain unchanged.
 
 ## Layout
 
@@ -49,9 +48,12 @@ the right tool for the *next* one.
 | `test_no_leak.gd` | the leak guard: `redact_answer_spans`, `find_match_in`, `answer_sentence`, + a sweep of all 279 bank records |
 | `test_audio_explanation_generator.gd` | `_normalize_for_compare`, `_is_duplicate_text`, `_rule_adds_value`, `prompt_intent`, `prompt_with_answer`, `lesson_point`, `plain_words`, `lesson_lines`, `format_lesson_text`, `generate_explanation` |
 | `test_speech_text.gd` | `speakable`, `spoken_fraction`, `_normalize_spoken`, `spoken_segments`, `teach_segments`, `speech_plan`, the delegation shims + a sweep of all 279 speech plans |
+| `test_speech_rules.gd` | `speech_rules.gd`: golden input -> spoken cases for every pipeline rule (fails if a rule has none), idempotence, reading order and "Option X," lettering, the rules version stamp, no answer before answering, and a whole-bank sweep for unspelled caps / raw symbols / doubled periods (spec: `docs/VOICE_READING_RULES.md`) |
 | `test_unit_matcher.gd` | `format_answer_number`, `answer_match_candidates` + a sweep of all 279 answers |
 | `test_table_viewer.gd` | the pure parts: `preview_layout`, `extract_target_keyword`, `is_note_row`, `_strip_note_prefix` + a sweep of all 25 bank tables |
 | `run_all.gd` | combined runner |
+| `test_validate_question_bank.py` | Python regression checks for validator/render parity and shared OCR path resolution |
+| `test_build_guard.sh` | proves builds refuse default, relative, and absolute targets that would overwrite the curated bank |
 
 ## What IS covered
 
@@ -77,12 +79,13 @@ part of the suite:
   unfindable. Also asserts the reverse: every record's `lesson_lines` DO state the
   answer, so the teardown can actually teach it.
 
-**TTS readability** (`test_speech_text.gd`, 445 checks) — `speakable()` is
+**TTS readability** (`test_speech_text.gd`, 456 checks) — `speakable()` is
 asserted against exact output for inches, feet, mixed numbers and fractions
 (`1 1/4"` -> `1 and one quarter inches`), every electrical unit (`240V` ->
 `240 volts`, `mA` vs `A`, `kVA`, `kW`, `deg C`/`deg F`, `Hz`, `mm`), jargon
-expansions (`GFCI`, `AFCI`, `EMT`, `AWG`, `OCPD`, …), NEC section references
-(`240.4(D)(5)` -> `Section 240.4, paragraph D, item 5`), Roman numerals, aught
+spelling and expansions (`GFCI` -> `G F C I`, `OCPD` -> `overcurrent protective
+device`, …), NEC section references (`240.4(D)(5)` -> `section 240 point 4,
+paragraph D, item 5`), Roman numerals, aught
 sizes, conductor types, blank runs, and every symbol. Plus `spoken_fraction`,
 the segment planners, and the guarantee that teach clips are a contiguous tail of
 the speech plan (the playback gate depends on that).
@@ -160,7 +163,7 @@ removed, so a regression is red rather than a printed warning.
 | 11 | `speech_text.gd` | `1-1/4"` needed whitespace, so the hyphenated form was unconverted | hyphenated mixed numbers normalise to the spaced form |
 | 12 | `table_viewer.gd` | `_strip_note_prefix` ate 4 characters off any word starting with `note` | `strip("NOTED: x")` -> `"NOTED: x"` |
 | 13 | `unit_matcher.gd` | an `NN%` answer had no `N percent` candidate, so it was never redacted | `83%` -> `83 percent`, `eighty-three percent`. The **bare** number is deliberately excluded: as a candidate it blanked the 8 in `8 AWG` |
-| 14 | `speech_text.gd` | `unspaced_mixed` rewrote the live `15/16` fraction as `"1 and five sixteenths"` | the numerator is pinned to `1`, so `15/16 in.` stays `Fifteen sixteenths inches` |
+| 14 | `speech_text.gd` | `unspaced_mixed` rewrote the live `15/16` fraction as `"1 and five sixteenths"` | the numerator is pinned to `1`, so `15/16 in.` stays a fraction (`Fifteen sixteenths of an inch`) |
 
 **The leak guarantee itself currently holds:** 0 of 279 records leak a surviving
 answer into any pre-answer field. The gaps that were found are now closed in

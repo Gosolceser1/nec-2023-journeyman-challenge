@@ -1,7 +1,7 @@
 # ARCHITECTURE — refactoring `main.gd`
 
 **Status:** design only. No code in this document has been applied.
-**Baseline:** `main.gd` @ 3,299 lines, 86 functions, 88 member vars. Harness **342 checks / 0 failures** (verified, see §0.1). Godot 4.7.2, GDScript.
+**Current baseline:** `main.gd` @ 3,327 lines, 86 functions, 88 member vars. Harness **342 checks / 0 failures**. Godot 4.7.2, GDScript.
 
 **Reading order:** §1 what hurts → §2 target architecture → §3 migration phases → §4 what *not* to do → §5 the state problem.
 
@@ -9,7 +9,7 @@
 
 ## 0. Baseline facts this plan is built on
 
-Everything below was measured against the working tree, not estimated. Re-measure before each phase; the numbers are the acceptance criteria.
+Detailed function ranges and dependency measurements below describe the original planning baseline, not the current tree. Re-measure before each phase; do not use those historical line ranges as migration targets.
 
 ### 0.1 The safety net
 
@@ -228,7 +228,7 @@ Every phase is independently shippable, independently revertible, and harness-gr
    ```
 3. **Rollback is `git revert <sha>`.** Every phase is additive-then-redirect, never redirect-then-delete. The old function survives in `main.gd` (unreferenced) until the *following* phase deletes it. That gives a window where a failure is a one-line pointer swap back, not a rebase.
 4. **Guards move verbatim.** `is_instance_valid` is never reworded, reordered, or "cleaned up" during a move. §3.7 handles them separately.
-5. **Verify the patch landed** — `grep` for the new symbol and confirm the match count. A `patch` on a 3,299-line file has reported success without changing anything.
+5. **Verify the patch landed** — `grep` for the new symbol and confirm the match count. A `patch` on a 3,327-line file has reported success without changing anything.
 6. **No new `signal`s until phase 5.** Adding signals and moving code together makes failures unattributable.
 
 ### 3.1 Phase 1 — `theme.gd` (MECHANICAL) · highest value ÷ risk

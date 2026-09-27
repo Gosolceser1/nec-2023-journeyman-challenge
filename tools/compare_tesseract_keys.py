@@ -2,8 +2,10 @@ import json
 import re
 from pathlib import Path
 
+from pipeline_paths import answer_key_ocr_dir
+
 ROOT = Path(__file__).resolve().parents[1]
-KEYS = Path(r"C:\Users\vadim\AppData\Local\Temp\opencode\wire_tesseract_keys")
+KEYS = answer_key_ocr_dir()
 
 STEMS = {
     "Journeyman open book final exam #1 answer key": "Final Exam #1",

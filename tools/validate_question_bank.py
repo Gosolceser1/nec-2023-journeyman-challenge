@@ -62,6 +62,7 @@ LIST_FIELDS = ["answers", "keywords", "reference_table", "choice_notes"]
 
 MIN_ANSWERS, MAX_ANSWERS = 2, 6
 VALID_DIFFICULTIES = {"easy", "medium", "hard"}
+NON_CODE_REFERENCE_LABELS = {"general knowledge", "general calculation"}
 
 # ids look like "final-exam-#1-002" / "open-book-exam-#7-014"
 ID_RE = re.compile(r"^[a-z0-9#-]+-\d{3}$")
@@ -73,6 +74,18 @@ ARTICLE_RE = re.compile(r"^(?:Table\s+)?\d+\.\d+", re.I)
 # answer appearing verbatim there hands the answer to the player.
 PRE_ANSWER_CHAPTERS = ["WHAT THIS QUESTION MEANS", "PLAIN-LANGUAGE BACKGROUND", "LOOKUP FOCUS"]
 LEAK_MIN_LEN = 4  # ignore 1-3 char answers ("no", "yes", "1") -- too noisy
+
+# Stems are shown exactly as printed in the source exam PDF. A few source
+# questions state their own answer in the stem (422.33(A) says "an accessible"
+# twice, and the exam blanks only the second). Each exception pins the record id
+# AND its full prompt: any other record, or any other wording of this one, is
+# still a fatal prompt leak.
+PROMPT_LEAK_EXCEPTIONS = {
+    "final-exam-#3-042": (
+        "For cord-and-plug connected appliances, an accessible separable connector or ___ "
+        "plug and receptacle is permitted to serve as the disconnecting means."
+    ),
+}
 
 # --------------------------------------------------------------------------
 # Build-time scaffolding that must never ship inside a learner-facing field.
@@ -215,8 +228,55 @@ def _pre_answer_tip(tip: str) -> str:
     return task
 
 
-# --------------------------------------------------------------------------
-# top level
+def prompt_leak_excepted(record_id, prompt) -> bool:
+    return PROMPT_LEAK_EXCEPTIONS.get(record_id) == prompt
+
+
+def pre_answer_visible_text(record: dict) -> str:
+    """Mirror main.gd: prefer gist; use the info_tip task only as its fallback."""
+    gist = record.get("gist")
+    if isinstance(gist, str) and gist.strip():
+        return gist.strip()
+    tip = record.get("info_tip")
+    return _pre_answer_tip(tip) if isinstance(tip, str) else ""
+
+
+def article_reference_is_recognized(reference: str) -> bool:
+    """Accept NEC/standard citations and explicit non-code reference categories."""
+    if not isinstance(reference, str):
+        return False
+    clean = reference.strip()
+    folded = clean.casefold()
+    if folded in NON_CODE_REFERENCE_LABELS or folded == "nfpa 70e":
+        return True
+    if folded in {"def 100", "definition 100", "definitions 100"}:
+        return True
+    if folded.startswith("nec "):
+        clean = clean[4:].strip()
+        folded = clean.casefold()
+    if folded.startswith("article ") and clean[8:].strip().isdigit():
+        return True
+    if folded.startswith("chapter 9, note ") and clean[15:].strip().isdigit():
+        return True
+    if folded == "table 8, chapter 9":
+        return True
+    return ARTICLE_RE.match(clean) is not None
+
+
+def ragged_table_rows(table: list) -> list[tuple[int, int]]:
+    """Return malformed width deviations, excluding recognized one-cell notes."""
+    if not table or not isinstance(table[0], list):
+        return []
+    header_width = len(table[0])
+    return [
+        (index, len(row))
+        for index, row in enumerate(table)
+        if isinstance(row, list)
+        and len(row) != header_width
+        and not note_row_documented(row)
+    ]
+
+
 # --------------------------------------------------------------------------
 def check_top_level(data, rep: Report) -> None:
     if not isinstance(data, dict):
@@ -397,9 +457,9 @@ def check_records(data, rep: Report) -> dict:
                 f"{rid}: difficulty {rec.get('difficulty')!r} not in {sorted(VALID_DIFFICULTIES)}"
             )
 
-        # article format
-        if isinstance(rec.get("article"), str) and not ARTICLE_RE.match(rec["article"]):
-            rep.warn(f"{rid}: article {rec['article']!r} does not look like an NEC citation")
+        # citation format (or an explicit non-code reference category)
+        if isinstance(rec.get("article"), str) and not article_reference_is_recognized(rec["article"]):
+            rep.warn(f"{rid}: article {rec['article']!r} is not a recognized reference")
 
         # question_number
         qn = rec.get("question_number")
@@ -443,7 +503,7 @@ def check_records(data, rep: Report) -> dict:
             if isinstance(ans, str) and len(ans.strip()) >= LEAK_MIN_LEN:
                 target = ans.strip().casefold()
                 v = rec.get("prompt")
-                if isinstance(v, str) and answer_in_text(ans, v):
+                if isinstance(v, str) and answer_in_text(ans, v) and not prompt_leak_excepted(rid, v):
                     rep.error(
                         f"{rid}: correct answer {truncate(ans)!r} leaks verbatim into 'prompt' "
                         f"(prompt is displayed unredacted)"
@@ -455,13 +515,12 @@ def check_records(data, rep: Report) -> dict:
                         f"(main.gd blanks gist at runtime, so no spoiler -- but the data is at risk)"
                     )
                 tip = rec.get("info_tip")
-                # main.gd:_gist_task_sentence() shows ONLY the task-framing
-                # paragraph (chunk[1]) before an answer, and only when chunk[2]
-                # starts with "LOOKUP FOCUS". Everything after that is the
-                # post-answer explanation, which is SUPPOSED to name the answer.
-                # Scanning the whole tip string flagged every record whose
-                # "Correct: B — ..." line exists - i.e. almost all of them.
-                if isinstance(tip, str) and answer_in_text(ans, _pre_answer_tip(tip)):
+                # main.gd uses the task paragraph only when gist is empty. Check
+                # that actual fallback, not a paragraph the learner won't see.
+                gist = rec.get("gist")
+                fallback = not (isinstance(gist, str) and gist.strip())
+                visible_tip = pre_answer_visible_text(rec) if fallback else ""
+                if isinstance(tip, str) and answer_in_text(ans, visible_tip):
                     low = tip.casefold()
                     pos = low.find(target)
                     chapter = next(
@@ -496,14 +555,14 @@ def check_records(data, rep: Report) -> dict:
                         note_like_unrecognised.append((ri, row[0]))
                     elif not note_row_documented(row):
                         note_like_unrecognised.append((ri, row[0]))
-            # ragged
-            if len(widths) > 1:
+            # A one-cell NOTE row is a separate note strip, not a malformed
+            # table row. Only flag actual data rows whose width differs.
+            odd = ragged_table_rows(tbl)
+            if odd:
                 header_w = len(tbl[0]) if isinstance(tbl[0], list) else max(widths)
-                odd = [(ri, len(tbl[ri])) for ri in range(len(tbl))
-                       if isinstance(tbl[ri], list) and len(tbl[ri]) != header_w]
                 rep.warn(
-                    f"{rid}: reference_table is ragged -- header has {header_w} column(s), "
-                    f"row widths {dict(widths)}; deviating rows {odd}"
+                    f"{rid}: reference_table has malformed row widths -- "
+                    f"header has {header_w} column(s); deviating rows {odd}"
                 )
             for ri, cell in note_like_unrecognised:
                 rep.warn(

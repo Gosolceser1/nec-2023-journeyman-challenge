@@ -38,7 +38,6 @@ func run() -> void:
 	extract_target_keyword_matching()
 	extract_target_keyword_edges()
 	note_row_bank_consistency()
-	known_defects()
 	report()
 
 
@@ -265,16 +264,6 @@ func note_row_bank_consistency() -> void:
 	# a defect pin expecting final-exam-#1-021 to slip through; the is_note_row
 	# fix closed it, so there is nothing left to list.
 	t.eq(note_ids, [], "no numbered NEC note in the bank is left unclassified")
-
-
-func known_defects() -> void:
-	print("=== known defects (documented, not failures) ===")
-	t.defect("table_viewer.gd:13 _strip_note_prefix",
-		"the prefix strip tests only 'begins_with(\"NOTE\")', so a word that merely STARTS "
-		+ "with 'note' has 3 characters cut off it",
-		"_strip_note_prefix('NOTED: x') = '" + TV._strip_note_prefix("NOTED: x") + "'",
-		"'x' -- 'NOTED' should not be treated as a note prefix",
-		"not reachable today: no bank text contains 'NOTED:'; latent for any future cell")
 
 
 func report() -> void:

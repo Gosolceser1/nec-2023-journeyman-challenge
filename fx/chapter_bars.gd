@@ -1,0 +1,86 @@
+class_name ChapterBars
+extends Control
+
+## Results-screen breakdown: one horizontal bar per NEC chapter showing the
+## share answered correctly. Bars grow in when shown.
+
+const ROW_H := 24.0
+const CHAPTER_NAMES := {
+	0: "Trade knowledge / math",
+	1: "Ch 1  General",
+	2: "Ch 2  Wiring & protection",
+	3: "Ch 3  Wiring methods",
+	4: "Ch 4  General equipment",
+	5: "Ch 5  Special occupancies",
+	6: "Ch 6  Special equipment",
+	7: "Ch 7  Special conditions",
+	8: "Ch 8  Communications",
+	9: "Ch 9  Tables",
+}
+
+var rows: Array = []
+var _grow := 0.0
+
+
+func _init() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
+
+## NEC chapter for an article/section string ("310.16", "Table 250.66",
+## "Chapter 9, Table 4"); 0 for NFPA 70E, math and general knowledge.
+static func chapter_of(article: String) -> int:
+	var ch := RegEx.create_from_string("(?i)\\bchapter\\s+(\\d)\\b").search(article)
+	if ch != null:
+		return int(ch.get_string(1))
+	if article.to_lower().contains("70e"):
+		return 0
+	var m := RegEx.create_from_string("\\b([1-9])\\d\\d\\b").search(article)
+	return int(m.get_string(1)) if m != null else 0
+
+
+## stats: {chapter:int -> [correct:int, total:int]} -> sorted display rows.
+static func rows_from_stats(stats: Dictionary) -> Array:
+	var keys := stats.keys()
+	keys.sort()
+	var out: Array = []
+	for k in keys:
+		var v: Array = stats[k]
+		out.append({"label": str(CHAPTER_NAMES.get(int(k), "Other")), "correct": int(v[0]), "total": int(v[1])})
+	return out
+
+
+func set_rows(new_rows: Array) -> void:
+	rows = new_rows
+	custom_minimum_size.y = ROW_H * rows.size() + 4.0
+	_grow = 0.0
+	queue_redraw()
+	var tw := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tw.tween_interval(0.3)
+	tw.tween_method(_set_grow, 0.0, 1.0, 1.0)
+
+
+func _set_grow(v: float) -> void:
+	_grow = v
+	queue_redraw()
+
+
+func _draw() -> void:
+	var font := get_theme_default_font()
+	var label_w := minf(190.0, size.x * 0.46)
+	var count_w := 44.0
+	var bar_x := label_w + 8.0
+	var bar_w := maxf(20.0, size.x - bar_x - count_w)
+	for i in rows.size():
+		var row: Dictionary = rows[i]
+		var y := float(i) * ROW_H
+		var total: int = maxi(int(row["total"]), 1)
+		var ratio := float(row["correct"]) / float(total)
+		var col := ResultGauge.tint_for(ratio * 100.0, 75.0)
+		draw_string(font, Vector2(0, y + 16.0), str(row["label"]), HORIZONTAL_ALIGNMENT_LEFT, label_w, 12, Color("cbd5e1"))
+		var track := Rect2(bar_x, y + 7.0, bar_w, 10.0)
+		draw_rect(track, Color(1, 1, 1, 0.07))
+		if ratio > 0.0:
+			draw_rect(Rect2(track.position, Vector2(bar_w * ratio * _grow, track.size.y)), col)
+		draw_string(font, Vector2(bar_x + bar_w + 6.0, y + 16.0), "%d/%d" % [int(row["correct"]), int(row["total"])],
+			HORIZONTAL_ALIGNMENT_LEFT, count_w, 12, Color("94a3b8"))

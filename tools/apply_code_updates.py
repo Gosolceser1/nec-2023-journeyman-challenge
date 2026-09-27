@@ -6,31 +6,23 @@ updates = {
         "reference_text": "408.36(B) Overcurrent Protection for Panelboards Supplied Through a Transformer\nWhere a panelboard is supplied through a transformer, the overcurrent protection required by 408.36 shall be located on the secondary side of the transformer. Exception: A panelboard supplied by the secondary side of a transformer shall be considered protected by the overcurrent protection provided on the primary side of the transformer in accordance with 240.21(C)(1)."
     },
 
-    # 2. open-book-exam-#10-002: 220.11 / 220.14(J) / 220.41 (or 220.11(C) in NEC 2023)
-    # The question asked which is EXCLUDED from floor area calculations: 'open porches', 'garages', 'areas not adaptable as future occupiable space' - all of these are excluded.
-    # In the question prompt: "For the purpose of load calculations, the square footage of a dwelling unit includes ___."
-    # Wait, the prompt had: "For the purpose of load calculations, the square footage of a dwelling unit includes ___."
-    # With options: ['open porches', 'garages', 'areas not adaptable as future occupiable space', 'all of these']
-    # Let's fix the prompt to: "For the purpose of load calculations, the calculated floor area of a dwelling unit shall not include ___." with answer "all of these" (index 3), OR if the original question was "shall NOT include", let's check its original intent.
-    # Let's verify what options and prompt make this 100% sound.
-    # If prompt is: "For the purpose of load calculations, the calculated floor area of a dwelling unit shall not include ___."
-    # and answers are ["open porches", "garages", "unfinished areas not adaptable for future use", "all of these"], correct_index is 3 ("all of these").
+    # 2. open-book-exam-#10-002: 220.5(C) — NEC 2023 no longer excludes garages from dwelling floor area.
     "open-book-exam-#10-002": {
-        "prompt": "For the purpose of load calculations, the calculated floor area of a dwelling unit shall not include ___.",
+        "prompt": "For the purpose of load calculations, the square footage of a dwelling unit includes ___.",
         "answers": [
             "open porches",
             "garages",
-            "unfinished areas not adaptable for future use",
+            "areas not adaptable as future occupiable space",
             "all of these"
         ],
-        "correct_index": 3,
-        "article": "220.11",
-        "reference_text": "220.11 Floor Area\nThe floor area for each floor shall be calculated from the outside dimensions of the building, dwelling unit, or other area involved. For dwelling units, the calculated floor area shall not include open porches, garages, or unfinished areas not adaptable for future use as a habitable room or occupiable space.",
+        "correct_index": 1,
+        "article": "220.5(C)",
+        "reference_text": "220.5(C) Floor Area\nThe floor area for each floor shall be calculated from the outside dimensions of the building, dwelling unit, or other area involved. For dwelling units, the calculated floor area shall not include open porches or unfinished areas not adaptable for future use as a habitable room or occupiable space.",
         "choice_notes": [
-            "Excluded from dwelling unit floor area.",
-            "Excluded from dwelling unit floor area.",
-            "Excluded from dwelling unit floor area.",
-            "Open porches, garages, and unadaptable areas are all excluded."
+            "Open porches are excluded from dwelling floor area.",
+            "Garages are no longer excluded in the 2023 NEC, so they are counted.",
+            "Areas not adaptable for future occupiable space are excluded.",
+            "Porches and unadaptable areas are still excluded."
         ]
     },
 

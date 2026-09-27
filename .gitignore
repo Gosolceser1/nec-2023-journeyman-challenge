@@ -28,6 +28,7 @@ export_presets.cfg.bak
 
 # Scratch output from OCR/audit tooling
 /tools/__pycache__/
+/tools/tests/__pycache__/
 /tools/*.txt
 /tools/*.png
 /tools/*.png.import

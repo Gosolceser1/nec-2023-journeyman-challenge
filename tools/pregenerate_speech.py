@@ -7,8 +7,11 @@ The game plays those local files first and only synthesizes live when a question
 changed or the voice was switched, so practice works offline after this run.
 
 Usage:
-    python tools\\dump_first (Godot step below), then:
-    python tools\\pregenerate_speech.py [--voice VOICE] [--limit N] [--force]
+    run the Godot dump step below first, then:
+    python tools\\pregenerate_speech.py [--voice VOICE] [--limit N] [--force] [--bundle]
+
+--bundle writes the shipped clips into <project>\\speech\\ (checked by
+tools/test_bundle.gd) instead of the per-user cache.
 
 Godot step (run from the project folder):
     Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/dump_speech.gd
@@ -22,7 +25,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from speak_question import DEFAULT_VOICE, synthesize
+from speak_question import DEFAULT_VOICE, OUTPUT_FORMAT, synthesize
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -48,7 +51,13 @@ def saved_voice(userdata: Path) -> str:
 
 def plan_key(plan: dict) -> list:
     return [
-        (str(s.get("text", "")).strip(), int(s.get("choice", -1)), bool(s.get("teach", False)))
+        (
+            str(s.get("text", "")).strip(),
+            int(s.get("choice", -1)),
+            bool(s.get("teach", False)),
+            int(s.get("rules", 0)),
+            OUTPUT_FORMAT,
+        )
         for s in plan.get("segments", [])
         if str(s.get("text", "")).strip() != ""
     ]
@@ -69,7 +78,15 @@ def manifest_key(folder: Path) -> list | None:
         clip = folder / str(row.get("file", ""))
         if not clip.exists() or clip.stat().st_size == 0:
             return None
-        keys.append((str(row.get("text", "")), int(row.get("choice", -1)), bool(row.get("teach", False))))
+        keys.append(
+            (
+                str(row.get("text", "")),
+                int(row.get("choice", -1)),
+                bool(row.get("teach", False)),
+                int(row.get("rules", 0)),
+                str(row.get("format", "")),
+            )
+        )
     return keys
 
 
@@ -78,10 +95,17 @@ def main() -> None:
     args_parser.add_argument("--voice", default="")
     args_parser.add_argument("--limit", type=int, default=0)
     args_parser.add_argument("--force", action="store_true")
+    args_parser.add_argument(
+        "--bundle",
+        action="store_true",
+        help="write into the project's res://speech (the clips shipped with the app) "
+        "instead of the user cache; voice defaults to the bundled default voice",
+    )
     args = args_parser.parse_args()
 
     userdata = user_dir()
-    voice = args.voice or saved_voice(userdata)
+    voice = args.voice or (DEFAULT_VOICE if args.bundle else saved_voice(userdata))
+    out_root = ROOT / "speech" if args.bundle else userdata / "speech"
     src = userdata / "speech_src"
     if not src.exists():
         raise SystemExit("speech plans not found. Run the Godot dump step first (see module docstring).")
@@ -95,7 +119,7 @@ def main() -> None:
     for index, plan_path in enumerate(plans, start=1):
         plan = json.loads(plan_path.read_text(encoding="utf-8"))
         qid = plan.get("id") or plan_path.stem
-        folder = userdata / "speech" / ("%s__%s" % (plan_path.stem, voice))
+        folder = out_root / ("%s__%s" % (plan_path.stem, voice))
         wanted = plan_key(plan)
         if not wanted:
             print("[%d/%d] %s: empty plan, skipped" % (index, len(plans), qid))

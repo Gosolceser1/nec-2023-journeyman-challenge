@@ -3,8 +3,10 @@ from pathlib import Path
 
 import fitz
 
+from pipeline_paths import exam_ocr_dir
+
 ROOT = Path(__file__).resolve().parents[1]
-OUT = Path(r"C:\Users\vadim\AppData\Local\Temp\opencode\wire_tesseract")
+OUT = exam_ocr_dir()
 TESSERACT = Path(r"C:\Program Files\Tesseract-OCR\tesseract.exe")
 
 PDF_DIR = ROOT / "exams_source_pdf" if (ROOT / "exams_source_pdf").exists() else ROOT

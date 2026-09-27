@@ -6,11 +6,15 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gists import GISTS, SCENES
+from pipeline_paths import answer_key_ocr_dir, exam_ocr_dir
+from bank_overrides import apply_overrides
 
 ROOT = Path(__file__).resolve().parents[1]
-OCR = Path(os.environ.get("WIRE_OCR_PATH", r"C:\Users\vadim\AppData\Local\Temp\opencode\wire_ocr"))
-KEYS = Path(r"C:\Users\vadim\AppData\Local\Temp\opencode\wire_ocr_keys")
+OCR = exam_ocr_dir()
+KEYS = answer_key_ocr_dir()
 OUT = Path(os.environ.get("WIRE_BANK_OUT", str(ROOT / "question_bank.json")))
+if OUT.resolve() == (ROOT / "question_bank.json").resolve():
+    raise SystemExit("Refusing to write over the curated bank; set WIRE_BANK_OUT to a candidate file.")
 
 SOURCES = {
     "Journeyman open book final exam #1": "Final Exam #1",
@@ -271,9 +275,9 @@ CONCEPT_NOTES = {
     ),
     "load_calc_basics": (
         "Load calculations never just add everything up, because a home never runs all loads at once. "
-        "Start with 3 VA per square foot of living space (outside dimensions, minus porches and garages), "
+        "Start with 3 VA per square foot of living space (outside dimensions, minus open porches and unfinished spaces), "
         "add 1,500 VA for each small-appliance and laundry circuit, then shrink the subtotal with the "
-        "demand factor (first 3,000 VA at full value, the rest at 35%). Ranges and dryers use their own "
+        "demand factor (first 3,000 VA at full value, 3,001 to 120,000 VA at 35%, the remainder at 25%). Ranges and dryers use their own "
         "tables — a range nameplate is only the starting point. Heat and AC: count the larger one, never both."
     ),
     "disconnect_basics": (
@@ -1060,7 +1064,7 @@ REFERENCE_TEXTS = {
     "470.11": "470.11 Reactor Support and Enclosure\nReactors shall be installed in an enclosure or supported so they cannot be contacted by persons; spacing from combustible material per the manufacturer's listing.",
     "356.22": "356.22 Liquidtight Flexible Metal Conduit (LFMC) Ampacity\nLFMC ampacity is based on raceway tables when length and fill conditions per Article 356 are met (see Chapter 9 for fill).",
     "344.10(C)": "344.10(C) RMC Use Permitted in Wet Locations\nRigid metal conduit is permitted in all atmospheres and locations, including direct burial and submerged locations where listed for corrosion resistance.",
-    "Final Exam #1, Question 5": "General service grounding — see 250.52, 250.66, and 250.68 for grounding electrode system sizing and connections (see individual provision entries).",
+    "Final Exam #1, Question 5": "Switch and Lamp Troubleshooting",
     "322.56(B)": "322.56(B) Armored Grounding Continuity\nType AC cable's bonding jumper shall be used for equipment grounding where the cable's armor is listed as an equipment grounding conductor (see 250.118 for AC armor acceptance).",
     "425.22(D)": "425.22(D) Process Heating Overload Protection\nElectric process heating equipment shall be provided with overload protection per 427.5 for continuous-duty heating elements where marked.",
     "680.35(D)": "680.35(D) Audio Equipment\nAudio equipment shall not be installed in or on self-contained storable or portable immersion pools. Audio equipment operating above the low-voltage contact limit and located within 1.83 m (6 ft) of the inside walls of a storable or portable immersion pool shall be grounded and provided with GFCI protection.",
@@ -1413,6 +1417,7 @@ PROMPT_REPAIRS = {
 }
 
 QUESTION_REFERENCE_TEXTS = {
+    ("Final Exam #1", 5): "Switch and Lamp Troubleshooting" + chr(10) + "With S1 closed and 0 volts measured across it, the switch contacts are conducting. With full 120 volts still present across the lamp, the lamp circuit is open downstream of the switch, so current never reaches the filament.",
     ("Open Book Exam #10", 9): "Operator. The individual responsible for starting, stopping, and controlling an amusement ride or supervising a concession. (525) (CMP—15)",
     ("Open Book Exam #10", 10): "225.19(D)(1) Final Spans — Clearance from Windows and Doors. Maintain at least 900 mm (3 ft) horizontal clearance from operable windows and doors. 225.19(D)(3) Building Openings. Do not install overhead branch-circuit or feeder conductors beneath openings used to move materials, or where they obstruct entrance to those openings."
 }
@@ -2082,7 +2087,7 @@ manual = [
     ["FINAL EXAM #5", "The number of conductors allowed in LFNC must not exceed the percentage fill specified in Chapter 9, Table...", ["Table 7", "Table 9", "Table 1", "Table 4"], 2, "NEC 356.22", "Final Exam #5", 66, "hard"],
     ["FINAL EXAM #5", "Rigid metal conduit may be installed in or under cinder fill when protected on all sides by noncinder concrete not less than...", ["1 1/2 inches", "2 inches", "4 inches", "6 inches"], 1, "NEC 344.10(C)", "Final Exam #5", 68, "hard"],
     ["OPEN BOOK EXAM #7", "Temperature correction and adjustment factors may be applied to conductor ampacity if the corrected and adjusted ampacity does not exceed the ampacity for the temperature rating of the...", ["Termination", "Connector", "Enclosure", "Device"], 0, "NEC 310.15(A)", "Open Book Exam #7", 15, "medium"],
-    ["FINAL EXAM #1", "Given switch S1 is ON, the light does not come on, voltage across the light is 120 volts, and voltage across S1 is 0 volts. The light does not come on because...", ["The light is open (bulb burned out)", "The light and switch are shorted", "The light is good but the switch does not make contact", "There is a break in the circuit wiring"], 0, "Final Exam #1, Question 5", "Final Exam #1", 5, "easy"],
+    ["FINAL EXAM #1", "Given switch S1 is ON, the light does not come on, voltage across the light is 120 volts, and voltage across S1 is 0 volts. The light does not come on because...", ["The light is open (bulb burned out)", "The light and switch are shorted", "The light is good but the switch does not make contact", "There is a break in the circuit wiring"], 0, "General knowledge", "Final Exam #1", 5, "easy"],
     ["FINAL EXAM #1", "When working from an electrical drawing, you should start from the...", ["Lower right-hand corner", "Center", "Upper left-hand corner", "Bottom"], 2, "General knowledge", "Final Exam #1", 64, "medium"],
     ["FINAL EXAM #3", "Service and feeder conductors may be sized using Table 310.12(A) for...", ["Commercial services only", "Only multifamily dwelling services", "Any service under 400 amps", "Only 240/120V, 3-wire services for a single dwelling unit"], 3, "Table 310.12(A)", "Final Exam #3", 65, "hard"],
     ["OPEN BOOK EXAM #1", "Plate electrodes shall be installed not less than how far below the surface of earth?", ["2 feet", "2 1/2 feet", "3 feet", "4 feet"], 1, "NEC 250.53(A)(5)", "Open Book Exam #1", 8, "medium"],
@@ -2317,6 +2322,14 @@ for item in bank:
         "choice_notes": choice_notes_for(item[2]),
         "available": True,
     })
+# Curated corrections live in a data overlay instead of being lost on rebuild.
+# Set WIRE_SKIP_BANK_OVERRIDES=1 only when generating a raw baseline for a
+# reviewed overlay refresh.
+if os.environ.get("WIRE_SKIP_BANK_OVERRIDES") != "1":
+    overrides_path = Path(__file__).with_name("question_bank_overrides.json")
+    overlay = json.loads(overrides_path.read_text(encoding="utf-8"))
+    apply_overrides(records, overlay)
+
 # "questions" held the RAW pre-curation rows (un-redacted stems, original
 # units). main.gd read only "records"; keeping both doubled the file and left a
 # latent fallback to unredacted data. Curated rows only.

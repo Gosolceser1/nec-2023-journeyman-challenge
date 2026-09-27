@@ -50,8 +50,10 @@ cd "$ROOT" || exit 1
 # 1. Parse every script without booting the app.
 parse_check() {
   local rc=0
-  for f in main.gd speech_text.gd audio_explanation_generator.gd table_viewer.gd \
-           unit_matcher.gd answer_card.gd voice_visualizer.gd; do
+  for f in main.gd speech_text.gd speech_rules.gd audio_explanation_generator.gd table_viewer.gd \
+           unit_matcher.gd answer_card.gd voice_visualizer.gd audio_settings.gd diagram_view.gd \
+           fx/ui_fx.gd fx/time_gauge.gd fx/streak_meter.gd fx/result_gauge.gd \
+           fx/chapter_bars.gd fx/mode_badge.gd fx/sfx.gd fx/speech_chain.gd speech_helper.gd; do
     out=$("$GODOT" --headless --path . --check-only --script "$f" 2>&1 | grep -vE "$NOISE")
     if printf '%s' "$out" | grep -qiE "SCRIPT ERROR|Parse Error"; then
       echo "  ✗ $f failed to parse:"
@@ -92,7 +94,10 @@ bank_validate() {
     echo "  (no validator yet — skipping)"
     return 0
   fi
-  python tools/validate_question_bank.py
+  bash tools/tests/test_build_guard.sh || return $?
+  python -m unittest tools.tests.test_validate_question_bank tools.tests.test_spellcheck_bank tools.tests.test_speak_question || return $?
+  python tools/spellcheck_bank.py --offline || return $?
+  python tools/validate_question_bank.py --no-warn
   return $?
 }
 
