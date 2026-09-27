@@ -6,7 +6,7 @@ to earn its place: it must tell them something they would otherwise miss, and
 still be pleasant on the 100th repetition.
 
 The shipped set is "Set C" with the wrong cue replaced by a hand-picked
-electric boom (sourced from Pixabay, processed per role; sources
+electric boom and hover by a hand-picked swoosh (sourced from Pixabay, processed per role; sources
 and license in `assets/sfx/CREDITS.md`): six event cues plus five quiet
 interface sounds. `tools/sfx/make_sfx.py` still renders the old synthesized
 set, but only writes into `assets/sfx/` with `--replace-shipped`.
@@ -30,7 +30,7 @@ and short. One user action makes at most one sound.
 | Sound | File | Plays on | Never on |
 |---|---|---|---|
 | `click` | "Click", a short dry click, 0.11 s | Plain button presses: Next question / Finish, Read / Stop, Pause / Resume, Skip, Menu (the first, arming press), Change, Preview, opening the voice picker | Session starts (start cue), answer cards |
-| `hover` | "Pop Clean", a tiny pop, 0.09 s | Mouse pointer entering a plain button or menu card, desktop layout only | Mobile, answer cards, chips and switches, while a voice reads |
+| `hover` | "Swoosh 1", the peak of a soft airy swoosh, 0.15 s (as long as its repeat gap, so a sweep never stacks) | Mouse pointer entering a plain button or menu card, desktop layout only | Mobile, answer cards, chips and switches, while a voice reads |
 | `toggle` | "Light Switch", a real switch flick, 0.14 s | Switches and chips: voice Mute / Turn on, the Audio & Voice mode, speed and think-pause chips, "Also read the rule", "Reduce motion" | The Sounds level chips (they preview with `correct`) |
 | `select` | "Pop Click", 0.19 s | Keyboard or controller focus moving onto an answer card, before answering | A click or tap on a card (the answer tone covers it), after answering |
 | `transition` | "Movement Swipe Whoosh 1", a short airy swipe, 0.30 s | Screen changes: quiz → report, back to the menu (Return to Main Menu, Menu, Android back) | The launch menu; menu → quiz (the start cue is that transition) |
@@ -91,7 +91,7 @@ and only the result sound plays).
   and fades out under the first 0.3 s of the voice.
 - Independent of the voice mode: Silent mutes the voice, not these.
 - Files: 16-bit WAV, stereo except `warning` (mono), 44.1 or 48 kHz,
-  1.45 MB together, imported with QOA compression (`compress/mode=2`).
+  1.5 MB together, imported with QOA compression (`compress/mode=2`).
 
 ## Session start: motion
 

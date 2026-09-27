@@ -10,7 +10,7 @@ extends SceneTree
 
 const PLANNED := {
 	"start": 0.7, "correct": 0.9, "wrong": 0.9, "warning": 1.5, "pass": 3.0, "fail": 2.5,
-	"click": 0.15, "hover": 0.1, "toggle": 0.2, "select": 0.2, "transition": 0.5,
+	"click": 0.15, "hover": 0.15, "toggle": 0.2, "select": 0.2, "transition": 0.5,
 }
 const UI_SOUNDS: Array[String] = ["click", "hover", "toggle", "select", "transition"]
 ## Auto-read waits this long after the question appears (main._schedule_auto_read),
