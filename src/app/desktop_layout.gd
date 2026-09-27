@@ -220,7 +220,6 @@ static func build(host: Main) -> void:
 	host.question_table_panel = PanelContainer.new()
 	host.question_table_panel.add_theme_stylebox_override("panel", AppTheme.surface(AppTheme.PAPER_BOTTOM, AppTheme.PAPER_BORDER, AppTheme.ELEVATION_REST, AppTheme.RADIUS_INNER))
 	UiFx.add_glass(host.question_table_panel, AppTheme.GRAD_PAPER, AppTheme.RADIUS_INNER)
-	host.question_table_panel.custom_minimum_size = Vector2(0, 120)
 	host.question_table_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	host.question_table_panel.visible = false
 	question_column.add_child(host.question_table_panel)
@@ -240,16 +239,16 @@ static func build(host: Main) -> void:
 	host.question_table_heading.add_theme_color_override("font_color", AppTheme.SKY_300)
 	question_table_column.add_child(host.question_table_heading)
 	host.question_table_scroll = ScrollContainer.new()
-	host.question_table_scroll.custom_minimum_size = Vector2(0, 42)
 	host.question_table_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	host.question_table_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
-	host.question_table_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	host.question_table_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_NEVER
+	host.question_table_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	question_table_column.add_child(host.question_table_scroll)
 	host.question_table_grid = GridContainer.new()
 	host.question_table_grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	host.question_table_grid.add_theme_constant_override("h_separation", 0)
 	host.question_table_grid.add_theme_constant_override("v_separation", 0)
 	host.question_table_scroll.add_child(host.question_table_grid)
+	host.question_table_scroll.resized.connect(TableViewer.fit_columns.bind(host.question_table_grid))
 	host.question_table_note = Label.new()
 	host.question_table_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	host.question_table_note.add_theme_font_size_override("font_size", 11)
@@ -358,10 +357,9 @@ static func build(host: Main) -> void:
 	feedback_column.add_child(host.feedback_reference)
 	var feedback_detail := host._make_feedback_detail(feedback_column)
 	host.feedback_table_scroll = ScrollContainer.new()
-	host.feedback_table_scroll.custom_minimum_size = Vector2(0, 42)
 	host.feedback_table_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	host.feedback_table_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
-	host.feedback_table_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
+	host.feedback_table_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_SHOW_NEVER
+	host.feedback_table_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	host.feedback_table_scroll.visible = false
 	feedback_detail.add_child(host.feedback_table_scroll)
 	host.feedback_table_grid = GridContainer.new()
@@ -369,6 +367,7 @@ static func build(host: Main) -> void:
 	host.feedback_table_grid.add_theme_constant_override("h_separation", 0)
 	host.feedback_table_grid.add_theme_constant_override("v_separation", 0)
 	host.feedback_table_scroll.add_child(host.feedback_table_grid)
+	host.feedback_table_scroll.resized.connect(TableViewer.fit_columns.bind(host.feedback_table_grid))
 	host.feedback_table_note = Label.new()
 	host.feedback_table_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	host.feedback_table_note.add_theme_font_size_override("font_size", 11)

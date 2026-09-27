@@ -6,7 +6,7 @@ the product's core promise: **the answer must not appear anywhere above the
 question until the learner answers.**
 
 Everything here runs headless with no autoloads. Most suites are node-free;
-the layout-tree, menu-alignment, figure and speech-helper suites instantiate
+the layout-tree, menu-alignment, figure, table-fit and speech-helper suites instantiate
 `scenes/main.tscn`. A full run takes about a minute.
 
 ## Running
@@ -56,7 +56,8 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | `test_question_deck.gd` | `ExamBlueprint` and `QuestionDeck`: area classification and overrides, blueprint apportionment and remainder rotation, per-area no-repeat decks and coverage, article cap and interleaving, missed-question reviews (gap, cap), simulator blueprint, single-area drills, fixed seeds, save / relaunch / version-1 migration / damaged file / reset, mastery and readiness |
 | `test_study_feedback.gd` | session area tallies and pace (fake clock, 6:00 flag), area bars and weak rows, the report's study feedback (scored line, weak areas, pace, readiness) and the weakest-area menu button, desktop and mobile |
 | `test_menu_cards.gd` | menu mode cards (the Nebraska State Law card included) and answer cards sit in their column slot (same x and width as the column and each other, scale 1) after the menu settles, quick hover passes, a hover spanning a re-sort (hover is glow only, no slide), focus moves, the start press animation and a quiz round-trip; one content box for every card state; audio toggles flush with the row labels; the desktop menu fits 960 px. Desktop and mobile |
-| `test_table_viewer.gd` | the pure parts: `preview_layout`, `extract_target_keyword`, `is_note_row`, `_strip_note_prefix` + a sweep of all 25 bank tables |
+| `test_table_viewer.gd` | the pure parts: folding (`_folded_lines`, `max_blocks`), column widths (`_column_floors`, `_column_widths`), `extract_target_keyword`, `is_note_row`, `_strip_note_prefix` + a sweep of all 30 bank tables |
+| `test_table_fit.gd` | every table question, both layouts: the lookup table before answering and the feedback table after show whole, with no scrollbar and nothing left to scroll either way |
 | `run_all.gd` | combined runner |
 | `test_validate_question_bank.py` | Python regression checks for validator/render parity and shared OCR path resolution |
 | `test_build_guard.sh` | proves builds refuse default, relative, and absolute targets that would overwrite the curated bank |
@@ -101,8 +102,10 @@ is the foundation of redaction: a missing candidate is a leak. Asserts the
 number-word map both ways, feet<->inches<->metric conversion in both directions,
 thousands separators (`1200` <-> `1,200`), unit spellings, and the leading-`#` form.
 
-**Table layout** (`test_table_viewer.gd`, 77 checks) — the geometry formula, the
-220/190 caps, the note-strip allowance, degenerate input, and keyword extraction.
+**Table layout** (`test_table_viewer.gd`, 66 checks) — folding order and limits,
+column floors that break after `/` and `-`, the width split (never wider than the
+box, long headers wrap over number columns), keyword extraction, and a bank sweep
+that folding keeps every cell once. `test_table_fit.gd` checks the live tables.
 
 ## What is NOT covered (and why)
 
@@ -113,10 +116,9 @@ thousands separators (`1200` <-> `1,200`), unit spellings, and the leading-`#` f
   render branches, the teach gate, the speech thread join, timer expiry, stale
   speech callbacks). That is the right tool for those; these unit tests are for
   the pure functions underneath it.
-- **`TableViewer.populate_table` and `TableViewer.scroll_to_row`** — they take a
-  live `GridContainer` / `Label` / `ScrollContainer` and read real node geometry.
-  They need a scene, so they stay in the harness. The pure geometry they depend
-  on (`preview_layout`) *is* covered here.
+- **`TableViewer.populate_table`, `predict_height` and `pick_layout`** — they
+  need live labels and fonts, so `test_table_fit.gd` and the harness drive them;
+  the pure folding and width helpers underneath *are* covered here.
 - **`answer_card.gd`**, `voice_visualizer.gd` — UI nodes and audio playback.
 - **Audio output** — nothing here asserts what the TTS engine actually says, only
   the text handed to it. A mispronounced word that survives `speakable()` is

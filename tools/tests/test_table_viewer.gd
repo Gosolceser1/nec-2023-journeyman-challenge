@@ -1,13 +1,13 @@
 extends SceneTree
 ## table_viewer.gd -- the PURE helpers only.
 ##
-##   preview_layout           geometry, no nodes
+##   _folded_lines, max_blocks, _column_floors, _column_widths   folding and widths
 ##   extract_target_keyword   the scroll target, no nodes
 ##   is_note_row              note-row classification, no nodes
 ##   _strip_note_prefix       note text cleanup, no nodes
 ##
-## populate_table and scroll_to_row are deliberately NOT here: they need a live
-## GridContainer/Label/ScrollContainer and stay in tools/harness.gd.
+## populate_table and the fit (predict_height, pick_layout) are NOT here: they
+## need live labels; test_table_fit.gd and tools/harness.gd drive them.
 ##
 ##   ./Godot_v4.7.2-stable_win64_console.exe --headless --path . \
 ##       --script tools/tests/test_table_viewer.gd
@@ -33,8 +33,8 @@ func _init() -> void:
 func run() -> void:
 	is_note_row_classification()
 	strip_note_prefix()
-	preview_layout_geometry()
-	preview_layout_edge_cases()
+	folding_layout()
+	column_widths()
 	extract_target_keyword_matching()
 	extract_target_keyword_edges()
 	note_row_bank_consistency()
@@ -108,70 +108,57 @@ func strip_note_prefix() -> void:
 
 
 # --------------------------------------------------------------------------
-# preview_layout -- scroll/panel geometry
+# Folding and column widths -- the table never scrolls, so a long narrow one
+# folds into side-by-side blocks and the columns share the box's width.
 # --------------------------------------------------------------------------
-func preview_layout_geometry() -> void:
-	print("=== preview_layout ===")
-	var header := ["Column C", "Maximum demand"]
-	var rows := [header, ["One range 12 kW or less", "8 kW"], ["NOTE: not copper"], ["Over 12 kW", "5 kW"]]
-	var out: Dictionary = TV.preview_layout(rows)
-	# 3 data rows x 33.0 = 99.0, clamped into [42, 220].
-	t.eq(float(out["scroll_height"]), 99.0, "scroll_height = data rows x 33")
-	# panel = max(120, scroll + 38 + 28 for the note strip)
-	t.eq(float(out["panel_height"]), 165.0, "panel_height = scroll + 38 + 28 (note strip present)")
+func folding_layout() -> void:
+	print("=== folding ===")
+	var header := ["Size", "Amps"]
+	var rows := [header, ["a", "1"], ["b", "2"], ["c", "3"], ["d", "4"], ["e", "5"]]
+	var one: Array = TV._folded_lines(rows, 1)
+	t.eq(one.size(), 6, "one block: header + 5 lines")
+	t.eq(one[0], header, "one block: the header comes first")
+	var two: Array = TV._folded_lines(rows, 2)
+	t.eq(two.size(), 4, "two blocks: header + ceil(5/2) = 3 lines")
+	t.eq(two[0], ["Size", "Amps", "Size", "Amps"], "each block has its own header")
+	t.eq(two[1], ["a", "1", "d", "4"], "rows run down the first block, then the next")
+	t.eq(two[3], ["c", "3", "", ""], "the last block is padded with empty cells")
+	t.eq((TV._folded_lines(rows, 9)[0] as Array).size(), 10, "never more blocks than body rows (5 blocks of 2 columns)")
 
-	# The note strip adds exactly 28px; without a note it does not.
-	# NOTE: preview_layout counts the HEADER as a data row (it is not special-cased),
-	# so two rows -> 66 and three rows -> 99.
-	var no_note: Dictionary = TV.preview_layout([header, ["a", "b"]])
-	t.eq(float(no_note["scroll_height"]), 66.0, "2 rows (incl. header) x 33")
-	t.eq(float(no_note["panel_height"]), 120.0, "panel floors at 120 when scroll + 38 is under it")
-	t.eq(float(TV.preview_layout([header, ["a"], ["b"]])["scroll_height"]), 99.0, "3 rows x 33")
-	t.eq(float(TV.preview_layout([header, ["a"], ["b"]])["panel_height"]), 137.0, "scroll 99 + 38 = 137")
-	# The note strip adds exactly 28 on top.
-	t.eq(float(TV.preview_layout([header, ["a"], ["NOTE: n"]])["panel_height"]), 132.0,
-		"66 + 38 + 28 note strip = 132")
-
-	# The cap is honoured.
-	var many: Array = [header]
+	var grid := GridContainer.new()
+	var long_rows: Array = [header]
 	for i in 30:
-		many.append(["row %d" % i, "x"])
-	t.eq(float(TV.preview_layout(many)["scroll_height"]), 220.0, "scroll_height clamps to the 220 default cap")
-	t.eq(float(TV.preview_layout(many, 100.0)["scroll_height"]), 100.0, "scroll_height honours a custom cap")
-	t.eq(float(TV.preview_layout(many, 190.0)["scroll_height"]), 190.0, "190 is the cap the feedback table uses")
-	t.eq(float(TV.preview_layout(many, 190.0)["panel_height"]), 228.0, "panel grows with the capped scroll")
+		long_rows.append(["row %d" % i, str(i)])
+	long_rows.append(["NOTE: a note"])
+	grid.set_meta("populate_args", [null, long_rows, "", true, ""])
+	t.eq(TV.max_blocks(grid), 3, "30 short rows may fold into 3 blocks")
+	grid.set_meta("populate_args", [null, [header, ["a", "1"], ["b", "2"], ["c", "3"]], "", true, ""])
+	t.eq(TV.max_blocks(grid), 1, "3 body rows never fold")
+	grid.set_meta("populate_args", [null, [["h1", "h2", "h3", "h4"]] + long_rows.slice(1, 20).map(func(r): return r + ["x", "y"]), "", true, ""])
+	t.eq(TV.max_blocks(grid), 1, "a table of 4+ columns never folds")
+	grid.free()
 
 
-# --------------------------------------------------------------------------
-# preview_layout -- degenerate input
-# --------------------------------------------------------------------------
-func preview_layout_edge_cases() -> void:
-	print("=== preview_layout: edge cases ===")
-	var empty: Dictionary = TV.preview_layout([])
-	t.eq(float(empty["scroll_height"]), 42.0, "no rows -> scroll floors at 42")
-	t.eq(float(empty["panel_height"]), 120.0, "no rows -> panel floors at 120")
+func column_widths() -> void:
+	print("=== column widths ===")
+	var font: Font = ThemeDB.fallback_font
+	var floors: Array[float] = TV._column_floors([["TF/XHHW/TW", "Out"]], font, 12, 0)
+	var whole: float = font.get_string_size("TF/XHHW/TW", HORIZONTAL_ALIGNMENT_LEFT, -1, 12).x
+	t.check(floors[0] < whole, "text breaks after '/', so the floor is under the whole word")
+	t.check(TV._keeps_words(floors, 1000.0) and not TV._keeps_words(floors, 20.0), "_keeps_words compares the floors with the width")
 
-	t.eq(float(TV.preview_layout([["a", "b"]])["scroll_height"]), 42.0, "one row still floors at 42")
-
-	# Junk rows are skipped, not counted and not crashed on.
-	var junk: Array = [[], "not an array", {}, null, ["real", "row"]]
-	var out: Dictionary = TV.preview_layout(junk)
-	t.eq(float(out["scroll_height"]), 42.0, "empty/非array rows are skipped")
-
-	# A single note row is NOT a data row, so the count stays 0.
-	t.eq(float(TV.preview_layout([["NOTE: only a note"]])["scroll_height"]), 42.0,
-		"a lone note row does not inflate the scroll height")
-	t.eq(float(TV.preview_layout([["NOTE: only a note"]])["panel_height"]), 120.0,
-		"42 + 38 + 28 = 108, which the 120 panel floor absorbs")
-
-	# The two keys must always be present and numeric.
-	for rows in [[], [["a"]], [["NOTE: n"], ["a", "b"]]]:
-		var res: Dictionary = TV.preview_layout(rows)
-		t.check(res.has("scroll_height"), "scroll_height key present")
-		t.check(res.has("panel_height"), "panel_height key present")
-		t.check(typeof(res["scroll_height"]) in [TYPE_FLOAT, TYPE_INT], "scroll_height is numeric")
-		t.check(float(res["panel_height"]) >= 120.0, "panel_height never drops below 120")
-
+	var lines := [["Type of occupancy", "Unit load (VA/ft2)"], ["Office", "1.3"], ["Hospital", "1.6"],
+			["Hotel or motel, or apartment house without provision for cooking by tenant", "1.7"]]
+	for width in [200.0, 320.0, 600.0]:
+		var widths: Array[float] = TV._column_widths(lines, width, font, 12, 0)
+		t.check(widths[0] + widths[1] <= width + 0.01, "columns never exceed the box (%d px)" % width)
+	var w: Array[float] = TV._column_widths(lines, 320.0, font, 12, 0)
+	var number_floor: float = TV._column_floors(lines, font, 12, 0)[1]
+	t.check(w[1] <= number_floor + 0.01, "a long header wraps instead of widening a column of numbers")
+	var roomy: Array[float] = TV._column_widths([["A", "B"], ["x", "y"]], 600.0, font, 12, 0)
+	t.check(roomy[0] + roomy[1] < 600.0, "short text leaves the rest of the width to the grid")
+	var squeezed: Array[float] = TV._column_widths([["Transportation", "Warehouse"], ["a", "b"]], 40.0, font, 12, 0)
+	t.check(absf(squeezed[0] + squeezed[1] - 40.0) < 0.01, "too narrow: the floors scale down to the width")
 
 # --------------------------------------------------------------------------
 # extract_target_keyword -- the scroll target for the pre-answer table
@@ -253,13 +240,24 @@ func note_row_bank_consistency() -> void:
 			if looks_like_note and not is_note:
 				numbered_notes += 1
 				note_ids.append(str(rec.get("id", "")))
-		# data_rows must equal the row_count populate_table would report.
-		var expected_scroll := clampf(float(data_rows) * 33.0, 42.0, 220.0)
-		var layout: Dictionary = TV.preview_layout(tbl)
-		if not is_equal_approx(float(layout["scroll_height"]), expected_scroll):
-			mismatch += 1
+		# Folding keeps every data cell exactly once, in every block count.
+		var body: Array = []
+		for row_v in (tbl as Array):
+			if row_v is Array and not (row_v as Array).is_empty() and not TV.is_note_row(row_v):
+				body.append(row_v)
+		for blocks in [1, 2, 3]:
+			var cells := 0
+			for line in TV._folded_lines(body, blocks).slice(1):
+				for cell in line:
+					cells += 1 if str(cell) != "" else 0
+			var want := 0
+			for row in body.slice(1):
+				for cell in row:
+					want += 1 if str(cell) != "" else 0
+			if cells != want or data_rows != body.size():
+				mismatch += 1
 	t.check(tables > 0, "the bank contains reference tables (got %d)" % tables)
-	t.eq(mismatch, 0, "preview_layout row counts agree with is_note_row for every table")
+	t.eq(mismatch, 0, "folding into 1-3 blocks keeps every data cell of every bank table once")
 	# Every numbered NEC note in the bank is now classified as a note. This was
 	# a defect pin expecting final-exam-#1-021 to slip through; the is_note_row
 	# fix closed it, so there is nothing left to list.

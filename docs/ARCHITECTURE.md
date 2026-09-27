@@ -31,11 +31,12 @@ src/
   ui/     app_theme.gd      AppTheme: the palette (Tailwind names + role names), panel/font factories
           widgets.gd        Widgets: mode buttons, dock buttons, chips, voice picker
           fit_controller.gd FitController: keeps the question screen at 0% scroll
+          table_viewer.gd   TableViewer: reference tables that never scroll (column fit, folding, type steps)
           info_panel_renderer.gd  InfoPanelRenderer: the explanation RichTextLabel
           results_view.gd   ResultsView: graded and listen results, confetti
           audio_section.gd  AudioSection: the menu's Audio & Voice block
           icons.gd          Icons: small SDF glyphs drawn in code (tinted by modulate)
-          answer_card.gd  table_viewer.gd  diagram_view.gd  voice_visualizer.gd
+          answer_card.gd  diagram_view.gd  voice_visualizer.gd
   fx/     quiz_fx.gd        QuizFx: fx layer, segmented progress, time gauges, answer burst
           ui_fx.gd          UiFx: surface material, glass/shine/current, screen enter, Reduce motion
           sfx.gd  speech_chain.gd  time_gauge.gd  progress_segments.gd  readiness_ring.gd
@@ -48,7 +49,7 @@ docs/     this file, DATA_PIPELINE, VOICE_READING_RULES, SFX_PLAN, KNOWN_ISSUES,
 tools/    verify.sh  harness.gd  list_pck.py
           pipeline/  bank build, overrides, validator, spellcheck, OCR
           speech/    dump_speech.gd  pregenerate_speech.py  test_bundle.gd  check_export_pack.gd
-          visual/    snap.gd  snap_all.gd  snap_motion.gd  measure_fit.gd  compare_shots.py (output: .audit_tmp/)
+          visual/    snap.gd  snap_all.gd  snap_motion.gd  snap_tables.gd  measure_fit.gd  compare_shots.py (output: .audit_tmp/)
           tests/     run_all.gd + suites, golden/ layout snapshots
           study/     blueprint_report.gd (pool per subject area, overrides, draws per mode)
 ```
@@ -86,7 +87,18 @@ renders the stem, choices, table or figure, then `fit.begin()` shrinks the
 screen until nothing scrolls. `_answer_selected` hands the pick to
 `session.submit()`, which grades it and returns the verdict. `main` then
 shows the feedback sheet, `QuizFx.play_answer` plays the burst, and
-`fit.compact_answered` hides what no longer matters. `_tick_timer` drives
+`fit.compact_answered` hides what no longer matters.
+
+Reference tables never scroll. The table's ScrollContainer has vertical
+scrolling off (it takes the grid's height) and no horizontal bar;
+`TableViewer.fit_columns` splits the box's width between the columns from the
+measured text. When the page would scroll, `FitController` picks the most
+readable layout that fits (`TableViewer.pick_layout`, predicted from the font
+metrics): whole words first, then larger type, then fewer blocks, a long narrow
+table folding into side-by-side blocks under repeated headers. If even the
+smallest layout does not fit, the gist and then the formula hint give way.
+After answering, the feedback table gets the layout that shows it whole in the
+explanation sheet's first view; the sheet scrolls only for the text below it. `_tick_timer` drives
 `session.tick()` once a second.
 
 ### Question selection
@@ -205,7 +217,7 @@ tests and the native TTS callbacks refer to them by name.
 `bash tools/verify.sh` runs everything below except the last three:
 
 - import and `--check-only` parse of every script;
-- `tools/tests/run_all.gd`: 25 suites, including `test_no_leak` (nothing
+- `tools/tests/run_all.gd`: 26 suites, including `test_no_leak` (nothing
   before answering reveals the answer), `test_layout_tree` (serialised node
   tree of both layouts against `tools/tests/golden/`; `-- --update` rewrites
   the snapshots after an intended change), `test_menu_cards` (cards stay
@@ -217,7 +229,7 @@ tests and the native TTS callbacks refer to them by name.
 Also:
 
 - `tools/speech/test_bundle.gd`: every question resolves to its bundled clips (283/283).
-- `tools/visual/measure_fit.gd`: share of questions that scroll before answering (0%).
+- `tools/visual/measure_fit.gd`: share of questions that scroll before and after answering (0%), and any reference table that shows a scrollbar (none).
 - `tools/speech/check_export_pack.gd`: run against an exported `.pck` with
   `--main-pack`. It loads the bank, every clip and the sfx from inside the
   pack, and checks the helper script is copied out.

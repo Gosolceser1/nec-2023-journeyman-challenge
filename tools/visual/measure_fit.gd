@@ -1,5 +1,6 @@
 extends SceneTree
 ## Does each record fit its viewport without scrolling, before and after answering?
+## And does every reference table show whole, with no scrollbar of its own?
 ##   Godot --path . --script tools/visual/measure_fit.gd -- [--mobile-ui] [--shuffle] --win=1280x720 --label=before
 ## --shuffle gives every record a seeded choice order, as a session would.
 
@@ -21,6 +22,14 @@ func _quiz_scroll() -> ScrollContainer:
 func _overflow(scroll: ScrollContainer) -> float:
 	var content := scroll.get_child(0) as Control
 	return content.get_combined_minimum_size().y - scroll.size.y
+
+## A table shows whole: no scrollbar on screen and nothing left to scroll.
+func _table_scrolls(scroll: ScrollContainer) -> bool:
+	if not scroll.is_visible_in_tree():
+		return false
+	var grid_min := (scroll.get_child(0) as Control).get_combined_minimum_size()
+	return scroll.get_v_scroll_bar().visible or scroll.get_h_scroll_bar().visible \
+			or grid_min.y > scroll.size.y + 0.5 or grid_min.x > scroll.size.x + 0.5
 
 func _initialize() -> void:
 	for a in OS.get_cmdline_user_args():
@@ -60,20 +69,26 @@ func _initialize() -> void:
 	var worst_pre: Array = []
 	var worst_post: Array = []
 	var post_sum := 0.0
+	var table_bad: Array[String] = []
 	for i in n:
 		var rec: Dictionary = main.session.display_record(i)
 		main.order = [i, (i + 1) % n] as Array[int]
 		main.current_index = 0
 		main._show_question()
 		main._auto_token += 1
-		await _frames(4)
+		# The table fit steps once per frame.
+		await _frames(12)
 		var pre := _overflow(scroll)
+		if _table_scrolls(main.question_table_scroll):
+			table_bad.append("%s pre" % rec.get("id", i))
 		var ci := int(rec.get("correct_index", 0))
 		main._answer_selected((ci + 1) % (rec.get("answers", []) as Array).size())
 		main._auto_token += 1
 		main._stop_reading()
 		await _frames(4)
 		var post := _overflow(scroll)
+		if _table_scrolls(main.feedback_table_scroll):
+			table_bad.append("%s post" % rec.get("id", i))
 		post_sum += maxf(post, 0.0)
 		var kind := "plain"
 		if rec.get("reference_table", []) is Array and not (rec.get("reference_table", []) as Array).is_empty():
@@ -98,6 +113,7 @@ func _initialize() -> void:
 	report += "  post-answer needs scroll: %d  (%.1f%%)   mean overflow %.0f px\n" % [post_bad, 100.0 * post_bad / n, post_sum / n]
 	for k in kinds:
 		report += "    %-8s n=%-4d pre=%-4d post=%d\n" % [k, kinds[k][0], kinds[k][1], kinds[k][2]]
+	report += "  tables that scroll: %d  %s\n" % [table_bad.size(), str(table_bad.slice(0, 6))]
 	report += "  worst pre:  %s\n" % str(worst_pre.slice(0, 6))
 	report += "  worst post: %s\n" % str(worst_post.slice(0, 6))
 	print(report)

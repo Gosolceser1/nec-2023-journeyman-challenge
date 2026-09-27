@@ -1,7 +1,8 @@
 class_name FitController
 extends RefCounted
 ## Keeps the question screen free of scrolling: steps fonts and card density
-## down, trims the table, lookup path and figure, and after answering lets the
+## down, trims the lookup path, folds or shrinks the table (it never scrolls),
+## trims the figure, and after answering lets the
 ## explanation sheet give way first. Also switches the desktop answers row
 ## between side by side and stacked.
 
@@ -12,16 +13,18 @@ const FIT_QUESTION_DESKTOP := [22, 20, 18, 17]
 const FIT_ANSWER := [17, 16, 15, 15]
 const FIT_HINT_MOBILE := [15, 14, 14, 13]
 const FIT_HINT_DESKTOP := [14, 13, 13, 12]
-const FIT_TABLE_MIN_H := 64.0
 const DIAGRAM_MAX_H_DESKTOP := 320.0
 const DIAGRAM_MAX_H_MOBILE := 250.0
 const FIT_DIAGRAM_MIN_H := 96.0
 const SIDE_BY_SIDE_MIN_WIDTH := 1100.0
+## Table layout picks per fit (each measured a frame after the last).
+const TABLE_PASSES := 5
 
 var host: Main
 var _fit_gen := 0
 var _fit_level := 0
-var table_natural_h := 0.0
+var _table_passes := 0
+var _dropped: Array[Control] = []
 
 func _quiz_overflow() -> float:
 	if not is_instance_valid(host.quiz_scroll_box) or host.quiz_scroll_box.get_child_count() == 0:
@@ -51,8 +54,10 @@ func apply_level(level: int) -> void:
 func begin() -> void:
 	_fit_gen += 1
 	apply_level(0)
-	if host.question_table_panel.visible and table_natural_h > 0.0:
-		host.question_table_scroll.custom_minimum_size.y = table_natural_h
+	_table_passes = 0
+	_dropped.clear()
+	if host.question_table_panel.visible:
+		TableViewer.apply_layout(host.question_table_grid, [1, 0])
 	if is_instance_valid(host.question_diagram_view):
 		host.question_diagram_view.max_height = DIAGRAM_MAX_H_MOBILE if host.ui_mobile else DIAGRAM_MAX_H_DESKTOP
 	_fit_after_frames(_fit_gen, 2)
@@ -71,17 +76,13 @@ func _fit_run(gen: int) -> void:
 	if gen != _fit_gen or host.order.is_empty():
 		return
 	if host.current_answered:
-		_fit_answered()
+		_fit_answered(gen)
 		return
 	# Font and min-size changes re-measure synchronously at a fixed width, so
 	# the whole step-down happens in this one call.
 	var over := _quiz_overflow()
 	while over > 0.5 and _fit_level < FIT_ANSWER.size() - 1:
 		apply_level(_fit_level + 1)
-		over = _quiz_overflow()
-	if over > 0.5 and host.question_table_panel.visible:
-		host.question_table_panel.custom_minimum_size.y = 0.0
-		host.question_table_scroll.custom_minimum_size.y = maxf(FIT_TABLE_MIN_H, host.question_table_scroll.custom_minimum_size.y - over)
 		over = _quiz_overflow()
 	# The table heading already says where to look; the chapter path is the
 	# expendable duplicate (kept when the heading had to be redacted).
@@ -90,8 +91,50 @@ func _fit_run(gen: int) -> void:
 		host.chapter_hint_label.visible = false
 		host.lookup_box.visible = false
 		over = _quiz_overflow()
+	# The table shows whole (it never scrolls). Its columns take new widths only
+	# when the grid re-sorts, so it steps once per frame and is measured after.
+	var grid := host.question_table_grid
+	var box := host.question_table_scroll
+	if host.question_table_panel.visible and _table_passes < TABLE_PASSES and (over > 0.5 or _breaks_words(grid, box)):
+		_table_passes += 1
+		if _step_table(grid, box, grid.get_combined_minimum_size().y - over) or (over > 0.5 and _drop_extra()):
+			_fit_after_frames(gen, 1)
+			return
 	if over > 0.5 and host.question_diagram_panel.visible:
 		_shrink_diagram(over)
+
+## Refold or shrink a table to the most readable layout within `target` px (a
+## long narrow table folds into side-by-side blocks before its type gets
+## smaller). False when nothing would change.
+func _step_table(grid: GridContainer, box: Control, target: float, smallest_if_none := true) -> bool:
+	var pick := TableViewer.pick_layout(grid, box.size.x, target, smallest_if_none)
+	if pick == [TableViewer.block_count(grid), TableViewer.text_level(grid)]:
+		return false
+	TableViewer.apply_layout(grid, pick)
+	return true
+
+func _breaks_words(grid: GridContainer, box: Control) -> bool:
+	return not TableViewer.keeps_words(grid, box.size.x, TableViewer.block_count(grid), TableViewer.text_level(grid))
+
+## When even the smallest table layout does not fit, the gist (it restates the
+## stem) goes, then the formula hint; the table gets another pick with the room
+## each leaves. A resize brings them back before the fit reruns.
+func _drop_extra() -> bool:
+	var gist: Control = host.question_hint_row if is_instance_valid(host.question_hint_row) else host.article_label
+	for group in [[gist], [host.formula_box, host.question_formula_label]]:
+		if (group[0] as Control).visible:
+			for c in group:
+				(c as Control).visible = false
+				_dropped.append(c)
+			return true
+	return false
+
+func _restore_dropped() -> void:
+	for c in _dropped:
+		if is_instance_valid(c):
+			(c as Control).visible = true
+	_dropped.clear()
+
 func _shrink_diagram(over: float) -> void:
 	var cur := host.question_diagram_view.custom_minimum_size.y
 	host.question_diagram_view.max_height = maxf(FIT_DIAGRAM_MIN_H, cur - over)
@@ -117,11 +160,14 @@ func on_viewport_resized() -> void:
 	if host.order.is_empty():
 		return
 	if not host.current_answered:
+		_restore_dropped()
 		begin()
 	elif is_instance_valid(host.feedback_scroll) and host.feedback_scroll.visible:
 		# Answered: give the sheet its preferred height back, then let
 		# _fit_answered shrink it again for the new size.
 		host.feedback_scroll.custom_minimum_size.y = feedback_min_h()
+		TableViewer.apply_layout(host.feedback_table_grid, [1, 0])
+		_table_passes = 0
 		_fit_gen += 1
 		_fit_after_frames(_fit_gen, 2)
 
@@ -144,6 +190,7 @@ func compact_answered(correct: int, selected: int) -> void:
 	host.feedback_scroll.visible = true
 	host.feedback_scroll.scroll_vertical = 0
 	host.feedback_scroll.custom_minimum_size.y = feedback_min_h()
+	_table_passes = 0
 	_fit_gen += 1
 	_fit_after_frames(_fit_gen, 2)
 
@@ -153,7 +200,7 @@ func feedback_min_h() -> float:
 ## Answered-state fit: a long stem can leave less than the sheet's preferred
 ## height; let the sheet give way (it scrolls inside), then the type steps
 ## down, before the page scrolls.
-func _fit_answered() -> void:
+func _fit_answered(gen: int) -> void:
 	var over := _quiz_overflow()
 	if over > 0.5:
 		host.feedback_scroll.custom_minimum_size.y = maxf(84.0, host.feedback_scroll.custom_minimum_size.y - over)
@@ -163,3 +210,13 @@ func _fit_answered() -> void:
 		over = _quiz_overflow()
 	if over > 0.5 and host.question_diagram_panel.visible:
 		_shrink_diagram(over)
+	# The sheet scrolls for the explanation below the table, never for the
+	# table: it gets the layout that shows it whole in the sheet's first view.
+	if host.feedback_table_scroll.visible and _table_passes < TABLE_PASSES:
+		var grid := host.feedback_table_grid
+		var top := host.feedback_table_scroll.global_position.y - host.feedback_scroll.global_position.y + host.feedback_scroll.scroll_vertical
+		var room := host.feedback_scroll.size.y - top - 4.0
+		if grid.get_combined_minimum_size().y > room + 0.5 or _breaks_words(grid, host.feedback_table_scroll):
+			_table_passes += 1
+			if _step_table(grid, host.feedback_table_scroll, room, false):
+				_fit_after_frames(gen, 1)

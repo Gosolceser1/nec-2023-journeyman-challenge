@@ -24,6 +24,9 @@ const SUITES := [
 	{"name": "unit_matcher", "path": "res://tools/tests/test_unit_matcher.gd"},
 	{"name": "info panel (memory tip, answer chip)", "path": "res://tools/tests/test_info_panel.gd"},
 	{"name": "table_viewer (pure)", "path": "res://tools/tests/test_table_viewer.gd"},
+	# Tables used to scroll inside a box sized from a 33 px row guess; a wrapped
+	# row put a scrollbar on the table. Now every table shows whole.
+	{"name": "reference tables (no scrollbar, both layouts)", "path": "res://tools/tests/test_table_fit.gd"},
 	# Layout regression guard. The scene harness asserts quiz LOGIC and never
 	# inspects a margin, so a broken safe-area calculation shipped green and left
 	# the app rendering a blank strip where the question should be.

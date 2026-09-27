@@ -100,8 +100,6 @@ var feedback_reference: Label
 var feedback_table_scroll: ScrollContainer
 var feedback_table_grid: GridContainer
 var feedback_table_note: Label
-var feedback_table_match_row := -1
-var feedback_table_row_count := 0
 var info_label: RichTextLabel
 var next_button: Button
 var read_button: Button
@@ -778,29 +776,10 @@ func _show_menu() -> void:
 
 func _populate_reference_table(grid: GridContainer, note_label: Label, rows: Array, highlight_answer: String = "", is_feedback: bool = true, target_keyword: String = "") -> bool:
 	var res := TableViewer.populate_table(grid, note_label, rows, highlight_answer, is_feedback, target_keyword)
-	# Only the FEEDBACK table scrolls to a match; the pre-answer table is opened
-	# at the top instead, so its match state was written but never read.
-	if is_feedback:
-		feedback_table_match_row = int(res.get("matched_row", -1))
-		feedback_table_row_count = int(res.get("row_count", 0))
 	return bool(res.get("highlighted", false))
-
-func _scroll_feedback_table_to_match() -> void:
-	TableViewer.scroll_to_row(feedback_table_scroll, feedback_table_grid, feedback_table_match_row, feedback_table_row_count)
-
-func _scroll_question_table_to_top() -> void:
-	if not is_instance_valid(question_table_scroll):
-		return
-	question_table_scroll.scroll_horizontal = 0
-	var bar := question_table_scroll.get_v_scroll_bar()
-	if bar != null:
-		bar.value = 0.0
 
 func _extract_table_target_keyword(record: Dictionary, table: Array) -> String:
 	return TableViewer.extract_target_keyword(record, table)
-
-func _table_preview_layout(rows: Array, max_scroll_height: float = 220.0) -> Dictionary:
-	return TableViewer.preview_layout(rows, max_scroll_height)
 
 
 func _show_question() -> void:
@@ -827,10 +806,6 @@ func _show_question() -> void:
 	question_table_panel.visible = question_table is Array and not question_table.is_empty() \
 			and not bool(record.get("table_after_answer", false))
 	if question_table_panel.visible:
-		var table_layout := _table_preview_layout(question_table, 340.0 if fit.side_by_side() else 220.0)
-		fit.table_natural_h = float(table_layout["scroll_height"])
-		question_table_scroll.custom_minimum_size.y = fit.table_natural_h
-		question_table_panel.custom_minimum_size.y = float(table_layout["panel_height"])
 		var reference_lines := str(record.get("reference_text", "")).split("\n", false)
 		var table_title := reference_lines[0] if not reference_lines.is_empty() else str(record.get("article", "Reference table"))
 		# The title often IS the answer ("Table ___ lists..." + title "Table 300.5(A)...").
@@ -840,9 +815,6 @@ func _show_question() -> void:
 			table_title = "REFERENCE TABLE"
 		question_table_heading.text = "LOOK UP BEFORE ANSWERING  •  " + table_title
 		_populate_reference_table(question_table_grid, question_table_note, question_table, current_correct_text, false, "")
-		# Open the "book" at the top like a real lookup — never auto-scroll to the
-		# blanked answer cell pre-answer. (Post-answer feedback still jumps to the match.)
-		call_deferred("_scroll_question_table_to_top")
 	question_diagram_panel.visible = question_diagram_view.show_record(record)
 	var formula_str := str(record.get("formula", "")).strip_edges()
 	if formula_str != "":
@@ -1016,11 +988,8 @@ func _answer_selected(selected: int) -> void:
 	feedback_table_scroll.visible = table is Array and not table.is_empty()
 	var table_highlighted := false
 	if feedback_table_scroll.visible:
-		var table_layout := _table_preview_layout(table, 190.0)
-		feedback_table_scroll.custom_minimum_size.y = float(table_layout["scroll_height"])
 		var target_kw := _extract_table_target_keyword(record, table)
 		table_highlighted = _populate_reference_table(feedback_table_grid, feedback_table_note, table, correct_text, true, target_kw)
-		call_deferred("_scroll_feedback_table_to_match")
 	info_panel.show(record, correct_text, table_highlighted)
 	info_label.visible = true
 	fit.compact_answered(correct, selected)
