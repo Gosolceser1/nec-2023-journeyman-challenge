@@ -3,8 +3,8 @@
     python tools/list_pck.py build/NEC2023JourneymanChallenge.pck [--desktop] [--all]
 
 Prints a per-top-level-folder summary, then fails (exit 1) if a path that the
-export presets exclude made it in (tests, tools except the speech helper,
-docs, source PDFs, OCR PNGs), or if something the app loads at runtime is
+export presets exclude made it in (anything under tools/, docs, source
+PDFs, *.md, OCR PNGs), or if something the app loads at runtime is
 missing (bank, voices, diagrams, sfx, imported speech clips).
 """
 import struct

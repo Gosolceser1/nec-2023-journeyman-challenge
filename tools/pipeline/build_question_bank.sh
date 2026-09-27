@@ -100,7 +100,10 @@ require_safe_build_target() {
 build() {
   require_safe_build_target
   say "BUILD $BUILDER_W"
-  "$PY" "$BUILDER_W"
+  # WSL hands a Windows python.exe only the variables listed in WSLENV.
+  WIRE_BANK_OUT="$BANK_W" \
+    WSLENV="${WSLENV:+$WSLENV:}WIRE_BANK_OUT:WIRE_OCR_PATH/p:WIRE_OCR_KEYS/p:WIRE_SKIP_BANK_OVERRIDES" \
+    "$PY" "$BUILDER_W"
   [ -f "$BANK" ] || die "builder reported success but $BANK does not exist"
   validate
 }
@@ -113,7 +116,9 @@ ocr() {
 }
 
 speech() {
-  say "SPEECH dump speech plans (headless Godot)"
+  # Speech is rendered from the checked-in res://data/question_bank.json, not
+  # the candidate just built: clips must match the bank that ships.
+  say "SPEECH dump speech plans (headless Godot, checked-in bank)"
   [ -f "$GODOT" ] || die "Godot console binary not found: $GODOT"
   "$GODOT_W" --headless --path "$ROOT_W" --script "$(winpath "$ROOT/tools/speech/dump_speech.gd")"
   say "SPEECH pregenerate clips"

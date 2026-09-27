@@ -90,6 +90,5 @@ func result() -> Dictionary:
 ## Prints the machine-readable tail. run_all.gd greps for "checks: ", "FAIL:"
 ## and "KNOWN DEFECT:" -- keep those markers in sync with run_all.gd.
 func report() -> void:
-	for f in failures:
-		print("  FAIL: %s" % f)
+	# check()/eq()/ne() already printed each "FAIL:" line; run_all.gd counts them.
 	print("checks: %d  failures: %d  known-defects: %d" % [checks, failures.size(), defects.size()])

@@ -10,7 +10,7 @@ Usage:
     run the Godot dump step below first, then:
     python tools\\speech\\pregenerate_speech.py [--voice VOICE] [--limit N] [--force] [--bundle]
 
---bundle writes the shipped clips into <project>\\speech\\ (checked by
+--bundle writes the shipped clips into <project>\\assets\\speech\\ (checked by
 tools/speech/test_bundle.gd) instead of the per-user cache.
 
 Godot step (run from the project folder):
@@ -90,7 +90,7 @@ def manifest_key(folder: Path) -> list | None:
     return keys
 
 
-def main() -> None:
+def main() -> int:
     args_parser = argparse.ArgumentParser()
     args_parser.add_argument("--voice", default="")
     args_parser.add_argument("--limit", type=int, default=0)
@@ -136,7 +136,8 @@ def main() -> None:
             failed += 1
             print("[%d/%d] %s: FAILED %s" % (index, len(plans), qid, exc))
     print("done: %d | already cached: %d | failed: %d" % (done, skipped, failed))
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

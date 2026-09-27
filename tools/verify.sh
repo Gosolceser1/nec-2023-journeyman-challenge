@@ -69,8 +69,12 @@ find_python() {
 
 # 0. Build the class_name cache so --script runs resolve AnswerCard, AudioSettings, ...
 import_project() {
-  "$GODOT" --headless --path . --import >/dev/null 2>&1
-  local rc=$?
+  local out rc
+  out=$("$GODOT" --headless --path . --import 2>&1)
+  rc=$?
+  # A first import on a fresh clone can log transient class-cache errors, so
+  # show them without failing; the parse stage is the gate for scripts.
+  printf '%s\n' "$out" | grep -E "ERROR" | grep -vE "$NOISE" | head -20
   [ $rc -eq 0 ] && echo "  import done"
   return $rc
 }
@@ -85,13 +89,19 @@ parse_check() {
   for f in $files; do
     f="${f#./}"
     n=$((n + 1))
-    out=$("$GODOT" --headless --path . --check-only --script "$f" 2>&1 | grep -vE "$NOISE")
-    if printf '%s' "$out" | grep -qiE "SCRIPT ERROR|Parse Error"; then
-      echo "  ✗ $f failed to parse:"
+    out=$("$GODOT" --headless --path . --check-only --script "$f" 2>&1)
+    code=$?
+    out=$(printf '%s\n' "$out" | grep -vE "$NOISE")
+    if [ "$code" -ne 0 ] || printf '%s' "$out" | grep -qiE "SCRIPT ERROR|Parse Error"; then
+      echo "  ✗ $f failed to parse (exit $code):"
       printf '%s\n' "$out" | head -5
       rc=1
     fi
   done
+  if [ "$n" -eq 0 ]; then
+    echo "  ✗ no .gd files found to parse"
+    return 1
+  fi
   [ $rc -eq 0 ] && echo "  all $n scripts parse cleanly"
   return $rc
 }
@@ -138,6 +148,15 @@ stage "2/5  Unit tests"              unit_tests       || true
 stage "3/5  Scene harness (desktop)" scene_harness "" || true
 stage "4/5  Scene harness (mobile)"  scene_harness mobile || true
 stage "5/5  Question bank"           bank_validate    || true
+
+# The voice bundle is gitignored, so fresh clones and CI skip this; where it
+# exists, a stale or partial bundle must not pass silently.
+if [ -d assets/speech ]; then
+  stage "+    Speech bundle (279/279)"  "$GODOT" --headless --path . --script tools/speech/test_bundle.gd || true
+else
+  echo ""
+  echo "  (assets/speech/ not generated — bundled-voice checks skipped)"
+fi
 
 echo ""
 echo "══════════════════════════════════════════════════════════════"

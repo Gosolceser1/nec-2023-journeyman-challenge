@@ -14,7 +14,8 @@ run/main_scene="res://scenes/main.tscn"
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.7")
 config/name="NEC 2023 Journeyman Challenge"
-config/boot_splash/bg_color=Color(0.008, 0.016, 0.031, 1)
+boot_splash/bg_color=Color(0.008, 0.016, 0.031, 1)
+boot_splash/show_image=false
 
 [audio]
 

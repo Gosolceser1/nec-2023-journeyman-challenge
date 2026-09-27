@@ -87,6 +87,7 @@ func _initialize() -> void:
 	report += "  worst pre:  %s\n" % str(worst_pre.slice(0, 6))
 	report += "  worst post: %s\n" % str(worst_post.slice(0, 6))
 	print(report)
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path("res://.audit_tmp"))
 	var f := FileAccess.open("res://.audit_tmp/fit_%s_%s_%dx%d.txt" % [label, "mob" if main.ui_mobile else "desk", win.x, win.y], FileAccess.WRITE)
 	f.store_string(report)
 	f.close()

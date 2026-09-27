@@ -1,6 +1,6 @@
 extends SceneTree
 ## Headless check: every record's live speech plan must resolve to its bundled
-## default-voice folder (after tools/fix step copies pregenerated clips to res://assets/speech).
+## default-voice folder (after `pregenerate_speech.py --bundle` writes them to res://assets/speech).
 ## Run: Godot --headless --path . --script tools/speech/test_bundle.gd
 
 func _init() -> void:
