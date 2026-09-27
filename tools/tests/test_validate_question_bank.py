@@ -131,6 +131,43 @@ class ValidatorRuleTests(unittest.TestCase):
         reworded = pdf_prompt.replace("is permitted", "shall be permitted")
         self.assertEqual(len(self._prompt_leak_errors("final-exam-#3-042", reworded)), 1)
 
+    def test_recognizes_nebraska_state_law_citations(self):
+        for value in ("Neb. Rev. Stat. 81-2113(2)", "Neb. Rev. Stat. 81-2108(2) and 81-2113(2)", "Title 100 NAC Rule 13"):
+            with self.subTest(value=value):
+                self.assertTrue(validator.article_reference_is_recognized(value))
+        self.assertFalse(validator.article_reference_is_recognized("Nebraska law"))
+
+    def _section_errors(self, record_id, **fields):
+        bank = __import__("json").loads((ROOT / "data" / "question_bank.json").read_text(encoding="utf-8"))
+        target = next(r for r in bank["records"] if r["id"] == record_id)
+        for key, value in fields.items():
+            if value is None:
+                target.pop(key, None)
+            else:
+                target[key] = value
+        rep = validator.Report()
+        validator.check_records(bank, rep)
+        return [e for e in rep.errors if e.startswith(record_id + ":") and "section" in e]
+
+    def test_state_law_records_must_carry_their_section(self):
+        self.assertEqual(self._section_errors("ne-state-act-#3-001"), [])
+        self.assertEqual(len(self._section_errors("ne-state-act-#3-001", section=None)), 1)
+        self.assertEqual(len(self._section_errors("final-exam-#1-001", section="nec_typo")), 1)
+
+    def test_state_law_records_are_built_from_the_curated_sources(self):
+        spec = importlib.util.spec_from_file_location(
+            "state_law_source", ROOT / "tools" / "pipeline" / "state_law_source.py"
+        )
+        assert spec is not None and spec.loader is not None
+        source = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(source)
+        built, manifest = source.load_all()
+        bank = __import__("json").loads((ROOT / "data" / "question_bank.json").read_text(encoding="utf-8"))
+        shipped = [r for r in bank["records"] if r.get("section") == "ne_state_law"]
+        self.assertEqual(built, shipped)
+        self.assertEqual(manifest, bank["manifest"][-len(manifest):])
+        self.assertEqual(bank["records"][-len(built):], built)
+
     def test_ragged_table_check_ignores_valid_single_cell_note_rows(self):
         table = [
             ["Column A", "Column B"],

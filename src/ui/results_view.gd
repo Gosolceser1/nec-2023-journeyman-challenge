@@ -10,6 +10,8 @@ static func show(host: Main) -> void:
 	host.current_answered = true
 	clear_confetti(host)
 	var is_exam := host.session_name.begins_with("Full Journeyman Exam")
+	var state_law := host.session.session_section == BankLoader.SECTION_NE_STATE_LAW
+	var provisions := "Nebraska State Electrical Act and Board Rules" if state_law else "NEC 2023"
 	host.question_label.text = "Official Examination Report" if is_exam else "Practice Report"
 	host.chapter_hint_label.visible = false
 	host.lookup_box.visible = false
@@ -18,7 +20,7 @@ static func show(host: Main) -> void:
 	host.question_diagram_panel.visible = false
 	host.question_formula_label.visible = false
 	host.exam_label.text = "STATE ELECTRICAL DIVISION  •  NEBRASKA (NSED / PSI)"
-	host.article_label.text = "CANDIDATE PERFORMANCE SUMMARY  •  NEC 2023 STANDARDS"
+	host.article_label.text = "CANDIDATE PERFORMANCE SUMMARY  •  " + ("NEBRASKA STATE ELECTRICAL ACT & BOARD RULES" if state_law else "NEC 2023 STANDARDS")
 	if is_instance_valid(host.question_hint_row):
 		host.question_hint_row.visible = true
 	host.exam_pills_row.visible = not host.ui_mobile
@@ -94,10 +96,10 @@ static func show(host: Main) -> void:
 		host.info_label.add_text("Every question you reached was correct, but %d were left unanswered when the session clock ran out." % unanswered)
 	elif host.missed_questions.is_empty():
 		host.info_panel.append_heading("PERFECT SCORE ACHIEVED\n", AppTheme.EMERALD_400)
-		host.info_label.add_text("Congratulations! You answered 100% of questions correctly. You have demonstrated full mastery of these NEC 2023 provisions.")
+		host.info_label.add_text("Congratulations! You answered 100%% of questions correctly. You have demonstrated full mastery of these %s provisions." % provisions)
 	else:
 		host.info_panel.append_heading("AREAS FOR TARGETED CODE STUDY (%d FAILED ITEMS)\n" % host.missed_questions.size(), AppTheme.RED_400)
-		host.info_label.add_text("The following questions were answered incorrectly or timed out. Review each NEC article reference carefully before retaking the test:\n\n")
+		host.info_label.add_text("The following questions were answered incorrectly or timed out. Review each %s carefully before retaking the test:\n\n" % ("cited statute or board rule" if state_law else "NEC article reference"))
 
 		for i in host.missed_questions.size():
 			var item: Dictionary = host.missed_questions[i]
@@ -109,7 +111,8 @@ static func show(host: Main) -> void:
 			var art_title: String = str(item.get("article_title", ""))
 			var tip: String = str(item.get("tip_short", ""))
 
-			host.info_panel.append_heading("ITEM #%d  •  NEC %s%s\n" % [num, article, " — " + art_title if art_title != "" else ""], AppTheme.SKY_300)
+			var code := NecReference.code_label(article)
+			host.info_panel.append_heading("ITEM #%d  •  %s %s%s\n" % [num, code, article, " — " + art_title if art_title != "" else ""], AppTheme.SKY_300)
 			host.info_label.push_color(AppTheme.SLATE_200)
 			host.info_label.add_text("Question: %s\n" % prompt)
 			host.info_label.pop()
@@ -120,7 +123,7 @@ static func show(host: Main) -> void:
 			
 			host.info_label.push_color(AppTheme.GREEN_300)
 			host.info_label.push_bold()
-			host.info_label.add_text("Correct NEC answer:  %s\n" % correct)
+			host.info_label.add_text("Correct %s answer:  %s\n" % [code, correct])
 			host.info_label.pop()
 			host.info_label.pop()
 
@@ -175,9 +178,11 @@ static func append_study_feedback(host: Main, is_exam: bool, total: int) -> void
 		if not slow.is_empty():
 			line += " Over %s: item %s." % [clock_text(QuizSession.SLOW_SECONDS), ", ".join(slow)]
 		host.info_label.add_text(line + "\n")
-	var mastery := host.session.deck.mastery(host.records)
-	host.info_label.add_text("Exam readiness: %d%% (recent accuracy per subject area, weighted like the exam). Next: drill %s.\n\n" % [
-		roundi(100.0 * QuestionDeck.readiness(mastery)), ExamBlueprint.title(QuestionDeck.weakest_area(mastery, host.records))])
+	if host.session.session_section == BankLoader.SECTION_NEC:
+		var mastery := host.session.deck.mastery(host.records)
+		host.info_label.add_text("Exam readiness: %d%% (recent accuracy per subject area, weighted like the exam). Next: drill %s.\n" % [
+			roundi(100.0 * QuestionDeck.readiness(mastery)), ExamBlueprint.title(QuestionDeck.weakest_area(mastery, host.records))])
+	host.info_label.add_text("\n")
 	host.info_label.pop()
 
 

@@ -19,6 +19,11 @@ const GOLDEN := [
 	["table_block", "Rule text.\nA\tB\n1\t2", "Rule text. The table is shown on screen."],
 	["typography", "the “front” and 5′", "The front and 5 feet"],
 	["typography", "shall be…", "Shall be."],
+	["state_citations", "Neb. Rev. Stat. 81-2108", "Nebraska Revised Statute eighty-one twenty-one oh-eight"],
+	["state_citations", "Neb. Rev. Stat. 81-2108(2) and 81-2113(2): text", "Nebraska Revised Statute eighty-one twenty-one oh-eight, subsection 2 and section eighty-one twenty-one thirteen, subsection 2: text"],
+	["state_citations", "as provided in section 81-2106, 81-2112, or 81-2144", "As provided in section eighty-one twenty-one oh-six, section eighty-one twenty-one twelve, or section eighty-one twenty-one forty-four"],
+	["state_citations", "Title 100 NAC Rule 13: notify", "Title 100 of the Nebraska Administrative Code, Rule 13: notify"],
+	["state_citations", "rated 100-400 A", "Rated 100 to 400 amps"],
 	["abbreviations", "e.g. a box, i.e. metal", "For example a box, that is metal"],
 	["abbreviations", "min. depth, max. load, approx. 5", "Minimum depth, maximum load, approximately 5"],
 	["abbreviations", "708.54 Ex.: text", "Section 708 point 54 Exception: text"],
@@ -313,9 +318,9 @@ func no_answer_before_answering() -> void:
 
 
 func bank_sweep() -> void:
-	print("=== bank sweep: every spoken line of all 279 records ===")
+	print("=== bank sweep: every spoken line of all 283 records ===")
 	var recs: Array = (JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json")) as Dictionary).get("records", [])
-	t.eq(recs.size(), 279, "bank read is not vacuous")
+	t.eq(recs.size(), 283, "bank read is not vacuous")
 	var caps := RegEx.create_from_string("\\b[A-Z]{2,}s?\\b")
 	var hostile := RegEx.create_from_string("[\\t\\n_\"“”‘’—–→÷×√≈Ω½¼¾≤≥±−²³•…%#=]|\\.\\.|\\s[,.;:](?!\\d)|\\b\\d{2,3}\\.\\d+\\(|\\bft\\b|\\blbs?\\b|\\bkcmil\\b")
 	# A bare NNN.N left in a line is voiced as a decimal; the only real one in the bank is a resistance.

@@ -20,7 +20,7 @@ func _init() -> void:
 		"running from the project folder, not a pack (use --main-pack)")
 	var bank = JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json"))
 	var records: Array = bank.get("records", []) if bank is Dictionary else []
-	check(records.size() == 279, "bank loads from the pack: %d records" % records.size())
+	check(records.size() == 283, "bank loads from the pack: %d records" % records.size())
 	var voices = JSON.parse_string(FileAccess.get_file_as_string("res://data/voices.json"))
 	check(voices is Array and not (voices as Array).is_empty(), "voice catalog loads from the pack")
 

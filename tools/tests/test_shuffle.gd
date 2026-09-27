@@ -46,7 +46,8 @@ func _chi(counts: Array, expected: float) -> float:
 
 func _initialize() -> void:
 	bank = BankLoader.load_records()
-	check(bank.size() == 279, "bank has 279 records (%d)" % bank.size())
+	check(bank.size() == 283, "bank has 283 records (%d)" % bank.size())
+	check(BankLoader.count_in_section(bank, BankLoader.SECTION_NEC) == 279, "279 of them are NEC questions")
 	var snapshot: Array = bank.duplicate(true)
 	_rng_isolation()
 	_modes()
@@ -137,10 +138,10 @@ func _first_question_uniform() -> void:
 	var first_split := ExamBlueprint.apportion(10, capacity)
 	var n := 279 * 25
 	var counts: Array = []
-	counts.resize(279)
+	counts.resize(bank.size())
 	counts.fill(0)
 	var firsts_long: Array = []
-	firsts_long.resize(279)
+	firsts_long.resize(bank.size())
 	firsts_long.fill(0)
 	var long_run := _session(99)
 	for k in n:

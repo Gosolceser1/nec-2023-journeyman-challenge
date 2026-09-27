@@ -4,7 +4,8 @@ extends RefCounted
 ## areas, scored items per area, and which NEC chapters feed each area. Every
 ## record belongs to exactly one area: an explicit override by question id,
 ## else the chapter of its article (ChapterBars.chapter_of; 0 = no NEC
-## article), else the first area.
+## article), else the first area. Records outside the NEC pool (a "section"
+## such as ne_state_law, see BankLoader.section_of) have no area: "".
 
 const PATH := "res://data/exam_blueprint.json"
 
@@ -52,6 +53,8 @@ static func scored_items() -> int:
 
 
 static func area_of(record: Dictionary) -> String:
+	if BankLoader.section_of(record) != BankLoader.SECTION_NEC:
+		return ""
 	var override = data().get("overrides", {}).get(str(record.get("id", "")))
 	if override is Dictionary and items(str(override.get("area", ""))) > 0:
 		return str(override["area"])
@@ -62,7 +65,8 @@ static func area_of(record: Dictionary) -> String:
 	return keys()[0] if not keys().is_empty() else ""
 
 
-## area key -> record indices, every area present (possibly empty).
+## area key -> record indices, every area present (possibly empty). Records
+## with no area are left out.
 static func indices_by_area(records: Array) -> Dictionary:
 	var out := {}
 	for k in keys():

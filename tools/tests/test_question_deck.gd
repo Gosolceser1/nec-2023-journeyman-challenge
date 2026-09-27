@@ -10,6 +10,7 @@ var checks := 0
 var bank: Array = []
 var by_area: Dictionary = {}
 var area_of: Array[String] = []
+var nec_count := 0
 
 func check(cond: bool, label: String) -> void:
 	checks += 1
@@ -77,6 +78,7 @@ func _initialize() -> void:
 	by_area = ExamBlueprint.indices_by_area(bank)
 	for r in bank:
 		area_of.append(ExamBlueprint.area_of(r))
+	nec_count = BankLoader.count_in_section(bank, BankLoader.SECTION_NEC)
 	var snapshot: Array = bank.duplicate(true)
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(FILE))
 	_blueprint()
@@ -108,11 +110,18 @@ func _blueprint() -> void:
 		total += (by_area[k] as Array).size()
 		print("  %-30s %3d records" % [ExamBlueprint.title(k), (by_area[k] as Array).size()])
 		check(not (by_area[k] as Array).is_empty(), "%s has records" % k)
-	check(total == bank.size(), "every record is in exactly one area")
+	check(total == nec_count, "every NEC record is in exactly one area")
+	var no_area := 0
+	for i in bank.size():
+		if (area_of[i] == "") != (BankLoader.section_of(bank[i]) != BankLoader.SECTION_NEC):
+			no_area += 1
+	check(no_area == 0 and nec_count < bank.size(), "Nebraska State Law records (%d) have no subject area" % (bank.size() - nec_count))
 	var chapter_area := {0: "general", 1: "general", 2: "wiring_protection", 3: "wiring_methods", 4: "equipment", 5: "special_occupancies", 6: "special_equipment", 7: "special_conditions", 8: "general", 9: "general"}
 	var overrides: Dictionary = ExamBlueprint.data().get("overrides", {})
 	var mismatched := 0
 	for i in bank.size():
+		if area_of[i] == "":
+			continue
 		var id := str(bank[i]["id"])
 		var expect: String = overrides[id]["area"] if overrides.has(id) else chapter_area[ChapterBars.chapter_of(str(bank[i].get("article", "")))]
 		if area_of[i] != expect:
@@ -132,7 +141,7 @@ func _apportion() -> void:
 	print("=== apportionment ===")
 	var cap := _capacity()
 	var bad := 0
-	for n in range(0, bank.size() + 1):
+	for n in range(0, nec_count + 1):
 		var q := ExamBlueprint.apportion(n, cap)
 		var sum := 0
 		for k in q:
@@ -205,7 +214,7 @@ func _drills() -> void:
 					overlaps += 1
 			prev = run
 			repeats += _unbalanced(shown, [])
-			if covered_at < 0 and seen.size() == bank.size():
+			if covered_at < 0 and seen.size() == nec_count:
 				covered_at = r + 1
 		check(dupes == 0, "%d-question drills: no duplicate within a run" % size)
 		check(repeats == 0, "%d-question drills: no question repeats before its whole area was asked (%d)" % [size, repeats])
@@ -378,6 +387,14 @@ func _area_drill() -> void:
 		for i in s.order:
 			only = only and area_of[i] == k
 		check(only and s.order.size() == mini(10, (by_area[k] as Array).size()), "%s drill: %d questions, all from the area" % [k, s.order.size()])
+	var state_drawn := 0
+	for step in [[50, false], [80, true], [9999, false], [9999, true]]:
+		s.begin(step[0], 60, true, "NEC only", step[1])
+		for i in s.order:
+			if area_of[i] == "":
+				state_drawn += 1
+		check(s.order.size() == mini(step[0], nec_count), "%d-question %s: %d questions from the NEC pool" % [step[0], "exam" if step[1] else "drill", s.order.size()])
+	check(state_drawn == 0, "drills and the simulator never draw Nebraska State Law records (%d)" % state_drawn)
 
 
 func _seeded() -> void:

@@ -68,6 +68,10 @@ NON_CODE_REFERENCE_LABELS = {"general knowledge", "general calculation"}
 ID_RE = re.compile(r"^[a-z0-9#-]+-\d{3}$")
 # NEC citations: "210.8(A)(2)", "408.18(C)", "590.5", "Table 220.42(A)"
 ARTICLE_RE = re.compile(r"^(?:Table\s+)?\d+\.\d+", re.I)
+# Nebraska law: "Neb. Rev. Stat. 81-2113(2)", "Title 100 NAC Rule 13"
+STATE_LAW_RE = re.compile(r"^(?:Neb\. Rev\. Stat\. \d{2}-\d{4}|Title \d+ NAC Rule \d+)")
+# Records outside the NEC pool name their pool; NEC records have no "section".
+VALID_SECTIONS = {"ne_state_law"}
 
 # Chapters of info_tip that the player sees BEFORE committing an answer.
 # "LOOKUP FOCUS" and "PLAIN-LANGUAGE BACKGROUND" are background text; a correct
@@ -259,6 +263,8 @@ def article_reference_is_recognized(reference: str) -> bool:
     if folded.startswith("chapter 9, note ") and clean[15:].strip().isdigit():
         return True
     if folded == "table 8, chapter 9":
+        return True
+    if STATE_LAW_RE.match(clean):
         return True
     return ARTICLE_RE.match(clean) is not None
 
@@ -460,6 +466,13 @@ def check_records(data, rep: Report) -> dict:
         # citation format (or an explicit non-code reference category)
         if isinstance(rec.get("article"), str) and not article_reference_is_recognized(rec["article"]):
             rep.warn(f"{rid}: article {rec['article']!r} is not a recognized reference")
+
+        # A state-law citation outside its section would put it in the NEC pool.
+        if "section" in rec and rec["section"] not in VALID_SECTIONS:
+            rep.error(f"{rid}: section {rec['section']!r} not in {sorted(VALID_SECTIONS)}")
+        if isinstance(rec.get("article"), str) and STATE_LAW_RE.match(rec["article"].strip()) \
+                and rec.get("section") != "ne_state_law":
+            rep.error(f"{rid}: Nebraska law citation {rec['article']!r} without section 'ne_state_law'")
 
         # question_number
         qn = rec.get("question_number")

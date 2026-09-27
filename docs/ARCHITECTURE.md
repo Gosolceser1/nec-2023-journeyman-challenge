@@ -13,12 +13,12 @@ src/
           desktop_layout.gd DesktopLayout.build(host): the Windows UI
           mobile_layout.gd  MobileLayout.build(host): the Android UI
   core/   node-free, unit-tested
-          quiz_session.gd   QuizSession: order, score, streak, verdicts, missed list, clocks
+          quiz_session.gd   QuizSession: order (one question pool), score, streak, verdicts, missed list, clocks
           question_deck.gd  QuestionDeck: which questions a run gets, reviews, study stats, question_bag.cfg
-          exam_blueprint.gd ExamBlueprint: the exam's subject areas, record -> area, apportionment
+          exam_blueprint.gd ExamBlueprint: the exam's subject areas, record -> area (NEC pool only), apportionment
           choice_order.gd   ChoiceOrder: per-run choice order, locked questions, pinned choices
-          bank_loader.gd    BankLoader: reads data/question_bank.json, normalises records
-          nec_reference.gd  NecReference: article titles, lookup paths
+          bank_loader.gd    BankLoader: reads data/question_bank.json, normalises records, question pools
+          nec_reference.gd  NecReference: article titles, lookup paths (NEC and Nebraska law)
           safe_area.gd      SafeArea.margins: notch / cutout insets
           audio_settings.gd AudioSettings: audio modes, speed, pauses, sound effects, audio.cfg
   speech/ speech_controller.gd  SpeechController: bundled clips, Edge helper and cache,
@@ -69,6 +69,15 @@ UI through `main`. Two patterns hang off it:
 `class_name Main` makes every `host.x` access type-checked, so a renamed
 member fails at parse time, not at runtime.
 
+Question pools: records without a `section` field are the NEC pool; the
+Nebraska State Law records carry `"section": "ne_state_law"`.
+`_start_quiz(..., section)` hands the pool to `session.begin`. The NEC pool
+goes through the deck below; `ExamBlueprint.area_of` gives other pools no
+area, so the NEC drills, the simulator, the reviews and the readiness never
+see a state question. Any other pool is simply shuffled, with shuffled
+choices. The menu's NEBRASKA STATE LAW drill
+(`Widgets.add_state_law_section`) asks for every record in its pool.
+
 The flow of one question: `_show_question` asks `session` for the record,
 renders the stem, choices, table or figure, then `fit.begin()` shrinks the
 screen until nothing scrolls. `_answer_selected` hands the pick to
@@ -79,7 +88,7 @@ shows the feedback sheet, `QuizFx.play_answer` plays the burst, and
 
 ### Question selection
 
-Every mode draws from the whole pool (all 279 questions, every exam) through
+Every NEC mode draws from the whole NEC pool (all 279 questions, every exam) through
 `session.deck` (QuestionDeck), weighted by the licensing exam's content
 outline in `data/exam_blueprint.json` (ExamBlueprint). In short:
 
@@ -163,7 +172,7 @@ tests and the native TTS callbacks refer to them by name.
 
 Also:
 
-- `tools/speech/test_bundle.gd`: every question resolves to its bundled clips (279/279).
+- `tools/speech/test_bundle.gd`: every question resolves to its bundled clips (283/283).
 - `tools/visual/measure_fit.gd`: share of questions that scroll before answering (0%).
 - `tools/speech/check_export_pack.gd`: run against an exported `.pck` with
   `--main-pack`. It loads the bank, every clip and the sfx from inside the

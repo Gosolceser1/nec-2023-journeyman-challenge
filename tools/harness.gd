@@ -29,7 +29,9 @@ func _init() -> void:
 	await process_frame
 
 	print("=== bank load ===")
-	check(main.records.size() == 279, "records count == 279, got %d" % main.records.size())
+	check(main.records.size() == 283, "records count == 283, got %d" % main.records.size())
+	check(BankLoader.count_in_section(main.records, BankLoader.SECTION_NEC) == 279, "NEC pool == 279")
+	check(BankLoader.count_in_section(main.records, BankLoader.SECTION_NE_STATE_LAW) == 4, "Nebraska state-law pool == 4")
 	check(main.voice_ids.size() > 0, "voice catalog (data/voices.json) loaded: %d voices" % main.voice_ids.size())
 
 	print("=== sessions ===")
@@ -37,6 +39,8 @@ func _init() -> void:
 	await _run_session(main, 25, true)
 	await _run_session(main, 9999, false)
 	await _run_session(main, 1, false)
+	await _run_session(main, 9999, true, BankLoader.SECTION_NE_STATE_LAW)
+	await _full_exam_excludes_state_law(main)
 
 	print("=== answer every record (all render branches) ===")
 	await _answer_every_record(main)
@@ -78,12 +82,17 @@ func _init() -> void:
 	print("RESULT: ", "PASS" if failures.is_empty() else "FAIL")
 	quit(0 if failures.is_empty() else 1)
 
-func _run_session(main: Node, count: int, timed: bool) -> void:
-	main._start_quiz(count, main.SESSION_TIME_SECONDS, timed, "Harness")
+func _run_session(main: Node, count: int, timed: bool, section := BankLoader.SECTION_NEC) -> void:
+	main._start_quiz(count, main.SESSION_TIME_SECONDS, timed, "Harness", "", section)
 	await process_frame
 	await process_frame
-	var total: int = mini(count, main.records.size())
-	check(main.order.size() == total, "order size count=%d -> %d (want %d)" % [count, main.order.size(), total])
+	var total: int = mini(count, BankLoader.count_in_section(main.records, section))
+	check(main.order.size() == total, "order size count=%d %s -> %d (want %d)" % [count, section, main.order.size(), total])
+	var foreign := 0
+	for idx in main.order:
+		if BankLoader.section_of(main.records[idx]) != section:
+			foreign += 1
+	check(foreign == 0, "%s session drew %d records from another section" % [section, foreign])
 	# The tween in _start_quiz only reaches _show_question once frames run, so
 	# render q0 explicitly before the walk.
 	main._show_question()
@@ -99,6 +108,18 @@ func _run_session(main: Node, count: int, timed: bool) -> void:
 		if i % 25 == 0:
 			await process_frame
 	check(main.answered_count == total, "answered_count count=%d -> %d (want %d)" % [count, main.answered_count, total])
+	main._show_results()
+	await process_frame
+
+func _full_exam_excludes_state_law(main: Node) -> void:
+	for attempt in 5:
+		main._start_quiz(80, main.EXAM_MINUTES * 60, true, "Full Journeyman Exam")
+		await process_frame
+		var drawn := 0
+		for idx in main.order:
+			if BankLoader.section_of(main.records[idx]) != BankLoader.SECTION_NEC:
+				drawn += 1
+		check(main.order.size() == 80 and drawn == 0, "simulator #%d: 80 NEC items, %d state-law drawn" % [attempt, drawn])
 	main._show_results()
 	await process_frame
 

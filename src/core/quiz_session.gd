@@ -61,6 +61,7 @@ var session_length := SESSION_LENGTH
 var session_time_limit := SESSION_TIME_SECONDS
 var timed_session := true
 var session_name := "Practice Test"
+var session_section := BankLoader.SECTION_NEC
 var question_time_left := SECONDS_PER_SCORED_ITEM
 
 
@@ -70,14 +71,19 @@ func _init() -> void:
 
 ## A fresh session of up to question_count records, each with a new choice
 ## order: the next drill from the decks (from one subject area if area is
-## set), or with simulation a blueprint exam.
-func begin(question_count: int, time_limit: int, timed: bool, name: String, simulation := false, area := "") -> void:
-	if simulation:
+## set), or with simulation a blueprint exam. Both draw only the NEC pool;
+## another section (BankLoader.section_of) is a plain shuffle of that pool,
+## outside the decks and the study stats.
+func begin(question_count: int, time_limit: int, timed: bool, name: String, simulation := false, area := "", section := BankLoader.SECTION_NEC) -> void:
+	if section != BankLoader.SECTION_NEC:
+		order = _shuffled_section(section, question_count)
+	elif simulation:
 		order = deck.draw_exam(records, question_count, rng)
 	else:
 		order = deck.draw_drill(records, question_count, rng, area)
 	for i in order:
 		choice_orders[i] = ChoiceOrder.shuffled(records[i], rng)
+	session_section = section
 	session_length = order.size()
 	session_time_limit = time_limit
 	timed_session = timed
@@ -93,6 +99,19 @@ func begin(question_count: int, time_limit: int, timed: bool, name: String, simu
 	answer_seconds.clear()
 	time_left = session_time_limit
 	question_time_left = SECONDS_PER_SCORED_ITEM
+
+
+func _shuffled_section(section: String, count: int) -> Array[int]:
+	var picked: Array[int] = []
+	for i in records.size():
+		if BankLoader.section_of(records[i]) == section:
+			picked.append(i)
+	for i in range(picked.size() - 1, 0, -1):
+		var j := rng.randi_range(0, i)
+		var t := picked[i]
+		picked[i] = picked[j]
+		picked[j] = t
+	return picked.slice(0, mini(count, picked.size()))
 
 
 ## {"mean": seconds per answered question, "slow": item numbers over
@@ -162,10 +181,11 @@ func submit(selected: int, graded: bool) -> Dictionary:
 		var tally: Array = chapter_stats.get(chapter, [0, 0])
 		chapter_stats[chapter] = [int(tally[0]) + (1 if right else 0), int(tally[1]) + 1]
 		var area := ExamBlueprint.area_of(record)
-		var area_tally: Array = area_stats.get(area, [0, 0])
-		area_stats[area] = [int(area_tally[0]) + (1 if right else 0), int(area_tally[1]) + 1]
+		if area != "":
+			var area_tally: Array = area_stats.get(area, [0, 0])
+			area_stats[area] = [int(area_tally[0]) + (1 if right else 0), int(area_tally[1]) + 1]
+			deck.record_result(records, record_index, right)
 		answer_seconds.append([current_index + 1, maxf(0.0, (int(clock.call()) - _shown_msec) / 1000.0)])
-		deck.record_result(records, record_index, right)
 
 	var verdict: Verdict
 	var shown := ChoiceOrder.apply(record, perm)

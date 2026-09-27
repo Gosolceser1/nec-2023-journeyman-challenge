@@ -281,9 +281,9 @@ func edge_cases() -> void:
 # Every real answer must yield a usable candidate set.
 # --------------------------------------------------------------------------
 func bank_candidate_sweep() -> void:
-	print("=== bank candidate sweep (279 records) ===")
+	print("=== bank candidate sweep (283 records) ===")
 	var recs: Array = (JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json")) as Dictionary).get("records", [])
-	t.eq(recs.size(), 279, "bank read is not vacuous")
+	t.eq(recs.size(), 283, "bank read is not vacuous")
 
 	var empty_sets := 0
 	var self_missing := 0
@@ -312,7 +312,7 @@ func bank_candidate_sweep() -> void:
 
 	# The answer must be findable SOMEWHERE in the record's teaching material,
 	# because the post-answer highlight and the teach line both key off it.
-	# reference_text alone is NOT required: 106 of 279 records keep the answer in
+	# reference_text alone is NOT required: 106 of 283 records keep the answer in
 	# reference_table, worked, or a tip instead, and the UI highlights the TABLE.
 	# final-exam-#3-034 is the ONE record that fails this, via the defect below.
 	var nowhere := 0

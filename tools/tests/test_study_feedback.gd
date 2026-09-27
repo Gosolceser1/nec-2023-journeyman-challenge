@@ -76,6 +76,16 @@ func _session_tallies() -> void:
 		l.start_question()
 		l.submit(0, false)
 	check(l.area_stats.is_empty() and l.answer_seconds.is_empty(), "listen (ungraded) answers stay out of the areas and the pace")
+	var ne := QuizSession.new()
+	ne.records = bank
+	ne.bag_path = ""
+	ne.begin(9999, 600, true, "Nebraska State Law", false, "", BankLoader.SECTION_NE_STATE_LAW)
+	for j in ne.order.size():
+		ne.current_index = j
+		ne.start_question()
+		ne.submit(0, true)
+	check(ne.order.size() > 0 and ne.area_stats.is_empty() and ne.answer_seconds.size() == ne.order.size(), "Nebraska State Law answers count for pace but no subject area")
+	check(ne.deck.stats.is_empty(), "Nebraska State Law answers stay out of the NEC deck")
 	s.begin(10, 1800, true, "Again")
 	check(s.area_stats.is_empty() and s.answer_seconds.is_empty(), "a new session starts with empty tallies")
 

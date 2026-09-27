@@ -2,11 +2,12 @@
 
 A solo exam trainer for the NEC 2023 journeyman electrician exam: 279
 questions from seven practice exams, each with the answer, the NEC 2023
-reference and a short lesson. Runs on Windows and Android (Godot 4.7.2,
+reference and a short lesson, plus a separate Nebraska State Law drill (4
+questions on the State Electrical Act and Board Rules, cited to the statute). Runs on Windows and Android (Godot 4.7.2,
 GDScript). Questions can be read aloud by a recorded neural voice that ships
 with the app.
 
-Every drill and the Full Journeyman Simulator draw from all 279 questions,
+Every NEC drill and the Full Journeyman Simulator draw from all 279 NEC questions,
 weighted like the Nebraska exam's content outline (10/20/15/15/10/5/5 items
 per subject area). Drills avoid repeats until an area is used up, and missed
 questions come back two sessions later. The report breaks your score down by

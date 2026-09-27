@@ -519,6 +519,7 @@ static func build(host: Main) -> void:
 	var menu_column := VBoxContainer.new()
 	menu_column.add_theme_constant_override("separation", 10)
 	menu_margin.add_child(menu_column)
+	host.menu_column = menu_column
 	var badge_box := HBoxContainer.new()
 	badge_box.alignment = BoxContainer.ALIGNMENT_CENTER
 	menu_column.add_child(badge_box)
@@ -573,6 +574,7 @@ static func build(host: Main) -> void:
 	Widgets.add_mode_button(host, menu_column, "50 QUESTIONS", "Intensive endurance drill • 150 minutes timed", host._start_quiz.bind(50, host._practice_time(50), true, "50-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG, false, 64.0, 15)
 	Widgets.add_mode_button(host, menu_column, "10 QUESTIONS • WEAKEST AREA", host._study_button_subtitle(), host._start_area_drill, AppTheme.SKY_300, AppTheme.BUTTON_BG, false, 64.0, 15)
 	host.study_button = host.menu_mode_buttons.back()
+	Widgets.add_state_law_section(host, menu_column, 64.0, 15)
 	var exam_hdr_box := HBoxContainer.new()
 	exam_hdr_box.add_theme_constant_override("separation", 8)
 	menu_column.add_child(exam_hdr_box)

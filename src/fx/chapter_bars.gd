@@ -6,6 +6,8 @@ extends Control
 ## area rows. Bars grow in when shown.
 
 const ROW_H := 24.0
+## Chart key for Nebraska State Electrical Act / Board Rules citations.
+const STATE_LAW := 10
 const CHAPTER_NAMES := {
 	0: "Trade knowledge / math",
 	1: "Ch 1  General",
@@ -17,6 +19,7 @@ const CHAPTER_NAMES := {
 	7: "Ch 7  Special conditions",
 	8: "Ch 8  Communications",
 	9: "Ch 9  Tables",
+	STATE_LAW: "NE State Act & Rules",
 }
 
 var rows: Array = []
@@ -29,8 +32,11 @@ func _init() -> void:
 
 
 ## NEC chapter for an article/section string ("310.16", "Table 250.66",
-## "Chapter 9, Table 4"); 0 for NFPA 70E, math and general knowledge.
+## "Chapter 9, Table 4"); 0 for NFPA 70E, math and general knowledge;
+## STATE_LAW for Nebraska statutes and board rules.
 static func chapter_of(article: String) -> int:
+	if NecReference.is_state_law(article):
+		return STATE_LAW
 	var ch := RegEx.create_from_string("(?i)\\bchapter\\s+(\\d)\\b").search(article)
 	if ch != null:
 		return int(ch.get_string(1))

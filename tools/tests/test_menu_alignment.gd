@@ -2,7 +2,8 @@ extends SceneTree
 ## Menu mode cards and answer cards stay in their column slot: same left x and
 ## width as the VBoxContainer that holds them, once the menu settles, after
 ## mouse passes (including one spanning a container re-sort), after focus moves
-## and after a quiz round-trip. Hover slides used to tween position:x
+## and after a quiz round-trip. The Nebraska State Law card is held to the
+## same column x and width as the NEC cards. Hover slides used to tween position:x
 ## as_relative, so a re-sort or a quick enter/exit left each card a different
 ## few px off its slot and the menu looked staggered.
 ##
@@ -38,18 +39,30 @@ func _initialize() -> void:
 	main.session.bag_path = ""
 	root.add_child(main)
 	await _wait(0.8)
-	check(main.menu_mode_buttons.size() == 7, "7 mode cards (got %d)" % main.menu_mode_buttons.size())
+	check(main.menu_mode_buttons.size() == 8, "8 mode cards (got %d)" % main.menu_mode_buttons.size())
 
 	_check_styles()
 	_check_slots(main.menu_mode_buttons, "menu settled")
+	var state_card := _state_law_card()
+	_check_state_law_card(state_card, "menu settled")
 
 	var btns: Array = main.menu_mode_buttons
-	for k in [0, 1, 2, 3, 4, 5, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 2, 1]:
+	for k in [0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1, 0, 1, 2, 3, 2, 1, 7, 6, 7]:
 		btns[k].mouse_entered.emit()
 		await _wait(0.01 + 0.015 * float(k % 4))
 		btns[k].mouse_exited.emit()
 	await _wait(0.4)
 	_check_slots(btns, "after quick mouse passes")
+	_check_state_law_card(state_card, "after quick mouse passes")
+
+	if state_card != null:
+		state_card.mouse_entered.emit()
+		await _wait(0.3)
+		var dx := state_card.get_global_rect().position.x - (state_card.get_parent() as Control).get_global_rect().position.x
+		check(absf(dx - 5.0) <= TOL, "hovered State Law card rests 5 px right of its slot (off by %.2f)" % dx)
+		state_card.mouse_exited.emit()
+		await _wait(0.4)
+		_check_state_law_card(state_card, "after a State Law hover")
 
 	btns[2].mouse_entered.emit()
 	await _wait(0.3)
@@ -91,6 +104,7 @@ func _initialize() -> void:
 	main._show_menu()
 	await _wait(0.8)
 	_check_slots(main.menu_mode_buttons, "menu after returning from a quiz")
+	_check_state_law_card(state_card, "menu after returning from a quiz")
 
 	var child_ok := true
 	if not mobile:
@@ -112,6 +126,28 @@ func _check_slots(nodes: Array, when: String) -> void:
 		if absf(r.position.x - slot.position.x) > TOL or absf(r.size.x - slot.size.x) > TOL or not c.scale.is_equal_approx(Vector2.ONE):
 			bad.append("%s x%+.2f w%+.2f s%.3f" % [c.name, r.position.x - slot.position.x, r.size.x - slot.size.x, c.scale.x])
 	check(bad.is_empty(), "%s: %d cards in their slot (off: %s)" % [when, nodes.size() - bad.size(), ", ".join(bad)])
+
+
+func _state_law_card() -> Button:
+	var found: Array = main.menu_mode_buttons.filter(func(b): return str(b.get_meta("base_text")).contains("State Electrical Act"))
+	check(found.size() == 1, "one State Law mode card (got %d)" % found.size())
+	return found[0] if found.size() == 1 else null
+
+
+## The State Law card sits in the same column as the NEC mode cards, with the
+## same left x and width as each of them.
+func _check_state_law_card(card: Button, when: String) -> void:
+	if card == null:
+		return
+	var r := card.get_global_rect()
+	var bad := PackedStringArray()
+	for b in main.menu_mode_buttons:
+		if b == card:
+			continue
+		var o := (b as Control).get_global_rect()
+		if b.get_parent() != card.get_parent() or absf(r.position.x - o.position.x) > TOL or absf(r.size.x - o.size.x) > TOL:
+			bad.append("%s x%+.2f w%+.2f" % [b.name, r.position.x - o.position.x, r.size.x - o.size.x])
+	check(bad.is_empty(), "%s: State Law card lines up with the %d other cards (off: %s)" % [when, main.menu_mode_buttons.size() - 1, ", ".join(bad)])
 
 
 ## One content box for every state of a card, and the toggles line up with

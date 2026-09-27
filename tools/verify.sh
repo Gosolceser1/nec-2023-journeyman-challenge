@@ -152,7 +152,7 @@ stage "5/5  Question bank"           bank_validate    || true
 # The voice bundle is gitignored, so fresh clones and CI skip this; where it
 # exists, a stale or partial bundle must not pass silently.
 if [ -d assets/speech ]; then
-  stage "+    Speech bundle (279/279)"  "$GODOT" --headless --path . --script tools/speech/test_bundle.gd || true
+  stage "+    Speech bundle (283/283)"  "$GODOT" --headless --path . --script tools/speech/test_bundle.gd || true
 else
   echo ""
   echo "  (assets/speech/ not generated — bundled-voice checks skipped)"

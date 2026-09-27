@@ -162,6 +162,9 @@ var main_margin: MarginContainer
 var menu_center_box: MarginContainer
 var menu_overlay: Control
 var menu_panel: PanelContainer
+## The menu's button column; _fit_menu_spacing tightens its separation.
+var menu_column: VBoxContainer
+var _menu_separation := -1
 var menu_mode_buttons: Array[Button] = []
 ## The weakest-area drill; its subtitle shows the area and the readiness.
 var study_button: Button
@@ -245,6 +248,8 @@ func _ready() -> void:
 	add_child(speech.speech_helper)
 	speech.speech_helper.clip_ready.connect(speech._on_helper_clip)
 	speech.speech_helper.request_failed.connect(speech._on_helper_failed)
+	# Before the build: the menu sizes the state-law drill from the bank.
+	records = BankLoader.load_records()
 	_build_ui()
 	info_panel.label = info_label
 	speech._warm_speech_helper()
@@ -258,6 +263,7 @@ func _ready() -> void:
 		get_tree().create_timer(4.0).timeout.connect(speech._refresh_native_voices)
 	get_viewport().size_changed.connect(_apply_safe_area)
 	get_viewport().size_changed.connect(fit.on_viewport_resized)
+	get_viewport().size_changed.connect(_fit_menu_spacing, CONNECT_DEFERRED)
 	fit.apply_answers_row_layout()
 	timer = Timer.new()
 	timer.wait_time = 1.0
@@ -274,7 +280,6 @@ func _ready() -> void:
 	add_child(_listen_timer)
 	AudioSection.refresh(self)
 	_refresh_dock_audio()
-	records = BankLoader.load_records()
 	if records.is_empty():
 		_show_error("Question bank could not be loaded.")
 	else:
@@ -389,8 +394,8 @@ func _apply_safe_area() -> void:
 		mms.x = clampf(vp_size.x - float(m["side"]) * 2.0 - 16.0, 288.0, vp_size.x)
 		menu_panel.custom_minimum_size = mms
 
-func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION_TIME_SECONDS, timed: bool = true, mode_name: String = "Practice Test", area: String = "") -> void:
-	if records.is_empty():
+func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION_TIME_SECONDS, timed: bool = true, mode_name: String = "Practice Test", area: String = "", section: String = BankLoader.SECTION_NEC) -> void:
+	if BankLoader.count_in_section(records, section) == 0:
 		return
 	var simulation := mode_name == "Full Journeyman Exam"
 	session_audio_mode = AudioSettings.session_mode(audio.mode, simulation)
@@ -398,7 +403,7 @@ func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION
 	listen_phase = AudioSettings.ListenPhase.IDLE
 	listen_paused = false
 	var listening := session_audio_mode == AudioSettings.Mode.LISTEN
-	session.begin(question_count, time_limit, timed and not listening, mode_name + (" · Listen" if listening else ""), simulation, area)
+	session.begin(question_count, time_limit, timed and not listening, mode_name + (" · Listen" if listening else ""), simulation, area, section)
 	_refresh_dock_audio()
 	if timed_session:
 		timer.start()
@@ -425,6 +430,7 @@ func _build_ui() -> void:
 func _toggle_audio_section() -> void:
 	audio_expanded = not audio_expanded
 	AudioSection.refresh(self)
+	_fit_menu_spacing.call_deferred()
 
 func _on_audio_mode_picked(m: int) -> void:
 	audio.mode = AudioSettings.sanitize_mode(m)
@@ -661,6 +667,28 @@ func _refresh_study_button() -> void:
 	study_button.set_meta("base_text", base.get_slice("\n", 0) + "\n" + _study_button_subtitle())
 	study_button.text = str(study_button.get_meta("base_text"))
 
+## Tightens the menu's row spacing just enough that the whole menu fits the
+## screen without scrolling, down to 4 px; a roomy screen keeps the layout's
+## own spacing.
+func _fit_menu_spacing() -> void:
+	if not is_instance_valid(menu_column) or not is_instance_valid(menu_center_box):
+		return
+	var scroll := menu_center_box.get_parent() as ScrollContainer
+	if scroll == null or scroll.size.y <= 0.0:
+		return
+	if _menu_separation < 0:
+		_menu_separation = menu_column.get_theme_constant("separation")
+	var gaps := -1
+	for c in menu_column.get_children():
+		if c is Control and (c as Control).visible:
+			gaps += 1
+	gaps = maxi(gaps, 1)
+	var current := menu_column.get_theme_constant("separation")
+	var overflow := menu_center_box.get_combined_minimum_size().y - scroll.size.y + (_menu_separation - current) * gaps
+	var fitted := clampi(_menu_separation - ceili(maxf(overflow, 0.0) / gaps), 4, _menu_separation)
+	if fitted != current:
+		menu_column.add_theme_constant_override("separation", fitted)
+
 func _show_menu() -> void:
 	timer.stop()
 	if _start_tween != null and _start_tween.is_valid():
@@ -703,6 +731,7 @@ func _show_menu() -> void:
 				b_tw.tween_property(btn, "modulate:a", 1.0, 0.18)
 				b_tw.parallel().tween_property(btn, "scale", Vector2.ONE, 0.22)
 				b_tw.tween_callback(UiFx.shine_sweep.bind(btn))
+		_fit_menu_spacing.call_deferred()
 
 func _populate_reference_table(grid: GridContainer, note_label: Label, rows: Array, highlight_answer: String = "", is_feedback: bool = true, target_keyword: String = "") -> bool:
 	var res := TableViewer.populate_table(grid, note_label, rows, highlight_answer, is_feedback, target_keyword)

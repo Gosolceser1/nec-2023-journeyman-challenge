@@ -224,7 +224,7 @@ func extract_target_keyword_edges() -> void:
 func note_row_bank_consistency() -> void:
 	print("=== bank note/data consistency (25 tables) ===")
 	var recs: Array = (JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json")) as Dictionary).get("records", [])
-	t.eq(recs.size(), 279, "bank read is not vacuous")
+	t.eq(recs.size(), 283, "bank read is not vacuous")
 
 	var tables := 0
 	var mismatch := 0

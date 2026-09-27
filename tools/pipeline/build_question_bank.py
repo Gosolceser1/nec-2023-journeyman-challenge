@@ -8,6 +8,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gists import GISTS, SCENES
 from pipeline_paths import answer_key_ocr_dir, exam_ocr_dir
 from bank_overrides import apply_overrides
+from state_law_source import load_all as load_state_law
 
 ROOT = Path(__file__).resolve().parents[2]
 OCR = exam_ocr_dir()
@@ -2322,6 +2323,9 @@ for item in bank:
         "choice_notes": choice_notes_for(item[2]),
         "available": True,
     })
+# State law questions come from curated JSON, not OCR, and follow the NEC records.
+state_records, state_manifest = load_state_law()
+records.extend(state_records)
 # Curated corrections live in a data overlay instead of being lost on rebuild.
 # Set WIRE_SKIP_BANK_OVERRIDES=1 only when generating a raw baseline for a
 # reviewed overlay refresh.
@@ -2333,13 +2337,15 @@ if os.environ.get("WIRE_SKIP_BANK_OVERRIDES") != "1":
 # "questions" held the RAW pre-curation rows (un-redacted stems, original
 # units). main.gd read only "records"; keeping both doubled the file and left a
 # latent fallback to unredacted data. Curated rows only.
-payload = {"version": 2, "total_expected": 310, "playable": len(bank), "missing_source_items": missing, "audit_notes": report, "records": records}
+playable = len(bank) + len(state_records)
+payload = {"version": 2, "total_expected": 310 + len(state_records), "playable": playable, "missing_source_items": missing, "audit_notes": report, "records": records}
 manifest = []
 for stem, source in SOURCES.items():
     count = 70 if "Final" in source else 25
     for number in range(1, count + 1):
         match = next((item for item in bank if item[5] == source and item[6] == number), None)
         manifest.append({"source": source, "number": number, "available": match is not None})
+manifest.extend(state_manifest)
 payload["manifest"] = manifest
 OUT.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
-print(json.dumps({"playable": len(bank), "missing": len(missing), "notes": len(report), "output": str(OUT)}))
+print(json.dumps({"playable": playable, "missing": len(missing), "notes": len(report), "output": str(OUT)}))

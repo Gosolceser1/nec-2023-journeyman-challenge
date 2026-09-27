@@ -58,8 +58,11 @@ and catch broken overrides (it exits 1 on one).
 
 ## 2. Drawing a run
 
-All modes use the whole pool. `QuizSession.begin(count, time, timed, name,
-simulation := false, area := "")`.
+All NEC modes use the whole NEC pool. `QuizSession.begin(count, time, timed, name,
+simulation := false, area := "", section := "nec")`. Records with another
+`section` (the Nebraska State Law questions) have no subject area, so they
+stay out of the blueprint, the decks, the reviews and the readiness; their
+own drill shuffles its pool.
 
 ### Drills (10/20/30/40/50, listen mode, single-area drills)
 

@@ -15,7 +15,8 @@ func _initialize() -> void:
 		capacity[k] = n
 		var need := ExamBlueprint.items(k)
 		print("  %-30s %6d %6d %s" % [ExamBlueprint.title(k), need, n, "SHORT by %d: the simulator fills the gap from other areas" % (need - n) if n < need else ""])
-	print("  %-30s %6d %6d" % ["total", ExamBlueprint.scored_items(), records.size()])
+	print("  %-30s %6d %6d" % ["total", ExamBlueprint.scored_items(), BankLoader.count_in_section(records, BankLoader.SECTION_NEC)])
+	print("  (outside the blueprint: %d Nebraska State Law records)" % BankLoader.count_in_section(records, BankLoader.SECTION_NE_STATE_LAW))
 	var index_of := {}
 	for i in records.size():
 		index_of[str(records[i].get("id", ""))] = i

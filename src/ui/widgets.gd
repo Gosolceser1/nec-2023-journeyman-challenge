@@ -64,6 +64,31 @@ static func add_mode_button(host: Main, parent: VBoxContainer, title_text: Strin
 	host.menu_mode_buttons.append(button)
 
 
+## "NEBRASKA STATE LAW" heading plus one drill of every state-law question,
+## shuffled. Adds nothing when the bank has none.
+static func add_state_law_section(host: Main, parent: VBoxContainer, min_height: float = -1.0, font_size: int = -1) -> void:
+	var count := BankLoader.count_in_section(host.records, BankLoader.SECTION_NE_STATE_LAW)
+	if count == 0:
+		return
+	var hdr_box := HBoxContainer.new()
+	hdr_box.add_theme_constant_override("separation", 8)
+	parent.add_child(hdr_box)
+	var bar := ColorRect.new()
+	bar.custom_minimum_size = Vector2(4, 16)
+	bar.color = AppTheme.SKY_300
+	hdr_box.add_child(bar)
+	var heading := Label.new()
+	heading.text = "NEBRASKA STATE LAW"
+	heading.add_theme_font_size_override("font_size", 12)
+	heading.add_theme_color_override("font_color", AppTheme.SKY_300)
+	hdr_box.add_child(heading)
+	var seconds: int = host._practice_time(count)
+	add_mode_button(host, parent, "%d QUESTIONS" % count,
+		"State Electrical Act & Board Rules • %d minutes timed" % (seconds / 60),
+		host._start_quiz.bind(count, seconds, true, "Nebraska State Law", "", BankLoader.SECTION_NE_STATE_LAW),
+		AppTheme.SKY_300, AppTheme.BUTTON_BG, false, min_height, font_size)
+
+
 static func make_dock_button(text: String, min_w: float, h: float, font_size: int, callback: Callable) -> Button:
 	var button := Button.new()
 	button.text = text

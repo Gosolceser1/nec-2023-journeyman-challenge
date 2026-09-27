@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "source": "Quiz 3 - STATE ELECTRICAL ACT AND BOARD RULES EXAM QUESTIONS",
+  "note": "Stems and choices word for word from the quiz sheet (no answer key on the sheet). Keys, citations and explanations are in ne_state_act_quiz3_keys.json.",
+  "exam": "NE State Act #3",
+  "section": "ne_state_law",
+  "questions": [
+    {
+      "number": 1,
+      "prompt": "How many apprentice fire alarm installers can be supervised at one time by a license holder?",
+      "answers": ["1", "2", "3", "5"]
+    },
+    {
+      "number": 2,
+      "prompt": "What type of new electrical work is an unsupervised apprentice electrician allowed to install?",
+      "answers": ["raceway", "service work", "pull wiring", "none"]
+    },
+    {
+      "number": 3,
+      "prompt": "You are going to send a wiring crew to a new construction project. If you send three licensed journeymen, how many apprentice electricians can you send with them to the job?",
+      "answers": ["12", "9", "6", "3"]
+    },
+    {
+      "number": 4,
+      "prompt": "According to the State Electrical Act and Board rules, it is the electrical contractor's responsibility to call the inspector to schedule which of the following types of inspections during the project?",
+      "answers": ["rough-in or pre-cover", "finals", "re-inspections for correction orders", "all of these"]
+    }
+  ]
+}

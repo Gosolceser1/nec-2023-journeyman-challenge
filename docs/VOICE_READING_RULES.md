@@ -119,6 +119,9 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 | `___` | blank (after "Article/Section": "which Article") |
 | `connector(s)` | connectors |
 | `e.g.`, `i.e.`, `approx.`, `min.`, `max.` | for example, that is, approximately, minimum, maximum |
+| `Neb. Rev. Stat. 81-2108(2)` | Nebraska Revised Statute eighty-one twenty-one oh-eight, subsection 2 |
+| `81-2108(2) and 81-2113(2)` after `Neb. Rev. Stat.`, `section 81-2106, 81-2112, or 81-2144` | … and section eighty-one twenty-one thirteen, subsection 2; section eighty-one twenty-one oh-six, section … (only after `Neb. Rev. Stat.` or `section(s)`, so `100-400 A` stays a range) |
+| `Title 100 NAC Rule 13`, `NAC` | Title 100 of the Nebraska Administrative Code, Rule 13; Nebraska Administrative Code |
 
 Unknown all-caps tokens: consonant-only ones are spelled ("Q R Z"). A line
 shouted in capitals is lowercased. `ON`, `OFF`, `NOT` and `ONLY` are read as words.
@@ -206,7 +209,7 @@ text is spoken, or a clip-format change), then refresh the shipped clips:
 Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/speech/dump_speech.gd
 python tools/speech/pregenerate_speech.py --bundle
 Godot_v4.7.2-stable_win64_console.exe --headless --path . --import
-Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/speech/test_bundle.gd   # expect 279/279
+Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/speech/test_bundle.gd   # expect 283/283
 ```
 
 The `--import` step matters. Bundled clips are loaded as imported

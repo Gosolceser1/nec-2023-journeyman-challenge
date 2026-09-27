@@ -364,9 +364,9 @@ func delegation_shims() -> void:
 # Every real record must produce a speakable, non-empty plan.
 # --------------------------------------------------------------------------
 func bank_speakable_sweep() -> void:
-	print("=== bank speakable sweep (279 records) ===")
+	print("=== bank speakable sweep (283 records) ===")
 	var recs: Array = (JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json")) as Dictionary).get("records", [])
-	t.eq(recs.size(), 279, "bank read is not vacuous")
+	t.eq(recs.size(), 283, "bank read is not vacuous")
 
 	var bad := 0
 	var empty := 0
@@ -398,7 +398,7 @@ func bank_speakable_sweep() -> void:
 					break
 			if lone:
 				continue
-	t.eq(bad, 0, "no malformed segment and no TTS-hostile character survives in any of the 279 plans")
+	t.eq(bad, 0, "no malformed segment and no TTS-hostile character survives in any of the 283 plans")
 	t.eq(empty, 0, "no narrated choice is silent")
 	t.eq(underscore_records, KNOWN_LONE_UNDERSCORE_RECORDS,
 		"the only records whose speech contains '_' are the known lone-underscore defect set")

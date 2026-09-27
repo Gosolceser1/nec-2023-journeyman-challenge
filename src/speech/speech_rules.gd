@@ -20,6 +20,8 @@ const VERSION := 3
 const PIPELINE := [
 	["table_block", ""],
 	["typography", ""],
+	# Before number_range turns the Nebraska section 81-2113 into "81 to 2113".
+	["state_citations", ""],
 	["abbreviations", ""],
 	["plural_suffix", "(?<=[A-Za-z])\\(s\\)", "s"],
 	# "11/2" typed for 1 1/2. Numerator pinned to 1 so the live 15/16 stays a fraction.
@@ -348,6 +350,8 @@ static func _apply_function(id: String, text: String) -> String:
 			return _re("\\s*\\n\\s*").sub(text, " ", true)
 		"typography":
 			return _replace_table(text, TYPOGRAPHY)
+		"state_citations":
+			return _state_citations(text)
 		"abbreviations":
 			var pattern := "(?i)(?<![A-Za-z])(" + _words_alternation(ABBREVIATIONS.keys()) + ")"
 			return _each(text, pattern, func(m: RegExMatch, _src: String) -> String:
@@ -420,6 +424,52 @@ static func _apply_function(id: String, text: String) -> String:
 			return _tidy(text)
 	push_error("speech_rules: unknown function stage " + id)
 	return text
+
+
+## Nebraska statute and board-rule citations. A statute section is read the way
+## it is said aloud: "Neb. Rev. Stat. 81-2108(2)" -> "Nebraska Revised Statute
+## eighty-one twenty-one oh-eight, subsection 2". Only sections after "Neb. Rev.
+## Stat." or "section(s)" are converted, so an NEC range such as "100-400" is
+## left for number_range.
+const STATE_SECTION := "\\b(\\d{2})-(\\d{4})((?:\\(\\w+\\))*)"
+## One or more sections joined as a list: "81-2106, 81-2112, or 81-2144".
+const STATE_SECTION_RUN := "\\b\\d{2}-\\d{4}(?:\\(\\w+\\))*(?:(?:,? (?:and|or) |, )\\d{2}-\\d{4}(?:\\(\\w+\\))*)*"
+
+static func _state_citations(text: String) -> String:
+	text = _each(text, "Neb\\. Rev\\. Stat\\.\\s*(?:§\\s*)?(" + STATE_SECTION_RUN + ")", func(m: RegExMatch, _src: String) -> String:
+		return "Nebraska Revised Statute " + _state_section_run(m.get_string(1)))
+	text = _each(text, "(?i)\\b(sections?)\\s+(" + STATE_SECTION_RUN + ")", func(m: RegExMatch, _src: String) -> String:
+		return m.get_string(1) + " " + _state_section_run(m.get_string(2)))
+	text = _re("\\bTitle (\\d+) NAC\\b,?").sub(text, "Title $1 of the Nebraska Administrative Code,", true)
+	return _re("\\bNAC\\b").sub(text, "Nebraska Administrative Code", true)
+
+
+## "81-2108(2) and 81-2113(2)" -> "eighty-one twenty-one oh-eight, subsection 2
+## and section eighty-one twenty-one thirteen, subsection 2".
+static func _state_section_run(run: String) -> String:
+	return _each(run, STATE_SECTION, func(m: RegExMatch, _src: String) -> String:
+		var digits := m.get_string(2)
+		var words := "%s %s" % [_pair_words(m.get_string(1), true), _pair_words(digits.substr(0, 2), true)]
+		words += " hundred" if digits.substr(2) == "00" else " " + _pair_words(digits.substr(2), false)
+		for part in _re("\\((\\w+)\\)").search_all(m.get_string(3)):
+			var p := part.get_string(1)
+			words += (", subsection " if p.is_valid_int() else ", subdivision ") + p
+		return words if m.get_start() == 0 else "section " + words)
+
+
+## Two digits as said in a statute number: "81" eighty-one, "13" thirteen,
+## "08" oh-eight ("oh" only inside a number, not leading it).
+static func _pair_words(pair: String, leading: bool) -> String:
+	var ones := ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
+		"ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen",
+		"eighteen", "nineteen"]
+	var tens := ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+	var n := int(pair)
+	if pair.begins_with("0"):
+		return str(ones[n]) if leading else "oh-" + str(ones[n])
+	if n < 20:
+		return str(ones[n])
+	return str(tens[n / 10]) + ("" if n % 10 == 0 else "-" + str(ones[n % 10]))
 
 
 ## Drops every tab-separated line. The line just before the first dropped one

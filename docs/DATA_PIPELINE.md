@@ -2,7 +2,7 @@
 
 ## Current bank
 
-`question_bank.json` is schema v2. It contains 279 playable records across 7 exams, plus a 310-entry manifest and 31 unavailable source entries. Its current top-level keys are `version`, `total_expected`, `playable`, `missing_source_items`, `audit_notes`, `records`, and `manifest`. The old `questions` array is absent; the validator accepts it only as an optional legacy key and checks it if present.
+`question_bank.json` is schema v2. It contains 283 playable records: 279 NEC records across 7 exams and 4 Nebraska State Law records (exam `NE State Act #3`, `"section": "ne_state_law"`), plus a 314-entry manifest and 31 unavailable source entries. Its current top-level keys are `version`, `total_expected`, `playable`, `missing_source_items`, `audit_notes`, `records`, and `manifest`. The old `questions` array is absent; the validator accepts it only as an optional legacy key and checks it if present.
 
 The bank validator is a structural and spoiler-safety gate, not a proof that each answer is technically correct. The regression suite explicitly leaves NEC answer correctness to source review (`tools/tests/README.md`, “What is NOT covered”). Section-level NEC claims must be checked against the 2023 NEC.
 
@@ -35,7 +35,7 @@ The OCR scripts skip output files that already exist. Remove or replace a stale 
 
 The raw OCR/parser output is normalized by the deterministic field overlay in `tools/pipeline/question_bank_overrides.json`. `tools/pipeline/bank_overrides.py` applies those reviewed, record-ID keyed changes after parsing, preserving the curated bank without scattering one-off edits through the OCR pipeline.
 
-Every build still writes to a separate candidate path. `tools/pipeline/build_question_bank.sh` refuses the checked-in `question_bank.json` so an unreviewed candidate cannot overwrite the learner bank. A controlled build with the current source and overlay produced all 279 records and exactly matched the checked-in bank; strict validation reported 0 errors and 0 warnings. This proves reproducibility and schema validity, not NEC answer correctness.
+Every build still writes to a separate candidate path. `tools/pipeline/build_question_bank.sh` refuses the checked-in `question_bank.json` so an unreviewed candidate cannot overwrite the learner bank. A controlled build with the current source and overlay produced all 283 records and exactly matched the checked-in bank; strict validation reported 0 errors and 0 warnings. This proves reproducibility and schema validity, not NEC answer correctness.
 
 To intentionally refresh the overlay after a reviewed bank change:
 
@@ -61,10 +61,21 @@ The one stem that intentionally contains its answer is `final-exam-#3-042` (422.
 
 `tools/pipeline/spellcheck_bank.py` checks every learner-facing string (bank fields and `tools/pipeline/gists.py`) for misspellings, doubled words, punctuation spacing, unit case (kVA, kW, kcmil, AWG) and unbalanced brackets or quotes. Domain words go in `tools/pipeline/spellcheck_allowlist.txt`. `verify.sh` runs it with `--offline`, against `tools/pipeline/spellcheck_lexicon.txt`, so it needs no extra packages; install `pyspellchecker` for the full dictionary run and `--update-lexicon`.
 
+## Nebraska State Law questions
+
+State Electrical Act and Board Rules questions do not come from the exam PDFs or OCR. Each quiz is two files in `tools/pipeline/sources/`, read by `tools/pipeline/state_law_source.py`:
+
+- `<name>.json`: the quiz sheet word for word: `exam` (e.g. `NE State Act #3`), `section` (`ne_state_law`) and `questions` (`number`, `prompt`, `answers`). Nothing else goes here.
+- `<name>_keys.json`: per question number: `correct_index`, the citation (`article`, e.g. `Neb. Rev. Stat. 81-2113(2)` or `Title 100 NAC Rule 13`), `reference_text` quoting the law word for word, the explanation fields (`gist`, `info_tip`, `tip_title`, `tip`, `choice_notes`, `keywords`, `lookup_summary`, `difficulty`, optional `worked`/`formula`), and an `evidence` block (sources, reasoning, discrepancies) for reviewers only; it is not shipped.
+
+The builder appends these records after the NEC records and adds their manifest entries, so `total_expected` and `playable` grow by the question count and the NEC records are untouched. `tip_short` is assembled as `<tip> Correct: X — <answer>. <note> Not A: <note> …`. The records carry `"section": "ne_state_law"`; `QuizSession.begin` draws only the `nec` pool (records without `section`) unless asked for another, so state questions never enter the NEC drills or the simulator. The menu's NEBRASKA STATE LAW drill uses every record in that section, shuffled.
+
+To add a quiz: add both files (a new `exam` label gives new ids, `ne-state-act-#4-001`…; the id is `exam` lower-cased with spaces as dashes plus the number), quote the current statute text (the July 2025 Act is the reference edition), keep the gist free of the answer words, then build a candidate, validate with `--no-warn`, check that the existing records are unchanged and copy it over `data/question_bank.json`. Then update the record counts in `tools/harness.gd` and the sweep suites (they assert the exact bank size), run `spellcheck_bank.py --update-lexicon` after reviewing any new words, re-run `dump_speech.gd`, and run `pregenerate_speech.py --bundle` so `test_bundle.gd` finds the new clips.
+
 ## What validation checks
 
 - Required schema and field types, unique IDs, answer ranges, and manifest arithmetic.
-- Recognized NEC/standard citations or explicit non-code categories.
+- Recognized NEC/standard citations, Nebraska law citations (`Neb. Rev. Stat. 81-xxxx`, `Title 100 NAC Rule n`) or explicit non-code categories. A Nebraska citation must sit in `section: "ne_state_law"`, and `section`, when present, must be a known pool.
 - Table row shape, allowing recognized single-cell note rows.
 - Pre-answer answer mentions using the same visible-text precedence as the app (gist first; task-framing tip only when gist is empty).
 - Learner-facing editorial scaffolding that should not ship.

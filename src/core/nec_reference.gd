@@ -3,7 +3,22 @@ extends RefCounted
 ## NEC article titles and the reference/lookup strings shown with a question.
 ## Pure string work: no nodes, no bank access.
 
+const STATE_ACT_TITLE := "Nebraska State Electrical Act"
+const BOARD_RULES_TITLE := "Nebraska State Electrical Board Rules"
+
+## Nebraska law rather than the NEC: "Neb. Rev. Stat. 81-2113(2)" or
+## "Title 100 NAC Rule 13". Their numbers are not NEC articles.
+static func is_state_law(reference: String) -> bool:
+	return RegEx.create_from_string("^(?:Neb\\. Rev\\. Stat\\.|Title \\d+ NAC\\b)").search(reference.strip_edges()) != null
+
+## The code a citation belongs to, for labels such as "NEC 210.8" or
+## "Nebraska law Neb. Rev. Stat. 81-2113(2)" in the results review.
+static func code_label(reference: String) -> String:
+	return "Nebraska law" if is_state_law(reference) else "NEC"
+
 static func article_title(reference: String) -> String:
+	if is_state_law(reference):
+		return BOARD_RULES_TITLE if reference.contains("NAC") else STATE_ACT_TITLE
 	var match := RegEx.create_from_string("\\b(\\d{3})\\b").search(reference)
 	if match == null:
 		return reference if reference != "" else "General knowledge"
@@ -30,6 +45,8 @@ static func article_title(reference: String) -> String:
 static func format_reference(record: Dictionary) -> String:
 	var reference := str(record.get("article", "General knowledge"))
 	var title := str(record.get("article_title", article_title(reference)))
+	if is_state_law(reference):
+		return "%s — %s" % [title, reference]
 	var match := RegEx.create_from_string("\\b(\\d{3})\\b").search(reference)
 	if match == null:
 		return reference
@@ -39,6 +56,9 @@ static func format_reference(record: Dictionary) -> String:
 ## Where to look the answer up in the code book, chapter then article.
 static func lookup_path(record: Dictionary) -> String:
 	var reference := str(record.get("article", "")).strip_edges()
+	if is_state_law(reference):
+		var source := BOARD_RULES_TITLE if reference.contains("NAC") else STATE_ACT_TITLE
+		return "%s  ►  %s" % [source.to_upper(), reference]
 	var code := reference.replace("NEC ", "").strip_edges()
 	var chapter_names := {
 		1: "General",

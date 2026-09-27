@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "total_expected": 310,
-  "playable": 279,
+  "total_expected": 314,
+  "playable": 283,
   "missing_source_items": [
     {
       "source": "Final Exam #5",
@@ -11367,6 +11367,158 @@
         "10 feet is typical for metal conduit such as EMT, not 1/2 inch PVC."
       ],
       "available": true
+    },
+    {
+      "id": "ne-state-act-#3-001",
+      "exam": "NE State Act #3",
+      "question_number": 1,
+      "prompt": "How many apprentice fire alarm installers can be supervised at one time by a license holder?",
+      "answers": [
+        "1",
+        "2",
+        "3",
+        "5"
+      ],
+      "gist": "A fire alarm installer license lets its holder supervise apprentices, but only on fire alarm work at 50 volts or less. The question asks how many of those apprentices one license holder may supervise at a time.",
+      "scene": "",
+      "correct_index": 2,
+      "article": "Neb. Rev. Stat. 81-2108(2) and 81-2113(2)",
+      "article_title": "Nebraska State Electrical Act",
+      "difficulty": "medium",
+      "keywords": [
+        "fire alarm installer license",
+        "apprentice supervision ratio"
+      ],
+      "lookup_summary": "Lookup clues: fire alarm installer license, apprentice supervision ratio. Start with Neb. Rev. Stat. 81-2108(2), then read the apprentice ratio in 81-2113(2).",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThe Nebraska State Electrical Act (Neb. Rev. Stat. 81-2101 to 81-2144) decides who may do electrical work for another person. An apprentice registers with the State Electrical Board to learn the trade and may only work under a licensee on the same project.\n\nThis asks for a supervision limit set by state law, not by the NEC. Find who may supervise fire alarm apprentices, then the ratio the Act sets for every licensee.\n\nLOOKUP FOCUS\nfire alarm installer license, apprentice supervision ratio",
+      "reference_text": "81-2108(2) and 81-2113(2) Fire Alarm Installer Supervision; Apprentice Ratio\n81-2108(2) Except as provided in section 81-2106, 81-2112, or 81-2144 no person shall wire for or install electrical wiring, apparatus, or equipment or supervise an apprentice electrician unless such person is licensed as a Class B journeyman electrician, a journeyman electrician, a residential journeyman electrician, or a fire alarm installer and is employed by a Class B electrical contractor, an electrical contractor, a Class A master electrician, or a fire alarm installer.\nFor purposes of this section, the holder of a fire alarm installer license shall only supervise those apprentices engaged in the installation of fire alarm equipment and apparatus operating at fifty volts or less.\n81-2113(2) An apprentice electrician shall do no electrical wiring except under the direct personal on-the-job supervision and control and in the immediate presence of a licensee under the State Electrical Act. Such supervision shall include both on-the-job training and related classroom training as approved by the board. The licensee may employ or supervise apprentice electricians at a ratio not to exceed three apprentice electricians to one licensee, except that such ratio and the other requirements of this section shall not be applicable to a teacher-student relationship within a classroom of a community college.",
+      "reference_table": [],
+      "tip_title": "State Act: apprentice ratio",
+      "tip_short": "The Act sets one apprentice ratio for every license that may supervise, the fire alarm installer license included. Correct: C — 3. 81-2108(2) lets a fire alarm installer license holder supervise apprentices on fire alarm work at 50 volts or less, and 81-2113(2) caps every licensee at three apprentice electricians. Not A: One apprentice is under the limit; 81-2113(2) allows up to three per licensee. Not B: Two apprentices is under the limit; 81-2113(2) allows up to three per licensee. Not D: Five apprentices is over the limit; 81-2113(2) caps each licensee at three.",
+      "formula": "",
+      "worked": "",
+      "choice_notes": [
+        "One apprentice is under the limit; 81-2113(2) allows up to three per licensee.",
+        "Two apprentices is under the limit; 81-2113(2) allows up to three per licensee.",
+        "81-2108(2) lets a fire alarm installer license holder supervise apprentices on fire alarm work at 50 volts or less, and 81-2113(2) caps every licensee at three apprentice electricians.",
+        "Five apprentices is over the limit; 81-2113(2) caps each licensee at three."
+      ],
+      "available": true,
+      "section": "ne_state_law"
+    },
+    {
+      "id": "ne-state-act-#3-002",
+      "exam": "NE State Act #3",
+      "question_number": 2,
+      "prompt": "What type of new electrical work is an unsupervised apprentice electrician allowed to install?",
+      "answers": [
+        "raceway",
+        "service work",
+        "pull wiring",
+        "none"
+      ],
+      "gist": "An apprentice electrician registers with the State Electrical Board to learn the trade under a licensee. The question asks what new work an apprentice may install without a licensee supervising.",
+      "scene": "",
+      "correct_index": 3,
+      "article": "Neb. Rev. Stat. 81-2113(2) and 81-2113(3)",
+      "article_title": "Nebraska State Electrical Act",
+      "difficulty": "easy",
+      "keywords": [
+        "apprentice electrician",
+        "direct personal on-the-job supervision"
+      ],
+      "lookup_summary": "Lookup clues: apprentice electrician, direct personal on-the-job supervision. Start with Neb. Rev. Stat. 81-2113(2), then read 81-2113(3).",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThe Nebraska State Electrical Act (Neb. Rev. Stat. 81-2101 to 81-2144) decides who may do electrical work for another person. An apprentice registers with the State Electrical Board to learn the trade and works for a licensee.\n\nThis asks what state law lets an apprentice do on their own. Read the supervision rule for apprentices and check whether any kind of work is left out of it.\n\nLOOKUP FOCUS\napprentice electrician, direct personal on-the-job supervision",
+      "reference_text": "81-2113(2) and (3) Apprentice Electrician; Supervision\n(2) An apprentice electrician shall do no electrical wiring except under the direct personal on-the-job supervision and control and in the immediate presence of a licensee under the State Electrical Act. Such supervision shall include both on-the-job training and related classroom training as approved by the board. The licensee may employ or supervise apprentice electricians at a ratio not to exceed three apprentice electricians to one licensee, except that such ratio and the other requirements of this section shall not be applicable to a teacher-student relationship within a classroom of a community college. For purposes of this section, the direct personal on-the-job supervision and control and in the immediate presence of a licensee shall mean the licensee and the apprentice electrician shall be working at the same project location but shall not require that the licensee and apprentice electrician must be within sight of one another at all times.\n(3) An apprentice electrician shall not install, alter, or repair electrical equipment except as provided in this section, and the licensee employing or supervising an apprentice electrician shall not authorize or permit such actions by the apprentice electrician.",
+      "reference_table": [],
+      "tip_title": "State Act: apprentice supervision",
+      "tip_short": "An apprentice never wires alone: every piece of electrical work needs a licensee working on the same project. Correct: D — none. 81-2113(2) says an apprentice electrician shall do no electrical wiring except under a licensee's direct personal on-the-job supervision, and 81-2113(3) bars any other installation. Not A: Installing raceway is installing electrical equipment; 81-2113(3) allows it only under the supervision 81-2113(2) requires. Not B: Service work is electrical wiring; 81-2113(2) allows it only under a licensee's direct personal supervision. Not C: Pulling wire is electrical wiring; 81-2113(2) allows it only under a licensee's direct personal supervision.",
+      "formula": "",
+      "worked": "",
+      "choice_notes": [
+        "Installing raceway is installing electrical equipment; 81-2113(3) allows it only under the supervision 81-2113(2) requires.",
+        "Service work is electrical wiring; 81-2113(2) allows it only under a licensee's direct personal supervision.",
+        "Pulling wire is electrical wiring; 81-2113(2) allows it only under a licensee's direct personal supervision.",
+        "81-2113(2) says an apprentice electrician shall do no electrical wiring except under a licensee's direct personal on-the-job supervision, and 81-2113(3) bars any other installation."
+      ],
+      "available": true,
+      "section": "ne_state_law"
+    },
+    {
+      "id": "ne-state-act-#3-003",
+      "exam": "NE State Act #3",
+      "question_number": 3,
+      "prompt": "You are going to send a wiring crew to a new construction project. If you send three licensed journeymen, how many apprentice electricians can you send with them to the job?",
+      "answers": [
+        "12",
+        "9",
+        "6",
+        "3"
+      ],
+      "gist": "Apprentice electricians may only work under licensees, and the Act caps how many apprentices each licensee may supervise. The question asks how many apprentices a crew of three journeymen may bring.",
+      "scene": "",
+      "correct_index": 1,
+      "article": "Neb. Rev. Stat. 81-2113(2)",
+      "article_title": "Nebraska State Electrical Act",
+      "difficulty": "easy",
+      "keywords": [
+        "apprentice supervision ratio",
+        "journeyman electrician"
+      ],
+      "lookup_summary": "Lookup clues: apprentice supervision ratio, journeyman electrician. Start with Neb. Rev. Stat. 81-2113(2), then apply its ratio to each licensee on the crew.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThe Nebraska State Electrical Act (Neb. Rev. Stat. 81-2101 to 81-2144) decides who may do electrical work for another person. A journeyman electrician is a licensee who may wire and may supervise apprentice electricians.\n\nThis asks for a crew limit set by state law. Find the apprentice ratio for one licensee, then apply it to every journeyman on the crew.\n\nLOOKUP FOCUS\napprentice supervision ratio, journeyman electrician",
+      "reference_text": "81-2113(2) Apprentice Electrician; Supervision Ratio\nThe licensee may employ or supervise apprentice electricians at a ratio not to exceed three apprentice electricians to one licensee, except that such ratio and the other requirements of this section shall not be applicable to a teacher-student relationship within a classroom of a community college.",
+      "reference_table": [],
+      "tip_title": "State Act: apprentice ratio",
+      "tip_short": "Apprentices ride on licenses: each licensee may bring up to three, so multiply the licensees on the crew by three. Correct: B — 9. 81-2113(2) caps the ratio at three apprentice electricians to one licensee, so three journeymen may supervise 3 × 3 = 9. Not A: 12 apprentices would need four licensees at three apprentices each. Not C: 6 apprentices is the limit for two licensees; three journeymen may supervise 9. Not D: 3 apprentices is the limit for one licensee, not for a crew of three journeymen.",
+      "formula": "",
+      "worked": "Neb. Rev. Stat. 81-2113(2) allows three apprentice electricians per licensee: 3 journeymen × 3 = 9 apprentice electricians.",
+      "choice_notes": [
+        "12 apprentices would need four licensees at three apprentices each.",
+        "81-2113(2) caps the ratio at three apprentice electricians to one licensee, so three journeymen may supervise 3 × 3 = 9.",
+        "6 apprentices is the limit for two licensees; three journeymen may supervise 9.",
+        "3 apprentices is the limit for one licensee, not for a crew of three journeymen."
+      ],
+      "available": true,
+      "section": "ne_state_law"
+    },
+    {
+      "id": "ne-state-act-#3-004",
+      "exam": "NE State Act #3",
+      "question_number": 4,
+      "prompt": "According to the State Electrical Act and Board rules, it is the electrical contractor's responsibility to call the inspector to schedule which of the following types of inspections during the project?",
+      "answers": [
+        "rough-in or pre-cover",
+        "finals",
+        "re-inspections for correction orders",
+        "all of these"
+      ],
+      "gist": "State inspectors come out at several stages of a project, but only when someone tells them the work is ready. The question asks which inspection requests are the electrical contractor's job.",
+      "scene": "",
+      "correct_index": 3,
+      "article": "Title 100 NAC Rule 13",
+      "article_title": "Nebraska State Electrical Board Rules",
+      "difficulty": "easy",
+      "keywords": [
+        "request for inspection",
+        "contractor notification"
+      ],
+      "lookup_summary": "Lookup clues: request for inspection, contractor notification. Start with Title 100 NAC Rule 13 (Requests for Inspection), then see Neb. Rev. Stat. 81-2134(2).",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nWork under state inspection starts with a request for inspection filed with the State Electrical Board. The State Electrical Board Rules (Title 100 of the Nebraska Administrative Code) then say who must call the inspector as the job moves along.\n\nThis asks which inspection calls the Board rules put on the installer or electrical contractor. Read the rule on requests for inspection and list the stages it names.\n\nLOOKUP FOCUS\nrequest for inspection, contractor notification",
+      "reference_text": "Title 100 NAC Rule 13 Requests for Inspection\nIt is the responsibility of the installer or electrical contractor to notify the inspector at such times as the project is ready for inspection. ... (1) rough-in inspections necessary prior to the concealment of wiring, and (2) final inspections, and (3) re-inspection required by the issuance of a \"correction order\". The requirement of timely notification is an ongoing responsibility of the installer or electrical contractor during the entire life of the project. Notification must be made by telephone request, email request, on-line request, or text message to the area State Electrical Inspector.\nNeb. Rev. Stat. 81-2134(2) Where wiring is to be concealed, the inspector must be notified within reasonable time to complete a rough-in inspection prior to concealment, exclusive of Saturdays, Sundays, and holidays.",
+      "reference_table": [],
+      "tip_title": "Board rules: requests for inspection",
+      "tip_short": "Calling the inspector is the contractor's job at every stage: before cover, at the end, and after a correction order. Correct: D — all of these. Rule 13 makes the installer or electrical contractor notify the inspector for rough-in inspections before wiring is concealed, final inspections, and re-inspections required by a correction order. Not A: Rough-in is only one of the three inspections Rule 13 makes the contractor call for. Not B: Finals are only one of the three inspections Rule 13 makes the contractor call for. Not C: Correction-order re-inspections are only one of the three inspections Rule 13 makes the contractor call for.",
+      "formula": "",
+      "worked": "",
+      "choice_notes": [
+        "Rough-in is only one of the three inspections Rule 13 makes the contractor call for.",
+        "Finals are only one of the three inspections Rule 13 makes the contractor call for.",
+        "Correction-order re-inspections are only one of the three inspections Rule 13 makes the contractor call for.",
+        "Rule 13 makes the installer or electrical contractor notify the inspector for rough-in inspections before wiring is concealed, final inspections, and re-inspections required by a correction order."
+      ],
+      "available": true,
+      "section": "ne_state_law"
     }
   ],
   "manifest": [
@@ -12918,6 +13070,26 @@
     {
       "source": "Open Book Exam #10",
       "number": 25,
+      "available": true
+    },
+    {
+      "source": "NE State Act #3",
+      "number": 1,
+      "available": true
+    },
+    {
+      "source": "NE State Act #3",
+      "number": 2,
+      "available": true
+    },
+    {
+      "source": "NE State Act #3",
+      "number": 3,
+      "available": true
+    },
+    {
+      "source": "NE State Act #3",
+      "number": 4,
       "available": true
     }
   ]

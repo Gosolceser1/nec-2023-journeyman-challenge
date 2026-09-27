@@ -27,3 +27,6 @@ distractor lookup etc attaches
 
 # French etymology quoted in final-exam-#1-019 ("intensité du courant")
 intensité courant
+
+# Nebraska State Electrical Act citations (Neb. Rev. Stat.) and quiz wording (pre-cover)
+stat pre

@@ -89,12 +89,32 @@ func _init() -> void:
 		s.start_question()
 		s.submit(rng.randi_range(-1, 3), true)
 		more = s.advance()
-	check(s.answered_count == bank.size(), "every question answered (%d)" % s.answered_count)
+	var nec_count := BankLoader.count_in_section(bank, BankLoader.SECTION_NEC)
+	check(nec_count < bank.size(), "bank holds records outside the NEC pool")
+	check(s.answered_count == nec_count, "every NEC question answered (%d of %d)" % [s.answered_count, nec_count])
 	check(s.score + s.missed_questions.size() == s.answered_count, "score + missed == answered: %d + %d vs %d" % [s.score, s.missed_questions.size(), s.answered_count])
 	var tallied := 0
 	for ch in s.chapter_stats:
 		tallied += int(s.chapter_stats[ch][1])
 	check(tallied == s.answered_count, "chapter tallies cover every graded answer")
+	check(not s.chapter_stats.has(ChapterBars.STATE_LAW), "the NEC session drew no state-law record")
+
+	print("=== sections ===")
+	var mixed := recs + [_rec("Neb. Rev. Stat. 81-2113(2)", 1), _rec("Title 100 NAC Rule 13", 3)]
+	mixed[5]["section"] = BankLoader.SECTION_NE_STATE_LAW
+	mixed[6]["section"] = BankLoader.SECTION_NE_STATE_LAW
+	s = _session(mixed)
+	s.begin(80, 600, true, "Full Journeyman Exam", true)
+	check(s.order.size() == 5 and 5 not in s.order and 6 not in s.order, "the simulator draws only the NEC pool")
+	s.begin(80, 600, true, "Drill")
+	check(s.order.size() == 5 and 5 not in s.order and 6 not in s.order, "a default drill draws only the NEC pool")
+	s.begin(9999, 600, true, "Nebraska State Law", false, "", BankLoader.SECTION_NE_STATE_LAW)
+	check(s.order.size() == 2 and 5 in s.order and 6 in s.order and s.session_length == 2, "state-law drill: every state record, nothing else")
+	check(s.session_section == BankLoader.SECTION_NE_STATE_LAW, "session remembers its pool")
+	s.submit(0, true)
+	check(s.chapter_stats.has(ChapterBars.STATE_LAW), "state-law answers tally under their own results row")
+	s.begin(5, 600, true, "Empty", false, "", "no_such_section")
+	check(s.order.is_empty() and s.session_length == 0, "an empty pool gives an empty session")
 
 	print("=== clocks ===")
 	s = _session(recs)

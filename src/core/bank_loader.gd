@@ -3,6 +3,20 @@ extends RefCounted
 ## Reads the question bank into normalized record dictionaries.
 
 const BANK_PATH := "res://data/question_bank.json"
+## Question pools. NEC records carry no "section" field; others name their pool
+## so the NEC drills and the simulator never draw them.
+const SECTION_NEC := "nec"
+const SECTION_NE_STATE_LAW := "ne_state_law"
+
+static func section_of(record: Dictionary) -> String:
+	return str(record.get("section", SECTION_NEC))
+
+static func count_in_section(records: Array, section: String) -> int:
+	var count := 0
+	for record in records:
+		if section_of(record) == section:
+			count += 1
+	return count
 
 static func load_records(path: String = BANK_PATH) -> Array:
 	var records: Array = []

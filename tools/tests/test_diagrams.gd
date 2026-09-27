@@ -140,7 +140,7 @@ func _sweep() -> void:
 		t.eq(view.is_revealed(), m.get(qid, {}).has("highlight"), "%s: answer part highlighted only after answering" % qid)
 		main._show_question()
 		t.check(not view.is_revealed(), "%s: highlight cleared when the question is shown again" % qid)
-	t.eq(shown, _map().size(), "every mapped figure was shown by the 279-record sweep")
+	t.eq(shown, _map().size(), "every mapped figure was shown by the 283-record sweep")
 	print("  swept %d records, %d with figures" % [main.records.size(), shown])
 
 

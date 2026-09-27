@@ -68,7 +68,7 @@ func draw_drill(records: Array, count: int, rng: RandomNumberGenerator, area := 
 	load_state(records)
 	run += 1
 	var by_area := ExamBlueprint.indices_by_area(records)
-	var pool_size := records.size() if area == "" else (by_area.get(area, []) as Array).size()
+	var pool_size := _pool_size(by_area) if area == "" else (by_area.get(area, []) as Array).size()
 	count = mini(count, pool_size)
 	var picked: Array[int] = []
 	var taken := {}
@@ -100,8 +100,8 @@ func draw_drill(records: Array, count: int, rng: RandomNumberGenerator, area := 
 func draw_exam(records: Array, count: int, rng: RandomNumberGenerator) -> Array[int]:
 	load_state(records)
 	run += 1
-	count = mini(count, records.size())
 	var by_area := ExamBlueprint.indices_by_area(records)
+	count = mini(count, _pool_size(by_area))
 	var capacity := {}
 	for k in by_area:
 		capacity[k] = (by_area[k] as Array).size()
@@ -149,9 +149,10 @@ func mastery(records: Array) -> Dictionary:
 		out[k] = {"right": 0, "answers": 0, "questions": 0}
 	for i in records.size():
 		var st = stats.get(str(records[i].get("id", "")))
-		if st == null or int(st[5]) == 0:
+		var k := ExamBlueprint.area_of(records[i])
+		if st == null or int(st[5]) == 0 or k == "":
 			continue
-		var m: Dictionary = out[ExamBlueprint.area_of(records[i])]
+		var m: Dictionary = out[k]
 		var bits := int(st[4])
 		for b in int(st[5]):
 			m["right"] += (bits >> b) & 1
@@ -312,12 +313,21 @@ func _due(records: Array, limit: int, rng: RandomNumberGenerator, area := "") ->
 		var d := int(stats[id][3])
 		if d > 0 and d <= run and index_of.has(id):
 			var i: int = index_of[id]
-			if area == "" or ExamBlueprint.area_of(records[i]) == area:
+			var k := ExamBlueprint.area_of(records[i])
+			if k != "" and (area == "" or k == area):
 				due.append([d, rng.randf(), i])
 	due.sort_custom(func(a, b): return a[0] < b[0] or (a[0] == b[0] and a[1] < b[1]))
 	for e in due.slice(0, limit):
 		out.append(int(e[2]))
 	return out
+
+
+## Questions with a subject area: the NEC pool.
+static func _pool_size(by_area: Dictionary) -> int:
+	var n := 0
+	for k in by_area:
+		n += (by_area[k] as Array).size()
+	return n
 
 
 static func _count_untaken(members: Array, taken: Dictionary) -> int:
