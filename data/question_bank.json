@@ -1255,7 +1255,7 @@
       ],
       "lookup_summary": "Lookup clues: ampacity, conductors, dwelling unit, load calculation. Start with 310.12(A), then read the matching subsection and exceptions.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nServices and transformers are about size and labels. A one-family dwelling service from 100–400 A may use conductors at 83% of the rating (the diversity of a home makes full size unnecessary). Every transformer must wear a nameplate with its ratings — but not trivia like the wire gauge inside it. And transformers generally need a disconnect in sight, or lockable with its location marked on the unit.\n\nThis asks how many amps the conductor may safely carry under the stated conditions. Subject: dwelling unit. Numbers in the question: 400 amps. Apply temperature and adjustment factors first, then read the resulting ampacity.\n\nLOOKUP FOCUS\nampacity, conductors, dwelling unit, load calculation",
-      "reference_text": "310.12(A) Services\nFor a service rated 100 amperes through 400 amperes, the service conductors supplying the entire load associated with a one-family dwelling, or the service conductors supplying the entire load associated with an individual dwelling unit in a two-family or multifamily dwelling, shall be permitted to have an ampacity not less than 83 percent of the service rating. If no adjustment or correction factors are required, Table 310.12(A) shall be permitted to be applied.\nTable 310.12(A) Single-Phase Dwelling Services and Feeders\nService or Feeder Rating (Amperes)\tConductor (AWG or kcmil)\nCopper\tAluminum or Copper-Clad Aluminum\n100\t4\t2\n110\t3\t1\n125\t2\t1/0\n150\t1\t2/0\n175\t1/0\t3/0\n200\t2/0\t4/0\n225\t3/0\t250\n250\t4/0\t300\n300\t250\t350\n350\t350\t500\n400\t400\t600\nNote: If no adjustment or correction factors are required, this table shall be permitted to be applied.",
+      "reference_text": "310.12(A) Services\nFor a service rated 100 amperes through 400 amperes, the service conductors supplying the entire load associated with a one-family dwelling, or the service conductors supplying the entire load associated with an individual dwelling unit in a two-family or multifamily dwelling, shall be permitted to have an ampacity not less than 83 percent of the service rating.",
       "reference_table": [],
       "tip_title": "Services and transformers",
       "tip_short": "Dwelling services of 100 through 400 amperes may use conductors sized at 83 percent of the service rating. Correct: A — 83%. 310.12(A) permits service conductors with an ampacity not less than 83 percent of the service rating. Not B: 80 percent is the continuous-load or adjustment figure, not the 310.12(A) dwelling service value. Not C: 75 percent is not in 310.12(A); the permitted ampacity is 83 percent of the service rating. Not D: 70 percent is too low; 310.12(A) requires at least 83 percent of the service rating.",
@@ -5664,7 +5664,7 @@
       "reference_text": "310.12(A) Services\nFor a service rated 100 through 400 amperes, the service conductors supplying the entire load associated with a one-family dwelling, or the service conductors supplying the entire load associated with an individual dwelling unit in a two-family or multifamily dwelling, shall be permitted to have an ampacity not less than 83 percent of the service rating. NEC 2023 deleted former Table 310.12; the 83 percent rule in 310.12(A) replaces it and applies only to 120/240-volt, 3-wire, single-phase dwelling services and feeders.",
       "reference_table": [
         [
-          "Table 310.12(A) applies to",
+          "310.12(A) applies to",
           "Service/feeder scope"
         ],
         [
@@ -5677,14 +5677,14 @@
         ]
       ],
       "tip_title": "Load calculations",
-      "tip_short": "Table 310.12(A) is only for 120/240 volt, 3-wire services or feeders carrying the whole load of one dwelling unit. Correct: D — Only 240/120V, 3-wire services for a single dwelling unit. Table 310.12(A) covers 120/240 volt, 3-wire services supplying the entire load of a dwelling unit. Not A: Commercial services are excluded; Table 310.12(A) applies only to dwelling units. Not B: It applies to individual dwelling units, not to multifamily building services as a whole. Not C: The table is limited to 120/240 volt single-phase dwelling services, not any service under 400 amperes.",
+      "tip_short": "The 2023 NEC moved the rule the question calls Table 310.12(A) into 310.12(A), which is only for 120/240 volt, 3-wire services or feeders carrying the whole load of one dwelling unit. Correct: D — Only 240/120V, 3-wire services for a single dwelling unit. 310.12(A) covers 120/240 volt, 3-wire services supplying the entire load of a dwelling unit. Not A: Commercial services are excluded; 310.12(A) applies only to dwelling units. Not B: It applies to individual dwelling units, not to multifamily building services as a whole. Not C: The 83 percent rule is limited to 120/240 volt single-phase dwelling services, not any service under 400 amperes.",
       "formula": "",
       "worked": "",
       "choice_notes": [
-        "Commercial services are excluded; Table 310.12(A) applies only to dwelling units.",
+        "Commercial services are excluded; 310.12(A) applies only to dwelling units.",
         "It applies to individual dwelling units, not to multifamily building services as a whole.",
-        "The table is limited to 120/240 volt single-phase dwelling services, not any service under 400 amperes.",
-        "Table 310.12(A) covers 120/240 volt, 3-wire services supplying the entire load of a dwelling unit."
+        "The 83 percent rule is limited to 120/240 volt single-phase dwelling services, not any service under 400 amperes.",
+        "310.12(A) covers 120/240 volt, 3-wire services supplying the entire load of a dwelling unit."
       ],
       "available": true,
       "table_after_answer": true
