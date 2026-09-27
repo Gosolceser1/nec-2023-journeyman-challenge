@@ -481,7 +481,7 @@ static func build(host: Main) -> void:
 	controls.add_child(host.mute_button)
 
 	host.read_button = Button.new()
-	host.read_button.text = host._idle_read_label()
+	host.read_button.text = host.speech._idle_read_label()
 	host.read_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	host.read_button.custom_minimum_size = Vector2(0, 42)
 	host.read_button.pressed.connect(host._toggle_read)

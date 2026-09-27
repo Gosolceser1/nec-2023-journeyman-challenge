@@ -131,10 +131,10 @@ static func make_voice_picker(host: Main, h: float, font_size: int) -> OptionBut
 		popup.add_theme_constant_override("v_separation", 14 if host.ui_mobile else 8)
 		popup.add_theme_constant_override("item_start_padding", 10)
 		popup.add_theme_constant_override("item_end_padding", 10)
-	host._populate_voice_picker()
+	host.speech._populate_voice_picker()
 	host.voice_picker.item_selected.connect(func(_i: int) -> void:
-		if host._previewing:
-			host._stop_reading()
+		if host.speech._previewing:
+			host.speech._stop_reading()
 	)
 	return host.voice_picker
 

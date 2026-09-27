@@ -144,6 +144,8 @@ func _fmt_callable(c: Callable) -> String:
 	var obj := c.get_object()
 	if obj == main:
 		target = "main"
+	elif obj == main.speech:
+		target = "main.speech"
 	elif obj is Node and main.is_ancestor_of(obj):
 		target = str(main.get_path_to(obj))
 	elif obj != null:

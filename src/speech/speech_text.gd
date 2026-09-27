@@ -1,6 +1,6 @@
 extends RefCounted
 ## Single source of truth for every word the voice speaks.
-## Used by main.gd at runtime and by tools/speech/dump_speech.gd for batch pre-generation.
+## Used by SpeechController at runtime and by tools/speech/dump_speech.gd for batch pre-generation.
 ## Reading order and pronunciation rules: docs/VOICE_READING_RULES.md.
 
 const Rules = preload("res://src/speech/speech_rules.gd")

@@ -37,7 +37,7 @@ RATE = "+0%"
 # edge-tts hardcodes 48 kbps; the endpoint also serves 96 kbps (48 kHz formats
 # are refused, Opus does not play in Godot). Stored in every manifest row so
 # clips recorded in another format are treated as stale. Keep in sync with
-# SPEECH_FORMAT in main.gd.
+# SPEECH_FORMAT in speech_controller.gd.
 OUTPUT_FORMAT = "audio-24khz-96kbitrate-mono-mp3"
 _EDGE_DEFAULT_FORMAT = "audio-24khz-48kbitrate-mono-mp3"
 

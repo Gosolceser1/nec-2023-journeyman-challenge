@@ -2,7 +2,7 @@ class_name AudioSettings
 extends RefCounted
 ## Study-audio preferences picked in the main menu, plus the pure rules that
 ## decide when the app is allowed to speak. The voice itself stays in
-## user://voice.cfg (main.gd owns the picker); everything else lives here.
+## user://voice.cfg (see VoiceCatalog); everything else lives here.
 
 enum Mode { SILENT, TAP, AUTO, LISTEN }
 ## Hands-free loop: read question -> think pause -> reveal + read the rule ->

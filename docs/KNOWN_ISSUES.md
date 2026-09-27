@@ -20,6 +20,11 @@ that produced false results before. Fixed defects are in git history
   values may clip on narrow phones.
 - **Native-TTS watchdog tweens accumulate** (min 6 s each, bounded by
   teardown). Minor, not a correctness bug.
+- **Speech on Android after the SpeechController move.** The native-TTS
+  callbacks now target `main.speech` instead of `main`. Headless tests,
+  the bundle check and the desktop export pass, but on a device confirm
+  Read / Stop / Read again, that the rule stays silent until an answer is
+  in, and that the voice list refreshes when the picker opens.
 
 ## Open: found during the refactor
 

@@ -84,7 +84,7 @@ static func build(host: Main, parent: VBoxContainer) -> Control:
 	opts.add_child(voice_row)
 	voice_row.add_child(Widgets.audio_row_label("VOICE", label_w))
 	voice_row.add_child(Widgets.make_voice_picker(host, h, fs))
-	host.preview_button = Widgets.make_dock_button("Preview", 96.0 if host.ui_mobile else 84.0, h, fs, host._preview_voice)
+	host.preview_button = Widgets.make_dock_button("Preview", 96.0 if host.ui_mobile else 84.0, h, fs, host.speech._preview_voice)
 	voice_row.add_child(host.preview_button)
 
 	var speed_row := HBoxContainer.new()
@@ -177,7 +177,7 @@ static func refresh(host: Main) -> void:
 	if is_instance_valid(host.audio_summary_label):
 		var summary: String = AudioSettings.MODE_TITLES[host.audio.mode]
 		if host.audio.mode != AudioSettings.Mode.SILENT:
-			summary += "  ·  %s  ·  %s" % [host._voice_short(), AudioSettings.speed_label(host.audio.speed)]
+			summary += "  ·  %s  ·  %s" % [host.speech._voice_short(), AudioSettings.speed_label(host.audio.speed)]
 			if host.audio.mode == AudioSettings.Mode.LISTEN:
 				summary += "  ·  %d s think" % host.audio.think_pause
 		summary += "  ·  " + AudioSettings.sfx_label(host.audio.sfx_enabled, host.audio.sfx_level)

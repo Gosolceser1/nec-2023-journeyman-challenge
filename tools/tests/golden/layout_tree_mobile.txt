@@ -11,8 +11,8 @@ Main <Control> res://src/app/main.gd
   on item_rect_changed -> lambda
   on item_rect_changed -> lambda
   SpeechHelper <Node> res://src/speech/speech_helper.gd
-    on clip_ready -> main._on_helper_clip
-    on request_failed -> main._on_helper_failed
+    on clip_ready -> main.speech._on_helper_clip
+    on request_failed -> main.speech._on_helper_failed
   @TextureRect@2 <TextureRect>
     .layout_mode = 0
     .anchor_right = 1.0
@@ -1528,7 +1528,7 @@ Main <Control> res://src/app/main.gd
                               on maximum_size_changed -> lambda
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
-                              on item_selected -> main._on_voice_picked
+                              on item_selected -> main.speech._on_voice_picked
                               on item_selected -> lambda
                             @Button@141 <Button>
                               .custom_minimum_size = Vector2(96, 56)
@@ -1547,7 +1547,7 @@ Main <Control> res://src/app/main.gd
                               on maximum_size_changed -> lambda
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
-                              on pressed -> main._preview_voice
+                              on pressed -> main.speech._preview_voice
                           @HBoxContainer@142 <HBoxContainer>
                             .mouse_filter = 2
                             .theme_override_constants/separation = 6
@@ -2255,7 +2255,7 @@ Main <Control> res://src/app/main.gd
     on timeout -> main._tick_timer
   @AudioStreamPlayer@182 <AudioStreamPlayer>
     .bus = &"Speech"
-    on finished -> main._on_reader_finished
+    on finished -> main.speech._on_reader_finished
   Sfx <Node> res://src/fx/sfx.gd
     Sfx_correct <AudioStreamPlayer>
       .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[5376], format=3}}

@@ -5,7 +5,7 @@ extends RefCounted
 
 static func show(host: Main) -> void:
 	host.timer.stop()
-	host._stop_reading()
+	host.speech._stop_reading()
 	clear_confetti(host)
 	host.question_label.text = "Official Examination Report"
 	host.chapter_hint_label.visible = false
