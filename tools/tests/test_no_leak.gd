@@ -11,8 +11,8 @@ extends SceneTree
 ## digit-inside-larger-number, "two"<->"2", multi-word answers, 125-volt) AND
 ## sweep all 279 real bank records for surviving matches.
 
-const AEG = preload("res://audio_explanation_generator.gd")
-const UM = preload("res://unit_matcher.gd")
+const AEG = preload("res://src/speech/audio_explanation_generator.gd")
+const UM = preload("res://src/speech/unit_matcher.gd")
 const R = preload("res://tools/tests/t_report.gd")
 
 var t: R = R.new()

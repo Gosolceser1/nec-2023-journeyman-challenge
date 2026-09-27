@@ -3,7 +3,7 @@ extends RefCounted
 ## Used by main.gd at runtime and by tools/dump_speech.gd for batch pre-generation.
 ## Reading order and pronunciation rules: docs/VOICE_READING_RULES.md.
 
-const Rules = preload("res://speech_rules.gd")
+const Rules = preload("res://src/speech/speech_rules.gd")
 
 const ANSWER_LETTERS := ["A", "B", "C", "D"]
 

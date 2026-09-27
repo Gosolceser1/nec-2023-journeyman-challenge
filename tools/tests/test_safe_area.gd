@@ -24,7 +24,7 @@ func check(cond: bool, label: String) -> void:
 
 
 func _init() -> void:
-	var main_script = load("res://main.gd")
+	var main_script = load("res://src/app/main.gd")
 	if main_script == null:
 		print("  FAIL: could not load main.gd")
 		quit(1)

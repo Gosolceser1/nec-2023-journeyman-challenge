@@ -9,8 +9,8 @@ const EXAM_MINUTES := 240
 const PASS_PERCENT := 75
 const SECONDS_PER_SCORED_ITEM: int = (EXAM_MINUTES * 60) / EXAM_SCORED_ITEMS
 const SESSION_TIME_SECONDS: int = SECONDS_PER_SCORED_ITEM * SESSION_LENGTH
-const SpeechText = preload("res://speech_text.gd")
-const SpeechChain = preload("res://fx/speech_chain.gd")
+const SpeechText = preload("res://src/speech/speech_text.gd")
+const SpeechChain = preload("res://src/fx/speech_chain.gd")
 ## Microsoft's conversational "Copilot" persona: the most human-sounding US voice
 ## on the free Edge endpoint. Also the voice of the bundled offline clips.
 const DEFAULT_VOICE_ID := "en-US-AndrewNeural"

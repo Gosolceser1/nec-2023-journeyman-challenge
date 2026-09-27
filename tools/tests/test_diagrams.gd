@@ -23,7 +23,7 @@ func _initialize() -> void:
 	mobile = "--mobile-ui" in OS.get_cmdline_user_args()
 	print("=== question figures (%s) ===" % ("mobile" if mobile else "desktop"))
 	_data_checks()
-	main = load("res://Main.tscn").instantiate()
+	main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
 	await _frames(6)
 	main.audio_cfg_path = "user://test_diagrams_audio.cfg"

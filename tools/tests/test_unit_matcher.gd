@@ -6,7 +6,7 @@ extends SceneTree
 ##   ./Godot_v4.7.2-stable_win64_console.exe --headless --path . \
 ##       --script tools/tests/test_unit_matcher.gd
 
-const UM = preload("res://unit_matcher.gd")
+const UM = preload("res://src/speech/unit_matcher.gd")
 const R = preload("res://tools/tests/t_report.gd")
 
 var t: R = R.new()
@@ -321,7 +321,7 @@ func bank_candidate_sweep() -> void:
 				if row_v is Array:
 					for cell in (row_v as Array):
 						blob += " " + _str(cell)
-		if preload("res://audio_explanation_generator.gd").find_match_in(blob.strip_edges(), ans2).is_empty():
+		if preload("res://src/speech/audio_explanation_generator.gd").find_match_in(blob.strip_edges(), ans2).is_empty():
 			nowhere += 1
 			nowhere_ids.append(_str(rec2.get("id", "")))
 			if nowhere <= 10:

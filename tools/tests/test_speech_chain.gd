@@ -4,7 +4,7 @@ extends SceneTree
 ## shifted images are cleaned too), the pitch shift never uses the broken 4096
 ## FFT, and the limiter caps the lifted voice below full scale.
 
-const SpeechChain = preload("res://fx/speech_chain.gd")
+const SpeechChain = preload("res://src/fx/speech_chain.gd")
 
 var failures: Array[String] = []
 var checks := 0

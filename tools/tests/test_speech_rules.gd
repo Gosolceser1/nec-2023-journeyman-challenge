@@ -5,9 +5,9 @@ extends SceneTree
 ##   ./Godot_v4.7.2-stable_win64_console.exe --headless --path . \
 ##       --script tools/tests/test_speech_rules.gd
 
-const Rules = preload("res://speech_rules.gd")
-const ST = preload("res://speech_text.gd")
-const AEG = preload("res://audio_explanation_generator.gd")
+const Rules = preload("res://src/speech/speech_rules.gd")
+const ST = preload("res://src/speech/speech_text.gd")
+const AEG = preload("res://src/speech/audio_explanation_generator.gd")
 const R = preload("res://tools/tests/t_report.gd")
 
 var t: R = R.new()

@@ -4,7 +4,7 @@ extends SceneTree
 # asserts exact symptoms. Run:
 #   Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/harness.gd
 
-const SpeechText = preload("res://speech_text.gd")
+const SpeechText = preload("res://src/speech/speech_text.gd")
 
 var failures: Array[String] = []
 var checks := 0
@@ -16,7 +16,7 @@ func check(cond: bool, label: String) -> void:
 		print("  FAIL: ", label)
 
 func _init() -> void:
-	var main = load("res://Main.tscn").instantiate()
+	var main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
 	# Pin the default (Silent, no autoplay) whatever this machine saved in the
 	# menu, and never write the developer's real audio.cfg.

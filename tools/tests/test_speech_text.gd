@@ -5,7 +5,7 @@ extends SceneTree
 ##   ./Godot_v4.7.2-stable_win64_console.exe --headless --path . \
 ##       --script tools/tests/test_speech_text.gd
 
-const ST = preload("res://speech_text.gd")
+const ST = preload("res://src/speech/speech_text.gd")
 const R = preload("res://tools/tests/t_report.gd")
 
 var t: R = R.new()
@@ -308,7 +308,7 @@ func teach_gate_ordering() -> void:
 
 	# The spoken index N must match the DISPLAYED lesson line N: both are built
 	# from the same lesson_lines list, so they can never drift apart.
-	var lines: PackedStringArray = preload("res://audio_explanation_generator.gd").lesson_lines(rec, "12 kW")
+	var lines: PackedStringArray = preload("res://src/speech/audio_explanation_generator.gd").lesson_lines(rec, "12 kW")
 	t.check(teach.size() <= lines.size(), "teach segments never outnumber the display lines")
 	t.has(str(teach[0].get("text", "")), ST.speakable(lines[0]), "teach[0] is the spoken form of lesson_lines[0]")
 
@@ -338,10 +338,10 @@ func teach_gate_ordering() -> void:
 # --------------------------------------------------------------------------
 func delegation_shims() -> void:
 	print("=== delegation shims ===")
-	const AEG = preload("res://audio_explanation_generator.gd")
-	t.eq(ST.format_answer_number(2.5), preload("res://unit_matcher.gd").format_answer_number(2.5),
+	const AEG = preload("res://src/speech/audio_explanation_generator.gd")
+	t.eq(ST.format_answer_number(2.5), preload("res://src/speech/unit_matcher.gd").format_answer_number(2.5),
 		"format_answer_number mirrors UnitMatcher")
-	t.eq(str(ST.answer_match_candidates("25")), str(preload("res://unit_matcher.gd").answer_match_candidates("25")),
+	t.eq(str(ST.answer_match_candidates("25")), str(preload("res://src/speech/unit_matcher.gd").answer_match_candidates("25")),
 		"answer_match_candidates mirrors UnitMatcher")
 	t.eq(str(ST.find_answer_match("a 25A b", "25")), str(AEG.find_match_in("a 25A b", "25")),
 		"find_answer_match mirrors AudioExplanationGenerator.find_match_in")

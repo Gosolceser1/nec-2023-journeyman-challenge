@@ -11,7 +11,7 @@ extends SceneTree
 ## nothing, the rule never plays before answering, "Hear the rule" reuses the
 ## full-question cache, and a failed Edge voice is labelled as the system voice.
 
-const SpeechText = preload("res://speech_text.gd")
+const SpeechText = preload("res://src/speech/speech_text.gd")
 const BRIAN := "en-US-BrianNeural"
 const ROOT := "user://speech_helper_test"
 
@@ -132,7 +132,7 @@ func _helper_failures() -> void:
 
 func _game_flow() -> void:
 	print("=== game: prefetch, stream, cancel, cache ===")
-	var main = load("res://Main.tscn").instantiate()
+	var main = load("res://scenes/main.tscn").instantiate()
 	main.audio_cfg_path = ROOT + "/audio.cfg"
 	main.voice_cfg_path = ROOT + "/voice.cfg"
 	main.speech_cache_root = ROOT + "/cache"

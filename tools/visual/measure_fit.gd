@@ -29,7 +29,7 @@ func _initialize() -> void:
 			win = Vector2i(int(p[0]), int(p[1]))
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	DisplayServer.window_set_size(win)
-	main = load("res://Main.tscn").instantiate()
+	main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
 	await _frames(10)
 	main.audio_cfg_path = "user://measure_audio.cfg"

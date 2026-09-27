@@ -4,9 +4,9 @@ extends SceneTree
 ## Run: Godot --headless --path . --script tools/test_bundle.gd
 
 func _init() -> void:
-	var main_script = load("res://main.gd")
+	var main_script = load("res://src/app/main.gd")
 	var holder = main_script.new()
-	var speech_text = load("res://speech_text.gd")
+	var speech_text = load("res://src/speech/speech_text.gd")
 	var bank = JSON.parse_string(FileAccess.get_file_as_string("res://question_bank.json"))
 	if bank == null or not bank is Dictionary or not bank.has("records"):
 		push_error("question bank unreadable")

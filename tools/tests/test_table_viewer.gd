@@ -12,7 +12,7 @@ extends SceneTree
 ##   ./Godot_v4.7.2-stable_win64_console.exe --headless --path . \
 ##       --script tools/tests/test_table_viewer.gd
 
-const TV = preload("res://table_viewer.gd")
+const TV = preload("res://src/ui/table_viewer.gd")
 const R = preload("res://tools/tests/t_report.gd")
 
 var t: R = R.new()

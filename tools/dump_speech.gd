@@ -4,7 +4,7 @@ extends SceneTree
 ## Run: Godot --headless --path . --script tools/dump_speech.gd
 
 func _init() -> void:
-	var speech_text = load("res://speech_text.gd")
+	var speech_text = load("res://src/speech/speech_text.gd")
 	var bank_path := "res://question_bank.json"
 	if not FileAccess.file_exists(bank_path):
 		push_error("question bank not found: " + bank_path)
@@ -32,7 +32,7 @@ func _init() -> void:
 		file.close()
 		count += 1
 	# The voice picker's preview line, so the recorded voice previews offline.
-	var main_script = load("res://main.gd")
+	var main_script = load("res://src/app/main.gd")
 	var preview := FileAccess.open(out_dir.path_join(main_script.PREVIEW_ID + ".json"), FileAccess.WRITE)
 	preview.store_string(JSON.stringify({"id": main_script.PREVIEW_ID,
 		"segments": [{"text": main_script.PREVIEW_TEXT, "choice": -1, "teach": false}]}))

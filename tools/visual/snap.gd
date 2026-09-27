@@ -24,7 +24,7 @@ func _initialize() -> void:
 		tag = "mob"
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		DisplayServer.window_set_size(Vector2i(540, 960))
-	var main: Node = load("res://Main.tscn").instantiate()
+	var main: Node = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
 	main.audio_cfg_path = "user://snap_audio.cfg"
 	main._on_audio_mode_picked(AudioSettings.Mode.SILENT)

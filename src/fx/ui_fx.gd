@@ -5,9 +5,9 @@ extends RefCounted
 ## particle bursts, flashes and glow pulses. Everything here is decoration —
 ## no quiz state lives in these nodes, and every spawned node frees itself.
 
-const CIRCUIT_SHADER := preload("res://fx/circuit_backdrop.gdshader")
-const TITLE_SHADER := preload("res://fx/electric_title.gdshader")
-const SHINE_SHADER := preload("res://fx/card_shine.gdshader")
+const CIRCUIT_SHADER := preload("res://src/fx/shaders/circuit_backdrop.gdshader")
+const TITLE_SHADER := preload("res://src/fx/shaders/electric_title.gdshader")
+const SHINE_SHADER := preload("res://src/fx/shaders/card_shine.gdshader")
 
 const CYAN := Color("38bdf8")
 const EMERALD := Color("34d399")
