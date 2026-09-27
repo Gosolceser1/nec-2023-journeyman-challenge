@@ -1,6 +1,6 @@
 """Synthesize the app's sound effects into res://assets/sfx/ (see docs/SFX_PLAN.md).
 
-    python tools/sfx/make_sfx.py                   # default family -> sfx/*.wav
+    python tools/sfx/make_sfx.py                   # default family -> assets/sfx/*.wav
     python tools/sfx/make_sfx.py --family mallet   # ship another family instead
     python tools/sfx/make_sfx.py --preview         # also every family -> .audit_tmp/sfx_preview/v2/
 
@@ -8,11 +8,13 @@ Five cues only: correct, wrong, pass, fail, warning. Each family plays the same
 notes (C major) with a different instrument, so picking one is purely a timbre
 choice:
 
-    keys    warm electric piano (FM tine + body, soft saturation)   [default]
+    electric  electric piano + light electrical layers (charge zip, relay tick,
+              breaker thunk, shimmer), phone-safe lows; see electric.py  [default]
+    keys    warm electric piano (FM tine + body, soft saturation)
     mallet  soft marimba bar (inharmonic bar partials, felt mallet)
     pluck   kalimba-like pluck (Karplus-Strong string + sine body)
 
-All original synthesis (CC0, see sfx/CREDITS.md), deterministic, 44.1 kHz mono
+All original synthesis (CC0, see assets/sfx/CREDITS.md), deterministic, 44.1 kHz mono
 16-bit, loudness-matched with a K-weighted momentary (400 ms) measure.
 """
 
@@ -25,8 +27,8 @@ import wave
 import numpy as np
 
 SR = 44100
-FAMILIES = ("keys", "mallet", "pluck")
-DEFAULT_FAMILY = "keys"
+FAMILIES = ("electric", "keys", "mallet", "pluck")
+DEFAULT_FAMILY = "electric"
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 OUT_DIR = os.path.join(ROOT, "assets", "sfx")
 PREVIEW_DIR = os.path.join(ROOT, ".audit_tmp", "sfx_preview", "v2")
@@ -275,6 +277,9 @@ def cue(name: str, note) -> np.ndarray:
 
 
 def render(name: str, family: str) -> np.ndarray:
+    if family == "electric":
+        import electric
+        return electric.render_cue(name)
     x = cue(name, INSTRUMENTS[family])
     x = x * 10 ** ((SPEC[name]["lufs"] - momentary_lufs(x)) / 20.0)
     peak_db = 20 * np.log10(max(1e-9, float(np.max(np.abs(x)))))
@@ -283,8 +288,9 @@ def render(name: str, family: str) -> np.ndarray:
     return x
 
 
-def write_wav(path: str, x: np.ndarray) -> None:
-    pcm = (np.clip(x, -1.0, 1.0) * 32767.0).astype("<i2")
+def write_wav(path: str, x: np.ndarray, rounded: bool = False) -> None:
+    x = np.clip(x, -1.0, 1.0) * 32767.0
+    pcm = (np.round(x) if rounded else x).astype("<i2")
     with wave.open(path, "wb") as w:
         w.setnchannels(1)
         w.setsampwidth(2)
@@ -294,7 +300,7 @@ def write_wav(path: str, x: np.ndarray) -> None:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--family", choices=FAMILIES, default=DEFAULT_FAMILY, help="instrument written to sfx/")
+    ap.add_argument("--family", choices=FAMILIES, default=DEFAULT_FAMILY, help="instrument written to assets/sfx/")
     ap.add_argument("--preview", action="store_true", help="render every family to .audit_tmp/sfx_preview/v2/")
     args = ap.parse_args()
     families = FAMILIES if args.preview else (args.family,)
@@ -309,10 +315,10 @@ def main() -> None:
             peak = 20 * np.log10(max(1e-9, float(np.max(np.abs(x)))))
             print(f"  {family:<7} {name:<8} {len(x) / SR * 1000:5.0f} ms  {loud:6.1f} LUFS  peak {peak:5.1f} dBFS")
             if family == args.family:
-                write_wav(os.path.join(OUT_DIR, f"{name}.wav"), x)
+                write_wav(os.path.join(OUT_DIR, f"{name}.wav"), x, family == "electric")
             if args.preview:
                 os.makedirs(os.path.join(PREVIEW_DIR, family), exist_ok=True)
-                write_wav(os.path.join(PREVIEW_DIR, family, f"{name}.wav"), x)
+                write_wav(os.path.join(PREVIEW_DIR, family, f"{name}.wav"), x, family == "electric")
                 tour += [x, gap]
             if name in ("correct", "wrong"):
                 compare += [x, gap[: len(gap) // 2]]

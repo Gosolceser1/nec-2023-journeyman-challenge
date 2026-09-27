@@ -33,6 +33,9 @@ func _init() -> void:
 	# --- cancel_press must not leave the card stuck in PRESSED ---
 	_stuck_press_case()
 
+	# --- verdict animation: never a layout change, reduce motion is static ---
+	_verdict_case()
+
 	print("")
 	print("checks: %d  failures: %d" % [checks, failures.size()])
 	for f in failures:
@@ -135,3 +138,58 @@ func _stuck_press_case() -> void:
 	check(card.current_state == AnswerCard.State.NORMAL,
 		"cancel_press should return the card to NORMAL")
 	card.queue_free()
+
+
+## The answer animation must leave a synchronous caller (the harness) looking
+## at the final graded card, and reduce motion must mean no animation at all.
+func _verdict_case() -> void:
+	print("=== ANSWER CARD VERDICT ===")
+	for state in [AnswerCard.State.CORRECT, AnswerCard.State.WRONG]:
+		var card := _new_card()
+		card.set_state(state)
+		var settled := card.get_theme_stylebox("panel")
+		var min_size := card.get_combined_minimum_size()
+		if state == AnswerCard.State.CORRECT:
+			card.celebrate(1.4, true, 1.335)
+		else:
+			card.reject(true)
+		check(card._verdict_tweens.is_empty(), "reduce motion starts no tween (state %d)" % state)
+		check(_same_style(card.get_theme_stylebox("panel"), settled) and card.icon_progress == 1.0 and card.scale == Vector2.ONE,
+			"reduce motion shows the final card at once (state %d)" % state)
+		if state == AnswerCard.State.CORRECT:
+			card.celebrate(1.4, false, 1.335)
+		else:
+			card.reject(false)
+		check(not card._verdict_tweens.is_empty(), "full motion animates (state %d)" % state)
+		check(card.current_state == state, "animating keeps the graded state (state %d)" % state)
+		check(card.get_combined_minimum_size() == min_size, "animation never changes the card's size (state %d)" % state)
+		card._stop_verdict()
+		check(card.scale == Vector2.ONE and card.position.x == 0.0 and card.icon_progress == 1.0 and card.icon_heat == 0.0
+			and card.icon_pad == 0.0 and card.icon_pop == 0.0 and card.icon_flicker == 1.0,
+			"stopping snaps to the settled look (state %d)" % state)
+		check(_same_style(card.get_theme_stylebox("panel"), settled), "the settled stylebox is the state style (state %d)" % state)
+		card.queue_free()
+	var right := _new_card()
+	right.set_state(AnswerCard.State.CORRECT)
+	right.reveal_right(0.2, true)
+	check(right._verdict_tweens.is_empty() and right.icon_progress == 1.0, "reveal under reduce motion: final check at once")
+	right.reveal_right(0.2, false)
+	check(right.icon_progress == 0.0 and not right._verdict_tweens.is_empty(), "reveal draws the check in after the delay")
+	right._stop_verdict()
+	right.queue_free()
+	var probe := _new_card()
+	var widest := 0.0
+	for n in 13:
+		probe._glitch_at(float(n) / 12.0)
+		widest = maxf(widest, absf(probe.position.x))
+	check(widest > 0.0 and widest <= 5.0, "glitch moves the card sideways by at most 5 px (got %.1f)" % widest)
+	check(probe.position.x == 0.0, "glitch ends back at x = 0")
+	probe.queue_free()
+
+func _same_style(a: StyleBox, b: StyleBox) -> bool:
+	var fa := a as StyleBoxFlat
+	var fb := b as StyleBoxFlat
+	if fa == null or fb == null:
+		return a == b
+	return fa.bg_color == fb.bg_color and fa.border_color == fb.border_color and fa.shadow_size == fb.shadow_size \
+		and fa.shadow_color == fb.shadow_color and fa.border_width_left == fb.border_width_left

@@ -129,42 +129,209 @@ func set_card_data(idx: int, option_text: String) -> void:
 	answer_label.text = option_text
 	set_state(State.NORMAL)
 
+## Style only: the verdict motion is celebrate() / reject() / reveal_right(),
+## started by QuizFx after grading, so a synchronous caller sees the final look.
 func set_state(state: State) -> void:
 	current_state = state
 	if state == State.CORRECT or state == State.WRONG or state == State.ELIMINATED:
 		_touch_press_index = -1
 	_apply_styling()
 	vector_state_icon.queue_redraw()
-	if state == State.CORRECT:
-		pivot_offset = size / 2.0
-		var tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		tw.tween_property(self, "scale", Vector2(1.035, 1.035), 0.14)
-		tw.tween_property(self, "scale", Vector2.ONE, 0.18)
-		# Pop icon with scale and rotation
-		vector_state_icon.pivot_offset = vector_state_icon.size / 2.0
-		vector_state_icon.scale = Vector2(0.3, 0.3)
-		vector_state_icon.rotation_degrees = -20.0
-		var ic_tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		ic_tw.parallel().tween_property(vector_state_icon, "scale", Vector2.ONE, 0.22)
-		ic_tw.parallel().tween_property(vector_state_icon, "rotation_degrees", 0.0, 0.22)
-	elif state == State.WRONG:
-		pivot_offset = size / 2.0
-		var tw := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-		tw.tween_property(self, "position:x", -8.0, 0.04).as_relative()
-		tw.tween_property(self, "position:x", 16.0, 0.06).as_relative()
-		tw.tween_property(self, "position:x", -12.0, 0.05).as_relative()
-		tw.tween_property(self, "position:x", 4.0, 0.05).as_relative()
-		# Pop icon
-		vector_state_icon.pivot_offset = vector_state_icon.size / 2.0
-		vector_state_icon.scale = Vector2(0.5, 0.5)
-		var ic_tw := create_tween().set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-		ic_tw.tween_property(vector_state_icon, "scale", Vector2.ONE, 0.26)
+
+# Verdict animation, electrical theme (docs/SFX_PLAN.md has the timings):
+#   right: the check draws itself as a hot cyan trace with an electron at its
+#          head, a solder pad pulses at the tip, then current runs once around
+#          the card's border and the card settles in its normal CORRECT look.
+#   wrong: the two strokes of the X cross like a short circuit with a spark at
+#          the crossing, the X flickers once like a failing tube, and the card
+#          glitches sideways; then the right card gets the same current, softer.
+# Everything is scale, a stylebox tween, the card shader or the icon's own
+# drawing, never size, so the fitted layout cannot change. The glitch moves
+# position.x absolutely: cards sit at x = 0 in the answers VBox, so a mid-shake
+# re-sort cannot leave an offset. All of it settles within ~0.6 s.
+var icon_progress := 1.0:
+	set(v):
+		icon_progress = v
+		vector_state_icon.queue_redraw()
+## 1 = drawn hot (cyan trace / white-hot X), 0 = the settled state colour.
+var icon_heat := 0.0:
+	set(v):
+		icon_heat = v
+		vector_state_icon.queue_redraw()
+## Solder-pad pulse at the tip of the check, 0..1 (0 = not drawn).
+var icon_pad := 0.0:
+	set(v):
+		icon_pad = v
+		vector_state_icon.queue_redraw()
+## Spark pop where the strokes of the X cross, 0..1 (0 = not drawn).
+var icon_pop := 0.0:
+	set(v):
+		icon_pop = v
+		vector_state_icon.queue_redraw()
+## Opacity of the X while it flickers; 1 when settled.
+var icon_flicker := 1.0:
+	set(v):
+		icon_flicker = v
+		vector_state_icon.queue_redraw()
+var _verdict_tweens: Array[Tween] = []
+
+const TRACE_CYAN := AppTheme.SKY_300
+const GLITCH_PX: Array[float] = [5.0, -4.0, 3.0, -3.0, 1.5, 0.0]
+
+## The pick was right. strength 1.0 = first correct, up to ~1.4 on a streak.
+## pitch is the correct cue's streak pitch_scale: the timing follows the sound
+## (correct.wav: G5 tine at 30 ms, C6 + sparkle at ~95 ms, scaled by 1/pitch),
+## so the electron passes the check's corner on the first note and reaches the
+## tip on the second. calm (reduce motion): only the final state.
+func celebrate(strength: float = 1.0, calm: bool = false, pitch: float = 1.0) -> void:
+	_stop_verdict()
+	if calm:
+		return
+	var land := 0.1 / maxf(pitch, 0.5)
+	_flash_style(Color(AppTheme.EMERALD_400, 0.35), AppTheme.SKY_300, int(14 + 6 * strength), Color(AppTheme.SKY_400, 0.45), 0.45)
+	pivot_offset = size / 2.0
+	var peak := 1.0 + 0.03 * strength
+	var punch := _verdict_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	punch.tween_interval(land)
+	punch.tween_property(self, "scale", Vector2(peak, peak), 0.06)
+	punch.tween_property(self, "scale", Vector2.ONE, 0.26).set_trans(Tween.TRANS_BACK)
+	icon_progress = 0.0
+	icon_heat = 1.0
+	var icon := _verdict_tween()
+	icon.tween_property(self, "icon_progress", 1.0, land)
+	icon.tween_property(self, "icon_pad", 1.0, 0.24).from(0.001).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	icon.parallel().tween_property(self, "icon_heat", 0.0, 0.3).set_trans(Tween.TRANS_SINE)
+	icon.tween_callback(func(): icon_pad = 0.0)
+	# Spark positions are read inside callbacks: the icon only turns visible in
+	# the grading frame and has no settled position until the container sorts.
+	var sparks := _verdict_tween()
+	sparks.tween_callback(func(): UiFx.trail_sparks(self, _icon_path(), land, TRACE_CYAN, roundi(8 * strength)))
+	sparks.tween_interval(land)
+	sparks.tween_callback(func(): UiFx.card_burst(self, _icon_path()[-1], TRACE_CYAN, roundi(8 * strength), 0.55))
+	_run_current(land, 0.36, 0.9 + 0.25 * (strength - 1.0) / 0.4)
+
+## The pick was wrong: the X shorts out on the breaker thunk at the start of
+## wrong.wav (spark pop where the strokes cross), flickers, the card glitches.
+func reject(calm: bool = false) -> void:
+	_stop_verdict()
+	if calm:
+		return
+	var muted_red := AppTheme.ROSE_400.lerp(AppTheme.SLATE_500, 0.35)
+	_flash_style(Color(muted_red, 0.4), AppTheme.RED_300, 16, Color(AppTheme.RED_400, 0.4), 0.4)
+	icon_progress = 0.0
+	icon_heat = 1.0
+	var icon := _verdict_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	icon.tween_property(self, "icon_progress", 1.0, 0.06)
+	icon.parallel().tween_property(self, "icon_pop", 1.0, 0.22).from(0.001).set_delay(0.015)
+	icon.parallel().tween_property(self, "icon_heat", 0.0, 0.26).set_delay(0.06)
+	icon.tween_callback(func(): icon_pop = 0.0)
+	# Two dips 0.33 s apart (under 3 Hz) on a small, low-contrast glyph, so it
+	# stays well inside photosensitivity limits.
+	var flicker := _verdict_tween()
+	flicker.tween_interval(0.16)
+	flicker.tween_property(self, "icon_flicker", 0.55, 0.04)
+	flicker.tween_property(self, "icon_flicker", 1.0, 0.05)
+	flicker.tween_interval(0.24)
+	flicker.tween_property(self, "icon_flicker", 0.75, 0.04)
+	flicker.tween_property(self, "icon_flicker", 1.0, 0.04)
+	var pop := _verdict_tween()
+	pop.tween_interval(0.015)
+	pop.tween_callback(func(): UiFx.card_burst(self, _to_card(PackedVector2Array([vector_state_icon.size / 2.0]))[0], AppTheme.AMBER_200, 10, 0.6))
+	var glitch := _verdict_tween()
+	glitch.tween_interval(0.01)
+	glitch.tween_method(_glitch_at, 0.0, 1.0, 0.2)
+
+## The right answer after a miss or a timeout, never before: after `delay` the
+## check draws in as a trace and a softer current runs around the border.
+func reveal_right(delay: float = 0.2, calm: bool = false) -> void:
+	_stop_verdict()
+	if calm:
+		return
+	icon_progress = 0.0
+	icon_heat = 1.0
+	var icon := _verdict_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	icon.tween_interval(delay)
+	icon.tween_property(self, "icon_progress", 1.0, 0.12)
+	icon.tween_property(self, "icon_heat", 0.0, 0.2)
+	_run_current(delay, 0.36, 0.55)
+
+## Current runs once around the border via the card shader (UiFx.add_shine).
+func _run_current(delay: float, duration: float, power: float) -> void:
+	var mat := material as ShaderMaterial
+	if mat == null:
+		return
+	mat.set_shader_parameter("current_strength", power)
+	var tail := 0.22
+	mat.set_shader_parameter("current_tail", tail)
+	var tw := _verdict_tween()
+	tw.tween_interval(delay)
+	tw.tween_method(func(v: float): mat.set_shader_parameter("current_pos", v), 0.0, 1.0 + tail, duration)
+	tw.tween_callback(func(): mat.set_shader_parameter("current_pos", -1.0))
+
+func _verdict_tween() -> Tween:
+	var tw := create_tween()
+	_verdict_tweens.append(tw)
+	return tw
+
+## Snaps any running verdict animation to its settled look.
+func _stop_verdict() -> void:
+	for tw in _verdict_tweens:
+		if tw.is_valid():
+			tw.kill()
+	_verdict_tweens.clear()
+	scale = Vector2.ONE
+	modulate.a = 1.0
+	position.x = 0.0
+	icon_progress = 1.0
+	icon_heat = 0.0
+	icon_pad = 0.0
+	icon_pop = 0.0
+	icon_flicker = 1.0
+	if material is ShaderMaterial:
+		(material as ShaderMaterial).set_shader_parameter("current_pos", -1.0)
+	_apply_styling()
+
+## Flashes the card's stylebox from the given colours back to its state style,
+## then puts the state style itself back so the settled frame is unchanged.
+func _flash_style(bg: Color, border: Color, shadow_size_peak: int, shadow: Color, duration: float) -> void:
+	var base := get_theme_stylebox("panel") as StyleBoxFlat
+	if base == null:
+		return
+	var fx := base.duplicate() as StyleBoxFlat
+	fx.bg_color = base.bg_color.blend(bg)
+	fx.border_color = border
+	fx.shadow_size = shadow_size_peak
+	fx.shadow_color = shadow
+	add_theme_stylebox_override("panel", fx)
+	var tw := _verdict_tween().set_parallel().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	tw.tween_property(fx, "bg_color", base.bg_color, duration * 0.7)
+	tw.tween_property(fx, "border_color", base.border_color, duration * 0.7)
+	tw.tween_property(fx, "shadow_size", base.shadow_size, duration)
+	tw.tween_property(fx, "shadow_color", base.shadow_color, duration)
+	tw.chain().tween_callback(_restore_style.bind(fx, base))
+
+func _restore_style(fx: StyleBoxFlat, base: StyleBoxFlat) -> void:
+	if get_theme_stylebox("panel") == fx:
+		add_theme_stylebox_override("panel", base)
+
+## The check's stroke in this card's local space.
+func _icon_path() -> PackedVector2Array:
+	return _to_card(_check_points(vector_state_icon.size))
+
+## Icon-local points -> this card's local space (for sparks parented to the card).
+func _to_card(pts: PackedVector2Array) -> PackedVector2Array:
+	var xf := get_global_transform().affine_inverse() * vector_state_icon.get_global_transform()
+	return xf * pts
+
+## Stepped sideways jumps, like a glitching signal (t runs 0 -> 1).
+func _glitch_at(t: float) -> void:
+	position.x = GLITCH_PX[mini(int(t * GLITCH_PX.size()), GLITCH_PX.size() - 1)]
 
 func animate_entrance(delay: float = 0.0) -> void:
 	modulate.a = 0.0
 	pivot_offset = size / 2.0
 	scale = Vector2(0.95, 0.95)
-	var tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	var tw := _verdict_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	if delay > 0.0:
 		tw.tween_interval(delay)
 	tw.tween_property(self, "modulate:a", 1.0, 0.2)
@@ -247,25 +414,76 @@ func set_eliminated() -> void:
 
 func _draw_state_icon() -> void:
 	var s: Vector2 = vector_state_icon.size
+	var ci := vector_state_icon
 	match current_state:
 		State.CORRECT:
-			# Draw vector checkmark with soft outer glow line
-			var pts: PackedVector2Array = PackedVector2Array([
-				Vector2(3, s.y * 0.52),
-				Vector2(8, s.y * 0.78),
-				Vector2(21, s.y * 0.22)
-			])
-			vector_state_icon.draw_polyline(pts, Color(0.06, 0.72, 0.5, 0.35), 4.6, true)
-			vector_state_icon.draw_polyline(pts, AppTheme.EMERALD_500, 2.6, true)
+			# Vector checkmark with a soft outer glow line; drawn hot cyan while
+			# the trace animates, cooling to emerald (heat 0 is the settled look).
+			var full := _check_points(s)
+			var pts: PackedVector2Array = _partial_stroke(full, icon_progress)
+			if pts.size() >= 2:
+				var glow := Color(0.06, 0.72, 0.5, 0.35).lerp(Color(AppTheme.SKY_400, 0.5), icon_heat)
+				ci.draw_polyline(pts, glow, 4.6 + 2.0 * icon_heat, true)
+				ci.draw_polyline(pts, AppTheme.EMERALD_500.lerp(TRACE_CYAN, icon_heat), 2.6, true)
+			if icon_heat > 0.0 and icon_progress > 0.0 and icon_progress < 1.0:
+				var head: Vector2 = pts[-1]
+				ci.draw_circle(head, 5.5, Color(AppTheme.SKY_300, 0.25))
+				ci.draw_circle(head, 3.2, Color(AppTheme.SKY_100, 0.7))
+				ci.draw_circle(head, 1.6, Color.WHITE)
+			if icon_pad > 0.0 and icon_pad < 1.0:
+				var tip: Vector2 = full[-1]
+				var fade := 1.0 - icon_pad
+				ci.draw_arc(tip, lerpf(2.5, 8.0, icon_pad), 0.0, TAU, 20, Color(AppTheme.SKY_300, 0.8 * fade), 1.5, true)
+				ci.draw_circle(tip, 2.6, Color(AppTheme.SKY_100, fade))
 		State.WRONG:
-			# Draw vector cross with soft outer glow line
+			# Vector cross with a soft outer glow line; both strokes draw at once
+			# and cross like a short, flickering white-hot to red.
 			var pad: float = 4.0
-			vector_state_icon.draw_line(Vector2(pad, pad), Vector2(s.x - pad, s.y - pad), Color(0.93, 0.26, 0.26, 0.35), 4.6, true)
-			vector_state_icon.draw_line(Vector2(s.x - pad, pad), Vector2(pad, s.y - pad), Color(0.93, 0.26, 0.26, 0.35), 4.6, true)
-			vector_state_icon.draw_line(Vector2(pad, pad), Vector2(s.x - pad, s.y - pad), AppTheme.RED_500, 2.6, true)
-			vector_state_icon.draw_line(Vector2(s.x - pad, pad), Vector2(pad, s.y - pad), AppTheme.RED_500, 2.6, true)
+			var strokes := [
+				_partial_stroke(PackedVector2Array([Vector2(pad, pad), Vector2(s.x - pad, s.y - pad)]), icon_progress),
+				_partial_stroke(PackedVector2Array([Vector2(s.x - pad, pad), Vector2(pad, s.y - pad)]), icon_progress),
+			]
+			var glow := Color(0.93, 0.26, 0.26, 0.35)
+			var core := AppTheme.RED_500.lerp(AppTheme.RED_300, icon_heat)
+			glow.a *= icon_flicker
+			core.a *= icon_flicker
+			for stroke in strokes:
+				if stroke.size() >= 2:
+					ci.draw_line(stroke[0], stroke[1], glow, 4.6, true)
+			for stroke in strokes:
+				if stroke.size() >= 2:
+					ci.draw_line(stroke[0], stroke[1], core, 2.6, true)
+			if icon_pop > 0.0 and icon_pop < 1.0:
+				var fade := 1.0 - icon_pop
+				ci.draw_circle(s / 2.0, lerpf(3.0, 7.0, icon_pop), Color(AppTheme.AMBER_200, 0.55 * fade))
+				ci.draw_circle(s / 2.0, lerpf(2.0, 0.5, icon_pop), Color(1, 1, 1, fade))
 		_:
 			pass
+
+static func _check_points(s: Vector2) -> PackedVector2Array:
+	return PackedVector2Array([Vector2(3, s.y * 0.52), Vector2(8, s.y * 0.78), Vector2(21, s.y * 0.22)])
+
+## The first `t` (0..1) of a polyline, by length; all of it at t >= 1.
+static func _partial_stroke(pts: PackedVector2Array, t: float) -> PackedVector2Array:
+	if t >= 1.0:
+		return pts
+	var out := PackedVector2Array()
+	if t <= 0.0:
+		return out
+	var total := 0.0
+	for i in range(1, pts.size()):
+		total += pts[i - 1].distance_to(pts[i])
+	var left := total * t
+	out.append(pts[0])
+	for i in range(1, pts.size()):
+		var seg := pts[i - 1].distance_to(pts[i])
+		if left >= seg:
+			out.append(pts[i])
+			left -= seg
+		else:
+			out.append(pts[i - 1].lerp(pts[i], left / maxf(seg, 0.001)))
+			break
+	return out
 
 func _apply_styling() -> void:
 	pivot_offset = size / 2.0

@@ -73,32 +73,48 @@ static func update_time_gauges(host: Main) -> void:
 			not host.current_answered and host.question_time_left > 0 and host.question_time_left <= 30)
 
 
+## Answer feedback, electrical theme (docs/SFX_PLAN.md for the sound side).
+## Everything starts in the grading frame and settles within ~0.6 s; it only
+## animates scale, position.x, styleboxes, the card shader and particles
+## parented to the card, so it never changes the fitted layout, and the cards
+## already carry their final state style, so synchronous callers (the harness)
+## see the graded screen without waiting. Reduce motion: final icons only.
+##   right:  rising chime (higher on a streak); the check draws itself as a
+##           cyan trace with a spark running down it, a solder pad pulses at
+##           the tip, current runs once around the card; one light haptic tick
+##   wrong:  low "short" tone; the X strokes cross with a spark pop, flicker
+##           once, the pick glitches sideways; then the right card (only now)
+##           gets the softer current; two soft haptic ticks
 static func play_answer(host: Main, cards: Array, correct: int, selected: int) -> void:
 	var is_right := selected == correct and selected >= 0
-	host._sfx(Sfx.answer_sound(AudioSettings.grades_answers(host.session_audio_mode), is_right))
-	if host.ui_mobile:
-		Input.vibrate_handheld(25 if is_right else 90)
+	var graded := AudioSettings.grades_answers(host.session_audio_mode)
+	var calm := host.audio.reduce_motion
+	var strength := 1.0 + 0.4 * Sfx.streak_strength(host.streak) if is_right else 1.0
+	var pitch := Sfx.streak_pitch(host.streak) if is_right else 1.0
+	host._sfx(Sfx.answer_sound(graded, is_right), pitch)
+	if host.ui_mobile and graded:
+		haptic(host, is_right)
 	if correct >= 0 and correct < cards.size():
 		var right_card: AnswerCard = cards[correct]
-		UiFx.glow_pulse(right_card, UiFx.EMERALD, 30 if is_right else 18)
 		if is_right:
-			var spark_at := right_card.vector_state_icon.get_global_rect().get_center()
-			if quiz_view_rect(host).has_point(spark_at):
-				UiFx.spark_burst(host.fx_layer, spark_at, UiFx.EMERALD)
-			UiFx.screen_flash(host.fx_layer, UiFx.EMERALD, 0.07)
-	if not is_right:
-		UiFx.screen_flash(host.fx_layer, UiFx.RED, 0.11)
-		if selected >= 0 and selected < cards.size():
-			UiFx.glow_pulse(cards[selected], UiFx.RED, 24)
+			right_card.celebrate(strength, calm, pitch)
+		else:
+			right_card.reveal_right(0.2 if selected >= 0 else 0.06, calm)
+	if not is_right and selected >= 0 and selected < cards.size():
+		(cards[selected] as AnswerCard).reject(calm)
+	if calm:
+		return
 	UiFx.pop(host.pass_badge, 1.06)
-	UiFx.pop(host.feedback_title, 1.12, 0.3)
-	UiFx.glow_pulse(host.feedback_panel, UiFx.EMERALD if is_right else UiFx.RED, 22, 0.8)
+	UiFx.pop(host.feedback_title, 1.06 if is_right else 1.03, 0.3, Vector2(0.0, 0.5))
+	UiFx.glow_pulse(host.feedback_panel, UiFx.CYAN if is_right else AppTheme.ROSE_400, 20 if is_right else 14, 0.55)
 
 
-## On-screen rect of the scrolling quiz column (sparks outside it would land on
-## the Next button or dock).
-static func quiz_view_rect(host: Main) -> Rect2:
-	var n: Node = host.answers_box
-	while n != null and not n is ScrollContainer:
-		n = n.get_parent()
-	return (n as Control).get_global_rect() if n != null else host.get_global_rect()
+## Android: a light tick for right, two softer ticks for wrong (the platform's
+## "confirm" / "reject" patterns), never a long buzz.
+static func haptic(host: Main, is_right: bool) -> void:
+	if is_right:
+		Input.vibrate_handheld(20, 0.45)
+		return
+	Input.vibrate_handheld(30, 0.35)
+	if host.is_inside_tree():
+		host.get_tree().create_timer(0.11).timeout.connect(func(): Input.vibrate_handheld(30, 0.35))

@@ -172,19 +172,25 @@ static func show_visual(host: Main, accuracy: float, passed: bool) -> void:
 		column.add_child(host.results_visual)
 		column.move_child(host.results_visual, host.feedback_body.get_index() + 1)
 	host.results_visual.visible = true
-	host.result_gauge.play(accuracy, float(Main.PASS_PERCENT))
-	host.chapter_bars.set_rows(ChapterBars.rows_from_stats(host.chapter_stats))
-	UiFx.glow_pulse(host.feedback_panel, UiFx.EMERALD if passed else UiFx.RED, 30, 1.2)
-	host._sfx(Sfx.result_sound(passed))
 	host._results_seq += 1
-	if passed:
-		var seq := host._results_seq
-		host.get_tree().create_timer(1.1).timeout.connect(func(): launch_confetti(host, seq))
+	var seq := host._results_seq
+	host.result_gauge.landed.connect(func(): land(host, seq, passed), CONNECT_ONE_SHOT)
+	host.result_gauge.play(accuracy, float(Main.PASS_PERCENT), host.audio.reduce_motion)
+	host.chapter_bars.set_rows(ChapterBars.rows_from_stats(host.chapter_stats))
+	UiFx.glow_pulse(host.feedback_panel, ResultGauge.tint_for(accuracy, float(Main.PASS_PERCENT)), 30, 1.2)
 
 
-static func launch_confetti(host: Main, seq: int) -> void:
-	if seq == host._results_seq and is_instance_valid(host.results_visual) and host.results_visual.visible:
-		UiFx.confetti(host.fx_layer)
+## The dial reached the score: the result sound plays on the landing, and a pass
+## gets a bounce, a spark puff from the dial and the confetti.
+static func land(host: Main, seq: int, passed: bool) -> void:
+	if seq != host._results_seq or not is_instance_valid(host.results_visual) or not host.results_visual.visible:
+		return
+	host._sfx(Sfx.result_sound(passed))
+	if not passed or host.audio.reduce_motion:
+		return
+	host.result_gauge.punch()
+	UiFx.spark_burst(host.fx_layer, host.result_gauge.get_global_rect().get_center(), UiFx.EMERALD, 36)
+	UiFx.confetti(host.fx_layer)
 
 
 static func clear_confetti(host: Main) -> void:

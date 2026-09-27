@@ -4,34 +4,49 @@ extends Node
 ## The few sound effects the app plays (docs/SFX_PLAN.md): answer correct /
 ## wrong, results pass / fail, and an exam-clock warning. They live on their own
 ## "SFX" bus, separate from the voice, with one pre-loaded player each so a cue
-## never waits on a load. The static part is the sound map and the rules for
-## when a cue plays; it is pure and unit-tested. Every instance method is a
-## quiet no-op without a tree, bus or imported asset (headless harness).
+## never waits on a load. Only the clock warning can overlap the voice (answers
+## and results stop it first), so only the warning goes through the ducker: a
+## compressor keyed by the Speech bus stays clamped for a while after the voice
+## is cut off, and would swallow an answer tone fired in that same instant. The
+## static part is the sound map and the rules for when a cue plays; it is pure
+## and unit-tested. Every instance method is a quiet no-op without a tree, bus
+## or imported asset (headless harness).
 ##
-## Assets are synthesized by tools/sfx/make_sfx.py (CC0, see sfx/CREDITS.md) and
-## loudness-matched there, so the trims below stay near zero.
+## Assets are synthesized by tools/sfx/make_sfx.py (CC0, see assets/sfx/CREDITS.md)
+## and loudness-matched there, so the trims below stay near zero.
 
 const BUS := "SFX"
+## Sub-bus of SFX carrying the sidechain ducker; only "duck" cues play on it.
+const DUCK_BUS := "SFXDuck"
 const SPEECH_BUS := "Speech"
 const DIR := "res://assets/sfx/"
 
 ## db: trim on top of the bus level. vary_db: random level spread per play, so
-## the 100th answer tone is not a byte-identical copy of the first.
+## the 100th answer tone is not a byte-identical copy of the first. duck: the
+## cue can play while the voice is still reading and is squeezed under it.
 const SOUNDS := {
-	"correct": {"db": 0.0, "vary_db": 1.0},
-	"wrong": {"db": 0.0, "vary_db": 1.0},
-	"warning": {"db": 0.0, "vary_db": 0.0},
-	"pass": {"db": 0.0, "vary_db": 0.0},
-	"fail": {"db": 0.0, "vary_db": 0.0},
+	"correct": {"db": 0.0, "vary_db": 1.0, "duck": false},
+	"wrong": {"db": 0.0, "vary_db": 1.0, "duck": false},
+	"warning": {"db": 0.0, "vary_db": 0.0, "duck": true},
+	"pass": {"db": 0.0, "vary_db": 0.0, "duck": false},
+	"fail": {"db": 0.0, "vary_db": 0.0, "duck": false},
 }
 
-const VOICE_DUCK_DB := -10.0
+## Semitones the correct tone rises on a streak (index = streak, last entry
+## holds): 3 in a row +2, 5 +4, 8 (a full streak meter) +5. The tone is a rising
+## fourth, so every step stays in C major. Same asset, no new cue.
+const STREAK_SEMITONES: Array[int] = [0, 0, 0, 2, 2, 4, 4, 4, 5]
+
+## Applied only while a voice the Speech-bus ducker cannot hear is reading
+## (Android / system TTS); about what the ducker takes off a recorded clip.
+const VOICE_DUCK_DB := -8.0
 ## Exam-clock seconds left at which the warning plays once: 5:00 is where the
 ## clock turns red, 1:00 is the last call.
 const WARN_AT_SECONDS: Array[int] = [300, 60]
 
 var enabled := true
-## Returns true while the voice is reading; set by the host.
+## Returns true while a voice outside the Speech bus (system TTS) is reading;
+## set by the host. Recorded clips on the Speech bus are ducked by DUCK_BUS.
 var voice_active: Callable = Callable()
 var _players: Dictionary = {}
 
@@ -47,6 +62,18 @@ static func answer_sound(graded: bool, is_right: bool) -> String:
 	return "correct" if is_right else "wrong"
 
 
+static func streak_pitch(streak: int) -> float:
+	var semis: int = STREAK_SEMITONES[clampi(streak, 0, STREAK_SEMITONES.size() - 1)]
+	return pow(2.0, semis / 12.0)
+
+
+## 0 for a first correct answer, rising to 1 at the top streak step; drives how
+## big the visual celebration is, in step with the pitch.
+static func streak_strength(streak: int) -> float:
+	var semis: int = STREAK_SEMITONES[clampi(streak, 0, STREAK_SEMITONES.size() - 1)]
+	return float(semis) / float(STREAK_SEMITONES[-1])
+
+
 static func result_sound(passed: bool) -> String:
 	return "pass" if passed else "fail"
 
@@ -59,7 +86,7 @@ static func time_warning(timed: bool, exam_left: int) -> bool:
 static func voice_offset_db(id: String, voice_on: bool) -> float:
 	if not SOUNDS.has(id):
 		return NAN
-	return VOICE_DUCK_DB if voice_on else 0.0
+	return VOICE_DUCK_DB if voice_on and bool(SOUNDS[id]["duck"]) else 0.0
 
 
 func setup() -> void:
@@ -80,23 +107,30 @@ func apply_settings(on: bool, bus_db: float) -> void:
 
 
 ## Returns whether a cue was started (false when off, unknown or not loaded).
-func play(id: String) -> bool:
+func play(id: String, pitch: float = 1.0) -> bool:
 	if not enabled or not _players.has(id) or not is_inside_tree():
 		return false
 	var voice_on := voice_active.is_valid() and bool(voice_active.call())
 	var p: AudioStreamPlayer = _players[id]
 	p.volume_db = float(SOUNDS[id]["db"]) + voice_offset_db(id, voice_on)
+	p.pitch_scale = pitch
 	p.play()
 	return true
 
 
 func _ensure_bus() -> void:
-	if AudioServer.get_bus_index(BUS) >= 0:
+	if AudioServer.get_bus_index(BUS) < 0:
+		var bus_idx := AudioServer.bus_count
+		AudioServer.add_bus(bus_idx)
+		AudioServer.set_bus_name(bus_idx, BUS)
+		AudioServer.set_bus_send(bus_idx, "Master")
+	if AudioServer.get_bus_index(DUCK_BUS) >= 0:
 		return
 	var idx := AudioServer.bus_count
 	AudioServer.add_bus(idx)
-	AudioServer.set_bus_name(idx, BUS)
-	AudioServer.set_bus_send(idx, "Master")
+	AudioServer.set_bus_name(idx, DUCK_BUS)
+	# Through SFX, so the Sounds level and Off apply to it too.
+	AudioServer.set_bus_send(idx, BUS)
 	# Sidechain ducking: whatever still overlaps the voice is squeezed under it.
 	var duck := AudioEffectCompressor.new()
 	duck.sidechain = SPEECH_BUS
@@ -125,6 +159,6 @@ func _make_player(id: String) -> AudioStreamPlayer:
 	var p := AudioStreamPlayer.new()
 	p.name = "Sfx_" + id
 	p.stream = stream
-	p.bus = BUS
+	p.bus = DUCK_BUS if bool(SOUNDS[id]["duck"]) else BUS
 	p.max_polyphony = 2
 	return p

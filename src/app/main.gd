@@ -181,6 +181,7 @@ var audio_speed_buttons: Array[Button] = []
 var audio_pause_buttons: Array[Button] = []
 var audio_pause_row: HBoxContainer
 var auto_teach_toggle: CheckButton
+var reduce_motion_toggle: CheckButton
 var audio_exam_note: Label
 var preview_button: Button
 var mute_button: Button
@@ -418,6 +419,12 @@ func _on_auto_teach_toggled(on: bool) -> void:
 	audio.auto_teach = on
 	audio.save_to(audio_cfg_path)
 
+func _on_reduce_motion_toggled(on: bool) -> void:
+	audio.reduce_motion = on
+	audio.reduce_motion_picked = true
+	audio.save_to(audio_cfg_path)
+	AudioSection.refresh(self)
+
 ## level -1 = Off; otherwise an index into AudioSettings.SFX_LEVEL_TITLES.
 func _on_sfx_level_picked(level: int) -> void:
 	audio.sfx_enabled = level >= 0
@@ -434,17 +441,18 @@ func _setup_sfx() -> void:
 	sfx.name = "Sfx"
 	add_child(sfx)
 	sfx.setup()
+	# Recorded clips are on the Speech bus, which the duck bus already listens to.
 	sfx.voice_active = func() -> bool:
-		return (speech.reader != null and speech.reader.playing) or speech.speak_busy or DisplayServer.tts_is_speaking()
+		return DisplayServer.tts_is_speaking()
 	_apply_sfx_settings()
 
 func _apply_sfx_settings() -> void:
 	if sfx != null:
 		sfx.apply_settings(audio.sfx_enabled, AudioSettings.sfx_bus_db(audio.sfx_level))
 
-func _sfx(id: String) -> void:
+func _sfx(id: String, pitch: float = 1.0) -> void:
 	if sfx != null and id != "":
-		sfx.play(id)
+		sfx.play(id, pitch)
 
 func _refresh_dock_audio() -> void:
 	if not is_instance_valid(mute_button):

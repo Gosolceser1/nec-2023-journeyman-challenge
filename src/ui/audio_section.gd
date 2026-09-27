@@ -100,16 +100,7 @@ static func build(host: Main, parent: VBoxContainer) -> Control:
 		speed_row.add_child(chip)
 		host.audio_speed_buttons.append(chip)
 
-	host.auto_teach_toggle = CheckButton.new()
-	host.auto_teach_toggle.text = "Also read the rule after I answer"
-	host.auto_teach_toggle.custom_minimum_size = Vector2(0, 44.0 if host.ui_mobile else 32.0)
-	host.auto_teach_toggle.add_theme_font_override("font", AppTheme.ui_font(500))
-	host.auto_teach_toggle.add_theme_font_size_override("font_size", fs)
-	host.auto_teach_toggle.add_theme_color_override("font_color", AppTheme.SLATE_300)
-	host.auto_teach_toggle.add_theme_color_override("font_hover_color", AppTheme.WHITE)
-	host.auto_teach_toggle.add_theme_color_override("font_pressed_color", AppTheme.EMERALD_300)
-	host.auto_teach_toggle.add_theme_color_override("font_hover_pressed_color", AppTheme.EMERALD_200)
-	host.auto_teach_toggle.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	host.auto_teach_toggle = _make_toggle(host, "Also read the rule after I answer", fs)
 	host.auto_teach_toggle.toggled.connect(host._on_auto_teach_toggled)
 	host.audio_details_box.add_child(host.auto_teach_toggle)
 
@@ -161,7 +152,25 @@ static func build(host: Main, parent: VBoxContainer) -> Control:
 		sfx_hint.add_theme_font_override("font", AppTheme.ui_font(500))
 		sfx_hint.add_theme_font_size_override("font_size", 12)
 		sfx_row.add_child(sfx_hint)
+
+	host.reduce_motion_toggle = _make_toggle(host, "Reduce motion (no shake, pop or sparks on answers)" if not host.ui_mobile else "Reduce motion", fs)
+	host.reduce_motion_toggle.toggled.connect(host._on_reduce_motion_toggled)
+	host.audio_body.add_child(host.reduce_motion_toggle)
 	return section
+
+
+static func _make_toggle(host: Main, text: String, fs: int) -> CheckButton:
+	var toggle := CheckButton.new()
+	toggle.text = text
+	toggle.custom_minimum_size = Vector2(0, 44.0 if host.ui_mobile else 32.0)
+	toggle.add_theme_font_override("font", AppTheme.ui_font(500))
+	toggle.add_theme_font_size_override("font_size", fs)
+	toggle.add_theme_color_override("font_color", AppTheme.SLATE_300)
+	toggle.add_theme_color_override("font_hover_color", AppTheme.WHITE)
+	toggle.add_theme_color_override("font_pressed_color", AppTheme.EMERALD_300)
+	toggle.add_theme_color_override("font_hover_pressed_color", AppTheme.EMERALD_200)
+	toggle.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
+	return toggle
 
 
 static func refresh(host: Main) -> void:
@@ -188,6 +197,8 @@ static func refresh(host: Main) -> void:
 		host.audio_toggle_button.text = "Done" if host.audio_expanded else "Change"
 	host.audio_details_box.visible = host.audio.mode != AudioSettings.Mode.SILENT
 	host.auto_teach_toggle.set_pressed_no_signal(host.audio.auto_teach)
+	if is_instance_valid(host.reduce_motion_toggle):
+		host.reduce_motion_toggle.set_pressed_no_signal(host.audio.reduce_motion)
 	host.auto_teach_toggle.visible = host.audio.mode == AudioSettings.Mode.AUTO
 	host.audio_pause_row.visible = host.audio.mode == AudioSettings.Mode.LISTEN
 	host.audio_exam_note.visible = AudioSettings.autoplays_question(host.audio.mode)

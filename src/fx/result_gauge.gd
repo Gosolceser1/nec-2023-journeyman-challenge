@@ -2,14 +2,19 @@ class_name ResultGauge
 extends Control
 
 ## Results-screen score dial: sweeps from 0 to the final percentage with the
-## number counting up, and marks the passing line on the arc.
+## number counting up, and marks the passing line on the arc. `landed` fires
+## when the needle arrives, which is when the result sound and flourish play.
+
+signal landed
 
 const START_DEG := 150.0
 const SWEEP_DEG := 240.0
+const LAND_SECONDS := 1.15
 
 var target_pct := 0.0
 var pass_pct := 75.0
 var _shown := 0.0
+var _tween: Tween
 
 
 func _init() -> void:
@@ -17,14 +22,31 @@ func _init() -> void:
 	custom_minimum_size = Vector2(220, 190)
 
 
-func play(pct: float, pass_line: float) -> void:
+## instant: reduce motion, the dial shows the score at once and lands now.
+func play(pct: float, pass_line: float, instant: bool = false) -> void:
 	target_pct = clampf(pct, 0.0, 100.0)
 	pass_pct = pass_line
+	if _tween != null and _tween.is_valid():
+		_tween.kill()
+	scale = Vector2.ONE
+	if instant or not is_inside_tree():
+		_set_shown(target_pct)
+		landed.emit()
+		return
 	_shown = 0.0
 	queue_redraw()
-	var tw := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tw.tween_interval(0.15)
-	tw.tween_method(_set_shown, 0.0, target_pct, 1.3)
+	_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	_tween.tween_interval(0.15)
+	_tween.tween_method(_set_shown, 0.0, target_pct, LAND_SECONDS - 0.15)
+	_tween.tween_callback(landed.emit)
+
+
+## The needle's little bounce on a pass.
+func punch() -> void:
+	pivot_offset = size / 2.0
+	var tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.tween_property(self, "scale", Vector2(1.06, 1.06), 0.08)
+	tw.tween_property(self, "scale", Vector2.ONE, 0.2)
 
 
 func _set_shown(v: float) -> void:

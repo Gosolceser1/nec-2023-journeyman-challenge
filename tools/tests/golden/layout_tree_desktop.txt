@@ -88,7 +88,7 @@ Main <Control> res://src/app/main.gd
             on maximum_size_changed -> lambda
             on minimum_size_changed -> lambda
             on _desired_size_changed -> lambda
-          @HBoxContainer@183 <HBoxContainer>
+          @HBoxContainer@184 <HBoxContainer>
             .mouse_filter = 2
             .theme_override_constants/separation = 12
             on child_order_changed -> lambda
@@ -109,7 +109,7 @@ Main <Control> res://src/app/main.gd
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
-            @Control@184 <Control> res://src/fx/streak_meter.gd
+            @Control@185 <Control> res://src/fx/streak_meter.gd
               .custom_minimum_size = Vector2(118, 16)
               .size_flags_vertical = 4
               .mouse_filter = 2
@@ -209,7 +209,7 @@ Main <Control> res://src/app/main.gd
             on maximum_size_changed -> lambda
             on minimum_size_changed -> lambda
             on _desired_size_changed -> lambda
-            @HBoxContainer@185 <HBoxContainer>
+            @HBoxContainer@186 <HBoxContainer>
               .mouse_filter = 2
               .theme_override_constants/separation = 8
               on child_order_changed -> lambda
@@ -220,7 +220,7 @@ Main <Control> res://src/app/main.gd
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
-              @Control@186 <Control> res://src/fx/time_gauge.gd
+              @Control@187 <Control> res://src/fx/time_gauge.gd
                 .custom_minimum_size = Vector2(18, 18)
                 .size_flags_vertical = 4
                 .mouse_filter = 2
@@ -263,7 +263,7 @@ Main <Control> res://src/app/main.gd
             on maximum_size_changed -> lambda
             on minimum_size_changed -> lambda
             on _desired_size_changed -> lambda
-            @HBoxContainer@187 <HBoxContainer>
+            @HBoxContainer@188 <HBoxContainer>
               .mouse_filter = 2
               .theme_override_constants/separation = 8
               on child_order_changed -> lambda
@@ -274,7 +274,7 @@ Main <Control> res://src/app/main.gd
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
-              @Control@188 <Control> res://src/fx/time_gauge.gd
+              @Control@189 <Control> res://src/fx/time_gauge.gd
                 .custom_minimum_size = Vector2(18, 18)
                 .size_flags_vertical = 4
                 .mouse_filter = 2
@@ -1121,7 +1121,7 @@ Main <Control> res://src/app/main.gd
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
-            @Label@189 <Label>
+            @Label@190 <Label>
               .size_flags_horizontal = 3
               .size_flags_stretch_ratio = 0.7
               .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
@@ -1409,6 +1409,7 @@ Main <Control> res://src/app/main.gd
                       .theme_override_constants/separation = 10
                       on child_order_changed -> lambda
                       on visibility_changed -> lambda
+                      on item_rect_changed -> lambda
                       on item_rect_changed -> lambda
                       on item_rect_changed -> lambda
                       on item_rect_changed -> lambda
@@ -2026,6 +2027,23 @@ Main <Control> res://src/app/main.gd
                           on maximum_size_changed -> lambda
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
+                      @CheckButton@167 <CheckButton>
+                        .custom_minimum_size = Vector2(0, 32)
+                        .mouse_filter = 1
+                        .theme_override_styles/focus = StyleBoxEmpty{}
+                        .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
+                        .theme_override_colors/font_pressed_color = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                        .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                        .theme_override_colors/font_hover_pressed_color = Color(0.654902, 0.9529412, 0.8156863, 1)
+                        .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
+                        .theme_override_font_sizes/font_size = 13
+                        .text = "Reduce motion (no shake, pop or sparks on answers)"
+                        on visibility_changed -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                        on toggled -> main._on_reduce_motion_toggled
                 @HBoxContainer@113 <HBoxContainer>
                   .mouse_filter = 2
                   .theme_override_constants/separation = 8
@@ -2056,9 +2074,9 @@ Main <Control> res://src/app/main.gd
                     on maximum_size_changed -> lambda
                     on minimum_size_changed -> lambda
                     on _desired_size_changed -> lambda
-                @Button@168 <Button>
+                @Button@169 <Button>
                   .modulate = Color(1, 1, 1, 0)
-                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(337, 62), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null}
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\n//\n// Energized border: a pulse of current runs once around the rounded outline.\n// current_pos runs 0 -> 1 + current_tail (driven by a tween); below 0 it is off\n// and the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float corner_radius = 14.0;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	if (current_pos >= 0.0) {\n		vec2 b = rect_size * 0.5;\n		vec2 q = local_pos - b;\n		vec2 k = abs(q) - b + vec2(corner_radius);\n		float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n		float band = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n		float behind = current_pos - perimeter_t(q, b);\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * band * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(337, 62), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/corner_radius=null}
                   .custom_minimum_size = Vector2(0, 62)
                   .mouse_filter = 1
                   .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
@@ -2085,7 +2103,7 @@ Main <Control> res://src/app/main.gd
                   on minimum_size_changed -> lambda
                   on _desired_size_changed -> lambda
                   on pressed -> lambda
-                  @Control@167 <Control> res://src/fx/mode_badge.gd
+                  @Control@168 <Control> res://src/fx/mode_badge.gd
                     .layout_mode = 0
                     .anchor_left = 1.0
                     .anchor_top = 0.5
@@ -2096,9 +2114,9 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -14.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @Button@170 <Button>
+                @Button@171 <Button>
                   .modulate = Color(1, 1, 1, 0)
-                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(371, 62), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null}
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\n//\n// Energized border: a pulse of current runs once around the rounded outline.\n// current_pos runs 0 -> 1 + current_tail (driven by a tween); below 0 it is off\n// and the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float corner_radius = 14.0;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	if (current_pos >= 0.0) {\n		vec2 b = rect_size * 0.5;\n		vec2 q = local_pos - b;\n		vec2 k = abs(q) - b + vec2(corner_radius);\n		float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n		float band = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n		float behind = current_pos - perimeter_t(q, b);\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * band * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(371, 62), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/corner_radius=null}
                   .custom_minimum_size = Vector2(0, 62)
                   .mouse_filter = 1
                   .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
@@ -2125,7 +2143,7 @@ Main <Control> res://src/app/main.gd
                   on minimum_size_changed -> lambda
                   on _desired_size_changed -> lambda
                   on pressed -> lambda
-                  @Control@169 <Control> res://src/fx/mode_badge.gd
+                  @Control@170 <Control> res://src/fx/mode_badge.gd
                     .layout_mode = 0
                     .anchor_left = 1.0
                     .anchor_top = 0.5
@@ -2136,9 +2154,9 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -14.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @Button@172 <Button>
+                @Button@173 <Button>
                   .modulate = Color(1, 1, 1, 0)
-                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(347, 62), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null}
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\n//\n// Energized border: a pulse of current runs once around the rounded outline.\n// current_pos runs 0 -> 1 + current_tail (driven by a tween); below 0 it is off\n// and the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float corner_radius = 14.0;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	if (current_pos >= 0.0) {\n		vec2 b = rect_size * 0.5;\n		vec2 q = local_pos - b;\n		vec2 k = abs(q) - b + vec2(corner_radius);\n		float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n		float band = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n		float behind = current_pos - perimeter_t(q, b);\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * band * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(347, 62), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/corner_radius=null}
                   .custom_minimum_size = Vector2(0, 62)
                   .mouse_filter = 1
                   .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
@@ -2165,7 +2183,7 @@ Main <Control> res://src/app/main.gd
                   on minimum_size_changed -> lambda
                   on _desired_size_changed -> lambda
                   on pressed -> lambda
-                  @Control@171 <Control> res://src/fx/mode_badge.gd
+                  @Control@172 <Control> res://src/fx/mode_badge.gd
                     .layout_mode = 0
                     .anchor_left = 1.0
                     .anchor_top = 0.5
@@ -2176,9 +2194,9 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -14.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @Button@174 <Button>
+                @Button@175 <Button>
                   .modulate = Color(1, 1, 1, 0)
-                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(386, 62), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null}
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\n//\n// Energized border: a pulse of current runs once around the rounded outline.\n// current_pos runs 0 -> 1 + current_tail (driven by a tween); below 0 it is off\n// and the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float corner_radius = 14.0;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	if (current_pos >= 0.0) {\n		vec2 b = rect_size * 0.5;\n		vec2 q = local_pos - b;\n		vec2 k = abs(q) - b + vec2(corner_radius);\n		float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n		float band = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n		float behind = current_pos - perimeter_t(q, b);\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * band * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(386, 62), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/corner_radius=null}
                   .custom_minimum_size = Vector2(0, 62)
                   .mouse_filter = 1
                   .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
@@ -2205,7 +2223,7 @@ Main <Control> res://src/app/main.gd
                   on minimum_size_changed -> lambda
                   on _desired_size_changed -> lambda
                   on pressed -> lambda
-                  @Control@173 <Control> res://src/fx/mode_badge.gd
+                  @Control@174 <Control> res://src/fx/mode_badge.gd
                     .layout_mode = 0
                     .anchor_left = 1.0
                     .anchor_top = 0.5
@@ -2216,9 +2234,9 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -14.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @Button@176 <Button>
+                @Button@177 <Button>
                   .modulate = Color(1, 1, 1, 0)
-                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(373, 62), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null}
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\n//\n// Energized border: a pulse of current runs once around the rounded outline.\n// current_pos runs 0 -> 1 + current_tail (driven by a tween); below 0 it is off\n// and the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float corner_radius = 14.0;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	if (current_pos >= 0.0) {\n		vec2 b = rect_size * 0.5;\n		vec2 q = local_pos - b;\n		vec2 k = abs(q) - b + vec2(corner_radius);\n		float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n		float band = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n		float behind = current_pos - perimeter_t(q, b);\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * band * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(373, 62), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/corner_radius=null}
                   .custom_minimum_size = Vector2(0, 62)
                   .mouse_filter = 1
                   .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
@@ -2245,7 +2263,7 @@ Main <Control> res://src/app/main.gd
                   on minimum_size_changed -> lambda
                   on _desired_size_changed -> lambda
                   on pressed -> lambda
-                  @Control@175 <Control> res://src/fx/mode_badge.gd
+                  @Control@176 <Control> res://src/fx/mode_badge.gd
                     .layout_mode = 0
                     .anchor_left = 1.0
                     .anchor_top = 0.5
@@ -2256,7 +2274,7 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -14.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @HBoxContainer@177 <HBoxContainer>
+                @HBoxContainer@178 <HBoxContainer>
                   .mouse_filter = 2
                   .theme_override_constants/separation = 8
                   on child_order_changed -> lambda
@@ -2267,7 +2285,7 @@ Main <Control> res://src/app/main.gd
                   on maximum_size_changed -> lambda
                   on minimum_size_changed -> lambda
                   on _desired_size_changed -> lambda
-                  @ColorRect@178 <ColorRect>
+                  @ColorRect@179 <ColorRect>
                     .custom_minimum_size = Vector2(4, 16)
                     .mouse_filter = 2
                     .color = Color(0.95686275, 0.24705882, 0.36862746, 1)
@@ -2276,7 +2294,7 @@ Main <Control> res://src/app/main.gd
                     on maximum_size_changed -> lambda
                     on minimum_size_changed -> lambda
                     on _desired_size_changed -> lambda
-                  @Label@179 <Label>
+                  @Label@180 <Label>
                     .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                     .theme_override_font_sizes/font_size = 12
                     .theme_override_colors/font_color = Color(0.95686275, 0.24705882, 0.36862746, 1)
@@ -2287,9 +2305,9 @@ Main <Control> res://src/app/main.gd
                     on maximum_size_changed -> lambda
                     on minimum_size_changed -> lambda
                     on _desired_size_changed -> lambda
-                @Button@181 <Button>
+                @Button@182 <Button>
                   .modulate = Color(1, 1, 1, 0)
-                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(452, 68), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null}
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\n//\n// Energized border: a pulse of current runs once around the rounded outline.\n// current_pos runs 0 -> 1 + current_tail (driven by a tween); below 0 it is off\n// and the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float corner_radius = 14.0;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	if (current_pos >= 0.0) {\n		vec2 b = rect_size * 0.5;\n		vec2 q = local_pos - b;\n		vec2 k = abs(q) - b + vec2(corner_radius);\n		float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n		float band = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n		float behind = current_pos - perimeter_t(q, b);\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * band * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(452, 68), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/corner_radius=null}
                   .custom_minimum_size = Vector2(0, 68)
                   .mouse_filter = 1
                   .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.11764706, 0.078431375, 0.11372549, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.95686275, 0.24705882, 0.36862746, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
@@ -2316,7 +2334,7 @@ Main <Control> res://src/app/main.gd
                   on minimum_size_changed -> lambda
                   on _desired_size_changed -> lambda
                   on pressed -> lambda
-                  @Control@180 <Control> res://src/fx/mode_badge.gd
+                  @Control@181 <Control> res://src/fx/mode_badge.gd
                     .layout_mode = 0
                     .anchor_left = 1.0
                     .anchor_top = 0.5
@@ -2327,7 +2345,7 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -14.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @Label@182 <Label>
+                @Label@183 <Label>
                   .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                   .theme_override_font_sizes/font_size = 11
                   .theme_override_colors/font_color = Color(0.39215687, 0.45490196, 0.54509807, 1)
@@ -2345,9 +2363,9 @@ Main <Control> res://src/app/main.gd
     .anchor_right = 1.0
     .anchor_bottom = 1.0
     .mouse_filter = 2
-  @Timer@190 <Timer>
+  @Timer@191 <Timer>
     on timeout -> main._tick_timer
-  @AudioStreamPlayer@191 <AudioStreamPlayer>
+  @AudioStreamPlayer@192 <AudioStreamPlayer>
     .bus = &"Speech"
     on finished -> main.speech._on_reader_finished
   Sfx <Node> res://src/fx/sfx.gd
@@ -2362,7 +2380,7 @@ Main <Control> res://src/app/main.gd
     Sfx_warning <AudioStreamPlayer>
       .stream = AudioStreamWAV{data=bytes[14288], format=3}
       .max_polyphony = 2
-      .bus = &"SFX"
+      .bus = &"SFXDuck"
     Sfx_pass <AudioStreamPlayer>
       .stream = AudioStreamWAV{data=bytes[25904], format=3}
       .max_polyphony = 2
@@ -2371,5 +2389,5 @@ Main <Control> res://src/app/main.gd
       .stream = AudioStreamWAV{data=bytes[21440], format=3}
       .max_polyphony = 2
       .bus = &"SFX"
-  @Timer@192 <Timer>
+  @Timer@193 <Timer>
     on timeout -> main._on_listen_tick

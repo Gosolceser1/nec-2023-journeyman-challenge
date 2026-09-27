@@ -42,6 +42,11 @@ var think_pause: int = 10
 var auto_teach: bool = true
 var sfx_enabled: bool = true
 var sfx_level: int = SFX_DEFAULT_LEVEL
+## Answer and results effects without shake, pop, sparks or confetti. Stored in
+## the same file (section "display"); until the learner picks, it follows the
+## OS "reduce motion / remove animations" switch.
+var reduce_motion: bool = system_reduce_motion()
+var reduce_motion_picked := false
 
 
 static func sanitize_mode(value) -> int:
@@ -133,6 +138,11 @@ static func sfx_label(on: bool, level: int) -> String:
 	return "Sounds %s" % (SFX_LEVEL_TITLES[sanitize_sfx_level(level)].to_lower() if on else "off")
 
 
+## 1 = the OS asks for less animation; 0 = no; -1 = unknown (headless, old OS).
+static func system_reduce_motion() -> bool:
+	return DisplayServer.accessibility_should_reduce_animation() == 1
+
+
 func load_from(path: String = PATH) -> void:
 	var config := ConfigFile.new()
 	if config.load(path) != OK:
@@ -147,6 +157,9 @@ func load_from(path: String = PATH) -> void:
 	var sfx_on = config.get_value("audio", "sfx_enabled", true)
 	sfx_enabled = sfx_on if sfx_on is bool else true
 	sfx_level = sanitize_sfx_level(config.get_value("audio", "sfx_level", SFX_DEFAULT_LEVEL))
+	var calm = config.get_value("display", "reduce_motion") if config.has_section_key("display", "reduce_motion") else null
+	reduce_motion_picked = calm is bool
+	reduce_motion = calm if calm is bool else system_reduce_motion()
 
 
 func save_to(path: String = PATH) -> Error:
@@ -158,4 +171,6 @@ func save_to(path: String = PATH) -> Error:
 	config.set_value("audio", "auto_teach", auto_teach)
 	config.set_value("audio", "sfx_enabled", sfx_enabled)
 	config.set_value("audio", "sfx_level", sfx_level)
+	if reduce_motion_picked:
+		config.set_value("display", "reduce_motion", reduce_motion)
 	return config.save(path)
