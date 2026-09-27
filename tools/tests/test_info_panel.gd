@@ -20,6 +20,7 @@ func _init() -> void:
 func run() -> void:
 	memory_tip_visibility()
 	answer_chip()
+	provision_tables()
 	bank_sweep()
 	report()
 
@@ -76,6 +77,22 @@ func answer_chip() -> void:
 	panel.label.free()
 	t.has(text, "minimum  10  percent", "the chip marks the 10 next to the blank's words")
 	t.has(text, "8, 10, and 12 AWG", "the earlier 10 is left alone")
+
+
+## Provisions that quote an NEC table as tab-separated lines render as a table,
+## not as raw tabs, and the answer is still highlighted.
+func provision_tables() -> void:
+	print("=== provision tables ===")
+	var panel := InfoPanelRenderer.new()
+	panel.label = RichTextLabel.new()
+	var body := "Ambient Temperature (°C)\t60°C\t75°C\t90°C\n41–45\t0.71\t0.82\t0.87\nApply the factor to the ampacity."
+	var highlighted := panel.append_provision_with_tables(body, "0.87")
+	var text := panel.label.get_parsed_text()
+	panel.label.free()
+	t.check(highlighted, "the answer cell is highlighted")
+	t.lacks(text, "\t", "no raw tab reaches the panel")
+	t.has(text, "0.71", "table cells are rendered")
+	t.has(text, "Apply the factor", "prose after the table is kept")
 
 
 ## Every record renders a MEMORY TIP when it has tip rows.

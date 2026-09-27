@@ -729,7 +729,8 @@ func _show_question() -> void:
 	var answers: Array = record.get("answers", [])
 	var current_correct_text: String = str(answers[correct_idx]) if correct_idx >= 0 and correct_idx < answers.size() else ""
 	var question_table = record.get("reference_table", [])
-	question_table_panel.visible = question_table is Array and not question_table.is_empty()
+	question_table_panel.visible = question_table is Array and not question_table.is_empty() \
+			and not bool(record.get("table_after_answer", false))
 	if question_table_panel.visible:
 		var table_layout := _table_preview_layout(question_table, 340.0 if fit.side_by_side() else 220.0)
 		fit.table_natural_h = float(table_layout["scroll_height"])

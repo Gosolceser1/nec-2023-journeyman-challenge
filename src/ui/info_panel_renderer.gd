@@ -34,6 +34,71 @@ func append_answer_highlight(text: String, answer: String) -> bool:
 	label.add_text(text.substr(start + match_length))
 	return true
 
+## Provisions quote NEC tables as tab-separated lines; plain add_text() leaves the
+## columns misaligned. Each run of tab lines becomes a RichTextLabel table. The
+## answer is highlighted once, in the first prose block or cell that contains it.
+func append_provision_with_tables(body: String, answer: String) -> bool:
+	var highlighted := false
+	var prose := PackedStringArray()
+	var rows: Array = []
+	for line in body.split("\n"):
+		if line.contains("\t"):
+			if not prose.is_empty():
+				highlighted = _append_once("\n".join(prose) + "\n", answer, highlighted)
+				prose.clear()
+			rows.append(line.split("\t"))
+		else:
+			if not rows.is_empty():
+				highlighted = _append_rows(rows, answer, highlighted)
+				rows.clear()
+			prose.append(line)
+	if not rows.is_empty():
+		highlighted = _append_rows(rows, answer, highlighted)
+	if not prose.is_empty():
+		highlighted = _append_once("\n".join(prose), answer, highlighted)
+	return highlighted
+
+func _append_once(text: String, answer: String, already: bool) -> bool:
+	if already:
+		label.add_text(text)
+		return true
+	return append_answer_highlight(text, answer)
+
+## NEC sub-header rows ("Copper / Aluminum", "Condition 1 / 2 / 3") leave out the
+## row-label column, so a short row after the first is aligned to the right edge.
+## The header band runs until the first full-width row.
+func _append_rows(rows: Array, answer: String, already: bool) -> bool:
+	var columns := 1
+	for row in rows:
+		columns = maxi(columns, (row as PackedStringArray).size())
+	var header_rows := 1
+	while header_rows < rows.size() and (rows[header_rows] as PackedStringArray).size() < columns:
+		header_rows += 1
+	if header_rows == rows.size():
+		header_rows = 1
+	label.push_table(columns)
+	label.set_table_column_expand(0, true, 2)
+	var highlighted := already
+	for ri in rows.size():
+		var row: PackedStringArray = rows[ri]
+		var offset := 0 if ri == 0 else columns - row.size()
+		for ci in columns:
+			label.push_cell()
+			label.set_cell_padding(Rect2(4, 1, 4, 1))
+			label.set_cell_row_background_color(AppTheme.TABLE_ROW_ODD, AppTheme.TABLE_ROW_EVEN)
+			var si := ci - offset
+			var cell := row[si].strip_edges() if si >= 0 and si < row.size() else ""
+			if ri < header_rows:
+				label.push_color(AppTheme.SKY_400)
+				label.add_text(cell)
+				label.pop()
+			else:
+				highlighted = _append_once(cell, answer, highlighted)
+			label.pop()
+	label.pop()
+	label.add_text("\n")
+	return highlighted
+
 ## tip_short reads "<tip> Correct: B — <answer>. <note> Not A: <note> ...". When
 ## choice_notes lines up with the answers, render the tip sentence followed by one
 ## row per choice (correct first) instead of that single run-on paragraph.
@@ -141,7 +206,10 @@ func render() -> void:
 			label.pop()
 			label.pop()
 			var body := source_text.substr(heading_end + 1)
-			highlighted = append_answer_highlight(body, correct_answer) or highlighted
+			if body.contains("\t"):
+				highlighted = append_provision_with_tables(body, correct_answer) or highlighted
+			else:
+				highlighted = append_answer_highlight(body, correct_answer) or highlighted
 		else:
 			highlighted = append_answer_highlight(source_text, correct_answer) or highlighted
 	else:
