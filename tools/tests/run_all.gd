@@ -27,6 +27,9 @@ const SUITES := [
 	# inspects a margin, so a broken safe-area calculation shipped green and left
 	# the app rendering a blank strip where the question should be.
 	{"name": "safe_area margins (layout)", "path": "res://tools/tests/test_safe_area.gd"},
+	{"name": "app theme (palette, factories)", "path": "res://tools/tests/test_app_theme.gd"},
+	{"name": "nec reference (titles, lookup path)", "path": "res://tools/tests/test_nec_reference.gd"},
+	{"name": "bank loader (shapes, leak guard)", "path": "res://tools/tests/test_bank_loader.gd"},
 	# project.godot is parsed by ConfigFile, whose only comment char is ";".
 	# A "#" comment silently fused onto the next setting's NAME and left
 	# emulate_mouse_from_touch at its default TRUE, so every tap also drove the

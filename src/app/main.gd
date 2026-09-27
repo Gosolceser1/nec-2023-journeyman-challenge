@@ -1,6 +1,5 @@
 extends Control
 
-const BANK_PATH := "res://data/question_bank.json"
 const ANSWER_LETTERS := ["A", "B", "C", "D"]
 const SESSION_LENGTH := 10
 const EXAM_NAME := "NE JOURNEYMAN ELECTRICIAN"
@@ -241,7 +240,7 @@ func _ready() -> void:
 	add_child(_listen_timer)
 	_refresh_audio_section()
 	_refresh_dock_audio()
-	_load_bank()
+	records = BankLoader.load_records()
 	if records.is_empty():
 		_show_error("Question bank could not be loaded.")
 	else:
@@ -267,36 +266,25 @@ func _attach_fx() -> void:
 	exam_gauge = _attach_time_gauge(timer_label)
 	pace_gauge = _attach_time_gauge(question_timer_label)
 
-## Thin cyan outline: visible for keyboard users, but unlike reusing the hover
-## box it doesn't look like the last-clicked button is stuck highlighted.
-func _focus_ring(radius: int = 10) -> StyleBoxFlat:
-	var ring := StyleBoxFlat.new()
-	ring.draw_center = false
-	ring.border_color = Color(0.22, 0.74, 0.97, 0.55)
-	ring.set_border_width_all(1)
-	ring.set_corner_radius_all(radius)
-	ring.set_expand_margin_all(2)
-	return ring
-
 ## Shared state styling for both layouts, applied after the builder ran:
 ## several buttons only had normal/hover boxes and flashed the stock grey
 ## theme when pressed or focused.
 func _polish_controls() -> void:
-	var ring := _focus_ring(9)
+	var ring := AppTheme.focus_ring(9)
 	for b in [read_button, restart_button]:
 		if is_instance_valid(b):
-			b.add_theme_stylebox_override("pressed", _panel_style("0c1526", "0284c7", 1, 9))
+			b.add_theme_stylebox_override("pressed", AppTheme.panel_style(AppTheme.BUTTON_PRESSED_BG, AppTheme.SKY_600, 1, 9))
 			b.add_theme_stylebox_override("focus", ring)
-			b.add_theme_color_override("font_hover_color", Color("ffffff"))
-			b.add_theme_color_override("font_pressed_color", Color("7dd3fc"))
+			b.add_theme_color_override("font_hover_color", AppTheme.WHITE)
+			b.add_theme_color_override("font_pressed_color", AppTheme.SKY_300)
 	for b in [mute_button, pause_button, skip_button, preview_button]:
 		if is_instance_valid(b):
 			b.add_theme_stylebox_override("focus", ring)
 	if is_instance_valid(next_button):
-		next_button.add_theme_stylebox_override("focus", _focus_ring(10))
-		next_button.add_theme_stylebox_override("disabled", _panel_style("1e293b", "334155", 1, 10))
-		next_button.add_theme_color_override("font_hover_color", Color("ffffff"))
-		next_button.add_theme_color_override("font_pressed_color", Color("e0f2fe"))
+		next_button.add_theme_stylebox_override("focus", AppTheme.focus_ring(10))
+		next_button.add_theme_stylebox_override("disabled", AppTheme.panel_style(AppTheme.SLATE_800, AppTheme.SLATE_700, 1, 10))
+		next_button.add_theme_color_override("font_hover_color", AppTheme.WHITE)
+		next_button.add_theme_color_override("font_pressed_color", AppTheme.SKY_100)
 	if not ui_mobile and is_instance_valid(restart_button):
 		key_hint_label = Label.new()
 		key_hint_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -304,9 +292,9 @@ func _polish_controls() -> void:
 		key_hint_label.size_flags_stretch_ratio = 0.7
 		key_hint_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		key_hint_label.clip_text = true
-		key_hint_label.add_theme_font_override("font", _ui_font(600))
+		key_hint_label.add_theme_font_override("font", AppTheme.ui_font(600))
 		key_hint_label.add_theme_font_size_override("font_size", 11)
-		key_hint_label.add_theme_color_override("font_color", Color("64748b"))
+		key_hint_label.add_theme_color_override("font_color", AppTheme.SLATE_500)
 		var dock_row := restart_button.get_parent()
 		dock_row.add_child(key_hint_label)
 		dock_row.move_child(key_hint_label, restart_button.get_index())
@@ -551,7 +539,7 @@ func _quiz_view_rect() -> Rect2:
 	return (n as Control).get_global_rect() if n != null else get_global_rect()
 
 func _question_panel_style() -> StyleBoxFlat:
-	var style := _panel_style("0a0f1d", "1e293b", 1, 14)
+	var style := AppTheme.panel_style(AppTheme.SURFACE_DEEP, AppTheme.SLATE_800, 1, 14)
 	style.shadow_color = Color(0.22, 0.74, 0.97, 0.09)
 	style.shadow_size = 16
 	return style
@@ -562,7 +550,7 @@ func _apply_safe_area() -> void:
 	var win_size: Vector2i = win.size if win != null else Vector2i.ZERO
 	var safe_area: Rect2i = DisplayServer.get_display_safe_area()
 	var cutouts: Array[Rect2] = DisplayServer.get_display_cutouts()
-	var m := safe_area_margins(vp_size, win_size, safe_area, cutouts, ui_mobile)
+	var m := SafeArea.margins(vp_size, win_size, safe_area, cutouts, ui_mobile)
 	if is_instance_valid(main_margin):
 		main_margin.add_theme_constant_override("margin_left", m["side"])
 		main_margin.add_theme_constant_override("margin_right", m["side"])
@@ -581,203 +569,6 @@ func _apply_safe_area() -> void:
 		var mms := menu_panel.custom_minimum_size
 		mms.x = clampf(vp_size.x - float(m["side"]) * 2.0 - 16.0, 288.0, vp_size.x)
 		menu_panel.custom_minimum_size = mms
-
-## PURE margin math, split out so tools/tests/test_safe_area.gd can exercise the
-## real function instead of a copy that can silently drift out of sync.
-##
-## vp_size / safe_area are in different spaces: get_display_safe_area() and
-## get_display_cutouts() return PHYSICAL-SCREEN pixels, while the UI lays out in
-## stretched canvas units, so every inset is scaled by vp_size.x / win_size.x.
-##
-## safe_area is a RECT, not a set of edge distances: the bottom inset is the gap
-## from the rect's BOTTOM EDGE to the screen bottom, i.e.
-## (screen_height - (pos.y + size.y)). Using (size.y - pos.y) instead measures
-## the rect's own height and produced ~1100px margins that collapsed the content
-## box to a blank strip - the app drew its header and dock and showed no
-## question at all.
-static func safe_area_margins(vp_size: Vector2, win_size: Vector2i, safe_area: Rect2i,
-		cutouts: Array, is_mobile: bool) -> Dictionary:
-	var top_margin: int = 16 if is_mobile else 24
-	var bottom_margin: int = 16 if is_mobile else 24
-	var side_margin: int = 16 if is_mobile else 20
-
-	var scale: float = 1.0
-	if win_size.x > 0:
-		scale = vp_size.x / float(win_size.x)
-	if scale <= 0.0:
-		scale = 1.0
-
-	var top_inset := 0.0
-	var bottom_inset := 0.0
-	var left_inset := 0.0
-	var right_inset := 0.0
-	if safe_area.size.y > 0 and vp_size.y > 0:
-		top_inset = float(safe_area.position.y) * scale
-		bottom_inset = maxf(0.0, (float(win_size.y) - float(safe_area.position.y + safe_area.size.y)) * scale)
-	if safe_area.size.x > 0 and vp_size.x > 0:
-		left_inset = float(safe_area.position.x) * scale
-		right_inset = maxf(0.0, (float(win_size.x) - float(safe_area.position.x + safe_area.size.x)) * scale)
-	# A cutout is a LOCALISED hole, not an edge-to-edge inset, so it must not be
-	# max()'d against the full screen width/height. Only count a cutout towards
-	# an edge when it actually touches that edge, and clamp the result so a
-	# malformed rect can never eat the whole screen.
-	for rect_v in cutouts:
-		var rect := rect_v as Rect2
-		if rect.size.x <= 0.0 or rect.size.y <= 0.0:
-			continue
-		var touches_top: bool = rect.position.y <= 1.0
-		var touches_left: bool = rect.position.x <= 1.0
-		var touches_right: bool = (rect.position.x + rect.size.x) >= float(win_size.x) - 1.0
-		# A cutout on the top edge, or a notch that spans the full width, does
-		# need top padding. Side notches only inset their own side.
-		if touches_top:
-			top_inset = maxf(top_inset, float(rect.position.y + rect.size.y) * scale)
-		if touches_left:
-			left_inset = maxf(left_inset, float(rect.position.x + rect.size.x) * scale)
-		if touches_right:
-			right_inset = maxf(right_inset, (float(win_size.x) - float(rect.position.x)) * scale)
-	# An inset may never exceed the viewport it insets; clamp before use.
-	top_inset = clampf(top_inset, 0.0, vp_size.y * 0.25)
-	bottom_inset = clampf(bottom_inset, 0.0, vp_size.y * 0.25)
-	left_inset = clampf(left_inset, 0.0, vp_size.x * 0.25)
-	right_inset = clampf(right_inset, 0.0, vp_size.x * 0.25)
-
-	# Padding beyond the raw inset keeps content clear of the bar edge and of
-	# the mandatory system gesture zones along the bottom.
-	if top_inset > 0.0:
-		top_margin = maxi(top_margin, int(round(top_inset)) + 8)
-	if bottom_inset > 0.0:
-		bottom_margin = maxi(bottom_margin, int(round(bottom_inset)) + 12)
-	if left_inset > 0.0 or right_inset > 0.0:
-		side_margin = maxi(side_margin, int(round(maxf(left_inset, right_inset))) + 8)
-	return {"top": top_margin, "bottom": bottom_margin, "side": side_margin}
-
-func _load_bank() -> void:
-	if not FileAccess.file_exists(BANK_PATH):
-		return
-	var file := FileAccess.open(BANK_PATH, FileAccess.READ)
-	if file == null:
-		return
-	var parsed = JSON.parse_string(file.get_as_text())
-	if parsed is Dictionary:
-		# ONLY "records" is authoritative. The old fallback chain also accepted a
-		# top-level "questions" key, which holds the RAW pre-curation rows:
-		# un-redacted stems and answers in their original units (36" instead of
-		# "36 inches"). If "records" were ever missing, that fallback would have
-		# silently loaded stale, partly-unredacted data - a latent answer leak.
-		var source = parsed.get("records", [])
-		if source is Array:
-			for raw in source:
-				var record := _normalize_record(raw)
-				if not record.is_empty():
-					records.append(record)
-	elif parsed is Array:
-		for raw in parsed:
-			var record := _normalize_record(raw)
-			if not record.is_empty():
-				records.append(record)
-
-func _normalize_record(raw) -> Dictionary:
-	if raw is Dictionary:
-		var record: Dictionary = raw.duplicate(true)
-		if not record.has("answers") and record.has("choices"):
-			record["answers"] = record["choices"]
-		if not record.has("correct_index") and record.has("answer"):
-			record["correct_index"] = record["answer"]
-		if not record.has("article"):
-			record["article"] = "General knowledge"
-		if not record.has("article_title") or str(record.article_title).strip_edges() == "":
-			record["article_title"] = _article_title(str(record.article))
-		return record
-	if raw is Array and raw.size() >= 4:
-		var answers = raw[2] if raw[2] is Array else []
-		var article := str(raw[4]) if raw.size() > 4 else "General knowledge"
-		return {
-			"exam": str(raw[0]),
-			"prompt": str(raw[1]),
-			"answers": answers,
-			"correct_index": int(raw[3]),
-			"article": article,
-			"article_title": _article_title(article),
-			"difficulty": str(raw[7]) if raw.size() > 7 else "medium"
-		}
-	return {}
-
-func _article_title(reference: String) -> String:
-	var match := RegEx.create_from_string("\\b(\\d{3})\\b").search(reference)
-	if match == null:
-		return reference if reference != "" else "General knowledge"
-	var titles := {
-		100: "Definitions", 110: "Requirements for Electrical Installations",
-		200: "Use and Identification of Grounded Conductors", 210: "Branch Circuits",
-		215: "Feeders", 220: "Load Calculations", 225: "Outside Branch Circuits and Feeders",
-		230: "Services", 240: "Overcurrent Protection", 250: "Grounding and Bonding",
-		300: "Wiring Methods and Materials", 310: "Conductors for General Wiring",
-		314: "Outlet, Device, Pull, and Junction Boxes", 334: "Nonmetallic-Sheathed Cable",
-		344: "Rigid Metal Conduit", 358: "Electrical Metallic Tubing",
-		400: "Flexible Cords and Flexible Cables", 404: "Switches",
-		406: "Wiring Devices", 408: "Switchboards, Switchgear, and Panelboards",
-		410: "Luminaires, Lampholders, and Lamps", 422: "Appliances",
-		430: "Motors, Motor Circuits, and Controllers", 440: "Air-Conditioning Equipment",
-		450: "Transformers", 500: "Hazardous Locations", 550: "Mobile Homes",
-		551: "Recreational Vehicles", 590: "Temporary Installations",
-		625: "Electric Vehicle Power Transfer Systems", 630: "Electric Welders",
-		680: "Swimming Pools, Fountains, and Similar Installations"
-	}
-	return str(titles.get(int(match.get_string(1)), "NEC Article " + match.get_string(1)))
-
-func _format_nec_reference(record: Dictionary) -> String:
-	var reference := str(record.get("article", "General knowledge"))
-	var title := str(record.get("article_title", _article_title(reference)))
-	var match := RegEx.create_from_string("\\b(\\d{3})\\b").search(reference)
-	if match == null:
-		return reference
-	var article_number := match.get_string(1)
-	return "Article %s %s — %s" % [article_number, title, reference]
-
-func _lookup_navigation_path(record: Dictionary) -> String:
-	var reference := str(record.get("article", "")).strip_edges()
-	var code := reference.replace("NEC ", "").strip_edges()
-	var chapter_names := {
-		1: "General",
-		2: "Wiring and Protection",
-		3: "Wiring Methods and Materials",
-		4: "Equipment for General Use",
-		5: "Special Occupancies",
-		6: "Special Equipment",
-		7: "Special Conditions",
-		8: "Communications Systems",
-		9: "Tables",
-	}
-	var chapter_match := RegEx.create_from_string("(?i)\\bChapter\\s+(\\d+)\\b").search(code)
-	var chapter := 0
-	if chapter_match != null:
-		chapter = int(chapter_match.get_string(1))
-	var section_match := RegEx.create_from_string("\\b(\\d{3}(?:\\.\\d+)?(?:\\([A-Za-z0-9]+\\))*)").search(code)
-	var article_number := ""
-	if section_match != null:
-		var section_number := section_match.get_string(1)
-		article_number = section_number.substr(0, 3)
-		if chapter == 0:
-			var article_value := int(article_number)
-			if article_value >= 100 and article_value < 900:
-				chapter = int(article_value / 100)
-	if chapter_names.has(chapter):
-		if article_number != "":
-			var article_title := str(record.get("article_title", "")).strip_edges()
-			var article_path := "Article " + article_number
-			if article_title != "":
-				article_path += " (" + article_title + ")"
-			return "NEC 2023  ►  Chapter %d: %s  ►  %s" % [chapter, chapter_names[chapter], article_path]
-		return "NEC 2023  ►  Chapter %d: %s" % [chapter, chapter_names[chapter]]
-	if code.to_lower().contains("nfpa 70e"):
-		return "NFPA 70E  ►  Standard for Electrical Safety in the Workplace"
-	var article_lower := code.to_lower()
-	if article_lower in ["general calculation", "general math"] or str(record.get("formula", "")) != "":
-		return "CALCULATION  ►  Basic Ohm's Law / General Math"
-	if article_lower == "general knowledge":
-		return "GENERAL TRADE KNOWLEDGE  ►  Standard Electrical Practice"
-	return ""
 
 func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION_TIME_SECONDS, timed: bool = true, mode_name: String = "Practice Test") -> void:
 	order.clear()
@@ -824,8 +615,8 @@ func _build_ui() -> void:
 	# 2026 Illustrated NEC Edition Backdrop (Windows/desktop layout — do not restyle):
 	# Deep obsidian-black into electric slate-blue gradient
 	var bg_gradient := Gradient.new()
-	bg_gradient.set_color(0, Color("020408"))
-	bg_gradient.set_color(1, Color("08101e"))
+	bg_gradient.set_color(0, AppTheme.BG_TOP)
+	bg_gradient.set_color(1, AppTheme.BG_BOTTOM)
 	var bg_texture := GradientTexture2D.new()
 	bg_texture.gradient = bg_gradient
 	bg_texture.fill_from = Vector2(0.5, 0.0)
@@ -877,20 +668,20 @@ func _build_ui() -> void:
 
 	var title := Label.new()
 	title.text = "NEC 2023 // JOURNEYMAN CHALLENGE"
-	title.add_theme_font_override("font", _ui_font(700))
+	title.add_theme_font_override("font", AppTheme.ui_font(700))
 	title.add_theme_font_size_override("font_size", 17)
-	title.add_theme_color_override("font_color", Color("f8fafc"))
+	title.add_theme_color_override("font_color", AppTheme.SLATE_50)
 	title_box.add_child(title)
 
 	progress_label = Label.new()
-	progress_label.add_theme_font_override("font", _ui_font(600))
+	progress_label.add_theme_font_override("font", AppTheme.ui_font(600))
 	progress_label.add_theme_font_size_override("font_size", 12)
-	progress_label.add_theme_color_override("font_color", Color("38bdf8"))
+	progress_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	title_box.add_child(progress_label)
 
 	# Target Pass Pill Badge (75% Pass Standard per PSI CIB)
 	pass_badge = PanelContainer.new()
-	var pass_badge_style := _panel_style("0f291e", "059669", 1, 8)
+	var pass_badge_style := AppTheme.panel_style(AppTheme.BADGE_GREEN_BG, AppTheme.EMERALD_600, 1, 8)
 	pass_badge.add_theme_stylebox_override("panel", pass_badge_style)
 	var pass_margin := MarginContainer.new()
 	pass_margin.add_theme_constant_override("margin_left", 12)
@@ -900,15 +691,15 @@ func _build_ui() -> void:
 	pass_badge.add_child(pass_margin)
 	score_label = Label.new()
 	score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	score_label.add_theme_font_override("font", _ui_font(700))
+	score_label.add_theme_font_override("font", AppTheme.ui_font(700))
 	score_label.add_theme_font_size_override("font_size", 12)
-	score_label.add_theme_color_override("font_color", Color("6ee7b7"))
+	score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
 	pass_margin.add_child(score_label)
 	header.add_child(pass_badge)
 
 	# Session Type Badge (PSI Test Specification)
 	var streak_badge := PanelContainer.new()
-	var streak_badge_style := _panel_style("132035", "1e3a5f", 1, 8)
+	var streak_badge_style := AppTheme.panel_style(AppTheme.PILL_BLUE_BG, AppTheme.BORDER_BLUE, 1, 8)
 	streak_badge.add_theme_stylebox_override("panel", streak_badge_style)
 	var streak_margin := MarginContainer.new()
 	streak_margin.add_theme_constant_override("margin_left", 12)
@@ -918,15 +709,15 @@ func _build_ui() -> void:
 	streak_badge.add_child(streak_margin)
 	streak_label = Label.new()
 	streak_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	streak_label.add_theme_font_override("font", _ui_font(600))
+	streak_label.add_theme_font_override("font", AppTheme.ui_font(600))
 	streak_label.add_theme_font_size_override("font_size", 12)
-	streak_label.add_theme_color_override("font_color", Color("7dd3fc"))
+	streak_label.add_theme_color_override("font_color", AppTheme.SKY_300)
 	streak_margin.add_child(streak_label)
 	header.add_child(streak_badge)
 
 	# Overall Exam Timer Badge
 	var timer_badge := PanelContainer.new()
-	timer_badge.add_theme_stylebox_override("panel", _panel_style("141c2a", "334155", 1, 8))
+	timer_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.PILL_SLATE_BG, AppTheme.SLATE_700, 1, 8))
 	var timer_m := MarginContainer.new()
 	timer_m.add_theme_constant_override("margin_left", 12)
 	timer_m.add_theme_constant_override("margin_right", 12)
@@ -935,15 +726,15 @@ func _build_ui() -> void:
 	timer_badge.add_child(timer_m)
 	timer_label = Label.new()
 	timer_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	timer_label.add_theme_font_override("font", _ui_font(700))
+	timer_label.add_theme_font_override("font", AppTheme.ui_font(700))
 	timer_label.add_theme_font_size_override("font_size", 13)
-	timer_label.add_theme_color_override("font_color", Color("f8fafc"))
+	timer_label.add_theme_color_override("font_color", AppTheme.SLATE_50)
 	timer_m.add_child(timer_label)
 	header.add_child(timer_badge)
 
 	# Pace Item Timer Badge
 	var pace_badge := PanelContainer.new()
-	pace_badge.add_theme_stylebox_override("panel", _panel_style("0f2334", "0284c7", 1, 8))
+	pace_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.PACE_BADGE_BG, AppTheme.SKY_600, 1, 8))
 	var pace_m := MarginContainer.new()
 	pace_m.add_theme_constant_override("margin_left", 12)
 	pace_m.add_theme_constant_override("margin_right", 12)
@@ -952,9 +743,9 @@ func _build_ui() -> void:
 	pace_badge.add_child(pace_m)
 	question_timer_label = Label.new()
 	question_timer_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	question_timer_label.add_theme_font_override("font", _ui_font(700))
+	question_timer_label.add_theme_font_override("font", AppTheme.ui_font(700))
 	question_timer_label.add_theme_font_size_override("font_size", 13)
-	question_timer_label.add_theme_color_override("font_color", Color("38bdf8"))
+	question_timer_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	pace_m.add_child(question_timer_label)
 	header.add_child(pace_badge)
 
@@ -981,7 +772,7 @@ func _build_ui() -> void:
 	exam_pills_row.add_child(exam_label)
 
 	var mode_pill_panel := PanelContainer.new()
-	mode_pill_panel.add_theme_stylebox_override("panel", _panel_style("132035", "1e3a5f", 1, 6))
+	mode_pill_panel.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.PILL_BLUE_BG, AppTheme.BORDER_BLUE, 1, 6))
 	var mode_pill_m := MarginContainer.new()
 	mode_pill_m.add_theme_constant_override("margin_left", 8)
 	mode_pill_m.add_theme_constant_override("margin_right", 8)
@@ -989,14 +780,14 @@ func _build_ui() -> void:
 	mode_pill_m.add_theme_constant_override("margin_bottom", 3)
 	mode_pill_panel.add_child(mode_pill_m)
 	exam_mode_pill = Label.new()
-	exam_mode_pill.add_theme_font_override("font", _ui_font(700))
+	exam_mode_pill.add_theme_font_override("font", AppTheme.ui_font(700))
 	exam_mode_pill.add_theme_font_size_override("font_size", 11)
-	exam_mode_pill.add_theme_color_override("font_color", Color("38bdf8"))
+	exam_mode_pill.add_theme_color_override("font_color", AppTheme.SKY_400)
 	mode_pill_m.add_child(exam_mode_pill)
 	exam_pills_row.add_child(mode_pill_panel)
 
 	var lic_pill_panel := PanelContainer.new()
-	lic_pill_panel.add_theme_stylebox_override("panel", _panel_style("141c2a", "334155", 1, 6))
+	lic_pill_panel.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.PILL_SLATE_BG, AppTheme.SLATE_700, 1, 6))
 	var lic_pill_m := MarginContainer.new()
 	lic_pill_m.add_theme_constant_override("margin_left", 8)
 	lic_pill_m.add_theme_constant_override("margin_right", 8)
@@ -1004,15 +795,15 @@ func _build_ui() -> void:
 	lic_pill_m.add_theme_constant_override("margin_bottom", 3)
 	lic_pill_panel.add_child(lic_pill_m)
 	exam_license_pill = Label.new()
-	exam_license_pill.add_theme_font_override("font", _ui_font(600))
+	exam_license_pill.add_theme_font_override("font", AppTheme.ui_font(600))
 	exam_license_pill.add_theme_font_size_override("font_size", 11)
-	exam_license_pill.add_theme_color_override("font_color", Color("cbd5e1"))
+	exam_license_pill.add_theme_color_override("font_color", AppTheme.SLATE_300)
 	lic_pill_m.add_child(exam_license_pill)
 	exam_pills_row.add_child(lic_pill_panel)
 
 	# Question Stem Voice Visualizer Badge
 	prompt_voice_badge = PanelContainer.new()
-	prompt_voice_badge.add_theme_stylebox_override("panel", _panel_style("06263b", "0284c7", 1, 6))
+	prompt_voice_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.VOICE_BADGE_BG, AppTheme.SKY_600, 1, 6))
 	var pvb_margin := MarginContainer.new()
 	pvb_margin.add_theme_constant_override("margin_left", 8)
 	pvb_margin.add_theme_constant_override("margin_right", 8)
@@ -1031,18 +822,18 @@ func _build_ui() -> void:
 	pvb_hbox.add_child(prompt_visualizer)
 	var pvb_text := Label.new()
 	pvb_text.text = "READING AUDIO"
-	pvb_text.add_theme_font_override("font", _ui_font(700))
+	pvb_text.add_theme_font_override("font", AppTheme.ui_font(700))
 	pvb_text.add_theme_font_size_override("font_size", 10)
-	pvb_text.add_theme_color_override("font_color", Color("38bdf8"))
+	pvb_text.add_theme_color_override("font_color", AppTheme.SKY_400)
 	pvb_hbox.add_child(pvb_text)
 	prompt_voice_badge.visible = false
 	exam_pills_row.add_child(prompt_voice_badge)
 
 	question_label = Label.new()
 	question_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	question_label.add_theme_font_override("font", _ui_font(700))
+	question_label.add_theme_font_override("font", AppTheme.ui_font(700))
 	question_label.add_theme_font_size_override("font_size", 21)
-	question_label.add_theme_color_override("font_color", Color("ffffff"))
+	question_label.add_theme_color_override("font_color", AppTheme.WHITE)
 	question_column.add_child(question_label)
 
 	# Subtitle / Gist Hint with Left Accent Bar
@@ -1054,20 +845,20 @@ func _build_ui() -> void:
 	var hint_bar := ColorRect.new()
 	hint_bar.custom_minimum_size = Vector2(3, 18)
 	hint_bar.size_flags_vertical = Control.SIZE_FILL
-	hint_bar.color = Color("38bdf8")
+	hint_bar.color = AppTheme.SKY_400
 	hint_hbox.add_child(hint_bar)
 
 	article_label = Label.new()
 	article_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	article_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	article_label.add_theme_font_override("font", _ui_font(500))
+	article_label.add_theme_font_override("font", AppTheme.ui_font(500))
 	article_label.add_theme_font_size_override("font_size", 14)
-	article_label.add_theme_color_override("font_color", Color("e2e8f0"))
+	article_label.add_theme_color_override("font_color", AppTheme.SLATE_200)
 	hint_hbox.add_child(article_label)
 
 	# Lookup Path Callout Box
 	lookup_box = PanelContainer.new()
-	var lookup_style := _panel_style("0d192c", "1e3a5f", 1, 8)
+	var lookup_style := AppTheme.panel_style(AppTheme.LOOKUP_BG, AppTheme.BORDER_BLUE, 1, 8)
 	lookup_box.add_theme_stylebox_override("panel", lookup_style)
 	question_column.add_child(lookup_box)
 	var lookup_margin := MarginContainer.new()
@@ -1079,9 +870,9 @@ func _build_ui() -> void:
 
 	chapter_hint_label = Label.new()
 	chapter_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	chapter_hint_label.add_theme_font_override("font", _ui_font(500))
+	chapter_hint_label.add_theme_font_override("font", AppTheme.ui_font(500))
 	chapter_hint_label.add_theme_font_size_override("font_size", 12)
-	chapter_hint_label.add_theme_color_override("font_color", Color("38bdf8"))
+	chapter_hint_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	lookup_margin.add_child(chapter_hint_label)
 	lookup_box.visible = false
 
@@ -1092,7 +883,7 @@ func _build_ui() -> void:
 	)
 
 	question_table_panel = PanelContainer.new()
-	question_table_panel.add_theme_stylebox_override("panel", _panel_style("091322", "1e3a5f", 1, 9))
+	question_table_panel.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.TABLE_PANEL_BG, AppTheme.BORDER_BLUE, 1, 9))
 	question_table_panel.custom_minimum_size = Vector2(0, 120)
 	question_table_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	question_table_panel.visible = false
@@ -1109,7 +900,7 @@ func _build_ui() -> void:
 	question_table_heading = Label.new()
 	question_table_heading.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	question_table_heading.add_theme_font_size_override("font_size", 12)
-	question_table_heading.add_theme_color_override("font_color", Color("7dd3fc"))
+	question_table_heading.add_theme_color_override("font_color", AppTheme.SKY_300)
 	question_table_column.add_child(question_table_heading)
 	question_table_scroll = ScrollContainer.new()
 	question_table_scroll.custom_minimum_size = Vector2(0, 42)
@@ -1125,12 +916,12 @@ func _build_ui() -> void:
 	question_table_note = Label.new()
 	question_table_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	question_table_note.add_theme_font_size_override("font_size", 11)
-	question_table_note.add_theme_color_override("font_color", Color("cbd5e1"))
+	question_table_note.add_theme_color_override("font_color", AppTheme.SLATE_300)
 	question_table_column.add_child(question_table_note)
 
 	question_diagram_panel = PanelContainer.new()
 	# Paper card: the figures are black-on-white scans of the exam page.
-	question_diagram_panel.add_theme_stylebox_override("panel", _panel_style("f8fafc", "38bdf8", 1, 10))
+	question_diagram_panel.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.SLATE_50, AppTheme.SKY_400, 1, 10))
 	question_diagram_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	question_diagram_panel.visible = false
 	question_column.add_child(question_diagram_panel)
@@ -1146,7 +937,7 @@ func _build_ui() -> void:
 
 	# Calculation Reference Box
 	formula_box = PanelContainer.new()
-	var formula_style := _panel_style("141c2a", "2563eb", 1, 8)
+	var formula_style := AppTheme.panel_style(AppTheme.PILL_SLATE_BG, AppTheme.BLUE_600, 1, 8)
 	formula_box.add_theme_stylebox_override("panel", formula_style)
 	question_column.add_child(formula_box)
 	var formula_margin := MarginContainer.new()
@@ -1158,9 +949,9 @@ func _build_ui() -> void:
 
 	question_formula_label = Label.new()
 	question_formula_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	question_formula_label.add_theme_font_override("font", _ui_font(500))
+	question_formula_label.add_theme_font_override("font", AppTheme.ui_font(500))
 	question_formula_label.add_theme_font_size_override("font_size", 13)
-	question_formula_label.add_theme_color_override("font_color", Color("93c5fd"))
+	question_formula_label.add_theme_color_override("font_color", AppTheme.BLUE_300)
 	formula_margin.add_child(question_formula_label)
 	formula_box.visible = false
 
@@ -1175,8 +966,8 @@ func _build_ui() -> void:
 	timer_bar.max_value = SESSION_TIME_SECONDS
 	timer_bar.show_percentage = false
 	timer_bar.custom_minimum_size = Vector2(0, 6)
-	var bar_bg := _panel_style("0f172a", "1e293b", 1, 3)
-	var bar_fill := _panel_style("0284c7", "38bdf8", 0, 3)
+	var bar_bg := AppTheme.panel_style(AppTheme.SLATE_900, AppTheme.SLATE_800, 1, 3)
+	var bar_fill := AppTheme.panel_style(AppTheme.SKY_600, AppTheme.SKY_400, 0, 3)
 	timer_bar.add_theme_stylebox_override("background", bar_bg)
 	timer_bar.add_theme_stylebox_override("fill", bar_fill)
 	question_column.add_child(timer_bar)
@@ -1200,7 +991,7 @@ func _build_ui() -> void:
 		ref_panel.reparent(ref_column, false)
 
 	feedback_panel = PanelContainer.new()
-	feedback_panel.add_theme_stylebox_override("panel", _panel_style("13213a", "29476f", 1, 14))
+	feedback_panel.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.FEEDBACK_BG, AppTheme.FEEDBACK_BORDER, 1, 14))
 	quiz_column.add_child(feedback_panel)
 	var feedback_margin := MarginContainer.new()
 	feedback_margin.add_theme_constant_override("margin_left", 16)
@@ -1212,20 +1003,20 @@ func _build_ui() -> void:
 	feedback_column.add_theme_constant_override("separation", 8)
 	feedback_margin.add_child(feedback_column)
 	feedback_title = Label.new()
-	feedback_title.add_theme_font_override("font", _ui_font(700))
+	feedback_title.add_theme_font_override("font", AppTheme.ui_font(700))
 	feedback_title.add_theme_font_size_override("font_size", 18)
 	feedback_column.add_child(feedback_title)
 	feedback_body = Label.new()
 	feedback_body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	feedback_body.add_theme_font_override("font", _ui_font(500))
+	feedback_body.add_theme_font_override("font", AppTheme.ui_font(500))
 	feedback_body.add_theme_font_size_override("font_size", 14)
-	feedback_body.add_theme_color_override("font_color", Color("f1f5f9"))
+	feedback_body.add_theme_color_override("font_color", AppTheme.SLATE_100)
 	feedback_column.add_child(feedback_body)
 	feedback_reference = Label.new()
 	feedback_reference.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	feedback_reference.add_theme_font_override("font", _ui_font(600))
+	feedback_reference.add_theme_font_override("font", AppTheme.ui_font(600))
 	feedback_reference.add_theme_font_size_override("font_size", 13)
-	feedback_reference.add_theme_color_override("font_color", Color("7dd3fc"))
+	feedback_reference.add_theme_color_override("font_color", AppTheme.SKY_300)
 	feedback_reference.visible = false
 	feedback_column.add_child(feedback_reference)
 	var feedback_detail := _make_feedback_detail(feedback_column)
@@ -1244,7 +1035,7 @@ func _build_ui() -> void:
 	feedback_table_note = Label.new()
 	feedback_table_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	feedback_table_note.add_theme_font_size_override("font_size", 11)
-	feedback_table_note.add_theme_color_override("font_color", Color("cbd5e1"))
+	feedback_table_note.add_theme_color_override("font_color", AppTheme.SLATE_300)
 	feedback_table_note.visible = false
 	feedback_detail.add_child(feedback_table_note)
 	info_label = RichTextLabel.new()
@@ -1252,9 +1043,9 @@ func _build_ui() -> void:
 	info_label.scroll_active = false
 	info_label.custom_minimum_size = Vector2(0, 0)
 	info_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	info_label.add_theme_font_override("normal_font", _ui_font(400))
-	info_label.add_theme_font_override("bold_font", _ui_font(700))
-	info_label.add_theme_color_override("default_color", Color("f1f5f9"))
+	info_label.add_theme_font_override("normal_font", AppTheme.ui_font(400))
+	info_label.add_theme_font_override("bold_font", AppTheme.ui_font(700))
+	info_label.add_theme_color_override("default_color", AppTheme.SLATE_100)
 	info_label.add_theme_font_size_override("normal_font_size", 14)
 	info_label.add_theme_font_size_override("bold_font_size", 14)
 	info_label.add_theme_constant_override("line_separation", 4)
@@ -1266,18 +1057,18 @@ func _build_ui() -> void:
 	next_button.custom_minimum_size = Vector2(0, 48)
 	next_button.pressed.connect(_on_next_button_pressed)
 	next_button.visible = false
-	var btn_normal := _panel_style("0284c7", "38bdf8", 1, 10)
-	var btn_hover := _panel_style("0369a1", "7dd3fc", 2, 10)
-	var btn_pressed := _panel_style("075985", "38bdf8", 1, 10)
+	var btn_normal := AppTheme.panel_style(AppTheme.SKY_600, AppTheme.SKY_400, 1, 10)
+	var btn_hover := AppTheme.panel_style(AppTheme.SKY_700, AppTheme.SKY_300, 2, 10)
+	var btn_pressed := AppTheme.panel_style(AppTheme.SKY_800, AppTheme.SKY_400, 1, 10)
 	next_button.add_theme_stylebox_override("normal", btn_normal)
 	next_button.add_theme_stylebox_override("hover", btn_hover)
 	next_button.add_theme_stylebox_override("pressed", btn_pressed)
 	next_button.add_theme_font_size_override("font_size", 16)
-	next_button.add_theme_color_override("font_color", Color("ffffff"))
+	next_button.add_theme_color_override("font_color", AppTheme.WHITE)
 	root.add_child(next_button)
 
 	dock_panel = PanelContainer.new()
-	var dock_style := _panel_style("0a0f1d", "1e293b", 1, 12)
+	var dock_style := AppTheme.panel_style(AppTheme.SURFACE_DEEP, AppTheme.SLATE_800, 1, 12)
 	dock_panel.add_theme_stylebox_override("panel", dock_style)
 	root.add_child(dock_panel)
 
@@ -1300,13 +1091,13 @@ func _build_ui() -> void:
 	read_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	read_button.custom_minimum_size = Vector2(0, 42)
 	read_button.pressed.connect(_toggle_read)
-	var rb_norm := _panel_style("142238", "2d4a77", 1, 9)
-	var rb_hov := _panel_style("1e3458", "38bdf8", 2, 9)
+	var rb_norm := AppTheme.panel_style(AppTheme.READ_BUTTON_BG, AppTheme.READ_BUTTON_BORDER, 1, 9)
+	var rb_hov := AppTheme.panel_style(AppTheme.READ_BUTTON_HOVER_BG, AppTheme.SKY_400, 2, 9)
 	read_button.add_theme_stylebox_override("normal", rb_norm)
 	read_button.add_theme_stylebox_override("hover", rb_hov)
-	read_button.add_theme_font_override("font", _ui_font(600))
+	read_button.add_theme_font_override("font", AppTheme.ui_font(600))
 	read_button.add_theme_font_size_override("font_size", 14)
-	read_button.add_theme_color_override("font_color", Color("f1f5f9"))
+	read_button.add_theme_color_override("font_color", AppTheme.SLATE_100)
 	controls.add_child(read_button)
 
 	pause_button = _make_dock_button("Pause", 130, 42, 14, _toggle_listen_pause)
@@ -1329,9 +1120,9 @@ func _build_ui() -> void:
 	read_status_label.text = ""
 	read_status_label.visible = false
 	read_status_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	read_status_label.add_theme_font_override("font", _ui_font(700))
+	read_status_label.add_theme_font_override("font", AppTheme.ui_font(700))
 	read_status_label.add_theme_font_size_override("font_size", 12)
-	read_status_label.add_theme_color_override("font_color", Color("38bdf8"))
+	read_status_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	read_status_label.clip_text = true
 	# clip_text drops the min width to zero, so beside an expanding button the
 	# label would get no room at all; reserve space while it is visible.
@@ -1342,13 +1133,13 @@ func _build_ui() -> void:
 	restart_button.text = "Main menu"
 	restart_button.custom_minimum_size = Vector2(110, 42)
 	restart_button.pressed.connect(_show_menu)
-	var rst_norm := _panel_style("111d31", "223659", 1, 9)
-	var rst_hov := _panel_style("1a2c4b", "475569", 1, 9)
+	var rst_norm := AppTheme.panel_style(AppTheme.DOCK_BUTTON_BG, AppTheme.DOCK_BUTTON_BORDER, 1, 9)
+	var rst_hov := AppTheme.panel_style(AppTheme.DOCK_BUTTON_HOVER_BG, AppTheme.SLATE_600, 1, 9)
 	restart_button.add_theme_stylebox_override("normal", rst_norm)
 	restart_button.add_theme_stylebox_override("hover", rst_hov)
-	restart_button.add_theme_font_override("font", _ui_font(500))
+	restart_button.add_theme_font_override("font", AppTheme.ui_font(500))
 	restart_button.add_theme_font_size_override("font_size", 14)
-	restart_button.add_theme_color_override("font_color", Color("94a3b8"))
+	restart_button.add_theme_color_override("font_color", AppTheme.SLATE_400)
 	controls.add_child(restart_button)
 
 	feedback_panel.visible = false
@@ -1358,7 +1149,7 @@ func _build_ui() -> void:
 	menu_overlay.z_index = 20
 	add_child(menu_overlay)
 	var menu_background := ColorRect.new()
-	menu_background.color = Color("020408")
+	menu_background.color = AppTheme.BG_TOP
 	menu_background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	menu_overlay.add_child(menu_background)
 	menu_overlay.add_child(UiFx.make_circuit_backdrop())
@@ -1382,9 +1173,9 @@ func _build_ui() -> void:
 
 	menu_panel = PanelContainer.new()
 	menu_panel.custom_minimum_size = Vector2(860, 0)
-	var panel_sb := _panel_style("0c1322", "1e293b", 1, 16)
+	var panel_sb := AppTheme.panel_style(AppTheme.MENU_PANEL_BG, AppTheme.SLATE_800, 1, 16)
 	panel_sb.border_width_top = 3
-	panel_sb.border_color = Color("38bdf8")
+	panel_sb.border_color = AppTheme.SKY_400
 	panel_sb.shadow_color = Color(0, 0, 0, 0.5)
 	panel_sb.shadow_size = 14
 	menu_panel.add_theme_stylebox_override("panel", panel_sb)
@@ -1408,10 +1199,10 @@ func _build_ui() -> void:
 
 	var year_badge := Label.new()
 	year_badge.text = " NFPA 70 • NEC 2023 EDITION • PSI EXAM STANDARDS "
-	year_badge.add_theme_font_override("font", _ui_font(700))
+	year_badge.add_theme_font_override("font", AppTheme.ui_font(700))
 	year_badge.add_theme_font_size_override("font_size", 11)
-	year_badge.add_theme_color_override("font_color", Color("38bdf8"))
-	var yb_style := _panel_style("0f2338", "0284c7", 1, 6)
+	year_badge.add_theme_color_override("font_color", AppTheme.SKY_400)
+	var yb_style := AppTheme.panel_style(AppTheme.BADGE_BLUE_BG, AppTheme.SKY_600, 1, 6)
 	yb_style.content_margin_left = 12
 	yb_style.content_margin_right = 12
 	yb_style.content_margin_top = 4
@@ -1422,9 +1213,9 @@ func _build_ui() -> void:
 	var menu_title := Label.new()
 	menu_title.text = "NEC 2023 // JOURNEYMAN CHALLENGE"
 	menu_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	menu_title.add_theme_font_override("font", _ui_font(700))
+	menu_title.add_theme_font_override("font", AppTheme.ui_font(700))
 	menu_title.add_theme_font_size_override("font_size", 22)
-	menu_title.add_theme_color_override("font_color", Color("f8fafc"))
+	menu_title.add_theme_color_override("font_color", AppTheme.SLATE_50)
 	menu_column.add_child(menu_title)
 	UiFx.electrify_title(menu_title)
 
@@ -1432,7 +1223,7 @@ func _build_ui() -> void:
 	menu_subtitle.text = "Master the National Electrical Code • Comprehensive Exam Prep"
 	menu_subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	menu_subtitle.add_theme_font_size_override("font_size", 13)
-	menu_subtitle.add_theme_color_override("font_color", Color("94a3b8"))
+	menu_subtitle.add_theme_color_override("font_color", AppTheme.SLATE_400)
 	menu_column.add_child(menu_subtitle)
 
 	var menu_rule := HSeparator.new()
@@ -1445,22 +1236,22 @@ func _build_ui() -> void:
 
 	var practice_bar := ColorRect.new()
 	practice_bar.custom_minimum_size = Vector2(4, 16)
-	practice_bar.color = Color("38bdf8")
+	practice_bar.color = AppTheme.SKY_400
 	practice_hdr_box.add_child(practice_bar)
 
 	var practice_heading := Label.new()
 	practice_heading.text = "RAPID PRACTICE DRILLS"
 	practice_heading.add_theme_font_size_override("font_size", 12)
-	practice_heading.add_theme_color_override("font_color", Color("38bdf8"))
+	practice_heading.add_theme_color_override("font_color", AppTheme.SKY_400)
 	practice_hdr_box.add_child(practice_heading)
 	menu_column.move_child(_build_audio_section(menu_column), practice_hdr_box.get_index())
 
 	menu_mode_buttons.clear()
-	_add_mode_button(menu_column, "10 QUESTIONS", "Quick warm-up drill • 30 minutes timed", _start_quiz.bind(10, _practice_time(10), true, "10-Question Practice"), "38bdf8", "111928")
-	_add_mode_button(menu_column, "20 QUESTIONS", "Standard focused session • 60 minutes timed", _start_quiz.bind(20, _practice_time(20), true, "20-Question Practice"), "38bdf8", "111928")
-	_add_mode_button(menu_column, "30 QUESTIONS", "Extended study block • 90 minutes timed", _start_quiz.bind(30, _practice_time(30), true, "30-Question Practice"), "38bdf8", "111928")
-	_add_mode_button(menu_column, "40 QUESTIONS", "Half-length diagnostic test • 120 minutes timed", _start_quiz.bind(40, _practice_time(40), true, "40-Question Practice"), "38bdf8", "111928")
-	_add_mode_button(menu_column, "50 QUESTIONS", "Intensive endurance drill • 150 minutes timed", _start_quiz.bind(50, _practice_time(50), true, "50-Question Practice"), "38bdf8", "111928")
+	_add_mode_button(menu_column, "10 QUESTIONS", "Quick warm-up drill • 30 minutes timed", _start_quiz.bind(10, _practice_time(10), true, "10-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG)
+	_add_mode_button(menu_column, "20 QUESTIONS", "Standard focused session • 60 minutes timed", _start_quiz.bind(20, _practice_time(20), true, "20-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG)
+	_add_mode_button(menu_column, "30 QUESTIONS", "Extended study block • 90 minutes timed", _start_quiz.bind(30, _practice_time(30), true, "30-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG)
+	_add_mode_button(menu_column, "40 QUESTIONS", "Half-length diagnostic test • 120 minutes timed", _start_quiz.bind(40, _practice_time(40), true, "40-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG)
+	_add_mode_button(menu_column, "50 QUESTIONS", "Intensive endurance drill • 150 minutes timed", _start_quiz.bind(50, _practice_time(50), true, "50-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG)
 
 	# Full Simulation Section
 	var exam_hdr_box := HBoxContainer.new()
@@ -1469,25 +1260,25 @@ func _build_ui() -> void:
 
 	var exam_bar := ColorRect.new()
 	exam_bar.custom_minimum_size = Vector2(4, 16)
-	exam_bar.color = Color("f43f5e")
+	exam_bar.color = AppTheme.ROSE_500
 	exam_hdr_box.add_child(exam_bar)
 
 	var exam_heading := Label.new()
 	exam_heading.text = "OFFICIAL LICENSING SIMULATION"
-	exam_heading.add_theme_font_override("font", _ui_font(700))
+	exam_heading.add_theme_font_override("font", AppTheme.ui_font(700))
 	exam_heading.add_theme_font_size_override("font_size", 12)
-	exam_heading.add_theme_color_override("font_color", Color("f43f5e"))
+	exam_heading.add_theme_color_override("font_color", AppTheme.ROSE_500)
 	exam_hdr_box.add_child(exam_heading)
 
-	_add_mode_button(menu_column, "FULL JOURNEYMAN SIMULATOR", "80 scored questions • 240 minutes • 75% required to pass", _start_quiz.bind(80, EXAM_MINUTES * 60, true, "Full Journeyman Exam"), "f43f5e", "1e141d", true)
+	_add_mode_button(menu_column, "FULL JOURNEYMAN SIMULATOR", "80 scored questions • 240 minutes • 75% required to pass", _start_quiz.bind(80, EXAM_MINUTES * 60, true, "Full Journeyman Exam"), AppTheme.ROSE_500, AppTheme.EXAM_BUTTON_BG, true)
 
 
 	var menu_note := Label.new()
 	menu_note.text = "Aligned with NFPA 70 (NEC 2023) & Nebraska State Electrical Division / PSI Standards\nPacing standard: 3:00 per scored item • 80 questions timed"
 	menu_note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	menu_note.add_theme_font_override("font", _ui_font(400))
+	menu_note.add_theme_font_override("font", AppTheme.ui_font(400))
 	menu_note.add_theme_font_size_override("font_size", 11)
-	menu_note.add_theme_color_override("font_color", Color("64748b"))
+	menu_note.add_theme_color_override("font_color", AppTheme.SLATE_500)
 	menu_column.add_child(menu_note)
 
 func _build_mobile_ui() -> void:
@@ -1496,8 +1287,8 @@ func _build_mobile_ui() -> void:
 	# prompt_voice_badge / prompt_visualizer stay null by design (all uses guarded) —
 	# the dock status line is the mobile "now reading" indicator.
 	var bg_gradient := Gradient.new()
-	bg_gradient.set_color(0, Color("020408"))
-	bg_gradient.set_color(1, Color("08101e"))
+	bg_gradient.set_color(0, AppTheme.BG_TOP)
+	bg_gradient.set_color(1, AppTheme.BG_BOTTOM)
 	var bg_texture := GradientTexture2D.new()
 	bg_texture.gradient = bg_gradient
 	bg_texture.fill_from = Vector2(0.5, 0.0)
@@ -1534,16 +1325,16 @@ func _build_mobile_ui() -> void:
 	title.text = "NEC 2023 // JOURNEYMAN"
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title.clip_text = true
-	title.add_theme_font_override("font", _ui_font(700))
+	title.add_theme_font_override("font", AppTheme.ui_font(700))
 	title.add_theme_font_size_override("font_size", 16)
-	title.add_theme_color_override("font_color", Color("f8fafc"))
+	title.add_theme_color_override("font_color", AppTheme.SLATE_50)
 	title_box.add_child(title)
 	progress_label = Label.new()
 	progress_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	progress_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	progress_label.add_theme_font_override("font", _ui_font(700))
+	progress_label.add_theme_font_override("font", AppTheme.ui_font(700))
 	progress_label.add_theme_font_size_override("font_size", 13)
-	progress_label.add_theme_color_override("font_color", Color("38bdf8"))
+	progress_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	title_box.add_child(progress_label)
 
 	var badge_row := HBoxContainer.new()
@@ -1551,7 +1342,7 @@ func _build_mobile_ui() -> void:
 	header.add_child(badge_row)
 	pass_badge = PanelContainer.new()
 	pass_badge.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	pass_badge.add_theme_stylebox_override("panel", _panel_style("0f291e", "059669", 1, 8))
+	pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_GREEN_BG, AppTheme.EMERALD_600, 1, 8))
 	badge_row.add_child(pass_badge)
 	var pass_m := MarginContainer.new()
 	pass_m.add_theme_constant_override("margin_left", 6)
@@ -1561,13 +1352,13 @@ func _build_mobile_ui() -> void:
 	pass_badge.add_child(pass_m)
 	score_label = Label.new()
 	score_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	score_label.add_theme_font_override("font", _ui_font(700))
+	score_label.add_theme_font_override("font", AppTheme.ui_font(700))
 	score_label.add_theme_font_size_override("font_size", 12)
-	score_label.add_theme_color_override("font_color", Color("6ee7b7"))
+	score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
 	pass_m.add_child(score_label)
 	var streak_badge := PanelContainer.new()
 	streak_badge.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	streak_badge.add_theme_stylebox_override("panel", _panel_style("132035", "1e3a5f", 1, 8))
+	streak_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.PILL_BLUE_BG, AppTheme.BORDER_BLUE, 1, 8))
 	badge_row.add_child(streak_badge)
 	var streak_m := MarginContainer.new()
 	streak_m.add_theme_constant_override("margin_left", 6)
@@ -1577,13 +1368,13 @@ func _build_mobile_ui() -> void:
 	streak_badge.add_child(streak_m)
 	streak_label = Label.new()
 	streak_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	streak_label.add_theme_font_override("font", _ui_font(600))
+	streak_label.add_theme_font_override("font", AppTheme.ui_font(600))
 	streak_label.add_theme_font_size_override("font_size", 12)
-	streak_label.add_theme_color_override("font_color", Color("7dd3fc"))
+	streak_label.add_theme_color_override("font_color", AppTheme.SKY_300)
 	streak_m.add_child(streak_label)
 	var timer_badge := PanelContainer.new()
 	timer_badge.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	timer_badge.add_theme_stylebox_override("panel", _panel_style("141c2a", "334155", 1, 8))
+	timer_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.PILL_SLATE_BG, AppTheme.SLATE_700, 1, 8))
 	badge_row.add_child(timer_badge)
 	var timer_m := MarginContainer.new()
 	timer_m.add_theme_constant_override("margin_left", 6)
@@ -1593,13 +1384,13 @@ func _build_mobile_ui() -> void:
 	timer_badge.add_child(timer_m)
 	timer_label = Label.new()
 	timer_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	timer_label.add_theme_font_override("font", _ui_font(700))
+	timer_label.add_theme_font_override("font", AppTheme.ui_font(700))
 	timer_label.add_theme_font_size_override("font_size", 12)
-	timer_label.add_theme_color_override("font_color", Color("f8fafc"))
+	timer_label.add_theme_color_override("font_color", AppTheme.SLATE_50)
 	timer_m.add_child(timer_label)
 	var pace_badge := PanelContainer.new()
 	pace_badge.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	pace_badge.add_theme_stylebox_override("panel", _panel_style("0f2334", "0284c7", 1, 8))
+	pace_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.PACE_BADGE_BG, AppTheme.SKY_600, 1, 8))
 	badge_row.add_child(pace_badge)
 	var pace_m := MarginContainer.new()
 	pace_m.add_theme_constant_override("margin_left", 6)
@@ -1609,9 +1400,9 @@ func _build_mobile_ui() -> void:
 	pace_badge.add_child(pace_m)
 	question_timer_label = Label.new()
 	question_timer_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	question_timer_label.add_theme_font_override("font", _ui_font(700))
+	question_timer_label.add_theme_font_override("font", AppTheme.ui_font(700))
 	question_timer_label.add_theme_font_size_override("font_size", 12)
-	question_timer_label.add_theme_color_override("font_color", Color("38bdf8"))
+	question_timer_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	pace_m.add_child(question_timer_label)
 
 	var quiz_scroll := ScrollContainer.new()
@@ -1650,7 +1441,7 @@ func _build_mobile_ui() -> void:
 	exam_label.visible = false
 	exam_pills_row.add_child(exam_label)
 	var mode_pill_panel := PanelContainer.new()
-	mode_pill_panel.add_theme_stylebox_override("panel", _panel_style("132035", "1e3a5f", 1, 6))
+	mode_pill_panel.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.PILL_BLUE_BG, AppTheme.BORDER_BLUE, 1, 6))
 	var mode_pill_m := MarginContainer.new()
 	mode_pill_m.add_theme_constant_override("margin_left", 8)
 	mode_pill_m.add_theme_constant_override("margin_right", 8)
@@ -1658,13 +1449,13 @@ func _build_mobile_ui() -> void:
 	mode_pill_m.add_theme_constant_override("margin_bottom", 4)
 	mode_pill_panel.add_child(mode_pill_m)
 	exam_mode_pill = Label.new()
-	exam_mode_pill.add_theme_font_override("font", _ui_font(700))
+	exam_mode_pill.add_theme_font_override("font", AppTheme.ui_font(700))
 	exam_mode_pill.add_theme_font_size_override("font_size", 12)
-	exam_mode_pill.add_theme_color_override("font_color", Color("38bdf8"))
+	exam_mode_pill.add_theme_color_override("font_color", AppTheme.SKY_400)
 	mode_pill_m.add_child(exam_mode_pill)
 	exam_pills_row.add_child(mode_pill_panel)
 	var lic_pill_panel := PanelContainer.new()
-	lic_pill_panel.add_theme_stylebox_override("panel", _panel_style("141c2a", "334155", 1, 6))
+	lic_pill_panel.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.PILL_SLATE_BG, AppTheme.SLATE_700, 1, 6))
 	var lic_pill_m := MarginContainer.new()
 	lic_pill_m.add_theme_constant_override("margin_left", 8)
 	lic_pill_m.add_theme_constant_override("margin_right", 8)
@@ -1672,16 +1463,16 @@ func _build_mobile_ui() -> void:
 	lic_pill_m.add_theme_constant_override("margin_bottom", 4)
 	lic_pill_panel.add_child(lic_pill_m)
 	exam_license_pill = Label.new()
-	exam_license_pill.add_theme_font_override("font", _ui_font(600))
+	exam_license_pill.add_theme_font_override("font", AppTheme.ui_font(600))
 	exam_license_pill.add_theme_font_size_override("font_size", 12)
-	exam_license_pill.add_theme_color_override("font_color", Color("cbd5e1"))
+	exam_license_pill.add_theme_color_override("font_color", AppTheme.SLATE_300)
 	lic_pill_m.add_child(exam_license_pill)
 	exam_pills_row.add_child(lic_pill_panel)
 	question_label = Label.new()
 	question_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	question_label.add_theme_font_override("font", _ui_font(700))
+	question_label.add_theme_font_override("font", AppTheme.ui_font(700))
 	question_label.add_theme_font_size_override("font_size", 23)
-	question_label.add_theme_color_override("font_color", Color("ffffff"))
+	question_label.add_theme_color_override("font_color", AppTheme.WHITE)
 	question_column.add_child(question_label)
 
 	var hint_hbox := HBoxContainer.new()
@@ -1691,18 +1482,18 @@ func _build_mobile_ui() -> void:
 	var hint_bar := ColorRect.new()
 	hint_bar.custom_minimum_size = Vector2(3, 18)
 	hint_bar.size_flags_vertical = Control.SIZE_FILL
-	hint_bar.color = Color("38bdf8")
+	hint_bar.color = AppTheme.SKY_400
 	hint_hbox.add_child(hint_bar)
 	article_label = Label.new()
 	article_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	article_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	article_label.add_theme_font_override("font", _ui_font(500))
+	article_label.add_theme_font_override("font", AppTheme.ui_font(500))
 	article_label.add_theme_font_size_override("font_size", 15)
-	article_label.add_theme_color_override("font_color", Color("e2e8f0"))
+	article_label.add_theme_color_override("font_color", AppTheme.SLATE_200)
 	hint_hbox.add_child(article_label)
 
 	lookup_box = PanelContainer.new()
-	lookup_box.add_theme_stylebox_override("panel", _panel_style("0d192c", "1e3a5f", 1, 8))
+	lookup_box.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.LOOKUP_BG, AppTheme.BORDER_BLUE, 1, 8))
 	question_column.add_child(lookup_box)
 	var lookup_margin := MarginContainer.new()
 	lookup_margin.add_theme_constant_override("margin_left", 12)
@@ -1712,9 +1503,9 @@ func _build_mobile_ui() -> void:
 	lookup_box.add_child(lookup_margin)
 	chapter_hint_label = Label.new()
 	chapter_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	chapter_hint_label.add_theme_font_override("font", _ui_font(500))
+	chapter_hint_label.add_theme_font_override("font", AppTheme.ui_font(500))
 	chapter_hint_label.add_theme_font_size_override("font_size", 13)
-	chapter_hint_label.add_theme_color_override("font_color", Color("38bdf8"))
+	chapter_hint_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	lookup_margin.add_child(chapter_hint_label)
 	lookup_box.visible = false
 	chapter_hint_label.item_rect_changed.connect(func():
@@ -1723,7 +1514,7 @@ func _build_mobile_ui() -> void:
 	)
 
 	question_table_panel = PanelContainer.new()
-	question_table_panel.add_theme_stylebox_override("panel", _panel_style("091322", "1e3a5f", 1, 9))
+	question_table_panel.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.TABLE_PANEL_BG, AppTheme.BORDER_BLUE, 1, 9))
 	question_table_panel.custom_minimum_size = Vector2(0, 120)
 	question_table_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	question_table_panel.visible = false
@@ -1740,7 +1531,7 @@ func _build_mobile_ui() -> void:
 	question_table_heading = Label.new()
 	question_table_heading.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	question_table_heading.add_theme_font_size_override("font_size", 13)
-	question_table_heading.add_theme_color_override("font_color", Color("7dd3fc"))
+	question_table_heading.add_theme_color_override("font_color", AppTheme.SKY_300)
 	question_table_column.add_child(question_table_heading)
 	question_table_scroll = ScrollContainer.new()
 	question_table_scroll.custom_minimum_size = Vector2(0, 42)
@@ -1756,12 +1547,12 @@ func _build_mobile_ui() -> void:
 	question_table_note = Label.new()
 	question_table_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	question_table_note.add_theme_font_size_override("font_size", 12)
-	question_table_note.add_theme_color_override("font_color", Color("cbd5e1"))
+	question_table_note.add_theme_color_override("font_color", AppTheme.SLATE_300)
 	question_table_column.add_child(question_table_note)
 
 	question_diagram_panel = PanelContainer.new()
 	# Paper card: the figures are black-on-white scans of the exam page.
-	question_diagram_panel.add_theme_stylebox_override("panel", _panel_style("f8fafc", "38bdf8", 1, 10))
+	question_diagram_panel.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.SLATE_50, AppTheme.SKY_400, 1, 10))
 	question_diagram_panel.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	question_diagram_panel.visible = false
 	question_column.add_child(question_diagram_panel)
@@ -1776,7 +1567,7 @@ func _build_mobile_ui() -> void:
 	diagram_margin.add_child(question_diagram_view)
 
 	formula_box = PanelContainer.new()
-	formula_box.add_theme_stylebox_override("panel", _panel_style("141c2a", "2563eb", 1, 8))
+	formula_box.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.PILL_SLATE_BG, AppTheme.BLUE_600, 1, 8))
 	question_column.add_child(formula_box)
 	var formula_margin := MarginContainer.new()
 	formula_margin.add_theme_constant_override("margin_left", 12)
@@ -1786,9 +1577,9 @@ func _build_mobile_ui() -> void:
 	formula_box.add_child(formula_margin)
 	question_formula_label = Label.new()
 	question_formula_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	question_formula_label.add_theme_font_override("font", _ui_font(500))
+	question_formula_label.add_theme_font_override("font", AppTheme.ui_font(500))
 	question_formula_label.add_theme_font_size_override("font_size", 14)
-	question_formula_label.add_theme_color_override("font_color", Color("93c5fd"))
+	question_formula_label.add_theme_color_override("font_color", AppTheme.BLUE_300)
 	formula_margin.add_child(question_formula_label)
 	formula_box.visible = false
 	question_formula_label.item_rect_changed.connect(func():
@@ -1801,8 +1592,8 @@ func _build_mobile_ui() -> void:
 	timer_bar.max_value = SESSION_TIME_SECONDS
 	timer_bar.show_percentage = false
 	timer_bar.custom_minimum_size = Vector2(0, 8)
-	var bar_bg := _panel_style("0f172a", "1e293b", 1, 3)
-	var bar_fill := _panel_style("0284c7", "38bdf8", 0, 3)
+	var bar_bg := AppTheme.panel_style(AppTheme.SLATE_900, AppTheme.SLATE_800, 1, 3)
+	var bar_fill := AppTheme.panel_style(AppTheme.SKY_600, AppTheme.SKY_400, 0, 3)
 	timer_bar.add_theme_stylebox_override("background", bar_bg)
 	timer_bar.add_theme_stylebox_override("fill", bar_fill)
 	question_column.add_child(timer_bar)
@@ -1812,7 +1603,7 @@ func _build_mobile_ui() -> void:
 	quiz_column.add_child(answers_box)
 
 	feedback_panel = PanelContainer.new()
-	feedback_panel.add_theme_stylebox_override("panel", _panel_style("13213a", "29476f", 1, 14))
+	feedback_panel.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.FEEDBACK_BG, AppTheme.FEEDBACK_BORDER, 1, 14))
 	quiz_column.add_child(feedback_panel)
 	var feedback_margin := MarginContainer.new()
 	feedback_margin.add_theme_constant_override("margin_left", 16)
@@ -1824,20 +1615,20 @@ func _build_mobile_ui() -> void:
 	feedback_column.add_theme_constant_override("separation", 10)
 	feedback_margin.add_child(feedback_column)
 	feedback_title = Label.new()
-	feedback_title.add_theme_font_override("font", _ui_font(700))
+	feedback_title.add_theme_font_override("font", AppTheme.ui_font(700))
 	feedback_title.add_theme_font_size_override("font_size", 19)
 	feedback_column.add_child(feedback_title)
 	feedback_body = Label.new()
 	feedback_body.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	feedback_body.add_theme_font_override("font", _ui_font(500))
+	feedback_body.add_theme_font_override("font", AppTheme.ui_font(500))
 	feedback_body.add_theme_font_size_override("font_size", 15)
-	feedback_body.add_theme_color_override("font_color", Color("f1f5f9"))
+	feedback_body.add_theme_color_override("font_color", AppTheme.SLATE_100)
 	feedback_column.add_child(feedback_body)
 	feedback_reference = Label.new()
 	feedback_reference.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	feedback_reference.add_theme_font_override("font", _ui_font(600))
+	feedback_reference.add_theme_font_override("font", AppTheme.ui_font(600))
 	feedback_reference.add_theme_font_size_override("font_size", 14)
-	feedback_reference.add_theme_color_override("font_color", Color("7dd3fc"))
+	feedback_reference.add_theme_color_override("font_color", AppTheme.SKY_300)
 	feedback_reference.visible = false
 	feedback_column.add_child(feedback_reference)
 	var feedback_detail := _make_feedback_detail(feedback_column)
@@ -1856,7 +1647,7 @@ func _build_mobile_ui() -> void:
 	feedback_table_note = Label.new()
 	feedback_table_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	feedback_table_note.add_theme_font_size_override("font_size", 12)
-	feedback_table_note.add_theme_color_override("font_color", Color("cbd5e1"))
+	feedback_table_note.add_theme_color_override("font_color", AppTheme.SLATE_300)
 	feedback_table_note.visible = false
 	feedback_detail.add_child(feedback_table_note)
 	info_label = RichTextLabel.new()
@@ -1864,9 +1655,9 @@ func _build_mobile_ui() -> void:
 	info_label.scroll_active = false
 	info_label.custom_minimum_size = Vector2(0, 0)
 	info_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	info_label.add_theme_font_override("normal_font", _ui_font(400))
-	info_label.add_theme_font_override("bold_font", _ui_font(700))
-	info_label.add_theme_color_override("default_color", Color("f1f5f9"))
+	info_label.add_theme_font_override("normal_font", AppTheme.ui_font(400))
+	info_label.add_theme_font_override("bold_font", AppTheme.ui_font(700))
+	info_label.add_theme_color_override("default_color", AppTheme.SLATE_100)
 	info_label.add_theme_font_size_override("normal_font_size", 15)
 	info_label.add_theme_font_size_override("bold_font_size", 15)
 	info_label.add_theme_constant_override("line_separation", 4)
@@ -1878,18 +1669,18 @@ func _build_mobile_ui() -> void:
 	next_button.custom_minimum_size = Vector2(0, 52)
 	next_button.pressed.connect(_on_next_button_pressed)
 	next_button.visible = false
-	var btn_normal := _panel_style("0284c7", "38bdf8", 1, 10)
-	var btn_hover := _panel_style("0369a1", "7dd3fc", 2, 10)
-	var btn_pressed := _panel_style("075985", "38bdf8", 1, 10)
+	var btn_normal := AppTheme.panel_style(AppTheme.SKY_600, AppTheme.SKY_400, 1, 10)
+	var btn_hover := AppTheme.panel_style(AppTheme.SKY_700, AppTheme.SKY_300, 2, 10)
+	var btn_pressed := AppTheme.panel_style(AppTheme.SKY_800, AppTheme.SKY_400, 1, 10)
 	next_button.add_theme_stylebox_override("normal", btn_normal)
 	next_button.add_theme_stylebox_override("hover", btn_hover)
 	next_button.add_theme_stylebox_override("pressed", btn_pressed)
 	next_button.add_theme_font_size_override("font_size", 18)
-	next_button.add_theme_color_override("font_color", Color("ffffff"))
+	next_button.add_theme_color_override("font_color", AppTheme.WHITE)
 	root.add_child(next_button)
 
 	dock_panel = PanelContainer.new()
-	dock_panel.add_theme_stylebox_override("panel", _panel_style("0a0f1d", "1e293b", 1, 12))
+	dock_panel.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.SURFACE_DEEP, AppTheme.SLATE_800, 1, 12))
 	root.add_child(dock_panel)
 	var dock_margin := MarginContainer.new()
 	dock_margin.add_theme_constant_override("margin_left", 12)
@@ -1911,13 +1702,13 @@ func _build_mobile_ui() -> void:
 	read_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	read_button.custom_minimum_size = Vector2(0, 48)
 	read_button.pressed.connect(_toggle_read)
-	var rb_norm := _panel_style("142238", "2d4a77", 1, 9)
-	var rb_hov := _panel_style("1e3458", "38bdf8", 2, 9)
+	var rb_norm := AppTheme.panel_style(AppTheme.READ_BUTTON_BG, AppTheme.READ_BUTTON_BORDER, 1, 9)
+	var rb_hov := AppTheme.panel_style(AppTheme.READ_BUTTON_HOVER_BG, AppTheme.SKY_400, 2, 9)
 	read_button.add_theme_stylebox_override("normal", rb_norm)
 	read_button.add_theme_stylebox_override("hover", rb_hov)
-	read_button.add_theme_font_override("font", _ui_font(600))
+	read_button.add_theme_font_override("font", AppTheme.ui_font(600))
 	read_button.add_theme_font_size_override("font_size", 16)
-	read_button.add_theme_color_override("font_color", Color("f1f5f9"))
+	read_button.add_theme_color_override("font_color", AppTheme.SLATE_100)
 	controls.add_child(read_button)
 	pause_button = _make_dock_button("Pause", 0, 48, 16, _toggle_listen_pause)
 	pause_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -1928,13 +1719,13 @@ func _build_mobile_ui() -> void:
 	restart_button.text = "Menu"
 	restart_button.custom_minimum_size = Vector2(96, 48)
 	restart_button.pressed.connect(_show_menu)
-	var rst_norm := _panel_style("111d31", "223659", 1, 9)
-	var rst_hov := _panel_style("1a2c4b", "475569", 1, 9)
+	var rst_norm := AppTheme.panel_style(AppTheme.DOCK_BUTTON_BG, AppTheme.DOCK_BUTTON_BORDER, 1, 9)
+	var rst_hov := AppTheme.panel_style(AppTheme.DOCK_BUTTON_HOVER_BG, AppTheme.SLATE_600, 1, 9)
 	restart_button.add_theme_stylebox_override("normal", rst_norm)
 	restart_button.add_theme_stylebox_override("hover", rst_hov)
-	restart_button.add_theme_font_override("font", _ui_font(500))
+	restart_button.add_theme_font_override("font", AppTheme.ui_font(500))
 	restart_button.add_theme_font_size_override("font_size", 14)
-	restart_button.add_theme_color_override("font_color", Color("94a3b8"))
+	restart_button.add_theme_color_override("font_color", AppTheme.SLATE_400)
 	controls.add_child(restart_button)
 	var status_row := HBoxContainer.new()
 	status_row.add_theme_constant_override("separation", 8)
@@ -1951,9 +1742,9 @@ func _build_mobile_ui() -> void:
 	read_status_label.text = ""
 	read_status_label.visible = false
 	read_status_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	read_status_label.add_theme_font_override("font", _ui_font(700))
+	read_status_label.add_theme_font_override("font", AppTheme.ui_font(700))
 	read_status_label.add_theme_font_size_override("font_size", 13)
-	read_status_label.add_theme_color_override("font_color", Color("38bdf8"))
+	read_status_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	read_status_label.clip_text = true
 	read_status_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	status_row.add_child(read_status_label)
@@ -1964,7 +1755,7 @@ func _build_mobile_ui() -> void:
 	menu_overlay.z_index = 20
 	add_child(menu_overlay)
 	var menu_background := ColorRect.new()
-	menu_background.color = Color("020408")
+	menu_background.color = AppTheme.BG_TOP
 	menu_background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	menu_overlay.add_child(menu_background)
 	menu_overlay.add_child(UiFx.make_circuit_backdrop())
@@ -1989,9 +1780,9 @@ func _build_mobile_ui() -> void:
 	menu_center_box.add_child(menu_outer_center)
 	menu_panel = PanelContainer.new()
 	menu_panel.custom_minimum_size = Vector2(320, 0)
-	var panel_sb := _panel_style("0c1322", "1e293b", 1, 16)
+	var panel_sb := AppTheme.panel_style(AppTheme.MENU_PANEL_BG, AppTheme.SLATE_800, 1, 16)
 	panel_sb.border_width_top = 3
-	panel_sb.border_color = Color("38bdf8")
+	panel_sb.border_color = AppTheme.SKY_400
 	panel_sb.shadow_color = Color(0, 0, 0, 0.5)
 	panel_sb.shadow_size = 14
 	menu_panel.add_theme_stylebox_override("panel", panel_sb)
@@ -2010,10 +1801,10 @@ func _build_mobile_ui() -> void:
 	menu_column.add_child(badge_box)
 	var year_badge := Label.new()
 	year_badge.text = " NFPA 70 • NEC 2023 • PSI STANDARDS "
-	year_badge.add_theme_font_override("font", _ui_font(700))
+	year_badge.add_theme_font_override("font", AppTheme.ui_font(700))
 	year_badge.add_theme_font_size_override("font_size", 11)
-	year_badge.add_theme_color_override("font_color", Color("38bdf8"))
-	var yb_style := _panel_style("0f2338", "0284c7", 1, 6)
+	year_badge.add_theme_color_override("font_color", AppTheme.SKY_400)
+	var yb_style := AppTheme.panel_style(AppTheme.BADGE_BLUE_BG, AppTheme.SKY_600, 1, 6)
 	yb_style.content_margin_left = 12
 	yb_style.content_margin_right = 12
 	yb_style.content_margin_top = 4
@@ -2024,9 +1815,9 @@ func _build_mobile_ui() -> void:
 	menu_title.text = "NEC 2023 // JOURNEYMAN CHALLENGE"
 	menu_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	menu_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	menu_title.add_theme_font_override("font", _ui_font(700))
+	menu_title.add_theme_font_override("font", AppTheme.ui_font(700))
 	menu_title.add_theme_font_size_override("font_size", 24)
-	menu_title.add_theme_color_override("font_color", Color("f8fafc"))
+	menu_title.add_theme_color_override("font_color", AppTheme.SLATE_50)
 	menu_column.add_child(menu_title)
 	UiFx.electrify_title(menu_title)
 	var menu_subtitle := Label.new()
@@ -2034,7 +1825,7 @@ func _build_mobile_ui() -> void:
 	menu_subtitle.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	menu_subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	menu_subtitle.add_theme_font_size_override("font_size", 13)
-	menu_subtitle.add_theme_color_override("font_color", Color("94a3b8"))
+	menu_subtitle.add_theme_color_override("font_color", AppTheme.SLATE_400)
 	menu_column.add_child(menu_subtitle)
 	var menu_rule := HSeparator.new()
 	menu_column.add_child(menu_rule)
@@ -2043,45 +1834,45 @@ func _build_mobile_ui() -> void:
 	menu_column.add_child(practice_hdr_box)
 	var practice_bar := ColorRect.new()
 	practice_bar.custom_minimum_size = Vector2(4, 16)
-	practice_bar.color = Color("38bdf8")
+	practice_bar.color = AppTheme.SKY_400
 	practice_hdr_box.add_child(practice_bar)
 	var practice_heading := Label.new()
 	practice_heading.text = "RAPID PRACTICE DRILLS"
 	practice_heading.add_theme_font_size_override("font_size", 12)
-	practice_heading.add_theme_color_override("font_color", Color("38bdf8"))
+	practice_heading.add_theme_color_override("font_color", AppTheme.SKY_400)
 	practice_hdr_box.add_child(practice_heading)
 	menu_column.move_child(_build_audio_section(menu_column), practice_hdr_box.get_index())
 	menu_mode_buttons.clear()
-	_add_mode_button(menu_column, "10 QUESTIONS", "Quick warm-up drill • 30 minutes timed", _start_quiz.bind(10, _practice_time(10), true, "10-Question Practice"), "38bdf8", "111928", false, 64.0, 15)
-	_add_mode_button(menu_column, "20 QUESTIONS", "Standard focused session • 60 minutes timed", _start_quiz.bind(20, _practice_time(20), true, "20-Question Practice"), "38bdf8", "111928", false, 64.0, 15)
-	_add_mode_button(menu_column, "30 QUESTIONS", "Extended study block • 90 minutes timed", _start_quiz.bind(30, _practice_time(30), true, "30-Question Practice"), "38bdf8", "111928", false, 64.0, 15)
-	_add_mode_button(menu_column, "40 QUESTIONS", "Half-length diagnostic test • 120 minutes timed", _start_quiz.bind(40, _practice_time(40), true, "40-Question Practice"), "38bdf8", "111928", false, 64.0, 15)
-	_add_mode_button(menu_column, "50 QUESTIONS", "Intensive endurance drill • 150 minutes timed", _start_quiz.bind(50, _practice_time(50), true, "50-Question Practice"), "38bdf8", "111928", false, 64.0, 15)
+	_add_mode_button(menu_column, "10 QUESTIONS", "Quick warm-up drill • 30 minutes timed", _start_quiz.bind(10, _practice_time(10), true, "10-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG, false, 64.0, 15)
+	_add_mode_button(menu_column, "20 QUESTIONS", "Standard focused session • 60 minutes timed", _start_quiz.bind(20, _practice_time(20), true, "20-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG, false, 64.0, 15)
+	_add_mode_button(menu_column, "30 QUESTIONS", "Extended study block • 90 minutes timed", _start_quiz.bind(30, _practice_time(30), true, "30-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG, false, 64.0, 15)
+	_add_mode_button(menu_column, "40 QUESTIONS", "Half-length diagnostic test • 120 minutes timed", _start_quiz.bind(40, _practice_time(40), true, "40-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG, false, 64.0, 15)
+	_add_mode_button(menu_column, "50 QUESTIONS", "Intensive endurance drill • 150 minutes timed", _start_quiz.bind(50, _practice_time(50), true, "50-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG, false, 64.0, 15)
 	var exam_hdr_box := HBoxContainer.new()
 	exam_hdr_box.add_theme_constant_override("separation", 8)
 	menu_column.add_child(exam_hdr_box)
 	var exam_bar := ColorRect.new()
 	exam_bar.custom_minimum_size = Vector2(4, 16)
-	exam_bar.color = Color("f43f5e")
+	exam_bar.color = AppTheme.ROSE_500
 	exam_hdr_box.add_child(exam_bar)
 	var exam_heading := Label.new()
 	exam_heading.text = "OFFICIAL LICENSING SIMULATION"
-	exam_heading.add_theme_font_override("font", _ui_font(700))
+	exam_heading.add_theme_font_override("font", AppTheme.ui_font(700))
 	exam_heading.add_theme_font_size_override("font_size", 12)
-	exam_heading.add_theme_color_override("font_color", Color("f43f5e"))
+	exam_heading.add_theme_color_override("font_color", AppTheme.ROSE_500)
 	exam_hdr_box.add_child(exam_heading)
-	_add_mode_button(menu_column, "FULL JOURNEYMAN SIMULATOR", "80 scored questions • 240 minutes • 75% required to pass", _start_quiz.bind(80, EXAM_MINUTES * 60, true, "Full Journeyman Exam"), "f43f5e", "1e141d", true, 72.0, 15)
+	_add_mode_button(menu_column, "FULL JOURNEYMAN SIMULATOR", "80 scored questions • 240 minutes • 75% required to pass", _start_quiz.bind(80, EXAM_MINUTES * 60, true, "Full Journeyman Exam"), AppTheme.ROSE_500, AppTheme.EXAM_BUTTON_BG, true, 72.0, 15)
 
 	var menu_note := Label.new()
 	menu_note.text = "Aligned with NFPA 70 (NEC 2023) & Nebraska State Electrical Division / PSI Standards\nPacing standard: 3:00 per scored item • 80 questions timed"
 	menu_note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	menu_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	menu_note.add_theme_font_override("font", _ui_font(400))
+	menu_note.add_theme_font_override("font", AppTheme.ui_font(400))
 	menu_note.add_theme_font_size_override("font_size", 11)
-	menu_note.add_theme_color_override("font_color", Color("64748b"))
+	menu_note.add_theme_color_override("font_color", AppTheme.SLATE_500)
 	menu_column.add_child(menu_note)
 
-func _add_mode_button(parent: VBoxContainer, title_text: String, subtitle_text: String, callback: Callable, accent_hex: String = "38bdf8", bg_hex: String = "111928", is_major: bool = false, min_height: float = -1.0, font_size: int = -1) -> void:
+func _add_mode_button(parent: VBoxContainer, title_text: String, subtitle_text: String, callback: Callable, accent: Color = AppTheme.SKY_400, bg: Color = AppTheme.BUTTON_BG, is_major: bool = false, min_height: float = -1.0, font_size: int = -1) -> void:
 	var button := Button.new()
 	button.text = title_text + "\n" + subtitle_text
 	button.custom_minimum_size = Vector2(0, min_height if min_height > 0.0 else (68.0 if is_major else 62.0))
@@ -2090,25 +1881,25 @@ func _add_mode_button(parent: VBoxContainer, title_text: String, subtitle_text: 
 		# An unwrapped subtitle sets the button's min width, which pushed the
 		# phone menu panel past the right screen edge.
 		button.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	button.add_theme_font_override("font", _ui_font(600))
+	button.add_theme_font_override("font", AppTheme.ui_font(600))
 	button.add_theme_font_size_override("font_size", font_size if font_size > 0 else 14)
 
-	var btn_norm := _panel_style(bg_hex, "2e3d57", 1, 10)
+	var btn_norm := AppTheme.panel_style(bg, AppTheme.BUTTON_BORDER, 1, 10)
 	btn_norm.border_width_left = 6
-	btn_norm.border_color = Color(accent_hex)
+	btn_norm.border_color = accent
 	btn_norm.content_margin_left = 20
 	btn_norm.content_margin_right = 16
 	btn_norm.content_margin_top = 10
 	btn_norm.content_margin_bottom = 10
 
-	var btn_hov := _panel_style("182438" if not is_major else "2e151e", accent_hex, 2, 10)
+	var btn_hov := AppTheme.panel_style(AppTheme.BUTTON_HOVER_BG if not is_major else AppTheme.EXAM_BUTTON_HOVER_BG, accent, 2, 10)
 	btn_hov.border_width_left = 8
 	btn_hov.content_margin_left = 22
 	btn_hov.content_margin_right = 16
 	btn_hov.content_margin_top = 10
 	btn_hov.content_margin_bottom = 10
 
-	var btn_pressed := _panel_style(bg_hex, accent_hex, 2, 10)
+	var btn_pressed := AppTheme.panel_style(bg, accent, 2, 10)
 	btn_pressed.border_width_left = 6
 	btn_pressed.content_margin_left = 20
 	btn_pressed.content_margin_right = 16
@@ -2116,9 +1907,9 @@ func _add_mode_button(parent: VBoxContainer, title_text: String, subtitle_text: 
 	button.add_theme_stylebox_override("normal", btn_norm)
 	button.add_theme_stylebox_override("hover", btn_hov)
 	button.add_theme_stylebox_override("pressed", btn_pressed)
-	button.add_theme_stylebox_override("focus", _focus_ring(10))
-	button.add_theme_color_override("font_color", Color("ffffff"))
-	button.add_theme_color_override("font_hover_color", Color("ffffff"))
+	button.add_theme_stylebox_override("focus", AppTheme.focus_ring(10))
+	button.add_theme_color_override("font_color", AppTheme.WHITE)
+	button.add_theme_color_override("font_hover_color", AppTheme.WHITE)
 
 	# Tactile hover animation: gentle slide on X
 	button.mouse_entered.connect(func():
@@ -2139,7 +1930,7 @@ func _add_mode_button(parent: VBoxContainer, title_text: String, subtitle_text: 
 	var badge := ModeBadge.new()
 	badge.question_count = int(title_text.get_slice(" ", 0))
 	badge.full_exam = is_major
-	badge.accent = Color(accent_hex)
+	badge.accent = accent
 	badge.set_anchors_preset(Control.PRESET_CENTER_RIGHT)
 	badge.offset_left = -58
 	badge.offset_right = -14
@@ -2157,14 +1948,14 @@ func _make_dock_button(text: String, min_w: float, h: float, font_size: int, cal
 	var button := Button.new()
 	button.text = text
 	button.custom_minimum_size = Vector2(min_w, h)
-	button.add_theme_stylebox_override("normal", _panel_style("111d31", "223659", 1, 9))
-	button.add_theme_stylebox_override("hover", _panel_style("1a2c4b", "38bdf8", 1, 9))
-	button.add_theme_stylebox_override("pressed", _panel_style("0c1526", "0284c7", 1, 9))
+	button.add_theme_stylebox_override("normal", AppTheme.panel_style(AppTheme.DOCK_BUTTON_BG, AppTheme.DOCK_BUTTON_BORDER, 1, 9))
+	button.add_theme_stylebox_override("hover", AppTheme.panel_style(AppTheme.DOCK_BUTTON_HOVER_BG, AppTheme.SKY_400, 1, 9))
+	button.add_theme_stylebox_override("pressed", AppTheme.panel_style(AppTheme.BUTTON_PRESSED_BG, AppTheme.SKY_600, 1, 9))
 	button.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
-	button.add_theme_font_override("font", _ui_font(600))
+	button.add_theme_font_override("font", AppTheme.ui_font(600))
 	button.add_theme_font_size_override("font_size", font_size)
-	button.add_theme_color_override("font_color", Color("cbd5e1"))
-	button.add_theme_color_override("font_hover_color", Color("ffffff"))
+	button.add_theme_color_override("font_color", AppTheme.SLATE_300)
+	button.add_theme_color_override("font_hover_color", AppTheme.WHITE)
 	button.pressed.connect(callback)
 	return button
 
@@ -2174,9 +1965,9 @@ func _make_voice_picker(h: float, font_size: int) -> OptionButton:
 	voice_picker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	voice_picker.clip_text = true
 	voice_picker.fit_to_longest_item = false
-	var vp_hov := _panel_style("162640", "38bdf8", 2, 9)
-	var vp_norm := _panel_style("0f1a2e", "1e3a5f", 1, 9)
-	var vp_pressed := _panel_style("0c1526", "0284c7", 1, 9)
+	var vp_hov := AppTheme.panel_style(AppTheme.PICKER_HOVER_BG, AppTheme.SKY_400, 2, 9)
+	var vp_norm := AppTheme.panel_style(AppTheme.PICKER_BG, AppTheme.BORDER_BLUE, 1, 9)
+	var vp_pressed := AppTheme.panel_style(AppTheme.BUTTON_PRESSED_BG, AppTheme.SKY_600, 1, 9)
 	for sb in [vp_hov, vp_norm, vp_pressed]:
 		sb.content_margin_left = 10
 		sb.content_margin_right = 8
@@ -2184,25 +1975,25 @@ func _make_voice_picker(h: float, font_size: int) -> OptionButton:
 	voice_picker.add_theme_stylebox_override("hover", vp_hov)
 	voice_picker.add_theme_stylebox_override("pressed", vp_pressed)
 	voice_picker.add_theme_stylebox_override("focus", vp_hov)
-	voice_picker.add_theme_font_override("font", _ui_font(500))
+	voice_picker.add_theme_font_override("font", AppTheme.ui_font(500))
 	voice_picker.add_theme_font_size_override("font_size", font_size)
-	voice_picker.add_theme_color_override("font_color", Color("e2e8f0"))
-	voice_picker.add_theme_color_override("font_hover_color", Color("ffffff"))
-	voice_picker.add_theme_color_override("font_pressed_color", Color("38bdf8"))
+	voice_picker.add_theme_color_override("font_color", AppTheme.SLATE_200)
+	voice_picker.add_theme_color_override("font_hover_color", AppTheme.WHITE)
+	voice_picker.add_theme_color_override("font_pressed_color", AppTheme.SKY_400)
 	var popup: PopupMenu = voice_picker.get_popup()
 	if popup:
-		var pop_panel := _panel_style("0a1220", "1e3a5f", 1, 10)
+		var pop_panel := AppTheme.panel_style(AppTheme.POPUP_BG, AppTheme.BORDER_BLUE, 1, 10)
 		pop_panel.shadow_color = Color(0, 0, 0, 0.7)
 		pop_panel.shadow_size = 14
 		pop_panel.set_content_margin_all(8)
 		popup.add_theme_stylebox_override("panel", pop_panel)
-		popup.add_theme_stylebox_override("hover", _panel_style("14253d", "38bdf8", 1, 6))
-		popup.add_theme_font_override("font", _ui_font(500))
+		popup.add_theme_stylebox_override("hover", AppTheme.panel_style(AppTheme.POPUP_HOVER_BG, AppTheme.SKY_400, 1, 6))
+		popup.add_theme_font_override("font", AppTheme.ui_font(500))
 		popup.add_theme_font_size_override("font_size", font_size + (1 if ui_mobile else 0))
-		popup.add_theme_color_override("font_color", Color("cbd5e1"))
-		popup.add_theme_color_override("font_hover_color", Color("ffffff"))
-		popup.add_theme_color_override("font_separator_color", Color("38bdf8"))
-		popup.add_theme_font_override("font_separator", _ui_font(700))
+		popup.add_theme_color_override("font_color", AppTheme.SLATE_300)
+		popup.add_theme_color_override("font_hover_color", AppTheme.WHITE)
+		popup.add_theme_color_override("font_separator_color", AppTheme.SKY_400)
+		popup.add_theme_font_override("font_separator", AppTheme.ui_font(700))
 		popup.add_theme_font_size_override("font_separator_size", 11)
 		popup.add_theme_constant_override("v_separation", 14 if ui_mobile else 8)
 		popup.add_theme_constant_override("item_start_padding", 10)
@@ -2222,18 +2013,18 @@ func _make_chip(text: String, h: float, font_size: int, group: ButtonGroup) -> B
 	chip.button_group = group
 	chip.custom_minimum_size = Vector2(0, h)
 	chip.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	var on := _panel_style("0c2a24", "34d399", 2, 9)
-	chip.add_theme_stylebox_override("normal", _panel_style("111928", "2e3d57", 1, 9))
-	chip.add_theme_stylebox_override("hover", _panel_style("182438", "38bdf8", 1, 9))
+	var on := AppTheme.panel_style(AppTheme.CHIP_ON_BG, AppTheme.EMERALD_400, 2, 9)
+	chip.add_theme_stylebox_override("normal", AppTheme.panel_style(AppTheme.BUTTON_BG, AppTheme.BUTTON_BORDER, 1, 9))
+	chip.add_theme_stylebox_override("hover", AppTheme.panel_style(AppTheme.BUTTON_HOVER_BG, AppTheme.SKY_400, 1, 9))
 	chip.add_theme_stylebox_override("pressed", on)
 	chip.add_theme_stylebox_override("hover_pressed", on)
 	chip.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
-	chip.add_theme_font_override("font", _ui_font(600))
+	chip.add_theme_font_override("font", AppTheme.ui_font(600))
 	chip.add_theme_font_size_override("font_size", font_size)
-	chip.add_theme_color_override("font_color", Color("94a3b8"))
-	chip.add_theme_color_override("font_hover_color", Color("e2e8f0"))
-	chip.add_theme_color_override("font_pressed_color", Color("6ee7b7"))
-	chip.add_theme_color_override("font_hover_pressed_color", Color("a7f3d0"))
+	chip.add_theme_color_override("font_color", AppTheme.SLATE_400)
+	chip.add_theme_color_override("font_hover_color", AppTheme.SLATE_200)
+	chip.add_theme_color_override("font_pressed_color", AppTheme.EMERALD_300)
+	chip.add_theme_color_override("font_hover_pressed_color", AppTheme.EMERALD_200)
 	return chip
 
 func _audio_row_label(text: String, min_w: float) -> Label:
@@ -2241,9 +2032,9 @@ func _audio_row_label(text: String, min_w: float) -> Label:
 	label.text = text
 	label.custom_minimum_size = Vector2(min_w, 0)
 	label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	label.add_theme_font_override("font", _ui_font(700))
+	label.add_theme_font_override("font", AppTheme.ui_font(700))
 	label.add_theme_font_size_override("font_size", 11)
-	label.add_theme_color_override("font_color", Color("64748b"))
+	label.add_theme_color_override("font_color", AppTheme.SLATE_500)
 	return label
 
 ## "Audio & Voice" menu section, shared by both layouts (sizes follow ui_mobile).
@@ -2253,7 +2044,7 @@ func _build_audio_section(parent: VBoxContainer) -> Control:
 	var fs: int = 14 if ui_mobile else 13
 	var label_w: float = 62.0 if ui_mobile else 48.0
 	var section := PanelContainer.new()
-	var section_style := _panel_style("0a1120", "1e293b", 1, 12)
+	var section_style := AppTheme.panel_style(AppTheme.SECTION_BG, AppTheme.SLATE_800, 1, 12)
 	section_style.set_content_margin_all(14.0 if ui_mobile else 16.0)
 	section.add_theme_stylebox_override("panel", section_style)
 	parent.add_child(section)
@@ -2266,13 +2057,13 @@ func _build_audio_section(parent: VBoxContainer) -> Control:
 	col.add_child(hdr)
 	var bar := ColorRect.new()
 	bar.custom_minimum_size = Vector2(4, 16)
-	bar.color = Color("34d399")
+	bar.color = AppTheme.EMERALD_400
 	hdr.add_child(bar)
 	var heading := Label.new()
 	heading.text = "AUDIO & VOICE"
-	heading.add_theme_font_override("font", _ui_font(700))
+	heading.add_theme_font_override("font", AppTheme.ui_font(700))
 	heading.add_theme_font_size_override("font_size", 12)
-	heading.add_theme_color_override("font_color", Color("34d399"))
+	heading.add_theme_color_override("font_color", AppTheme.EMERALD_400)
 	heading.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	hdr.add_child(heading)
 	# Collapsed by default: one line says what is set, the full panel is a tap
@@ -2281,12 +2072,12 @@ func _build_audio_section(parent: VBoxContainer) -> Control:
 	audio_summary_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	audio_summary_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	audio_summary_label.clip_text = true
-	audio_summary_label.add_theme_font_override("font", _ui_font(600))
+	audio_summary_label.add_theme_font_override("font", AppTheme.ui_font(600))
 	audio_summary_label.add_theme_font_size_override("font_size", fs)
-	audio_summary_label.add_theme_color_override("font_color", Color("cbd5e1"))
+	audio_summary_label.add_theme_color_override("font_color", AppTheme.SLATE_300)
 	hdr.add_child(audio_summary_label)
 	audio_toggle_button = _make_dock_button("Change", 92.0 if ui_mobile else 84.0, 44.0 if ui_mobile else 32.0, fs, _toggle_audio_section)
-	audio_toggle_button.add_theme_stylebox_override("focus", _focus_ring(9))
+	audio_toggle_button.add_theme_stylebox_override("focus", AppTheme.focus_ring(9))
 	hdr.add_child(audio_toggle_button)
 	audio_body = VBoxContainer.new()
 	audio_body.add_theme_constant_override("separation", 10)
@@ -2308,9 +2099,9 @@ func _build_audio_section(parent: VBoxContainer) -> Control:
 
 	audio_mode_blurb = Label.new()
 	audio_mode_blurb.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	audio_mode_blurb.add_theme_font_override("font", _ui_font(400))
+	audio_mode_blurb.add_theme_font_override("font", AppTheme.ui_font(400))
 	audio_mode_blurb.add_theme_font_size_override("font_size", 13 if ui_mobile else 12)
-	audio_mode_blurb.add_theme_color_override("font_color", Color("94a3b8"))
+	audio_mode_blurb.add_theme_color_override("font_color", AppTheme.SLATE_400)
 	audio_body.add_child(audio_mode_blurb)
 
 	audio_details_box = VBoxContainer.new()
@@ -2345,12 +2136,12 @@ func _build_audio_section(parent: VBoxContainer) -> Control:
 	auto_teach_toggle = CheckButton.new()
 	auto_teach_toggle.text = "Also read the rule after I answer"
 	auto_teach_toggle.custom_minimum_size = Vector2(0, 44.0 if ui_mobile else 32.0)
-	auto_teach_toggle.add_theme_font_override("font", _ui_font(500))
+	auto_teach_toggle.add_theme_font_override("font", AppTheme.ui_font(500))
 	auto_teach_toggle.add_theme_font_size_override("font_size", fs)
-	auto_teach_toggle.add_theme_color_override("font_color", Color("cbd5e1"))
-	auto_teach_toggle.add_theme_color_override("font_hover_color", Color("ffffff"))
-	auto_teach_toggle.add_theme_color_override("font_pressed_color", Color("6ee7b7"))
-	auto_teach_toggle.add_theme_color_override("font_hover_pressed_color", Color("a7f3d0"))
+	auto_teach_toggle.add_theme_color_override("font_color", AppTheme.SLATE_300)
+	auto_teach_toggle.add_theme_color_override("font_hover_color", AppTheme.WHITE)
+	auto_teach_toggle.add_theme_color_override("font_pressed_color", AppTheme.EMERALD_300)
+	auto_teach_toggle.add_theme_color_override("font_hover_pressed_color", AppTheme.EMERALD_200)
 	auto_teach_toggle.add_theme_stylebox_override("focus", StyleBoxEmpty.new())
 	auto_teach_toggle.toggled.connect(_on_auto_teach_toggled)
 	audio_details_box.add_child(auto_teach_toggle)
@@ -2370,16 +2161,16 @@ func _build_audio_section(parent: VBoxContainer) -> Control:
 		audio_pause_buttons.append(chip)
 	if not ui_mobile:
 		var pause_hint := _audio_row_label("pause before the answer is revealed", 0)
-		pause_hint.add_theme_font_override("font", _ui_font(500))
+		pause_hint.add_theme_font_override("font", AppTheme.ui_font(500))
 		pause_hint.add_theme_font_size_override("font_size", 12)
 		audio_pause_row.add_child(pause_hint)
 
 	audio_exam_note = Label.new()
 	audio_exam_note.text = "The Full Journeyman Simulator stays exam-quiet: nothing plays by itself, like the real exam. The Read button still works there."
 	audio_exam_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	audio_exam_note.add_theme_font_override("font", _ui_font(400))
+	audio_exam_note.add_theme_font_override("font", AppTheme.ui_font(400))
 	audio_exam_note.add_theme_font_size_override("font_size", 12 if ui_mobile else 11)
-	audio_exam_note.add_theme_color_override("font_color", Color("fda4af"))
+	audio_exam_note.add_theme_color_override("font_color", AppTheme.ROSE_300)
 	audio_details_box.add_child(audio_exam_note)
 
 	# Sound effects sit outside the voice details: Silent mutes the voice only.
@@ -2400,7 +2191,7 @@ func _build_audio_section(parent: VBoxContainer) -> Control:
 		sfx_level_buttons.append(chip)
 	if not ui_mobile:
 		var sfx_hint := _audio_row_label("answer tones, results and clock warnings", 0)
-		sfx_hint.add_theme_font_override("font", _ui_font(500))
+		sfx_hint.add_theme_font_override("font", AppTheme.ui_font(500))
 		sfx_hint.add_theme_font_size_override("font_size", 12)
 		sfx_row.add_child(sfx_hint)
 	return section
@@ -2545,12 +2336,12 @@ func _refresh_dock_audio() -> void:
 	mute_button.visible = not listening
 	mute_button.text = "Audio off · Turn on" if session_muted else "Mute"
 	mute_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL if session_muted and ui_mobile else Control.SIZE_FILL
-	mute_button.add_theme_color_override("font_color", Color("94a3b8") if session_muted else Color("cbd5e1"))
+	mute_button.add_theme_color_override("font_color", AppTheme.SLATE_400 if session_muted else AppTheme.SLATE_300)
 	read_button.visible = not listening and not session_muted
 	pause_button.visible = listening
 	skip_button.visible = listening
 	pause_button.text = "Resume" if listen_paused else "Pause"
-	pause_button.add_theme_color_override("font_color", Color("6ee7b7") if listen_paused else Color("cbd5e1"))
+	pause_button.add_theme_color_override("font_color", AppTheme.EMERALD_300 if listen_paused else AppTheme.SLATE_300)
 
 func _toggle_session_mute() -> void:
 	session_muted = not session_muted
@@ -2730,26 +2521,6 @@ func _show_menu() -> void:
 				b_tw.parallel().tween_property(btn, "scale", Vector2.ONE, 0.22)
 				b_tw.tween_callback(UiFx.shine_sweep.bind(btn))
 
-func _panel_style(fill: String, border: String, width: int, radius: int) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(fill)
-	style.border_color = Color(border)
-	style.set_border_width_all(width)
-	style.set_corner_radius_all(radius)
-	return style
-
-func _ui_font(weight: int = 500) -> SystemFont:
-	var font := SystemFont.new()
-	font.font_names = PackedStringArray(["Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"])
-	font.font_weight = weight
-	font.subpixel_positioning = TextServer.SUBPIXEL_POSITIONING_AUTO
-	return font
-
-func _monospace_font() -> SystemFont:
-	var font := SystemFont.new()
-	font.font_names = PackedStringArray(["Consolas", "Courier New", "monospace"])
-	return font
-
 func _populate_reference_table(grid: GridContainer, note_label: Label, rows: Array, highlight_answer: String = "", is_feedback: bool = true, target_keyword: String = "") -> bool:
 	var res := TableViewer.populate_table(grid, note_label, rows, highlight_answer, is_feedback, target_keyword)
 	# Only the FEEDBACK table scrolls to a match; the pre-answer table is opened
@@ -2768,21 +2539,6 @@ func _scroll_question_table_to_top() -> void:
 	var bar := question_table_scroll.get_v_scroll_bar()
 	if bar != null:
 		bar.value = 0.0
-
-func _is_reference_seeking(prompt: String) -> bool:
-	# True when the question asks for the reference itself ("Table ___ lists...",
-	# "which article..."). Those prompts get redacted lookup aids pre-answer.
-	var lowered := prompt.to_lower()
-	if not lowered.contains("___"):
-		return false
-	return lowered.contains("table") or lowered.contains("article") or lowered.contains("section")
-
-func _chapter_only_path(full_path: String) -> String:
-	# "NEC 2023  ►  Chapter 3: ...  ►  Article 300 (...)" -> drops the article segment.
-	var parts := full_path.split("►", false)
-	if parts.size() >= 3:
-		return parts[0].strip_edges() + "  ►  " + parts[1].strip_edges()
-	return full_path
 
 func _extract_table_target_keyword(record: Dictionary, table: Array) -> String:
 	return TableViewer.extract_target_keyword(record, table)
@@ -2863,12 +2619,12 @@ func _show_question() -> void:
 	article_label.visible = gist != ""
 	if is_instance_valid(question_hint_row):
 		question_hint_row.visible = gist != ""
-	if _is_reference_seeking(str(record.get("prompt", ""))):
+	if NecReference.is_reference_seeking(str(record.get("prompt", ""))):
 		# The stem asks WHICH table/article holds the rule — printing the article
 		# hands over the answer, so pre-answer navigation stops at chapter level.
-		chapter_hint_label.text = _chapter_only_path(_lookup_navigation_path(record))
+		chapter_hint_label.text = NecReference.chapter_only_path(NecReference.lookup_path(record))
 	else:
-		chapter_hint_label.text = AudioExplanationGenerator.redact_answer_spans(_lookup_navigation_path(record), current_correct_text)
+		chapter_hint_label.text = AudioExplanationGenerator.redact_answer_spans(NecReference.lookup_path(record), current_correct_text)
 	chapter_hint_label.visible = chapter_hint_label.text != ""
 	lookup_box.visible = chapter_hint_label.visible
 	formula_box.visible = question_formula_label.visible
@@ -2876,7 +2632,7 @@ func _show_question() -> void:
 	_update_score_badges()
 	timer_label.text = "TOTAL " + _format_time(time_left) if timed_session else "UNTIMED"
 	question_timer_label.text = "ITEM " + _format_time(question_time_left) if timed_session else ""
-	question_timer_label.add_theme_color_override("font_color", Color("38bdf8"))
+	question_timer_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	timer_bar.visible = timed_session
 	if timed_session:
 		timer_bar.max_value = session_time_limit
@@ -2958,13 +2714,13 @@ func _answer_selected(selected: int) -> void:
 	if not graded:
 		# Listen mode reviews, it does not test: no score, streak or missed list.
 		feedback_title.text = "Answer"
-		feedback_title.add_theme_color_override("font_color", Color("38bdf8"))
+		feedback_title.add_theme_color_override("font_color", AppTheme.SKY_400)
 		feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
 		feedback_body.visible = true
 	elif selected == -1:
 		streak = 0
 		feedback_title.text = "Time expired"
-		feedback_title.add_theme_color_override("font_color", Color("f87171"))
+		feedback_title.add_theme_color_override("font_color", AppTheme.RED_400)
 		feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
 		feedback_body.visible = true
 		missed_questions.append({
@@ -2984,11 +2740,11 @@ func _answer_selected(selected: int) -> void:
 		# The green card already shows the pick — a text echo of it is clutter.
 		feedback_body.text = ""
 		feedback_body.visible = false
-		feedback_title.add_theme_color_override("font_color", Color("34d399"))
+		feedback_title.add_theme_color_override("font_color", AppTheme.EMERALD_400)
 	else:
 		streak = 0
 		feedback_title.text = "Not quite"
-		feedback_title.add_theme_color_override("font_color", Color("f87171"))
+		feedback_title.add_theme_color_override("font_color", AppTheme.RED_400)
 		# One verdict line: your pick is already red on its card, no need to restate it.
 		feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
 		feedback_body.visible = true
@@ -3026,7 +2782,7 @@ func _answer_selected(selected: int) -> void:
 	var nb_tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	nb_tw.parallel().tween_property(next_button, "modulate:a", 1.0, 0.18)
 	nb_tw.parallel().tween_property(next_button, "scale", Vector2.ONE, 0.22)
-	feedback_reference.text = _format_nec_reference(record)
+	feedback_reference.text = NecReference.format_reference(record)
 	feedback_reference.visible = true
 	var table = record.get("reference_table", [])
 	feedback_table_note.visible = false
@@ -3090,19 +2846,19 @@ func _update_score_badges() -> void:
 		streak_meter.set_streak(streak)
 	if session_audio_mode == AudioSettings.Mode.LISTEN:
 		score_label.text = "LISTEN MODE"
-		score_label.add_theme_color_override("font_color", Color("7dd3fc"))
+		score_label.add_theme_color_override("font_color", AppTheme.SKY_300)
 		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", _panel_style("0f2338", "0284c7", 1, 8))
+			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_BLUE_BG, AppTheme.SKY_600, 1, 8))
 		streak_label.text = "%d / %d REVIEWED" % [answered_count, session_length]
-		streak_label.add_theme_color_override("font_color", Color("7dd3fc"))
+		streak_label.add_theme_color_override("font_color", AppTheme.SKY_300)
 		return
 	if answered_count == 0:
 		score_label.text = "TARGET: 75%"
-		score_label.add_theme_color_override("font_color", Color("6ee7b7"))
+		score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
 		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", _panel_style("0f291e", "059669", 1, 8))
+			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_GREEN_BG, AppTheme.EMERALD_600, 1, 8))
 		streak_label.text = "0 / %d ITEMS" % session_length
-		streak_label.add_theme_color_override("font_color", Color("7dd3fc"))
+		streak_label.add_theme_color_override("font_color", AppTheme.SKY_300)
 		return
 
 	var pct: float = (float(score) / float(answered_count)) * 100.0
@@ -3111,22 +2867,22 @@ func _update_score_badges() -> void:
 
 	if pct >= 75.0:
 		score_label.text = "PASSING: " + str(pct_int) + "%"
-		score_label.add_theme_color_override("font_color", Color("6ee7b7"))
+		score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
 		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", _panel_style("0f291e", "059669", 1, 8))
-		streak_label.add_theme_color_override("font_color", Color("34d399"))
+			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_GREEN_BG, AppTheme.EMERALD_600, 1, 8))
+		streak_label.add_theme_color_override("font_color", AppTheme.EMERALD_400)
 	elif pct >= 60.0:
 		score_label.text = "AT RISK: " + str(pct_int) + "%"
-		score_label.add_theme_color_override("font_color", Color("fde047"))
+		score_label.add_theme_color_override("font_color", AppTheme.YELLOW_300)
 		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", _panel_style("241d08", "a16207", 1, 8))
-		streak_label.add_theme_color_override("font_color", Color("fde047"))
+			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_AMBER_BG, AppTheme.YELLOW_700, 1, 8))
+		streak_label.add_theme_color_override("font_color", AppTheme.YELLOW_300)
 	else:
 		score_label.text = "BELOW 75%: " + str(pct_int) + "%"
-		score_label.add_theme_color_override("font_color", Color("fda4af"))
+		score_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
 		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", _panel_style("260c14", "9f1239", 1, 8))
-		streak_label.add_theme_color_override("font_color", Color("fda4af"))
+			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_RED_BG, AppTheme.ROSE_800, 1, 8))
+		streak_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
 
 
 func _append_answer_highlight(text: String, answer: String) -> bool:
@@ -3137,8 +2893,8 @@ func _append_answer_highlight(text: String, answer: String) -> bool:
 	var start := int(match_info["start"])
 	var match_length := int(match_info["length"])
 	info_label.add_text(text.substr(0, start))
-	info_label.push_bgcolor(Color("047857"))
-	info_label.push_color(Color("ffffff"))
+	info_label.push_bgcolor(AppTheme.EMERALD_700)
+	info_label.push_color(AppTheme.WHITE)
 	info_label.push_bold()
 	info_label.add_text(" " + text.substr(start, match_length) + " ")
 	info_label.pop()
@@ -3167,14 +2923,14 @@ func _append_tip_rows(record: Dictionary, tip: String) -> bool:
 	for i in row_order:
 		var is_correct := i == ci
 		info_label.add_text("\n")
-		info_label.push_bgcolor(Color("047857") if is_correct else Color("4c1d24"))
-		info_label.push_color(Color("ffffff") if is_correct else Color("fecdd3"))
+		info_label.push_bgcolor(AppTheme.EMERALD_700 if is_correct else AppTheme.WRONG_HIGHLIGHT_BG)
+		info_label.push_color(AppTheme.WHITE if is_correct else AppTheme.ROSE_200)
 		info_label.push_bold()
 		info_label.add_text(" %s %s " % ["✓" if is_correct else "✗", ANSWER_LETTERS[i]])
 		info_label.pop()
 		info_label.pop()
 		info_label.pop()
-		info_label.push_color(Color("f0fdf4") if is_correct else Color("cbd5e1"))
+		info_label.push_color(AppTheme.GREEN_50 if is_correct else AppTheme.SLATE_300)
 		if is_correct:
 			info_label.push_bold()
 		info_label.add_text("  " + str(answers[i]))
@@ -3183,7 +2939,7 @@ func _append_tip_rows(record: Dictionary, tip: String) -> bool:
 		info_label.pop()
 		var note := str(notes[i]).strip_edges()
 		if note != "":
-			info_label.push_color(Color("a7f3d0") if is_correct else Color("94a3b8"))
+			info_label.push_color(AppTheme.EMERALD_200 if is_correct else AppTheme.SLATE_400)
 			info_label.add_text("  —  " + note)
 			info_label.pop()
 	return true
@@ -3196,8 +2952,8 @@ func _echoes_any(line: String, others: Array) -> bool:
 			return true
 	return false
 
-func _append_provision_heading(text: String, heading_color: String = "7dd3fc") -> void:
-	info_label.push_color(Color(heading_color))
+func _append_provision_heading(text: String, heading_color: Color = AppTheme.SKY_300) -> void:
+	info_label.push_color(heading_color)
 	info_label.push_bold()
 	info_label.add_text(text)
 	info_label.pop()
@@ -3233,18 +2989,18 @@ func _do_render_info_label() -> void:
 		tip = str(record.get("info_tip", "")).strip_edges()
 	if tip != "" and not _echoes_any(tip, [source_text, gist_text]):
 		if tip_title != "":
-			_append_provision_heading("MEMORY TIP — " + tip_title + "\n", "f59e0b")
+			_append_provision_heading("MEMORY TIP — " + tip_title + "\n", AppTheme.AMBER_500)
 		else:
-			_append_provision_heading("MEMORY TIP\n", "f59e0b")
+			_append_provision_heading("MEMORY TIP\n", AppTheme.AMBER_500)
 		highlighted = _append_tip_rows(record, tip) or highlighted
 		info_label.add_text("\n\n")
 
 	# --- CODE PROVISION section (NEC statutory text) ---
-	_append_provision_heading("CODE PROVISION\n", "34d399")
+	_append_provision_heading("CODE PROVISION\n", AppTheme.EMERALD_400)
 	if source_text != "":
 		var heading_end := source_text.find("\n")
 		if heading_end >= 0:
-			info_label.push_color(Color("93c5fd"))
+			info_label.push_color(AppTheme.BLUE_300)
 			info_label.push_bold()
 			info_label.add_text(source_text.substr(0, heading_end + 1))
 			info_label.pop()
@@ -3275,7 +3031,7 @@ func _do_render_info_label() -> void:
 		render_lesson.append([li, ln])
 	if not render_lesson.is_empty():
 		info_label.add_text("\n\n")
-		_append_provision_heading("WHAT THE CODE SAYS\n", "38bdf8")
+		_append_provision_heading("WHAT THE CODE SAYS\n", AppTheme.SKY_400)
 		var first_row := true
 		for pair in render_lesson:
 			var li: int = pair[0]
@@ -3284,8 +3040,8 @@ func _do_render_info_label() -> void:
 				# Amber highlight on the currently-spoken line
 				if not first_row:
 					info_label.add_text("\n")
-				info_label.push_bgcolor(Color("854d0e"))
-				info_label.push_color(Color("fef3c7"))
+				info_label.push_bgcolor(AppTheme.YELLOW_800)
+				info_label.push_color(AppTheme.AMBER_100)
 				info_label.push_bold()
 				info_label.add_text(" ▶  " + ln + " ")
 				info_label.pop()
@@ -3307,15 +3063,15 @@ func _do_render_info_label() -> void:
 	var formula := formula_text
 	if worked != "":
 		info_label.add_text("\n\n")
-		_append_provision_heading("WORKED SOLUTION\n", "fde047")
+		_append_provision_heading("WORKED SOLUTION\n", AppTheme.YELLOW_300)
 		highlighted = _append_answer_highlight(worked, correct_answer) or highlighted
 	elif formula != "":
 		info_label.add_text("\n\n")
-		_append_provision_heading("METHOD & FORMULA\n", "c084fc")
+		_append_provision_heading("METHOD & FORMULA\n", AppTheme.PURPLE_400)
 		highlighted = _append_answer_highlight(formula, correct_answer) or highlighted
 	if not highlighted and correct_answer != "":
 		info_label.add_text("\n\n")
-		_append_provision_heading("ANSWER DETAIL\n", "34d399")
+		_append_provision_heading("ANSWER DETAIL\n", AppTheme.EMERALD_400)
 		_append_answer_highlight(correct_answer, correct_answer)
 func _load_voice_catalog() -> void:
 	voice_ids.clear()
@@ -4234,8 +3990,8 @@ func _set_question_stem_glow(on: bool) -> void:
 		# resting panel, so the stem highlight was effectively invisible.
 		if _question_stem_glow_style == null:
 			_question_stem_glow_style = StyleBoxFlat.new()
-			_question_stem_glow_style.bg_color = Color("10233f")
-			_question_stem_glow_style.border_color = Color("38bdf8")
+			_question_stem_glow_style.bg_color = AppTheme.STEM_GLOW_BG
+			_question_stem_glow_style.border_color = AppTheme.SKY_400
 			_question_stem_glow_style.set_border_width_all(3)
 			_question_stem_glow_style.set_corner_radius_all(14)
 			_question_stem_glow_style.shadow_color = Color(0.22, 0.74, 0.97, 0.65)
@@ -4246,14 +4002,14 @@ func _set_question_stem_glow(on: bool) -> void:
 
 
 func _apply_exam_time_tint() -> void:
-	var label_col := Color("f8fafc")
-	var bar_col := Color("38bdf8")
+	var label_col := AppTheme.SLATE_50
+	var bar_col := AppTheme.SKY_400
 	if timed_session and time_left <= 300:
-		label_col = Color("f87171")
-		bar_col = Color("ef4444")
+		label_col = AppTheme.RED_400
+		bar_col = AppTheme.RED_500
 	elif timed_session and time_left <= 900:
-		label_col = Color("fbbf24")
-		bar_col = Color("f59e0b")
+		label_col = AppTheme.AMBER_400
+		bar_col = AppTheme.AMBER_500
 	timer_label.add_theme_color_override("font_color", label_col)
 	timer_bar.modulate = bar_col
 
@@ -4268,16 +4024,16 @@ func _tick_timer() -> void:
 		question_time_left -= 1
 		question_timer_label.text = "ITEM " + _format_time(max(question_time_left, 0))
 		if question_time_left <= 30:
-			question_timer_label.add_theme_color_override("font_color", Color("f87171"))
+			question_timer_label.add_theme_color_override("font_color", AppTheme.RED_400)
 			# Subtle warning pulse
 			question_timer_label.pivot_offset = question_timer_label.size / 2.0
 			var p_tw := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 			p_tw.tween_property(question_timer_label, "scale", Vector2(1.08, 1.08), 0.1)
 			p_tw.tween_property(question_timer_label, "scale", Vector2.ONE, 0.14)
 		elif question_time_left <= 60:
-			question_timer_label.add_theme_color_override("font_color", Color("fbbf24"))
+			question_timer_label.add_theme_color_override("font_color", AppTheme.AMBER_400)
 		else:
-			question_timer_label.add_theme_color_override("font_color", Color("38bdf8"))
+			question_timer_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	if Sfx.time_warning(timed_session, time_left):
 		_sfx("warning")
 	_update_time_gauges()
@@ -4333,7 +4089,7 @@ func _show_results() -> void:
 	else:
 		progress_label.text = "SESSION COMPLETE  •  %d OF %d ANSWERED" % [answered_count, order.size()]
 	question_timer_label.text = "REVIEW"
-	question_timer_label.add_theme_color_override("font_color", Color("38bdf8"))
+	question_timer_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	if is_instance_valid(dock_panel):
 		dock_panel.visible = false
 	if session_audio_mode == AudioSettings.Mode.LISTEN:
@@ -4344,14 +4100,14 @@ func _show_results() -> void:
 	var passed := accuracy >= PASS_PERCENT
 	if passed:
 		score_label.text = "RESULT: PASSED"
-		score_label.add_theme_color_override("font_color", Color("6ee7b7"))
+		score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
 		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", _panel_style("0f291e", "059669", 1, 8))
+			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_GREEN_BG, AppTheme.EMERALD_600, 1, 8))
 	else:
 		score_label.text = "RESULT: DID NOT PASS"
-		score_label.add_theme_color_override("font_color", Color("fda4af"))
+		score_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
 		if is_instance_valid(pass_badge):
-			pass_badge.add_theme_stylebox_override("panel", _panel_style("260c14", "9f1239", 1, 8))
+			pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_RED_BG, AppTheme.ROSE_800, 1, 8))
 	streak_label.text = "FINAL: %d/%d (%d%%)" % [score, answered_count, roundi(accuracy)]
 	for child in answers_box.get_children():
 		child.queue_free()
@@ -4359,10 +4115,10 @@ func _show_results() -> void:
 	feedback_reference.visible = false
 	if passed:
 		feedback_title.text = "EXAMINATION RESULT: PASS"
-		feedback_title.add_theme_color_override("font_color", Color("34d399"))
+		feedback_title.add_theme_color_override("font_color", AppTheme.EMERALD_400)
 	else:
 		feedback_title.text = "EXAMINATION RESULT: DID NOT PASS"
-		feedback_title.add_theme_color_override("font_color", Color("f87171"))
+		feedback_title.add_theme_color_override("font_color", AppTheme.RED_400)
 	
 	# The gauge and the title already state the percentage and the verdict.
 	var summary_text := "%d of %d correct  •  %d%% needed to pass  •  %s" % [
@@ -4376,10 +4132,10 @@ func _show_results() -> void:
 
 	info_label.clear()
 	if missed_questions.is_empty():
-		_append_provision_heading("PERFECT SCORE ACHIEVED\n", "34d399")
+		_append_provision_heading("PERFECT SCORE ACHIEVED\n", AppTheme.EMERALD_400)
 		info_label.add_text("Congratulations! You answered 100% of questions correctly. You have demonstrated full mastery of these NEC 2023 provisions.")
 	else:
-		_append_provision_heading("AREAS FOR TARGETED CODE STUDY (%d FAILED ITEMS)\n" % missed_questions.size(), "f87171")
+		_append_provision_heading("AREAS FOR TARGETED CODE STUDY (%d FAILED ITEMS)\n" % missed_questions.size(), AppTheme.RED_400)
 		info_label.add_text("The following questions were answered incorrectly or timed out. Review each NEC article reference carefully before retaking the test:\n\n")
 
 		for i in missed_questions.size():
@@ -4392,16 +4148,16 @@ func _show_results() -> void:
 			var art_title: String = str(item.get("article_title", ""))
 			var tip: String = str(item.get("tip_short", ""))
 
-			_append_provision_heading("ITEM #%d  •  NEC %s%s\n" % [num, article, " — " + art_title if art_title != "" else ""], "7dd3fc")
-			info_label.push_color(Color("e2e8f0"))
+			_append_provision_heading("ITEM #%d  •  NEC %s%s\n" % [num, article, " — " + art_title if art_title != "" else ""], AppTheme.SKY_300)
+			info_label.push_color(AppTheme.SLATE_200)
 			info_label.add_text("Question: %s\n" % prompt)
 			info_label.pop()
 			
-			info_label.push_color(Color("fca5a5"))
+			info_label.push_color(AppTheme.RED_300)
 			info_label.add_text("Your answer:  %s\n" % selected)
 			info_label.pop()
 			
-			info_label.push_color(Color("86efac"))
+			info_label.push_color(AppTheme.GREEN_300)
 			info_label.push_bold()
 			info_label.add_text("Correct NEC answer:  %s\n" % correct)
 			info_label.pop()
@@ -4410,11 +4166,11 @@ func _show_results() -> void:
 			if tip != "":
 				var ri := int(item.get("record_index", -1))
 				if ri >= 0 and ri < records.size():
-					_append_provision_heading("Code key:  ", "93c5fd")
+					_append_provision_heading("Code key:  ", AppTheme.BLUE_300)
 					_append_tip_rows(records[ri], tip)
 					info_label.add_text("\n")
 				else:
-					info_label.push_color(Color("93c5fd"))
+					info_label.push_color(AppTheme.BLUE_300)
 					info_label.add_text("Code Key:  %s\n" % tip)
 					info_label.pop()
 
@@ -4439,7 +4195,7 @@ func _show_listen_results() -> void:
 	feedback_panel.visible = true
 	feedback_reference.visible = false
 	feedback_title.text = "LISTENING SESSION COMPLETE"
-	feedback_title.add_theme_color_override("font_color", Color("38bdf8"))
+	feedback_title.add_theme_color_override("font_color", AppTheme.SKY_400)
 	feedback_body.text = "Reviewed %d of %d questions hands-free.\nListen mode is not graded — run a drill in Tap or Auto-read mode to test yourself." % [answered_count, order.size()]
 	feedback_body.visible = true
 	info_label.clear()

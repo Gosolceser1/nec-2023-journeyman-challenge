@@ -19,13 +19,6 @@ var accent_bar: ColorRect
 var voice_visualizer: VoiceVisualizer
 var _margin: MarginContainer
 
-static func _card_font(weight: int = 500) -> SystemFont:
-	var font := SystemFont.new()
-	font.font_names = PackedStringArray(["Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"])
-	font.font_weight = weight
-	font.subpixel_positioning = TextServer.SUBPIXEL_POSITIONING_AUTO
-	return font
-
 func _init() -> void:
 	custom_minimum_size = Vector2(0, 56)
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -58,7 +51,7 @@ func _init() -> void:
 	accent_bar.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	accent_bar.custom_minimum_size = Vector2(4, 28)
 	accent_bar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	accent_bar.color = Color("38bdf8")
+	accent_bar.color = AppTheme.SKY_400
 	hbox.add_child(accent_bar)
 
 	# Letter Pill (A, B, C, D)
@@ -67,8 +60,8 @@ func _init() -> void:
 	letter_panel.custom_minimum_size = Vector2(34, 34)
 	letter_panel.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	var pill_style := StyleBoxFlat.new()
-	pill_style.bg_color = Color("142035")
-	pill_style.border_color = Color("223659")
+	pill_style.bg_color = AppTheme.CARD_PILL_BG
+	pill_style.border_color = AppTheme.DOCK_BUTTON_BORDER
 	pill_style.set_border_width_all(1)
 	pill_style.set_corner_radius_all(10)
 	letter_panel.add_theme_stylebox_override("panel", pill_style)
@@ -78,9 +71,9 @@ func _init() -> void:
 	letter_label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	letter_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	letter_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	letter_label.add_theme_font_override("font", _card_font(700))
+	letter_label.add_theme_font_override("font", AppTheme.ui_font(700))
 	letter_label.add_theme_font_size_override("font_size", 16)
-	letter_label.add_theme_color_override("font_color", Color("ffffff"))
+	letter_label.add_theme_color_override("font_color", AppTheme.WHITE)
 	letter_panel.add_child(letter_label)
 
 	# Answer Text Label
@@ -89,9 +82,9 @@ func _init() -> void:
 	answer_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	answer_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	answer_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	answer_label.add_theme_font_override("font", _card_font(600))
+	answer_label.add_theme_font_override("font", AppTheme.ui_font(600))
 	answer_label.add_theme_font_size_override("font_size", 17)
-	answer_label.add_theme_color_override("font_color", Color("ffffff"))
+	answer_label.add_theme_color_override("font_color", AppTheme.WHITE)
 	hbox.add_child(answer_label)
 
 	# Audio voice visualizer bars (shown when card is being read)
@@ -214,8 +207,8 @@ func set_speaking(on: bool) -> void:
 		var style: StyleBoxFlat = get_theme_stylebox("panel")
 		if style:
 			style = style.duplicate()
-			style.bg_color = Color("1a2942")
-			style.border_color = Color("38bdf8")
+			style.bg_color = AppTheme.CARD_SPEAKING_BG
+			style.border_color = AppTheme.SKY_400
 			style.set_border_width_all(2)
 			style.shadow_color = Color(0.22, 0.74, 0.97, 0.35)
 			style.shadow_size = 12
@@ -225,10 +218,10 @@ func set_speaking(on: bool) -> void:
 		var pill_style: StyleBoxFlat = letter_panel.get_theme_stylebox("panel")
 		if pill_style:
 			pill_style = pill_style.duplicate()
-			pill_style.bg_color = Color("0284c7")
-			pill_style.border_color = Color("38bdf8")
+			pill_style.bg_color = AppTheme.SKY_600
+			pill_style.border_color = AppTheme.SKY_400
 			letter_panel.add_theme_stylebox_override("panel", pill_style)
-		letter_label.add_theme_color_override("font_color", Color("ffffff"))
+		letter_label.add_theme_color_override("font_color", AppTheme.WHITE)
 
 		# Animated gentle bounce
 		pivot_offset = size / 2.0
@@ -263,14 +256,14 @@ func _draw_state_icon() -> void:
 				Vector2(21, s.y * 0.22)
 			])
 			vector_state_icon.draw_polyline(pts, Color(0.06, 0.72, 0.5, 0.35), 4.6, true)
-			vector_state_icon.draw_polyline(pts, Color("10b981"), 2.6, true)
+			vector_state_icon.draw_polyline(pts, AppTheme.EMERALD_500, 2.6, true)
 		State.WRONG:
 			# Draw vector cross with soft outer glow line
 			var pad: float = 4.0
 			vector_state_icon.draw_line(Vector2(pad, pad), Vector2(s.x - pad, s.y - pad), Color(0.93, 0.26, 0.26, 0.35), 4.6, true)
 			vector_state_icon.draw_line(Vector2(s.x - pad, pad), Vector2(pad, s.y - pad), Color(0.93, 0.26, 0.26, 0.35), 4.6, true)
-			vector_state_icon.draw_line(Vector2(pad, pad), Vector2(s.x - pad, s.y - pad), Color("ef4444"), 2.6, true)
-			vector_state_icon.draw_line(Vector2(s.x - pad, pad), Vector2(pad, s.y - pad), Color("ef4444"), 2.6, true)
+			vector_state_icon.draw_line(Vector2(pad, pad), Vector2(s.x - pad, s.y - pad), AppTheme.RED_500, 2.6, true)
+			vector_state_icon.draw_line(Vector2(s.x - pad, pad), Vector2(pad, s.y - pad), AppTheme.RED_500, 2.6, true)
 		_:
 			pass
 
@@ -291,74 +284,74 @@ func _apply_styling() -> void:
 
 	# Clean, professional exam styling for choices:
 	# Keep all cards in a uniform, crisp state so choices C & D don't look pre-answered as green/red.
-	var card_accent := Color("38bdf8") # Clean cyan highlight on hover/focus
+	var card_accent := AppTheme.SKY_400 # Clean cyan highlight on hover/focus
 
 	match current_state:
 		State.CORRECT:
-			style.bg_color = Color("0d281e")
-			style.border_color = Color("10b981")
+			style.bg_color = AppTheme.CARD_CORRECT_BG
+			style.border_color = AppTheme.EMERALD_500
 			style.set_border_width_all(2)
 			style.shadow_color = Color(0.06, 0.72, 0.5, 0.25)
 			style.shadow_size = 10
-			accent_bar.color = Color("34d399")
-			pill_style.bg_color = Color("10b981")
-			pill_style.border_color = Color("34d399")
-			letter_label.add_theme_color_override("font_color", Color("022c1b"))
-			answer_label.add_theme_color_override("font_color", Color("f0fdf4"))
+			accent_bar.color = AppTheme.EMERALD_400
+			pill_style.bg_color = AppTheme.EMERALD_500
+			pill_style.border_color = AppTheme.EMERALD_400
+			letter_label.add_theme_color_override("font_color", AppTheme.CARD_CORRECT_INK)
+			answer_label.add_theme_color_override("font_color", AppTheme.GREEN_50)
 		State.WRONG:
-			style.bg_color = Color("2e1216")
-			style.border_color = Color("ef4444")
+			style.bg_color = AppTheme.CARD_WRONG_BG
+			style.border_color = AppTheme.RED_500
 			style.set_border_width_all(2)
 			style.shadow_color = Color(0.95, 0.24, 0.36, 0.25)
 			style.shadow_size = 10
-			accent_bar.color = Color("fb7185")
-			pill_style.bg_color = Color("ef4444")
-			pill_style.border_color = Color("fca5a5")
-			letter_label.add_theme_color_override("font_color", Color("1f0408"))
-			answer_label.add_theme_color_override("font_color", Color("fff1f2"))
+			accent_bar.color = AppTheme.ROSE_400
+			pill_style.bg_color = AppTheme.RED_500
+			pill_style.border_color = AppTheme.RED_300
+			letter_label.add_theme_color_override("font_color", AppTheme.CARD_WRONG_INK)
+			answer_label.add_theme_color_override("font_color", AppTheme.ROSE_50)
 		State.ELIMINATED:
-			style.bg_color = Color("0d131f")
-			style.border_color = Color("172030")
+			style.bg_color = AppTheme.CARD_ELIMINATED_BG
+			style.border_color = AppTheme.CARD_ELIMINATED_BORDER
 			style.set_border_width_all(1)
 			style.shadow_size = 0
 			accent_bar.color = Color(0.3, 0.35, 0.45, 0.2)
-			pill_style.bg_color = Color("111827")
-			pill_style.border_color = Color("1f293d")
-			letter_label.add_theme_color_override("font_color", Color("475569"))
-			answer_label.add_theme_color_override("font_color", Color("64748b"))
+			pill_style.bg_color = AppTheme.GRAY_900
+			pill_style.border_color = AppTheme.CARD_ELIMINATED_PILL_BORDER
+			letter_label.add_theme_color_override("font_color", AppTheme.SLATE_600)
+			answer_label.add_theme_color_override("font_color", AppTheme.SLATE_500)
 		State.HOVER:
-			style.bg_color = Color("1a2538")
-			style.border_color = Color("38bdf8")
+			style.bg_color = AppTheme.CARD_HOVER_BG
+			style.border_color = AppTheme.SKY_400
 			style.set_border_width_all(2)
 			style.shadow_color = Color(0, 0, 0, 0.45)
 			style.shadow_size = 8
-			accent_bar.color = Color("38bdf8")
-			pill_style.bg_color = Color("0284c7")
-			pill_style.border_color = Color("38bdf8")
-			letter_label.add_theme_color_override("font_color", Color("ffffff"))
-			answer_label.add_theme_color_override("font_color", Color("ffffff"))
+			accent_bar.color = AppTheme.SKY_400
+			pill_style.bg_color = AppTheme.SKY_600
+			pill_style.border_color = AppTheme.SKY_400
+			letter_label.add_theme_color_override("font_color", AppTheme.WHITE)
+			answer_label.add_theme_color_override("font_color", AppTheme.WHITE)
 		State.PRESSED:
-			style.bg_color = Color("141e30")
-			style.border_color = Color("0ea5e9")
+			style.bg_color = AppTheme.CARD_PRESSED_BG
+			style.border_color = AppTheme.SKY_500
 			style.set_border_width_all(2)
 			style.shadow_color = Color(0, 0, 0, 0.3)
 			style.shadow_size = 4
-			accent_bar.color = Color("0ea5e9")
-			pill_style.bg_color = Color("0369a1")
-			pill_style.border_color = Color("0ea5e9")
-			letter_label.add_theme_color_override("font_color", Color("ffffff"))
-			answer_label.add_theme_color_override("font_color", Color("ffffff"))
+			accent_bar.color = AppTheme.SKY_500
+			pill_style.bg_color = AppTheme.SKY_700
+			pill_style.border_color = AppTheme.SKY_500
+			letter_label.add_theme_color_override("font_color", AppTheme.WHITE)
+			answer_label.add_theme_color_override("font_color", AppTheme.WHITE)
 		_: # NORMAL
-			style.bg_color = Color("111928")
-			style.border_color = Color("2e3d57")
+			style.bg_color = AppTheme.BUTTON_BG
+			style.border_color = AppTheme.BUTTON_BORDER
 			style.set_border_width_all(1)
 			style.shadow_color = Color(0, 0, 0, 0.35)
 			style.shadow_size = 6
-			accent_bar.color = Color("38bdf8")
-			pill_style.bg_color = Color("1e293b")
-			pill_style.border_color = Color("475569")
-			letter_label.add_theme_color_override("font_color", Color("ffffff"))
-			answer_label.add_theme_color_override("font_color", Color("ffffff"))
+			accent_bar.color = AppTheme.SKY_400
+			pill_style.bg_color = AppTheme.SLATE_800
+			pill_style.border_color = AppTheme.SLATE_600
+			letter_label.add_theme_color_override("font_color", AppTheme.WHITE)
+			answer_label.add_theme_color_override("font_color", AppTheme.WHITE)
 
 	add_theme_stylebox_override("panel", style)
 

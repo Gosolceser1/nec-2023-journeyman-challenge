@@ -8,7 +8,7 @@ extends SceneTree
 ## showed NO question and NO answer cards. The 342-check scene harness stayed
 ## GREEN throughout, because it asserts quiz LOGIC and never inspects a margin.
 ##
-## This calls the REAL main.gd:static safe_area_margins() with synthetic
+## This calls the REAL SafeArea.margins() (src/core/safe_area.gd) with synthetic
 ## insets, so it cannot drift away from the shipped arithmetic. A first version
 ## of this test re-implemented the math locally and passed against the broken
 ## code — which proved nothing.
@@ -24,21 +24,16 @@ func check(cond: bool, label: String) -> void:
 
 
 func _init() -> void:
-	var main_script = load("res://src/app/main.gd")
-	if main_script == null:
-		print("  FAIL: could not load main.gd")
-		quit(1)
-		return
-	print("=== SAFE AREA MARGIN MATH (against the real safe_area_margins) ===")
+	print("=== SAFE AREA MARGIN MATH (against the real SafeArea.margins) ===")
 
 	# screen_w/h: physical pixels.  vp_w/h: stretched canvas units.
-	_geom(main_script, 1080, 2400, 540, 1200, Rect2i(0, 63, 1080, 2274), [], "Pixel 7, status + gesture")
-	_geom(main_script, 1080, 2400, 540, 1200, Rect2i(0, 0, 1080, 2400), [], "no insets at all")
-	_geom(main_script, 1536, 2048, 720, 960, Rect2i(0, 0, 1536, 2048), [], "tablet, no insets")
-	_geom(main_script, 1080, 2400, 540, 1200, Rect2i(0, 63, 1080, 2400 - 63), [], "gesture nav only")
-	_geom(main_script, 1080, 2400, 540, 1200, Rect2i(0, 0, 1080, 2400), [Rect2(440, 0, 200, 120)], "punch-hole, symmetric")
-	_geom(main_script, 2400, 1080, 1200, 540, Rect2i(63, 0, 2400 - 63, 1080), [], "landscape, cutout on a side")
-	_geom(main_script, 1080, 2400, 540, 1200, Rect2i(0, 63, 1080, 2274), [Rect2(0, 0, 200, 120)], "notch + cutout union")
+	_geom(1080, 2400, 540, 1200, Rect2i(0, 63, 1080, 2274), [], "Pixel 7, status + gesture")
+	_geom(1080, 2400, 540, 1200, Rect2i(0, 0, 1080, 2400), [], "no insets at all")
+	_geom(1536, 2048, 720, 960, Rect2i(0, 0, 1536, 2048), [], "tablet, no insets")
+	_geom(1080, 2400, 540, 1200, Rect2i(0, 63, 1080, 2400 - 63), [], "gesture nav only")
+	_geom(1080, 2400, 540, 1200, Rect2i(0, 0, 1080, 2400), [Rect2(440, 0, 200, 120)], "punch-hole, symmetric")
+	_geom(2400, 1080, 1200, 540, Rect2i(63, 0, 2400 - 63, 1080), [], "landscape, cutout on a side")
+	_geom(1080, 2400, 540, 1200, Rect2i(0, 63, 1080, 2274), [Rect2(0, 0, 200, 120)], "notch + cutout union")
 
 	print("")
 	print("checks: %d  failures: %d" % [checks, failures.size()])
@@ -48,9 +43,9 @@ func _init() -> void:
 	quit(0 if failures.is_empty() else 1)
 
 
-func _geom(main_script, sw: int, sh: int, vw: float, vh: float,
+func _geom(sw: int, sh: int, vw: float, vh: float,
 		safe: Rect2i, cutouts: Array, label: String) -> void:
-	var m: Dictionary = main_script.safe_area_margins(
+	var m: Dictionary = SafeArea.margins(
 		Vector2(vw, vh), Vector2i(sw, sh), safe, cutouts, true)
 	var top: int = int(m["top"])
 	var bottom: int = int(m["bottom"])

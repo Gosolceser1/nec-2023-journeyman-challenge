@@ -77,10 +77,10 @@ func _draw() -> void:
 		var total: int = maxi(int(row["total"]), 1)
 		var ratio := float(row["correct"]) / float(total)
 		var col := ResultGauge.tint_for(ratio * 100.0, 75.0)
-		draw_string(font, Vector2(0, y + 16.0), str(row["label"]), HORIZONTAL_ALIGNMENT_LEFT, label_w, 12, Color("cbd5e1"))
+		draw_string(font, Vector2(0, y + 16.0), str(row["label"]), HORIZONTAL_ALIGNMENT_LEFT, label_w, 12, AppTheme.SLATE_300)
 		var track := Rect2(bar_x, y + 7.0, bar_w, 10.0)
 		draw_rect(track, Color(1, 1, 1, 0.07))
 		if ratio > 0.0:
 			draw_rect(Rect2(track.position, Vector2(bar_w * ratio * _grow, track.size.y)), col)
 		draw_string(font, Vector2(bar_x + bar_w + 6.0, y + 16.0), "%d/%d" % [int(row["correct"]), int(row["total"])],
-			HORIZONTAL_ALIGNMENT_LEFT, count_w, 12, Color("94a3b8"))
+			HORIZONTAL_ALIGNMENT_LEFT, count_w, 12, AppTheme.SLATE_400)

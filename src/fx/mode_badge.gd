@@ -6,7 +6,7 @@ extends Control
 
 var question_count := 10
 var full_exam := false
-var accent := Color("38bdf8")
+var accent := AppTheme.SKY_400
 
 
 func _init() -> void:
@@ -26,4 +26,4 @@ func _draw() -> void:
 		draw_colored_polygon(UiFx.bolt_points(c, r * 1.1), accent)
 	else:
 		var font := get_theme_default_font()
-		draw_string(font, Vector2(0, c.y + 5.0), str(question_count), HORIZONTAL_ALIGNMENT_CENTER, size.x, 14, Color("f8fafc"))
+		draw_string(font, Vector2(0, c.y + 5.0), str(question_count), HORIZONTAL_ALIGNMENT_CENTER, size.x, 14, AppTheme.SLATE_50)

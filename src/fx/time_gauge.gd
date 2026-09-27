@@ -9,7 +9,7 @@ enum Mode { RING, EDGE }
 
 var mode: Mode = Mode.RING
 var fraction := 1.0
-var color := Color("38bdf8")
+var color := AppTheme.SKY_400
 var track_color := Color(1, 1, 1, 0.09)
 var _pulse := 0.0
 

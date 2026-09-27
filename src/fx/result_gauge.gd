@@ -34,10 +34,10 @@ func _set_shown(v: float) -> void:
 
 static func tint_for(pct: float, pass_line: float) -> Color:
 	if pct >= pass_line:
-		return Color("34d399")
+		return AppTheme.EMERALD_400
 	if pct >= pass_line - 15.0:
-		return Color("fbbf24")
-	return Color("f87171")
+		return AppTheme.AMBER_400
+	return AppTheme.RED_400
 
 
 func _angle(pct: float) -> float:
@@ -58,12 +58,12 @@ func _draw() -> void:
 
 	var pa := _angle(pass_pct)
 	var dir := Vector2(cos(pa), sin(pa))
-	draw_line(c + dir * (r - 12.0), c + dir * (r + 12.0), Color("f8fafc"), 2.0, true)
+	draw_line(c + dir * (r - 12.0), c + dir * (r + 12.0), AppTheme.SLATE_50, 2.0, true)
 
 	var font := get_theme_default_font()
-	draw_string(font, Vector2(0, c.y + 8.0), "%d%%" % roundi(_shown), HORIZONTAL_ALIGNMENT_CENTER, size.x, 38, Color("f8fafc"))
+	draw_string(font, Vector2(0, c.y + 8.0), "%d%%" % roundi(_shown), HORIZONTAL_ALIGNMENT_CENTER, size.x, 38, AppTheme.SLATE_50)
 	var verdict := "PASS" if target_pct >= pass_pct else "BELOW %d%%" % roundi(pass_pct)
-	var verdict_col := tint_for(target_pct, pass_pct) if is_equal_approx(_shown, target_pct) else Color("64748b")
+	var verdict_col := tint_for(target_pct, pass_pct) if is_equal_approx(_shown, target_pct) else AppTheme.SLATE_500
 	draw_string(font, Vector2(0, c.y + 30.0), verdict, HORIZONTAL_ALIGNMENT_CENTER, size.x, 13, verdict_col)
 	var label_at := c + dir * (r + 22.0)
-	draw_string(font, label_at + Vector2(-20, 4), "%d%%" % roundi(pass_pct), HORIZONTAL_ALIGNMENT_CENTER, 40, 10, Color("94a3b8"))
+	draw_string(font, label_at + Vector2(-20, 4), "%d%%" % roundi(pass_pct), HORIZONTAL_ALIGNMENT_CENTER, 40, 10, AppTheme.SLATE_400)

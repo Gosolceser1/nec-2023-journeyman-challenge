@@ -8,9 +8,9 @@ extends Control
 @export var bar_count: int = 5
 @export var bar_width: float = 3.5
 @export var bar_gap: float = 3.0
-@export var active_color: Color = Color("38bdf8")       # Electric Sky Cyan
-@export var secondary_color: Color = Color("34d399")    # Emerald highlight
-@export var idle_color: Color = Color("334155")         # Subdued slate
+@export var active_color: Color = AppTheme.SKY_400       # Electric Sky Cyan
+@export var secondary_color: Color = AppTheme.EMERALD_400    # Emerald highlight
+@export var idle_color: Color = AppTheme.SLATE_700         # Subdued slate
 
 var is_active: bool = false
 var _anim_time: float = 0.0

@@ -9,10 +9,10 @@ const CIRCUIT_SHADER := preload("res://src/fx/shaders/circuit_backdrop.gdshader"
 const TITLE_SHADER := preload("res://src/fx/shaders/electric_title.gdshader")
 const SHINE_SHADER := preload("res://src/fx/shaders/card_shine.gdshader")
 
-const CYAN := Color("38bdf8")
-const EMERALD := Color("34d399")
-const RED := Color("f87171")
-const AMBER := Color("fbbf24")
+const CYAN := AppTheme.SKY_400
+const EMERALD := AppTheme.EMERALD_400
+const RED := AppTheme.RED_400
+const AMBER := AppTheme.AMBER_400
 
 ## Particle nodes alive on one fx layer are capped so rapid answering (or the
 ## headless harness answering hundreds of items without frames) can't pile up.
@@ -108,7 +108,7 @@ static func confetti(layer: Control) -> void:
 	var palette := Gradient.new()
 	palette.interpolation_mode = Gradient.GRADIENT_INTERPOLATE_CONSTANT
 	palette.offsets = PackedFloat32Array([0.0, 0.17, 0.34, 0.5, 0.67, 0.84])
-	palette.colors = PackedColorArray([CYAN, EMERALD, Color("fde047"), Color("f472b6"), Color("a78bfa"), Color("fb923c")])
+	palette.colors = PackedColorArray([CYAN, EMERALD, AppTheme.YELLOW_300, AppTheme.PINK_400, AppTheme.VIOLET_400, AppTheme.ORANGE_400])
 	p.color_initial_ramp = palette
 	var fade := Gradient.new()
 	fade.set_color(0, Color.WHITE)

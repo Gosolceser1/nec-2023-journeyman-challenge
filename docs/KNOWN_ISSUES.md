@@ -15,7 +15,7 @@ that produced false results before. Fixed defects are in git history
   accessibility font size. Test with Font size = Large.
 - **`get_display_safe_area()` accuracy.** godot#105462 reports a too-narrow
   safe area on Pixel 9 in some orientations. The inset scaling in
-  `safe_area_margins` is correct in principle; confirm on a notched device.
+  `SafeArea.margins` is correct in principle; confirm on a notched device.
 - **`exam_label` / `question_diagram_label` use `AUTOWRAP_OFF`.** Long NEC
   values may clip on narrow phones.
 - **Native-TTS watchdog tweens accumulate** (min 6 s each, bounded by
@@ -31,6 +31,11 @@ that produced false results before. Fixed defects are in git history
   awaits (only the tool scripts do), so the crash is most likely in the
   measuring loop or the engine; the Windows build opens at 540x960, so it is
   worth a look.
+- **`NecReference.lookup_path` reads any 3-digit number as an NEC article.**
+  An `article` of "NFPA 70E 130.5" would show "Chapter 1 ► Article 130"
+  instead of the NFPA 70E line. The bank only uses the bare "NFPA 70E", which
+  takes the right branch, so nothing shows it today; check the NFPA case first
+  if sectioned 70E references are ever added.
 
 ## Verification traps
 

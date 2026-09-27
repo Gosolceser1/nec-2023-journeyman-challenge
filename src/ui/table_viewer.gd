@@ -2,14 +2,6 @@ class_name TableViewer
 extends RefCounted
 ## Encapsulates NEC Table rendering, style generation, and row centering / auto-scroll logic.
 
-static func panel_style(fill: String, border: String, width: int, radius: int) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(fill)
-	style.border_color = Color(border)
-	style.set_border_width_all(width)
-	style.set_corner_radius_all(radius)
-	return style
-
 ## The characters that may follow the word NOTE in a real note row: a colon,
 ## a number separator, or plain whitespace. Shared by is_note_row() and
 ## _strip_note_prefix() so the classifier and the strip can never disagree --
@@ -178,9 +170,9 @@ static func populate_table(
 				cell_width = 84.0 if column_index == 0 else 112.0
 			cell.custom_minimum_size = Vector2(cell_width, 30.0)
 			var header_cell := row_index == 0
-			var background := "152844" if header_cell else ("064e3b" if cell_highlighted else ("0f172a" if cell_is_blanked else ("0c1524" if row_index % 2 == 0 else "121d30")))
-			var border := "334d72" if header_cell else ("34d399" if cell_highlighted else ("38bdf8" if cell_is_blanked else "1e2f47"))
-			cell.add_theme_stylebox_override("panel", panel_style(background, border, 1, 0))
+			var background := AppTheme.TABLE_HEADER_BG if header_cell else (AppTheme.EMERALD_900 if cell_highlighted else (AppTheme.SLATE_900 if cell_is_blanked else (AppTheme.TABLE_ROW_EVEN if row_index % 2 == 0 else AppTheme.TABLE_ROW_ODD)))
+			var border := AppTheme.TABLE_HEADER_BORDER if header_cell else (AppTheme.EMERALD_400 if cell_highlighted else (AppTheme.SKY_400 if cell_is_blanked else AppTheme.TABLE_CELL_BORDER))
+			cell.add_theme_stylebox_override("panel", AppTheme.panel_style(background, border, 1, 0))
 			grid.add_child(cell)
 			var margin := MarginContainer.new()
 			margin.add_theme_constant_override("margin_left", 7)
@@ -194,7 +186,7 @@ static func populate_table(
 			label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 			label.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT if column_index == 0 else HORIZONTAL_ALIGNMENT_CENTER
 			label.add_theme_font_size_override("font_size", 12 if column_count < 8 else 11)
-			var text_color: Color = Color("38bdf8") if header_cell else (Color("ecfdf5") if cell_highlighted else (Color("38bdf8") if cell_is_blanked else Color("f1f5f9")))
+			var text_color: Color = AppTheme.SKY_400 if header_cell else (AppTheme.EMERALD_50 if cell_highlighted else (AppTheme.SKY_400 if cell_is_blanked else AppTheme.SLATE_100))
 			label.add_theme_color_override("font_color", text_color)
 			margin.add_child(label)
 			if cell_matches_answer and matched_row < 0:

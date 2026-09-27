@@ -35,14 +35,14 @@ func _process(delta: float) -> void:
 static func segment_color(i: int) -> Color:
 	var t := float(i) / float(SEGMENTS - 1)
 	if t < 0.5:
-		return Color("38bdf8").lerp(Color("34d399"), t * 2.0)
-	return Color("34d399").lerp(Color("fbbf24"), (t - 0.5) * 2.0)
+		return AppTheme.SKY_400.lerp(AppTheme.EMERALD_400, t * 2.0)
+	return AppTheme.EMERALD_400.lerp(AppTheme.AMBER_400, (t - 0.5) * 2.0)
 
 
 func _draw() -> void:
 	var h := size.y
 	var charged := streak > 0
-	var bolt_col := Color("fbbf24") if charged else Color("334155")
+	var bolt_col := AppTheme.AMBER_400 if charged else AppTheme.SLATE_700
 	if _flash > 0.0:
 		bolt_col = bolt_col.lerp(Color.WHITE, _flash * 0.7)
 	draw_colored_polygon(UiFx.bolt_points(Vector2(6, h * 0.5), h * 0.95), bolt_col)
@@ -66,4 +66,4 @@ func _draw() -> void:
 		var font := get_theme_default_font()
 		var label := "x%d" % streak
 		draw_string(font, Vector2(x + 3.0, h - 3.0), label, HORIZONTAL_ALIGNMENT_LEFT, -1, 11,
-			Color("fde68a").lerp(Color.WHITE, _flash))
+			AppTheme.AMBER_200.lerp(Color.WHITE, _flash))

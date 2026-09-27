@@ -15,8 +15,8 @@ const MAP_PATH := "res://assets/diagrams/diagrams.json"
 const PAD := 4.0
 const TAP_SLOP := 14.0
 const HINT_GUTTER := 36.0
-const INK := Color("0f172a")
-const HIGHLIGHT := Color("10b981")
+const INK := AppTheme.SLATE_900
+const HIGHLIGHT := AppTheme.EMERALD_500
 
 static var _map: Dictionary = {}
 static var _loaded := false
@@ -216,8 +216,8 @@ func _draw_zoom_hint() -> void:
 	var r := 7.0
 	var c := Vector2(size.x - r - 5.0, size.y - r - 5.0)
 	draw_circle(c, r + 4.0, Color(0.06, 0.09, 0.16, 0.10))
-	draw_arc(c + Vector2(-1.5, -1.5), 4.0, 0.0, TAU, 20, Color("0369a1"), 1.6, true)
-	draw_line(c + Vector2(1.4, 1.4), c + Vector2(4.5, 4.5), Color("0369a1"), 1.8, true)
+	draw_arc(c + Vector2(-1.5, -1.5), 4.0, 0.0, TAU, 20, AppTheme.SKY_700, 1.6, true)
+	draw_line(c + Vector2(1.4, 1.4), c + Vector2(4.5, 4.5), AppTheme.SKY_700, 1.8, true)
 
 
 func _gui_input(event: InputEvent) -> void:
@@ -282,8 +282,8 @@ class _ZoomSheet extends Control:
 		draw_rect(Rect2(Vector2.ZERO, get_viewport_rect().size), Color(0.01, 0.03, 0.07, 0.9))
 		var card := _card_rect()
 		var sb := StyleBoxFlat.new()
-		sb.bg_color = Color("f8fafc")
-		sb.border_color = Color("38bdf8")
+		sb.bg_color = AppTheme.SLATE_50
+		sb.border_color = AppTheme.SKY_400
 		sb.set_border_width_all(2)
 		sb.set_corner_radius_all(14)
 		draw_style_box(sb, card)
@@ -292,7 +292,7 @@ class _ZoomSheet extends Control:
 		var hint := "Tap anywhere or press Esc to close"
 		var fs := 15
 		var w := font.get_string_size(hint, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
-		draw_string(font, Vector2((get_viewport_rect().size.x - w) * 0.5, card.end.y + 30), hint, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color("94a3b8"))
+		draw_string(font, Vector2((get_viewport_rect().size.x - w) * 0.5, card.end.y + 30), hint, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, AppTheme.SLATE_400)
 
 	func _gui_input(event: InputEvent) -> void:
 		if event is InputEventMouseButton and not event.pressed:
