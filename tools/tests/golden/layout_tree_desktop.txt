@@ -988,7 +988,6 @@ Main <Control> res://src/app/main.gd
         .text = "Next question"
         on visibility_changed -> lambda
         on resized -> lambda
-        on mouse_entered -> lambda
         on size_flags_changed -> lambda
         on maximum_size_changed -> lambda
         on minimum_size_changed -> lambda
@@ -1093,7 +1092,6 @@ Main <Control> res://src/app/main.gd
               .text = "Read question"
               .icon = ImageTexture{size=(16.0, 16.0)}
               on visibility_changed -> lambda
-              on mouse_entered -> lambda
               on size_flags_changed -> lambda
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
@@ -1126,7 +1124,6 @@ Main <Control> res://src/app/main.gd
               .text = "Pause"
               .icon = ImageTexture{size=(16.0, 16.0)}
               on visibility_changed -> lambda
-              on mouse_entered -> lambda
               on size_flags_changed -> lambda
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
@@ -1159,7 +1156,6 @@ Main <Control> res://src/app/main.gd
               .text = "Skip"
               .icon = ImageTexture{size=(16.0, 16.0)}
               on visibility_changed -> lambda
-              on mouse_entered -> lambda
               on size_flags_changed -> lambda
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
@@ -1234,7 +1230,6 @@ Main <Control> res://src/app/main.gd
               .text = "Main menu"
               .icon = ImageTexture{size=(16.0, 16.0)}
               on visibility_changed -> lambda
-              on mouse_entered -> lambda
               on size_flags_changed -> lambda
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
@@ -1454,7 +1449,6 @@ Main <Control> res://src/app/main.gd
                       .clip_text = true
                       meta starts_session = true
                       on visibility_changed -> lambda
-                      on mouse_entered -> lambda
                       on size_flags_changed -> lambda
                       on maximum_size_changed -> lambda
                       on minimum_size_changed -> lambda
@@ -1548,7 +1542,6 @@ Main <Control> res://src/app/main.gd
                         .theme_override_constants/h_separation = 8
                         .text = "Change"
                         on visibility_changed -> lambda
-                        on mouse_entered -> lambda
                         on size_flags_changed -> lambda
                         on maximum_size_changed -> lambda
                         on minimum_size_changed -> lambda
@@ -1793,7 +1786,6 @@ Main <Control> res://src/app/main.gd
                               .theme_override_constants/h_separation = 8
                               .text = "Preview"
                               on visibility_changed -> lambda
-                              on mouse_entered -> lambda
                               on size_flags_changed -> lambda
                               on maximum_size_changed -> lambda
                               on minimum_size_changed -> lambda
@@ -2804,7 +2796,7 @@ Main <Control> res://src/app/main.gd
     on finished -> main.speech._on_reader_finished
   Sfx <Node> res://src/fx/sfx.gd
     Sfx_correct <AudioStreamPlayer>
-      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[34928], format=3, mix_rate=48000, stereo=true}}
+      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[30200], format=3, mix_rate=48000, stereo=true}}
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_wrong <AudioStreamPlayer>
@@ -2832,7 +2824,7 @@ Main <Control> res://src/app/main.gd
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_hover <AudioStreamPlayer>
-      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[5384], format=3, stereo=true}}
+      .stream = AudioStreamRandomizer{random_pitch=1.04, random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[4408], format=3, mix_rate=48000, stereo=true}}
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_toggle <AudioStreamPlayer>
@@ -2844,7 +2836,7 @@ Main <Control> res://src/app/main.gd
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_transition <AudioStreamPlayer>
-      .stream = AudioStreamWAV{data=bytes[10624], format=3, stereo=true}
+      .stream = AudioStreamWAV{data=bytes[22264], format=3, stereo=true}
       .max_polyphony = 2
       .bus = &"SFX"
   @Timer@194 <Timer>

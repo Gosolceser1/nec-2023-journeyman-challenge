@@ -85,7 +85,7 @@ static func update_time_gauges(host: Main) -> void:
 ## parented to the card, so it never changes the fitted layout, and the cards
 ## already carry their final state style, so synchronous callers (the harness)
 ## see the graded screen without waiting. Reduce motion: final icons only.
-##   right:  rising chime (higher on a streak); the check draws itself as a
+##   right:  zap sweeping upward (higher on a streak); the check draws itself as a
 ##           cyan trace with a spark running down it, a solder pad pulses at
 ##           the tip, current runs once around the card; one light haptic tick
 ##   wrong:  low "short" tone; the X strokes cross with a spark pop, flicker

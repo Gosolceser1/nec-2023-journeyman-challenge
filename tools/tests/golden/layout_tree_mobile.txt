@@ -2649,7 +2649,7 @@ Main <Control> res://src/app/main.gd
     on finished -> main.speech._on_reader_finished
   Sfx <Node> res://src/fx/sfx.gd
     Sfx_correct <AudioStreamPlayer>
-      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[34928], format=3, mix_rate=48000, stereo=true}}
+      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[30200], format=3, mix_rate=48000, stereo=true}}
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_wrong <AudioStreamPlayer>
@@ -2677,7 +2677,7 @@ Main <Control> res://src/app/main.gd
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_hover <AudioStreamPlayer>
-      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[5384], format=3, stereo=true}}
+      .stream = AudioStreamRandomizer{random_pitch=1.04, random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[4408], format=3, mix_rate=48000, stereo=true}}
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_toggle <AudioStreamPlayer>
@@ -2689,7 +2689,7 @@ Main <Control> res://src/app/main.gd
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_transition <AudioStreamPlayer>
-      .stream = AudioStreamWAV{data=bytes[10624], format=3, stereo=true}
+      .stream = AudioStreamWAV{data=bytes[22264], format=3, stereo=true}
       .max_polyphony = 2
       .bus = &"SFX"
   @Timer@181 <Timer>

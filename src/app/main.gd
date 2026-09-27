@@ -482,8 +482,9 @@ func _setup_sfx() -> void:
 
 ## Interface sounds for every button the builders made (docs/SFX_PLAN.md):
 ## toggle for switches, check boxes, segmented chips and the voice mute; click
-## for other presses; hover for pointer hover on plain buttons (desktop only).
-## Session-start controls play the start cue themselves, so they get no click.
+## for other presses; hover for the pointer entering a menu mode card (desktop
+## only; plain buttons stay quiet on hover). Session-start controls play the
+## start cue themselves, so they get no click.
 ## Answer cards are not buttons: _show_question gives them select.
 func _wire_ui_sounds(node: Node) -> void:
 	for child in node.get_children():
@@ -494,7 +495,7 @@ func _wire_ui_sounds(node: Node) -> void:
 	var toggles := button.toggle_mode or button == mute_button
 	if not button.has_meta("starts_session"):
 		button.pressed.connect(_sfx.bind("toggle" if toggles else "click"))
-	if not ui_mobile and not toggles and not button is OptionButton:
+	if not ui_mobile and menu_mode_buttons.has(button):
 		button.mouse_entered.connect(func() -> void:
 			if not button.disabled:
 				_sfx("hover"))

@@ -228,9 +228,9 @@ const GLITCH_PX: Array[float] = [5.0, -4.0, 3.0, -3.0, 1.5, 0.0]
 
 ## The pick was right. strength 1.0 = first correct, up to ~1.4 on a streak.
 ## pitch is the correct cue's streak pitch_scale: the timing follows the sound
-## (correct.wav: a quick run of chime hits from ~10 ms, scaled by 1/pitch), so
-## the electron runs the check while the hits land and reaches the tip at
-## ~100 ms. calm (reduce motion): only the final state.
+## (correct.wav: a zap from ~10 ms sweeping up to its peak at ~0.23 s, scaled
+## by 1/pitch), so the electron runs the check on the zap and reaches the tip
+## at ~100 ms, early in the sweep. calm (reduce motion): only the final state.
 func celebrate(strength: float = 1.0, calm: bool = false, pitch: float = 1.0) -> void:
 	_stop_verdict()
 	if calm:

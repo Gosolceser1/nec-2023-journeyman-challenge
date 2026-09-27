@@ -36,20 +36,22 @@ const SPEECH_BUS := "Speech"
 const DIR := "res://assets/sfx/"
 
 ## db: trim on top of the bus level. vary_db: random level spread per play, so
-## the 100th answer tone is not a byte-identical copy of the first. duck: the
+## the 100th answer tone is not a byte-identical copy of the first. vary_pitch:
+## random pitch spread per play (0.04 = about ±4 %), only on hover, the sound
+## that repeats most; the correct tone is pitched by the streak instead. duck: the
 ## cue can play while the voice is still reading and is squeezed under it.
 const SOUNDS := {
-	"correct": {"db": 0.0, "vary_db": 1.0, "duck": false},
-	"wrong": {"db": 0.0, "vary_db": 1.0, "duck": false},
-	"warning": {"db": 0.0, "vary_db": 0.0, "duck": true},
-	"pass": {"db": 0.0, "vary_db": 0.0, "duck": false},
-	"fail": {"db": 0.0, "vary_db": 0.0, "duck": false},
-	"start": {"db": 0.0, "vary_db": 0.0, "duck": false},
-	"click": {"db": 0.0, "vary_db": 1.0, "duck": false},
-	"hover": {"db": 0.0, "vary_db": 1.0, "duck": false},
-	"toggle": {"db": 0.0, "vary_db": 0.0, "duck": false},
-	"select": {"db": 0.0, "vary_db": 1.0, "duck": false},
-	"transition": {"db": 0.0, "vary_db": 0.0, "duck": false},
+	"correct": {"db": 0.0, "vary_db": 1.0, "vary_pitch": 0.0, "duck": false},
+	"wrong": {"db": 0.0, "vary_db": 1.0, "vary_pitch": 0.0, "duck": false},
+	"warning": {"db": 0.0, "vary_db": 0.0, "vary_pitch": 0.0, "duck": true},
+	"pass": {"db": 0.0, "vary_db": 0.0, "vary_pitch": 0.0, "duck": false},
+	"fail": {"db": 0.0, "vary_db": 0.0, "vary_pitch": 0.0, "duck": false},
+	"start": {"db": 0.0, "vary_db": 0.0, "vary_pitch": 0.0, "duck": false},
+	"click": {"db": 0.0, "vary_db": 1.0, "vary_pitch": 0.0, "duck": false},
+	"hover": {"db": 0.0, "vary_db": 1.0, "vary_pitch": 0.04, "duck": false},
+	"toggle": {"db": 0.0, "vary_db": 0.0, "vary_pitch": 0.0, "duck": false},
+	"select": {"db": 0.0, "vary_db": 1.0, "vary_pitch": 0.0, "duck": false},
+	"transition": {"db": 0.0, "vary_db": 0.0, "vary_pitch": 0.0, "duck": false},
 }
 ## Interface sounds. rank: when one action asks for several (a Menu press asks
 ## for click and transition), the highest plays. gap: seconds before the same
@@ -248,10 +250,12 @@ func _make_player(id: String) -> AudioStreamPlayer:
 		return null
 	var stream: AudioStream = wav
 	var vary := float(SOUNDS[id]["vary_db"])
-	if vary > 0.0:
+	var vary_pitch := float(SOUNDS[id]["vary_pitch"])
+	if vary > 0.0 or vary_pitch > 0.0:
 		var rnd := AudioStreamRandomizer.new()
 		rnd.add_stream(-1, wav)
-		rnd.random_pitch = 1.0
+		# Picks a pitch scale between 1 / random_pitch and random_pitch per play.
+		rnd.random_pitch = 1.0 + vary_pitch
 		rnd.random_volume_offset_db = vary
 		stream = rnd
 	var p := AudioStreamPlayer.new()

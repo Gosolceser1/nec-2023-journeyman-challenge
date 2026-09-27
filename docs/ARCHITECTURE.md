@@ -147,8 +147,9 @@ sounds and the rules. Event cues come from the flow: `Widgets.connect_session_st
 - `main._wire_ui_sounds` walks every BaseButton once, after `_setup_sfx`:
   toggle for toggle-mode buttons (chips, CheckButtons) and `mute_button`,
   click for the rest, except session starts (`starts_session` meta), which
-  play the start cue alone; hover on `mouse_entered` for plain buttons on
-  the desktop layout. A button built later is not covered.
+  play the start cue alone; hover on `mouse_entered` for the menu mode cards
+  (`menu_mode_buttons`) on the desktop layout only, with its pitch jittered
+  per play (`vary_pitch` in `Sfx.SOUNDS`). A button built later is not covered.
 - Answer cards are wired in `_show_question`: `focus_entered` plays select
   when the last input was a key or controller (`main._input` sets
   `_nav_input`). Nothing is added inside `answers_box`.

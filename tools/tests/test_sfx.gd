@@ -10,7 +10,7 @@ extends SceneTree
 
 const PLANNED := {
 	"start": 0.7, "correct": 0.9, "wrong": 0.9, "warning": 1.5, "pass": 3.0, "fail": 2.5,
-	"click": 0.15, "hover": 0.15, "toggle": 0.2, "select": 0.2, "transition": 0.5,
+	"click": 0.15, "hover": 0.15, "toggle": 0.2, "select": 0.2, "transition": 0.65,
 }
 const UI_SOUNDS: Array[String] = ["click", "hover", "toggle", "select", "transition"]
 ## Auto-read waits this long after the question appears (main._schedule_auto_read),
@@ -134,6 +134,11 @@ func _check_app() -> void:
 	await _frames()
 	check(fx.last_ui == "", "sweeping on to the next card at once: rate-limited")
 	await _wait(0.3)
+	for plain: BaseButton in [main.next_button, main.restart_button, main.mute_button, main.audio_toggle_button]:
+		plain.mouse_entered.emit()
+	await _frames()
+	check(fx.last_ui == "", "pointer over plain buttons and switches: no hover (menu cards only)")
+	await _wait(0.3)
 	main.auto_teach_toggle.pressed.emit()
 	await _frames()
 	check(fx.last_ui == "toggle", "a switch in Audio & Voice: toggle")
@@ -207,6 +212,10 @@ func _initialize() -> void:
 		var spec: Dictionary = Sfx.SOUNDS[id]
 		check(float(spec["db"]) <= 0.0 and float(spec["db"]) >= -12.0, "%s: trim is a small attenuation" % id)
 		check(float(spec["vary_db"]) >= 0.0 and float(spec["vary_db"]) <= 2.0, "%s: level variation stays subtle" % id)
+		if id == "hover":
+			check(float(spec["vary_pitch"]) >= 0.03 and float(spec["vary_pitch"]) <= 0.05, "hover: pitch varies about ±4 % per play")
+		else:
+			check(float(spec["vary_pitch"]) == 0.0, "%s: fixed pitch (only hover is jittered)" % id)
 		var info := _wav_info(ProjectSettings.globalize_path(Sfx.path_for(id)))
 		check(not info.is_empty() and bool(info.get("ok", false)), "%s: wav file present" % id)
 		if info.is_empty():
@@ -301,6 +310,11 @@ func _initialize() -> void:
 	check(AudioServer.get_bus_effect_count(duck_bus) == 1 and AudioServer.get_bus_effect(duck_bus, 0) is AudioEffectCompressor, "sidechain ducker on the duck bus")
 	check((AudioServer.get_bus_effect(duck_bus, 0) as AudioEffectCompressor).sidechain == &"Speech", "ducker keyed by the Speech bus")
 	check(s.get_child_count() == Sfx.SOUNDS.size(), "one pre-loaded player per cue")
+	var hover_stream := (s.get_node("Sfx_hover") as AudioStreamPlayer).stream as AudioStreamRandomizer
+	check(hover_stream != null and is_equal_approx(hover_stream.random_pitch, 1.0 + float(Sfx.SOUNDS["hover"]["vary_pitch"])),
+		"hover player jitters its pitch per play")
+	var click_stream := (s.get_node("Sfx_click") as AudioStreamPlayer).stream as AudioStreamRandomizer
+	check(click_stream != null and click_stream.random_pitch == 1.0, "click keeps its pitch (level variation only)")
 	var routed := true
 	for p in s.get_children():
 		var id := String(p.name).trim_prefix("Sfx_")

@@ -5,8 +5,9 @@ reading questions, sometimes on headphones for an hour or more. Every sound has
 to earn its place: it must tell them something they would otherwise miss, and
 still be pleasant on the 100th repetition.
 
-The shipped set is "Set C" with the wrong cue replaced by a hand-picked
-electric boom and hover by a hand-picked swoosh (sourced from Pixabay, processed per role; sources
+The shipped set is "Set C" with four hand-picked replacements: an electric
+confirm zap for correct, an electric boom for wrong, a soft pop for hover and
+a full swoosh for the screen transition (sourced from Pixabay, processed per role; sources
 and license in `assets/sfx/CREDITS.md`): six event cues plus five quiet
 interface sounds. `tools/sfx/make_sfx.py` still renders the old synthesized
 set, but only writes into `assets/sfx/` with `--replace-shipped`.
@@ -16,7 +17,7 @@ set, but only writes into `assets/sfx/` with `--replace-shipped`.
 | Moment | Sound | Why |
 |---|---|---|
 | A session starts (any menu mode card, the weakest-area chip) | `start`: "Interface 13", a bright, glassy two-step chime (hits at ~40 and ~120 ms), 0.70 s | The one commitment point on the menu. Once per session, so it can't fatigue. It is also the menu → quiz transition: the press plays nothing else. |
-| Answer correct | `correct`: "Interface 9", a quick crystalline 4-hit chime, 0.90 s; up to a fourth higher on a streak | The core feedback loop; confirms the pick without having to read the verdict. |
+| Answer correct | `correct`: "UI Alert - Confirm Medium", an instant zap sweeping upward ("circuit completed"), silent by 0.73 s, 0.78 s; up to a fourth higher on a streak | The core feedback loop; confirms the pick without having to read the verdict. |
 | Answer wrong / item timed out | `wrong`: "Electric Boom 1", a crackling electric short-circuit boom that hits at once and pulses, 0.90 s | Equally important; fits the X shorting out. A low boom rather than a buzzer. |
 | Results: passed | `pass`: "Level Up", a bright 5-step arpeggio, 2.13 s | Once per session, marks the end of real effort. |
 | Results: did not pass | `fail`: "Game Over 39", five gently descending notes, 1.85 s | Closes the session honestly. |
@@ -30,10 +31,10 @@ and short. One user action makes at most one sound.
 | Sound | File | Plays on | Never on |
 |---|---|---|---|
 | `click` | "Click", a short dry click, 0.11 s | Plain button presses: Next question / Finish, Read / Stop, Pause / Resume, Skip, Menu (the first, arming press), Change, Preview, opening the voice picker | Session starts (start cue), answer cards |
-| `hover` | "Swoosh 1", the peak of a soft airy swoosh, 0.15 s (as long as its repeat gap, so a sweep never stacks) | Mouse pointer entering a plain button or menu card, desktop layout only | Mobile, answer cards, chips and switches, while a voice reads |
+| `hover` | "Pop Atmos", a tiny soft pop, 0.11 s, pitch varied ±4 % per play so a sweep never sounds like one sample repeated | Mouse pointer entering a menu mode card, desktop layout only | Plain buttons, chips and switches, answer cards, mobile, while a voice reads |
 | `toggle` | "Light Switch", a real switch flick, 0.14 s | Switches and chips: voice Mute / Turn on, the Audio & Voice mode, speed and think-pause chips, "Also read the rule", "Reduce motion" | The Sounds level chips (they preview with `correct`) |
 | `select` | "Pop Click", 0.19 s | Keyboard or controller focus moving onto an answer card, before answering | A click or tap on a card (the answer tone covers it), after answering |
-| `transition` | "Movement Swipe Whoosh 1", a short airy swipe, 0.30 s | Screen changes: quiz → report, back to the menu (Return to Main Menu, Menu, Android back) | The launch menu; menu → quiz (the start cue is that transition) |
+| `transition` | "Swoosh 1", a full airy swoosh with its natural rise and fall, 0.62 s | Screen changes: quiz → report, back to the menu (Return to Main Menu, Menu, Android back) | The launch menu; menu → quiz (the start cue is that transition) |
 
 How "one per action" works (`Sfx.play` / `Sfx.flush_ui`): interface sounds
 asked for while handling an action are queued and, at the end of the frame,
@@ -41,12 +42,12 @@ only the highest-ranked one plays (transition > toggle = select > click >
 hover). An event cue started within 40 ms silences them all, so a start press
 is the start cue alone and an answer is the answer tone alone, played at
 once. Each interface sound has a minimum gap before it repeats (hover
-0.15 s), so sweeping the mouse down the menu gives one or two pops, not a
-burst. Keyboard answering (A–D, 1–4), Enter / Space / → for Next, and the
+0.15 s), so sweeping the mouse down the menu cards gives a few soft pops at
+slightly different pitches, not a burst. Keyboard answering (A–D, 1–4), Enter / Space / → for Next, and the
 Listen loop stay silent apart from the event cues.
 
-On the report, `transition` plays as the screen changes and `pass` / `fail`
-when the dial lands 1.15 s later (with Reduce motion the dial lands at once
+On the report, `transition` plays as the screen changes (the 0.62 s swoosh
+is over before the dial lands) and `pass` / `fail` when the dial lands 1.15 s later (with Reduce motion the dial lands at once
 and only the result sound plays).
 
 ## What stays silent
@@ -87,7 +88,7 @@ and only the result sound plays).
   at the earliest. The 0.70 s start file is 40 dB under its peak from 0.58 s
   (-63 dB at 0.63 s). `test_sfx` pins that against the file's samples.
 - The rule after an answer (Auto-read) starts 0.6 s after the answer tone;
-  `correct` is below -30 dB by then; the `wrong` boom is still near full level
+  `correct` is below -40 dB by then; the `wrong` boom is still near full level
   and fades out under the first 0.3 s of the voice.
 - Independent of the voice mode: Silent mutes the voice, not these.
 - Files: 16-bit WAV, stereo except `warning` (mono), 44.1 or 48 kHz,
@@ -116,7 +117,7 @@ Sounds Off and the Low / Medium / High level apply to it like every SFX.
 The answer animation (`AnswerCard`, started by `QuizFx.play_answer`) starts
 with the cue, lasts at most ~0.6 s and never delays grading or the layout.
 
-| Moment | `correct` (chime hits from ~10 ms) | `wrong` (boom hits at ~3 ms) |
+| Moment | `correct` (zap from ~10 ms, sweep peaks ~0.23 s) | `wrong` (boom hits at ~3 ms) |
 |---|---|---|
 | 0 ms | The check starts drawing itself as a hot cyan trace, an electron spark running down it | The two strokes of the X shoot in and cross; spark pop at the crossing |
 | 30 ms | The spark turns the check's corner | The card glitches sideways in steps (5 / 4 / 3 / 3 / 1.5 px), settled by ~0.2 s |
