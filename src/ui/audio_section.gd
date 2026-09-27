@@ -148,7 +148,7 @@ static func build(host: Main, parent: VBoxContainer) -> Control:
 		sfx_row.add_child(chip)
 		host.sfx_level_buttons.append(chip)
 	if not host.ui_mobile:
-		var sfx_hint := Widgets.audio_row_label("answer tones, results and clock warnings", 0)
+		var sfx_hint := Widgets.audio_row_label("answers, results, clock warnings and taps", 0)
 		sfx_hint.add_theme_font_override("font", AppTheme.ui_font(500))
 		sfx_hint.add_theme_font_size_override("font_size", 12)
 		sfx_row.add_child(sfx_hint)

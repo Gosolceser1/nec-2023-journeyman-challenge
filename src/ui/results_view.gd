@@ -6,6 +6,8 @@ extends RefCounted
 static func show(host: Main) -> void:
 	host.timer.stop()
 	host.speech._stop_reading()
+	# The screen change; pass / fail follows when the dial lands.
+	host._sfx("transition")
 	# The report is not a question: keys 1-4 / A-D must not grade anything here.
 	host.current_answered = true
 	clear_confetti(host)

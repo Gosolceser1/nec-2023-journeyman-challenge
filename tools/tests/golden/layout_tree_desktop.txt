@@ -988,11 +988,13 @@ Main <Control> res://src/app/main.gd
         .text = "Next question"
         on visibility_changed -> lambda
         on resized -> lambda
+        on mouse_entered -> lambda
         on size_flags_changed -> lambda
         on maximum_size_changed -> lambda
         on minimum_size_changed -> lambda
         on _desired_size_changed -> lambda
         on pressed -> main._on_next_button_pressed
+        on pressed -> lambda
       @PanelContainer@87 <PanelContainer>
         .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// One material for every raised surface (UiFx.add_glass / UiFx.add_shine).\n// It only touches the control's own drawing (its StyleBox, and a Button's\n// label), never child controls, and every effect is off at its default.\n//\n// Glass: inside the rounded rect the fill is lifted by fill_lift at the top\n// edge, fading to the StyleBox colour at the bottom (a vertical gradient),\n// and a 1 px highlight runs just under the top border (bevel).\n//\n// Tint: the fill blends toward tint_to across the width (the primary button's\n// cyan -> deep blue bar). Pure-white fragments are the button's label and are\n// left alone, so the text keeps its contrast.\n//\n// Shine: a diagonal light sweep; shine_pos runs -0.3 -> 1.5 (tweened).\n//\n// Current: one pulse of light runs around the border; current_pos runs\n// 0 -> 1 + current_tail (tweened), below 0 it is off.\n//\n// Flow: a slow, endless light on the border (the official simulator card),\n// flow_strength 0 = off. Runs on TIME, so it costs no CPU.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float corner_radius = 12.0;\nuniform vec3 fill_lift = vec3(0.0);\nuniform float bevel = 0.0;\nuniform vec4 tint_to : source_color = vec4(0.0);\nuniform float tint_amount = 0.0;\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.14;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float flow_strength = 0.0;\nuniform float flow_speed = 0.08;\nuniform vec4 flow_color : source_color = vec4(0.98, 0.75, 0.14, 1.0);\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\n// Brightness of a light head at `pos` (0..1 around the outline) with a tail.\nfloat head_at(float pos, float t, float tail) {\n	float behind = pos - t;\n	behind = behind < 0.0 ? behind + 1.0 : behind;\n	return behind <= tail ? 1.0 - behind / tail : 0.0;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 size = max(rect_size, vec2(1.0));\n	vec2 p = local_pos / size;\n	vec2 b = size * 0.5;\n	vec2 q = local_pos - b;\n	vec2 k = abs(q) - b + vec2(corner_radius);\n	float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n	bool is_label = min(base.r, min(base.g, base.b)) > 0.97;\n	if (sdf <= 0.0 && !is_label) {\n		base.rgb += fill_lift * (1.0 - clamp(p.y, 0.0, 1.0));\n		base.rgb = mix(base.rgb, tint_to.rgb, tint_amount * clamp(p.x, 0.0, 1.0));\n		if (bevel > 0.0) {\n			float band = 1.0 - smoothstep(0.0, 1.0, abs(local_pos.y - 1.5));\n			float ends = smoothstep(0.0, corner_radius, min(local_pos.x, size.x - local_pos.x));\n			base.rgb += vec3(bevel * band * ends);\n		}\n	}\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	base.rgb += vec3((1.0 - smoothstep(0.0, shine_width, d)) * strength);\n	float edge = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n	if (current_pos >= 0.0) {\n		float along = perimeter_t(q, b);\n		float behind = current_pos - along;\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * edge * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	if (flow_strength > 0.0) {\n		float along = perimeter_t(q, b);\n		float t = fract(TIME * flow_speed);\n		float h = head_at(t, along, 0.18) + head_at(fract(t + 0.5), along, 0.18);\n		float glow = h * h * edge * flow_strength;\n		base.rgb += flow_color.rgb * glow;\n		base.a = max(base.a, glow * 0.7);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(2, 2), shader_parameter/corner_radius=12.0, shader_parameter/fill_lift=Vector3(0.027450979, 0.039215688, 0.0627451), shader_parameter/bevel=0.07, shader_parameter/tint_to=null, shader_parameter/tint_amount=null, shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/flow_strength=null, shader_parameter/flow_speed=null, shader_parameter/flow_color=null}
         .mouse_filter = 2
@@ -1064,6 +1066,7 @@ Main <Control> res://src/app/main.gd
               on _desired_size_changed -> lambda
               on pressed -> main._toggle_session_mute
               on pressed -> lambda
+              on pressed -> lambda
               on button_down -> lambda
             @Button@91 <Button>
               .visible = false
@@ -1090,11 +1093,13 @@ Main <Control> res://src/app/main.gd
               .text = "Read question"
               .icon = ImageTexture{size=(16.0, 16.0)}
               on visibility_changed -> lambda
+              on mouse_entered -> lambda
               on size_flags_changed -> lambda
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
               on pressed -> main._toggle_read
+              on pressed -> lambda
               on pressed -> lambda
               on button_down -> lambda
             @Button@92 <Button>
@@ -1121,11 +1126,13 @@ Main <Control> res://src/app/main.gd
               .text = "Pause"
               .icon = ImageTexture{size=(16.0, 16.0)}
               on visibility_changed -> lambda
+              on mouse_entered -> lambda
               on size_flags_changed -> lambda
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
               on pressed -> main._toggle_listen_pause
+              on pressed -> lambda
               on pressed -> lambda
               on button_down -> lambda
             @Button@93 <Button>
@@ -1152,11 +1159,13 @@ Main <Control> res://src/app/main.gd
               .text = "Skip"
               .icon = ImageTexture{size=(16.0, 16.0)}
               on visibility_changed -> lambda
+              on mouse_entered -> lambda
               on size_flags_changed -> lambda
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
               on pressed -> main._listen_skip
+              on pressed -> lambda
               on pressed -> lambda
               on button_down -> lambda
             @Control@94 <Control> res://src/ui/voice_visualizer.gd
@@ -1225,11 +1234,13 @@ Main <Control> res://src/app/main.gd
               .text = "Main menu"
               .icon = ImageTexture{size=(16.0, 16.0)}
               on visibility_changed -> lambda
+              on mouse_entered -> lambda
               on size_flags_changed -> lambda
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
               on pressed -> main._request_menu
+              on pressed -> lambda
               on pressed -> lambda
               on button_down -> lambda
   @Control@97 <Control>
@@ -1443,6 +1454,7 @@ Main <Control> res://src/app/main.gd
                       .clip_text = true
                       meta starts_session = true
                       on visibility_changed -> lambda
+                      on mouse_entered -> lambda
                       on size_flags_changed -> lambda
                       on maximum_size_changed -> lambda
                       on minimum_size_changed -> lambda
@@ -1536,11 +1548,13 @@ Main <Control> res://src/app/main.gd
                         .theme_override_constants/h_separation = 8
                         .text = "Change"
                         on visibility_changed -> lambda
+                        on mouse_entered -> lambda
                         on size_flags_changed -> lambda
                         on maximum_size_changed -> lambda
                         on minimum_size_changed -> lambda
                         on _desired_size_changed -> lambda
                         on pressed -> main._toggle_audio_section
+                        on pressed -> lambda
                     @VBoxContainer@125 <VBoxContainer>
                       .visible = false
                       .mouse_filter = 2
@@ -1596,6 +1610,7 @@ Main <Control> res://src/app/main.gd
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
                           on pressed -> lambda
+                          on pressed -> lambda
                         @Button@128 <Button>
                           .custom_minimum_size = Vector2(0, 40)
                           .size_flags_horizontal = 3
@@ -1619,6 +1634,7 @@ Main <Control> res://src/app/main.gd
                           on maximum_size_changed -> lambda
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
+                          on pressed -> lambda
                           on pressed -> lambda
                         @Button@129 <Button>
                           .custom_minimum_size = Vector2(0, 40)
@@ -1644,6 +1660,7 @@ Main <Control> res://src/app/main.gd
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
                           on pressed -> lambda
+                          on pressed -> lambda
                         @Button@130 <Button>
                           .custom_minimum_size = Vector2(0, 40)
                           .size_flags_horizontal = 3
@@ -1667,6 +1684,7 @@ Main <Control> res://src/app/main.gd
                           on maximum_size_changed -> lambda
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
+                          on pressed -> lambda
                           on pressed -> lambda
                       @Label@131 <Label>
                         .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
@@ -1751,6 +1769,7 @@ Main <Control> res://src/app/main.gd
                               on maximum_size_changed -> lambda
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
+                              on pressed -> lambda
                               on item_selected -> main.speech._on_voice_picked
                               on item_selected -> lambda
                             @Button@147 <Button>
@@ -1774,11 +1793,13 @@ Main <Control> res://src/app/main.gd
                               .theme_override_constants/h_separation = 8
                               .text = "Preview"
                               on visibility_changed -> lambda
+                              on mouse_entered -> lambda
                               on size_flags_changed -> lambda
                               on maximum_size_changed -> lambda
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
                               on pressed -> main.speech._preview_voice
+                              on pressed -> lambda
                           @HBoxContainer@148 <HBoxContainer>
                             .mouse_filter = 2
                             .theme_override_constants/separation = 6
@@ -1829,6 +1850,7 @@ Main <Control> res://src/app/main.gd
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
+                              on pressed -> lambda
                             @Button@151 <Button>
                               .custom_minimum_size = Vector2(56, 40)
                               .size_flags_horizontal = 3
@@ -1854,6 +1876,7 @@ Main <Control> res://src/app/main.gd
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
+                              on pressed -> lambda
                             @Button@152 <Button>
                               .custom_minimum_size = Vector2(56, 40)
                               .size_flags_horizontal = 3
@@ -1877,6 +1900,7 @@ Main <Control> res://src/app/main.gd
                               on maximum_size_changed -> lambda
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
+                              on pressed -> lambda
                               on pressed -> lambda
                             @Button@153 <Button>
                               .custom_minimum_size = Vector2(56, 40)
@@ -1902,6 +1926,7 @@ Main <Control> res://src/app/main.gd
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
+                              on pressed -> lambda
                         @CheckButton@154 <CheckButton>
                           .visible = false
                           .custom_minimum_size = Vector2(0, 32)
@@ -1925,6 +1950,7 @@ Main <Control> res://src/app/main.gd
                           on maximum_size_changed -> lambda
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
+                          on pressed -> lambda
                           on toggled -> main._on_auto_teach_toggled
                         @HBoxContainer@155 <HBoxContainer>
                           .visible = false
@@ -1976,6 +2002,7 @@ Main <Control> res://src/app/main.gd
                             on minimum_size_changed -> lambda
                             on _desired_size_changed -> lambda
                             on pressed -> lambda
+                            on pressed -> lambda
                           @Button@158 <Button>
                             .custom_minimum_size = Vector2(56, 40)
                             .mouse_filter = 1
@@ -2000,6 +2027,7 @@ Main <Control> res://src/app/main.gd
                             on minimum_size_changed -> lambda
                             on _desired_size_changed -> lambda
                             on pressed -> lambda
+                            on pressed -> lambda
                           @Button@159 <Button>
                             .custom_minimum_size = Vector2(56, 40)
                             .mouse_filter = 1
@@ -2022,6 +2050,7 @@ Main <Control> res://src/app/main.gd
                             on maximum_size_changed -> lambda
                             on minimum_size_changed -> lambda
                             on _desired_size_changed -> lambda
+                            on pressed -> lambda
                             on pressed -> lambda
                           @Label@160 <Label>
                             .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
@@ -2097,6 +2126,7 @@ Main <Control> res://src/app/main.gd
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
                           on pressed -> lambda
+                          on pressed -> lambda
                         @Button@165 <Button>
                           .custom_minimum_size = Vector2(72, 40)
                           .mouse_filter = 1
@@ -2119,6 +2149,7 @@ Main <Control> res://src/app/main.gd
                           on maximum_size_changed -> lambda
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
+                          on pressed -> lambda
                           on pressed -> lambda
                         @Button@166 <Button>
                           .custom_minimum_size = Vector2(72, 40)
@@ -2144,6 +2175,7 @@ Main <Control> res://src/app/main.gd
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
                           on pressed -> lambda
+                          on pressed -> lambda
                         @Button@167 <Button>
                           .custom_minimum_size = Vector2(72, 40)
                           .mouse_filter = 1
@@ -2167,11 +2199,12 @@ Main <Control> res://src/app/main.gd
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
                           on pressed -> lambda
+                          on pressed -> lambda
                         @Label@168 <Label>
                           .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
                           .theme_override_font_sizes/font_size = 12
                           .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
-                          .text = "answer tones, results and clock warnings"
+                          .text = "answers, results, clock warnings and taps"
                           on visibility_changed -> lambda
                           on size_flags_changed -> lambda
                           on maximum_size_changed -> lambda
@@ -2199,6 +2232,7 @@ Main <Control> res://src/app/main.gd
                         on maximum_size_changed -> lambda
                         on minimum_size_changed -> lambda
                         on _desired_size_changed -> lambda
+                        on pressed -> lambda
                         on toggled -> main._on_reduce_motion_toggled
                 @HBoxContainer@117 <HBoxContainer>
                   .mouse_filter = 2
@@ -2268,6 +2302,7 @@ Main <Control> res://src/app/main.gd
                   on resized -> lambda
                   on mouse_entered -> lambda
                   on mouse_entered -> lambda
+                  on mouse_entered -> lambda
                   on mouse_exited -> lambda
                   on focus_entered -> lambda
                   on focus_exited -> lambda
@@ -2321,6 +2356,7 @@ Main <Control> res://src/app/main.gd
                   on visibility_changed -> lambda
                   on item_rect_changed -> lambda
                   on resized -> lambda
+                  on mouse_entered -> lambda
                   on mouse_entered -> lambda
                   on mouse_entered -> lambda
                   on mouse_exited -> lambda
@@ -2378,6 +2414,7 @@ Main <Control> res://src/app/main.gd
                   on resized -> lambda
                   on mouse_entered -> lambda
                   on mouse_entered -> lambda
+                  on mouse_entered -> lambda
                   on mouse_exited -> lambda
                   on focus_entered -> lambda
                   on focus_exited -> lambda
@@ -2431,6 +2468,7 @@ Main <Control> res://src/app/main.gd
                   on visibility_changed -> lambda
                   on item_rect_changed -> lambda
                   on resized -> lambda
+                  on mouse_entered -> lambda
                   on mouse_entered -> lambda
                   on mouse_entered -> lambda
                   on mouse_exited -> lambda
@@ -2488,6 +2526,7 @@ Main <Control> res://src/app/main.gd
                   on resized -> lambda
                   on mouse_entered -> lambda
                   on mouse_entered -> lambda
+                  on mouse_entered -> lambda
                   on mouse_exited -> lambda
                   on focus_entered -> lambda
                   on focus_exited -> lambda
@@ -2541,6 +2580,7 @@ Main <Control> res://src/app/main.gd
                   on visibility_changed -> lambda
                   on item_rect_changed -> lambda
                   on resized -> lambda
+                  on mouse_entered -> lambda
                   on mouse_entered -> lambda
                   on mouse_entered -> lambda
                   on mouse_exited -> lambda
@@ -2628,6 +2668,7 @@ Main <Control> res://src/app/main.gd
                   on visibility_changed -> lambda
                   on item_rect_changed -> lambda
                   on resized -> lambda
+                  on mouse_entered -> lambda
                   on mouse_entered -> lambda
                   on mouse_entered -> lambda
                   on mouse_exited -> lambda
@@ -2718,6 +2759,7 @@ Main <Control> res://src/app/main.gd
                   on resized -> lambda
                   on mouse_entered -> lambda
                   on mouse_entered -> lambda
+                  on mouse_entered -> lambda
                   on mouse_exited -> lambda
                   on focus_entered -> lambda
                   on focus_exited -> lambda
@@ -2762,27 +2804,47 @@ Main <Control> res://src/app/main.gd
     on finished -> main.speech._on_reader_finished
   Sfx <Node> res://src/fx/sfx.gd
     Sfx_correct <AudioStreamPlayer>
-      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[5376], format=3}}
+      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[34928], format=3, mix_rate=48000, stereo=true}}
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_wrong <AudioStreamPlayer>
-      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[5376], format=3}}
+      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[32056], format=3, mix_rate=48000, stereo=true}}
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_warning <AudioStreamPlayer>
-      .stream = AudioStreamWAV{data=bytes[14288], format=3}
+      .stream = AudioStreamWAV{data=bytes[26784], format=3}
       .max_polyphony = 2
       .bus = &"SFXDuck"
     Sfx_pass <AudioStreamPlayer>
-      .stream = AudioStreamWAV{data=bytes[25904], format=3}
+      .stream = AudioStreamWAV{data=bytes[82456], format=3, mix_rate=48000, stereo=true}
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_fail <AudioStreamPlayer>
-      .stream = AudioStreamWAV{data=bytes[21440], format=3}
+      .stream = AudioStreamWAV{data=bytes[66008], format=3, stereo=true}
       .max_polyphony = 2
       .bus = &"SFX"
     Sfx_start <AudioStreamPlayer>
-      .stream = AudioStreamWAV{data=bytes[10736], format=3}
+      .stream = AudioStreamWAV{data=bytes[27120], format=3, mix_rate=48000, stereo=true}
+      .max_polyphony = 2
+      .bus = &"SFX"
+    Sfx_click <AudioStreamPlayer>
+      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[4376], format=3, mix_rate=48000, stereo=true}}
+      .max_polyphony = 2
+      .bus = &"SFX"
+    Sfx_hover <AudioStreamPlayer>
+      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[3328], format=3, mix_rate=48000, stereo=true}}
+      .max_polyphony = 2
+      .bus = &"SFX"
+    Sfx_toggle <AudioStreamPlayer>
+      .stream = AudioStreamWAV{data=bytes[5544], format=3, mix_rate=48000, stereo=true}
+      .max_polyphony = 2
+      .bus = &"SFX"
+    Sfx_select <AudioStreamPlayer>
+      .stream = AudioStreamRandomizer{random_volume_offset_db=1.0, streams_count=1, stream_0/stream=AudioStreamWAV{data=bytes[7464], format=3, mix_rate=48000, stereo=true}}
+      .max_polyphony = 2
+      .bus = &"SFX"
+    Sfx_transition <AudioStreamPlayer>
+      .stream = AudioStreamWAV{data=bytes[10624], format=3, stereo=true}
       .max_polyphony = 2
       .bus = &"SFX"
   @Timer@194 <Timer>

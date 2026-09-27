@@ -1,45 +1,41 @@
 # Sound effects — source and license
 
-All files in this folder except `start.wav` are **original, procedurally
-synthesized** audio made for this project (44.1 kHz mono 16-bit WAV,
-loudness-matched to about -20 LUFS momentary, K-weighted). `start.wav` is a
-processed recording; see "start.wav" below.
+All eleven files in this folder are **processed recordings from Pixabay**
+(the "Set C" pick), used under the **Pixabay Content License**
+(https://pixabay.com/service/license-summary/): free for commercial and
+non-commercial use, no attribution required, modifying and bundling inside an
+app allowed; selling or redistributing the files on their own (as stock or a
+sound pack) is not, nor implying the creator endorses the app. Credit is given
+here anyway. None of the sources is flagged AI-generated or low quality on
+Pixabay (checked at download, Sep 27, 2026).
 
-The shipped set is the **electrical** family (`tools/sfx/electric.py`):
-electric-piano tones with light electrical layers (charge zip, relay tick,
-breaker thunk, soft shimmer) and phone-safe harmonics on the low cues.
+Only the processed in-app WAVs are committed, never the source MP3s.
 
-License: **CC0 1.0 Universal** (public domain dedication) —
-https://creativecommons.org/publicdomain/zero/1.0/
+| File | Plays when | Sound | Creator | Pixabay page | Length |
+|---|---|---|---|---|---|
+| start.wav | a session starts from the menu | Interface 13 | SoundReality | https://pixabay.com/sound-effects/film-special-effects-interface-13-204784/ | 0.70 s |
+| correct.wav | right answer | Interface 9 | SoundReality | https://pixabay.com/sound-effects/film-special-effects-interface-9-204779/ | 0.90 s |
+| wrong.wav | wrong answer / item timed out | Notification Error | SoundReality | https://pixabay.com/sound-effects/film-special-effects-notification-error-427345/ | 0.83 s |
+| warning.wav | exam clock reaches 5:00 and 1:00 left | Beep warning | freesound_community | https://pixabay.com/sound-effects/film-special-effects-beep-warning-6387/ | 1.50 s |
+| pass.wav | results: passed | Level Up | SoundReality | https://pixabay.com/sound-effects/film-special-effects-level-up-140966/ | 2.13 s |
+| fail.wav | results: did not pass | Game Over 39 | Tuomas_Data | https://pixabay.com/sound-effects/musical-game-over-39-199830/ | 1.85 s |
+| click.wav | plain button presses | Click | SoundReality | https://pixabay.com/sound-effects/film-special-effects-click-233950/ | 0.11 s |
+| hover.wav | pointer over a button or menu card (desktop) | Pop Clean | SoundReality | https://pixabay.com/sound-effects/film-special-effects-pop-clean-312648/ | 0.09 s |
+| toggle.wav | switches, chips, voice mute | Light Switch | SoundReality | https://pixabay.com/sound-effects/film-special-effects-light-switch-156813/ | 0.14 s |
+| select.wav | keyboard / controller focus onto an answer card | Pop Click | SoundReality | https://pixabay.com/sound-effects/film-special-effects-pop-click-312649/ | 0.19 s |
+| transition.wav | screen changes (report, back to menu) | Movement Swipe Whoosh 1 | floraphonic | https://pixabay.com/sound-effects/film-special-effects-movement-swipe-whoosh-1-186575/ | 0.30 s |
 
-Regenerate (deterministic, numpy only, overwrites these files):
+Processing (the same for all): leading silence trimmed (onset at -40 dB, 5 ms
+pre-roll, 3 ms fade-in); the natural end kept when it fits the sound's length
+budget, otherwise cut at the quietest point near the end with an exponential
+fade to -60 dB; one gain change to a per-role max-momentary loudness (start
+-18 LUFS, correct / wrong -16, warning / pass -15, fail -17, click / toggle /
+select / transition -22, hover -25), true peak ≤ -1 dBTP; no EQ, no limiter.
+16-bit PCM, stereo kept (warning is mono at the source), 44.1 or 48 kHz.
+Details and the reasoning per sound: `docs/SFX_PLAN.md`.
 
-    python tools/sfx/make_sfx.py                   # shipped family: electric
-    python tools/sfx/make_sfx.py --family keys     # the previous set
-    python tools/sfx/make_sfx.py --family mallet   # or: pluck
-    python tools/sfx/make_sfx.py --preview         # all families -> .audit_tmp/sfx_preview/v2/
+`tools/sfx/make_sfx.py` renders the previous synthesized set (CC0). It only
+writes here with `--replace-shipped`, which overwrites five of these files.
 
-| File | Plays when | Length |
-|---|---|---|
-| correct.wav | right answer | 0.30 s |
-| wrong.wav | wrong answer / item timed out | 0.30 s |
-| warning.wav | exam clock reaches 5:00 and 1:00 left | 0.80 s |
-| pass.wav | results: passed | 1.45 s |
-| fail.wav | results: did not pass | 1.20 s |
-| start.wav | a session starts from the menu | 0.60 s |
-
-## start.wav
-
-"Sci-Fi Weapon – Power On – Charge Up Processed Pulse" by **RescopicSound**,
-Pixabay #233851 —
-https://pixabay.com/sound-effects/film-special-effects-sci-fi-weapon-power-on-charge-up-processed-pulse-233851/
-
-License: **Pixabay Content License** (https://pixabay.com/service/license-summary/):
-free for commercial use, no attribution required; bundling in an app is
-allowed, redistributing or selling the file on its own is not. Processed for
-the app (mono, 44.1 kHz, first 0.60 s, -21 LUFS; details in
-`docs/SFX_PLAN.md`, "Session start"). `make_sfx.py` does not generate or
-overwrite it. It is a placeholder and will be replaced; update this entry
-with the new file.
-
-Why only these: see `docs/SFX_PLAN.md`. Mix and voice ducking: `src/fx/sfx.gd`.
+Why only these: see `docs/SFX_PLAN.md`. Mix, voice rules and the one-sound-
+per-action logic: `src/fx/sfx.gd`.

@@ -103,13 +103,15 @@ static func _mode_style(fill: Color, border: Color, elevation: int, glow: Color)
 	return style
 
 
-## Anything on the menu that starts a session: the power-on cue (Sfx.START,
-## assets/sfx/start.wav) and a press animation on its beats, then the session
-## itself. The menu fades out over MOTION_SCREEN (180 ms), so the motion is
-## keyed to the cue's first 180 ms; the charge-up keeps playing under the fade.
-##   0 ms   pre-click      the card dips 1.5 %
-##   50 ms  charge onset   current runs once around the card's border and
+## Anything on the menu that starts a session: the start cue (Sfx.START,
+## assets/sfx/start.wav, a two-step glassy chime) and a press animation on its
+## beats, then the session itself. It is the only sound of the press: no click,
+## and it silences the menu -> quiz transition. The menu fades out over
+## MOTION_SCREEN (180 ms), so the motion is keyed to the cue's first 180 ms.
+##   0 ms   press          the card dips 1.5 %
+##   ~40 ms first chime    current runs once around the card's border and
 ##                         the badge ring charges to full
+##   ~120 ms second chime  (current still running)
 ## Reduce motion keeps the sound and skips the motion.
 static func connect_session_start(host: Main, button: Button, callback: Callable) -> void:
 	button.set_meta("starts_session", true)

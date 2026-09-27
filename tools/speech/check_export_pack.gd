@@ -46,8 +46,8 @@ func _init() -> void:
 	check(folders == records.size(), "every record has its bundled clip folder in the pack")
 	check(bad_clips == 0 and clips > 0, "every bundled clip loads as an imported AudioStream")
 
-	for cue in ["correct", "wrong", "pass", "fail", "warning"]:
-		check(load("res://assets/sfx/%s.wav" % cue) is AudioStream, "sfx %s loads from the pack" % cue)
+	for cue in Sfx.SOUNDS:
+		check(load(Sfx.path_for(cue)) is AudioStream, "sfx %s loads from the pack" % cue)
 
 	var script := SpeechHelper.resolve_script()
 	print("SPEECH_HELPER_SCRIPT=", script)

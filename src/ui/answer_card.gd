@@ -228,9 +228,9 @@ const GLITCH_PX: Array[float] = [5.0, -4.0, 3.0, -3.0, 1.5, 0.0]
 
 ## The pick was right. strength 1.0 = first correct, up to ~1.4 on a streak.
 ## pitch is the correct cue's streak pitch_scale: the timing follows the sound
-## (correct.wav: G5 tine at 30 ms, C6 + sparkle at ~95 ms, scaled by 1/pitch),
-## so the electron passes the check's corner on the first note and reaches the
-## tip on the second. calm (reduce motion): only the final state.
+## (correct.wav: a quick run of chime hits from ~10 ms, scaled by 1/pitch), so
+## the electron runs the check while the hits land and reaches the tip at
+## ~100 ms. calm (reduce motion): only the final state.
 func celebrate(strength: float = 1.0, calm: bool = false, pitch: float = 1.0) -> void:
 	_stop_verdict()
 	if calm:
@@ -259,8 +259,8 @@ func celebrate(strength: float = 1.0, calm: bool = false, pitch: float = 1.0) ->
 	sparks.tween_callback(func(): UiFx.card_burst(self, _icon_path()[-1], TRACE_CYAN, roundi(8 * strength), 0.55))
 	_run_current(land, 0.36, 0.9 + 0.25 * (strength - 1.0) / 0.4)
 
-## The pick was wrong: the X shorts out on the breaker thunk at the start of
-## wrong.wav (spark pop where the strokes cross), flickers, the card glitches.
+## The pick was wrong: the X shorts out on the first low hit of wrong.wav
+## (~10 ms; spark pop where the strokes cross), flickers, the card glitches.
 func reject(calm: bool = false) -> void:
 	_stop_verdict()
 	if calm:

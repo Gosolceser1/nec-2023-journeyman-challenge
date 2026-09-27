@@ -1,17 +1,25 @@
 extends SceneTree
-## Sfx: the six cues from docs/SFX_PLAN.md and the rules for when they play.
-## The promises: only the planned cues exist (no click/whoosh/tick creep), each
-## ships as a short mono clip within its length budget, answers and results map
-## to the right cue, the exam clock warns exactly twice, only the cue that can
-## overlap the voice (the warning) is ducked, SFX live on their own bus, and a
-## missing tree/asset is a no-op.
+## Sfx: the six event cues and five interface sounds from docs/SFX_PLAN.md and
+## the rules for when they play. The promises: only the planned sounds exist
+## (no tick/whoosh creep), each ships as a short mono or stereo clip within its
+## length budget, answers and results map to the right cue, the exam clock
+## warns exactly twice, only the cue that can overlap the voice (the warning)
+## is ducked by the Speech sidechain, interface sounds are one per action,
+## rate-limited, gated by the Sounds setting and kept off the voice, SFX live
+## on their own bus, and a missing tree/asset is a no-op.
 
-const PLANNED := {"correct": 0.3, "wrong": 0.3, "warning": 0.8, "pass": 1.5, "fail": 1.5, "start": 0.6}
+const PLANNED := {
+	"start": 0.7, "correct": 0.9, "wrong": 0.9, "warning": 1.5, "pass": 3.0, "fail": 2.5,
+	"click": 0.15, "hover": 0.1, "toggle": 0.2, "select": 0.2, "transition": 0.5,
+}
+const UI_SOUNDS: Array[String] = ["click", "hover", "toggle", "select", "transition"]
 ## Auto-read waits this long after the question appears (main._schedule_auto_read),
 ## and the question appears after the menu's MOTION_SCREEN fade: the start cue
-## must be over by then so the voice never lands on it.
+## must be inaudible by then so the voice never lands on it.
 const AUTO_READ_DELAY := 0.45
-const MAX_TOTAL_KB := 450
+## "Inaudible": every sample from here on is this far under the file's peak.
+const TAIL_DB := -40.0
+const MAX_TOTAL_KB := 1536
 
 var failures: Array[String] = []
 var checks := 0
@@ -45,10 +53,137 @@ func _wav_info(path: String) -> Dictionary:
 			f.seek(f.get_position() + size - 16)
 		elif id == "data":
 			info["data"] = size
+			info["data_at"] = f.get_position()
 			break
 		else:
 			f.seek(f.get_position() + size)
 	return info
+
+
+## The wiring in the real app (desktop layout): one sound per action, and the
+## Sounds setting silences the interface sounds too.
+func _check_app() -> void:
+	print("=== in the app: which press plays what ===")
+	# The run turns Sounds off at the end, which saves; start from defaults.
+	var cfg := "user://test_sfx_audio.cfg"
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(cfg))
+	var main: Main = load("res://scenes/main.tscn").instantiate()
+	main.audio_cfg_path = cfg
+	main.session.bag_path = ""
+	root.add_child(main)
+	await _wait(0.4)
+	var fx := main.sfx
+	check(fx.last_ui == "" and fx.last_event == "", "launch: the menu opens silently")
+	var start_button := main.menu_mode_buttons[0]
+	start_button.pressed.emit()
+	await _frames()
+	check(fx.last_event == Sfx.START and fx.last_ui == "", "start press: the start cue only (no click, no transition)")
+	await _wait(0.5)
+	check(not main.menu_overlay.visible and main.answers_box.get_child_count() > 0, "the quiz is up")
+	var players := 0
+	for card in main.answers_box.get_children():
+		players += 1 if card is AudioStreamPlayer else 0
+	check(players == 0, "no sound player inside answers_box")
+	main._nav_input = true
+	(main.answers_box.get_child(1) as Control).grab_focus()
+	await _frames()
+	check(fx.last_ui == "select", "keyboard focus onto an answer card: select")
+	fx.last_ui = ""
+	await _wait(0.1)
+	main._nav_input = false
+	(main.answers_box.get_child(2) as Control).grab_focus()
+	await _frames()
+	check(fx.last_ui == "", "focus from a click or tap: no select (the answer tone covers it)")
+	await _wait(0.1)
+	fx.last_event = ""
+	main._answer_selected(0)
+	await _frames()
+	check(fx.last_event in ["correct", "wrong"] and fx.last_ui == "", "answer: correct / wrong only, right away")
+	await _wait(0.1)
+	main.mute_button.pressed.emit()
+	await _frames()
+	check(fx.last_ui == "toggle", "voice mute / unmute: toggle")
+	await _wait(0.1)
+	main.mute_button.pressed.emit()
+	await _wait(0.1)
+	fx.last_ui = ""
+	main.next_button.pressed.emit()
+	await _frames()
+	check(fx.last_ui == "click" or fx.last_ui == "transition", "Next: a click (a transition if it opened the report)")
+	await _wait(0.3)
+	main._answer_selected(0)
+	await _wait(0.1)
+	fx.last_ui = ""
+	main.restart_button.pressed.emit()
+	await _frames()
+	if main.menu_overlay.visible:
+		check(fx.last_ui == "transition", "Menu with nothing to lose: the transition only")
+	else:
+		check(fx.last_ui == "click", "Menu, first press (arms Leave?): a click")
+		await _wait(0.3)
+		main.restart_button.pressed.emit()
+		await _frames()
+		check(main.menu_overlay.visible and fx.last_ui == "transition", "Menu, second press: back to the menu with the transition only")
+	await _wait(0.3)
+	fx.last_ui = ""
+	start_button.mouse_entered.emit()
+	await _frames()
+	check(fx.last_ui == "hover", "pointer over a menu card: hover (desktop)")
+	fx.last_ui = ""
+	main.menu_mode_buttons[1].mouse_entered.emit()
+	await _frames()
+	check(fx.last_ui == "", "sweeping on to the next card at once: rate-limited")
+	await _wait(0.3)
+	main.auto_teach_toggle.pressed.emit()
+	await _frames()
+	check(fx.last_ui == "toggle", "a switch in Audio & Voice: toggle")
+	main._on_sfx_level_picked(-1)
+	await _wait(0.3)
+	fx.last_ui = ""
+	fx.last_event = ""
+	main.audio_toggle_button.pressed.emit()
+	start_button.mouse_entered.emit()
+	start_button.pressed.emit()
+	await _wait(0.5)
+	check(fx.last_ui == "" and fx.last_event == "", "Sounds off: no interface sound and no start cue")
+	main.free()
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(cfg))
+	await _wait(0.3)
+
+
+## Enough frames for a deferred call to run.
+func _frames() -> void:
+	await process_frame
+	await process_frame
+
+
+## Wall-clock wait: a SceneTree timer can fire on the first frame, whose delta
+## includes the whole startup.
+func _wait(seconds: float) -> void:
+	var until := Time.get_ticks_msec() + int(seconds * 1000.0)
+	while Time.get_ticks_msec() < until:
+		await process_frame
+
+
+## Seconds until the last sample louder than TAIL_DB under the peak (16-bit PCM).
+func _audible_end(path: String, info: Dictionary) -> float:
+	var f := FileAccess.open(path, FileAccess.READ)
+	if f == null or not info.has("data_at"):
+		return INF
+	f.seek(int(info["data_at"]))
+	var pcm := f.get_buffer(int(info["data"]))
+	var n := pcm.size() / 2
+	var peak := 0
+	for i in n:
+		peak = maxi(peak, absi(pcm.decode_s16(i * 2)))
+	var floor_amp := float(peak) * pow(10.0, TAIL_DB / 20.0)
+	var last := 0
+	for i in range(n - 1, -1, -1):
+		if absi(pcm.decode_s16(i * 2)) > floor_amp:
+			last = i
+			break
+	var frame_samples := maxi(1, int(info.get("channels", 1)))
+	return float(last / frame_samples) / float(maxi(1, int(info.get("rate", 1))))
 
 
 func _initialize() -> void:
@@ -56,7 +191,12 @@ func _initialize() -> void:
 	check(Sfx.SOUNDS.size() == PLANNED.size(), "exactly %d cues (got %d)" % [PLANNED.size(), Sfx.SOUNDS.size()])
 	for id in PLANNED:
 		check(Sfx.SOUNDS.has(id), "map has %s" % id)
-	for cut in ["click", "toggle", "tick", "next", "menu", "streak", "confetti"]:
+	check(Sfx.UI.size() == UI_SOUNDS.size(), "exactly %d interface sounds" % UI_SOUNDS.size())
+	for id in UI_SOUNDS:
+		check(Sfx.is_ui(id) and Sfx.SOUNDS.has(id), "%s is registered as an interface sound" % id)
+	for id in ["start", "correct", "wrong", "warning", "pass", "fail"]:
+		check(not Sfx.is_ui(id), "%s is an event cue, not an interface sound" % id)
+	for cut in ["tick", "next", "menu", "streak", "confetti", "whoosh"]:
 		check(not Sfx.SOUNDS.has(cut), "cut cue stays cut: %s" % cut)
 		check(not FileAccess.file_exists(ProjectSettings.globalize_path(Sfx.path_for(cut))), "cut asset deleted: %s" % cut)
 
@@ -72,12 +212,17 @@ func _initialize() -> void:
 		if info.is_empty():
 			continue
 		total_bytes += int(info["bytes"])
-		check(int(info.get("channels", 0)) == 1 and int(info.get("bits", 0)) == 16, "%s: mono 16-bit" % id)
+		var channels := int(info.get("channels", 0))
+		check(channels in [1, 2] and int(info.get("bits", 0)) == 16, "%s: mono or stereo 16-bit" % id)
 		check(int(info.get("rate", 0)) >= 44100, "%s: full-band sample rate" % id)
-		var secs := float(info.get("data", 0)) / (2.0 * float(maxi(1, int(info.get("rate", 1)))))
+		# data bytes / (2 bytes per sample * channels * rate)
+		var secs := float(info.get("data", 0)) / (2.0 * float(maxi(1, channels)) * float(maxi(1, int(info.get("rate", 1)))))
 		seconds[id] = secs
-		check(secs > 0.1 and secs <= float(PLANNED.get(id, 0.0)) + 0.001, "%s: %.2f s within its %.2f s budget" % [id, secs, float(PLANNED.get(id, 0.0))])
+		var min_secs := 0.05 if Sfx.is_ui(id) else 0.1
+		check(secs > min_secs and secs <= float(PLANNED.get(id, 0.0)) + 0.001, "%s: %.3f s within its %.2f s budget" % [id, secs, float(PLANNED.get(id, 0.0))])
 		check(ResourceLoader.exists(Sfx.path_for(id)), "%s: imported" % id)
+		if id == "start":
+			seconds["start_audible"] = _audible_end(ProjectSettings.globalize_path(Sfx.path_for(id)), info)
 	check(total_bytes < MAX_TOTAL_KB * 1024, "all sfx under %d KB (%d KB)" % [MAX_TOTAL_KB, total_bytes / 1024])
 
 	print("=== answer and result cues ===")
@@ -86,8 +231,10 @@ func _initialize() -> void:
 	check(Sfx.answer_sound(false, true) == "" and Sfx.answer_sound(false, false) == "", "Listen mode (ungraded) is silent")
 	check(Sfx.result_sound(true) == "pass" and Sfx.result_sound(false) == "fail", "results map to pass / fail")
 	check(Sfx.START == "start" and Sfx.SOUNDS.has(Sfx.START), "session start -> start")
-	var start_secs := float(seconds.get("start", PLANNED["start"]))
-	check(start_secs < AppTheme.MOTION_SCREEN + AUTO_READ_DELAY, "start cue (%.2f s) ends before auto-read can begin (%.2f s)" % [start_secs, AppTheme.MOTION_SCREEN + AUTO_READ_DELAY])
+	var start_audible := float(seconds.get("start_audible", INF))
+	check(start_audible < AppTheme.MOTION_SCREEN + AUTO_READ_DELAY,
+		"start cue is %d dB down by %.2f s, before auto-read can begin (%.2f s)" % [TAIL_DB, start_audible, AppTheme.MOTION_SCREEN + AUTO_READ_DELAY])
+	check(Widgets.START_CUE_ONSET <= AppTheme.MOTION_SCREEN, "start press motion lands inside the menu fade")
 	check(float(Sfx.SOUNDS["start"]["vary_db"]) == 0.0, "start plays as-is (once per session)")
 
 	print("=== streak pitch ===")
@@ -117,7 +264,20 @@ func _initialize() -> void:
 		check(not bool(Sfx.SOUNDS[id]["duck"]) and Sfx.voice_offset_db(id, true) == 0.0,
 			"%s plays right after the voice is stopped: never ducked" % id)
 	check(Sfx.VOICE_DUCK_DB <= -6.0 and Sfx.VOICE_DUCK_DB >= -10.0, "duck is audible but not a mute")
-	check(is_nan(Sfx.voice_offset_db("click", false)), "unknown id -> NAN")
+	check(is_nan(Sfx.voice_offset_db("tick", false)), "unknown id -> NAN")
+	for id in UI_SOUNDS:
+		check(not bool(Sfx.SOUNDS[id]["duck"]), "%s bypasses the Speech-keyed ducker (judged after the action instead)" % id)
+		check(Sfx.voice_offset_db(id, false) == 0.0 and is_equal_approx(Sfx.voice_offset_db(id, true), Sfx.VOICE_DUCK_DB),
+			"%s: full level alone, %d dB under a voice" % [id, Sfx.VOICE_DUCK_DB])
+	check(not Sfx.plays_over_voice("hover") and Sfx.plays_over_voice("click"), "hover never plays over a voice")
+
+	print("=== interface sound rules ===")
+	check(Sfx.pick_ui(["click", "transition"]) == "transition" and Sfx.pick_ui(["transition", "click"]) == "transition", "a screen change outranks the press that caused it")
+	check(Sfx.pick_ui(["hover", "click"]) == "click" and Sfx.pick_ui(["toggle", "click"]) == "toggle", "a press outranks hover; a switch sounds as a toggle")
+	check(Sfx.pick_ui(["correct", "start"]) == "" and Sfx.pick_ui([]) == "", "event cues are never picked as interface sounds")
+	check(not Sfx.gap_ok("hover", 0.05) and Sfx.gap_ok("hover", 0.2), "hover waits %.2f s before repeating" % float(Sfx.UI["hover"]["gap"]))
+	for id in UI_SOUNDS:
+		check(float(Sfx.UI[id]["gap"]) > 0.0 and float(Sfx.UI[id]["gap"]) <= 0.3, "%s has a short repeat gap" % id)
 
 	print("=== instance: no tree is a no-op ===")
 	var loose := Sfx.new()
@@ -156,20 +316,87 @@ func _initialize() -> void:
 	check((s.get_node("Sfx_correct") as AudioStreamPlayer).pitch_scale == 1.0, "a plain correct plays at its own pitch")
 	check(s.play("correct", Sfx.streak_pitch(8)) and is_equal_approx((s.get_node("Sfx_correct") as AudioStreamPlayer).pitch_scale, Sfx.streak_pitch(8)), "a streak correct plays pitched up")
 	check(s.play("correct") and (s.get_node("Sfx_correct") as AudioStreamPlayer).pitch_scale == 1.0, "the pitch resets on the next plain play")
-	check(not s.play("click"), "a cut cue cannot play")
+	check(not s.play("tick"), "a cut cue cannot play")
 	s.voice_active = func() -> bool: return true
 	check(s.play("warning"), "voice on: warning still plays, ducked")
 	check(is_equal_approx((s.get_node("Sfx_warning") as AudioStreamPlayer).volume_db, float(Sfx.SOUNDS["warning"]["db"]) + Sfx.VOICE_DUCK_DB), "ducked volume applied")
 	s.voice_active = Callable()
+
+	print("=== interface sounds in tree: one per action, rate limit, voice ===")
+	for id in UI_SOUNDS:
+		check(s.has_node("Sfx_" + id), "%s has a pre-loaded player" % id)
+	# Clear the event window left by the cues above.
+	await _wait(0.1)
+	s.last_ui = ""
+	check(s.play("click") and s.play("transition"), "interface sounds queue for the end of the frame")
+	await _frames()
+	check(s.last_ui == "transition", "one action, one sound: the transition, not the click")
+	s.last_ui = ""
+	s.play(Sfx.START)
+	s.play("transition")
+	s.play("click")
+	await _frames()
+	check(s.last_ui == "", "start press: the start cue alone (no click, no transition)")
+	await _wait(0.1)
+	s.play("select")
+	s.play("wrong")
+	await _frames()
+	check(s.last_ui == "", "answer chosen: the answer tone alone, no select")
+	await _wait(0.1)
+	s.play("correct")
+	s.play("select")
+	await _frames()
+	check(s.last_ui == "", "an interface sound asked for right after an answer tone is dropped")
+	await _wait(0.1)
+	s.play("hover")
+	await _frames()
+	check(s.last_ui == "hover", "hover plays on its own")
+	s.last_ui = ""
+	s.play("hover")
+	await _frames()
+	check(s.last_ui == "", "sweeping the pointer: a second hover right away is rate-limited")
+	await _wait(0.2)
+	s.play("hover")
+	await _frames()
+	check(s.last_ui == "hover", "hover plays again after its gap")
+	await _wait(0.2)
+	s.last_ui = ""
+	s.voice_reading = func() -> bool: return true
+	s.play("hover")
+	await _frames()
+	check(s.last_ui == "", "no hover while a voice reads")
+	s.play("toggle")
+	await _frames()
+	check(s.last_ui == "toggle" and is_equal_approx((s.get_node("Sfx_toggle") as AudioStreamPlayer).volume_db, Sfx.VOICE_DUCK_DB),
+		"a toggle while a voice reads plays %d dB down, and never stops the voice" % Sfx.VOICE_DUCK_DB)
+	s.voice_reading = Callable()
+	await _wait(0.1)
+	s.play("toggle")
+	await _frames()
+	check((s.get_node("Sfx_toggle") as AudioStreamPlayer).volume_db == 0.0, "no voice: full level again")
+
+	print("=== the Sounds setting gates everything ===")
+	await _wait(0.3)
+	s.last_ui = ""
+	s.play("click")
 	s.apply_settings(false, AudioSettings.sfx_bus_db(1))
+	await _frames()
+	check(s.last_ui == "", "turning Sounds off drops a pending interface sound")
 	check(AudioServer.is_bus_mute(bus), "off: bus muted")
 	check(not s.play("correct"), "off: nothing plays")
+	for id in UI_SOUNDS:
+		check(not s.play(id), "off: %s does not play" % id)
+	s.apply_settings(true, AudioSettings.sfx_bus_db(2))
+	check(is_equal_approx(AudioServer.get_bus_volume_db(bus), AudioSettings.SFX_LEVEL_DB[2]) and s.play("click"), "back on: interface sounds follow the Sounds level (one bus)")
+	await _frames()
+	s.apply_settings(false, AudioSettings.sfx_bus_db(1))
 	for p in s.get_children():
 		(p as AudioStreamPlayer).stop()
 	# The mixer releases stopped playbacks on its own thread; give it a beat so
 	# the clean exit check (no leaked streams) stays meaningful.
 	await create_timer(0.25).timeout
 	host.free()
+	await _check_app()
 
 	print("")
 	print("checks: %d  failures: %d" % [checks, failures.size()])

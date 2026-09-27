@@ -1,11 +1,13 @@
 """Synthesize the app's sound effects into res://assets/sfx/ (see docs/SFX_PLAN.md).
 
-    python tools/sfx/make_sfx.py                   # default family -> assets/sfx/*.wav
-    python tools/sfx/make_sfx.py --family mallet   # ship another family instead
-    python tools/sfx/make_sfx.py --preview         # also every family -> .audit_tmp/sfx_preview/v2/
+    python tools/sfx/make_sfx.py --preview         # every family -> .audit_tmp/sfx_preview/v2/
+    python tools/sfx/make_sfx.py --replace-shipped # default family -> assets/sfx/*.wav
+    python tools/sfx/make_sfx.py --replace-shipped --family mallet
 
-Five cues: correct, wrong, pass, fail, warning. The sixth, start.wav, is a
-sourced recording (assets/sfx/CREDITS.md) and is never written here. Each family plays the same
+The app now ships sourced recordings (Set C, assets/sfx/CREDITS.md), so this
+only writes into assets/sfx/ with --replace-shipped: it would overwrite them.
+Five cues: correct, wrong, pass, fail, warning; start and the interface sounds
+are never written here. Each family plays the same
 notes (C major) with a different instrument, so picking one is purely a timbre
 choice:
 
@@ -303,6 +305,7 @@ def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--family", choices=FAMILIES, default=DEFAULT_FAMILY, help="instrument written to assets/sfx/")
     ap.add_argument("--preview", action="store_true", help="render every family to .audit_tmp/sfx_preview/v2/")
+    ap.add_argument("--replace-shipped", action="store_true", help="overwrite the shipped (sourced) cues in assets/sfx/")
     args = ap.parse_args()
     families = FAMILIES if args.preview else (args.family,)
     os.makedirs(OUT_DIR, exist_ok=True)
@@ -315,7 +318,7 @@ def main() -> None:
             loud = momentary_lufs(x)
             peak = 20 * np.log10(max(1e-9, float(np.max(np.abs(x)))))
             print(f"  {family:<7} {name:<8} {len(x) / SR * 1000:5.0f} ms  {loud:6.1f} LUFS  peak {peak:5.1f} dBFS")
-            if family == args.family:
+            if family == args.family and args.replace_shipped:
                 write_wav(os.path.join(OUT_DIR, f"{name}.wav"), x, family == "electric")
             if args.preview:
                 os.makedirs(os.path.join(PREVIEW_DIR, family), exist_ok=True)
@@ -330,7 +333,10 @@ def main() -> None:
         # correct, wrong, correct, wrong ... per family, in FAMILIES order.
         write_wav(os.path.join(PREVIEW_DIR, "compare_correct_wrong.wav"), np.concatenate(compare))
         print(f"  preview -> {PREVIEW_DIR}")
-    print(f"  shipped family '{args.family}' -> {OUT_DIR}")
+    if args.replace_shipped:
+        print(f"  shipped family '{args.family}' -> {OUT_DIR}")
+    else:
+        print("  assets/sfx/ left alone (the sourced set ships); --replace-shipped overwrites it")
 
 
 if __name__ == "__main__":

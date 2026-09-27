@@ -209,6 +209,10 @@ var fit := FitController.new()
 var _verdict_scroll_tween: Tween
 var _start_tween: Tween
 var _leave_armed_until := 0
+## The last input was a key or controller (not a pointer or touch); see _input.
+var _nav_input := false
+## The launch menu gets no transition sound; later returns to it do.
+var _menu_shown := false
 ## The 860 px menu card and ~823 px quiz header clip below this; narrower
 ## windows scale the desktop canvas down instead.
 const DESKTOP_MIN_CANVAS_WIDTH := 900
@@ -399,6 +403,8 @@ func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION
 	else:
 		timer.stop()
 	speech._stop_reading()
+	# A start press already played the start cue, which silences this.
+	_sfx("transition")
 	# A second tap during the fade restarts it instead of queueing a second
 	# _show_question for the same session.
 	if _start_tween != null and _start_tween.is_valid():
@@ -469,7 +475,35 @@ func _setup_sfx() -> void:
 	# Recorded clips are on the Speech bus, which the duck bus already listens to.
 	sfx.voice_active = func() -> bool:
 		return DisplayServer.tts_is_speaking()
+	sfx.voice_reading = func() -> bool:
+		return (speech.reader != null and speech.reader.playing) or DisplayServer.tts_is_speaking()
 	_apply_sfx_settings()
+	_wire_ui_sounds(self)
+
+## Interface sounds for every button the builders made (docs/SFX_PLAN.md):
+## toggle for switches, check boxes, segmented chips and the voice mute; click
+## for other presses; hover for pointer hover on plain buttons (desktop only).
+## Session-start controls play the start cue themselves, so they get no click.
+## Answer cards are not buttons: _show_question gives them select.
+func _wire_ui_sounds(node: Node) -> void:
+	for child in node.get_children():
+		_wire_ui_sounds(child)
+	if not node is BaseButton:
+		return
+	var button := node as BaseButton
+	var toggles := button.toggle_mode or button == mute_button
+	if not button.has_meta("starts_session"):
+		button.pressed.connect(_sfx.bind("toggle" if toggles else "click"))
+	if not ui_mobile and not toggles and not button is OptionButton:
+		button.mouse_entered.connect(func() -> void:
+			if not button.disabled:
+				_sfx("hover"))
+
+## Keyboard / controller focus moves on the answer cards get select; a focus
+## that comes with a click or tap does not (the answer tone covers that).
+func _on_answer_card_focused() -> void:
+	if _nav_input and not current_answered:
+		_sfx("select")
 
 func _apply_sfx_settings() -> void:
 	if sfx != null:
@@ -702,6 +736,9 @@ func _show_menu() -> void:
 	listen_paused = false
 	session_audio_mode = AudioSettings.Mode.SILENT
 	speech._stop_reading()
+	if _menu_shown:
+		_sfx("transition")
+	_menu_shown = true
 	_refresh_study_button()
 	AudioSection.refresh(self)
 	_update_key_hint()
@@ -868,6 +905,7 @@ func _show_question() -> void:
 		var card := AnswerCard.new()
 		card.set_card_data(i, str(answers[i]))
 		card.card_clicked.connect(_answer_selected)
+		card.focus_entered.connect(_on_answer_card_focused)
 		answers_box.add_child(card)
 		UiFx.add_shine(card)
 		card.animate_entrance(0.08 + float(i) * 0.07)
@@ -1309,6 +1347,13 @@ func _request_menu() -> void:
 		if is_instance_valid(restart_button) and Time.get_ticks_msec() >= _leave_armed_until:
 			restart_button.text = restart_button.get_meta("idle_text", restart_button.text)
 			read_status_label.text = "")
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey or event is InputEventJoypadButton \
+			or event is InputEventJoypadMotion and absf((event as InputEventJoypadMotion).axis_value) > 0.5:
+		_nav_input = true
+	elif event is InputEventMouseButton or event is InputEventScreenTouch:
+		_nav_input = false
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and not event.echo:
