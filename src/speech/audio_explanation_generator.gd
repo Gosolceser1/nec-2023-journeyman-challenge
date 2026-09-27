@@ -462,14 +462,18 @@ static func plain_words(text: String) -> String:
 		["not more than", "at most"],
 		["not exceeding", "up to"],
 		["as specified in", "in"],
-		["An current", "A current"],
-		["an current", "a current"],
-		["A outlet", "An outlet"],
-		["a outlet", "an outlet"],
 	]
 	var plain := text
 	for pair in swaps:
 		var pattern := RegEx.new()
 		pattern.compile("(?i)\\b" + pair[0] + "\\b")
 		plain = pattern.sub(plain, pair[1], true)
+	# Article agreement after the swaps, case-sensitive: a mid-sentence "an
+	# current" must become "a current", because a capital "A" is voiced as the
+	# letter. After a naming word ("Class A outlet") the A is a letter, not an article.
+	for pair in [["An current", "A current"], ["an current", "a current"],
+			["A outlet", "An outlet"], ["a outlet", "an outlet"]]:
+		var article := RegEx.new()
+		article.compile("(?<!Class |Type |Option |Answer |paragraph |sub-item )\\b" + pair[0] + "\\b")
+		plain = article.sub(plain, pair[1], true)
 	return plain

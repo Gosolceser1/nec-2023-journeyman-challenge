@@ -78,6 +78,16 @@ const GOLDEN := [
 	["references", "Article 250 and Chapter 9", "Article 250 and Chapter 9"],
 	["references", "31.6 amps", "31.6 amps"],
 	["references", "422.16(B)(1)(a)", "Section 422 point 16, paragraph B, item 1, sub-item A"],
+	["references", "sized under 250.122 based on", "Sized under section 250 point 122 based on"],
+	["references", "as covered by 240.21.", "As covered by section 240 point 21."],
+	["references", "352.100, 352.12(B), and 352.60: text", "Section 352 point 100, section 352 point 12, paragraph B, and section 352 point 60: text"],
+	["references", "332.104, 332.108, and 332.116: 332.104 Conductors", "Section 332 point 104, section 332 point 108, and section 332 point 116: section 332 point 104 Conductors"],
+	["references", "rules\n352.100 Construction", "Rules. section 352 point 100 Construction"],
+	["references", "Tables 310.15(B)(1) and 310.16", "Tables 310 point 15, B, 1 and Table 310 point 16"],
+	["references", "21 x 0.39 = 8.19 A", "21 times 0.39 equals 8.19 amps"],
+	["references", "a value of 888.8 ohms", "A value of 888.8 ohms"],
+	["references", "within 1.5 seconds, a 1.5% drop", "Within 1.5 seconds, a 1.5 percent drop"],
+	["references", "in 120.5 V and 42.4, 34.8", "In 120.5 volts and 42.4, 34.8"],
 	["designator_pair", "item 1 through (B)(5)", "Item 1 through paragraph B, item 5"],
 	["wire_aught", "1/0 and 4/0", "One aught and four aught"],
 	["cable_designation", "12/3 and 10/2 NM", "12 slash 3 and 10 slash 2 N M"],
@@ -258,6 +268,17 @@ func lost_blank_and_references() -> void:
 	t.eq(str(ref[2]["text"]), "Option B, 210 point 8, paragraph A.", "with its designator")
 	var numeric := ST.spoken_segments({"prompt": "The ampacity is ___ amps.", "answers": ["31.6"], "correct_index": 0})
 	t.eq(str(numeric[1]["text"]), "Option A, 31.6.", "a decimal answer to a non-reference question stays a number")
+	var cited := ST.spoken_segments({"prompt": "Supply conductors are feeders or ___ as covered by 240.21.", "answers": ["taps", "0.5"], "correct_index": 0})
+	t.eq(str(cited[0]["text"]), "Supply conductors are feeders or blank as covered by section 240 point 21.", "a section cited in the stem is read as a section")
+	t.eq(str(cited[2]["text"]), "Option B, 0.5.", "a decimal choice stays a number")
+	var rule := ST.teach_segments({"prompt": "Conductors shall have an ampacity ___ the rating.", "answers": ["of not less than", "equal to"],
+		"correct_index": 0, "article": "210.19(B)",
+		"reference_text": "210.19(B) Branch Circuits\nConductors shall have an ampacity of not less than the rating of the branch circuit."})
+	var rule_text := ""
+	for seg in rule:
+		rule_text += str(seg["text"]) + "\n"
+	t.check(rule_text.contains("must have a current rating of at least"), "the article before 'current rating' stays lower case: " + rule_text)
+	t.check(not rule_text.contains(" A current"), "no mid-sentence capital 'A' for the article 'a'")
 
 
 func rules_version_stamp() -> void:
@@ -296,12 +317,25 @@ func bank_sweep() -> void:
 	t.eq(recs.size(), 279, "bank read is not vacuous")
 	var caps := RegEx.create_from_string("\\b[A-Z]{2,}s?\\b")
 	var hostile := RegEx.create_from_string("[\\t\\n_\"“”‘’—–→÷×√≈Ω½¼¾≤≥±−²³•…%#=]|\\.\\.|\\s[,.;:](?!\\d)|\\b\\d{2,3}\\.\\d+\\(|\\bft\\b|\\blbs?\\b|\\bkcmil\\b")
+	# A bare NNN.N left in a line is voiced as a decimal; the only real one in the bank is a resistance.
+	var bare_section := RegEx.create_from_string("\\b(?:90|[1-9]\\d{2})\\.\\d+\\b(?! ohms)")
+	# A capital "A" before a lowercase word is voiced as the letter, so only a real letter may be one.
+	var letter_a := RegEx.create_from_string("\\b([A-Za-z-]+) A (?=[a-z])")
+	var letter_words := ["paragraph", "sub-item", "Class"]
 	var bad_caps := {}
 	var bad := 0
 	for rec_v in recs:
 		var rec: Dictionary = rec_v
 		for seg in ST.speech_plan(rec):
 			var txt := str(seg["text"])
+			var bs := bare_section.search(txt)
+			if bs != null:
+				bad += 1
+				print("  bare section '%s' in %s" % [bs.get_string(0), rec.get("id", "")])
+			for la in letter_a.search_all(txt):
+				if not la.get_string(1) in letter_words:
+					bad += 1
+					print("  article read as letter '%s' in %s" % [la.get_string(0), rec.get("id", "")])
 			for m in caps.search_all(txt):
 				if not Rules.SAY_AS.has(m.get_string(0)):
 					bad_caps[m.get_string(0)] = str(rec.get("id", ""))

@@ -248,6 +248,10 @@ func plain_words() -> void:
 		["grounded conductor", "neutral wire", "singular grounded conductor"],
 		["ungrounded conductors", "hot wires", "plural ungrounded conductors"],
 		["A outlet shall", "An outlet must", "a -> an article fix"],
+		["and a outlet", "and an outlet", "a -> an keeps a mid-sentence article lower case"],
+		["shall have an ampacity of", "must have a current rating of", "an -> a keeps a mid-sentence article lower case"],
+		["An ampacity of", "A current rating of", "an -> a at a sentence start stays capitalised"],
+		["Class A receptacle", "Class A outlet", "a class letter is not an article"],
 		["Article 210.8 shall be used", "Article 210.8 must be used", "shall be"],
 	]
 	for row in swaps:

@@ -472,25 +472,91 @@ static func _unshout(text: String) -> String:
 const REFERENCE_RE := "(?:\\b(Sections?|sections?|Tables?|tables?|Articles?|articles?)\\s+|(§)\\s*)?\\b(\\d{2,3})\\.(\\d{1,3})\\b((?:\\((?:[A-Za-z]|\\d{1,2})\\))*)"
 
 
+## NEC articles run 90 through 840; a bare "31.6" or "0.39" is never one.
+const ARTICLE_NUMBER_RE := "^(?:90|[1-9]\\d{2})$"
+## A word that cites a bare section in running text: "as covered by 240.21".
+const CITE_CUE_RE := "(?i)\\b(?:under|in|by|per|see|with|of)\\s+$"
+## A unit after the number makes it a measurement: "of 888.8 ohms".
+const UNIT_AFTER_RE := "^\\s*(?:%|°|\"|'|(?:percent|amps?|amperes?|A|mA|kA|V|volts?|kV|VA|kVA|W|watts?|kW|ohms?|Ω|m|mm|meters?|millimeters?|ft|feet|foot|in|inch(?:es)?|s|seconds?|Hz|hertz|lbs?|pounds?|kcmil|degrees?|sq|cu)\\b)"
+## Joins the members of a reference list: "352.100, 352.12(B), and 352.60".
+const LIST_GAP_RE := "^(?:,\\s*|,?\\s+(?:and|or|through)\\s+)$"
+
+
 ## "210.8(A)(1)" -> "section 210 point 8, paragraph A, item 1".
 ## "Table 310.15(B)(1)" -> "Table 310 point 15, B, 1".
 ## A decimal is only treated as a reference when something says it is one: a
-## Section/Table/Article word, a (designator), or a line-leading "680.58:"
-## citation. A bare "31.6" stays a number.
+## Section/Table/Article word, a (designator), a citing word ("under 250.122"),
+## a "352.100 Construction" heading (at a line start or after a "label: "), a
+## "680.58:" label, or membership of a list
+## that holds one ("332.104, 332.108, and 332.116:"). Without a designator the
+## number must also look like an NEC section (NNN.N, no unit after it), so
+## "31.6", "8.19 amps" and "in 1.5 seconds" stay numbers.
 static func _references(text: String) -> String:
-	return _each(text, REFERENCE_RE, func(m: RegExMatch, src: String) -> String:
-		var prefix := m.get_string(1)
-		var desig := m.get_string(5)
-		var at_line_start := m.get_start() == 0 or src.substr(m.get_start() - 1, 1) == "\n"
-		var after := src.substr(m.get_end(), 11)
-		var line_cite := prefix == "" and at_line_start and (after.begins_with(":") or after.begins_with(" Exception"))
-		if m.get_string(2) == "§":
-			prefix = "section"
-		elif prefix == "" and (desig != "" or line_cite):
-			prefix = "section"
-		if prefix == "":
-			return m.get_string(0)
-		return _speak_reference(prefix, m.get_string(3), m.get_string(4), desig))
+	var matches := _re(REFERENCE_RE).search_all(text)
+	var prefixes: Array[String] = []
+	for m in matches:
+		prefixes.append(_reference_prefix(m, text))
+	# A list is spoken as references when any member is one.
+	var run_start := 0
+	for i in matches.size() + 1:
+		var joined := i > 0 and i < matches.size() and _list_member(matches[i], text) \
+			and _re(LIST_GAP_RE).search(text.substr(matches[i - 1].get_end(), matches[i].get_start() - matches[i - 1].get_end())) != null
+		if joined:
+			continue
+		var lead := ""
+		for j in range(run_start, i):
+			if prefixes[j] != "":
+				lead = "Table" if prefixes[j].to_lower().begins_with("table") else "section"
+				break
+		if lead != "":
+			for j in range(run_start, i):
+				if prefixes[j] == "" and _list_member(matches[j], text):
+					prefixes[j] = lead
+		run_start = i
+	var out := ""
+	var from := 0
+	for i in matches.size():
+		var m := matches[i]
+		out += text.substr(from, m.get_start() - from)
+		if prefixes[i] == "":
+			out += m.get_string(0)
+		else:
+			out += _speak_reference(prefixes[i], m.get_string(3), m.get_string(4), m.get_string(5))
+		from = m.get_end()
+	return out + text.substr(from)
+
+
+static func _reference_prefix(m: RegExMatch, src: String) -> String:
+	var prefix := m.get_string(1)
+	if m.get_string(2) == "§":
+		return "section"
+	if prefix != "" or m.get_string(5) != "":
+		return prefix if prefix != "" else "section"
+	var at_line_start := m.get_start() == 0 or src.substr(m.get_start() - 1, 1) == "\n"
+	var after := src.substr(m.get_end(), 11)
+	if at_line_start and (after.begins_with(":") or after.begins_with(" Exception")):
+		return "section"
+	if not _looks_like_section(m, src):
+		return ""
+	var before := src.substr(maxi(0, m.get_start() - 12), m.get_start() - maxi(0, m.get_start() - 12))
+	var heading_start := at_line_start or before.ends_with(": ")
+	var heading := heading_start and _re("^ [A-Za-z]").search(after) != null
+	if after.begins_with(":") or heading or _re(CITE_CUE_RE).search(before) != null:
+		return "section"
+	return ""
+
+
+## A bare NNN.N with nothing after it that makes it a measurement.
+static func _looks_like_section(m: RegExMatch, src: String) -> bool:
+	return m.get_string(1) == "" and m.get_string(2) == "" \
+		and _re(ARTICLE_NUMBER_RE).search(m.get_string(3)) != null \
+		and _re(UNIT_AFTER_RE).search(src.substr(m.get_end(), 12)) == null
+
+
+## A later list member carries no Section/Table word of its own.
+static func _list_member(m: RegExMatch, src: String) -> bool:
+	return m.get_string(1) == "" and m.get_string(2) == "" \
+		and (m.get_string(5) != "" or _looks_like_section(m, src))
 
 
 static func _speak_reference(prefix: String, whole: String, part: String, desig: String) -> String:

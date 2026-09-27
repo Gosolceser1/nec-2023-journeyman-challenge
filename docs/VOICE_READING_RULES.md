@@ -81,7 +81,9 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 | `680.58:` at line start, `§ 90.2` | Section 680 point 58, Section 90 point 2 |
 | `708.54 Ex.:` | Section 708 point 54 Exception: |
 | bare `210.12` choice to a "which section" question | 210 point 12 |
-| `31.6 amps` (not a reference) | 31.6 amps |
+| `under 250.122`, `required by 408.36`, `in 110.26` | under section 250 point 122, … (a citing word: under, in, by, per, see, with, of) |
+| `352.100, 352.12(B), and 352.60:`, `352.100 Construction` | section 352 point 100, section 352 point 12, paragraph B, and section 352 point 60; a list is read as sections when one member is, and a heading after a line start or `label: ` is a section |
+| `31.6 amps`, `8.19 A`, `0.5`, `888.8 ohms` (not a reference) | 31.6 amps … (a bare number is a section only in the cases above, only as 90 or 100–999 point N, and never with a unit after it) |
 | `1/0`, `4/0` | one aught, four aught |
 | `12/3 NM` | 12 slash 3 N M |
 | `250 kcmil` | 250 thousand circular mil |
@@ -175,7 +177,9 @@ tuning renders were scratch and are not kept; what they showed:
   jargon swapped for plain words (`plain_words`). "Shall" becomes a modal that
   agrees with any subject: "shall be" is "must be", "shall be permitted to" is
   "may", "shall be provided with" is "must have". The old "shall be" to "is"
-  read "garbage disposals is permitted" and "is has".
+  read "garbage disposals is permitted" and "is has". The article is then
+  fixed case-sensitively ("an ampacity" becomes "a current rating", never "A
+  current rating", which the voice reads as the letter A).
 - Right or wrong is shown visually and by the sound effect. It is not spoken,
   because the clips are rendered once per question.
 - Navigating to another question, or leaving the quiz, stops all speech
