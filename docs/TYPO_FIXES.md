@@ -315,3 +315,105 @@ Records from the first two sections, whose spoken stem or choices changed:
 - `open-book-exam-#10-009`
 - `open-book-exam-#10-010`
 - `open-book-exam-#10-012`
+
+## Explanation content audit (84 records)
+
+Post-answer explanation fields only: `reference_text` (74), `choice_notes` with the
+rebuilt `tip_short` (9), `tip_title` (6), `article` (3), `article_title` (2),
+`worked` / `formula` (1 each). No stem, choice or `correct_index` changed; a
+script compared all 279 records before and after and found zero differences.
+Typical fixes: provisions truncated mid-list (680.43(B)(1) lost its (a)/(b)/(c)
+labels and items (1)/(2)), provisions that stopped before the tested item,
+paraphrases shown as quoted Code text, wrong table or section numbers, and choice
+notes that stated a wrong fact (800.44(B) Ex. 3 allows 3 ft on a 4/12 roof).
+
+The NEC 2023 wording was reviewed from recall, without the book. The
+medium-confidence `reference_text` replacements (50 records) should be checked
+against NFPA 70-2023 when a copy is at hand.
+
+| Record | Fields | Finding (confidence) |
+|---|---|---|
+| `final-exam-#1-004` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-005` | reference_text | inconsistency (high) |
+| `final-exam-#1-009` | article_title, reference_text, tip_title | inconsistency (high); formatting / truncation (high); inconsistency (medium) |
+| `final-exam-#1-010` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-011` | tip_title | inconsistency (medium) |
+| `final-exam-#1-012` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-014` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-021` | reference_text | wrong NEC content (medium) |
+| `final-exam-#1-023` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-027` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-029` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-030` | tip_title | inconsistency (medium) |
+| `final-exam-#1-032` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-037` | reference_text | formatting / truncation (high) |
+| `final-exam-#1-039` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-040` | reference_text | wrong NEC content (high) |
+| `final-exam-#1-042` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-043` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-049` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-050` | choice_notes, reference_text, tip_short | wrong NEC content (medium) |
+| `final-exam-#1-053` | reference_text | formatting / truncation (high) |
+| `final-exam-#1-057` | reference_text | formatting / truncation (high) |
+| `final-exam-#1-058` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-068` | reference_text | formatting / truncation (medium) |
+| `final-exam-#1-070` | reference_text | formatting / truncation (medium) |
+| `final-exam-#3-003` | reference_text | formatting / truncation (medium) |
+| `final-exam-#3-014` | reference_text | wrong NEC content (medium) |
+| `final-exam-#3-015` | reference_text | formatting / truncation (high) |
+| `final-exam-#3-016` | reference_text | formatting / truncation (medium) |
+| `final-exam-#3-017` | reference_text | wrong NEC content (medium) |
+| `final-exam-#3-028` | reference_text | wrong NEC content (medium) |
+| `final-exam-#3-031` | choice_notes, tip_short | inconsistency (medium) |
+| `final-exam-#3-033` | reference_text | formatting / truncation (high) |
+| `final-exam-#3-040` | reference_text, choice_notes, worked, tip_short | wrong NEC content (medium); inconsistency (medium) |
+| `final-exam-#3-042` | reference_text | formatting / truncation (high) |
+| `final-exam-#3-047` | tip_title | inconsistency (high) |
+| `final-exam-#3-048` | reference_text | formatting / truncation (medium) |
+| `final-exam-#3-049` | reference_text | formatting / truncation (medium) |
+| `final-exam-#3-052` | reference_text | wrong NEC content (medium) |
+| `final-exam-#3-053` | reference_text, choice_notes, tip_short | wrong NEC content (medium) |
+| `final-exam-#3-068` | reference_text, choice_notes, tip_short | wrong NEC content (medium) |
+| `final-exam-#5-001` | choice_notes, tip_short | inconsistency (medium) |
+| `final-exam-#5-005` | reference_text | formatting / truncation (high) |
+| `final-exam-#5-018` | reference_text | formatting / truncation (high) |
+| `final-exam-#5-019` | reference_text, tip_title | formatting / truncation (high); inconsistency (medium) |
+| `final-exam-#5-020` | reference_text | formatting / truncation (high) |
+| `final-exam-#5-022` | article_title | inconsistency (high) |
+| `final-exam-#5-032` | reference_text | formatting / truncation (medium) |
+| `final-exam-#5-033` | reference_text | formatting / truncation (high) |
+| `final-exam-#5-036` | reference_text | formatting / truncation (medium) |
+| `final-exam-#5-067` | reference_text | formatting / truncation (medium) |
+| `final-exam-#5-070` | reference_text, article | wrong NEC content (medium); inconsistency (medium) |
+| `open-book-exam-#1-003` | reference_text | formatting / truncation (high) |
+| `open-book-exam-#1-005` | reference_text | formatting / truncation (medium) |
+| `open-book-exam-#1-010` | reference_text | formatting / truncation (medium) |
+| `open-book-exam-#1-012` | reference_text | wrong NEC content (medium) |
+| `open-book-exam-#1-021` | reference_text | formatting / truncation (medium) |
+| `open-book-exam-#4-004` | reference_text | formatting / truncation (medium) |
+| `open-book-exam-#4-010` | reference_text | formatting / truncation (medium) |
+| `open-book-exam-#4-011` | reference_text | formatting / truncation (medium) |
+| `open-book-exam-#4-012` | reference_text | formatting / truncation (medium) |
+| `open-book-exam-#4-014` | reference_text | formatting / truncation (medium) |
+| `open-book-exam-#4-015` | reference_text | wrong NEC content (medium) |
+| `open-book-exam-#4-016` | reference_text | formatting / truncation (medium) |
+| `open-book-exam-#4-018` | reference_text | formatting / truncation (medium) |
+| `open-book-exam-#4-020` | reference_text | formatting / truncation (high) |
+| `open-book-exam-#4-021` | reference_text | wrong NEC content (high) |
+| `open-book-exam-#4-023` | reference_text | wrong NEC content (medium) |
+| `open-book-exam-#4-025` | choice_notes, tip_short | formatting / truncation (high) |
+| `open-book-exam-#7-003` | reference_text | formatting / truncation (high) |
+| `open-book-exam-#7-004` | article, reference_text, formula, choice_notes, tip_short | inconsistency (high); wrong NEC content (medium); inconsistency (medium) |
+| `open-book-exam-#7-007` | reference_text | formatting / truncation (medium) |
+| `open-book-exam-#7-009` | reference_text | formatting / truncation (high) |
+| `open-book-exam-#7-010` | reference_text | wrong NEC content (medium) |
+| `open-book-exam-#7-012` | article | wrong NEC content (medium) |
+| `open-book-exam-#7-014` | reference_text | wrong NEC content (medium) |
+| `open-book-exam-#7-023` | reference_text | formatting / truncation (high) |
+| `open-book-exam-#7-024` | tip_title | inconsistency (medium) |
+| `open-book-exam-#10-002` | reference_text | formatting / truncation (high) |
+| `open-book-exam-#10-004` | reference_text | formatting / truncation (high) |
+| `open-book-exam-#10-008` | reference_text | formatting / truncation (high) |
+| `open-book-exam-#10-013` | reference_text | formatting / truncation (medium) |
+| `open-book-exam-#10-015` | reference_text | formatting / truncation (high) |
+| `open-book-exam-#10-024` | choice_notes, tip_short | inconsistency (medium) |

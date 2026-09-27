@@ -42,6 +42,20 @@ that produced false results before. Fixed defects are in git history
   takes the right branch, so nothing shows it today; check the NFPA case first
   if sectioned 70E references are ever added.
 
+## Open: found applying the explanation audit
+
+- **Rule lines can run to a whole provision.** `answer_sentence` splits the
+  provision on ". " only, so when the answer sits in a later line of a
+  multi-line provision the "sentence" spans every line before it.
+  final-exam-#3-053 reads all of 344.30(B) plus its table (997 characters,
+  about 25 s of audio); `speak_question.py` gives a clip 20 s, so its bundled
+  clip had to be rendered with a longer timeout, and a live read with another
+  Edge voice times out on that line. final-exam-#1-012 reads the full 210.8(A)
+  list. Splitting on line breaks too would fix it but re-renders many clips.
+- **"is permitted" after a plural subject.** `plain_words` maps "shall be
+  permitted" to "is permitted", so about a dozen rule lines still read
+  "Conductors of different voltage ratings is permitted".
+
 ## Verification traps
 
 - `ui_mobile` is set in `_ready()` from the command line, so setting it on

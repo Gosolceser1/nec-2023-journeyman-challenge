@@ -13,7 +13,7 @@ overcurrents panelboard panelboards raceway raceways switchgear wireway wireways
 wrenchtight occupiable hoistways multibuilding barriered noncinder nonheating
 noninsulated nonlighting nonlocking nonshielded unjacketed thermoset relamping
 explosible flyings plexed storable prefinished centerline
-kcmil kVA kft ft ft² µm mm ml kg lb lbs hp rms std
+kcmil kVA kft ft ft² m² µm mm ml kg lb lbs hp rms std
 AWG THHN THWN NM EMT RMC IMC GFCI AFCI NEMA
 
 # Plurals of acronyms as they appear lower-cased by the tokenizer
