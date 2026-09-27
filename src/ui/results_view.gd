@@ -58,12 +58,12 @@ static func show(host: Main) -> void:
 		host.score_label.text = "RESULT: PASSED"
 		host.score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
 		if is_instance_valid(host.pass_badge):
-			host.pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_GREEN_BG, AppTheme.EMERALD_600, 1, 8))
+			Widgets.tint_hud_segment(host.pass_badge, AppTheme.EMERALD_400)
 	else:
 		host.score_label.text = "RESULT: DID NOT PASS"
 		host.score_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
 		if is_instance_valid(host.pass_badge):
-			host.pass_badge.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.BADGE_RED_BG, AppTheme.ROSE_800, 1, 8))
+			Widgets.tint_hud_segment(host.pass_badge, AppTheme.RED_400)
 	host.streak_label.text = "FINAL: %d/%d (%d%%)" % [host.score, total, roundi(accuracy)]
 	for child in host.answers_box.get_children():
 		host.answers_box.remove_child(child)
@@ -71,11 +71,9 @@ static func show(host: Main) -> void:
 	host.feedback_panel.visible = true
 	host.feedback_reference.visible = false
 	if passed:
-		host.feedback_title.text = ("EXAMINATION" if is_exam else "PRACTICE") + " RESULT: PASS"
-		host.feedback_title.add_theme_color_override("font_color", AppTheme.EMERALD_400)
+		host._set_feedback_verdict(("EXAMINATION" if is_exam else "PRACTICE") + " RESULT: PASS", AppTheme.EMERALD_400, "check")
 	else:
-		host.feedback_title.text = ("EXAMINATION" if is_exam else "PRACTICE") + " RESULT: DID NOT PASS"
-		host.feedback_title.add_theme_color_override("font_color", AppTheme.RED_400)
+		host._set_feedback_verdict(("EXAMINATION" if is_exam else "PRACTICE") + " RESULT: DID NOT PASS", AppTheme.RED_400, "cross")
 	
 	# The gauge and the title already state the percentage and the verdict.
 	var summary_text := "%d of %d correct  •  %d%% needed to pass  •  %s" % [
@@ -202,8 +200,7 @@ static func show_listen(host: Main) -> void:
 		host.results_visual.visible = false
 	host.feedback_panel.visible = true
 	host.feedback_reference.visible = false
-	host.feedback_title.text = "LISTENING SESSION COMPLETE"
-	host.feedback_title.add_theme_color_override("font_color", AppTheme.SKY_400)
+	host._set_feedback_verdict("LISTENING SESSION COMPLETE", AppTheme.SKY_400, "speaker")
 	host.feedback_body.text = "Reviewed %d of %d questions hands-free.\nListen mode is not graded — run a drill in Tap or Auto-read mode to test yourself." % [host.answered_count, host.order.size()]
 	host.feedback_body.visible = true
 	host.info_label.clear()
@@ -219,14 +216,21 @@ static func show_listen(host: Main) -> void:
 static func show_visual(host: Main, accuracy: float, passed: bool) -> void:
 	if not is_instance_valid(host.results_visual):
 		host.results_visual = VBoxContainer.new() if host.ui_mobile else HBoxContainer.new()
-		host.results_visual.add_theme_constant_override("separation", 18)
+		host.results_visual.add_theme_constant_override("separation", AppTheme.SPACE_LG)
 		host.result_gauge = ResultGauge.new()
 		host.result_gauge.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
 		host.result_gauge.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		host.results_visual.add_child(host.result_gauge)
+		var detail := VBoxContainer.new()
+		detail.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		detail.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		detail.add_theme_constant_override("separation", AppTheme.SPACE_MD)
+		host.results_visual.add_child(detail)
 		host.chapter_bars = ChapterBars.new()
-		host.chapter_bars.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-		host.results_visual.add_child(host.chapter_bars)
+		detail.add_child(host.chapter_bars)
+		var pace := PaceSparkline.new()
+		pace.name = "PaceSparkline"
+		detail.add_child(pace)
 		var column := host.feedback_body.get_parent()
 		column.add_child(host.results_visual)
 		column.move_child(host.results_visual, host.feedback_body.get_index() + 1)
@@ -239,6 +243,8 @@ static func show_visual(host: Main, accuracy: float, passed: bool) -> void:
 		host.chapter_bars.set_rows(ChapterBars.rows_from_stats(host.chapter_stats))
 	else:
 		host.chapter_bars.set_rows(ChapterBars.rows_from_areas(host.session.area_stats, float(Main.PASS_PERCENT)))
+	var pace := host.chapter_bars.get_parent().get_node("PaceSparkline") as PaceSparkline
+	pace.set_points(host.session.answer_seconds)
 	UiFx.glow_pulse(host.feedback_panel, ResultGauge.tint_for(accuracy, float(Main.PASS_PERCENT)), 30, 1.2)
 
 

@@ -24,6 +24,7 @@ const CHAPTER_NAMES := {
 
 var rows: Array = []
 var _grow := 0.0
+var _pill := StyleBoxFlat.new()
 
 
 func _init() -> void:
@@ -91,11 +92,13 @@ func _set_grow(v: float) -> void:
 
 
 func _draw() -> void:
-	var font := get_theme_default_font()
+	var font := AppTheme.ui_font(AppTheme.WEIGHT_MEDIUM)
+	var digits := AppTheme.numeric_font(AppTheme.WEIGHT_MEDIUM)
 	var label_w := minf(190.0, size.x * 0.46)
 	var count_w := 76.0
-	var bar_x := label_w + 8.0
+	var bar_x := label_w + AppTheme.SPACE_SM
 	var bar_w := maxf(20.0, size.x - bar_x - count_w)
+	var bar_h := 8.0
 	for i in rows.size():
 		var row: Dictionary = rows[i]
 		var y := float(i) * ROW_H
@@ -103,13 +106,22 @@ func _draw() -> void:
 		var ratio := float(row["correct"]) / float(total)
 		var col := ResultGauge.tint_for(ratio * 100.0, 75.0)
 		var label := ("▸ " if row.get("weakest", false) else "") + str(row["label"])
-		draw_string(font, Vector2(0, y + 16.0), label, HORIZONTAL_ALIGNMENT_LEFT, label_w, 12, AppTheme.AMBER_400 if row.get("weak", false) else AppTheme.SLATE_300)
-		var track := Rect2(bar_x, y + 7.0, bar_w, 10.0)
-		draw_rect(track, Color(1, 1, 1, 0.07))
-		if ratio > 0.0:
-			draw_rect(Rect2(track.position, Vector2(bar_w * ratio * _grow, track.size.y)), col)
+		draw_string(font, Vector2(0, y + 16.0), label, HORIZONTAL_ALIGNMENT_LEFT, label_w, AppTheme.TYPE_META, AppTheme.AMBER_400 if row.get("weak", false) else AppTheme.SLATE_300)
+		var mid := y + 12.0
+		_capsule(bar_x, bar_x + bar_w, mid, bar_h, Color(AppTheme.WHITE, 0.07))
+		var fill := bar_w * ratio * _grow
+		if fill > 0.5:
+			_capsule(bar_x, bar_x + fill, mid, bar_h + 6.0, Color(col, 0.18))
+			_capsule(bar_x, bar_x + fill, mid, bar_h, col)
 		if row.has("weak"):
 			var tick_x := bar_x + bar_w * 0.75
-			draw_line(Vector2(tick_x, y + 4.0), Vector2(tick_x, y + 20.0), Color(1, 1, 1, 0.35), 1.0)
-		draw_string(font, Vector2(bar_x + bar_w + 6.0, y + 16.0), "%d/%d  %d%%" % [int(row["correct"]), int(row["total"]), roundi(ratio * 100.0)],
-			HORIZONTAL_ALIGNMENT_LEFT, count_w, 12, AppTheme.SLATE_400)
+			draw_line(Vector2(tick_x, y + 3.0), Vector2(tick_x, y + 21.0), Color(AppTheme.WHITE, 0.45), 1.0)
+		draw_string(digits, Vector2(bar_x + bar_w + 6.0, y + 16.0), "%d/%d  %d%%" % [int(row["correct"]), int(row["total"]), roundi(ratio * 100.0)],
+			HORIZONTAL_ALIGNMENT_LEFT, count_w, AppTheme.TYPE_META, AppTheme.SLATE_400)
+
+
+## A round-ended bar from x0 to x1 centred on y.
+func _capsule(x0: float, x1: float, y: float, h: float, col: Color) -> void:
+	_pill.bg_color = col
+	_pill.set_corner_radius_all(int(h * 0.5))
+	draw_style_box(_pill, Rect2(x0, y - h * 0.5, maxf(x1 - x0, 1.0), h))
