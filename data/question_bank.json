@@ -936,7 +936,8 @@
         "R means thermoset (rubber) insulation, not thermoplastic, and -2 marks the temperature rating.",
         "Table 310.4(1) lists RHW-2 at 90 degrees C for dry and wet locations; the -2 marks that rating."
       ],
-      "available": true
+      "available": true,
+      "table_after_answer": true
     },
     {
       "id": "final-exam-#1-027",
@@ -963,7 +964,26 @@
       "lookup_summary": "Lookup clues: ampacity, raceway, conductors. Start with Table 310.15(B)(1)(1), then read the matching subsection and exceptions.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nDecode the letters first: EMT = Electrical Metallic Tubing (thin-wall, hand-bendable). RMC = Rigid Metal Conduit (thick threaded steel). IMC = Intermediate (in between). FMC = Flexible Metal Conduit (bendable whip). ENT = Electrical Nonmetallic Tubing (blue smurf tube). LFMC = Liquidtight Flexible Metal (sealed whip). RNC = Rigid Nonmetallic Conduit (PVC). Rules answer three things: clearance from wood framing (1-1/4 in. or a nail plate), burial depth, and strapping (within a foot of every box, then every few feet by type).\n\nThis asks how many amps the conductor may safely carry under the stated conditions. Subject: raceway. Apply temperature and adjustment factors first, then read the resulting ampacity.\n\nLOOKUP FOCUS\nampacity, raceway, conductors",
       "reference_text": "Table 310.15(B)(1)(1) Ambient Temperature Correction Factors Based on 30°C (86°F)\nAmbient Temperature (°C)\t60°C\t75°C\t90°C\tAmbient Temperature (°F)\n41–45\t0.71\t0.82\t0.87\t105–113",
-      "reference_table": [],
+      "reference_table": [
+        [
+          "Column",
+          "60°C",
+          "75°C",
+          "90°C"
+        ],
+        [
+          "#10 Cu (A)",
+          "30",
+          "35",
+          "40"
+        ],
+        [
+          "105–113°F",
+          "0.71",
+          "0.82",
+          "0.87"
+        ]
+      ],
       "tip_title": "Conduit and raceways",
       "tip_short": "THWN-2 uses the 90 degree C column: #10 is 40 amperes, and 112 degrees F takes the 0.87 correction. Correct: B — 34.8. #10 THWN-2 is 40 amperes at 90 degrees C, and 40 times the 0.87 factor for 112 degrees F is 34.8 amperes. Not A: 31.6 amperes uses the wrong factor; 40 amperes times 0.87 for 105 to 113 degrees F is 34.8 amperes. Not C: 35 amperes is the 75 degree C value with no temperature correction; 112 degrees F requires correction. Not D: 37.2 amperes uses too high a factor; the 90 degree C factor for 105 to 113 degrees F is 0.87.",
       "formula": "Multiply the base ampacity by the temperature correction factor for the given ambient.",
@@ -2414,12 +2434,12 @@
       "reference_text": "Table 210.21(B)(2) Maximum Cord-and-Plug-Connected Load to Receptacle\nCircuit Rating (Amperes) | Receptacle Rating (Amperes) | Maximum Load (Amperes)\n15 or 20 | 15 | 12\n20 | 20 | 16\n30 | 30 | 24",
       "reference_table": [
         [
-          "Branch-circuit rating",
+          "Circuit rating",
           "Receptacle rating",
-          "Maximum cord-and-plug load"
+          "Max. cord-and-plug load"
         ],
         [
-          "20 A",
+          "15 or 20 A",
           "15 A",
           "12 A"
         ],
@@ -2427,6 +2447,11 @@
           "20 A",
           "20 A",
           "16 A"
+        ],
+        [
+          "30 A",
+          "30 A",
+          "24 A"
         ]
       ],
       "tip_title": "Flexible cords",
@@ -4009,7 +4034,41 @@
       "lookup_summary": "Lookup clues: ampacity, cable, conductors. Start with 320.80(A), then read the matching subsection and exceptions.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nDecode the letters first: MI = Mineral-Insulated (wires in white mineral powder inside a copper tube — fireproof, for hazardous and harsh spots). MC = Metal-Clad (metal armor, goes almost anywhere). NM = Nonmetallic-sheathed, Romex (dry homes only). UF = Underground Feeder (burial and wet spots). SE = Service-Entrance (brings power in). AC = Armored Cable/BX (grounds through its armor plus a bonding strip, needs a red anti-short bushing). USE stays buried outside and may not come indoors.\n\nThis asks how many amps the conductor may safely carry under the stated conditions. Numbers in the question: 60 degree c. Apply temperature and adjustment factors first, then read the resulting ampacity.\n\nLOOKUP FOCUS\nampacity, cable, conductors",
       "reference_text": "320.80(A) Thermal Insulation\nArmored cable installed in thermal insulation shall have conductors rated at 90°C (194°F). The ampacity of cable installed in these applications shall not exceed that of a 60°C (140°F) rated conductor. The 90°C (194°F) rating shall be permitted to be used for ampacity adjustment and correction calculations; however, the ampacity shall not exceed that of a 60°C (140°F) rated conductor.\nWhere more than two Type AC cables containing two or more current-carrying conductors in each cable are installed in contact with thermal insulation, caulk, or sealing foam without maintaining spacing between cables, the ampacity of each conductor shall be adjusted in accordance with Table 310.15(C)(1).",
-      "reference_table": [],
+      "reference_table": [
+        [
+          "Cu AWG",
+          "60°C (140°F)",
+          "75°C (167°F)",
+          "90°C (194°F)"
+        ],
+        [
+          "14",
+          "15",
+          "20",
+          "25"
+        ],
+        [
+          "12",
+          "20",
+          "25",
+          "30"
+        ],
+        [
+          "10",
+          "30",
+          "35",
+          "40"
+        ],
+        [
+          "8",
+          "40",
+          "50",
+          "55"
+        ],
+        [
+          "NOTE: Table 310.16 copper ampacities. Per 320.80(A), AC cable in thermal insulation uses 90°C conductors; correction and adjustment may start from the 90°C column, but the result may not exceed the 60°C column."
+        ]
+      ],
       "tip_title": "Cable types",
       "tip_short": "AC cable in insulation: 90 degrees C (194 degrees F) conductors, but ampacity limited to the 60 degrees C column. Correct: B — 194 degrees F. 320.80(A) requires conductors rated 90 degrees C, which equals 194 degrees F. Not A: 60 degrees C is the ampacity limit in insulation, not the required conductor rating. Not C: 75 degrees C is not in 320.80(A); conductors must be rated 90 degrees C (194 degrees F). Not D: 90 degrees F is far too low; the rule is 90 degrees C, which is 194 degrees F.",
       "formula": "",
@@ -4020,7 +4079,8 @@
         "75 degrees C is not in 320.80(A); conductors must be rated 90 degrees C (194 degrees F).",
         "90 degrees F is far too low; the rule is 90 degrees C, which is 194 degrees F."
       ],
-      "available": true
+      "available": true,
+      "table_after_answer": true
     },
     {
       "id": "final-exam-#5-004",
@@ -4411,7 +4471,77 @@
       "lookup_summary": "Lookup clues: conduit. Start with 348.22, then read the matching subsection and exceptions.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nDecode the letters first: EMT = Electrical Metallic Tubing (thin-wall, hand-bendable). RMC = Rigid Metal Conduit (thick threaded steel). IMC = Intermediate (in between). FMC = Flexible Metal Conduit (bendable whip). ENT = Electrical Nonmetallic Tubing (blue smurf tube). LFMC = Liquidtight Flexible Metal (sealed whip). RNC = Rigid Nonmetallic Conduit (PVC). Rules answer three things: clearance from wood framing (1-1/4 in. or a nail plate), burial depth, and strapping (within a foot of every box, then every few feet by type).\n\nThis asks which wiring-method rule fits this installation. Subject: conduit. Numbers in the question: 8\". Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\nconduit",
       "reference_text": "348.22 Number of Conductors\nThe number of conductors shall not exceed that permitted by the percentage fill specified in Table 1, Chapter 9, or as permitted in Table 348.22, or for metric designator 12 (trade size 3/8).\nCables shall be permitted to be installed where such use is not prohibited by the respective cable articles. The number of cables shall not exceed the allowable percentage fill specified in Table 1, Chapter 9.\nTable 348.22 Maximum Number of Insulated Conductors in Metric Designator 12 (Trade Size 3/8) Flexible Metal Conduit (FMC)*\nSize (AWG)\tTypes RFH-2, SF-2\tTypes TF, XHHW, TW\tTypes TFN, THHN, THWN\tTypes FEP, FEBP, PF, PGF\nFittings Inside Conduit\tFittings Outside Conduit\tFittings Inside Conduit\tFittings Outside Conduit\tFittings Inside Conduit\tFittings Outside Conduit\tFittings Inside Conduit\tFittings Outside Conduit\n18\t2\t3\t3\t5\t5\t8\t5\t8\n16\t1\t2\t3\t4\t4\t6\t4\t6\n14\t1\t2\t2\t3\t3\t4\t3\t4\n12\t-\t-\t1\t2\t2\t3\t2\t3\n10\t-\t-\t1\t1\t1\t1\t1\t2\n*In addition, one insulated, covered, or bare equipment grounding conductor of the same size shall be permitted.",
-      "reference_table": [],
+      "reference_table": [
+        [
+          "Size AWG",
+          "RFH-2/SF-2 In",
+          "Out",
+          "TF/XHHW/TW In",
+          "Out",
+          "TFN/THHN/THWN In",
+          "Out",
+          "FEP/FEBP/PF/PGF In",
+          "Out"
+        ],
+        [
+          "18",
+          "2",
+          "3",
+          "3",
+          "5",
+          "5",
+          "8",
+          "5",
+          "8"
+        ],
+        [
+          "16",
+          "1",
+          "2",
+          "3",
+          "4",
+          "4",
+          "6",
+          "4",
+          "6"
+        ],
+        [
+          "14",
+          "1",
+          "2",
+          "2",
+          "3",
+          "3",
+          "4",
+          "3",
+          "4"
+        ],
+        [
+          "12",
+          "—",
+          "—",
+          "1",
+          "2",
+          "2",
+          "3",
+          "2",
+          "3"
+        ],
+        [
+          "10",
+          "—",
+          "—",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "2"
+        ],
+        [
+          "NOTE: One additional insulated, covered, or bare equipment grounding conductor of the same size is permitted."
+        ]
+      ],
       "tip_title": "Conduit and raceways",
       "tip_short": "Table 348.22 covers 3/8-inch FMC; its TW, THHN, and THWN columns go up to 10 AWG. Correct: D — #10. Table 348.22 allows one 10 AWG TW, THHN, or THWN conductor, its largest listed size. Not A: 12 AWG is listed in Table 348.22, but a larger size, 10 AWG, is also permitted. Not B: 16 AWG is listed, but it is not the largest size in Table 348.22. Not C: 14 AWG is listed, but Table 348.22 also permits 12 and 10 AWG.",
       "formula": "",
@@ -4422,7 +4552,8 @@
         "14 AWG is listed, but Table 348.22 also permits 12 and 10 AWG.",
         "Table 348.22 allows one 10 AWG TW, THHN, or THWN conductor, its largest listed size."
       ],
-      "available": true
+      "available": true,
+      "table_after_answer": true
     },
     {
       "id": "final-exam-#5-033",
@@ -5152,7 +5283,35 @@
       "lookup_summary": "Lookup clues: identify the equipment, location, and requirement. Start with NEC 344.30(B)(2), then read the matching subsection and exceptions.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nDecode the letters first: EMT = Electrical Metallic Tubing (thin-wall, hand-bendable). RMC = Rigid Metal Conduit (thick threaded steel). IMC = Intermediate (in between). FMC = Flexible Metal Conduit (bendable whip). ENT = Electrical Nonmetallic Tubing (blue smurf tube). LFMC = Liquidtight Flexible Metal (sealed whip). RNC = Rigid Nonmetallic Conduit (PVC). Rules answer three things: clearance from wood framing (1-1/4 in. or a nail plate), burial depth, and strapping (within a foot of every box, then every few feet by type).\n\nIn plain terms, the question is: \"Straight runs of 1-inch RMC using threaded couplings may be secured at intervals not exceeding...\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
       "reference_text": "344.30(B) Supports\nRMC shall be supported in accordance with one of the following:\nConduit shall be supported at intervals not exceeding 3 m (10 ft).\nThe distance between supports for straight runs of conduit shall be permitted in accordance with Table 344.30(B)(2), provided the conduit is made up with threaded couplings and such supports prevent transmission of stresses to termination where conduit is deflected between supports.\nExposed vertical risers from industrial machinery or fixed equipment shall be permitted to be supported at intervals not exceeding 6 m (20 ft) if the conduit is made up with threaded couplings, the conduit is supported and securely fastened at the top and bottom of the riser, and no other means of intermediate support is readily available.\nHorizontal runs of RMC supported by openings through framing members at intervals not exceeding 3 m (10 ft) and securely fastened within 900 mm (3 ft) of termination points shall be permitted.\nTable 344.30(B)(2) Supports for Rigid Metal Conduit\nConduit Size (Metric Designator / Trade Size)\tMaximum Distance Between Rigid Metal Conduit Supports\n16-21 (1/2-3/4)\t3.0 m (10 ft)\n27 (1)\t3.7 m (12 ft)\n35-41 (1 1/4-1 1/2)\t4.3 m (14 ft)\n53-63 (2-2 1/2)\t4.9 m (16 ft)\n78 and larger (3 and larger)\t6.1 m (20 ft)",
-      "reference_table": [],
+      "reference_table": [
+        [
+          "RMC trade size (metric)",
+          "Max. support spacing"
+        ],
+        [
+          "1/2–3/4 (16–21)",
+          "10 ft (3.0 m)"
+        ],
+        [
+          "1 (27)",
+          "12 ft (3.7 m)"
+        ],
+        [
+          "1 1/4–1 1/2 (35–41)",
+          "14 ft (4.3 m)"
+        ],
+        [
+          "2–2 1/2 (53–63)",
+          "16 ft (4.9 m)"
+        ],
+        [
+          "3 and larger (78+)",
+          "20 ft (6.1 m)"
+        ],
+        [
+          "NOTE: Table 344.30(B)(2) applies only to straight runs made up with threaded couplings; otherwise 344.30(B)(1) limits supports to 10 ft."
+        ]
+      ],
       "tip_title": "Conduit and raceways",
       "tip_short": "RMC with threaded couplings: Table 344.30(B)(2) allows 12 feet for 1 inch, versus the general 10 feet. Correct: C — 12 feet. Table 344.30(B)(2) permits 1 inch threaded RMC straight runs to be supported every 3.7 m (12 feet). Not A: 6 feet is not an RMC support interval; even the general rule allows 10 feet. Not B: 10 feet is the general RMC rule; threaded 1 inch runs may use 12 feet per the table. Not D: 14 feet is the table value for 1 1/4 and 1 1/2 inch RMC, not 1 inch.",
       "formula": "",
@@ -5163,7 +5322,8 @@
         "Table 344.30(B)(2) permits 1 inch threaded RMC straight runs to be supported every 3.7 m (12 feet).",
         "14 feet is the table value for 1 1/4 and 1 1/2 inch RMC, not 1 inch."
       ],
-      "available": true
+      "available": true,
+      "table_after_answer": true
     },
     {
       "id": "final-exam-#3-059",
@@ -5335,7 +5495,27 @@
       "lookup_summary": "Lookup clues: conductors. Start with NEC 356.22, then read the matching subsection and exceptions.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"The number of conductors allowed in LFNC must not exceed that permitted by the percentage fill specified…\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nconductors",
       "reference_text": "356.22 Number of Conductors\nThe number of conductors shall not exceed that permitted by the percentage fill specified in Table 1, Chapter 9.\nCables shall be permitted to be installed where such use is not prohibited by the respective cable articles. The number of cables shall not exceed the allowable percentage fill specified in Table 1, Chapter 9.",
-      "reference_table": [],
+      "reference_table": [
+        [
+          "Number of conductors or cables",
+          "Max. fill (% of conduit area)"
+        ],
+        [
+          "1",
+          "53"
+        ],
+        [
+          "2",
+          "31"
+        ],
+        [
+          "Over 2",
+          "40"
+        ],
+        [
+          "NOTE: Chapter 9, Table 1, Percent of Cross Section of Conduit and Tubing for Conductors and Cables. Table 4 gives the conduit areas these percentages apply to."
+        ]
+      ],
       "tip_title": "Electrical math",
       "tip_short": "Conduit fill percentages come from Chapter 9 Table 1; Table 4 only gives the conduit areas. Correct: C — Table 1. 356.22 limits LFNC fill to the percentages specified in Chapter 9, Table 1. Not A: Chapter 9 has no Table 7 for fill; the allowable fill percentages are in Table 1. Not B: Table 9 lists AC resistance and reactance, not conduit fill percentages. Not D: Table 4 gives conduit dimensions and areas, not the allowable fill percentages.",
       "formula": "",
@@ -5346,7 +5526,8 @@
         "356.22 limits LFNC fill to the percentages specified in Chapter 9, Table 1.",
         "Table 4 gives conduit dimensions and areas, not the allowable fill percentages."
       ],
-      "available": true
+      "available": true,
+      "table_after_answer": true
     },
     {
       "id": "final-exam-#5-068",
@@ -5505,7 +5686,8 @@
         "The table is limited to 120/240 volt single-phase dwelling services, not any service under 400 amperes.",
         "Table 310.12(A) covers 120/240 volt, 3-wire services supplying the entire load of a dwelling unit."
       ],
-      "available": true
+      "available": true,
+      "table_after_answer": true
     },
     {
       "id": "final-exam-#5-005",
@@ -6038,7 +6220,8 @@
         "12 AWG THHN is allowed (2 or 3 conductors), but 10 AWG is also listed, so it is not the largest.",
         "Table 348.22 permits one 10 AWG THHN in 3/8 inch FMC, the largest size the table lists."
       ],
-      "available": true
+      "available": true,
+      "table_after_answer": true
     },
     {
       "id": "final-exam-#3-070",
@@ -8226,7 +8409,8 @@
         "Chapter 9 Table 5 lists dimensions of insulated conductors and fixture wires.",
         "Chapter 9 Table 4 lists dimensions and percent area of conduit and tubing."
       ],
-      "available": true
+      "available": true,
+      "table_after_answer": true
     },
     {
       "id": "open-book-exam-#7-003",

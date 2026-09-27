@@ -786,7 +786,37 @@
         "Table 344.30(B)(2) permits 1 inch threaded RMC straight runs to be supported every 3.7 m (12 feet).",
         "14 feet is the table value for 1 1/4 and 1 1/2 inch RMC, not 1 inch."
       ],
-      "prompt": "Straight runs of 1-inch RMC using threaded couplings may be secured at intervals not exceeding ___."
+      "prompt": "Straight runs of 1-inch RMC using threaded couplings may be secured at intervals not exceeding ___.",
+      "table_after_answer": true,
+      "reference_table": [
+        [
+          "RMC trade size (metric)",
+          "Max. support spacing"
+        ],
+        [
+          "1/2–3/4 (16–21)",
+          "10 ft (3.0 m)"
+        ],
+        [
+          "1 (27)",
+          "12 ft (3.7 m)"
+        ],
+        [
+          "1 1/4–1 1/2 (35–41)",
+          "14 ft (4.3 m)"
+        ],
+        [
+          "2–2 1/2 (53–63)",
+          "16 ft (4.9 m)"
+        ],
+        [
+          "3 and larger (78+)",
+          "20 ft (6.1 m)"
+        ],
+        [
+          "NOTE: Table 344.30(B)(2) applies only to straight runs made up with threaded couplings; otherwise 344.30(B)(1) limits supports to 10 ft."
+        ]
+      ]
     },
     "final-exam-#3-059": {
       "article": "680.22(A)(2)",
@@ -853,7 +883,29 @@
         "356.22 limits LFNC fill to the percentages specified in Chapter 9, Table 1.",
         "Table 4 gives conduit dimensions and areas, not the allowable fill percentages."
       ],
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"The number of conductors allowed in LFNC must not exceed that permitted by the percentage fill specified…\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nconductors"
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"The number of conductors allowed in LFNC must not exceed that permitted by the percentage fill specified…\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nconductors",
+      "table_after_answer": true,
+      "reference_table": [
+        [
+          "Number of conductors or cables",
+          "Max. fill (% of conduit area)"
+        ],
+        [
+          "1",
+          "53"
+        ],
+        [
+          "2",
+          "31"
+        ],
+        [
+          "Over 2",
+          "40"
+        ],
+        [
+          "NOTE: Chapter 9, Table 1, Percent of Cross Section of Conduit and Tubing for Conductors and Cables. Table 4 gives the conduit areas these percentages apply to."
+        ]
+      ]
     },
     "final-exam-#5-068": {
       "article": "344.10(C)",
@@ -1862,7 +1914,8 @@
         [
           "NOTE: One additional insulated, covered, or bare equipment grounding conductor of the same size is permitted."
         ]
-      ]
+      ],
+      "table_after_answer": true
     },
     "final-exam-#3-057": {
       "prompt": "When determining the number of conductors that are considered as current-carrying, a grounding conductor is ___.",
@@ -1884,7 +1937,8 @@
         "It applies to individual dwelling units, not to multifamily building services as a whole.",
         "The table is limited to 120/240 volt single-phase dwelling services, not any service under 400 amperes.",
         "Table 310.12(A) covers 120/240 volt, 3-wire services supplying the entire load of a dwelling unit."
-      ]
+      ],
+      "table_after_answer": true
     },
     "final-exam-#5-002": {
       "prompt": "Armored cable installed in thermal insulation shall have conductors rated at ___. The ampacity of the cable installed in these applications shall be that of 60 degree C conductors.",
@@ -1895,6 +1949,42 @@
         "320.80(A) requires conductors rated 90 degrees C, which equals 194 degrees F.",
         "75 degrees C is not in 320.80(A); conductors must be rated 90 degrees C (194 degrees F).",
         "90 degrees F is far too low; the rule is 90 degrees C, which is 194 degrees F."
+      ],
+      "table_after_answer": true,
+      "reference_table": [
+        [
+          "Cu AWG",
+          "60°C (140°F)",
+          "75°C (167°F)",
+          "90°C (194°F)"
+        ],
+        [
+          "14",
+          "15",
+          "20",
+          "25"
+        ],
+        [
+          "12",
+          "20",
+          "25",
+          "30"
+        ],
+        [
+          "10",
+          "30",
+          "35",
+          "40"
+        ],
+        [
+          "8",
+          "40",
+          "50",
+          "55"
+        ],
+        [
+          "NOTE: Table 310.16 copper ampacities. Per 320.80(A), AC cable in thermal insulation uses 90°C conductors; correction and adjustment may start from the 90°C column, but the result may not exceed the 60°C column."
+        ]
       ]
     },
     "final-exam-#5-052": {
@@ -2313,7 +2403,8 @@
         "R means thermoset (rubber) insulation, not thermoplastic, and -2 marks the temperature rating.",
         "Table 310.4(1) lists RHW-2 at 90 degrees C for dry and wet locations; the -2 marks that rating."
       ],
-      "prompt": "The conductor is marked RHW-2 on the insulation. What does the -2 represent?"
+      "prompt": "The conductor is marked RHW-2 on the insulation. What does the -2 represent?",
+      "table_after_answer": true
     },
     "final-exam-#1-027": {
       "reference_text": "Table 310.15(B)(1)(1) Ambient Temperature Correction Factors Based on 30°C (86°F)\nAmbient Temperature (°C)\t60°C\t75°C\t90°C\tAmbient Temperature (°F)\n41–45\t0.71\t0.82\t0.87\t105–113",
@@ -2325,6 +2416,26 @@
         "#10 THWN-2 is 40 amperes at 90 degrees C, and 40 times the 0.87 factor for 112 degrees F is 34.8 amperes.",
         "35 amperes is the 75 degree C value with no temperature correction; 112 degrees F requires correction.",
         "37.2 amperes uses too high a factor; the 90 degree C factor for 105 to 113 degrees F is 0.87."
+      ],
+      "reference_table": [
+        [
+          "Column",
+          "60°C",
+          "75°C",
+          "90°C"
+        ],
+        [
+          "#10 Cu (A)",
+          "30",
+          "35",
+          "40"
+        ],
+        [
+          "105–113°F",
+          "0.71",
+          "0.82",
+          "0.87"
+        ]
       ]
     },
     "final-exam-#1-028": {
@@ -2582,6 +2693,28 @@
         "16 amperes is the limit for a 20 ampere receptacle on a 20 ampere circuit, not a 15 ampere one.",
         "20 amperes is the circuit rating; cord load on the 15 ampere receptacle is limited to 12 amperes.",
         "24 amperes exceeds both the receptacle and circuit ratings; the table limit is 12 amperes."
+      ],
+      "reference_table": [
+        [
+          "Circuit rating",
+          "Receptacle rating",
+          "Max. cord-and-plug load"
+        ],
+        [
+          "15 or 20 A",
+          "15 A",
+          "12 A"
+        ],
+        [
+          "20 A",
+          "20 A",
+          "16 A"
+        ],
+        [
+          "30 A",
+          "30 A",
+          "24 A"
+        ]
       ]
     },
     "final-exam-#3-015": {
@@ -2934,7 +3067,79 @@
         "14 AWG is listed, but Table 348.22 also permits 12 and 10 AWG.",
         "Table 348.22 allows one 10 AWG TW, THHN, or THWN conductor, its largest listed size."
       ],
-      "prompt": "The largest conductor permitted in 3/8\" flexible metal conduit is ___."
+      "prompt": "The largest conductor permitted in 3/8\" flexible metal conduit is ___.",
+      "table_after_answer": true,
+      "reference_table": [
+        [
+          "Size AWG",
+          "RFH-2/SF-2 In",
+          "Out",
+          "TF/XHHW/TW In",
+          "Out",
+          "TFN/THHN/THWN In",
+          "Out",
+          "FEP/FEBP/PF/PGF In",
+          "Out"
+        ],
+        [
+          "18",
+          "2",
+          "3",
+          "3",
+          "5",
+          "5",
+          "8",
+          "5",
+          "8"
+        ],
+        [
+          "16",
+          "1",
+          "2",
+          "3",
+          "4",
+          "4",
+          "6",
+          "4",
+          "6"
+        ],
+        [
+          "14",
+          "1",
+          "2",
+          "2",
+          "3",
+          "3",
+          "4",
+          "3",
+          "4"
+        ],
+        [
+          "12",
+          "—",
+          "—",
+          "1",
+          "2",
+          "2",
+          "3",
+          "2",
+          "3"
+        ],
+        [
+          "10",
+          "—",
+          "—",
+          "1",
+          "1",
+          "1",
+          "1",
+          "1",
+          "2"
+        ],
+        [
+          "NOTE: One additional insulated, covered, or bare equipment grounding conductor of the same size is permitted."
+        ]
+      ]
     },
     "final-exam-#5-036": {
       "reference_text": "352.10(G) and 352.12(B)\n352.10(G) Exposed\nPVC conduit shall be permitted for exposed work. PVC conduit used exposed in areas of physical damage shall be identified for the use.\n352.12(B) Support of Luminaires\nFor the support of luminaires or other equipment not described in 352.10(I).",
@@ -3401,7 +3606,8 @@
         "Chapter 9 Table 9 lists AC resistance and reactance, not DC resistance.",
         "Chapter 9 Table 5 lists dimensions of insulated conductors and fixture wires.",
         "Chapter 9 Table 4 lists dimensions and percent area of conduit and tubing."
-      ]
+      ],
+      "table_after_answer": true
     },
     "open-book-exam-#7-003": {
       "reference_text": "110.16(A) General\nElectrical equipment, such as switchboards, switchgear, enclosed panelboards, industrial control panels, meter socket enclosures, and motor control centers, that is in other than dwelling units, and is likely to require examination, adjustment, servicing, or maintenance while energized, shall be field or factory marked to warn qualified persons of potential electric arc flash hazards. The marking shall meet the requirements in 110.21(B) and shall be located so as to be clearly visible to qualified persons before examination, adjustment, servicing, or maintenance of the equipment.",
