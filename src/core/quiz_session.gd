@@ -19,6 +19,8 @@ const EXAM_MINUTES := 240
 const PASS_PERCENT := 75
 const SECONDS_PER_SCORED_ITEM: int = (EXAM_MINUTES * 60) / EXAM_SCORED_ITEMS
 const SESSION_TIME_SECONDS: int = SECONDS_PER_SCORED_ITEM * SESSION_LENGTH
+## Twice the exam's pace: answers slower than this are flagged on the report.
+const SLOW_SECONDS := SECONDS_PER_SCORED_ITEM * 2
 
 enum Verdict { REVIEWED, TIMED_OUT, CORRECT, WRONG }
 ## What the clock asks the screen to do after a tick.
@@ -48,6 +50,12 @@ var answered_count := 0
 var current_answered := false
 var missed_questions: Array[Dictionary] = []
 var chapter_stats: Dictionary = {}  # chapter:int -> [correct, total] for the results breakdown
+var area_stats: Dictionary = {}  # exam subject area -> [correct, total], graded answers
+## [item number, seconds from showing to answering] per answered question.
+var answer_seconds: Array = []
+## Milliseconds now; tests swap it for a fake clock.
+var clock := Callable(Time, "get_ticks_msec")
+var _shown_msec := 0
 var time_left := SESSION_TIME_SECONDS
 var session_length := SESSION_LENGTH
 var session_time_limit := SESSION_TIME_SECONDS
@@ -81,8 +89,22 @@ func begin(question_count: int, time_limit: int, timed: bool, name: String, simu
 	current_answered = false
 	missed_questions.clear()
 	chapter_stats.clear()
+	area_stats.clear()
+	answer_seconds.clear()
 	time_left = session_time_limit
 	question_time_left = SECONDS_PER_SCORED_ITEM
+
+
+## {"mean": seconds per answered question, "slow": item numbers over
+## SLOW_SECONDS}; mean is 0 with no answers.
+static func pace(seconds: Array) -> Dictionary:
+	var sum := 0.0
+	var slow: Array[int] = []
+	for e in seconds:
+		sum += float(e[1])
+		if float(e[1]) > SLOW_SECONDS:
+			slow.append(int(e[0]))
+	return {"mean": sum / seconds.size() if not seconds.is_empty() else 0.0, "slow": slow}
 
 
 ## Clears the deck, the review queue and the per-question stats.
@@ -112,6 +134,7 @@ func current_record() -> Dictionary:
 func start_question() -> void:
 	current_answered = false
 	question_time_left = SECONDS_PER_SCORED_ITEM
+	_shown_msec = int(clock.call())
 
 
 ## Grades the pick, a display slot (-1 = time ran out), against the bank's
@@ -138,6 +161,10 @@ func submit(selected: int, graded: bool) -> Dictionary:
 		var chapter := ChapterBars.chapter_of(str(record.get("article", "")))
 		var tally: Array = chapter_stats.get(chapter, [0, 0])
 		chapter_stats[chapter] = [int(tally[0]) + (1 if right else 0), int(tally[1]) + 1]
+		var area := ExamBlueprint.area_of(record)
+		var area_tally: Array = area_stats.get(area, [0, 0])
+		area_stats[area] = [int(area_tally[0]) + (1 if right else 0), int(area_tally[1]) + 1]
+		answer_seconds.append([current_index + 1, maxf(0.0, (int(clock.call()) - _shown_msec) / 1000.0)])
 		deck.record_result(records, record_index, right)
 
 	var verdict: Verdict

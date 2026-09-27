@@ -88,6 +88,7 @@ static func show(host: Main) -> void:
 	show_visual(host, accuracy, passed)
 
 	host.info_label.clear()
+	append_study_feedback(host, is_exam, total)
 	if host.missed_questions.is_empty() and unanswered > 0:
 		host.info_panel.append_heading("TIME EXPIRED\n", AppTheme.AMBER_400)
 		host.info_label.add_text("Every question you reached was correct, but %d were left unanswered when the session clock ran out." % unanswered)
@@ -145,6 +146,46 @@ static func show(host: Main) -> void:
 	host._update_key_hint()
 
 
+## Scored line (simulator), subject areas under the pass line, pace against
+## the exam's 3:00 per item, and the readiness estimate across sessions.
+static func append_study_feedback(host: Main, is_exam: bool, total: int) -> void:
+	host.info_panel.append_heading("STUDY FEEDBACK\n", AppTheme.SKY_300)
+	host.info_label.push_color(AppTheme.SLATE_200)
+	if is_exam:
+		var needed := ceili(total * Main.PASS_PERCENT / 100.0)
+		host.info_label.add_text("Scored line: %d of %d correct, %d needed for %d%%: %s.\n" % [host.score, total, needed, Main.PASS_PERCENT, "PASS" if host.score >= needed else "DID NOT PASS"])
+	var rows := ChapterBars.rows_from_areas(host.session.area_stats, float(Main.PASS_PERCENT))
+	var weak := PackedStringArray()
+	var weakest := ""
+	for row in rows:
+		if row["weak"]:
+			weak.append("%s %d/%d (%d%%)" % [row["label"], row["correct"], row["total"], roundi(100.0 * row["correct"] / maxf(1.0, row["total"]))])
+		if row["weakest"] and weakest == "":
+			weakest = str(row["label"])
+	if not weak.is_empty():
+		host.info_label.add_text("Below %d%%: %s. Weakest: %s.\n" % [Main.PASS_PERCENT, ", ".join(weak), weakest])
+	elif not rows.is_empty():
+		host.info_label.add_text("Every subject area at or above %d%%.\n" % Main.PASS_PERCENT)
+	var pace := QuizSession.pace(host.session.answer_seconds)
+	if float(pace["mean"]) > 0.0:
+		var line := "Pace: %s per answer (exam pace %s)." % [clock_text(pace["mean"]), clock_text(QuizSession.SECONDS_PER_SCORED_ITEM)]
+		var slow := PackedStringArray()
+		for n in pace["slow"]:
+			slow.append("#%d" % n)
+		if not slow.is_empty():
+			line += " Over %s: item %s." % [clock_text(QuizSession.SLOW_SECONDS), ", ".join(slow)]
+		host.info_label.add_text(line + "\n")
+	var mastery := host.session.deck.mastery(host.records)
+	host.info_label.add_text("Exam readiness: %d%% (recent accuracy per subject area, weighted like the exam). Next: drill %s.\n\n" % [
+		roundi(100.0 * QuestionDeck.readiness(mastery)), ExamBlueprint.title(QuestionDeck.weakest_area(mastery, host.records))])
+	host.info_label.pop()
+
+
+static func clock_text(seconds: float) -> String:
+	var s := roundi(seconds)
+	return "%d:%02d" % [s / 60, s % 60]
+
+
 static func show_listen(host: Main) -> void:
 	host.question_label.text = "Listening Session Summary"
 	host.article_label.text = "HANDS-FREE REVIEW  •  NEC 2023 STANDARDS"
@@ -189,7 +230,10 @@ static func show_visual(host: Main, accuracy: float, passed: bool) -> void:
 	var seq := host._results_seq
 	host.result_gauge.landed.connect(func(): land(host, seq, passed), CONNECT_ONE_SHOT)
 	host.result_gauge.play(accuracy, float(Main.PASS_PERCENT), host.audio.reduce_motion)
-	host.chapter_bars.set_rows(ChapterBars.rows_from_stats(host.chapter_stats))
+	if host.session.area_stats.is_empty():
+		host.chapter_bars.set_rows(ChapterBars.rows_from_stats(host.chapter_stats))
+	else:
+		host.chapter_bars.set_rows(ChapterBars.rows_from_areas(host.session.area_stats, float(Main.PASS_PERCENT)))
 	UiFx.glow_pulse(host.feedback_panel, ResultGauge.tint_for(accuracy, float(Main.PASS_PERCENT)), 30, 1.2)
 
 

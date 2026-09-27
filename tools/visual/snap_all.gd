@@ -69,6 +69,7 @@ func _initialize() -> void:
 	await _wait(10)
 	main.audio_cfg_path = "user://snap_audio.cfg"
 	main.session.bag_path = ""
+	main._refresh_study_button()
 	main._on_audio_mode_picked(AudioSettings.Mode.SILENT)
 	await _wait(60)
 	_snap("01_menu")
@@ -149,6 +150,8 @@ func _initialize() -> void:
 	main.answered_count = 10
 	main.streak = 5
 	main.chapter_stats = {1: [2, 2], 2: [3, 3], 3: [2, 3], 4: [1, 1], 0: [1, 1]}
+	main.session.area_stats = {"general": [3, 3], "wiring_protection": [3, 3], "wiring_methods": [2, 3], "equipment": [1, 1]}
+	main.session.answer_seconds = [[1, 95.0], [2, 120.0], [3, 150.0], [4, 80.0], [5, 110.0], [6, 130.0], [7, 100.0], [8, 90.0], [9, 140.0], [10, 105.0]]
 	main.missed_questions.clear()
 	main.missed_questions.append({"index": 3, "prompt": main.records[2].prompt, "selected": "B — 10,000", "correct": "C — 17,500", "article": "220.12", "article_title": "Lighting Load", "tip_short": str(main.records[2].get("tip_short", "")), "record_index": 2})
 	main._show_results()
@@ -157,6 +160,8 @@ func _initialize() -> void:
 	_snap("14_results_pass")
 	main.score = 5
 	main.chapter_stats = {1: [0, 2], 2: [2, 3], 3: [1, 3], 4: [1, 1], 0: [1, 1]}
+	main.session.area_stats = {"general": [1, 3], "wiring_protection": [2, 3], "wiring_methods": [1, 3], "equipment": [1, 1]}
+	main.session.answer_seconds = [[1, 95.0], [2, 200.0], [3, 410.0], [4, 80.0], [5, 170.0], [6, 130.0], [7, 100.0], [8, 90.0], [9, 175.0], [10, 150.0]]
 	main._show_results()
 	_scroll(0)
 	await _wait(90)

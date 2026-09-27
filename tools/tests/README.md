@@ -54,6 +54,7 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | `test_info_panel.gd` | `InfoPanelRenderer`: a MEMORY TIP with per-choice rows is never hidden as an echo (plus a 279-record sweep), and the answer chip lands on the occurrence next to the stem's blank |
 | `test_shuffle.gd` | question and choice shuffling: per-mode size and no duplicates, own seedable RNG, chi-square fairness of the first question and of choice slots, locked / pinned choices, grading and display letters under random choice orders, speech letter order |
 | `test_question_deck.gd` | `ExamBlueprint` and `QuestionDeck`: area classification and overrides, blueprint apportionment and remainder rotation, per-area no-repeat decks and coverage, article cap and interleaving, missed-question reviews (gap, cap), simulator blueprint, single-area drills, fixed seeds, save / relaunch / version-1 migration / damaged file / reset, mastery and readiness |
+| `test_study_feedback.gd` | session area tallies and pace (fake clock, 6:00 flag), area bars and weak rows, the report's study feedback (scored line, weak areas, pace, readiness) and the weakest-area menu button, desktop and mobile |
 | `test_table_viewer.gd` | the pure parts: `preview_layout`, `extract_target_keyword`, `is_note_row`, `_strip_note_prefix` + a sweep of all 25 bank tables |
 | `run_all.gd` | combined runner |
 | `test_validate_question_bank.py` | Python regression checks for validator/render parity and shared OCR path resolution |

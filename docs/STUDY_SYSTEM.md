@@ -6,9 +6,11 @@ modelled on the Nebraska Journeyman Electrician exam bulletin (NSED / PSI):
 Ugly's), plus 5-10 unscored experimental items the bulletin mentions.
 
 Code: `src/core/exam_blueprint.gd` (outline, classification, apportionment),
-`src/core/question_deck.gd` (draws, reviews, saved state),
-`src/core/quiz_session.gd` (one session). Tests:
-`tools/tests/test_question_deck.gd`, `tools/tests/test_shuffle.gd`.
+`src/core/question_deck.gd` (draws, reviews, saved state, mastery),
+`src/core/quiz_session.gd` (one session, area tallies, pace),
+`src/ui/results_view.gd` and `src/fx/chapter_bars.gd` (the report). Tests:
+`tools/tests/test_question_deck.gd`, `tools/tests/test_shuffle.gd`,
+`tools/tests/test_study_feedback.gd`.
 Pool report: `tools/study/blueprint_report.gd`.
 
 ## 1. Blueprint
@@ -141,3 +143,41 @@ dropped on load. An unreadable file starts fresh. A version 1 file (one
 without answer history load with an empty history.
 `QuizSession.reset_progress()` deletes the file and clears everything.
 The app has no settings reset, so nothing calls it yet.
+
+## 4. Study feedback
+
+### Report (every graded session)
+
+- **Subject-area bars.** One bar per area the session touched, in outline
+  order, `correct/total  %`, with a tick at 75%. Areas under 75% are amber,
+  and the lowest gets a marker. Sessions without area tallies (old tools)
+  fall back to the per-chapter bars.
+- **Study feedback block** at the top of the report text:
+  - simulator only: "Scored line: 62 of 80 correct, 60 needed for 75%: PASS."
+  - the areas under 75% with their tallies, and the weakest
+  - pace: mean time from showing a question to answering it, against the
+    exam's 3:00 per item, listing items over 6:00 (twice the exam pace;
+    the item clock stops while a question is read aloud, so wall time can
+    run past it)
+  - exam readiness and the area to drill next
+- Listen sessions are ungraded and add nothing to the tallies, pace or
+  mastery.
+
+### Mastery and readiness
+
+- Every graded answer goes into its question's history (the last 4, by
+  question id, in the saved state). An area's mastery is the share right
+  over those histories, so old misses age out as you improve.
+- **Readiness** = sum over areas of (exam items x mastery) / 80. An area not
+  practised yet counts as 0, so the estimate only climbs as you cover the
+  outline. 75% is the target, like the pass line.
+
+### Weakest-area drill (menu)
+
+One mode button under the drills: "10 QUESTIONS • WEAKEST AREA", subtitle
+`<area> (<mastery>|new) • readiness N% • 30 minutes timed`. It picks the
+heaviest area not practised yet, else the lowest mastery (heavier on ties).
+Pressing it starts 10 questions from that area's deck (fewer if the area
+is smaller), with that area's due reviews first, 3:00 per question. The
+subtitle is recomputed whenever the menu opens. A full area picker would
+not fit the phone menu without scrolling, so the menu gets this one button.

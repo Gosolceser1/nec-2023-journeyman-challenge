@@ -163,6 +163,8 @@ var menu_center_box: MarginContainer
 var menu_overlay: Control
 var menu_panel: PanelContainer
 var menu_mode_buttons: Array[Button] = []
+## The weakest-area drill; its subtitle shows the area and the readiness.
+var study_button: Button
 
 # Study audio (menu "Audio & Voice" section + compact quiz dock controls)
 var audio := AudioSettings.new()
@@ -387,7 +389,7 @@ func _apply_safe_area() -> void:
 		mms.x = clampf(vp_size.x - float(m["side"]) * 2.0 - 16.0, 288.0, vp_size.x)
 		menu_panel.custom_minimum_size = mms
 
-func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION_TIME_SECONDS, timed: bool = true, mode_name: String = "Practice Test") -> void:
+func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION_TIME_SECONDS, timed: bool = true, mode_name: String = "Practice Test", area: String = "") -> void:
 	if records.is_empty():
 		return
 	var simulation := mode_name == "Full Journeyman Exam"
@@ -396,7 +398,7 @@ func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION
 	listen_phase = AudioSettings.ListenPhase.IDLE
 	listen_paused = false
 	var listening := session_audio_mode == AudioSettings.Mode.LISTEN
-	session.begin(question_count, time_limit, timed and not listening, mode_name + (" · Listen" if listening else ""), simulation)
+	session.begin(question_count, time_limit, timed and not listening, mode_name + (" · Listen" if listening else ""), simulation, area)
 	_refresh_dock_audio()
 	if timed_session:
 		timer.start()
@@ -637,6 +639,28 @@ func _on_playback_complete(generation: int) -> void:
 func _practice_time(question_count: int) -> int:
 	return question_count * SECONDS_PER_SCORED_ITEM
 
+## Ten questions from the subject area with the lowest recent accuracy (or
+## the heaviest one not practised yet).
+func _start_area_drill() -> void:
+	var area := QuestionDeck.weakest_area(session.deck.mastery(records), records)
+	_start_quiz(10, _practice_time(10), true, "Area Drill · " + ExamBlueprint.title(area), area)
+
+func _study_button_subtitle() -> String:
+	if records.is_empty():
+		return "Weakest subject area • 30 minutes timed"
+	var mastery := session.deck.mastery(records)
+	var area := QuestionDeck.weakest_area(mastery, records)
+	var m: Dictionary = mastery.get(area, {})
+	var level := "new" if int(m.get("answers", 0)) == 0 else "%d%%" % roundi(100.0 * float(m["right"]) / float(m["answers"]))
+	return "%s (%s) • readiness %d%% • 30 minutes timed" % [ExamBlueprint.title(area), level, roundi(100.0 * QuestionDeck.readiness(mastery))]
+
+func _refresh_study_button() -> void:
+	if not is_instance_valid(study_button):
+		return
+	var base := str(study_button.get_meta("base_text", ""))
+	study_button.set_meta("base_text", base.get_slice("\n", 0) + "\n" + _study_button_subtitle())
+	study_button.text = str(study_button.get_meta("base_text"))
+
 func _show_menu() -> void:
 	timer.stop()
 	if _start_tween != null and _start_tween.is_valid():
@@ -649,6 +673,7 @@ func _show_menu() -> void:
 	listen_paused = false
 	session_audio_mode = AudioSettings.Mode.SILENT
 	speech._stop_reading()
+	_refresh_study_button()
 	AudioSection.refresh(self)
 	_update_key_hint()
 	if menu_overlay:

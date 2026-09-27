@@ -87,7 +87,7 @@ Main <Control> res://src/app/main.gd
             on maximum_size_changed -> lambda
             on minimum_size_changed -> lambda
             on _desired_size_changed -> lambda
-          @HBoxContainer@178 <HBoxContainer>
+          @HBoxContainer@180 <HBoxContainer>
             .mouse_filter = 2
             .theme_override_constants/separation = 12
             on child_order_changed -> lambda
@@ -109,7 +109,7 @@ Main <Control> res://src/app/main.gd
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
-            @Control@179 <Control> res://src/fx/streak_meter.gd
+            @Control@181 <Control> res://src/fx/streak_meter.gd
               .custom_minimum_size = Vector2(118, 16)
               .size_flags_vertical = 4
               .mouse_filter = 2
@@ -213,7 +213,7 @@ Main <Control> res://src/app/main.gd
             on maximum_size_changed -> lambda
             on minimum_size_changed -> lambda
             on _desired_size_changed -> lambda
-            @Control@180 <Control> res://src/fx/time_gauge.gd
+            @Control@182 <Control> res://src/fx/time_gauge.gd
               .mouse_filter = 2
               on visibility_changed -> lambda
               on size_flags_changed -> lambda
@@ -256,7 +256,7 @@ Main <Control> res://src/app/main.gd
             on maximum_size_changed -> lambda
             on minimum_size_changed -> lambda
             on _desired_size_changed -> lambda
-            @Control@181 <Control> res://src/fx/time_gauge.gd
+            @Control@183 <Control> res://src/fx/time_gauge.gd
               .mouse_filter = 2
               on visibility_changed -> lambda
               on size_flags_changed -> lambda
@@ -1171,6 +1171,7 @@ Main <Control> res://src/app/main.gd
                 .theme_override_constants/separation = 10
                 on child_order_changed -> lambda
                 on visibility_changed -> lambda
+                on item_rect_changed -> lambda
                 on item_rect_changed -> lambda
                 on item_rect_changed -> lambda
                 on item_rect_changed -> lambda
@@ -2189,7 +2190,48 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -14.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @HBoxContainer@172 <HBoxContainer>
+                @Button@173 <Button>
+                  .modulate = Color(1, 1, 1, 0)
+                  .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\n//\n// Energized border: a pulse of current runs once around the rounded outline.\n// current_pos runs 0 -> 1 + current_tail (driven by a tween); below 0 it is off\n// and the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float corner_radius = 14.0;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	if (current_pos >= 0.0) {\n		vec2 b = rect_size * 0.5;\n		vec2 q = local_pos - b;\n		vec2 k = abs(q) - b + vec2(corner_radius);\n		float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n		float band = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n		float behind = current_pos - perimeter_t(q, b);\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * band * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(86, 64), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/corner_radius=null}
+                  .custom_minimum_size = Vector2(0, 64)
+                  .mouse_filter = 1
+                  .theme_override_styles/normal = StyleBoxFlat{content_margin_left=20.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=20.0, content_margin_right=66.0, bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=6, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/hover = StyleBoxFlat{content_margin_left=22.0, content_margin_top=10.0, content_margin_right=66.0, content_margin_bottom=10.0, bg_color=Color(0.09411765, 0.14117648, 0.21960784, 1), border_width_left=8, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10}
+                  .theme_override_styles/focus = StyleBoxFlat{draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=10, corner_radius_top_right=10, corner_radius_bottom_right=10, corner_radius_bottom_left=10, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
+                  .theme_override_colors/font_color = Color(1, 1, 1, 1)
+                  .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                  .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
+                  .theme_override_font_sizes/font_size = 15
+                  .text = "10 QUESTIONS • WEAKEST AREA\nWiring and Protection (new) • readiness 0% • 30 minutes timed"
+                  .alignment = 0
+                  .autowrap_mode = 3
+                  meta base_text = "10 QUESTIONS • WEAKEST AREA\nWiring and Protection (new) • readiness 0% • 30 minutes timed"
+                  meta full_exam = false
+                  on child_order_changed -> lambda
+                  on visibility_changed -> lambda
+                  on item_rect_changed -> lambda
+                  on resized -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_entered -> lambda
+                  on mouse_exited -> lambda
+                  on size_flags_changed -> lambda
+                  on maximum_size_changed -> lambda
+                  on minimum_size_changed -> lambda
+                  on _desired_size_changed -> lambda
+                  on pressed -> main._start_area_drill
+                  @Control@172 <Control> res://src/fx/mode_badge.gd
+                    .layout_mode = 0
+                    .anchor_left = 1.0
+                    .anchor_top = 0.5
+                    .anchor_right = 1.0
+                    .anchor_bottom = 0.5
+                    .offset_left = -58.0
+                    .offset_top = -22.0
+                    .offset_right = -14.0
+                    .offset_bottom = 22.0
+                    .mouse_filter = 2
+                @HBoxContainer@174 <HBoxContainer>
                   .mouse_filter = 2
                   .theme_override_constants/separation = 8
                   on child_order_changed -> lambda
@@ -2200,7 +2242,7 @@ Main <Control> res://src/app/main.gd
                   on maximum_size_changed -> lambda
                   on minimum_size_changed -> lambda
                   on _desired_size_changed -> lambda
-                  @ColorRect@173 <ColorRect>
+                  @ColorRect@175 <ColorRect>
                     .custom_minimum_size = Vector2(4, 16)
                     .mouse_filter = 2
                     .color = Color(0.95686275, 0.24705882, 0.36862746, 1)
@@ -2209,7 +2251,7 @@ Main <Control> res://src/app/main.gd
                     on maximum_size_changed -> lambda
                     on minimum_size_changed -> lambda
                     on _desired_size_changed -> lambda
-                  @Label@174 <Label>
+                  @Label@176 <Label>
                     .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                     .theme_override_font_sizes/font_size = 12
                     .theme_override_colors/font_color = Color(0.95686275, 0.24705882, 0.36862746, 1)
@@ -2220,7 +2262,7 @@ Main <Control> res://src/app/main.gd
                     on maximum_size_changed -> lambda
                     on minimum_size_changed -> lambda
                     on _desired_size_changed -> lambda
-                @Button@176 <Button>
+                @Button@178 <Button>
                   .modulate = Color(1, 1, 1, 0)
                   .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// Diagonal light sweep across a control. shine_pos runs -0.3 -> 1.3 (driven by a\n// tween); outside that range the control draws untouched.\n//\n// Energized border: a pulse of current runs once around the rounded outline.\n// current_pos runs 0 -> 1 + current_tail (driven by a tween); below 0 it is off\n// and the control draws untouched.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.22;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float corner_radius = 14.0;\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 p = local_pos / max(rect_size, vec2(1.0));\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	float s = 1.0 - smoothstep(0.0, shine_width, d);\n	base.rgb += vec3(s * strength);\n	if (current_pos >= 0.0) {\n		vec2 b = rect_size * 0.5;\n		vec2 q = local_pos - b;\n		vec2 k = abs(q) - b + vec2(corner_radius);\n		float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n		float band = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n		float behind = current_pos - perimeter_t(q, b);\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * band * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(86, 72), shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/corner_radius=null}
                   .custom_minimum_size = Vector2(0, 72)
@@ -2250,7 +2292,7 @@ Main <Control> res://src/app/main.gd
                   on minimum_size_changed -> lambda
                   on _desired_size_changed -> lambda
                   on pressed -> lambda
-                  @Control@175 <Control> res://src/fx/mode_badge.gd
+                  @Control@177 <Control> res://src/fx/mode_badge.gd
                     .layout_mode = 0
                     .anchor_left = 1.0
                     .anchor_top = 0.5
@@ -2261,7 +2303,7 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -14.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @Label@177 <Label>
+                @Label@179 <Label>
                   .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                   .theme_override_font_sizes/font_size = 11
                   .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
@@ -2280,9 +2322,9 @@ Main <Control> res://src/app/main.gd
     .anchor_right = 1.0
     .anchor_bottom = 1.0
     .mouse_filter = 2
-  @Timer@182 <Timer>
+  @Timer@184 <Timer>
     on timeout -> main._tick_timer
-  @AudioStreamPlayer@183 <AudioStreamPlayer>
+  @AudioStreamPlayer@185 <AudioStreamPlayer>
     .bus = &"Speech"
     on finished -> main.speech._on_reader_finished
   Sfx <Node> res://src/fx/sfx.gd
@@ -2306,5 +2348,5 @@ Main <Control> res://src/app/main.gd
       .stream = AudioStreamWAV{data=bytes[21440], format=3}
       .max_polyphony = 2
       .bus = &"SFX"
-  @Timer@184 <Timer>
+  @Timer@186 <Timer>
     on timeout -> main._on_listen_tick

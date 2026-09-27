@@ -6,6 +6,14 @@ reference and a short lesson. Runs on Windows and Android (Godot 4.7.2,
 GDScript). Questions can be read aloud by a recorded neural voice that ships
 with the app.
 
+Every drill and the Full Journeyman Simulator draw from all 279 questions,
+weighted like the Nebraska exam's content outline (10/20/15/15/10/5/5 items
+per subject area). Drills avoid repeats until an area is used up, and missed
+questions come back two sessions later. The report breaks your score down by
+subject area, shows your pace against the exam's 3:00 per question, and
+estimates exam readiness. "10 Questions • Weakest Area" drills the area
+that needs it most. See `docs/STUDY_SYSTEM.md`.
+
 ## Run
 
 Open the folder in Godot 4.7.2, or from a terminal:
@@ -50,6 +58,7 @@ succeeds silently with no recorded voice, so generate the bundle first.
 ## Docs
 
 - `docs/ARCHITECTURE.md`: how the code is organised
+- `docs/STUDY_SYSTEM.md`: exam blueprint, question selection, study feedback
 - `docs/DATA_PIPELINE.md`: how the question bank is built and validated
 - `docs/VOICE_READING_RULES.md`: how questions are spoken
 - `docs/SFX_PLAN.md`: which moments get a sound

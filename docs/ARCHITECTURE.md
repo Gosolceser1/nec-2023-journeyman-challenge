@@ -97,6 +97,10 @@ outline in `data/exam_blueprint.json` (ExamBlueprint). In short:
   (tests, harness) makes it repeatable, otherwise each session randomizes.
 - The deck, reviews and per-question stats persist by question id in
   `user://question_bag.cfg`; `reset_progress()` clears them.
+- Study feedback reads the same state: `session.area_stats` and
+  `answer_seconds` for the report (ResultsView, ChapterBars area rows),
+  `deck.mastery()` for readiness and the menu's weakest-area drill
+  (`main.study_button`, refreshed by `_show_menu`).
 
 `docs/STUDY_SYSTEM.md` has the blueprint, the pool counts, and the
 algorithms in detail.

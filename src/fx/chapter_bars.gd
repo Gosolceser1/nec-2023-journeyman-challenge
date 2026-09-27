@@ -1,8 +1,9 @@
 class_name ChapterBars
 extends Control
 
-## Results-screen breakdown: one horizontal bar per NEC chapter showing the
-## share answered correctly. Bars grow in when shown.
+## Results-screen breakdown: one horizontal bar per exam subject area (or per
+## NEC chapter) showing the share answered correctly, with the 75% line on
+## area rows. Bars grow in when shown.
 
 const ROW_H := 24.0
 const CHAPTER_NAMES := {
@@ -50,6 +51,24 @@ static func rows_from_stats(stats: Dictionary) -> Array:
 	return out
 
 
+## stats: {area key -> [correct, total]} -> rows in exam outline order. Rows
+## below the pass line are marked weak; the lowest of them is the weakest.
+static func rows_from_areas(stats: Dictionary, pass_percent: float) -> Array:
+	var out: Array = []
+	var lowest := 2.0
+	for k in ExamBlueprint.keys():
+		if not stats.has(k):
+			continue
+		var v: Array = stats[k]
+		var ratio := float(v[0]) / maxf(1.0, float(v[1]))
+		out.append({"label": ExamBlueprint.title(k), "correct": int(v[0]), "total": int(v[1]), "weak": ratio * 100.0 < pass_percent, "weakest": false})
+		if ratio * 100.0 < pass_percent:
+			lowest = minf(lowest, ratio)
+	for row in out:
+		row["weakest"] = row["weak"] and is_equal_approx(float(row["correct"]) / maxf(1.0, float(row["total"])), lowest)
+	return out
+
+
 func set_rows(new_rows: Array) -> void:
 	rows = new_rows
 	custom_minimum_size.y = ROW_H * rows.size() + 4.0
@@ -68,7 +87,7 @@ func _set_grow(v: float) -> void:
 func _draw() -> void:
 	var font := get_theme_default_font()
 	var label_w := minf(190.0, size.x * 0.46)
-	var count_w := 44.0
+	var count_w := 76.0
 	var bar_x := label_w + 8.0
 	var bar_w := maxf(20.0, size.x - bar_x - count_w)
 	for i in rows.size():
@@ -77,10 +96,14 @@ func _draw() -> void:
 		var total: int = maxi(int(row["total"]), 1)
 		var ratio := float(row["correct"]) / float(total)
 		var col := ResultGauge.tint_for(ratio * 100.0, 75.0)
-		draw_string(font, Vector2(0, y + 16.0), str(row["label"]), HORIZONTAL_ALIGNMENT_LEFT, label_w, 12, AppTheme.SLATE_300)
+		var label := ("▸ " if row.get("weakest", false) else "") + str(row["label"])
+		draw_string(font, Vector2(0, y + 16.0), label, HORIZONTAL_ALIGNMENT_LEFT, label_w, 12, AppTheme.AMBER_400 if row.get("weak", false) else AppTheme.SLATE_300)
 		var track := Rect2(bar_x, y + 7.0, bar_w, 10.0)
 		draw_rect(track, Color(1, 1, 1, 0.07))
 		if ratio > 0.0:
 			draw_rect(Rect2(track.position, Vector2(bar_w * ratio * _grow, track.size.y)), col)
-		draw_string(font, Vector2(bar_x + bar_w + 6.0, y + 16.0), "%d/%d" % [int(row["correct"]), int(row["total"])],
+		if row.has("weak"):
+			var tick_x := bar_x + bar_w * 0.75
+			draw_line(Vector2(tick_x, y + 4.0), Vector2(tick_x, y + 20.0), Color(1, 1, 1, 0.35), 1.0)
+		draw_string(font, Vector2(bar_x + bar_w + 6.0, y + 16.0), "%d/%d  %d%%" % [int(row["correct"]), int(row["total"]), roundi(ratio * 100.0)],
 			HORIZONTAL_ALIGNMENT_LEFT, count_w, 12, AppTheme.SLATE_400)

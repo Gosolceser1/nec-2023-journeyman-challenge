@@ -571,6 +571,8 @@ static func build(host: Main) -> void:
 	Widgets.add_mode_button(host, menu_column, "30 QUESTIONS", "Extended study block • 90 minutes timed", host._start_quiz.bind(30, host._practice_time(30), true, "30-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG, false, 64.0, 15)
 	Widgets.add_mode_button(host, menu_column, "40 QUESTIONS", "Half-length diagnostic test • 120 minutes timed", host._start_quiz.bind(40, host._practice_time(40), true, "40-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG, false, 64.0, 15)
 	Widgets.add_mode_button(host, menu_column, "50 QUESTIONS", "Intensive endurance drill • 150 minutes timed", host._start_quiz.bind(50, host._practice_time(50), true, "50-Question Practice"), AppTheme.SKY_400, AppTheme.BUTTON_BG, false, 64.0, 15)
+	Widgets.add_mode_button(host, menu_column, "10 QUESTIONS • WEAKEST AREA", host._study_button_subtitle(), host._start_area_drill, AppTheme.SKY_300, AppTheme.BUTTON_BG, false, 64.0, 15)
+	host.study_button = host.menu_mode_buttons.back()
 	var exam_hdr_box := HBoxContainer.new()
 	exam_hdr_box.add_theme_constant_override("separation", 8)
 	menu_column.add_child(exam_hdr_box)

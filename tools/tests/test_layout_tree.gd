@@ -40,6 +40,8 @@ func _initialize() -> void:
 	print("=== layout tree (%s) ===" % layout)
 	main = load("res://scenes/main.tscn").instantiate()
 	main.audio_cfg_path = "user://test_layout_tree_audio.cfg"
+	# No saved study progress: the weakest-area button's subtitle is fixed.
+	main.session.bag_path = ""
 	# Dumped from the ready signal, before any frame is processed: the entrance
 	# and pulse tweens have not stepped yet, so animated values are still the
 	# ones the code wrote.

@@ -38,6 +38,7 @@ const SUITES := [
 	# Blueprint drills, per-area decks, missed-question reviews, the simulator's
 	# blueprint and the saved study state.
 	{"name": "question deck (exam blueprint, reviews, saved state)", "path": "res://tools/tests/test_question_deck.gd"},
+	{"name": "study feedback (subject areas, pace, readiness, weakest-area drill)", "path": "res://tools/tests/test_study_feedback.gd"},
 	{"name": "app theme (palette, factories)", "path": "res://tools/tests/test_app_theme.gd"},
 	{"name": "nec reference (titles, lookup path)", "path": "res://tools/tests/test_nec_reference.gd"},
 	{"name": "bank loader (shapes, leak guard)", "path": "res://tools/tests/test_bank_loader.gd"},
