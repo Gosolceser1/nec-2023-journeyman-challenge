@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="432" height="432" viewBox="0 0 432 432">
+  <!-- Android 13 themed icon: only the alpha is used, the launcher tints it. -->
+  <g transform="translate(216 216) scale(0.5) translate(-293 -266)">
+    <path d="M278 82 L136 282 H230 L198 418 L348 210 H252 Z" fill="#ffffff" stroke="#ffffff" stroke-width="8" stroke-linejoin="round"/>
+    <circle cx="376" cy="376" r="54" fill="none" stroke="#ffffff" stroke-width="16"/>
+    <path d="M350 378 L369 397 L404 358" fill="none" stroke="#ffffff" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
