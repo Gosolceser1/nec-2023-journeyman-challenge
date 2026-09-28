@@ -6,7 +6,8 @@
 # Runs, in order:
 #   0. Import (rebuilds the class_name cache after scripts move)
 #   1. GDScript parse check (catches syntax errors without booting)
-#   2. Unit tests for pure logic  (fast, no scene)
+#   2. Unit tests for pure logic  (tools/tests/run_all.gd, including the
+#      touch-scroll and Android voice-picker suites)
 #   3. Scene harness, desktop layout
 #   4. Scene harness, mobile layout
 #   5. Question bank checks (build guard, python unit tests, spellcheck, schema)

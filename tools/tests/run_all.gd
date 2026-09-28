@@ -55,6 +55,14 @@ const SUITES := [
 	# Tap-vs-drag on the answer cards. Grading is irreversible, so a scroll that
 	# commits an answer is the worst failure mode in an exam app.
 	{"name": "answer card tap-vs-drag", "path": "res://tools/tests/test_answer_card_input.gd"},
+	# Android: ScrollContainer only drag-scrolls on mouse events and the app
+	# turns touch-to-mouse emulation off, so no list scrolled by finger. A swipe
+	# over buttons and cards must scroll without pressing; a tap still presses.
+	{"name": "touch scroll (swipe scrolls, never presses; both layouts)", "path": "res://tools/tests/test_touch_scroll.gd"},
+	# Android: the OptionButton popup took no touch, so choosing a voice froze
+	# the app and Back then quit it. 450 fake voices, time budget, no re-entry,
+	# US English only with male/female names from docs/ANDROID_VOICES.md.
+	{"name": "voice picker (hundreds of voices, names, US only)", "path": "res://tools/tests/test_voice_picker.gd"},
 	{"name": "fx helpers (chapter map, gauges)", "path": "res://tools/tests/test_fx.gd"},
 	# Hover slides once tweened position:x as_relative, so container re-sorts
 	# and quick mouse passes left each menu card a different few px off its

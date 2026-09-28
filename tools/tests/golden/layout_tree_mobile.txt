@@ -99,7 +99,7 @@ Main <Control> res://src/app/main.gd
             on maximum_size_changed -> lambda
             on minimum_size_changed -> lambda
             on _desired_size_changed -> lambda
-        @Control@176 <Control> res://src/fx/progress_segments.gd
+        @Control@177 <Control> res://src/fx/progress_segments.gd
           .custom_minimum_size = Vector2(120, 16)
           .size_flags_horizontal = 3
           .size_flags_vertical = 4
@@ -194,7 +194,7 @@ Main <Control> res://src/app/main.gd
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
-              @Control@177 <Control> res://src/fx/time_gauge.gd
+              @Control@178 <Control> res://src/fx/time_gauge.gd
                 .mouse_filter = 2
                 on visibility_changed -> lambda
                 on size_flags_changed -> lambda
@@ -225,7 +225,7 @@ Main <Control> res://src/app/main.gd
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
-              @Control@178 <Control> res://src/fx/time_gauge.gd
+              @Control@179 <Control> res://src/fx/time_gauge.gd
                 .mouse_filter = 2
                 on visibility_changed -> lambda
                 on size_flags_changed -> lambda
@@ -1597,6 +1597,7 @@ Main <Control> res://src/app/main.gd
                             on item_rect_changed -> lambda
                             on item_rect_changed -> lambda
                             on item_rect_changed -> lambda
+                            on item_rect_changed -> lambda
                             on size_flags_changed -> lambda
                             on maximum_size_changed -> lambda
                             on minimum_size_changed -> lambda
@@ -1614,6 +1615,7 @@ Main <Control> res://src/app/main.gd
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
                             @OptionButton@139 <OptionButton>
+                              .visible = false
                               .custom_minimum_size = Vector2(0, 56)
                               .size_flags_horizontal = 3
                               .mouse_filter = 1
@@ -1638,6 +1640,29 @@ Main <Control> res://src/app/main.gd
                               on item_selected -> main.speech._on_voice_picked
                               on item_selected -> lambda
                             @Button@140 <Button>
+                              .custom_minimum_size = Vector2(0, 56)
+                              .size_flags_horizontal = 3
+                              .mouse_filter = 1
+                              .theme_override_styles/normal = StyleBoxFlat{content_margin_left=10.0, content_margin_right=8.0, bg_color=Color(0.05882353, 0.101960786, 0.18039216, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.11764706, 0.22745098, 0.37254903, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=10.0, content_margin_right=8.0, bg_color=Color(0.047058824, 0.08235294, 0.14901961, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.007843138, 0.5176471, 0.78039217, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/hover = StyleBoxFlat{content_margin_left=10.0, content_margin_right=8.0, bg_color=Color(0.08627451, 0.14901961, 0.2509804, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_styles/focus = StyleBoxFlat{content_margin_left=10.0, content_margin_right=8.0, bg_color=Color(0.08627451, 0.14901961, 0.2509804, 1), border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
+                              .theme_override_colors/font_color = Color(0.8862745, 0.9098039, 0.9411765, 1)
+                              .theme_override_colors/font_pressed_color = Color(0.21960784, 0.7411765, 0.972549, 1)
+                              .theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+                              .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
+                              .theme_override_font_sizes/font_size = 14
+                              .text = "Andrew · Recorded (offline)"
+                              .alignment = 0
+                              .clip_text = true
+                              on visibility_changed -> lambda
+                              on size_flags_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on minimum_size_changed -> lambda
+                              on _desired_size_changed -> lambda
+                              on pressed -> main.open_voice_sheet
+                              on pressed -> lambda
+                            @Button@141 <Button>
                               .custom_minimum_size = Vector2(96, 56)
                               .mouse_filter = 1
                               .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=4.0, content_margin_right=12.0, content_margin_bottom=4.0, bg_color=Color(1, 1, 1, 0.02), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.16470589, 0.23137255, 0.34117648, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8}
@@ -1664,7 +1689,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> main.speech._preview_voice
                               on pressed -> lambda
-                          @HBoxContainer@141 <HBoxContainer>
+                          @HBoxContainer@142 <HBoxContainer>
                             .mouse_filter = 2
                             .theme_override_constants/separation = 6
                             on child_order_changed -> lambda
@@ -1678,7 +1703,7 @@ Main <Control> res://src/app/main.gd
                             on maximum_size_changed -> lambda
                             on minimum_size_changed -> lambda
                             on _desired_size_changed -> lambda
-                            @Label@142 <Label>
+                            @Label@143 <Label>
                               .custom_minimum_size = Vector2(62, 0)
                               .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                               .theme_override_font_sizes/font_size = 11
@@ -1690,7 +1715,7 @@ Main <Control> res://src/app/main.gd
                               on maximum_size_changed -> lambda
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
-                            @Button@143 <Button>
+                            @Button@144 <Button>
                               .custom_minimum_size = Vector2(0, 56)
                               .size_flags_horizontal = 3
                               .mouse_filter = 1
@@ -1715,7 +1740,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
                               on pressed -> lambda
-                            @Button@144 <Button>
+                            @Button@145 <Button>
                               .custom_minimum_size = Vector2(0, 56)
                               .size_flags_horizontal = 3
                               .mouse_filter = 1
@@ -1741,7 +1766,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
                               on pressed -> lambda
-                            @Button@145 <Button>
+                            @Button@146 <Button>
                               .custom_minimum_size = Vector2(0, 56)
                               .size_flags_horizontal = 3
                               .mouse_filter = 1
@@ -1766,7 +1791,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
                               on pressed -> lambda
-                            @Button@146 <Button>
+                            @Button@147 <Button>
                               .custom_minimum_size = Vector2(0, 56)
                               .size_flags_horizontal = 3
                               .mouse_filter = 1
@@ -1791,7 +1816,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
                               on pressed -> lambda
-                        @CheckButton@147 <CheckButton>
+                        @CheckButton@148 <CheckButton>
                           .visible = false
                           .custom_minimum_size = Vector2(0, 44)
                           .mouse_filter = 1
@@ -1816,7 +1841,7 @@ Main <Control> res://src/app/main.gd
                           on _desired_size_changed -> lambda
                           on pressed -> lambda
                           on toggled -> main._on_auto_teach_toggled
-                        @HBoxContainer@148 <HBoxContainer>
+                        @HBoxContainer@149 <HBoxContainer>
                           .visible = false
                           .mouse_filter = 2
                           .theme_override_constants/separation = 6
@@ -1830,7 +1855,7 @@ Main <Control> res://src/app/main.gd
                           on maximum_size_changed -> lambda
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
-                          @Label@149 <Label>
+                          @Label@150 <Label>
                             .custom_minimum_size = Vector2(62, 0)
                             .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                             .theme_override_font_sizes/font_size = 11
@@ -1842,7 +1867,7 @@ Main <Control> res://src/app/main.gd
                             on maximum_size_changed -> lambda
                             on minimum_size_changed -> lambda
                             on _desired_size_changed -> lambda
-                          @Button@150 <Button>
+                          @Button@151 <Button>
                             .custom_minimum_size = Vector2(0, 56)
                             .size_flags_horizontal = 3
                             .mouse_filter = 1
@@ -1867,7 +1892,7 @@ Main <Control> res://src/app/main.gd
                             on _desired_size_changed -> lambda
                             on pressed -> lambda
                             on pressed -> lambda
-                          @Button@151 <Button>
+                          @Button@152 <Button>
                             .custom_minimum_size = Vector2(0, 56)
                             .size_flags_horizontal = 3
                             .mouse_filter = 1
@@ -1893,7 +1918,7 @@ Main <Control> res://src/app/main.gd
                             on _desired_size_changed -> lambda
                             on pressed -> lambda
                             on pressed -> lambda
-                          @Button@152 <Button>
+                          @Button@153 <Button>
                             .custom_minimum_size = Vector2(0, 56)
                             .size_flags_horizontal = 3
                             .mouse_filter = 1
@@ -1918,7 +1943,7 @@ Main <Control> res://src/app/main.gd
                             on _desired_size_changed -> lambda
                             on pressed -> lambda
                             on pressed -> lambda
-                        @Label@153 <Label>
+                        @Label@154 <Label>
                           .visible = false
                           .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                           .theme_override_font_sizes/font_size = 12
@@ -1931,7 +1956,7 @@ Main <Control> res://src/app/main.gd
                           on maximum_size_changed -> lambda
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
-                      @HBoxContainer@154 <HBoxContainer>
+                      @HBoxContainer@155 <HBoxContainer>
                         .mouse_filter = 2
                         .theme_override_constants/separation = 6
                         on child_order_changed -> lambda
@@ -1945,7 +1970,7 @@ Main <Control> res://src/app/main.gd
                         on maximum_size_changed -> lambda
                         on minimum_size_changed -> lambda
                         on _desired_size_changed -> lambda
-                        @Label@155 <Label>
+                        @Label@156 <Label>
                           .custom_minimum_size = Vector2(62, 0)
                           .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                           .theme_override_font_sizes/font_size = 11
@@ -1957,7 +1982,7 @@ Main <Control> res://src/app/main.gd
                           on maximum_size_changed -> lambda
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
-                        @Button@156 <Button>
+                        @Button@157 <Button>
                           .custom_minimum_size = Vector2(0, 56)
                           .size_flags_horizontal = 3
                           .mouse_filter = 1
@@ -1982,7 +2007,7 @@ Main <Control> res://src/app/main.gd
                           on _desired_size_changed -> lambda
                           on pressed -> lambda
                           on pressed -> lambda
-                        @Button@157 <Button>
+                        @Button@158 <Button>
                           .custom_minimum_size = Vector2(0, 56)
                           .size_flags_horizontal = 3
                           .mouse_filter = 1
@@ -2007,7 +2032,7 @@ Main <Control> res://src/app/main.gd
                           on _desired_size_changed -> lambda
                           on pressed -> lambda
                           on pressed -> lambda
-                        @Button@158 <Button>
+                        @Button@159 <Button>
                           .custom_minimum_size = Vector2(0, 56)
                           .size_flags_horizontal = 3
                           .mouse_filter = 1
@@ -2033,7 +2058,7 @@ Main <Control> res://src/app/main.gd
                           on _desired_size_changed -> lambda
                           on pressed -> lambda
                           on pressed -> lambda
-                        @Button@159 <Button>
+                        @Button@160 <Button>
                           .custom_minimum_size = Vector2(0, 56)
                           .size_flags_horizontal = 3
                           .mouse_filter = 1
@@ -2058,7 +2083,7 @@ Main <Control> res://src/app/main.gd
                           on _desired_size_changed -> lambda
                           on pressed -> lambda
                           on pressed -> lambda
-                      @CheckButton@160 <CheckButton>
+                      @CheckButton@161 <CheckButton>
                         .custom_minimum_size = Vector2(0, 44)
                         .mouse_filter = 1
                         .theme_override_styles/normal = StyleBoxEmpty{content_margin_left=0.0, content_margin_right=0.0}
@@ -2113,7 +2138,7 @@ Main <Control> res://src/app/main.gd
                     on maximum_size_changed -> lambda
                     on minimum_size_changed -> lambda
                     on _desired_size_changed -> lambda
-                @Button@161 <Button>
+                @Button@162 <Button>
                   .modulate = Color(1, 1, 1, 0)
                   .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// One material for every raised surface (UiFx.add_glass / UiFx.add_shine).\n// It only touches the control's own drawing (its StyleBox, and a Button's\n// label), never child controls, and every effect is off at its default.\n//\n// Glass: inside the rounded rect the fill is lifted by fill_lift at the top\n// edge, fading to the StyleBox colour at the bottom (a vertical gradient),\n// and a 1 px highlight runs just under the top border (bevel).\n//\n// Tint: the fill blends toward tint_to across the width (the primary button's\n// cyan -> deep blue bar). Pure-white fragments are the button's label and are\n// left alone, so the text keeps its contrast.\n//\n// Shine: a diagonal light sweep; shine_pos runs -0.3 -> 1.5 (tweened).\n//\n// Current: one pulse of light runs around the border; current_pos runs\n// 0 -> 1 + current_tail (tweened), below 0 it is off.\n//\n// Flow: a slow, endless light on the border (the official simulator card),\n// flow_strength 0 = off. Runs on TIME, so it costs no CPU.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float corner_radius = 12.0;\nuniform vec3 fill_lift = vec3(0.0);\nuniform float bevel = 0.0;\nuniform vec4 tint_to : source_color = vec4(0.0);\nuniform float tint_amount = 0.0;\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.14;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float flow_strength = 0.0;\nuniform float flow_speed = 0.08;\nuniform vec4 flow_color : source_color = vec4(0.98, 0.75, 0.14, 1.0);\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\n// Brightness of a light head at `pos` (0..1 around the outline) with a tail.\nfloat head_at(float pos, float t, float tail) {\n	float behind = pos - t;\n	behind = behind < 0.0 ? behind + 1.0 : behind;\n	return behind <= tail ? 1.0 - behind / tail : 0.0;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 size = max(rect_size, vec2(1.0));\n	vec2 p = local_pos / size;\n	vec2 b = size * 0.5;\n	vec2 q = local_pos - b;\n	vec2 k = abs(q) - b + vec2(corner_radius);\n	float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n	bool is_label = min(base.r, min(base.g, base.b)) > 0.97;\n	if (sdf <= 0.0 && !is_label) {\n		base.rgb += fill_lift * (1.0 - clamp(p.y, 0.0, 1.0));\n		base.rgb = mix(base.rgb, tint_to.rgb, tint_amount * clamp(p.x, 0.0, 1.0));\n		if (bevel > 0.0) {\n			float band = 1.0 - smoothstep(0.0, 1.0, abs(local_pos.y - 1.5));\n			float ends = smoothstep(0.0, corner_radius, min(local_pos.x, size.x - local_pos.x));\n			base.rgb += vec3(bevel * band * ends);\n		}\n	}\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	base.rgb += vec3((1.0 - smoothstep(0.0, shine_width, d)) * strength);\n	float edge = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n	if (current_pos >= 0.0) {\n		float along = perimeter_t(q, b);\n		float behind = current_pos - along;\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * edge * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	if (flow_strength > 0.0) {\n		float along = perimeter_t(q, b);\n		float t = fract(TIME * flow_speed);\n		float h = head_at(t, along, 0.18) + head_at(fract(t + 0.5), along, 0.18);\n		float glow = h * h * edge * flow_strength;\n		base.rgb += flow_color.rgb * glow;\n		base.a = max(base.a, glow * 0.7);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(118, 64), shader_parameter/corner_radius=12.0, shader_parameter/fill_lift=Vector3(0.03529412, 0.04705882, 0.07058823), shader_parameter/bevel=0.07, shader_parameter/tint_to=null, shader_parameter/tint_amount=null, shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/flow_strength=null, shader_parameter/flow_speed=null, shader_parameter/flow_color=null}
                   .custom_minimum_size = Vector2(0, 64)
@@ -2169,7 +2194,7 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -16.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @Button@162 <Button>
+                @Button@163 <Button>
                   .modulate = Color(1, 1, 1, 0)
                   .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// One material for every raised surface (UiFx.add_glass / UiFx.add_shine).\n// It only touches the control's own drawing (its StyleBox, and a Button's\n// label), never child controls, and every effect is off at its default.\n//\n// Glass: inside the rounded rect the fill is lifted by fill_lift at the top\n// edge, fading to the StyleBox colour at the bottom (a vertical gradient),\n// and a 1 px highlight runs just under the top border (bevel).\n//\n// Tint: the fill blends toward tint_to across the width (the primary button's\n// cyan -> deep blue bar). Pure-white fragments are the button's label and are\n// left alone, so the text keeps its contrast.\n//\n// Shine: a diagonal light sweep; shine_pos runs -0.3 -> 1.5 (tweened).\n//\n// Current: one pulse of light runs around the border; current_pos runs\n// 0 -> 1 + current_tail (tweened), below 0 it is off.\n//\n// Flow: a slow, endless light on the border (the official simulator card),\n// flow_strength 0 = off. Runs on TIME, so it costs no CPU.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float corner_radius = 12.0;\nuniform vec3 fill_lift = vec3(0.0);\nuniform float bevel = 0.0;\nuniform vec4 tint_to : source_color = vec4(0.0);\nuniform float tint_amount = 0.0;\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.14;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float flow_strength = 0.0;\nuniform float flow_speed = 0.08;\nuniform vec4 flow_color : source_color = vec4(0.98, 0.75, 0.14, 1.0);\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\n// Brightness of a light head at `pos` (0..1 around the outline) with a tail.\nfloat head_at(float pos, float t, float tail) {\n	float behind = pos - t;\n	behind = behind < 0.0 ? behind + 1.0 : behind;\n	return behind <= tail ? 1.0 - behind / tail : 0.0;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 size = max(rect_size, vec2(1.0));\n	vec2 p = local_pos / size;\n	vec2 b = size * 0.5;\n	vec2 q = local_pos - b;\n	vec2 k = abs(q) - b + vec2(corner_radius);\n	float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n	bool is_label = min(base.r, min(base.g, base.b)) > 0.97;\n	if (sdf <= 0.0 && !is_label) {\n		base.rgb += fill_lift * (1.0 - clamp(p.y, 0.0, 1.0));\n		base.rgb = mix(base.rgb, tint_to.rgb, tint_amount * clamp(p.x, 0.0, 1.0));\n		if (bevel > 0.0) {\n			float band = 1.0 - smoothstep(0.0, 1.0, abs(local_pos.y - 1.5));\n			float ends = smoothstep(0.0, corner_radius, min(local_pos.x, size.x - local_pos.x));\n			base.rgb += vec3(bevel * band * ends);\n		}\n	}\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	base.rgb += vec3((1.0 - smoothstep(0.0, shine_width, d)) * strength);\n	float edge = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n	if (current_pos >= 0.0) {\n		float along = perimeter_t(q, b);\n		float behind = current_pos - along;\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * edge * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	if (flow_strength > 0.0) {\n		float along = perimeter_t(q, b);\n		float t = fract(TIME * flow_speed);\n		float h = head_at(t, along, 0.18) + head_at(fract(t + 0.5), along, 0.18);\n		float glow = h * h * edge * flow_strength;\n		base.rgb += flow_color.rgb * glow;\n		base.a = max(base.a, glow * 0.7);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(118, 64), shader_parameter/corner_radius=12.0, shader_parameter/fill_lift=Vector3(0.03529412, 0.04705882, 0.07058823), shader_parameter/bevel=0.07, shader_parameter/tint_to=null, shader_parameter/tint_amount=null, shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/flow_strength=null, shader_parameter/flow_speed=null, shader_parameter/flow_color=null}
                   .custom_minimum_size = Vector2(0, 64)
@@ -2225,7 +2250,7 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -16.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @Button@163 <Button>
+                @Button@164 <Button>
                   .modulate = Color(1, 1, 1, 0)
                   .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// One material for every raised surface (UiFx.add_glass / UiFx.add_shine).\n// It only touches the control's own drawing (its StyleBox, and a Button's\n// label), never child controls, and every effect is off at its default.\n//\n// Glass: inside the rounded rect the fill is lifted by fill_lift at the top\n// edge, fading to the StyleBox colour at the bottom (a vertical gradient),\n// and a 1 px highlight runs just under the top border (bevel).\n//\n// Tint: the fill blends toward tint_to across the width (the primary button's\n// cyan -> deep blue bar). Pure-white fragments are the button's label and are\n// left alone, so the text keeps its contrast.\n//\n// Shine: a diagonal light sweep; shine_pos runs -0.3 -> 1.5 (tweened).\n//\n// Current: one pulse of light runs around the border; current_pos runs\n// 0 -> 1 + current_tail (tweened), below 0 it is off.\n//\n// Flow: a slow, endless light on the border (the official simulator card),\n// flow_strength 0 = off. Runs on TIME, so it costs no CPU.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float corner_radius = 12.0;\nuniform vec3 fill_lift = vec3(0.0);\nuniform float bevel = 0.0;\nuniform vec4 tint_to : source_color = vec4(0.0);\nuniform float tint_amount = 0.0;\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.14;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float flow_strength = 0.0;\nuniform float flow_speed = 0.08;\nuniform vec4 flow_color : source_color = vec4(0.98, 0.75, 0.14, 1.0);\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\n// Brightness of a light head at `pos` (0..1 around the outline) with a tail.\nfloat head_at(float pos, float t, float tail) {\n	float behind = pos - t;\n	behind = behind < 0.0 ? behind + 1.0 : behind;\n	return behind <= tail ? 1.0 - behind / tail : 0.0;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 size = max(rect_size, vec2(1.0));\n	vec2 p = local_pos / size;\n	vec2 b = size * 0.5;\n	vec2 q = local_pos - b;\n	vec2 k = abs(q) - b + vec2(corner_radius);\n	float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n	bool is_label = min(base.r, min(base.g, base.b)) > 0.97;\n	if (sdf <= 0.0 && !is_label) {\n		base.rgb += fill_lift * (1.0 - clamp(p.y, 0.0, 1.0));\n		base.rgb = mix(base.rgb, tint_to.rgb, tint_amount * clamp(p.x, 0.0, 1.0));\n		if (bevel > 0.0) {\n			float band = 1.0 - smoothstep(0.0, 1.0, abs(local_pos.y - 1.5));\n			float ends = smoothstep(0.0, corner_radius, min(local_pos.x, size.x - local_pos.x));\n			base.rgb += vec3(bevel * band * ends);\n		}\n	}\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	base.rgb += vec3((1.0 - smoothstep(0.0, shine_width, d)) * strength);\n	float edge = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n	if (current_pos >= 0.0) {\n		float along = perimeter_t(q, b);\n		float behind = current_pos - along;\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * edge * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	if (flow_strength > 0.0) {\n		float along = perimeter_t(q, b);\n		float t = fract(TIME * flow_speed);\n		float h = head_at(t, along, 0.18) + head_at(fract(t + 0.5), along, 0.18);\n		float glow = h * h * edge * flow_strength;\n		base.rgb += flow_color.rgb * glow;\n		base.a = max(base.a, glow * 0.7);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(118, 64), shader_parameter/corner_radius=12.0, shader_parameter/fill_lift=Vector3(0.03529412, 0.04705882, 0.07058823), shader_parameter/bevel=0.07, shader_parameter/tint_to=null, shader_parameter/tint_amount=null, shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/flow_strength=null, shader_parameter/flow_speed=null, shader_parameter/flow_color=null}
                   .custom_minimum_size = Vector2(0, 64)
@@ -2281,7 +2306,7 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -16.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @Button@164 <Button>
+                @Button@165 <Button>
                   .modulate = Color(1, 1, 1, 0)
                   .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// One material for every raised surface (UiFx.add_glass / UiFx.add_shine).\n// It only touches the control's own drawing (its StyleBox, and a Button's\n// label), never child controls, and every effect is off at its default.\n//\n// Glass: inside the rounded rect the fill is lifted by fill_lift at the top\n// edge, fading to the StyleBox colour at the bottom (a vertical gradient),\n// and a 1 px highlight runs just under the top border (bevel).\n//\n// Tint: the fill blends toward tint_to across the width (the primary button's\n// cyan -> deep blue bar). Pure-white fragments are the button's label and are\n// left alone, so the text keeps its contrast.\n//\n// Shine: a diagonal light sweep; shine_pos runs -0.3 -> 1.5 (tweened).\n//\n// Current: one pulse of light runs around the border; current_pos runs\n// 0 -> 1 + current_tail (tweened), below 0 it is off.\n//\n// Flow: a slow, endless light on the border (the official simulator card),\n// flow_strength 0 = off. Runs on TIME, so it costs no CPU.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float corner_radius = 12.0;\nuniform vec3 fill_lift = vec3(0.0);\nuniform float bevel = 0.0;\nuniform vec4 tint_to : source_color = vec4(0.0);\nuniform float tint_amount = 0.0;\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.14;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float flow_strength = 0.0;\nuniform float flow_speed = 0.08;\nuniform vec4 flow_color : source_color = vec4(0.98, 0.75, 0.14, 1.0);\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\n// Brightness of a light head at `pos` (0..1 around the outline) with a tail.\nfloat head_at(float pos, float t, float tail) {\n	float behind = pos - t;\n	behind = behind < 0.0 ? behind + 1.0 : behind;\n	return behind <= tail ? 1.0 - behind / tail : 0.0;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 size = max(rect_size, vec2(1.0));\n	vec2 p = local_pos / size;\n	vec2 b = size * 0.5;\n	vec2 q = local_pos - b;\n	vec2 k = abs(q) - b + vec2(corner_radius);\n	float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n	bool is_label = min(base.r, min(base.g, base.b)) > 0.97;\n	if (sdf <= 0.0 && !is_label) {\n		base.rgb += fill_lift * (1.0 - clamp(p.y, 0.0, 1.0));\n		base.rgb = mix(base.rgb, tint_to.rgb, tint_amount * clamp(p.x, 0.0, 1.0));\n		if (bevel > 0.0) {\n			float band = 1.0 - smoothstep(0.0, 1.0, abs(local_pos.y - 1.5));\n			float ends = smoothstep(0.0, corner_radius, min(local_pos.x, size.x - local_pos.x));\n			base.rgb += vec3(bevel * band * ends);\n		}\n	}\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	base.rgb += vec3((1.0 - smoothstep(0.0, shine_width, d)) * strength);\n	float edge = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n	if (current_pos >= 0.0) {\n		float along = perimeter_t(q, b);\n		float behind = current_pos - along;\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * edge * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	if (flow_strength > 0.0) {\n		float along = perimeter_t(q, b);\n		float t = fract(TIME * flow_speed);\n		float h = head_at(t, along, 0.18) + head_at(fract(t + 0.5), along, 0.18);\n		float glow = h * h * edge * flow_strength;\n		base.rgb += flow_color.rgb * glow;\n		base.a = max(base.a, glow * 0.7);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(118, 64), shader_parameter/corner_radius=12.0, shader_parameter/fill_lift=Vector3(0.03529412, 0.04705882, 0.07058823), shader_parameter/bevel=0.07, shader_parameter/tint_to=null, shader_parameter/tint_amount=null, shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/flow_strength=null, shader_parameter/flow_speed=null, shader_parameter/flow_color=null}
                   .custom_minimum_size = Vector2(0, 64)
@@ -2337,7 +2362,7 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -16.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @Button@165 <Button>
+                @Button@166 <Button>
                   .modulate = Color(1, 1, 1, 0)
                   .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// One material for every raised surface (UiFx.add_glass / UiFx.add_shine).\n// It only touches the control's own drawing (its StyleBox, and a Button's\n// label), never child controls, and every effect is off at its default.\n//\n// Glass: inside the rounded rect the fill is lifted by fill_lift at the top\n// edge, fading to the StyleBox colour at the bottom (a vertical gradient),\n// and a 1 px highlight runs just under the top border (bevel).\n//\n// Tint: the fill blends toward tint_to across the width (the primary button's\n// cyan -> deep blue bar). Pure-white fragments are the button's label and are\n// left alone, so the text keeps its contrast.\n//\n// Shine: a diagonal light sweep; shine_pos runs -0.3 -> 1.5 (tweened).\n//\n// Current: one pulse of light runs around the border; current_pos runs\n// 0 -> 1 + current_tail (tweened), below 0 it is off.\n//\n// Flow: a slow, endless light on the border (the official simulator card),\n// flow_strength 0 = off. Runs on TIME, so it costs no CPU.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float corner_radius = 12.0;\nuniform vec3 fill_lift = vec3(0.0);\nuniform float bevel = 0.0;\nuniform vec4 tint_to : source_color = vec4(0.0);\nuniform float tint_amount = 0.0;\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.14;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float flow_strength = 0.0;\nuniform float flow_speed = 0.08;\nuniform vec4 flow_color : source_color = vec4(0.98, 0.75, 0.14, 1.0);\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\n// Brightness of a light head at `pos` (0..1 around the outline) with a tail.\nfloat head_at(float pos, float t, float tail) {\n	float behind = pos - t;\n	behind = behind < 0.0 ? behind + 1.0 : behind;\n	return behind <= tail ? 1.0 - behind / tail : 0.0;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 size = max(rect_size, vec2(1.0));\n	vec2 p = local_pos / size;\n	vec2 b = size * 0.5;\n	vec2 q = local_pos - b;\n	vec2 k = abs(q) - b + vec2(corner_radius);\n	float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n	bool is_label = min(base.r, min(base.g, base.b)) > 0.97;\n	if (sdf <= 0.0 && !is_label) {\n		base.rgb += fill_lift * (1.0 - clamp(p.y, 0.0, 1.0));\n		base.rgb = mix(base.rgb, tint_to.rgb, tint_amount * clamp(p.x, 0.0, 1.0));\n		if (bevel > 0.0) {\n			float band = 1.0 - smoothstep(0.0, 1.0, abs(local_pos.y - 1.5));\n			float ends = smoothstep(0.0, corner_radius, min(local_pos.x, size.x - local_pos.x));\n			base.rgb += vec3(bevel * band * ends);\n		}\n	}\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	base.rgb += vec3((1.0 - smoothstep(0.0, shine_width, d)) * strength);\n	float edge = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n	if (current_pos >= 0.0) {\n		float along = perimeter_t(q, b);\n		float behind = current_pos - along;\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * edge * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	if (flow_strength > 0.0) {\n		float along = perimeter_t(q, b);\n		float t = fract(TIME * flow_speed);\n		float h = head_at(t, along, 0.18) + head_at(fract(t + 0.5), along, 0.18);\n		float glow = h * h * edge * flow_strength;\n		base.rgb += flow_color.rgb * glow;\n		base.a = max(base.a, glow * 0.7);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(118, 64), shader_parameter/corner_radius=12.0, shader_parameter/fill_lift=Vector3(0.03529412, 0.04705882, 0.07058823), shader_parameter/bevel=0.07, shader_parameter/tint_to=null, shader_parameter/tint_amount=null, shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/flow_strength=null, shader_parameter/flow_speed=null, shader_parameter/flow_color=null}
                   .custom_minimum_size = Vector2(0, 64)
@@ -2393,7 +2418,7 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -16.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @Button@166 <Button>
+                @Button@167 <Button>
                   .modulate = Color(1, 1, 1, 0)
                   .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// One material for every raised surface (UiFx.add_glass / UiFx.add_shine).\n// It only touches the control's own drawing (its StyleBox, and a Button's\n// label), never child controls, and every effect is off at its default.\n//\n// Glass: inside the rounded rect the fill is lifted by fill_lift at the top\n// edge, fading to the StyleBox colour at the bottom (a vertical gradient),\n// and a 1 px highlight runs just under the top border (bevel).\n//\n// Tint: the fill blends toward tint_to across the width (the primary button's\n// cyan -> deep blue bar). Pure-white fragments are the button's label and are\n// left alone, so the text keeps its contrast.\n//\n// Shine: a diagonal light sweep; shine_pos runs -0.3 -> 1.5 (tweened).\n//\n// Current: one pulse of light runs around the border; current_pos runs\n// 0 -> 1 + current_tail (tweened), below 0 it is off.\n//\n// Flow: a slow, endless light on the border (the official simulator card),\n// flow_strength 0 = off. Runs on TIME, so it costs no CPU.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float corner_radius = 12.0;\nuniform vec3 fill_lift = vec3(0.0);\nuniform float bevel = 0.0;\nuniform vec4 tint_to : source_color = vec4(0.0);\nuniform float tint_amount = 0.0;\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.14;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float flow_strength = 0.0;\nuniform float flow_speed = 0.08;\nuniform vec4 flow_color : source_color = vec4(0.98, 0.75, 0.14, 1.0);\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\n// Brightness of a light head at `pos` (0..1 around the outline) with a tail.\nfloat head_at(float pos, float t, float tail) {\n	float behind = pos - t;\n	behind = behind < 0.0 ? behind + 1.0 : behind;\n	return behind <= tail ? 1.0 - behind / tail : 0.0;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 size = max(rect_size, vec2(1.0));\n	vec2 p = local_pos / size;\n	vec2 b = size * 0.5;\n	vec2 q = local_pos - b;\n	vec2 k = abs(q) - b + vec2(corner_radius);\n	float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n	bool is_label = min(base.r, min(base.g, base.b)) > 0.97;\n	if (sdf <= 0.0 && !is_label) {\n		base.rgb += fill_lift * (1.0 - clamp(p.y, 0.0, 1.0));\n		base.rgb = mix(base.rgb, tint_to.rgb, tint_amount * clamp(p.x, 0.0, 1.0));\n		if (bevel > 0.0) {\n			float band = 1.0 - smoothstep(0.0, 1.0, abs(local_pos.y - 1.5));\n			float ends = smoothstep(0.0, corner_radius, min(local_pos.x, size.x - local_pos.x));\n			base.rgb += vec3(bevel * band * ends);\n		}\n	}\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	base.rgb += vec3((1.0 - smoothstep(0.0, shine_width, d)) * strength);\n	float edge = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n	if (current_pos >= 0.0) {\n		float along = perimeter_t(q, b);\n		float behind = current_pos - along;\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * edge * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	if (flow_strength > 0.0) {\n		float along = perimeter_t(q, b);\n		float t = fract(TIME * flow_speed);\n		float h = head_at(t, along, 0.18) + head_at(fract(t + 0.5), along, 0.18);\n		float glow = h * h * edge * flow_strength;\n		base.rgb += flow_color.rgb * glow;\n		base.a = max(base.a, glow * 0.7);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(118, 64), shader_parameter/corner_radius=12.0, shader_parameter/fill_lift=Vector3(0.03529412, 0.04705882, 0.07058823), shader_parameter/bevel=0.07, shader_parameter/tint_to=null, shader_parameter/tint_amount=null, shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/flow_strength=null, shader_parameter/flow_speed=null, shader_parameter/flow_color=null}
                   .custom_minimum_size = Vector2(0, 64)
@@ -2449,7 +2474,7 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -16.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @HBoxContainer@169 <HBoxContainer>
+                @HBoxContainer@170 <HBoxContainer>
                   .mouse_filter = 2
                   .theme_override_constants/separation = 8
                   on child_order_changed -> lambda
@@ -2460,7 +2485,7 @@ Main <Control> res://src/app/main.gd
                   on maximum_size_changed -> lambda
                   on minimum_size_changed -> lambda
                   on _desired_size_changed -> lambda
-                  @ColorRect@167 <ColorRect>
+                  @ColorRect@168 <ColorRect>
                     .custom_minimum_size = Vector2(4, 14)
                     .size_flags_vertical = 4
                     .mouse_filter = 2
@@ -2470,7 +2495,7 @@ Main <Control> res://src/app/main.gd
                     on maximum_size_changed -> lambda
                     on minimum_size_changed -> lambda
                     on _desired_size_changed -> lambda
-                  @Label@168 <Label>
+                  @Label@169 <Label>
                     .theme_override_fonts/font = FontVariation{base_font=SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}, spacing_glyph=1}
                     .theme_override_font_sizes/font_size = 12
                     .theme_override_colors/font_color = Color(0.49019608, 0.827451, 0.9882353, 1)
@@ -2481,7 +2506,7 @@ Main <Control> res://src/app/main.gd
                     on maximum_size_changed -> lambda
                     on minimum_size_changed -> lambda
                     on _desired_size_changed -> lambda
-                @Button@170 <Button>
+                @Button@171 <Button>
                   .modulate = Color(1, 1, 1, 0)
                   .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// One material for every raised surface (UiFx.add_glass / UiFx.add_shine).\n// It only touches the control's own drawing (its StyleBox, and a Button's\n// label), never child controls, and every effect is off at its default.\n//\n// Glass: inside the rounded rect the fill is lifted by fill_lift at the top\n// edge, fading to the StyleBox colour at the bottom (a vertical gradient),\n// and a 1 px highlight runs just under the top border (bevel).\n//\n// Tint: the fill blends toward tint_to across the width (the primary button's\n// cyan -> deep blue bar). Pure-white fragments are the button's label and are\n// left alone, so the text keeps its contrast.\n//\n// Shine: a diagonal light sweep; shine_pos runs -0.3 -> 1.5 (tweened).\n//\n// Current: one pulse of light runs around the border; current_pos runs\n// 0 -> 1 + current_tail (tweened), below 0 it is off.\n//\n// Flow: a slow, endless light on the border (the official simulator card),\n// flow_strength 0 = off. Runs on TIME, so it costs no CPU.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float corner_radius = 12.0;\nuniform vec3 fill_lift = vec3(0.0);\nuniform float bevel = 0.0;\nuniform vec4 tint_to : source_color = vec4(0.0);\nuniform float tint_amount = 0.0;\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.14;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float flow_strength = 0.0;\nuniform float flow_speed = 0.08;\nuniform vec4 flow_color : source_color = vec4(0.98, 0.75, 0.14, 1.0);\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\n// Brightness of a light head at `pos` (0..1 around the outline) with a tail.\nfloat head_at(float pos, float t, float tail) {\n	float behind = pos - t;\n	behind = behind < 0.0 ? behind + 1.0 : behind;\n	return behind <= tail ? 1.0 - behind / tail : 0.0;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 size = max(rect_size, vec2(1.0));\n	vec2 p = local_pos / size;\n	vec2 b = size * 0.5;\n	vec2 q = local_pos - b;\n	vec2 k = abs(q) - b + vec2(corner_radius);\n	float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n	bool is_label = min(base.r, min(base.g, base.b)) > 0.97;\n	if (sdf <= 0.0 && !is_label) {\n		base.rgb += fill_lift * (1.0 - clamp(p.y, 0.0, 1.0));\n		base.rgb = mix(base.rgb, tint_to.rgb, tint_amount * clamp(p.x, 0.0, 1.0));\n		if (bevel > 0.0) {\n			float band = 1.0 - smoothstep(0.0, 1.0, abs(local_pos.y - 1.5));\n			float ends = smoothstep(0.0, corner_radius, min(local_pos.x, size.x - local_pos.x));\n			base.rgb += vec3(bevel * band * ends);\n		}\n	}\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	base.rgb += vec3((1.0 - smoothstep(0.0, shine_width, d)) * strength);\n	float edge = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n	if (current_pos >= 0.0) {\n		float along = perimeter_t(q, b);\n		float behind = current_pos - along;\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * edge * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	if (flow_strength > 0.0) {\n		float along = perimeter_t(q, b);\n		float t = fract(TIME * flow_speed);\n		float h = head_at(t, along, 0.18) + head_at(fract(t + 0.5), along, 0.18);\n		float glow = h * h * edge * flow_strength;\n		base.rgb += flow_color.rgb * glow;\n		base.a = max(base.a, glow * 0.7);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(118, 64), shader_parameter/corner_radius=12.0, shader_parameter/fill_lift=Vector3(0.03529412, 0.04705882, 0.07058823), shader_parameter/bevel=0.07, shader_parameter/tint_to=null, shader_parameter/tint_amount=null, shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/flow_strength=null, shader_parameter/flow_speed=null, shader_parameter/flow_color=null}
                   .custom_minimum_size = Vector2(0, 64)
@@ -2537,7 +2562,7 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -16.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @HBoxContainer@173 <HBoxContainer>
+                @HBoxContainer@174 <HBoxContainer>
                   .mouse_filter = 2
                   .theme_override_constants/separation = 8
                   on child_order_changed -> lambda
@@ -2548,7 +2573,7 @@ Main <Control> res://src/app/main.gd
                   on maximum_size_changed -> lambda
                   on minimum_size_changed -> lambda
                   on _desired_size_changed -> lambda
-                  @ColorRect@171 <ColorRect>
+                  @ColorRect@172 <ColorRect>
                     .custom_minimum_size = Vector2(4, 14)
                     .size_flags_vertical = 4
                     .mouse_filter = 2
@@ -2558,7 +2583,7 @@ Main <Control> res://src/app/main.gd
                     on maximum_size_changed -> lambda
                     on minimum_size_changed -> lambda
                     on _desired_size_changed -> lambda
-                  @Label@172 <Label>
+                  @Label@173 <Label>
                     .theme_override_fonts/font = FontVariation{base_font=SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}, spacing_glyph=1}
                     .theme_override_font_sizes/font_size = 12
                     .theme_override_colors/font_color = Color(0.9843137, 0.44313726, 0.52156866, 1)
@@ -2569,7 +2594,7 @@ Main <Control> res://src/app/main.gd
                     on maximum_size_changed -> lambda
                     on minimum_size_changed -> lambda
                     on _desired_size_changed -> lambda
-                @Button@174 <Button>
+                @Button@175 <Button>
                   .modulate = Color(1, 1, 1, 0)
                   .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// One material for every raised surface (UiFx.add_glass / UiFx.add_shine).\n// It only touches the control's own drawing (its StyleBox, and a Button's\n// label), never child controls, and every effect is off at its default.\n//\n// Glass: inside the rounded rect the fill is lifted by fill_lift at the top\n// edge, fading to the StyleBox colour at the bottom (a vertical gradient),\n// and a 1 px highlight runs just under the top border (bevel).\n//\n// Tint: the fill blends toward tint_to across the width (the primary button's\n// cyan -> deep blue bar). Pure-white fragments are the button's label and are\n// left alone, so the text keeps its contrast.\n//\n// Shine: a diagonal light sweep; shine_pos runs -0.3 -> 1.5 (tweened).\n//\n// Current: one pulse of light runs around the border; current_pos runs\n// 0 -> 1 + current_tail (tweened), below 0 it is off.\n//\n// Flow: a slow, endless light on the border (the official simulator card),\n// flow_strength 0 = off. Runs on TIME, so it costs no CPU.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float corner_radius = 12.0;\nuniform vec3 fill_lift = vec3(0.0);\nuniform float bevel = 0.0;\nuniform vec4 tint_to : source_color = vec4(0.0);\nuniform float tint_amount = 0.0;\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.14;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float flow_strength = 0.0;\nuniform float flow_speed = 0.08;\nuniform vec4 flow_color : source_color = vec4(0.98, 0.75, 0.14, 1.0);\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\n// Brightness of a light head at `pos` (0..1 around the outline) with a tail.\nfloat head_at(float pos, float t, float tail) {\n	float behind = pos - t;\n	behind = behind < 0.0 ? behind + 1.0 : behind;\n	return behind <= tail ? 1.0 - behind / tail : 0.0;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 size = max(rect_size, vec2(1.0));\n	vec2 p = local_pos / size;\n	vec2 b = size * 0.5;\n	vec2 q = local_pos - b;\n	vec2 k = abs(q) - b + vec2(corner_radius);\n	float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n	bool is_label = min(base.r, min(base.g, base.b)) > 0.97;\n	if (sdf <= 0.0 && !is_label) {\n		base.rgb += fill_lift * (1.0 - clamp(p.y, 0.0, 1.0));\n		base.rgb = mix(base.rgb, tint_to.rgb, tint_amount * clamp(p.x, 0.0, 1.0));\n		if (bevel > 0.0) {\n			float band = 1.0 - smoothstep(0.0, 1.0, abs(local_pos.y - 1.5));\n			float ends = smoothstep(0.0, corner_radius, min(local_pos.x, size.x - local_pos.x));\n			base.rgb += vec3(bevel * band * ends);\n		}\n	}\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	base.rgb += vec3((1.0 - smoothstep(0.0, shine_width, d)) * strength);\n	float edge = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n	if (current_pos >= 0.0) {\n		float along = perimeter_t(q, b);\n		float behind = current_pos - along;\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * edge * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	if (flow_strength > 0.0) {\n		float along = perimeter_t(q, b);\n		float t = fract(TIME * flow_speed);\n		float h = head_at(t, along, 0.18) + head_at(fract(t + 0.5), along, 0.18);\n		float glow = h * h * edge * flow_strength;\n		base.rgb += flow_color.rgb * glow;\n		base.a = max(base.a, glow * 0.7);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(118, 72), shader_parameter/corner_radius=12.0, shader_parameter/fill_lift=Vector3(0.049647063, 0.056470584, 0.053647064), shader_parameter/bevel=0.07, shader_parameter/tint_to=Color(0.16862746, 0.11372549, 0.03137255, 1), shader_parameter/tint_amount=0.9, shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/flow_strength=0.55, shader_parameter/flow_speed=null, shader_parameter/flow_color=Color(0.9843137, 0.7490196, 0.14117648, 1)}
                   .custom_minimum_size = Vector2(0, 72)
@@ -2626,7 +2651,7 @@ Main <Control> res://src/app/main.gd
                     .offset_right = -16.0
                     .offset_bottom = 22.0
                     .mouse_filter = 2
-                @Label@175 <Label>
+                @Label@176 <Label>
                   .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                   .theme_override_font_sizes/font_size = 11
                   .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
@@ -2645,9 +2670,11 @@ Main <Control> res://src/app/main.gd
     .anchor_right = 1.0
     .anchor_bottom = 1.0
     .mouse_filter = 2
-  @Timer@179 <Timer>
+  TouchScroll <Node> res://src/ui/touch_scroll.gd
+    .process_mode = 3
+  @Timer@180 <Timer>
     on timeout -> main._tick_timer
-  @AudioStreamPlayer@180 <AudioStreamPlayer>
+  @AudioStreamPlayer@181 <AudioStreamPlayer>
     .bus = &"Speech"
     on finished -> main.speech._on_reader_finished
   Sfx <Node> res://src/fx/sfx.gd
@@ -2695,5 +2722,5 @@ Main <Control> res://src/app/main.gd
       .stream = AudioStreamWAV{data=bytes[22264], format=3, stereo=true}
       .max_polyphony = 2
       .bus = &"SFX"
-  @Timer@181 <Timer>
+  @Timer@182 <Timer>
     on timeout -> main._on_listen_tick

@@ -2792,6 +2792,8 @@ Main <Control> res://src/app/main.gd
     .anchor_right = 1.0
     .anchor_bottom = 1.0
     .mouse_filter = 2
+  TouchScroll <Node> res://src/ui/touch_scroll.gd
+    .process_mode = 3
   @Timer@192 <Timer>
     on timeout -> main._tick_timer
   @AudioStreamPlayer@193 <AudioStreamPlayer>
