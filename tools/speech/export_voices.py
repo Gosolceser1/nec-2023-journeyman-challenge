@@ -43,9 +43,11 @@ async def main() -> None:
     rows = []
     for voice in await edge_tts.list_voices():
         short = voice["ShortName"]
+        # gender and locale let the mobile picker list the en-US voices by gender.
+        meta = {"locale": voice["Locale"], "gender": voice["Gender"]}
         if short in EXTRA_VOICES:
             label, tier = EXTRA_VOICES[short]
-            rows.append({"label": label, "id": short, "tier": tier})
+            rows.append({"label": label, "id": short, "tier": tier, **meta})
             continue
         if voice["Locale"] != "en-US" or skip(voice):
             continue
@@ -55,7 +57,7 @@ async def main() -> None:
         label = "%s · %s" % (name, voice["Gender"])
         if trait:
             label += " · " + trait
-        rows.append({"label": label, "id": short, "tier": tier_of(voice)})
+        rows.append({"label": label, "id": short, "tier": tier_of(voice), **meta})
     rows.sort(key=lambda row: (TIER_ORDER[row["tier"]], row["label"]))
     path = Path(__file__).resolve().parents[2] / "data" / "voices.json"
     path.write_text(json.dumps(rows, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

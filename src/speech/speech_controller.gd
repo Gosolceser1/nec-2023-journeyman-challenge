@@ -1,7 +1,8 @@
 class_name SpeechController
 extends RefCounted
-## Reads questions aloud: bundled clips, the desktop Edge helper and cache,
-## native TTS on mobile, the play queue and the teach gate, and the voice picker.
+## Reads questions aloud: bundled clips, Edge voices and their cache (the Python
+## helper on desktop, the WebSocket client on mobile), native TTS, the play
+## queue and the teach gate, and the voice picker.
 ## main.gd owns one (main.speech) and keeps the UI; this reaches back through host.
 
 const SpeechText = preload("res://src/speech/speech_text.gd")
@@ -27,7 +28,11 @@ var _retired_threads: Array[Thread] = []
 var speak_generation := 0
 var speak_busy := false
 var speech_helper: SpeechHelper
-## Desktop Edge clips cache. Tests point it elsewhere.
+## Edge voices over WebSocket where the Python helper cannot run (mobile).
+var edge_client: EdgeTtsClient
+## The backend the live request came from (speech_helper or edge_client).
+var _live_backend: Node
+## Edge clips cache (desktop and mobile). Tests point it elsewhere.
 var speech_cache_root := "user://speech"
 ## Helper request the playing queue is waiting on (-1 when none).
 var _live_request := -1
@@ -41,6 +46,7 @@ var want_teach := false
 var voice_ids: Dictionary = {}
 var voice_tiers: Dictionary = {}  # picker label -> "natural" / "general" / "classic"
 var voice_cfg_path := VoiceCatalog.CONFIG_PATH
+var edge_catalog_path := VoiceCatalog.CATALOG_PATH
 var _previewing := false
 ## Returns the device voices (DisplayServer.tts_get_voices() shape). Tests set a
 ## fake list here; unset, the OS is asked.
@@ -173,17 +179,18 @@ func _status_with_voice(base: String) -> String:
 	return base + (" · " + who if who != "" else "")
 
 func _populate_voice_picker_native() -> void:
-	# The recorded voice first, then the US English device voices under friendly
-	# names (VoiceCatalog.device_voice_rows; never hundreds, never empty).
+	# The recorded voice first, then the US English Edge voices (online), then
+	# the US English device voices under friendly names
+	# (VoiceCatalog.device_voice_rows; never hundreds, never empty).
 	if _populating:
 		return
 	_populating = true
 	voice_ids.clear()
 	host.voice_picker.clear()
-	# The recorded voice ships with the app (every question, offline); device
-	# voices are the fallback for anything it has no clip for.
+	# The recorded voice ships with the app (every question, offline); online
+	# Andrew, then a device voice, cover anything it has no clip for.
 	voice_ids[VoiceCatalog.BUNDLED_VOICE_LABEL] = VoiceCatalog.BUNDLED_VOICE_ID
-	for row in VoiceCatalog.device_voice_rows(_device_voice_list()):
+	for row in VoiceCatalog.edge_voice_rows(edge_catalog_path) + VoiceCatalog.device_voice_rows(_device_voice_list()):
 		var label := str(row[0])
 		if voice_ids.has(label):
 			label = "%s (%s)" % [label, str(row[1])]
@@ -396,11 +403,9 @@ func _begin_reading(segments: Array) -> void:
 			start_index = _bundled_teach_tail_offset(bundle, segments)
 		_on_speech_ready(speak_generation, bundle, 0, "bundle", start_index)
 		return
-	# On Android or mobile platforms without python runtime, use native OS TTS engine!
-	if _speech_mobile():
-		if _selected_voice_id() == VoiceCatalog.BUNDLED_VOICE_ID:
-			_voice_fallback = "Device voice (no recording)"
-			push_warning("Speech: no recorded clip for %s, using the device voice." % safe_qid)
+	# Mobile: Edge voices (and Andrew with no clip) stream over the network;
+	# device voices go to the OS engine.
+	if _speech_mobile() and not (VoiceCatalog.is_edge_voice(_selected_voice_id()) and edge_client != null):
 		# The whole plan even for the rule alone: it carries the letter line the
 		# rule opens with, and the native player skips to the teach part itself.
 		_begin_native_tts(SpeechText.speech_plan(record) if not record.is_empty() else segments)
@@ -411,7 +416,7 @@ func _begin_reading(segments: Array) -> void:
 	_read_with_helper(safe_qid, SpeechText.speech_plan(record) if not record.is_empty() else segments)
 
 ## ui_mobile too: the mobile layout's picker lists OS voices, which edge-tts
-## does not know.
+## does not know, and its Edge voices use edge_client, not Python.
 func _speech_mobile() -> bool:
 	return host.ui_mobile or OS.get_name() == "Android" or not OS.has_feature("pc")
 
@@ -422,8 +427,13 @@ func _safe_speech_id(question_id: String) -> String:
 func _speech_cache_folder(safe_id: String, voice_id: String) -> String:
 	return ProjectSettings.globalize_path(speech_cache_root).path_join(safe_id + "__" + voice_id)
 
-## Desktop Edge voice: cached clips play at once; otherwise the warm helper
-## synthesizes `plan` and each clip plays as soon as it lands.
+## Where Edge clips come from: the Python helper on desktop, the WebSocket
+## client on mobile (Android cannot run Python).
+func _synth() -> Node:
+	return edge_client if _speech_mobile() else speech_helper
+
+## Edge voice: cached clips play at once; otherwise the backend synthesizes
+## `plan` and each clip plays as soon as it lands.
 func _read_with_helper(safe_id: String, plan: Array) -> void:
 	speak_generation += 1
 	var voice_id := _selected_voice_id()
@@ -431,9 +441,11 @@ func _read_with_helper(safe_id: String, plan: Array) -> void:
 	if _speech_cache_matches(folder, plan):
 		_on_speech_ready(speak_generation, folder, 0, "cache")
 		return
-	var rid := speech_helper.request(folder, voice_id, plan, SpeechHelper.PRIO_LIVE)
+	var backend := _synth()
+	_live_backend = backend
+	var rid: int = backend.request(folder, voice_id, plan, SpeechHelper.PRIO_LIVE) if backend != null else -1
 	if rid < 0:
-		_fallback_to_native(speech_helper.fail_reason)
+		_fallback_to_native(backend.fail_reason if backend != null else "no speech backend")
 		return
 	_live_request = rid
 	speech_queue.clear()
@@ -459,6 +471,14 @@ func _read_with_helper(safe_id: String, plan: Array) -> void:
 	host.read_button.disabled = false
 	_play_speech_clip()
 
+func _on_edge_clip(request_id: int, index: int) -> void:
+	if _live_backend == edge_client:
+		_on_helper_clip(request_id, index)
+
+func _on_edge_failed(request_id: int, why: String) -> void:
+	if _live_backend == edge_client:
+		_on_helper_failed(request_id, why)
+
 func _on_helper_clip(request_id: int, index: int) -> void:
 	if request_id != _live_request or not speak_busy:
 		return
@@ -470,20 +490,38 @@ func _on_helper_failed(request_id: int, why: String) -> void:
 	if request_id == _live_request:
 		_fallback_to_native(why)
 
-## The picked Edge voice cannot speak: say so, log why, read with the system voice.
+## The picked Edge voice cannot speak (no internet, no Python): say so, log
+## why, and read with the recorded Andrew when this line has a clip, else the
+## device voice. Never waits on the network again for this read.
 func _fallback_to_native(why: String) -> void:
 	var wanted := _voice_short()
+	var cause := "no internet" if _speech_mobile() else "Edge unavailable"
 	_live_request = -1
 	speak_busy = false
 	_halt_player()
-	push_warning("Speech: %s unavailable, using the system voice. %s" % [wanted, why])
-	_voice_fallback = "System voice (Edge unavailable)"
-	if _previewing:
-		_begin_native_tts([{"text": PREVIEW_TEXT, "choice": -1, "teach": false}])
+	var plan: Array = [{"text": PREVIEW_TEXT, "choice": -1, "teach": false}]
+	var safe_id := PREVIEW_ID
+	var has_question := not host.order.is_empty() and host.current_index >= 0 and host.current_index < host.order.size()
+	if not _previewing and has_question:
+		var record: Dictionary = host.records[host.order[host.current_index]]
+		plan = SpeechText.speech_plan(record)
+		safe_id = _safe_speech_id(str(record.get("id", "")))
+	if _previewing or has_question:
+		var bundle := "" if _selected_voice_id() == VoiceCatalog.BUNDLED_VOICE_ID \
+			else _bundled_speech_folder(safe_id, VoiceCatalog.BUNDLED_VOICE_ID, plan)
+		if bundle != "":
+			push_warning("Speech: %s unavailable, using the recorded Andrew. %s" % [wanted, why])
+			_voice_fallback = "Andrew (recorded, %s)" % cause
+			speak_generation += 1
+			host.read_button.text = "Stop"
+			host.read_button.disabled = false
+			_on_speech_ready(speak_generation, bundle, 0, "bundle")
+			return
+		push_warning("Speech: %s unavailable, using the system voice. %s" % [wanted, why])
+		_voice_fallback = "Device voice (%s)" % cause if _speech_mobile() else "System voice (Edge unavailable)"
+		_begin_native_tts(plan)
 		return
-	if not host.order.is_empty() and host.current_index >= 0 and host.current_index < host.order.size():
-		_begin_native_tts(SpeechText.speech_plan(host.records[host.order[host.current_index]]))
-		return
+	_voice_fallback = "Device voice (%s)" % cause if _speech_mobile() else "System voice (Edge unavailable)"
 	host.read_button.text = _idle_read_label()
 	_set_read_status("")
 
@@ -499,9 +537,12 @@ func _warm_speech_helper() -> void:
 ## rule included; the teach gate in _play_speech_clip still holds the rule
 ## until the answer is in), so Read and Next start from the cache.
 func _prefetch_speech() -> void:
-	if speech_helper == null or host.session_muted or _speech_mobile() or host.order.is_empty():
+	var backend := _synth()
+	if backend == null or host.session_muted or host.order.is_empty() or not is_instance_valid(host.voice_picker):
 		return
 	var voice_id := _selected_voice_id()
+	if _speech_mobile() and (not VoiceCatalog.is_edge_voice(voice_id) or edge_client.is_offline()):
+		return
 	for idx in [host.current_index, host.current_index + 1]:
 		if idx < 0 or idx >= host.order.size():
 			continue
@@ -511,9 +552,9 @@ func _prefetch_speech() -> void:
 		if _bundled_speech_folder(safe_id, voice_id, plan) != "":
 			continue
 		var folder := _speech_cache_folder(safe_id, voice_id)
-		if speech_helper.busy_request_for(folder) >= 0 or _speech_cache_matches(folder, plan):
+		if backend.busy_request_for(folder) >= 0 or _speech_cache_matches(folder, plan):
 			continue
-		if speech_helper.request(folder, voice_id, plan, SpeechHelper.PRIO_PREFETCH) < 0:
+		if backend.request(folder, voice_id, plan, SpeechHelper.PRIO_PREFETCH) < 0:
 			return
 
 func _set_read_status(text: String) -> void:
@@ -575,10 +616,10 @@ func _register_native_tts_callbacks() -> void:
 func _pick_native_voice() -> String:
 	# Honor the picker (on mobile it holds real OS voices, including an explicit
 	# "System default" whose id is ""). Fall back to first English, then default.
-	# The bundled recorded voice is not an OS voice: fall through to a device one.
+	# The recorded and Edge voices are not OS voices: fall through to a device one.
 	if is_instance_valid(host.voice_picker) and host.voice_picker.item_count > 0:
 		var label := host.voice_picker.get_item_text(host.voice_picker.selected)
-		if voice_ids.has(label) and str(voice_ids[label]) != VoiceCatalog.BUNDLED_VOICE_ID:
+		if voice_ids.has(label) and not VoiceCatalog.is_edge_voice(str(voice_ids[label])):
 			return str(voice_ids[label])
 	return str(VoiceCatalog.device_voice_rows(_device_voice_list())[0][1])
 
@@ -827,7 +868,7 @@ func _play_speech_clip() -> void:
 	# Streaming from the helper: this clip has not landed yet. Wait for it
 	# (_on_helper_clip resumes); Stop, skip and Next clear _live_request.
 	var request_id := int(clip.get("request", -1))
-	if request_id >= 0 and not speech_helper.has_clip(request_id, int(clip.get("segment", -1))):
+	if request_id >= 0 and _live_backend != null and not _live_backend.has_clip(request_id, int(clip.get("segment", -1))):
 		speak_busy = true
 		_set_read_status("PREPARING %s…" % _voice_short().to_upper())
 		return
@@ -937,7 +978,7 @@ func _preview_voice() -> void:
 		speak_generation += 1
 		_on_speech_ready(speak_generation, bundle, 0, "bundle")
 		return
-	if _speech_mobile():
+	if _speech_mobile() and not (VoiceCatalog.is_edge_voice(_selected_voice_id()) and edge_client != null):
 		_begin_native_tts(segments)
 		return
 	_read_with_helper(PREVIEW_ID, segments)

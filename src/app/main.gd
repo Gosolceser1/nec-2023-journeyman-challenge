@@ -134,6 +134,9 @@ var speak_busy: bool:
 var speech_helper: SpeechHelper:
 	get: return speech.speech_helper
 	set(v): speech.speech_helper = v
+var edge_client: EdgeTtsClient:
+	get: return speech.edge_client
+	set(v): speech.edge_client = v
 var speech_cache_root: String:
 	get: return speech.speech_cache_root
 	set(v): speech.speech_cache_root = v
@@ -272,6 +275,11 @@ func _ready() -> void:
 	add_child(speech.speech_helper)
 	speech.speech_helper.clip_ready.connect(speech._on_helper_clip)
 	speech.speech_helper.request_failed.connect(speech._on_helper_failed)
+	speech.edge_client = EdgeTtsClient.new()
+	speech.edge_client.name = "EdgeTtsClient"
+	add_child(speech.edge_client)
+	speech.edge_client.clip_ready.connect(speech._on_edge_clip)
+	speech.edge_client.request_failed.connect(speech._on_edge_failed)
 	# Before the build: the menu sizes the state-law drill from the bank.
 	records = BankLoader.load_records()
 	_build_ui()

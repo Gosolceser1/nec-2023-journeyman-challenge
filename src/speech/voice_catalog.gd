@@ -35,6 +35,39 @@ static func load_catalog(ids: Dictionary, tiers: Dictionary, path: String = CATA
 				ids[label] = str(row.get("id", ""))
 				tiers[label] = str(row.get("tier", "classic"))
 
+const EDGE_TAG := "Online (natural)"
+
+## Edge neural ids (en-US-AvaNeural); device voice ids never end this way.
+static func is_edge_voice(voice_id: String) -> bool:
+	return voice_id.ends_with("Neural")
+
+## The Edge voices the mobile list shows, as [label, id] rows in catalog order:
+## en-US only, named "Ava · Female · Online (natural)" from the catalog's name
+## and Edge gender. Andrew is left out: the recorded row already is Andrew, and
+## reads anything it has no clip for with the online Andrew voice.
+static func edge_voice_rows(path: String = CATALOG_PATH) -> Array:
+	var rows: Array = []
+	var file := FileAccess.open(path, FileAccess.READ)
+	if file == null:
+		return rows
+	var parsed = JSON.parse_string(file.get_as_text())
+	file.close()
+	if not parsed is Array:
+		return rows
+	for row in parsed:
+		if not row is Dictionary:
+			continue
+		var vid := str(row.get("id", ""))
+		if vid == BUNDLED_VOICE_ID or not is_edge_voice(vid) or str(row.get("locale", "")) != "en-US":
+			continue
+		var voice_name := str(row.get("label", "")).get_slice(" · ", 0).strip_edges()
+		var gender := str(row.get("gender", "")).strip_edges().capitalize()
+		if voice_name == "":
+			continue
+		var parts := [voice_name] + ([gender] if gender in ["Male", "Female"] else []) + [EDGE_TAG]
+		rows.append([" · ".join(parts), vid])
+	return rows
+
 ## Every en-US voice code in docs/ANDROID_VOICES.md, with its gender confirmed
 ## by two independent sources: Google Speech Services codes (the "sfg" in
 ## en-us-x-sfg-local) and Samsung TTS packs ("smtf00" for en-US-SMTf00). The
@@ -153,11 +186,11 @@ static func migrate_voice_id(saved: String, rows: Array) -> String:
 
 ## Compact speaker name for the status line ("who is speaking").
 static func short_name(label: String) -> String:
-	var cut := label.find(" (")
-	if cut < 0:
-		cut = label.find(" [")
-	if cut < 0:
-		cut = label.find(" · ")
+	var cut := -1
+	for mark in [" (", " [", " · "]:
+		var at := label.find(mark)
+		if at > 0 and (cut < 0 or at < cut):
+			cut = at
 	if cut > 0:
 		label = label.substr(0, cut)
 	label = label.strip_edges()

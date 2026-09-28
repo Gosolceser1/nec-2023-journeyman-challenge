@@ -2,66 +2,92 @@
   {
     "label": "Andrew · Male · Warm",
     "id": "en-US-AndrewNeural",
-    "tier": "natural"
+    "tier": "natural",
+    "locale": "en-US",
+    "gender": "Male"
   },
   {
     "label": "Ava · Female · Expressive",
     "id": "en-US-AvaNeural",
-    "tier": "natural"
+    "tier": "natural",
+    "locale": "en-US",
+    "gender": "Female"
   },
   {
     "label": "Brian · Male · Approachable",
     "id": "en-US-BrianNeural",
-    "tier": "natural"
+    "tier": "natural",
+    "locale": "en-US",
+    "gender": "Male"
   },
   {
     "label": "Emma · Female · Cheerful",
     "id": "en-US-EmmaNeural",
-    "tier": "natural"
+    "tier": "natural",
+    "locale": "en-US",
+    "gender": "Female"
   },
   {
     "label": "Ryan · Male · Calm British narrator",
     "id": "en-GB-RyanNeural",
-    "tier": "natural"
+    "tier": "natural",
+    "locale": "en-GB",
+    "gender": "Male"
   },
   {
     "label": "Jenny · Female · Friendly",
     "id": "en-US-JennyNeural",
-    "tier": "general"
+    "tier": "general",
+    "locale": "en-US",
+    "gender": "Female"
   },
   {
     "label": "Aria · Female · Positive",
     "id": "en-US-AriaNeural",
-    "tier": "classic"
+    "tier": "classic",
+    "locale": "en-US",
+    "gender": "Female"
   },
   {
     "label": "Christopher · Male · Reliable",
     "id": "en-US-ChristopherNeural",
-    "tier": "classic"
+    "tier": "classic",
+    "locale": "en-US",
+    "gender": "Male"
   },
   {
     "label": "Eric · Male · Rational",
     "id": "en-US-EricNeural",
-    "tier": "classic"
+    "tier": "classic",
+    "locale": "en-US",
+    "gender": "Male"
   },
   {
     "label": "Guy · Male · Passionate",
     "id": "en-US-GuyNeural",
-    "tier": "classic"
+    "tier": "classic",
+    "locale": "en-US",
+    "gender": "Male"
   },
   {
     "label": "Michelle · Female · Friendly",
     "id": "en-US-MichelleNeural",
-    "tier": "classic"
+    "tier": "classic",
+    "locale": "en-US",
+    "gender": "Female"
   },
   {
     "label": "Roger · Male · Lively",
     "id": "en-US-RogerNeural",
-    "tier": "classic"
+    "tier": "classic",
+    "locale": "en-US",
+    "gender": "Male"
   },
   {
     "label": "Steffan · Male · Rational",
     "id": "en-US-SteffanNeural",
-    "tier": "classic"
+    "tier": "classic",
+    "locale": "en-US",
+    "gender": "Male"
   }
 ]
