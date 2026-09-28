@@ -244,6 +244,9 @@ func _exit_tree() -> void:
 	speech._join_speak_thread()
 
 func _ready() -> void:
+	# Before anything reads user://: the settings and progress may still be in
+	# the pre-1.0 folder.
+	UserDirMigration.run()
 	speech._load_voice_catalog()
 	audio.load_from(audio_cfg_path)
 	ui_mobile = "--mobile-ui" in OS.get_cmdline_args() or "--mobile-ui" in OS.get_cmdline_user_args() or OS.get_name() in ["Android", "iOS"]

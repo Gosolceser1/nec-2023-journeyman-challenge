@@ -50,6 +50,8 @@ const SUITES := [
 	# emulate_mouse_from_touch at its default TRUE, so every tap also drove the
 	# mouse branch that selects an answer card when you meant to scroll.
 	{"name": "project settings (parsed)", "path": "res://tools/tests/test_project_settings.gd"},
+	# 1.0 moved saves out of %APPDATA%\Godot\app_userdata; progress is copied once.
+	{"name": "user dir migration (one-time copy, temp dirs)", "path": "res://tools/tests/test_user_dir_migration.gd"},
 	# Tap-vs-drag on the answer cards. Grading is irreversible, so a scroll that
 	# commits an answer is the worst failure mode in an exam app.
 	{"name": "answer card tap-vs-drag", "path": "res://tools/tests/test_answer_card_input.gd"},

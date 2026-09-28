@@ -14,6 +14,10 @@ run/main_scene="res://scenes/main.tscn"
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.7")
 config/name="NEC 2023 Journeyman Challenge"
+; Saves go to %APPDATA%\NEC2023JourneymanChallenge, not %APPDATA%\Godot\app_userdata\...
+; UserDirMigration copies the old folder's settings and progress over once.
+config/use_custom_user_dir=true
+config/custom_user_dir_name="NEC2023JourneymanChallenge"
 boot_splash/bg_color=Color(0.008, 0.016, 0.031, 1)
 boot_splash/show_image=false
 
