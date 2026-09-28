@@ -11,19 +11,19 @@ record into segments (one audio clip each), and both voices use it:
 - Recorded clips: the Edge neural voice (`src/speech/speak_question.py`, default
   en-US-AndrewNeural, 96 kbps / 24 kHz mono MP3). Python only synthesises the
   text it is handed. Andrew's clips for every question ship in `res://assets/speech`
-  and play on desktop **and Android**. Other desktop voices are synthesised on
+  and play on desktop **and Android**. Other Edge voices are synthesised on
   demand and cached (see "Runtime synthesis" below).
 - Device voice (`DisplayServer.tts_speak`): the Android fallback when no
   recorded clip matches, or when a "Device voice · …" entry is picked. The
   mobile picker lists "Andrew · Recorded (offline)" first.
 
-### Runtime synthesis (desktop, voices other than bundled Andrew)
+### Runtime synthesis (Edge voices other than bundled Andrew)
 
-`speech_helper.gd` keeps one `speak_question.py --serve` process running, so
-the ~3 s import of edge_tts + aiohttp is paid once (at start, or when such a
-voice is picked) instead of on every question. It always synthesises the
-question's whole plan (stem, choices, rule) into `user://speech/<id>__<voice>`,
-so the read, "Hear the rule" and replays share one cached folder.
+`edge_tts_client.gd` speaks the Edge read-aloud WebSocket in GDScript on
+Windows and Android, so no Python or edge-tts is needed at runtime and no
+process is started. It always synthesises the question's whole plan (stem,
+choices, rule) into `user://speech/<id>__<voice>`, so the read, "Hear the
+rule" and replays share one cached folder.
 
 - Clips stream: each one is announced as it lands and playback starts with the
   stem while the rest are still coming. If the next clip is not there yet the
@@ -34,12 +34,15 @@ so the read, "Hear the rule" and replays share one cached folder.
   until the answer is in.
 - A new live read cancels the previous live one (the learner moved on);
   prefetches are left alone.
-- Robustness: every clip is retried (1, 2, 4 s) with a 20 s timeout, written to
+- Robustness: every clip is retried once with a 20 s timeout, written to
   `N.mp3.part` and renamed when complete; `manifest.json` is written last. A
-  failed or cancelled request removes its clips.
-- Honest fallback: if Edge cannot be used (no Python, no network, helper died),
-  the game logs one line with the reason and reads with the system voice, and
-  the status line says "System voice (Edge unavailable)", never the picked name.
+  failed or cancelled request removes its clips. A connection that never opens
+  marks the network down for 30 s, so the next reads fall back at once.
+- Honest fallback: if Edge cannot be used (no network, service down), the game
+  logs one line with the reason and reads with the recorded Andrew when the
+  line has a clip, else the system voice, and the status line says
+  "Andrew (recorded, no internet)" or "System voice (no internet)", never the
+  picked name.
   On Android a question without a recording says "Device voice (no recording)".
 
 Golden input → spoken cases for every rule live in

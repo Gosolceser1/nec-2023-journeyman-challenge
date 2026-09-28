@@ -1,7 +1,7 @@
 extends SceneTree
 ## Runs against an exported pack, not the project: the bank, every bundled
-## speech clip and the sound effects must load from inside the .pck, and the
-## desktop speech helper script must be copied out to a real file for Python.
+## speech clip and the sound effects must load from inside the .pck, and no
+## Python speech script may ship (Edge voices stream through EdgeTtsClient).
 ## tools/ is excluded from exports, so pass this script by absolute path:
 ##
 ##   cd build
@@ -49,12 +49,9 @@ func _init() -> void:
 	for cue in Sfx.SOUNDS:
 		check(load(Sfx.path_for(cue)) is AudioStream, "sfx %s loads from the pack" % cue)
 
-	var script := SpeechHelper.resolve_script()
-	print("SPEECH_HELPER_SCRIPT=", script)
-	check(script.is_absolute_path() and FileAccess.file_exists(script),
-		"speech helper script copied out of the pack to a real file: '%s'" % script)
-	check(FileAccess.get_file_as_string(script) == FileAccess.get_file_as_string(SpeechHelper.SCRIPT_RES),
-		"copied helper script matches the packed one")
+	check(not FileAccess.file_exists("res://src/speech/speak_question.py"),
+		"the Python speech tool is not shipped (Edge voices use EdgeTtsClient)")
+	check(load("res://src/speech/edge_tts_client.gd") is Script, "the built-in Edge client loads from the pack")
 
 	print("PACK CHECK: ", "PASS" if failures.is_empty() else "FAIL")
 	quit(0 if failures.is_empty() else 1)

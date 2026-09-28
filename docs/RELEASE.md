@@ -81,8 +81,8 @@ Copy-Item "$real\editor_settings-4.7.tres" "$env:APPDATA\Godot\"
    `New-Item -ItemType Directory -Force release/windows, release/android` first,
    and put an empty `.gdignore` in `release/` so the editor never scans the builds.
 5. Check the pack: `python tools/list_pck.py "release/windows/NEC 2023 Journeyman Challenge.exe" --desktop`
-   (reads the pack embedded in the exe; fails on tools/, docs, PDFs, `.md`
-   or a missing runtime file).
+   (reads the pack embedded in the exe; fails on tools/, docs, PDFs, `.md`,
+   any `.py` (no build runs Python) or a missing runtime file).
 6. Package: `python tools/release/make_release.py` (zip, APK copy, SHA256SUMS).
 7. Smoke test: run the exe with a temp `APPDATA`. stdout and stderr must stay
    empty, the title must read "NEC 2023 Journeyman Challenge", and the menu

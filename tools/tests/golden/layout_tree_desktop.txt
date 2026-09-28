@@ -10,9 +10,6 @@ Main <Control> res://src/app/main.gd
   on item_rect_changed -> lambda
   on item_rect_changed -> lambda
   on item_rect_changed -> lambda
-  SpeechHelper <Node> res://src/speech/speech_helper.gd
-    on clip_ready -> main.speech._on_helper_clip
-    on request_failed -> main.speech._on_helper_failed
   EdgeTtsClient <Node> res://src/speech/edge_tts_client.gd
     on clip_ready -> main.speech._on_edge_clip
     on request_failed -> main.speech._on_edge_failed

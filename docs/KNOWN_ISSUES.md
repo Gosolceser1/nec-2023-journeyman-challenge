@@ -48,15 +48,10 @@ the Edge voices on Android), each pinned by a test.
   edge-tts 7.2.8: the trusted client token, the Chromium version in
   `Sec-MS-GEC-Version` and the Origin header. If Microsoft changes them, the
   handshake fails and every read falls back to the recorded Andrew or a device
-  voice until the constants are updated (the desktop helper needs a new
+  voice until the constants are updated (pregenerating the bundle needs a new
   edge-tts then too). The token is built from the device clock; unlike
   edge-tts, the client does not correct a clock that is more than about
-  5 minutes off, so such a phone always falls back.
-- **The Windows build still needs Python for Edge voices other than Andrew.**
-  Desktop synthesis goes through `speak_question.py` (Python with edge-tts);
-  on a PC without it those voices fall back to the recorded Andrew or the
-  system voice. `EdgeTtsClient` could serve desktop too; not switched in
-  1.0.2 to keep the tested desktop path unchanged.
+  5 minutes off, so such a PC or phone always falls back.
 - **`TTS_Android` utterance-id map is not thread-safe (engine).** Godot's
   `TTS_Android::ids` HashMap is written from the Android TTS callback thread
   and from the main thread without a lock. The app cannot fix that; it now

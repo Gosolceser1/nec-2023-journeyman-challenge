@@ -82,6 +82,8 @@ def main():
         r.startswith(("tools/tests/", "tools/visual/", "tools/pipeline/", "docs/", "exams_source_pdf/", "build/"))
         or r.startswith("tools/")
         or r.endswith((".pdf", ".md"))
+        # Speech streams through EdgeTtsClient; no build runs Python.
+        or r.endswith(".py")
     ))
     # Imported textures live under .godot/imported; flag any OCR/tool PNG import.
     bad += shipped(lambda r: r.startswith(".godot/imported/") and "exam5_key" in r)
@@ -93,8 +95,6 @@ def main():
         "speech clips (imported)": lambda r: "speech/" in r and r.endswith(".mp3.import"),
         "speech manifests": lambda r: "speech/" in r and r.endswith("manifest.json"),
     }
-    if "--desktop" in sys.argv:
-        need["desktop speech helper"] = lambda r: r.endswith("speak_question.py")
     missing = [label for label, pred in need.items() if not shipped(pred)]
     for r in bad:
         print(f"  SHOULD NOT SHIP: {r}")

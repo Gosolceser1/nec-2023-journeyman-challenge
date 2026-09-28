@@ -77,12 +77,14 @@ const SUITES := [
 	{"name": "audio settings (modes, autoplay rules)", "path": "res://tools/tests/test_audio_settings.gd"},
 	{"name": "sfx (sound map, voice ducking, bus)", "path": "res://tools/tests/test_sfx.gd"},
 	{"name": "speech bus chain (anti-image, pitch bypass)", "path": "res://tools/tests/test_speech_chain.gd"},
-	# Desktop Edge voices: warm helper, streamed clips, prefetch, cancel, honest fallback.
-	{"name": "speech helper (stream, prefetch, cancel, cache)", "path": "res://tools/tests/test_speech_helper.gd"},
-	# Android cannot run the Python helper, so the phone never had the Edge
-	# voices. The GDScript client speaks the same protocol (against a local fake
-	# here), never blocks a frame and fails fast with no internet.
+	# Desktop Edge voices through the built-in client: streamed clips, prefetch,
+	# cancel, Ryan kept, honest fallback, with PATH emptied (no Python).
+	{"name": "desktop edge voices (stream, prefetch, cancel, cache, no Python)", "path": "res://tools/tests/test_desktop_edge.gd"},
+	# The GDScript client speaks the Edge protocol (against a local fake here),
+	# never blocks a frame and fails fast with no internet.
 	{"name": "edge client (Edge voices without Python, offline fallback)", "path": "res://tools/tests/test_edge_client.gd"},
+	# Release builds never start a process for speech.
+	{"name": "no speech process (no OS.execute, no shipped .py)", "path": "res://tools/tests/test_no_speech_process.gd"},
 ]
 
 const NOISE := "Unreferenced static string|string_name\\.cpp:|NavMeshGeometryParser|PagedAllocator"

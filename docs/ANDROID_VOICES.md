@@ -131,11 +131,12 @@ neutral labels.
 
 The Windows app's voices are Microsoft Edge "read aloud" neural voices from
 `data/voices.json` (built by `tools/speech/export_voices.py`, which stores
-each voice's Edge `Gender` and `Locale`). On Windows the Python helper
-(`speak_question.py`, edge-tts) synthesizes them; Android cannot start a
-Python process, so before 1.0.2 the phone listed none of them. Since 1.0.2
+each voice's Edge `Gender` and `Locale`). Up to 1.0.2 Windows synthesized
+them through a Python helper (`speak_question.py`, edge-tts), which Android
+cannot start, so before 1.0.2 the phone listed none of them. Since 1.0.2
 `EdgeTtsClient` (`src/speech/edge_tts_client.gd`) speaks the same WebSocket
 protocol in GDScript, and the Android presets ask for the INTERNET permission.
+Since 1.0.3 Windows uses it too, so no platform needs Python.
 
 - Listed: every `en-US` row, labelled `<Name> · <Gender> · Online (natural)`
   (for example `Ava · Female · Online (natural)`), in catalog order. The

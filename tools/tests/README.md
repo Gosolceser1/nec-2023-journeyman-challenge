@@ -6,7 +6,7 @@ the product's core promise: **the answer must not appear anywhere above the
 question until the learner answers.**
 
 Everything here runs headless with no autoloads. Most suites are node-free;
-the layout-tree, menu-alignment, figure, table-fit and speech-helper suites instantiate
+the layout-tree, menu-alignment, figure, table-fit and desktop Edge suites instantiate
 `scenes/main.tscn`. A full run takes about a minute.
 
 ## Running
@@ -36,7 +36,7 @@ one as a child Godot process and reads its exit code. Slower than an in-process
 runner, but it exercises exactly the path a developer runs by hand, and one
 suite's failure cannot abort the rest.
 
-**Current status: 6,460 Godot checks across 30 suites, 25 Python tests (validator, spellcheck, speak_question), 1 build-guard shell test, 0 failures, 0 documented product defects.** The scene harness adds 390 (desktop) / 406 (mobile) checks. The speech-helper suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
+**Current status: 6,457 Godot checks across 31 suites, 25 Python tests (validator, spellcheck, speak_question), 1 build-guard shell test, 0 failures, 0 documented product defects.** The scene harness adds 390 (desktop) / 406 (mobile) checks. The desktop Edge suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
 
 Every formerly pinned defect is fixed and promoted to a real assertion, so a
 regression fails its suite rather than appearing in the defect list. The test table prefix case is covered directly: `NOTED: x` must remain unchanged.
@@ -59,8 +59,10 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | `test_user_dir_migration.gd` | the one-time copy of `audio.cfg`, `voice.cfg` and `question_bag.cfg` from `%APPDATA%\Godot\app_userdata\<name>` into the custom user folder: byte-for-byte copy, old files kept, tool leftovers skipped, runs once (a reset stays reset), a folder already in use is never touched, missing or same folder, a fake APPDATA layout. All in temp dirs |
 | `test_table_viewer.gd` | the pure parts: folding (`_folded_lines`, `max_blocks`), column widths (`_column_floors`, `_column_widths`), `extract_target_keyword`, `is_note_row`, `_strip_note_prefix` + a sweep of all 30 bank tables |
 | `test_table_fit.gd` | every table question, both layouts: the lookup table before answering and the feedback table after show whole, with no scrollbar and nothing left to scroll either way |
-| `test_edge_client.gd` | `EdgeTtsClient`, the Edge voices without Python (Android): Sec-MS-GEC token against edge-tts, XML escaping and chunking, a round trip through a local fake service (clips, manifest last, 96 kbps config, SSML voice), shared and cancelled requests, a silent service timing out, and no internet failing in milliseconds without blocking a frame, refusing new requests while down and recovering |
-| `fake_edge_server.gd` | a local stand-in for the Edge read-aloud WebSocket, used by `test_edge_client.gd` and `test_voice_picker.gd`. Not a suite. |
+| `test_desktop_edge.gd` | the desktop game with an Edge voice, PATH emptied: no Python helper node, the full desktop list (Ryan kept), prefetch of the current and next question, a cached read in the same frame, a streamed read ("PREPARING AVA") from the stem, the rule held until answered, "Hear the rule" from the cache, Stop while preparing, the Ryan preview, and no internet falling back to the recorded Andrew or "System voice (no internet)" |
+| `test_no_speech_process.gd` | release builds never start a process for speech: no `OS.execute` / `execute_with_pipe` / `create_process` in `src/` or `scenes/`, no reference to the old Python helper, no export preset ships a `.py` |
+| `test_edge_client.gd` | `EdgeTtsClient`, the Edge voices without Python (Windows and Android): Sec-MS-GEC token against edge-tts, XML escaping and chunking, a round trip through a local fake service (clips, manifest last, 96 kbps config, SSML voice), shared and cancelled requests, a silent service timing out, and no internet failing in milliseconds without blocking a frame, refusing new requests while down and recovering |
+| `fake_edge_server.gd` | a local stand-in for the Edge read-aloud WebSocket, used by `test_edge_client.gd`, `test_desktop_edge.gd` and `test_voice_picker.gd`. Not a suite. |
 | `run_all.gd` | combined runner |
 | `test_validate_question_bank.py` | Python regression checks for validator/render parity and shared OCR path resolution |
 | `test_build_guard.sh` | proves builds refuse default, relative, and absolute targets that would overwrite the curated bank |

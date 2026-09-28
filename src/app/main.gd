@@ -131,9 +131,6 @@ var speak_generation: int:
 var speak_busy: bool:
 	get: return speech.speak_busy
 	set(v): speech.speak_busy = v
-var speech_helper: SpeechHelper:
-	get: return speech.speech_helper
-	set(v): speech.speech_helper = v
 var edge_client: EdgeTtsClient:
 	get: return speech.edge_client
 	set(v): speech.edge_client = v
@@ -253,7 +250,7 @@ func _init() -> void:
 
 func _exit_tree() -> void:
 	# The TTS worker runs on speak_thread. Destroying the node while that thread is
-	# still inside OS.execute() leaves Godot printing "Thread object is being
+	# still running leaves Godot printing "Thread object is being
 	# destroyed without its completion having been realized" and can tear the
 	# thread down mid-write. Join it before the node goes away.
 	speech._join_speak_thread()
@@ -270,11 +267,6 @@ func _ready() -> void:
 		# Headless, a min size grows the fake 960x960 window the tests measure.
 		if DisplayServer.get_name() != "headless":
 			get_window().min_size = DESKTOP_MIN_WINDOW
-	speech.speech_helper = SpeechHelper.new()
-	speech.speech_helper.name = "SpeechHelper"
-	add_child(speech.speech_helper)
-	speech.speech_helper.clip_ready.connect(speech._on_helper_clip)
-	speech.speech_helper.request_failed.connect(speech._on_helper_failed)
 	speech.edge_client = EdgeTtsClient.new()
 	speech.edge_client.name = "EdgeTtsClient"
 	add_child(speech.edge_client)
@@ -284,7 +276,6 @@ func _ready() -> void:
 	records = BankLoader.load_records()
 	_build_ui()
 	info_panel.label = info_label
-	speech._warm_speech_helper()
 	QuizFx.attach(self)
 	UiFx.apply_reduce_motion(get_tree(), audio.reduce_motion)
 	_polish_controls()

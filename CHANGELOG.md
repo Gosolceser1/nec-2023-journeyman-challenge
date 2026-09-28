@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+### Changed
+
+- **Windows: natural voices without Python.** The Windows build now uses the
+  same built-in voice client as Android, so Ava, Brian, Emma, the British Ryan
+  and the rest of the desktop list work on any PC with internet; Python and
+  edge-tts are no longer needed and the app never starts a helper process.
+  Clips are still cached, and with no internet the recorded Andrew reads at
+  once, with the status line saying "Andrew (recorded, no internet)" (or
+  "System voice (no internet)" for a line without a recording).
+
 ## 1.0.2 (2026-09-28)
 
 Android: the natural online voices from Windows are now available. Verified

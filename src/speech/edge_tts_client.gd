@@ -1,9 +1,9 @@
 class_name EdgeTtsClient
 extends Node
-## Edge neural voices in pure GDScript, for platforms that cannot run the
-## Python helper (Android). Speaks the same read-aloud WebSocket protocol as
-## edge-tts (src/speech/speak_question.py) and writes the same cache layout:
-## I.mp3 per segment, manifest.json last. Same API and signals as SpeechHelper.
+## Edge neural voices in pure GDScript, on Windows and Android alike: no Python,
+## no child process. Speaks the same read-aloud WebSocket protocol as edge-tts
+## (src/speech/speak_question.py, the dev/pregeneration tool) and writes the
+## same cache layout: I.mp3 per segment, manifest.json last.
 ##
 ## Everything is polled from _process: DNS, TLS and the socket never block the
 ## main thread. A failed request marks the network down for OFFLINE_HOLD_MSEC,

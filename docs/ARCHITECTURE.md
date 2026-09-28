@@ -22,12 +22,11 @@ src/
           safe_area.gd      SafeArea.margins: notch / cutout insets
           audio_settings.gd AudioSettings: audio modes, speed, pauses, sound effects, audio.cfg
           user_dir_migration.gd  UserDirMigration: one-time copy from the pre-1.0 user folder
-  speech/ speech_controller.gd  SpeechController: bundled clips, Edge helper and cache,
+  speech/ speech_controller.gd  SpeechController: bundled clips, Edge voices and cache,
                                 native TTS, play queue, teach gate, voice picker
           voice_catalog.gd      VoiceCatalog: voices.json, US device voice names (docs/ANDROID_VOICES.md), voice.cfg
-          speech_helper.gd      SpeechHelper node: talks to speak_question.py --serve
-          speak_question.py     desktop Edge TTS helper (shipped, copied out at runtime)
-          edge_tts_client.gd    EdgeTtsClient node: Edge voices over WebSocket, no Python (mobile)
+          edge_tts_client.gd    EdgeTtsClient node: Edge voices over WebSocket, no Python (Windows and Android)
+          speak_question.py     dev tool: edge-tts synthesis for tools/speech/pregenerate_speech.py (not shipped)
           speech_text.gd  speech_rules.gd  audio_explanation_generator.gd  unit_matcher.gd
                                 what gets spoken (see docs/VOICE_READING_RULES.md)
   ui/     app_theme.gd      AppTheme: the palette (Tailwind names + role names), panel/font factories
@@ -154,14 +153,16 @@ algorithms in detail.
 1. The bundled recorded voice (`assets/speech/`, imported, ships in the pck).
 2. An Edge neural voice: a cached folder in `user://speech`, or a live
    request that plays each clip as it lands. The current and next question
-   are prefetched. On desktop the clips come from the Python helper
-   (`SpeechHelper` + `speak_question.py`); on mobile, where Python cannot run,
-   from `EdgeTtsClient`, a pure-GDScript client for the same read-aloud
-   WebSocket (same Sec-MS-GEC token, same 96 kbps format, same cache layout).
-   `_synth()` picks the backend; both have the same API and signals.
-3. When the Edge voice fails (no internet, no Python): the recorded Andrew if
-   the line has a clip, else native OS text-to-speech, and the status line
-   names the voice speaking ("Andrew (recorded, no internet)").
+   are prefetched. On Windows and Android alike the clips come from
+   `EdgeTtsClient`, a pure-GDScript client for the edge-tts read-aloud
+   WebSocket (same Sec-MS-GEC token, same 96 kbps format, same cache layout
+   as `speak_question.py`, which only pregenerates the bundle now). The app
+   never starts a process for speech (`test_no_speech_process.gd`), so a
+   shared Windows build needs no Python.
+3. When the Edge voice fails (no internet, service down): the recorded Andrew
+   if the line has a clip, else native OS text-to-speech, and the status line
+   names the voice speaking ("Andrew (recorded, no internet)", "System voice
+   (no internet)").
 4. Native OS text-to-speech for device voices (Android).
 
 `EdgeTtsClient` polls DNS, TLS and its sockets from `_process`, so nothing
@@ -306,7 +307,7 @@ Also:
 - `tools/visual/measure_fit.gd`: share of questions that scroll before and after answering (0%), and any reference table that shows a scrollbar (none).
 - `tools/speech/check_export_pack.gd`: run against an exported `.pck` with
   `--main-pack`. It loads the bank, every clip and the sfx from inside the
-  pack, and checks the helper script is copied out.
+  pack, and checks no Python speech script ships.
 
 Headless Godot gives fake layout sizes, so anything about pixels needs a
 windowed run (`snap_all.gd`, `measure_fit.gd`). docs/KNOWN_ISSUES.md lists

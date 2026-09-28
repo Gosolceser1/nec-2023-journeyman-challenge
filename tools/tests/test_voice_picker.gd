@@ -439,7 +439,7 @@ func _edge_reads() -> void:
 	check(main.speak_busy and main.read_status_label.text.begins_with("PREPARING AVA"), "it says it is preparing Ava (%s)" % main.read_status_label.text)
 	worst[0] = 0
 	check(await _until_fake(fake, func() -> bool: return main.reader.playing, 5.0, worst), "Ava reads the question on the phone")
-	check(main._voice_fallback == "" and main.speech._live_backend == main.edge_client, "through the Edge client, no fallback")
+	check(main._voice_fallback == "" and main.speech._live_request >= 0, "through the Edge client, no fallback")
 	check(main.speech_queue_index == 0 and not bool(main.speech_queue[0]["teach"]), "reading starts at the stem")
 	check(await _until_fake(fake, func() -> bool: return main._speech_cache_matches(folder, plan), 5.0, worst), "the whole question lands in the cache under user://")
 	var first_teach: int = main.teach_from_index

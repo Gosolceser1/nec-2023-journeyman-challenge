@@ -53,9 +53,9 @@ if Android asks.
   up, and missed questions come back two sessions later.
 - **Read-aloud voice:** questions and lessons can be read by a recorded voice
   that ships with the app, including a hands-free Listen mode. With internet,
-  Microsoft's natural online voices (Ava, Brian, Emma and more, US English)
-  can read too: built in on Android, and on Windows when Python with edge-tts
-  is installed. Without a connection the recorded voice takes over.
+  Microsoft's natural online voices (Ava, Brian, Emma and more) can read too,
+  built in on Windows and Android with nothing extra to install (Windows also
+  offers the British Ryan). Without a connection the recorded voice takes over.
 - **Reference tables and diagrams** right next to the question, with tables
   laid out to fit the screen.
 - **Electrical answer animations and sounds** (with a Reduce motion option),
