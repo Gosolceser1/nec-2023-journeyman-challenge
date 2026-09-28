@@ -84,6 +84,8 @@ static func build(host: Main, parent: VBoxContainer) -> Control:
 	opts.add_child(voice_row)
 	voice_row.add_child(Widgets.audio_row_label("VOICE", label_w))
 	voice_row.add_child(Widgets.make_voice_picker(host, h, fs))
+	if host.ui_mobile:
+		voice_row.add_child(Widgets.make_voice_button(host, h, fs))
 	host.preview_button = Widgets.make_dock_button("Preview", 96.0 if host.ui_mobile else 84.0, h, fs, host.speech._preview_voice)
 	voice_row.add_child(host.preview_button)
 

@@ -35,48 +35,121 @@ static func load_catalog(ids: Dictionary, tiers: Dictionary, path: String = CATA
 				ids[label] = str(row.get("id", ""))
 				tiers[label] = str(row.get("tier", "classic"))
 
-static func native_tier(info: Dictionary) -> int:
-	# 0 = US English (the only tier we list), 1 = other English, 2 = rest.
+## Every en-US voice code in docs/ANDROID_VOICES.md, with its gender confirmed
+## by two independent sources: Google Speech Services codes (the "sfg" in
+## en-us-x-sfg-local) and Samsung TTS packs ("smtf00" for en-US-SMTf00). The
+## numbers are fixed per code so "Female 2" is the same voice on every phone.
+## A code not listed here gets a neutral "Voice A" label, never a guess.
+const US_VOICE_NAMES := {
+	"tpc": "Female 1", "iob": "Female 2", "iog": "Female 3", "tpf": "Female 4", "sfg": "Female 5",
+	"iom": "Male 1", "iol": "Male 2", "tpd": "Male 3",
+	"smtf00": "Female 1", "smtl03": "Female 2", "smtl04": "Female 3", "smtg02": "Male 1",
+}
+const SYSTEM_DEFAULT_LABEL := "System default"
+const US_TAG := "US English"
+
+static func is_us_voice(info: Dictionary) -> bool:
+	var vid := str(info.get("id", "")).strip_edges().to_lower()
 	var vlang := str(info.get("language", "")).strip_edges().to_lower().replace("_", "-")
-	var vname := str(info.get("name", "")).strip_edges().to_lower()
-	if vlang.begins_with("en-us"):
-		return 0
-	if vlang == "" and ("en-us" in vname or "en_us" in vname or "english (united states)" in vname):
-		return 0
-	if vlang.begins_with("en"):
-		return 1
-	if vlang == "" and "english" in vname:
-		return 1
-	return 2
+	return vlang == "en-us" or vlang.begins_with("en-us-") or vid.begins_with("en-us-") \
+		or vid.begins_with("en_us") or (vlang == "" and vid == "en-us")
 
-static func pretty_lang(vlang: String, vname: String) -> String:
-	# Human-readable language tag so every entry says WHO it is ("Voice 3" tells
-	# nothing; "Voice 3 · English (US)" does).
-	var t := vlang.strip_edges().replace("_", "-")
-	if t == "":
-		var ln := vname.to_lower()
-		if "en-us" in ln or "en_us" in ln or "united states" in ln:
-			return "English (US)"
-		return ""
-	var low := t.to_lower()
-	var names := {"en": "English", "es": "Spanish", "fr": "French", "de": "German",
-		"it": "Italian", "pt": "Portuguese", "hi": "Hindi", "ru": "Russian",
-		"ar": "Arabic", "zh": "Chinese", "ja": "Japanese", "ko": "Korean",
-		"nl": "Dutch", "pl": "Polish", "tr": "Turkish", "uk": "Ukrainian"}
-	var parts := low.split("-")
-	var base: String = names.get(parts[0], parts[0].to_upper() if parts[0].length() <= 3 else parts[0])
-	if parts.size() > 1 and parts[1] != "":
-		return "%s (%s)" % [base, parts[1].to_upper()]
-	return base
+## ["tpc", "local"] from "en-us-x-tpc-local" / "en-us-x-sfg#female_2-network";
+## gender is "female"/"male" when the name itself carries it (older engines).
+static func parse_voice_id(vid: String) -> Dictionary:
+	var low := vid.strip_edges().to_lower()
+	var out := {"code": "", "network": low.ends_with("-network") or low.contains("network"), "gender": "", "variant": ""}
+	var hash := low.find("#")
+	if hash >= 0:
+		var tail := low.substr(hash + 1)
+		for g in ["female", "male"]:
+			if tail.begins_with(g):
+				out["gender"] = g
+				out["variant"] = tail.get_slice("-", 0).trim_prefix(g).trim_prefix("_")
+				break
+		low = low.substr(0, hash) + ("-" + tail.get_slice("-", 1) if tail.contains("-") else "")
+	for suffix in ["-local", "-network", "-embedded"]:
+		low = low.trim_suffix(suffix)
+	var marker := low.find("-x-")
+	var samsung := low.find("-smt")
+	if marker >= 0:
+		out["code"] = low.substr(marker + 3)
+	elif samsung >= 0:
+		out["code"] = low.substr(samsung + 1)
+	elif low.ends_with("-language") or low.ends_with("_language") or low.ends_with("-default"):
+		out["code"] = "language"
+	return out
 
-static func display_label(vname: String, vlang: String, vid: String) -> String:
-	var label := vname.strip_edges()
-	if label == "":
-		label = vid
-	var tag := pretty_lang(vlang, vname)
-	if tag != "" and not label.to_lower().contains(tag.to_lower()):
-		label = "%s · %s" % [label, tag]
-	return label
+## The device voices the mobile list shows, as [label, id] rows in display
+## order: US English only (Android can report hundreds of voices in every
+## locale), one entry per voice code with the offline copy preferred, named
+## voices (Female 1..5, Male 1..3) then unconfirmed codes, all offline voices
+## before online ones, "System default" last. Never empty.
+static func device_voice_rows(voices: Array) -> Array:
+	var by_key := {}  # one entry per voice, the offline copy preferred
+	var default_id := ""
+	for info in voices:
+		if not info is Dictionary or not is_us_voice(info):
+			continue
+		var vid := str(info.get("id", "")).strip_edges()
+		if vid == "":
+			continue
+		var parsed := parse_voice_id(vid)
+		var code: String = parsed["code"]
+		if code == "language":
+			default_id = vid
+			continue
+		if code == "":
+			code = vid.to_lower()
+		var key: String = code + "#" + parsed["gender"] + parsed["variant"]
+		var entry := {"id": vid, "code": code, "network": parsed["network"],
+			"gender": parsed["gender"], "variant": parsed["variant"]}
+		if not by_key.has(key) or (by_key[key]["network"] and not entry["network"]):
+			by_key[key] = entry
+	var unknown: Array = []
+	var all: Array = []
+	for key in by_key:
+		var e: Dictionary = by_key[key]
+		if e["gender"] != "":
+			e["name"] = ("%s %s" % [e["gender"].capitalize(), e["variant"]]).strip_edges()
+		elif US_VOICE_NAMES.has(e["code"]):
+			e["name"] = US_VOICE_NAMES[e["code"]]
+		else:
+			unknown.append(e)
+		all.append(e)
+	unknown.sort_custom(func(a, b): return a["code"] < b["code"])
+	for i in unknown.size():
+		unknown[i]["name"] = "Voice %s" % char(65 + i % 26)
+	for e in all:
+		var n := str(e["name"])
+		e["rank"] = (1000 if e["network"] else 0) \
+			+ (0 if n.begins_with("Female") else (100 if n.begins_with("Male") else 200))
+	all.sort_custom(func(a, b):
+		if a["rank"] != b["rank"]:
+			return a["rank"] < b["rank"]
+		return str(a["name"]).naturalnocasecmp_to(str(b["name"])) < 0)
+	var rows: Array = []
+	for e in all:
+		var where := "Online (needs internet)" if e["network"] else "Offline"
+		rows.append(["%s · %s · %s" % [e["name"], US_TAG, where], e["id"]])
+	rows.append([SYSTEM_DEFAULT_LABEL, default_id])
+	return rows
+
+## The id a saved choice maps to among the listed rows: itself when listed, the
+## listed copy of the same voice when the other copy was deduplicated away,
+## otherwise the recorded voice (also for non-US voices hidden since 1.0.1).
+static func migrate_voice_id(saved: String, rows: Array) -> String:
+	var ids := rows.map(func(r): return str(r[1]))
+	if saved == DEFAULT_VOICE_ID or ids.has(saved):
+		return saved
+	if not is_us_voice({"id": saved}):
+		return DEFAULT_VOICE_ID
+	var want := parse_voice_id(saved)
+	for id in ids:
+		var got := parse_voice_id(id)
+		if id != "" and got["code"] == want["code"] and got["gender"] == want["gender"] and got["variant"] == want["variant"]:
+			return id
+	return DEFAULT_VOICE_ID
 
 ## Compact speaker name for the status line ("who is speaking").
 static func short_name(label: String) -> String:

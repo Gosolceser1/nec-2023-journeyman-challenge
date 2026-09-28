@@ -359,6 +359,28 @@ static func make_voice_picker(host: Main, h: float, font_size: int) -> OptionBut
 	return host.voice_picker
 
 
+## Mobile: the picker's popup cannot take a finger, so the OptionButton stays
+## hidden (it still holds the list and the selection) and this button, styled
+## like it, opens the VoiceSheet.
+static func make_voice_button(host: Main, h: float, font_size: int) -> Button:
+	host.voice_picker.visible = false
+	host.voice_button = Button.new()
+	host.voice_button.custom_minimum_size = Vector2(0, h)
+	host.voice_button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	host.voice_button.clip_text = true
+	host.voice_button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	for state in ["normal", "hover", "pressed", "focus"]:
+		host.voice_button.add_theme_stylebox_override(state, host.voice_picker.get_theme_stylebox(state))
+	host.voice_button.add_theme_font_override("font", AppTheme.ui_font(500))
+	host.voice_button.add_theme_font_size_override("font_size", font_size)
+	host.voice_button.add_theme_color_override("font_color", AppTheme.SLATE_200)
+	host.voice_button.add_theme_color_override("font_hover_color", AppTheme.WHITE)
+	host.voice_button.add_theme_color_override("font_pressed_color", AppTheme.SKY_400)
+	host.voice_button.pressed.connect(host.open_voice_sheet)
+	host.speech._sync_voice_button()
+	return host.voice_button
+
+
 ## Segmented-control chip: a toggle button in a ButtonGroup, emerald when on.
 static func make_chip(text: String, h: float, font_size: int, group: ButtonGroup) -> Button:
 	var chip := Button.new()

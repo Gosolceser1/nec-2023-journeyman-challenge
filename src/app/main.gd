@@ -104,6 +104,9 @@ var info_label: RichTextLabel
 var next_button: Button
 var read_button: Button
 var voice_picker: OptionButton
+## Mobile: shows the picked voice and opens voice_sheet (Widgets.make_voice_button).
+var voice_button: Button
+var voice_sheet: VoiceSheet
 ## Finger drag-to-scroll for every ScrollContainer (see TouchScroll).
 var touch_scroll: TouchScroll
 var restart_button: Button
@@ -1132,6 +1135,11 @@ func _play_speech_clip() -> void: speech._play_speech_clip()
 func _on_reader_finished() -> void: speech._on_reader_finished()
 func _halt_player() -> void: speech._halt_player()
 
+## Mobile voice list (the picker's popup cannot take a finger).
+func open_voice_sheet() -> void:
+	speech._refresh_native_voices()
+	VoiceSheet.open(self)
+
 func _apply_touch_filters() -> void:
 	# Finger drags are scrolled by touch_scroll before the GUI sees them, so these
 	# filters no longer decide whether a page scrolls. They keep a mouse drag and a
@@ -1301,6 +1309,9 @@ func _on_go_back() -> void:
 	if now - _last_go_back_msec < 600:
 		return
 	_last_go_back_msec = now
+	if is_instance_valid(voice_sheet):
+		voice_sheet.close()
+		return
 	if is_instance_valid(question_diagram_view) and question_diagram_view.is_zoomed():
 		question_diagram_view.close_zoom()
 		return

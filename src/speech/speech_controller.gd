@@ -42,9 +42,44 @@ var voice_ids: Dictionary = {}
 var voice_tiers: Dictionary = {}  # picker label -> "natural" / "general" / "classic"
 var voice_cfg_path := VoiceCatalog.CONFIG_PATH
 var _previewing := false
+## Returns the device voices (DisplayServer.tts_get_voices() shape). Tests set a
+## fake list here; unset, the OS is asked.
+var voice_source := Callable()
+## How often the OS list was actually queried (tests check it stays cached).
+var voice_source_calls := 0
+## The OS voice list, queried once: on Android every query is a binder call to
+## the TTS engine on the main thread and can return hundreds of voices.
+var _device_voices: Array = []
+var _device_voices_msec := -VOICE_RETRY_MSEC
+var _populating := false
+var _picking := false
+var _emitting_pick := false
+## A saved US voice not listed yet because the OS voice list loads late.
+var _pending_voice_id := ""
+## An utterance was handed to the OS and not stopped since, so tts_stop has work.
+var _native_active := false
+## An empty list is asked for again at most this often (voices load late).
+const VOICE_RETRY_MSEC := 2000
 
 func _load_voice_catalog() -> void:
 	VoiceCatalog.load_catalog(voice_ids, voice_tiers)
+
+## The device voice list, from the cache when it has anything.
+func _device_voice_list() -> Array:
+	if not _device_voices.is_empty():
+		return _device_voices
+	var now := Time.get_ticks_msec()
+	if now - _device_voices_msec < VOICE_RETRY_MSEC:
+		return _device_voices
+	_device_voices_msec = now
+	voice_source_calls += 1
+	var got: Variant = []
+	if voice_source.is_valid():
+		got = voice_source.call()
+	elif DisplayServer.has_feature(DisplayServer.FEATURE_TEXT_TO_SPEECH):
+		got = DisplayServer.tts_get_voices()
+	_device_voices = got if got is Array else []
+	return _device_voices
 
 func _populate_voice_picker() -> void:
 	# Desktop: cloud voices from voices.json. Mobile: REAL on-device voices —
@@ -67,34 +102,66 @@ func _populate_voice_picker() -> void:
 		host.voice_picker.selected = default_idx
 	if not host.voice_picker.item_selected.is_connected(_on_voice_picked):
 		host.voice_picker.item_selected.connect(_on_voice_picked)
-	var popup: PopupMenu = host.voice_picker.get_popup()
-	if popup != null and not popup.about_to_popup.is_connected(_refresh_native_voices):
-		popup.about_to_popup.connect(_refresh_native_voices)
 	_load_voice_choice()
 
+## OS voice lists can load late on Android: the launch timer and the voice
+## sheet call this, and it rebuilds the list only while it still has no device
+## voice. It never rebuilds on popup (that used to query the OS twice and
+## rebuild the whole list every time the picker opened).
 func _refresh_native_voices() -> void:
-	# OS voice lists can load late on Android, so rebuild until real OS voices
-	# actually appear. The old guard counted PICKER ITEMS, and the picker was
-	# always seeded with the bundled Aria entry plus "System default" - so
-	# item_count was already 2 and this returned early forever, leaving a cloud
-	# Edge voice id selectable that the Android TTS engine does not know.
-	# Gate on the OS list instead, and only rebuild when the list is non-empty.
 	if not host.ui_mobile and OS.has_feature("pc"):
 		return
-	if host.voice_picker == null:
+	if not is_instance_valid(host.voice_picker) or _populating:
 		return
-	if not DisplayServer.has_method("tts_get_voices"):
+	if not _device_voices.is_empty():
 		return
-	if DisplayServer.tts_get_voices().is_empty():
-		return  # still nothing to show; try again on the next tick
+	if _device_voice_list().is_empty():
+		return  # still nothing to show; the next call asks again
+	var keep := _selected_voice_id()
 	_populate_voice_picker_native()
-	_load_voice_choice()
+	if _pending_voice_id != "" and keep == VoiceCatalog.BUNDLED_VOICE_ID:
+		_load_voice_choice()
+	else:
+		_select_voice_id(keep)
+	_pending_voice_id = ""
 
 func _on_voice_picked(_index: int) -> void:
+	if _picking or _populating:
+		return
+	_picking = true
 	_save_voice_choice()
 	AudioSection.refresh(host)
+	_sync_voice_button()
 	_warm_speech_helper()
 	_prefetch_speech()
+	_picking = false
+
+## The voice sheet's pick. The same row again, or a pick while one is still
+## being applied, changes nothing.
+func pick_voice(index: int) -> void:
+	if _picking or _populating or _emitting_pick or not is_instance_valid(host.voice_picker):
+		return
+	if index < 0 or index >= host.voice_picker.item_count or index == host.voice_picker.selected:
+		return
+	_emitting_pick = true
+	host.voice_picker.select(index)
+	host.voice_picker.item_selected.emit(index)
+	_emitting_pick = false
+
+## Mobile shows the picked voice on a plain button (the OptionButton popup
+## cannot take a finger); keep its text in step with the picker.
+func _sync_voice_button() -> void:
+	if not is_instance_valid(host.voice_button) or not is_instance_valid(host.voice_picker):
+		return
+	var sel := host.voice_picker.selected
+	host.voice_button.text = host.voice_picker.get_item_text(sel) if sel >= 0 and sel < host.voice_picker.item_count else ""
+
+func _select_voice_id(voice_id: String) -> void:
+	for i in host.voice_picker.item_count:
+		if str(voice_ids.get(host.voice_picker.get_item_text(i), "")) == voice_id:
+			host.voice_picker.selected = i
+			break
+	_sync_voice_button()
 
 func _voice_short() -> String:
 	if not is_instance_valid(host.voice_picker) or host.voice_picker.item_count <= 0:
@@ -106,56 +173,55 @@ func _status_with_voice(base: String) -> String:
 	return base + (" · " + who if who != "" else "")
 
 func _populate_voice_picker_native() -> void:
-	# US-English-only list (mirrors the curated desktop picker): collect tiers,
-	# show the best non-empty tier so the list is never empty.
+	# The recorded voice first, then the US English device voices under friendly
+	# names (VoiceCatalog.device_voice_rows; never hundreds, never empty).
+	if _populating:
+		return
+	_populating = true
 	voice_ids.clear()
-	# Clear here, not only in the caller: _refresh_native_voices can run more than
-	# once (timer + about_to_popup) and a bare add_item loop duplicated every
-	# entry on the second pass.
 	host.voice_picker.clear()
-	var tiers: Array = [[], [], []]
-	if DisplayServer.has_method("tts_get_voices"):
-		for info in DisplayServer.tts_get_voices():
-			if not info is Dictionary:
-				continue
-			var vid := str(info.get("id", ""))
-			if vid == "":
-				continue
-			var vname := str(info.get("name", vid))
-			var vlang := str(info.get("language", ""))
-			if vname == "":
-				vname = vid
-			tiers[VoiceCatalog.native_tier(info)].append([vname, vlang, vid])
-	var chosen: Array = tiers[0] if not tiers[0].is_empty() else (tiers[1] if not tiers[1].is_empty() else tiers[2])
 	# The recorded voice ships with the app (every question, offline); device
 	# voices are the fallback for anything it has no clip for.
 	voice_ids[VoiceCatalog.BUNDLED_VOICE_LABEL] = VoiceCatalog.BUNDLED_VOICE_ID
-	var seen := {}
-	for pair in chosen:
-		var label := "Device voice · " + VoiceCatalog.display_label(str(pair[0]), str(pair[1]), str(pair[2]))
-		if seen.has(label):
-			label = "%s [%s]" % [label, str(pair[2])]
-		seen[label] = true
-		voice_ids[label] = str(pair[2])
-	if chosen.is_empty():
-		voice_ids["Device voice · System default"] = ""
+	for row in VoiceCatalog.device_voice_rows(_device_voice_list()):
+		var label := str(row[0])
+		if voice_ids.has(label):
+			label = "%s (%s)" % [label, str(row[1])]
+		voice_ids[label] = str(row[1])
 	for label in voice_ids:
 		host.voice_picker.add_item(label)
 	host.voice_picker.selected = 0
+	_populating = false
+	_sync_voice_button()
 
 func _selected_voice_id() -> String:
-	var label := host.voice_picker.get_item_text(host.voice_picker.selected)
-	var voice_id := str(voice_ids.get(label, ""))
+	var sel := host.voice_picker.selected
+	if sel < 0 or sel >= host.voice_picker.item_count:
+		return ""
+	var voice_id := str(voice_ids.get(host.voice_picker.get_item_text(sel), ""))
 	return voice_id.replace("Multilingual", "")
 
 func _load_voice_choice() -> void:
 	var saved = VoiceCatalog.load_choice(voice_cfg_path, host.ui_mobile or not OS.has_feature("pc"))
 	if saved == null:
+		_sync_voice_button()
 		return
-	for i in host.voice_picker.item_count:
-		if str(voice_ids.get(host.voice_picker.get_item_text(i), "")) == saved:
-			host.voice_picker.selected = i
+	if host.ui_mobile or not OS.has_feature("pc"):
+		var rows: Array = []
+		for label in voice_ids:
+			rows.append([label, voice_ids[label]])
+		var migrated := VoiceCatalog.migrate_voice_id(str(saved), rows)
+		_pending_voice_id = ""
+		if migrated != str(saved) and _device_voices.is_empty() and VoiceCatalog.is_us_voice({"id": str(saved)}):
+			# The OS list has not loaded yet: keep the saved voice for the refresh.
+			_pending_voice_id = str(saved)
+			_select_voice_id(migrated)
 			return
+		_select_voice_id(migrated)
+		if migrated != str(saved):
+			_save_voice_choice()
+		return
+	_select_voice_id(str(saved))
 
 func _save_voice_choice() -> void:
 	VoiceCatalog.save_choice(voice_cfg_path, _selected_voice_id())
@@ -171,9 +237,14 @@ func _stop_reading() -> void:
 	speech_queue.clear()
 	speech_queue_index = 0
 	_halt_player()
-	# Unconditional: an utterance queued but not yet started reads is_speaking=false
-	# and would otherwise play on as ghost audio after Stop.
-	DisplayServer.tts_stop()
+	# Whenever anything was handed to the OS, even if is_speaking reads false: an
+	# utterance queued but not yet started would otherwise play on as ghost audio.
+	# Not when nothing was: on Android every stop posts CANCEL events from the TTS
+	# thread, and back-to-back stops (Stop, then a pick, then Preview) only race
+	# more of them against the next speak.
+	if _native_active or DisplayServer.tts_is_speaking():
+		DisplayServer.tts_stop()
+	_native_active = false
 	host._clear_speech_highlight()
 	if is_instance_valid(host.dock_visualizer):
 		host.dock_visualizer.visible = false
@@ -509,11 +580,7 @@ func _pick_native_voice() -> String:
 		var label := host.voice_picker.get_item_text(host.voice_picker.selected)
 		if voice_ids.has(label) and str(voice_ids[label]) != VoiceCatalog.BUNDLED_VOICE_ID:
 			return str(voice_ids[label])
-	if DisplayServer.has_method("tts_get_voices_for_language"):
-		var voices := DisplayServer.tts_get_voices_for_language("en")
-		if not voices.is_empty():
-			return str(voices[0])
-	return ""
+	return str(VoiceCatalog.device_voice_rows(_device_voice_list())[0][1])
 
 ## Utterance ids carry the generation as well as the segment, so an event for
 ## segment N of an earlier readout never matches segment N of the current one.
@@ -651,7 +718,9 @@ func _play_next_native_tts_segment(segments: Array, seg_idx: int, generation: in
 	# into the OS queue while the highlight runs ahead (the Android skip bug).
 	# Volume 100: Godot's default of 50 made the native voice half as loud as the
 	# desktop clips (Android maps it to a 0.5 TextToSpeech volume).
-	DisplayServer.tts_speak(text, _native_voice_id, 100, 1.0, host.audio.speed, _native_utterance_id(generation, seg_idx), true)
+	# The first line after a stop skips the interrupt: the stop already flushed the OS.
+	DisplayServer.tts_speak(text, _native_voice_id, 100, 1.0, host.audio.speed, _native_utterance_id(generation, seg_idx), _native_active)
+	_native_active = true
 	_start_native_watchdog(segments, seg_idx, generation)
 
 func _speech_cache_matches(folder: String, segments: Array) -> bool:

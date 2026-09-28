@@ -327,8 +327,9 @@ func _voice_routing(main: Node) -> void:
 		check(main._pick_native_voice() != main.BUNDLED_VOICE_ID,
 			"native fallback was handed the recorded voice id instead of a device voice")
 		for i in range(1, main.voice_picker.item_count):
-			check(main.voice_picker.get_item_text(i).begins_with("Device voice · "),
-				"device voice not labelled as one: '%s'" % main.voice_picker.get_item_text(i))
+			var label: String = main.voice_picker.get_item_text(i)
+			check(label == VoiceCatalog.SYSTEM_DEFAULT_LABEL or label.contains(" · US English · "),
+				"device voice without a friendly US English label: '%s'" % label)
 
 func _thread_join(main: Node) -> void:
 	# Start a thread on speak_thread, then check the node joins it before the
