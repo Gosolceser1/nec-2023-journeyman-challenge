@@ -54,6 +54,7 @@ tools/    verify.sh  harness.gd  list_pck.py
           pipeline/  bank build, overrides, validator, spellcheck, OCR
           speech/    dump_speech.gd  pregenerate_speech.py  test_bundle.gd  check_export_pack.gd
           visual/    snap.gd  snap_all.gd  snap_motion.gd  snap_tables.gd  measure_fit.gd  compare_shots.py (output: .audit_tmp/)
+                     snap_showcase.gd + make_showcase.py: the README screenshots and hero (docs/media/)
           tests/     run_all.gd + suites, golden/ layout snapshots
           study/     blueprint_report.gd (pool per subject area, overrides, draws per mode)
 ```

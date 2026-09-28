@@ -4,6 +4,8 @@ extends SceneTree
 ## Writes res://.audit_tmp/motion/<out>/<desk|mob>_<sequence>/f_0000.png ... at
 ## 60 fps game time, plus timeline.json with each sequence's frame count and
 ## the frame on which the start cue fired (the Pressed frame of a mode card).
+## With --answers it records only answer_correct and answer_wrong (one click
+## each on fixed questions), for the README animations; --win=WxH sets the window.
 
 var tag := "desk"
 var out := "after"
@@ -83,6 +85,10 @@ func _initialize() -> void:
 	if "--mobile-ui" in OS.get_cmdline_user_args():
 		tag = "mob"
 		DisplayServer.window_set_size(Vector2i(540, 960))
+	for a in OS.get_cmdline_user_args():
+		if a.begins_with("--win="):
+			var p := a.trim_prefix("--win=").split("x")
+			DisplayServer.window_set_size(Vector2i(int(p[0]), int(p[1])))
 	main = load("res://scenes/main.tscn").instantiate()
 	root.add_child(main)
 	await _idle(10)
@@ -92,6 +98,10 @@ func _initialize() -> void:
 	main._on_audio_mode_picked(AudioSettings.Mode.SILENT)
 	_move(Vector2(4, 4))
 	await _idle(70)
+	if "--answers" in OS.get_cmdline_user_args():
+		await _answers()
+		_finish()
+		return
 
 	var cards: Array[Button] = []
 	for b in main.menu_overlay.find_children("*", "Button", true, false):
@@ -142,7 +152,29 @@ func _initialize() -> void:
 	main._show_results()
 	await _capture(96)
 	await _click(main.next_button, 10, 36)
+	_finish()
 
+
+func _answers() -> void:
+	main._start_quiz(10, 1800, true, "10-Question Practice")
+	await _idle(40)
+	main.timer.stop()
+	for step in [["answer_correct", 0, true], ["answer_wrong", 2, false]]:
+		main.order = [int(step[1]), 1, 3, 4, 5, 7, 8, 10, 11, 12] as Array[int]
+		main.current_index = 0
+		main._show_question()
+		main._auto_token += 1
+		_move(Vector2(4, 4))
+		await _idle(60)
+		_begin(step[0])
+		var rec: Dictionary = main.session.current_record()
+		var slot := int(rec.correct_index)
+		if not step[2]:
+			slot = (slot + 1) % main.answers_box.get_child_count()
+		await _click(main.answers_box.get_child(slot) as Control, 12, 84)
+
+
+func _finish() -> void:
 	var f := FileAccess.open("res://.audit_tmp/motion/%s/timeline_%s.json" % [out, tag], FileAccess.WRITE)
 	f.store_string(JSON.stringify(_timeline, "  "))
 	f.close()

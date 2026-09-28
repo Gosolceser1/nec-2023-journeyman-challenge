@@ -1,19 +1,167 @@
-# NEC 2023 Journeyman Challenge
+<p align="center">
+  <img width="200" alt="NEC 2023 Journeyman Challenge logo" src="assets/branding/icon.png" />
+</p>
+<h1 align="center">NEC 2023 Journeyman Challenge</h1>
+<p align="center">A study app for the <strong>NEC 2023</strong> <strong>journeyman electrician</strong> exam: timed drills, a full exam simulator built on the <strong>Nebraska</strong> exam blueprint, and a lesson after every answer.</p>
+<p align="center">
+  <img src="https://img.shields.io/badge/version-1.0.0-38bdf8" alt="Version 1.0.0">
+  <img src="https://img.shields.io/badge/platform-Windows%20x64%20%7C%20Android-0b1221" alt="Platform: Windows x64 | Android">
+  <img src="https://img.shields.io/badge/engine-Godot%204.7-478cbf?logo=godotengine&logoColor=white" alt="Engine: Godot 4.7">
+  <img src="https://img.shields.io/badge/NEC-2023-f59e0b" alt="NEC 2023">
+</p>
 
-A solo exam trainer for the NEC 2023 journeyman electrician exam: 279
-questions from seven practice exams, each with the answer, the NEC 2023
-reference and a short lesson, plus a separate Nebraska State Law drill (4
-questions on the State Electrical Act and Board Rules, cited to the statute). Runs on Windows and Android (Godot 4.7.2,
-GDScript). Questions can be read aloud by a recorded neural voice that ships
-with the app.
+---
 
-Every NEC drill and the Full Journeyman Simulator draw from all 279 NEC questions,
-weighted like the Nebraska exam's content outline (10/20/15/15/10/5/5 items
-per subject area). Drills avoid repeats until an area is used up, and missed
-questions come back two sessions later. The report breaks your score down by
-subject area, shows your pace against the exam's 3:00 per question, and
-estimates exam readiness. "10 Questions • Weakest Area" drills the area
-that needs it most. See `docs/STUDY_SYSTEM.md`.
+## Download
+
+Get the latest build from the
+[Releases page](https://github.com/Gosolceser1/nec-2023-journeyman-challenge/releases/latest).
+
+| File | Best for | Requirement |
+|---|---|---|
+| `NEC2023JourneymanChallenge_v1.0.0_Windows.zip` | Windows PCs | Windows 10/11, 64-bit; no install |
+| `NEC2023JourneymanChallenge_v1.0.0_Android.apk` | Android phones and tablets | Allow installs from unknown sources |
+
+**Windows:** unzip and run `NEC 2023 Journeyman Challenge.exe`. The app is not
+code-signed, so the first time you open it Windows SmartScreen may show
+"Windows protected your PC": click **More info**, then **Run anyway**.
+
+**Android:** open the APK on the device and allow installs from unknown sources
+if Android asks.
+
+`SHA256SUMS.txt` on the release page lets you check the downloads.
+
+---
+
+## Features
+
+- **283 questions:** 279 NEC 2023 questions from seven practice exams plus 4
+  Nebraska State Law questions. Every answer shows the NEC reference, a short
+  lesson, a memory tip, why each wrong choice is wrong, and the code provision.
+- **Timed practice drills** of 10, 20, 30, 40 or 50 questions at the exam's
+  3 minutes per question, weighted like the exam's content outline.
+- **Full Journeyman Simulator:** 80 questions split over the seven subject
+  areas like the Nebraska exam blueprint, 240 minutes, 75% to pass. The
+  report scores each subject area, charts your pace and estimates your exam
+  readiness.
+- **10 Questions • Weakest Area:** a drill of the subject area that needs it
+  most, picked from your recent answers.
+- **Nebraska State Law:** a drill on the State Electrical Act and Board Rules,
+  cited to the statute.
+- **No repeats, smart reviews:** questions and answer choices are shuffled
+  every session, drills draw from no-repeat decks until a subject area is used
+  up, and missed questions come back two sessions later.
+- **Read-aloud voice:** questions and lessons can be read by a recorded voice
+  that ships with the app, including a hands-free Listen mode.
+- **Reference tables and diagrams** right next to the question, with tables
+  laid out to fit the screen.
+- **Electrical answer animations and sounds** (with a Reduce motion option),
+  and keyboard shortcuts on desktop (A-D or 1-4, Enter for next).
+- **Works offline:** the questions, the voice and the sounds are all inside
+  the app. Progress is saved on your device.
+
+## Screenshots
+
+<p align="center">
+  <img src="docs/media/hero.png" alt="NEC 2023 Journeyman Challenge on desktop and on a phone" width="100%">
+</p>
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <a href="docs/media/desktop-menu.png"><img src="docs/media/desktop-menu.png" alt="Main menu" width="100%"></a><br>
+      <sub>Main menu: exam readiness ring, timed drills, weakest-area drill, Nebraska State Law and the simulator</sub>
+    </td>
+    <td width="50%" align="center">
+      <a href="docs/media/desktop-table-question.png"><img src="docs/media/desktop-table-question.png" alt="Question with a lookup table" width="100%"></a><br>
+      <sub>A question with its lookup table (NEC 626.11, electrified truck parking)</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <a href="docs/media/desktop-correct.png"><img src="docs/media/desktop-correct.png" alt="Correct answer with explanation" width="100%"></a><br>
+      <sub>Correct: the filled-in table, memory tip, every choice explained and the code provision</sub>
+    </td>
+    <td width="50%" align="center">
+      <a href="docs/media/desktop-wrong.png"><img src="docs/media/desktop-wrong.png" alt="Wrong answer" width="100%"></a><br>
+      <sub>Wrong: the right answer and the NEC table it comes from</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <a href="docs/media/desktop-diagram.png"><img src="docs/media/desktop-diagram.png" alt="Diagram question" width="100%"></a><br>
+      <sub>A diagram question (tap the figure to zoom)</sub>
+    </td>
+    <td width="50%" align="center">
+      <a href="docs/media/desktop-simulator.png"><img src="docs/media/desktop-simulator.png" alt="Full Journeyman Simulator in progress" width="100%"></a><br>
+      <sub>The Full Journeyman Simulator: 80 questions, 240 minutes</sub>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center">
+      <a href="docs/media/desktop-results.png"><img src="docs/media/desktop-results.png" alt="Examination report" width="50%"></a><br>
+      <sub>The report: score gauge, subject-area bars against the 75% line, pace per answer and study feedback</sub>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="33%" align="center">
+      <a href="docs/media/mobile-menu.png"><img src="docs/media/mobile-menu.png" alt="Android main menu" width="100%"></a><br>
+      <sub>Android: main menu</sub>
+    </td>
+    <td width="33%" align="center">
+      <a href="docs/media/mobile-question.png"><img src="docs/media/mobile-question.png" alt="Android question with a lookup table" width="100%"></a><br>
+      <sub>Android: question with a lookup table</sub>
+    </td>
+    <td width="33%" align="center">
+      <a href="docs/media/mobile-results.png"><img src="docs/media/mobile-results.png" alt="Android examination report" width="100%"></a><br>
+      <sub>Android: examination report</sub>
+    </td>
+  </tr>
+</table>
+
+<p align="center">
+  <img src="docs/media/answer-correct.gif" alt="Answering correctly: the check draws itself as a circuit trace" width="100%"><br>
+  <sub>A correct answer: the check draws itself as a cyan circuit trace with a spark running down it</sub>
+</p>
+
+<p align="center">
+  <img src="docs/media/answer-wrong.gif" alt="Answering wrong: a short-circuit X, then the right answer lights up" width="100%"><br>
+  <sub>A wrong answer: the X strikes with a short-circuit spark, then the right answer lights up</sub>
+</p>
+
+## How studying works
+
+Drills and the simulator follow the Nebraska Journeyman Electrician exam's
+content outline (10/20/15/15/10/5/5 items per subject area). Every graded
+answer feeds a per-question history, which drives the readiness estimate, the
+weakest-area drill and the review queue. The details are in
+[docs/STUDY_SYSTEM.md](docs/STUDY_SYSTEM.md).
+
+## Building from source
+
+The app is Godot 4.7.2 and GDScript. The sections below cover running,
+verifying and exporting; [docs/RELEASE.md](docs/RELEASE.md) has the full
+release steps (branding, Android signing, the shareable zip and checksums).
+
+## Credits
+
+Sound effects are from Pixabay (creators listed in
+[assets/sfx/CREDITS.md](assets/sfx/CREDITS.md)); the voice is Microsoft's
+"Andrew" neural voice, recorded with edge-tts; the app is made with the
+Godot Engine (MIT license). The release zip carries the full `CREDITS.txt`
+and `THIRD_PARTY_LICENSES.txt`.
+
+## Disclaimer
+
+An independent study aid, not affiliated with or endorsed by the NFPA, PSI or
+the Nebraska State Electrical Division. NFPA 70, National Electrical Code and
+NEC are registered trademarks of the National Fire Protection Association.
+Always check the current NEC and your local amendments.
+
+---
 
 ## Run
 
