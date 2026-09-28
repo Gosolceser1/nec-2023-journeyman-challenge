@@ -170,8 +170,8 @@ where the NEC 2023 fact was verified.
   choice that names that conductor.
 - **open-book-exam-#1-018** (210.8(E)): the rationale for choice C cites
   "210.8(A) Exception No. 2" for a permanently installed security system
-  receptacle. SECTION_1018
-- **final-exam-#3-068** (620.51): SECTION_3068
+  receptacle. Not yet verified on UpCodes; the record's article (210.8(E)) and answer are unaffected.
+- **final-exam-#3-068** (620.51): the citation is "620.51" and the provision heading "620.51(D)(1) More Than One Driving Machine". The UpCodes text extraction returned "Available Fault Current Field Marking" for 620.51(D)(1), which may be a mis-sliced neighbour (the extraction matched the first "(1)" after "(D)"). The record was left unchanged: the citation and the breadcrumb (Chapter 6, Article 620) are right either way. Re-check the 620.51(D) list numbering by hand.
 - **open-book-exam-#10-002** (220.5(C), garages now counted): verified. The
   2023 220.5(C) excludes only open porches and unfinished areas not
   adaptable for future use, and the record matches it word for word.
@@ -220,4 +220,19 @@ snapshots and with in-page text extraction.
   semicolon in 314. Article 712 (Direct Current Microgrids, 2020) is not in
   NEC 2023 and was dropped from the table.
 - **Section numbers, headings and text:**
-SECTION_ROWS
+  - https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials
+    - 314.23(E) Raceway-Supported Enclosure, Without Devices, Luminaires, or Lampholders: full text matches open-book-exam-#10-013.
+    - 344.10(A) Atmospheric Conditions and Occupancies: (1) Galvanized Steel, Stainless Steel, and Red Brass RMC; (2) Aluminum RMC; (3) Ferrous Raceways and Fittings (enamel, indoors only). 344.10(B) Corrosive Environments: (B)(1), (B)(2).
+    - 300.4(A) Cables and Raceways Through Wood Members: (1) Bored Holes; (2) Notches in Wood (1.6 mm (1/16 in.) steel plate).
+    - 338.100 Construction (Part III), with (A) Assemblies and (B) Uninsulated Conductor.
+    - Table 310.15(B)(1)(1): 41–45 °C / 105–113 °F row = 0.71 / 0.82 / 0.87 (60/75/90 °C); final-exam-#1-027 (40 A × 0.87 = 34.8 A) is right.
+    - Headings present as cited: 300.1(C), 310.6(C), 310.14(A)(3), 312.5(C), 324.41, 334.116(B), 342.30(B), 344.30(B), 348.22, 352.30(B), 352.100.
+  - https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection
+    - 220.5(B) Fractions of an Ampere; 220.5(C) Floor Area (excludes open porches and unfinished areas only; no garage exclusion). Text matches open-book-exam-#10-002.
+    - Headings present as cited: 210.8(A), 210.8(B), 210.12(A), 210.12(B), 210.52(A)(2), 210.63, 220.14(H), 240.21(B)(1), 250.122(F)(1).
+  - https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies
+    - 547.30 Motors (Article 547 Agricultural Buildings).
+  - https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment
+    - 620.51 Disconnecting Means (lead-in and (A) Type read); 620.51(D)(1) see the flag above.
+  - https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/8/communications-systems
+    - 800.44 Overhead (Aerial) Wires and Cables; (A)(1) Relative Location, (A)(2) Attachment to Cross-Arms, (A)(3) Climbing Space, (A)(4) Clearances; (B) Above Roofs with Exceptions No. 1 and 2. Quoted verbatim in final-exam-#3-031.
