@@ -181,5 +181,70 @@ class ValidatorRuleTests(unittest.TestCase):
         self.assertEqual(validator.ragged_table_rows(table), [(1, 1)])
 
 
+class LocationRuleTests(unittest.TestCase):
+    ARTICLES = validator.load_nec_articles()
+    BOX_TITLE = "Outlet, Device, Pull, and Junction Boxes; Conduit Bodies; Fittings; and Handhole Enclosures"
+
+    def record(self, **fields):
+        rec = {
+            "id": "q-001",
+            "article": "314.23(E)",
+            "article_title": self.BOX_TITLE,
+            "reference_text": "314.23(E) Raceway-Supported Enclosure, With Devices, Luminaires, or Lampholders\nText.",
+            "lookup_summary": "Start with 314.23(E), then read the matching subsection and exceptions.",
+            "answers": ["a", "b"],
+            "correct_index": 1,
+            "choice_notes": ["", "Correct: 314.23(E) requires hubs."],
+            "tip_short": "Correct: B — hubs. 314.23(E) requires it. Not A: no.",
+        }
+        rec.update(fields)
+        return validator.location_problems(rec, self.ARTICLES)
+
+    def test_consistent_record_passes(self):
+        self.assertEqual(self.record(), [])
+
+    def test_canonical_table_uses_nec_2023_titles(self):
+        self.assertEqual(self.ARTICLES[314], self.BOX_TITLE)
+        self.assertEqual(self.ARTICLES[210], "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal")
+        self.assertNotIn(311, self.ARTICLES)
+
+    def test_stale_or_short_title_is_reported(self):
+        problems = self.record(article_title="Outlet, Device, Pull, and Junction Boxes")
+        self.assertTrue(any("article_title" in p for p in problems), problems)
+
+    def test_heading_in_another_article_is_reported(self):
+        problems = self.record(reference_text="430.9(C) Torque Requirements\nText.")
+        self.assertTrue(any("not in Article 314" in p for p in problems), problems)
+
+    def test_heading_naming_a_different_subsection_is_reported(self):
+        problems = self.record(article="344.10(A)(4)", article_title=self.ARTICLES[344],
+                               reference_text="344.10(A)(3) Corrosive Environments\nText.",
+                               lookup_summary="Start with 344.10(A)(4).",
+                               choice_notes=["", ""], tip_short="")
+        self.assertTrue(any("different subsections" in p for p in problems), problems)
+
+    def test_lookup_hint_pointing_elsewhere_is_reported(self):
+        self.assertTrue(self.record(lookup_summary="Start with DEF 100, then read on."))
+        self.assertTrue(self.record(lookup_summary="Start with 314.23(F), then read on."))
+        self.assertEqual(self.record(lookup_summary="Start with 314.23, then read on."), [])
+
+    def test_rationale_citing_a_neighbouring_subsection_is_reported(self):
+        problems = self.record(choice_notes=["", "Correct: 314.23(F) requires hubs."])
+        self.assertTrue(any("rationale cites 314.23(F)" in p for p in problems), problems)
+
+    def test_citation_of_an_article_missing_from_nec_2023_is_reported(self):
+        problems = self.record(info_tip="See 311.10 for medium voltage.")
+        self.assertTrue(any("311" in p for p in problems), problems)
+
+    def test_pre_2023_number_is_reported_unless_called_old(self):
+        self.assertTrue(self.record(gist="Use Table 310.15(B)(16) for ampacity."))
+        self.assertEqual(self.record(gist="Table 310.15(B)(16) is the old numbering of Table 310.16."), [])
+
+    def test_state_law_records_claim_no_nec_location(self):
+        self.assertEqual(validator.location_problems(
+            {"section": "ne_state_law", "article": "Neb. Rev. Stat. 81-2108", "article_title": "x"},
+            self.ARTICLES), [])
+
+
 if __name__ == "__main__":
     unittest.main()

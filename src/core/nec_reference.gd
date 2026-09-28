@@ -16,30 +16,49 @@ static func is_state_law(reference: String) -> bool:
 static func code_label(reference: String) -> String:
 	return "Nebraska law" if is_state_law(reference) else "NEC"
 
+## The one table of NEC 2023 chapter and article titles. The bank builder and
+## validator read the same file.
+const ARTICLES_PATH := "res://data/nec_2023_articles.json"
+
+static var _table: Dictionary = {}
+
+static func _articles() -> Dictionary:
+	if _table.is_empty():
+		var parsed = JSON.parse_string(FileAccess.get_file_as_string(ARTICLES_PATH))
+		_table = parsed if parsed is Dictionary else {"chapters": {}, "articles": {}}
+	return _table
+
+## Official NEC 2023 title of an article number, "" if the number is not an article.
+static func canonical_article_title(article_number: int) -> String:
+	return str((_articles()["articles"] as Dictionary).get(str(article_number), ""))
+
+static func chapter_title(chapter: int) -> String:
+	return str((_articles()["chapters"] as Dictionary).get(str(chapter), ""))
+
+## Chapter of an NEC article number: 100-199 is Chapter 1, ..., 800-899 Chapter 8.
+## Article 90 (the Introduction) is in no chapter: 0.
+static func chapter_of_article(article_number: int) -> int:
+	return article_number / 100 if article_number >= 100 and article_number < 900 else 0
+
+## The article of the primary (first) citation: "314.23(E)" -> 314,
+## "Table 220.42(A)" -> 220, "Article 100" -> 100; -1 when there is none.
+static func primary_article(reference: String) -> int:
+	if is_state_law(reference):
+		return -1
+	var match := RegEx.create_from_string("^(?:NEC\\s+)?(?:Table\\s+|Article\\s+)?(\\d{2,3})(?:\\.\\d|\\b)").search(reference.strip_edges())
+	if match == null:
+		return -1
+	var number := int(match.get_string(1))
+	return number if canonical_article_title(number) != "" else -1
+
 static func article_title(reference: String) -> String:
 	if is_state_law(reference):
 		return BOARD_RULES_TITLE if reference.contains("NAC") else STATE_ACT_TITLE
 	var match := RegEx.create_from_string("\\b(\\d{3})\\b").search(reference)
 	if match == null:
 		return reference if reference != "" else "General knowledge"
-	var titles := {
-		100: "Definitions", 110: "Requirements for Electrical Installations",
-		200: "Use and Identification of Grounded Conductors", 210: "Branch Circuits",
-		215: "Feeders", 220: "Load Calculations", 225: "Outside Branch Circuits and Feeders",
-		230: "Services", 240: "Overcurrent Protection", 250: "Grounding and Bonding",
-		300: "Wiring Methods and Materials", 310: "Conductors for General Wiring",
-		314: "Outlet, Device, Pull, and Junction Boxes", 334: "Nonmetallic-Sheathed Cable",
-		344: "Rigid Metal Conduit", 358: "Electrical Metallic Tubing",
-		400: "Flexible Cords and Flexible Cables", 404: "Switches",
-		406: "Wiring Devices", 408: "Switchboards, Switchgear, and Panelboards",
-		410: "Luminaires, Lampholders, and Lamps", 422: "Appliances",
-		430: "Motors, Motor Circuits, and Controllers", 440: "Air-Conditioning Equipment",
-		450: "Transformers", 500: "Hazardous Locations", 550: "Mobile Homes",
-		551: "Recreational Vehicles", 590: "Temporary Installations",
-		625: "Electric Vehicle Power Transfer Systems", 630: "Electric Welders",
-		680: "Swimming Pools, Fountains, and Similar Installations"
-	}
-	return str(titles.get(int(match.get_string(1)), "NEC Article " + match.get_string(1)))
+	var title := canonical_article_title(int(match.get_string(1)))
+	return title if title != "" else "NEC Article " + match.get_string(1)
 
 ## The post-answer reference line: "Article 210 Branch Circuits — NEC 210.8(A)".
 static func format_reference(record: Dictionary) -> String:
@@ -53,6 +72,17 @@ static func format_reference(record: Dictionary) -> String:
 	var article_number := match.get_string(1)
 	return "Article %s %s — %s" % [article_number, title, reference]
 
+## The breadcrumb a record must show, built only from its primary citation and
+## the canonical table (no stored title): what the validator and tests compare
+## the screen against.
+static func expected_breadcrumb(record: Dictionary) -> String:
+	var reference := str(record.get("article", "")).strip_edges()
+	var article := primary_article(reference)
+	if article < 100:
+		return lookup_path(record)
+	var chapter := chapter_of_article(article)
+	return "NEC 2023  ►  Chapter %d: %s  ►  Article %d (%s)" % [chapter, chapter_title(chapter), article, canonical_article_title(article)]
+
 ## Where to look the answer up in the code book, chapter then article.
 static func lookup_path(record: Dictionary) -> String:
 	var reference := str(record.get("article", "")).strip_edges()
@@ -60,17 +90,9 @@ static func lookup_path(record: Dictionary) -> String:
 		var source := BOARD_RULES_TITLE if reference.contains("NAC") else STATE_ACT_TITLE
 		return "%s  ►  %s" % [source.to_upper(), reference]
 	var code := reference.replace("NEC ", "").strip_edges()
-	var chapter_names := {
-		1: "General",
-		2: "Wiring and Protection",
-		3: "Wiring Methods and Materials",
-		4: "Equipment for General Use",
-		5: "Special Occupancies",
-		6: "Special Equipment",
-		7: "Special Conditions",
-		8: "Communications Systems",
-		9: "Tables",
-	}
+	var chapter_names := {}
+	for key in (_articles()["chapters"] as Dictionary):
+		chapter_names[int(key)] = str(_articles()["chapters"][key])
 	var chapter_match := RegEx.create_from_string("(?i)\\bChapter\\s+(\\d+)\\b").search(code)
 	var chapter := 0
 	if chapter_match != null:

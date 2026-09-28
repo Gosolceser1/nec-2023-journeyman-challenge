@@ -1936,63 +1936,9 @@ def formula_for(exam, number):
 def worked_for(exam, number):
     return WORKED_SOLUTIONS.get((exam, number), "")
 
-ARTICLE_TITLES = {
-    100: "Definitions", 110: "Requirements for Electrical Installations",
-    200: "Use and Identification of Grounded Conductors", 210: "Branch Circuits",
-    215: "Feeders", 220: "Branch-Circuit, Feeder, and Service Load Calculations",
-    225: "Outside Branch Circuits and Feeders", 230: "Services",
-    240: "Overcurrent Protection", 250: "Grounding and Bonding",
-    300: "General Requirements for Wiring Methods and Materials",
-    310: "Conductors for General Wiring", 314: "Outlet, Device, Pull, and Junction Boxes",
-    320: "Armored Cable: Type AC", 322: "Flat Cable Assemblies: Type FC",
-    324: "Flat Conductor Cable: Type FCC", 326: "Integrated Gas Spacer Cable: Type IGS",
-    330: "Metal-Clad Cable: Type MC", 332: "Mineral-Insulated, Metal-Sheathed Cable: Type MI",
-    334: "Nonmetallic-Sheathed Cable: Types NM and NMC",
-    336: "Power and Control Tray Cable: Type TC", 338: "Service-Entrance Cable: Types SE and USE",
-    340: "Underground Feeder and Branch-Circuit Cable: Type UF",
-    342: "Intermediate Metal Conduit: Type IMC", 344: "Rigid Metal Conduit: Type RMC",
-    348: "Flexible Metal Conduit: Type FMC", 350: "Liquidtight Flexible Metal Conduit: Type LFMC",
-    352: "Rigid Polyvinyl Chloride Conduit: Type PVC", 354: "Nonmetallic Underground Conduit: Type NUCC",
-    356: "Liquidtight Flexible Nonmetallic Conduit: Type LFNC",
-    358: "Electrical Metallic Tubing: Type EMT", 360: "Flexible Metallic Tubing: Type FMT",
-    362: "Electrical Nonmetallic Tubing: Type ENT", 366: "Auxiliary Gutters", 368: "Busways",
-    370: "Cablebus", 372: "Cellular Concrete Floor Raceways", 374: "Cellular Metal Floor Raceways",
-    376: "Metal Wireways", 378: "Nonmetallic Wireways", 380: "Multioutlet Assemblies",
-    382: "Nonmetallic Extensions", 384: "Strut-Type Channel Raceway", 386: "Surface Metal Raceways",
-    388: "Surface Nonmetallic Raceways", 390: "Underfloor Raceways", 392: "Cable Trays",
-    400: "Flexible Cords and Flexible Cables", 404: "Switches", 406: "Wiring Devices",
-    408: "Switchboards, Switchgear, and Panelboards", 409: "Industrial Control Panels",
-    410: "Luminaires, Lampholders, and Lamps", 422: "Appliances",
-    424: "Fixed Electric Space-Heating Equipment", 425: "Fixed Resistance and Electrode Industrial Process Heating Equipment",
-    430: "Motors, Motor Circuits, and Controllers", 440: "Air-Conditioning and Refrigerating Equipment",
-    445: "Generators", 450: "Transformers and Transformer Vaults", 455: "Phase Converters",
-    460: "Capacitors", 470: "Resistors and Reactors", 480: "Stationary Standby Batteries",
-    500: "Hazardous (Classified) Locations", 510: "Special Occupancies",
-    514: "Motor Fuel Dispensing Facilities", 517: "Health Care Facilities",
-    550: "Mobile Homes, Manufactured Homes, and Mobile Home Parks",
-    551: "Recreational Vehicles and Recreational Vehicle Parks", 555: "Marinas",
-    590: "Temporary Installations", 600: "Electric Signs and Outline Lighting",
-    625: "Electric Vehicle Power Transfer System", 630: "Electric Welders",
-    640: "Audio Signal Processing, Amplification, and Reproduction Equipment",
-    650: "Sensitive Electronic Equipment", 660: "X-Ray Equipment",
-    680: "Swimming Pools, Fountains, and Similar Installations", 695: "Fire Pumps",
-    800: "General Requirements for Communications Systems", 810: "Radio and Television Equipment",
-    # UpCodes article titles verified via up.codes/s/ SEO pages (2023 NEC article titles are
-    # the official NFPA 70 wording; lookup clues intentionally NOT shown in answers anymore)
-    305: "General Requirements for Wiring Methods and Materials for Systems Rated Over 1000 Volts AC, 1500 Volts DC, Nominal",
-    312: "Cabinets, Cutout Boxes, and Meter Socket Enclosures",
-    315: "Medium Voltage Conductors, Cable, Cable Joints, and Cable Terminations",
-    395: "Outdoor Overhead Conductors Over 1000 Volts",
-    503: "Class III Locations",
-    522: "Control Systems for Permanent Amusement Attractions",
-    547: "Agricultural Buildings",
-    620: "Elevators, Dumbwaiters, Escalators, Moving Walks, Platform Lifts, and Stairway Chairlifts",
-    626: "Electrified Truck Parking Spaces",
-    647: "Sensitive Electronic Equipment",
-    700: "Emergency Systems",
-    708: "Critical Operations Power Systems (COPS)",
-    724: "Class 1 Power-Limited Circuits and Class 1 Power-Limited Remote-Control and Signaling Circuits",
-}
+# NEC 2023 article titles: one table shared with the app and the validator.
+NEC_ARTICLES = json.loads((ROOT / "data" / "nec_2023_articles.json").read_text(encoding="utf-8"))
+ARTICLE_TITLES = {int(number): title for number, title in NEC_ARTICLES["articles"].items()}
 
 def article_title(reference):
     match = re.search(r"\b(\d{3})\b", reference)
@@ -2333,6 +2279,14 @@ if os.environ.get("WIRE_SKIP_BANK_OVERRIDES") != "1":
     overrides_path = Path(__file__).with_name("question_bank_overrides.json")
     overlay = json.loads(overrides_path.read_text(encoding="utf-8"))
     apply_overrides(records, overlay)
+# Titles follow the final citation: an override that moves a record to another
+# article must not keep the title of the OCR citation it replaced.
+for record in records:
+    if record.get("section"):
+        continue
+    primary = re.match(r"(?:Table\s+|Article\s+)?(\d{2,3})(?:\.\d|\b)", record["article"].strip())
+    if primary and int(primary.group(1)) in ARTICLE_TITLES:
+        record["article_title"] = ARTICLE_TITLES[int(primary.group(1))]
 
 # "questions" held the RAW pre-curation rows (un-redacted stems, original
 # units). main.gd read only "records"; keeping both doubled the file and left a

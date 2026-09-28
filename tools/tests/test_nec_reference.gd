@@ -17,7 +17,23 @@ func eq(got, want, label: String) -> void:
 
 func _init() -> void:
 	print("=== article_title ===")
-	eq(NecReference.article_title("NEC 210.8(A)"), "Branch Circuits", "known article")
+	eq(NecReference.article_title("NEC 210.8(A)"), "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal", "known article")
+	eq(NecReference.article_title("314.23(E)"),
+		"Outlet, Device, Pull, and Junction Boxes; Conduit Bodies; Fittings; and Handhole Enclosures", "reported 314 record")
+
+	print("=== canonical table ===")
+	eq(NecReference.chapter_of_article(314), 3, "314 is in chapter 3")
+	eq(NecReference.chapter_of_article(430), 4, "430 is in chapter 4")
+	eq(NecReference.chapter_of_article(90), 0, "Article 90 has no chapter")
+	eq(NecReference.chapter_title(3), "Wiring Methods and Materials", "chapter 3 title")
+	eq(NecReference.primary_article("314.23(E)"), 314, "section")
+	eq(NecReference.primary_article("Table 310.16"), 310, "table")
+	eq(NecReference.primary_article("NEC 250.66 and 250.102(C)"), 250, "first of several")
+	eq(NecReference.primary_article("Neb. Rev. Stat. 81-2108"), -1, "state law")
+	eq(NecReference.primary_article("311.10"), -1, "article not in NEC 2023")
+	eq(NecReference.expected_breadcrumb({"article": "314.23(E)", "article_title": "stale"}),
+		"NEC 2023  ►  Chapter 3: Wiring Methods and Materials  ►  Article 314 (Outlet, Device, Pull, and Junction Boxes; Conduit Bodies; Fittings; and Handhole Enclosures)",
+		"expected breadcrumb ignores a stale title")
 	eq(NecReference.article_title("Table 310.16"), "Conductors for General Wiring", "table number")
 	eq(NecReference.article_title("NEC 999.1"), "NEC Article 999", "unknown article")
 	eq(NecReference.article_title(""), "General knowledge", "empty")

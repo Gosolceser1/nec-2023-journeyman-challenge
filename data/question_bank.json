@@ -212,7 +212,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "210.63(B)(1)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "easy",
       "keywords": [
         "service equipment",
@@ -446,7 +446,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "210.52(E)(3)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "easy",
       "keywords": [
         "receptacle outlet",
@@ -556,7 +556,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "210.52(A)(2)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "dwelling unit"
@@ -592,7 +592,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "210.8(A)(2)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "ground-fault circuit-interrupter",
@@ -1356,7 +1356,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "406.9(B)",
-      "article_title": "Wiring Devices",
+      "article_title": "Receptacles, Cord Connectors, and Attachment Plugs (Caps)",
       "difficulty": "medium",
       "keywords": [
         "receptacle outlet"
@@ -1539,7 +1539,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "406.12(1)",
-      "article_title": "Wiring Devices",
+      "article_title": "Receptacles, Cord Connectors, and Attachment Plugs (Caps)",
       "difficulty": "medium",
       "keywords": [
         "ground-fault circuit-interrupter",
@@ -1697,7 +1697,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "110.26(E)(1)",
-      "article_title": "Requirements for Electrical Installations",
+      "article_title": "General Requirements for Electrical Installations",
       "difficulty": "medium",
       "keywords": [
         "identify the equipment, location, and requirement"
@@ -1733,7 +1733,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "450.11(A)",
-      "article_title": "Transformers and Transformer Vaults",
+      "article_title": "Transformers and Transformer Vaults (Including Secondary Ties)",
       "difficulty": "hard",
       "keywords": [
         "transformer"
@@ -1769,7 +1769,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "210.18",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "hard",
       "keywords": [
         "switch ampere rating",
@@ -2062,7 +2062,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "406.6(D)",
-      "article_title": "Wiring Devices",
+      "article_title": "Receptacles, Cord Connectors, and Attachment Plugs (Caps)",
       "difficulty": "easy",
       "keywords": [
         "identify the equipment, location, and requirement"
@@ -2170,7 +2170,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "210.8(C)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "easy",
       "keywords": [
         "ground-fault circuit-interrupter"
@@ -2206,7 +2206,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "500.5(D)(2)",
-      "article_title": "Hazardous (Classified) Locations",
+      "article_title": "Hazardous (Classified) Locations, Classes I, II, and III, Divisions 1 and 2",
       "difficulty": "easy",
       "keywords": [
         "hazardous location"
@@ -2387,7 +2387,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "358.30(A)",
-      "article_title": "Electrical Metallic Tubing: Type EMT",
+      "article_title": "Electrical Metallic Tubing (EMT)",
       "difficulty": "medium",
       "keywords": [
         "conduit"
@@ -2423,7 +2423,7 @@
       "scene": "",
       "correct_index": 0,
       "article": "Table 210.21(B)(2)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "receptacle outlet",
@@ -2652,7 +2652,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "810.13",
-      "article_title": "Radio and Television Equipment",
+      "article_title": "Antenna Systems",
       "difficulty": "medium",
       "keywords": [
         "conductors"
@@ -3029,16 +3029,16 @@
       "gist": "Overhead communications wires entering a building have several rules about their position relative to power wires and roofs. The question asks which of the listed requirements apply.",
       "scene": "",
       "correct_index": 3,
-      "article": "800.44(B)",
+      "article": "800.44",
       "article_title": "General Requirements for Communications Systems",
       "difficulty": "medium",
       "keywords": [
         "cable",
         "conductors"
       ],
-      "lookup_summary": "Lookup clues: cable, conductors. Start with 800.44(B), then read the matching subsection and exceptions.",
+      "lookup_summary": "Lookup clues: cable, conductors. Start with 800.44, then read the matching subsection and exceptions.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nBeyond ordinary wire-in-conduit, the NEC gives each special system its own article: flat FCC/FC cables glued under carpet squares, busways and cablebus feeding big loads, wireways and auxiliary gutters as roomy sheet-metal raceways (mind the spacing between live parts), and surface extensions for remodels. Questions on these almost always ask where the system is allowed, how it attaches, or what it must be marked.\n\nThis asks which wiring-method rule fits this installation. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\ncable, conductors",
-      "reference_text": "800.44(B) Above Roofs\nCommunications wires and cables and CATV-type coaxial cables shall have a vertical clearance of not less than 2.5 m (8 ft) from all points of roofs above which they pass.\nException No. 1: Communications wires and cables and CATV-type coaxial cables shall not be required to have a vertical clearance of not less than 2.5 m (8 ft) above auxiliary buildings, such as garages and the like.\nException No. 2: A reduction in clearance above only the overhanging portion of the roof to not less than 450 mm (18 in.) shall be permitted if (1) not more than 1.2 m (4 ft) of communications and CATV-type service-drop conductors pass above the roof overhang and (2) they are terminated at a through- or above-the-roof raceway or approved support.",
+      "reference_text": "800.44 Overhead (Aerial) Wires and Cables\n800.44(A)(1) Relative Location\nIf practicable, the communications wires and cables and CATV-type coaxial cables shall be located below the electric light or power conductors.\n800.44(A)(2) Attachment to Cross-Arms\nCommunications wires and cables and CATV-type coaxial cables shall not be attached to a cross-arm that carries electric light or power conductors.\n800.44(B) Above Roofs\nCommunications wires and cables and CATV-type coaxial cables shall have a vertical clearance of not less than 2.5 m (8 ft) from all points of roofs above which they pass.\nException No. 1: Communications wires and cables and CATV-type coaxial cables shall not be required to have a vertical clearance of not less than 2.5 m (8 ft) above auxiliary buildings, such as garages and the like.\nException No. 2: A reduction in clearance above only the overhanging portion of the roof to not less than 450 mm (18 in.) shall be permitted if (1) not more than 1.2 m (4 ft) of communications and CATV-type service-drop conductors pass above the roof overhang and (2) they are terminated at a through-the-roof raceway or approved support.",
       "reference_table": [],
       "tip_title": "Special systems",
       "tip_short": "Overhead communications: below power where practicable, off power cross-arms, and 8 feet above roofs. Correct: D — any of the above. All three listed requirements apply to overhead communications cables, so this choice covers each one. Not A: 800.44(A)(1) requires communications cables to be located below power conductors where practicable, but the other rules apply too. Not B: 800.44(A)(2) prohibits attaching communications cables to a cross-arm that carries power conductors, but the other rules also apply. Not C: 800.44(B) requires 2.5 m (8 feet) above roofs, but the other rules also apply.",
@@ -3103,7 +3103,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "314.24(B)(5)",
-      "article_title": "Outlet, Device, Pull, and Junction Boxes",
+      "article_title": "Outlet, Device, Pull, and Junction Boxes; Conduit Bodies; Fittings; and Handhole Enclosures",
       "difficulty": "medium",
       "keywords": [
         "box / enclosure"
@@ -3139,7 +3139,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "354.28",
-      "article_title": "Nonmetallic Underground Conduit: Type NUCC",
+      "article_title": "Nonmetallic Underground Conduit With Conductors (NUCC)",
       "difficulty": "medium",
       "keywords": [
         "conduit",
@@ -3432,7 +3432,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "210.63",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "service equipment",
@@ -3801,7 +3801,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "210.8(A)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "hard",
       "keywords": [
         "ground-fault circuit-interrupter",
@@ -4396,7 +4396,7 @@
         "cable",
         "conductors"
       ],
-      "lookup_summary": "Lookup clues: cable, conductors. Start with DEF 100, then read the matching subsection and exceptions.",
+      "lookup_summary": "Lookup clues: cable, conductors. Start with 338.100, then read the matching subsection and exceptions.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nDecode the letters first: EMT = Electrical Metallic Tubing (thin-wall, hand-bendable). RMC = Rigid Metal Conduit (thick threaded steel). IMC = Intermediate (in between). FMC = Flexible Metal Conduit (bendable whip). ENT = Electrical Nonmetallic Tubing (blue smurf tube). LFMC = Liquidtight Flexible Metal (sealed whip). RNC = Rigid Nonmetallic Conduit (PVC). Rules answer three things: clearance from wood framing (1-1/4 in. or a nail plate), burial depth, and strapping (within a foot of every box, then every few feet by type).\n\nThis asks which wiring-method rule fits this installation. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\ncable, conductors",
       "reference_text": "338.100 Construction\n(A) Assemblies\nCabled assemblies of multiple single-conductor Type USE conductors shall be permitted for direct burial. All conductors shall be insulated.\nInformational Note: The term \"cabled\" refers to a manufacturing process of twisting single conductors together and may also be referred to as \"plexed.\"\n(B) Uninsulated Conductor\nType SE or USE cable with an overall covering containing two or more conductors shall be permitted to have one conductor uninsulated.",
       "reference_table": [],
@@ -4463,7 +4463,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "348.22",
-      "article_title": "Flexible Metal Conduit: Type FMC",
+      "article_title": "Flexible Metal Conduit (FMC)",
       "difficulty": "medium",
       "keywords": [
         "conduit"
@@ -4570,7 +4570,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "344.120",
-      "article_title": "Rigid Metal Conduit: Type RMC",
+      "article_title": "Rigid Metal Conduit (RMC)",
       "difficulty": "medium",
       "keywords": [
         "conduit"
@@ -4606,7 +4606,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "358.14",
-      "article_title": "Electrical Metallic Tubing: Type EMT",
+      "article_title": "Electrical Metallic Tubing (EMT)",
       "difficulty": "medium",
       "keywords": [
         "conduit"
@@ -4642,7 +4642,7 @@
       "scene": "",
       "correct_index": 0,
       "article": "352.100, 352.12(B), and 352.60",
-      "article_title": "Rigid Polyvinyl Chloride Conduit: Type PVC",
+      "article_title": "Rigid Polyvinyl Chloride Conduit (PVC)",
       "difficulty": "medium",
       "keywords": [
         "equipment grounding conductor",
@@ -4679,7 +4679,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "358.100",
-      "article_title": "Electrical Metallic Tubing: Type EMT",
+      "article_title": "Electrical Metallic Tubing (EMT)",
       "difficulty": "medium",
       "keywords": [
         "identify the equipment, location, and requirement"
@@ -4715,7 +4715,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "350.12",
-      "article_title": "Liquidtight Flexible Metal Conduit: Type LFMC",
+      "article_title": "Liquidtight Flexible Metal Conduit (LFMC)",
       "difficulty": "medium",
       "keywords": [
         "conduit",
@@ -5043,7 +5043,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "210.52(G)(1)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "receptacle outlet",
@@ -5117,7 +5117,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "210.52(H)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "receptacle outlet",
@@ -5275,7 +5275,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "344.30(B)(2)",
-      "article_title": "Rigid Metal Conduit: Type RMC",
+      "article_title": "Rigid Metal Conduit (RMC)",
       "difficulty": "medium",
       "keywords": [
         "identify the equipment, location, and requirement"
@@ -5487,7 +5487,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "356.22",
-      "article_title": "Liquidtight Flexible Nonmetallic Conduit: Type LFNC",
+      "article_title": "Liquidtight Flexible Nonmetallic Conduit (LFNC)",
       "difficulty": "hard",
       "keywords": [
         "conductors"
@@ -5544,7 +5544,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "344.10(C)",
-      "article_title": "Rigid Metal Conduit: Type RMC",
+      "article_title": "Rigid Metal Conduit (RMC)",
       "difficulty": "hard",
       "keywords": [
         "conduit"
@@ -6131,7 +6131,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "Table 348.22",
-      "article_title": "Flexible Metal Conduit: Type FMC",
+      "article_title": "Flexible Metal Conduit (FMC)",
       "difficulty": "hard",
       "keywords": [
         "identify the equipment, location, and requirement"
@@ -6274,7 +6274,7 @@
       "scene": "",
       "correct_index": 0,
       "article": "210.4(B)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "branch circuit",
@@ -6392,7 +6392,7 @@
       "keywords": [
         "cable"
       ],
-      "lookup_summary": "Lookup clues: cable. Start with 300.4(A)(1), then read the matching subsection and exceptions.",
+      "lookup_summary": "Lookup clues: cable. Start with 300.4(A)(2), then read the matching subsection and exceptions.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nDecode the letters first: MI = Mineral-Insulated (wires in white mineral powder inside a copper tube — fireproof, for hazardous and harsh spots). MC = Metal-Clad (metal armor, goes almost anywhere). NM = Nonmetallic-sheathed, Romex (dry homes only). UF = Underground Feeder (burial and wet spots). SE = Service-Entrance (brings power in). AC = Armored Cable/BX (grounds through its armor plus a bonding strip, needs a red anti-short bushing). USE stays buried outside and may not come indoors.\n\nThis is a minimum-limit question. Subject: NM cable. The correct choice is the minimum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\ncable",
       "reference_text": "300.4(A)(2) Notches in Wood\nWhere there is no objection because of weakening the building structure, in both exposed and concealed locations, cables or raceways shall be permitted to be laid in notches in wood studs, joists, rafters, or other wood members where the cable or raceway at those points is protected from penetration by nails or screws by a steel plate at least 1.6 mm (1/16 in.) thick, and of appropriate length and width, installed to cover the area of the wiring. The steel plate shall be installed before the building finish is applied.\nException No. 1: Steel plates shall not be required to protect rigid metal conduit, intermediate metal conduit, rigid nonmetallic conduit, or electrical metallic tubing.\nException No. 2: A listed and marked steel plate less than 1.6 mm (1/16 in.) thick that provides equal or better protection against nail or screw penetration shall be permitted.",
       "reference_table": [],
@@ -6423,7 +6423,7 @@
       "scene": "",
       "correct_index": 0,
       "article": "210.63",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "ground-fault circuit-interrupter",
@@ -6608,7 +6608,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "210.8(A)(10)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "ground-fault circuit-interrupter",
@@ -6646,7 +6646,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "110.26(B)",
-      "article_title": "Requirements for Electrical Installations",
+      "article_title": "General Requirements for Electrical Installations",
       "difficulty": "medium",
       "keywords": [
         "identify the equipment, location, and requirement"
@@ -6682,7 +6682,7 @@
       "scene": "",
       "correct_index": 0,
       "article": "210.8(B)(2)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "ground-fault circuit-interrupter",
@@ -6756,7 +6756,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "210.8(C)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "ground-fault circuit-interrupter"
@@ -6828,7 +6828,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "210.63(B)(1)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "service equipment",
@@ -6902,7 +6902,7 @@
       "scene": "",
       "correct_index": 0,
       "article": "210.8(E)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "ground-fault circuit-interrupter",
@@ -6975,7 +6975,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "210.11(C)(2)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "branch circuit",
@@ -7173,7 +7173,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "210.50(C)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "receptacle outlet",
@@ -7357,7 +7357,7 @@
       "scene": "",
       "correct_index": 0,
       "article": "210.8(F)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "ground-fault circuit-interrupter",
@@ -7478,7 +7478,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "406.12(1)",
-      "article_title": "Wiring Devices",
+      "article_title": "Receptacles, Cord Connectors, and Attachment Plugs (Caps)",
       "difficulty": "medium",
       "keywords": [
         "ground-fault circuit-interrupter",
@@ -7552,7 +7552,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "406.3(E)",
-      "article_title": "Wiring Devices",
+      "article_title": "Receptacles, Cord Connectors, and Attachment Plugs (Caps)",
       "difficulty": "medium",
       "keywords": [
         "equipment grounding conductor",
@@ -7589,7 +7589,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "210.4(C)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "branch circuit",
@@ -7741,7 +7741,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "210.12(A)(1)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "branch circuit",
@@ -7816,7 +7816,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "406.9(B)",
-      "article_title": "Wiring Devices",
+      "article_title": "Receptacles, Cord Connectors, and Attachment Plugs (Caps)",
       "difficulty": "medium",
       "keywords": [
         "receptacle outlet"
@@ -8051,7 +8051,7 @@
       "scene": "",
       "correct_index": 0,
       "article": "314.27(D) Ex.",
-      "article_title": "Outlet, Device, Pull, and Junction Boxes",
+      "article_title": "Outlet, Device, Pull, and Junction Boxes; Conduit Bodies; Fittings; and Handhole Enclosures",
       "difficulty": "medium",
       "keywords": [
         "box / enclosure"
@@ -8123,7 +8123,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "210.8(A) Ex. 1",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "ground-fault circuit-interrupter",
@@ -8201,7 +8201,7 @@
       "scene": "",
       "correct_index": 0,
       "article": "210.12(B), (C), and (D)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "arc-fault circuit-interrupter",
@@ -8427,7 +8427,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "110.16(A)",
-      "article_title": "Requirements for Electrical Installations",
+      "article_title": "General Requirements for Electrical Installations",
       "difficulty": "medium",
       "keywords": [
         "motor",
@@ -8611,7 +8611,7 @@
       "scene": "",
       "correct_index": 0,
       "article": "110.13(B)",
-      "article_title": "Requirements for Electrical Installations",
+      "article_title": "General Requirements for Electrical Installations",
       "difficulty": "medium",
       "keywords": [
         "identify the equipment, location, and requirement"
@@ -8722,7 +8722,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "210.19(B)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "branch circuit",
@@ -8760,8 +8760,8 @@
       "gist": "Thin paint-type coatings do not qualify as outdoor corrosion protection. The question asks which coating is indoor-only.",
       "scene": "",
       "correct_index": 0,
-      "article": "344.10(A)(4)",
-      "article_title": "Rigid Metal Conduit: Type RMC",
+      "article": "344.10(A)(3)",
+      "article_title": "Rigid Metal Conduit (RMC)",
       "difficulty": "medium",
       "keywords": [
         "raceway"
@@ -9010,7 +9010,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "110.14(C)(2)",
-      "article_title": "Requirements for Electrical Installations",
+      "article_title": "General Requirements for Electrical Installations",
       "difficulty": "medium",
       "keywords": [
         "ampacity",
@@ -9047,7 +9047,7 @@
       "scene": "",
       "correct_index": 0,
       "article": "210.11(A)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "branch circuit",
@@ -9084,7 +9084,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "110.12(B)",
-      "article_title": "Requirements for Electrical Installations",
+      "article_title": "General Requirements for Electrical Installations",
       "difficulty": "medium",
       "keywords": [
         "identify the equipment, location, and requirement"
@@ -9193,7 +9193,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "110.26",
-      "article_title": "Requirements for Electrical Installations",
+      "article_title": "General Requirements for Electrical Installations",
       "difficulty": "medium",
       "keywords": [
         "identify the equipment, location, and requirement"
@@ -9412,7 +9412,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "406.10(C)",
-      "article_title": "Wiring Devices",
+      "article_title": "Receptacles, Cord Connectors, and Attachment Plugs (Caps)",
       "difficulty": "medium",
       "keywords": [
         "grounding electrode",
@@ -9562,7 +9562,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "314.2",
-      "article_title": "Outlet, Device, Pull, and Junction Boxes",
+      "article_title": "Outlet, Device, Pull, and Junction Boxes; Conduit Bodies; Fittings; and Handhole Enclosures",
       "difficulty": "medium",
       "keywords": [
         "equipment grounding conductor",
@@ -9709,7 +9709,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "810.16(B)",
-      "article_title": "Radio and Television Equipment",
+      "article_title": "Antenna Systems",
       "difficulty": "medium",
       "keywords": [
         "conductors"
@@ -9781,7 +9781,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "314.23(E)",
-      "article_title": "Outlet, Device, Pull, and Junction Boxes",
+      "article_title": "Outlet, Device, Pull, and Junction Boxes; Conduit Bodies; Fittings; and Handhole Enclosures",
       "difficulty": "medium",
       "keywords": [
         "conduit",
@@ -9890,7 +9890,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "110.26(A)(1) Condition 2",
-      "article_title": "Requirements for Electrical Installations",
+      "article_title": "General Requirements for Electrical Installations",
       "difficulty": "medium",
       "keywords": [
         "identify the equipment, location, and requirement"
@@ -9926,7 +9926,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "500.5(D)",
-      "article_title": "Hazardous (Classified) Locations",
+      "article_title": "Hazardous (Classified) Locations, Classes I, II, and III, Divisions 1 and 2",
       "difficulty": "medium",
       "keywords": [
         "hazardous location"
@@ -9962,7 +9962,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "406.3(E)",
-      "article_title": "Wiring Devices",
+      "article_title": "Receptacles, Cord Connectors, and Attachment Plugs (Caps)",
       "difficulty": "medium",
       "keywords": [
         "receptacle outlet"
@@ -10034,7 +10034,7 @@
       "scene": "",
       "correct_index": 1,
       "article": "210.52(E)(3)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "receptacle outlet",
@@ -10329,7 +10329,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "210.18",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "branch circuit",
@@ -10660,7 +10660,7 @@
       "scene": "",
       "correct_index": 3,
       "article": "110.26(C)(3)",
-      "article_title": "Requirements for Electrical Installations",
+      "article_title": "General Requirements for Electrical Installations",
       "difficulty": "medium",
       "keywords": [
         "overcurrent protection"
@@ -10856,7 +10856,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "348.28",
-      "article_title": "Flexible Metal Conduit: Type FMC",
+      "article_title": "Flexible Metal Conduit (FMC)",
       "difficulty": "medium",
       "keywords": [
         "conduit"
@@ -10964,7 +10964,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "210.50(C)",
-      "article_title": "Branch Circuits",
+      "article_title": "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal",
       "difficulty": "medium",
       "keywords": [
         "receptacle outlet",
@@ -11283,7 +11283,7 @@
       "scene": "",
       "correct_index": 2,
       "article": "342.30(B)(3)",
-      "article_title": "Intermediate Metal Conduit: Type IMC",
+      "article_title": "Intermediate Metal Conduit (IMC)",
       "difficulty": "medium",
       "keywords": [
         "conduit"
@@ -11319,7 +11319,7 @@
       "scene": "",
       "correct_index": 0,
       "article": "Table 352.30",
-      "article_title": "Rigid Polyvinyl Chloride Conduit: Type PVC",
+      "article_title": "Rigid Polyvinyl Chloride Conduit (PVC)",
       "difficulty": "medium",
       "keywords": [
         "identify the equipment, location, and requirement"

@@ -18,7 +18,7 @@ src/
           exam_blueprint.gd ExamBlueprint: the exam's subject areas, record -> area (NEC pool only), apportionment
           choice_order.gd   ChoiceOrder: per-run choice order, locked questions, pinned choices
           bank_loader.gd    BankLoader: reads data/question_bank.json, normalises records, question pools
-          nec_reference.gd  NecReference: article titles, lookup paths (NEC and Nebraska law)
+          nec_reference.gd  NecReference: article titles (data/nec_2023_articles.json), lookup paths (NEC and Nebraska law)
           safe_area.gd      SafeArea.margins: notch / cutout insets
           audio_settings.gd AudioSettings: audio modes, speed, pauses, sound effects, audio.cfg
           user_dir_migration.gd  UserDirMigration: one-time copy from the pre-1.0 user folder
@@ -47,6 +47,7 @@ src/
           result_gauge.gd  chapter_bars.gd  pace_sparkline.gd  mode_badge.gd
           shaders/          surface (panels, cards, buttons), circuit_backdrop, electric_title
 data/     question_bank.json (never edited by hand)  voices.json
+          nec_2023_articles.json  canonical NEC 2023 chapter and article titles (app, builder, validator)
           exam_blueprint.json (content outline, chapter map, area overrides)
 assets/   diagrams/  sfx/  speech/<qid>__<voice>/ (generated, gitignored)
           branding/  icon.png/.ico, Android icon layers, splash.png; source/ (SVGs, .gdignore)
@@ -284,7 +285,10 @@ tests and the native TTS callbacks refer to them by name.
 `bash tools/verify.sh` runs everything below except the last three:
 
 - import and `--check-only` parse of every script;
-- `tools/tests/run_all.gd`: 29 suites, including `test_touch_scroll` (a
+- `tools/tests/run_all.gd`: 31 suites, including `test_breadcrumb` (every
+  record, shuffled, through the real Next flow in both layouts: the
+  breadcrumb and the "Article N Title — section" line name the record's own
+  chapter and article, from `data/nec_2023_articles.json`), `test_touch_scroll` (a
   swipe over buttons and answer cards scrolls and presses nothing; a tap
   presses), `test_voice_picker` (450 device voices within a time budget,
   names, US-only list, migration), `test_no_leak` (nothing

@@ -38,7 +38,7 @@ func _init() -> void:
 	check(titled.get("article_title") == "Grounding and Bonding", "blank title is looked up")
 	var row := BankLoader.normalize_record(["X", "Q?", ["a", "b", "c", "d"], 1, "NEC 210.12", "", "", "hard"])
 	check(row.get("exam") == "X" and row.get("correct_index") == 1 and row.get("difficulty") == "hard", "array row")
-	check(row.get("article_title") == "Branch Circuits", "array row title")
+	check(row.get("article_title") == NecReference.canonical_article_title(210), "array row title")
 	check(BankLoader.normalize_record(["too", "short"]).is_empty(), "short array rejected")
 	check(BankLoader.normalize_record("text").is_empty(), "non-record rejected")
 

@@ -269,6 +269,128 @@ def article_reference_is_recognized(reference: str) -> bool:
     return ARTICLE_RE.match(clean) is not None
 
 
+# --------------------------------------------------------------------------
+# locations: breadcrumb, reference line and every citation point at the same,
+# existing NEC 2023 place
+# --------------------------------------------------------------------------
+NEC_ARTICLES_PATH = ROOT / "data" / "nec_2023_articles.json"
+PRIMARY_ARTICLE_RE = re.compile(r"^(?:NEC\s+)?(?:Table\s+|Article\s+)?(\d{2,3})(?:\.\d|\b)")
+PRIMARY_SECTION_RE = re.compile(r"^(?:NEC\s+)?(?:Table\s+)?(\d{3}\.\d+)((?:\([A-Za-z0-9]+\))*)")
+CITATION_RE = re.compile(r"(?<![\d.$])([1-8]\d\d)\.(\d+)((?:\([A-Za-z0-9]+\))*)(?!\d)")
+ARTICLE_CITATION_RE = re.compile(r"\bArticles?\s+([1-8]\d\d|90)\b")
+# Explanatory fields: the exam's own wording (prompt, answers) may quote old
+# numbers as distractors; everything the app writes must use 2023 numbering.
+EXPLANATION_FIELDS = ["gist", "info_tip", "lookup_summary", "reference_text", "reference_table",
+                      "tip_title", "tip_short", "choice_notes", "formula", "worked"]
+# Section numbers that exist only in earlier editions, with their 2023 home.
+PRE_2023_SECTIONS = [
+    (re.compile(r"\b310\.15\(B\)\(16\)"), "Table 310.16 (renumbered in 2020)"),
+    (re.compile(r"\b310\.15\(B\)\(2\)\(a\)"), "Table 310.15(B)(1)(1) (renumbered in 2020)"),
+    (re.compile(r"\b310\.104\b"), "Table 310.4(1) (renumbered in 2020)"),
+    (re.compile(r"\bTable 220\.12\b"), "Table 220.42(A) (renumbered in 2023)"),
+    (re.compile(r"\b725\.(?:4[1-9]|5\d)\b"), "Article 724 (Class 1 moved in 2023)"),
+    (re.compile(r"\b300\.50\b"), "305.15 (moved in 2023)"),
+    (re.compile(r"\bArticle (?:311|399|490|727|720)\b"), "renumbered or deleted in 2023"),
+]
+
+
+def load_nec_articles(path: Path = NEC_ARTICLES_PATH) -> dict:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return {int(k): v for k, v in data["articles"].items()}
+
+
+def primary_article(reference: str) -> int | None:
+    if not isinstance(reference, str) or STATE_LAW_RE.match(reference.strip()):
+        return None
+    m = PRIMARY_ARTICLE_RE.match(reference.strip())
+    return int(m.group(1)) if m else None
+
+
+def subsections_agree(a: str, b: str) -> bool:
+    """'(A)(3)' and '(A)' agree (one narrows the other); '(A)(3)' and '(A)(4)' do not."""
+    pa, pb = re.findall(r"\(([A-Za-z0-9]+)\)", a), re.findall(r"\(([A-Za-z0-9]+)\)", b)
+    n = min(len(pa), len(pb))
+    return pa[:n] == pb[:n]
+
+
+def _flat(value) -> str:
+    if isinstance(value, list):
+        return "\n".join(_flat(v) for v in value)
+    return value if isinstance(value, str) else ""
+
+
+def location_problems(rec: dict, articles: dict) -> list[str]:
+    """Every way a record can point the learner at the wrong place in the NEC."""
+    problems: list[str] = []
+    if rec.get("section") == "ne_state_law":
+        return problems
+    reference = rec.get("article", "")
+    article = primary_article(reference)
+    if article is None:
+        return problems
+    if article not in articles:
+        return [f"article {reference!r}: {article} is not an NEC 2023 article"]
+    if rec.get("article_title") != articles[article]:
+        problems.append(f"article_title {rec.get('article_title')!r} is not the NEC 2023 title of "
+                        f"Article {article} ({articles[article]!r})")
+
+    heading = _flat(rec.get("reference_text")).split("\n", 1)[0]
+    heading_article = primary_article(heading)
+    if heading and heading_article != article:
+        problems.append(f"provision heading {truncate(heading, 60)!r} is not in Article {article}")
+    primary = PRIMARY_SECTION_RE.match(reference.strip())
+    if primary and heading:
+        base = primary.group(1)
+        head = PRIMARY_SECTION_RE.match(heading.strip())
+        if head is None or head.group(1) != base:
+            problems.append(f"provision heading {truncate(heading, 60)!r} does not start with {base}")
+        elif not subsections_agree(head.group(2), primary.group(2)):
+            problems.append(f"provision heading {head.group(0)} and citation {primary.group(0)} name different subsections")
+
+    start = re.search(r"Start with ([^,]+?)(?:, then|\.\s|$)", _flat(rec.get("lookup_summary")))
+    if start and primary:
+        hint = PRIMARY_SECTION_RE.match(start.group(1).strip())
+        if hint is None or hint.group(1) != primary.group(1) or not subsections_agree(hint.group(2), primary.group(2)):
+            problems.append(f"lookup_summary starts with {start.group(1)!r}, not {primary.group(0)}")
+
+    # The correct choice's rationale and the tip cite the primary section; a
+    # neighbouring subsection of the same section is a typo unless the quoted
+    # provision itself mentions it.
+    if primary:
+        base, sub = primary.group(1), primary.group(2)
+        provision = _flat(rec.get("reference_text")) + "\n" + _flat(rec.get("reference_table"))
+        ci = rec.get("correct_index")
+        notes = rec.get("choice_notes") if isinstance(rec.get("choice_notes"), list) else []
+        tip = _flat(rec.get("tip_short"))
+        correct_part = re.search(r"Correct: .*?(?= Not [A-D]: |$)", tip, re.S)
+        texts = [correct_part.group(0) if correct_part else tip]
+        if isinstance(ci, int) and 0 <= ci < len(notes):
+            texts.append(_flat(notes[ci]))
+        first_sub = re.match(r"\(([A-Za-z0-9]+)\)", sub)
+        for text in texts:
+            for m in CITATION_RE.finditer(text):
+                cited = f"{m.group(1)}.{m.group(2)}"
+                cited_sub = re.match(r"\(([A-Za-z0-9]+)\)", m.group(3))
+                if cited == base and first_sub and cited_sub and cited_sub.group(1) != first_sub.group(1) \
+                        and m.group(0) not in provision and m.group(0) not in reference:
+                    problems.append(f"rationale cites {m.group(0)} but the provision is {reference}")
+
+    for field in EXPLANATION_FIELDS:
+        text = _flat(rec.get(field))
+        for m in CITATION_RE.finditer(text):
+            if int(m.group(1)) not in articles:
+                problems.append(f"{field} cites {m.group(0)}: {m.group(1)} is not an NEC 2023 article")
+        for m in ARTICLE_CITATION_RE.finditer(text):
+            if int(m.group(1)) not in articles:
+                problems.append(f"{field} cites Article {m.group(1)}, not an NEC 2023 article")
+        for rx, home in PRE_2023_SECTIONS:
+            for m in rx.finditer(text):
+                sentence = text[text.rfind(".", 0, m.start()) + 1:text.find(".", m.end()) + 1 or None]
+                if not re.search(r"\b(?:old|numbering|renumbered|earlier edition)\b", sentence, re.I):
+                    problems.append(f"{field} cites {m.group(0)}, pre-2023 numbering: {home}")
+    return problems
+
+
 def ragged_table_rows(table: list) -> list[tuple[int, int]]:
     """Return malformed width deviations, excluding recognized one-cell notes."""
     if not table or not isinstance(table[0], list):
@@ -419,6 +541,7 @@ def check_records(data, rep: Report) -> dict:
         return stats
 
     seen_ids: dict[str, int] = {}
+    nec_articles = load_nec_articles()
 
     for i, rec in enumerate(recs):
         if not isinstance(rec, dict):
@@ -473,6 +596,9 @@ def check_records(data, rep: Report) -> dict:
         if isinstance(rec.get("article"), str) and STATE_LAW_RE.match(rec["article"].strip()) \
                 and rec.get("section") != "ne_state_law":
             rep.error(f"{rid}: Nebraska law citation {rec['article']!r} without section 'ne_state_law'")
+
+        for problem in location_problems(rec, nec_articles):
+            rep.error(f"{rid}: location: {problem}")
 
         # question_number
         qn = rec.get("question_number")

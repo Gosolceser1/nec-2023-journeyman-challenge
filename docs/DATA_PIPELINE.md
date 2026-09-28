@@ -35,6 +35,8 @@ The OCR scripts skip output files that already exist. Remove or replace a stale 
 
 The raw OCR/parser output is normalized by the deterministic field overlay in `tools/pipeline/question_bank_overrides.json`. `tools/pipeline/bank_overrides.py` applies those reviewed, record-ID keyed changes after parsing, preserving the curated bank without scattering one-off edits through the OCR pipeline.
 
+`article_title` is never curated by hand: after the overlay, the builder sets it from the record's primary cited article (the first section in `article`) using `data/nec_2023_articles.json`, the NEC 2023 table of contents as listed on UpCodes. The app's breadcrumb and the validator read the same table. The validator's location rules (`location_problems`) fail the gate when a title is not the canonical one, when the provision heading or the lookup hint names another article or subsection, when the correct choice's rationale cites a neighbouring subsection the provision never mentions, when an explanation cites an article that is not in NEC 2023, or when it uses a pre-2023 number without calling it old. `docs/LOCATION_AUDIT.md` records the audit that introduced them.
+
 Every build still writes to a separate candidate path. `tools/pipeline/build_question_bank.sh` refuses the checked-in `question_bank.json` so an unreviewed candidate cannot overwrite the learner bank. A controlled build with the current source and overlay produced all 283 records and exactly matched the checked-in bank; strict validation reported 0 errors and 0 warnings. This proves reproducibility and schema validity, not NEC answer correctness.
 
 To intentionally refresh the overlay after a reviewed bank change:

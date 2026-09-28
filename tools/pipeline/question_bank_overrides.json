@@ -221,7 +221,6 @@
     },
     "final-exam-#1-044": {
       "article": "Article 100",
-      "article_title": "Definitions",
       "reference_text": "Article 100 Definitions — Ground Fault\nGround Fault. An unintentional, electrically conductive connection between an ungrounded conductor of an electrical circuit and the normally non-current-carrying conductors, metal enclosures, metal raceways, metal equipment, or earth. (CMP—5)",
       "worked": "",
       "tip_short": "A hot conductor unintentionally touching metal parts, raceway, or earth is a ground fault per Article 100. Correct: A — ground fault. Article 100 defines this unintentional hot-to-metal or hot-to-earth connection as a ground fault. Not B: An open circuit is a broken path with no current flow, not a connection to ground. Not C: A short circuit is hot to another circuit conductor, not specifically to metal parts or earth. Not D: Circuit bypass is not an NEC defined term for a connection to ground.",
@@ -627,7 +626,7 @@
         "THHN is dry or damp location building wire and is not permitted for direct burial."
       ],
       "prompt": "For general wiring, ___ type cable containing one or more conductors is approved for direct burial in earth.",
-      "article_title": "Service-Entrance Cable: Types SE and USE"
+      "lookup_summary": "Lookup clues: cable, conductors. Start with 338.100, then read the matching subsection and exceptions."
     },
     "final-exam-#5-023": {
       "reference_text": "336.24 Bending Radius\nBends in Type TC cable shall be made so as not to damage the cable. For Type TC cable without metal shielding, the minimum bending radius shall be as follows:\nFour times the overall diameter for cables 25 mm (1 in.) or less in diameter\nFive times the overall diameter for cables larger than 25 mm (1 in.) but not more than 50 mm (2 in.) in diameter\nSix times the overall diameter for cables larger than 50 mm (2 in.) in diameter\nType TC cables with metallic shielding shall have a minimum bending radius of not less than 12 times the cable overall diameter.",
@@ -1312,7 +1311,7 @@
         "Galvanizing provides corrosion protection suitable for outdoor use, unlike enamel.",
         "Rubber is not a corrosion coating addressed in 344.10(A)(3)."
       ],
-      "article": "344.10(A)(4)"
+      "article": "344.10(A)(3)"
     },
     "open-book-exam-#7-015": {
       "reference_text": "310.15(A) General\nAmpacities for conductors rated 0 volts to 2000 volts shall be as specified in the Ampacity Table 310.16 through Table 310.21, as modified by 310.15(A) through (F) and 310.12. Under engineering supervision, ampacities of sizes not shown in ampacity tables for conductors meeting the general wiring requirements shall be permitted to be determined by interpolation of the adjacent conductors based on the conductor's circular-mil area.\nThe temperature correction and adjustment factors shall be permitted to be applied to the ampacity for the temperature rating of the conductor, if the corrected and adjusted ampacity does not exceed the ampacity for the temperature rating of the termination in accordance with 110.14(C).",
@@ -1684,7 +1683,6 @@
     },
     "final-exam-#5-035": {
       "article": "Article 100",
-      "article_title": "Definitions",
       "reference_text": "Article 100 Definitions — Tubing, Electrical Nonmetallic (ENT)\nTubing, Electrical Nonmetallic (ENT). (Electrical Nonmetallic Tubing) A nonmetallic, pliable, corrugated raceway of circular cross section with integral or associated couplings, connectors, and fittings for the installation of electrical conductors. It is composed of a material that is resistant to moisture and chemical atmospheres and is flame retardant.\nA pliable raceway is a raceway that can be bent by hand with a reasonable force but without other assistance. (CMP—8)",
       "tip_short": "Pliable means you can bend it by hand with reasonable force, like ENT, with no heat or tools. Correct: C — manually. Article 100 says a pliable raceway can be bent by hand with reasonable force, without other assistance. Not A: Bending with heat describes PVC conduit, not a pliable raceway. Not B: Without heat is incomplete; the definition says bent by hand without other assistance. Not D: Easily is not the Code wording; the definition says by hand with a reasonable force.",
       "choice_notes": [
@@ -2122,7 +2120,8 @@
         "3/32 inch is thicker than required; the Code minimum is 1/16 inch.",
         "1/8 inch exceeds the minimum; 300.4(A)(2) requires only 1/16 inch steel plate.",
         "3/16 inch is three times the required 1/16 inch minimum thickness."
-      ]
+      ],
+      "lookup_summary": "Lookup clues: cable. Start with 300.4(A)(2), then read the matching subsection and exceptions."
     },
     "final-exam-#1-009": {
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nLoad calculations never just add everything up, because a home never runs all loads at once. Start with 3 VA per square foot of living space (outside dimensions, minus open porches and unfinished spaces), add 1,500 VA for each small-appliance and laundry circuit, then shrink the subtotal with the demand factor (first 3,000 VA at full value, 3,001 to 120,000 VA at 35%, the remainder at 25%). Ranges and dryers use their own tables — a range nameplate is only the starting point. Heat and AC: count the larger one, never both.\n\nThis asks which conductor color the NEC allows here. Recall which colors are reserved (grounded, grounding) and which remain for ungrounded conductors.\n\nLOOKUP FOCUS\ngrounded conductor, conductors",
@@ -2136,7 +2135,6 @@
         "Pink is not white, gray, or green, so it is clearly distinguishable from grounded and grounding conductors.",
         "White identifies a grounded (neutral) conductor, so it cannot be the ungrounded conductor color."
       ],
-      "article_title": "Conductors for General Wiring",
       "tip_title": "Conductor identification"
     },
     "final-exam-#1-010": {
@@ -2860,7 +2858,7 @@
       "prompt": "Appliances, ___ provided for public use rated 250v or less and 60 amps or less, single-phase or three-phase, shall be provided with GFCI protection for personnel."
     },
     "final-exam-#3-031": {
-      "reference_text": "800.44(B) Above Roofs\nCommunications wires and cables and CATV-type coaxial cables shall have a vertical clearance of not less than 2.5 m (8 ft) from all points of roofs above which they pass.\nException No. 1: Communications wires and cables and CATV-type coaxial cables shall not be required to have a vertical clearance of not less than 2.5 m (8 ft) above auxiliary buildings, such as garages and the like.\nException No. 2: A reduction in clearance above only the overhanging portion of the roof to not less than 450 mm (18 in.) shall be permitted if (1) not more than 1.2 m (4 ft) of communications and CATV-type service-drop conductors pass above the roof overhang and (2) they are terminated at a through- or above-the-roof raceway or approved support.",
+      "reference_text": "800.44 Overhead (Aerial) Wires and Cables\n800.44(A)(1) Relative Location\nIf practicable, the communications wires and cables and CATV-type coaxial cables shall be located below the electric light or power conductors.\n800.44(A)(2) Attachment to Cross-Arms\nCommunications wires and cables and CATV-type coaxial cables shall not be attached to a cross-arm that carries electric light or power conductors.\n800.44(B) Above Roofs\nCommunications wires and cables and CATV-type coaxial cables shall have a vertical clearance of not less than 2.5 m (8 ft) from all points of roofs above which they pass.\nException No. 1: Communications wires and cables and CATV-type coaxial cables shall not be required to have a vertical clearance of not less than 2.5 m (8 ft) above auxiliary buildings, such as garages and the like.\nException No. 2: A reduction in clearance above only the overhanging portion of the roof to not less than 450 mm (18 in.) shall be permitted if (1) not more than 1.2 m (4 ft) of communications and CATV-type service-drop conductors pass above the roof overhang and (2) they are terminated at a through-the-roof raceway or approved support.",
       "tip_short": "Overhead communications: below power where practicable, off power cross-arms, and 8 feet above roofs. Correct: D — any of the above. All three listed requirements apply to overhead communications cables, so this choice covers each one. Not A: 800.44(A)(1) requires communications cables to be located below power conductors where practicable, but the other rules apply too. Not B: 800.44(A)(2) prohibits attaching communications cables to a cross-arm that carries power conductors, but the other rules also apply. Not C: 800.44(B) requires 2.5 m (8 feet) above roofs, but the other rules also apply.",
       "choice_notes": [
         "800.44(A)(1) requires communications cables to be located below power conductors where practicable, but the other rules apply too.",
@@ -2868,7 +2866,9 @@
         "800.44(B) requires 2.5 m (8 feet) above roofs, but the other rules also apply.",
         "All three listed requirements apply to overhead communications cables, so this choice covers each one."
       ],
-      "prompt": "Where overhead communications wires and cables enter buildings, they must ___."
+      "prompt": "Where overhead communications wires and cables enter buildings, they must ___.",
+      "article": "800.44",
+      "lookup_summary": "Lookup clues: cable, conductors. Start with 800.44, then read the matching subsection and exceptions."
     },
     "final-exam-#3-037": {
       "reference_text": "354.28 Trimming\nFor termination, the conduit shall be trimmed away from the conductors or cables using an approved method that will not damage the conductor or cable insulation or jacket. All conduit ends shall be trimmed inside and out to remove rough edges.",
