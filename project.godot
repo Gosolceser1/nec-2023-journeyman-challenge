@@ -35,8 +35,10 @@ general/text_to_speech=true
 
 [input_devices]
 
-; Touch is handled directly (AnswerCard tracks ScreenTouch; Buttons and
-; ScrollContainers are touch-native). Mouse emulation would double-fire taps.
+; Touch is handled directly: AnswerCard tracks ScreenTouch with a slop check,
+; Buttons take ScreenTouch natively, and TouchScroll (src/ui/touch_scroll.gd)
+; drag-scrolls every ScrollContainer, because Godot's own ScrollContainer and
+; PopupMenu react only to mouse events. Mouse emulation would double-fire taps.
 ;
 ; NOTE: these comments MUST start with ";", not "#". project.godot is parsed by
 ; ConfigFile, whose only comment character is ";". With "#" the two comment lines

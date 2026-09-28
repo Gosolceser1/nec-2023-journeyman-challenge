@@ -104,6 +104,8 @@ var info_label: RichTextLabel
 var next_button: Button
 var read_button: Button
 var voice_picker: OptionButton
+## Finger drag-to-scroll for every ScrollContainer (see TouchScroll).
+var touch_scroll: TouchScroll
 var restart_button: Button
 var dock_visualizer: VoiceVisualizer
 var prompt_visualizer: VoiceVisualizer
@@ -276,6 +278,10 @@ func _ready() -> void:
 	UiFx.apply_reduce_motion(get_tree(), audio.reduce_motion)
 	_polish_controls()
 	_apply_touch_filters()
+	touch_scroll = TouchScroll.new()
+	touch_scroll.name = "TouchScroll"
+	touch_scroll.root = self
+	add_child(touch_scroll)
 	_apply_safe_area()
 	# OS voices can arrive late on mobile: silently refresh the picker a few
 	# seconds after launch so the first Read already offers real voices.
@@ -1127,10 +1133,11 @@ func _on_reader_finished() -> void: speech._on_reader_finished()
 func _halt_player() -> void: speech._halt_player()
 
 func _apply_touch_filters() -> void:
-	# Touch scrolling dies when decoration swallows drag starts (MOUSE_FILTER_STOP
-	# grabs the gesture). Interactive nodes get PASS (own input + drags propagate);
-	# everything else inside scrollable areas gets IGNORE. Scrollers get a real
-	# touch deadzone so jittery taps aren't eaten by instant scroll-starts.
+	# Finger drags are scrolled by touch_scroll before the GUI sees them, so these
+	# filters no longer decide whether a page scrolls. They keep a mouse drag and a
+	# touchscreen laptop's wheel/pan events reaching the scroller: interactive
+	# nodes get PASS, everything else inside scrollable areas gets IGNORE, and
+	# scrollers a deadzone so jittery presses aren't eaten by instant scroll-starts.
 	#
 	# menu_overlay must be walked TOO, not just its menu_center_box child: the
 	# overlay's own ScrollContainer sits ABOVE menu_center_box in the tree, so

@@ -220,6 +220,11 @@ func _draw_zoom_hint() -> void:
 	draw_line(c + Vector2(1.4, 1.4), c + Vector2(4.5, 4.5), AppTheme.SKY_700, 1.8, true)
 
 
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_SCROLL_BEGIN:
+		_press_pos = Vector2.INF
+
+
 func _gui_input(event: InputEvent) -> void:
 	if not has_content():
 		return

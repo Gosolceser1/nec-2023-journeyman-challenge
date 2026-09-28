@@ -127,6 +127,10 @@ func _notification(what: int) -> void:
 		var box := get_parent() as Container
 		if box != null and not box.sort_children.is_connected(_reapply_lift):
 			box.sort_children.connect(_reapply_lift)
+	elif what == NOTIFICATION_SCROLL_BEGIN:
+		# A scroller took the finger (TouchScroll): this touch can no longer answer.
+		_touch_press_index = -1
+		cancel_press()
 
 # Hover/focus lift: a y offset on top of wherever the answers box placed the
 # card, so the fitted layout never moves. The box resets positions whenever
@@ -662,6 +666,7 @@ func _on_gui_input(event: InputEvent) -> void:
 		return
 	if event is InputEventScreenDrag and event.index == _touch_press_index:
 		if _touch_press_pos.distance_to(event.position) > TOUCH_SLOP_PX:
+			_touch_press_index = -1
 			cancel_press()
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
