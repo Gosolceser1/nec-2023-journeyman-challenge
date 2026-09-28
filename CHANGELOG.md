@@ -1,5 +1,37 @@
 # Changelog
 
+## 1.0.2 (2026-09-28)
+
+Android: the natural online voices from Windows are now available. Verified
+on desktop (a local fake of the voice service, and the phone layout against
+the real service); not yet checked on a real Android device (see
+docs/KNOWN_ISSUES.md).
+
+### Fixed
+
+- **Android: the Windows voices were missing.** On Windows the voices other
+  than the recorded Andrew are Microsoft Edge neural voices made by a Python
+  helper (edge-tts). Android cannot run Python, so the phone only ever listed
+  its own device voices. A new built-in client talks to the same Edge voice
+  service directly, and the phone's voice list now reads: Andrew · Recorded
+  (offline), then the US English Edge voices such as
+  "Ava · Female · Online (natural)" and "Brian · Male · Online (natural)"
+  (gender from Microsoft's voice data), then the device voices. The British
+  Ryan stays on Windows only (US English on the phone). The app now asks for
+  the Internet permission.
+
+### Changed
+
+- **No internet, no waiting.** If an online voice cannot be reached, the
+  question is read at once by the recorded Andrew (or a device voice when a
+  line has no recording), and the status line says so, for example
+  "Andrew (recorded, no internet)". After a failed connection the app does
+  not try again for 30 seconds, so the next questions do not wait either.
+  Clips are cached, so a question heard once plays offline later. The same
+  fallback to the recorded Andrew now also applies on Windows when an Edge
+  voice is unavailable.
+- The rule still never plays before you answer, with every voice.
+
 ## 1.0.1 (2026-09-28)
 
 Android fixes. Verified on desktop with synthetic touch input; not yet

@@ -24,8 +24,11 @@ VOICE
 The questions and explanations are read by a recorded neural voice, "Andrew"
 (en-US-AndrewNeural), generated with Microsoft's Edge text-to-speech service
 through the open-source edge-tts tool. The recordings ship inside the app; no
-internet connection is used to play them. Microsoft and Microsoft Edge are
-trademarks of the Microsoft group of companies.
+internet connection is used to play them. The other named voices in the voice
+list (Ava, Brian, Emma and the rest) are Microsoft Edge neural voices,
+fetched from the same service only when picked; they need an internet
+connection. Microsoft and
+Microsoft Edge are trademarks of the Microsoft group of companies.
 
 
 FONTS

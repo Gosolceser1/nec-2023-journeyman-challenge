@@ -4,7 +4,7 @@
 <h1 align="center">NEC 2023 Journeyman Challenge</h1>
 <p align="center">A study app for the <strong>NEC 2023</strong> <strong>journeyman electrician</strong> exam: timed drills, a full exam simulator built on the <strong>Nebraska</strong> exam blueprint, and a lesson after every answer.</p>
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.1-38bdf8" alt="Version 1.0.1">
+  <img src="https://img.shields.io/badge/version-1.0.2-38bdf8" alt="Version 1.0.2">
   <img src="https://img.shields.io/badge/platform-Windows%20x64%20%7C%20Android-0b1221" alt="Platform: Windows x64 | Android">
   <img src="https://img.shields.io/badge/engine-Godot%204.7-478cbf?logo=godotengine&logoColor=white" alt="Engine: Godot 4.7">
   <img src="https://img.shields.io/badge/NEC-2023-f59e0b" alt="NEC 2023">
@@ -19,8 +19,8 @@ Get the latest build from the
 
 | File | Best for | Requirement |
 |---|---|---|
-| `NEC2023JourneymanChallenge_v1.0.1_Windows.zip` | Windows PCs | Windows 10/11, 64-bit; no install |
-| `NEC2023JourneymanChallenge_v1.0.1_Android.apk` | Android phones and tablets | Allow installs from unknown sources |
+| `NEC2023JourneymanChallenge_v1.0.2_Windows.zip` | Windows PCs | Windows 10/11, 64-bit; no install |
+| `NEC2023JourneymanChallenge_v1.0.2_Android.apk` | Android phones and tablets | Allow installs from unknown sources |
 
 **Windows:** unzip and run `NEC 2023 Journeyman Challenge.exe`. The app is not
 code-signed, so the first time you open it Windows SmartScreen may show
@@ -52,7 +52,10 @@ if Android asks.
   every session, drills draw from no-repeat decks until a subject area is used
   up, and missed questions come back two sessions later.
 - **Read-aloud voice:** questions and lessons can be read by a recorded voice
-  that ships with the app, including a hands-free Listen mode.
+  that ships with the app, including a hands-free Listen mode. With internet,
+  Microsoft's natural online voices (Ava, Brian, Emma and more, US English)
+  can read too: built in on Android, and on Windows when Python with edge-tts
+  is installed. Without a connection the recorded voice takes over.
 - **Reference tables and diagrams** right next to the question, with tables
   laid out to fit the screen.
 - **Electrical answer animations and sounds** (with a Reduce motion option),
