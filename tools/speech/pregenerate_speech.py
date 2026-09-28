@@ -38,6 +38,10 @@ def app_name() -> str:
 
 def user_dir() -> Path:
     base = os.environ.get("APPDATA") or str(Path.home() / "AppData" / "Roaming")
+    text = (ROOT / "project.godot").read_text(encoding="utf-8")
+    custom = re.search(r'config/custom_user_dir_name="([^"]+)"', text)
+    if custom and re.search(r"config/use_custom_user_dir=true", text):
+        return Path(base) / custom.group(1)
     return Path(base) / "Godot" / "app_userdata" / app_name()
 
 

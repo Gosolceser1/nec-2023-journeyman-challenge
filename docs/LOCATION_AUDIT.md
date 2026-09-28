@@ -219,7 +219,24 @@ snapshots and with in-page text extraction.
   The table keeps the UpCodes wording, except that it lowercases "and" after a
   semicolon in 314. Article 712 (Direct Current Microgrids, 2020) is not in
   NEC 2023 and was dropped from the table.
-- **Section numbers, headings and text:**
+- **Broad sweep of the bank's cited sections:** 199 distinct primary
+  sections and tables, grouped by chapter and read with in-page text
+  extraction. 156 were located with their headings as cited. 43 were not
+  matched by the text search, which proves nothing either way: the matcher
+  misses deep subsections and tables, and several of the 43 (210.52(A)(2),
+  240.21(B)(1), 250.122(F)(1), Table 310.15(B)(1)(1)) were read directly in
+  the targeted pass below. Not matched:
+  - Ch 1: 110.14(C)(2), 110.26(B), 110.26(C)(3), 110.26(E)(1).
+  - Ch 2: Tables 210.21(B)(2), 220.54, 220.55, 250.122; 210.8(C), 210.8(E),
+    210.11(C)(2), 210.52(A)(2), 210.52(E)(3), 210.52(H), 210.63(B)(1),
+    225.19(D)(1), 240.5(B)(1), 240.5(B)(4), 240.21(B)(1), 250.52(A)(2),
+    250.53(A)(5), 250.122(F)(1).
+  - Ch 3: 300.5(F), 305.15(E), 310.15(F), 314.24(B)(5), 314.27(D),
+    338.10(B)(3), 366.23(A), Tables 310.15(B)(1)(1), 310.16, 348.22.
+  - Ch 4: 422.16(B)(1), Tables 400.4, 430.37, 430.250.
+  - Ch 5: 500.5(D), 500.5(D)(2), 590.4(F), 590.4(G), 590.4(J).
+  - Ch 6: 630.31(A)(2), 680.22(A)(2), 680.43(B)(1).
+- **Section numbers, headings and text (targeted pass):**
   - https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials
     - 314.23(E) Raceway-Supported Enclosure, Without Devices, Luminaires, or Lampholders: full text matches open-book-exam-#10-013.
     - 344.10(A) Atmospheric Conditions and Occupancies: (1) Galvanized Steel, Stainless Steel, and Red Brass RMC; (2) Aluminum RMC; (3) Ferrous Raceways and Fittings (enamel, indoors only). 344.10(B) Corrosive Environments: (B)(1), (B)(2).
