@@ -24,13 +24,15 @@ src/
           user_dir_migration.gd  UserDirMigration: one-time copy from the pre-1.0 user folder
   speech/ speech_controller.gd  SpeechController: bundled clips, Edge helper and cache,
                                 native TTS, play queue, teach gate, voice picker
-          voice_catalog.gd      VoiceCatalog: voices.json, device voice tiers/labels, voice.cfg
+          voice_catalog.gd      VoiceCatalog: voices.json, US device voice names (docs/ANDROID_VOICES.md), voice.cfg
           speech_helper.gd      SpeechHelper node: talks to speak_question.py --serve
           speak_question.py     desktop Edge TTS helper (shipped, copied out at runtime)
           speech_text.gd  speech_rules.gd  audio_explanation_generator.gd  unit_matcher.gd
                                 what gets spoken (see docs/VOICE_READING_RULES.md)
   ui/     app_theme.gd      AppTheme: the palette (Tailwind names + role names), panel/font factories
-          widgets.gd        Widgets: mode buttons, dock buttons, chips, voice picker
+          widgets.gd        Widgets: mode buttons, dock buttons, chips, voice picker, mobile voice button
+          touch_scroll.gd   TouchScroll: finger drag-to-scroll for every ScrollContainer, tap vs swipe
+          voice_sheet.gd    VoiceSheet: the mobile voice list (rows built a batch per frame)
           fit_controller.gd FitController: keeps the question screen at 0% scroll
           table_viewer.gd   TableViewer: reference tables that never scroll (column fit, folding, type steps)
           info_panel_renderer.gd  InfoPanelRenderer: the explanation RichTextLabel
@@ -47,7 +49,8 @@ data/     question_bank.json (never edited by hand)  voices.json
           exam_blueprint.json (content outline, chapter map, area overrides)
 assets/   diagrams/  sfx/  speech/<qid>__<voice>/ (generated, gitignored)
           branding/  icon.png/.ico, Android icon layers, splash.png; source/ (SVGs, .gdignore)
-docs/     this file, DATA_PIPELINE, VOICE_READING_RULES, SFX_PLAN, KNOWN_ISSUES, RELEASE, ...
+docs/     this file, DATA_PIPELINE, VOICE_READING_RULES, SFX_PLAN, KNOWN_ISSUES, RELEASE,
+          ANDROID_VOICES, ... (.gdignore: Godot never imports docs/)
 tools/    verify.sh  harness.gd  list_pck.py
           branding/  build_branding.py + render_svg.gd: every icon and the splash from the SVGs
           release/   make_release.py, the recipient README/CREDITS, dump_licenses.gd (docs/RELEASE.md)
@@ -161,6 +164,35 @@ The native TTS callbacks are registered as `Callable(self, "...")` on the
 controller. Signal targets that the golden layout test records are
 `main.speech._on_...`.
 
+**Device voices (Android).** `_device_voice_list()` asks the OS
+(`DisplayServer.tts_get_voices`, a binder call on Android) once and caches
+the answer; an empty answer is asked again at most every 2 s, from the launch
+timer or when the voice sheet opens, never on every open. Tests swap the OS
+in through `voice_source`. `VoiceCatalog.device_voice_rows` keeps only US
+English voices, one per voice (the offline copy of a local/network pair),
+labels them from `US_VOICE_NAMES` ("Female 1 · US English · Offline"; unknown
+codes get a neutral "Voice A") and ends with "System default"; the table and
+its sources are in docs/ANDROID_VOICES.md. The mobile picker is the hidden
+`voice_picker` OptionButton (it holds the list and the selection) behind
+`voice_button`, which opens `VoiceSheet`: a PopupMenu reacts only to mouse
+events, which the app does not emulate. `pick_voice` applies a row once and
+ignores re-entry. `_load_voice_choice` migrates a saved id with
+`VoiceCatalog.migrate_voice_id` (non-US or missing: Andrew).
+
+### Touch input
+
+`input_devices/pointing/emulate_mouse_from_touch` is off, so a finger never
+produces mouse events (with emulation, a scroll could select an answer
+card). Godot's ScrollContainer and PopupMenu drag and pick only on mouse
+events, so `main.touch_scroll` (TouchScroll, a child node) scrolls instead.
+In `_input`, before the GUI, it hit-tests the touch point itself; once a drag
+passes `DRAG_THRESHOLD` (14 px, under the answer card's 20 px slop) it picks
+the axis, finds the innermost ScrollContainer that can scroll that way,
+sends `NOTIFICATION_SCROLL_BEGIN` down that container (BaseButton cancels its
+press, AnswerCard and DiagramView drop theirs), swallows the rest of the
+gesture and flings on release. A touch that never passes the threshold is
+left alone, so Buttons (ScreenTouch-native) and AnswerCard still see a tap.
+
 ### Sound effects
 
 `main.sfx` (Sfx, a child node with one pre-loaded player per sound on the
@@ -230,7 +262,10 @@ tests and the native TTS callbacks refer to them by name.
 `bash tools/verify.sh` runs everything below except the last three:
 
 - import and `--check-only` parse of every script;
-- `tools/tests/run_all.gd`: 27 suites, including `test_no_leak` (nothing
+- `tools/tests/run_all.gd`: 29 suites, including `test_touch_scroll` (a
+  swipe over buttons and answer cards scrolls and presses nothing; a tap
+  presses), `test_voice_picker` (450 device voices within a time budget,
+  names, US-only list, migration), `test_no_leak` (nothing
   before answering reveals the answer), `test_layout_tree` (serialised node
   tree of both layouts against `tools/tests/golden/`; `-- --update` rewrites
   the snapshots after an intended change), `test_menu_cards` (cards stay

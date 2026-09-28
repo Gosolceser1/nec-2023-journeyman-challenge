@@ -2,7 +2,9 @@
 
 Open items that could not be closed headless, plus the verification traps
 that produced false results before. Fixed defects are in git history
-(`77e2cf7`, `16589d5`, `3c5971f`, `3bfc526`, `c8ff389`), each pinned by a test.
+(`77e2cf7`, `16589d5`, `3c5971f`, `3bfc526`, `c8ff389`, and for 1.0.1 the
+Android touch scrolling `d6667a6` and voice picker `e5d4a7c`), each pinned by
+a test.
 
 ## Open: needs a real device
 
@@ -23,8 +25,25 @@ that produced false results before. Fixed defects are in git history
 - **Speech on Android after the SpeechController move.** The native-TTS
   callbacks now target `main.speech` instead of `main`. Headless tests,
   the bundle check and the desktop export pass, but on a device confirm
-  Read / Stop / Read again, that the rule stays silent until an answer is
-  in, and that the voice list refreshes when the picker opens.
+  Read / Stop / Read again, and that the rule stays silent until an answer is
+  in.
+- **1.0.1 touch scrolling and voice sheet were verified on desktop only.**
+  `test_touch_scroll` and `test_voice_picker` push synthetic ScreenTouch /
+  ScreenDrag events through the real viewport; no Android device or emulator
+  was available. On a phone confirm: every list scrolls by finger (menu,
+  question, explanation, results, voice list), a swipe never presses a button
+  or answers a card, a tap still does, a fling stops on touch, the voice list
+  opens at once, a tap picks and closes it, Back closes it, and the labels
+  read "Female 1 · US English · Offline" and so on.
+- **`TTS_Android` utterance-id map is not thread-safe (engine).** Godot's
+  `TTS_Android::ids` HashMap is written from the Android TTS callback thread
+  and from the main thread without a lock. The app cannot fix that; it now
+  calls `tts_stop` only when it handed an utterance to the OS, which keeps the
+  two sides from racing on every Stop.
+- **Samsung TTS voice ids other than `en-US-SMTf00` are inferred.** The l03,
+  l04 and g02 ids follow the observed `<locale>-SMT<variant>` pattern
+  (docs/ANDROID_VOICES.md); if a Samsung phone reports them differently they
+  get a neutral label, never a wrong gender.
 
 ## Open: found during the refactor
 
@@ -35,14 +54,16 @@ that produced false results before. Fixed defects are in git history
   The other six measured sizes finish with 0% scroll. The app itself never
   awaits (only the tool scripts do), so the crash is most likely in the
   measuring loop or the engine; the Windows build opens at 540x960, so it is
-  worth a look.
+  worth a look. It is intermittent: the 1.0.0 and 1.0.1 release runs at
+  540x960 finished with 0% scroll.
 - **`measure_fit.gd` crashes the engine on the mobile layout at 1024x768.**
   The run dies inside the engine (message queue overflow under
   `Container::_sort_children`) before it finishes. The base commit
   (`2d6b960`, before the premium visual pass) crashes the same way, so it is
   not caused by the restyle. Desktop at all six sizes and mobile at the other
   five finish with 0% scroll. A phone never gets a 1024x768 window with the
-  mobile UI, but a tablet in landscape could.
+  mobile UI, but a tablet in landscape could. Still crashes in 1.0.1
+  (signal 11); the other eleven size/layout runs finish with 0% scroll.
 - **`NecReference.lookup_path` reads any 3-digit number as an NEC article.**
   An `article` of "NFPA 70E 130.5" would show "Chapter 1 ► Article 130"
   instead of the NFPA 70E line. The bank only uses the bare "NFPA 70E", which
@@ -117,6 +138,13 @@ that produced false results before. Fixed defects are in git history
 - The boot splash shows for about 0.35 s (`boot_splash/minimum_display_time`
   is 600 ms from process start). `PrintWindow` captures miss it; screen-copy the
   exe started with `--always-on-top` instead.
+- A synthetic touch test must hold the finger still long enough for a fling to
+  end before tapping: a touch during a fling only stops it (as on a phone), so
+  a tap right after a swipe presses nothing. `test_touch_scroll` waits for
+  `touch_scroll._fling_speed == 0`.
+- Tests that open the app must delete their own `user://*.cfg` first: a saved
+  voice from the previous run otherwise makes the tapped row the selected one,
+  and the pick becomes a no-op.
 - New or moved `class_name` scripts need
   `Godot --headless --path . --import` before `--script` runs can resolve
   them (verify.sh stage 0 does this).
@@ -126,10 +154,15 @@ that produced false results before. Fixed defects are in git history
 - **Back-button double-fire** (godot#123454: one press delivers
   `NOTIFICATION_WM_GO_BACK_REQUEST` twice ~1 ms apart on 4.7 at targetSdk 36).
   `_on_go_back()` debounces at 600 ms.
-- **Mouse/touch double-firing.** The engine guards every ScrollContainer touch
-  branch with `event_device_id != DEVICE_ID_EMULATION`, so
-  `emulate_mouse_from_touch=false` is not required for scrolling, but it is
-  required for the answer cards (see the note in `project.godot`).
+- **Mouse/touch double-firing.** `emulate_mouse_from_touch` stays false: with
+  it on, a scroll could select an answer card (see the note in
+  `project.godot`). An earlier version of this note said ScrollContainer
+  handles touch itself; that was wrong and shipped the 1.0.0 scroll bug. In
+  Godot 4.7 `ScrollContainer::gui_input` drag-scrolls only on
+  InputEventMouseButton / InputEventMouseMotion (and only when
+  `is_touchscreen_available()`), and `PopupMenu::gui_input` handles only mouse
+  events, so with emulation off neither reacts to a finger. `TouchScroll` and
+  `VoiceSheet` (1.0.1) replace them for touch.
 - **`MOUSE_FILTER_PASS` on children.** `_touch_filter_walk` assigns PASS to
   BaseButtons and IGNORE to decoration, matching the documented behaviour.
 - **Contrast.** The palette is dark by design; body text and the small
