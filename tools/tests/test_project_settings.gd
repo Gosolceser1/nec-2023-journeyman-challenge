@@ -43,6 +43,19 @@ func _init() -> void:
 	check(ProjectSettings.get_setting("audio/general/text_to_speech") == true,
 		"audio/general/text_to_speech must be true: the Read button is silently dead without it")
 
+	# Branding: with show_image on and no image, Godot draws its own logo.
+	var icon := str(ProjectSettings.get_setting("application/config/icon"))
+	check(icon.begins_with("res://assets/branding/") and ResourceLoader.exists(icon),
+		"application/config/icon must be the app icon (got '%s')" % icon)
+	var ico := str(ProjectSettings.get_setting("application/config/windows_native_icon"))
+	check(ico.ends_with(".ico") and FileAccess.file_exists(ico), "windows_native_icon must be an existing .ico")
+	var splash := str(ProjectSettings.get_setting("application/boot_splash/image"))
+	check(ProjectSettings.get_setting("application/boot_splash/show_image") == false
+			or (splash != "" and ResourceLoader.exists(splash)),
+		"boot splash must show the app's image or none, never Godot's default logo")
+	check(not FileAccess.file_exists("res://icon.svg"), "Godot's default icon.svg must not be in the project")
+	check(str(ProjectSettings.get_setting("application/config/version")) == "1.0.0", "config/version is 1.0.0")
+
 	# No setting name may contain a comment character or a space: that is the
 	# signature of a "#" comment line fused onto the next key.
 	var junk: Array[String] = []

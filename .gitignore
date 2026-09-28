@@ -43,3 +43,6 @@ desktop.ini
 .DS_Store
 *.log
 /.audit_tmp/
+
+# Release packages (docs/RELEASE.md)
+/release/

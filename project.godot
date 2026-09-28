@@ -13,13 +13,21 @@ config_version=5
 run/main_scene="res://scenes/main.tscn"
 config/quit_on_go_back=false
 config/features=PackedStringArray("4.7")
+run/print_header=false
 config/name="NEC 2023 Journeyman Challenge"
+config/description="NEC 2023 journeyman electrician exam trainer."
+config/version="1.0.0"
+config/icon="res://assets/branding/icon.png"
+config/windows_native_icon="res://assets/branding/icon.ico"
 ; Saves go to %APPDATA%\NEC2023JourneymanChallenge, not %APPDATA%\Godot\app_userdata\...
 ; UserDirMigration copies the old folder's settings and progress over once.
 config/use_custom_user_dir=true
 config/custom_user_dir_name="NEC2023JourneymanChallenge"
 boot_splash/bg_color=Color(0.008, 0.016, 0.031, 1)
-boot_splash/show_image=false
+boot_splash/show_image=true
+boot_splash/image="res://assets/branding/splash.png"
+boot_splash/stretch_mode=0
+boot_splash/minimum_display_time=600
 
 [audio]
 
