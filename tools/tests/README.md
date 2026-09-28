@@ -36,7 +36,7 @@ one as a child Godot process and reads its exit code. Slower than an in-process
 runner, but it exercises exactly the path a developer runs by hand, and one
 suite's failure cannot abort the rest.
 
-**Current status: 5,805 Godot checks across 25 suites, 22 Python tests (validator, spellcheck, speak_question), 1 build-guard shell test, 0 failures, 0 documented product defects.** The scene harness adds 372 (desktop) / 376 (mobile) checks. The speech-helper suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
+**Current status: 6,288 Godot checks across 26 suites, 22 Python tests (validator, spellcheck, speak_question), 1 build-guard shell test, 0 failures, 0 documented product defects.** The scene harness adds 390 (desktop) / 394 (mobile) checks. The speech-helper suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
 
 Every formerly pinned defect is fixed and promoted to a real assertion, so a
 regression fails its suite rather than appearing in the defect list. The test table prefix case is covered directly: `NOTED: x` must remain unchanged.
