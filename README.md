@@ -46,15 +46,18 @@ python tools/pipeline/validate_question_bank.py --no-warn   # bank schema + spoi
 
 Presets live in `export_presets.cfg` (Windows Desktop, Android Debug/Release).
 Their exclude filters keep tests, tools, docs and source PDFs out of the build.
+The Windows export is a single exe with the pack embedded.
 
 ```
 mkdir build
 Godot_v4.7.2-stable_win64_console.exe --headless --path . --export-release "Windows Desktop" build/NEC2023JourneymanChallenge.exe
-python tools/list_pck.py build/NEC2023JourneymanChallenge.pck --desktop   # fails if the voice bundle or a runtime file is missing
+python tools/list_pck.py build/NEC2023JourneymanChallenge.exe --desktop   # reads the embedded pack; fails if the voice bundle or a runtime file is missing
 ```
 
 Godot will not create `build/`, and an export without `assets/speech/`
 succeeds silently with no recorded voice, so generate the bundle first.
+`docs/RELEASE.md` has the full release steps: icon and branding, Android
+signing, the shareable zip and checksums.
 
 ## Docs
 
@@ -64,3 +67,4 @@ succeeds silently with no recorded voice, so generate the bundle first.
 - `docs/VOICE_READING_RULES.md`: how questions are spoken
 - `docs/SFX_PLAN.md`: which moments get a sound
 - `docs/KNOWN_ISSUES.md`: open items and verification traps
+- `docs/RELEASE.md`: building and packaging a release

@@ -21,6 +21,7 @@ src/
           nec_reference.gd  NecReference: article titles, lookup paths (NEC and Nebraska law)
           safe_area.gd      SafeArea.margins: notch / cutout insets
           audio_settings.gd AudioSettings: audio modes, speed, pauses, sound effects, audio.cfg
+          user_dir_migration.gd  UserDirMigration: one-time copy from the pre-1.0 user folder
   speech/ speech_controller.gd  SpeechController: bundled clips, Edge helper and cache,
                                 native TTS, play queue, teach gate, voice picker
           voice_catalog.gd      VoiceCatalog: voices.json, device voice tiers/labels, voice.cfg
@@ -45,8 +46,11 @@ src/
 data/     question_bank.json (never edited by hand)  voices.json
           exam_blueprint.json (content outline, chapter map, area overrides)
 assets/   diagrams/  sfx/  speech/<qid>__<voice>/ (generated, gitignored)
-docs/     this file, DATA_PIPELINE, VOICE_READING_RULES, SFX_PLAN, KNOWN_ISSUES, ...
+          branding/  icon.png/.ico, Android icon layers, splash.png; source/ (SVGs, .gdignore)
+docs/     this file, DATA_PIPELINE, VOICE_READING_RULES, SFX_PLAN, KNOWN_ISSUES, RELEASE, ...
 tools/    verify.sh  harness.gd  list_pck.py
+          branding/  build_branding.py + render_svg.gd: every icon and the splash from the SVGs
+          release/   make_release.py, the recipient README/CREDITS, dump_licenses.gd (docs/RELEASE.md)
           pipeline/  bank build, overrides, validator, spellcheck, OCR
           speech/    dump_speech.gd  pregenerate_speech.py  test_bundle.gd  check_export_pack.gd
           visual/    snap.gd  snap_all.gd  snap_motion.gd  snap_tables.gd  measure_fit.gd  compare_shots.py (output: .audit_tmp/)
@@ -72,6 +76,14 @@ UI through `main`. Two patterns hang off it:
 
 `class_name Main` makes every `host.x` access type-checked, so a renamed
 member fails at parse time, not at runtime.
+
+Saved state lives in `user://`, which `application/config/use_custom_user_dir`
+puts at `%APPDATA%\NEC2023JourneymanChallenge` on Windows. The first thing
+`_ready` does is `UserDirMigration.run()`: on a first launch it copies
+`audio.cfg`, `voice.cfg` and `question_bag.cfg` from the pre-1.0 folder
+(`%APPDATA%\Godot\app_userdata\<project name>`), never deleting them, and
+leaves a marker so it runs once. The version shown in the menu footer
+(`Main.version_label()`) comes from `application/config/version`.
 
 Question pools: records without a `section` field are the NEC pool; the
 Nebraska State Law records carry `"section": "ne_state_law"`.
@@ -217,7 +229,7 @@ tests and the native TTS callbacks refer to them by name.
 `bash tools/verify.sh` runs everything below except the last three:
 
 - import and `--check-only` parse of every script;
-- `tools/tests/run_all.gd`: 26 suites, including `test_no_leak` (nothing
+- `tools/tests/run_all.gd`: 27 suites, including `test_no_leak` (nothing
   before answering reveals the answer), `test_layout_tree` (serialised node
   tree of both layouts against `tools/tests/golden/`; `-- --update` rewrites
   the snapshots after an intended change), `test_menu_cards` (cards stay

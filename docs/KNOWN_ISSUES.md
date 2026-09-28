@@ -63,6 +63,24 @@ that produced false results before. Fixed defects are in git history
   permitted" to "is permitted", so about a dozen rule lines still read
   "Conductors of different voltage ratings is permitted".
 
+## Open: release 1.0.0
+
+- **The Windows exe is not code-signed**, so SmartScreen warns on first run
+  ("More info", then "Run anyway"; the recipient README says so). Only a
+  code-signing certificate removes that.
+- **No 24 px image in the exe.** Godot's exporter writes 16/32/48/64/128/256
+  into the exe's icon, dropping the `.ico`'s hand-made 24 px; Windows scales
+  32 down for a 100% taskbar. The running window uses the full `.ico`
+  (`windows_native_icon`), so its title bar and taskbar icon are unaffected.
+- **The Edge speech cache is not migrated.** `user://speech` (clips the desktop
+  Edge helper downloaded) stays in the old folder; it refills on demand. Only
+  the settings and `question_bag.cfg` move.
+- **No in-app About or credits screen.** Credits and licenses ship as text
+  files next to the exe (`docs/RELEASE.md`); the menu footer shows the version.
+- **Alt-tab and a pinned taskbar icon were not screenshotted** (the dev
+  machine's taskbar auto-hides); the title bar, Explorer views and the icon
+  resource inside the exe were checked.
+
 ## Verification traps
 
 - `ui_mobile` is set in `_ready()` from the command line, so setting it on
@@ -89,6 +107,16 @@ that produced false results before. Fixed defects are in git history
   apart. Mode cards no longer slide at all (hover is glow and shine); where
   something must slide, use `UiFx.slide_x` (absolute target, one tween per
   control). `test_menu_cards.gd` pins it.
+- A window `min_size` grows the headless window, so every headless layout
+  number changes. `main.gd` sets `DESKTOP_MIN_WINDOW` only when the display
+  server is not headless.
+- Godot's own user folder moved in 1.0 (`use_custom_user_dir`): with a temp
+  `APPDATA`, runs write to `<temp>\NEC2023JourneymanChallenge`, not
+  `<temp>\Godot\app_userdata\...`. To test the migration, put a fake old folder
+  at `<temp>\Godot\app_userdata\NEC 2023 Journeyman Challenge` first.
+- The boot splash shows for about 0.35 s (`boot_splash/minimum_display_time`
+  is 600 ms from process start). `PrintWindow` captures miss it; screen-copy the
+  exe started with `--always-on-top` instead.
 - New or moved `class_name` scripts need
   `Godot --headless --path . --import` before `--script` runs can resolve
   them (verify.sh stage 0 does this).

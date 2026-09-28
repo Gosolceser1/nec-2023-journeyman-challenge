@@ -36,7 +36,7 @@ one as a child Godot process and reads its exit code. Slower than an in-process
 runner, but it exercises exactly the path a developer runs by hand, and one
 suite's failure cannot abort the rest.
 
-**Current status: 6,288 Godot checks across 26 suites, 22 Python tests (validator, spellcheck, speak_question), 1 build-guard shell test, 0 failures, 0 documented product defects.** The scene harness adds 390 (desktop) / 394 (mobile) checks. The speech-helper suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
+**Current status: 6,327 Godot checks across 27 suites, 25 Python tests (validator, spellcheck, speak_question), 1 build-guard shell test, 0 failures, 0 documented product defects.** The scene harness adds 390 (desktop) / 394 (mobile) checks. The speech-helper suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
 
 Every formerly pinned defect is fixed and promoted to a real assertion, so a
 regression fails its suite rather than appearing in the defect list. The test table prefix case is covered directly: `NOTED: x` must remain unchanged.
@@ -56,6 +56,7 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | `test_question_deck.gd` | `ExamBlueprint` and `QuestionDeck`: area classification and overrides, blueprint apportionment and remainder rotation, per-area no-repeat decks and coverage, article cap and interleaving, missed-question reviews (gap, cap), simulator blueprint, single-area drills, fixed seeds, save / relaunch / version-1 migration / damaged file / reset, mastery and readiness |
 | `test_study_feedback.gd` | session area tallies and pace (fake clock, 6:00 flag), area bars and weak rows, the report's study feedback (scored line, weak areas, pace, readiness) and the weakest-area menu button, desktop and mobile |
 | `test_menu_cards.gd` | menu mode cards (the Nebraska State Law card included) and answer cards sit in their column slot (same x and width as the column and each other, scale 1) after the menu settles, quick hover passes, a hover spanning a re-sort (hover is glow only, no slide), focus moves, the start press animation and a quiz round-trip; one content box for every card state; audio toggles flush with the row labels; the desktop menu fits 960 px. Desktop and mobile |
+| `test_user_dir_migration.gd` | the one-time copy of `audio.cfg`, `voice.cfg` and `question_bag.cfg` from `%APPDATA%\Godot\app_userdata\<name>` into the custom user folder: byte-for-byte copy, old files kept, tool leftovers skipped, runs once (a reset stays reset), a folder already in use is never touched, missing or same folder, a fake APPDATA layout. All in temp dirs |
 | `test_table_viewer.gd` | the pure parts: folding (`_folded_lines`, `max_blocks`), column widths (`_column_floors`, `_column_widths`), `extract_target_keyword`, `is_note_row`, `_strip_note_prefix` + a sweep of all 30 bank tables |
 | `test_table_fit.gd` | every table question, both layouts: the lookup table before answering and the feedback table after show whole, with no scrollbar and nothing left to scroll either way |
 | `run_all.gd` | combined runner |
