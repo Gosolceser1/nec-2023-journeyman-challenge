@@ -54,7 +54,28 @@ func _init() -> void:
 			or (splash != "" and ResourceLoader.exists(splash)),
 		"boot splash must show the app's image or none, never Godot's default logo")
 	check(not FileAccess.file_exists("res://icon.svg"), "Godot's default icon.svg must not be in the project")
-	check(str(ProjectSettings.get_setting("application/config/version")) == "1.0.1", "config/version is 1.0.1")
+	var version := str(ProjectSettings.get_setting("application/config/version"))
+	check(version == "1.0.1", "config/version is 1.0.1")
+
+	# Export presets: the Edge voices need the network on Android, and every
+	# build carries the same version.
+	var presets := ConfigFile.new()
+	check(presets.load("res://export_presets.cfg") == OK, "export_presets.cfg parses")
+	var androids := 0
+	for sec in presets.get_sections():
+		if sec.ends_with(".options") or not presets.has_section(sec + ".options"):
+			continue
+		var opts := sec + ".options"
+		var platform := str(presets.get_value(sec, "platform", ""))
+		if platform == "Android":
+			androids += 1
+			check(presets.get_value(opts, "permissions/internet", false) == true,
+				"%s asks for INTERNET (the Edge voices stream over the network)" % presets.get_value(sec, "name"))
+			check(str(presets.get_value(opts, "version/name", "")) == version, "%s version/name is %s" % [presets.get_value(sec, "name"), version])
+		elif platform == "Windows Desktop":
+			check(str(presets.get_value(opts, "application/file_version", "")) == version
+				and str(presets.get_value(opts, "application/product_version", "")) == version, "Windows file/product version is %s" % version)
+	check(androids == 2, "both Android presets checked (%d)" % androids)
 
 	# No setting name may contain a comment character or a space: that is the
 	# signature of a "#" comment line fused onto the next key.

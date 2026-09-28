@@ -61,8 +61,9 @@ const SUITES := [
 	{"name": "touch scroll (swipe scrolls, never presses; both layouts)", "path": "res://tools/tests/test_touch_scroll.gd"},
 	# Android: the OptionButton popup took no touch, so choosing a voice froze
 	# the app and Back then quit it. 450 fake voices, time budget, no re-entry,
-	# US English only with male/female names from docs/ANDROID_VOICES.md.
-	{"name": "voice picker (hundreds of voices, names, US only)", "path": "res://tools/tests/test_voice_picker.gd"},
+	# US English only with male/female names from docs/ANDROID_VOICES.md; the
+	# Windows Edge voices after the recorded one, with a no-internet fallback.
+	{"name": "voice picker (hundreds of voices, names, US only, Edge voices)", "path": "res://tools/tests/test_voice_picker.gd"},
 	{"name": "fx helpers (chapter map, gauges)", "path": "res://tools/tests/test_fx.gd"},
 	# Hover slides once tweened position:x as_relative, so container re-sorts
 	# and quick mouse passes left each menu card a different few px off its
@@ -74,6 +75,10 @@ const SUITES := [
 	{"name": "speech bus chain (anti-image, pitch bypass)", "path": "res://tools/tests/test_speech_chain.gd"},
 	# Desktop Edge voices: warm helper, streamed clips, prefetch, cancel, honest fallback.
 	{"name": "speech helper (stream, prefetch, cancel, cache)", "path": "res://tools/tests/test_speech_helper.gd"},
+	# Android cannot run the Python helper, so the phone never had the Edge
+	# voices. The GDScript client speaks the same protocol (against a local fake
+	# here), never blocks a frame and fails fast with no internet.
+	{"name": "edge client (Edge voices without Python, offline fallback)", "path": "res://tools/tests/test_edge_client.gd"},
 ]
 
 const NOISE := "Unreferenced static string|string_name\\.cpp:|NavMeshGeometryParser|PagedAllocator"

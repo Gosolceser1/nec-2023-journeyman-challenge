@@ -205,8 +205,12 @@ func _game_flow() -> void:
 	main.speech_helper._starts = 0
 	_wipe(f0)
 	main._begin_reading(SpeechText.speech_plan(q0))
-	check(main._voice_fallback == "System voice (Edge unavailable)", "a failed Edge voice is labelled as the system voice")
-	check(main._status_with_voice("READING").contains("System voice (Edge unavailable)"), "the status line names the voice actually speaking")
+	var q0_bundled: bool = main._bundled_speech_folder(main._safe_speech_id(str(q0["id"])), VoiceCatalog.BUNDLED_VOICE_ID, SpeechText.speech_plan(q0)) != ""
+	var want := "Andrew (recorded, Edge unavailable)" if q0_bundled else "System voice (Edge unavailable)"
+	check(main._voice_fallback == want, "a failed Edge voice falls back to the recorded Andrew, else the system voice (%s)" % main._voice_fallback)
+	if q0_bundled:
+		check(main.reader.playing and not bool(main.speech_queue[main.speech_queue_index]["teach"]), "the recorded Andrew reads the question, not the rule")
+	check(main._status_with_voice("READING").contains(want), "the status line names the voice actually speaking")
 	check(not main._status_with_voice("READING").contains("Brian"), "the status line never claims Brian after a fallback")
 	main._stop_reading()
 	main.current_index = 1

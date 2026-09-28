@@ -13,6 +13,9 @@ Main <Control> res://src/app/main.gd
   SpeechHelper <Node> res://src/speech/speech_helper.gd
     on clip_ready -> main.speech._on_helper_clip
     on request_failed -> main.speech._on_helper_failed
+  EdgeTtsClient <Node> res://src/speech/edge_tts_client.gd
+    on clip_ready -> main.speech._on_edge_clip
+    on request_failed -> main.speech._on_edge_failed
   @TextureRect@2 <TextureRect>
     .layout_mode = 0
     .anchor_right = 1.0

@@ -13,6 +13,8 @@ extends SceneTree
 ##
 ##   Godot --headless --path . --script tools/tests/test_voice_picker.gd
 
+const FakeEdge = preload("res://tools/tests/fake_edge_server.gd")
+const SpeechText = preload("res://src/speech/speech_text.gd")
 const FAKE_COUNT := 450
 ## Opening the sheet and picking a voice must each take less than this.
 const BUDGET_MSEC := 150
@@ -22,6 +24,7 @@ var checks := 0
 var main: Main
 var fake: Array = []
 var source_calls := [0]
+var _picker_done := false
 
 
 func check(cond: bool, label: String) -> void:
@@ -50,6 +53,8 @@ func _initialize() -> void:
 		check(code == 0, "the mobile voice picker checks pass (exit %d)" % code)
 	else:
 		await _picker_cases()
+		# A script error ends a coroutine early without failing anything.
+		check(_picker_done, "the mobile picker cases ran to the end")
 	print("")
 	print("checks: %d  failures: %d" % [checks, failures.size()])
 	for f in failures:
@@ -62,6 +67,7 @@ func _initialize() -> void:
 ## online only), an unconfirmed code, the en-US default, and hundreds of voices
 ## in other locales (including en-GB, en-AU, en-IN and es-US) that must stay out.
 const US_ROWS := 10  # Female 1-5, Male 1-2, Voice A offline; Male 3 online; System default
+const EDGE := 11  # the en-US Edge voices from data/voices.json, Andrew aside
 
 func _fake_voices() -> Array:
 	var out: Array = []
@@ -178,6 +184,42 @@ func _catalog_cases() -> void:
 	check(VoiceCatalog.migrate_voice_id("en-gb-x-rjs-local", rows) == VoiceCatalog.DEFAULT_VOICE_ID, "a saved non-US voice migrates to Andrew")
 	check(VoiceCatalog.migrate_voice_id("en-us-x-gone-local", rows) == VoiceCatalog.DEFAULT_VOICE_ID, "a saved voice the phone lost migrates to Andrew")
 	check(VoiceCatalog.migrate_voice_id("en-US-language", rows) == "en-US-language", "a saved system default stays")
+	_edge_catalog_cases()
+
+
+## The Edge voices from Windows, as the phone lists them.
+const EDGE_LABELS := [
+	"Ava · Female · Online (natural)", "Brian · Male · Online (natural)", "Emma · Female · Online (natural)",
+	"Jenny · Female · Online (natural)", "Aria · Female · Online (natural)", "Christopher · Male · Online (natural)",
+	"Eric · Male · Online (natural)", "Guy · Male · Online (natural)", "Michelle · Female · Online (natural)",
+	"Roger · Male · Online (natural)", "Steffan · Male · Online (natural)",
+]
+
+func _edge_catalog_cases() -> void:
+	var rows := VoiceCatalog.edge_voice_rows()
+	check(rows.map(func(r): return str(r[0])) == EDGE_LABELS, "the Windows Edge voices are listed with name, gender and Online (natural): %s" % [rows])
+	check(rows.all(func(r): return str(r[1]).begins_with("en-US-") and str(r[1]).ends_with("Neural")), "each keeps its Edge id")
+	check(not rows.any(func(r): return str(r[1]) == "en-GB-RyanNeural"), "the British Ryan is not listed (US English only)")
+	check(not rows.any(func(r): return str(r[1]) == VoiceCatalog.BUNDLED_VOICE_ID), "Andrew is not listed twice (the recorded row is Andrew)")
+	var path := "user://test_voice_picker_edge.json"
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	f.store_string(JSON.stringify([
+		{"label": "Ava · Female · Expressive", "id": "en-US-AvaNeural", "tier": "natural", "locale": "en-US", "gender": "Female"},
+		{"label": "Ryan · Male · Calm British narrator", "id": "en-GB-RyanNeural", "tier": "natural", "locale": "en-GB", "gender": "Male"},
+		{"label": "Natasha · Female · Clear", "id": "en-AU-NatashaNeural", "tier": "classic", "locale": "en-AU", "gender": "Female"},
+		{"label": "Prabhat · Male · Clear", "id": "en-IN-PrabhatNeural", "tier": "classic", "locale": "en-IN", "gender": "Male"},
+		{"label": "Andrew · Male · Warm", "id": "en-US-AndrewNeural", "tier": "natural", "locale": "en-US", "gender": "Male"},
+		{"label": "Sam · Friendly", "id": "en-US-SamNeural", "tier": "classic", "locale": "en-US"},
+		{"label": "Old", "id": "en-US-OldVoice", "locale": "en-US", "gender": "Male"},
+		{"label": "Guy · Male", "id": "en-US-GuyNeural", "tier": "classic"},
+	]))
+	f.close()
+	check(VoiceCatalog.edge_voice_rows(path) == [["Ava · Female · Online (natural)", "en-US-AvaNeural"], ["Sam · Online (natural)", "en-US-SamNeural"]],
+		"non-US Edge voices (en-GB, en-AU, en-IN), rows without en-US and non-neural ids are filtered out; no gender, no guess")
+	check(VoiceCatalog.edge_voice_rows("user://no_such_catalog.json").is_empty(), "no catalog: no Edge rows")
+	check(VoiceCatalog.is_edge_voice("en-US-AvaNeural") and not VoiceCatalog.is_edge_voice("en-us-x-iol-local") and not VoiceCatalog.is_edge_voice(""),
+		"Edge ids are told apart from device ids")
+	check(VoiceCatalog.migrate_voice_id("en-US-AvaNeural", [["Ava", "en-US-AvaNeural"]]) == "en-US-AvaNeural", "a saved Edge voice stays")
 
 
 func _picker_cases() -> void:
@@ -194,9 +236,15 @@ func _picker_cases() -> void:
 	root.add_child(main)
 	await _wait(0.3)
 	var picker := main.voice_picker
-	check(main.ui_mobile and is_instance_valid(main.voice_button), "mobile layout: the voice button stands in for the picker")
+	check(main.ui_mobile and main.speech._speech_mobile() and is_instance_valid(main.voice_button), "mobile layout (the phone code path): the voice button stands in for the picker")
 	check(not picker.visible, "the OptionButton (popup needs a mouse) is hidden on mobile")
-	check(picker.item_count == 1 + US_ROWS, "recorded voice + %d US voices listed (got %d)" % [US_ROWS, picker.item_count])
+	check(picker.item_count == 1 + EDGE + US_ROWS, "recorded voice + %d Edge voices + %d US device voices listed (got %d)" % [EDGE, US_ROWS, picker.item_count])
+	var order: Array = []
+	for i in picker.item_count:
+		order.append(picker.get_item_text(i))
+	check(order.slice(1, 1 + EDGE) == EDGE_LABELS, "the Windows Edge voices follow the recorded one: %s" % [order.slice(1, 1 + EDGE)])
+	check(order[1 + EDGE] == "Female 1 · US English · Offline" and order[-1] == VoiceCatalog.SYSTEM_DEFAULT_LABEL,
+		"device voices come after them, System default last")
 	check(picker.get_item_text(0) == VoiceCatalog.BUNDLED_VOICE_LABEL and picker.selected == 0, "the recorded voice is first and picked by default")
 	check(main.voice_button.text == picker.get_item_text(0), "the voice button shows the picked voice")
 	check(source_calls[0] == 1, "the OS voice list is asked once at start (asked %d)" % source_calls[0])
@@ -222,14 +270,15 @@ func _picker_cases() -> void:
 	print("  open sheet: worst %d ms over 5 opens" % worst)
 	check(worst < BUDGET_MSEC, "opening the voice sheet takes < %d ms (worst %d)" % [BUDGET_MSEC, worst])
 	check(source_calls[0] == 1, "opening 5 times and 50 refreshes never ask the OS again (asked %d)" % source_calls[0])
-	check(picker.item_count == 1 + US_ROWS and picks[0] == 0, "the list is neither rebuilt nor re-picked by opening it")
+	check(picker.item_count == 1 + EDGE + US_ROWS and picks[0] == 0, "the list is neither rebuilt nor re-picked by opening it")
 
-	# Pick a voice by tapping its row, while the preview is "speaking".
+	# Pick a device voice by tapping its row, while the preview is "speaking".
 	main.open_voice_sheet()
-	await process_frame
+	for f in 10:
+		await process_frame
 	var sheet := main.voice_sheet
 	main.speech._previewing = true
-	var target := 5
+	var target := 1 + EDGE + 4
 	var t1 := Time.get_ticks_msec()
 	sheet.rows[target].pressed.emit()
 	var pick_ms := Time.get_ticks_msec() - t1
@@ -291,8 +340,8 @@ func _picker_cases() -> void:
 	main.speech._device_voices.clear()
 	main.speech._device_voices_msec = -10 * SpeechController.VOICE_RETRY_MSEC
 	main.speech._populate_voice_picker_native()
-	check(picker.item_count == 2 and picker.get_item_text(1) == VoiceCatalog.SYSTEM_DEFAULT_LABEL,
-		"no device voices yet: recorded voice + System default")
+	check(picker.item_count == 2 + EDGE and picker.get_item_text(1 + EDGE) == VoiceCatalog.SYSTEM_DEFAULT_LABEL,
+		"no device voices yet: recorded voice + Edge voices + System default")
 	stale.set_value("speech", "voice", "en-us-x-iom-local")
 	stale.save(main.voice_cfg_path)
 	main.speech._load_voice_choice()
@@ -304,16 +353,16 @@ func _picker_cases() -> void:
 	fake = _fake_voices()
 	main.speech._device_voices_msec -= SpeechController.VOICE_RETRY_MSEC
 	main.speech._refresh_native_voices()
-	check(picker.item_count == 1 + US_ROWS, "late voices appear on the next refresh (%d)" % picker.item_count)
+	check(picker.item_count == 1 + EDGE + US_ROWS, "late voices appear on the next refresh (%d)" % picker.item_count)
 	check(main.speech._selected_voice_id() == "en-us-x-iom-local", "the saved US voice comes back once the late list loads (%s)" % main.speech._selected_voice_id())
 	var only_other := _fake_voices().filter(func(v): return not str(v["id"]).to_lower().begins_with("en-us"))
 	fake = only_other
 	main.speech._device_voices.clear()
 	main.speech._device_voices_msec = -10 * SpeechController.VOICE_RETRY_MSEC
 	main.speech._populate_voice_picker_native()
-	check(picker.item_count == 2 and picker.get_item_text(0) == VoiceCatalog.BUNDLED_VOICE_LABEL
-		and picker.get_item_text(1) == VoiceCatalog.SYSTEM_DEFAULT_LABEL,
-		"a phone with %d voices but none US lists Andrew + System default" % only_other.size())
+	check(picker.item_count == 2 + EDGE and picker.get_item_text(0) == VoiceCatalog.BUNDLED_VOICE_LABEL
+		and picker.get_item_text(1 + EDGE) == VoiceCatalog.SYSTEM_DEFAULT_LABEL,
+		"a phone with %d voices but none US lists Andrew + the Edge voices + System default" % only_other.size())
 	fake = _fake_voices()
 	main.speech._device_voices.clear()
 	main.speech._device_voices_msec = -10 * SpeechController.VOICE_RETRY_MSEC
@@ -344,6 +393,8 @@ func _picker_cases() -> void:
 	await process_frame
 	main.speech._populate_voice_picker_native()
 
+	await _edge_reads()
+
 	# Back closes the sheet instead of quitting the app.
 	main.open_voice_sheet()
 	await process_frame
@@ -353,3 +404,106 @@ func _picker_cases() -> void:
 	check(not is_instance_valid(main.voice_sheet) and not main.is_queued_for_deletion(), "Back closes the voice sheet, not the app")
 	main.queue_free()
 	await process_frame
+	_picker_done = true
+
+
+## An Edge voice on the phone: streamed by EdgeTtsClient from a local fake of
+## the service, and with no internet a quick fall back that never blocks.
+func _edge_reads() -> void:
+	print("=== EDGE VOICES ON THE PHONE ===")
+	var fake := FakeEdge.new()
+	check(fake.listen() > 0, "the fake Edge service listens")
+	fake.audio = _fixture_audio()
+	main.speech_cache_root = "user://test_voice_picker_speech"
+	_wipe(ProjectSettings.globalize_path(main.speech_cache_root))
+	main.edge_client.url = fake.url()
+	main.edge_client.offline_until_msec = 0
+	main.speech.pick_voice(1)
+	check(main.speech._selected_voice_id() == "en-US-AvaNeural" and main.voice_button.text == EDGE_LABELS[0], "Ava can be picked on the phone")
+	check(main.speech._pick_native_voice() != "en-US-AvaNeural", "a device fallback is never handed an Edge id")
+	main._start_quiz(5, 10, false, "Edge voice test")
+	main.session_muted = false
+	main._show_question()
+	var rec: Dictionary = main.records[main.order[0]]
+	var plan: Array = SpeechText.speech_plan(rec)
+	var folder: String = main._speech_cache_folder(main._safe_speech_id(str(rec["id"])), "en-US-AvaNeural")
+	check(main.edge_client.busy_request_for(folder) >= 0, "showing a question prefetches it with the Edge voice")
+	var worst := [0]
+	check(await _until_fake(fake, func() -> bool: return not main.menu_overlay.visible and main._speech_cache_matches(folder, plan), 5.0, worst),
+		"the quiz opens with the question already fetched")
+	main._stop_reading()
+	_wipe(folder)
+	var t0 := Time.get_ticks_msec()
+	main._begin_reading(plan)
+	check(Time.get_ticks_msec() - t0 < BUDGET_MSEC, "Read returns at once while the clips are fetched")
+	check(main.speak_busy and main.read_status_label.text.begins_with("PREPARING AVA"), "it says it is preparing Ava (%s)" % main.read_status_label.text)
+	worst[0] = 0
+	check(await _until_fake(fake, func() -> bool: return main.reader.playing, 5.0, worst), "Ava reads the question on the phone")
+	check(main._voice_fallback == "" and main.speech._live_backend == main.edge_client, "through the Edge client, no fallback")
+	check(main.speech_queue_index == 0 and not bool(main.speech_queue[0]["teach"]), "reading starts at the stem")
+	check(await _until_fake(fake, func() -> bool: return main._speech_cache_matches(folder, plan), 5.0, worst), "the whole question lands in the cache under user://")
+	var first_teach: int = main.teach_from_index
+	main.speech_queue_index = first_teach - 1
+	main._halt_player()
+	main._on_reader_finished()
+	check(not main.reader.playing and main.speech_queue_index == first_teach, "the rule is not read before answering")
+	main._stop_reading()
+	check(worst[0] < BUDGET_MSEC, "no frame over %d ms while streaming (worst %d)" % [BUDGET_MSEC, worst[0]])
+
+	# No internet: fall back to the recorded Andrew (or a device voice), never hang.
+	main.edge_client.url = "wss://no-such-host.invalid/edge/v1"
+	main.current_index = 3
+	var rec3: Dictionary = main.records[main.order[3]]
+	var bundled := main._bundled_speech_folder(main._safe_speech_id(str(rec3["id"])), VoiceCatalog.BUNDLED_VOICE_ID, SpeechText.speech_plan(rec3)) != ""
+	worst[0] = 0
+	t0 = Time.get_ticks_msec()
+	main._begin_reading(SpeechText.speech_plan(rec3))
+	check(Time.get_ticks_msec() - t0 < BUDGET_MSEC, "Read with no internet returns at once")
+	check(await _until_fake(fake, func() -> bool: return main._voice_fallback != "", 3.0, worst), "with no internet the read falls back within 3 s")
+	var want := "Andrew (recorded, no internet)" if bundled else "Device voice (no internet)"
+	check(main._voice_fallback == want, "the fallback names the voice speaking (%s)" % main._voice_fallback)
+	check(main._status_with_voice("READING").contains(want) and not main._status_with_voice("READING").contains("Ava"), "the status line never claims Ava after a fallback")
+	if bundled:
+		check(main.reader.playing and not bool(main.speech_queue[main.speech_queue_index]["teach"]), "the recorded Andrew reads the question, not the rule")
+	check(worst[0] < BUDGET_MSEC, "no frame over %d ms while failing (worst %d)" % [BUDGET_MSEC, worst[0]])
+	main._stop_reading()
+	main.current_index = 4
+	var rec4: Dictionary = main.records[main.order[4]]
+	main._begin_reading(SpeechText.speech_plan(rec4))
+	check(main._voice_fallback != "", "the next read falls back at once while the network is down")
+	main._stop_reading()
+	main.edge_client.offline_until_msec = 0
+	main.speech.pick_voice(0)
+	fake.stop()
+
+
+func _until_fake(fake, pred: Callable, limit_s: float, worst: Array) -> bool:
+	var t0 := Time.get_ticks_msec()
+	while Time.get_ticks_msec() - t0 < limit_s * 1000.0:
+		if pred.call():
+			return true
+		var tf := Time.get_ticks_msec()
+		fake.poll()
+		await process_frame
+		worst[0] = maxi(worst[0], Time.get_ticks_msec() - tf)
+	return pred.call()
+
+
+func _fixture_audio() -> PackedByteArray:
+	var speech := ProjectSettings.globalize_path("res://assets/speech")
+	if DirAccess.dir_exists_absolute(speech):
+		for dir in DirAccess.get_directories_at(speech):
+			var clip := speech.path_join(dir).path_join("0.mp3")
+			if FileAccess.file_exists(clip):
+				return FileAccess.get_file_as_bytes(clip)
+	return PackedByteArray()
+
+
+func _wipe(folder: String) -> void:
+	if not DirAccess.dir_exists_absolute(folder):
+		return
+	for sub in DirAccess.get_directories_at(folder):
+		_wipe(folder.path_join(sub))
+	for f in DirAccess.get_files_at(folder):
+		DirAccess.remove_absolute(folder.path_join(f))
+	DirAccess.remove_absolute(folder)

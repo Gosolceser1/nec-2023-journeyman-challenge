@@ -326,10 +326,16 @@ func _voice_routing(main: Node) -> void:
 		check(main._selected_voice_id() == main.BUNDLED_VOICE_ID, "recorded voice entry has the wrong id")
 		check(main._pick_native_voice() != main.BUNDLED_VOICE_ID,
 			"native fallback was handed the recorded voice id instead of a device voice")
+		var edge_rows := VoiceCatalog.edge_voice_rows().size()
+		check(edge_rows > 0 and main.voice_picker.get_item_text(1).ends_with(" · " + VoiceCatalog.EDGE_TAG),
+			"mobile picker does not list the online Edge voices after the recorded one")
 		for i in range(1, main.voice_picker.item_count):
 			var label: String = main.voice_picker.get_item_text(i)
-			check(label == VoiceCatalog.SYSTEM_DEFAULT_LABEL or label.contains(" · US English · "),
-				"device voice without a friendly US English label: '%s'" % label)
+			if i <= edge_rows:
+				check(label.ends_with(" · " + VoiceCatalog.EDGE_TAG), "Edge voice row %d out of place: '%s'" % [i, label])
+			else:
+				check(label == VoiceCatalog.SYSTEM_DEFAULT_LABEL or label.contains(" · US English · "),
+					"device voice without a friendly US English label: '%s'" % label)
 
 func _thread_join(main: Node) -> void:
 	# Start a thread on speak_thread, then check the node joins it before the
