@@ -2,9 +2,9 @@
 
 Open items that could not be closed headless, plus the verification traps
 that produced false results before. Fixed defects are in git history
-(`77e2cf7`, `16589d5`, `3c5971f`, `3bfc526`, `c8ff389`, and for 1.0.1 the
-Android touch scrolling `d6667a6` and voice picker `e5d4a7c`), each pinned by
-a test.
+(`77e2cf7`, `16589d5`, `3c5971f`, `3bfc526`, `c8ff389`, for 1.0.1 the
+Android touch scrolling `d6667a6` and voice picker `e5d4a7c`, and for 1.0.2
+the Edge voices on Android), each pinned by a test.
 
 ## Open: needs a real device
 
@@ -35,6 +35,28 @@ a test.
   or answers a card, a tap still does, a fling stops on touch, the voice list
   opens at once, a tap picks and closes it, Back closes it, and the labels
   read "Female 1 · US English · Offline" and so on.
+- **1.0.2 Edge voices on Android were verified on desktop only.**
+  `test_edge_client` and `test_voice_picker` run `EdgeTtsClient` against a
+  local fake of the service (streaming, cache, cancel, no-internet fallback),
+  and the mobile layout was checked live against the real service from
+  Windows (Emma played after about 1 s). On a phone confirm: the Edge voices
+  are listed after Andrew, Preview and Read play them with Wi-Fi or mobile
+  data, a question heard once replays in airplane mode, and in airplane mode an
+  unheard question falls back to the recorded Andrew at once with the status
+  line saying "no internet".
+- **The Edge read-aloud endpoint is unofficial.** `EdgeTtsClient` copies
+  edge-tts 7.2.8: the trusted client token, the Chromium version in
+  `Sec-MS-GEC-Version` and the Origin header. If Microsoft changes them, the
+  handshake fails and every read falls back to the recorded Andrew or a device
+  voice until the constants are updated (the desktop helper needs a new
+  edge-tts then too). The token is built from the device clock; unlike
+  edge-tts, the client does not correct a clock that is more than about
+  5 minutes off, so such a phone always falls back.
+- **The Windows build still needs Python for Edge voices other than Andrew.**
+  Desktop synthesis goes through `speak_question.py` (Python with edge-tts);
+  on a PC without it those voices fall back to the recorded Andrew or the
+  system voice. `EdgeTtsClient` could serve desktop too; not switched in
+  1.0.2 to keep the tested desktop path unchanged.
 - **`TTS_Android` utterance-id map is not thread-safe (engine).** Godot's
   `TTS_Android::ids` HashMap is written from the Android TTS callback thread
   and from the main thread without a lock. The app cannot fix that; it now
@@ -64,6 +86,7 @@ a test.
   five finish with 0% scroll. A phone never gets a 1024x768 window with the
   mobile UI, but a tablet in landscape could. Still crashes in 1.0.1
   (signal 11); the other eleven size/layout runs finish with 0% scroll.
+  Same crash in 1.0.2; desktop 1280x720 and mobile 540x960 finish with 0%.
 - **`NecReference.lookup_path` reads any 3-digit number as an NEC article.**
   An `article` of "NFPA 70E 130.5" would show "Chapter 1 ► Article 130"
   instead of the NFPA 70E line. The bank only uses the bare "NFPA 70E", which

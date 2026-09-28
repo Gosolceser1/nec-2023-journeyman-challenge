@@ -1,7 +1,9 @@
 # Android voice names (US English)
 
-On Android the voice picker lists **only US English device voices** (language
-`en-US` / `en_US`, or an id starting `en-us-`), after the recorded Andrew voice.
+On Android the voice picker lists the recorded Andrew voice, then the
+**Microsoft Edge natural voices from the Windows app** (US English only, see
+"Edge voices" below), then **only US English device voices** (language
+`en-US` / `en_US`, or an id starting `en-us-`).
 Android reports voices by raw id (`en-us-x-iol-local`), so the app maps each id
 to a friendly label such as `Female 1 · US English · Offline` or
 `Male 2 · US English · Online (needs internet)`. The mapping lives in
@@ -16,9 +18,9 @@ Rules:
   voice has both copies, only the offline one is listed.
 - `en-US-language` (Google) and `en-US-default` (Samsung) are listed last as
   `System default`.
-- Order: Andrew, then offline voices (female, male, neutral), then online ones,
-  then System default. With no US voice on the phone the list is Andrew plus
-  System default.
+- Order: Andrew, the Edge voices, then offline device voices (female, male,
+  neutral), then online ones, then System default. With no US device voice on
+  the phone the list is Andrew, the Edge voices and System default.
 - The saved choice is the real voice id. A saved id that is not US, or that the
   phone no longer has, falls back to Andrew. A saved network copy moves to the
   listed offline copy of the same voice.
@@ -121,9 +123,28 @@ Notes:
 ## Other engines
 
 Microsoft does not ship a system TTS engine for Android; its Edge voices are
-cloud-only and are handled by the desktop voice catalog. Other OEM engines
+cloud-only and come from the app itself (next section). Other OEM engines
 (Xiaomi, Huawei, Vivo, and so on) publish no voice ids, so their voices get
 neutral labels.
+
+## Edge voices (the Windows voices)
+
+The Windows app's voices are Microsoft Edge "read aloud" neural voices from
+`data/voices.json` (built by `tools/speech/export_voices.py`, which stores
+each voice's Edge `Gender` and `Locale`). On Windows the Python helper
+(`speak_question.py`, edge-tts) synthesizes them; Android cannot start a
+Python process, so before 1.0.2 the phone listed none of them. Since 1.0.2
+`EdgeTtsClient` (`src/speech/edge_tts_client.gd`) speaks the same WebSocket
+protocol in GDScript, and the Android presets ask for the INTERNET permission.
+
+- Listed: every `en-US` row, labelled `<Name> · <Gender> · Online (natural)`
+  (for example `Ava · Female · Online (natural)`), in catalog order. The
+  British Ryan (`en-GB`) stays desktop-only. Andrew is not listed twice: the
+  recorded row is Andrew, and a line without a clip uses online Andrew.
+- They need internet. Clips are cached in `user://speech`, so a question
+  heard once plays offline later. With no connection the read falls back to
+  the recorded Andrew (every question has a clip) or a device voice, and the
+  status line says so.
 
 ## Totals (US English)
 

@@ -59,6 +59,8 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | `test_user_dir_migration.gd` | the one-time copy of `audio.cfg`, `voice.cfg` and `question_bag.cfg` from `%APPDATA%\Godot\app_userdata\<name>` into the custom user folder: byte-for-byte copy, old files kept, tool leftovers skipped, runs once (a reset stays reset), a folder already in use is never touched, missing or same folder, a fake APPDATA layout. All in temp dirs |
 | `test_table_viewer.gd` | the pure parts: folding (`_folded_lines`, `max_blocks`), column widths (`_column_floors`, `_column_widths`), `extract_target_keyword`, `is_note_row`, `_strip_note_prefix` + a sweep of all 30 bank tables |
 | `test_table_fit.gd` | every table question, both layouts: the lookup table before answering and the feedback table after show whole, with no scrollbar and nothing left to scroll either way |
+| `test_edge_client.gd` | `EdgeTtsClient`, the Edge voices without Python (Android): Sec-MS-GEC token against edge-tts, XML escaping and chunking, a round trip through a local fake service (clips, manifest last, 96 kbps config, SSML voice), shared and cancelled requests, a silent service timing out, and no internet failing in milliseconds without blocking a frame, refusing new requests while down and recovering |
+| `fake_edge_server.gd` | a local stand-in for the Edge read-aloud WebSocket, used by `test_edge_client.gd` and `test_voice_picker.gd`. Not a suite. |
 | `run_all.gd` | combined runner |
 | `test_validate_question_bank.py` | Python regression checks for validator/render parity and shared OCR path resolution |
 | `test_build_guard.sh` | proves builds refuse default, relative, and absolute targets that would overwrite the curated bank |

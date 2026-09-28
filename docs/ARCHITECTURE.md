@@ -27,6 +27,7 @@ src/
           voice_catalog.gd      VoiceCatalog: voices.json, US device voice names (docs/ANDROID_VOICES.md), voice.cfg
           speech_helper.gd      SpeechHelper node: talks to speak_question.py --serve
           speak_question.py     desktop Edge TTS helper (shipped, copied out at runtime)
+          edge_tts_client.gd    EdgeTtsClient node: Edge voices over WebSocket, no Python (mobile)
           speech_text.gd  speech_rules.gd  audio_explanation_generator.gd  unit_matcher.gd
                                 what gets spoken (see docs/VOICE_READING_RULES.md)
   ui/     app_theme.gd      AppTheme: the palette (Tailwind names + role names), panel/font factories
@@ -150,10 +151,23 @@ algorithms in detail.
 `SpeechController` decides where each readout comes from, in this order:
 
 1. The bundled recorded voice (`assets/speech/`, imported, ships in the pck).
-2. On desktop, the Edge helper: a cached folder in `user://speech`, or a live
+2. An Edge neural voice: a cached folder in `user://speech`, or a live
    request that plays each clip as it lands. The current and next question
-   are prefetched.
-3. Native OS text-to-speech (Android, or when Edge fails).
+   are prefetched. On desktop the clips come from the Python helper
+   (`SpeechHelper` + `speak_question.py`); on mobile, where Python cannot run,
+   from `EdgeTtsClient`, a pure-GDScript client for the same read-aloud
+   WebSocket (same Sec-MS-GEC token, same 96 kbps format, same cache layout).
+   `_synth()` picks the backend; both have the same API and signals.
+3. When the Edge voice fails (no internet, no Python): the recorded Andrew if
+   the line has a clip, else native OS text-to-speech, and the status line
+   names the voice speaking ("Andrew (recorded, no internet)").
+4. Native OS text-to-speech for device voices (Android).
+
+`EdgeTtsClient` polls DNS, TLS and its sockets from `_process`, so nothing
+waits on the network on the main thread. A connection that never opens
+(unresolvable host, or 6 s without a handshake) marks the network down for
+30 s: queued requests fail with it and new ones are refused at once, so the
+next reads fall back without waiting again.
 
 The **teach gate** is in `_play_speech_clip`, the one function that plays a
 clip. A teach clip (the rule, which gives away the answer) never plays while
@@ -178,6 +192,14 @@ its sources are in docs/ANDROID_VOICES.md. The mobile picker is the hidden
 events, which the app does not emulate. `pick_voice` applies a row once and
 ignores re-entry. `_load_voice_choice` migrates a saved id with
 `VoiceCatalog.migrate_voice_id` (non-US or missing: Andrew).
+
+The mobile list is: the recorded Andrew, then the en-US Edge voices from
+`data/voices.json` (`VoiceCatalog.edge_voice_rows`: "Ava · Female · Online
+(natural)", gender from the Edge metadata, Andrew left out because the
+recorded row is Andrew and uses online Andrew for any line without a clip),
+then the device voices. `VoiceCatalog.is_edge_voice` tells the two id kinds
+apart (Edge ids end in `Neural`), so a device fallback is never handed an
+Edge id.
 
 ### Touch input
 
