@@ -54,7 +54,7 @@ func _init() -> void:
 			or (splash != "" and ResourceLoader.exists(splash)),
 		"boot splash must show the app's image or none, never Godot's default logo")
 	check(not FileAccess.file_exists("res://icon.svg"), "Godot's default icon.svg must not be in the project")
-	check(str(ProjectSettings.get_setting("application/config/version")) == "1.0.0", "config/version is 1.0.0")
+	check(str(ProjectSettings.get_setting("application/config/version")) == "1.0.1", "config/version is 1.0.1")
 
 	# No setting name may contain a comment character or a space: that is the
 	# signature of a "#" comment line fused onto the next key.
