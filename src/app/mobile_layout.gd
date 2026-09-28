@@ -437,7 +437,7 @@ static func build(host: Main) -> void:
 	Widgets.add_mode_button(host, menu_column, "FULL JOURNEYMAN SIMULATOR", "80 scored questions • 240 minutes • 75% required to pass", host._start_quiz.bind(80, Main.EXAM_MINUTES * 60, true, "Full Journeyman Exam"), AppTheme.ROSE_500, AppTheme.EXAM_BUTTON_BG, true, 72.0, AppTheme.TYPE_BODY, "bolt")
 
 	var menu_note := Label.new()
-	menu_note.text = "Aligned with NFPA 70 (NEC 2023) & Nebraska State Electrical Division / PSI Standards\nPacing standard: 3:00 per scored item • 80 questions timed"
+	menu_note.text = "Aligned with NFPA 70 (NEC 2023) & Nebraska State Electrical Division / PSI Standards\nPacing standard: 3:00 per scored item • 80 questions timed • " + Main.version_label()
 	menu_note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	menu_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	menu_note.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_REGULAR))

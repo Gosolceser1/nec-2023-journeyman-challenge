@@ -214,6 +214,9 @@ var _menu_shown := false
 ## The 860 px menu card and ~823 px quiz header clip below this; narrower
 ## windows scale the desktop canvas down instead.
 const DESKTOP_MIN_CANVAS_WIDTH := 900
+## Below this the scaled-down desktop canvas gets too small to read. At or
+## under the smallest window measure_fit checks (360x640, 1024x600).
+const DESKTOP_MIN_WINDOW := Vector2i(360, 600)
 
 var pause_button: Button
 var skip_button: Button
@@ -230,6 +233,10 @@ var result_gauge: ResultGauge
 var chapter_bars: ChapterBars
 var sfx: Sfx
 var sfx_level_buttons: Array[Button] = []  # Off, then one per AudioSettings.SFX_LEVEL_TITLES
+
+## "v1.0.0", from application/config/version (the export presets carry the same number).
+static func version_label() -> String:
+	return "v" + str(ProjectSettings.get_setting("application/config/version", "1.0.0"))
 
 func _init() -> void:
 	speech.host = self
@@ -252,6 +259,9 @@ func _ready() -> void:
 	ui_mobile = "--mobile-ui" in OS.get_cmdline_args() or "--mobile-ui" in OS.get_cmdline_user_args() or OS.get_name() in ["Android", "iOS"]
 	if not ui_mobile:
 		get_window().content_scale_size = Vector2i(DESKTOP_MIN_CANVAS_WIDTH, 960)
+		# Headless, a min size grows the fake 960x960 window the tests measure.
+		if DisplayServer.get_name() != "headless":
+			get_window().min_size = DESKTOP_MIN_WINDOW
 	speech.speech_helper = SpeechHelper.new()
 	speech.speech_helper.name = "SpeechHelper"
 	add_child(speech.speech_helper)
