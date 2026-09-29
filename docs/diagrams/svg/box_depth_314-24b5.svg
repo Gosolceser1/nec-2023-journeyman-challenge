@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<rect x="0.0" y="0.0" width="800.0" height="450.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="40.0" y="50.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">side section</text>
+<rect x="282.0" y="70.0" width="18.0" height="280.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<text x="266.0" y="100.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="end">wall</text>
+<rect x="300.0" y="150.0" width="170.0" height="180.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<rect x="270.0" y="136.0" width="12.0" height="208.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="256.0" y="244.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="end">plate</text>
+<rect x="282.0" y="196.0" width="84.0" height="88.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<text x="324.0" y="247.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">device</text>
+<polyline points="700.0,100.0 560.0,100.0 530.0,130.0 444.0,190.0 360.0,226.0" fill="none" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="700.0,112.0 566.0,112.0 538.0,140.0 444.0,204.0 360.0,252.0" fill="none" stroke="#cbd5e1" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="710.0" y="84.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="end">14 AWG</text>
+<text x="710.0" y="146.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="end">or smaller</text>
+<text x="490.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">device box</text>
+<line x1="300.0" y1="334.0" x2="300.0" y2="341.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="300.0" y1="347.0" x2="300.0" y2="354.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="300.0" y1="360.0" x2="300.0" y2="367.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="300.0" y1="373.0" x2="300.0" y2="380.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="470.0" y1="334.0" x2="470.0" y2="341.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="470.0" y1="347.0" x2="470.0" y2="354.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="470.0" y1="360.0" x2="470.0" y2="367.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="470.0" y1="373.0" x2="470.0" y2="380.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="306.0" y1="372.0" x2="464.0" y2="372.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="300.0,372.0 312.0,366.0 312.0,378.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="470.0,372.0 458.0,378.0 458.0,366.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="385.0" y="352.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="middle">depth</text>
+<text x="290.0" y="420.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">23.8 mm (15/16 in) min</text>
+<rect x="30.0" y="410.0" width="197.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="40.0" y="438.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 314.24(B)(5)</text>
+</svg>

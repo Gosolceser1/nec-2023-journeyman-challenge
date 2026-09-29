@@ -184,6 +184,69 @@
       ],
       "reviewed": "2026-09-28"
     },
+    "final-exam-#1-023": {
+      "file": "parallel_egc_250-122f.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.7412,
+            0.4533,
+            0.04,
+            0.0711
+          ],
+          "what": "EGC drawn in this raceway"
+        },
+        {
+          "region": [
+            0.9038,
+            0.4533,
+            0.04,
+            0.0711
+          ],
+          "what": "EGC drawn in this raceway"
+        },
+        {
+          "region": [
+            0.6504,
+            0.6873,
+            0.3368,
+            0.1529
+          ],
+          "what": "'wire-type EGC in each raceway, in parallel'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.7412,
+            0.4533,
+            0.04,
+            0.0711
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.9038,
+            0.4533,
+            0.04,
+            0.0711
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.6504,
+            0.6873,
+            0.3368,
+            0.1529
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
     "final-exam-#1-024": {
       "file": "pool_fountain_distances_680.png",
       "when": "before",
@@ -323,6 +386,13 @@
       ],
       "reviewed": "2026-09-28"
     },
+    "final-exam-#1-033": {
+      "file": "three_way_switch_spdt.png",
+      "when": "after",
+      "leaks": [],
+      "masks": [],
+      "reviewed": "2026-09-28"
+    },
     "final-exam-#1-035": {
       "file": "electrode_system_250-52_250-53.png",
       "when": "before",
@@ -350,6 +420,61 @@
       ],
       "reviewed": "2026-09-28"
     },
+    "final-exam-#1-041": {
+      "file": "motor_stop_start_control.png",
+      "when": "after",
+      "leaks": [],
+      "masks": [],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-042": {
+      "file": "wet_location_receptacle_406-9b.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.2092,
+            0.4142,
+            0.0567,
+            0.0711
+          ],
+          "what": "WR marking on the face"
+        },
+        {
+          "region": [
+            0.105,
+            0.7381,
+            0.2651,
+            0.1724
+          ],
+          "what": "'listed weather- resistant type'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.2092,
+            0.4142,
+            0.0567,
+            0.0711
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.105,
+            0.7381,
+            0.2651,
+            0.1724
+          ],
+          "ring": true
+        }
+      ],
+      "terms": [
+        "WR"
+      ],
+      "reviewed": "2026-09-28"
+    },
     "final-exam-#1-043": {
       "file": "spa_fan_height_680-43.png",
       "when": "before",
@@ -373,6 +498,34 @@
             0.1822
           ],
           "label": "? ft",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-045": {
+      "file": "disposer_cord_422-16b1.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.6035,
+            0.2089,
+            0.3429,
+            0.0936
+          ],
+          "what": "'36 in max (900 mm)'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.6035,
+            0.2089,
+            0.3429,
+            0.0936
+          ],
+          "label": "? max",
           "ring": true
         }
       ],
@@ -613,6 +766,61 @@
       ],
       "reviewed": "2026-09-28"
     },
+    "final-exam-#1-062": {
+      "file": "voltage_drop_percent.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.2805,
+            0.8443,
+            0.4391,
+            0.1095
+          ],
+          "what": "the percent worked out (base voltage and result)"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.2805,
+            0.8443,
+            0.4391,
+            0.1095
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-063": {
+      "file": "drawing_scale_quarter_inch.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.3321,
+            0.33,
+            0.2858,
+            0.1095
+          ],
+          "what": "'3 1/2 x 4 = 14 ft'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.3321,
+            0.33,
+            0.2858,
+            0.1095
+          ],
+          "label": "? ft",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
     "final-exam-#1-065": {
       "file": "sine_wave_60hz_quarter_cycle.png",
       "when": "before",
@@ -686,6 +894,13 @@
           "ring": true
         }
       ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-067": {
+      "file": "nipple_fill_ch9_note4.png",
+      "when": "after",
+      "leaks": [],
+      "masks": [],
       "reviewed": "2026-09-28"
     },
     "final-exam-#3-006": {
@@ -789,6 +1004,33 @@
       ],
       "reviewed": "2026-09-28"
     },
+    "final-exam-#3-020": {
+      "file": "antenna_leadin_810-13.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.5536,
+            0.0685,
+            0.1678,
+            0.1764
+          ],
+          "what": "'600 mm (2 ft) min'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.5536,
+            0.0685,
+            0.1678,
+            0.1764
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
     "final-exam-#3-027": {
       "file": "gec_water_bond_250-66_250-68.png",
       "when": "before",
@@ -821,6 +1063,34 @@
       "when": "after",
       "leaks": [],
       "masks": [],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#3-034": {
+      "file": "box_depth_314-24b5.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.3525,
+            0.8636,
+            0.4202,
+            0.1022
+          ],
+          "what": "'23.8 mm (15/16 in) min'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.3525,
+            0.8636,
+            0.4202,
+            0.1022
+          ],
+          "label": "? min",
+          "ring": true
+        }
+      ],
       "reviewed": "2026-09-28"
     },
     "final-exam-#3-035": {
@@ -1069,6 +1339,13 @@
       "masks": [],
       "reviewed": "2026-09-28"
     },
+    "final-exam-#3-070": {
+      "file": "delta_generator_symbol.png",
+      "when": "after",
+      "leaks": [],
+      "masks": [],
+      "reviewed": "2026-09-28"
+    },
     "final-exam-#5-006": {
       "file": "supports_unsupported_cable_320-330-334.png",
       "when": "before",
@@ -1092,6 +1369,78 @@
             0.0917
           ],
           "label": "? ft",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#5-048": {
+      "file": "gutter_bare_parts_366-100e.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.69,
+            0.1083,
+            0.2242,
+            0.088
+          ],
+          "what": "'25 mm (1 in)'"
+        },
+        {
+          "region": [
+            0.69,
+            0.8203,
+            0.2242,
+            0.088
+          ],
+          "what": "'25 mm (1 in)'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.69,
+            0.1083,
+            0.2242,
+            0.088
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.69,
+            0.8203,
+            0.2242,
+            0.088
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#5-049": {
+      "file": "nm_extension_floor_382-15a.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.5608,
+            0.907,
+            0.2242,
+            0.093
+          ],
+          "what": "'50 mm (2 in)'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.5608,
+            0.907,
+            0.2242,
+            0.093
+          ],
           "ring": true
         }
       ],
@@ -1181,6 +1530,89 @@
             0.3928,
             0.291,
             0.0979
+          ],
+          "label": "? ft",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#5-064": {
+      "file": "resistor_thermal_barrier_470-11.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.2347,
+            0.8902,
+            0.2805,
+            0.1022
+          ],
+          "what": "'305 mm (12 in)'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.2347,
+            0.8902,
+            0.2805,
+            0.1022
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#5-065": {
+      "file": "supports_vertical_376-30_342-30.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.3175,
+            0.5612,
+            0.1826,
+            0.092
+          ],
+          "what": "'15 ft max'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.3175,
+            0.5612,
+            0.1826,
+            0.092
+          ],
+          "label": "? ft",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#5-067": {
+      "file": "supports_vertical_376-30_342-30.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.5349,
+            0.3892,
+            0.1826,
+            0.092
+          ],
+          "what": "'20 ft max'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.5349,
+            0.3892,
+            0.1826,
+            0.092
           ],
           "label": "? ft",
           "ring": true
@@ -1449,6 +1881,13 @@
       ],
       "reviewed": "2026-09-28"
     },
+    "open-book-exam-#1-012": {
+      "file": "gfci_locations_210-8.png",
+      "when": "after",
+      "leaks": [],
+      "masks": [],
+      "reviewed": "2026-09-28"
+    },
     "open-book-exam-#1-014": {
       "file": "gfci_locations_210-8.png",
       "when": "before",
@@ -1713,6 +2152,34 @@
       ],
       "reviewed": "2026-09-28"
     },
+    "open-book-exam-#10-021": {
+      "file": "fire_pump_parts_695-12d.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.4525,
+            0.6858,
+            0.2075,
+            0.1822
+          ],
+          "what": "'300 mm (12 in) min'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.4525,
+            0.6858,
+            0.2075,
+            0.1822
+          ],
+          "label": "? min",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
     "open-book-exam-#10-024": {
       "file": "service_bonding_250-24.png",
       "when": "before",
@@ -1795,6 +2262,34 @@
       ],
       "reviewed": "2026-09-28"
     },
+    "open-book-exam-#4-006": {
+      "file": "disposer_cord_422-16b1.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.6035,
+            0.2089,
+            0.3429,
+            0.0936
+          ],
+          "what": "'36 in max (900 mm)'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.6035,
+            0.2089,
+            0.3429,
+            0.0936
+          ],
+          "label": "? max",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
     "open-book-exam-#4-008": {
       "file": "multiwire_branch_circuit_210-4.png",
       "when": "before",
@@ -1868,6 +2363,54 @@
       ],
       "reviewed": "2026-09-28"
     },
+    "open-book-exam-#4-014": {
+      "file": "wet_location_receptacle_406-9b.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.2092,
+            0.4142,
+            0.0567,
+            0.0711
+          ],
+          "what": "WR marking on the face"
+        },
+        {
+          "region": [
+            0.105,
+            0.7381,
+            0.2651,
+            0.1724
+          ],
+          "what": "'listed weather- resistant type'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.2092,
+            0.4142,
+            0.0567,
+            0.0711
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.105,
+            0.7381,
+            0.2651,
+            0.1724
+          ],
+          "ring": true
+        }
+      ],
+      "terms": [
+        "WR"
+      ],
+      "reviewed": "2026-09-28"
+    },
     "open-book-exam-#4-018": {
       "file": "nm_cable_sleeve_312-5c.png",
       "when": "before",
@@ -1896,6 +2439,13 @@
       ],
       "reviewed": "2026-09-28"
     },
+    "open-book-exam-#4-021": {
+      "file": "gfci_locations_210-8.png",
+      "when": "after",
+      "leaks": [],
+      "masks": [],
+      "reviewed": "2026-09-28"
+    },
     "open-book-exam-#4-024": {
       "file": "electrode_system_250-52_250-53.png",
       "when": "before",
@@ -1921,6 +2471,41 @@
           "ring": true
         }
       ],
+      "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#7-010": {
+      "file": "heated_ceiling_wiring_424-36.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.59,
+            0.6137,
+            0.2962,
+            0.0978
+          ],
+          "what": "'50 mm (2 in) min'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.59,
+            0.6137,
+            0.2962,
+            0.0978
+          ],
+          "label": "? min",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#7-013": {
+      "file": "burial_under_concrete_300-5.png",
+      "when": "after",
+      "leaks": [],
+      "masks": [],
       "reviewed": "2026-09-28"
     },
     "open-book-exam-#7-022": {

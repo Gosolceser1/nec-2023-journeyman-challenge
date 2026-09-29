@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<rect x="0.0" y="0.0" width="800.0" height="450.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="40.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Wet location: 15 or 20 A, 125 or 250 V nonlocking receptacle</text>
+<rect x="40.0" y="70.0" width="300.0" height="250.0" rx="6" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="3"/>
+<text x="190.0" y="104.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">front</text>
+<rect x="151.6" y="140.0" width="76.8" height="120.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="178.0" y1="169.6" x2="178.0" y2="177.6" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="202.0" y1="169.6" x2="202.0" y2="177.6" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="178.0" y1="222.4" x2="178.0" y2="230.4" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="202.0" y1="222.4" x2="202.0" y2="230.4" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="190.0" y="208.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">WR</text>
+<text x="190.0" y="362.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="middle">listed weather-</text>
+<text x="190.0" y="395.6" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="middle">resistant type</text>
+<line x1="470.0" y1="70.0" x2="470.0" y2="400.0" stroke="#94a3b8" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="470.0" y="70.0" width="290.0" height="330.0" rx="0" fill="#1e293b" fill-opacity="0.0" stroke="none" stroke-width="2"/>
+<text x="560.0" y="104.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">side</text>
+<polygon points="470.0,140.0 560.0,160.0 560.0,320.0 470.0,330.0" fill="#334155" fill-opacity="0.8" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="488.0" y="215.0" width="36.0" height="34.0" rx="4" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<polyline points="506.0,249.0 520.0,322.0 536.0,400.0" fill="none" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="506.0" y="204.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">plug</text>
+<text x="575.0" y="190.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">extra-duty</text>
+<text x="575.0" y="217.5" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">in-use cover</text>
+<text x="575.0" y="245.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">(outlet box hood)</text>
+<text x="575.0" y="290.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">weatherproof with</text>
+<text x="575.0" y="317.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">the plug inserted</text>
+<rect x="601.0" y="410.0" width="185.0" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="611.0" y="438.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 406.9(B)(1)</text>
+</svg>

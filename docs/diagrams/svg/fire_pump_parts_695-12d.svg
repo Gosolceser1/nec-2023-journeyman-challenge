@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<rect x="0.0" y="0.0" width="800.0" height="450.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<line x1="20.0" y1="400.0" x2="780.0" y2="400.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="70.0" y1="40.0" x2="70.0" y2="400.0" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="74.0" y="388.0" width="700.0" height="10.0" rx="0" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="1"/>
+<rect x="130.0" y="110.0" width="170.0" height="190.0" rx="6" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<line x1="70.0" y1="170.0" x2="130.0" y2="170.0" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="70.0" y1="260.0" x2="130.0" y2="260.0" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="150.0" y="272.0" width="130.0" height="16.0" rx="3" fill="#fbbf24" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="215.0" y="58.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">fire pump</text>
+<text x="215.0" y="88.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">controller</text>
+<text x="215.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="middle">lowest energized part</text>
+<line x1="282.0" y1="288.0" x2="289.0" y2="288.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="295.0" y1="288.0" x2="302.0" y2="288.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="308.0" y1="288.0" x2="315.0" y2="288.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="321.0" y1="288.0" x2="328.0" y2="288.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="334.0" y1="288.0" x2="341.0" y2="288.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="347.0" y1="288.0" x2="354.0" y2="288.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="350.0" y1="294.0" x2="350.0" y2="394.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="350.0,288.0 356.0,300.0 344.0,300.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="350.0,400.0 344.0,388.0 356.0,388.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="370.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">300 mm</text>
+<text x="370.0" y="376.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">(12 in) min</text>
+<rect x="580.0" y="300.0" width="170.0" height="88.0" rx="8" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<text x="665.0" y="352.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">pump</text>
+<line x1="665.0" y1="300.0" x2="665.0" y2="200.0" stroke="#94a3b8" stroke-width="24" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="665.0" y1="300.0" x2="665.0" y2="200.0" stroke="#64748b" stroke-width="20" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="665.0" y="180.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">water discharge</text>
+<text x="760.0" y="438.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#38bdf8" text-anchor="end">water on the floor</text>
+<rect x="30.0" y="410.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="40.0" y="438.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 695.12(D)</text>
+</svg>

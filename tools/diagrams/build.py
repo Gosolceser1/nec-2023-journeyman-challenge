@@ -44,7 +44,7 @@ SCALE = 1.5
 PALETTE = 96
 
 # Tiers wired into the app (the rest are drawn but not shipped).
-WIRED_TIERS = "AB"
+WIRED_TIERS = "ABC"
 
 
 def load_figs(modules=None):

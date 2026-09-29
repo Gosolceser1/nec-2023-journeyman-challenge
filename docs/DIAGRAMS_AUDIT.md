@@ -283,7 +283,7 @@ support-spacing figure; those are ours to draw.
 
 ## 5. New original figures (all 88 "benefit" records)
 
-**Status:** the high (A: 23 records) and medium (B: 42 records) tiers ship in the app, 65 records on 31 drawings. The low tier (C) is drawn and reviewed; it lands next, with the full checks.
+**Status:** all three tiers ship in the app: high (A, 23 records), medium (B, 42) and low (C, 23), 88 records on 48 drawings, landed in that order, each with the full checks.
 
 **One visual system.** `tools/diagrams/nec_style.py` holds the palette (dark
 slate `#0f172a` ground, cyan `#38bdf8` dimensions, green `#34d399` answer
@@ -346,7 +346,7 @@ screen still overflows with the strip, the explanation sheet (it scrolls
 inside) gives way down to 60 px. The dark figures sit on a dark card
 (`DiagramView.card_style`), inline and in the zoom.
 
-**Size.** 31 drawings, 717 KiB of PNG (about 23 KiB each at 1200 px wide).
+**Size.** 48 drawings, 1,034 KiB of PNG in the repo (about 22 KiB each at 1200 px wide; 96-colour palette, no dithering). The release size delta is in CHANGELOG.md.
 
 **A resize loop fixed.** `DiagramView` sizes its height from its width. On
 the phone layout at 1024x768 (a tablet in landscape) answering

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+<rect x="0.0" y="0.0" width="800.0" height="420.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<circle cx="260.0" cy="200.0" r="100" fill="#1e293b" stroke="#e2e8f0" stroke-width="4"/>
+<polygon points="260.0,128.0 322.4,236.0 197.6,236.0" fill="none" fill-opacity="1.0" stroke="#34d399" stroke-width="5"/>
+<text x="260.0" y="346.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">3-phase delta generator</text>
+<text x="260.0" y="386.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="middle">circle + triangle</text>
+<circle cx="580.0" cy="200.0" r="70" fill="#1e293b" stroke="#94a3b8" stroke-width="3"/>
+<line x1="580.0" y1="200.0" x2="580.0" y2="242.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="580.0" y1="200.0" x2="543.6" y2="179.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="580.0" y1="200.0" x2="616.4" y2="179.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="580.0" y="316.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="middle">compare: wye (star)</text>
+<text x="580.0" y="344.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">Y inside the circle</text>
+</svg>
