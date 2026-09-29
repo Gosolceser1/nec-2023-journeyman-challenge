@@ -10,7 +10,7 @@
 ampacity ampacities busbar busbars busway busways cablebus lampholder lampholders
 liquidtight luminaire luminaires multiconductor multioutlet multiwire overcurrent
 overcurrents panelboard panelboards raceway raceways switchgear wireway wireways
-wrenchtight occupiable hoistways multibuilding barriered noncinder nonheating
+wrenchtight occupiable hoistway hoistways multibuilding barriered noncinder nonheating
 noninsulated nonlighting nonlocking nonshielded unjacketed thermoset relamping
 nonplasticized handhole handholes aerial
 explosible flyings plexed storable prefinished centerline

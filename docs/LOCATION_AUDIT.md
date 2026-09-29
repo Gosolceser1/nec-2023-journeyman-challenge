@@ -180,8 +180,8 @@ where the NEC 2023 fact was verified.
   permitted to omit ground-fault circuit-interrupter protection". No change.
 - **final-exam-#3-068** (620.51): the citation is "620.51" and the provision heading "620.51(D)(1) More Than One Driving Machine". The UpCodes text extraction returned "Available Fault Current Field Marking" for 620.51(D)(1), which may be a mis-sliced neighbour (the extraction matched the first "(1)" after "(D)"). The record was left unchanged: the citation and the breadcrumb (Chapter 6, Article 620) are right either way. Re-check the 620.51(D) list numbering by hand. Resolved in `docs/CONTENT_AUDIT_2023.md`: 2023 620.51(D) has only (1) Available Fault Current Field Marking, so the record tests a removed rule and is flagged there. The tables/formulas audit confirmed
   this: the phrase "numbered to correspond to the identifying number" appears in 2023 Chapter 6
-  only in 620.53, 620.54 and 620.55. It labelled the provision heading, the tip and the choice A
-  note as NEC 2020 text. The key is unchanged.
+  only in 620.53, 620.54 and 620.55. The record was then rewritten to test 2023 620.51(A) (disconnect
+  lockable only in the open position per 110.25); key position A unchanged.
 - **open-book-exam-#10-002** (220.5(C), garages now counted): verified. The
   2023 220.5(C) excludes only open porches and unfinished areas not
   adaptable for future use, and the record matches it word for word.

@@ -73,12 +73,13 @@ ne-state-act-#3-003, which was added.
   and 620.55 (other utilization equipment). The record now says so: the reference heading
   reads "(NEC 2020 text, removed in NEC 2023)", and the tip and choice A note say that 2023 keeps
   the rule only in 620.53–620.55. The key is kept. The content audit flags the same record
-  (`KNOWN_ISSUES.md`). **Recommendation:** retire or rewrite the question for 2023.
+  (`KNOWN_ISSUES.md`). **Resolved:** the question was rewritten to test 2023 620.51(A) (disconnect lockable only in the open position per 110.25); the NEC 2020 label is gone (`CONTENT_AUDIT_2023.md`).
 - **final-exam-#5-008** (330.104): the key "#18" is literally right, because 330.104 allows
   18 AWG copper for *control and signal* conductors (UpCodes text matches the record). But the
   stem ("minimum size copper conductor permitted in metal-clad cable") does not say "control".
   Many readers would answer 14 AWG, the minimum for power conductors. The choice notes explain
-  both. The key is kept.
+  both. The key is kept. **Resolved:** the stem now asks for control and signal conductors in
+  Type MC cable, and the notes cite both 330.104 minimums (`CONTENT_AUDIT_2023.md`).
 - **open-book-exam-#10-024** (Article 100), fixed without a key change (the answer wording by
   the content audit, the background line here): the stem is the
   Article 100 definition of *Grounding Electrode Conductor* ("A conductor used to connect the

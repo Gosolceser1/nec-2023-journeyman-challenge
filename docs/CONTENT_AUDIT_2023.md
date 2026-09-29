@@ -15,9 +15,9 @@ The full 2023 text was cached locally, outside the repository, and every provisi
 
 | Status | Records |
 |---|---|
-| verified | 196 |
-| fixed | 58 |
-| flagged | 2 |
+| verified | 195 |
+| fixed | 60 |
+| flagged | 1 |
 | non_nec | 23 |
 | total | 279 |
 
@@ -34,10 +34,16 @@ The 4 Nebraska state-law records are outside the NEC bank and are not part of th
 ## Flagged for a human
 
 - `final-exam-#1-029` (408.5): UpCodes heading reads '408.5 Clearance for Conductor Entering Bus Enclosures' (singular) while its Table 408.5 title says 'Conductors'. Record keeps 'Conductors'; confirm against the printed code. https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#408
-- `final-exam-#3-068` (620.51): Tests the 2020 620.51(D)(1) 'More Than One Driving Machine' numbering rule. 2023 620.51(D) has only (1) Available Fault Current Field Marking and Article 620 has no driving-machine numbering rule. Keyed answer cannot be re-anchored to 2023 text without changing it; retire or rewrite (human decision). The tables audit has since labelled the provision, tip and choice A note as NEC 2020 text, and points to 620.53–620.55, which keep the numbering rule for other disconnects. https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#620
+
+## To check in print
+
+- `final-exam-#1-029`: the 408.5 heading, singular "Conductor" (UpCodes) or plural "Conductors" (the record, and the Table 408.5 title).
+- `final-exam-#3-028`: whether 422.5(A) reads "(A)(1) through (A)(7) rated 150 volts or less to ground"; UpCodes omits "rated", and the record keeps it.
 
 ## Notable fixes
 
+- `final-exam-#3-068`: [prompt, answers, article, reference_text, choice_notes, tip_short, gist, info_tip, keywords, lookup_summary] Rewritten (user decision): the 2020 620.51(D)(1) driving-machine numbering rule is not in 2023, so the question now tests 620.51(A) Type: the disconnect is lockable only in the open position in accordance with 110.25. Key stays A. https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#620
+- `final-exam-#5-008`: [prompt, gist, choice_notes, tip_short] Stem clarified to control and signal conductors (tables audit found it ambiguous): 330.104 allows 18 AWG copper only for control and signal conductors; power and grounding conductors need 14 AWG copper. Key and provision unchanged.
 - `open-book-exam-#7-004`: [article, choice_notes, formula, gist, lookup_summary, prompt, reference_text, tip_short] The 2020 517.73(A)(2) biplane sentence ('100 percent of the momentary demand rating') is not in 2023. Stem rewritten to the 2023 517.73(B) feeder rule (50/25/10 percent of the momentary demand rating); keyed answer 'momentary' unchanged. Provision, notes, formula, tip and gist updated.
 - `open-book-exam-#1-012`: [article, choice_notes, gist, lookup_summary, prompt, reference_text] 2023 splits 210.8(B)(2) Kitchens from (3) 'Areas with sinks and permanent provisions for food preparation, beverage preparation, or cooking'. Article now 210.8(B)(3); stem uses the 2023 wording, key unchanged.
 - `final-exam-#3-015`: [gist, prompt, reference_text] 2023 240.33 dropped 'unless that is shown to be impracticable'. Removed it from the stem and provision; key unchanged.
@@ -149,14 +155,14 @@ Key: `verified` means no change was needed. `fixed` means explanation fields cha
 | `final-exam-#3-064` | 210.8(A) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210 |
 | `final-exam-#3-066` | 250.50 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250 |
 | `final-exam-#3-067` | 440.55(B) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#440 |
-| `final-exam-#3-068` | 620.51 | flagged | Tests the 2020 620.51(D)(1) 'More Than One Driving Machine' numbering rule. 2023 620.51(D) has only (1) Available Fault Current Field Marking and Article 620 has no driving-machine numbering rule. Keyed answer cannot be re-anchored to 2023 text without changing it; retire or rewrite (human decision). | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#620 |
+| `final-exam-#3-068` | 620.51(A) | fixed | [prompt, answers, article, reference_text, choice_notes, tip_short, gist, info_tip, keywords, lookup_summary] Rewritten (user decision): the 2020 620.51(D)(1) driving-machine numbering rule is not in 2023, so the question now tests 620.51(A) Type: the disconnect is lockable only in the open position in accordance with 110.25. Key stays A. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#620 |
 | `final-exam-#3-069` | 430.62(A) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
 | `final-exam-#5-001` | 324.41 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#324 |
 | `final-exam-#5-002` | 320.80(A) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#320 |
 | `final-exam-#5-004` | 324.40(D) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#324 |
 | `final-exam-#5-006` | 320.30(D)(2) | fixed | [reference_text] 320.30(D)(2) is cited: list labels (1)-(3) restored in NEC order (item 2 = 600 mm (2 ft) at terminals); text unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#320 |
 | `final-exam-#5-007` | Article 100 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#100 |
-| `final-exam-#5-008` | 330.104 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#330 |
+| `final-exam-#5-008` | 330.104 | fixed | [prompt, gist, choice_notes, tip_short] Stem clarified to control and signal conductors (tables audit found it ambiguous): 330.104 allows 18 AWG copper only for control and signal conductors; power and grounding conductors need 14 AWG copper. Key and provision unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#330 |
 | `final-exam-#5-017` | 332.10(7) | fixed | [reference_text] 332.10(7) is cited: list labels (1)-(11) restored in NEC order (item 7 = hazardous (classified) locations); text unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#332 |
 | `final-exam-#5-018` | 340.80 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#340 |
 | `final-exam-#5-020` | 332.104, 332.108, and 332.116 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#332 |

@@ -106,14 +106,11 @@ Python and the NEC location audit), each pinned by a test.
 
 ## Open: NEC 2023 content audit
 
-- **final-exam-#3-068 tests a rule NEC 2023 removed.** The 2020 620.51(D)(1)
-  "More Than One Driving Machine" numbering rule is gone; 2023 620.51(D) has
-  only "Available Fault Current Field Marking". The keyed answer cannot be
-  tied to 2023 text without changing it, so the record needs a human decision
-  (retire or rewrite). See `docs/CONTENT_AUDIT_2023.md`.
 - **final-exam-#1-029 heading.** UpCodes prints "408.5 Clearance for Conductor
   Entering Bus Enclosures" (singular); the record keeps "Conductors", as in the
   Table 408.5 title. Confirm against the printed code.
+- **final-exam-#3-028, 422.5(A) "rated".** UpCodes omits "rated" before
+  "150 volts or less to ground"; the record keeps it. Confirm in print.
 
 ## Open: release 1.0.0
 

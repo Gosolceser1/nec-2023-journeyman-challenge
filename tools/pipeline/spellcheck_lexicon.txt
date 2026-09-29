@@ -977,6 +977,7 @@ extends
 extension
 extensions
 external
+externally
 extra
 face
 faceplate
@@ -1136,6 +1137,7 @@ fungus
 furnace
 furring
 fuse
+fused
 fuses
 future
 galvanic
@@ -1668,6 +1670,7 @@ measured
 measurement
 measurements
 measures
+mechanic
 mechanical
 mechanically
 mechanism
@@ -1809,7 +1812,6 @@ notify
 novelty
 now
 number
-numbered
 numbering
 numbers
 numerator
@@ -1857,6 +1859,7 @@ opened
 opening
 openings
 opens
+operable
 operate
 operated
 operates
@@ -3106,7 +3109,6 @@ writes
 wrong
 wye
 yellow
-yes
 yet
 yoke
 you

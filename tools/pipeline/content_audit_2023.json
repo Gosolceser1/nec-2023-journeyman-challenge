@@ -1025,19 +1025,17 @@
       "note": "Key, provision, notes, tip and headings match NEC 2023."
     },
     "final-exam-#3-068": {
-      "status": "flagged",
+      "status": "fixed",
       "verified_on": "2026-09-28",
       "sections": [
-        "620.51",
-        "620.51(D)",
-        "620.53",
-        "620.54",
-        "620.55"
+        "620.51(A)",
+        "620.51(C)(1)",
+        "110.25"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#620",
-      "provision": "3f7ab6ef4368bfa1",
+      "provision": "9eb1c05ea7e1d3a1",
       "correct_index": 0,
-      "note": "Tests the 2020 620.51(D)(1) 'More Than One Driving Machine' numbering rule. 2023 620.51(D) has only (1) Available Fault Current Field Marking and Article 620 has no driving-machine numbering rule. Keyed answer cannot be re-anchored to 2023 text without changing it; retire or rewrite (human decision). Tables/formulas audit: provision heading, tip and choice A note now label the driving-machine rule as NEC 2020 text removed in 2023 (620.53-620.55 keep the numbering rule); key unchanged, still flagged."
+      "note": "[prompt, answers, article, reference_text, choice_notes, tip_short, gist, info_tip, keywords, lookup_summary] Rewritten (user decision): the 2020 620.51(D)(1) driving-machine numbering rule is not in 2023, so the question now tests 620.51(A) Type: the disconnect is lockable only in the open position in accordance with 110.25. Key stays A."
     },
     "final-exam-#3-069": {
       "status": "verified",
@@ -1109,7 +1107,7 @@
       "note": "Key, provision, notes, tip and headings match NEC 2023."
     },
     "final-exam-#5-008": {
-      "status": "verified",
+      "status": "fixed",
       "verified_on": "2026-09-28",
       "sections": [
         "330.104"
@@ -1117,7 +1115,7 @@
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#330",
       "provision": "7e79b68c98079da2",
       "correct_index": 0,
-      "note": "Key, provision, notes, tip and headings match NEC 2023."
+      "note": "[prompt, gist, choice_notes, tip_short] Stem clarified to control and signal conductors (tables audit found it ambiguous): 330.104 allows 18 AWG copper only for control and signal conductors; power and grounding conductors need 14 AWG copper. Key and provision unchanged."
     },
     "final-exam-#5-017": {
       "status": "fixed",

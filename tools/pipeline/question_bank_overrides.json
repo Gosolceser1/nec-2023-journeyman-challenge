@@ -588,15 +588,16 @@
       "prompt": "A protective layer which is installed between the floor and type FCC flat conductor cable to protect the cable from physical damage and may or may not be incorporated as an integral part of the cable is the ___."
     },
     "final-exam-#5-008": {
-      "tip_short": "MC cable: 14 AWG copper minimum for power, but control and signal conductors may be as small as 18 AWG copper. Correct: A — #18. 330.104 permits 18 AWG copper for control and signal conductors, the smallest copper allowed in MC cable. Not B: 16 AWG is not a 330.104 minimum; control and signal copper can go down to 18 AWG. Not C: 14 AWG copper is the minimum for power conductors only; control and signal can be 18 AWG. Not D: 12 AWG is the minimum for aluminum or copper-clad aluminum power conductors, not copper.",
+      "tip_short": "MC cable, 330.104: control and signal conductors may be 18 AWG copper; ungrounded, grounded, and equipment grounding conductors need 14 AWG copper. Correct: A — #18. 330.104 sets 18 AWG copper, nickel, or nickel-coated copper as the minimum size for control and signal conductors in Type MC cable. Not B: 16 AWG is not a 330.104 minimum; the control and signal minimum for copper is 18 AWG. Not C: 14 AWG copper is the 330.104 minimum for ungrounded, grounded, and equipment grounding conductors, not for control and signal conductors. Not D: 12 AWG is the 330.104 minimum for aluminum conductors, not copper.",
       "reference_text": "330.104 Conductors\nFor ungrounded, grounded, and equipment grounding conductors, the minimum conductor sizes shall be 14 AWG copper, nickel, or nickel-coated copper and 12 AWG aluminum or copper-clad aluminum.\nFor control and signal conductors, minimum conductor sizes shall be 18 AWG copper, nickel, or nickel-coated copper, 14 AWG copper-clad aluminum, and 12 AWG aluminum.",
       "choice_notes": [
-        "330.104 permits 18 AWG copper for control and signal conductors, the smallest copper allowed in MC cable.",
-        "16 AWG is not a 330.104 minimum; control and signal copper can go down to 18 AWG.",
-        "14 AWG copper is the minimum for power conductors only; control and signal can be 18 AWG.",
-        "12 AWG is the minimum for aluminum or copper-clad aluminum power conductors, not copper."
+        "330.104 sets 18 AWG copper, nickel, or nickel-coated copper as the minimum size for control and signal conductors in Type MC cable.",
+        "16 AWG is not a 330.104 minimum; the control and signal minimum for copper is 18 AWG.",
+        "14 AWG copper is the 330.104 minimum for ungrounded, grounded, and equipment grounding conductors, not for control and signal conductors.",
+        "12 AWG is the 330.104 minimum for aluminum conductors, not copper."
       ],
-      "prompt": "The minimum size copper conductor permitted in metal-clad cable is ___."
+      "prompt": "The minimum size copper conductor permitted for control and signal conductors in Type MC (metal-clad) cable is ___.",
+      "gist": "MC cable conductors have different minimum sizes for power circuits and for control and signal circuits. The question asks the smallest copper size for the control and signal conductors."
     },
     "final-exam-#5-018": {
       "tip_short": "UF cable ampacity always comes from the 60 degrees C column of the ampacity tables, per 340.80. Correct: D — 60 degrees C. 340.80 sets UF ampacity at that of 60 degrees C (140 degrees F) conductors per 310.14. Not A: 60 degrees F is the wrong unit; 340.80 uses 60 degrees C (140 degrees F) conductors. Not B: 75 degrees C is not permitted for UF ampacity; 340.80 limits it to the 60 degrees C column. Not C: 140 is the Fahrenheit equivalent; 140 degrees C is not a UF ampacity rating at all.",
@@ -3113,23 +3114,29 @@
       "prompt": "The rating of the attachment plug and receptacle must not exceed ___ @ 250 volts for a cord-and-plug connected air conditioner."
     },
     "final-exam-#3-068": {
-      "reference_text": "620.51(D)(1) More Than One Driving Machine (NEC 2020 text, removed in NEC 2023)\nWhere there is more than one driving machine in a machine room, the disconnecting means shall be numbered to correspond to the identifying number of the driving machine that they control. The disconnecting means shall be provided with a sign to identify the location of the supply side overcurrent protective device.",
-      "article": "620.51",
-      "lookup_summary": "Lookup clues: branch circuit, disconnecting means. Start with 620.51, then read the matching subsection and exceptions.",
-      "tip_short": "With more than one driving machine in a machine room, number each disconnect to match the driving machine it controls (NEC 2020 620.51(D)(1); NEC 2023 keeps this numbering rule only in 620.53 to 620.55). Correct: A — driving machine they control. NEC 2020 620.51(D)(1) required each disconnect to be numbered to match the driving machine it controls. NEC 2023 dropped that sentence; 620.53 to 620.55 keep the same numbering rule for car light, car heating and air-conditioning, and other equipment disconnects. Not B: The feeding panelboard number is not what identifies an elevator disconnect. Not C: Branch circuit numbers are not used; the disconnect is matched to the machine it serves. Not D: Only the driving machine number is used, so all of these is wrong.",
+      "reference_text": "620.51(A) Type\nThe disconnecting means shall be an enclosed externally operable fused motor circuit switch or circuit breaker that is lockable only in the open position in accordance with 110.25.\nThe disconnecting means shall be a listed device.",
+      "article": "620.51(A)",
+      "lookup_summary": "Lookup clues: disconnecting means, circuit breaker. Start with 620.51(A), then read the matching subsection and exceptions.",
+      "tip_short": "Elevator main disconnect, 620.51(A): an enclosed, externally operable fused motor circuit switch or circuit breaker, listed, and lockable open only (110.25). Correct: A — only in the open position. 620.51(A) requires the fused motor circuit switch or circuit breaker to be lockable only in the open position, in accordance with 110.25. Not B: Locking the disconnect closed could hold power on during service; 620.51(A) allows locking only in the open position. Not C: Locking in the closed position is the opposite of what 620.51(A) permits; a lockout holds the circuit open. Not D: Hoistway location is a 620.51(C)(1) location rule, not a condition on locking; the 620.51(A) disconnect must be lockable open wherever it is installed.",
       "choice_notes": [
-        "NEC 2020 620.51(D)(1) required each disconnect to be numbered to match the driving machine it controls. NEC 2023 dropped that sentence; 620.53 to 620.55 keep the same numbering rule for car light, car heating and air-conditioning, and other equipment disconnects.",
-        "The feeding panelboard number is not what identifies an elevator disconnect.",
-        "Branch circuit numbers are not used; the disconnect is matched to the machine it serves.",
-        "Only the driving machine number is used, so all of these is wrong."
+        "620.51(A) requires the fused motor circuit switch or circuit breaker to be lockable only in the open position, in accordance with 110.25.",
+        "Locking the disconnect closed could hold power on during service; 620.51(A) allows locking only in the open position.",
+        "Locking in the closed position is the opposite of what 620.51(A) permits; a lockout holds the circuit open.",
+        "Hoistway location is a 620.51(C)(1) location rule, not a condition on locking; the 620.51(A) disconnect must be lockable open wherever it is installed."
       ],
-      "prompt": "Where there is more than one driving machine in an elevator room, the disconnecting means must be numbered to correspond to the identifying number of the ___.",
+      "prompt": "The disconnecting means for the main power supply conductors of an elevator shall be an enclosed externally operable fused motor circuit switch or circuit breaker that is lockable ___ in accordance with 110.25.",
       "answers": [
-        "driving machine they control",
-        "panelboard it is fed from",
-        "branch circuit feeding it",
-        "all of these"
-      ]
+        "only in the open position",
+        "in either the open or the closed position",
+        "only in the closed position",
+        "only when located outside the hoistway"
+      ],
+      "keywords": [
+        "disconnecting means",
+        "circuit breaker"
+      ],
+      "gist": "An elevator's main disconnect has to let a mechanic safely lock out the car during service. The question asks in which position the Code lets that switch be locked.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nElevator and dumbwaiter motors live an intermittent life — short hard runs, long rests — so the Code sizes their conductors and protection by duty rating instead of continuous-duty rules. Their machine rooms and controllers get the same disconnect-within-sight treatment as any motor.\n\nThis asks what the Code requires of the elevator's main disconnecting means. Subject: elevator. Test each choice against the required type of disconnect and how it may be locked.\n\nLOOKUP FOCUS\ndisconnecting means, circuit breaker"
     },
     "final-exam-#5-001": {
       "reference_text": "324.41 Floor Coverings\nFloor-mounted Type FCC cable, cable connectors, and insulating ends shall be covered with carpet squares not larger than 1.0 m (39.37 in.) square. Carpet squares that are adhered to the floor shall be attached with release-type adhesives.",
