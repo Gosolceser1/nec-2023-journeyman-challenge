@@ -11,6 +11,12 @@
   tamper-resistant dwelling map, FCC layers and the type-letter decoder, plus
   new notes on six existing figures. Anything that answers the question stays
   hidden until you answer.
+- **31 more questions get a study figure** (docs/DIAGRAMS_AUDIT.md section 9):
+  23 new drawings, among them Ohm's law and power, EGC sizing from the
+  breaker, the termination temperature limit, busbar and welder worked cards,
+  the motor-group feeder, insulation colors, the TC bending radius, battery
+  room ventilation and the RV park receptacles. As before, the answer stays
+  hidden until you answer.
 
 ### Fixed
 

@@ -6,12 +6,12 @@ figure, and all three are now redrawn in the app's own style (section 1);
 88 would benefit from an original study figure, and all 88 have one**
 (51 drawings for all 91 records, section 5), each checked against the NEC 2023
 text by two separate reviews (section 6). Batch 1 of the gap scan adds 26
-drawings and 6 re-masks for 72 more questions (section 8): 77 drawings for
-163 records in all.
+drawings and 6 re-masks for 72 more questions (section 8), and batch 2 adds
+23 drawings for 31 more (section 9): 100 drawings for 194 records in all.
 
 Screenshots: `.audit_tmp/shots/diagrams/` (contact sheets `all_*.png` for
 every record, `changed_*.png` for the 1.0.5 changes, `batch1/batch1_*.png`
-for batch 1; desktop and phone, before and after answering). Nothing here copies UpCodes, the exam PDFs or
+and `batch2/batch2_*.png` for the gap-scan batches; desktop and phone, before and after answering). Nothing here copies UpCodes, the exam PDFs or
 any other source: every figure is drawn in code (`tools/diagrams/`).
 
 ## 1. Required figures (redrawn for 1.0.5)
@@ -691,3 +691,66 @@ answer. Review with NEC sections per drawing: `audits/diagram_batch1_tmp/review.
 | B | `open-book-exam-#7-011` | `branch_circuit_rating_210` | before | conductor ampacity >= 20 A rating |
 | B | `open-book-exam-#7-016` | `multiple_supplies_225-37_700-7` | before | where the source is; the second item on the sign |
 | B | `open-book-exam-#7-020` | `sign_construction_600` | before | sign body |
+
+## 9. Batch 2 from the gap scan (31 more questions)
+
+Batch 2 is the rest of the gap scan's medium list: 8 concept groups that
+serve two questions each, then 16 single-question concepts. **23 new
+drawings for 31 questions** (tier B; `records.py`, family "Batch 2 ...").
+One single-question concept was skipped. `M22` (RMC identified every 10 ft,
+`final-exam-#5-033`) asks for the rule's wording, and its stem already gives
+the interval, so a picture would only restate the stem.
+
+New modules in `tools/diagrams/figs/`:
+
+- `calc_cards.py`: office unit load, Ohm's law and power, multioutlet assembly, busbar density, arc and resistance welders, imaging feeder demand, motor-group feeder.
+- `conductors.py`: EGC from the OCPD, termination temperature limit, insulation colors, TC bending radius, grounded-conductor connection.
+- `installs.py`: laundry and furnace circuits, vertical OCPD enclosures, room A/C cord, battery room ventilation, light equipment on a box, airflow at openings, relay-operated disconnect, welding cable tray signs, maximum water level, holiday lighting on trees, RV park receptacles and feeder.
+
+Every value was checked against the NFPA 70-2023 text cache and the scanner
+passes. Each record's before shot was also compared by hand with its keyed
+answer, in desktop, phone and phone zoom. Masks beyond the scanner:
+
+- the whole letter card for the "what is I" question;
+- every worked step on both busbars, since each bar's working gives the other's rate;
+- the RV feeder cross-section, whose colors would answer the I/II/III question;
+- the motor-group rounding note, which let the rule be worked back from the example.
+
+Four records get their figure only after answering (`#1-009` colors,
+`#3-015` vertical, `#3-039` individual circuit, `#10-008` sign text), where
+the drawing is the answer. Review with NEC sections per drawing:
+`audits/diagram_batch2_tmp/review.md`.
+
+| tier | record | figure | shown | masked before answering |
+|---|---|---|---|---|
+| B | `final-exam-#1-004` | `office_lighting_220-42a` | before | the office unit load; 6,500 VA |
+| B | `final-exam-#1-009` | `conductor_colors_310-6` | after | shown after answering only |
+| B | `final-exam-#1-010` | `multioutlet_assembly_220-14h` | before | the length per outlet; the VA per outlet; the worked load |
+| B | `final-exam-#1-016` | `holiday_lighting_trees_590-4j` | before | the other permitted device |
+| B | `final-exam-#1-019` | `ohms_law_wheel` | before | what each letter stands for; the example current |
+| B | `final-exam-#1-025` | `welder_supply_630` | before | the 200% step; 90 A |
+| B | `final-exam-#1-068` | `egc_size_250-122` | before | the 15 A row; the 20 A row; the 60 A row |
+| B | `final-exam-#3-002` | `rv_park_supply_551-71_551-72` | before | the feeder conductors |
+| B | `final-exam-#3-015` | `ocpd_vertical_240-33` | after | shown after answering only |
+| B | `final-exam-#3-017` | `egc_size_250-122` | before | the 15 A row; the 20 A row; the 60 A row |
+| B | `final-exam-#3-018` | `room_ac_cord_440-64` | before | 10 ft max |
+| B | `final-exam-#3-033` | `ohms_law_wheel` | before | the example current |
+| B | `final-exam-#3-039` | `single_load_circuits_210-11_422-12` | after | shown after answering only |
+| B | `final-exam-#3-040` | `welder_supply_630` | before | the 15% multiplier; 8.19 A |
+| B | `final-exam-#3-060` | `battery_ventilation_480-10a` | before | the mixture type |
+| B | `final-exam-#3-063` | `busbar_ampacity_366-23a` | before | the copper density; 1,500 A; the bar B working; the density rule |
+| B | `final-exam-#3-069` | `motor_group_feeder_430-62a` | before | the feeder rule; the rounding note |
+| B | `final-exam-#5-023` | `tc_bending_radius_336-24` | before | the shielded multiple |
+| B | `final-exam-#5-039` | `busbar_ampacity_366-23a` | before | the copper density; 1,500 A; the bar area; the bar B working; the density rule |
+| B | `open-book-exam-#1-020` | `single_load_circuits_210-11_422-12` | before | 20 A |
+| B | `open-book-exam-#1-021` | `office_lighting_220-42a` | before | the office unit load; 6,500 VA |
+| B | `open-book-exam-#10-006` | `disconnect_relay_control_art100` | before | the defined term |
+| B | `open-book-exam-#10-008` | `welding_tray_signs_630-42c` | after | shown after answering only |
+| B | `open-book-exam-#10-023` | `rv_park_supply_551-71_551-72` | before | 70% |
+| B | `open-book-exam-#4-019` | `box_screws_314-27d` | before | the screw size |
+| B | `open-book-exam-#7-001` | `grounded_connection_200-3` | before | the connection word; the definition |
+| B | `open-book-exam-#7-004` | `imaging_feeder_517-73b` | before | the rating used |
+| B | `open-book-exam-#7-005` | `max_water_level_art100` | before | the defined term |
+| B | `open-book-exam-#7-008` | `equipment_airflow_110-13b` | before | the opening type |
+| B | `open-book-exam-#7-015` | `termination_temp_110-14c` | before | what caps the ampacity |
+| B | `open-book-exam-#7-017` | `termination_temp_110-14c` | before | the rating word |
