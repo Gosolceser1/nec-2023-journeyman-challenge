@@ -1,0 +1,846 @@
+{
+ "question_count": 70,
+ "provenance": "Tesseract OCR of the exam and answer-key PDFs, with the stems, choices and keys retyped from the PDF page images where the OCR was wrong (formerly the manual and exact_* lists in build_question_bank.py). Text as the exam prints it; curated wording lives in question_bank_overrides.json.",
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "Write 60% as a fraction in simplest form.",
+   "answers": [
+    "5/8",
+    "3/5",
+    "2/5",
+    "5/16"
+   ],
+   "correct_index": 1,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 2,
+   "prompt": "Each section of equipment that requires rear or side access to make field connections shall be so marked by the manufacturer on the .",
+   "answers": [
+    "front",
+    "right side",
+    "left side",
+    "rear"
+   ],
+   "correct_index": 0,
+   "reference": "408.18(C)"
+  },
+  {
+   "number": 3,
+   "prompt": "In other than one and two family dwellings, a receptacle outlet for indoor service equipment shall be located within of the service equipment.",
+   "answers": [
+    "25 feet",
+    "50 feet",
+    "75 feet",
+    "the same room or area"
+   ],
+   "correct_index": 3,
+   "reference": "210.63(B)(1)"
+  },
+  {
+   "number": 4,
+   "prompt": "Disregarding demand factors, the calculated lighting load for a 5,000 sq.ft. office building is volt-amperes.",
+   "answers": [
+    "16,500",
+    "15,400",
+    "8,000",
+    "6,500"
+   ],
+   "correct_index": 3,
+   "reference": "Table 220.42(A)"
+  },
+  {
+   "number": 5,
+   "prompt": "Given switch S1 is ON, the light does not come on, voltage across the light is 120 volts, and voltage across S1 is 0 volts. The light does not come on because...",
+   "answers": [
+    "The light is open (bulb burned out)",
+    "The light and switch are shorted",
+    "The light is good but the switch does not make contact",
+    "There is a break in the circuit wiring"
+   ],
+   "correct_index": 0,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 6,
+   "prompt": "Decorative lighting and similar accessories used for holiday lighting and similar purposes shall be listed and . :",
+   "answers": [
+    "marked",
+    "approved",
+    "labeled",
+    "stamped"
+   ],
+   "correct_index": 2,
+   "reference": "590.5"
+  },
+  {
+   "number": 7,
+   "prompt": "Insulated conductors used inside switchgear or switchboards are required to be ___.",
+   "answers": [
+    "suitable",
+    "labeled",
+    "acceptable",
+    "listed"
+   ],
+   "correct_index": 3,
+   "reference": "408.19"
+  },
+  {
+   "number": 8,
+   "prompt": "Balconies, decks and porches that are with in 4” horizontally of the dwelling unit shall have at least one receptacle outlet accessible from the balcony, deck, or porch. The receptacle outlet shall not be located more than above the balcony, deck, or porch walking surface.",
+   "answers": [
+    "36”",
+    "48”",
+    "60”",
+    "78”"
+   ],
+   "correct_index": 3,
+   "reference": "210.52(E)(3)"
+  },
+  {
+   "number": 9,
+   "prompt": "An acceptable color for ungrounded conductors is .",
+   "answers": [
+    "green",
+    "gray",
+    "pink",
+    "white"
+   ],
+   "correct_index": 2,
+   "reference": "315.14"
+  },
+  {
+   "number": 10,
+   "prompt": "The calculated load of a 12 foot length of fixed multioutlet assembly in a commercial facility is volt-amperes if the appliances it supplies are not likely to be used at the same time.",
+   "answers": [
+    "1000",
+    "720",
+    "540",
+    "380"
+   ],
+   "correct_index": 2,
+   "reference": "220.14(4)"
+  },
+  {
+   "number": 11,
+   "prompt": "In a dwelling bedroom, any wall space or more in width (including space measured around corners) and unbroken along the floor line by doorways and similar openings, fireplaces, and fixed cabinets that do not have countertops or similar work surfaces.",
+   "answers": [
+    "18”",
+    "24”",
+    "30”",
+    "36”"
+   ],
+   "correct_index": 1,
+   "reference": "210.52(A)(2)(1)"
+  },
+  {
+   "number": 12,
+   "prompt": "A wall-mounted central vacuum assembly connected to a single receptacle located in an at- . tached garage shall be provided with protection for personnel.",
+   "answers": [
+    "LCDI",
+    "GFCI",
+    "AFCI",
+    "both AFCI and GFCI"
+   ],
+   "correct_index": 1,
+   "reference": "210.8(A)(2)"
+  },
+  {
+   "number": 13,
+   "prompt": "Which of the following is an ammeter?",
+   "answers": [
+    "I only",
+    "II only",
+    "III only",
+    "I, II, or III"
+   ],
+   "correct_index": 1,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 14,
+   "prompt": "What is the ampacity of a #12 THWN conductor installed in an ambient temperature of 86°F if the raceway contains four current-carrying conductors?",
+   "answers": [
+    "17.5a",
+    "20a",
+    "23a",
+    "26a"
+   ],
+   "correct_index": 1,
+   "reference": "Table 310.16"
+  },
+  {
+   "number": 15,
+   "prompt": "If festoon lighting is installed without a messenger, the smallest allowable overhead conductor is AWG.",
+   "answers": [
+    "#10",
+    "#12",
+    "#14",
+    "#16"
+   ],
+   "correct_index": 1,
+   "reference": "225.6(B)"
+  },
+  {
+   "number": 16,
+   "prompt": "For temporary holiday lighting, trees shall be permitted for supporting overhead spans of conductors and cables if the overhead wiring is arranged with , tension take-up devices, or other approved means to avoid damage from live vegetation.",
+   "answers": [
+    "fittings",
+    "cable ties",
+    "strain relief devices",
+    "overhead clamps"
+   ],
+   "correct_index": 2,
+   "reference": "590.4(J)"
+  },
+  {
+   "number": 17,
+   "prompt": "The Code requires branch circuits be rated in accordance with the overcurrent protective device. Therefore, which of the following combinations are permitted for lighting branch circuits?",
+   "answers": [
+    "20, 25, 35, 40 and 50 amperes",
+    "20, 25, 30, 40 and 50 amperes",
+    "15, 25, 30, 40 and 50 amperes",
+    "10, 15, 20, 30, 40 and 50 amperes"
+   ],
+   "correct_index": 3,
+   "reference": "210.18"
+  },
+  {
+   "number": 18,
+   "prompt": "Duty on elevator and dumbwaiter driving machine motors and driving motors of motor-generators used with generator field control shall be rated as .",
+   "answers": [
+    "intermittent",
+    "lockable",
+    "continuous",
+    "varying"
+   ],
+   "correct_index": 0,
+   "reference": "620.61(B)(1)"
+  },
+  {
+   "number": 19,
+   "prompt": "What does the alpha character I represent when srating the question W = E x I? t",
+   "answers": [
+    "Intrinsic circuit",
+    "Intrinsic electromotive force",
+    "Intensity of current",
+    "Isotopic character"
+   ],
+   "correct_index": 2,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 20,
+   "prompt": "Where multiple driven ground rods are used to form the grounding electrode system, in order to maintain an effective grounding electrode system, they shall not be less than apart.",
+   "answers": [
+    "36”",
+    "48”",
+    "60”",
+    "72”"
+   ],
+   "correct_index": 3,
+   "reference": "250.53(A)(3)"
+  },
+  {
+   "number": 21,
+   "prompt": "The demand load for a 14 kW range installed in a dwelling unit is ___ kW.",
+   "answers": [
+    "8 kW",
+    "8.4 kW",
+    "8.8 kW",
+    "12 kW"
+   ],
+   "correct_index": 2,
+   "reference": "Table 220.55"
+  },
+  {
+   "number": 22,
+   "prompt": "Where a dwelling has an attached garage built to accommodate a pair of vehicles, the Code requires a minimum of ___ receptacle outlet(s) to be installed in the garage.",
+   "answers": [
+    "none required",
+    "one",
+    "two",
+    "three"
+   ],
+   "correct_index": 2,
+   "reference": "NEC 210.52(G)(1)"
+  },
+  {
+   "number": 23,
+   "prompt": "Where ungrounded conductors are run in parallel in multiple raceways, the equipment grounding conductor, where used, shall be ___.",
+   "answers": [
+    "installed in one raceway only",
+    "run in parallel in each raceway",
+    "not required",
+    "bare"
+   ],
+   "correct_index": 1,
+   "reference": "250.122(F)(1)(b)"
+  },
+  {
+   "number": 24,
+   "prompt": "All 15 or 20 amp, single-phase, 125 volt through 250 volt receptacles located within feet of a fountain edge shall be provided with GFCI protection.",
+   "answers": [
+    "20",
+    "24",
+    "25",
+    "30"
+   ],
+   "correct_index": 0,
+   "reference": "680.58"
+  },
+  {
+   "number": 25,
+   "prompt": "For an arc welder with an I1max rating of 43 amps, what is the maximum rating for the overcurrent device supplying the welder?",
+   "answers": [
+    "85 amp",
+    "90 amp",
+    "95 amp",
+    "100 amp"
+   ],
+   "correct_index": 1,
+   "reference": "NEC 630.12(A)"
+  },
+  {
+   "number": 26,
+   "prompt": "The conductor is marked RHW-2 on the insulation, what does the -2 represent?",
+   "answers": [
+    "The cable has two conductors.",
+    "The conductor is double insulated.",
+    "The conductor is thermoplastic.",
+    "The conductor has a maximum operating temperature of 90°C."
+   ],
+   "correct_index": 3,
+   "reference": "Table 310.4(1)"
+  },
+  {
+   "number": 27,
+   "prompt": "The ampacity of three #10 THWN-2 conductors installed in a raceway is amps if the ambient temperature is 112°F.",
+   "answers": [
+    "31.6",
+    "34.8",
+    "35",
+    "37.2"
+   ],
+   "correct_index": 1,
+   "reference": "310.15(B)(1)(1)"
+  },
+  {
+   "number": 28,
+   "prompt": "Fuel dispensing systems shall be provided with one or more clearly identified emergency shutoff devices or electrical disconnects. Such disconnects or devices shall be installed in approved locations but not less than 20 feet or more than feet from the fuel dispensing devices that they serve.",
+   "answers": [
+    "50",
+    "75",
+    "80",
+    "100"
+   ],
+   "correct_index": 3,
+   "reference": "514.11(A)"
+  },
+  {
+   "number": 29,
+   "prompt": "Where conduits enter a floor-standing switchboard, switchgear or, panelboard at the bottom, the conduits, including their end fittings, shall not rise more than inches above the bottom of the enclosure. —",
+   "answers": [
+    "2",
+    "3",
+    "4",
+    "6"
+   ],
+   "correct_index": 1,
+   "reference": "408.5"
+  },
+  {
+   "number": 30,
+   "prompt": "Thermostatically controlled switching devices serving both controllers and disconnecting means for fixed electric space heating equipment shall .",
+   "answers": [
+    "not be permitted",
+    "be located not more than 8 feet above floor level",
+    "open all grounded conductors when placed in the off position",
+    "be designed so that the circuit cannot be energized automatically after the device has been manually placed in the off position"
+   ],
+   "correct_index": 3,
+   "reference": "424.20(A)(3)"
+  },
+  {
+   "number": 31,
+   "prompt": "In dwelling units, hallways of how many feet or more in length shall have at least one receptacle outlet?",
+   "answers": [
+    "6 feet",
+    "8 feet",
+    "10 feet",
+    "12 feet"
+   ],
+   "correct_index": 2,
+   "reference": "NEC 210.52(H)"
+  },
+  {
+   "number": 32,
+   "prompt": "For a feeder tap not exceeding 10 feet in length and field installation, the maximum overcurrent i device rating supplying a tap conductor with an ampacity of 40 amps is . .",
+   "answers": [
+    "150a",
+    "200a",
+    "350a",
+    "400a"
+   ],
+   "correct_index": 3,
+   "reference": "240.21(B)(1)"
+  },
+  {
+   "number": 33,
+   "prompt": "A three-way switch is equivalent to a switch.",
+   "answers": [
+    "DPST",
+    "DPDT",
+    "SPST",
+    "SPDT"
+   ],
+   "correct_index": 3,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 34,
+   "prompt": "Which of the following cord types is permitted in wet location and is sunlight resistant?",
+   "answers": [
+    "SPT-2",
+    "STOOW",
+    "THWN",
+    "XHWN"
+   ],
+   "correct_index": 1,
+   "reference": "Table 400.4"
+  },
+  {
+   "number": 35,
+   "prompt": "One or more metal in-ground support structures in direct contact with the earth vertically for how many feet or more are a permitted grounding electrode?",
+   "answers": [
+    "6 feet",
+    "8 feet",
+    "10 feet",
+    "12 feet"
+   ],
+   "correct_index": 2,
+   "reference": "NEC 250.52(A)(2)"
+  },
+  {
+   "number": 36,
+   "prompt": "For a service rated 100 through 400 amps, the service conductors supplying the entire load of a ; one family dwelling shall be permitted to have an ampacity of of the service rating.",
+   "answers": [
+    "83%",
+    "80%",
+    "75%",
+    "70%"
+   ],
+   "correct_index": 0,
+   "reference": "310.12(A)"
+  },
+  {
+   "number": 37,
+   "prompt": "Nonmetallic cable trays shall be made of material.",
+   "answers": [
+    "watertight",
+    "waterproof",
+    "fire-resistant",
+    "flame-retardant"
+   ],
+   "correct_index": 3,
+   "reference": "392.100(F)"
+  },
+  {
+   "number": 38,
+   "prompt": "Type UF cable is permitted to be used ___.",
+   "answers": [
+    "as service entrance",
+    "in commercial garages",
+    "where subject to physical damage",
+    "for wiring in wet, dry, or corrosive locations"
+   ],
+   "correct_index": 3,
+   "reference": "340.10(3)"
+  },
+  {
+   "number": 39,
+   "prompt": "A controller that includes motor overload protection for group motor application shall be marked with the motor overload protection and the maximum branch-circuit short-circuit and ground-fault protection for such applications.",
+   "answers": [
+    "required",
+    "recognized",
+    "permitted",
+    "suitable"
+   ],
+   "correct_index": 3,
+   "reference": "430.8"
+  },
+  {
+   "number": 40,
+   "prompt": "The permitted demand factor for five household clothes dryers in a multifamily dwelling is...",
+   "answers": [
+    "70%",
+    "75%",
+    "80%",
+    "85%"
+   ],
+   "correct_index": 3,
+   "reference": "Table 220.54"
+  },
+  {
+   "number": 41,
+   "prompt": "A stop switch is wired in a motor circuit.",
+   "answers": [
+    "series",
+    "series-shunt",
+    "series-parallel",
+    "parallel"
+   ],
+   "correct_index": 0,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 42,
+   "prompt": "All 15 and 20 amp, 125 and 250 volt, nonlocking receptacles located in a wet location shall be listed type.",
+   "answers": [
+    "weather proof",
+    "water proof",
+    "water resistant",
+    "weather resistant"
+   ],
+   "correct_index": 3,
+   "reference": "406.9(B)"
+  },
+  {
+   "number": 43,
+   "prompt": "Where no GFCI protection is provided, the mounting height of a paddle fan located above a spa or hot tub shall not be less than feet.",
+   "answers": [
+    "6",
+    "8",
+    "10",
+    "12"
+   ],
+   "correct_index": 3,
+   "reference": "680.43(B)(1)(a)"
+  },
+  {
+   "number": 44,
+   "prompt": "An unintentional, electrically conducting connection between an ungrounded conductor of an electrical circuit and the normally non-current-carrying conductors, metallic enclosures, metallic raceways, metallic equipment or earth is referred to as a .",
+   "answers": [
+    "ground fault",
+    "open circuit",
+    "short circuit",
+    "circuit bypass"
+   ],
+   "correct_index": 0,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 45,
+   "prompt": "Residential in sink electrically operated kitchen waste disposers shall be permitted to be cord-and-plug connected however, the flexible cord is to be not less than 18” in length and not over in length.",
+   "answers": [
+    "24”",
+    "30”",
+    "36”",
+    "48”"
+   ],
+   "correct_index": 2,
+   "reference": "422.16(B)(1)(1)"
+  },
+  {
+   "number": 46,
+   "prompt": "40% is equivalent to . a",
+   "answers": [
+    "5/8",
+    "3/5",
+    "2/5",
+    "5/16"
+   ],
+   "correct_index": 2,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 47,
+   "prompt": "Which of the following is the symbol for a temperature-actuated switch?",
+   "answers": [
+    "Diagram A",
+    "Diagram B",
+    "Diagram C",
+    "Diagram D"
+   ],
+   "correct_index": 0,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 48,
+   "prompt": "A 125 volt, 15 amp rated receptacle located in a hallway of a dwelling unit is required to be",
+   "answers": [
+    "GFCI protected",
+    "on a dedicated circuit",
+    "need a 20 amp receptacle",
+    "listed tamper-resistant"
+   ],
+   "correct_index": 3,
+   "reference": "406.12(1)"
+  },
+  {
+   "number": 49,
+   "prompt": "Direct-buried cables located in a trench below 2” of concrete shall have a minimum cover of",
+   "answers": [
+    "6”",
+    "12”",
+    "18”",
+    "24”"
+   ],
+   "correct_index": 2,
+   "reference": "Table 300.5(A)"
+  },
+  {
+   "number": 50,
+   "prompt": "Communications wires and cables and CATV type coaxial cables shall have a vertical clearance of not less than from all points of roofs which they pass.",
+   "answers": [
+    "18”",
+    "36”",
+    "6 feet",
+    "8 feet"
+   ],
+   "correct_index": 3,
+   "reference": "800.44(B)"
+  },
+  {
+   "number": 51,
+   "prompt": "Personnel doors where equipment rated 800 amperes or more that contains overcurrent devices is installed and there is a personnel door intended for entrance to and egress from the working space less than ___ feet from the nearest edge of the working space.",
+   "answers": [
+    "12",
+    "15",
+    "20",
+    "25"
+   ],
+   "correct_index": 3,
+   "reference": "110.26(C)(3)"
+  },
+  {
+   "number": 52,
+   "prompt": "Outdoor mobile home disconnecting means shall be installed so the bottom of the enclosure containing the disconnecting means is not less than ___ above finished grade or working platform.",
+   "answers": [
+    "24 inches",
+    "36 inches",
+    "48 inches",
+    "60 inches"
+   ],
+   "correct_index": 0,
+   "reference": "550.32(F)"
+  },
+  {
+   "number": 53,
+   "prompt": "Overhead conductors not over 1,000 volts passing over track rails of railroads shall have a minimum clearance of not less than ___ feet above finished grade.",
+   "answers": [
+    "12",
+    "15",
+    "18",
+    "24 1/2"
+   ],
+   "correct_index": 3,
+   "reference": "225.18(5)"
+  },
+  {
+   "number": 54,
+   "prompt": "Flexible cords may be repaired with splices for hard-service cord or what other cord under certain conditions?",
+   "answers": [
+    "Junior hard-service",
+    "Lamp",
+    "Tinsel",
+    "Portable"
+   ],
+   "correct_index": 0,
+   "reference": "NEC 400.13"
+  },
+  {
+   "number": 55,
+   "prompt": "Where an NM cable is installed parallel to framing members, the cable shall be installed so that the nearest edge of the cable is not less than ___ from the nearest edge of the framing member.",
+   "answers": [
+    "1/2 inch",
+    "1 inch",
+    "1 1/4 inch",
+    "1 1/2 inch"
+   ],
+   "correct_index": 2,
+   "reference": "300.4(D)"
+  },
+  {
+   "number": 56,
+   "prompt": "The maximum ampere rating permitted for a 125 volt, single-phase, receptacle outlet having a cord-and-plug connected motor load that does not have individual overload protection is .",
+   "answers": [
+    "15 amps",
+    "20 amps",
+    "25 amps",
+    "30 amps"
+   ],
+   "correct_index": 0,
+   "reference": "430.42(C)"
+  },
+  {
+   "number": 57,
+   "prompt": "is permitted in the dedicated electrical space above a panelboard.",
+   "answers": [
+    "Water piping",
+    "Leak protection",
+    "Sprinkler protection",
+    "Air-conditioning ducts"
+   ],
+   "correct_index": 2,
+   "reference": "110.26(E)(1)(a)(c)"
+  },
+  {
+   "number": 58,
+   "prompt": "Which of the following is not required to be marked on the name plate of a transformer?",
+   "answers": [
+    "Frequency",
+    "Amount of insulating liquid",
+    "AWG size",
+    "Clearance for ventilating openings"
+   ],
+   "correct_index": 2,
+   "reference": "450.11(A)"
+  },
+  {
+   "number": 59,
+   "prompt": "Branch circuits shall be rated in accordance with the .",
+   "answers": [
+    "ampere rating of the largest receptacle",
+    "maximum permitted rating of the fuse or breaker",
+    "number of receptacle outlets in the branch circuit",
+    "ampere rating of the largest conductor"
+   ],
+   "correct_index": 1,
+   "reference": "210.18"
+  },
+  {
+   "number": 60,
+   "prompt": "Underground wiring within horizontally from the inside wall of the pool shall be permitted in liquidtight flexible metal conduit listed for direct burial use.",
+   "answers": [
+    "18”",
+    "24”",
+    "48”",
+    "60”"
+   ],
+   "correct_index": 3,
+   "reference": "680.11(A)"
+  },
+  {
+   "number": 61,
+   "prompt": "___ locations are those that are hazardous because of the presence of easily ignitable fibers or flyings.",
+   "answers": [
+    "Class I",
+    "Class II",
+    "Class III",
+    "Class II, Division II"
+   ],
+   "correct_index": 2,
+   "reference": "503.1"
+  },
+  {
+   "number": 62,
+   "prompt": "You have 125 volts at the panel and 115 volts at the load. What is the percentage of voltage drop? —",
+   "answers": [
+    "5%",
+    "4.35%",
+    "4.17%",
+    "8%"
+   ],
+   "correct_index": 3,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 63,
+   "prompt": "If the plans drawing has a scale of 1/4 inch = 1 foot, a dimension of 3 1/2 inches on the drawing would be equal to ___.",
+   "answers": [
+    "12 feet",
+    "13 feet",
+    "14 feet",
+    "15 feet"
+   ],
+   "correct_index": 2,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 64,
+   "prompt": "When working from an electrical drawing, you should start from the...",
+   "answers": [
+    "Lower right-hand corner",
+    "Center",
+    "Upper left-hand corner",
+    "Bottom"
+   ],
+   "correct_index": 2,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 65,
+   "prompt": "60 cycle frequency travels 90 degrees in how many seconds?",
+   "answers": [
+    "1/60",
+    "1/120",
+    "1/180",
+    "1/240"
+   ],
+   "correct_index": 3,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 66,
+   "prompt": "Type MC cable shall be permitted to be unsupported and unsecured where the cable is not more than ___ in length from the last point of connection to luminaires.",
+   "answers": [
+    "36”",
+    "48”",
+    "60”",
+    "72”"
+   ],
+   "correct_index": 3,
+   "reference": "330.30(D)(2)"
+  },
+  {
+   "number": 67,
+   "prompt": "Conduit nipples not over 24 inches in length may be filled to a maximum of...",
+   "answers": [
+    "50%",
+    "60%",
+    "70%",
+    "80%"
+   ],
+   "correct_index": 1,
+   "reference": "Chapter 9, Note 4"
+  },
+  {
+   "number": 68,
+   "prompt": "What is the minimum size equipment grounding conductor for a 50 amp rated branch circuit?",
+   "answers": [
+    "#14",
+    "#12",
+    "#10",
+    "#8"
+   ],
+   "correct_index": 2,
+   "reference": "Table 250.122"
+  },
+  {
+   "number": 69,
+   "prompt": "Electric sign enclosures may be constructed of wood if ___.",
+   "answers": [
+    "kept 1 inch from lampholders",
+    "wood is not permitted at all",
+    "kept 2 inches from lampholders",
+    "none of these"
+   ],
+   "correct_index": 2,
+   "reference": "600.9(C)"
+  },
+  {
+   "number": 70,
+   "prompt": "What is the full load current of a 50 horsepower, 3, 480v, wound rotor, AC motor?",
+   "answers": [
+    "104 amps",
+    "52 amps",
+    "65 amps",
+    "41 amps"
+   ],
+   "correct_index": 2,
+   "reference": "Table 430.250"
+  }
+ ]
+}

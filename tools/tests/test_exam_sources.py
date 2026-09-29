@@ -115,7 +115,7 @@ class RepositoryTests(unittest.TestCase):
     def key_numbers(self, exam) -> set[int] | None:
         transcript = exam.transcript()
         if transcript is not None:
-            return {q["number"] for q in transcript["questions"]}
+            return {q["number"] for q in transcript["questions"]} | {k["number"] for k in transcript.get("key_only", [])}
         path = exam.key_ocr_path(answer_key_ocr_dir())
         if not path.exists():
             return None
@@ -142,16 +142,28 @@ class RepositoryTests(unittest.TestCase):
         if not checked:
             self.skipTest("no transcripts and no answer-key OCR cache")
 
+    def test_every_exam_has_a_transcript(self):
+        # The build needs no OCR output for the shipped exams (a fresh machine
+        # without Tesseract rebuilds the bank).
+        for exam in self.exams:
+            with self.subTest(exam=exam.label):
+                self.assertIsNotNone(exam.transcript(), f"add {exam.transcript_path.name}")
+
     def test_transcripts_are_well_formed(self):
+        allowed = {"question_count", "questions", "provenance", "key_only", "key_only_note"}
         for exam in self.exams:
             transcript = exam.transcript()
             if transcript is None:
                 continue
             with self.subTest(exam=exam.label):
+                self.assertLessEqual(set(transcript), allowed)
                 numbers = [q["number"] for q in transcript["questions"]]
-                self.assertEqual(len(numbers), len(set(numbers)))
-                self.assertTrue(all(1 <= n <= transcript["question_count"] for n in numbers))
+                key_only = [k["number"] for k in transcript.get("key_only", [])]
+                self.assertEqual(len(numbers + key_only), len(set(numbers + key_only)))
+                self.assertTrue(all(1 <= n <= transcript["question_count"] for n in numbers + key_only))
                 for q in transcript["questions"]:
+                    self.assertLessEqual({"number", "prompt", "answers", "correct_index", "reference"}, set(q))
+                    self.assertLessEqual(set(q), {"number", "prompt", "answers", "correct_index", "reference", "key_note"})
                     self.assertGreaterEqual(len(q["answers"]), 2)
                     self.assertIn(q["correct_index"], range(len(q["answers"])))
                     self.assertTrue(q["prompt"].strip() and q["reference"].strip())

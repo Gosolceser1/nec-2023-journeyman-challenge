@@ -1,0 +1,306 @@
+{
+ "question_count": 25,
+ "provenance": "Tesseract OCR of the exam and answer-key PDFs, with the stems, choices and keys retyped from the PDF page images where the OCR was wrong (formerly the manual and exact_* lists in build_question_bank.py). Text as the exam prints it; curated wording lives in question_bank_overrides.json.",
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "Motors and other rotating electrical machinery shall be totally enclosed or designed so as to minimize the entrance of ___.",
+   "answers": [
+    "moisture",
+    "dust",
+    "corrosive particles",
+    "all of these"
+   ],
+   "correct_index": 3,
+   "reference": "547.3(A)(B)"
+  },
+  {
+   "number": 2,
+   "prompt": "For the purpose of load calculations, the square footage of a dwelling unit includes ___.",
+   "answers": [
+    "open porches",
+    "garages",
+    "areas not adaptable as future occupiable space",
+    "all of these"
+   ],
+   "correct_index": 1,
+   "reference": "220.5(C)"
+  },
+  {
+   "number": 3,
+   "prompt": "A receptacle's grounding terminal shall only be used for connection to the ___ conductor.",
+   "answers": [
+    "grounded",
+    "equipment grounding",
+    "ungrounded",
+    "grounding electrode"
+   ],
+   "correct_index": 1,
+   "reference": "406.10(C)"
+  },
+  {
+   "number": 4,
+   "prompt": "Where overcurrent protection is provided as part of the industrial control panel, the supply conductors shall be considered as either feeders or as covered by 240.21.",
+   "answers": [
+    "taps",
+    "branch circuits",
+    "shunts",
+    "isolated"
+   ],
+   "correct_index": 0,
+   "reference": "409.21(B)(2)"
+  },
+  {
+   "number": 5,
+   "prompt": "Backfill that contains large rocks, paving materials, cinders, large or sharply angular substances, or corrosive material shall not be placed in an excavation where materials may damage raceways, cables, conductors, or other structures or prevent adequate compaction of fill or contribute to the ___ of raceways, cables, or other substructures.",
+   "answers": [
+    "damage",
+    "deterioration",
+    "aging",
+    "corrosion"
+   ],
+   "correct_index": 3,
+   "reference": "300.5(F)"
+  },
+  {
+   "number": 6,
+   "prompt": "An electric device and circuit that controls a disconnecting means through a relay or equivalent device.",
+   "answers": [
+    "Remote Disconnect Control",
+    "Safety Switch",
+    "Knife Switch",
+    "Shunt Trip"
+   ],
+   "correct_index": 0,
+   "reference": "Definition 100"
+  },
+  {
+   "number": 7,
+   "prompt": "Which of the following statements is false?",
+   "answers": [
+    "For isolated ground receptacles, the receptacle grounding terminal is required to be connected to an insulated equipment grounding conductor run with the circuit conductors.",
+    "Round boxes are required to be used where conduits or connectors requiring the use of locknuts or bushings are to be connected to the side of the box.",
+    "Control circuit devices with screw-type pressure terminals used with #14 or smaller copper conductors are required to be torqued to a minimum of 7 lb-in.",
+    "Type MC cable is permitted to be manufactured as a single-conductor cable."
+   ],
+   "correct_index": 1,
+   "reference": "314.2"
+  },
+  {
+   "number": 8,
+   "prompt": "A permanent sign shall be attached to the cable tray at intervals not greater than 20 feet. The sign shall read as follows:",
+   "answers": [
+    "CABLE TRAY FOR WELDING CABLES ONLY",
+    "CABLE TRAY MAXIMUM VOLTAGE 300",
+    "THE CABLE TRAY PROVIDES SUPPORT AT 6\" INTERVALS",
+    "CABLES SHALL BE LOW VOLTAGE"
+   ],
+   "correct_index": 0,
+   "reference": "630.42(C)"
+  },
+  {
+   "number": 9,
+   "prompt": "The individual responsible for starting, stopping, and controlling an amusement ride or supervising a concession.",
+   "answers": [
+    "Ticket Taker",
+    "Assistant",
+    "Operator",
+    "Manager"
+   ],
+   "correct_index": 2,
+   "reference": "Definition 100"
+  },
+  {
+   "number": 10,
+   "prompt": "A commercial building has a second-floor material-handling door used to move items into and out of a storage area. A 120V overhead branch-circuit final span will run from the building near this opening to a pole-mounted floodlight. Which installation complies with the 2023 NEC?",
+   "answers": [
+    "Overhead installation is prohibited.",
+    "Keep 3 ft of horizontal clearance from the door, but passing beneath the material opening is allowed.",
+    "Provide 3 ft of vertical clearance above the door.",
+    "Keep at least 3 ft of horizontal clearance from the door, do not run beneath the material-handling opening, and do not obstruct its entrance."
+   ],
+   "correct_index": 3,
+   "reference": "225.19(D)(1) and 225.19(D)(3)"
+  },
+  {
+   "number": 11,
+   "prompt": "Outdoor self-supporting radio and television receiving antennas, such as vertical rods, dishes, etc., shall be located well away from overhead conductors of electric light and power circuits of over ___ volts to ground.",
+   "answers": [
+    "30",
+    "120",
+    "150",
+    "300"
+   ],
+   "correct_index": 2,
+   "reference": "810.16(B)"
+  },
+  {
+   "number": 12,
+   "prompt": "A Class 1 power-limited circuit shall be supplied from a source having a rated output of not more than 30 volts and ___ volt amperes.",
+   "answers": [
+    "1000",
+    "1200",
+    "1500",
+    "2000"
+   ],
+   "correct_index": 0,
+   "reference": "724.40"
+  },
+  {
+   "number": 13,
+   "prompt": "Enclosures that are not over 100 cubic inches in size and which have two conduits supported within three feet on either side of the enclosure and the enclosure does not contain devices or support fixtures shall not be required to have the enclosure supported if the conduits are ___.",
+   "answers": [
+    "rigid nonmetallic conduits",
+    "threaded into hubs identified for the purpose",
+    "installed with locknuts inside and outside enclosure",
+    "shoulders of fittings outside and locknuts inside the box"
+   ],
+   "correct_index": 1,
+   "reference": "314.23(E)"
+  },
+  {
+   "number": 14,
+   "prompt": "Size #18 or #16 fixture wires, and flexible cords shall be permitted for the control and operating circuits of X-ray and auxiliary equipment where protected by not larger than ___ ampere overcurrent devices.",
+   "answers": [
+    "6",
+    "15",
+    "20",
+    "30"
+   ],
+   "correct_index": 2,
+   "reference": "660.9"
+  },
+  {
+   "number": 15,
+   "prompt": "Conductors drawn from a copper-clad aluminum rod with the copper metallurgically bonded to an aluminum core. The copper forms a minimum of ___ percent of the cross-sectional area.",
+   "answers": [
+    "10",
+    "20",
+    "40",
+    "70"
+   ],
+   "correct_index": 0,
+   "reference": "310.3(B)(3)"
+  },
+  {
+   "number": 16,
+   "prompt": "Concrete, brick, or tile walls are considered as being ___.",
+   "answers": [
+    "isolated",
+    "insulators",
+    "grounded",
+    "dry locations"
+   ],
+   "correct_index": 2,
+   "reference": "110.26(A)(1) Condition 2"
+  },
+  {
+   "number": 17,
+   "prompt": "___ locations are those that are hazardous because of the presence of easily ignitable fibers or flyings.",
+   "answers": [
+    "Class I",
+    "Class II",
+    "Class III",
+    "Class II, Division II"
+   ],
+   "correct_index": 2,
+   "reference": "500.5(D)"
+  },
+  {
+   "number": 18,
+   "prompt": "An isolated ground receptacle shall be identified by ___.",
+   "answers": [
+    "CO/ALR orange marking on the face of the receptacle",
+    "a metal faceplate not less than 0.030 inches in thickness",
+    "a reset type test button on the face of the receptacle",
+    "an orange triangle located on the face of the receptacle"
+   ],
+   "correct_index": 3,
+   "reference": "406.3(E)"
+  },
+  {
+   "number": 19,
+   "prompt": "In a hospital General Care Area, each patient bed location shall be provided with a minimum of ___ receptacles.",
+   "answers": [
+    "3 single",
+    "2 single or 1 duplex",
+    "2 duplex or 4 single",
+    "4 duplex or 8 single"
+   ],
+   "correct_index": 3,
+   "reference": "517.18(B)(1)"
+  },
+  {
+   "number": 20,
+   "prompt": "Balconies, decks, and porches that are attached to the dwelling unit and are accessible from inside the dwelling unit shall have at least one receptacle outlet accessible from the balcony, deck, or porch. The receptacle outlet shall not be located more than ___ above the balcony, deck, or porch walking surface.",
+   "answers": [
+    "6'",
+    "6'6\"",
+    "7'",
+    "8'"
+   ],
+   "correct_index": 1,
+   "reference": "210.52(E)(3)"
+  },
+  {
+   "number": 21,
+   "prompt": "Energized equipment parts for fire pump installations are required to be located at least ___ inches above floor level.",
+   "answers": [
+    "6",
+    "8",
+    "10",
+    "12"
+   ],
+   "correct_index": 3,
+   "reference": "695.12(D)"
+  },
+  {
+   "number": 22,
+   "prompt": "Conductors having ___ insulation and operating at different voltage levels shall not occupy the same enclosure, cable, or raceway.",
+   "answers": [
+    "thermoset",
+    "flame-retardant",
+    "nonshielded",
+    "silicone rubber"
+   ],
+   "correct_index": 2,
+   "reference": "305.4"
+  },
+  {
+   "number": 23,
+   "prompt": "In a recreational vehicle park with electrical supply, at least ___% of the sites shall be equipped with 30 ampere, 125 volt receptacles.",
+   "answers": [
+    "25",
+    "30",
+    "40",
+    "70"
+   ],
+   "correct_index": 3,
+   "reference": "551.71(B)"
+  },
+  {
+   "number": 24,
+   "prompt": "The conductor used to connect the grounded circuit of a wiring system to a grounding electrode is the ___.",
+   "answers": [
+    "grounded conductor",
+    "bonding jumper",
+    "main bonding jumper",
+    "grounding conductor"
+   ],
+   "correct_index": 3,
+   "reference": "Definition 100"
+  },
+  {
+   "number": 25,
+   "prompt": "For underground systems over 1000 volts, backfill containing large rocks, paving materials, cinders, large or sharply angular substances, or corrosive material shall not be placed where it can ___ raceways, cables, or other structures, prevent adequate compaction of fill, or contribute to corrosion.",
+   "answers": [
+    "damage",
+    "deteriorate",
+    "age",
+    "corrode"
+   ],
+   "correct_index": 0,
+   "reference": "305.15(E)"
+  }
+ ]
+}

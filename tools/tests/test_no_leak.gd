@@ -351,7 +351,8 @@ func bank_wide_sweep() -> void:
 		return
 	var recs: Array = (parsed as Dictionary).get("records", [])
 	t.eq(recs.size(), int((parsed as Dictionary).get("playable", -1)), "bank has every declared record (%d)" % recs.size())
-	t.eq(field(recs[0], "id"), "final-exam-#1-002", "bank read is NOT vacuous (first id)")
+	t.check(RegEx.create_from_string("^[a-z0-9#-]+-\\d{3}$").search(field(recs[0], "id")) != null,
+		"bank read is NOT vacuous (first record has a record id: %s)" % field(recs[0], "id"))
 	t.check(field(recs[0], "reference_text").length() > 20, "reference_text read is not a stub")
 
 	# Exactly the fields main.gd renders BEFORE the learner answers.

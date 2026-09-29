@@ -1,0 +1,846 @@
+{
+ "question_count": 70,
+ "provenance": "Tesseract OCR of the exam and answer-key PDFs, with the stems, choices and keys retyped from the PDF page images where the OCR was wrong (formerly the manual and exact_* lists in build_question_bank.py). Text as the exam prints it; curated wording lives in question_bank_overrides.json.",
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "A Universal Serial Bus flush device cover plate that additionally provides a night light and/or output connector(s) shall be listed.",
+   "answers": [
+    "one",
+    "two",
+    "Class 1",
+    "Class 2"
+   ],
+   "correct_index": 3,
+   "reference": "406.6(D)"
+  },
+  {
+   "number": 2,
+   "prompt": "RV feeders from 208Y/120 volt, 3-phase systems shall be permitted to include ___. I. one equipment grounding conductor II. one grounded conductor III. three ungrounded conductors",
+   "answers": [
+    "I only",
+    "II only",
+    "I and II only",
+    "I, II and III"
+   ],
+   "correct_index": 2,
+   "reference": "551.72(B)"
+  },
+  {
+   "number": 3,
+   "prompt": "The conductors supplying supplementary overcurrent protective devices for fixed industrial process heating equipment shall be considered... conductors.",
+   "answers": [
+    "Supplementary",
+    "Tap",
+    "By-pass",
+    "Branch circuit"
+   ],
+   "correct_index": 3,
+   "reference": "NEC 425.22(D)"
+  },
+  {
+   "number": 4,
+   "prompt": "In airports where maintenance and supervision conditions ensure that only qualified persons can access, install, or service the cable, airfield lighting cable used in series circuits that are rated up to : volts and are powered by constant current regulators shall be permitted to be installed in cable trays. i",
+   "answers": [
+    "1000",
+    "2500",
+    "3000",
+    "5000"
+   ],
+   "correct_index": 3,
+   "reference": "392.10(E)"
+  },
+  {
+   "number": 5,
+   "prompt": "Low voltage heating power unit shall be an isolating type with a rated output not exceeding volts peak ac.",
+   "answers": [
+    "30",
+    "42.4",
+    "60",
+    "25"
+   ],
+   "correct_index": 1,
+   "reference": "424.101(A)"
+  },
+  {
+   "number": 6,
+   "prompt": "GFCI protection shall be provided for lighting outlets not exceeding volts installed in crawl spaces.",
+   "answers": [
+    "30",
+    "50",
+    "90",
+    "120"
+   ],
+   "correct_index": 3,
+   "reference": "210.8(C)"
+  },
+  {
+   "number": 7,
+   "prompt": "Audio equipment operating above the low-voltage contact limit within how many feet of a storable or portable immersion pool must be grounded and GFCI protected?",
+   "answers": [
+    "6 feet",
+    "8 feet",
+    "10 feet",
+    "12 feet"
+   ],
+   "correct_index": 0,
+   "reference": "NEC 680.35(D)"
+  },
+  {
+   "number": 8,
+   "prompt": "Locations in which easily ignitible combustible fibers are stored or handled other than in the process of manufacturing are designated as .",
+   "answers": [
+    "nonhazardous",
+    "Class III, Division 2",
+    "Class III, Division 1",
+    "Class II, Division 2"
+   ],
+   "correct_index": 1,
+   "reference": "500.5(D)(2)"
+  },
+  {
+   "number": 9,
+   "prompt": "A disconnecting means is required to disconnect the from the circuit.",
+   "answers": [
+    "motor and controller",
+    "motor",
+    "motor or controller",
+    "controller"
+   ],
+   "correct_index": 0,
+   "reference": "430.101"
+  },
+  {
+   "number": 10,
+   "prompt": "The definition of “busbar” in Article 100 applies .",
+   "answers": [
+    "only to Article 110",
+    "only to Article 225",
+    "only to Article 393",
+    "throughout the NEC"
+   ],
+   "correct_index": 2,
+   "reference": "DEF 100"
+  },
+  {
+   "number": 11,
+   "prompt": "Most incidents and injuries are initiated by .",
+   "answers": [
+    "equipment failures",
+    "people",
+    "incomplete procedures",
+    "inadequate regulation enforcement"
+   ],
+   "correct_index": 1,
+   "reference": "NFPA 70E"
+  },
+  {
+   "number": 12,
+   "prompt": "Which of the following organizations would maintain records of tested electrical equipment?",
+   "answers": [
+    "Underwriters' Laboratories",
+    "National Fire Protection Association",
+    "National Electrical Contractors Association",
+    "IEEE"
+   ],
+   "correct_index": 0,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 13,
+   "prompt": "Fastening of unbroken lengths of EMT conduit can be increased to a distance of from the termination point where the structural members do not readily permit fastening within 3 feet.",
+   "answers": [
+    "4'",
+    "5'",
+    "6'",
+    "10'"
+   ],
+   "correct_index": 1,
+   "reference": "358.30(A)"
+  },
+  {
+   "number": 14,
+   "prompt": "What is the maximum cord-and-plug connected load permitted on a 15 amp receptacle that is supplied by a 20 amp circuit supplying multiple outlets?",
+   "answers": [
+    "12 amps",
+    "16 amps",
+    "20 amps",
+    "24 amps"
+   ],
+   "correct_index": 0,
+   "reference": "Table 210.21(B)(2)"
+  },
+  {
+   "number": 15,
+   "prompt": "Enclosures for overcurrent protection devices must be mounted in a/an position unless that is shown to be impracticable.",
+   "answers": [
+    "horizontal",
+    "vertical",
+    "perspective",
+    "upright"
+   ],
+   "correct_index": 1,
+   "reference": "240.33"
+  },
+  {
+   "number": 16,
+   "prompt": "Heat generated internally in the conductor as the result of load current flow, including fundamental and ___ currents.",
+   "answers": [
+    "dissipation",
+    "alternation",
+    "harmonic",
+    "transfer"
+   ],
+   "correct_index": 2,
+   "reference": "310.14(A)(3)(2)"
+  },
+  {
+   "number": 17,
+   "prompt": "Equipment grounding conductors must be the same size as the circuit conductors for amp circuits.",
+   "answers": [
+    "30",
+    "20",
+    "15",
+    "all of these"
+   ],
+   "correct_index": 3,
+   "reference": "Table 250.122"
+  },
+  {
+   "number": 18,
+   "prompt": "When supplying a room air conditioner rated 120 volts, the length of the flexible supply cord must not exceed .",
+   "answers": [
+    "6'",
+    "8\"",
+    "10'",
+    "12'"
+   ],
+   "correct_index": 2,
+   "reference": "440.64"
+  },
+  {
+   "number": 19,
+   "prompt": "A must be located in sight from the motor location and the driven machinery location.",
+   "answers": [
+    "disconnecting means",
+    "circuit breaker",
+    "fuse",
+    "controller"
+   ],
+   "correct_index": 0,
+   "reference": "430.102(B)(1)"
+  },
+  {
+   "number": 20,
+   "prompt": "Outdoor antennas and lead-in conductors for radio and TV equipment must not cross over open conductors of electric light or power circuits, and must be kept well away from all such circuits to avoid the possibility of accidental contact. Where proximity to open electric light or power service conductors of less than 250 volts between conductors cannot be avoided, the installation must provide a clearance of at least :",
+   "answers": [
+    "12\"",
+    "18\"",
+    "24\"",
+    "30\""
+   ],
+   "correct_index": 2,
+   "reference": "810.13"
+  },
+  {
+   "number": 21,
+   "prompt": "Effective safe work practices are based on which of the following?",
+   "answers": [
+    "Type of hazard",
+    "Manner of exposure",
+    "Degree of exposure",
+    "All of these"
+   ],
+   "correct_index": 3,
+   "reference": "NFPA 70E"
+  },
+  {
+   "number": 22,
+   "prompt": "When working on live electrical circuits, the type of screwdriver that should be used has a/an ___.",
+   "answers": [
+    "non-conducting handle",
+    "double triangle and rated-for-volts handle",
+    "ergonomically designed handle for safety",
+    "longer blade and square handle"
+   ],
+   "correct_index": 1,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 23,
+   "prompt": "Conductors in a non-jacketed multiconductor cable, such as ribbon cable in a permanent amusement attraction shall not be smaller than AWG.",
+   "answers": [
+    "22",
+    "24",
+    "26",
+    "30"
+   ],
+   "correct_index": 2,
+   "reference": "522.21(B)"
+  },
+  {
+   "number": 24,
+   "prompt": "For installations consisting of not more than two 2-wire branch circuits, the building disconnecting means must have a rating of not less than amps.",
+   "answers": [
+    "15",
+    "20",
+    "25",
+    "30"
+   ],
+   "correct_index": 3,
+   "reference": "225.39(B)"
+  },
+  {
+   "number": 25,
+   "prompt": "Supplementary overcurrent protection .",
+   "answers": [
+    "must be readily accessible",
+    "must not be used in luminaires",
+    "may be used to protect internal circuits of equipment",
+    "may be used as a substitute for a branch-circuit overcurrent protection device"
+   ],
+   "correct_index": 2,
+   "reference": "240.10"
+  },
+  {
+   "number": 26,
+   "prompt": "Electrical services and feeders shall be calculated on the basis of not less than per electrified truck parking space.",
+   "answers": [
+    "11 kVA",
+    "12KVA",
+    "15kVA",
+    "21 kVA"
+   ],
+   "correct_index": 0,
+   "reference": "626.11"
+  },
+  {
+   "number": 27,
+   "prompt": "The largest size grounding electrode conductor to a concrete-encased electrode is not required to be larger than copper.",
+   "answers": [
+    "#10",
+    "#8",
+    "#6",
+    "#4"
+   ],
+   "correct_index": 3,
+   "reference": "250.66(B)"
+  },
+  {
+   "number": 28,
+   "prompt": "Appliances, provided for public use rated 250v or less and 60 amps or less, 19 or 3¢, shall be provided with GFCI protection for personnel.",
+   "answers": [
+    "vending machines",
+    "tire inflation machines",
+    "drinking water coolers",
+    "all of these"
+   ],
+   "correct_index": 3,
+   "reference": "422.5(A)"
+  },
+  {
+   "number": 29,
+   "prompt": "The localization of an overcurrent condition to restrict outages to the circuit or equipment affected, accomplished by the choice of overcurrent-protective devices is called .",
+   "answers": [
+    "arc-fault interrupter",
+    "overload protection",
+    "selective coordination",
+    "none of these"
+   ],
+   "correct_index": 2,
+   "reference": "DEF 100"
+  },
+  {
+   "number": 30,
+   "prompt": "Torque requirements for motor control circuit device terminals must be a minimum of lbs-inch (unless otherwise identified) for screw-type pressure terminals used for #14 and smaller copper conductors. _",
+   "answers": [
+    "6",
+    "7",
+    "8",
+    "10"
+   ],
+   "correct_index": 1,
+   "reference": "430.9(C)"
+  },
+  {
+   "number": 31,
+   "prompt": "Where overhead communications wires and cables enter buildings, they must .",
+   "answers": [
+    "where practicable, be located below the electric light or power conductors",
+    "not be attached to a cross-arm that carries electric light or power conductors",
+    "have a vertical clearance of not less than 8' from all points of roofs above which they pass",
+    "any of the above"
+   ],
+   "correct_index": 3,
+   "reference": "800.44(B)"
+  },
+  {
+   "number": 32,
+   "prompt": "A nursing home is an area used for the lodging, boarding, and nursing care, on a 24-hour basis, of or more inpatients.",
+   "answers": [
+    "4",
+    "20",
+    "50",
+    "100"
+   ],
+   "correct_index": 0,
+   "reference": "DEF 100"
+  },
+  {
+   "number": 33,
+   "prompt": "The power in a circuit is 2 W and the voltage is 20 VDC. What is the circuit current?",
+   "answers": [
+    "0.10 A",
+    "0.20 A",
+    "0.30 A",
+    "0.40 A"
+   ],
+   "correct_index": 0,
+   "reference": "General calculation"
+  },
+  {
+   "number": 34,
+   "prompt": "The minimum size box that is to contain a flush device must not be less than deep.",
+   "answers": [
+    "3/4\"",
+    "15/16\"",
+    "1\"",
+    "11/2\""
+   ],
+   "correct_index": 1,
+   "reference": "314.24(B)(5)"
+  },
+  {
+   "number": 35,
+   "prompt": "Receptacle outlets installed for a specific appliance in a dwelling unit, such as a clothes washer, dryer, range, or refrigerator, must be within ___ of the intended location of the appliance.",
+   "answers": [
+    "sight",
+    "no specified distance",
+    "6'",
+    "10'"
+   ],
+   "correct_index": 2,
+   "reference": "210.50(C)"
+  },
+  {
+   "number": 36,
+   "prompt": "Flexible cords approved for and used with a specific listed appliance or luminaire are considered to be protected when ___.",
+   "answers": [
+    "#18 AWG and larger",
+    "#16 AWG and larger",
+    "not more than 6' long",
+    "applied within the listing requirements"
+   ],
+   "correct_index": 3,
+   "reference": "240.5(B)(1)"
+  },
+  {
+   "number": 37,
+   "prompt": "For NUCC, the conduit must be trimmed away from the conductors or cables using an approved method that will not damage the conductor or cable insulation or jacket.",
+   "answers": [
+    "install in a workmanlike manner",
+    "termination",
+    "connect to the fitting properly",
+    "all of these"
+   ],
+   "correct_index": 1,
+   "reference": "354.28"
+  },
+  {
+   "number": 38,
+   "prompt": "The motor branch-circuit short-circuit and ground-fault protective device must be capable of carrying the current of the motor.",
+   "answers": [
+    "starting",
+    "inrush",
+    "running",
+    "overload"
+   ],
+   "correct_index": 0,
+   "reference": "430.52(B)"
+  },
+  {
+   "number": 39,
+   "prompt": "Central heating equipment, other than fixed electric space-heating equipment, must be supplied by a/an branch circuit.",
+   "answers": [
+    "appliance",
+    "individual",
+    "HARC",
+    "controlled"
+   ],
+   "correct_index": 1,
+   "reference": "422.12"
+  },
+  {
+   "number": 40,
+   "prompt": "The ampacity for the supply conductors for a resistance welder with a duty cycle of 15% and a primary current of 21 amps is ___.",
+   "answers": [
+    "9.45 amps",
+    "8.19 amps",
+    "11.2 amps",
+    "21 amps"
+   ],
+   "correct_index": 1,
+   "reference": "Table 630.31(A)(2)"
+  },
+  {
+   "number": 41,
+   "prompt": "Lockout/tagout is an important part of isolating electrical equipment to be worked on. Which of the following should be secured before lockout is executed?",
+   "answers": [
+    "A copy of the OSHA regulations for each person involved.",
+    "A supplemental list that shows all involved energy sources and energy isolating devices.",
+    "Knowledge that each person involved in the task is in control of all energy sources.",
+    "Both (b) and (c)"
+   ],
+   "correct_index": 3,
+   "reference": "NFPA 70E"
+  },
+  {
+   "number": 42,
+   "prompt": "For cord-and-plug-connected appliances, ___ separable connector or plug and receptacle is permitted to serve as the disconnecting means.",
+   "answers": [
+    "a readily accessible",
+    "an isolated",
+    "an accessible",
+    "a guarded"
+   ],
+   "correct_index": 2,
+   "reference": "422.33"
+  },
+  {
+   "number": 43,
+   "prompt": "The only way to see an electrical hazard is .",
+   "answers": [
+    "by wearing a switchman's hood",
+    "by observing signs and signals indicating its presence",
+    "by wearing 3-D glasses",
+    "None of these"
+   ],
+   "correct_index": 1,
+   "reference": "NFPA 70E"
+  },
+  {
+   "number": 44,
+   "prompt": "Voltage drop on sensitive electronic equipment systems must not exceed for branch circuits.",
+   "answers": [
+    "1.5%",
+    "2.5%",
+    "3%",
+    "5%"
+   ],
+   "correct_index": 0,
+   "reference": "647.4(D)"
+  },
+  {
+   "number": 45,
+   "prompt": "The total number of AC cycles completed in one second is the current's .",
+   "answers": [
+    "phase",
+    "alternation",
+    "frequency",
+    "timing"
+   ],
+   "correct_index": 2,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 46,
+   "prompt": "Unused openings for breakers in panelboards must be closed using...",
+   "answers": [
+    "Sheet metal",
+    "Duct seal",
+    "Exothermic welding",
+    "Identified closures"
+   ],
+   "correct_index": 3,
+   "reference": "NEC 408.7"
+  },
+  {
+   "number": 47,
+   "prompt": "Type SE cable is permitted to be formed ina and taped with self-sealing weather-resistant thermoplastic.",
+   "answers": [
+    "doughnut",
+    "gooseneck",
+    "turtleback",
+    "loop"
+   ],
+   "correct_index": 1,
+   "reference": "230.54(B)"
+  },
+  {
+   "number": 48,
+   "prompt": "Using Table 348.22 below, what is the largest conductor size listed for THHN in 3/8-inch FMC?",
+   "answers": [
+    "#16",
+    "#14",
+    "#12",
+    "#10"
+   ],
+   "correct_index": 3,
+   "reference": "Table 348.22"
+  },
+  {
+   "number": 49,
+   "prompt": "At least one 125-volt, single-phase, 15or 20-ampere-rated receptacle outlet shall be installed within of the electrical service equipment requiring servicing.",
+   "answers": [
+    "6'",
+    "10\"",
+    "25'",
+    "50\""
+   ],
+   "correct_index": 2,
+   "reference": "210.63"
+  },
+  {
+   "number": 50,
+   "prompt": "When an underground metal water-piping system is used as a grounding electrode, effective bonding must be provided around insulated joints and around any equipment that is likely to be disconnected for repairs or replacement. Bonding conductors must be of to permit removal of such equipment while retaining the integrity of the bond.",
+   "answers": [
+    "cu/al wire",
+    "stranded wire",
+    "flexible conduit",
+    "sufficient length"
+   ],
+   "correct_index": 3,
+   "reference": "250.68(B)"
+  },
+  {
+   "number": 51,
+   "prompt": "An outdoor disconnecting means for a mobile home must be installed so the bottom of the enclosure is not less than above the finished grade or working platform.",
+   "answers": [
+    "12\"",
+    "18\"",
+    "24\"",
+    "30\""
+   ],
+   "correct_index": 2,
+   "reference": "550.32(F)"
+  },
+  {
+   "number": 52,
+   "prompt": "The minimum number of overload units required for a three-phase motor is...",
+   "answers": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "correct_index": 2,
+   "reference": "Table 430.37"
+  },
+  {
+   "number": 53,
+   "prompt": "Straight runs of 1-inch RMC using threaded couplings may be secured at intervals not exceeding...",
+   "answers": [
+    "6 feet",
+    "10 feet",
+    "12 feet",
+    "14 feet"
+   ],
+   "correct_index": 2,
+   "reference": "NEC 344.30(B)(2)"
+  },
+  {
+   "number": 54,
+   "prompt": "All cut ends of flexible metal conduit must be trimmed or otherwise finished to remove rough edges, except where fittings ___.",
+   "answers": [
+    "contain insulated bushings",
+    "are listed for grounding",
+    "thread into the convolutions",
+    "are the compression type"
+   ],
+   "correct_index": 2,
+   "reference": "348.28"
+  },
+  {
+   "number": 55,
+   "prompt": "A circuit contains two 2,000 ohm resistors connected in parallel. What is the total resistance of the circuit?",
+   "answers": [
+    "888.8 ohms",
+    "1,000 ohms",
+    "1,200 ohms",
+    "4,000 ohms"
+   ],
+   "correct_index": 1,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 56,
+   "prompt": "The building disconnecting means for a one-circuit installation that supplies only limited loads of a single branch circuit must have a rating not less than .",
+   "answers": [
+    "15 amps",
+    "20 amps",
+    "25 amps",
+    "30 amps"
+   ],
+   "correct_index": 0,
+   "reference": "225.39(A)"
+  },
+  {
+   "number": 57,
+   "prompt": "When determining the number of conductors that are considered as current-carrying, a grounding conductor is .",
+   "answers": [
+    "counted as one current-carrying conductor",
+    "counted as one conductor for each ground wire in the raceway",
+    "considered to be a current-carrying conductor but not counted",
+    "considered to be a noncurrent-carrying conductor and is not counted"
+   ],
+   "correct_index": 3,
+   "reference": "310.15(F)"
+  },
+  {
+   "number": 58,
+   "prompt": "The definition of “fibers/flyings, ignitible” is found in Article__.",
+   "answers": [
+    "100",
+    "500",
+    "502",
+    "503"
+   ],
+   "correct_index": 0,
+   "reference": "DEF 100"
+  },
+  {
+   "number": 59,
+   "prompt": "Receptacles that provide power for water-pump motors or loads directly related to pool circulation must be at least how far from the inside pool walls?",
+   "answers": [
+    "4 feet",
+    "6 feet",
+    "10 feet",
+    "12 feet"
+   ],
+   "correct_index": 1,
+   "reference": "NEC 680.22(A)(2)"
+  },
+  {
+   "number": 60,
+   "prompt": "Provisions shall be made for sufficient diffusion and ventilation of the gases from the storage battery if present to prevent the accumulation of a/an mixture.",
+   "answers": [
+    "explosive",
+    "corrosive",
+    "toxic",
+    "all of these"
+   ],
+   "correct_index": 0,
+   "reference": "480.10(A)"
+  },
+  {
+   "number": 61,
+   "prompt": "Where motors are provided with terminal housings, the housings must be of and of substantial construction.",
+   "answers": [
+    "metal",
+    "plastic",
+    "steel",
+    "none of these"
+   ],
+   "correct_index": 0,
+   "reference": "430.12(A)"
+  },
+  {
+   "number": 62,
+   "prompt": "What is the standard abbreviation for power on an electrical diagram?",
+   "answers": [
+    "PAR",
+    "PB",
+    "PF",
+    "PWR"
+   ],
+   "correct_index": 3,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 63,
+   "prompt": "The continuous current-carrying capacity of a 1 1/2 square inch copper busbar mounted in an unventilated enclosure is amps.",
+   "answers": [
+    "500",
+    "650",
+    "750",
+    "1500"
+   ],
+   "correct_index": 3,
+   "reference": "366.23(A)"
+  },
+  {
+   "number": 64,
+   "prompt": "GFCI protection for personnel is required for all 15 and 20 amp, 125 volt single-phase receptacles installed in a dwelling unit .",
+   "answers": [
+    "laundry",
+    "garage",
+    "shower stalls",
+    "all of these"
+   ],
+   "correct_index": 3,
+   "reference": "210.8(A)"
+  },
+  {
+   "number": 65,
+   "prompt": "Service and feeder conductors may be sized using Table 310.12(A) for...",
+   "answers": [
+    "Commercial services only",
+    "Only multifamily dwelling services",
+    "Any service under 400 amps",
+    "Only 240/120V, 3-wire services for a single dwelling unit"
+   ],
+   "correct_index": 3,
+   "reference": "Table 310.12(A)"
+  },
+  {
+   "number": 66,
+   "prompt": "Concrete-encased electrodes of are not required to be part of the grounding electrode system where the steel rebars or rods aren't accessible for use without disturbing the concrete.",
+   "answers": [
+    "gas stations",
+    "hazardous locations",
+    "health care facilities",
+    "existing buildings"
+   ],
+   "correct_index": 3,
+   "reference": "250.50"
+  },
+  {
+   "number": 67,
+   "prompt": "The rating of the attachment plug and receptacle must not exceed @ 250 volts for a cord-and-plug connected air conditioner.",
+   "answers": [
+    "15 amps",
+    "20 amps",
+    "25 amps",
+    "30 amps"
+   ],
+   "correct_index": 0,
+   "reference": "440.55(B)"
+  },
+  {
+   "number": 68,
+   "prompt": "Where there is more than one driving machine in an elevator room, the disconnecting means must be numbered to correspond to the identifying number of the .",
+   "answers": [
+    "driving machine they control",
+    "panelboard it is fed from",
+    "the branch circuit feeding it",
+    "all of these"
+   ],
+   "correct_index": 0,
+   "reference": "620.53"
+  },
+  {
+   "number": 69,
+   "prompt": "A feeder must have a protective device with a rating or setting branch-circuit short-circuit and ground-fault protective device for any motor in the group, plus the sum of the full-load currents of the other motors of the group.",
+   "answers": [
+    "125% of the largest rating",
+    "not greater than the largest rating or setting of the",
+    "225% of the largest rating",
+    "none of these"
+   ],
+   "correct_index": 1,
+   "reference": "430.62(A)"
+  },
+  {
+   "number": 70,
+   "prompt": "The symbol for a three-phase delta-wound generator consists of a circle with a... scribed inside.",
+   "answers": [
+    "Cross",
+    "Triangle",
+    "Y",
+    "Star"
+   ],
+   "correct_index": 1,
+   "reference": "General knowledge"
+  }
+ ]
+}

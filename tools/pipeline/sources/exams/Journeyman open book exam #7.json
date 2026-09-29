@@ -1,0 +1,306 @@
+{
+ "question_count": 25,
+ "provenance": "Tesseract OCR of the exam and answer-key PDFs, with the stems, choices and keys retyped from the PDF page images where the OCR was wrong (formerly the manual and exact_* lists in build_question_bank.py). Text as the exam prints it; curated wording lives in question_bank_overrides.json.",
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "Grounded conductors of premises wiring systems shall be ___ connected to the supply system grounded conductor to ensure a common, continuous grounded system.",
+   "answers": [
+    "directly",
+    "permanently",
+    "electrically",
+    "magnetically"
+   ],
+   "correct_index": 2,
+   "reference": "200.3"
+  },
+  {
+   "number": 2,
+   "prompt": "___ lists the direct-current resistance of conductors per kFT.",
+   "answers": [
+    "Table 8, Chapter 9",
+    "Table 9, Chapter 9",
+    "Table 5, Chapter 9",
+    "Table 4, Chapter 9"
+   ],
+   "correct_index": 0,
+   "reference": "Table 8, Chapter 9"
+  },
+  {
+   "number": 3,
+   "prompt": "Electrical equipment, such as switchboards, switchgear, panelboards, industrial control panels, meter socket enclosures, and motor control centers, that is in other than ___, and is likely to require examination, adjustment, servicing, or maintenance while energized, shall be field or factory marked to warn qualified persons of potential electric arc flash hazards.",
+   "answers": [
+    "locked rooms",
+    "schools",
+    "testing areas",
+    "dwelling units"
+   ],
+   "correct_index": 3,
+   "reference": "110.16(A)"
+  },
+  {
+   "number": 4,
+   "prompt": "Where simultaneous biplane examinations are undertaken with the X-ray units, the supply conductors and overcurrent protection devices shall be 100% of the ___ demand rating of each X-ray unit.",
+   "answers": [
+    "continuous",
+    "non-continuous",
+    "instantaneous",
+    "momentary"
+   ],
+   "correct_index": 3,
+   "reference": "517.73(A)"
+  },
+  {
+   "number": 5,
+   "prompt": "___ The highest level that water can reach before it spills out.",
+   "answers": [
+    "Over Flow",
+    "Escape Limit",
+    "Datum Level",
+    "Maximum Water Level"
+   ],
+   "correct_index": 3,
+   "reference": "Definition 100"
+  },
+  {
+   "number": 6,
+   "prompt": "Flexible cord used in extension cords made with separately listed and installed components shall be permitted to be supplied by a branch circuit in accordance with the following: 20 ampere circuits and larger.",
+   "answers": [
+    "#24",
+    "#16",
+    "#14",
+    "#12"
+   ],
+   "correct_index": 1,
+   "reference": "240.5(B)(4)"
+  },
+  {
+   "number": 7,
+   "prompt": "Selective coordination shall not be required between two overcurrent devices located in series if no ___ are connected in parallel with the downstream device.",
+   "answers": [
+    "fuses",
+    "disconnects",
+    "devices",
+    "loads"
+   ],
+   "correct_index": 3,
+   "reference": "708.54 Ex."
+  },
+  {
+   "number": 8,
+   "prompt": "Electrical equipment provided with ___ openings shall be installed so that walls or other obstructions do not prevent the free circulation of air through the equipment.",
+   "answers": [
+    "ventilating",
+    "vented",
+    "filtered",
+    "gated"
+   ],
+   "correct_index": 0,
+   "reference": "110.13(B)"
+  },
+  {
+   "number": 9,
+   "prompt": "The feeder or branch circuit disconnecting means shall have a rating not less than the ___ load to be served.",
+   "answers": [
+    "actual",
+    "minimum",
+    "calculated",
+    "maximum"
+   ],
+   "correct_index": 2,
+   "reference": "225.39"
+  },
+  {
+   "number": 10,
+   "prompt": "Wiring located above heated ceilings shall be spaced not less than ___ above the heated ceiling.",
+   "answers": [
+    "2 inches",
+    "3 inches",
+    "4 inches",
+    "6 inches"
+   ],
+   "correct_index": 0,
+   "reference": "424.36"
+  },
+  {
+   "number": 11,
+   "prompt": "Conductors of branch circuits supplying more than one receptacle for cord-and-plug connected portable tools shall have an ampacity ___ the rating of the branch circuit.",
+   "answers": [
+    "equal to",
+    "of not less than",
+    "greater than",
+    "125%"
+   ],
+   "correct_index": 1,
+   "reference": "210.19(A)(2)"
+  },
+  {
+   "number": 12,
+   "prompt": "Ferrous raceways and fittings protected from corrosion solely by ___ shall be permitted only indoors and in occupancies not subject to severe corrosive influences.",
+   "answers": [
+    "enamel",
+    "silicone",
+    "galvanize",
+    "rubber"
+   ],
+   "correct_index": 0,
+   "reference": "344.10(A)(3)"
+  },
+  {
+   "number": 13,
+   "prompt": "Table ___ lists the minimum cover requirements for underground wiring methods 1000 volts or less.",
+   "answers": [
+    "312.6(A)",
+    "310.104",
+    "300.19(A)",
+    "300.5(A)"
+   ],
+   "correct_index": 3,
+   "reference": "Table 300.5(A)"
+  },
+  {
+   "number": 14,
+   "prompt": "Table ___ lists metric designators and trade sizes for conduit, tubing, etc.",
+   "answers": [
+    "314.16(A)",
+    "355.44",
+    "384.22",
+    "300.1(C)"
+   ],
+   "correct_index": 3,
+   "reference": "Table 300.1(C)"
+  },
+  {
+   "number": 15,
+   "prompt": "The temperature correction and adjustment factors shall be permitted to be applied to the ampacity for the temperature rating of the conductor, if the corrected and adjusted ampacity does not exceed the ampacity for the temperature rating of the ___ in accordance with the provisions of 110.14(C).",
+   "answers": [
+    "termination",
+    "connector",
+    "enclosure",
+    "device"
+   ],
+   "correct_index": 0,
+   "reference": "310.15(A)"
+  },
+  {
+   "number": 16,
+   "prompt": "A sign shall be placed at the service entrance equipment, indicating type and ___ of each onsite emergency power source.",
+   "answers": [
+    "voltage",
+    "kW",
+    "hours of fuel",
+    "location"
+   ],
+   "correct_index": 3,
+   "reference": "700.7(A)"
+  },
+  {
+   "number": 17,
+   "prompt": "Separately installed pressure connectors shall be used with conductors at the ampacities not exceeding the ampacity at the listed and ___ temperature rating of the conductor.",
+   "answers": [
+    "marked",
+    "tested",
+    "identified",
+    "certified"
+   ],
+   "correct_index": 2,
+   "reference": "110.14(C)(2)"
+  },
+  {
+   "number": 18,
+   "prompt": "The ___ number of branch circuits shall be determined from the total calculated load and the size or rating of the circuits used.",
+   "answers": [
+    "minimum",
+    "maximum",
+    "total",
+    "largest"
+   ],
+   "correct_index": 0,
+   "reference": "210.11(A)"
+  },
+  {
+   "number": 19,
+   "prompt": "Internal parts of electrical equipment, including busbars, wiring terminals, insulators, and other surfaces, shall not be damaged or contaminated by foreign materials such as paint, plaster, cleaners, abrasives, or ___.",
+   "answers": [
+    "moisture",
+    "organic residues",
+    "corrosive residues",
+    "dust and dirt"
+   ],
+   "correct_index": 2,
+   "reference": "110.12(B)"
+  },
+  {
+   "number": 20,
+   "prompt": "A ___ is a portion of a sign that may provide protection from the weather but is not an electrical enclosure.",
+   "answers": [
+    "Section Sign",
+    "Sign Body",
+    "Sign Gutter",
+    "Sign Enclosure"
+   ],
+   "correct_index": 1,
+   "reference": "Definition 100"
+  },
+  {
+   "number": 21,
+   "prompt": "Where a panelboard is supplied through a transformer, the overcurrent protection required by 408.36 shall be located on the ___ side of the transformer.",
+   "answers": [
+    "supply",
+    "primary",
+    "secondary",
+    "high leg"
+   ],
+   "correct_index": 2,
+   "reference": "408.36(B)"
+  },
+  {
+   "number": 22,
+   "prompt": "Open equipment doors must not impede access to or from working space required in 110.26. If the door(s) reduce(s) the access to less than ___ inches wide and 6 1/2 feet high, access is considered impeded.",
+   "answers": [
+    "18",
+    "24",
+    "30",
+    "36"
+   ],
+   "correct_index": 1,
+   "reference": "110.26"
+  },
+  {
+   "number": 23,
+   "prompt": "Terminations on ___ cables rated over 600 volts, nominal, shall be accessible only to authorized and qualified personnel.",
+   "answers": [
+    "portable",
+    "fixed",
+    "flexible",
+    "nonmetallic"
+   ],
+   "correct_index": 0,
+   "reference": "400.36"
+  },
+  {
+   "number": 24,
+   "prompt": "A switchboard, switchgear, or panelboard containing a 4-wire, ___-connected system where the midpoint of one phase winding is grounded shall be legibly and permanently marked as follows: 'Caution Phase Has ___ Volts to Ground.'",
+   "answers": [
+    "series",
+    "wye",
+    "delta",
+    "grounded"
+   ],
+   "correct_index": 2,
+   "reference": "408.3(F)(1)"
+  },
+  {
+   "number": 25,
+   "prompt": "Where a building or structure has any combination of feeders, branch circuits, or services passing through it or supplying it, a permanent plaque or directory shall be installed at each feeder and branch circuit ___ denoting all other services, feeders, or branch circuits supplying that building or structure or passing through that building or structure and the area served by each.",
+   "answers": [
+    "disconnect",
+    "connection",
+    "termination",
+    "entrance"
+   ],
+   "correct_index": 0,
+   "reference": "225.37"
+  }
+ ]
+}

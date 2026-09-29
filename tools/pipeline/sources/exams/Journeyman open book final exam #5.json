@@ -1,0 +1,601 @@
+{
+ "question_count": 70,
+ "provenance": "Tesseract OCR of the exam and answer-key PDFs, with the stems, choices and keys retyped from the PDF page images where the OCR was wrong (formerly the manual and exact_* lists in build_question_bank.py). Text as the exam prints it; curated wording lives in question_bank_overrides.json.",
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "FCC carpet squares that are adhered to the floor shall be attached with .",
+   "answers": [
+    "tacking strip",
+    "release-type adhesive",
+    "glue",
+    "none of these"
+   ],
+   "correct_index": 1,
+   "reference": "324.41"
+  },
+  {
+   "number": 2,
+   "prompt": "Armored cable installed in thermal insulation shall have conductors rated at . The ampacity . of the cable installed in these applications shall be that of 60 degree C conductors.",
+   "answers": [
+    "60 degrees C",
+    "194 degrees F",
+    "75 degrees C",
+    "90 degrees F"
+   ],
+   "correct_index": 1,
+   "reference": "320.80(A)"
+  },
+  {
+   "number": 3,
+   "prompt": "Type ___ is a factory assembly of one or more insulated circuit conductors with or without optical fiber members enclosed in an armor of interlocking metal tape, or a smooth or corrugated metallic sheath.",
+   "answers": [
+    "MI",
+    "NM",
+    "MC",
+    "MV"
+   ],
+   "correct_index": 2,
+   "reference": "DEF 100"
+  },
+  {
+   "number": 4,
+   "prompt": "Power feed, grounding connection, and shield system connection between the FCC system and : other wiring systems shall be accomplished in a .",
+   "answers": [
+    "transition assembly",
+    "raceway",
+    "trench",
+    "none of these"
+   ],
+   "correct_index": 0,
+   "reference": "324.40(D)"
+  },
+  {
+   "number": 5,
+   "prompt": "Tap devices used in FC assemblies shall be rated at not less than how many amps?",
+   "answers": [
+    "20 amps",
+    "15 amps",
+    "30 amps",
+    "40 amps"
+   ],
+   "correct_index": 1,
+   "reference": "NEC 322.56(B)"
+  },
+  {
+   "number": 6,
+   "prompt": "Lengths of not more than of AC cable at terminals where flexibility is necessary does not have to be supported. :",
+   "answers": [
+    "28\"",
+    "2'",
+    "30\"",
+    "3'"
+   ],
+   "correct_index": 1,
+   "reference": "320.30(D)(2)"
+  },
+  {
+   "number": 7,
+   "prompt": "A protective layer which is installed between the floor and type FCC flat conductor cable to protect . the cable from physical damage and may or may not be incorporated as an integral part of the cable is the .",
+   "answers": [
+    "transition assembly",
+    "outer sheath",
+    "bottom shield",
+    "header"
+   ],
+   "correct_index": 2,
+   "reference": "DEF 100"
+  },
+  {
+   "number": 8,
+   "prompt": "The minimum size copper conductor permitted in metal-clad cable is .",
+   "answers": [
+    "#18",
+    "#16",
+    "#14",
+    "#12"
+   ],
+   "correct_index": 0,
+   "reference": "330.104"
+  },
+  {
+   "number": 17,
+   "prompt": "Which of the following statements about MI cable is correct?",
+   "answers": [
+    "it may be used in hazardous locations, where permitted",
+    "it may be mounted flush on a wall in a wet location",
+    "it shall be supported every 10 feet",
+    "a single run of cable shall not contain more than four quarter bends"
+   ],
+   "correct_index": 0,
+   "reference": "332.10(7)"
+  },
+  {
+   "number": 18,
+   "prompt": "The ampacity of type UF cable shall be that of conductors.",
+   "answers": [
+    "60°F",
+    "75°C",
+    "140°C",
+    "60°C"
+   ],
+   "correct_index": 3,
+   "reference": "340.80"
+  },
+  {
+   "number": 19,
+   "prompt": "Which cable shall be flame-retardant, moisture-resistant, fungus-resistant, and corrosion-resistant?",
+   "answers": [
+    "MI",
+    "USE",
+    "NMC",
+    "NM"
+   ],
+   "correct_index": 2,
+   "reference": "NEC 334.116(B)"
+  },
+  {
+   "number": 20,
+   "prompt": "MI cable has .",
+   "answers": [
+    "solid copper conductors",
+    "outer sheath to provide mechanical protection",
+    "an adequate path for grounding purposes",
+    "all of these"
+   ],
+   "correct_index": 3,
+   "reference": "332.104"
+  },
+  {
+   "number": 21,
+   "prompt": "SE cable used to supply shall not be subject to conductor temperatures in excess of the temperature specified for the type of insulation involved.",
+   "answers": [
+    "lighting",
+    "appliances",
+    "motors",
+    "generators"
+   ],
+   "correct_index": 1,
+   "reference": "338.10(B)(3)"
+  },
+  {
+   "number": 22,
+   "prompt": "For general wiring, type cable containing one or more conductors is approved for direct burial in earth.",
+   "answers": [
+    "THW",
+    "USE",
+    "THHW",
+    "THHN"
+   ],
+   "correct_index": 1,
+   "reference": "DEF 100"
+  },
+  {
+   "number": 23,
+   "prompt": "Type TC cables with metallic shielding shall have a minimum bending radius of not less than ___. times the cable overall diameter.",
+   "answers": [
+    "ten",
+    "twelve",
+    "twenty four",
+    "thirty six"
+   ],
+   "correct_index": 1,
+   "reference": "336.24"
+  },
+  {
+   "number": 24,
+   "prompt": "Types NM, NMC cables shall NOT be used as follows ___.",
+   "answers": [
+    "in exposed work",
+    "as service-entrance cable",
+    "fished in voids in masonry block",
+    "on the outside walls of masonry block or tile"
+   ],
+   "correct_index": 1,
+   "reference": "334.12(A)(3)"
+  },
+  {
+   "number": 32,
+   "prompt": "The largest conductor permitted in 3/8\" flexible metal conduit is .",
+   "answers": [
+    "#12",
+    "#16",
+    "#14",
+    "#10"
+   ],
+   "correct_index": 3,
+   "reference": "348.22"
+  },
+  {
+   "number": 33,
+   "prompt": "Rigid metal conduit shall be every 10 feet as required by section 110.21.",
+   "answers": [
+    "stamped",
+    "clearly and durably identified",
+    "marked",
+    "none of these"
+   ],
+   "correct_index": 1,
+   "reference": "344.120"
+  },
+  {
+   "number": 34,
+   "prompt": "Aluminum fittings and enclosures shall be permitted to be used with __.",
+   "answers": [
+    "both ferrous and nonferrous conduits",
+    "PVC schedule 80 conduit",
+    "electrical nonmetallic tubing",
+    "steel electrical metallic tubing"
+   ],
+   "correct_index": 3,
+   "reference": "358.14"
+  },
+  {
+   "number": 35,
+   "prompt": "A pliable raceway is a raceway which can be bent ___ with a reasonable force, but without other assistance.",
+   "answers": [
+    "with heat",
+    "without heat",
+    "manually",
+    "easily"
+   ],
+   "correct_index": 2,
+   "reference": "362.24(A)"
+  },
+  {
+   "number": 36,
+   "prompt": "Rigid PVC conduit may be used .",
+   "answers": [
+    "above ground in direct sunlight",
+    "as a support for lighting fixtures",
+    "as a grounding conductor",
+    "all of these"
+   ],
+   "correct_index": 0,
+   "reference": "352.100"
+  },
+  {
+   "number": 37,
+   "prompt": "EMT shall be made of which of the following?",
+   "answers": [
+    "Aluminum",
+    "Steel with protective coatings",
+    "Stainless steel",
+    "any of these"
+   ],
+   "correct_index": 3,
+   "reference": "358.100"
+  },
+  {
+   "number": 38,
+   "prompt": "Liquidtight flexible metal conduit shall not be permitted .",
+   "answers": [
+    "in hazardous locations",
+    "where subject to physical damage",
+    "in exposed and concealed work",
+    "where installations requires flexibility or protection from liquids, vapors or solids"
+   ],
+   "correct_index": 1,
+   "reference": "350.12"
+  },
+  {
+   "number": 39,
+   "prompt": "A copper bus bar is 4\" wide by 1/2\" thick. What is the ampacity?",
+   "answers": [
+    "500 amps",
+    "1000 amps",
+    "1500 amps",
+    "2000 amps"
+   ],
+   "correct_index": 3,
+   "reference": "366.23(A)"
+  },
+  {
+   "number": 48,
+   "prompt": "In auxiliary gutters, the minimum clearance between bare current-carrying metal parts of different potential mounted on the same surface is...",
+   "answers": [
+    "3/4 inch",
+    "1 inch",
+    "1 1/2 inches",
+    "2 inches"
+   ],
+   "correct_index": 1,
+   "reference": "NEC 366.100(E)"
+  },
+  {
+   "number": 49,
+   "prompt": "Nonmetallic surface extensions shall not be run on the floor or within how many inches from the floor?",
+   "answers": [
+    "6 inches",
+    "4 inches",
+    "3 inches",
+    "2 inches"
+   ],
+   "correct_index": 3,
+   "reference": "NEC 382.15(A)"
+  },
+  {
+   "number": 50,
+   "prompt": "For over 1000 volts, busways having sections located both inside and outside of buildings, shall have a____at the building wall.",
+   "answers": [
+    "vapor seal",
+    "fire barrier",
+    "condulet",
+    "ventilated enclosure"
+   ],
+   "correct_index": 0,
+   "reference": "368.234(A)"
+  },
+  {
+   "number": 51,
+   "prompt": "Cablebus shall be installed only for work. ;",
+   "answers": [
+    "exposed",
+    "commercial",
+    "concealed",
+    "hazardous"
+   ],
+   "correct_index": 0,
+   "reference": "370.10(1)"
+  },
+  {
+   "number": 52,
+   "prompt": "A 300 foot run of 800 amp busway is installed in a commercial warehouse building. The last 20' of the busway run is reduced to a bus rating of 200 amps. Which of the following best describes : requirements for installation of the smaller bus?",
+   "answers": [
+    "This installation meets Code requirements.",
+    "It must be protected by an overcurrent device.",
+    "Busway is not permitted in commercial buildings.",
+    "It must be at least 1/3 the ampere rating of the larger bus."
+   ],
+   "correct_index": 3,
+   "reference": "368.17(B)"
+  },
+  {
+   "number": 53,
+   "prompt": "Strut-type channel raceway shall be secured at intervals not exceeding ___ feet and within 3 feet of each outlet box.",
+   "answers": [
+    "3",
+    "41/2",
+    "10",
+    "12"
+   ],
+   "correct_index": 2,
+   "reference": "384.30(A)"
+  },
+  {
+   "number": 54,
+   "prompt": "Documentation of engineered design by a licensed professional engineer engaged primarily in the design of such systems for the spacing between conductors shall be available upon request of the AHJ and this is stated in Article .",
+   "answers": [
+    "517",
+    "501",
+    "300",
+    "395"
+   ],
+   "correct_index": 3,
+   "reference": "395.30(A)"
+  },
+  {
+   "number": 55,
+   "prompt": "In general, the voltage limitation between conductors in surface nonmetallic raceways is ___ volts.",
+   "answers": [
+    "300",
+    "500",
+    "600",
+    "1000"
+   ],
+   "correct_index": 0,
+   "reference": "388.12(3)"
+  },
+  {
+   "number": 64,
+   "prompt": "For installations of resistors and reactors, a thermal barrier is required if the space to combustible material is less than...",
+   "answers": [
+    "2 inches",
+    "4 inches",
+    "6 inches",
+    "12 inches"
+   ],
+   "correct_index": 3,
+   "reference": "NEC 470.11"
+  },
+  {
+   "number": 65,
+   "prompt": "Vertical runs of metal wireways must be securely supported at intervals not exceeding ___ and must not have more than one joint between supports.",
+   "answers": [
+    "8 feet",
+    "10 feet",
+    "12 feet",
+    "15 feet"
+   ],
+   "correct_index": 3,
+   "reference": "376.30(B)"
+  },
+  {
+   "number": 66,
+   "prompt": "The number of conductors allowed in LFNC must not exceed the percentage fill specified in Chapter 9, Table...",
+   "answers": [
+    "Table 7",
+    "Table 9",
+    "Table 1",
+    "Table 4"
+   ],
+   "correct_index": 2,
+   "reference": "NEC 356.22"
+  },
+  {
+   "number": 67,
+   "prompt": "Exposed vertical risers of IMC for industrial machinery or fixed equipment can be supported at intervals not exceeding ___ feet if the conduit is made up with threaded couplings, firmly supported at the top and bottom of the riser, and no other means of support is available.",
+   "answers": [
+    "12",
+    "15",
+    "20",
+    "25"
+   ],
+   "correct_index": 2,
+   "reference": "342.30(B)(3)"
+  },
+  {
+   "number": 68,
+   "prompt": "Rigid metal conduit may be installed in or under cinder fill when protected on all sides by noncinder concrete not less than...",
+   "answers": [
+    "1 1/2 inches",
+    "2 inches",
+    "4 inches",
+    "6 inches"
+   ],
+   "correct_index": 1,
+   "reference": "NEC 344.10(C)"
+  },
+  {
+   "number": 69,
+   "prompt": "What maximum distance from the last point of support can an unsupported nonmetallic-sheathed cable be installed when the cable is located within an access ceiling and supplies power to electrical equipment?",
+   "answers": [
+    "24\"",
+    "36\"",
+    "48\"",
+    "54\""
+   ],
+   "correct_index": 3,
+   "reference": "334.30(B)(2)"
+  },
+  {
+   "number": 70,
+   "prompt": "For a 1/2-inch RNC run secured within 36 inches of each termination, what is the maximum permitted spacing between supports along the run?",
+   "answers": [
+    "3 feet",
+    "5 feet",
+    "6 feet",
+    "10 feet"
+   ],
+   "correct_index": 0,
+   "reference": "Table 352.30(B)"
+  }
+ ],
+ "key_only": [
+  {
+   "number": 9,
+   "correct_index": 3
+  },
+  {
+   "number": 10,
+   "correct_index": 1
+  },
+  {
+   "number": 11,
+   "correct_index": 1
+  },
+  {
+   "number": 12,
+   "correct_index": 2
+  },
+  {
+   "number": 13,
+   "correct_index": null
+  },
+  {
+   "number": 14,
+   "correct_index": 3
+  },
+  {
+   "number": 15,
+   "correct_index": 0
+  },
+  {
+   "number": 16,
+   "correct_index": 1
+  },
+  {
+   "number": 25,
+   "correct_index": 3
+  },
+  {
+   "number": 26,
+   "correct_index": 2
+  },
+  {
+   "number": 27,
+   "correct_index": 3
+  },
+  {
+   "number": 28,
+   "correct_index": 2
+  },
+  {
+   "number": 29,
+   "correct_index": 1
+  },
+  {
+   "number": 30,
+   "correct_index": 2
+  },
+  {
+   "number": 31,
+   "correct_index": 3
+  },
+  {
+   "number": 40,
+   "correct_index": 1
+  },
+  {
+   "number": 41,
+   "correct_index": 2
+  },
+  {
+   "number": 42,
+   "correct_index": 1
+  },
+  {
+   "number": 43,
+   "correct_index": 3
+  },
+  {
+   "number": 44,
+   "correct_index": 2
+  },
+  {
+   "number": 45,
+   "correct_index": 3
+  },
+  {
+   "number": 46,
+   "correct_index": 3
+  },
+  {
+   "number": 47,
+   "correct_index": 0
+  },
+  {
+   "number": 56,
+   "correct_index": 0
+  },
+  {
+   "number": 57,
+   "correct_index": 3
+  },
+  {
+   "number": 58,
+   "correct_index": 1
+  },
+  {
+   "number": 59,
+   "correct_index": 1
+  },
+  {
+   "number": 60,
+   "correct_index": 1
+  },
+  {
+   "number": 61,
+   "correct_index": 2
+  },
+  {
+   "number": 62,
+   "correct_index": 3
+  },
+  {
+   "number": 63,
+   "correct_index": 0
+  }
+ ],
+ "key_only_note": "Answer-key entries whose question page is not in the scanned PDF."
+}

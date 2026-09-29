@@ -9,9 +9,12 @@ with an answer key ``<same name> answer key.pdf`` (any letter case).
   lower-cased with spaces as dashes plus the number (``final-exam-#2-007``).
 * question count: from the reviewed transcript when there is one, else from the
   cover page of the OCR text ("25 QUESTIONS").
-* transcript: ``sources/exams/<pdf stem>.json``, the exam and its key typed from
-  the PDF page images (see docs/DATA_PIPELINE.md). When present it replaces the
-  OCR parse for that exam, so the build does not depend on Tesseract output.
+* transcript: ``sources/exams/<pdf stem>.json``, the exam and its key as
+  reviewed text (see docs/ADDING_EXAMS.md): ``question_count``, ``questions``
+  (number, prompt, answers, correct_index, reference) and optional ``key_only``
+  entries (number, correct_index) for key lines whose question page is missing.
+  When present it replaces the OCR parse for that exam, so the build does not
+  depend on Tesseract output. Every shipped exam has one.
 """
 from __future__ import annotations
 

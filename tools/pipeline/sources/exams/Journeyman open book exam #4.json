@@ -1,0 +1,306 @@
+{
+ "question_count": 25,
+ "provenance": "Tesseract OCR of the exam and answer-key PDFs, with the stems, choices and keys retyped from the PDF page images where the OCR was wrong (formerly the manual and exact_* lists in build_question_bank.py). Text as the exam prints it; curated wording lives in question_bank_overrides.json.",
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "One who has skills and knowledge related to the construction and operation of the electrical equipment and installations and has received safety training to recognize and avoid the hazards involved, is defined as a/an ___ person.",
+   "answers": [
+    "grandfather",
+    "acceptable",
+    "qualified",
+    "parts changer"
+   ],
+   "correct_index": 2,
+   "reference": "Definitions 100"
+  },
+  {
+   "number": 2,
+   "prompt": "All outdoor outlets for dwellings, that are supplied by single-phase branch circuits rated 150 volts to ground or less, ___ amperes or less, shall have GFCI protection for personnel.",
+   "answers": [
+    "50",
+    "60",
+    "70",
+    "75"
+   ],
+   "correct_index": 0,
+   "reference": "210.8(F)"
+  },
+  {
+   "number": 3,
+   "prompt": "Type NM cable is permitted for use under all the following conditions or locations except.",
+   "answers": [
+    "in Type V construction",
+    "in a multifamily dwelling unit",
+    "as a feeder",
+    "in a damp or wet location"
+   ],
+   "correct_index": 3,
+   "reference": "334.12(B)(4)"
+  },
+  {
+   "number": 4,
+   "prompt": "Direct-buried cables located in a trench below 2 inches of concrete shall have a minimum cover of ___.",
+   "answers": [
+    "6 inches",
+    "12 inches",
+    "18 inches",
+    "24 inches"
+   ],
+   "correct_index": 2,
+   "reference": "Table 300.5(A) Column 1"
+  },
+  {
+   "number": 5,
+   "prompt": "A 125 volt, 15 amp rated receptacle located in a hallway of a dwelling unit is required to be ___.",
+   "answers": [
+    "GFCI protected",
+    "on a dedicated circuit",
+    "in need of a 20 amp receptacle",
+    "listed tamper-resistant"
+   ],
+   "correct_index": 3,
+   "reference": "406.12(1)"
+  },
+  {
+   "number": 6,
+   "prompt": "Residential in-sink electrically operated kitchen waste disposers shall be permitted to be cord-and-plug connected; however, the flexible cord is to be not less than 18 inches in length and not over ___ in length.",
+   "answers": [
+    "24 inches",
+    "30 inches",
+    "36 inches",
+    "48 inches"
+   ],
+   "correct_index": 2,
+   "reference": "422.16(B)(1)(1)"
+  },
+  {
+   "number": 7,
+   "prompt": "Isolated ground receptacles that incorporate an isolating equipment grounding conductor connection intended for the reduction of electrical noise or electromagnetic interference shall be clearly identified by a/an ___ located on the face of the receptacle.",
+   "answers": [
+    "green dot",
+    "yellow circle",
+    "red triangle",
+    "orange triangle"
+   ],
+   "correct_index": 3,
+   "reference": "406.3(E)"
+  },
+  {
+   "number": 8,
+   "prompt": "Except as permitted by 300.3(B)(4), all conductors of a multiwire branch circuit shall originate from the equipment containing the branch-circuit overcurrent protective device(s). The circuit shall have a means to simultaneously disconnect its phase conductors and shall supply only line-to-___ loads.",
+   "answers": [
+    "line",
+    "ungrounded",
+    "primary",
+    "neutral"
+   ],
+   "correct_index": 3,
+   "reference": "210.4(C)"
+  },
+  {
+   "number": 9,
+   "prompt": "An unintentional, electrically conducting connection between an ungrounded conductor of an electrical circuit and the normally non-current-carrying conductors, metallic enclosures, metallic raceways, metallic equipment, or earth is referred to as a/an ___.",
+   "answers": [
+    "ground fault",
+    "open circuit",
+    "short circuit",
+    "circuit bypass"
+   ],
+   "correct_index": 0,
+   "reference": "Definition 100"
+  },
+  {
+   "number": 10,
+   "prompt": "For temporary wiring, a box, conduit body, or other enclosure shall ___ for splices at tree lots and similar installations.",
+   "answers": [
+    "not be permitted",
+    "be permitted",
+    "be required",
+    "not be required"
+   ],
+   "correct_index": 2,
+   "reference": "590.4(G)"
+  },
+  {
+   "number": 11,
+   "prompt": "Where no GFCI protection is provided, the mounting height of a paddle fan located above a spa or hot tub shall not be less than ___ feet.",
+   "answers": [
+    "6",
+    "8",
+    "10",
+    "12"
+   ],
+   "correct_index": 3,
+   "reference": "680.43(B)(1)(a)"
+  },
+  {
+   "number": 12,
+   "prompt": "Rooms or areas of dwelling units shall be protected by a listed combination-type arc-fault circuit interrupter to provide protection of the entire ___.",
+   "answers": [
+    "feeder",
+    "branch circuit",
+    "service",
+    "load center"
+   ],
+   "correct_index": 1,
+   "reference": "210.12(A)(1)"
+  },
+  {
+   "number": 13,
+   "prompt": "Equipment or materials to which has been attached a symbol or other identifying mark of an organization that is acceptable to the authority having jurisdiction. This mark is ___.",
+   "answers": [
+    "labeled",
+    "suitable",
+    "acceptable",
+    "identified"
+   ],
+   "correct_index": 0,
+   "reference": "Definitions 100"
+  },
+  {
+   "number": 14,
+   "prompt": "All 15 and 20 amp, 125 and 250 volt, nonlocking receptacles located in a wet location shall be listed ___ type.",
+   "answers": [
+    "weather proof",
+    "water proof",
+    "water resistant",
+    "weather resistant"
+   ],
+   "correct_index": 3,
+   "reference": "406.9(B)"
+  },
+  {
+   "number": 15,
+   "prompt": "The permitted demand factor for five household clothes dryers in a multifamily dwelling is ___.",
+   "answers": [
+    "70%",
+    "75%",
+    "80%",
+    "85%"
+   ],
+   "correct_index": 3,
+   "reference": "Table 220.54"
+  },
+  {
+   "number": 16,
+   "prompt": "A controller that includes motor overload protection for group motor application shall be marked with the motor overload protection and the maximum branch-circuit short-circuit and ground-fault protection for such applications.",
+   "answers": [
+    "required",
+    "recognized",
+    "permitted",
+    "suitable"
+   ],
+   "correct_index": 3,
+   "reference": "430.8"
+  },
+  {
+   "number": 17,
+   "prompt": "Type UF cable is permitted to be used ___.",
+   "answers": [
+    "as service entrance",
+    "in commercial garages",
+    "where subject to physical damage",
+    "for wiring in wet, dry, or corrosive locations"
+   ],
+   "correct_index": 3,
+   "reference": "340.10(3)"
+  },
+  {
+   "number": 18,
+   "prompt": "Cables with entirely nonmetallic sheaths shall be permitted to enter the top of a surface-mounted enclosure through one or more nonflexible raceways not less than ___ and not more than 10 feet in length, provided all conditions are met.",
+   "answers": [
+    "12 inches",
+    "16 inches",
+    "18 inches",
+    "24 inches"
+   ],
+   "correct_index": 2,
+   "reference": "312.5(C) Ex. 1"
+  },
+  {
+   "number": 19,
+   "prompt": "Utilization equipment weighing not more than 6 pounds shall be permitted to be supported on other boxes or plaster rings that are secured to other boxes, provided the equipment or its supporting yoke is secured to the box with no fewer than two ___ or larger screws.",
+   "answers": [
+    "#6",
+    "#8",
+    "#10",
+    "#12"
+   ],
+   "correct_index": 0,
+   "reference": "314.27(D) Ex."
+  },
+  {
+   "number": 20,
+   "prompt": "Nonmetallic cable trays shall be made of ___ material.",
+   "answers": [
+    "watertight",
+    "waterproof",
+    "fire-resistant",
+    "flame-retardant"
+   ],
+   "correct_index": 3,
+   "reference": "392.100(F)"
+  },
+  {
+   "number": 21,
+   "prompt": "For dwelling units, outdoor receptacles that are not ___ and are supplied by a branch circuit dedicated to snow-melting equipment are required to have GFCI protection for personnel.",
+   "answers": [
+    "accessible",
+    "guarded",
+    "covered",
+    "readily accessible"
+   ],
+   "correct_index": 3,
+   "reference": "210.8(A) Ex. 1"
+  },
+  {
+   "number": 22,
+   "prompt": "For a service rated 100 through 400 amps, the service conductors supplying the entire load of a one-family dwelling shall be permitted to have an ampacity of ___ of the service rating.",
+   "answers": [
+    "83%",
+    "80%",
+    "75%",
+    "70%"
+   ],
+   "correct_index": 0,
+   "reference": "310.12(A)"
+  },
+  {
+   "number": 23,
+   "prompt": "AFCI protection is required for all 15 and 20 amp receptacles located in all the following except ___.",
+   "answers": [
+    "residential garages",
+    "patient sleeping rooms",
+    "dormitory closets",
+    "guest suites"
+   ],
+   "correct_index": 0,
+   "reference": "210.12(B)(C)"
+  },
+  {
+   "number": 24,
+   "prompt": "One or more metal in-ground support structures in direct contact with the earth vertically for ___ feet or more, with or without concrete encasement, is a permitted grounding electrode.",
+   "answers": [
+    "6",
+    "8",
+    "10",
+    "12"
+   ],
+   "correct_index": 2,
+   "reference": "250.52(A)(2)"
+  },
+  {
+   "number": 25,
+   "prompt": "Which of the following cord types is permitted in a wet location and is sunlight resistant?",
+   "answers": [
+    "SPT-2",
+    "STOOW",
+    "THWN",
+    "XHWN"
+   ],
+   "correct_index": 1,
+   "reference": "Table 400.4 and Note 9"
+  }
+ ]
+}

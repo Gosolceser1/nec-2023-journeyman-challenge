@@ -32,7 +32,8 @@ func _init() -> void:
 	check(main.records.size() == BankLoader.declared_count(), "records count == declared %d, got %d" % [BankLoader.declared_count(), main.records.size()])
 	var nec_pool := BankLoader.count_in_section(main.records, BankLoader.SECTION_NEC)
 	check(nec_pool > 0 and nec_pool == main.records.size() - BankLoader.count_in_section(main.records, BankLoader.SECTION_NE_STATE_LAW), "NEC pool == %d" % nec_pool)
-	check(BankLoader.count_in_section(main.records, BankLoader.SECTION_NE_STATE_LAW) == 4, "Nebraska state-law pool == 4")
+	var state_law := _state_law_source_count()
+	check(state_law > 0 and BankLoader.count_in_section(main.records, BankLoader.SECTION_NE_STATE_LAW) == state_law, "Nebraska state-law pool == %d (tools/pipeline/sources)" % state_law)
 	check(main.voice_ids.size() > 0, "voice catalog (data/voices.json) loaded: %d voices" % main.voice_ids.size())
 
 	print("=== sessions ===")
@@ -112,15 +113,29 @@ func _run_session(main: Node, count: int, timed: bool, section := BankLoader.SEC
 	main._show_results()
 	await process_frame
 
+## Questions in the curated state-law quizzes (tools/pipeline/sources/<quiz>.json
+## with a "section"), the source of the bank's state-law pool.
+func _state_law_source_count() -> int:
+	var dir := "res://tools/pipeline/sources/"
+	var total := 0
+	for file_name in DirAccess.get_files_at(dir):
+		if not file_name.ends_with(".json") or file_name.ends_with("_keys.json"):
+			continue
+		var quiz = JSON.parse_string(FileAccess.get_file_as_string(dir + file_name))
+		if quiz is Dictionary and quiz.has("section"):
+			total += (quiz.get("questions", []) as Array).size()
+	return total
+
 func _full_exam_excludes_state_law(main: Node) -> void:
+	var items := ExamBlueprint.scored_items()
 	for attempt in 5:
-		main._start_quiz(80, main.EXAM_MINUTES * 60, true, "Full Journeyman Exam")
+		main._start_quiz(items, main.EXAM_MINUTES * 60, true, "Full Journeyman Exam")
 		await process_frame
 		var drawn := 0
 		for idx in main.order:
 			if BankLoader.section_of(main.records[idx]) != BankLoader.SECTION_NEC:
 				drawn += 1
-		check(main.order.size() == 80 and drawn == 0, "simulator #%d: 80 NEC items, %d state-law drawn" % [attempt, drawn])
+		check(main.order.size() == items and drawn == 0, "simulator #%d: %d NEC items, %d state-law drawn" % [attempt, items, drawn])
 	main._show_results()
 	await process_frame
 

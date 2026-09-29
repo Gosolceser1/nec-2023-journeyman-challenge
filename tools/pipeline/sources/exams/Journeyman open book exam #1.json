@@ -1,0 +1,306 @@
+{
+ "question_count": 25,
+ "provenance": "Tesseract OCR of the exam and answer-key PDFs, with the stems, choices and keys retyped from the PDF page images where the OCR was wrong (formerly the manual and exact_* lists in build_question_bank.py). Text as the exam prints it; curated wording lives in question_bank_overrides.json.",
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "Each multiwire branch circuit shall be provided with a means that will simultaneously disconnect all.",
+   "answers": [
+    "ungrounded",
+    "neutral",
+    "equipment grounding",
+    "grounded"
+   ],
+   "correct_index": 0,
+   "reference": "210.4(B)"
+  },
+  {
+   "number": 2,
+   "prompt": "The connection between the grounded circuit conductor and the equipment grounding conductor, or the supply-side bonding jumper, or both at the service is recognized as the.",
+   "answers": [
+    "neutral conductor",
+    "equipment bonding jumper",
+    "main bonding jumper",
+    "grounding electrode conductor"
+   ],
+   "correct_index": 2,
+   "reference": "DEF 100"
+  },
+  {
+   "number": 3,
+   "prompt": "When calculating floor area for branch circuit load calculations, the floor area is measured from the dimensions of the building, dwelling unit, or area involved.",
+   "answers": [
+    "drawing",
+    "scale",
+    "outside",
+    "inside"
+   ],
+   "correct_index": 2,
+   "reference": "220.5(C)"
+  },
+  {
+   "number": 4,
+   "prompt": "NM cable shall be permitted to be laid in notches of wooden studs where the NM cable at those points is protected by a steel plate at least ___ thick to cover the area of the wiring.",
+   "answers": [
+    "1/16\"",
+    "3/32\"",
+    "1 1/8\"",
+    "3/16\""
+   ],
+   "correct_index": 0,
+   "reference": "300.4(A)(1)"
+  },
+  {
+   "number": 5,
+   "prompt": "A motor control center in an equipment room requires GFCI protected 125-volt, single-phase, 15 or 20 amp rated receptacle outlet within ___ feet.",
+   "answers": [
+    "25",
+    "30",
+    "45",
+    "50"
+   ],
+   "correct_index": 0,
+   "reference": "210.63"
+  },
+  {
+   "number": 6,
+   "prompt": "Alternating current snap switches shall be permitted for control of inductive loads not exceeding ___ of the ampere rating of the switch at the applied voltage.",
+   "answers": [
+    "70%",
+    "60%",
+    "50%",
+    "33%"
+   ],
+   "correct_index": 2,
+   "reference": "404.14(B)(2)"
+  },
+  {
+   "number": 7,
+   "prompt": "Other than the required interconnections and control wiring, only those conductors that are intended for termination in a/an ___ section of a switchboard or switchgear shall be located in that section.",
+   "answers": [
+    "isolated",
+    "horizontal",
+    "vertical",
+    "dual"
+   ],
+   "correct_index": 2,
+   "reference": "408.3(A)(2)"
+  },
+  {
+   "number": 8,
+   "prompt": "Plate electrodes shall be installed not less than ___ below the surface of earth.",
+   "answers": [
+    "2 feet",
+    "2 1/2 feet",
+    "3 feet",
+    "4 feet"
+   ],
+   "correct_index": 1,
+   "reference": "250.53(A)(5)"
+  },
+  {
+   "number": 9,
+   "prompt": "Each grounded conductor shall terminate within the panelboard in a/an ___ terminal that is not also used for another conductor.",
+   "answers": [
+    "single",
+    "multiwire",
+    "dual",
+    "individual"
+   ],
+   "correct_index": 3,
+   "reference": "408.41"
+  },
+  {
+   "number": 10,
+   "prompt": "In dwelling units, GFCI protection is required for all 15 and 20 ampere, 125 volt receptacles that are installed within ___ feet of the outside edge of a bathtub or shower stall.",
+   "answers": [
+    "4",
+    "6",
+    "8",
+    "12"
+   ],
+   "correct_index": 1,
+   "reference": "210.8(A)(10)"
+  },
+  {
+   "number": 11,
+   "prompt": "When normally enclosed live parts are exposed for inspection or servicing, the working space, if in a passageway or general open space, shall be suitably ___.",
+   "answers": [
+    "isolated",
+    "locked",
+    "guarded",
+    "insulated"
+   ],
+   "correct_index": 2,
+   "reference": "110.26(B)"
+  },
+  {
+   "number": 12,
+   "prompt": "All 125-volt through 250-volt receptacles supplied by single-phase branch circuits rated 150 volts or less to ground in kitchens or areas with a/an ___ and permanent provisions for either food preparation or cooking shall have GFCI protection for personnel.",
+   "answers": [
+    "sink",
+    "oven",
+    "range",
+    "fryer"
+   ],
+   "correct_index": 0,
+   "reference": "210.8(B)(2)"
+  },
+  {
+   "number": 13,
+   "prompt": "As it relates to load calculations, calculations shall be permitted to be rounded to the nearest whole ampere, with decimal fractions smaller than ___ dropped.",
+   "answers": [
+    "0.5",
+    "0.05",
+    "0.6",
+    "0.8"
+   ],
+   "correct_index": 0,
+   "reference": "220.5(B)"
+  },
+  {
+   "number": 14,
+   "prompt": "GFCI protection shall be provided for lighting outlets not exceeding ___ volts installed in crawl spaces.",
+   "answers": [
+    "115",
+    "120",
+    "150",
+    "300"
+   ],
+   "correct_index": 1,
+   "reference": "210.8(C)"
+  },
+  {
+   "number": 15,
+   "prompt": "Each section of equipment that requires rear or side access to make field connections shall be so marked by the manufacturer on the ___.",
+   "answers": [
+    "front",
+    "right side",
+    "left side",
+    "rear"
+   ],
+   "correct_index": 0,
+   "reference": "408.18(C)"
+  },
+  {
+   "number": 16,
+   "prompt": "In other than one and two family dwellings, a receptacle outlet for indoor service equipment shall be located within ___ of the service equipment.",
+   "answers": [
+    "25 feet",
+    "50 feet",
+    "75 feet",
+    "the same room or area"
+   ],
+   "correct_index": 3,
+   "reference": "210.63(B)(1)"
+  },
+  {
+   "number": 17,
+   "prompt": "Insulated conductors used inside switchgear or switchboards are required to be ___.",
+   "answers": [
+    "suitable",
+    "labeled",
+    "acceptable",
+    "listed"
+   ],
+   "correct_index": 3,
+   "reference": "408.19"
+  },
+  {
+   "number": 18,
+   "prompt": "GFCI protection shall be provided for ___ receptacles.",
+   "answers": [
+    "equipment requiring servicing",
+    "permanently installed fire alarm",
+    "permanently installed burglar alarm",
+    "industrial laboratories"
+   ],
+   "correct_index": 0,
+   "reference": "210.8(E)"
+  },
+  {
+   "number": 19,
+   "prompt": "All lamps for general illumination in temporary wiring installations shall be protected from accidental contact or breakage by a suitable ___ or lampholder with a guard.",
+   "answers": [
+    "screen",
+    "luminaire",
+    "barrier",
+    "guard"
+   ],
+   "correct_index": 1,
+   "reference": "590.4(F)"
+  },
+  {
+   "number": 20,
+   "prompt": "In addition to the number of 120 volt, single-phase branch circuits required in other areas of a dwelling, at least one additional ___ ampere branch circuit shall be provided to supply the laundry receptacle outlet in the laundry room. The circuit shall have no other outlets.",
+   "answers": [
+    "15",
+    "20",
+    "25",
+    "30"
+   ],
+   "correct_index": 1,
+   "reference": "210.11(C)(2)"
+  },
+  {
+   "number": 21,
+   "prompt": "Disregarding demand factors, the calculated lighting load for a 5,000 sq.ft. office building is ___ volt-amperes.",
+   "answers": [
+    "16,500",
+    "15,400",
+    "8,000",
+    "6,500"
+   ],
+   "correct_index": 3,
+   "reference": "Table 220.42(A)"
+  },
+  {
+   "number": 22,
+   "prompt": "Appliance receptacle outlets installed in a dwelling unit for specific appliances, such as laundry equipment, shall be installed within ___ of the intended location of the appliance.",
+   "answers": [
+    "24\"",
+    "36\"",
+    "48\"",
+    "72\""
+   ],
+   "correct_index": 3,
+   "reference": "210.50(C)"
+  },
+  {
+   "number": 23,
+   "prompt": "Decorative lighting and similar accessories used for holiday lighting and similar purposes shall be listed and ___.",
+   "answers": [
+    "marked",
+    "approved",
+    "labeled",
+    "stamped"
+   ],
+   "correct_index": 2,
+   "reference": "590.5"
+  },
+  {
+   "number": 24,
+   "prompt": "Outlets supplying all pool motors on branch circuits rated 150 volts or less to ground and ___ amperes or less, single or 3 phase, shall be provided with Class A GFCI protection.",
+   "answers": [
+    "60",
+    "50",
+    "40",
+    "30"
+   ],
+   "correct_index": 0,
+   "reference": "680.21(C)"
+  },
+  {
+   "number": 25,
+   "prompt": "Disconnecting means shall be located within sight from, and ___ from air-conditioning or refrigerating equipment.",
+   "answers": [
+    "serviceable",
+    "isolated",
+    "accessible",
+    "readily accessible"
+   ],
+   "correct_index": 3,
+   "reference": "440.14"
+  }
+ ]
+}
