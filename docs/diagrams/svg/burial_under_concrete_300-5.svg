@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<rect x="0.0" y="0.0" width="800.0" height="450.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="40.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Cover = top of the concrete to the top of the cable</text>
+<rect x="20.0" y="150.0" width="760.0" height="280.0" rx="0" fill="#3f2e1f" fill-opacity="0.75" stroke="none" stroke-width="2"/>
+<circle cx="32.0" cy="168.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="60.0" cy="204.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="88.0" cy="240.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="116.0" cy="276.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="144.0" cy="312.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="172.0" cy="348.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="200.0" cy="384.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="228.0" cy="170.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="256.0" cy="206.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="284.0" cy="242.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="312.0" cy="278.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="340.0" cy="314.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="368.0" cy="350.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="396.0" cy="386.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="424.0" cy="172.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="452.0" cy="208.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="480.0" cy="244.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="508.0" cy="280.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="536.0" cy="316.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="564.0" cy="352.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="592.0" cy="388.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="620.0" cy="174.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="648.0" cy="210.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="676.0" cy="246.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="704.0" cy="282.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="732.0" cy="318.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="760.0" cy="354.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="788.0" cy="390.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<rect x="330.0" y="150.0" width="160.0" height="216.0" rx="0" fill="#5b4430" fill-opacity="0.95" stroke="none" stroke-width="2"/>
+<rect x="200.0" y="128.0" width="400.0" height="22.0" rx="0" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="208.0" cy="142.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="242.0" cy="136.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="276.0" cy="137.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="310.0" cy="138.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="344.0" cy="139.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="378.0" cy="140.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="412.0" cy="141.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="446.0" cy="142.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="480.0" cy="136.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="514.0" cy="137.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="548.0" cy="138.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="582.0" cy="139.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<text x="400.0" y="116.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#e2e8f0" text-anchor="middle">2 in concrete</text>
+<line x1="20.0" y1="150.0" x2="200.0" y2="150.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="600.0" y1="150.0" x2="780.0" y2="150.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="28.0" y="138.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">grade</text>
+<circle cx="410.0" cy="339.0" r="13" fill="#0f172a" stroke="#e2e8f0" stroke-width="4"/>
+<text x="410.0" y="392.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">direct-buried cable</text>
+<line x1="290.0" y1="326.0" x2="297.0" y2="326.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="303.0" y1="326.0" x2="310.0" y2="326.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="316.0" y1="326.0" x2="323.0" y2="326.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="329.0" y1="326.0" x2="336.0" y2="326.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="342.0" y1="326.0" x2="349.0" y2="326.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="355.0" y1="326.0" x2="362.0" y2="326.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="368.0" y1="326.0" x2="375.0" y2="326.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="381.0" y1="326.0" x2="388.0" y2="326.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="394.0" y1="326.0" x2="396.0" y2="326.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="300.0" y1="134.0" x2="300.0" y2="320.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="300.0,128.0 306.0,140.0 294.0,140.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="300.0,326.0 294.0,314.0 306.0,314.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="284.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="end">18 in</text>
+<text x="284.0" y="286.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="end">min</text>
+<text x="520.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="start">Column 1:</text>
+<text x="520.0" y="280.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="start">direct burial</text>
+<text x="520.0" y="310.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="start">cables</text>
+<rect x="564.3" y="394.0" width="221.7" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="574.3" y="422.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Table 300.5(A)</text>
+</svg>

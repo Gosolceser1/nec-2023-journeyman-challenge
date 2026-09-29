@@ -6073,7 +6073,7 @@
         "Diagram C",
         "Diagram D"
       ],
-      "gist": "The symbol for a temperature-actuated switch is a switch contact combined with a bimetallic or heat-sensing element. Look for the curved sensing line drawn across the contact, then pick the matching diagram.",
+      "gist": "Four switch contacts, each with a different symbol drawn under the blade. The question asks which symbol stands for a thermal (temperature) element.",
       "scene": "",
       "correct_index": 0,
       "article": "General knowledge",
@@ -10325,7 +10325,7 @@
         "III only",
         "I, II, or III"
       ],
-      "gist": "An ammeter measures current and must be connected in series with the load. The question asks which diagram shows an ammeter.",
+      "gist": "Three meters are wired three different ways around the load. Trace each meter's leads, then decide which hookup measures current.",
       "scene": "",
       "correct_index": 1,
       "article": "General knowledge",

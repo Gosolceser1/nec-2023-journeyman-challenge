@@ -2,15 +2,14 @@
 
 Which questions need a figure, whether the three figures we ship are right, and
 what new figures would help. The short answer: **three questions require a
-figure and already have a correct one; about two dozen would clearly benefit
-from an original study figure.** Four prototypes are drawn (not wired in).
+figure and already have a correct one; 88 would benefit from an original
+study figure, and all 88 now have one** (48 drawings, section 5), each checked
+against the NEC 2023 text by a separate review (section 6).
 
-Screenshots: `.audit_tmp/shots/diagrams/` (contact sheet `overview.png`,
+Screenshots: `.audit_tmp/shots/diagrams/` (contact sheets `overview_all*.png`,
 existing figures in `existing/`). Nothing here copies UpCodes or any other
-source: the prototypes are drawn in code from the NEC 2023 text
-(`tools/diagrams/protos.py`). The prototype sources (`tools/diagrams/`,
-`docs/diagrams_proto/`, `tools/visual/snap_diagram_protos.gd`) are on the
-local branch `diagrams-protos` and will not land until they are approved.
+source: every figure is drawn in code from the NEC 2023 text
+(`tools/diagrams/`).
 
 ## 1. Existing figures (`assets/diagrams/`)
 
@@ -39,27 +38,27 @@ The three reviews are recorded in `data/diagram_masks.json` (empty `leaks` and
 `masks`), and `tools/tests/test_diagrams.gd` fails if a figure ever lacks a
 review or a flagged leak lacks a mask.
 
-**Text around the figures (not the images).** These are bank-text changes, so
-they are proposed here rather than landed; the content audit owns the overlay:
+**Text around the figures (not the images), fixed in 1.0.4** through the
+overlay and the pipeline (`tools/pipeline/question_bank_overrides.json`,
+`tools/pipeline/gists.py`, then a candidate build that differs from the old
+bank only in these two gists). Gists are not spoken, so no speech changed,
+and the content audit checksums cover the provision text only:
 
-- `final-exam-#1-013` gist: "An ammeter measures current and must be connected
-  in series with the load." With the figure beside it, that sentence picks
-  meter II before the learner has answered (the answer is not quoted, so the
-  validator doesn't catch it). Proposed: "Three meters are wired three
+- `final-exam-#1-013` gist said "An ammeter measures current and must be
+  connected in series with the load." With the figure beside it, that picked
+  meter II before the learner answered. Now: "Three meters are wired three
   different ways around the load. Trace each meter's leads, then decide which
   hookup measures current."
-- `final-exam-#1-047` gist says to "look for the curved sensing line drawn
+- `final-exam-#1-047` gist said to "look for the curved sensing line drawn
   across the contact". The printed symbol (a) has a stepped thermal element
-  under the blade, not a curved line across it, so the hint points at the
-  wrong shape. Proposed: "Four switch contacts, each with a different
-  actuator mark under the blade. The question asks which mark stands for a
-  thermal (temperature) element."
-- `final-exam-#1-013` and `#1-047` carry the generic "Electrical math"
-  background paragraph ("Three formulas run the math questions...") and tip
-  title. It is harmless, but unrelated to meters or symbols.
-- `tools/pipeline/gists.py` still has stale gists for Final Exam #1 Q13 and
-  Q47 ("needs its missing diagrams ... flag it and move on"). The overlay
-  replaces them, but they are dead text that the spellcheck still reads.
+  under the blade, not a curved line across it. Now: "Four switch contacts,
+  each with a different symbol drawn under the blade. The question asks which
+  symbol stands for a thermal (temperature) element."
+- `tools/pipeline/gists.py` had stale "needs its missing diagrams ... flag it
+  and move on" gists for Final Exam #1 Q13 and Q47; they now match the
+  overlay.
+- Still open (harmless): `final-exam-#1-013` and `#1-047` carry the generic
+  "Electrical math" background paragraph and tip title.
 
 No image fix was needed: crops, masks and highlights are all correct.
 
@@ -282,35 +281,219 @@ space, receptacle placement, grounding electrodes, service and overhead
 clearances, 300.4 framing protection and pools. It has no burial-depth or
 support-spacing figure; those are ours to draw.
 
-## 5. Prototypes (original; awaiting approval, not wired into the bank)
+## 5. New original figures (all 88 "benefit" records)
 
-Drawn in code from the NEC 2023 text in the app's dark slate + cyan style
-(`tools/diagrams/protos.py` writes `docs/diagrams_proto/<name>.svg` and
-`masks.json`). Each is **one** picture with the answer drawn in, plus masks
-that hide it until the answer is in (the same mechanism as above). Labels are
-sized for the phone: main values at 28-36 canvas px, nothing under 22, which
-comes out at about 11-18 screen px. Screenshots come from
-`tools/visual/snap_diagram_protos.gd`.
+**Status:** the high tier (A: 23 records on 13 drawings) ships in the app. The medium (B) and low (C) tiers are drawn and reviewed; they land next, each with the full checks.
 
-| # | Figure | Records | Masked before answering (revealed after) |
-|---|---|---|---|
-| P1 | 110.26 working space + dedicated space, front and side views (30 in, 6 1/2 ft, 3 ft at 0-150 V, 6 ft or ceiling) | `final-exam-#1-057` | the verdict band, and the sprinkler head in the dedicated space (ringed) |
-| P2 | Deck/balcony receptacle height, deck within 4 in of the dwelling | `final-exam-#1-008`, `open-book-exam-#10-020` | "6 ft 6 in max (78 in)" shown as "? max" (ringed) |
-| P3 | Cover under 2 in of concrete, measured from the top of the slab | `final-exam-#1-049`, `open-book-exam-#4-004` | "18 in min" shown as "cover ?" (ringed) |
-| P4 | Service panel: neutral bar, ground bar, jumper, GEC to rods, load with EGC | `open-book-exam-#1-002` (GEC variant for `#10-024`) | "MAIN BONDING JUMPER" (ringed) |
+**One visual system.** `tools/diagrams/nec_style.py` holds the palette (dark
+slate `#0f172a` ground, cyan `#38bdf8` dimensions, green `#34d399` answer
+values, amber for warnings), the stroke widths (4 structure, 3 objects and
+dimensions, 2 thin), the type sizes (30 values, 24 labels, 22 notes, never
+under 20 canvas px), one dimension-line style (extension lines, filled
+arrowheads, value centred on the line), the section chip and the shared parts:
+wall, floor, ceiling, soil and grade, concrete, trench, panel, box,
+receptacle (elevation and plan), conduit, cable, strap, stud, rod, pool,
+person, OK/NO marks. Each topic module in `tools/diagrams/figs/` draws its
+figures with those parts only, so the 48 drawings read as one set.
 
-Shots, before, zoom (before) and after, for each prototype at desktop
-1280x720 and phone 540x960: `.audit_tmp/shots/diagrams/<desk|mob>_<size>_<name>_<pre|zoom|post>.png`,
-contact sheet `.audit_tmp/shots/diagrams/overview.png`.
+**One drawing, several questions.** Records that share a concept share a
+drawing, with their own masks: the 110.26 plan view serves four questions
+(the 25 ft door, Condition 2, open doors, the guarded passageway), the
+dwelling plan five, the GFCI map eight, the electrode section four. A value
+that answers one record is masked for that record only.
 
-To wire a prototype in later: copy its PNG into `assets/diagrams/`, add the
-record to `diagrams.json` (without `pdf`/`page`, or widen the test's PDF
-check), add its `masks.json` entry to `data/diagram_masks.json`, and decide
-the card colour. The card is paper-white for PDF scans, and the zoom card is
-too, so a dark figure sits on a white frame there.
+**Build.** `python tools/diagrams/build.py` draws every figure as SVG
+(review copy in `docs/diagrams/svg/`), renders it with PyMuPDF at 1.5x and
+quantizes it to a 96-colour palette PNG in `assets/diagrams/nec/` (Godot's SVG
+import drops text, so the app ships PNG), and writes
+`assets/diagrams/nec/figures.json` (record -> figure, `when`, size, NEC
+sections), the per-record masks in `data/diagram_masks.json` (`records`) and
+every label's text and box (`docs/diagrams/labels.json`). `--check` (run by
+`verify.sh` through `tools/tests/test_diagram_figures.py`) fails if any of
+those is stale. `WIRED_TIERS` in `build.py` picks the tiers that ship.
 
-Observed while prototyping: swapping to a *different* texture after
-answering on the phone layout sent `DiagramView._update_height` and the page
-layout into a resize loop (message-queue overflow). The mask approach keeps
-one texture, so it never swaps, and the loop did not recur. Still, check a
-new wide figure on the phone with `measure_fit.gd` before wiring it in.
+**Answer safety.** Before answering, every value or item that answers *that*
+question is under a "?" mask; after answering it is revealed with the
+highlight ring. The build refuses a figure when an unmasked label states the
+current record's answer: a correct-answer number (lengths normalised to
+inches, plus percent, volts, amps and AWG) that is not in the stem or a
+wrong choice, the whole correct-answer phrase, or a distinctive keyword of it
+(`tools/diagrams/leakscan.py`). Because it scans every label on the drawing
+against the *current* record, a value drawn for a different question can't
+give this one away. `test_diagrams.gd` repeats the scan in GDScript over
+`labels.json`, so a hand edit to the masks can't slip one through. The two
+drawings whose lengths could be read off the picture (the electrode section
+and the spa fan) are drawn out of proportion and say "not to scale".
+
+**Before or after, per record.** 75 records get the figure *before*
+answering (it sets up the question: distances, positions, what is measured
+from where). 13 get it only *after* answering (`"when": "after"`), because
+the picture is the answer or adds nothing to the setup: the delta symbol,
+the SPDT switch, the stop button in series, the nipple fill rule, the
+gooseneck, the PVC support table, the overhead clearance ladder for the
+railroad question, the communications-entry question, four GFCI-map questions whose whole point is the
+location, and the burial "which table" question. `DiagramView` hides an
+after-only figure (no panel, no zoom) until the answer is in, then shows it
+unmasked.
+
+**Phones.** The figure is a compact thumbnail that `FitController` shrinks
+(down to 96 px) so the question never scrolls; tapping it opens the zoom,
+which carries the same masks. The dark figures sit on a dark card
+(`DiagramView.card_style`), inline and in the zoom.
+
+**Size.** 13 drawings, 323 KiB of PNG (about 25 KiB each at 1200 px wide).
+
+**A resize loop fixed.** `DiagramView` sizes its height from its width. On
+the phone layout at 1024x768 (a tablet in landscape) answering
+`final-exam-#1-013` made the page overflow by a few pixels; the page
+scrollbar took width, the figure got shorter, the scrollbar left, the figure
+grew back, and so on within one frame until the engine's message queue
+overflowed. That was the long-standing `measure_fit.gd` crash at mobile
+1024x768, and most likely the intermittent one at desktop 540x960, which
+also died around record 250 of the sweep (`#1-013` is record 251). After four height passes in one frame the
+figure may now only shrink, so the layout settles; the run finishes with 0%
+scroll.
+
+**Tests.** `test_diagrams.gd` (both layouts) checks every original record:
+its mask entry matches `figures.json`, it has a dated review, every flagged
+region is inside a mask, no unmasked label leaks its answer, the panel shows
+before answering exactly when the figure is a setup figure, the card colour
+matches the figure, masks cover inline and in the zoom and go after the
+answer, and an after-only figure is hidden (no zoom) before and shown
+unmasked after. `tools/visual/snap_diagrams.gd` shoots every figure record
+before, zoomed and after on both layouts; `tools/diagrams/contact_sheet.py`
+lays them out one row per record.
+
+### Every record
+
+| tier | record | figure | shown | masked before answering |
+|---|---|---|---|---|
+| A | `final-exam-#1-008` | `balcony_receptacle_210-52e3` | before | '6 ft 6 in max (2.0 m, 78 in)' |
+| A | `final-exam-#1-011` | `dwelling_receptacles_210-52` | before | '2 ft (24 in) or more' |
+| A | `final-exam-#1-020` | `electrode_system_250-52_250-53` | before | '6 ft min' |
+| A | `final-exam-#1-043` | `spa_fan_height_680-43` | before | '12 ft (3.7 m)' |
+| A | `final-exam-#1-049` | `burial_under_concrete_300-5` | before | '18 in min' |
+| A | `final-exam-#1-051` | `working_space_110-26` | before | '25 ft' |
+| A | `final-exam-#1-053` | `overhead_clearances_225-18` | after | (whole figure after answering) |
+| A | `final-exam-#1-055` | `framing_protection_300-4` | before | '1 1/4 in' |
+| A | `final-exam-#1-057` | `dedicated_space_110-26e` | before | 'Sprinkler protection: permitted  (E)(1)(c)'; the not-permitted list (it narrows the choices); sprinkler head drawn in the dedicated space |
+| A | `final-exam-#1-060` | `pool_fountain_distances_680` | before | '5 ft' |
+| A | `final-exam-#3-013` | `supports_emt_strut_358-30` | before | 'within 5 ft' |
+| A | `final-exam-#3-059` | `pool_fountain_distances_680` | before | '6 ft'; '6 ft' |
+| A | `open-book-exam-#1-002` | `service_bonding_250-24` | before | 'MAIN BONDING JUMPER' |
+| A | `open-book-exam-#1-004` | `framing_protection_300-4` | before | '1/16 in' |
+| A | `open-book-exam-#1-008` | `electrode_system_250-52_250-53` | before | '30 in' |
+| A | `open-book-exam-#1-010` | `gfci_locations_210-8` | before | '6 ft' |
+| A | `open-book-exam-#10-010` | `overhead_clearances_225-18` | before | keep-out zone below the material opening; the 225.19(D)(3) building-opening rule |
+| A | `open-book-exam-#10-016` | `working_space_110-26` | before | 'considered grounded (Condition 2)' |
+| A | `open-book-exam-#10-020` | `balcony_receptacle_210-52e3` | before | '6 ft 6 in max (2.0 m, 78 in)' |
+| A | `open-book-exam-#10-024` | `service_bonding_250-24` | before | 'GROUNDING ELECTRODE CONDUCTOR' |
+| A | `open-book-exam-#4-004` | `burial_under_concrete_300-5` | before | '18 in min' |
+| A | `open-book-exam-#4-011` | `spa_fan_height_680-43` | before | '12 ft (3.7 m)' |
+| A | `open-book-exam-#7-022` | `working_space_110-26` | before | '24 in' |
+| B | `final-exam-#1-003` | `equipment_receptacle_210-63` | before | 'same room or area'; 'within 25 ft (7.5 m)' |
+| B | `final-exam-#1-012` | `gfci_locations_210-8` | after | (whole figure after answering) |
+| B | `final-exam-#1-022` | `dwelling_receptacles_210-52` | before | receptacles drawn one per bay, and the one-per-bay rule |
+| B | `final-exam-#1-024` | `pool_fountain_distances_680` | before | '20 ft' |
+| B | `final-exam-#1-028` | `fuel_dispenser_shutoff_514-11` | before | '100 ft (30 m) max' |
+| B | `final-exam-#1-029` | `conduit_stub_up_408-5` | before | '3 in max (75 mm)' |
+| B | `final-exam-#1-031` | `dwelling_receptacles_210-52` | before | '10 ft or more' |
+| B | `final-exam-#1-032` | `feeder_tap_10ft_240-21b1` | before | '400 A max' |
+| B | `final-exam-#1-035` | `electrode_system_250-52_250-53` | before | '10 ft or more' |
+| B | `final-exam-#1-050` | `communications_overhead_800-44` | before | '8 ft min' |
+| B | `final-exam-#1-052` | `mobile_home_disconnect_550-32f` | before | '24 in min (600 mm)' |
+| B | `final-exam-#1-065` | `sine_wave_60hz_quarter_cycle` | before | '1/240 s' |
+| B | `final-exam-#1-066` | `supports_unsupported_cable_320-330-334` | before | '6 ft'; '6 ft' |
+| B | `final-exam-#3-006` | `gfci_locations_210-8` | before | '120 V or less' |
+| B | `final-exam-#3-007` | `pool_fountain_distances_680` | before | '6 ft'; '6 ft' |
+| B | `final-exam-#3-027` | `gec_water_bond_250-66_250-68` | before | 'need not exceed 4 AWG Cu' |
+| B | `final-exam-#3-031` | `communications_overhead_800-44` | after | (whole figure after answering) |
+| B | `final-exam-#3-035` | `dwelling_receptacles_210-52` | before | 'within 6 ft (72 in)' |
+| B | `final-exam-#3-047` | `se_cable_gooseneck_230-54b` | after | (whole figure after answering) |
+| B | `final-exam-#3-049` | `equipment_receptacle_210-63` | before | 'within 25 ft (7.5 m)' |
+| B | `final-exam-#3-050` | `gec_water_bond_250-66_250-68` | before | 'sufficient length' |
+| B | `final-exam-#3-051` | `mobile_home_disconnect_550-32f` | before | '24 in min (600 mm)' |
+| B | `final-exam-#3-053` | `supports_rmc_344-30` | before | 'every 12 ft max' |
+| B | `final-exam-#3-055` | `parallel_resistors_equal` | before | '1,000 ohm'; the parallel formula worked through |
+| B | `final-exam-#3-064` | `gfci_locations_210-8` | after | (whole figure after answering) |
+| B | `final-exam-#5-006` | `supports_unsupported_cable_320-330-334` | before | '2 ft max' |
+| B | `final-exam-#5-052` | `busway_reduction_368-17b` | before | 'overcurrent protection required'; device drawn at the reduction; industrial-only exception box |
+| B | `final-exam-#5-053` | `supports_emt_strut_358-30` | before | 'every 10 ft max' |
+| B | `final-exam-#5-069` | `supports_unsupported_cable_320-330-334` | before | '4 1/2 ft' |
+| B | `final-exam-#5-070` | `supports_pvc_352-30` | after | (whole figure after answering) |
+| B | `open-book-exam-#1-001` | `multiwire_branch_circuit_210-4` | before | handle tie across both poles; 'handle tie: all ungrounded conductors open together' |
+| B | `open-book-exam-#1-005` | `equipment_receptacle_210-63` | before | 'within 25 ft (7.5 m)' |
+| B | `open-book-exam-#1-011` | `working_space_110-26` | before | the guard drawn across the passageway; 'guarded' |
+| B | `open-book-exam-#1-014` | `gfci_locations_210-8` | before | '120 V or less' |
+| B | `open-book-exam-#1-016` | `equipment_receptacle_210-63` | before | 'same room or area'; 'within 25 ft (7.5 m)' |
+| B | `open-book-exam-#1-022` | `dwelling_receptacles_210-52` | before | 'within 6 ft (72 in)' |
+| B | `open-book-exam-#10-013` | `raceway_supported_box_314-23e` | before | threaded hub at the box entry; threaded hub at the box entry; 'threaded wrenchtight into the box or identified hubs' |
+| B | `open-book-exam-#4-002` | `gfci_locations_210-8` | before | '50 A or less' |
+| B | `open-book-exam-#4-008` | `multiwire_branch_circuit_210-4` | before | 'line-to-neutral load'; 'line-to-neutral load' |
+| B | `open-book-exam-#4-018` | `nm_cable_sleeve_312-5c` | before | '18 in min (450 mm)' |
+| B | `open-book-exam-#4-024` | `electrode_system_250-52_250-53` | before | '10 ft or more' |
+| B | `open-book-exam-#7-024` | `high_leg_marking_408-3f1` | before | the transformer winding connection |
+| C | `final-exam-#1-023` | `parallel_egc_250-122f` | before | EGC drawn in this raceway; EGC drawn in this raceway; 'wire-type EGC in each raceway, in parallel' |
+| C | `final-exam-#1-033` | `three_way_switch_spdt` | after | (whole figure after answering) |
+| C | `final-exam-#1-041` | `motor_stop_start_control` | after | (whole figure after answering) |
+| C | `final-exam-#1-042` | `wet_location_receptacle_406-9b` | before | WR marking on the face; 'listed weather- resistant type' |
+| C | `final-exam-#1-045` | `disposer_cord_422-16b1` | before | '36 in max (900 mm)' |
+| C | `final-exam-#1-062` | `voltage_drop_percent` | before | the percent worked out (base voltage and result) |
+| C | `final-exam-#1-063` | `drawing_scale_quarter_inch` | before | '3 1/2 x 4 = 14 ft' |
+| C | `final-exam-#1-067` | `nipple_fill_ch9_note4` | after | (whole figure after answering) |
+| C | `final-exam-#3-020` | `antenna_leadin_810-13` | before | '600 mm (2 ft) min' |
+| C | `final-exam-#3-034` | `box_depth_314-24b5` | before | '23.8 mm (15/16 in) min' |
+| C | `final-exam-#3-070` | `delta_generator_symbol` | after | (whole figure after answering) |
+| C | `final-exam-#5-048` | `gutter_bare_parts_366-100e` | before | '25 mm (1 in)'; '25 mm (1 in)' |
+| C | `final-exam-#5-049` | `nm_extension_floor_382-15a` | before | '50 mm (2 in)' |
+| C | `final-exam-#5-064` | `resistor_thermal_barrier_470-11` | before | '305 mm (12 in)' |
+| C | `final-exam-#5-065` | `supports_vertical_376-30_342-30` | before | '15 ft max' |
+| C | `final-exam-#5-067` | `supports_vertical_376-30_342-30` | before | '20 ft max' |
+| C | `open-book-exam-#1-012` | `gfci_locations_210-8` | after | (whole figure after answering) |
+| C | `open-book-exam-#10-021` | `fire_pump_parts_695-12d` | before | '300 mm (12 in) min' |
+| C | `open-book-exam-#4-006` | `disposer_cord_422-16b1` | before | '36 in max (900 mm)' |
+| C | `open-book-exam-#4-014` | `wet_location_receptacle_406-9b` | before | WR marking on the face; 'listed weather- resistant type' |
+| C | `open-book-exam-#4-021` | `gfci_locations_210-8` | after | (whole figure after answering) |
+| C | `open-book-exam-#7-010` | `heated_ceiling_wiring_424-36` | before | '50 mm (2 in) min' |
+| C | `open-book-exam-#7-013` | `burial_under_concrete_300-5` | after | (whole figure after answering) |
+
+## 6. Accuracy review
+
+Two reviewers who did not draw the figures checked every figure against the
+NEC 2023 text (the local cache of NFPA 70-2023): each value and its metric
+equivalent, min/max direction, section number (2023 numbering, not 2020),
+what the dimension is measured from and to, and agreement with the keyed
+answer. 48 figures, 88 records. No wrong value, no 2020 section number and
+no figure that contradicts its key were found. Fixed:
+
+- `communications_overhead_800-44`: "(A)(1) below power" now says "if
+  practicable", as 800.44(A)(1) does.
+- `working_space_110-26`: the egress door "opens at least 90 deg", per
+  110.26(C)(3).
+- `dedicated_space_110-26e`: "6 ft or ceiling, if lower", per 110.26(E)(1)(a)
+  "whichever is lower".
+- `supports_unsupported_cable_320-330-334`: the 2 ft AC allowance at a
+  terminal is a cable length (320.30(D)(2)), now a callout on the cable, not
+  a straight vertical dimension.
+- `nm_cable_sleeve_312-5c`: the 12 in fastening distance is measured along
+  the sheath from the raceway end (312.5(C) Ex. No. 1(1)).
+- `fuel_dispenser_shutoff_514-11`: the 20 ft and 100 ft limits are measured
+  from the dispensers, not the island edge (514.11(A)).
+- `electrode_system_250-52_250-53`: the title said "to scale" while the
+  hidden 6 ft, 30 in and 10 ft could be measured against the visible 8 ft
+  rod; now "not to scale" and out of proportion (the spa fan heights too).
+
+Stem wording the reviewers flagged for the content owners (no key is wrong,
+nothing changed): `open-book-exam-#4-021` says snow-melt receptacles "are
+required to have GFCI" (2023 210.8(A) Ex. No. 1 permits 426.28/427.22
+protection instead); `open-book-exam-#10-020` uses the pre-2023 deck
+trigger wording; `final-exam-#5-070` says "RNC" (PVC conduit);
+`final-exam-#1-066` says "last point of connection" (2023: last point of
+cable support); `final-exam-#5-069` omits the dwelling limit;
+`final-exam-#3-034` says "flush device" (2023 frames 314.24(B)(5) by
+conductor size); `final-exam-#5-048` says "different potential" (2023:
+different voltages); `final-exam-#1-045` and `open-book-exam-#4-006` say
+"residential" (422.16(B)(1) has no such limit); `final-exam-#1-003` and
+`open-book-exam-#1-016`: under 2023 the 25 ft of 210.63 also applies to
+indoor service equipment, so choice A is partly true (key D, "same room or
+area", is the specific rule).

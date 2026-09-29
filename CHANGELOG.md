@@ -28,9 +28,25 @@ changed.
   220.45 note now includes the 25% tier.
 - **Voice:** the Table 310.16 "COPPER" / "ALUMINUM" headers are read as words,
   not spelled out.
+- **Hints next to the figures.** The Final Exam #1 Q13 hint named the meter
+  hookup the question asks for, and the Q47 hint described a symbol shape
+  the figure doesn't have; both now describe the figure without giving the
+  answer away.
+- **Tablet landscape layout.** Answering a figure question in the phone
+  layout at 1024x768 could send the figure and the page scrollbar into a
+  resize loop that overflowed the engine's message queue; the figure now
+  settles on the smaller height.
 
 ### Changed
 
+- **New study figures.** 23 questions (working space, grounding electrodes
+  and bonding, burial cover, pool and spa clearances, framing protection,
+  deck receptacles, support spacing, overhead clearances, GFCI locations)
+  now have an original figure drawn from the NEC 2023 text, in one dark
+  style. Before you answer, anything that would give the answer away is
+  under a "?" (inline and in the zoom); after you answer it is revealed.
+  Figures that only teach appear after answering. Each was checked against
+  the 2023 text (docs/DIAGRAMS_AUDIT.md).
 - **"?" masks on figures.** A figure can now cover any spot that gives the
   answer away with a "?" badge until you answer, inline and in the zoom; the
   badge fades after answering (instantly with Reduce motion). The three

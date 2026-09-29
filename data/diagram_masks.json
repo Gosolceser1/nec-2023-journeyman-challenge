@@ -20,5 +20,689 @@
       "leaks": [],
       "masks": []
     }
+  },
+  "records": {
+    "final-exam-#1-008": {
+      "file": "balcony_receptacle_210-52e3.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.425,
+            0.3023,
+            0.2623,
+            0.1878
+          ],
+          "what": "'6 ft 6 in max (2.0 m, 78 in)'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.425,
+            0.3023,
+            0.2623,
+            0.1878
+          ],
+          "label": "? max",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-011": {
+      "file": "dwelling_receptacles_210-52.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.4833,
+            0.2394,
+            0.1735,
+            0.1464
+          ],
+          "what": "'2 ft (24 in) or more'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.4833,
+            0.2394,
+            0.1735,
+            0.1464
+          ],
+          "label": "? in",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-020": {
+      "file": "electrode_system_250-52_250-53.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.4033,
+            0.1162,
+            0.1533,
+            0.0979
+          ],
+          "what": "'6 ft min'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.4033,
+            0.1162,
+            0.1533,
+            0.0979
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-043": {
+      "file": "spa_fan_height_680-43.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.71,
+            0.4858,
+            0.1409,
+            0.1822
+          ],
+          "what": "'12 ft (3.7 m)'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.71,
+            0.4858,
+            0.1409,
+            0.1822
+          ],
+          "label": "? ft",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-049": {
+      "file": "burial_under_concrete_300-5.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.2595,
+            0.4858,
+            0.1055,
+            0.1822
+          ],
+          "what": "'18 in min'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.2595,
+            0.4858,
+            0.1055,
+            0.1822
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-051": {
+      "file": "working_space_110-26.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.5715,
+            0.2762,
+            0.0971,
+            0.0958
+          ],
+          "what": "'25 ft'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.5715,
+            0.2762,
+            0.0971,
+            0.0958
+          ],
+          "label": "? ft",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-053": {
+      "file": "overhead_clearances_225-18.png",
+      "when": "after",
+      "leaks": [],
+      "masks": [],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-055": {
+      "file": "framing_protection_300-4.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.345,
+            0.388,
+            0.1472,
+            0.1022
+          ],
+          "what": "'1 1/4 in'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.345,
+            0.388,
+            0.1472,
+            0.1022
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-057": {
+      "file": "dedicated_space_110-26e.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.205,
+            0.0146,
+            0.5901,
+            0.08
+          ],
+          "what": "'Sprinkler protection: permitted  (E)(1)(c)'"
+        },
+        {
+          "region": [
+            0.05,
+            0.088,
+            0.9,
+            0.068
+          ],
+          "what": "the not-permitted list (it narrows the choices)"
+        },
+        {
+          "region": [
+            0.2525,
+            0.204,
+            0.1075,
+            0.204
+          ],
+          "what": "sprinkler head drawn in the dedicated space"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.205,
+            0.0146,
+            0.5901,
+            0.08
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.05,
+            0.088,
+            0.9,
+            0.068
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.2525,
+            0.204,
+            0.1075,
+            0.204
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-060": {
+      "file": "pool_fountain_distances_680.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.145,
+            0.6253,
+            0.0725,
+            0.0917
+          ],
+          "what": "'5 ft'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.145,
+            0.6253,
+            0.0725,
+            0.0917
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#3-013": {
+      "file": "supports_emt_strut_358-30.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.1775,
+            0.8694,
+            0.195,
+            0.0979
+          ],
+          "what": "'within 5 ft'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.1775,
+            0.8694,
+            0.195,
+            0.0979
+          ],
+          "label": "? ft",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "final-exam-#3-059": {
+      "file": "pool_fountain_distances_680.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.3337,
+            0.5337,
+            0.0725,
+            0.0917
+          ],
+          "what": "'6 ft'"
+        },
+        {
+          "region": [
+            0.7025,
+            0.4378,
+            0.0725,
+            0.0917
+          ],
+          "what": "'6 ft'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.3337,
+            0.5337,
+            0.0725,
+            0.0917
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.7025,
+            0.4378,
+            0.0725,
+            0.0917
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#1-002": {
+      "file": "service_bonding_250-24.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.5125,
+            0.4473,
+            0.2467,
+            0.1529
+          ],
+          "what": "'MAIN BONDING JUMPER'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.5125,
+            0.4473,
+            0.2467,
+            0.1529
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#1-004": {
+      "file": "framing_protection_300-4.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.7241,
+            0.1702,
+            0.1367,
+            0.1022
+          ],
+          "what": "'1/16 in'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.7241,
+            0.1702,
+            0.1367,
+            0.1022
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#1-008": {
+      "file": "electrode_system_250-52_250-53.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.677,
+            0.3077,
+            0.1055,
+            0.0979
+          ],
+          "what": "'30 in'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.677,
+            0.3077,
+            0.1055,
+            0.0979
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#1-010": {
+      "file": "gfci_locations_210-8.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.4938,
+            0.4123,
+            0.0725,
+            0.088
+          ],
+          "what": "'6 ft'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.4938,
+            0.4123,
+            0.0725,
+            0.088
+          ],
+          "label": "? ft",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#10-010": {
+      "file": "overhead_clearances_225-18.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.0675,
+            0.5708,
+            0.1025,
+            0.3417
+          ],
+          "what": "keep-out zone below the material opening"
+        },
+        {
+          "region": [
+            0.0985,
+            0.0309,
+            0.4279,
+            0.1342
+          ],
+          "what": "the 225.19(D)(3) building-opening rule"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.0675,
+            0.5708,
+            0.1025,
+            0.3417
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.0985,
+            0.0309,
+            0.4279,
+            0.1342
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#10-016": {
+      "file": "working_space_110-26.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.1986,
+            0.7712,
+            0.3778,
+            0.1617
+          ],
+          "what": "'considered grounded (Condition 2)'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.1986,
+            0.7712,
+            0.3778,
+            0.1617
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#10-020": {
+      "file": "balcony_receptacle_210-52e3.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.425,
+            0.3023,
+            0.2623,
+            0.1878
+          ],
+          "what": "'6 ft 6 in max (2.0 m, 78 in)'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.425,
+            0.3023,
+            0.2623,
+            0.1878
+          ],
+          "label": "? max",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#10-024": {
+      "file": "service_bonding_250-24.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.7925,
+            0.4596,
+            0.1987,
+            0.2018
+          ],
+          "what": "'GROUNDING ELECTRODE CONDUCTOR'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.7925,
+            0.4596,
+            0.1987,
+            0.2018
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#4-004": {
+      "file": "burial_under_concrete_300-5.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.2595,
+            0.4858,
+            0.1055,
+            0.1822
+          ],
+          "what": "'18 in min'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.2595,
+            0.4858,
+            0.1055,
+            0.1822
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#4-011": {
+      "file": "spa_fan_height_680-43.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.71,
+            0.4858,
+            0.1409,
+            0.1822
+          ],
+          "what": "'12 ft (3.7 m)'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.71,
+            0.4858,
+            0.1409,
+            0.1822
+          ],
+          "label": "? ft",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#7-022": {
+      "file": "working_space_110-26.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.535,
+            0.4471,
+            0.1055,
+            0.0958
+          ],
+          "what": "'24 in'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.535,
+            0.4471,
+            0.1055,
+            0.0958
+          ],
+          "label": "? in",
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-28"
+    }
   }
 }

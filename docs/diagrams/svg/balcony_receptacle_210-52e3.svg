@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect x="0.0" y="0.0" width="800.0" height="460.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="100.0" y="40.0" width="150.0" height="380.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="3"/>
+<text x="175.0" y="84.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">DWELLING</text>
+<rect x="234.0" y="140.0" width="16.0" height="180.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<text x="214.0" y="240.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle" transform="rotate(-90 214.0 240.0)">door</text>
+<line x1="250.0" y1="40.0" x2="250.0" y2="420.0" stroke="#94a3b8" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="262.0" y="320.0" width="508.0" height="18.0" rx="0" fill="#475569" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="292.0" y="338.0" width="16.0" height="82.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="732.0" y="338.0" width="16.0" height="82.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<line x1="762.0" y1="320.0" x2="762.0" y2="210.0" stroke="#94a3b8" stroke-width="7" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="700.0" y1="210.0" x2="762.0" y2="210.0" stroke="#94a3b8" stroke-width="7" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="20.0" y1="420.0" x2="780.0" y2="420.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="26.0" y="410.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">grade</text>
+<text x="560.0" y="282.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">BALCONY / DECK / PORCH</text>
+<text x="560.0" y="310.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">walking surface</text>
+<line x1="366.0" y1="384.0" x2="256.0" y2="332.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="256.0" cy="332.0" r="4" fill="#38bdf8" stroke="none" stroke-width="2"/>
+<text x="372.0" y="392.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">within 4 in of the dwelling</text>
+<rect x="250.6" y="101.0" width="30.7" height="48.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="261.2" y1="110.4" x2="261.2" y2="118.4" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="270.8" y1="110.4" x2="270.8" y2="118.4" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="261.2" y1="131.6" x2="261.2" y2="139.6" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="270.8" y1="131.6" x2="270.8" y2="139.6" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="296.0" y="91.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">receptacle</text>
+<line x1="284.0" y1="125.0" x2="291.0" y2="125.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="297.0" y1="125.0" x2="304.0" y2="125.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="310.0" y1="125.0" x2="317.0" y2="125.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="323.0" y1="125.0" x2="330.0" y2="125.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="336.0" y1="125.0" x2="343.0" y2="125.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="330.0" y1="131.0" x2="330.0" y2="314.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="330.0,125.0 336.0,137.0 324.0,137.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="330.0,320.0 324.0,308.0 336.0,308.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="348.0" y="172.0" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="bold" fill="#34d399" text-anchor="start">6 ft 6 in max</text>
+<text x="348.0" y="210.4" font-family="Helvetica, Arial, sans-serif" font-size="32" font-weight="bold" fill="#34d399" text-anchor="start">(2.0 m, 78 in)</text>
+<text x="470.0" y="64.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">Also: GFCI 210.8(A)(3),</text>
+<text x="470.0" y="91.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">weather-resistant 406.9</text>
+<rect x="590.0" y="424.0" width="196.0" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="600.0" y="452.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 210.52(E)(3)</text>
+</svg>

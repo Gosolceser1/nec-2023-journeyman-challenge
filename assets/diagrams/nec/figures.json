@@ -1,0 +1,301 @@
+{
+ "final-exam-#1-008": {
+  "file": "res://assets/diagrams/nec/balcony_receptacle_210-52e3.png",
+  "figure": "balcony_receptacle_210-52e3",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   690
+  ],
+  "nec": "210.52(E)(3)",
+  "svg_sha1": "87e27657d3b7"
+ },
+ "final-exam-#1-011": {
+  "file": "res://assets/diagrams/nec/dwelling_receptacles_210-52.png",
+  "figure": "dwelling_receptacles_210-52",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   750
+  ],
+  "nec": "210.52(A)(2), 210.52(G)(1), 210.52(H), 210.50(C)",
+  "svg_sha1": "b3a8f5630317"
+ },
+ "final-exam-#1-020": {
+  "file": "res://assets/diagrams/nec/electrode_system_250-52_250-53.png",
+  "figure": "electrode_system_250-52_250-53",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   705
+  ],
+  "nec": "250.52(A)(2), 250.52(A)(5), 250.53(A)(3), 250.53(A)(4), 250.53(A)(5)",
+  "svg_sha1": "1560a30df914"
+ },
+ "final-exam-#1-043": {
+  "file": "res://assets/diagrams/nec/spa_fan_height_680-43.png",
+  "figure": "spa_fan_height_680-43",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   675
+  ],
+  "nec": "680.43(B)(1)(a), (B)(1)(b)",
+  "svg_sha1": "b661c9ffb7f7"
+ },
+ "final-exam-#1-049": {
+  "file": "res://assets/diagrams/nec/burial_under_concrete_300-5.png",
+  "figure": "burial_under_concrete_300-5",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   675
+  ],
+  "nec": "Table 300.5(A) Column 1, 300.5(A) cover definition",
+  "svg_sha1": "0334f58c5baf"
+ },
+ "final-exam-#1-051": {
+  "file": "res://assets/diagrams/nec/working_space_110-26.png",
+  "figure": "working_space_110-26",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   720
+  ],
+  "nec": "110.26 (open doors), Table 110.26(A)(1) Condition 2, 110.26(B), 110.26(C)(3)",
+  "svg_sha1": "3d1684082818"
+ },
+ "final-exam-#1-053": {
+  "file": "res://assets/diagrams/nec/overhead_clearances_225-18.png",
+  "figure": "overhead_clearances_225-18",
+  "source": "original",
+  "style": "dark",
+  "when": "after",
+  "size": [
+   1200,
+   720
+  ],
+  "nec": "225.18, 225.19(D)(1)-(3)",
+  "svg_sha1": "e23ed0cbd816"
+ },
+ "final-exam-#1-055": {
+  "file": "res://assets/diagrams/nec/framing_protection_300-4.png",
+  "figure": "framing_protection_300-4",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   675
+  ],
+  "nec": "300.4(A)(2), 300.4(D)",
+  "svg_sha1": "04182a9c9a26"
+ },
+ "final-exam-#1-057": {
+  "file": "res://assets/diagrams/nec/dedicated_space_110-26e.png",
+  "figure": "dedicated_space_110-26e",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   750
+  ],
+  "nec": "110.26(A)(1)-(3), 110.26(E)(1)",
+  "svg_sha1": "c80210e93b86"
+ },
+ "final-exam-#1-060": {
+  "file": "res://assets/diagrams/nec/pool_fountain_distances_680.png",
+  "figure": "pool_fountain_distances_680",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   720
+  ],
+  "nec": "680.11(A), 680.22(A)(2), 680.35(D), 680.58",
+  "svg_sha1": "ef3e830454b5"
+ },
+ "final-exam-#3-013": {
+  "file": "res://assets/diagrams/nec/supports_emt_strut_358-30.png",
+  "figure": "supports_emt_strut_358-30",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   705
+  ],
+  "nec": "358.30(A) incl. Exception No. 1, 384.30(A)",
+  "svg_sha1": "836159d67b52"
+ },
+ "final-exam-#3-059": {
+  "file": "res://assets/diagrams/nec/pool_fountain_distances_680.png",
+  "figure": "pool_fountain_distances_680",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   720
+  ],
+  "nec": "680.11(A), 680.22(A)(2), 680.35(D), 680.58",
+  "svg_sha1": "ef3e830454b5"
+ },
+ "open-book-exam-#1-002": {
+  "file": "res://assets/diagrams/nec/service_bonding_250-24.png",
+  "figure": "service_bonding_250-24",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   675
+  ],
+  "nec": "Article 100 (main bonding jumper, GEC), 250.24, 250.28",
+  "svg_sha1": "e66b5a7aa1db"
+ },
+ "open-book-exam-#1-004": {
+  "file": "res://assets/diagrams/nec/framing_protection_300-4.png",
+  "figure": "framing_protection_300-4",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   675
+  ],
+  "nec": "300.4(A)(2), 300.4(D)",
+  "svg_sha1": "04182a9c9a26"
+ },
+ "open-book-exam-#1-008": {
+  "file": "res://assets/diagrams/nec/electrode_system_250-52_250-53.png",
+  "figure": "electrode_system_250-52_250-53",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   705
+  ],
+  "nec": "250.52(A)(2), 250.52(A)(5), 250.53(A)(3), 250.53(A)(4), 250.53(A)(5)",
+  "svg_sha1": "1560a30df914"
+ },
+ "open-book-exam-#1-010": {
+  "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
+  "figure": "gfci_locations_210-8",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   750
+  ],
+  "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
+  "svg_sha1": "549bdc4646ae"
+ },
+ "open-book-exam-#10-010": {
+  "file": "res://assets/diagrams/nec/overhead_clearances_225-18.png",
+  "figure": "overhead_clearances_225-18",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   720
+  ],
+  "nec": "225.18, 225.19(D)(1)-(3)",
+  "svg_sha1": "e23ed0cbd816"
+ },
+ "open-book-exam-#10-016": {
+  "file": "res://assets/diagrams/nec/working_space_110-26.png",
+  "figure": "working_space_110-26",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   720
+  ],
+  "nec": "110.26 (open doors), Table 110.26(A)(1) Condition 2, 110.26(B), 110.26(C)(3)",
+  "svg_sha1": "3d1684082818"
+ },
+ "open-book-exam-#10-020": {
+  "file": "res://assets/diagrams/nec/balcony_receptacle_210-52e3.png",
+  "figure": "balcony_receptacle_210-52e3",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   690
+  ],
+  "nec": "210.52(E)(3)",
+  "svg_sha1": "87e27657d3b7"
+ },
+ "open-book-exam-#10-024": {
+  "file": "res://assets/diagrams/nec/service_bonding_250-24.png",
+  "figure": "service_bonding_250-24",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   675
+  ],
+  "nec": "Article 100 (main bonding jumper, GEC), 250.24, 250.28",
+  "svg_sha1": "e66b5a7aa1db"
+ },
+ "open-book-exam-#4-004": {
+  "file": "res://assets/diagrams/nec/burial_under_concrete_300-5.png",
+  "figure": "burial_under_concrete_300-5",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   675
+  ],
+  "nec": "Table 300.5(A) Column 1, 300.5(A) cover definition",
+  "svg_sha1": "0334f58c5baf"
+ },
+ "open-book-exam-#4-011": {
+  "file": "res://assets/diagrams/nec/spa_fan_height_680-43.png",
+  "figure": "spa_fan_height_680-43",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   675
+  ],
+  "nec": "680.43(B)(1)(a), (B)(1)(b)",
+  "svg_sha1": "b661c9ffb7f7"
+ },
+ "open-book-exam-#7-022": {
+  "file": "res://assets/diagrams/nec/working_space_110-26.png",
+  "figure": "working_space_110-26",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   720
+  ],
+  "nec": "110.26 (open doors), Table 110.26(A)(1) Condition 2, 110.26(B), 110.26(C)(3)",
+  "svg_sha1": "3d1684082818"
+ }
+}

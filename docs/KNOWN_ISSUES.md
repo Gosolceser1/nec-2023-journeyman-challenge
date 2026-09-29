@@ -6,8 +6,10 @@ that produced false results before. Fixed defects are in git history
 Android touch scrolling `d6667a6` and voice picker `e5d4a7c`, for 1.0.2
 the Edge voices on Android, for 1.0.3 the Edge voices on Windows without
 Python and the NEC location audit, and since 1.0.3 the NEC 2023 content and
-tables/formulas audits and the diagram "?" masks), each pinned by a test or
-a validator guard.
+tables/formulas audits, the diagram "?" masks and the `measure_fit.gd`
+crashes at mobile 1024x768 and desktop 540x960 (a `DiagramView` resize loop
+with the page scrollbar, docs/DIAGRAMS_AUDIT.md section 5), each pinned by a
+test or a validator guard.
 
 ## Open: needs a real device
 
@@ -67,25 +69,6 @@ a validator guard.
 
 ## Open: found during the refactor
 
-- **`measure_fit.gd` crashes the engine on the desktop layout at 540x960.**
-  After ~250 of the 279 records the run prints "Object was deleted while
-  awaiting a callback" and dies with signal 11. It reproduces on the
-  pre-refactor checkpoint (`c0aaa1b`), so it is not caused by the moves.
-  The other six measured sizes finish with 0% scroll. The app itself never
-  awaits (only the tool scripts do), so the crash is most likely in the
-  measuring loop or the engine; the Windows build opens at 540x960, so it is
-  worth a look. It is intermittent: the 1.0.0 and 1.0.1 release runs at
-  540x960 finished with 0% scroll.
-- **`measure_fit.gd` crashes the engine on the mobile layout at 1024x768.**
-  The run dies inside the engine (message queue overflow under
-  `Container::_sort_children`) before it finishes. The base commit
-  (`2d6b960`, before the premium visual pass) crashes the same way, so it is
-  not caused by the restyle. Desktop at all six sizes and mobile at the other
-  five finish with 0% scroll. A phone never gets a 1024x768 window with the
-  mobile UI, but a tablet in landscape could. Still crashes in 1.0.1
-  (signal 11); the other eleven size/layout runs finish with 0% scroll.
-  Same crash in 1.0.2 and 1.0.3; desktop 1280x720 and mobile 540x960 finish
-  with 0%.
 - **`NecReference.lookup_path` reads any 3-digit number as an NEC article.**
   An `article` of "NFPA 70E 130.5" would show "Chapter 1 ► Article 130"
   instead of the NFPA 70E line. The bank only uses the bare "NFPA 70E", which

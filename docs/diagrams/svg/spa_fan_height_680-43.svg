@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<rect x="0.0" y="0.0" width="800.0" height="450.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="36.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Paddle fan over (or within 5 ft of) an indoor spa</text>
+<line x1="20.0" y1="64.0" x2="780.0" y2="64.0" stroke="#64748b" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="64.0" x2="400.0" y2="63.0" stroke="#94a3b8" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="63.0" x2="400.0" y2="79.0" stroke="#94a3b8" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="382.0" y="77.0" width="36.0" height="18.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="330.0" y1="95.0" x2="470.0" y2="95.0" stroke="#e2e8f0" stroke-width="7" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="330.0" y1="149.4" x2="342.0" y2="149.4" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="350.0" y1="149.4" x2="362.0" y2="149.4" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="370.0" y1="149.4" x2="382.0" y2="149.4" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="390.0" y1="149.4" x2="402.0" y2="149.4" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="410.0" y1="149.4" x2="422.0" y2="149.4" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="430.0" y1="149.4" x2="442.0" y2="149.4" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="450.0" y1="149.4" x2="462.0" y2="149.4" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="384.0" y="133.4" width="32.0" height="16.0" rx="4" fill="none" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<line x1="20.0" y1="380.0" x2="280.0" y2="380.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="520.0" y1="380.0" x2="780.0" y2="380.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="280.0" y="380.0" width="240.0" height="62.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<rect x="292.0" y="392.0" width="216.0" height="38.0" rx="0" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="3"/>
+<path d="M 312 406 q 15 -8 30 0 t 30 0 t 30 0" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 312 418 q 15 -8 30 0 t 30 0 t 30 0" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 312 430 q 15 -8 30 0 t 30 0 t 30 0" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="400.0" y="362.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">SPA / HOT TUB</text>
+<line x1="640.0" y1="404.0" x2="506.0" y2="394.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="506.0" cy="394.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<text x="646.0" y="412.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">max water level</text>
+<line x1="470.0" y1="95.0" x2="477.0" y2="95.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="483.0" y1="95.0" x2="490.0" y2="95.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="496.0" y1="95.0" x2="503.0" y2="95.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="509.0" y1="95.0" x2="516.0" y2="95.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="522.0" y1="95.0" x2="529.0" y2="95.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="535.0" y1="95.0" x2="542.0" y2="95.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="548.0" y1="95.0" x2="555.0" y2="95.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="561.0" y1="95.0" x2="568.0" y2="95.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="510.0" y1="392.0" x2="517.0" y2="392.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="523.0" y1="392.0" x2="530.0" y2="392.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="536.0" y1="392.0" x2="543.0" y2="392.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="549.0" y1="392.0" x2="556.0" y2="392.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="562.0" y1="392.0" x2="569.0" y2="392.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="101.0" x2="560.0" y2="386.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="560.0,95.0 566.0,107.0 554.0,107.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="560.0,392.0 554.0,380.0 566.0,380.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="576.0" y="208.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">no GFCI</text>
+<text x="576.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">12 ft</text>
+<text x="576.0" y="286.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">(3.7 m)</text>
+<line x1="330.0" y1="149.4" x2="323.0" y2="149.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="317.0" y1="149.4" x2="310.0" y2="149.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="304.0" y1="149.4" x2="297.0" y2="149.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="291.0" y1="149.4" x2="284.0" y2="149.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="278.0" y1="149.4" x2="271.0" y2="149.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="265.0" y1="149.4" x2="258.0" y2="149.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="252.0" y1="149.4" x2="245.0" y2="149.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="239.0" y1="149.4" x2="232.0" y2="149.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="290.0" y1="392.0" x2="283.0" y2="392.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="277.0" y1="392.0" x2="270.0" y2="392.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="264.0" y1="392.0" x2="257.0" y2="392.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="251.0" y1="392.0" x2="244.0" y2="392.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="238.0" y1="392.0" x2="231.0" y2="392.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="240.0" y1="155.4" x2="240.0" y2="386.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="240.0,149.4 246.0,161.4 234.0,161.4" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="240.0,392.0 234.0,380.0 246.0,380.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="224.0" y="272.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="end">with GFCI</text>
+<text x="224.0" y="308.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#38bdf8" text-anchor="end">7 ft 6 in</text>
+<text x="224.0" y="343.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#38bdf8" text-anchor="end">(2.3 m)</text>
+<text x="776.0" y="104.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="end">not to scale</text>
+<rect x="14.0" y="406.0" width="197.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="24.0" y="434.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 680.43(B)(1)</text>
+</svg>

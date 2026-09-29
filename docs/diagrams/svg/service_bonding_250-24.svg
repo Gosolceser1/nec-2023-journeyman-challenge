@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<rect x="0.0" y="0.0" width="800.0" height="450.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="430.0" y="42.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">SERVICE PANEL</text>
+<rect x="250.0" y="58.0" width="360.0" height="292.0" rx="10" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<text x="40.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">from meter</text>
+<line x1="40.0" y1="100.0" x2="270.0" y2="100.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="40.0" y1="136.0" x2="270.0" y2="136.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="40.0" y1="118.0" x2="262.0" y2="118.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="270.0" y="80.0" width="70.0" height="70.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<text x="305.0" y="124.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">MAIN</text>
+<line x1="262.0" y1="118.0" x2="262.0" y2="181.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="262.0" y1="181.0" x2="380.0" y2="181.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="380.0" y="170.0" width="180.0" height="22.0" rx="4" fill="#cbd5e1" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<circle cx="396.0" cy="181.0" r="4" fill="#1e293b" stroke="none" stroke-width="2"/>
+<circle cx="416.0" cy="181.0" r="4" fill="#1e293b" stroke="none" stroke-width="2"/>
+<circle cx="436.0" cy="181.0" r="4" fill="#1e293b" stroke="none" stroke-width="2"/>
+<circle cx="456.0" cy="181.0" r="4" fill="#1e293b" stroke="none" stroke-width="2"/>
+<circle cx="476.0" cy="181.0" r="4" fill="#1e293b" stroke="none" stroke-width="2"/>
+<circle cx="496.0" cy="181.0" r="4" fill="#1e293b" stroke="none" stroke-width="2"/>
+<circle cx="516.0" cy="181.0" r="4" fill="#1e293b" stroke="none" stroke-width="2"/>
+<circle cx="536.0" cy="181.0" r="4" fill="#1e293b" stroke="none" stroke-width="2"/>
+<circle cx="556.0" cy="181.0" r="4" fill="#1e293b" stroke="none" stroke-width="2"/>
+<text x="470.0" y="160.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">neutral bar</text>
+<rect x="380.0" y="280.0" width="180.0" height="22.0" rx="4" fill="#86efac" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="470.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">ground bar</text>
+<line x1="560.0" y1="291.0" x2="610.0" y2="291.0" stroke="#86efac" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="60.0" y="225.0" width="110.0" height="95.0" rx="8" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<text x="115.0" y="282.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">load</text>
+<line x1="170.0" y1="245.0" x2="305.0" y2="245.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="305.0" y1="245.0" x2="305.0" y2="150.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="170.0" y1="268.0" x2="355.0" y2="268.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="355.0" y1="268.0" x2="355.0" y2="187.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="355.0" y1="187.0" x2="380.0" y2="187.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="170.0" y1="291.0" x2="380.0" y2="291.0" stroke="#86efac" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="236.0" y="312.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#86efac" text-anchor="middle">EGC</text>
+<line x1="400.0" y1="192.0" x2="400.0" y2="280.0" stroke="#fbbf24" stroke-width="8" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="418.0" y="228.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="start">MAIN BONDING</text>
+<text x="418.0" y="256.8" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="start">JUMPER</text>
+<line x1="560.0" y1="181.0" x2="626.0" y2="181.0" stroke="#86efac" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="626.0" y1="181.0" x2="626.0" y2="400.0" stroke="#86efac" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="20.0" y1="400.0" x2="780.0" y2="400.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="626.0" y1="400.0" x2="626.0" y2="434.0" stroke="#b45309" stroke-width="9" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="621.0,434.0 631.0,434.0 626.0,446.0" fill="#b45309" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="642.0" y="232.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">GROUNDING</text>
+<text x="642.0" y="258.4" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">ELECTRODE</text>
+<text x="642.0" y="284.8" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">CONDUCTOR</text>
+<text x="642.0" y="440.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">electrode</text>
+</svg>

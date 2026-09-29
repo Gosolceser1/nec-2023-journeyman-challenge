@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+<rect x="0.0" y="0.0" width="800.0" height="500.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="40.0" y="30.0" width="26.0" height="18.0" rx="3" fill="#34d399" fill-opacity="0.5" stroke="#34d399" stroke-width="2"/>
+<text x="76.0" y="47.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">GFCI required</text>
+<rect x="20.0" y="420.0" width="760.0" height="70.0" rx="0" fill="#3f2e1f" fill-opacity="0.75" stroke="none" stroke-width="2"/>
+<circle cx="32.0" cy="438.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="60.0" cy="474.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="88.0" cy="470.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="116.0" cy="466.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="144.0" cy="462.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="172.0" cy="458.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="200.0" cy="454.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="228.0" cy="450.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="256.0" cy="446.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="284.0" cy="442.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="312.0" cy="438.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="340.0" cy="474.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="368.0" cy="470.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="396.0" cy="466.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="424.0" cy="462.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="452.0" cy="458.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="480.0" cy="454.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="508.0" cy="450.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="536.0" cy="446.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="564.0" cy="442.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="592.0" cy="438.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="620.0" cy="474.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="648.0" cy="470.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="676.0" cy="466.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="704.0" cy="462.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="732.0" cy="458.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="760.0" cy="454.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="788.0" cy="450.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<line x1="12.0" y1="160.0" x2="550.0" y2="160.0" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="16.0" y="160.0" width="16.0" height="260.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="142.0" y="160.0" width="16.0" height="260.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="492.0" y="160.0" width="16.0" height="280.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="279.0" y="160.0" width="10.0" height="170.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<line x1="158.0" y1="330.0" x2="492.0" y2="330.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="20.0" y1="420.0" x2="780.0" y2="420.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="87.0" y="200.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">GARAGE</text>
+<rect x="85.9" y="328.0" width="28.2" height="44.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="95.6" y1="336.3" x2="95.6" y2="344.3" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="104.4" y1="336.3" x2="104.4" y2="344.3" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="95.6" y1="355.7" x2="95.6" y2="363.7" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="104.4" y1="355.7" x2="104.4" y2="363.7" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="92.1" y="346.0" width="15.8" height="8.0" rx="2" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="217.0" y="200.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">LAUNDRY</text>
+<rect x="168.0" y="262.0" width="64.0" height="68.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="200.0" cy="300.0" r="18" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="243.2" y="250.0" width="25.6" height="40.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="252.0" y1="257.2" x2="252.0" y2="265.2" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="260.0" y1="257.2" x2="260.0" y2="265.2" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="252.0" y1="274.8" x2="252.0" y2="282.8" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="260.0" y1="274.8" x2="260.0" y2="282.8" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="248.8" y="266.0" width="14.4" height="8.0" rx="2" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="392.0" y="200.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">TUB / SHOWER</text>
+<rect x="294.0" y="290.0" width="88.0" height="40.0" rx="8" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="302.0" y="296.0" width="72.0" height="14.0" rx="4" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="2"/>
+<rect x="453.2" y="270.0" width="25.6" height="40.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="462.0" y1="277.2" x2="462.0" y2="285.2" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="470.0" y1="277.2" x2="470.0" y2="285.2" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="462.0" y1="294.8" x2="462.0" y2="302.8" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="470.0" y1="294.8" x2="470.0" y2="302.8" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="458.8" y="286.0" width="14.4" height="8.0" rx="2" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<line x1="382.0" y1="288.0" x2="382.0" y2="281.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="382.0" y1="275.0" x2="382.0" y2="268.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="382.0" y1="262.0" x2="382.0" y2="255.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="382.0" y1="249.0" x2="382.0" y2="242.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="466.0" y1="268.0" x2="466.0" y2="261.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="466.0" y1="255.0" x2="466.0" y2="248.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="466.0" y1="242.0" x2="466.0" y2="240.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="388.0" y1="248.0" x2="460.0" y2="248.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="382.0,248.0 394.0,242.0 394.0,254.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="466.0,248.0 454.0,254.0 454.0,242.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="424.0" y="236.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="middle">6 ft</text>
+<rect x="171.0" y="333.0" width="26.0" height="26.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="184.0" cy="346.0" r="3.12" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="184.0" cy="372.0" r="11" fill="#fbbf24" stroke="#e2e8f0" stroke-width="2"/>
+<text x="214.0" y="362.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">crawl space light</text>
+<text x="214.0" y="402.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">120 V or less</text>
+<rect x="514.5" y="180.0" width="23.0" height="36.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="522.4" y1="186.1" x2="522.4" y2="194.1" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="529.6" y1="186.1" x2="529.6" y2="194.1" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="522.4" y1="201.9" x2="522.4" y2="209.9" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="529.6" y1="201.9" x2="529.6" y2="209.9" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="526.0" y1="180.0" x2="526.0" y2="164.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="40.0" y="88.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">210.8(A) Ex. 1: not readily accessible,</text>
+<text x="40.0" y="115.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">own snow-melt circuit: 426.28</text>
+<line x1="428.0" y1="114.0" x2="512.0" y2="192.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="512.0" cy="192.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<rect x="513.2" y="352.0" width="25.6" height="40.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="522.0" y1="359.2" x2="522.0" y2="367.2" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="530.0" y1="359.2" x2="530.0" y2="367.2" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="522.0" y1="376.8" x2="522.0" y2="384.8" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="530.0" y1="376.8" x2="530.0" y2="384.8" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="518.8" y="368.0" width="14.4" height="8.0" rx="2" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="556.0" y="296.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">OUTDOOR OUTLETS</text>
+<text x="556.0" y="324.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">single-phase, 150 V</text>
+<text x="556.0" y="351.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">to ground or less,</text>
+<text x="556.0" y="402.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">50 A or less</text>
+<rect x="560.0" y="24.0" width="224.0" height="226.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="3"/>
+<text x="672.0" y="54.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">NOT A DWELLING</text>
+<text x="672.0" y="84.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">sink + food or</text>
+<text x="672.0" y="111.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">beverage prep</text>
+<rect x="572.0" y="196.0" width="200.0" height="12.0" rx="0" fill="#94a3b8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="578.0" y="208.0" width="188.0" height="32.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="584.0" y="194.0" width="64.0" height="16.0" rx="3" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="2"/>
+<polyline points="628.0,194.0 628.0,166.0 608.0,166.0 608.0,174.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="716.0" y="148.0" width="40.0" height="48.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="724.0" y="170.0" width="24.0" height="22.0" rx="3" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="2"/>
+<rect x="668.5" y="146.0" width="23.0" height="36.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="676.4" y1="152.1" x2="676.4" y2="160.1" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="683.6" y1="152.1" x2="683.6" y2="160.1" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="676.4" y1="167.9" x2="676.4" y2="175.9" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="683.6" y1="167.9" x2="683.6" y2="175.9" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="673.5" y="160.0" width="13.0" height="8.0" rx="2" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="658.4" y="454.0" width="127.6" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="668.4" y="482.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 210.8</text>
+</svg>

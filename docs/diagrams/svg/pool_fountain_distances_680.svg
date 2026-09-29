@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+<rect x="0.0" y="0.0" width="800.0" height="480.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="20.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">plan view</text>
+<rect x="20.0" y="120.0" width="300.0" height="228.0" rx="4" fill="#0ea5e9" fill-opacity="0.08" stroke="#0ea5e9" stroke-width="3"/>
+<rect x="80.0" y="180.0" width="180.0" height="108.0" rx="0" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="3"/>
+<text x="170.0" y="242.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">POOL</text>
+<text x="320.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#0ea5e9" text-anchor="end">underground wiring zone</text>
+<line x1="110.0" y1="294.0" x2="110.0" y2="342.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="110.0,288.0 116.0,300.0 104.0,300.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="110.0,348.0 104.0,336.0 116.0,336.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="124.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="start">5 ft</text>
+<line x1="200.0" y1="50.0" x2="200.0" y2="178.0" stroke="#94a3b8" stroke-width="14" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="200.0" y1="50.0" x2="200.0" y2="178.0" stroke="#64748b" stroke-width="10" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="184.0" y="70.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="end">LFMC listed for</text>
+<text x="184.0" y="97.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="end">direct burial</text>
+<circle cx="332.0" cy="226.0" r="12" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="314.0" y1="222.0" x2="320.0" y2="222.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="314.0" y1="230.0" x2="320.0" y2="230.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="332.0" cy="226.0" r="5.4" fill="#34d399" stroke="none" stroke-width="2"/>
+<rect x="358.0" y="204.0" width="56.0" height="44.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<text x="386.0" y="234.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">M</text>
+<line x1="344.0" y1="226.0" x2="358.0" y2="226.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="386.0" y="164.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">pump</text>
+<text x="386.0" y="191.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">motor</text>
+<line x1="332.0" y1="240.0" x2="332.0" y2="247.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="332.0" y1="253.0" x2="332.0" y2="260.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="266.0" y1="254.0" x2="326.0" y2="254.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="260.0,254.0 272.0,248.0 272.0,260.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="332.0,254.0 320.0,260.0 320.0,248.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="296.0" y="286.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="middle">6 ft</text>
+<text x="378.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">pump</text>
+<text x="378.0" y="327.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">receptacle:</text>
+<text x="378.0" y="355.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">GFCI</text>
+<line x1="442.0" y1="30.0" x2="442.0" y2="450.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="510.0" cy="150.0" r="45" fill="#0c4a6e" stroke="#38bdf8" stroke-width="3"/>
+<text x="462.0" y="76.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">storable pool</text>
+<rect x="627.0" y="130.0" width="30.0" height="40.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="642.0" cy="150.0" r="9" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="555.0" y1="158.0" x2="555.0" y2="165.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="555.0" y1="171.0" x2="555.0" y2="178.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="555.0" y1="184.0" x2="555.0" y2="191.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="555.0" y1="197.0" x2="555.0" y2="204.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="555.0" y1="210.0" x2="555.0" y2="212.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="627.0" y1="172.0" x2="627.0" y2="179.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="627.0" y1="185.0" x2="627.0" y2="192.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="627.0" y1="198.0" x2="627.0" y2="205.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="627.0" y1="211.0" x2="627.0" y2="212.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="561.0" y1="204.0" x2="621.0" y2="204.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="555.0,204.0 567.0,198.0 567.0,210.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="627.0,204.0 615.0,210.0 615.0,198.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="591.0" y="240.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="middle">6 ft</text>
+<text x="671.0" y="128.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">audio:</text>
+<text x="671.0" y="155.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">grounded</text>
+<text x="671.0" y="183.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">+ GFCI</text>
+<circle cx="494.0" cy="380.0" r="36" fill="#0c4a6e" stroke="#38bdf8" stroke-width="3"/>
+<circle cx="494.0" cy="380.0" r="8" fill="#38bdf8" stroke="none" stroke-width="2"/>
+<text x="494.0" y="328.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">fountain</text>
+<circle cx="770.0" cy="380.0" r="12" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="752.0" y1="376.0" x2="758.0" y2="376.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="752.0" y1="384.0" x2="758.0" y2="384.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="770.0" cy="380.0" r="5.4" fill="#34d399" stroke="none" stroke-width="2"/>
+<text x="782.0" y="314.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="end">receptacle:</text>
+<text x="782.0" y="341.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="end">GFCI</text>
+<line x1="530.0" y1="388.0" x2="530.0" y2="395.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="530.0" y1="401.0" x2="530.0" y2="408.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="530.0" y1="414.0" x2="530.0" y2="421.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="530.0" y1="427.0" x2="530.0" y2="434.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="770.0" y1="394.0" x2="770.0" y2="401.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="770.0" y1="407.0" x2="770.0" y2="414.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="770.0" y1="420.0" x2="770.0" y2="427.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="770.0" y1="433.0" x2="770.0" y2="440.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="536.0" y1="432.0" x2="764.0" y2="432.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="530.0,432.0 542.0,426.0 542.0,438.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="770.0,432.0 758.0,438.0 758.0,426.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="650.0" y="466.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="middle">20 ft</text>
+<rect x="14.0" y="436.0" width="109.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="24.0" y="464.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 680</text>
+</svg>

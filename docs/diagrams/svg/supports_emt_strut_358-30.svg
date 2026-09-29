@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470">
+<rect x="0.0" y="0.0" width="800.0" height="470.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="40.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">EMT or surface strut-type channel raceway</text>
+<line x1="95.0" y1="130.0" x2="705.0" y2="130.0" stroke="#94a3b8" stroke-width="18" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="95.0" y1="130.0" x2="705.0" y2="130.0" stroke="#64748b" stroke-width="14" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="195.0" y="115.0" width="10.0" height="30.0" rx="2" fill="#fbbf24" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="595.0" y="115.0" width="10.0" height="30.0" rx="2" fill="#fbbf24" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="45.0" y="105.0" width="50.0" height="50.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="70.0" cy="130.0" r="6.0" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<text x="70.0" y="93.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">box</text>
+<rect x="705.0" y="105.0" width="50.0" height="50.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="730.0" cy="130.0" r="6.0" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<text x="730.0" y="93.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">box</text>
+<line x1="95.0" y1="148.0" x2="95.0" y2="155.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="95.0" y1="161.0" x2="95.0" y2="168.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="95.0" y1="174.0" x2="95.0" y2="181.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="95.0" y1="187.0" x2="95.0" y2="190.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="200.0" y1="148.0" x2="200.0" y2="155.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="200.0" y1="161.0" x2="200.0" y2="168.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="200.0" y1="174.0" x2="200.0" y2="181.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="200.0" y1="187.0" x2="200.0" y2="190.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="101.0" y1="180.0" x2="194.0" y2="180.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="95.0,180.0 107.0,174.0 107.0,186.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="200.0,180.0 188.0,186.0 188.0,174.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="147.5" y="214.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="middle">within 3 ft</text>
+<line x1="600.0" y1="148.0" x2="600.0" y2="155.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="600.0" y1="161.0" x2="600.0" y2="168.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="600.0" y1="174.0" x2="600.0" y2="181.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="600.0" y1="187.0" x2="600.0" y2="190.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="705.0" y1="148.0" x2="705.0" y2="155.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="705.0" y1="161.0" x2="705.0" y2="168.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="705.0" y1="174.0" x2="705.0" y2="181.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="705.0" y1="187.0" x2="705.0" y2="190.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="606.0" y1="180.0" x2="699.0" y2="180.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="600.0,180.0 612.0,174.0 612.0,186.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="705.0,180.0 693.0,186.0 693.0,174.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="652.5" y="214.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="middle">within 3 ft</text>
+<line x1="200.0" y1="148.0" x2="200.0" y2="155.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="200.0" y1="161.0" x2="200.0" y2="168.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="200.0" y1="174.0" x2="200.0" y2="181.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="200.0" y1="187.0" x2="200.0" y2="190.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="600.0" y1="148.0" x2="600.0" y2="155.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="600.0" y1="161.0" x2="600.0" y2="168.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="600.0" y1="174.0" x2="600.0" y2="181.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="600.0" y1="187.0" x2="600.0" y2="190.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="206.0" y1="180.0" x2="594.0" y2="180.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="200.0,180.0 212.0,174.0 212.0,186.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="600.0,180.0 588.0,186.0 588.0,174.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="216.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="middle">every 10 ft max</text>
+<line x1="30.0" y1="262.0" x2="770.0" y2="262.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="40.0" y="296.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="start">EMT only, Exception No. 1: framing does not permit 3 ft</text>
+<rect x="330.0" y="316.0" width="30.0" height="68.0" rx="0" fill="#a16207" fill-opacity="0.55" stroke="#ca8a04" stroke-width="2"/>
+<path d="M 334 333.0 q 7.5 -6 15.0 0 t 7.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 334 350.0 q 7.5 -6 15.0 0 t 7.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 334 367.0 q 7.5 -6 15.0 0 t 7.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="95.0" y1="350.0" x2="760.0" y2="350.0" stroke="#94a3b8" stroke-width="18" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="95.0" y1="350.0" x2="760.0" y2="350.0" stroke="#64748b" stroke-width="14" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="45.0" y="325.0" width="50.0" height="50.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="70.0" cy="350.0" r="6.0" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="340.0" y="335.0" width="10.0" height="30.0" rx="2" fill="#fbbf24" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="560.0" y="328.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">unbroken length</text>
+<text x="620.0" y="394.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">first framing member</text>
+<line x1="470.0" y1="388.0" x2="360.0" y2="370.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="360.0" cy="370.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<line x1="95.0" y1="368.0" x2="95.0" y2="375.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="95.0" y1="381.0" x2="95.0" y2="388.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="95.0" y1="394.0" x2="95.0" y2="401.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="95.0" y1="407.0" x2="95.0" y2="410.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="345.0" y1="368.0" x2="345.0" y2="375.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="345.0" y1="381.0" x2="345.0" y2="388.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="345.0" y1="394.0" x2="345.0" y2="401.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="345.0" y1="407.0" x2="345.0" y2="410.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="101.0" y1="400.0" x2="339.0" y2="400.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="95.0,400.0 107.0,394.0 107.0,406.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="345.0,400.0 333.0,406.0 333.0,394.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="220.0" y="440.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="middle">within 5 ft</text>
+<rect x="509.6" y="428.0" width="280.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="519.6" y="456.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 358.30(A), 384.30(A)</text>
+</svg>

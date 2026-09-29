@@ -837,6 +837,7 @@ func _show_question() -> void:
 		question_table_heading.text = "LOOK UP BEFORE ANSWERING  •  " + table_title
 		_populate_reference_table(question_table_grid, question_table_note, question_table, current_correct_text, false, "")
 	question_diagram_panel.visible = question_diagram_view.show_record(record)
+	question_diagram_panel.add_theme_stylebox_override("panel", DiagramView.card_style(question_diagram_view.is_dark()))
 	var formula_str := str(record.get("formula", "")).strip_edges()
 	if formula_str != "":
 		# The formula box shows pre-answer: keep the method, blank a computed answer value.
@@ -987,8 +988,9 @@ func _answer_selected(selected: int) -> void:
 	fb_tw.parallel().tween_property(feedback_panel, "scale", Vector2.ONE, 0.2)
 
 	question_table_panel.visible = false
-	# The figure stays up: the explanation talks about it by its labels.
-	question_diagram_view.reveal(correct, audio.reduce_motion)
+	# The figure stays up: the explanation talks about it by its labels. A
+	# teaching figure ("when": "after") appears now.
+	question_diagram_panel.visible = question_diagram_view.reveal(correct, audio.reduce_motion)
 	question_formula_label.visible = false
 	# The box only follows the label on a resize, so hide it explicitly or an
 	# empty frame is left behind on formula questions.

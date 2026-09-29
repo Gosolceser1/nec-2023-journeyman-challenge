@@ -1,62 +1,111 @@
-"""Contact sheet of the prototype figure screenshots (tools/visual/snap_diagram_protos.gd).
+"""Contact sheet of in-app diagram shots (tools/visual/snap_diagrams.gd output).
 
-    python tools/diagrams/contact_sheet.py <shots_dir> <out.png>
+One row per record: desktop before/after answering, mobile before/zoom/after.
+Missing shots render as an empty cell, so a gap in the sweep is visible.
 
-One row per prototype: desktop pre, desktop post, phone pre, phone zoom (pre), phone post.
+    python tools/diagrams/contact_sheet.py SHOTS_DIR OUT_PREFIX [--rows 8]
+
+Writes OUT_PREFIX.png when everything fits on one page, otherwise
+OUT_PREFIX_01.png, OUT_PREFIX_02.png, ...
 """
-import sys
+from __future__ import annotations
+
+import argparse
+import json
+import re
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-NAMES = [
-    ("working_space_110-26", "110.26 working space + dedicated space  (final-exam-#1-057)"),
-    ("balcony_receptacle_210-52E3", "210.52(E)(3) balcony receptacle height  (final-exam-#1-008, open-book-exam-#10-020)"),
-    ("burial_under_concrete_300-5", "Table 300.5(A) cover under 2 in concrete  (final-exam-#1-049, open-book-exam-#4-004)"),
-    ("service_bonding_250", "250.28 main bonding jumper / GEC  (open-book-exam-#1-002; GEC variant for #10-024)"),
-]
-ROW_H, GAP, HEAD = 480, 16, 44
+ROW_H = 400
+LABEL_W = 260
+GAP = 12
+BG = (15, 23, 42)
+CELL = (30, 41, 59)
+TEXT = (226, 232, 240)
+MUTED = (148, 163, 184)
+COLUMNS = [("desk", "pre", "desktop, before"), ("desk", "post", "desktop, after"),
+           ("mob", "pre", "phone, before"), ("mob", "zoom", "phone, zoom"),
+           ("mob", "post", "phone, after")]
+NAME = re.compile(r"^(desk|mob)_(\d+)x(\d+)_(.+)_(pre|zoom|post)\.png$")
 
 
-def font(size):
-    for f in ("arialbd.ttf", "arial.ttf", "DejaVuSans-Bold.ttf"):
+def font(size: int) -> ImageFont.ImageFont:
+    for name in ("segoeui.ttf", "arial.ttf", "DejaVuSans.ttf"):
         try:
-            return ImageFont.truetype(f, size)
+            return ImageFont.truetype(name, size)
         except OSError:
             continue
     return ImageFont.load_default()
 
 
-def main():
-    shots, out = Path(sys.argv[1]), Path(sys.argv[2])
-    cells = [("desk_1280x720", "_pre", "Desktop 1280x720, before (masked)"),
-             ("desk_1280x720", "_post", "Desktop, after (revealed)"),
-             ("mob_540x960", "_pre", "Phone 540x960, before"),
-             ("mob_540x960", "_zoom", "Phone zoom, before"),
-             ("mob_540x960", "_post", "Phone, after")]
-    desk, mob = round(ROW_H * 1280 / 720), round(ROW_H * 540 / 960)
-    widths = [desk, desk, mob, mob, mob]
-    W = sum(widths) + GAP * (len(widths) + 1)
-    H = 70 + len(NAMES) * (HEAD + ROW_H + GAP)
-    sheet = Image.new("RGB", (W, H), (2, 6, 23))
-    d = ImageDraw.Draw(sheet)
-    d.text((GAP, 18), "Prototype study figures: answer masked with '?' until answered (original, from NEC 2023 text; not wired into the bank)",
-           fill=(56, 189, 248), font=font(30))
-    y = 70
-    for name, title in NAMES:
-        d.text((GAP, y + 8), title, fill=(226, 232, 240), font=font(26))
-        x = GAP
-        for (prefix, phase, label), w in zip(cells, widths):
-            p = shots / f"{prefix}_{name}{phase}.png"
-            im = Image.open(p).convert("RGB").resize((w, ROW_H), Image.LANCZOS)
-            sheet.paste(im, (x, y + HEAD))
-            d.rectangle((x, y + HEAD + ROW_H - 30, x + w, y + HEAD + ROW_H), fill=(15, 23, 42))
-            d.text((x + 8, y + HEAD + ROW_H - 26), label, fill=(148, 163, 184), font=font(18))
+def scan(shots: Path) -> tuple[dict, dict]:
+    found: dict[str, dict] = {}
+    aspect: dict[str, float] = {}
+    for p in sorted(shots.glob("*.png")):
+        m = NAME.match(p.name)
+        if not m:
+            continue
+        layout, w, h, rid, state = m.groups()
+        found.setdefault(rid, {})[(layout, state)] = p
+        aspect[layout] = int(w) / int(h)
+    return found, aspect
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("shots", type=Path)
+    ap.add_argument("out_prefix", type=Path)
+    ap.add_argument("--rows", type=int, default=8)
+    ap.add_argument("--masks", type=Path,
+                    default=Path(__file__).resolve().parents[2] / "data" / "diagram_masks.json")
+    a = ap.parse_args()
+    after = set()
+    if a.masks.exists():
+        records = json.loads(a.masks.read_text(encoding="utf-8")).get("records", {})
+        after = {rid.replace("#", "") for rid, e in records.items() if e.get("when") == "after"}
+    found, aspect = scan(a.shots)
+    if not found:
+        print("no shots in", a.shots)
+        return 1
+    widths = [round(ROW_H * aspect.get(layout, 0.5625)) for layout, _, _ in COLUMNS]
+    sheet_w = LABEL_W + sum(widths) + GAP * (len(widths) + 1)
+    head_h = 44
+    f_id, f_head = font(22), font(20)
+    ids = sorted(found)
+    pages = [ids[i:i + a.rows] for i in range(0, len(ids), a.rows)]
+    a.out_prefix.parent.mkdir(parents=True, exist_ok=True)
+    missing = 0
+    for n, page in enumerate(pages, 1):
+        img = Image.new("RGB", (sheet_w, head_h + len(page) * (ROW_H + GAP) + GAP), BG)
+        d = ImageDraw.Draw(img)
+        x = LABEL_W + GAP
+        for (_, _, title), w in zip(COLUMNS, widths):
+            d.text((x, 10), title, fill=MUTED, font=f_head)
             x += w + GAP
-        y += HEAD + ROW_H + GAP
-    sheet.save(out, optimize=True)
-    print(out, sheet.size)
+        for r, rid in enumerate(page):
+            y = head_h + r * (ROW_H + GAP)
+            d.text((GAP, y + 8), rid, fill=TEXT, font=f_id)
+            x = LABEL_W + GAP
+            for (layout, state, _), w in zip(COLUMNS, widths):
+                p = found[rid].get((layout, state))
+                if p is None:
+                    d.rectangle([x, y, x + w, y + ROW_H], fill=CELL)
+                    hidden = rid in after and state != "post"
+                    d.text((x + 10, y + 10), "figure shown\nafter answering" if hidden else "no shot",
+                           fill=MUTED, font=f_head)
+                    missing += 0 if hidden else 1
+                else:
+                    with Image.open(p) as shot:
+                        img.paste(shot.convert("RGB").resize((w, ROW_H), Image.LANCZOS), (x, y))
+                x += w + GAP
+        out = a.out_prefix.with_suffix(".png") if len(pages) == 1 else \
+            a.out_prefix.with_name(f"{a.out_prefix.name}_{n:02d}.png")
+        img.save(out, optimize=True)
+        print(out)
+    print(f"{len(ids)} records, {len(pages)} page(s), {missing} missing shot(s)")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

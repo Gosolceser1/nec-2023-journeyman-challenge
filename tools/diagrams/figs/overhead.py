@@ -1,0 +1,164 @@
+"""Overhead spans: 225.18 / 225.19(D), 800.44 communications, 810.13 antenna lead-ins."""
+from nec_style import *  # noqa: F401,F403
+
+
+def _span(p0, c, p1, n=24):
+    """Sagging span as a quadratic curve: points from p0 to p1 with control point c."""
+    pts = []
+    for i in range(n + 1):
+        t = i / n
+        a, b, d = (1 - t) ** 2, 2 * t * (1 - t), t * t
+        pts.append((a * p0[0] + b * c[0] + d * p1[0], a * p0[1] + b * c[1] + d * p1[1]))
+    return pts
+
+
+def _y_at(pts, x):
+    for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
+        if min(x0, x1) <= x <= max(x0, x1) and x0 != x1:
+            return y0 + (y1 - y0) * (x - x0) / (x1 - x0)
+    return pts[-1][1]
+
+
+def _pole(f, x, top, bottom, w=14):
+    f.rect(x - w / 2, top, w, bottom - top, fill=WOOD, op=0.8, stroke="#ca8a04", sw=SW_THIN)
+
+
+RAIL = "final-exam-#1-053"
+OPENING = "open-book-exam-#10-010"
+
+
+@figure("overhead_clearances_225-18", h=480, nec="225.18, 225.19(D)(1)-(3)",
+        records={RAIL: {"when": "after"}, OPENING: {}})
+def overhead_225(f):
+    grade, ft = 440, 14.0
+    y = lambda h: grade - h * ft  # noqa: E731
+    f.grade(grade, 20, 520, label=None)
+    # Building facade with a second-floor material-handling door.
+    bx0, bx1 = 20, 250
+    f.rect(bx0, y(24), bx1 - bx0, grade - y(24), fill=PANEL, stroke=EDGE, sw=SW_OBJ)
+    f.line(bx0, y(12), bx1, y(12), EDGE, SW_THIN)
+    f.text(192, y(3), "BUILDING", T_NOTE, MUTED, bold=True)
+    dx0, dx1 = 60, 130
+    f.hatch(dx0, y(20), dx1 - dx0, grade - y(20), NO, op=0.14)
+    f.mark_no((dx0 + dx1) / 2, y(6))
+    f.rect(dx0, y(20), dx1 - dx0, y(12) - y(20), fill=BG, stroke=TEXT, sw=SW_OBJ)
+    f.mask(dx0 - 6, y(12) + 2, dx1 - dx0 + 12, grade - y(12) - 4, records=[OPENING],
+           what="keep-out zone below the material opening")
+    f.text(95, 96, "material door", T_NOTE, TEXT, bold=True)
+    # Final span attached 3 ft beside the door, out to the floodlight pole.
+    ax, ay = 172, y(16)
+    px = 400
+    _pole(f, px, y(22), grade)
+    f.rect(px - 22, y(22) - 14, 30, 14, fill=AMBER, rx=3)
+    f.text(px, y(22) - 26, "floodlight", T_NOTE, TEXT, bold=True)
+    span = _span((ax, ay), ((ax + px) / 2, y(14)), (px - 7, y(18)))
+    f.polyline(span, WIRE_HOT, SW_WIRE)
+    f.circle(ax, ay, 6, fill=TEXT)
+    f.lines(318, y(10), ["120 V", "branch circuit"], T_NOTE, TEXT)
+    f.ext(dx1, y(20), dx1, y(21) - 10)
+    f.ext(ax, ay - 8, ax, y(21) - 10)
+    f.dim_h(dx1, ax, y(21))
+    f.text((dx1 + ax) / 2, y(21) - 14, "3 ft", 28, DIM, bold=True)
+    f.value_lines(250, 40, ["(D)(3): not beneath the opening", "and not obstructing it"], T_NOTE, NO,
+                  records=[OPENING], what="the 225.19(D)(3) building-opening rule")
+    # 225.18 ladder: minimum heights above finished grade.
+    lx = 580
+    f.text(680, 40, "225.18, 1000 V max", T_NOTE, MUTED, bold=True)
+    f.line(lx, grade, lx, y(24.5), LINE, SW_STRUCT)
+    rows = [(10, "10 ft", "pedestrians, 150 V"), (12, "12 ft", "residential, 300 V"),
+            (15, "15 ft", "same, over 300 V"), (18, "18 ft", "streets, trucks"),
+            (24.5, "24 1/2 ft", "railroad tracks")]
+    for h, val, what in rows:
+        yy = y(h)
+        f.line(lx - 10, yy, lx + 10, yy, LINE, SW_STRUCT)
+        if h == 24.5:
+            f.value(lx - 16, yy + 9, val, 26, DIM, anchor="end", records=[RAIL])
+        else:
+            f.text(lx - 16, yy + 9, val, 26, DIM, "end", True)
+        f.text(lx + 18, yy + 8, what, T_NOTE, TEXT, "start")
+    f.text(lx + 18, grade - 10, "finished grade", T_NOTE, MUTED, "start")
+    f.tag(f.w - 24, f.h - 14, "NEC 225.18, 225.19(D)", anchor="end")
+
+
+ROOF = "final-exam-#1-050"
+COMM = "final-exam-#3-031"
+
+
+@figure("communications_overhead_800-44", h=460, nec="800.44(A)(1), (A)(2), 800.44(B)",
+        records={ROOF: {}, COMM: {"when": "after"}})
+def communications_800(f):
+    grade = 410
+    f.grade(grade, 20, 780, label=None)
+    # Two-story house with a one-story wing the cable passes over.
+    hx0, hx1, eave = 40, 250, 190
+    f.rect(hx0, eave, hx1 - hx0, grade - eave, fill=PANEL, stroke=EDGE, sw=SW_OBJ)
+    f.poly([(hx0 - 12, eave), ((hx0 + hx1) / 2, 110), (hx1 + 12, eave)], PANEL_2, LINE, SW_OBJ)
+    f.text((hx0 + hx1) / 2, 330, "HOUSE", T_LABEL, MUTED, bold=True)
+    wx1, roof = 480, 300
+    f.rect(hx1, roof, wx1 - hx1, grade - roof, fill=PANEL, stroke=EDGE, sw=SW_OBJ)
+    f.rect(hx1 - 4, roof - 12, wx1 - hx1 + 16, 12, fill=PANEL_2, stroke=LINE, sw=SW_THIN)
+    f.text(420, 350, "roof", T_NOTE, MUTED)
+    # Pole: power on the cross-arm, communications lower on the pole.
+    px, arm = 700, 84
+    _pole(f, px, 60, grade)
+    f.rect(px - 64, arm, 128, 10, fill=WOOD, op=0.9, stroke="#ca8a04", sw=SW_THIN)
+    for x in (px - 50, px - 22, px + 22, px + 50):
+        f.rect(x - 5, arm - 16, 10, 16, fill=EDGE)
+        f.circle(x, arm - 20, 6, fill=WIRE_HOT)
+    f.lines(628, 70, ["power", "conductors"], T_NOTE, TEXT, "end", True)
+    ca = 170
+    f.rect(px + 7, ca - 6, 12, 12, fill=AMBER, rx=2)
+    span = _span((px - 7, ca), (470, 230), (hx1, 204))
+    f.polyline(span, AMBER, SW_WIRE)
+    f.circle(hx1, 204, 6, fill=AMBER)
+    f.text(470, 170, "communications cable", T_NOTE, AMBER, bold=True)
+    # 800.44(B): clearance above the roof.
+    dx = 300
+    cy = _y_at(span, dx)
+    f.dim_v(dx, cy, roof - 12)
+    f.value(316, 262, "8 ft min", anchor="start", records=[ROOF, COMM], label="? ft")
+    b = f.lines(594, 250, ["(A)(1) below power", "if practicable", "(A)(2) not on the", "power cross-arm"],
+                T_NOTE, MUTED, "middle")
+    f.mask(b[0] - 8, b[1] - 8, b[2] + 16, b[3] + 16, records=[COMM], what="the 800.44(A) rules")
+    f.leader(600, 228, px - 8, ca + 8)
+    f.tag(f.w - 24, f.h - 14, "NEC 800.44", anchor="end")
+
+
+LEADIN = "final-exam-#3-020"
+
+
+@figure("antenna_leadin_810-13", h=440, nec="810.13", records=[LEADIN])
+def antenna_810(f):
+    grade = 400
+    f.grade(grade, 20, 780, label=None)
+    # House with a service mast; the utility pole is on the left.
+    hx0, hx1, eave, ridge = 380, 760, 260, (570, 170)
+    f.rect(hx0, eave, hx1 - hx0, grade - eave, fill=PANEL, stroke=EDGE, sw=SW_OBJ)
+    f.poly([(hx0 - 12, eave), ridge, (hx1 + 12, eave)], PANEL_2, LINE, SW_OBJ)
+    f.text((hx0 + hx1) / 2, 340, "HOUSE", T_LABEL, MUTED, bold=True)
+    mx, wh = 440, 150
+    f.line(mx, 300, mx, wh, STEEL, 10)
+    f.path(f"M {mx - 13} {wh} q 13 -18 26 0", TEXT, SW_OBJ)
+    px, arm = 60, 100
+    _pole(f, px, 70, grade)
+    f.rect(px - 40, arm, 80, 10, fill=WOOD, op=0.9, stroke="#ca8a04", sw=SW_THIN)
+    power = _span((px + 30, arm), (260, 190), (mx - 16, wh + 12))
+    f.polyline(power, WIRE_HOT, SW_WIRE)
+    f.path(f"M {mx - 16} {wh + 12} q 14 20 22 0", WIRE_HOT, SW_WIRE)
+    f.lines(240, 50, ["open service conductors,", "under 250 V between"], T_NOTE, TEXT, "middle", True)
+    # Antenna on the roof; its lead-in comes down the mast beside the service mast.
+    ax = 620
+    roof_y = ridge[1] + (ax - ridge[0]) * (eave - ridge[1]) / (hx1 + 12 - ridge[0])
+    f.line(ax, roof_y, ax, 60, STEEL, 8)
+    for yy, half in ((64, 40), (80, 32), (96, 24)):
+        f.line(ax - half, yy, ax + half, yy, TEXT, SW_OBJ)
+    f.text(ax + 52, 86, "antenna", T_LABEL, TEXT, "start", True)
+    lx = ax - 8
+    f.line(lx, 100, lx, roof_y - 2, AMBER, SW_WIRE)
+    f.text(ax + 14, 150, "lead-in", T_LABEL, AMBER, "start", True)
+    # Clearance between the open service conductors and the lead-in.
+    dy = 124
+    f.ext(mx + 8, dy, mx + 8, wh + 16)
+    f.dim_h(mx + 8, lx - 4, dy)
+    f.value_lines(510, 60, ["600 mm", "(2 ft) min"], 28, label="?")
+    f.tag(f.w - 24, f.h - 10, "NEC 810.13", anchor="end")

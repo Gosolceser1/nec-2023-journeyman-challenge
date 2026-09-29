@@ -91,6 +91,8 @@ def main():
         "question bank": lambda r: r.endswith("question_bank.json"),
         "voice catalog": lambda r: r.endswith("voices.json"),
         "diagrams map": lambda r: r.endswith("diagrams/diagrams.json"),
+        "NEC figures map": lambda r: r.endswith("diagrams/nec/figures.json"),
+        "NEC figures (imported)": lambda r: "diagrams/nec/" in r and r.endswith(".png.import"),
         "sfx": lambda r: "sfx/" in r and r.endswith(".wav.import"),
         "speech clips (imported)": lambda r: "speech/" in r and r.endswith(".mp3.import"),
         "speech manifests": lambda r: "speech/" in r and r.endswith("manifest.json"),
