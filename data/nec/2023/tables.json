@@ -1,0 +1,3422 @@
+{
+ "edition": "2023",
+ "code": "NFPA 70",
+ "note": "Values only, read from the NFPA 70 text by tools/math/nec_tables_from_cache.py. Re-verify every value against the new edition before switching.",
+ "tables": {
+  "t310_16": {
+   "title": "Table 310.16",
+   "caption": "Allowable ampacities, not more than three current-carrying conductors, 30°C (86°F) ambient",
+   "kind": "keyed",
+   "key_label": "Size (AWG or kcmil)",
+   "columns": [
+    {
+     "id": "cu60",
+     "label": "Copper 60°C"
+    },
+    {
+     "id": "cu75",
+     "label": "Copper 75°C"
+    },
+    {
+     "id": "cu90",
+     "label": "Copper 90°C"
+    },
+    {
+     "id": "al60",
+     "label": "Aluminum 60°C"
+    },
+    {
+     "id": "al75",
+     "label": "Aluminum 75°C"
+    },
+    {
+     "id": "al90",
+     "label": "Aluminum 90°C"
+    }
+   ],
+   "rows": [
+    {
+     "key": "14",
+     "cu60": 15,
+     "cu75": 20,
+     "cu90": 25,
+     "al60": null,
+     "al75": null,
+     "al90": null
+    },
+    {
+     "key": "12",
+     "cu60": 20,
+     "cu75": 25,
+     "cu90": 30,
+     "al60": 15,
+     "al75": 20,
+     "al90": 25
+    },
+    {
+     "key": "10",
+     "cu60": 30,
+     "cu75": 35,
+     "cu90": 40,
+     "al60": 25,
+     "al75": 30,
+     "al90": 35
+    },
+    {
+     "key": "8",
+     "cu60": 40,
+     "cu75": 50,
+     "cu90": 55,
+     "al60": 35,
+     "al75": 40,
+     "al90": 45
+    },
+    {
+     "key": "6",
+     "cu60": 55,
+     "cu75": 65,
+     "cu90": 75,
+     "al60": 40,
+     "al75": 50,
+     "al90": 55
+    },
+    {
+     "key": "4",
+     "cu60": 70,
+     "cu75": 85,
+     "cu90": 95,
+     "al60": 55,
+     "al75": 65,
+     "al90": 75
+    },
+    {
+     "key": "3",
+     "cu60": 85,
+     "cu75": 100,
+     "cu90": 115,
+     "al60": 65,
+     "al75": 75,
+     "al90": 85
+    },
+    {
+     "key": "2",
+     "cu60": 95,
+     "cu75": 115,
+     "cu90": 130,
+     "al60": 75,
+     "al75": 90,
+     "al90": 100
+    },
+    {
+     "key": "1",
+     "cu60": 110,
+     "cu75": 130,
+     "cu90": 145,
+     "al60": 85,
+     "al75": 100,
+     "al90": 115
+    },
+    {
+     "key": "1/0",
+     "cu60": 125,
+     "cu75": 150,
+     "cu90": 170,
+     "al60": 100,
+     "al75": 120,
+     "al90": 135
+    },
+    {
+     "key": "2/0",
+     "cu60": 145,
+     "cu75": 175,
+     "cu90": 195,
+     "al60": 115,
+     "al75": 135,
+     "al90": 150
+    },
+    {
+     "key": "3/0",
+     "cu60": 165,
+     "cu75": 200,
+     "cu90": 225,
+     "al60": 130,
+     "al75": 155,
+     "al90": 175
+    },
+    {
+     "key": "4/0",
+     "cu60": 195,
+     "cu75": 230,
+     "cu90": 260,
+     "al60": 150,
+     "al75": 180,
+     "al90": 205
+    },
+    {
+     "key": "250",
+     "cu60": 215,
+     "cu75": 255,
+     "cu90": 290,
+     "al60": 170,
+     "al75": 205,
+     "al90": 230
+    },
+    {
+     "key": "300",
+     "cu60": 240,
+     "cu75": 285,
+     "cu90": 320,
+     "al60": 195,
+     "al75": 230,
+     "al90": 260
+    },
+    {
+     "key": "350",
+     "cu60": 260,
+     "cu75": 310,
+     "cu90": 350,
+     "al60": 210,
+     "al75": 250,
+     "al90": 280
+    },
+    {
+     "key": "400",
+     "cu60": 280,
+     "cu75": 335,
+     "cu90": 380,
+     "al60": 225,
+     "al75": 270,
+     "al90": 305
+    },
+    {
+     "key": "500",
+     "cu60": 320,
+     "cu75": 380,
+     "cu90": 430,
+     "al60": 260,
+     "al75": 310,
+     "al90": 350
+    },
+    {
+     "key": "600",
+     "cu60": 350,
+     "cu75": 420,
+     "cu90": 475,
+     "al60": 285,
+     "al75": 340,
+     "al90": 385
+    },
+    {
+     "key": "700",
+     "cu60": 385,
+     "cu75": 460,
+     "cu90": 520,
+     "al60": 315,
+     "al75": 375,
+     "al90": 425
+    },
+    {
+     "key": "750",
+     "cu60": 400,
+     "cu75": 475,
+     "cu90": 535,
+     "al60": 320,
+     "al75": 385,
+     "al90": 435
+    },
+    {
+     "key": "800",
+     "cu60": 410,
+     "cu75": 490,
+     "cu90": 555,
+     "al60": 330,
+     "al75": 395,
+     "al90": 445
+    },
+    {
+     "key": "900",
+     "cu60": 435,
+     "cu75": 520,
+     "cu90": 585,
+     "al60": 355,
+     "al75": 425,
+     "al90": 480
+    },
+    {
+     "key": "1000",
+     "cu60": 455,
+     "cu75": 545,
+     "cu90": 615,
+     "al60": 375,
+     "al75": 445,
+     "al90": 500
+    }
+   ],
+   "unit": "A"
+  },
+  "t310_15b1_1": {
+   "title": "Table 310.15(B)(1)(1)",
+   "caption": "Ambient temperature correction factors based on 30°C (86°F)",
+   "kind": "range",
+   "key_label": "Ambient (°F)",
+   "columns": [
+    {
+     "id": "c60",
+     "label": "60°C"
+    },
+    {
+     "id": "c75",
+     "label": "75°C"
+    },
+    {
+     "id": "c90",
+     "label": "90°C"
+    }
+   ],
+   "rows": [
+    {
+     "lo": -1000,
+     "hi": 50,
+     "key": "50 or less",
+     "c_lo": -1000,
+     "c_hi": 10,
+     "c60": 1.29,
+     "c75": 1.2,
+     "c90": 1.15
+    },
+    {
+     "lo": 51,
+     "hi": 59,
+     "key": "51–59",
+     "c_lo": 11,
+     "c_hi": 15,
+     "c60": 1.22,
+     "c75": 1.15,
+     "c90": 1.12
+    },
+    {
+     "lo": 60,
+     "hi": 68,
+     "key": "60–68",
+     "c_lo": 16,
+     "c_hi": 20,
+     "c60": 1.15,
+     "c75": 1.11,
+     "c90": 1.08
+    },
+    {
+     "lo": 69,
+     "hi": 77,
+     "key": "69–77",
+     "c_lo": 21,
+     "c_hi": 25,
+     "c60": 1.08,
+     "c75": 1.05,
+     "c90": 1.04
+    },
+    {
+     "lo": 78,
+     "hi": 86,
+     "key": "78–86",
+     "c_lo": 26,
+     "c_hi": 30,
+     "c60": 1.0,
+     "c75": 1.0,
+     "c90": 1.0
+    },
+    {
+     "lo": 87,
+     "hi": 95,
+     "key": "87–95",
+     "c_lo": 31,
+     "c_hi": 35,
+     "c60": 0.91,
+     "c75": 0.94,
+     "c90": 0.96
+    },
+    {
+     "lo": 96,
+     "hi": 104,
+     "key": "96–104",
+     "c_lo": 36,
+     "c_hi": 40,
+     "c60": 0.82,
+     "c75": 0.88,
+     "c90": 0.91
+    },
+    {
+     "lo": 105,
+     "hi": 113,
+     "key": "105–113",
+     "c_lo": 41,
+     "c_hi": 45,
+     "c60": 0.71,
+     "c75": 0.82,
+     "c90": 0.87
+    },
+    {
+     "lo": 114,
+     "hi": 122,
+     "key": "114–122",
+     "c_lo": 46,
+     "c_hi": 50,
+     "c60": 0.58,
+     "c75": 0.75,
+     "c90": 0.82
+    },
+    {
+     "lo": 123,
+     "hi": 131,
+     "key": "123–131",
+     "c_lo": 51,
+     "c_hi": 55,
+     "c60": 0.41,
+     "c75": 0.67,
+     "c90": 0.76
+    },
+    {
+     "lo": 132,
+     "hi": 140,
+     "key": "132–140",
+     "c_lo": 56,
+     "c_hi": 60,
+     "c60": null,
+     "c75": 0.58,
+     "c90": 0.71
+    },
+    {
+     "lo": 141,
+     "hi": 149,
+     "key": "141–149",
+     "c_lo": 61,
+     "c_hi": 65,
+     "c60": null,
+     "c75": 0.47,
+     "c90": 0.65
+    },
+    {
+     "lo": 150,
+     "hi": 158,
+     "key": "150–158",
+     "c_lo": 66,
+     "c_hi": 70,
+     "c60": null,
+     "c75": 0.33,
+     "c90": 0.58
+    },
+    {
+     "lo": 159,
+     "hi": 167,
+     "key": "159–167",
+     "c_lo": 71,
+     "c_hi": 75,
+     "c60": null,
+     "c75": null,
+     "c90": 0.5
+    },
+    {
+     "lo": 168,
+     "hi": 176,
+     "key": "168–176",
+     "c_lo": 76,
+     "c_hi": 80,
+     "c60": null,
+     "c75": null,
+     "c90": 0.41
+    },
+    {
+     "lo": 177,
+     "hi": 185,
+     "key": "177–185",
+     "c_lo": 81,
+     "c_hi": 85,
+     "c60": null,
+     "c75": null,
+     "c90": 0.29
+    }
+   ]
+  },
+  "t310_15c1": {
+   "title": "Table 310.15(C)(1)",
+   "caption": "Adjustment factors for more than three current-carrying conductors",
+   "kind": "range",
+   "key_label": "Number of conductors",
+   "columns": [
+    {
+     "id": "percent",
+     "label": "Percent of Table 310.16 value"
+    }
+   ],
+   "rows": [
+    {
+     "lo": 4,
+     "hi": 6,
+     "key": "4–6",
+     "percent": 80
+    },
+    {
+     "lo": 7,
+     "hi": 9,
+     "key": "7–9",
+     "percent": 70
+    },
+    {
+     "lo": 10,
+     "hi": 20,
+     "key": "10–20",
+     "percent": 50
+    },
+    {
+     "lo": 21,
+     "hi": 30,
+     "key": "21–30",
+     "percent": 45
+    },
+    {
+     "lo": 31,
+     "hi": 40,
+     "key": "31–40",
+     "percent": 40
+    },
+    {
+     "lo": 41,
+     "hi": 100000,
+     "key": "41 and above",
+     "percent": 35
+    }
+   ]
+  },
+  "t314_16a": {
+   "title": "Table 314.16(A)",
+   "caption": "Metal boxes: minimum volume and maximum number of conductors",
+   "kind": "keyed",
+   "key_label": "Box trade size",
+   "columns": [
+    {
+     "id": "in3",
+     "label": "Volume (in³)"
+    },
+    {
+     "id": "n18",
+     "label": "18 AWG"
+    },
+    {
+     "id": "n16",
+     "label": "16 AWG"
+    },
+    {
+     "id": "n14",
+     "label": "14 AWG"
+    },
+    {
+     "id": "n12",
+     "label": "12 AWG"
+    },
+    {
+     "id": "n10",
+     "label": "10 AWG"
+    },
+    {
+     "id": "n8",
+     "label": "8 AWG"
+    },
+    {
+     "id": "n6",
+     "label": "6 AWG"
+    }
+   ],
+   "rows": [
+    {
+     "key": "4 × 1-1/4 in. round/octagonal",
+     "in3": 12.5,
+     "n18": 8,
+     "n16": 7,
+     "n14": 6,
+     "n12": 5,
+     "n10": 5,
+     "n8": 4,
+     "n6": 2
+    },
+    {
+     "key": "4 × 1-1/2 in. round/octagonal",
+     "in3": 15.5,
+     "n18": 10,
+     "n16": 8,
+     "n14": 7,
+     "n12": 6,
+     "n10": 6,
+     "n8": 5,
+     "n6": 3
+    },
+    {
+     "key": "4 × 2-1/8 in. round/octagonal",
+     "in3": 21.5,
+     "n18": 14,
+     "n16": 12,
+     "n14": 10,
+     "n12": 9,
+     "n10": 8,
+     "n8": 7,
+     "n6": 4
+    },
+    {
+     "key": "4 × 1-1/4 in. square",
+     "in3": 18.0,
+     "n18": 12,
+     "n16": 10,
+     "n14": 9,
+     "n12": 8,
+     "n10": 7,
+     "n8": 6,
+     "n6": 3
+    },
+    {
+     "key": "4 × 1-1/2 in. square",
+     "in3": 21.0,
+     "n18": 14,
+     "n16": 12,
+     "n14": 10,
+     "n12": 9,
+     "n10": 8,
+     "n8": 7,
+     "n6": 4
+    },
+    {
+     "key": "4 × 2-1/8 in. square",
+     "in3": 30.3,
+     "n18": 20,
+     "n16": 17,
+     "n14": 15,
+     "n12": 13,
+     "n10": 12,
+     "n8": 10,
+     "n6": 6
+    },
+    {
+     "key": "4-11/16 × 1-1/4 in. square",
+     "in3": 25.5,
+     "n18": 17,
+     "n16": 14,
+     "n14": 12,
+     "n12": 11,
+     "n10": 10,
+     "n8": 8,
+     "n6": 5
+    },
+    {
+     "key": "4-11/16 × 1-1/2 in. square",
+     "in3": 29.5,
+     "n18": 19,
+     "n16": 16,
+     "n14": 14,
+     "n12": 13,
+     "n10": 11,
+     "n8": 9,
+     "n6": 5
+    },
+    {
+     "key": "4-11/16 × 2-1/8 in. square",
+     "in3": 42.0,
+     "n18": 28,
+     "n16": 24,
+     "n14": 21,
+     "n12": 18,
+     "n10": 16,
+     "n8": 14,
+     "n6": 8
+    },
+    {
+     "key": "3 × 2 × 1-1/2 in. device",
+     "in3": 7.5,
+     "n18": 5,
+     "n16": 4,
+     "n14": 3,
+     "n12": 3,
+     "n10": 3,
+     "n8": 2,
+     "n6": 1
+    },
+    {
+     "key": "3 × 2 × 2 in. device",
+     "in3": 10.0,
+     "n18": 6,
+     "n16": 5,
+     "n14": 5,
+     "n12": 4,
+     "n10": 4,
+     "n8": 3,
+     "n6": 2
+    },
+    {
+     "key": "3 × 2 × 2-1/4 in. device",
+     "in3": 10.5,
+     "n18": 7,
+     "n16": 6,
+     "n14": 5,
+     "n12": 4,
+     "n10": 4,
+     "n8": 3,
+     "n6": 2
+    },
+    {
+     "key": "3 × 2 × 2-1/2 in. device",
+     "in3": 12.5,
+     "n18": 8,
+     "n16": 7,
+     "n14": 6,
+     "n12": 5,
+     "n10": 5,
+     "n8": 4,
+     "n6": 2
+    },
+    {
+     "key": "3 × 2 × 2-3/4 in. device",
+     "in3": 14.0,
+     "n18": 9,
+     "n16": 8,
+     "n14": 7,
+     "n12": 6,
+     "n10": 5,
+     "n8": 4,
+     "n6": 2
+    },
+    {
+     "key": "3 × 2 × 3-1/2 in. device",
+     "in3": 18.0,
+     "n18": 12,
+     "n16": 10,
+     "n14": 9,
+     "n12": 8,
+     "n10": 7,
+     "n8": 6,
+     "n6": 3
+    },
+    {
+     "key": "4 × 2-1/8 × 1-1/2 in. device",
+     "in3": 10.3,
+     "n18": 6,
+     "n16": 5,
+     "n14": 5,
+     "n12": 4,
+     "n10": 4,
+     "n8": 3,
+     "n6": 2
+    },
+    {
+     "key": "4 × 2-1/8 × 1-7/8 in. device",
+     "in3": 13.0,
+     "n18": 8,
+     "n16": 7,
+     "n14": 6,
+     "n12": 5,
+     "n10": 5,
+     "n8": 4,
+     "n6": 2
+    },
+    {
+     "key": "4 × 2-1/8 × 2-1/8 in. device",
+     "in3": 14.5,
+     "n18": 9,
+     "n16": 8,
+     "n14": 7,
+     "n12": 6,
+     "n10": 5,
+     "n8": 4,
+     "n6": 2
+    },
+    {
+     "key": "3-3/4 × 2 × 2-1/2 in. masonry box/gang",
+     "in3": 14.0,
+     "n18": 9,
+     "n16": 8,
+     "n14": 7,
+     "n12": 6,
+     "n10": 5,
+     "n8": 4,
+     "n6": 2
+    },
+    {
+     "key": "3-3/4 × 2 × 3-1/2 in. masonry box/gang",
+     "in3": 21.0,
+     "n18": 14,
+     "n16": 12,
+     "n14": 10,
+     "n12": 9,
+     "n10": 8,
+     "n8": 7,
+     "n6": 4
+    },
+    {
+     "key": "FS single cover/gang (1-3/4 in. deep)",
+     "in3": 13.5,
+     "n18": 9,
+     "n16": 7,
+     "n14": 6,
+     "n12": 6,
+     "n10": 5,
+     "n8": 4,
+     "n6": 2
+    },
+    {
+     "key": "FD single cover/gang (2-3/8 in. deep)",
+     "in3": 18.0,
+     "n18": 12,
+     "n16": 10,
+     "n14": 9,
+     "n12": 8,
+     "n10": 7,
+     "n8": 6,
+     "n6": 3
+    },
+    {
+     "key": "FS multiple cover/gang (1-3/4 in. deep)",
+     "in3": 18.0,
+     "n18": 12,
+     "n16": 10,
+     "n14": 9,
+     "n12": 8,
+     "n10": 7,
+     "n8": 6,
+     "n6": 3
+    },
+    {
+     "key": "FD multiple cover/gang (2-3/8 in. deep)",
+     "in3": 24.0,
+     "n18": 16,
+     "n16": 13,
+     "n14": 12,
+     "n12": 10,
+     "n10": 9,
+     "n8": 8,
+     "n6": 4
+    }
+   ]
+  },
+  "t314_16b1": {
+   "title": "Table 314.16(B)(1)",
+   "caption": "Volume allowance required per conductor",
+   "kind": "keyed",
+   "key_label": "Size (AWG)",
+   "columns": [
+    {
+     "id": "in3",
+     "label": "Free space per conductor (in³)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "18",
+     "in3": 1.5
+    },
+    {
+     "key": "16",
+     "in3": 1.75
+    },
+    {
+     "key": "14",
+     "in3": 2.0
+    },
+    {
+     "key": "12",
+     "in3": 2.25
+    },
+    {
+     "key": "10",
+     "in3": 2.5
+    },
+    {
+     "key": "8",
+     "in3": 3.0
+    },
+    {
+     "key": "6",
+     "in3": 5.0
+    }
+   ],
+   "unit": "in³"
+  },
+  "ch9_t1": {
+   "title": "Chapter 9, Table 1",
+   "caption": "Percent of cross section of conduit and tubing for conductors",
+   "kind": "keyed",
+   "key_label": "Number of conductors",
+   "columns": [
+    {
+     "id": "percent",
+     "label": "Fill (%)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "1",
+     "percent": 53
+    },
+    {
+     "key": "2",
+     "percent": 31
+    },
+    {
+     "key": "over 2",
+     "percent": 40
+    }
+   ]
+  },
+  "ch9_t4_emt": {
+   "title": "Chapter 9, Table 4",
+   "caption": "EMT: dimensions and percent area",
+   "kind": "keyed",
+   "key_label": "Trade size",
+   "columns": [
+    {
+     "id": "a40",
+     "label": "Over 2 wires 40% (in²)"
+    },
+    {
+     "id": "a60",
+     "label": "60% (in²)"
+    },
+    {
+     "id": "a53",
+     "label": "1 wire 53% (in²)"
+    },
+    {
+     "id": "a31",
+     "label": "2 wires 31% (in²)"
+    },
+    {
+     "id": "a100",
+     "label": "Total area 100% (in²)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "1/2",
+     "a40": 0.122,
+     "a60": 0.182,
+     "a53": 0.161,
+     "a31": 0.094,
+     "a100": 0.304
+    },
+    {
+     "key": "3/4",
+     "a40": 0.213,
+     "a60": 0.32,
+     "a53": 0.283,
+     "a31": 0.165,
+     "a100": 0.533
+    },
+    {
+     "key": "1",
+     "a40": 0.346,
+     "a60": 0.519,
+     "a53": 0.458,
+     "a31": 0.268,
+     "a100": 0.864
+    },
+    {
+     "key": "1-1/4",
+     "a40": 0.598,
+     "a60": 0.897,
+     "a53": 0.793,
+     "a31": 0.464,
+     "a100": 1.496
+    },
+    {
+     "key": "1-1/2",
+     "a40": 0.814,
+     "a60": 1.221,
+     "a53": 1.079,
+     "a31": 0.631,
+     "a100": 2.036
+    },
+    {
+     "key": "2",
+     "a40": 1.342,
+     "a60": 2.013,
+     "a53": 1.778,
+     "a31": 1.04,
+     "a100": 3.356
+    },
+    {
+     "key": "2-1/2",
+     "a40": 2.343,
+     "a60": 3.515,
+     "a53": 3.105,
+     "a31": 1.816,
+     "a100": 5.858
+    },
+    {
+     "key": "3",
+     "a40": 3.538,
+     "a60": 5.307,
+     "a53": 4.688,
+     "a31": 2.742,
+     "a100": 8.846
+    },
+    {
+     "key": "3-1/2",
+     "a40": 4.618,
+     "a60": 6.927,
+     "a53": 6.119,
+     "a31": 3.579,
+     "a100": 11.545
+    },
+    {
+     "key": "4",
+     "a40": 5.901,
+     "a60": 8.852,
+     "a53": 7.819,
+     "a31": 4.573,
+     "a100": 14.753
+    }
+   ],
+   "unit": "in²",
+   "raceway": "EMT"
+  },
+  "ch9_t4_imc": {
+   "title": "Chapter 9, Table 4",
+   "caption": "IMC: dimensions and percent area",
+   "kind": "keyed",
+   "key_label": "Trade size",
+   "columns": [
+    {
+     "id": "a40",
+     "label": "Over 2 wires 40% (in²)"
+    },
+    {
+     "id": "a60",
+     "label": "60% (in²)"
+    },
+    {
+     "id": "a53",
+     "label": "1 wire 53% (in²)"
+    },
+    {
+     "id": "a31",
+     "label": "2 wires 31% (in²)"
+    },
+    {
+     "id": "a100",
+     "label": "Total area 100% (in²)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "1/2",
+     "a40": 0.137,
+     "a60": 0.205,
+     "a53": 0.181,
+     "a31": 0.106,
+     "a100": 0.342
+    },
+    {
+     "key": "3/4",
+     "a40": 0.235,
+     "a60": 0.352,
+     "a53": 0.311,
+     "a31": 0.182,
+     "a100": 0.586
+    },
+    {
+     "key": "1",
+     "a40": 0.384,
+     "a60": 0.575,
+     "a53": 0.508,
+     "a31": 0.297,
+     "a100": 0.959
+    },
+    {
+     "key": "1-1/4",
+     "a40": 0.659,
+     "a60": 0.988,
+     "a53": 0.873,
+     "a31": 0.51,
+     "a100": 1.647
+    },
+    {
+     "key": "1-1/2",
+     "a40": 0.89,
+     "a60": 1.335,
+     "a53": 1.179,
+     "a31": 0.69,
+     "a100": 2.225
+    },
+    {
+     "key": "2",
+     "a40": 1.452,
+     "a60": 2.178,
+     "a53": 1.924,
+     "a31": 1.125,
+     "a100": 3.63
+    },
+    {
+     "key": "2-1/2",
+     "a40": 2.054,
+     "a60": 3.081,
+     "a53": 2.722,
+     "a31": 1.592,
+     "a100": 5.135
+    },
+    {
+     "key": "3",
+     "a40": 3.169,
+     "a60": 4.753,
+     "a53": 4.199,
+     "a31": 2.456,
+     "a100": 7.922
+    },
+    {
+     "key": "3-1/2",
+     "a40": 4.234,
+     "a60": 6.351,
+     "a53": 5.61,
+     "a31": 3.281,
+     "a100": 10.584
+    },
+    {
+     "key": "4",
+     "a40": 5.452,
+     "a60": 8.179,
+     "a53": 7.224,
+     "a31": 4.226,
+     "a100": 13.631
+    }
+   ],
+   "unit": "in²",
+   "raceway": "IMC"
+  },
+  "ch9_t4_rmc": {
+   "title": "Chapter 9, Table 4",
+   "caption": "RMC: dimensions and percent area",
+   "kind": "keyed",
+   "key_label": "Trade size",
+   "columns": [
+    {
+     "id": "a40",
+     "label": "Over 2 wires 40% (in²)"
+    },
+    {
+     "id": "a60",
+     "label": "60% (in²)"
+    },
+    {
+     "id": "a53",
+     "label": "1 wire 53% (in²)"
+    },
+    {
+     "id": "a31",
+     "label": "2 wires 31% (in²)"
+    },
+    {
+     "id": "a100",
+     "label": "Total area 100% (in²)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "1/2",
+     "a40": 0.125,
+     "a60": 0.188,
+     "a53": 0.166,
+     "a31": 0.097,
+     "a100": 0.314
+    },
+    {
+     "key": "3/4",
+     "a40": 0.22,
+     "a60": 0.329,
+     "a53": 0.291,
+     "a31": 0.17,
+     "a100": 0.549
+    },
+    {
+     "key": "1",
+     "a40": 0.355,
+     "a60": 0.532,
+     "a53": 0.47,
+     "a31": 0.275,
+     "a100": 0.887
+    },
+    {
+     "key": "1-1/4",
+     "a40": 0.61,
+     "a60": 0.916,
+     "a53": 0.809,
+     "a31": 0.473,
+     "a100": 1.526
+    },
+    {
+     "key": "1-1/2",
+     "a40": 0.829,
+     "a60": 1.243,
+     "a53": 1.098,
+     "a31": 0.642,
+     "a100": 2.071
+    },
+    {
+     "key": "2",
+     "a40": 1.363,
+     "a60": 2.045,
+     "a53": 1.806,
+     "a31": 1.056,
+     "a100": 3.408
+    },
+    {
+     "key": "2-1/2",
+     "a40": 1.946,
+     "a60": 2.919,
+     "a53": 2.579,
+     "a31": 1.508,
+     "a100": 4.866
+    },
+    {
+     "key": "3",
+     "a40": 3.0,
+     "a60": 4.499,
+     "a53": 3.974,
+     "a31": 2.325,
+     "a100": 7.499
+    },
+    {
+     "key": "3-1/2",
+     "a40": 4.004,
+     "a60": 6.006,
+     "a53": 5.305,
+     "a31": 3.103,
+     "a100": 10.01
+    },
+    {
+     "key": "4",
+     "a40": 5.153,
+     "a60": 7.729,
+     "a53": 6.828,
+     "a31": 3.994,
+     "a100": 12.882
+    }
+   ],
+   "unit": "in²",
+   "raceway": "RMC"
+  },
+  "ch9_t4_pvc80": {
+   "title": "Chapter 9, Table 4",
+   "caption": "PVC Schedule 80: dimensions and percent area",
+   "kind": "keyed",
+   "key_label": "Trade size",
+   "columns": [
+    {
+     "id": "a40",
+     "label": "Over 2 wires 40% (in²)"
+    },
+    {
+     "id": "a60",
+     "label": "60% (in²)"
+    },
+    {
+     "id": "a53",
+     "label": "1 wire 53% (in²)"
+    },
+    {
+     "id": "a31",
+     "label": "2 wires 31% (in²)"
+    },
+    {
+     "id": "a100",
+     "label": "Total area 100% (in²)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "1/2",
+     "a40": 0.087,
+     "a60": 0.13,
+     "a53": 0.115,
+     "a31": 0.067,
+     "a100": 0.217
+    },
+    {
+     "key": "3/4",
+     "a40": 0.164,
+     "a60": 0.246,
+     "a53": 0.217,
+     "a31": 0.127,
+     "a100": 0.409
+    },
+    {
+     "key": "1",
+     "a40": 0.275,
+     "a60": 0.413,
+     "a53": 0.365,
+     "a31": 0.213,
+     "a100": 0.688
+    },
+    {
+     "key": "1-1/4",
+     "a40": 0.495,
+     "a60": 0.742,
+     "a53": 0.656,
+     "a31": 0.383,
+     "a100": 1.237
+    },
+    {
+     "key": "1-1/2",
+     "a40": 0.684,
+     "a60": 1.027,
+     "a53": 0.907,
+     "a31": 0.53,
+     "a100": 1.711
+    },
+    {
+     "key": "2",
+     "a40": 1.15,
+     "a60": 1.725,
+     "a53": 1.523,
+     "a31": 0.891,
+     "a100": 2.874
+    },
+    {
+     "key": "2-1/2",
+     "a40": 1.647,
+     "a60": 2.471,
+     "a53": 2.183,
+     "a31": 1.277,
+     "a100": 4.119
+    },
+    {
+     "key": "3",
+     "a40": 2.577,
+     "a60": 3.865,
+     "a53": 3.414,
+     "a31": 1.997,
+     "a100": 6.442
+    },
+    {
+     "key": "3-1/2",
+     "a40": 3.475,
+     "a60": 5.213,
+     "a53": 4.605,
+     "a31": 2.693,
+     "a100": 8.688
+    },
+    {
+     "key": "4",
+     "a40": 4.503,
+     "a60": 6.755,
+     "a53": 5.967,
+     "a31": 3.49,
+     "a100": 11.258
+    }
+   ],
+   "unit": "in²",
+   "raceway": "PVC Schedule 80"
+  },
+  "ch9_t4_pvc40": {
+   "title": "Chapter 9, Table 4",
+   "caption": "PVC Schedule 40: dimensions and percent area",
+   "kind": "keyed",
+   "key_label": "Trade size",
+   "columns": [
+    {
+     "id": "a40",
+     "label": "Over 2 wires 40% (in²)"
+    },
+    {
+     "id": "a60",
+     "label": "60% (in²)"
+    },
+    {
+     "id": "a53",
+     "label": "1 wire 53% (in²)"
+    },
+    {
+     "id": "a31",
+     "label": "2 wires 31% (in²)"
+    },
+    {
+     "id": "a100",
+     "label": "Total area 100% (in²)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "1/2",
+     "a40": 0.114,
+     "a60": 0.171,
+     "a53": 0.151,
+     "a31": 0.088,
+     "a100": 0.285
+    },
+    {
+     "key": "3/4",
+     "a40": 0.203,
+     "a60": 0.305,
+     "a53": 0.269,
+     "a31": 0.157,
+     "a100": 0.508
+    },
+    {
+     "key": "1",
+     "a40": 0.333,
+     "a60": 0.499,
+     "a53": 0.441,
+     "a31": 0.258,
+     "a100": 0.832
+    },
+    {
+     "key": "1-1/4",
+     "a40": 0.581,
+     "a60": 0.872,
+     "a53": 0.77,
+     "a31": 0.45,
+     "a100": 1.453
+    },
+    {
+     "key": "1-1/2",
+     "a40": 0.794,
+     "a60": 1.191,
+     "a53": 1.052,
+     "a31": 0.616,
+     "a100": 1.986
+    },
+    {
+     "key": "2",
+     "a40": 1.316,
+     "a60": 1.975,
+     "a53": 1.744,
+     "a31": 1.02,
+     "a100": 3.291
+    },
+    {
+     "key": "2-1/2",
+     "a40": 1.878,
+     "a60": 2.817,
+     "a53": 2.488,
+     "a31": 1.455,
+     "a100": 4.695
+    },
+    {
+     "key": "3",
+     "a40": 2.907,
+     "a60": 4.361,
+     "a53": 3.852,
+     "a31": 2.253,
+     "a100": 7.268
+    },
+    {
+     "key": "3-1/2",
+     "a40": 3.895,
+     "a60": 5.842,
+     "a53": 5.161,
+     "a31": 3.018,
+     "a100": 9.737
+    },
+    {
+     "key": "4",
+     "a40": 5.022,
+     "a60": 7.532,
+     "a53": 6.654,
+     "a31": 3.892,
+     "a100": 12.554
+    }
+   ],
+   "unit": "in²",
+   "raceway": "PVC Schedule 40"
+  },
+  "ch9_t5_thhn": {
+   "title": "Chapter 9, Table 5",
+   "caption": "Type THHN, THWN, THWN-2: approximate area",
+   "kind": "keyed",
+   "key_label": "Size (AWG or kcmil)",
+   "columns": [
+    {
+     "id": "in2",
+     "label": "Approximate area (in²)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "14",
+     "in2": 0.0097
+    },
+    {
+     "key": "12",
+     "in2": 0.0133
+    },
+    {
+     "key": "10",
+     "in2": 0.0211
+    },
+    {
+     "key": "8",
+     "in2": 0.0366
+    },
+    {
+     "key": "6",
+     "in2": 0.0507
+    },
+    {
+     "key": "4",
+     "in2": 0.0824
+    },
+    {
+     "key": "3",
+     "in2": 0.0973
+    },
+    {
+     "key": "2",
+     "in2": 0.1158
+    },
+    {
+     "key": "1",
+     "in2": 0.1562
+    },
+    {
+     "key": "1/0",
+     "in2": 0.1855
+    },
+    {
+     "key": "2/0",
+     "in2": 0.2223
+    },
+    {
+     "key": "3/0",
+     "in2": 0.2679
+    },
+    {
+     "key": "4/0",
+     "in2": 0.3237
+    },
+    {
+     "key": "250",
+     "in2": 0.397
+    },
+    {
+     "key": "300",
+     "in2": 0.4608
+    },
+    {
+     "key": "350",
+     "in2": 0.5242
+    },
+    {
+     "key": "400",
+     "in2": 0.5863
+    },
+    {
+     "key": "500",
+     "in2": 0.7073
+    },
+    {
+     "key": "600",
+     "in2": 0.8676
+    },
+    {
+     "key": "700",
+     "in2": 0.9887
+    },
+    {
+     "key": "750",
+     "in2": 1.0496
+    },
+    {
+     "key": "800",
+     "in2": 1.1085
+    },
+    {
+     "key": "900",
+     "in2": 1.2311
+    },
+    {
+     "key": "1000",
+     "in2": 1.3478
+    }
+   ],
+   "unit": "in²",
+   "insulation": "THHN, THWN, THWN-2"
+  },
+  "ch9_t5_xhhw": {
+   "title": "Chapter 9, Table 5",
+   "caption": "Type XHHW, XHHW-2, XHH: approximate area",
+   "kind": "keyed",
+   "key_label": "Size (AWG or kcmil)",
+   "columns": [
+    {
+     "id": "in2",
+     "label": "Approximate area (in²)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "14",
+     "in2": 0.0139
+    },
+    {
+     "key": "12",
+     "in2": 0.0181
+    },
+    {
+     "key": "10",
+     "in2": 0.0243
+    },
+    {
+     "key": "8",
+     "in2": 0.0437
+    },
+    {
+     "key": "6",
+     "in2": 0.059
+    },
+    {
+     "key": "4",
+     "in2": 0.0814
+    },
+    {
+     "key": "3",
+     "in2": 0.0962
+    },
+    {
+     "key": "2",
+     "in2": 0.1146
+    },
+    {
+     "key": "1",
+     "in2": 0.1534
+    },
+    {
+     "key": "1/0",
+     "in2": 0.1825
+    },
+    {
+     "key": "2/0",
+     "in2": 0.219
+    },
+    {
+     "key": "3/0",
+     "in2": 0.2642
+    },
+    {
+     "key": "4/0",
+     "in2": 0.3197
+    },
+    {
+     "key": "250",
+     "in2": 0.3904
+    },
+    {
+     "key": "300",
+     "in2": 0.4536
+    },
+    {
+     "key": "350",
+     "in2": 0.5166
+    },
+    {
+     "key": "400",
+     "in2": 0.5782
+    },
+    {
+     "key": "500",
+     "in2": 0.6984
+    },
+    {
+     "key": "600",
+     "in2": 0.8709
+    },
+    {
+     "key": "700",
+     "in2": 0.9923
+    },
+    {
+     "key": "750",
+     "in2": 1.0532
+    },
+    {
+     "key": "800",
+     "in2": 1.1122
+    },
+    {
+     "key": "900",
+     "in2": 1.2351
+    },
+    {
+     "key": "1000",
+     "in2": 1.3519
+    }
+   ],
+   "unit": "in²",
+   "insulation": "XHHW, XHHW-2, XHH"
+  },
+  "ch9_t5_thw": {
+   "title": "Chapter 9, Table 5",
+   "caption": "Type THW, THHW, THW-2, TW: approximate area",
+   "kind": "keyed",
+   "key_label": "Size (AWG or kcmil)",
+   "columns": [
+    {
+     "id": "in2",
+     "label": "Approximate area (in²)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "14",
+     "in2": 0.0139
+    },
+    {
+     "key": "12",
+     "in2": 0.0181
+    },
+    {
+     "key": "10",
+     "in2": 0.0243
+    },
+    {
+     "key": "8",
+     "in2": 0.0437
+    },
+    {
+     "key": "6",
+     "in2": 0.0726
+    },
+    {
+     "key": "4",
+     "in2": 0.0973
+    },
+    {
+     "key": "3",
+     "in2": 0.1134
+    },
+    {
+     "key": "2",
+     "in2": 0.1333
+    },
+    {
+     "key": "1",
+     "in2": 0.1901
+    },
+    {
+     "key": "1/0",
+     "in2": 0.2223
+    },
+    {
+     "key": "2/0",
+     "in2": 0.2624
+    },
+    {
+     "key": "3/0",
+     "in2": 0.3117
+    },
+    {
+     "key": "4/0",
+     "in2": 0.3718
+    },
+    {
+     "key": "250",
+     "in2": 0.4596
+    },
+    {
+     "key": "300",
+     "in2": 0.5281
+    },
+    {
+     "key": "350",
+     "in2": 0.5958
+    },
+    {
+     "key": "400",
+     "in2": 0.6619
+    },
+    {
+     "key": "500",
+     "in2": 0.7901
+    },
+    {
+     "key": "600",
+     "in2": 0.9729
+    },
+    {
+     "key": "700",
+     "in2": 1.101
+    },
+    {
+     "key": "750",
+     "in2": 1.1652
+    },
+    {
+     "key": "800",
+     "in2": 1.2272
+    },
+    {
+     "key": "900",
+     "in2": 1.3561
+    },
+    {
+     "key": "1000",
+     "in2": 1.4784
+    }
+   ],
+   "unit": "in²",
+   "insulation": "THW, THHW, THW-2, TW"
+  },
+  "ch9_t8": {
+   "title": "Chapter 9, Table 8",
+   "caption": "Conductor properties: area and dc resistance at 75°C (stranded)",
+   "kind": "keyed",
+   "key_label": "Size (AWG or kcmil)",
+   "columns": [
+    {
+     "id": "cmil",
+     "label": "Area (circular mils)"
+    },
+    {
+     "id": "cu_ohm_kft",
+     "label": "Copper uncoated (Ω/kFT)"
+    },
+    {
+     "id": "al_ohm_kft",
+     "label": "Aluminum (Ω/kFT)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "14",
+     "cmil": 4110,
+     "cu_ohm_kft": 3.14,
+     "al_ohm_kft": 5.17
+    },
+    {
+     "key": "12",
+     "cmil": 6530,
+     "cu_ohm_kft": 1.98,
+     "al_ohm_kft": 3.25
+    },
+    {
+     "key": "10",
+     "cmil": 10380,
+     "cu_ohm_kft": 1.24,
+     "al_ohm_kft": 2.04
+    },
+    {
+     "key": "8",
+     "cmil": 16510,
+     "cu_ohm_kft": 0.778,
+     "al_ohm_kft": 1.28
+    },
+    {
+     "key": "6",
+     "cmil": 26240,
+     "cu_ohm_kft": 0.491,
+     "al_ohm_kft": 0.808
+    },
+    {
+     "key": "4",
+     "cmil": 41740,
+     "cu_ohm_kft": 0.308,
+     "al_ohm_kft": 0.508
+    },
+    {
+     "key": "3",
+     "cmil": 52620,
+     "cu_ohm_kft": 0.245,
+     "al_ohm_kft": 0.403
+    },
+    {
+     "key": "2",
+     "cmil": 66360,
+     "cu_ohm_kft": 0.194,
+     "al_ohm_kft": 0.319
+    },
+    {
+     "key": "1",
+     "cmil": 83690,
+     "cu_ohm_kft": 0.154,
+     "al_ohm_kft": 0.253
+    },
+    {
+     "key": "1/0",
+     "cmil": 105600,
+     "cu_ohm_kft": 0.122,
+     "al_ohm_kft": 0.201
+    },
+    {
+     "key": "2/0",
+     "cmil": 133100,
+     "cu_ohm_kft": 0.0967,
+     "al_ohm_kft": 0.159
+    },
+    {
+     "key": "3/0",
+     "cmil": 167800,
+     "cu_ohm_kft": 0.0766,
+     "al_ohm_kft": 0.126
+    },
+    {
+     "key": "4/0",
+     "cmil": 211600,
+     "cu_ohm_kft": 0.0608,
+     "al_ohm_kft": 0.1
+    },
+    {
+     "key": "250",
+     "cmil": 250000,
+     "cu_ohm_kft": 0.0515,
+     "al_ohm_kft": 0.0847
+    },
+    {
+     "key": "300",
+     "cmil": 300000,
+     "cu_ohm_kft": 0.0429,
+     "al_ohm_kft": 0.0707
+    },
+    {
+     "key": "350",
+     "cmil": 350000,
+     "cu_ohm_kft": 0.0367,
+     "al_ohm_kft": 0.0605
+    },
+    {
+     "key": "400",
+     "cmil": 400000,
+     "cu_ohm_kft": 0.0321,
+     "al_ohm_kft": 0.0529
+    },
+    {
+     "key": "500",
+     "cmil": 500000,
+     "cu_ohm_kft": 0.0258,
+     "al_ohm_kft": 0.0424
+    },
+    {
+     "key": "600",
+     "cmil": 600000,
+     "cu_ohm_kft": 0.0214,
+     "al_ohm_kft": 0.0353
+    },
+    {
+     "key": "700",
+     "cmil": 700000,
+     "cu_ohm_kft": 0.0184,
+     "al_ohm_kft": 0.0303
+    },
+    {
+     "key": "750",
+     "cmil": 750000,
+     "cu_ohm_kft": 0.0171,
+     "al_ohm_kft": 0.0282
+    },
+    {
+     "key": "800",
+     "cmil": 800000,
+     "cu_ohm_kft": 0.0161,
+     "al_ohm_kft": 0.0265
+    },
+    {
+     "key": "900",
+     "cmil": 900000,
+     "cu_ohm_kft": 0.0143,
+     "al_ohm_kft": 0.0235
+    },
+    {
+     "key": "1000",
+     "cmil": 1000000,
+     "cu_ohm_kft": 0.0129,
+     "al_ohm_kft": 0.0212
+    }
+   ]
+  },
+  "t220_42a": {
+   "title": "Table 220.42(A)",
+   "caption": "General lighting loads by non-dwelling occupancy",
+   "kind": "keyed",
+   "key_label": "Occupancy",
+   "columns": [
+    {
+     "id": "va_ft2",
+     "label": "Unit load (VA/ft²)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "automotive facility",
+     "label": "Automotive facility",
+     "va_ft2": 1.5
+    },
+    {
+     "key": "convention center",
+     "label": "Convention center",
+     "va_ft2": 1.4
+    },
+    {
+     "key": "courthouse",
+     "label": "Courthouse",
+     "va_ft2": 1.4
+    },
+    {
+     "key": "dormitory",
+     "label": "Dormitory",
+     "va_ft2": 1.5
+    },
+    {
+     "key": "exercise center",
+     "label": "Exercise center",
+     "va_ft2": 1.4
+    },
+    {
+     "key": "fire station",
+     "label": "Fire station",
+     "va_ft2": 1.3
+    },
+    {
+     "key": "gymnasium",
+     "label": "Gymnasium",
+     "va_ft2": 1.7
+    },
+    {
+     "key": "health care clinic",
+     "label": "Health care clinic",
+     "va_ft2": 1.6
+    },
+    {
+     "key": "hospital",
+     "label": "Hospital",
+     "va_ft2": 1.6
+    },
+    {
+     "key": "hotel or motel",
+     "label": "Hotel or motel, or apartment house without provisions for cooking by tenants",
+     "va_ft2": 1.7
+    },
+    {
+     "key": "library",
+     "label": "Library",
+     "va_ft2": 1.5
+    },
+    {
+     "key": "manufacturing facility",
+     "label": "Manufacturing facility",
+     "va_ft2": 2.2
+    },
+    {
+     "key": "motion picture theater",
+     "label": "Motion picture theater",
+     "va_ft2": 1.6
+    },
+    {
+     "key": "museum",
+     "label": "Museum",
+     "va_ft2": 1.6
+    },
+    {
+     "key": "office",
+     "label": "Office",
+     "va_ft2": 1.3
+    },
+    {
+     "key": "parking garage",
+     "label": "Parking garage",
+     "va_ft2": 0.3
+    },
+    {
+     "key": "penitentiary",
+     "label": "Penitentiary",
+     "va_ft2": 1.2
+    },
+    {
+     "key": "performing arts theater",
+     "label": "Performing arts theater",
+     "va_ft2": 1.5
+    },
+    {
+     "key": "police station",
+     "label": "Police station",
+     "va_ft2": 1.3
+    },
+    {
+     "key": "post office",
+     "label": "Post office",
+     "va_ft2": 1.6
+    },
+    {
+     "key": "religious facility",
+     "label": "Religious facility",
+     "va_ft2": 2.2
+    },
+    {
+     "key": "restaurant",
+     "label": "Restaurant",
+     "va_ft2": 1.5
+    },
+    {
+     "key": "retail",
+     "label": "Retail",
+     "va_ft2": 1.9
+    },
+    {
+     "key": "school/university",
+     "label": "School/university",
+     "va_ft2": 1.5
+    },
+    {
+     "key": "sports arena",
+     "label": "Sports arena",
+     "va_ft2": 1.5
+    },
+    {
+     "key": "town hall",
+     "label": "Town hall",
+     "va_ft2": 1.4
+    },
+    {
+     "key": "transportation",
+     "label": "Transportation",
+     "va_ft2": 1.2
+    },
+    {
+     "key": "warehouse",
+     "label": "Warehouse",
+     "va_ft2": 1.2
+    },
+    {
+     "key": "workshop",
+     "label": "Workshop",
+     "va_ft2": 1.7
+    }
+   ]
+  },
+  "t220_45": {
+   "title": "Table 220.45",
+   "caption": "Lighting load demand factors, dwelling units",
+   "kind": "tiers",
+   "key_label": "Portion of load (VA)",
+   "columns": [
+    {
+     "id": "percent",
+     "label": "Demand factor (%)"
+    }
+   ],
+   "rows": [
+    {
+     "lo": 0,
+     "hi": 3000,
+     "key": "First 3,000",
+     "percent": 100
+    },
+    {
+     "lo": 3000,
+     "hi": 120000,
+     "key": "3,001 to 120,000",
+     "percent": 35
+    },
+    {
+     "lo": 120000,
+     "hi": 1000000000,
+     "key": "Over 120,000",
+     "percent": 25
+    }
+   ]
+  },
+  "t220_54": {
+   "title": "Table 220.54",
+   "caption": "Demand factors for household electric clothes dryers",
+   "kind": "range",
+   "key_label": "Number of dryers",
+   "columns": [
+    {
+     "id": "percent",
+     "label": "Demand factor (%)"
+    }
+   ],
+   "rows": [
+    {
+     "lo": 1,
+     "hi": 4,
+     "key": "1–4",
+     "percent": 100
+    },
+    {
+     "lo": 5,
+     "hi": 5,
+     "key": "5",
+     "percent": 85
+    },
+    {
+     "lo": 6,
+     "hi": 6,
+     "key": "6",
+     "percent": 75
+    },
+    {
+     "lo": 7,
+     "hi": 7,
+     "key": "7",
+     "percent": 65
+    },
+    {
+     "lo": 8,
+     "hi": 8,
+     "key": "8",
+     "percent": 60
+    },
+    {
+     "lo": 9,
+     "hi": 9,
+     "key": "9",
+     "percent": 55
+    },
+    {
+     "lo": 10,
+     "hi": 10,
+     "key": "10",
+     "percent": 50
+    },
+    {
+     "lo": 11,
+     "hi": 11,
+     "key": "11",
+     "percent": 47
+    },
+    {
+     "lo": 12,
+     "hi": 23,
+     "key": "12–23",
+     "expr": "47 - 1 * (n - 11)",
+     "label": "47% minus 1% for each dryer exceeding 11"
+    },
+    {
+     "lo": 24,
+     "hi": 42,
+     "key": "24–42",
+     "expr": "35 - 0.5 * (n - 23)",
+     "label": "35% minus 0.5% for each dryer exceeding 23"
+    },
+    {
+     "lo": 43,
+     "hi": 100000,
+     "key": "43 and over",
+     "percent": 25
+    }
+   ]
+  },
+  "t220_55": {
+   "title": "Table 220.55",
+   "caption": "Household cooking appliances over 1¾ kW: demand factors and loads",
+   "kind": "keyed",
+   "key_label": "Number of appliances",
+   "columns": [
+    {
+     "id": "col_a",
+     "label": "Column A, less than 3½ kW (%)"
+    },
+    {
+     "id": "col_b",
+     "label": "Column B, 3½–8¾ kW (%)"
+    },
+    {
+     "id": "col_c",
+     "label": "Column C, not over 12 kW (kW)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "1",
+     "lo": 1,
+     "hi": 1,
+     "col_a": 80,
+     "col_b": 80,
+     "col_c": 8
+    },
+    {
+     "key": "2",
+     "lo": 2,
+     "hi": 2,
+     "col_a": 75,
+     "col_b": 65,
+     "col_c": 11
+    },
+    {
+     "key": "3",
+     "lo": 3,
+     "hi": 3,
+     "col_a": 70,
+     "col_b": 55,
+     "col_c": 14
+    },
+    {
+     "key": "4",
+     "lo": 4,
+     "hi": 4,
+     "col_a": 66,
+     "col_b": 50,
+     "col_c": 17
+    },
+    {
+     "key": "5",
+     "lo": 5,
+     "hi": 5,
+     "col_a": 62,
+     "col_b": 45,
+     "col_c": 20
+    },
+    {
+     "key": "6",
+     "lo": 6,
+     "hi": 6,
+     "col_a": 59,
+     "col_b": 43,
+     "col_c": 21
+    },
+    {
+     "key": "7",
+     "lo": 7,
+     "hi": 7,
+     "col_a": 56,
+     "col_b": 40,
+     "col_c": 22
+    },
+    {
+     "key": "8",
+     "lo": 8,
+     "hi": 8,
+     "col_a": 53,
+     "col_b": 36,
+     "col_c": 23
+    },
+    {
+     "key": "9",
+     "lo": 9,
+     "hi": 9,
+     "col_a": 51,
+     "col_b": 35,
+     "col_c": 24
+    },
+    {
+     "key": "10",
+     "lo": 10,
+     "hi": 10,
+     "col_a": 49,
+     "col_b": 34,
+     "col_c": 25
+    },
+    {
+     "key": "11",
+     "lo": 11,
+     "hi": 11,
+     "col_a": 47,
+     "col_b": 32,
+     "col_c": 26
+    },
+    {
+     "key": "12",
+     "lo": 12,
+     "hi": 12,
+     "col_a": 45,
+     "col_b": 32,
+     "col_c": 27
+    },
+    {
+     "key": "13",
+     "lo": 13,
+     "hi": 13,
+     "col_a": 43,
+     "col_b": 32,
+     "col_c": 28
+    },
+    {
+     "key": "14",
+     "lo": 14,
+     "hi": 14,
+     "col_a": 41,
+     "col_b": 32,
+     "col_c": 29
+    },
+    {
+     "key": "15",
+     "lo": 15,
+     "hi": 15,
+     "col_a": 40,
+     "col_b": 32,
+     "col_c": 30
+    },
+    {
+     "key": "16",
+     "lo": 16,
+     "hi": 16,
+     "col_a": 39,
+     "col_b": 28,
+     "col_c": 31
+    },
+    {
+     "key": "17",
+     "lo": 17,
+     "hi": 17,
+     "col_a": 38,
+     "col_b": 28,
+     "col_c": 32
+    },
+    {
+     "key": "18",
+     "lo": 18,
+     "hi": 18,
+     "col_a": 37,
+     "col_b": 28,
+     "col_c": 33
+    },
+    {
+     "key": "19",
+     "lo": 19,
+     "hi": 19,
+     "col_a": 36,
+     "col_b": 28,
+     "col_c": 34
+    },
+    {
+     "key": "20",
+     "lo": 20,
+     "hi": 20,
+     "col_a": 35,
+     "col_b": 28,
+     "col_c": 35
+    },
+    {
+     "key": "21",
+     "lo": 21,
+     "hi": 21,
+     "col_a": 34,
+     "col_b": 26,
+     "col_c": 36
+    },
+    {
+     "key": "22",
+     "lo": 22,
+     "hi": 22,
+     "col_a": 33,
+     "col_b": 26,
+     "col_c": 37
+    },
+    {
+     "key": "23",
+     "lo": 23,
+     "hi": 23,
+     "col_a": 32,
+     "col_b": 26,
+     "col_c": 38
+    },
+    {
+     "key": "24",
+     "lo": 24,
+     "hi": 24,
+     "col_a": 31,
+     "col_b": 26,
+     "col_c": 39
+    },
+    {
+     "key": "25",
+     "lo": 25,
+     "hi": 25,
+     "col_a": 30,
+     "col_b": 26,
+     "col_c": 40
+    },
+    {
+     "key": "26–30",
+     "lo": 26,
+     "hi": 30,
+     "col_a": 30,
+     "col_b": 24,
+     "col_c_expr": "15 + 1 * n",
+     "col_c_label": "15 kW + 1 kW for each range"
+    },
+    {
+     "key": "31–40",
+     "lo": 31,
+     "hi": 40,
+     "col_a": 30,
+     "col_b": 22,
+     "col_c_expr": "15 + 1 * n",
+     "col_c_label": "15 kW + 1 kW for each range"
+    },
+    {
+     "key": "41–50",
+     "lo": 41,
+     "hi": 50,
+     "col_a": 30,
+     "col_b": 20,
+     "col_c_expr": "25 + 0.75 * n",
+     "col_c_label": "25 kW + 3/4 kW for each range"
+    },
+    {
+     "key": "51–60",
+     "lo": 51,
+     "hi": 60,
+     "col_a": 30,
+     "col_b": 18,
+     "col_c_expr": "25 + 0.75 * n",
+     "col_c_label": "25 kW + 3/4 kW for each range"
+    },
+    {
+     "key": "61 and over",
+     "lo": 61,
+     "hi": 100000,
+     "col_a": 30,
+     "col_b": 16,
+     "col_c_expr": "25 + 0.75 * n",
+     "col_c_label": "25 kW + 3/4 kW for each range"
+    }
+   ]
+  },
+  "t240_6a": {
+   "title": "Table 240.6(A)",
+   "caption": "Standard ampere ratings for fuses and inverse time circuit breakers",
+   "kind": "list",
+   "key_label": "Rating (A)",
+   "columns": [
+    {
+     "id": "amps",
+     "label": "Standard rating (A)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "10",
+     "amps": 10
+    },
+    {
+     "key": "15",
+     "amps": 15
+    },
+    {
+     "key": "20",
+     "amps": 20
+    },
+    {
+     "key": "25",
+     "amps": 25
+    },
+    {
+     "key": "30",
+     "amps": 30
+    },
+    {
+     "key": "35",
+     "amps": 35
+    },
+    {
+     "key": "40",
+     "amps": 40
+    },
+    {
+     "key": "45",
+     "amps": 45
+    },
+    {
+     "key": "50",
+     "amps": 50
+    },
+    {
+     "key": "60",
+     "amps": 60
+    },
+    {
+     "key": "70",
+     "amps": 70
+    },
+    {
+     "key": "80",
+     "amps": 80
+    },
+    {
+     "key": "90",
+     "amps": 90
+    },
+    {
+     "key": "100",
+     "amps": 100
+    },
+    {
+     "key": "110",
+     "amps": 110
+    },
+    {
+     "key": "125",
+     "amps": 125
+    },
+    {
+     "key": "150",
+     "amps": 150
+    },
+    {
+     "key": "175",
+     "amps": 175
+    },
+    {
+     "key": "200",
+     "amps": 200
+    },
+    {
+     "key": "225",
+     "amps": 225
+    },
+    {
+     "key": "250",
+     "amps": 250
+    },
+    {
+     "key": "300",
+     "amps": 300
+    },
+    {
+     "key": "350",
+     "amps": 350
+    },
+    {
+     "key": "400",
+     "amps": 400
+    },
+    {
+     "key": "450",
+     "amps": 450
+    },
+    {
+     "key": "500",
+     "amps": 500
+    },
+    {
+     "key": "600",
+     "amps": 600
+    },
+    {
+     "key": "700",
+     "amps": 700
+    },
+    {
+     "key": "800",
+     "amps": 800
+    },
+    {
+     "key": "1000",
+     "amps": 1000
+    },
+    {
+     "key": "1200",
+     "amps": 1200
+    },
+    {
+     "key": "1600",
+     "amps": 1600
+    },
+    {
+     "key": "2000",
+     "amps": 2000
+    },
+    {
+     "key": "2500",
+     "amps": 2500
+    },
+    {
+     "key": "3000",
+     "amps": 3000
+    },
+    {
+     "key": "4000",
+     "amps": 4000
+    },
+    {
+     "key": "5000",
+     "amps": 5000
+    },
+    {
+     "key": "6000",
+     "amps": 6000
+    }
+   ]
+  },
+  "t250_66": {
+   "title": "Table 250.66",
+   "caption": "Grounding electrode conductor for ac systems",
+   "kind": "keyed",
+   "key_label": "Largest ungrounded conductor, copper (AWG/kcmil)",
+   "columns": [
+    {
+     "id": "cu_gec",
+     "label": "Copper GEC"
+    },
+    {
+     "id": "al_gec",
+     "label": "Aluminum GEC"
+    }
+   ],
+   "rows": [
+    {
+     "key": "2 or smaller",
+     "al_range": "1/0 or smaller",
+     "cu_gec": "8",
+     "al_gec": "6",
+     "cu_max": "2"
+    },
+    {
+     "key": "1 or 1/0",
+     "al_range": "2/0 or 3/0",
+     "cu_gec": "6",
+     "al_gec": "4",
+     "cu_max": "1/0"
+    },
+    {
+     "key": "2/0 or 3/0",
+     "al_range": "4/0 or 250",
+     "cu_gec": "4",
+     "al_gec": "2",
+     "cu_max": "3/0"
+    },
+    {
+     "key": "Over 3/0 through 350",
+     "al_range": "Over 250 through 500",
+     "cu_gec": "2",
+     "al_gec": "1/0",
+     "cu_max": "350"
+    },
+    {
+     "key": "Over 350 through 600",
+     "al_range": "Over 500 through 900",
+     "cu_gec": "1/0",
+     "al_gec": "3/0",
+     "cu_max": "600"
+    },
+    {
+     "key": "Over 600 through 1100",
+     "al_range": "Over 900 through 1750",
+     "cu_gec": "2/0",
+     "al_gec": "4/0",
+     "cu_max": "1100"
+    },
+    {
+     "key": "Over 1100",
+     "al_range": "Over 1750",
+     "cu_gec": "3/0",
+     "al_gec": "250",
+     "cu_max": null
+    }
+   ]
+  },
+  "t250_122": {
+   "title": "Table 250.122",
+   "caption": "Minimum size equipment grounding conductors",
+   "kind": "at_most",
+   "key_label": "Overcurrent device, not exceeding (A)",
+   "columns": [
+    {
+     "id": "cu",
+     "label": "Copper"
+    },
+    {
+     "id": "al",
+     "label": "Aluminum"
+    }
+   ],
+   "rows": [
+    {
+     "key": "15",
+     "amps": 15,
+     "cu": "14",
+     "al": "12"
+    },
+    {
+     "key": "20",
+     "amps": 20,
+     "cu": "12",
+     "al": "10"
+    },
+    {
+     "key": "60",
+     "amps": 60,
+     "cu": "10",
+     "al": "8"
+    },
+    {
+     "key": "100",
+     "amps": 100,
+     "cu": "8",
+     "al": "6"
+    },
+    {
+     "key": "200",
+     "amps": 200,
+     "cu": "6",
+     "al": "4"
+    },
+    {
+     "key": "300",
+     "amps": 300,
+     "cu": "4",
+     "al": "2"
+    },
+    {
+     "key": "400",
+     "amps": 400,
+     "cu": "3",
+     "al": "1"
+    },
+    {
+     "key": "500",
+     "amps": 500,
+     "cu": "2",
+     "al": "1/0"
+    },
+    {
+     "key": "600",
+     "amps": 600,
+     "cu": "1",
+     "al": "2/0"
+    },
+    {
+     "key": "800",
+     "amps": 800,
+     "cu": "1/0",
+     "al": "3/0"
+    },
+    {
+     "key": "1000",
+     "amps": 1000,
+     "cu": "2/0",
+     "al": "4/0"
+    },
+    {
+     "key": "1200",
+     "amps": 1200,
+     "cu": "3/0",
+     "al": "250"
+    },
+    {
+     "key": "1600",
+     "amps": 1600,
+     "cu": "4/0",
+     "al": "350"
+    },
+    {
+     "key": "2000",
+     "amps": 2000,
+     "cu": "250",
+     "al": "400"
+    },
+    {
+     "key": "2500",
+     "amps": 2500,
+     "cu": "350",
+     "al": "600"
+    },
+    {
+     "key": "3000",
+     "amps": 3000,
+     "cu": "400",
+     "al": "600"
+    },
+    {
+     "key": "4000",
+     "amps": 4000,
+     "cu": "500",
+     "al": "750"
+    },
+    {
+     "key": "5000",
+     "amps": 5000,
+     "cu": "700",
+     "al": "1250"
+    },
+    {
+     "key": "6000",
+     "amps": 6000,
+     "cu": "800",
+     "al": "1250"
+    }
+   ]
+  },
+  "t430_248": {
+   "title": "Table 430.248",
+   "caption": "Full-load currents, single-phase ac motors",
+   "kind": "keyed",
+   "key_label": "Horsepower",
+   "columns": [
+    {
+     "id": "v115",
+     "label": "115 V"
+    },
+    {
+     "id": "v200",
+     "label": "200 V"
+    },
+    {
+     "id": "v208",
+     "label": "208 V"
+    },
+    {
+     "id": "v230",
+     "label": "230 V"
+    }
+   ],
+   "rows": [
+    {
+     "key": "1/6",
+     "v115": 4.4,
+     "v200": 2.5,
+     "v208": 2.4,
+     "v230": 2.2
+    },
+    {
+     "key": "1/4",
+     "v115": 5.8,
+     "v200": 3.3,
+     "v208": 3.2,
+     "v230": 2.9
+    },
+    {
+     "key": "1/3",
+     "v115": 7.2,
+     "v200": 4.1,
+     "v208": 4.0,
+     "v230": 3.6
+    },
+    {
+     "key": "1/2",
+     "v115": 9.8,
+     "v200": 5.6,
+     "v208": 5.4,
+     "v230": 4.9
+    },
+    {
+     "key": "3/4",
+     "v115": 13.8,
+     "v200": 7.9,
+     "v208": 7.6,
+     "v230": 6.9
+    },
+    {
+     "key": "1",
+     "v115": 16,
+     "v200": 9.2,
+     "v208": 8.8,
+     "v230": 8.0
+    },
+    {
+     "key": "1-1/2",
+     "v115": 20,
+     "v200": 11.5,
+     "v208": 11.0,
+     "v230": 10
+    },
+    {
+     "key": "2",
+     "v115": 24,
+     "v200": 13.8,
+     "v208": 13.2,
+     "v230": 12
+    },
+    {
+     "key": "3",
+     "v115": 34,
+     "v200": 19.6,
+     "v208": 18.7,
+     "v230": 17
+    },
+    {
+     "key": "5",
+     "v115": 56,
+     "v200": 32.2,
+     "v208": 30.8,
+     "v230": 28
+    },
+    {
+     "key": "7-1/2",
+     "v115": 80,
+     "v200": 46.0,
+     "v208": 44.0,
+     "v230": 40
+    },
+    {
+     "key": "10",
+     "v115": 100,
+     "v200": 57.5,
+     "v208": 55.0,
+     "v230": 50
+    }
+   ],
+   "unit": "A"
+  },
+  "t430_250": {
+   "title": "Table 430.250",
+   "caption": "Full-load current, three-phase ac motors (induction type)",
+   "kind": "keyed",
+   "key_label": "Horsepower",
+   "columns": [
+    {
+     "id": "v115",
+     "label": "115 V"
+    },
+    {
+     "id": "v200",
+     "label": "200 V"
+    },
+    {
+     "id": "v208",
+     "label": "208 V"
+    },
+    {
+     "id": "v230",
+     "label": "230 V"
+    },
+    {
+     "id": "v460",
+     "label": "460 V"
+    },
+    {
+     "id": "v575",
+     "label": "575 V"
+    },
+    {
+     "id": "v2300",
+     "label": "2300 V"
+    }
+   ],
+   "rows": [
+    {
+     "key": "1/2",
+     "v115": 4.4,
+     "v200": 2.5,
+     "v208": 2.4,
+     "v230": 2.2,
+     "v460": 1.1,
+     "v575": 0.9,
+     "v2300": null
+    },
+    {
+     "key": "3/4",
+     "v115": 6.4,
+     "v200": 3.7,
+     "v208": 3.5,
+     "v230": 3.2,
+     "v460": 1.6,
+     "v575": 1.3,
+     "v2300": null
+    },
+    {
+     "key": "1",
+     "v115": 8.4,
+     "v200": 4.8,
+     "v208": 4.6,
+     "v230": 4.2,
+     "v460": 2.1,
+     "v575": 1.7,
+     "v2300": null
+    },
+    {
+     "key": "1-1/2",
+     "v115": 12.0,
+     "v200": 6.9,
+     "v208": 6.6,
+     "v230": 6.0,
+     "v460": 3.0,
+     "v575": 2.4,
+     "v2300": null
+    },
+    {
+     "key": "2",
+     "v115": 13.6,
+     "v200": 7.8,
+     "v208": 7.5,
+     "v230": 6.8,
+     "v460": 3.4,
+     "v575": 2.7,
+     "v2300": null
+    },
+    {
+     "key": "3",
+     "v115": null,
+     "v200": 11.0,
+     "v208": 10.6,
+     "v230": 9.6,
+     "v460": 4.8,
+     "v575": 3.9,
+     "v2300": null
+    },
+    {
+     "key": "5",
+     "v115": null,
+     "v200": 17.5,
+     "v208": 16.7,
+     "v230": 15.2,
+     "v460": 7.6,
+     "v575": 6.1,
+     "v2300": null
+    },
+    {
+     "key": "7-1/2",
+     "v115": null,
+     "v200": 25.3,
+     "v208": 24.2,
+     "v230": 22,
+     "v460": 11,
+     "v575": 9,
+     "v2300": null
+    },
+    {
+     "key": "10",
+     "v115": null,
+     "v200": 32.2,
+     "v208": 30.8,
+     "v230": 28,
+     "v460": 14,
+     "v575": 11,
+     "v2300": null
+    },
+    {
+     "key": "15",
+     "v115": null,
+     "v200": 48.3,
+     "v208": 46.2,
+     "v230": 42,
+     "v460": 21,
+     "v575": 17,
+     "v2300": null
+    },
+    {
+     "key": "20",
+     "v115": null,
+     "v200": 62.1,
+     "v208": 59.4,
+     "v230": 54,
+     "v460": 27,
+     "v575": 22,
+     "v2300": null
+    },
+    {
+     "key": "25",
+     "v115": null,
+     "v200": 78.2,
+     "v208": 74.8,
+     "v230": 68,
+     "v460": 34,
+     "v575": 27,
+     "v2300": null
+    },
+    {
+     "key": "30",
+     "v115": null,
+     "v200": 92,
+     "v208": 88,
+     "v230": 80,
+     "v460": 40,
+     "v575": 32,
+     "v2300": null
+    },
+    {
+     "key": "40",
+     "v115": null,
+     "v200": 120,
+     "v208": 114,
+     "v230": 104,
+     "v460": 52,
+     "v575": 41,
+     "v2300": null
+    },
+    {
+     "key": "50",
+     "v115": null,
+     "v200": 150,
+     "v208": 143,
+     "v230": 130,
+     "v460": 65,
+     "v575": 52,
+     "v2300": null
+    },
+    {
+     "key": "60",
+     "v115": null,
+     "v200": 177,
+     "v208": 169,
+     "v230": 154,
+     "v460": 77,
+     "v575": 62,
+     "v2300": 16
+    },
+    {
+     "key": "75",
+     "v115": null,
+     "v200": 221,
+     "v208": 211,
+     "v230": 192,
+     "v460": 96,
+     "v575": 77,
+     "v2300": 20
+    },
+    {
+     "key": "100",
+     "v115": null,
+     "v200": 285,
+     "v208": 273,
+     "v230": 248,
+     "v460": 124,
+     "v575": 99,
+     "v2300": 26
+    },
+    {
+     "key": "125",
+     "v115": null,
+     "v200": 359,
+     "v208": 343,
+     "v230": 312,
+     "v460": 156,
+     "v575": 125,
+     "v2300": 31
+    },
+    {
+     "key": "150",
+     "v115": null,
+     "v200": 414,
+     "v208": 396,
+     "v230": 360,
+     "v460": 180,
+     "v575": 144,
+     "v2300": 37
+    },
+    {
+     "key": "200",
+     "v115": null,
+     "v200": 552,
+     "v208": 528,
+     "v230": 480,
+     "v460": 240,
+     "v575": 192,
+     "v2300": 49
+    },
+    {
+     "key": "250",
+     "v115": null,
+     "v200": null,
+     "v208": null,
+     "v230": null,
+     "v460": 302,
+     "v575": 242,
+     "v2300": 60
+    },
+    {
+     "key": "300",
+     "v115": null,
+     "v200": null,
+     "v208": null,
+     "v230": null,
+     "v460": 361,
+     "v575": 289,
+     "v2300": 72
+    },
+    {
+     "key": "350",
+     "v115": null,
+     "v200": null,
+     "v208": null,
+     "v230": null,
+     "v460": 414,
+     "v575": 336,
+     "v2300": 83
+    },
+    {
+     "key": "400",
+     "v115": null,
+     "v200": null,
+     "v208": null,
+     "v230": null,
+     "v460": 477,
+     "v575": 382,
+     "v2300": 95
+    },
+    {
+     "key": "450",
+     "v115": null,
+     "v200": null,
+     "v208": null,
+     "v230": null,
+     "v460": 515,
+     "v575": 412,
+     "v2300": 103
+    },
+    {
+     "key": "500",
+     "v115": null,
+     "v200": null,
+     "v208": null,
+     "v230": null,
+     "v460": 590,
+     "v575": 472,
+     "v2300": 118
+    }
+   ],
+   "unit": "A"
+  },
+  "t430_52c1": {
+   "title": "Table 430.52(C)(1)",
+   "caption": "Maximum rating or setting of motor branch-circuit short-circuit and ground-fault protective devices",
+   "kind": "keyed",
+   "key_label": "Type of motor",
+   "columns": [
+    {
+     "id": "nontime_fuse",
+     "label": "Nontime-delay fuse (%)"
+    },
+    {
+     "id": "dual_fuse",
+     "label": "Dual-element (time-delay) fuse (%)"
+    },
+    {
+     "id": "inst_breaker",
+     "label": "Instantaneous-trip breaker (%)"
+    },
+    {
+     "id": "inverse_breaker",
+     "label": "Inverse time breaker (%)"
+    }
+   ],
+   "rows": [
+    {
+     "key": "single_phase",
+     "label": "Single-phase motors",
+     "nontime_fuse": 300,
+     "dual_fuse": 175,
+     "inst_breaker": 800,
+     "inverse_breaker": 250
+    },
+    {
+     "key": "polyphase",
+     "label": "AC polyphase motors other than wound-rotor",
+     "nontime_fuse": 300,
+     "dual_fuse": 175,
+     "inst_breaker": 800,
+     "inverse_breaker": 250
+    },
+    {
+     "key": "squirrel_cage",
+     "label": "Squirrel cage - other than Design B energy-efficient - and Design B premium efficiency",
+     "nontime_fuse": 300,
+     "dual_fuse": 175,
+     "inst_breaker": 800,
+     "inverse_breaker": 250
+    },
+    {
+     "key": "design_b_ee",
+     "label": "Design B energy-efficient and Design B premium efficiency",
+     "nontime_fuse": 300,
+     "dual_fuse": 175,
+     "inst_breaker": 1100,
+     "inverse_breaker": 250
+    },
+    {
+     "key": "synchronous",
+     "label": "Synchronous",
+     "nontime_fuse": 300,
+     "dual_fuse": 175,
+     "inst_breaker": 800,
+     "inverse_breaker": 250
+    },
+    {
+     "key": "wound_rotor",
+     "label": "Wound-rotor",
+     "nontime_fuse": 150,
+     "dual_fuse": 150,
+     "inst_breaker": 800,
+     "inverse_breaker": 150
+    },
+    {
+     "key": "dc",
+     "label": "DC (constant voltage)",
+     "nontime_fuse": 150,
+     "dual_fuse": 150,
+     "inst_breaker": 250,
+     "inverse_breaker": 150
+    }
+   ]
+  },
+  "t630_31a": {
+   "title": "Table 630.31(A)",
+   "caption": "Duty cycle multiplication factors for resistance welders",
+   "kind": "keyed",
+   "key_label": "Duty cycle (%)",
+   "columns": [
+    {
+     "id": "multiplier",
+     "label": "Multiplier"
+    }
+   ],
+   "rows": [
+    {
+     "key": "50",
+     "multiplier": 0.71
+    },
+    {
+     "key": "40",
+     "multiplier": 0.63
+    },
+    {
+     "key": "30",
+     "multiplier": 0.55
+    },
+    {
+     "key": "25",
+     "multiplier": 0.5
+    },
+    {
+     "key": "20",
+     "multiplier": 0.45
+    },
+    {
+     "key": "15",
+     "multiplier": 0.39
+    },
+    {
+     "key": "10",
+     "multiplier": 0.32
+    },
+    {
+     "key": "7.5",
+     "multiplier": 0.27
+    },
+    {
+     "key": "5",
+     "multiplier": 0.22
+    }
+   ]
+  }
+ },
+ "values": {
+  "220.41.va_per_ft2": 3,
+  "220.52(A).va_per_circuit": 1500,
+  "220.52(B).va_per_circuit": 1500,
+  "210.11(C)(1).min_circuits": 2,
+  "220.53.percent": 75,
+  "220.53.min_count": 4,
+  "220.54.min_watts": 5000,
+  "220.55.note1_base_kw": 12,
+  "220.55.note1_percent_per_kw": 5,
+  "220.14(H)(1).feet": 5,
+  "220.14(H).va_per_outlet": 180,
+  "220.60.motor_percent": 125,
+  "430.22.percent": 125,
+  "430.32(A)(1).service_factor_percent": 125,
+  "430.32(A)(1).temp_rise_percent": 125,
+  "430.32(A)(1).other_percent": 115,
+  "430.32(C).service_factor_percent": 140,
+  "430.32(C).temp_rise_percent": 140,
+  "430.32(C).other_percent": 130,
+  "430.24.largest_percent": 125,
+  "220.61(B).neutral_percent": 70,
+  "240.4(D).cu_14": 15,
+  "240.4(D).cu_12": 20,
+  "240.4(D).cu_10": 30,
+  "240.4(D).al_12": 15,
+  "240.4(D).al_10": 25,
+  "366.23(A).copper_a_per_in2": 1000,
+  "366.23(A).aluminum_a_per_in2": 700,
+  "630.12(A).percent": 200,
+  "240.21(B)(1).tap_ratio": 10,
+  "210.52(G)(1).per_bay": 1,
+  "314.16(B)(5).egc_single": 4,
+  "314.16(B)(5).extra_egc_fraction": 0.25,
+  "314.16(B)(4).per_yoke": 2,
+  "ch9.note7_round_up_at": 0.8,
+  "ch9.note4_nipple_percent": 60
+ }
+}
