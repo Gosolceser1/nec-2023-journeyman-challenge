@@ -545,7 +545,7 @@
       "id": "final-exam-#1-011",
       "exam": "Final Exam #1",
       "question_number": 11,
-      "prompt": "In a dwelling bedroom, any wall space ___ or more in width (including space measured around corners) and unbroken along the floor line by doorways and similar openings, fireplaces, and fixed cabinets that do not have countertops or similar work surfaces.",
+      "prompt": "In a dwelling bedroom, wall space includes any space ___ or more in width (including space measured around corners) and unbroken along the floor line by doorways and similar openings, fireplaces, and fixed cabinets that do not have countertops or similar work surfaces.",
       "answers": [
         "18 inches",
         "24 inches",
@@ -783,7 +783,7 @@
       "id": "final-exam-#1-019",
       "exam": "Final Exam #1",
       "question_number": 19,
-      "prompt": "What does the alpha character I represent when stating the question W = E x I?",
+      "prompt": "What does the alpha character I represent when stating the equation W = E x I?",
       "answers": [
         "Intrinsic circuit",
         "Intrinsic electromotive force",
@@ -800,7 +800,7 @@
         "identify the equipment, location, and requirement"
       ],
       "lookup_summary": "Lookup clues: identify the equipment, location, and requirement. Start with General knowledge, then read the matching subsection and exceptions.",
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"What does the alpha character I represent when stating the question W = E x I?\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"What does the alpha character I represent when stating the equation W = E x I?\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
       "reference_text": "Electrical Theory • Power Equation (Watt's Law)\nIn the electrical power equation W = E x I (Watts = Volts x Amperes), the letter I traditionally designates 'Intensity of current' (from the French 'intensité du courant'), representing current flow in amperes.",
       "reference_table": [],
       "tip_title": "Electrical math",
@@ -1931,7 +1931,7 @@
         "60”",
         "72”"
       ],
-      "gist": "A short length of flexible raceway serving a luminaire is exempt from standard support intervals. The question asks how long that free length may be.",
+      "gist": "Type MC is a cable assembly (Article 330), and a short length serving a luminaire in an accessible ceiling is exempt from the usual support and securing rules. The question asks how long that free length may be.",
       "scene": "",
       "correct_index": 3,
       "article": "330.30(D)(2)",
@@ -10685,7 +10685,7 @@
       "id": "final-exam-#1-051",
       "exam": "Final Exam #1",
       "question_number": 51,
-      "prompt": "Personnel doors where equipment rated 800 amperes or more that contains overcurrent devices is installed and there is a personnel door intended for entrance to and egress from the working space less than ___ feet from the nearest edge of the working space.",
+      "prompt": "Where equipment rated 800 amperes or more that contains overcurrent devices is installed and there is a personnel door intended for entrance to and egress from the working space less than ___ feet from the nearest edge of the working space, the door shall open at least 90 degrees in the direction of egress and be equipped with listed panic hardware or listed fire exit hardware.",
       "answers": [
         "12",
         "15",

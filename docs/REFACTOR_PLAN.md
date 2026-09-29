@@ -68,7 +68,7 @@ Export presets (`export_presets.cfg`): all 3 presets use `export_filter="all_res
 | `FIX_PLAN.md` | 17 fixed items (all DONE) + OPEN device-only list + harness gotchas | ARCHITECTURE | **stale → replace**: keep the OPEN list + gotchas in `docs/KNOWN_ISSUES.md`, the fixed list is git history (commits `77e2cf7`, `16589d5`, `3c5971f`…); delete the root file |
 | `.gitignore` | see above | git | **keep, edit** (§2.3) |
 | `Godot_v4.7.2-stable_win64.exe` | 172 MB editor, untracked | nothing in code (humans) | **user decision** (§1.6) |
-| `Godot_v4.7.2-stable_win64_console.exe` | 194 KB console wrapper, untracked | `verify.sh`, `build_question_bank.sh`, CI (downloads to root) | **user decision**; if moved, verify.sh must honour `$GODOT` (it currently overwrites it — bug) |
+| `Godot_v4.7.2-stable_win64_console.exe` | 194 KB console wrapper, untracked | `verify.sh`, `build_question_bank.sh`, CI (downloads to root) | **user decision**; if moved, verify.sh must honor `$GODOT` (it currently overwrites it — bug) |
 
 ### 1.2 Folders
 
@@ -135,7 +135,7 @@ References = who imports/runs it (grep of all non-scratch files).
 
 ### 1.5 Magic values to centralize
 
-- 335 hex colour literals, 79 unique, in `main.gd` alone. Top: `38bdf8`×54 (accent), `7dd3fc`×16,
+- 335 hex color literals, 79 unique, in `main.gd` alone. Top: `38bdf8`×54 (accent), `7dd3fc`×16,
   `ffffff`×14, `0284c7`×13, `cbd5e1`×13, `1e3a5f`×12, `111928`×12, `1e293b`×9, `34d399`×9 (ok),
   `94a3b8`×8 (muted), `6ee7b7`×8, `f8fafc`×7, `f43f5e`×6 (bad). Plus the same palette in
   `answer_card.gd`, `table_viewer.gd`, `fx/*`.
@@ -143,7 +143,7 @@ References = who imports/runs it (grep of all non-scratch files).
   radii/widths; `FIT_*` arrays are already named (good pattern to follow).
 - Timings: 600 ms back debounce, 4.0 s native-voice refresh, 1.0 s timers, watchdog ≥6 s.
 
-→ `src/ui/app_theme.gd` (`class_name AppTheme`): named colours (`ACCENT`, `ACCENT_SOFT`, `ACCENT_DEEP`,
+→ `src/ui/app_theme.gd` (`class_name AppTheme`): named colors (`ACCENT`, `ACCENT_SOFT`, `ACCENT_DEEP`,
 `TEXT`, `TEXT_MUTED`, `PANEL_BG`, `PANEL_BORDER`, `OK`, `OK_SOFT`, `BAD`, `BG_TOP`, `BG_BOTTOM`…),
 `panel_style()`, `ui_font()`, `monospace_font()`, `focus_ring()`. Substitution is literal-for-literal,
 so pixels do not change (screenshot diff must be empty).
@@ -378,8 +378,8 @@ mutation still lands.
 Unchanged conclusion from ARCHITECTURE.md §1.2(b)/§4.1, re-checked: the builders build the same
 member set with different metrics/order and *zero* shared text; the desktop one is explicitly frozen
 visually. Unifying needs a node-tree golden test that does not exist. What this plan does instead:
-(a) move each builder verbatim into its own file so `main.gd` loses ~1,270 lines with no behavioural
-change; (b) centralize colours/fonts/panel styles both already call; (c) route both through the
+(a) move each builder verbatim into its own file so `main.gd` loses ~1,270 lines with no behavioral
+change; (b) centralize colors/fonts/panel styles both already call; (c) route both through the
 existing shared factories in `Widgets`. A unified builder remains a separate, optional project,
 gated on first adding a tree-serialization golden test (type/path/size flags/stylebox fill per node,
 both layouts) — that test is cheap and is worth adding in step S7 regardless.
@@ -398,7 +398,7 @@ compare against the S0 baseline shots (pixel-identical expected unless noted).
 |---|---|---|---|
 | **S0** | Wait for the other agent. Commit its work as-is. Record baseline: verify output, bank hash, snap shots (desktop+mobile), speech dump (`dump_all_speech.gd`), PCK file list. | none | G |
 | **S1** | Garbage removal (no code change): delete tracked backups (`gists.bak.py`, `validate_question_bank.py.bak`), `test_main_headless.gd`, `tools/archive/`, read-only probe scripts, one-shot bank mutators, tools scratch (png/txt/json), `__pycache__`, empty `.vscode/`. Promote `snap.gd`/`snap_all.gd`/`measure_fit.gd` to `tools/visual/`. User-confirmed items (§1.6) only after an explicit yes. | low (grep proved no refs) | G |
-| **S2** | Hygiene: `.gitignore` additions, export `exclude_filter`, `verify.sh` honours `$GODOT` + auto parse list, delete `EXAM_NON_SCORED_*` (or wire them), docs: `FIX_PLAN.md` → `docs/KNOWN_ISSUES.md`, `tools/DATA_PIPELINE.md` → `docs/`, README.md. | low | G + export listing |
+| **S2** | Hygiene: `.gitignore` additions, export `exclude_filter`, `verify.sh` honors `$GODOT` + auto parse list, delete `EXAM_NON_SCORED_*` (or wire them), docs: `FIX_PLAN.md` → `docs/KNOWN_ISSUES.md`, `tools/DATA_PIPELINE.md` → `docs/`, README.md. | low | G + export listing |
 | **S3** | Folder moves, scripts: `git mv` every `.gd`+`.uid` into `src/…`, `Main.tscn` → `scenes/main.tscn`, shaders, update every path in §2.2 (GDScript side), `--import`, delete `.godot/`, reimport. | medium (path typos) — the parse stage + harness catch all of them | G + shots |
 | **S4** | Data/asset moves: `question_bank.json`, `voices.json` → `data/`; `sfx/` → `assets/sfx/`; `speech/` → `assets/speech/` (only after regeneration is finished); python paths via one paths module; `test_build_guard.sh`; pipeline scripts → `tools/pipeline|speech|sfx/`. | medium; bank hash check is mandatory here | G + `bash tools/pipeline/build_question_bank.sh --validate` + `test_bundle.gd` = 279/279 |
 | **S5** | Single `speak_question.py`: move to `src/speech/`, ship via desktop `include_filter`, at runtime copy `res://…/speak_question.py` → `user://speech/speak_question.py` once (FileAccess can read from the PCK), run that; delete heredoc and `exe_dir/tools` fallback. | medium; desktop Edge TTS only — test in an **exported** exe with the bundle folder renamed | G + manual exported-exe Read test |

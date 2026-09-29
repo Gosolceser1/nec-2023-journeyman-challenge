@@ -177,12 +177,12 @@ test or a validator guard.
   events, so with emulation off neither reacts to a finger. `TouchScroll` and
   `VoiceSheet` (1.0.1) replace them for touch.
 - **`MOUSE_FILTER_PASS` on children.** `_touch_filter_walk` assigns PASS to
-  BaseButtons and IGNORE to decoration, matching the documented behaviour.
+  BaseButtons and IGNORE to decoration, matching the documented behavior.
 - **Contrast.** The palette is dark by design; body text and the small
   SLATE_400 helper labels pass WCAG AA (6.6:1+). The primary buttons (Next,
   Return to menu) now sit on SKY_700 with a SKY_700 -> BLUE_800 tint: behind
   the label the rendered fill measures 4.9-7.1:1 against white. Answer state
-  is carried by colour plus an icon and a border.
+  is carried by color plus an icon and a border.
 - **48 dp touch targets.** Canvas px are not dp: the 540 px canvas maps to
   ~0.76 dp/px on a 1080 px, 420 dpi phone, so 48 px dock buttons are ~37 dp and
   56 px cards ~43 dp. A density-aware content_scale_factor (clamped to 1.15 to

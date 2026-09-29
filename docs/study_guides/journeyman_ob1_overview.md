@@ -28,7 +28,7 @@ Use the answer key to locate and highlight the cited NEC section in the code boo
 
 ## Verified References
 
-The question bank contains the verified answer and reference for all 25 questions. Supplied source provisions are displayed after answering under `NEC REFERENCE` and `READ CODE PROVISION`.
+The question bank contains the verified answer and reference for all 25 questions. Supplied source provisions are displayed after answering under `CODE PROVISION`, with the lesson under `WHAT THE CODE SAYS`.
 
 ## Timing Note
 

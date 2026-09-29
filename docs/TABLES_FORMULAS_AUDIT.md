@@ -70,7 +70,7 @@ ne-state-act-#3-003, which was added.
   that sentence.** On UpCodes, 2023 620.51(D) "Identification and Signs" contains only
   (1) "Available Fault Current Field Marking". The "numbered to correspond to the identifying
   number" rule survives only in 620.53 (car light), 620.54 (car heating and air-conditioning)
-  and 620.55 (other utilization equipment). This pass first labelled the record's provision
+  and 620.55 (other utilization equipment). This pass first labeled the record's provision
   "(NEC 2020 text, removed in NEC 2023)" and kept the key. **Resolved:** the question was then
   rewritten to test 2023 620.51(A) (disconnect lockable only in the open position per 110.25);
   the NEC 2020 label is gone (`CONTENT_AUDIT_2023.md`).
@@ -281,7 +281,7 @@ All fixes go through `tools/pipeline/question_bank_overrides.json` (plus one bui
 | **N23** | *NFPA 70 National Electrical Code 2023* — public OCR copy on studylib.net (Chapters 1–2, through ~Article 235) | **2023** | Primary evidence for Articles 110–250. |
 | **FD26** | NFPA A2025-cycle CMP-6 First Draft working draft (docinfofiles.nfpa.org) | 2026 draft quoting the 2023 baseline text | Article 310 table titles, notes and values shown as unchanged baseline text. |
 | **SD26-8** | NFPA A2025-cycle CMP-8 Second Draft working draft (docinfofiles.nfpa.org) | 2026 draft quoting the 2023 baseline | Article 344/348/352 table names. |
-| **T23** | 2023-labelled trade sources: EC&M 2023 NEC quiz (ecmweb.com), FastTrax 2023 NEC answer key, electricallicenserenewal.com 2023 NEC Chapter 9 notes | 2023 (secondary) | Table 344.30(B), Table 352.30(B), Chapter 9 Note (4) wording. |
+| **T23** | 2023-labeled trade sources: EC&M 2023 NEC quiz (ecmweb.com), FastTrax 2023 NEC answer key, electricallicenserenewal.com 2023 NEC Chapter 9 notes | 2023 (secondary) | Table 344.30(B), Table 352.30(B), Chapter 9 Note (4) wording. |
 | **N20** | 2020 NEC text (Articles 400–630 excerpt) | 2020 | Used only where no 2023 source was available; such items are marked **Unconfirmed for 2023**. |
 | **N14** | 2014 NEC Article 220 (MADCAD) | 2014 | History only (2017→2023 renumbering). |
 

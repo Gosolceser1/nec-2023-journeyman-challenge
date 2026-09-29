@@ -1,6 +1,6 @@
 # Architecture
 
-How the code is organised after the 2026 refactor (`docs/REFACTOR_PLAN.md`
+How the code is organized after the 2026 refactor (`docs/REFACTOR_PLAN.md`
 has the plan and the reasoning; this file describes the result).
 
 ## Layout
@@ -17,7 +17,7 @@ src/
           question_deck.gd  QuestionDeck: which questions a run gets, reviews, study stats, question_bag.cfg
           exam_blueprint.gd ExamBlueprint: the exam's subject areas, record -> area (NEC pool only), apportionment
           choice_order.gd   ChoiceOrder: per-run choice order, locked questions, pinned choices
-          bank_loader.gd    BankLoader: reads data/question_bank.json, normalises records, question pools
+          bank_loader.gd    BankLoader: reads data/question_bank.json, normalizes records, question pools
           nec_reference.gd  NecReference: article titles (data/nec_2023_articles.json), lookup paths (NEC and Nebraska law)
           safe_area.gd      SafeArea.margins: notch / cutout insets
           audio_settings.gd AudioSettings: audio modes, speed, pauses, sound effects, audio.cfg
@@ -166,7 +166,7 @@ outline in `data/exam_blueprint.json` (ExamBlueprint). In short:
   Missed questions come back two runs later, at most a quarter of a drill.
 - The simulator takes exactly 10/20/15/15/10/5/5 per area, least recently
   seen first, without reviews. An area short of records passes its share on.
-- Every run is interleaved so neighbours differ in article and area.
+- Every run is interleaved so neighbors differ in article and area.
 - `begin(..., simulation, area)` picks the draw; an explicit `rng.seed`
   (tests, harness) makes it repeatable, otherwise each session randomizes.
 - The deck, reviews and per-question stats persist by question id in
@@ -290,11 +290,11 @@ builder, not behind `if ui_mobile` in main.
   canvas_item shader (`surface.gdshader`) applied by `UiFx.add_glass` /
   `add_tint` / `add_shine`: fill lift, bevel, a gradient tint, a hover shine
   and a "current" that runs around the border. Labels (pure white) are skipped
-  by the shader, so text keeps its exact colour.
+  by the shader, so text keeps its exact color.
 - **Type**: `ui_font(weight)`, tracked `meta_font()` for small caps labels,
   tabular `numeric_font()` for clocks and scores.
-- **Motion never moves layout.** Hover and press use `scale` about the centre,
-  offsets that return to rest, colour and shader uniforms; state styleboxes
+- **Motion never moves layout.** Hover and press use `scale` about the center,
+  offsets that return to rest, color and shader uniforms; state styleboxes
   share content margins (checked by `test_menu_cards` and `test_app_theme`).
   Everything that animates on its own joins `UiFx.MOTION_GROUP`, and
   `UiFx.apply_reduce_motion` freezes it when Reduce motion is on.
@@ -326,7 +326,7 @@ tests and the native TTS callbacks refer to them by name.
   swipe over buttons and answer cards scrolls and presses nothing; a tap
   presses), `test_voice_picker` (450 device voices within a time budget,
   names, US-only list, migration), `test_no_leak` (nothing
-  before answering reveals the answer), `test_layout_tree` (serialised node
+  before answering reveals the answer), `test_layout_tree` (serialized node
   tree of both layouts against `tools/tests/golden/`; `-- --update` rewrites
   the snapshots after an intended change), `test_menu_cards` (cards stay
   in their column slot through hover, focus and a quiz round-trip) and

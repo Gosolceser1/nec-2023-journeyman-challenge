@@ -9,7 +9,7 @@ source exam PDF word for word, including its odd phrasing, with two exceptions:
    corrected, without changing meaning or numbers. Quoted NEC text still matches the
    2023 edition word for word.
 
-Bank conventions kept: `3ø` written as "three-phase", first letters capitalised.
+Bank conventions kept: `3ø` written as "three-phase", first letters capitalized.
 Hyphenation of number compounds ("125 volt", "one family") is left as printed.
 
 All corrections live in `tools/pipeline/question_bank_overrides.json` (hints in `tools/pipeline/gists.py`)
@@ -447,3 +447,25 @@ gist, note and tip, the UI strings and the docs. No meaning, number, section or
 
 Voice clips regenerated (spoken stem or choice changed): `final-exam-#1-048`,
 `final-exam-#1-061`, `open-book-exam-#7-016`, `open-book-exam-#10-017`.
+
+### Follow-up: PDF errors fixed, not carried over
+
+The PDF's own slips are corrected rather than kept. This reverses the earlier
+restoration of "question" in `final-exam-#1-019`. The two stems that were
+sentence fragments get the predicate the provision supplies; blank, answer and
+choices are unchanged.
+
+| Record / file | Field | Before | After |
+|---|---|---|---|
+| `final-exam-#1-019` | stem | …when stating the question W = E x I? | …when stating the equation W = E x I? |
+| `final-exam-#1-011` | stem | In a dwelling bedroom, any wall space ___ or more in width (…) and unbroken along the floor line by … work surfaces. | In a dwelling bedroom, wall space includes any space ___ or more in width (…) and unbroken along the floor line by … work surfaces. |
+| `final-exam-#1-051` | stem | Personnel doors where equipment rated 800 amperes or more … less than ___ feet from the nearest edge of the working space. | Where equipment rated 800 amperes or more … less than ___ feet from the nearest edge of the working space, the door shall open at least 90 degrees in the direction of egress and be equipped with listed panic hardware or listed fire exit hardware. |
+| `final-exam-#1-066` | gist | A short length of flexible raceway serving a luminaire is exempt from standard support intervals. | Type MC is a cable assembly (Article 330), and a short length serving a luminaire in an accessible ceiling is exempt from the usual support and securing rules. |
+| `docs/study_guides/journeyman_ob1_overview.md` | labels | `NEC REFERENCE` and `READ CODE PROVISION` | `CODE PROVISION`, lesson under `WHAT THE CODE SAYS` |
+| docs, `tools/release/CREDITS.txt` | spelling | British (colour, behaviour, labelled, neighbour, organised, synthesise, …; 38 words) | American (color, behavior, labeled, neighbor, organized, synthesize, …) |
+
+Voice clips regenerated: `final-exam-#1-011`, `final-exam-#1-019`, `final-exam-#1-051`.
+
+`tools/tests/test_typo_regressions.py` (run by `tools/verify.sh`) fails if any
+fixed "before" text in this file comes back in the built bank or the results
+screen strings.

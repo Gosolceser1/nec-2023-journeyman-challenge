@@ -53,9 +53,9 @@ enclosure or hubs" (answer B stays correct).
 | Citation vs provision heading (subsection) | 279 | 1 (open-book-exam-#7-012) |
 | Citation narrower than the rule the answer needs | 279 | 1 (final-exam-#3-031) |
 | Lookup hint ("Start with …") pointing elsewhere | 279 | 2 (final-exam-#5-022, open-book-exam-#1-004) |
-| Rationale or tip citing a neighbouring subsection | 279 | 0 |
+| Rationale or tip citing a neighboring subsection | 279 | 0 |
 | Citation of an article not in NEC 2023 | 279 | 0 |
-| Pre-2023 section numbers not labelled as old | 279 | 0 (one labelled note, open-book-exam-#7-013 "Table 310.104 is old 2017 numbering", is correct) |
+| Pre-2023 section numbers not labeled as old | 279 | 0 (one labeled note, open-book-exam-#7-013 "Table 310.104 is old 2017 numbering", is correct) |
 | Answers changed | — | 0 |
 
 Code defects behind the title errors:
@@ -178,7 +178,7 @@ where the NEC 2023 fact was verified.
   receptacle. **Verified:** 2023 210.8(A) Exception No. 2 reads "A receptacle
   supplying only a permanently installed premises security system shall be
   permitted to omit ground-fault circuit-interrupter protection". No change.
-- **final-exam-#3-068** (620.51): the citation is "620.51" and the provision heading "620.51(D)(1) More Than One Driving Machine". The UpCodes text extraction returned "Available Fault Current Field Marking" for 620.51(D)(1), which may be a mis-sliced neighbour (the extraction matched the first "(1)" after "(D)"). The record was left unchanged: the citation and the breadcrumb (Chapter 6, Article 620) are right either way. Re-check the 620.51(D) list numbering by hand. Resolved in `docs/CONTENT_AUDIT_2023.md`: 2023 620.51(D) has only (1) Available Fault Current Field Marking, so the record tests a removed rule and is flagged there. The tables/formulas audit confirmed
+- **final-exam-#3-068** (620.51): the citation is "620.51" and the provision heading "620.51(D)(1) More Than One Driving Machine". The UpCodes text extraction returned "Available Fault Current Field Marking" for 620.51(D)(1), which may be a mis-sliced neighbor (the extraction matched the first "(1)" after "(D)"). The record was left unchanged: the citation and the breadcrumb (Chapter 6, Article 620) are right either way. Re-check the 620.51(D) list numbering by hand. Resolved in `docs/CONTENT_AUDIT_2023.md`: 2023 620.51(D) has only (1) Available Fault Current Field Marking, so the record tests a removed rule and is flagged there. The tables/formulas audit confirmed
   this: the phrase "numbered to correspond to the identifying number" appears in 2023 Chapter 6
   only in 620.53, 620.54 and 620.55. The record was then rewritten to test 2023 620.51(A) (disconnect
   lockable only in the open position per 110.25); key position A unchanged.
@@ -194,7 +194,7 @@ where the NEC 2023 fact was verified.
   - a provision heading in another article or section, or naming a different
     subsection;
   - a lookup hint pointing to another section or subsection;
-  - a correct-choice rationale citing a neighbouring subsection the provision
+  - a correct-choice rationale citing a neighboring subsection the provision
     never mentions;
   - a citation of an article missing from NEC 2023;
   - pre-2023 numbers (e.g. Table 310.15(B)(16), 310.104, 311, 399, 725.4x)

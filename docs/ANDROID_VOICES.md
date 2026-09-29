@@ -138,7 +138,7 @@ cannot start, so before 1.0.2 the phone listed none of them. Since 1.0.2
 protocol in GDScript, and the Android presets ask for the INTERNET permission.
 Since 1.0.3 Windows uses it too, so no platform needs Python.
 
-- Listed: every `en-US` row, labelled `<Name> · <Gender> · Online (natural)`
+- Listed: every `en-US` row, labeled `<Name> · <Gender> · Online (natural)`
   (for example `Ava · Female · Online (natural)`), in catalog order. The
   British Ryan (`en-GB`) stays desktop-only. Andrew is not listed twice: the
   recorded row is Andrew, and a line without a clip uses online Andrew.

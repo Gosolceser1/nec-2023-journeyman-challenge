@@ -69,7 +69,7 @@ GISTS = {
     ("Final Exam #1", 63): "The drawing scale equates one-quarter inch to one foot. The question asks how long three and a half paper inches really is.",
     ("Final Exam #1", 64): "Construction drawings are reviewed in a standard sequence. The question asks where you start.",
     ("Final Exam #1", 65): "Alternating current reverses 60 times per second; the question covers one quarter-cycle. Compute the duration of one quarter-cycle.",
-    ("Final Exam #1", 66): "A short length of flexible raceway serving a luminaire is exempt from standard support intervals. The question asks how long that free length may be.",
+    ("Final Exam #1", 66): "Type MC is a cable assembly (Article 330), and a short length serving a luminaire in an accessible ceiling is exempt from the usual support and securing rules. The question asks how long that free length may be.",
     ("Final Exam #1", 67): "A short conduit section between enclosures permits a higher fill percentage than a complete conduit run. The question asks how full, as a percent.",
     ("Final Exam #1", 68): "The equipment grounding conductor is selected from its table using the upstream overcurrent device rating. A 50-amp breaker is given. The question asks the copper size across from it.",
     ("Final Exam #1", 69): "A wooden sign enclosure near hot lampholders is combustible and must maintain separation. The question asks how far back the wood must stay.",

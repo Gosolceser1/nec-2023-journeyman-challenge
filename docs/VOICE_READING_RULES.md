@@ -4,14 +4,14 @@ How the trainer reads a question aloud. The on-screen wording in
 `question_bank.json` is never changed; everything here applies to the
 **spoken** text only.
 
-One normaliser does all of this: `speech_rules.gd` (`Rules.normalize`), a
+One normalizer does all of this: `speech_rules.gd` (`Rules.normalize`), a
 table-driven pipeline of named rules run in order. `speech_text.gd` turns a
 record into segments (one audio clip each), and both voices use it:
 
 - Recorded clips: the Edge neural voice (`src/speech/speak_question.py`, default
-  en-US-AndrewNeural, 96 kbps / 24 kHz mono MP3). Python only synthesises the
+  en-US-AndrewNeural, 96 kbps / 24 kHz mono MP3). Python only synthesizes the
   text it is handed. Andrew's clips for every question ship in `res://assets/speech`
-  and play on desktop **and Android**. Other Edge voices are synthesised on
+  and play on desktop **and Android**. Other Edge voices are synthesized on
   demand and cached (see "Runtime synthesis" below).
 - Device voice (`DisplayServer.tts_speak`): the Android fallback when no
   recorded clip matches, or when a "Device voice · …" entry is picked. The
@@ -21,7 +21,7 @@ record into segments (one audio clip each), and both voices use it:
 
 `edge_tts_client.gd` speaks the Edge read-aloud WebSocket in GDScript on
 Windows and Android, so no Python or edge-tts is needed at runtime and no
-process is started. It always synthesises the question's whole plan (stem,
+process is started. It always synthesizes the question's whole plan (stem,
 choices, rule) into `user://speech/<id>__<voice>`, so the read, "Hear the
 rule" and replays share one cached folder.
 
@@ -36,7 +36,7 @@ rule" and replays share one cached folder.
   prefetches are left alone.
 - Robustness: every clip is retried once with a 20 s timeout, written to
   `N.mp3.part` and renamed when complete; `manifest.json` is written last. A
-  failed or cancelled request removes its clips. A connection that never opens
+  failed or canceled request removes its clips. A connection that never opens
   marks the network down for 30 s, so the next reads fall back at once.
 - Honest fallback: if Edge cannot be used (no network, service down), the game
   logs one line with the reason and reads with the recorded Andrew when the

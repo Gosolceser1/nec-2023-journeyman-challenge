@@ -160,12 +160,13 @@
         "36 inches is not the threshold; 210.52(A)(2) counts spaces 2 feet (24 inches) or wider."
       ],
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nBoxes are sized by volume, not vibes: every wire, clamp, and device yoke eats cubic inches, so a crowded box is a Code violation and a fire risk. Device boxes need minimum depth (a flush device needs room behind it), and unused breaker or knockout openings must be closed with listed fillers so fingers and sparks can't get in. Switchboards and panelboards add their own rules: conductors belong only in the section they terminate in, and rear-access gear must say so on the front.\n\nIn plain terms, the question is: \"In a dwelling bedroom, any wall space ___ or more in width (including space measured around corners) and unbroken along the floor…\" Subject: dwelling unit. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\ndwelling unit",
-      "tip_title": "Receptacle placement"
+      "tip_title": "Receptacle placement",
+      "prompt": "In a dwelling bedroom, wall space includes any space ___ or more in width (including space measured around corners) and unbroken along the floor line by doorways and similar openings, fireplaces, and fixed cabinets that do not have countertops or similar work surfaces."
     },
     "final-exam-#1-019": {
       "reference_text": "Electrical Theory • Power Equation (Watt's Law)\nIn the electrical power equation W = E x I (Watts = Volts x Amperes), the letter I traditionally designates 'Intensity of current' (from the French 'intensité du courant'), representing current flow in amperes.",
       "worked": "",
-      "prompt": "What does the alpha character I represent when stating the question W = E x I?",
+      "prompt": "What does the alpha character I represent when stating the equation W = E x I?",
       "tip_short": "In W = E x I, the I stands for intensity of current, measured in amperes. Correct: C — Intensity of current. I stands for intensity of current, the current flow measured in amperes. Not A: Intrinsic circuit is not an electrical variable; I in the power formula is current in amperes. Not B: Electromotive force is the E (volts) in W = E x I, not the I. Not D: Isotopic character is a chemistry idea, unrelated to the current variable I.",
       "choice_notes": [
         "Intrinsic circuit is not an electrical variable; I in the power formula is current in amperes.",
@@ -173,7 +174,7 @@
         "I stands for intensity of current, the current flow measured in amperes.",
         "Isotopic character is a chemistry idea, unrelated to the current variable I."
       ],
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"What does the alpha character I represent when stating the question W = E x I?\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"What does the alpha character I represent when stating the equation W = E x I?\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "final-exam-#1-020": {
       "tip_short": "Multiple ground rods go at least 6 feet (72 inches) apart; twice the rod length works even better. Correct: D — 72 inches. 250.53(A)(3) requires rods at least 1.8 m (6 feet) apart, and 6 feet is 72 inches. Not A: 36 inches is only half enough; 250.53(A)(3) requires at least 1.8 m (6 feet), which is 72 inches. Not B: 48 inches is too close; the rods must be at least 6 feet, or 72 inches, apart. Not C: 60 inches is too close; 250.53(A)(3) requires at least 6 feet, which is 72 inches.",
@@ -1605,7 +1606,8 @@
         "15 feet is not the value; 110.26(C)(3) uses 7.6 meters (25 feet).",
         "20 feet is not the value; 110.26(C)(3) uses 7.6 meters (25 feet).",
         "110.26(C)(3) applies to personnel doors less than 7.6 meters (25 feet) from the working space."
-      ]
+      ],
+      "prompt": "Where equipment rated 800 amperes or more that contains overcurrent devices is installed and there is a personnel door intended for entrance to and egress from the working space less than ___ feet from the nearest edge of the working space, the door shall open at least 90 degrees in the direction of egress and be equipped with listed panic hardware or listed fire exit hardware."
     },
     "final-exam-#1-069": {
       "reference_text": "600.9(C) Adjacent to Combustible Materials\nSigns and outline lighting systems shall be installed so that adjacent combustible materials are not subjected to temperatures in excess of 90°C (194°F).\nThe spacing between wood or other combustible materials and an incandescent or HID lamp or lampholder shall not be less than 50 mm (2 in.).",

@@ -56,7 +56,7 @@ and only the result sound plays).
 |---|---|
 | Next-question keys and the Listen loop advancing | Plays 80× in a full simulator; the voice reading the next question is the cue. |
 | Per-second countdown ticks | Nagging and stressful; replaced by the two exam-clock warnings. |
-| Per-item clock warnings | The item clock restarts every question: a cue there would fire constantly. The pulse and red colour are enough. |
+| Per-item clock warnings | The item clock restarts every question: a cue there would fire constantly. The pulse and red color are enough. |
 | Streak milestones | Arcade reward; the streak meter shows it. (A streak only pitches the normal `correct` up: +2 semitones at 3 in a row, +4 at 5, +5 at 8. No extra cue.) |
 | Confetti sparkle | Doubles the pass sound; one result sound is enough. |
 | Listen mode answers | Ungraded, and the voice is about to read the answer. |

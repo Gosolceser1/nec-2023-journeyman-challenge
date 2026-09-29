@@ -1,7 +1,7 @@
 # Study system
 
 How the app picks questions and turns answers into study feedback. It is
-modelled on the Nebraska Journeyman Electrician exam bulletin (NSED / PSI):
+modeled on the Nebraska Journeyman Electrician exam bulletin (NSED / PSI):
 80 scored items, 240 minutes, 75% to pass, open book (NEC 2020 or 2023,
 Ugly's), plus 5-10 unscored experimental items the bulletin mentions.
 
@@ -114,7 +114,7 @@ between. When one article holds more than half of what is left, it goes
 next; otherwise the pick is a size-weighted random choice among other
 articles, preferring another subject area. The first question stays a
 uniform pick from the run. Measured: the same area back to back in under 1%
-of neighbours (random order: about 18%).
+of neighbors (random order: about 18%).
 
 ### Seeds
 
@@ -172,14 +172,14 @@ The app has no settings reset, so nothing calls it yet.
   question id, in the saved state). An area's mastery is the share right
   over those histories, so old misses age out as you improve.
 - **Readiness** = sum over areas of (exam items x mastery) / 80. An area not
-  practised yet counts as 0, so the estimate only climbs as you cover the
+  practiced yet counts as 0, so the estimate only climbs as you cover the
   outline. 75% is the target, like the pass line.
 
 ### Weakest-area drill (menu)
 
 One mode button under the drills: "10 QUESTIONS • WEAKEST AREA", subtitle
 `<area> (<mastery>|new) • readiness N% • 30 minutes timed`. It picks the
-heaviest area not practised yet, else the lowest mastery (heavier on ties).
+heaviest area not practiced yet, else the lowest mastery (heavier on ties).
 Pressing it starts 10 questions from that area's deck (fewer if the area
 is smaller), with that area's due reviews first, 3:00 per question. The
 subtitle is recomputed whenever the menu opens. A full area picker would

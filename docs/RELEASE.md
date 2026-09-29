@@ -32,7 +32,7 @@ PNG, the `.ico`, the splash and the options sheet with:
 python tools/branding/build_branding.py
 ```
 
-It rasterises with Godot (`tools/branding/render_svg.gd`, ThorVG) and builds
+It rasterizes with Godot (`tools/branding/render_svg.gd`, ThorVG) and builds
 the rest with Pillow. Outputs: `assets/branding/icon.png` (512,
 `application/config/icon`), `icon.ico` (16/24/32/48/64/128/256, each size its
 own image; `windows_native_icon` and the exe icon), `android_*.png`,

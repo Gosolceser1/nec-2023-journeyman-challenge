@@ -29,7 +29,11 @@ changed.
 - **Spell check** (docs/TYPO_FIXES.md). Typos and grammar slips fixed in 8
   questions ("ignitible" and "on-site" as NEC spells them, "Class II, Division
   2", four hint sentences) and in the results screen (singular/plural of
-  failed, unanswered and slow items). No answer changed.
+  failed, unanswered and slow items). No answer changed. Follow-up: the
+  PDF's own slips are now fixed too (final-exam-#1-019 "equation", complete
+  stems for final-exam-#1-011 and #1-051, the #1-066 hint no longer calls MC
+  cable a raceway), docs use American spelling, and a regression test
+  (tools/tests/test_typo_regressions.py) keeps the fixed typos out.
 - **Voice:** the Table 310.16 "COPPER" / "ALUMINUM" headers are read as words,
   not spelled out.
 - **Hints next to the figures.** The Final Exam #1 Q13 hint named the meter
