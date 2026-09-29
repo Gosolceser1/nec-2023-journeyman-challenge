@@ -4916,7 +4916,7 @@
       ],
       "tip_short": "Fraction to decimal: divide the top by the bottom; each sixteenth is 0.0625. Correct: B — .6875.",
       "formula": "Divide the numerator by the denominator.",
-      "worked": "11 ÷ 16 = 0.6875"
+      "worked": "11 ÷ 16 = 0.6875."
     },
     "final-exam-#2-058": {
       "gist": "Plastic conduit changes with temperature: it softens one way and stiffens the other. The informational note in the PVC uses-permitted section warns about one extreme. The question asks which one makes it brittle.",
@@ -5375,7 +5375,7 @@
       ],
       "tip_short": "Box fill (314.16(B)(1)): add the volume allowance for each conductor by size, then pick a box whose Table 314.16(A) volume is at least that total. Correct: D — 2 1/8\". 5 x 2.25 + 4 x 2.00 = 19.25 cubic inches, so the 4 x 2-1/8 in. octagon box (21.5 cubic inches) is required. Not A: A 4 x 1-1/4 in. octagon box is 12.5 cubic inches, too small for 19.25 cubic inches of conductors. Not B: A 4 x 1-1/2 in. octagon box is 15.5 cubic inches, too small for 19.25 cubic inches. Not C: No 2 in. deep octagon box is listed; the next listed size is 4 x 2-1/8 in.",
       "formula": "Add the Table 314.16(B)(1) allowance for each conductor, then pick the smallest octagon box in Table 314.16(A) with at least that volume.",
-      "worked": "5 × 2.25 + 4 × 2.00 = 19.25 in.3; the 4 × 2-1/8 in. octagon box holds 21.5 in.3",
+      "worked": "5 × 2.25 + 4 × 2.00 = 19.25 in.³; the 4 × 2-1/8 in. octagon box holds 21.5 in.³.",
       "tip_title": "Box fill"
     },
     "final-exam-#4-022": {
@@ -5405,7 +5405,7 @@
       ],
       "tip_short": "Household cooking demand (Table 220.55): Column C by count; Note 3 lets appliances of 1-3/4 to 8-3/4 kW use the Column A or B percentage of the nameplate total instead. Correct: A — 11.52. Not D: 11.52 kW is among the choices; it is the Column B demand for eight 4 kW ranges.",
       "formula": "Note 3: add the nameplate ratings and multiply by the Column B demand factor for the number of appliances.",
-      "worked": "8 × 4 kW = 32 kW; 32 × 0.36 = 11.52 kW",
+      "worked": "8 × 4 kW = 32 kW; 32 × 0.36 = 11.52 kW.",
       "tip_title": "Cooking appliance demand"
     },
     "final-exam-#4-024": {
@@ -5419,7 +5419,7 @@
       ],
       "tip_short": "Ampacity: start with Table 310.16 in the insulation's column, correct for ambient temperature, then apply the Table 310.15(C)(1) factor for more than three conductors. Correct: D — 16.",
       "formula": "Table 310.16 75°C value × the Table 310.15(C)(1) factor for the number of conductors.",
-      "worked": "20 A × 1.00 × 0.80 = 16 A",
+      "worked": "20 A × 1.00 × 0.80 = 16 A.",
       "tip_title": "Ampacity adjustment"
     },
     "final-exam-#4-025": {
@@ -5435,7 +5435,7 @@
       ],
       "tip_short": "Household cooking demand (Table 220.55): Column C by count; Note 3 lets appliances of 1-3/4 to 8-3/4 kW use the Column A or B percentage of the nameplate total instead. Correct: A — 11.",
       "formula": "Count the appliances and read Column C of Table 220.55 (neither is over 12 kW, so no Note 1 increase).",
-      "worked": "2 appliances, Column C = 11 kW",
+      "worked": "2 appliances, Column C = 11 kW.",
       "tip_title": "Cooking appliance demand"
     },
     "final-exam-#4-026": {
@@ -5449,7 +5449,7 @@
       ],
       "tip_short": "Single motor conductors (430.22): 125 percent of the Table 430.248 or 430.250 full-load current. 430.6(A)(1): use the Table 430.248 or 430.250 full-load current, not the nameplate, for conductors and short-circuit protection. Correct: B — 17.25 amps. Table 430.248 gives 13.8 amperes at 115 volts; 13.8 x 1.25 = 17.25 amperes. Not A: 13.8 amperes is the table full-load current; 430.22 requires 125 percent of it. Not C: 20 amperes is a common breaker size, not the 125 percent conductor ampacity. Not D: 21.3 amperes matches no correct calculation for this motor.",
       "formula": "Table 430.248 full-load current × 125% (430.22).",
-      "worked": "13.8 A × 1.25 = 17.25 A",
+      "worked": "13.8 A × 1.25 = 17.25 A.",
       "tip_title": "Motor conductors"
     },
     "final-exam-#4-027": {
@@ -5463,7 +5463,7 @@
       ],
       "tip_short": "Dwelling lighting load: 3 VA per square foot (220.41) of floor area from outside dimensions, leaving out open porches and unfinished spaces not adaptable for future use (220.5(C)). Correct: A — 6000.",
       "formula": "Floor area counted under 220.5(C) × the 220.41 dwelling unit load.",
-      "worked": "2000 ft2 × 3 VA = 6000 VA",
+      "worked": "2000 ft² × 3 VA = 6000 VA.",
       "tip_title": "Dwelling lighting load"
     },
     "final-exam-#4-028": {
@@ -5478,7 +5478,7 @@
       ],
       "tip_short": "Dwelling small-appliance and laundry loads (220.52): 1500 VA for each 2-wire small-appliance circuit (at least two) and 1500 VA for each laundry circuit (at least one). Correct: C — 4,500. Two small-appliance circuits at 1500 VA plus one laundry circuit at 1500 VA = 4500 VA. Not A: 1500 VA is the load of one circuit; a dwelling has at least two small-appliance circuits and one laundry circuit. Not B: 3000 VA covers only the two small-appliance circuits and leaves out the laundry circuit. Not D: 6000 VA counts four circuits; the minimum is two small-appliance circuits and one laundry circuit.",
       "formula": "(Small-appliance circuits + laundry circuit) × 1500 VA each (220.52).",
-      "worked": "(2 + 1) × 1500 VA = 4500 VA",
+      "worked": "(2 + 1) × 1500 VA = 4500 VA.",
       "tip_title": "Dwelling calculations",
       "lookup_summary": "Lookup clues: dwelling unit, load calculation. Start with 220.52, then read the matching subsection and exceptions."
     },
@@ -5505,7 +5505,7 @@
       ],
       "tip_short": "Several motors (430.24): 125 percent of the largest motor's full-load current plus 100 percent of the others. 430.6(A)(1): use the Table 430.248 or 430.250 full-load current, not the nameplate, for conductors and short-circuit protection. Correct: C — 22.5.",
       "formula": "125% of the largest motor's full-load current + the full-load current of the other motor (430.24).",
-      "worked": "10 A × 1.25 + 10 A = 22.5 A",
+      "worked": "10 A × 1.25 + 10 A = 22.5 A.",
       "tip_title": "Motor feeders"
     },
     "final-exam-#4-031": {
@@ -5519,7 +5519,7 @@
       ],
       "tip_short": "Ampacity: start with Table 310.16 in the insulation's column, then multiply by the Table 310.15(B)(1)(1) factor for the ambient temperature (above 1.00 when cooler than 86 degrees F). Correct: C — 21.6 amps. #12 TW is 20 amperes at 60 degrees C; 75 degrees F (69–77 degrees F) takes 1.08; 20 x 1.08 = 21.6 amperes. Not A: 20 amperes is the uncorrected 60 degree C value; 75 degrees F takes a 1.08 correction factor. Not B: 25 amperes is the 75 degree C value; TW is rated 60 degrees C. Not D: 30 amperes is the 90 degree C value; TW is rated 60 degrees C.",
       "formula": "Table 310.16 60°C value × the Table 310.15(B)(1)(1) correction factor for the ambient temperature.",
-      "worked": "20 A × 1.08 = 21.6 A",
+      "worked": "20 A × 1.08 = 21.6 A.",
       "tip_title": "Ampacity correction"
     },
     "final-exam-#4-032": {
@@ -5533,7 +5533,7 @@
       ],
       "tip_short": "Motor short-circuit and ground-fault protection (430.52): multiply the table full-load current by the Table 430.52(C)(1) percentage; round up to the next standard size (240.6(A)) when needed. Correct: C — 60 amps. Table 430.248: 34 amperes; 34 x 1.75 = 59.5 amperes, rounded up to the standard 60 ampere fuse. Not A: 35 amperes is only about the full-load current; dual-element fuses may be 175 percent. Not B: 40 amperes is below the 175 percent value; the next standard size above 59.5 amperes is 60. Not D: 90 amperes exceeds both 175 percent and the 225 percent maximum for dual-element fuses.",
       "formula": "Table 430.248 full-load current × the dual-element fuse percentage in Table 430.52(C)(1); round up to the next standard size.",
-      "worked": "34 A × 1.75 = 59.5 A; next standard size is 60 A",
+      "worked": "34 A × 1.75 = 59.5 A; next standard size is 60 A.",
       "tip_title": "Motor short-circuit protection"
     },
     "final-exam-#4-033": {
@@ -5547,7 +5547,7 @@
       ],
       "tip_short": "Ampacity: start with Table 310.16 in the insulation's column, correct for ambient temperature, then apply the Table 310.15(C)(1) factor for more than three conductors. Correct: D — 16.",
       "formula": "Table 310.16 75°C value × the Table 310.15(C)(1) factor for the number of conductors.",
-      "worked": "20 A × 1.00 × 0.80 = 16 A",
+      "worked": "20 A × 1.00 × 0.80 = 16 A.",
       "tip_title": "Ampacity adjustment"
     },
     "final-exam-#4-034": {
@@ -5561,7 +5561,7 @@
       ],
       "tip_short": "Maximum overload (430.32(C)): 140 percent for a marked service factor of 1.15 or more or a temperature rise of 40 degrees C or less; 130 percent for all other motors. Correct: C — 22.1.",
       "formula": "Motor full-load current × the 430.32(C) maximum percentage for \"all other motors\".",
-      "worked": "17 A × 1.30 = 22.1 A",
+      "worked": "17 A × 1.30 = 22.1 A.",
       "tip_title": "Motor overload protection"
     },
     "final-exam-#4-035": {
@@ -5602,7 +5602,7 @@
       ],
       "tip_short": "Maximum overload (430.32(C)): 140 percent for a marked service factor of 1.15 or more or a temperature rise of 40 degrees C or less; 130 percent for all other motors. Correct: D — 33.6.",
       "formula": "Full-load current × the 430.32(C) maximum percentage for the motor's service factor.",
-      "worked": "24 A × 1.40 = 33.6 A",
+      "worked": "24 A × 1.40 = 33.6 A.",
       "tip_title": "Motor overload protection"
     },
     "final-exam-#4-038": {
@@ -5616,7 +5616,7 @@
       ],
       "tip_short": "Box fill (314.16(B)): each conductor one allowance; clamps one; each device yoke two; all equipment grounding conductors (up to four) one; sized by the largest conductor. Correct: D — 18 cu.in. 4 conductors + 2 for the receptacle + 1 for clamps + 1 for the grounds = 8 x 2.25 = 18 cubic inches. Not A: 13.5 cubic inches leaves out allowances; four conductors plus device, clamps, and grounds total 18. Not B: 15.75 cubic inches misses one allowance; the full count is eight allowances of 2.25. Not C: 16 cubic inches does not match the 2.25 cubic inch allowances for #12 conductors.",
       "formula": "Count allowances (conductors, clamps, device yoke x 2, grounds) and multiply by the Table 314.16(B)(1) volume for the largest conductor.",
-      "worked": "(4 + 1 + 2 + 1) × 2.25 in.3 = 18",
+      "worked": "(4 + 1 + 2 + 1) × 2.25 in.³ = 18.",
       "tip_title": "Box fill"
     },
     "final-exam-#4-039": {
@@ -5631,7 +5631,7 @@
       ],
       "tip_short": "Single motor conductors (430.22): 125 percent of the Table 430.248 or 430.250 full-load current. 430.6(A)(1): use the Table 430.248 or 430.250 full-load current, not the nameplate, for conductors and short-circuit protection. Correct: C — 35.",
       "formula": "Table 430.250 full-load current × 125% (430.22).",
-      "worked": "28 A × 1.25 = 35 A",
+      "worked": "28 A × 1.25 = 35 A.",
       "tip_title": "Motor conductors"
     },
     "final-exam-#4-040": {
@@ -5645,7 +5645,7 @@
       ],
       "tip_short": "Ampacity: start with Table 310.16 in the insulation's column, correct for ambient temperature, then apply the Table 310.15(C)(1) factor for more than three conductors. Correct: A — 21.",
       "formula": "Table 310.16 90°C value × the Table 310.15(C)(1) factor for the number of conductors.",
-      "worked": "30 A × 0.70 = 21 A",
+      "worked": "30 A × 0.70 = 21 A.",
       "tip_title": "Ampacity adjustment"
     },
     "final-exam-#4-041": {
@@ -5660,7 +5660,7 @@
       ],
       "tip_short": "Ampacity: start with Table 310.16 in the insulation's column; ambient temperatures of 26–30 degrees C take a factor of 1.00, and three or fewer conductors need no adjustment. Correct: B — 25.",
       "formula": "Table 310.16 75°C value × the Table 310.15(B)(1)(1) factor for 28°C.",
-      "worked": "25 A × 1.00 = 25 A",
+      "worked": "25 A × 1.00 = 25 A.",
       "tip_title": "Ampacity"
     },
     "final-exam-#4-042": {
@@ -5674,7 +5674,7 @@
       ],
       "tip_short": "Fastened-in-place appliances (220.53): 75 percent for four or more, excluding cooking equipment, dryers, space heating, air conditioning, and EVSE, which have their own rules. Correct: C — 33.75 kW.",
       "formula": "Total nameplate load × 75% (220.53, four or more appliances).",
-      "worked": "10 × 4.5 kW × 0.75 = 33.75 kW",
+      "worked": "10 × 4.5 kW × 0.75 = 33.75 kW.",
       "tip_title": "Dwelling appliance demand"
     },
     "final-exam-#4-043": {
@@ -5715,7 +5715,7 @@
       ],
       "tip_short": "Small conductors (240.4(D)): 14 AWG copper 15 A, 12 AWG 20 A, 10 AWG 30 A, whatever the ampacity after correction, unless 240.4(E) or (G) applies. Correct: A — 30.",
       "formula": "Correct the ampacity, then apply the 240.4(D) limit for the conductor size.",
-      "worked": "40 A × 0.91 = 36.4 A ampacity; 240.4(D)(8) limits 10 AWG copper to 30 A",
+      "worked": "40 A × 0.91 = 36.4 A ampacity; 240.4(D)(8) limits 10 AWG copper to 30 A.",
       "tip_title": "Small conductor protection",
       "table_after_answer": true
     },
@@ -5745,7 +5745,7 @@
       ],
       "tip_short": "Household cooking demand (Table 220.55): Column C by count; Note 3 lets appliances of 1-3/4 to 8-3/4 kW use the Column A or B percentage of the nameplate total instead. Correct: B — 7.15. Not D: 7.15 kW, the Column B demand for these three appliances, is among the choices.",
       "formula": "Note 3: add the nameplate ratings and multiply by the Column B demand factor for the number of appliances.",
-      "worked": "(4 + 4 + 5) kW × 0.55 = 7.15 kW",
+      "worked": "(4 + 4 + 5) kW × 0.55 = 7.15 kW.",
       "tip_title": "Cooking appliance demand"
     },
     "final-exam-#4-046": {
@@ -5766,7 +5766,7 @@
       ],
       "tip_short": "Dryer neutral (220.54, 220.61(B)(1)): each dryer at least 5 kW, apply the Table 220.54 factor for the count, then 70 percent for the neutral. Correct: D — 15.75 kW.",
       "formula": "Each dryer at the 5 kW minimum × count × the Table 220.54 factor, then × 70% for the neutral (220.61(B)(1)).",
-      "worked": "6 × 5 kW = 30 kW; 30 × 0.75 = 22.5 kW; 22.5 × 0.70 = 15.75 kW",
+      "worked": "6 × 5 kW = 30 kW; 30 × 0.75 = 22.5 kW; 22.5 × 0.70 = 15.75 kW.",
       "tip_title": "Dryer demand"
     },
     "final-exam-#4-047": {
@@ -5781,7 +5781,7 @@
       ],
       "tip_short": "Lighting circuits: area x 3 VA (220.41), divided by one circuit's capacity (volts x amperes); always round up to the next whole circuit. Correct: D — 5. Not A: Two circuits carry only 3600 VA, less than the 7500 VA load. Not B: Three circuits carry only 5400 VA, less than the 7500 VA load. Not C: Four circuits carry 7200 VA, still less than the 7500 VA load.",
       "formula": "(Floor area × 3 VA) ÷ (120 V × 15 A), rounded up to a whole circuit.",
-      "worked": "2500 × 3 = 7500 VA; 7500 ÷ 1800 = 4.17, so 5 circuits",
+      "worked": "2500 × 3 = 7500 VA; 7500 ÷ 1800 = 4.17, so 5 circuits.",
       "tip_title": "Dwelling lighting load"
     },
     "final-exam-#4-048": {
@@ -5809,7 +5809,7 @@
       ],
       "tip_short": "Household cooking demand (Table 220.55): Column C by count; Note 3 lets appliances of 1-3/4 to 8-3/4 kW use the Column A or B percentage of the nameplate total instead. Correct: B — 16.8. Not D: 16.8 kW, the Column B demand for these ovens, is among the choices.",
       "formula": "Note 3: add the nameplate ratings and multiply by the Column B demand factor for the number of appliances.",
-      "worked": "15 × 3.5 kW = 52.5 kW; 52.5 × 0.32 = 16.8 kW",
+      "worked": "15 × 3.5 kW = 52.5 kW; 52.5 × 0.32 = 16.8 kW.",
       "tip_title": "Cooking appliance demand"
     },
     "final-exam-#4-050": {
@@ -5839,7 +5839,7 @@
       ],
       "tip_short": "Household cooking demand (Table 220.55): Note 4 lets one range's branch circuit use the table; Note 3 lets 1-3/4 to 8-3/4 kW appliances use Column A or B instead of Column C. Correct: C — 6.4.",
       "formula": "Note 4 with Note 3: nameplate × the Column B demand factor for one appliance.",
-      "worked": "8 kW × 0.80 = 6.4 kW",
+      "worked": "8 kW × 0.80 = 6.4 kW.",
       "tip_title": "Cooking appliance branch circuits"
     },
     "final-exam-#4-052": {
@@ -5854,7 +5854,7 @@
       ],
       "tip_short": "Dwelling lighting load: 3 VA per square foot (220.41) of floor area from outside dimensions, leaving out open porches and unfinished spaces not adaptable for future use (220.5(C)). Correct: D — 5400va. 220.5(C) uses the outside dimensions: 1800 square feet x 3 VA = 5400 VA. Not A: 4200 VA uses the 1400 square foot inside area; 220.5(C) uses the outside dimensions. Not B: 4500 VA matches neither area at 3 VA per square foot. Not C: 4800 VA matches neither area at 3 VA per square foot.",
       "formula": "Floor area from the outside dimensions (220.5(C)) × the 220.41 dwelling unit load.",
-      "worked": "1800 ft2 × 3 VA = 5400 VA",
+      "worked": "1800 ft² × 3 VA = 5400 VA.",
       "tip_title": "Dwelling lighting load"
     },
     "final-exam-#4-053": {
@@ -5869,7 +5869,7 @@
       ],
       "tip_short": "Motor short-circuit and ground-fault protection (430.52): table full-load current x the Table 430.52(C)(1) percentage, next standard size permitted; dual-element fuses may go up to 225 percent only if the motor will not start. Correct: A — 20 amp.",
       "formula": "Table 430.248 full-load current × the dual-element percentage in Table 430.52(C)(1); the next standard size up is the maximum. Pick the choice that does not exceed it.",
-      "worked": "13.2 A × 1.75 = 23.1 A; next standard size 25 A is the maximum; of the choices only 20 A does not exceed it",
+      "worked": "13.2 A × 1.75 = 23.1 A; next standard size 25 A is the maximum; of the choices only 20 A does not exceed it.",
       "tip_title": "Motor short-circuit protection"
     },
     "final-exam-#4-054": {
@@ -5883,7 +5883,7 @@
       ],
       "tip_short": "Box fill (314.16(B)): each circuit conductor one allowance; up to four equipment grounding conductors together take one allowance, plus 1/4 for each one beyond four. Correct: B — 6.75.",
       "formula": "Circuit conductors × the Table 314.16(B)(1) allowance, plus one allowance for all the grounding conductors (up to four).",
-      "worked": "2 × 2.25 + 2.25 = 6.75",
+      "worked": "2 × 2.25 + 2.25 = 6.75.",
       "tip_title": "Box fill"
     },
     "final-exam-#4-055": {
@@ -5898,7 +5898,7 @@
       ],
       "tip_short": "Equipment grounding conductor (Table 250.122): use the row whose rating is not exceeded by the overcurrent device; an 80 A device falls in the 100 A row. Correct: C — #8.",
       "formula": "Find the first Table 250.122 row whose rating is not exceeded by the device.",
-      "worked": "80 A falls in the 100 A row: 8 AWG copper",
+      "worked": "80 A falls in the 100 A row: 8 AWG copper.",
       "tip_title": "Equipment grounding conductors"
     },
     "final-exam-#4-056": {
@@ -5912,7 +5912,7 @@
       ],
       "tip_short": "Maximum overload (430.32(C)): 140 percent for a marked service factor of 1.15 or more or a temperature rise of 40 degrees C or less; 130 percent for all other motors. Correct: C — 17.16. Not D: 17.16 amperes, the 130 percent maximum, is among the choices.",
       "formula": "Motor full-load current × the 430.32(C) maximum percentage for \"all other motors\".",
-      "worked": "13.2 A × 1.30 = 17.16 A",
+      "worked": "13.2 A × 1.30 = 17.16 A.",
       "tip_title": "Motor overload protection"
     },
     "final-exam-#4-057": {
@@ -5927,7 +5927,7 @@
       ],
       "tip_short": "Conductor area: multiply each size's Chapter 9, Table 5 area by its count and add; compare the total with the Table 4 raceway area. Correct: D — 0.3802.",
       "formula": "Σ (count × Table 5 area) for each size.",
-      "worked": "6 × 0.0437 + 2 × 0.0590 = 0.3802",
+      "worked": "6 × 0.0437 + 2 × 0.0590 = 0.3802.",
       "tip_title": "Conductor dimensions",
       "lookup_summary": "Lookup clues: conductors. Start with Table 5, Chapter 9, then read the matching subsection and exceptions."
     },
@@ -5942,7 +5942,7 @@
       ],
       "tip_short": "3-wire neutral: carries the difference between the two line-to-neutral currents; with only one line loaded, it carries that line's full current (I = P ÷ 120 V). Correct: C — 79.",
       "formula": "I = P ÷ E for the larger line-to-neutral load.",
-      "worked": "9500 W ÷ 120 V = 79.2 A, about 79 A",
+      "worked": "9500 W ÷ 120 V = 79.2 A, about 79 A.",
       "tip_title": "Neutral current"
     },
     "final-exam-#4-059": {
@@ -5957,7 +5957,7 @@
       ],
       "tip_short": "Conduit fill: Chapter 9, Table 1 allows 40 percent for over two conductors (60 percent for nipples of 24 in. or less, Note 4); take conductor areas from Table 5 and raceway areas from Table 4. Correct: C — 0.1921 sq.in. Table 4 gives 1 in. RMC 0.355 square inches at 40 percent; 9 x 0.0181 = 0.1629; 0.355 - 0.1629 = 0.1921 square inches. Not A: 0.1297 square inches does not match 0.355 minus the XHHW conductor area. Not B: 0.1831 square inches does not match 0.355 minus the XHHW conductor area. Not D: 0.0181 square inches is the area of one #12 XHHW conductor, not the space left.",
       "formula": "40% area of the raceway (Table 4) − count × conductor area (Table 5).",
-      "worked": "0.355 − 9 × 0.0181 = 0.355 − 0.1629 = 0.1921",
+      "worked": "0.355 − 9 × 0.0181 = 0.355 − 0.1629 = 0.1921.",
       "tip_title": "Conduit fill",
       "lookup_summary": "Lookup clues: conduit, conductors. Start with Table 4, Chapter 9, then read the matching subsection and exceptions."
     },
@@ -5973,7 +5973,7 @@
       ],
       "tip_short": "Conduit fill: Chapter 9, Table 1 allows 40 percent for over two conductors (60 percent for nipples of 24 in. or less, Note 4); take conductor areas from Table 5 and raceway areas from Table 4. For all one size, divide and keep the whole number, rounding up only at a decimal of 0.8 or more (Note 7). Correct: D — 13.",
       "formula": "Nipple (24 in. or less): 60% area of the raceway (Table 4) ÷ conductor area (Table 5).",
-      "worked": "0.575 ÷ 0.0437 = 13.16, so 13 conductors",
+      "worked": "0.575 ÷ 0.0437 = 13.16, so 13 conductors.",
       "tip_title": "Conduit fill",
       "lookup_summary": "Lookup clues: conduit, conductors. Start with Table 4, Chapter 9, then read the matching subsection and exceptions."
     },
@@ -6001,7 +6001,7 @@
       ],
       "tip_short": "Conduit fill: Chapter 9, Table 1 allows 40 percent for over two conductors (60 percent for nipples of 24 in. or less, Note 4); take conductor areas from Table 5 and raceway areas from Table 4. For all one size, divide and keep the whole number, rounding up only at a decimal of 0.8 or more (Note 7). Correct: C — 19.",
       "formula": "40% area of the raceway (Table 4) ÷ conductor area (Table 5); round up only at 0.8 or more.",
-      "worked": "1.150 ÷ 0.0590 = 19.49, so 19 conductors",
+      "worked": "1.150 ÷ 0.0590 = 19.49, so 19 conductors.",
       "tip_title": "Conduit fill",
       "lookup_summary": "Lookup clues: conduit. Start with Table 4, Chapter 9, then read the matching subsection and exceptions."
     },
@@ -6016,7 +6016,7 @@
       ],
       "tip_short": "Ampacity: start with Table 310.16 in the insulation's column, correct for ambient temperature, then apply the Table 310.15(C)(1) factor for more than three conductors. Correct: B — 15.225a. #14 RHH is 25 amperes at 90 degrees C; 45 degrees C takes 0.87; 7 to 9 conductors take 70 percent; 25 x 0.87 x 0.70 = 15.225 amperes. Not A: 25 amperes is the unadjusted 90 degree C value, with neither correction applied. Not C: 17.5 amperes applies only the 70 percent factor and skips the temperature correction. Not D: 20 amperes is the 75 degree C value with no corrections; RHH is 90 degree C wire.",
       "formula": "Table 310.16 90°C value × the temperature correction × the Table 310.15(C)(1) factor.",
-      "worked": "25 A × 0.87 × 0.70 = 15.225 A",
+      "worked": "25 A × 0.87 × 0.70 = 15.225 A.",
       "tip_title": "Ampacity adjustment"
     },
     "final-exam-#4-064": {
@@ -6030,7 +6030,7 @@
       ],
       "tip_short": "Box fill (314.16(B)(1)): add the volume allowance for each conductor by size, then pick a box whose Table 314.16(A) volume is at least that total. Correct: C — 14.25 cu.in. 3 x 2.25 + 3 x 2.50 = 6.75 + 7.50 = 14.25 cubic inches. Not A: 10.5 cubic inches leaves out conductors; the six conductors total 14.25. Not B: 12.75 cubic inches does not match 3 x 2.25 + 3 x 2.50. Not D: 14.5 cubic inches is a listed box volume, not the required fill of 14.25.",
       "formula": "Σ (count × Table 314.16(B)(1) allowance) for each conductor size.",
-      "worked": "3 × 2.25 + 3 × 2.50 = 14.25",
+      "worked": "3 × 2.25 + 3 × 2.50 = 14.25.",
       "tip_title": "Box fill"
     },
     "final-exam-#4-065": {
@@ -6045,7 +6045,7 @@
       ],
       "tip_short": "Conduit fill: Chapter 9, Table 1 allows 40 percent for over two conductors (60 percent for nipples of 24 in. or less, Note 4); take conductor areas from Table 5 and raceway areas from Table 4. Correct: A — 2\". Total 0.7635 square inches fits within 1.150 square inches (40 percent of 2 in. Schedule 80), and 1-1/2 in. is too small. Not B: 2-1/2 in. would work but is not the minimum; 2 in. already has room. Not C: 1-1/2 in. Schedule 80 allows only 0.684 square inches, less than the 0.7635 total. Not D: 3 in. would work but is not the minimum; 2 in. already has room.",
       "formula": "Σ (count × Table 5 area), then the smallest Table 4 raceway whose 40% area is at least that total.",
-      "worked": "6 × 0.0973 + 3 × 0.0437 + 2 × 0.0243 = 0.7635 square inches; 1-1/2 in. allows 0.684 and 2 in. allows 1.150",
+      "worked": "6 × 0.0973 + 3 × 0.0437 + 2 × 0.0243 = 0.7635 square inches; 1-1/2 in. allows 0.684 and 2 in. allows 1.150.",
       "tip_title": "Conduit fill",
       "lookup_summary": "Lookup clues: conduit, conductors. Start with Table 4, Chapter 9, then read the matching subsection and exceptions."
     },
@@ -6061,7 +6061,7 @@
       ],
       "tip_short": "Conduit fill: Chapter 9, Table 1 allows 40 percent for over two conductors (60 percent for nipples of 24 in. or less, Note 4); take conductor areas from Table 5 and raceway areas from Table 4. For all one size, divide and keep the whole number, rounding up only at a decimal of 0.8 or more (Note 7). Correct: A — 12. Not D: 12 conductors, the 60 percent nipple fill, is among the choices.",
       "formula": "Nipple (24 in. or less): 60% area of the raceway (Table 4) ÷ conductor area (Table 5).",
-      "worked": "0.532 ÷ 0.0437 = 12.17, so 12 conductors",
+      "worked": "0.532 ÷ 0.0437 = 12.17, so 12 conductors.",
       "tip_title": "Conduit fill",
       "lookup_summary": "Lookup clues: conduit, conductors. Start with Table 4, Chapter 9, then read the matching subsection and exceptions."
     },
@@ -6076,7 +6076,7 @@
       ],
       "tip_short": "Motor short-circuit and ground-fault protection (430.52): multiply the table full-load current by the Table 430.52(C)(1) percentage; round up to the next standard size (240.6(A)) when needed. Correct: D — 45a. Table 430.248: 17 amperes; 17 x 2.50 = 42.5 amperes, rounded up to the standard 45 ampere breaker. Not A: 20 amperes is only slightly above the 17 ampere full-load current and may not hold the motor's starting current. Not B: 25 amperes is well below 250 percent of the full-load current. Not C: 30 amperes is below the 42.5 ampere value; the next standard size above it is 45.",
       "formula": "Table 430.248 full-load current × the inverse time breaker percentage in Table 430.52(C)(1); round up to the next standard size.",
-      "worked": "17 A × 2.50 = 42.5 A; next standard size is 45 A",
+      "worked": "17 A × 2.50 = 42.5 A; next standard size is 45 A.",
       "tip_title": "Motor short-circuit protection"
     },
     "final-exam-#4-068": {
@@ -6091,7 +6091,7 @@
       ],
       "tip_short": "Conduit fill: Chapter 9, Table 1 allows 40 percent for over two conductors (60 percent for nipples of 24 in. or less, Note 4); take conductor areas from Table 5 and raceway areas from Table 4. For all one size, divide and keep the whole number, rounding up only at a decimal of 0.8 or more (Note 7). Correct: C — 15.",
       "formula": "40% area of the raceway (Table 4) ÷ conductor area (Table 5); round up only at 0.8 or more.",
-      "worked": "0.890 ÷ 0.0590 = 15.08, so 15 conductors",
+      "worked": "0.890 ÷ 0.0590 = 15.08, so 15 conductors.",
       "tip_title": "Conduit fill",
       "lookup_summary": "Lookup clues: conduit, conductors. Start with Table 4, Chapter 9, then read the matching subsection and exceptions."
     },
@@ -6108,7 +6108,7 @@
       ],
       "tip_short": "Household cooking demand (Table 220.55): Column C by count (26 to 30 ranges: 15 kW plus 1 kW per range); Note 3 lets appliances of 1-3/4 to 8-3/4 kW use Column B instead. Correct: A — 43 kW. Not D: 43 kW, the Column C demand, is among the choices.",
       "formula": "Column C for 26–30 ranges: 15 kW plus 1 kW for each range.",
-      "worked": "15 kW + 28 × 1 kW = 43 kW",
+      "worked": "15 kW + 28 × 1 kW = 43 kW.",
       "tip_title": "Cooking appliance demand"
     },
     "final-exam-#4-070": {
@@ -6123,7 +6123,7 @@
       ],
       "tip_short": "Three-phase motor load: VA = table full-load current (Table 430.250) x volts x 1.732. Correct: D — 17,000.",
       "formula": "VA = Table 430.250 full-load current × voltage × 1.732.",
-      "worked": "46.2 A × 208 V × 1.732 = 16,644 VA, closest to 17,000 VA",
+      "worked": "46.2 A × 208 V × 1.732 = 16,644 VA, closest to 17,000 VA.",
       "tip_title": "Motor load"
     },
     "open-book-exam-#11-001": {
@@ -6891,7 +6891,7 @@
       ],
       "tip_short": "THWN is a 75°C insulation: #12 copper is 25 amperes, 86°F needs no correction, and 4 to 6 current-carrying conductors take 80 percent. Correct: B — 20a. #12 THWN is 25 amperes in the 75°C column of Table 310.16, 86°F needs no correction, and 25 times 0.80 is 20 amperes. Not A: 17.5 amperes uses the 70 percent factor for 7 to 9 conductors; four conductors take 80 percent. Not C: 23 amperes matches no Table 310.15(C)(1) factor; 25 amperes times the 80 percent adjustment is 20 amperes. Not D: 26 amperes exceeds even the unadjusted 25 ampere rating; four conductors must be adjusted to 80 percent.",
       "formula": "Read the 75°C column of Table 310.16 for THWN, apply no temperature correction at 86°F, then multiply by the Table 310.15(C)(1) factor for four current-carrying conductors.",
-      "worked": "25 A × 0.80 = 20 A",
+      "worked": "25 A × 0.80 = 20 A.",
       "tip_title": "Ampacity"
     },
     "open-book-exam-#2-013": {
@@ -6966,7 +6966,7 @@
       ],
       "tip_short": "Appliances not used at once: each 5 feet or fraction of fixed multioutlet assembly counts as one 180 volt-ampere outlet. Correct: C — 540. Not A: 1,000 volt-amperes does not come from the 180 volt-amperes per 5 feet rule; 12 feet gives 3 outlets, or 540.",
       "formula": "Not used simultaneously: count one 180 VA outlet for each 5 ft or fraction of the assembly (220.14(H)(1)), then multiply.",
-      "worked": "12 ft ÷ 5 ft = 2.4, round up to 3 outlets; 3 × 180 VA = 540 VA"
+      "worked": "12 ft ÷ 5 ft = 2.4, round up to 3 outlets; 3 × 180 VA = 540 VA."
     },
     "open-book-exam-#2-019": {
       "gist": "Grow lights run long hours at high output in humid spaces, so the Code wants them evaluated by a testing laboratory. The question asks what that equipment must be.",
@@ -7085,7 +7085,7 @@
       ],
       "tip_short": "Field-installed 10 foot taps that leave the enclosure need at least one-tenth the ampacity of the feeder overcurrent device. Correct: D — 400a. 240.21(B)(1) item (4) needs tap ampacity of at least one-tenth the feeder device, so 40 amperes allows 400 amperes. Not A: 150 amperes is allowed but is not the maximum; a 40 ampere tap is one-tenth of 400 amperes. Not B: 200 amperes is allowed but is not the maximum; the one-tenth rule of 240.21(B)(1) permits 400 amperes. Not C: 350 amperes is allowed but is not the maximum; 40 amperes is one-tenth of 400 amperes.",
       "formula": "Field 10-ft tap, 240.21(B)(1): compare the tap conductor ampacity with the rating of the feeder overcurrent device.",
-      "worked": "40 A × 10 = 400 A",
+      "worked": "40 A × 10 = 400 A.",
       "lookup_summary": "Lookup clues: feeder, ampacity, overcurrent protection. Start with 240.21(B)(1), then read the matching subsection and exceptions."
     },
     "open-book-exam-#3-003": {
@@ -7215,7 +7215,7 @@
       ],
       "tip_short": "THWN-2 uses the 90°C column: #10 copper is 40 amperes, and 105 to 113°F takes the 0.87 correction factor. Correct: B — 34.8.",
       "formula": "Read the 90°C column of Table 310.16 for THWN-2, then multiply by the Table 310.15(B)(1)(1) correction factor for the ambient temperature.",
-      "worked": "40 A × 0.87 = 34.8 A",
+      "worked": "40 A × 0.87 = 34.8 A.",
       "tip_title": "Ampacity",
       "lookup_summary": "Lookup clues: ampacity, raceway, conductors. Start with Table 310.15(B)(1)(1), then read the matching subsection and exceptions."
     },
@@ -7280,7 +7280,7 @@
       ],
       "tip_short": "Welder overcurrent protection is up to 200 percent of I1max, and if that is not a standard size, the next higher standard rating is allowed. Correct: B — 90 amp.",
       "formula": "Welder overcurrent device: not more than 200 percent of I1max (630.12(A)); if that is not a standard rating, 630.12 permits the next higher standard rating in 240.6(A).",
-      "worked": "43 A × 2.00 = 86 A; next higher standard rating = 90 A",
+      "worked": "43 A × 2.00 = 86 A; next higher standard rating = 90 A.",
       "tip_title": "Welders"
     },
     "open-book-exam-#3-014": {
@@ -7332,7 +7332,7 @@
       ],
       "tip_short": "Dwelling garages need at least one receptacle outlet in each vehicle bay, no more than 5 1/2 feet above the floor. Correct: C — two. Not A: 210.52(G)(1) requires receptacle outlets in every attached garage, so none is wrong.",
       "formula": "Count the receptacle outlets 210.52(G)(1) requires for the garage in the stem.",
-      "worked": "2 vehicle bays × 1 outlet = 2"
+      "worked": "2 vehicle bays × 1 outlet = 2."
     },
     "open-book-exam-#3-018": {
       "gist": "Lighting track carries movable luminaires whose weight can shift anywhere along it, so supports are required at set lengths. The question asks the section length that gets one additional support in a continuous row.",
@@ -7370,7 +7370,7 @@
       ],
       "tip_short": "One range over 12 kW: start with 8 kW from Column C and add 5 percent for each kilowatt (or major fraction) over 12 kW. Correct: C — 8.8.",
       "formula": "Start from the Column C value for one range, then increase it 5 percent for each kilowatt the range exceeds 12 kW (Table 220.55, Note 1).",
-      "worked": "14 kW − 12 kW = 2 kW; 2 × 5% = 10%; 8 kW × 1.10 = 8.8 kW",
+      "worked": "14 kW − 12 kW = 2 kW; 2 × 5% = 10%; 8 kW × 1.10 = 8.8 kW.",
       "tip_title": "Load calculations"
     },
     "open-book-exam-#3-020": {
@@ -7526,6 +7526,12 @@
     },
     "open-book-exam-#5-007": {
       "prompt": "The phase having the higher voltage to ground is ___, when an industrial control panel is supplied from a three-phase, 4-wire, delta connected electrical system.",
+      "answers": [
+        "permitted to be any phase on a delta connection",
+        "required to be phase \"C\" on a delta connection",
+        "required to be phase \"B\" on a delta connection",
+        "required to be phase \"A\" on a delta connection"
+      ],
       "gist": "A 4-wire delta system has one high leg with a higher voltage to ground, and putting it in a fixed bus position keeps anyone from landing a 120-volt load on it. The question asks which position the high leg must take in an industrial control panel.",
       "reference_text": "409.102(B) Phase Arrangement\nThe phase arrangement on 3-phase horizontal common power and vertical buses shall be A, B, C from front to back, top to bottom, or left to right, as viewed from the front of the industrial control panel. The B phase shall be that phase having the higher voltage to ground on 3-phase, 4-wire, delta-connected systems. Other busbar arrangements shall be permitted for additions to existing installations, and the phases shall be permanently marked.",
       "choice_notes": [
@@ -7534,7 +7540,7 @@
         "409.102(B) requires the B phase to be the phase having the higher voltage to ground on 3-phase, 4-wire, delta-connected systems.",
         "The A phase is not the high-leg position; 409.102(B) requires the B phase."
       ],
-      "tip_short": "In industrial control panels on a 4-wire delta, the high leg is the B phase (409.102(B)), just like switchboards and panelboards (408.3(E)(1)). Correct: C — required to be the \"B\" phase on a delta connection. 409.102(B) requires the B phase to be the phase having the higher voltage to ground on 3-phase, 4-wire, delta-connected systems. Not A: 409.102(B) fixes the high leg position; it is not permitted to be any phase except for additions to existing installations. Not B: The C phase is not the high-leg position; 409.102(B) requires the B phase. Not D: The A phase is not the high-leg position; 409.102(B) requires the B phase."
+      "tip_short": "In industrial control panels on a 4-wire delta, the high leg is the B phase (409.102(B)), just like switchboards and panelboards (408.3(E)(1)). Correct: C — required to be phase \"B\" on a delta connection. 409.102(B) requires the B phase to be the phase having the higher voltage to ground on 3-phase, 4-wire, delta-connected systems. Not A: 409.102(B) fixes the high leg position; it is not permitted to be any phase except for additions to existing installations. Not B: The C phase is not the high-leg position; 409.102(B) requires the B phase. Not D: The A phase is not the high-leg position; 409.102(B) requires the B phase."
     },
     "open-book-exam-#5-008": {
       "gist": "A plug-in motor with no overload device of its own relies on the general-purpose branch circuit, so the Code caps the plug and receptacle size. The question asks that maximum rating.",
