@@ -22,13 +22,6 @@ if OUT.resolve() == (ROOT / "data" / "question_bank.json").resolve():
 EXAMS = discover()
 QUESTION_COUNTS = {exam.label: exam.question_count(OCR) for exam in EXAMS}
 
-def difficulty(number):
-    if number <= 8:
-        return "easy"
-    if number >= 58:
-        return "hard"
-    return "medium"
-
 KEYWORD_TERMS = [
 	("ground fault", "ground fault"),
 	("ground-fault", "ground fault"),
@@ -1919,7 +1912,6 @@ for exam in EXAMS:
             refs.get(number, ""),
             source,
             number,
-            difficulty(number),
         ])
 
 manual = [
@@ -2164,7 +2156,6 @@ for item in bank:
         "correct_index": item[3],
         "article": item[4],
         "article_title": article_title(item[4]),
-        "difficulty": item[7],
         "keywords": keywords,
         "lookup_summary": lookup_summary,
         "info_tip": explain_question(item[1], keywords, item[4]),

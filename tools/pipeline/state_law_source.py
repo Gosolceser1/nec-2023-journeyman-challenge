@@ -19,7 +19,7 @@ from pathlib import Path
 SOURCES_DIR = Path(__file__).resolve().parent / "sources"
 LETTERS = ["A", "B", "C", "D", "E", "F"]
 KEY_FIELDS = [
-    "correct_index", "article", "article_title", "difficulty", "keywords",
+    "correct_index", "article", "article_title", "keywords",
     "lookup_summary", "gist", "info_tip", "reference_text", "tip_title", "tip",
     "choice_notes",
 ]
@@ -71,7 +71,6 @@ def load_quiz(question_path: Path) -> tuple[list[dict], list[dict]]:
             "correct_index": correct,
             "article": key["article"],
             "article_title": key["article_title"],
-            "difficulty": key["difficulty"],
             "keywords": key["keywords"],
             "lookup_summary": key["lookup_summary"],
             "info_tip": key["info_tip"],

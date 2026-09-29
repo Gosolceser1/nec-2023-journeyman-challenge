@@ -1,6 +1,6 @@
 extends SceneTree
-## BankLoader: the shipped bank loads whole and well-formed, legacy shapes are
-## normalized, and only "records" is ever read.
+## BankLoader: the shipped bank loads whole and well-formed, pre-v2 shapes are
+## rejected, and only "records" is ever read.
 
 var failures: Array[String] = []
 var checks := 0
@@ -29,17 +29,14 @@ func _init() -> void:
 		check(str(rec.get("article_title", "")).strip_edges() != "", "%s: has an article title" % id)
 
 	print("=== normalize_record ===")
-	var legacy := {"prompt": "Q?", "choices": ["a", "b", "c", "d"], "answer": 2}
-	var n := BankLoader.normalize_record(legacy)
-	check(n.get("answers") == ["a", "b", "c", "d"] and n.get("correct_index") == 2, "choices/answer become answers/correct_index")
+	var bare := {"prompt": "Q?", "answers": ["a", "b", "c", "d"], "correct_index": 2}
+	var n := BankLoader.normalize_record(bare)
+	check(n.get("answers") == ["a", "b", "c", "d"] and n.get("correct_index") == 2, "fields kept")
 	check(n.get("article") == "General knowledge" and n.get("article_title") == "General knowledge", "missing article defaults")
-	check(not legacy.has("answers"), "input record is not mutated")
+	check(not bare.has("article"), "input record is not mutated")
 	var titled := BankLoader.normalize_record({"article": "NEC 250.50", "article_title": " "})
 	check(titled.get("article_title") == "Grounding and Bonding", "blank title is looked up")
-	var row := BankLoader.normalize_record(["X", "Q?", ["a", "b", "c", "d"], 1, "NEC 210.12", "", "", "hard"])
-	check(row.get("exam") == "X" and row.get("correct_index") == 1 and row.get("difficulty") == "hard", "array row")
-	check(row.get("article_title") == NecReference.canonical_article_title(210), "array row title")
-	check(BankLoader.normalize_record(["too", "short"]).is_empty(), "short array rejected")
+	check(BankLoader.normalize_record(["X", "Q?", ["a", "b"], 1]).is_empty(), "pre-v2 array row rejected")
 	check(BankLoader.normalize_record("text").is_empty(), "non-record rejected")
 
 	print("=== file shapes ===")
@@ -47,8 +44,10 @@ func _init() -> void:
 	var tmp := "user://test_bank_loader.json"
 	_write(tmp, JSON.stringify({"questions": [{"prompt": "raw", "answers": ["a", "b"], "correct_index": 0}]}))
 	check(BankLoader.load_records(tmp).is_empty(), "raw 'questions' key is never read (answer-leak guard)")
-	_write(tmp, JSON.stringify([{"prompt": "Q?", "answers": ["a", "b"], "correct_index": 0}, 42]))
-	check(BankLoader.load_records(tmp).size() == 1, "top-level array, invalid entries skipped")
+	_write(tmp, JSON.stringify({"records": [{"prompt": "Q?", "answers": ["a", "b"], "correct_index": 0}, 42]}))
+	check(BankLoader.load_records(tmp).size() == 1, "invalid entries skipped")
+	_write(tmp, JSON.stringify([{"prompt": "Q?", "answers": ["a", "b"], "correct_index": 0}]))
+	check(BankLoader.load_records(tmp).is_empty(), "pre-v2 top-level array is not read")
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(tmp))
 
 	print("")

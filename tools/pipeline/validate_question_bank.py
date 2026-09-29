@@ -47,27 +47,26 @@ EDITION_YEAR = edition()["year"]
 SCHEMA_VERSION = 2
 
 REQUIRED_TOP_LEVEL = ["version", "total_expected", "playable", "records", "manifest", "missing_source_items"]
-OPTIONAL_TOP_LEVEL = ["questions", "audit_notes"]
+OPTIONAL_TOP_LEVEL = ["audit_notes"]
 
 REQUIRED_RECORD_FIELDS = [
     "id", "prompt", "answers", "correct_index", "article", "article_title",
-    "difficulty", "exam", "question_number",
+    "exam", "question_number",
 ]
 # Non-empty required. 'gist' and 'scene' are optional in practice (a large
 # share ship empty) so they are type-checked but never required to be filled.
 STRING_FIELDS = [
-    "id", "prompt", "article", "article_title", "difficulty", "exam",
+    "id", "prompt", "article", "article_title", "exam",
     "gist", "scene", "lookup_summary", "info_tip", "reference_text",
     "tip_title", "tip_short",
 ]
 NON_EMPTY_FIELDS = [
-    "id", "prompt", "article", "article_title", "difficulty", "exam",
+    "id", "prompt", "article", "article_title", "exam",
     "lookup_summary", "info_tip", "reference_text", "tip_title", "tip_short",
 ]
 LIST_FIELDS = ["answers", "keywords", "reference_table", "choice_notes"]
 
 MIN_ANSWERS, MAX_ANSWERS = 2, 6
-VALID_DIFFICULTIES = {"easy", "medium", "hard"}
 NON_CODE_REFERENCE_LABELS = {"general knowledge", "general calculation"}
 
 # ids look like "final-exam-#1-002" / "open-book-exam-#7-014"
@@ -187,22 +186,6 @@ def jtype(v) -> str:
 def truncate(s, n=110):
     s = str(s).replace("\n", "\\n")
     return s if len(s) <= n else s[: n - 1] + "…"
-
-
-def show_diff(want, got, ctx=46):
-    """Render a minimal 'common prefix … diverge here' view of two strings."""
-    w, g = str(want), str(got)
-    n = min(len(w), len(g))
-    i = 0
-    while i < n and w[i] == g[i]:
-        i += 1
-    if i == n and len(w) == len(g):
-        return "identical"
-    lo = max(0, i - ctx // 3)
-    head = ("…" if lo else "") + w[lo:i]
-    return (
-        f"…{head}[records: {truncate(w[i:], 34)!r}][questions: {truncate(g[i:], 34)!r}]"
-    )
 
 
 def answer_in_text(answer: str, text: str) -> bool:
@@ -497,7 +480,7 @@ def check_top_level(data, rep: Report) -> None:
         if k in data and not isinstance(data[k], int):
             rep.error(f"{k}: expected int, got {jtype(data[k])} ({data[k]!r})")
 
-    for k in ("records", "manifest", "missing_source_items", "questions", "audit_notes"):
+    for k in ("records", "manifest", "missing_source_items", "audit_notes"):
         if k in data and not isinstance(data[k], list):
             rep.error(f"{k}: expected array, got {jtype(data[k])}")
 
@@ -512,103 +495,12 @@ def check_top_level(data, rep: Report) -> None:
 
 
 # --------------------------------------------------------------------------
-# records vs questions
-# --------------------------------------------------------------------------
-QUESTIONS_LAYOUT = [
-    (0, "exam", "source label (UPPER CASE)"),
-    (1, "prompt", "question text"),
-    (2, "answers", "answer choices"),
-    (3, "correct_index", "index of correct answer"),
-    (4, "article", "NEC article"),
-    (5, "exam", "source label (title case)"),
-    (6, "question_number", "number within exam"),
-    (7, "difficulty", "difficulty label"),
-]
-
-
-def check_records_questions(data, rep: Report) -> None:
-    recs = data.get("records")
-    qs = data.get("questions")
-    if not isinstance(recs, list) or qs is None:
-        return
-    if not isinstance(qs, list):
-        return
-
-    if len(qs) != len(recs):
-        rep.error(
-            f"duplication: len(questions)={len(qs)} != len(records)={len(recs)}"
-        )
-        return
-
-    non_dict = [i for i, q in enumerate(qs) if not isinstance(q, dict)]
-    listy = [i for i, q in enumerate(qs) if isinstance(q, list)]
-
-    if non_dict:
-        rep.error(
-            f"duplication: questions[{len(non_dict)}x] hold {jtype(qs[non_dict[0]])} rows while "
-            f"records hold objects -- the two keys are not even the same shape "
-            f"(first at index {non_dict[0]})"
-        )
-    if listy:
-        rep.note(
-            f"duplication: 'questions' is a legacy POSITIONAL array (list of 8-element "
-            f"lists), while 'records' is a list of dicts. layout="
-            + ", ".join(f"[{i}]={f}" for i, f, _ in QUESTIONS_LAYOUT)
-        )
-
-    # Field-by-field comparison against records.
-    diffs: Counter = Counter()
-    examples: dict[str, list] = {}
-    for i, (rec, q) in enumerate(zip(recs, qs)):
-        if not isinstance(rec, dict) or not isinstance(q, list):
-            continue
-        for idx, field, _ in QUESTIONS_LAYOUT:
-            if idx >= len(q):
-                diffs[f"{field}:row_truncated"] += 1
-                continue
-            want = rec.get(field)
-            got = q[idx]
-            if field == "exam" and idx == 0 and isinstance(got, str) and got == str(want).upper():
-                continue  # case-only difference, by design
-            if got != want:
-                diffs[field] += 1
-                examples.setdefault(field, []).append(
-                    (rec.get("id", f"#{i}"), want, got)
-                )
-
-    if listy or non_dict:
-        for field, n in diffs.most_common():
-            ex = examples.get(field, [])[:3]
-            if field in ("prompt", "article", "article_title"):
-                detail = "; ".join(
-                    f"{rid}: {show_diff(w, g)}" for rid, w, g in ex
-                )
-            else:
-                detail = "; ".join(
-                    f"{rid}: records={truncate(w, 60)!r} vs questions={truncate(g, 60)!r}"
-                    for rid, w, g in ex
-                )
-            rep.error(
-                f"duplication: 'questions'[{n}/{len(recs)}] disagree with 'records' on "
-                f"'{field}' -- stale/duplicate copy of the data. {detail}"
-            )
-        rep.note(
-            "duplication: main.gd:226 does `parsed.get(\"records\", parsed.get(\"questions\", []))` "
-            "-> 'records' always wins and 'questions' is dead weight. It is written by "
-            "build_question_bank.py as `\"questions\": bank` (the raw, pre-repair OCR tuples) "
-            "alongside `\"records\": records` (the normalised dicts)."
-        )
-    elif not non_dict and not diffs:
-        rep.note("duplication: 'questions' is an exact duplicate of 'records' (pure waste).")
-
-
-# --------------------------------------------------------------------------
 # per-record checks
 # --------------------------------------------------------------------------
 def check_records(data, rep: Report) -> dict:
     recs = data.get("records")
     stats = {"count": 0, "ids": [], "with_table": 0, "exams": Counter(),
-             "difficulty": Counter(), "empty_gist": 0, "empty_scene": 0}
+             "empty_gist": 0, "empty_scene": 0}
     if not isinstance(recs, list):
         return stats
 
@@ -623,7 +515,6 @@ def check_records(data, rep: Report) -> dict:
         rid = rec.get("id") or f"records[{i}]"
         stats["ids"].append(rid)
         stats["exams"][rec.get("exam")] += 1
-        stats["difficulty"][rec.get("difficulty")] += 1
 
         # required presence
         for f in REQUIRED_RECORD_FIELDS:
@@ -651,12 +542,6 @@ def check_records(data, rep: Report) -> dict:
                 rep.error(f"{rid}: duplicate id (first seen at records[{seen_ids[rec['id']]}])")
             else:
                 seen_ids[rec["id"]] = i
-
-        # difficulty domain
-        if rec.get("difficulty") not in VALID_DIFFICULTIES:
-            rep.error(
-                f"{rid}: difficulty {rec.get('difficulty')!r} not in {sorted(VALID_DIFFICULTIES)}"
-            )
 
         # citation format (or an explicit non-code reference category)
         if isinstance(rec.get("article"), str) and not article_reference_is_recognized(rec["article"]):
@@ -920,7 +805,6 @@ def render(path: Path, data, rep: Report, stats: dict) -> str:
         L.append(
             f"version={data.get('version')} total_expected={data.get('total_expected')} "
             f"playable={data.get('playable')} records={len(data.get('records') or [])} "
-            f"questions={len(data['questions']) if isinstance(data.get('questions'), list) else '-'} "
             f"manifest={len(data.get('manifest') or [])} "
             f"missing={len(data.get('missing_source_items') or [])}"
         )
@@ -984,7 +868,6 @@ def main(argv=None) -> int:
     rep = Report()
     check_top_level(data, rep)
     stats = check_records(data, rep)
-    check_records_questions(data, rep)
     check_manifest(data, rep)
 
     n_err, n_warn = len(rep.errors), len(rep.warnings)
