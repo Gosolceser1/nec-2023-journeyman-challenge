@@ -31,11 +31,6 @@ func _scroll(px: int) -> void:
 	if n != null:
 		(n as ScrollContainer).scroll_vertical = px
 
-func _scroll_menu(px: int) -> void:
-	for c in main.menu_overlay.get_children():
-		if c is ScrollContainer:
-			(c as ScrollContainer).scroll_vertical = px
-
 func _show(rec_index: int) -> void:
 	main.order = [rec_index, 1, 2, 3, 4, 5, 7, 8, 10, 11] as Array[int]
 	main.current_index = 0
@@ -74,16 +69,13 @@ func _initialize() -> void:
 	await _wait(60)
 	_snap("01_menu")
 	main._on_audio_mode_picked(AudioSettings.Mode.LISTEN)
-	if "audio_expanded" in main and not main.audio_expanded:
-		main._toggle_audio_section()
+	main.menu_show_tab(main.menu.tab_index("settings"))
 	await _wait(10)
 	_snap("02_menu_listen")
-	_scroll_menu(2000)
+	main.menu_show_tab(main.menu.tab_index("exams"))
 	await _wait(10)
-	_snap("03_menu_bottom")
-	_scroll_menu(0)
-	if "audio_expanded" in main and main.audio_expanded:
-		main._toggle_audio_section()
+	_snap("03_menu_exams")
+	main.menu_show_tab(0)
 	main._on_audio_mode_picked(AudioSettings.Mode.SILENT)
 
 	main._start_quiz(10, 1800, true, "10-Question Practice")

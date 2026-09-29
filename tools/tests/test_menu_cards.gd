@@ -1,13 +1,14 @@
 extends SceneTree
-## Menu mode cards and answer cards stay in their column slot. Mode cards: one
-## content box for every state (normal, hover, pressed, hover_pressed, focus);
-## hover is glow and shine only, so a hovered card never leaves its slot; and
-## every card (the Nebraska State Law card included) rests at the same left x
-## and width as its siblings and the column, scale 1, once the menu settles,
-## after quick hover passes, a hover spanning a container re-sort, a focus
-## walk, the session-start press animation and a quiz round-trip. Answer cards
-## return to their slot after hover and speaking. Desktop: the whole menu,
-## State Law section included, fits 960 px without scrolling.
+## Menu mode cards, menu tiles and answer cards stay in their slot. Mode cards
+## and tiles: one content box for every state (normal, hover, pressed,
+## hover_pressed, focus); hover is glow and shine only, so a hovered card never
+## leaves its slot; the Home cards rest at the same left x and width as their
+## siblings and the page, scale 1, once the menu settles, after quick hover
+## passes, a hover spanning a container re-sort, a focus walk, the
+## session-start press animation and a quiz round-trip; the tiles of a grid
+## share one width and rest at scale 1 after hover passes. Answer cards return
+## to their slot after hover and speaking. Every menu tab fits the screen
+## without scrolling, desktop and mobile.
 ##
 ##   Godot --headless --path . --script tools/tests/test_menu_cards.gd [-- --mobile-ui]
 ##
@@ -42,24 +43,23 @@ func _initialize() -> void:
 	main.session.bag_path = ""
 	root.add_child(main)
 	await _wait(0.8)
-	var cards: Array = main.menu_mode_buttons
-	check(cards.size() == 8, "8 mode cards (got %d)" % cards.size())
-	var state_card := _state_law_card()
+	var cards: Array = main.menu_mode_buttons.filter(func(b): return b.is_visible_in_tree())
+	check(cards.size() == 4, "4 mode cards on Home without a run to continue (got %d)" % cards.size())
 
 	_check_styles(cards)
+	_check_styles(main.menu.tiles)
+	await _check_tiles()
 	_check_toggles()
 	_check_rest(cards, "menu settled")
 
-	for k in [0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1, 0, 3, 7, 6, 7]:
+	for k in [0, 1, 2, 3, 2, 1, 0, 3, 1, 2, 3, 2, 3]:
 		cards[k].mouse_entered.emit()
 		await _wait(0.01 + 0.015 * float(k % 4))
 		cards[k].mouse_exited.emit()
 	await _wait(0.4)
 	_check_rest(cards, "after quick hover passes")
 
-	for card in [cards[2], state_card]:
-		if card == null:
-			continue
+	for card in [cards[1], cards[2]]:
 		card.mouse_entered.emit()
 		await _wait(0.3)
 		_check_rest(cards, "while %s is hovered (glow only, no slide)" % _title(card))
@@ -106,8 +106,7 @@ func _initialize() -> void:
 	await _wait(0.8)
 	_check_rest(cards, "after a quiz round-trip and a doubled _show_menu")
 
-	if not mobile:
-		_check_menu_fits()
+	_check_menu_fits("Home after a quiz round-trip")
 
 	var child_ok := true
 	if not mobile:
@@ -122,14 +121,29 @@ func _title(b: Button) -> String:
 	return str(b.get_meta("base_text")).get_slice("\n", 0)
 
 
-func _state_law_card() -> Button:
-	var found: Array = main.menu_mode_buttons.filter(func(b): return str(b.get_meta("base_text")).contains("State Electrical Act"))
-	check(found.size() == 1, "one State Law mode card (got %d)" % found.size())
-	if found.size() != 1:
-		return null
-	check(found[0].get_parent() == main.menu_mode_buttons[0].get_parent(), "State Law card sits in the same column as the NEC cards")
-	check(found[0].has_meta("starts_session"), "State Law card plays the start cue like every mode card")
-	return found[0]
+## Every tab: its tiles share their grid's column width and are back at
+## scale 1 after a quick hover pass, and the page fits without scrolling.
+func _check_tiles() -> void:
+	for i in main.menu_tab_count():
+		main.menu_show_tab(i)
+		await _wait(0.3)
+		var tiles: Array = main.menu.tiles.filter(func(t): return t.is_visible_in_tree())
+		for t in tiles:
+			t.mouse_entered.emit()
+			await _wait(0.01)
+			t.mouse_exited.emit()
+		await _wait(0.4)
+		var bad := PackedStringArray()
+		for t in tiles:
+			var grid := t.get_parent() as GridContainer
+			var first := grid.get_child(0) as Control
+			# A grid hands its leftover pixel to some columns: 1 px apart is one width.
+			if absf(t.size.x - first.size.x) > 1.0 + TOL or not t.scale.is_equal_approx(Vector2.ONE) or not is_equal_approx(t.modulate.a, 1.0):
+				bad.append("%s w%+.2f s%.3f" % [t.title_label.text, t.size.x - first.size.x, t.scale.x])
+		check(bad.is_empty(), "tab %s: %d/%d tiles share their grid's width at rest (off: %s)" % [main.menu.tab_ids[i], tiles.size() - bad.size(), tiles.size(), ", ".join(bad)])
+		_check_menu_fits("tab " + main.menu.tab_ids[i])
+	main.menu_show_tab(0)
+	await _wait(0.3)
 
 
 ## Same content margins in every state, so hover, press and keyboard focus
@@ -181,12 +195,12 @@ func _check_slots(nodes: Array, when: String) -> void:
 	check(bad.is_empty(), "%s: %d cards in their slot (off: %s)" % [when, nodes.size() - bad.size(), ", ".join(bad)])
 
 
-## The desktop menu, State Law section included, fits the 960 px canvas.
-func _check_menu_fits() -> void:
+## The open tab fits the 960 px canvas without scrolling.
+func _check_menu_fits(when: String) -> void:
 	var scroll := main.menu_center_box.get_parent() as ScrollContainer
 	var need := main.menu_center_box.get_combined_minimum_size().y
-	print("  menu height: %.0f of %.0f px (row gap %d)" % [need, scroll.size.y, main.menu_column.get_theme_constant("separation")])
-	check(need <= scroll.size.y + TOL, "desktop menu fits without scrolling (%.0f of %.0f px)" % [need, scroll.size.y])
+	print("  %s: menu height %.0f of %.0f px (row gap %d)" % [when, need, scroll.size.y, main.menu_column.get_theme_constant("separation")])
+	check(need <= scroll.size.y + TOL, "%s: menu fits without scrolling (%.0f of %.0f px)" % [when, need, scroll.size.y])
 
 
 func _run_mobile_child() -> bool:

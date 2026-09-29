@@ -71,9 +71,13 @@ const SUITES := [
 	{"name": "fx helpers (chapter map, gauges)", "path": "res://tools/tests/test_fx.gd"},
 	# Hover slides once tweened position:x as_relative, so container re-sorts
 	# and quick mouse passes left each menu card a different few px off its
-	# slot. Mode and answer cards now line up in every state and after every
-	# animation, and the desktop menu (State Law section included) fits.
+	# slot. Mode cards, menu tiles and answer cards now line up in every state
+	# and after every animation, and every menu tab fits.
 	{"name": "menu and answer cards (alignment, state margins, fit)", "path": "res://tools/tests/test_menu_cards.gd"},
+	# The menu is built from data/menu.json and the bank's exam labels: a new
+	# exam shows up by itself, every entry starts the session it names, and
+	# every tab fits the phone and desktop window sizes without scrolling.
+	{"name": "main menu (tabs, exam discovery, every entry, continue, best scores, fit)", "path": "res://tools/tests/test_menu.gd"},
 	{"name": "audio settings (modes, autoplay rules)", "path": "res://tools/tests/test_audio_settings.gd"},
 	{"name": "sfx (sound map, voice ducking, bus)", "path": "res://tools/tests/test_sfx.gd"},
 	{"name": "speech bus chain (anti-image, pitch bypass)", "path": "res://tools/tests/test_speech_chain.gd"},

@@ -261,26 +261,23 @@ func _app_cases() -> void:
 	await _wait(0.8)
 	check(main.ui_mobile and is_instance_valid(main.touch_scroll), "mobile layout with a TouchScroll")
 
-	# Menu: the audio panel open makes it taller than the screen.
-	main.audio_expanded = true
-	AudioSection.refresh(main)
-	await _wait(0.3)
+	# Menu: every tab fits the screen, so it never scrolls, and a swipe over a
+	# mode card starts nothing.
 	var menu_scroll: ScrollContainer = main.menu_center_box.get_parent()
-	var bar := menu_scroll.get_v_scroll_bar()
-	print("  menu: content %.0f px, page %.0f px" % [bar.max_value, bar.page])
-	check(TouchScroll.can_scroll(menu_scroll, true), "the expanded mobile menu is scrollable")
-	var mode_card: Button = null
-	for b in main.menu_mode_buttons:
-		if menu_scroll.get_global_rect().encloses(b.get_global_rect()):
-			mode_card = b
-			break
-	var from := _center(mode_card) if mode_card != null else menu_scroll.get_global_rect().get_center()
-	var start := menu_scroll.scroll_vertical
-	await _swipe(from, Vector2(0, -200))
+	for i in main.menu_tab_count():
+		main.menu_show_tab(i)
+		await _wait(0.2)
+		check(not TouchScroll.can_scroll(menu_scroll, true), "mobile menu tab %s fits without scrolling" % main.menu.tab_ids[i])
+	main.menu_show_tab(0)
 	await _wait(0.2)
-	print("  menu swipe 200 px on a mode card: scroll %d -> %d" % [start, menu_scroll.scroll_vertical])
-	check(menu_scroll.scroll_vertical - start >= 150, "a finger swipe scrolls the mobile menu (%d -> %d)" % [start, menu_scroll.scroll_vertical])
+	var mode_card: Button = main.menu.first_focus()
+	var start := menu_scroll.scroll_vertical
+	await _swipe(_center(mode_card), Vector2(0, -200))
+	await _wait(0.2)
+	check(menu_scroll.scroll_vertical == start, "a swipe on the menu leaves it in place (%d -> %d)" % [start, menu_scroll.scroll_vertical])
 	check(main.menu_overlay.visible and main.order.is_empty(), "swiping over a mode card does not start a session")
+	main.menu_show_tab(main.menu.tab_index("settings"))
+	await _wait(0.2)
 
 	# Voice sheet: 62 rows, taller than the sheet.
 	main.voice_button.pressed.emit()

@@ -1,0 +1,7 @@
+{
+	"note": "Study tools for test_menu.gd (menu_study_stub.gd opens them).",
+	"tools": [
+		{"id": "alpha", "title": "Alpha tool", "description": "First stub tool", "icon": "bolt"},
+		{"id": "beta", "title": "Beta tool", "description": "Second stub tool", "icon": "no_such_glyph"}
+	]
+}

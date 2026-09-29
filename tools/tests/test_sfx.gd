@@ -74,7 +74,7 @@ func _check_app() -> void:
 	await _wait(0.4)
 	var fx := main.sfx
 	check(fx.last_ui == "" and fx.last_event == "", "launch: the menu opens silently")
-	var start_button := main.menu_mode_buttons[0]
+	var start_button: Button = main.menu.quick_button
 	start_button.pressed.emit()
 	await _frames()
 	check(fx.last_event == Sfx.START and fx.last_ui == "", "start press: the start cue only (no click, no transition)")
@@ -130,11 +130,22 @@ func _check_app() -> void:
 	await _frames()
 	check(fx.last_ui == "hover", "pointer over a menu card: hover (desktop)")
 	fx.last_ui = ""
-	main.menu_mode_buttons[1].mouse_entered.emit()
+	main.study_button.mouse_entered.emit()
 	await _frames()
 	check(fx.last_ui == "", "sweeping on to the next card at once: rate-limited")
 	await _wait(0.3)
-	for plain: BaseButton in [main.next_button, main.restart_button, main.mute_button, main.audio_toggle_button]:
+	main.menu.tiles[0].mouse_entered.emit()
+	await _frames()
+	check(fx.last_ui == "hover", "pointer over a menu tile: hover (desktop)")
+	await _wait(0.3)
+	fx.last_ui = ""
+	main.menu.tab_buttons[1].pressed.emit()
+	await _frames()
+	check(fx.last_ui == "toggle", "a menu tab: toggle")
+	main.menu_show_tab(0)
+	await _wait(0.3)
+	fx.last_ui = ""
+	for plain: BaseButton in [main.next_button, main.restart_button, main.mute_button, main.audio_toggle_button, main.menu.tab_buttons[2]]:
 		plain.mouse_entered.emit()
 	await _frames()
 	check(fx.last_ui == "", "pointer over plain buttons and switches: no hover (menu cards only)")
