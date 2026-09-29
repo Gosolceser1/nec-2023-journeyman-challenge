@@ -13,6 +13,9 @@ overcurrents panelboard panelboards raceway raceways switchgear wireway wireways
 wrenchtight occupiable hoistway hoistways multibuilding barriered noncinder nonheating
 noninsulated nonlighting nonlocking nonshielded unjacketed thermoset relamping
 nonplasticized handhole handholes aerial
+countertop nontime nonsubmersible nonventilated nonconductive intersystem overvoltage
+firestop firestopped firestopping microgrid microgrids backfed backfeed relamps upsizing
+gfcis spds subassemblies
 explosible flyings plexed storable prefinished centerline
 kcmil kVA kft ft ft² m² µm mm ml kg lb lbs hp rms std
 AWG THHN THWN NM EMT RMC IMC GFCI AFCI NEMA
@@ -30,3 +33,9 @@ intensité courant
 
 # Nebraska State Electrical Act citations (Neb. Rev. Stat.) and quiz wording (pre-cover)
 stat pre
+
+# NEC 2023 Article 100 "Voltage, Nominal" quoted verbatim ("e.g., 120/240 volts")
+!final-exam-#4-007|spacing|doubled punctuation: 'e class (e.g., 120/240 vol'
+# Transformer turns ratio symbols (Es ÷ Ep = Ns ÷ Np)
+!final-exam-#2-012|spelling|Ns
+!final-exam-#2-015|spelling|Ns

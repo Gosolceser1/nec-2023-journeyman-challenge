@@ -1322,6 +1322,1760 @@
   },
   "ne-state-act-#3-004": {
    "class": "recall"
+  },
+  "final-exam-#2-001": {
+   "class": "recall"
+  },
+  "final-exam-#2-002": {
+   "class": "recall"
+  },
+  "final-exam-#2-003": {
+   "class": "recall"
+  },
+  "final-exam-#2-004": {
+   "class": "recall"
+  },
+  "final-exam-#2-005": {
+   "class": "recall"
+  },
+  "final-exam-#2-006": {
+   "class": "recall"
+  },
+  "final-exam-#2-007": {
+   "class": "recall"
+  },
+  "final-exam-#2-008": {
+   "class": "recall"
+  },
+  "final-exam-#2-009": {
+   "class": "recall"
+  },
+  "final-exam-#2-010": {
+   "class": "recall"
+  },
+  "final-exam-#2-011": {
+   "class": "recall"
+  },
+  "final-exam-#2-012": {
+   "class": "recall"
+  },
+  "final-exam-#2-013": {
+   "class": "recall"
+  },
+  "final-exam-#2-014": {
+   "class": "recall"
+  },
+  "final-exam-#2-015": {
+   "class": "recall"
+  },
+  "final-exam-#2-016": {
+   "class": "recall"
+  },
+  "final-exam-#2-017": {
+   "class": "recall"
+  },
+  "final-exam-#2-018": {
+   "class": "recall"
+  },
+  "final-exam-#2-019": {
+   "class": "formula",
+   "tables": [],
+   "steps": [
+    "Length × 3: 5 × 3 = 15 ohms",
+    "Area × 1/2: 15 ÷ 0.5 = 30 ohms"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "product",
+    "factors": [
+     5,
+     3,
+     2
+    ]
+   }
+  },
+  "final-exam-#2-020": {
+   "class": "recall"
+  },
+  "final-exam-#2-021": {
+   "class": "recall"
+  },
+  "final-exam-#2-022": {
+   "class": "recall"
+  },
+  "final-exam-#2-023": {
+   "class": "table",
+   "tables": [
+    "Table 110.28 outdoor use, Corrosive agents row: X under Types 3X, 3RX, 3SX, 4X, 6P; Types 12 and 13 are indoor only"
+   ],
+   "pre_answer_table": false
+  },
+  "final-exam-#2-024": {
+   "class": "recall"
+  },
+  "final-exam-#2-025": {
+   "class": "recall"
+  },
+  "final-exam-#2-026": {
+   "class": "recall"
+  },
+  "final-exam-#2-027": {
+   "class": "recall"
+  },
+  "final-exam-#2-028": {
+   "class": "recall"
+  },
+  "final-exam-#2-029": {
+   "class": "recall"
+  },
+  "final-exam-#2-030": {
+   "class": "recall"
+  },
+  "final-exam-#2-031": {
+   "class": "recall"
+  },
+  "final-exam-#2-032": {
+   "class": "recall"
+  },
+  "final-exam-#2-033": {
+   "class": "recall"
+  },
+  "final-exam-#2-034": {
+   "class": "recall"
+  },
+  "final-exam-#2-035": {
+   "class": "recall"
+  },
+  "final-exam-#2-036": {
+   "class": "recall"
+  },
+  "final-exam-#2-037": {
+   "class": "recall"
+  },
+  "final-exam-#2-038": {
+   "class": "recall"
+  },
+  "final-exam-#2-039": {
+   "class": "recall"
+  },
+  "final-exam-#2-040": {
+   "class": "recall"
+  },
+  "final-exam-#2-041": {
+   "class": "recall"
+  },
+  "final-exam-#2-042": {
+   "class": "recall"
+  },
+  "final-exam-#2-043": {
+   "class": "recall"
+  },
+  "final-exam-#2-044": {
+   "class": "recall"
+  },
+  "final-exam-#2-045": {
+   "class": "recall"
+  },
+  "final-exam-#2-046": {
+   "class": "table",
+   "tables": [
+    "Table 110.26(A)(1), Condition 2 note: concrete, brick, or tile walls are considered grounded"
+   ],
+   "steps": [
+    "Read the Condition 2 definition under Table 110.26(A)(1)"
+   ],
+   "pre_answer_table": false,
+   "note": "The note states the answer, so the table appears after answering (in the code provision)."
+  },
+  "final-exam-#2-047": {
+   "class": "recall"
+  },
+  "final-exam-#2-048": {
+   "class": "recall"
+  },
+  "final-exam-#2-049": {
+   "class": "recall"
+  },
+  "final-exam-#2-050": {
+   "class": "recall"
+  },
+  "final-exam-#2-051": {
+   "class": "recall"
+  },
+  "final-exam-#2-052": {
+   "class": "recall"
+  },
+  "final-exam-#2-053": {
+   "class": "recall"
+  },
+  "final-exam-#2-054": {
+   "class": "recall"
+  },
+  "final-exam-#2-055": {
+   "class": "recall"
+  },
+  "final-exam-#2-056": {
+   "class": "recall"
+  },
+  "final-exam-#2-057": {
+   "class": "calc",
+   "tables": [],
+   "steps": [
+    "Decimal = numerator ÷ denominator",
+    "11 ÷ 16 = 0.6875"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "quotient",
+    "a": 11,
+    "b": 16
+   }
+  },
+  "final-exam-#2-058": {
+   "class": "recall"
+  },
+  "final-exam-#2-059": {
+   "class": "recall"
+  },
+  "final-exam-#2-060": {
+   "class": "recall"
+  },
+  "final-exam-#2-061": {
+   "class": "recall"
+  },
+  "final-exam-#2-062": {
+   "class": "recall"
+  },
+  "final-exam-#2-063": {
+   "class": "recall"
+  },
+  "final-exam-#2-064": {
+   "class": "recall"
+  },
+  "final-exam-#2-065": {
+   "class": "recall"
+  },
+  "final-exam-#2-066": {
+   "class": "recall"
+  },
+  "final-exam-#2-067": {
+   "class": "recall"
+  },
+  "final-exam-#2-068": {
+   "class": "recall"
+  },
+  "final-exam-#2-069": {
+   "class": "recall"
+  },
+  "final-exam-#2-070": {
+   "class": "recall"
+  },
+  "final-exam-#4-001": {
+   "class": "recall"
+  },
+  "final-exam-#4-002": {
+   "class": "recall"
+  },
+  "final-exam-#4-003": {
+   "class": "recall"
+  },
+  "final-exam-#4-004": {
+   "class": "recall"
+  },
+  "final-exam-#4-005": {
+   "class": "table",
+   "tables": [
+    "Table 314.16(A): 3 x 2 x 2 device box = 10.0 in.3"
+   ],
+   "steps": [
+    "Find the 3 x 2 x 2 device box row and read the minimum volume"
+   ],
+   "pre_answer_table": false
+  },
+  "final-exam-#4-006": {
+   "class": "table",
+   "tables": [
+    "Chapter 9, Table 9: 4/0 aluminum, steel conduit, per 1000 ft: AC resistance 0.11, effective Z at 0.85 PF 0.11"
+   ],
+   "steps": [
+    "Use the per-1000-ft row for 4/0 and read the aluminum, steel conduit columns"
+   ],
+   "pre_answer_table": false
+  },
+  "final-exam-#4-007": {
+   "class": "recall"
+  },
+  "final-exam-#4-008": {
+   "class": "recall"
+  },
+  "final-exam-#4-009": {
+   "class": "table",
+   "tables": [
+    "Table 392.60(B) steel: 200 A = 0.70 in.2; 400 A = 1.00 in.2"
+   ],
+   "steps": [
+    "0.79 in.2 meets the 0.70 in.2 row but not the 1.00 in.2 row"
+   ],
+   "pre_answer_table": false
+  },
+  "final-exam-#4-010": {
+   "class": "recall"
+  },
+  "final-exam-#4-011": {
+   "class": "table",
+   "tables": [
+    "Table 314.16(A): 3 x 2 x 2 = 10.0 in.3; 3 x 2 x 2-1/4 = 10.5 in.3"
+   ],
+   "steps": [
+    "Pick the smallest listed device box with at least 10.25 in.3"
+   ],
+   "pre_answer_table": false
+  },
+  "final-exam-#4-012": {
+   "class": "recall"
+  },
+  "final-exam-#4-013": {
+   "class": "recall"
+  },
+  "final-exam-#4-014": {
+   "class": "recall"
+  },
+  "final-exam-#4-015": {
+   "class": "recall"
+  },
+  "final-exam-#4-016": {
+   "class": "recall"
+  },
+  "final-exam-#4-017": {
+   "class": "recall"
+  },
+  "final-exam-#4-018": {
+   "class": "recall"
+  },
+  "final-exam-#4-019": {
+   "class": "recall"
+  },
+  "final-exam-#4-020": {
+   "class": "recall"
+  },
+  "final-exam-#4-021": {
+   "class": "table",
+   "tables": [
+    "Table 314.16(B)(1): 12 AWG = 2.25 in.3, 14 AWG = 2.00 in.3",
+    "Table 314.16(A): 4 x 2-1/8 octagon = 21.5 in.3"
+   ],
+   "steps": [
+    "5 x 2.25 + 4 x 2.00 = 19.25 in.3",
+    "Smallest octagon box of at least 19.25 in.3: 4 x 2-1/8 in. (21.5 in.3)"
+   ],
+   "pre_answer_table": false
+  },
+  "final-exam-#4-022": {
+   "class": "table",
+   "tables": [
+    "Chapter 9, Table 4, EMT: 1 in., over 2 wires 40% = 0.346 in.2"
+   ],
+   "steps": [
+    "Compare 0.30 in.2 with 0.346 in.2"
+   ],
+   "pre_answer_table": false
+  },
+  "final-exam-#4-023": {
+   "class": "table+calc",
+   "tables": [
+    "Table 220.55 Column B: 8 appliances = 36%",
+    "Table 220.55 Column C: 8 appliances = 23 kW"
+   ],
+   "steps": [
+    "32 kW x 0.36 = 11.52 kW (Column B, Note 3)",
+    "Column B gives less than the 23 kW of Column C"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "product",
+    "factors": [
+     8,
+     4,
+     0.36
+    ]
+   }
+  },
+  "final-exam-#4-024": {
+   "class": "table+calc",
+   "tables": [
+    "Table 310.16: 14 AWG Cu, 75°C (THW) = 20 A",
+    "Table 310.15(C)(1): 4–6 conductors = 80%"
+   ],
+   "steps": [
+    "20 A x 1.00 x 0.80 = 16 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "ampacity",
+    "awg": "14",
+    "column_c": 75,
+    "ambient_f": 86,
+    "ccc": 6
+   }
+  },
+  "final-exam-#4-025": {
+   "class": "table+calc",
+   "tables": [
+    "Table 220.55 Column C: 2 appliances = 11 kW"
+   ],
+   "steps": [
+    "Two appliances, none over 12 kW: Column C = 11 kW"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 11
+   }
+  },
+  "final-exam-#4-026": {
+   "class": "table+calc",
+   "tables": [
+    "Table 430.248: 3/4 hp, 115 V = 13.8 A"
+   ],
+   "steps": [
+    "13.8 A x 1.25 = 17.25 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "product",
+    "factors": [
+     13.8,
+     1.25
+    ]
+   }
+  },
+  "final-exam-#4-027": {
+   "class": "calc",
+   "tables": [],
+   "steps": [
+    "2000 ft2 x 3 VA/ft2 = 6000 VA"
+   ],
+   "check": {
+    "kind": "product",
+    "factors": [
+     2000,
+     3
+    ]
+   }
+  },
+  "final-exam-#4-028": {
+   "class": "calc",
+   "tables": [],
+   "steps": [
+    "3 circuits x 1500 VA = 4500 VA"
+   ],
+   "check": {
+    "kind": "product",
+    "factors": [
+     3,
+     1500
+    ]
+   }
+  },
+  "final-exam-#4-029": {
+   "class": "table",
+   "tables": [
+    "Table 250.66: 2/0 or 3/0 Cu = 4 AWG Cu GEC"
+   ],
+   "steps": [
+    "Find the 2/0 copper row and read the copper GEC size"
+   ],
+   "pre_answer_table": false
+  },
+  "final-exam-#4-030": {
+   "class": "table+calc",
+   "tables": [
+    "Table 430.248: 1-1/2 hp, 230 V = 10 A"
+   ],
+   "steps": [
+    "10 x 1.25 + 10 = 22.5 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 22.5
+   }
+  },
+  "final-exam-#4-031": {
+   "class": "table+calc",
+   "tables": [
+    "Table 310.16: 12 AWG Cu, 60°C (TW) = 20 A",
+    "Table 310.15(B)(1)(1): 69–77°F, 60°C column = 1.08"
+   ],
+   "steps": [
+    "20 A x 1.08 = 21.6 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "ampacity",
+    "awg": "12",
+    "column_c": 60,
+    "ambient_f": 75,
+    "ccc": 3
+   }
+  },
+  "final-exam-#4-032": {
+   "class": "table+calc",
+   "tables": [
+    "Table 430.248: 3 hp, 115 V = 34 A",
+    "Table 430.52(C)(1): dual element fuse = 175%"
+   ],
+   "steps": [
+    "34 x 1.75 = 59.5 A",
+    "Next standard size (240.6(A)) = 60 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 60
+   }
+  },
+  "final-exam-#4-033": {
+   "class": "table+calc",
+   "tables": [
+    "Table 310.16: 14 AWG Cu, 75°C (THW) = 20 A",
+    "Table 310.15(C)(1): 4–6 conductors = 80%"
+   ],
+   "steps": [
+    "20 A x 1.00 x 0.80 = 16 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "ampacity",
+    "awg": "14",
+    "column_c": 75,
+    "ambient_f": 86,
+    "ccc": 6
+   }
+  },
+  "final-exam-#4-034": {
+   "class": "table+calc",
+   "tables": [
+    "Table 430.248: 3 hp, 230 V = 17 A",
+    "430.32(C): all other motors = 130%"
+   ],
+   "steps": [
+    "17 x 1.30 = 22.1 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "product",
+    "factors": [
+     17,
+     1.3
+    ]
+   }
+  },
+  "final-exam-#4-035": {
+   "class": "table",
+   "tables": [
+    "Table 310.15(B)(1)(1): 96–104°F, 60°C = 0.82"
+   ],
+   "steps": [
+    "Read the 96–104°F row in the 60°C column"
+   ],
+   "pre_answer_table": false
+  },
+  "final-exam-#4-036": {
+   "class": "recall"
+  },
+  "final-exam-#4-037": {
+   "class": "calc",
+   "tables": [
+    "430.32(C): service factor 1.15 or greater = 140%"
+   ],
+   "steps": [
+    "24 x 1.40 = 33.6 A"
+   ],
+   "check": {
+    "kind": "product",
+    "factors": [
+     24,
+     1.4
+    ]
+   }
+  },
+  "final-exam-#4-038": {
+   "class": "table+calc",
+   "tables": [
+    "Table 314.16(B)(1): 12 AWG = 2.25 in.3"
+   ],
+   "steps": [
+    "4 conductors + 1 clamp + 2 device + 1 EGC = 8 allowances",
+    "8 x 2.25 = 18 in.3"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 18
+   }
+  },
+  "final-exam-#4-039": {
+   "class": "table+calc",
+   "tables": [
+    "Table 430.250: 10 hp, 230 V = 28 A"
+   ],
+   "steps": [
+    "28 x 1.25 = 35 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "product",
+    "factors": [
+     28,
+     1.25
+    ]
+   }
+  },
+  "final-exam-#4-040": {
+   "class": "table+calc",
+   "tables": [
+    "Table 310.16: 12 AWG Cu, 90°C (THHN) = 30 A",
+    "Table 310.15(C)(1): 7–9 conductors = 70%"
+   ],
+   "steps": [
+    "30 x 0.70 = 21 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "ampacity",
+    "awg": "12",
+    "column_c": 90,
+    "ambient_f": 86,
+    "ccc": 7
+   }
+  },
+  "final-exam-#4-041": {
+   "class": "table+calc",
+   "tables": [
+    "Table 310.16: 12 AWG Cu, 75°C (THW) = 25 A",
+    "Table 310.15(B)(1)(1): 26–30°C = 1.00"
+   ],
+   "steps": [
+    "25 x 1.00 = 25 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "ampacity",
+    "awg": "12",
+    "column_c": 75,
+    "ambient_f": 82,
+    "ccc": 3
+   }
+  },
+  "final-exam-#4-042": {
+   "class": "calc",
+   "tables": [],
+   "steps": [
+    "10 x 4.5 = 45 kW",
+    "45 x 0.75 = 33.75 kW"
+   ],
+   "check": {
+    "kind": "product",
+    "factors": [
+     10,
+     4.5,
+     0.75
+    ]
+   }
+  },
+  "final-exam-#4-043": {
+   "class": "table+calc",
+   "tables": [
+    "Table 310.16: 10 AWG Cu, 90°C (RHH) = 40 A",
+    "Table 310.15(B)(1)(1): 96–104°F, 90°C = 0.91",
+    "240.4(D)(8): 10 AWG Cu = 30 A"
+   ],
+   "steps": [
+    "40 x 0.91 = 36.4 A",
+    "240.4(D) limit = 30 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 30
+   }
+  },
+  "final-exam-#4-044": {
+   "class": "recall"
+  },
+  "final-exam-#4-045": {
+   "class": "table+calc",
+   "tables": [
+    "Table 220.55 Column B: 3 appliances = 55%"
+   ],
+   "steps": [
+    "13 kW x 0.55 = 7.15 kW"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "product",
+    "factors": [
+     13,
+     0.55
+    ]
+   }
+  },
+  "final-exam-#4-046": {
+   "class": "table+calc",
+   "tables": [
+    "220.54: 5 kW minimum per dryer",
+    "Table 220.54: 6 dryers = 75%",
+    "220.61(B)(1): neutral 70%"
+   ],
+   "steps": [
+    "6 x 5 = 30 kW",
+    "30 x 0.75 = 22.5 kW",
+    "22.5 x 0.70 = 15.75 kW"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "product",
+    "factors": [
+     6,
+     5,
+     0.75,
+     0.7
+    ]
+   }
+  },
+  "final-exam-#4-047": {
+   "class": "calc",
+   "tables": [],
+   "steps": [
+    "2500 x 3 = 7500 VA",
+    "7500 / 1800 = 4.17, round up to 5"
+   ],
+   "check": {
+    "kind": "value",
+    "value": 5
+   }
+  },
+  "final-exam-#4-048": {
+   "class": "recall"
+  },
+  "final-exam-#4-049": {
+   "class": "table+calc",
+   "tables": [
+    "Table 220.55 Column B: 15 appliances = 32%",
+    "Table 220.55 Column C: 15 appliances = 30 kW"
+   ],
+   "steps": [
+    "52.5 x 0.32 = 16.8 kW (Column B, Note 3)",
+    "Column B gives less than the 30 kW of Column C"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "product",
+    "factors": [
+     15,
+     3.5,
+     0.32
+    ]
+   }
+  },
+  "final-exam-#4-050": {
+   "class": "table",
+   "tables": [
+    "Chapter 9, Table 5: 14 AWG RHH* (no outer covering) = 0.0209 in.2"
+   ],
+   "steps": [
+    "Use the asterisk row for RHH without an outer covering"
+   ],
+   "pre_answer_table": false
+  },
+  "final-exam-#4-051": {
+   "class": "table+calc",
+   "tables": [
+    "Table 220.55 Column B: 1 appliance = 80%",
+    "Table 220.55 Column C: 1 appliance = 8 kW"
+   ],
+   "steps": [
+    "8 x 0.80 = 6.4 kW (Column B, Notes 3 and 4)"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "product",
+    "factors": [
+     8,
+     0.8
+    ]
+   }
+  },
+  "final-exam-#4-052": {
+   "class": "calc",
+   "tables": [],
+   "steps": [
+    "1800 ft2 x 3 VA/ft2 = 5400 VA"
+   ],
+   "check": {
+    "kind": "product",
+    "factors": [
+     1800,
+     3
+    ]
+   }
+  },
+  "final-exam-#4-053": {
+   "class": "table+calc",
+   "tables": [
+    "Table 430.248: 2 hp, 208 V = 13.2 A",
+    "Table 430.52(C)(1): dual element fuse = 175%"
+   ],
+   "steps": [
+    "13.2 x 1.75 = 23.1 A",
+    "Next standard size (240.6(A)) = 25 A maximum",
+    "Only the 20 A choice is within it"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 20
+   }
+  },
+  "final-exam-#4-054": {
+   "class": "table+calc",
+   "tables": [
+    "Table 314.16(B)(1): 12 AWG = 2.25 in.3"
+   ],
+   "steps": [
+    "2 x 2.25 + 2.25 = 6.75 in.3"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 6.75
+   }
+  },
+  "final-exam-#4-055": {
+   "class": "table+calc",
+   "tables": [
+    "Table 250.122: 100 A = 8 AWG Cu"
+   ],
+   "steps": [
+    "80 A is not over 100 A: 8 AWG copper"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "egc",
+    "rating": 80
+   }
+  },
+  "final-exam-#4-056": {
+   "class": "table+calc",
+   "tables": [
+    "Table 430.248: 2 hp, 208 V = 13.2 A",
+    "430.32(C): all other motors = 130%"
+   ],
+   "steps": [
+    "13.2 x 1.30 = 17.16 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "product",
+    "factors": [
+     13.2,
+     1.3
+    ]
+   }
+  },
+  "final-exam-#4-057": {
+   "class": "table+calc",
+   "tables": [
+    "Chapter 9, Table 5 XHHW: 8 AWG = 0.0437 in.2, 6 AWG = 0.0590 in.2"
+   ],
+   "steps": [
+    "6 x 0.0437 = 0.2622",
+    "2 x 0.0590 = 0.1180",
+    "0.2622 + 0.1180 = 0.3802 in.2"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 0.3802
+   }
+  },
+  "final-exam-#4-058": {
+   "class": "calc",
+   "tables": [],
+   "steps": [
+    "9500 / 120 = 79.2 A"
+   ],
+   "check": {
+    "kind": "value",
+    "value": 79
+   }
+  },
+  "final-exam-#4-059": {
+   "class": "table+calc",
+   "tables": [
+    "Chapter 9, Table 4, RMC: 1 in., 40% = 0.355 in.2",
+    "Chapter 9, Table 5: 12 AWG XHHW = 0.0181 in.2"
+   ],
+   "steps": [
+    "9 x 0.0181 = 0.1629",
+    "0.355 - 0.1629 = 0.1921 in.2"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 0.1921
+   }
+  },
+  "final-exam-#4-060": {
+   "class": "table+calc",
+   "tables": [
+    "Chapter 9, Table 4, IMC: 1 in., 60% = 0.575 in.2",
+    "Chapter 9, Table 5: 8 AWG TW = 0.0437 in.2",
+    "Chapter 9, Note 4: nipples 24 in. or less = 60%"
+   ],
+   "steps": [
+    "0.575 / 0.0437 = 13.16",
+    "Decimal below 0.8: 13 conductors"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 13
+   }
+  },
+  "final-exam-#4-061": {
+   "class": "table",
+   "tables": [
+    "Table 430.52(C)(1): wound-rotor, nontime delay fuse = 150%"
+   ],
+   "steps": [
+    "Read the wound-rotor row, nontime delay fuse column"
+   ],
+   "pre_answer_table": false
+  },
+  "final-exam-#4-062": {
+   "class": "table+calc",
+   "tables": [
+    "Chapter 9, Table 4, PVC Schedule 80: 2 in., 40% = 1.150 in.2",
+    "Chapter 9, Table 5: 6 AWG XHHW = 0.0590 in.2"
+   ],
+   "steps": [
+    "1.150 / 0.0590 = 19.49",
+    "Decimal below 0.8: 19 conductors"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 19
+   }
+  },
+  "final-exam-#4-063": {
+   "class": "table+calc",
+   "tables": [
+    "Table 310.16: 14 AWG Cu, 90°C (RHH) = 25 A",
+    "Table 310.15(B)(1)(1): 41–45°C, 90°C = 0.87",
+    "Table 310.15(C)(1): 7–9 conductors = 70%"
+   ],
+   "steps": [
+    "25 x 0.87 x 0.70 = 15.225 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "ampacity",
+    "awg": "14",
+    "column_c": 90,
+    "ambient_f": 113,
+    "ccc": 9
+   }
+  },
+  "final-exam-#4-064": {
+   "class": "table+calc",
+   "tables": [
+    "Table 314.16(B)(1): 12 AWG = 2.25 in.3, 10 AWG = 2.50 in.3"
+   ],
+   "steps": [
+    "3 x 2.25 + 3 x 2.50 = 14.25 in.3"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 14.25
+   }
+  },
+  "final-exam-#4-065": {
+   "class": "table",
+   "tables": [
+    "Chapter 9, Table 5: 3 AWG THWN = 0.0973, 8 AWG THW = 0.0437, 10 AWG THW = 0.0243 in.2",
+    "Chapter 9, Table 4, PVC Schedule 80: 1-1/2 in. 40% = 0.684, 2 in. 40% = 1.150 in.2"
+   ],
+   "steps": [
+    "0.5838 + 0.1311 + 0.0486 = 0.7635 in.2",
+    "Smallest size with 40% area of at least 0.7635: 2 in."
+   ],
+   "pre_answer_table": false
+  },
+  "final-exam-#4-066": {
+   "class": "table+calc",
+   "tables": [
+    "Chapter 9, Table 4, RMC: 1 in., 60% = 0.532 in.2",
+    "Chapter 9, Table 5: 8 AWG THW = 0.0437 in.2",
+    "Chapter 9, Note 4: nipples 24 in. or less = 60%"
+   ],
+   "steps": [
+    "0.532 / 0.0437 = 12.17",
+    "Decimal below 0.8: 12 conductors"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 12
+   }
+  },
+  "final-exam-#4-067": {
+   "class": "table+calc",
+   "tables": [
+    "Table 430.248: 3 hp, 230 V = 17 A",
+    "Table 430.52(C)(1): inverse time breaker = 250%"
+   ],
+   "steps": [
+    "17 x 2.50 = 42.5 A",
+    "Next standard size (240.6(A)) = 45 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 45
+   }
+  },
+  "final-exam-#4-068": {
+   "class": "table+calc",
+   "tables": [
+    "Chapter 9, Table 4, IMC: 1-1/2 in., 40% = 0.890 in.2",
+    "Chapter 9, Table 5: 6 AWG XHHW = 0.0590 in.2"
+   ],
+   "steps": [
+    "0.890 / 0.0590 = 15.08",
+    "15 conductors"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 15
+   }
+  },
+  "final-exam-#4-069": {
+   "class": "table+calc",
+   "tables": [
+    "Table 220.55 Column C: 26–30 ranges = 15 kW + 1 kW per range"
+   ],
+   "steps": [
+    "15 + 28 = 43 kW"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 43
+   }
+  },
+  "final-exam-#4-070": {
+   "class": "table+calc",
+   "tables": [
+    "Table 430.250: 15 hp, 208 V = 46.2 A"
+   ],
+   "steps": [
+    "46.2 x 208 x 1.732 = 16,644 VA",
+    "Closest choice: 17,000 VA"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 17000
+   }
+  },
+  "open-book-exam-#11-001": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-002": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-003": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-004": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-005": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-006": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-007": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-008": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-009": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-010": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-011": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-012": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-013": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-014": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-015": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-016": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-017": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-018": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-019": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-020": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-021": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-022": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-023": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-024": {
+   "class": "recall"
+  },
+  "open-book-exam-#11-025": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-001": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-002": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-003": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-004": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-005": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-006": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-007": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-008": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-009": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-010": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-011": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-012": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-013": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-014": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-015": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-016": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-017": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-018": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-019": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-020": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-021": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-022": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-023": {
+   "class": "table",
+   "tables": [
+    "Table 250.122: 30 A device -> 10 AWG copper (60 A row)",
+    "250.122(A): not required larger than the 12 AWG circuit conductors"
+   ],
+   "pre_answer_table": false
+  },
+  "open-book-exam-#12-024": {
+   "class": "recall"
+  },
+  "open-book-exam-#12-025": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-001": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-002": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-003": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-004": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-005": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-006": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-007": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-008": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-009": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-010": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-011": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-012": {
+   "class": "table+calc",
+   "tables": [
+    "Table 310.16: 12 AWG Cu, 75°C (THWN) = 25 A",
+    "Table 310.15(B)(1)(1): 86°F (30°C) ambient = 1.00",
+    "Table 310.15(C)(1): 4–6 current-carrying conductors = 80%"
+   ],
+   "steps": [
+    "Ampacity = table ampacity × temperature correction × adjustment",
+    "25 A × 1.00 × 0.80 = 20 A"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "ampacity",
+    "awg": "12",
+    "column_c": 75,
+    "ambient_f": 86,
+    "ccc": 4
+   }
+  },
+  "open-book-exam-#2-013": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-014": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-015": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-016": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-017": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-018": {
+   "class": "calc",
+   "tables": [
+    "220.14(H)(1): each 5 ft or fraction of multioutlet assembly = one outlet of 180 VA (appliances not used simultaneously)"
+   ],
+   "steps": [
+    "Outlets = 12 ft ÷ 5 ft = 2.4, round up to 3",
+    "3 × 180 VA = 540 VA"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "multioutlet",
+    "length_ft": 12,
+    "simultaneous": false
+   }
+  },
+  "open-book-exam-#2-019": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-020": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-021": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-022": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-023": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-024": {
+   "class": "recall"
+  },
+  "open-book-exam-#2-025": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-001": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-002": {
+   "class": "calc",
+   "tables": [
+    "240.21(B)(1), list item (4): field-installed tap leaving the enclosure: tap ampacity ≥ 1/10 of the feeder OCPD rating"
+   ],
+   "steps": [
+    "Maximum feeder OCPD = 10 × tap ampacity",
+    "10 × 40 A = 400 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "tap_10ft_ocpd",
+    "tap_ampacity": 40
+   }
+  },
+  "open-book-exam-#3-003": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-004": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-005": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-006": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-007": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-008": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-009": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-010": {
+   "class": "table+calc",
+   "tables": [
+    "Table 310.16: 10 AWG Cu, 90°C (THWN-2) = 40 A",
+    "Table 310.15(B)(1)(1): 105–113°F (41–45°C), 90°C column = 0.87",
+    "Table 310.15(C)(1): 3 current-carrying conductors, no adjustment"
+   ],
+   "steps": [
+    "Ampacity = table ampacity × temperature correction",
+    "40 A × 0.87 = 34.8 A"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "ampacity",
+    "awg": "10",
+    "column_c": 90,
+    "ambient_f": 112,
+    "ccc": 3
+   }
+  },
+  "open-book-exam-#3-011": {
+   "class": "table",
+   "tables": [
+    "Table 310.4(1): RHW = 75°C, RHW-2 = 90°C, dry and wet locations"
+   ],
+   "steps": [
+    "The -2 suffix marks a 90°C rating in dry and wet locations"
+   ],
+   "pre_answer_table": false
+  },
+  "open-book-exam-#3-012": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-013": {
+   "class": "calc",
+   "tables": [
+    "630.12(A): arc-welder OCPD not more than 200% of I1max",
+    "630.12 and 240.6(A): the next higher standard rating is permitted (standard ratings step 10 A from 60 A to 110 A)"
+   ],
+   "steps": [
+    "43 A × 200% = 86 A",
+    "Next higher standard rating = 90 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "welder_ocpd",
+    "i1max": 43
+   }
+  },
+  "open-book-exam-#3-014": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-015": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-016": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-017": {
+   "class": "calc",
+   "tables": [
+    "210.52(G)(1): at least one receptacle outlet in each vehicle bay"
+   ],
+   "steps": [
+    "Outlets = vehicle bays × 1",
+    "2 × 1 = 2"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 2
+   }
+  },
+  "open-book-exam-#3-018": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-019": {
+   "class": "table+calc",
+   "tables": [
+    "Table 220.55, Column C: one range not over 12 kW = 8 kW",
+    "Table 220.55 Note 1: +5% for each kW or major fraction over 12 kW"
+   ],
+   "steps": [
+    "14 kW − 12 kW = 2 kW over",
+    "2 × 5% = 10%",
+    "8 kW × 1.10 = 8.8 kW"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "range_demand",
+    "kw": 14
+   }
+  },
+  "open-book-exam-#3-020": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-021": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-022": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-023": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-024": {
+   "class": "recall"
+  },
+  "open-book-exam-#3-025": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-001": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-002": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-003": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-004": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-005": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-006": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-007": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-008": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-009": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-010": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-011": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-012": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-013": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-014": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-015": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-016": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-017": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-018": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-019": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-020": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-021": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-022": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-023": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-024": {
+   "class": "recall"
+  },
+  "open-book-exam-#5-025": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-001": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-002": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-003": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-004": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-005": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-006": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-007": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-008": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-009": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-010": {
+   "class": "table",
+   "tables": [
+    "Table 430.250: 50 hp, induction-type wound rotor, 460 V column (used for a 480 V system) = 65 A",
+    "430.6(A)(1): use the table current, not the nameplate"
+   ],
+   "steps": [
+    "Read the full-load current for the horsepower in the 460 V column"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "value",
+    "value": 65
+   },
+   "note": "The answer cell is blanked before answering."
+  },
+  "open-book-exam-#6-011": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-012": {
+   "class": "table",
+   "tables": [
+    "Table 250.122: a 50 A rating falls in the 'not exceeding 60 A' row = 10 AWG copper"
+   ],
+   "steps": [
+    "Size the EGC from the OCPD rating; a rating between rows takes the next larger row"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "egc",
+    "rating": 50
+   },
+   "note": "The answer cell is blanked before answering."
+  },
+  "open-book-exam-#6-013": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-014": {
+   "class": "table",
+   "tables": [
+    "Chapter 9, Note (4): nipples 24 in. or shorter between enclosures may be filled to 60%"
+   ],
+   "steps": [
+    "Apply Note (4) instead of Table 1 for short nipples"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "value",
+    "value": "60%"
+   },
+   "note": "The answer cell is blanked before answering."
+  },
+  "open-book-exam-#6-015": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-016": {
+   "class": "table",
+   "tables": [
+    "Table 352.30(B): PVC trade size 1 1/4-2 = 1.5 m (5 ft) between supports"
+   ],
+   "steps": [
+    "Find the row that contains the trade size and read the spacing"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": "5 feet"
+   },
+   "note": "The table row states the answer, so it appears after answering."
+  },
+  "open-book-exam-#6-017": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-018": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-019": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-020": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-021": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-022": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-023": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-024": {
+   "class": "recall"
+  },
+  "open-book-exam-#6-025": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-001": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-002": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-003": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-004": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-005": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-006": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-007": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-008": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-009": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-010": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-011": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-012": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-013": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-014": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-015": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-016": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-017": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-018": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-019": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-020": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-021": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-022": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-023": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-024": {
+   "class": "recall"
+  },
+  "open-book-exam-#9-025": {
+   "class": "recall"
   }
  }
 }

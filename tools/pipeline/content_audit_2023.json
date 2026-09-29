@@ -3110,6 +3110,3511 @@
       "provision": "8a6e1badd1de1e87",
       "correct_index": 0,
       "note": "[article, lookup_summary, reference_table, reference_text] 2023 numbers the table 'Table 352.30(B)'. Article, provision, table note and lookup updated."
+    },
+    "final-exam-#2-001": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "525.5(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#525",
+      "provision": "8147908df6eebaae",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-002": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "300.22(C)",
+        "300.22(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300",
+      "provision": "666dab67728fb671",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-003": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.52(A)(5)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "7cce3d30cf46c5b1",
+      "correct_index": 3,
+      "note": "Key cites 250.52(A)(5)(2): the rod requirement is the second list item of 250.52(A)(5) in 2023 (the cache drops list labels). 2023 wording adds 'unless listed'; the 5/8 inch answer is unchanged."
+    },
+    "final-exam-#2-004": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "555.33(A)(4)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#555",
+      "provision": "5662894efbbe2d87",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-005": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.53(A)(4)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "2e87cff752555a34",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-006": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Article 100"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#100",
+      "provision": "776daf3ef0fdaff3",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-007": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.12(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "0912375d01f581b2",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-008": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "225.37"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#225",
+      "provision": "417b29d2a4739e6d",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-009": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Article 100"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#100",
+      "provision": "075bc25a5c956332",
+      "correct_index": 3,
+      "note": "Stem printed as a fragment ('___. The highest level ...'); joined with 'is' so it reads as a sentence aloud."
+    },
+    "final-exam-#2-010": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.11(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "92a570d46749ecf0",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-011": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "5c209cf358acff5b",
+      "correct_index": 0,
+      "note": "Theory; explanation checked."
+    },
+    "final-exam-#2-012": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "410a7192e29b1d3d",
+      "correct_index": 3,
+      "note": "Theory; explanation checked (ratio read primary:secondary)."
+    },
+    "final-exam-#2-013": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "225618cb56d53a49",
+      "correct_index": 0,
+      "note": "Theory; explanation checked."
+    },
+    "final-exam-#2-014": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "4cf60f843003e87c",
+      "correct_index": 0,
+      "note": "Theory; checked: 60 W lamp 240 ohms, 25 W lamp 576 ohms, heater 28.8 ohms; higher series resistance lowers current and heater power."
+    },
+    "final-exam-#2-015": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "f77cf2e4498ecf66",
+      "correct_index": 2,
+      "note": "Theory; explanation checked."
+    },
+    "final-exam-#2-016": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "c55e7e8ef606d4fc",
+      "correct_index": 2,
+      "note": "Theory; explanation checked."
+    },
+    "final-exam-#2-017": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "82739616e9aedd74",
+      "correct_index": 2,
+      "note": "Theory; explanation checked."
+    },
+    "final-exam-#2-018": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "be13dfa7b0d5a552",
+      "correct_index": 2,
+      "note": "Theory; explanation checked."
+    },
+    "final-exam-#2-019": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "f51d3b2c67912b5e",
+      "correct_index": 2,
+      "note": "Theory math; R proportional to L/A checked."
+    },
+    "final-exam-#2-020": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "240.5(B)(4)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#240",
+      "provision": "3b2b399009f0e7be",
+      "correct_index": 3,
+      "note": "Wrong choice B printed the old 2017 table number 310.15(B)(16); renumbered to Table 310.16 for 2023. Key unchanged."
+    },
+    "final-exam-#2-021": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "305.12"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#305",
+      "provision": "00fbe89a9f53dcf8",
+      "correct_index": 3,
+      "note": "PDF says 'warning signs' and 'conduit systems'; 2023 305.12 says 'Danger signs' and 'raceway systems'. Wording kept (not misleading); key unchanged."
+    },
+    "final-exam-#2-022": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.62"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "448a1205e94f138d",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-023": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.28",
+        "Table 110.28"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "26a25bc1c1fb316e",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-024": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "314.16(B)",
+        "Table 314.16(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314",
+      "provision": "25835e5d9764c1f2",
+      "correct_index": 2,
+      "note": "The per-conductor volume table was numbered Table 314.16(B) in 2020 and is Table 314.16(B)(1) in 2023 (the key already cites 314.16(B)(1)); choice C renumbered. Wrong choice B (310.60) is an old section number kept as printed."
+    },
+    "final-exam-#2-025": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "225.19(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#225",
+      "provision": "c298b216cf65dbc0",
+      "correct_index": 1,
+      "note": "The printed stem named 'open multiconductor cables', which gave away the keyed word; reworded minimally so the stem no longer contains the answer. Key unchanged."
+    },
+    "final-exam-#2-026": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.12"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "bad625470f5c3db9",
+      "correct_index": 3,
+      "note": "Stem follows older wording (2023 adds 'or bonded' and 'or shall be connected by means of fittings'); kept as printed, key unchanged."
+    },
+    "final-exam-#2-027": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Chapter 9, Table 5",
+        "Chapter 9, Note 6"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "1c412117ba34baca",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-028": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.56",
+        "Table 220.56"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "314f232d0a21341a",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-029": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Chapter 9, Table 1"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "e17831534f44671e",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-030": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "600.4(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#600",
+      "provision": "27f0d8f28e8ef18e",
+      "correct_index": 0,
+      "note": "Choice B printed with a foot mark (1/2'); every other choice is inches, fixed to 1/2\"."
+    },
+    "final-exam-#2-031": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "fe8d611ad986a752",
+      "correct_index": 2,
+      "note": "Not an NEC question (general knowledge); explanation checked for accuracy."
+    },
+    "final-exam-#2-032": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "eb305de2574aed8a",
+      "correct_index": 1,
+      "note": "Not an NEC question (general knowledge); explanation checked for accuracy."
+    },
+    "final-exam-#2-033": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "740f6545f4765468",
+      "correct_index": 0,
+      "note": "Not an NEC question (general knowledge); explanation checked for accuracy."
+    },
+    "final-exam-#2-034": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "db29450bc9f388d2",
+      "correct_index": 0,
+      "note": "Not an NEC question (general knowledge); explanation checked for accuracy."
+    },
+    "final-exam-#2-035": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "d29198b70c216284",
+      "correct_index": 2,
+      "note": "Not an NEC question (general knowledge); explanation checked for accuracy."
+    },
+    "final-exam-#2-036": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "5370a08eb69d47bf",
+      "correct_index": 2,
+      "note": "Not an NEC question (general knowledge); explanation checked for accuracy."
+    },
+    "final-exam-#2-037": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "430.52(C)(1)",
+        "Table 430.52(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "f25654402d5abc28",
+      "correct_index": 1,
+      "note": "Same question as open-book-exam-#9-011; provision, notes, and requirements reused. The key prints 'Table 430.52'; the NEC 2023 table number is Table 430.52(C)(1), which matches choice (b)."
+    },
+    "final-exam-#2-038": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.18"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "5f49e8312a0b6c40",
+      "correct_index": 2,
+      "note": "Same question as open-book-exam-#9-012; provision, notes, and requirements reused. Verbatim in NEC 2023 210.18."
+    },
+    "final-exam-#2-039": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.21(B)(2)",
+        "Table 210.21(B)(2)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "721fae8b8d3639ac",
+      "correct_index": 0,
+      "note": "Same question as open-book-exam-#9-014; provision, notes, and requirements reused. Table title and values confirmed in NEC 2023."
+    },
+    "final-exam-#2-040": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "235.360(A)",
+        "Table 235.360(A)",
+        "225.61"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#235",
+      "provision": "3e089cce42617670",
+      "correct_index": 2,
+      "note": "Same question as open-book-exam-#9-017; provision, notes, and requirements reused. The key prints the old number Table 225.60; NEC 2023 renumbered it Table 235.360(A), which is choice (c). Key letter unchanged."
+    },
+    "final-exam-#2-041": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Article 100"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#100",
+      "provision": "9012da35bffd781d",
+      "correct_index": 1,
+      "note": "Same question as open-book-exam-#9-025; provision, notes, and requirements reused. Article 100 Luminaire definition unchanged in NEC 2023. The question relies on the last sentence (a lampholder itself is not a luminaire)."
+    },
+    "final-exam-#2-042": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "344.10(A)(1)",
+        "344.10(A)(2)",
+        "344.10(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#344",
+      "provision": "7bd85cc9fab7aa44",
+      "correct_index": 3,
+      "note": "Same question as open-book-exam-#9-024; provision, notes, and requirements reused. The PDF stem quotes the old red brass rule (direct burial and swimming pool applications). In NEC 2023, 344.10(A)(1) groups galvanized steel, stainless steel, and red brass RMC, and 344.10(B)(1) permits all three in direct burial, so choices (a), (b), and (d) would all fit the PDF stem. Stem reworded to the 2023 text so red brass stays the only answer."
+    },
+    "final-exam-#2-043": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "300.5(F)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300",
+      "provision": "697e5334ce653a85",
+      "correct_index": 3,
+      "note": "Same question as open-book-exam-#10-005; provision, notes, and requirements reused. Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-044": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "314.23(E)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314",
+      "provision": "88ce337909cf26d9",
+      "correct_index": 1,
+      "note": "Same question as open-book-exam-#10-013; provision, notes, and requirements reused. [choice_notes, reference_text] Dropped the conduit-body exception (not what the stem tests); choice A note restated from 314.23(E)."
+    },
+    "final-exam-#2-045": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "310.3(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
+      "provision": "5edae8276d897663",
+      "correct_index": 0,
+      "note": "Same question as open-book-exam-#10-015; provision, notes, and requirements reused. [reference_text] 310.3(B): the record omitted the lead-in sentence and its stranded-aluminum line didn't match the cache (the cache reads \"Type RHH. RHW\"). Trimmed to the lead-in plus item (3), which the citation 310.3(B)(3) points to."
+    },
+    "final-exam-#2-046": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.26(A)(1)",
+        "Table 110.26(A)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "df058311dae72b14",
+      "correct_index": 2,
+      "note": "Same question as open-book-exam-#10-016; provision, notes, and requirements reused. Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-047": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "406.3(E)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#406",
+      "provision": "32647eef3b712391",
+      "correct_index": 3,
+      "note": "Same question as open-book-exam-#10-018; provision, notes, and requirements reused. Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-048": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "517.18(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#517",
+      "provision": "6d5cfd31420eed40",
+      "correct_index": 3,
+      "note": "Same question as open-book-exam-#10-019; provision, notes, and requirements reused. [prompt, tip_short] 517.18 is 'Category 2 Spaces' in 2023; stem and tip use that term, key unchanged."
+    },
+    "final-exam-#2-049": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.52(E)(3)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "0dedb1cf9f7ac5c3",
+      "correct_index": 1,
+      "note": "Same question as open-book-exam-#10-020; provision, notes, and requirements reused. Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-050": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "305.4"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#305",
+      "provision": "143edf25775676b0",
+      "correct_index": 2,
+      "note": "Same question as open-book-exam-#10-022; provision, notes, and requirements reused. Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#2-051": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "d8c3fa3869718426",
+      "correct_index": 0,
+      "note": "Not an NEC question (general knowledge); explanation checked for accuracy."
+    },
+    "final-exam-#2-052": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "2d8b5bd00036e5ce",
+      "correct_index": 2,
+      "note": "Not an NEC question (general knowledge); explanation checked for accuracy."
+    },
+    "final-exam-#2-053": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "fcdc4cac399cadd3",
+      "correct_index": 0,
+      "note": "Not an NEC question (general knowledge). The source's textbook answer (about 1/2 cycle) matches current-limiting devices on a bolted ground fault; actual clearing time depends on the device and fault current."
+    },
+    "final-exam-#2-054": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "554654fffa063acd",
+      "correct_index": 0,
+      "note": "Not an NEC question (general knowledge); explanation checked for accuracy."
+    },
+    "final-exam-#2-055": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "dd300d3dfb177295",
+      "correct_index": 2,
+      "note": "Not an NEC question (general knowledge); explanation checked for accuracy."
+    },
+    "final-exam-#2-056": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "ebc7946a8a6503c1",
+      "correct_index": 0,
+      "note": "Not an NEC question (general knowledge); explanation checked for accuracy."
+    },
+    "final-exam-#2-057": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "6e13cc1cd4a4b6cf",
+      "correct_index": 1,
+      "note": "Not an NEC question (trade math); arithmetic checked."
+    },
+    "final-exam-#2-058": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "352.10"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#352",
+      "provision": "4c91524d53ae84fc",
+      "correct_index": 1,
+      "note": "Same question as open-book-exam-#11-005; provision, notes, and requirements reused. 352.10 Informational Note verbatim in NEC 2023 (says some nonmetallic conduits)."
+    },
+    "final-exam-#2-059": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.194(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "edb7eaeabaa7e17e",
+      "correct_index": 3,
+      "note": "Same question as open-book-exam-#11-007; provision, notes, and requirements reused. Verbatim in NEC 2023 250.194(A) (wire-type bonding jumpers)."
+    },
+    "final-exam-#2-060": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "334.10"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#334",
+      "provision": "99b7415a65f83995",
+      "correct_index": 3,
+      "note": "Same question as open-book-exam-#11-010; provision, notes, and requirements reused. Second list item of NEC 2023 334.10."
+    },
+    "final-exam-#2-061": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "422.13",
+        "210.19(A)(1)",
+        "210.20(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#422",
+      "provision": "b5af2f349118322a",
+      "correct_index": 3,
+      "note": "Same question as open-book-exam-#11-014; provision, notes, and requirements reused. NEC 2023 422.13 no longer says the heater 'shall be considered a continuous load'; it directly requires the overcurrent device and conductors to be rated at least 125 percent of the heater rating (the continuous-load multiplier of 210.19(A)(1) and 210.20(A)). Stem reworded to the 2023 rule; key unchanged."
+    },
+    "final-exam-#2-062": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "408.6"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#408",
+      "provision": "132a2ad16aeefb18",
+      "correct_index": 3,
+      "note": "Same question as open-book-exam-#11-018; provision, notes, and requirements reused. Verbatim in NEC 2023 408.6. Grammar fixes: 'date of the calculation was performed' and 'one-and two-family'."
+    },
+    "final-exam-#2-063": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "230.85(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#230",
+      "provision": "86aad5a110868cf8",
+      "correct_index": 3,
+      "note": "Key cites 230.85(B)(2); NEC 2023 230.85(B) item (2) is the meter disconnect integral to the meter mounting equipment."
+    },
+    "final-exam-#2-064": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "430.102(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "91352d4485288d0c",
+      "correct_index": 2,
+      "note": "Same question as open-book-exam-#11-022; provision, notes, and requirements reused. NEC 2023 places this in the Exception to 430.102(B)(1) and (2), condition (1) (key cites 430.102(B)(2) Ex. 1). Keyed answer lockable is correct."
+    },
+    "final-exam-#2-065": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "314.16(B)(4)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314",
+      "provision": "d8ac727af1f517e7",
+      "correct_index": 1,
+      "note": "Same question as open-book-exam-#11-023; provision, notes, and requirements reused. Verbatim in NEC 2023 314.16(B)(4)."
+    },
+    "final-exam-#2-066": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "0ed0c4a769c3b165",
+      "correct_index": 1,
+      "note": "Same question as open-book-exam-#12-006; provision, notes, and requirements reused."
+    },
+    "final-exam-#2-067": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "225.26",
+        "410.36(G)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#225",
+      "provision": "6f01c627c58e8d3e",
+      "correct_index": 2,
+      "note": "Same question as open-book-exam-#12-012; provision, notes, and requirements reused."
+    },
+    "final-exam-#2-068": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "410.10(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#410",
+      "provision": "63d067d73dc66f3e",
+      "correct_index": 3,
+      "note": "Same question as open-book-exam-#12-014; provision, notes, and requirements reused."
+    },
+    "final-exam-#2-069": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "344.14"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#344",
+      "provision": "ff323828b24d520c",
+      "correct_index": 0,
+      "note": "Same question as open-book-exam-#12-016; provision, notes, and requirements reused."
+    },
+    "final-exam-#2-070": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "360.20(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#360",
+      "provision": "376f4d3a86607400",
+      "correct_index": 1,
+      "note": "Same question as open-book-exam-#12-021; provision, notes, and requirements reused."
+    },
+    "final-exam-#4-001": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.56"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "5b8d60cc07eeae47",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-002": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "460.8(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#460",
+      "provision": "4e40661700fe666b",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-003": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "356.22"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#356",
+      "provision": "7716352dd69ce38f",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-004": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.14(I)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "5808d72f8a5a996c",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-005": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 314.16(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314",
+      "provision": "2b8f0bc6a28dddc0",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-006": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 9, Chapter 9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "255b1ec1522bcf67",
+      "correct_index": 3,
+      "note": "The source keyed choice 0.102, a value that is not in NEC 2023 Chapter 9 Table 9. The 2023 table gives 4/0 aluminum in steel conduit 0.11 ohms per 1000 ft (AC resistance and effective Z at 0.85 PF), so the keyed choice text was updated to 0.11; the keyed position is unchanged."
+    },
+    "final-exam-#4-007": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Article 100"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#100",
+      "provision": "d4e83a9d7c71afc5",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-008": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "440.62(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#440",
+      "provision": "efa0cade6f071ef3",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-009": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 392.60(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#392",
+      "provision": "988c2f0170dec4c8",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-010": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.52(D)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "1612cd5753f849f9",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-011": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 314.16(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314",
+      "provision": "2b8f0bc6a28dddc0",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-012": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.14(G)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "27109432b4f9d1f4",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-013": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "605.9(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#605",
+      "provision": "bddbd830a6c90b06",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-014": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "430.53(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "1d5a73ac65fb955b",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-015": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.52(E)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "7cf4cd43f2f0c014",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-016": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.52(B)(2)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "f176992178af31ac",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-017": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "240.4(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#240",
+      "provision": "9b7e0ebc7f1c612f",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-018": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "522.28"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#522",
+      "provision": "3077c661a3c07a68",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-019": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.53"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "436d917515766a19",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-020": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "310.14(A)(2)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
+      "provision": "240bc7a788b1b12b",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-021": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 314.16(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314",
+      "provision": "88966787a379af8e",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-022": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 4, Chapter 9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "e9c4cf35962671da",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-023": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 220.55"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "a08de4ed9e267b38",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-024": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 310.15(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
+      "provision": "1e12e2129f6fee78",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-025": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 220.55"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "5c6076337f56ae01",
+      "correct_index": 0,
+      "note": "Clarified the method: mixing Column C for the range with Column B for the oven gives 11.2 kW (also a choice). The stem now names Column C, which gives the keyed 11 kW."
+    },
+    "final-exam-#4-026": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 430.248",
+        "430.22"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "ea0ac2ccb1102332",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-027": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.5(C)",
+        "220.41"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "b7645ef79190ad03",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-028": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.52(A)",
+        "220.52(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "90cd598eba65eb87",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-029": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 250.66"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "801f863d586f50cf",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-030": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "430.24",
+        "Table 430.248"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "6915c57af282c8ae",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-031": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 310.15(B)(1)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
+      "provision": "5654aee52963096a",
+      "correct_index": 2,
+      "note": "Conductor ampacity is 21.6 A; 240.4(D) still limits the overcurrent protection of 12 AWG copper to 20 A."
+    },
+    "final-exam-#4-032": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 430.52(C)(1)",
+        "Table 430.248",
+        "430.52(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "a642610fd58f6156",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-033": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 310.15(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
+      "provision": "1e12e2129f6fee78",
+      "correct_index": 3,
+      "note": "The source exam repeats Q24 word for word as Q33; both are kept as printed."
+    },
+    "final-exam-#4-034": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "430.32(C)",
+        "Table 430.248"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "4a06ac023158116a",
+      "correct_index": 2,
+      "note": "430.32 sizes overloads from the motor nameplate current; the stem gives none, so the Table 430.248 value (17 A) stands in for it."
+    },
+    "final-exam-#4-035": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 310.15(B)(1)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
+      "provision": "352160830de1cb6c",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-036": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 220.55"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "8ed55f360d8f6250",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-037": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "430.32(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "61a0267cd97fa5f9",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-038": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "314.16(B)(1)",
+        "314.16(B)(2)",
+        "314.16(B)(4)",
+        "314.16(B)(5)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314",
+      "provision": "1a0427956da4aaf6",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-039": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 430.250",
+        "430.22"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "ec06ae97a1364bde",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-040": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 310.15(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
+      "provision": "1e12e2129f6fee78",
+      "correct_index": 0,
+      "note": "Adjusted ampacity is 21 A; 240.4(D) still limits the overcurrent protection of 12 AWG copper to 20 A."
+    },
+    "final-exam-#4-041": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 310.16"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
+      "provision": "f80e50d69098a77d",
+      "correct_index": 1,
+      "note": "Ampacity is 25 A; 240.4(D) still limits the overcurrent protection of 12 AWG copper to 20 A."
+    },
+    "final-exam-#4-042": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.53"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "71f1f29c0b37b09b",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-043": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "240.4(D)",
+        "Table 310.16",
+        "Table 310.15(B)(1)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#240",
+      "provision": "09ca1c176cdd8e87",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-044": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.82(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "19dd069d40b561b9",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-045": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 220.55"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "a08de4ed9e267b38",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-046": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.54",
+        "Table 220.54",
+        "220.61(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "82fd8b5672151f52",
+      "correct_index": 3,
+      "note": "The source printed the keyed answer rounded to 15.7 kW; the exact result is 15.75 kW, so the choice text shows 15.75 kW."
+    },
+    "final-exam-#4-047": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.41"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "578dad85545224c3",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-048": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.41"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "69c51445af34a7c6",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-049": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 220.55"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "a08de4ed9e267b38",
+      "correct_index": 1,
+      "note": "Clarified the stem: Column C (30 kW) is also a choice and is also a valid Table 220.55 method. The stem now asks for the minimum, which is the keyed Column B result."
+    },
+    "final-exam-#4-050": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 5, Chapter 9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "1128bcf1e49938f8",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-051": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 220.55"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "6e5b453c639b5a96",
+      "correct_index": 2,
+      "note": "Clarified the stem: Column C (8 kW) is also a choice and is also a valid Table 220.55 method. The stem now asks for the minimum, which is the keyed Column B result."
+    },
+    "final-exam-#4-052": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.5(C)",
+        "220.41"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "b7645ef79190ad03",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-053": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 430.52(C)(1)",
+        "Table 430.248",
+        "430.52(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "87ffede5f1f135ee",
+      "correct_index": 0,
+      "note": "The source asked what size the Code requires, but its own key note says 25 A is the correct size and is not a choice. 20 A is the only choice within the 430.52(C)(1) maximum (30 A exceeds even the 225 percent limit of 29.7 A), so the stem now asks which listed size the Code permits. Key unchanged."
+    },
+    "final-exam-#4-054": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "314.16(B)(5)",
+        "314.16(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314",
+      "provision": "0c2b3ed6c209eace",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-055": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 250.122"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "d81c6bb4887ba53f",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-056": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "430.32(C)",
+        "Table 430.248"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "278b9754450ed283",
+      "correct_index": 2,
+      "note": "430.32 sizes overloads from the motor nameplate current; the stem gives none, so the Table 430.248 value (13.2 A) stands in for it."
+    },
+    "final-exam-#4-057": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 5, Chapter 9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "770f91f3fb25f20d",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-058": {
+      "status": "non_nec",
+      "verified_on": "2026-09-29",
+      "sections": [],
+      "url": "",
+      "provision": "e8ba9d5dca93f6fa",
+      "correct_index": 2,
+      "note": "Not an NEC question (circuit theory); arithmetic checked."
+    },
+    "final-exam-#4-059": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 4, Chapter 9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "da7e61ae0edc52d7",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-060": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 4, Chapter 9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "00c4aa60a37bf5cf",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-061": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 430.52(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "be492d01ed0d0d0d",
+      "correct_index": 2,
+      "note": "Wound-rotor motors are polyphase machines; the stem's 'single-phase' is as printed, and the wound-rotor row of Table 430.52(C)(1) gives the keyed 150 percent."
+    },
+    "final-exam-#4-062": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 4, Chapter 9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "1d2e60fdf99af80f",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-063": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 310.15(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
+      "provision": "9710df8725c4a51f",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-064": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 314.16(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314",
+      "provision": "452b9692dd2238a7",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-065": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 4, Chapter 9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "b533a3a104fd8e2d",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-066": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 4, Chapter 9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "09072f61c4ea3060",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-067": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 430.52(C)(1)",
+        "Table 430.248",
+        "430.52(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "a642610fd58f6156",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-068": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 4, Chapter 9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "0fcbc15d3a74f817",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "final-exam-#4-069": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 220.55"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "a08de4ed9e267b38",
+      "correct_index": 0,
+      "note": "Clarified the method: Column B (Note 3) gives 53.76 kW, which is also a choice. The stem now names Column C, which gives the keyed 43 kW."
+    },
+    "final-exam-#4-070": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 430.250"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "e19f5b2097e09c9f",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#11-001": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.52(E)(3)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "0a1461e917a0288d",
+      "correct_index": 0,
+      "note": "Verbatim in NEC 2023 210.52(E)(3)."
+    },
+    "open-book-exam-#11-002": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "408.7"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#408",
+      "provision": "59f491efe9a10421",
+      "correct_index": 1,
+      "note": "Verbatim in NEC 2023 408.7."
+    },
+    "open-book-exam-#11-003": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Article 100"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#100",
+      "provision": "bbac833cf33db9ea",
+      "correct_index": 0,
+      "note": "Article 100 Outlet definition verbatim in NEC 2023. The PDF labels the fourth choice (b) a second time; it is choice (d)."
+    },
+    "open-book-exam-#11-004": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.6(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "0096c111394ae3fd",
+      "correct_index": 0,
+      "note": "Verbatim in NEC 2023 210.6(A)(1)."
+    },
+    "open-book-exam-#11-005": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "352.10"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#352",
+      "provision": "4c91524d53ae84fc",
+      "correct_index": 1,
+      "note": "352.10 Informational Note verbatim in NEC 2023 (says some nonmetallic conduits)."
+    },
+    "open-book-exam-#11-006": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "215.9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#215",
+      "provision": "5dae38a1bebef0c3",
+      "correct_index": 1,
+      "note": "Verbatim in NEC 2023 215.9."
+    },
+    "open-book-exam-#11-007": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.194(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "edb7eaeabaa7e17e",
+      "correct_index": 3,
+      "note": "Verbatim in NEC 2023 250.194(A) (wire-type bonding jumpers)."
+    },
+    "open-book-exam-#11-008": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "242.12"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#242",
+      "provision": "f532fe46de92b35a",
+      "correct_index": 3,
+      "note": "First list item of NEC 2023 242.12."
+    },
+    "open-book-exam-#11-009": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "382.15(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#382",
+      "provision": "f9a8848227fda999",
+      "correct_index": 0,
+      "note": "Verbatim in NEC 2023 382.15(A)."
+    },
+    "open-book-exam-#11-010": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "334.10"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#334",
+      "provision": "99b7415a65f83995",
+      "correct_index": 3,
+      "note": "Second list item of NEC 2023 334.10."
+    },
+    "open-book-exam-#11-011": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "230.46"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#230",
+      "provision": "2f32b8c7d03605b3",
+      "correct_index": 2,
+      "note": "Verbatim in NEC 2023 230.46 (Code says 'the service equipment'; PDF quote kept as printed)."
+    },
+    "open-book-exam-#11-012": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Article 100"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#100",
+      "provision": "8b55fc62615d8098",
+      "correct_index": 1,
+      "note": "Article 100 definition verbatim in NEC 2023."
+    },
+    "open-book-exam-#11-013": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "700.5(F)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/7/special-conditions#700",
+      "provision": "5221089e362ace92",
+      "correct_index": 0,
+      "note": "Verbatim in NEC 2023 700.5(F) Documentation."
+    },
+    "open-book-exam-#11-014": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "422.13",
+        "210.19(A)(1)",
+        "210.20(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#422",
+      "provision": "b5af2f349118322a",
+      "correct_index": 3,
+      "note": "NEC 2023 422.13 no longer says the heater 'shall be considered a continuous load'; it directly requires the overcurrent device and conductors to be rated at least 125 percent of the heater rating (the continuous-load multiplier of 210.19(A)(1) and 210.20(A)). Stem reworded to the 2023 rule; key unchanged."
+    },
+    "open-book-exam-#11-015": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "230.95",
+        "230.95(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#230",
+      "provision": "5d470d821c9ecc38",
+      "correct_index": 3,
+      "note": "Verbatim in NEC 2023 230.95 and 230.95(C)."
+    },
+    "open-book-exam-#11-016": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.25(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "a793b466c44abcc8",
+      "correct_index": 0,
+      "note": "Verbatim in NEC 2023 210.25(B)."
+    },
+    "open-book-exam-#11-017": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "410.54(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#410",
+      "provision": "d5d74a698a777ef6",
+      "correct_index": 1,
+      "note": "Verbatim in NEC 2023 410.54(C)."
+    },
+    "open-book-exam-#11-018": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "408.6"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#408",
+      "provision": "132a2ad16aeefb18",
+      "correct_index": 3,
+      "note": "Verbatim in NEC 2023 408.6. Grammar fixes: 'date of the calculation was performed' and 'one-and two-family'."
+    },
+    "open-book-exam-#11-019": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.57",
+        "220.54"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "df82b77d5d21ca67",
+      "correct_index": 3,
+      "note": "Verbatim in NEC 2023 220.57."
+    },
+    "open-book-exam-#11-020": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.52(A)(4)",
+        "250.52(A)(3)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "3fb2e8e58f99dc4d",
+      "correct_index": 3,
+      "note": "Verbatim in NEC 2023 250.52(A)(4)."
+    },
+    "open-book-exam-#11-021": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "406.12"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#406",
+      "provision": "46848df81dc95a87",
+      "correct_index": 3,
+      "note": "NEC 2023 406.12(1) covers all dwelling units, garages, accessory buildings, and common areas; it no longer limits the rule to areas specified in 210.52 and 550.13, so that clause was dropped. Voltage written out for reading."
+    },
+    "open-book-exam-#11-022": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "430.102(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "91352d4485288d0c",
+      "correct_index": 2,
+      "note": "NEC 2023 places this in the Exception to 430.102(B)(1) and (2), condition (1) (key cites 430.102(B)(2) Ex. 1). Keyed answer lockable is correct."
+    },
+    "open-book-exam-#11-023": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "314.16(B)(4)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314",
+      "provision": "d8ac727af1f517e7",
+      "correct_index": 1,
+      "note": "Verbatim in NEC 2023 314.16(B)(4)."
+    },
+    "open-book-exam-#11-024": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "450.13(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#450",
+      "provision": "ca3b837b37f7e44f",
+      "correct_index": 0,
+      "note": "Verbatim in NEC 2023 450.13(B)."
+    },
+    "open-book-exam-#11-025": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "332.30"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#332",
+      "provision": "bef72765017dfc63",
+      "correct_index": 3,
+      "note": "Verbatim in NEC 2023 332.30."
+    },
+    "open-book-exam-#12-001": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "300.25"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300",
+      "provision": "5b947281ac5851c9",
+      "correct_index": 3,
+      "note": "2023 300.25 applies where the exit enclosure is required to have a fire resistance rating (the stem used the older 'separated from the building' wording). Stem updated to the 2023 wording; key unchanged."
+    },
+    "open-book-exam-#12-002": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "691.9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#691",
+      "provision": "aa46aca4eae15cb6",
+      "correct_index": 2,
+      "note": "Key cites 691.9; the exemption is the last paragraph of 691.9 in NEC 2023."
+    },
+    "open-book-exam-#12-003": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "514.11(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#514",
+      "provision": "7ea0c0dfd52786fb",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-004": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "700.10(B)",
+        "701.10",
+        "702.10"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/7/special-conditions#700",
+      "provision": "306d6d46088ac062",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-005": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "230.2(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#230",
+      "provision": "2f376ffea49b21bb",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-006": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "0ed0c4a769c3b165",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-007": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "705.50"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/7/special-conditions#705",
+      "provision": "72a9cc03d6f6a831",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-008": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "300.21"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300",
+      "provision": "e9e447f55ee885ee",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-009": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "690.31(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#690",
+      "provision": "be1b04acb1e01b31",
+      "correct_index": 3,
+      "note": "The stem's 'PV system ac conductors' are the inverter output circuits of 690.31(B)(1); key matches."
+    },
+    "open-book-exam-#12-010": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.15"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "9c8ca205294177f2",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-011": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "695.7(D)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#695",
+      "provision": "8d61858ee0250894",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-012": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "225.26",
+        "410.36(G)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#225",
+      "provision": "6f01c627c58e8d3e",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-013": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "694.7(D)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#694",
+      "provision": "06b5ce0d7af81269",
+      "correct_index": 0,
+      "note": "Stem wording aligned with 2023 694.7(D) ('premises electrical system'); key unchanged."
+    },
+    "open-book-exam-#12-014": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "410.10(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#410",
+      "provision": "63d067d73dc66f3e",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-015": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Article 100"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#100",
+      "provision": "2c64749b2de890ff",
+      "correct_index": 3,
+      "note": "Key cites 'DEF 100'; the definition is in Article 100 of NEC 2023."
+    },
+    "open-book-exam-#12-016": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "344.14"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#344",
+      "provision": "ff323828b24d520c",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-017": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "690.12(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#690",
+      "provision": "c1ff552794245616",
+      "correct_index": 3,
+      "note": "Stem said 'inside the array boundry' (typo 'boundry'); the key's 30 volts and citation 690.12(B)(1) are the outside-boundary limit. Inside is 80 volts or a PVHCS (690.12(B)(2)). Stem changed to 'outside'."
+    },
+    "open-book-exam-#12-018": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "392.80(A)(3)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#392",
+      "provision": "ac9cf4f96744112a",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-019": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "706.9"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/7/special-conditions#706",
+      "provision": "1caa1d1ad9aad524",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-020": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "336.120"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#336",
+      "provision": "256460d8c6ae4b2f",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-021": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "360.20(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#360",
+      "provision": "376f4d3a86607400",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#12-022": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "358.30(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#358",
+      "provision": "593f8ba09319248e",
+      "correct_index": 1,
+      "note": "Key cites 358.30(A) ex.1; 2023 358.30(A) Exception No. 1 gives 1.5 m (5 ft)."
+    },
+    "open-book-exam-#12-023": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.122(A)",
+        "250.122(D)(1)",
+        "Table 250.122"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "591863b7e29d37ec",
+      "correct_index": 2,
+      "note": "Key cites Table 250.122(A); the cap at the circuit conductor size is in 250.122(A), and motor circuits size from 250.122(D)(1)."
+    },
+    "open-book-exam-#12-024": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "240.21(B)(4)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#240",
+      "provision": "faf93dab0a431705",
+      "correct_index": 3,
+      "note": "As printed the stem was misleading: outside feeder taps under 240.21(B)(5) have no length limit, and the key's 100 feet applies only to high bay manufacturing buildings (240.21(B)(4)(2)). Stem narrowed to that case; key unchanged."
+    },
+    "open-book-exam-#12-025": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "225.18"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#225",
+      "provision": "b49f348e94438d2f",
+      "correct_index": 1,
+      "note": "Stem wording is older; the 2023 minimum overhead clearance in 225.18(1) is 10 ft (pedestrian areas, 150 volts to ground or less). Key unchanged."
+    },
+    "open-book-exam-#2-001": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "408.43"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#408",
+      "provision": "0d380870695e2115",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#2-002": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.7"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "5d32e45393ac41bd",
+      "correct_index": 2,
+      "note": "PDF stem says 'the branch circuit'; 2023 text says 'branch circuits originate'. Meaning unchanged, stem kept."
+    },
+    "open-book-exam-#2-003": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.23(B)(2)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "c703d617043a62a1",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#2-004": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.8(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "73ece785bf0a0984",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#2-005": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.18"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "dce16d055c8a00f7",
+      "correct_index": 3,
+      "note": "2023 adds the 10-ampere rating, which matches the keyed choice."
+    },
+    "open-book-exam-#2-006": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.16(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "2a92405133e942b6",
+      "correct_index": 2,
+      "note": "PDF key cites 110.16; the rule is in 110.16(A). 2023 text says 'enclosed panelboards'."
+    },
+    "open-book-exam-#2-007": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.52(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "5528a63627532c91",
+      "correct_index": 3,
+      "note": "Countertop wall spaces in dwelling kitchens and similar areas (210.52(C)(1))."
+    },
+    "open-book-exam-#2-008": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "590.4(J)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#590",
+      "provision": "600d939f793181a0",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#2-009": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.62"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "65eb69efedf68fe4",
+      "correct_index": 2,
+      "note": "2023 210.62 replaced the old 'one receptacle per 12 linear feet or major fraction' count with 'no point along the top of the window farther than 1.8 m (6 ft) from a receptacle outlet'. Stem rewritten to the 2023 rule; the 18 inch answer is unchanged."
+    },
+    "open-book-exam-#2-010": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "225.6(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#225",
+      "provision": "9d4ca8333756578a",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#2-011": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.12(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "dfdb2e61de920a3e",
+      "correct_index": 2,
+      "note": "2023 adds 10-ampere circuits to 210.12(B); the list and the keyed exception are unchanged. List labels restored in NEC order."
+    },
+    "open-book-exam-#2-012": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 310.16",
+        "Table 310.15(C)(1)",
+        "310.15(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
+      "provision": "3f035428d4b9f0ac",
+      "correct_index": 1,
+      "note": "Values confirmed: 12 AWG Cu 75°C = 25 A; 4-6 conductors = 80%."
+    },
+    "open-book-exam-#2-013": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.8(A)(2)",
+        "210.12(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "9f570737f4a05b66",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#2-014": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.25"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "3b353e492d52f543",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#2-015": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.52(A)(2)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "46b93870100eb04b",
+      "correct_index": 1,
+      "note": "PDF stem has no main verb; 'wall space includes' added as in final-exam-#1-011. 2023 item also lists stationary appliances; the width is unchanged."
+    },
+    "open-book-exam-#2-016": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "240.87"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#240",
+      "provision": "2bbe9a20e6240a90",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#2-017": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.52(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "a89cc664ab540374",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#2-018": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.14(H)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "9d21a297efb2cba0",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#2-019": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "410.172"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#410",
+      "provision": "569b7662db8413e9",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#2-020": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Article 100"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#100",
+      "provision": "8832c43697a5807e",
+      "correct_index": 1,
+      "note": "Article 100 definitions Location, Dry; Location, Damp; Location, Wet checked."
+    },
+    "open-book-exam-#2-021": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "230.70(A)(2)",
+        "230.70(A)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#230",
+      "provision": "6a16c483bc9528c9",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#2-022": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "310.6(C)",
+        "200.6",
+        "250.119"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
+      "provision": "48f748085467bf88",
+      "correct_index": 2,
+      "note": "PDF key cites 200.6 (white and gray identify grounded conductors). The ungrounded-conductor rule is 310.6(C); 200.6 cited in the notes."
+    },
+    "open-book-exam-#2-023": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "680.62(E)",
+        "680.62(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#680",
+      "provision": "89b4241fcf1119d5",
+      "correct_index": 3,
+      "note": "PDF key cites 680.61(E); 680.61 is permanently installed therapeutic pools. The therapeutic tub receptacle rule is 680.62(E) in NEC 2023. Citation corrected, key unchanged."
+    },
+    "open-book-exam-#2-024": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "590.6(B)",
+        "590.6(B)(2)",
+        "590.6(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#590",
+      "provision": "079c6f9946c3bc6c",
+      "correct_index": 1,
+      "note": "PDF key cites 590.6(B)(2); the choice between GFCI and the program is in 590.6(B). 590.6(A)(1)-(A)(3) cover the 125-volt 15-, 20-, 30-ampere receptacles."
+    },
+    "open-book-exam-#2-025": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.52(E)(3)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "0dedb1cf9f7ac5c3",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#3-001": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.52(C)(3)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "c38566faeff0352b",
+      "correct_index": 2,
+      "note": "PDF stem is a pasted list fragment with no verb; joined into one sentence, same rule and answer. List labels restored in NEC order."
+    },
+    "open-book-exam-#3-002": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "240.21(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#240",
+      "provision": "af0aa7431b0ce6c9",
+      "correct_index": 3,
+      "note": "PDF key prints '240.21(B)(1) (B)(4)', meaning list item (4) of 240.21(B)(1). Only the intro and item (4) are quoted."
+    },
+    "open-book-exam-#3-003": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.52(H)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "6367f831ade258e9",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#3-004": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.8(A)(11)",
+        "210.12(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "031bfd54db47ac90",
+      "correct_index": 2,
+      "note": "2023: laundry areas are item (11) of 210.8(A) and item (13) of 210.12(B) (cache drops list labels; counted in order)."
+    },
+    "open-book-exam-#3-005": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.60(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "f04e580c81e9c8f6",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#3-006": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "220.53"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "ab9a39a1583d25d9",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#3-007": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "424.20(A)(3)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#424",
+      "provision": "fb83c2c9c14ca38a",
+      "correct_index": 3,
+      "note": "List labels restored in NEC order (cache drops them)."
+    },
+    "open-book-exam-#3-008": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "408.5"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#408",
+      "provision": "bb5548e4607e0e2c",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#3-009": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "514.11(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#514",
+      "provision": "7d1be5a89d0b47e7",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#3-010": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 310.15(B)(1)(1)",
+        "Table 310.16",
+        "Table 310.15(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
+      "provision": "478097a27c1e6ed6",
+      "correct_index": 1,
+      "note": "PDF key cites T.310.16 with the factor from T.310.15(B)(1)(1); the correction table is the primary citation. Values confirmed: 10 AWG Cu 90°C = 40 A; 41-45°C (105-113°F) 90°C factor = 0.87."
+    },
+    "open-book-exam-#3-011": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 310.4(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
+      "provision": "d96703a56d06275f",
+      "correct_index": 3,
+      "note": "PDF key cites Table 310.4; the 600-volt insulation table is Table 310.4(1) in 2023."
+    },
+    "open-book-exam-#3-012": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "680.5(B)",
+        "680.59",
+        "680.58"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#680",
+      "provision": "cc40befad84f9629",
+      "correct_index": 0,
+      "note": "2020 680.59 read 'rated 250 volts or less and 60 amperes or less'. 2023 680.59 dropped the ratings and points to 680.5(B) (Class A GFCI: 150 volts or less to ground, 60 amperes or less) or 680.5(C) (SPGFCI above 150 volts to ground). Stem rewritten to the 2023 limits; the 60 ampere answer is unchanged. PDF key cites 680.58 (fountain receptacles); the pump rule is 680.59 with 680.5(B)."
+    },
+    "open-book-exam-#3-013": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "630.12",
+        "630.12(A)",
+        "240.6(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#630",
+      "provision": "bfc8035bdf796743",
+      "correct_index": 1,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#3-014": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.8(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "02892ca110c76002",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#3-015": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "680.58"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#680",
+      "provision": "b2c3d7077ca9f10e",
+      "correct_index": 0,
+      "note": "2023 680.58 covers all 125- through 250-volt receptacles rated 60 amperes or less, which includes the 15 and 20 ampere receptacles in the stem; distance unchanged."
+    },
+    "open-book-exam-#3-016": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.122(F)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "79795fa6096fb14e",
+      "correct_index": 1,
+      "note": "Cache drops list labels; (b) Multiple Raceways is the second item of 250.122(F)(1)."
+    },
+    "open-book-exam-#3-017": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.52(G)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "a6d225ab1d3ce828",
+      "correct_index": 2,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#3-018": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "410.154"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#410",
+      "provision": "15ce98c8c90e735b",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#3-019": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 220.55"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220",
+      "provision": "c48d959af57c49a8",
+      "correct_index": 2,
+      "note": "Values confirmed: Column C, 1 appliance = 8 kW; Note 1 text verbatim."
+    },
+    "open-book-exam-#3-020": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.53(A)(3)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "6fd4175f1574b258",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#3-021": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "410.10(F)",
+        "300.4(E)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#410",
+      "provision": "1b4746ba6f913319",
+      "correct_index": 1,
+      "note": "2023 410.10(F) applies to luminaires under any roof decking where subject to physical damage (2020 said metal-corrugated sheet roof decking; that wording now appears only in the concrete-slab exception). Stem rewritten to the 2023 scope; the 1 1/2 inch answer is unchanged."
+    },
+    "open-book-exam-#3-022": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "620.61(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#620",
+      "provision": "87a2f48c6c18c3ac",
+      "correct_index": 0,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#3-023": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.34(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "250d119109d1d699",
+      "correct_index": 0,
+      "note": "'grounded electrode' is not an NEC term; 250.34(A) says 'grounding electrode'. Choice (d) 'be permitted' reads as 'shall be permitted to be connected', which is not the rule's wording, so the key stays (a)."
+    },
+    "open-book-exam-#3-024": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "800.25"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/8/communications-systems#800",
+      "provision": "47346503235dde12",
+      "correct_index": 3,
+      "note": "Key, provision, notes, tip and headings match NEC 2023."
+    },
+    "open-book-exam-#3-025": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.92(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "1d9613680dacdbe5",
+      "correct_index": 3,
+      "note": "PDF key cites 250.92(B)(1-4); the knockout sentence is in the 250.92(B) introduction and bonding-type locknuts and bushings are method (4)."
+    },
+    "open-book-exam-#5-001": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "525.5(B)(2)",
+        "525.5(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#525",
+      "provision": "8147908df6eebaae",
+      "correct_index": 1,
+      "note": "Key matches 525.5(B)(2) Over 600 Volts in NEC 2023."
+    },
+    "open-book-exam-#5-002": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "450.11(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#450",
+      "provision": "632380d8fdaac3dd",
+      "correct_index": 2,
+      "note": "Key matches the 450.11(A) nameplate list in NEC 2023; AWG size is not listed."
+    },
+    "open-book-exam-#5-003": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "590.3(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#590",
+      "provision": "883ffb3703c5d002",
+      "correct_index": 3,
+      "note": "Key matches 590.3(B) in NEC 2023 (the Code says holiday decorative lighting)."
+    },
+    "open-book-exam-#5-004": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.26(E)(1)(a)",
+        "110.26(E)(1)(c)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "86afe2b7d29dad03",
+      "correct_index": 2,
+      "note": "Key matches 110.26(E)(1)(c) Sprinkler Protection in NEC 2023; (a) lists the prohibited items."
+    },
+    "open-book-exam-#5-005": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "408.41"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#408",
+      "provision": "b5c8190f00640771",
+      "correct_index": 0,
+      "note": "Key matches the 408.41 Exception in NEC 2023."
+    },
+    "open-book-exam-#5-006": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.19(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "d2185a8f9ed929c1",
+      "correct_index": 1,
+      "note": "Key matches 210.19(C) in NEC 2023."
+    },
+    "open-book-exam-#5-007": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "409.102(B)",
+        "408.3(E)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#409",
+      "provision": "ff03991f6fdb2f5c",
+      "correct_index": 2,
+      "note": "Key matches 409.102(B) in NEC 2023."
+    },
+    "open-book-exam-#5-008": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "430.42(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "d1deb8ef0ec2bbcb",
+      "correct_index": 0,
+      "note": "Key matches 430.42(C) in NEC 2023."
+    },
+    "open-book-exam-#5-009": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "525.10(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#525",
+      "provision": "abf67cf6982a85c0",
+      "correct_index": 3,
+      "note": "Key matches 525.10(A) Guarding in NEC 2023."
+    },
+    "open-book-exam-#5-010": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "300.4(D)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300",
+      "provision": "cba4291a38711057",
+      "correct_index": 2,
+      "note": "Key matches 300.4(D) in NEC 2023."
+    },
+    "open-book-exam-#5-011": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "400.13"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#400",
+      "provision": "db3c1176fce66b31",
+      "correct_index": 0,
+      "note": "Key matches 400.13 in NEC 2023 (repair allowed for hard-service and junior hard-service cord, 14 AWG and larger)."
+    },
+    "open-book-exam-#5-012": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "682.15(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#682",
+      "provision": "ff4d21fe2efa7214",
+      "correct_index": 0,
+      "note": "Key matches 682.15(B) in NEC 2023."
+    },
+    "open-book-exam-#5-013": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "240.40"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#240",
+      "provision": "20cbbc6892a07a29",
+      "correct_index": 0,
+      "note": "Key matches 240.40 in NEC 2023."
+    },
+    "open-book-exam-#5-014": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "225.18"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#225",
+      "provision": "e3c7a92717cd183a",
+      "correct_index": 3,
+      "note": "Key matches 225.18 list item (5) in NEC 2023. Stem grammar repaired, and 'above finished grade' replaced with 'over the track rails' because 225.18(5) measures this clearance over the rails, not above grade."
+    },
+    "open-book-exam-#5-015": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "550.32(F)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#550",
+      "provision": "710e53a86dc2a824",
+      "correct_index": 0,
+      "note": "Key matches 550.32(F) in NEC 2023 (600 mm, 2 ft)."
+    },
+    "open-book-exam-#5-016": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.8(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "1228c52bfdcfcb6a",
+      "correct_index": 3,
+      "note": "Key matches 210.8(A)(1), (4) and (5) in NEC 2023; the crawl space item applies at or below grade level."
+    },
+    "open-book-exam-#5-017": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.26(C)(3)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "b8747bc909659fef",
+      "correct_index": 3,
+      "note": "Key matches 110.26(C)(3) in NEC 2023. The PDF stem is a sentence fragment that never states the requirement; 'shall have listed panic hardware' was added so it reads as a whole sentence (the 2023 rule also requires the door to open at least 90 degrees in the direction of egress)."
+    },
+    "open-book-exam-#5-018": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "800.44(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/8/communications-systems#800",
+      "provision": "74dd78987ef12f20",
+      "correct_index": 3,
+      "note": "Key matches 800.44(B) in NEC 2023. The dropped word 'above' was restored from the Code text."
+    },
+    "open-book-exam-#5-019": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "647.1"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#647",
+      "provision": "c4f4dec359c6f3a1",
+      "correct_index": 2,
+      "note": "Key matches 647.1 Scope in NEC 2023. The PDF stem is a fragment; 'Article 647 covers' was added from the scope wording, and 'sytems' corrected."
+    },
+    "open-book-exam-#5-020": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "300.5(J)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300",
+      "provision": "a20ef392ea05ed8d",
+      "correct_index": 3,
+      "note": "Key matches 300.5(J) in NEC 2023. The PDF key cites an exception; in 2023 the S loops appear in the Informational Note under the mandatory 'arranged so as to prevent damage' rule."
+    },
+    "open-book-exam-#5-021": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.52(A)(5)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "ccbd3edeabb6db0a",
+      "correct_index": 1,
+      "note": "Key matches 250.52(A)(5) list item (a) in NEC 2023; the PDF key's '(5)(1)' is the same item under an older label style."
+    },
+    "open-book-exam-#5-022": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "408.4(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#408",
+      "provision": "43f71657b58a138e",
+      "correct_index": 0,
+      "note": "Key matches 408.4(B) in NEC 2023. The 2023 text requires the identification and physical location of where the power originates, on a permanent, non-handwritten label; the stem's paraphrase does not change the keyed answer."
+    },
+    "open-book-exam-#5-023": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "334.15(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#334",
+      "provision": "6685ba539c3f4055",
+      "correct_index": 3,
+      "note": "Key matches 334.15(B) in NEC 2023."
+    },
+    "open-book-exam-#5-024": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "352.30(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#352",
+      "provision": "71f01e515e8b5216",
+      "correct_index": 2,
+      "note": "Key matches 352.30(A) in NEC 2023 (900 mm, 3 ft). Stem wording ('junction device', 'termination box') kept as printed; the Code says outlet box, junction box, device box, conduit body, or other conduit termination."
+    },
+    "open-book-exam-#5-025": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.8(A)",
+        "250.8(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "509c4402c63acb76",
+      "correct_index": 3,
+      "note": "Key matches 250.8(A) in NEC 2023: sheet metal screws are not among the permitted methods. 'Grounding conductors' is no longer a defined NEC term, so the stem uses the 250.8(A) wording (equipment grounding conductors, grounding electrode conductors)."
+    },
+    "open-book-exam-#6-001": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "300.22(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300",
+      "provision": "666dab67728fb671",
+      "correct_index": 0,
+      "note": "Key matches 300.22(C)(1) in NEC 2023; PVC is not a permitted wiring method."
+    },
+    "open-book-exam-#6-002": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Article 100"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#100",
+      "provision": "915704404f49e5ec",
+      "correct_index": 3,
+      "note": "Key matches the Article 100 definition of Ampacity in NEC 2023."
+    },
+    "open-book-exam-#6-003": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.52(A)(5)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "ccbd3edeabb6db0a",
+      "correct_index": 3,
+      "note": "Key matches 250.52(A)(5) list item (b) in NEC 2023 (the PDF key's '(5)(2)' is the same item). Listed rods may be smaller."
+    },
+    "open-book-exam-#6-004": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "555.33(A)(4)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#555",
+      "provision": "5662894efbbe2d87",
+      "correct_index": 3,
+      "note": "Key matches 555.33(A)(4) in NEC 2023."
+    },
+    "open-book-exam-#6-005": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "225.18"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#225",
+      "provision": "fe892e3ddf44aef6",
+      "correct_index": 3,
+      "note": "Key matches 225.18 list item (4) in NEC 2023 ('driveways on other than residential property'). Stem grammar repaired ('Where' added)."
+    },
+    "open-book-exam-#6-006": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.53(A)(4)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "2e87cff752555a34",
+      "correct_index": 0,
+      "note": "Key matches 250.53(A)(4) in NEC 2023 (750 mm, 30 in. = 2 1/2 ft). The trench is allowed only where rock bottom is met at an angle up to 45 degrees."
+    },
+    "open-book-exam-#6-007": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "408.52"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#408",
+      "provision": "e34740f8091bc636",
+      "correct_index": 2,
+      "note": "Key matches 408.52 in NEC 2023."
+    },
+    "open-book-exam-#6-008": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "300.5(D)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300",
+      "provision": "2e5d468b1c0d41dc",
+      "correct_index": 0,
+      "note": "Key matches 300.5(D)(1) in NEC 2023."
+    },
+    "open-book-exam-#6-009": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "430.102(B)(2)",
+        "110.25"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "30bb58d002c51bb5",
+      "correct_index": 1,
+      "note": "Key matches the 430.102(B) Exception to (1) and (2) and 110.25 in NEC 2023. The PDF stem is ungrammatical and was reworded for clarity with the same meaning. In 2023 the exception also requires one of two conditions: an impracticable or hazardous location, or an industrial site where only qualified persons service the equipment."
+    },
+    "open-book-exam-#6-010": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 430.250",
+        "430.6(A)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "c3b129e581c889bb",
+      "correct_index": 2,
+      "note": "Key matches Table 430.250 in NEC 2023 (50 hp, 460 V = 65 A). Same question as final-exam-#1-070; content mirrors that record."
+    },
+    "open-book-exam-#6-011": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "408.39"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#408",
+      "provision": "85b55b9d15bef03a",
+      "correct_index": 2,
+      "note": "Key matches 408.39 in NEC 2023."
+    },
+    "open-book-exam-#6-012": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 250.122"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "7aa8b53f83f8e7ae",
+      "correct_index": 2,
+      "note": "Key matches Table 250.122 in NEC 2023 (60 A row = 10 AWG copper). Same question as final-exam-#1-068; content mirrors that record."
+    },
+    "open-book-exam-#6-013": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "350.30(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#350",
+      "provision": "71749cf6a498349b",
+      "correct_index": 1,
+      "note": "Key matches 350.30(A) in NEC 2023."
+    },
+    "open-book-exam-#6-014": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Chapter 9, Note 4"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "4e44df14b11e8e2a",
+      "correct_index": 1,
+      "note": "Key matches Chapter 9 Notes to Tables, Note (4) in NEC 2023. Same question as final-exam-#1-067; content mirrors that record."
+    },
+    "open-book-exam-#6-015": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "300.5(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300",
+      "provision": "151a2d491f28ed31",
+      "correct_index": 3,
+      "note": "Key matches 300.5(B) in NEC 2023."
+    },
+    "open-book-exam-#6-016": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Table 352.30(B)",
+        "352.30(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#352",
+      "provision": "67c95ea8046d0b01",
+      "correct_index": 2,
+      "note": "Key matches Table 352.30(B) in NEC 2023 (trade size 1 1/4-2 = 5 ft)."
+    },
+    "open-book-exam-#6-017": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "324.10(B)(2)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#324",
+      "provision": "61a485abbb2f8e2e",
+      "correct_index": 0,
+      "note": "Key matches 324.10(B)(2) in NEC 2023."
+    },
+    "open-book-exam-#6-018": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "480.10(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#480",
+      "provision": "3cdacf089c583052",
+      "correct_index": 3,
+      "note": "Key matches 480.10(A) in NEC 2023; the 2023 text ties ventilation to the battery technology (some types need none)."
+    },
+    "open-book-exam-#6-019": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.53(A)(2)",
+        "250.52(A)(2)",
+        "250.52(A)(3)",
+        "250.52(A)(4)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "731ac51730be5c16",
+      "correct_index": 3,
+      "note": "Key matches 250.53(A)(2) in NEC 2023, which allows any electrode in 250.52(A)(2) through (A)(8). Choice C updated: 250.52(A)(2) is now 'metal in-ground support structure(s)'; the old 'metal frame of the building' electrode is gone. The PDF key cites the 250.52(A) items; the 2023 rule itself is 250.53(A)(2)."
+    },
+    "open-book-exam-#6-020": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "300.21"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300",
+      "provision": "e9e447f55ee885ee",
+      "correct_index": 3,
+      "note": "Key matches 300.21 in NEC 2023."
+    },
+    "open-book-exam-#6-021": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "408.36(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#408",
+      "provision": "c450860f4282115a",
+      "correct_index": 3,
+      "note": "Key matches 408.36(A) in NEC 2023."
+    },
+    "open-book-exam-#6-022": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "330.30(D)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#330",
+      "provision": "805e8ad151ec1597",
+      "correct_index": 3,
+      "note": "Key matches 330.30(D)(2) in NEC 2023. The PDF stem said 'from the last point of connection', which misstates the rule; it now reads 'from the last point of cable support to the point of connection to luminaires within an accessible ceiling', as in the 2023 text."
+    },
+    "open-book-exam-#6-023": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "680.11(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#680",
+      "provision": "6effd4abc38c8719",
+      "correct_index": 3,
+      "note": "Key matches 680.11(A) and list item (7) in NEC 2023."
+    },
+    "open-book-exam-#6-024": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.18"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "dce16d055c8a00f7",
+      "correct_index": 1,
+      "note": "Key matches 210.18 in NEC 2023."
+    },
+    "open-book-exam-#6-025": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "504.80(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#504",
+      "provision": "ed80cfc052111534",
+      "correct_index": 1,
+      "note": "Key matches 504.80(C) in NEC 2023."
+    },
+    "open-book-exam-#9-001": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "394.19(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#394",
+      "provision": "870f99e36d9cf79d",
+      "correct_index": 1,
+      "note": "Key matches NEC 2023 394.19(A): 75 mm (3 in.) between conductors."
+    },
+    "open-book-exam-#9-002": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "250.122(A)",
+        "Table 250.122"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250",
+      "provision": "fc79ece99d4d7c11",
+      "correct_index": 3,
+      "note": "Table 250.122 title and use in 250.122(A) confirmed in NEC 2023."
+    },
+    "open-book-exam-#9-003": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.21(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "74942b3b985040e5",
+      "correct_index": 0,
+      "note": "NEC 2023 110.21(B) Informational Note No. 2 cites ANSI Z535.4-2011 (R2017); the stem's description of the note follows older wording but the standard number is unchanged. 'Information note' corrected to 'Informational Note'. The validator's section regex reads the ANSI number in the verbatim note as an NEC section (false alarm); notes and tip avoid it."
+    },
+    "open-book-exam-#9-004": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "620.51(D)",
+        "620.53",
+        "620.54",
+        "620.55"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#620",
+      "provision": "e519476d776d7b05",
+      "correct_index": 2,
+      "note": "In the NEC 2023 cache 620.51(D) Identification and Signs contains only (1) Available Fault Current Field Marking; the older driving-machine numbering and sign sentence was not found. The same sign rule exists in 2023 in 620.53, 620.54, and 620.55, so the stem was reworded to the 620.54 wording with the same keyed answer. Check 620.51(D) in the printed 2023 book."
+    },
+    "open-book-exam-#9-005": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Chapter 9, Table 1"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables",
+      "provision": "e17831534f44671e",
+      "correct_index": 2,
+      "note": "Chapter 9 Table 1 title and values (53/31/40 percent) confirmed in NEC 2023."
+    },
+    "open-book-exam-#9-006": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "240.4(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#240",
+      "provision": "181aa44cd3276e0a",
+      "correct_index": 2,
+      "note": "Verbatim wording confirmed in NEC 2023 240.4(C). Choice (d) is equivalent in meaning; the PDF key follows the Code's exact words."
+    },
+    "open-book-exam-#9-007": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "300.6(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300",
+      "provision": "d54286b989ecbe3e",
+      "correct_index": 0,
+      "note": "NEC 2023 300.6(A) says threaded anywhere other than at the factory where the product is listed (same meaning as threaded in the field); compound must be approved."
+    },
+    "open-book-exam-#9-008": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "495.25(B)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#495",
+      "provision": "4e678073f7594278",
+      "correct_index": 2,
+      "note": "Verbatim in NEC 2023 495.25(B) (key printed '495.25(b)'). Stray space before the final period removed."
+    },
+    "open-book-exam-#9-009": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.14(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "cd7155a2a6a5f702",
+      "correct_index": 1,
+      "note": "Fourth list item of 110.14(C)(1)(a) in NEC 2023 (cache drops list labels). The PDF stem itself contains 75°C (insulation rating of 75°C or higher), so the answer appears in the stem as printed; kept word for word, needs a prompt-leak exception or a coordinator decision."
+    },
+    "open-book-exam-#9-010": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "600.4(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#600",
+      "provision": "27f0d8f28e8ef18e",
+      "correct_index": 0,
+      "note": "Verbatim in NEC 2023 600.4(C). Choice (b) printed 1/2' (foot mark) corrected to 1/2 inch mark."
+    },
+    "open-book-exam-#9-011": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "430.52(C)(1)",
+        "Table 430.52(C)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "f25654402d5abc28",
+      "correct_index": 1,
+      "note": "The key prints 'Table 430.52'; the NEC 2023 table number is Table 430.52(C)(1), which matches choice (b)."
+    },
+    "open-book-exam-#9-012": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.18"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "5f49e8312a0b6c40",
+      "correct_index": 2,
+      "note": "Verbatim in NEC 2023 210.18."
+    },
+    "open-book-exam-#9-013": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "502.128"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#502",
+      "provision": "236d83015b06a467",
+      "correct_index": 2,
+      "note": "Third list item of 502.128 in NEC 2023 (cache drops labels). Stem thickness written as .021 inch for reading."
+    },
+    "open-book-exam-#9-014": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.21(B)(2)",
+        "Table 210.21(B)(2)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "721fae8b8d3639ac",
+      "correct_index": 0,
+      "note": "Table title and values confirmed in NEC 2023."
+    },
+    "open-book-exam-#9-015": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "314.24(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314",
+      "provision": "214442273ab11c91",
+      "correct_index": 3,
+      "note": "Verbatim in NEC 2023 314.24(B)(1) (cache shows 17/8 for 1 7/8)."
+    },
+    "open-book-exam-#9-016": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.14(C)(2)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "51d1c6824a9d868b",
+      "correct_index": 0,
+      "note": "Verbatim in NEC 2023 110.14(C)(2)."
+    },
+    "open-book-exam-#9-017": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "235.360(A)",
+        "Table 235.360(A)",
+        "225.61"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#235",
+      "provision": "3e089cce42617670",
+      "correct_index": 2,
+      "note": "The key prints the old number Table 225.60; NEC 2023 renumbered it Table 235.360(A), which is choice (c). Key letter unchanged."
+    },
+    "open-book-exam-#9-018": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.18"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "dce16d055c8a00f7",
+      "correct_index": 2,
+      "note": "Verbatim in NEC 2023 210.18."
+    },
+    "open-book-exam-#9-019": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "110.34(A)",
+        "Table 110.34(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
+      "provision": "539a20511b4ac26e",
+      "correct_index": 1,
+      "note": "Title verbatim in NEC 2023. Table 110.26(A)(1) (1000 V and under) is not among the choices."
+    },
+    "open-book-exam-#9-020": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "210.21(B)(4)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
+      "provision": "ffab698fea91120d",
+      "correct_index": 3,
+      "note": "Verbatim in NEC 2023 210.21(B)(4)."
+    },
+    "open-book-exam-#9-021": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "545.7",
+        "230.70"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#545",
+      "provision": "bbcc6de0eaec13a0",
+      "correct_index": 1,
+      "note": "NEC 2023 545.7 refers to 230.70; the key cites 230.70 as the referenced rule. Keyed choice 545.7 is correct."
+    },
+    "open-book-exam-#9-022": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "430.7(C)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "6d8998419164eab6",
+      "correct_index": 2,
+      "note": "Verbatim in NEC 2023 430.7(C)."
+    },
+    "open-book-exam-#9-023": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "430.7(A)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
+      "provision": "8c5f8f0ce28c0131",
+      "correct_index": 3,
+      "note": "Fourteenth list item of 430.7(A) in NEC 2023 (cache drops labels)."
+    },
+    "open-book-exam-#9-024": {
+      "status": "fixed",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "344.10(A)(1)",
+        "344.10(A)(2)",
+        "344.10(B)(1)"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#344",
+      "provision": "7bd85cc9fab7aa44",
+      "correct_index": 3,
+      "note": "The PDF stem quotes the old red brass rule (direct burial and swimming pool applications). In NEC 2023, 344.10(A)(1) groups galvanized steel, stainless steel, and red brass RMC, and 344.10(B)(1) permits all three in direct burial, so choices (a), (b), and (d) would all fit the PDF stem. Stem reworded to the 2023 text so red brass stays the only answer."
+    },
+    "open-book-exam-#9-025": {
+      "status": "verified",
+      "verified_on": "2026-09-29",
+      "sections": [
+        "Article 100"
+      ],
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#100",
+      "provision": "9012da35bffd781d",
+      "correct_index": 1,
+      "note": "Article 100 Luminaire definition unchanged in NEC 2023. The question relies on the last sentence (a lampholder itself is not a luminaire)."
     }
   }
 }
