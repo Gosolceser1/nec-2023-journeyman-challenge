@@ -34,7 +34,7 @@ The 4 Nebraska state-law records are outside the NEC bank and are not part of th
 ## Flagged for a human
 
 - `final-exam-#1-029` (408.5): UpCodes heading reads '408.5 Clearance for Conductor Entering Bus Enclosures' (singular) while its Table 408.5 title says 'Conductors'. Record keeps 'Conductors'; confirm against the printed code. https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#408
-- `final-exam-#3-068` (620.51): Tests the 2020 620.51(D)(1) 'More Than One Driving Machine' numbering rule. 2023 620.51(D) has only (1) Available Fault Current Field Marking and Article 620 has no driving-machine numbering rule. Keyed answer cannot be re-anchored to 2023 text without changing it; retire or rewrite (human decision). https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#620
+- `final-exam-#3-068` (620.51): Tests the 2020 620.51(D)(1) 'More Than One Driving Machine' numbering rule. 2023 620.51(D) has only (1) Available Fault Current Field Marking and Article 620 has no driving-machine numbering rule. Keyed answer cannot be re-anchored to 2023 text without changing it; retire or rewrite (human decision). The tables audit has since labelled the provision, tip and choice A note as NEC 2020 text, and points to 620.53–620.55, which keep the numbering rule for other disconnects. https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#620
 
 ## Notable fixes
 
