@@ -24,6 +24,8 @@ const GOLDEN := [
 	["unit_microamps", "trips at 5 µA", "Trips at 5 microamps"],
 	["table_block", "Table 408.5 Clearance\nConductor\tMinimum\nInsulated\t200\t8", "Table 408 point 5 is shown on screen."],
 	["table_block", "Rule text.\nA\tB\n1\t2", "Rule text. The table is shown on screen."],
+	["table_block", "Table 310.16 Ampacities\nAWG\t60\n12\t20\nCopper\n10\t30\nTable 310.15(C)(1) Adjustment Factors\n4—6\t80",
+		"Table 310 point 16 is shown on screen. Copper. Table 310 point 15, C, 1 is shown on screen."],
 	["typography", "the “front” and 5′", "The front and 5 feet"],
 	["typography", "shall be…", "Shall be."],
 	["typography", "the feeder [based on the rating], plus", "The feeder (based on the rating), plus"],
@@ -35,6 +37,8 @@ const GOLDEN := [
 	["abbreviations", "e.g. a box, i.e. metal", "For example a box, that is metal"],
 	["abbreviations", "min. depth, max. load, approx. 5", "Minimum depth, maximum load, approximately 5"],
 	["abbreviations", "708.54 Ex.: text", "Section 708 point 54 Exception: text"],
+	["leading_decimal_point", ".6875", "0.6875"],
+	["leading_decimal_point", "Answer: .6875 or 2.5 A.", "Answer: 0.6875 or 2.5 amps."],
 	["plural_suffix", "the door(s) and connector(s)", "The doors and connectors"],
 	["mixed_number_unspaced", "11/2\"", "1 and one half inches"],
 	["mixed_number_unspaced", "41/2", "4 and one half"],
@@ -112,6 +116,7 @@ const GOLDEN := [
 	["unit_sq_ft", "3 VA per sq. ft. of area", "3 volt amperes per square feet of area"],
 	["unit_sq_in", "0.0133 sq in", "0.0133 square inches"],
 	["unit_cu_in", "18 cu. in. box", "18 cubic inches box"],
+	["unit_cu_in", "Answer: 18 cu.in.", "Answer: 18 cubic inches"],
 	["unit_ft_adjective", "three 5-ft sections", "Three 5-foot sections"],
 	["unit_ft_dot", "within 6 ft. of", "Within 6 feet of"],
 	["unit_ft", "2.0 m (6 and one half ft) above", "2.0 meters (6 and one half feet) above"],
@@ -328,16 +333,16 @@ func no_answer_before_answering() -> void:
 
 
 func bank_sweep() -> void:
-	print("=== bank sweep: every spoken line of all 283 records ===")
+	print("=== bank sweep: every spoken line of every record ===")
 	var recs: Array = (JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json")) as Dictionary).get("records", [])
-	t.eq(recs.size(), 283, "bank read is not vacuous")
+	t.eq(recs.size() > 0 and recs.size() == BankLoader.declared_count(), true, "bank read is not vacuous: %d records" % recs.size())
 	var caps := RegEx.create_from_string("\\b[A-Z]{2,}s?\\b")
 	var hostile := RegEx.create_from_string("[\\t\\n_\"“”‘’—–→÷×√≈Ω½¼¾≤≥±−²³•…%#=]|\\.\\.|\\s[,.;:](?!\\d)|\\b\\d{2,3}\\.\\d+\\(|\\bft\\b|\\blbs?\\b|\\bkcmil\\b")
 	# A bare NNN.N left in a line is voiced as a decimal; the only real one in the bank is a resistance.
 	var bare_section := RegEx.create_from_string("\\b(?:90|[1-9]\\d{2})\\.\\d+\\b(?! ohms)")
 	# A capital "A" before a lowercase word is voiced as the letter, so only a real letter may be one.
 	var letter_a := RegEx.create_from_string("\\b([A-Za-z-]+) A (?=[a-z])")
-	var letter_words := ["paragraph", "sub-item", "Class"]
+	var letter_words := ["paragraph", "sub-item", "Class", "phase"]
 	var bad_caps := {}
 	var bad := 0
 	for rec_v in recs:

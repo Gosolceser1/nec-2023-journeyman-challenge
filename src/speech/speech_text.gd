@@ -53,9 +53,17 @@ static func teach_segments(record: Dictionary) -> Array:
 	var correct := int(record.get("correct_index", -1))
 	var choice := str(answers[correct]) if correct >= 0 and correct < answers.size() else ""
 	var seen: Array[String] = []
+	var bare_choice: RegEx = null
+	if _asks_for_reference(str(record.get("prompt", ""))) and Rules.is_bare_reference(choice):
+		var escaped := choice.strip_edges().replace(".", "\\.").replace("(", "\\(").replace(")", "\\)")
+		bare_choice = Rules._re("(?<![\\d.])" + escaped + "(?![\\d(])")
 	# Indexed from the shared lesson_lines so spoken index N == displayed line N.
 	for line in AudioExplanationGenerator.lesson_lines(record, choice):
 		var spoken := speakable(line)
+		# "Answer: 220.56." ends a sentence, so the reference rule leaves it a decimal.
+		if bare_choice != null:
+			spoken = bare_choice.sub(spoken, Rules.bare_reference(choice), true)
+		spoken = _terminated(spoken)
 		if spoken == "":
 			continue
 		var norm := _normalize_spoken(spoken)
@@ -76,7 +84,7 @@ static func spoken_segments(record: Dictionary) -> Array:
 	var stem := speakable(Rules.restore_lost_blank(prompt))
 	segments.append(_segment(_terminated(stem), -1, false))
 	var answers: Array = record.get("answers", [])
-	var asks_for_reference := Rules._re("(?i)\\b(section|article|table)\\b").search(prompt) != null
+	var asks_for_reference := _asks_for_reference(prompt)
 	for i in answers.size():
 		var raw := str(answers[i])
 		var spoken := Rules.bare_reference(raw) if asks_for_reference and Rules.is_bare_reference(raw) else speakable(raw)
@@ -88,6 +96,10 @@ static func spoken_segments(record: Dictionary) -> Array:
 		if text != "":
 			segments.append(_segment(text, i, false))
 	return segments
+
+## A stem asking for a Section, Article or Table reads bare-number choices as references.
+static func _asks_for_reference(prompt: String) -> bool:
+	return Rules._re("(?i)\\b(section|article|table)\\b").search(prompt) != null
 
 ## The spoken letter of a choice slot.
 static func letter_line(slot: int) -> String:

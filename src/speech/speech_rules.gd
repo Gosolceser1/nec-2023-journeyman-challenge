@@ -31,6 +31,8 @@ const PIPELINE := [
 	# Before number_range turns the Nebraska section 81-2113 into "81 to 2113".
 	["state_citations", ""],
 	["abbreviations", ""],
+	# ".6875" is 0.6875; the tidy stage would drop a bare leading point.
+	["leading_decimal_point", "(?<![\\w.])\\.(\\d)", "0.$1"],
 	["plural_suffix", "(?<=[A-Za-z])\\(s\\)", "s"],
 	# "11/2" typed for 1 1/2. Numerator pinned to 1 so the live 15/16 stays a fraction.
 	["mixed_number_unspaced", "(?<![\\d/])([1-9])(1)/([248]|16)(?![\\d/])", "$1 $2/$3"],
@@ -219,7 +221,7 @@ const SPELL := [
 	"SPDT", "SPST", "DPDT", "DPST", "PWR", "MCM", "ASTM", "IEC", "HARC", "PV", "EV",
 	"RV", "TV", "VD", "MV", "PF", "PB", "AA", "PSI", "UPS", "SWD", "HID", "LED",
 	"CT", "GFPE", "FPN", "ANSI", "UV", "SPD", "HACR", "FAA", "USB", "CSA", "XHHN", "TFN", "TFFN",
-	"IBEW",
+	"IBEW", "EVSE", "OL",
 ]
 
 ## Read as a word or a fixed phrase, never spelled or lower-cased. Emphasis
@@ -227,7 +229,7 @@ const SPELL := [
 const SAY_AS := {
 	"IEEE": "I triple E", "NEMA": "NEMA", "OSHA": "OSHA", "HVAC": "HVAC", "PAR": "par",
 	"NOT": "NOT", "ON": "ON", "OFF": "OFF", "GIVEN": "GIVEN", "ONLY": "ONLY", "ALL": "ALL",
-	"COPPER": "copper", "ALUMINUM": "aluminum",
+	"COPPER": "copper", "ALUMINUM": "aluminum", "ELI": "Eli", "ICE": "ice",
 }
 
 static var _cache := {}
@@ -486,27 +488,31 @@ static func _pair_words(pair: String, leading: bool) -> String:
 	return str(tens[n / 10]) + ("" if n % 10 == 0 else "-" + str(ones[n % 10]))
 
 
-## Drops every tab-separated line. The line just before the first dropped one
-## is the table's title when it starts with "Table"; it becomes the pointer to
-## the on-screen grid. Otherwise the pointer is appended where the table was.
+## Drops every tab-separated line. The line just before a run of dropped ones
+## is that table's title when it starts with "Table"; it becomes the pointer to
+## the on-screen grid, for every table of a multi-table provision. A first
+## table without such a title gets the pointer appended where it was.
 static func _table_block(text: String) -> String:
 	if not text.contains("\t"):
 		return text
 	var kept: PackedStringArray = []
 	var pointed := false
+	var in_table := false
 	for line in text.split("\n"):
 		if not line.contains("\t"):
 			kept.append(line)
+			in_table = false
 			continue
-		if pointed:
+		if in_table:
 			continue
-		pointed = true
+		in_table = true
 		var title := kept[kept.size() - 1].strip_edges() if not kept.is_empty() else ""
 		var ref := _re("^Table\\s+\\S+").search(title)
 		if ref != null:
 			kept[kept.size() - 1] = "%s is shown on screen." % ref.get_string(0)
-		else:
+		elif not pointed:
 			kept.append(TABLE_ON_SCREEN)
+		pointed = true
 	return "\n".join(kept)
 
 

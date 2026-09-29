@@ -308,6 +308,13 @@ func teach_gate_ordering() -> void:
 	for seg_v in teach:
 		t.check(bool(seg_v.get("teach", false)), "every teach segment is flagged teach=true")
 		t.eq(int(seg_v.get("choice", -99)), 3, "teach segments carry the correct choice index")
+	var box_teach: Array = ST.teach_segments({
+		"prompt": "The box volume is ___.", "answers": ["16 cu.in.", "18 cu.in."], "correct_index": 1,
+		"worked": "(4 + 1 + 2 + 1) × 2.25 in.³ = 18 cu.in.",
+	})
+	for seg_v in box_teach:
+		var line := str(seg_v.get("text", ""))
+		t.check(line.ends_with("."), "a teach line whose unit ate the period still ends a sentence: %s" % line)
 
 	# The spoken index N must match the DISPLAYED lesson line N: both are built
 	# from the same lesson_lines list, so they can never drift apart.
@@ -364,9 +371,9 @@ func delegation_shims() -> void:
 # Every real record must produce a speakable, non-empty plan.
 # --------------------------------------------------------------------------
 func bank_speakable_sweep() -> void:
-	print("=== bank speakable sweep (283 records) ===")
+	print("=== bank speakable sweep (every record) ===")
 	var recs: Array = (JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json")) as Dictionary).get("records", [])
-	t.eq(recs.size(), 283, "bank read is not vacuous")
+	t.eq(recs.size() > 0 and recs.size() == BankLoader.declared_count(), true, "bank read is not vacuous: %d records" % recs.size())
 
 	var bad := 0
 	var empty := 0
@@ -398,7 +405,7 @@ func bank_speakable_sweep() -> void:
 					break
 			if lone:
 				continue
-	t.eq(bad, 0, "no malformed segment and no TTS-hostile character survives in any of the 283 plans")
+	t.eq(bad, 0, "no malformed segment and no TTS-hostile character survives in any plan")
 	t.eq(empty, 0, "no narrated choice is silent")
 	t.eq(underscore_records, KNOWN_LONE_UNDERSCORE_RECORDS,
 		"the only records whose speech contains '_' are the known lone-underscore defect set")
@@ -456,7 +463,7 @@ func bank_complete_sentences_sweep(recs: Array) -> void:
 			if m != null:
 				misreads.append("%s: '%s'" % [str((rec_v as Dictionary).get("id", "")), m.get_string(0)])
 	t.eq(misreads, [] as Array[String], "no wrong article, doubled word, pipe, footnote star, '@' or panel tag is spoken")
-	t.eq(unfinished, [] as Array[String], "every spoken line of all 283 plans ends a sentence (no 'Exception No.', no dangling list marker)")
+	t.eq(unfinished, [] as Array[String], "every spoken line of every plan ends a sentence (no 'Exception No.', no dangling list marker)")
 	t.eq(too_long, [] as Array[String], "no spoken line is long enough to need chunking")
 	t.eq(cut_words, [] as Array[String], "no quoted rule stops mid-word")
 

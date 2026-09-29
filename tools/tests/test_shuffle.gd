@@ -153,7 +153,7 @@ func _first_question_uniform() -> void:
 		counts[s.order[0]] += 1
 		long_run.begin(10, 60, true, "Next")
 		firsts_long[long_run.order[0]] += 1
-	var bound := _chi_bound(278)
+	var bound := _chi_bound(nec - 1)
 	var x := 0.0
 	var y := 0.0
 	for k in by_area:
@@ -163,7 +163,7 @@ func _first_question_uniform() -> void:
 		for i in by_area[k]:
 			x += pow(counts[i] - fresh, 2) / fresh
 			y += pow(firsts_long[i] - steady, 2) / steady
-	print("  fresh sessions: chi-square %.1f (df 278, bound %.1f)" % [x, bound])
+	print("  fresh sessions: chi-square %.1f (df %d, bound %.1f)" % [x, nec - 1, bound])
 	check(x < bound, "first question of fresh sessions: chi2 %.1f < %.1f" % [x, bound])
 	print("  consecutive runs of one session: chi-square %.1f" % y)
 	check(y < bound, "first question across consecutive runs: chi2 %.1f < %.1f" % [y, bound])

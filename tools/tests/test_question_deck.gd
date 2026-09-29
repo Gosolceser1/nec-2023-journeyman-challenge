@@ -156,7 +156,9 @@ func _apportion() -> void:
 	for k in exam:
 		var expected := mini(ExamBlueprint.items(k), cap[k])
 		check(exam[k] >= expected and (exam[k] == expected or cap[k] >= ExamBlueprint.items(k)), "simulator %s: %d (blueprint %d, pool %d)" % [k, exam[k], ExamBlueprint.items(k), cap[k]])
-	check(exam["special_conditions"] == cap["special_conditions"], "Special Conditions short of records: all of them are used")
+	for k in exam:
+		if cap[k] < ExamBlueprint.items(k):
+			check(exam[k] == cap[k], "%s short of records: all of them are used" % k)
 	for size in [10, 20, 30, 40, 50]:
 		var credits := {}
 		var sum := {}
@@ -508,7 +510,8 @@ func _mastery() -> void:
 			_answer(s, true)
 	m = s.deck.mastery(bank)
 	check(QuestionDeck.weakest_area(m, bank) == "special_occupancies", "weakest: the lowest rolling accuracy once every area is practised")
-	for r in QuestionDeck.HISTORY:
+	# The no-repeat deck cycles the whole area before a missed question returns.
+	for r in ceili(float(so.size() * QuestionDeck.HISTORY) / 20.0):
 		s.begin(20, 60, true, "SO again", false, "special_occupancies")
 		_answer(s, true)
 	m = s.deck.mastery(bank)

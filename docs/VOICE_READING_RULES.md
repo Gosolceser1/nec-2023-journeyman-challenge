@@ -88,6 +88,8 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 - A newline becomes a sentence break (". ").
 - "—" becomes ", ", and "→" becomes ", so ".
 - A table is replaced by one sentence (§5).
+- Every clip ends a sentence: the stem, each choice and each lesson line get a
+  final period when theirs was eaten by a unit abbreviation ("18 cu.in.").
 
 ## 3. Pronunciation table (NEC notation)
 
@@ -101,6 +103,7 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 | bare `210.12` choice to a "which section" question | 210 point 12 |
 | `under 250.122`, `required by 408.36`, `in 110.26` | under section 250 point 122, … (a citing word: under, in, by, per, see, with, of) |
 | `352.100, 352.12(B), and 352.60:`, `352.100 Construction` | section 352 point 100, section 352 point 12, paragraph B, and section 352 point 60; a list is read as sections when one member is, and a heading after a line start or `label: ` is a section |
+| `.6875` (a decimal with no leading zero) | 0.6875 |
 | `31.6 amps`, `8.19 A`, `0.5`, `888.8 ohms` (not a reference) | 31.6 amps … (a bare number is a section only in the cases above, only as 90 or 100–999 point N, and never with a unit after it) |
 | `1/0`, `4/0` | one aught, four aught |
 | `12/3 NM` | 12 slash 3 N M |
@@ -186,7 +189,8 @@ tuning renders were scratch and are not kept; what they showed:
 
 - A tab-separated block is never read cell by cell. A table titled
   "Table 408.5 …" becomes "Table 408 point 5 is shown on screen."; otherwise
-  "The table is shown on screen."
+  "The table is shown on screen." A line with two tables gets one sentence
+  per table, each from its own title.
 - In a line containing `=`, operators are spoken: "equals", "minus", "plus",
   "times", "divided by", "squared". `VD = V source - V load` becomes "V D equals V
   source minus V load". Outside formulas a hyphen stays a hyphen.

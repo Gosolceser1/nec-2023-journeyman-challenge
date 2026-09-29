@@ -42,6 +42,13 @@ var prompt_allowlist := {
 	"open-book-exam-#4-019|6": true,
 	"final-exam-#5-070|3 ft": true,
 	"final-exam-#1-022|two": true,
+	# The stem's own values: no demand factor on one oven (220.55), 20 A vs 20 ft,
+	# two bays -> two outlets, 30 V within 30 seconds, EGC not larger than the #12 circuit.
+	"final-exam-#4-036|6": true,
+	"open-book-exam-#3-015|20": true,
+	"open-book-exam-#3-017|two": true,
+	"open-book-exam-#12-017|30": true,
+	"open-book-exam-#12-023|#12": true,
 }
 
 

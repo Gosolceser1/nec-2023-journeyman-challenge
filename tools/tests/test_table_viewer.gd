@@ -209,9 +209,9 @@ func extract_target_keyword_edges() -> void:
 # the note-strip classification and the data-row count must agree.
 # --------------------------------------------------------------------------
 func note_row_bank_consistency() -> void:
-	print("=== bank note/data consistency (25 tables) ===")
+	print("=== bank note/data consistency (every table) ===")
 	var recs: Array = (JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json")) as Dictionary).get("records", [])
-	t.eq(recs.size(), 283, "bank read is not vacuous")
+	t.eq(recs.size() > 0 and recs.size() == BankLoader.declared_count(), true, "bank read is not vacuous: %d records" % recs.size())
 
 	var tables := 0
 	var mismatch := 0
