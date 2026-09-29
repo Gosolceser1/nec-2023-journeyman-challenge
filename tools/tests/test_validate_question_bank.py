@@ -246,5 +246,48 @@ class LocationRuleTests(unittest.TestCase):
             self.ARTICLES), [])
 
 
+class ContentAuditTests(unittest.TestCase):
+    def records(self):
+        return [{"id": f"q-{n:03d}", "reference_text": f"210.8(A) Dwelling Units\nText {n}.",
+                 "reference_table": [], "correct_index": 1} for n in range(1, 4)]
+
+    def audit(self, records):
+        return {"records": {r["id"]: {"status": "verified", "verified_on": "2026-09-28",
+                                      "provision": validator.provision_digest(r),
+                                      "correct_index": r["correct_index"]} for r in records}}
+
+    def test_audited_bank_passes(self):
+        recs = self.records()
+        self.assertEqual(validator.content_audit_problems(recs, self.audit(recs)), ([], []))
+
+    def test_changed_provision_or_key_is_an_error(self):
+        recs = self.records()
+        audit = self.audit(recs)
+        recs[0]["reference_text"] += " Edited."
+        recs[1]["correct_index"] = 2
+        errors, _ = validator.content_audit_problems(recs, audit)
+        self.assertTrue(any("q-001" in e and "provision" in e for e in errors), errors)
+        self.assertTrue(any("q-002" in e and "correct_index" in e for e in errors), errors)
+
+    def test_unaudited_record_in_a_real_bank_is_reported(self):
+        recs = self.records()
+        audit = self.audit(recs[:2])
+        _, warnings = validator.content_audit_problems(recs, audit)
+        self.assertEqual(len(warnings), 1)
+        self.assertIn("q-003", warnings[0])
+
+    def test_state_law_records_are_not_audited(self):
+        recs = self.records() + [{"id": "ne-001", "section": "ne_state_law", "reference_text": "x",
+                                  "reference_table": [], "correct_index": 0}]
+        self.assertEqual(validator.content_audit_problems(recs, self.audit(recs[:3])), ([], []))
+
+    def test_checked_in_audit_covers_every_nec_record(self):
+        bank = __import__("json").loads((ROOT / "data" / "question_bank.json").read_text(encoding="utf-8"))
+        audit = validator.load_content_audit()
+        nec = [r["id"] for r in bank["records"] if r.get("section") is None]
+        self.assertEqual(sorted(audit["records"]), sorted(nec))
+        self.assertEqual(validator.content_audit_problems(bank["records"], audit), ([], []))
+
+
 if __name__ == "__main__":
     unittest.main()

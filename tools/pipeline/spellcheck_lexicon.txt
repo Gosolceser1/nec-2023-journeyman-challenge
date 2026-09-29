@@ -4,6 +4,7 @@ able
 abnormal
 about
 above
+aboveground
 abrasion
 abrasives
 absorb
@@ -246,7 +247,6 @@ becomes
 bed
 bedroom
 bedrooms
-beds
 been
 before
 begin
@@ -256,6 +256,7 @@ being
 belong
 belongs
 below
+belted
 bend
 bendable
 bending
@@ -272,7 +273,6 @@ big
 biggest
 bimetal
 bimetallic
-biplane
 blade
 blank
 blast
@@ -317,7 +317,6 @@ bring
 brings
 broken
 bubble
-buffet
 build
 building
 buildings
@@ -370,6 +369,7 @@ carrying
 case
 cases
 casings
+category
 caulk
 cause
 causes
@@ -441,7 +441,6 @@ close
 closed
 closeness
 closer
-closest
 closets
 closing
 closure
@@ -716,7 +715,6 @@ different
 differently
 diffusion
 dimension
-dimensional
 dimensions
 dining
 dipole
@@ -934,7 +932,6 @@ ex
 exact
 exactly
 examination
-examinations
 example
 excavation
 exceed
@@ -1309,6 +1306,7 @@ ignitible
 ignition
 ignores
 illumination
+imaging
 immediate
 immersion
 impact
@@ -1589,7 +1587,6 @@ locations
 lock
 lockable
 locked
-locker
 locking
 locknut
 locknuts
@@ -1713,6 +1710,7 @@ minimums
 minus
 missing
 mix
+mixes
 mixing
 mixture
 mixtures
@@ -2322,7 +2320,6 @@ rolling
 roof
 roofs
 rooftop
-rooftops
 room
 rooms
 roomy
@@ -2334,7 +2331,6 @@ round
 rounded
 rounding
 rounds
-routine
 row
 rows
 rubber
@@ -2452,7 +2448,6 @@ should
 shoulders
 show
 shower
-showering
 showing
 shown
 shows
@@ -2549,10 +2544,10 @@ spec
 special
 specific
 specifically
-specifications
 specified
 specifies
 specify
+speeds
 spike
 spill
 spilling
@@ -2656,7 +2651,6 @@ studies
 studios
 studs
 sturdy
-style
 subdivided
 subject
 subjected
@@ -2755,6 +2749,7 @@ temperatures
 temporary
 ten
 tenant
+tenants
 tension
 tensioned
 tenth
@@ -2917,10 +2912,10 @@ unadjusted
 unbroken
 unchanged
 unclassified
+uncoated
 under
 underground
 understates
-undertaken
 underwriters
 unfamiliar
 unfinished

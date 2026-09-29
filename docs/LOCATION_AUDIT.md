@@ -171,7 +171,7 @@ where the NEC 2023 fact was verified.
 - **open-book-exam-#1-018** (210.8(E)): the rationale for choice C cites
   "210.8(A) Exception No. 2" for a permanently installed security system
   receptacle. Not yet verified on UpCodes; the record's article (210.8(E)) and answer are unaffected.
-- **final-exam-#3-068** (620.51): the citation is "620.51" and the provision heading "620.51(D)(1) More Than One Driving Machine". The UpCodes text extraction returned "Available Fault Current Field Marking" for 620.51(D)(1), which may be a mis-sliced neighbour (the extraction matched the first "(1)" after "(D)"). The record was left unchanged: the citation and the breadcrumb (Chapter 6, Article 620) are right either way. Re-check the 620.51(D) list numbering by hand.
+- **final-exam-#3-068** (620.51): the citation is "620.51" and the provision heading "620.51(D)(1) More Than One Driving Machine". The UpCodes text extraction returned "Available Fault Current Field Marking" for 620.51(D)(1), which may be a mis-sliced neighbour (the extraction matched the first "(1)" after "(D)"). The record was left unchanged: the citation and the breadcrumb (Chapter 6, Article 620) are right either way. Re-check the 620.51(D) list numbering by hand. Resolved in `docs/CONTENT_AUDIT_2023.md`: 2023 620.51(D) has only (1) Available Fault Current Field Marking, so the record tests a removed rule and is flagged there.
 - **open-book-exam-#10-002** (220.5(C), garages now counted): verified. The
   2023 220.5(C) excludes only open porches and unfinished areas not
   adaptable for future use, and the record matches it word for word.
@@ -243,7 +243,9 @@ snapshots and with in-page text extraction.
   110.26(B) Clear Spaces and 590.4(G) Splices. It also contradicted its own
   earlier reading of 620.51(D). So "not found" here means "not verified by
   the automated extraction", not "does not exist". No record was changed on
-  that basis. They remain on the list for a manual check.
+  that basis. The 2026-09-28 content audit (`docs/CONTENT_AUDIT_2023.md`)
+  found every section and table on this list in NEC 2023 under the cited
+  heading.
 - **Section numbers, headings and text (targeted pass):**
   - https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials
     - 314.23(E) Raceway-Supported Enclosure, Without Devices, Luminaires, or Lampholders: full text matches open-book-exam-#10-013.

@@ -329,7 +329,8 @@ notes that stated a wrong fact (800.44(B) Ex. 3 allows 3 ft on a 4/12 roof).
 
 The NEC 2023 wording was reviewed from recall, without the book. The
 medium-confidence `reference_text` replacements (50 records) should be checked
-against NFPA 70-2023 when a copy is at hand.
+against NFPA 70-2023 when a copy is at hand. Done on 2026-09-28 against the 2023
+text on UpCodes Premium; results per record in `docs/CONTENT_AUDIT_2023.md`.
 
 | Record | Fields | Finding (confidence) |
 |---|---|---|

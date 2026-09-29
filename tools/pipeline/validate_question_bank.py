@@ -28,6 +28,7 @@ Design notes
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
@@ -292,6 +293,48 @@ PRE_2023_SECTIONS = [
     (re.compile(r"\b300\.50\b"), "305.15 (moved in 2023)"),
     (re.compile(r"\bArticle (?:311|399|490|727|720)\b"), "renumbered or deleted in 2023"),
 ]
+
+
+CONTENT_AUDIT_PATH = ROOT / "tools" / "pipeline" / "content_audit_2023.json"
+AUDIT_STATUSES = {"verified", "fixed", "flagged", "non_nec"}
+
+
+def provision_digest(rec: dict) -> str:
+    """Checksum of the provision a learner sees (text plus table); no NEC text is stored."""
+    blob = json.dumps([rec.get("reference_text", ""), rec.get("reference_table", [])],
+                      ensure_ascii=False, separators=(",", ":"))
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()[:16]
+
+
+def content_audit_problems(records: list, audit: dict) -> tuple[list[str], list[str]]:
+    """(errors, warnings) for records whose provision or key changed since the 2023 content audit."""
+    errors: list[str] = []
+    warnings: list[str] = []
+    entries = audit.get("records", {}) if isinstance(audit, dict) else {}
+    nec = [r for r in records if isinstance(r, dict) and r.get("section") is None]
+    covered = [r for r in nec if r.get("id") in entries]
+    for rec in covered:
+        rid = rec["id"]
+        entry = entries[rid]
+        if entry.get("status") not in AUDIT_STATUSES:
+            errors.append(f"{rid}: content audit status {entry.get('status')!r} not in {sorted(AUDIT_STATUSES)}")
+            continue
+        if entry.get("provision") != provision_digest(rec):
+            errors.append(f"{rid}: provision text changed since the NEC 2023 content audit "
+                          f"({entry.get('verified_on')}); re-verify it and update {CONTENT_AUDIT_PATH.name}")
+        if entry.get("correct_index") != rec.get("correct_index"):
+            errors.append(f"{rid}: correct_index {rec.get('correct_index')} differs from the audited key "
+                          f"{entry.get('correct_index')}; record the evidence in {CONTENT_AUDIT_PATH.name}")
+    # A real bank (not a unit-test fixture) must have every NEC record audited.
+    if covered and len(covered) * 2 >= len(nec):
+        for rec in nec:
+            if rec.get("id") not in entries:
+                warnings.append(f"{rec.get('id')}: no NEC 2023 content audit entry in {CONTENT_AUDIT_PATH.name}")
+    return errors, warnings
+
+
+def load_content_audit(path: Path = CONTENT_AUDIT_PATH) -> dict:
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
 
 
 def load_nec_articles(path: Path = NEC_ARTICLES_PATH) -> dict:
@@ -730,6 +773,12 @@ def check_records(data, rep: Report) -> dict:
             stats["empty_gist"] += 1
         if is_blank(rec.get("scene")):
             stats["empty_scene"] += 1
+
+    audit_errors, audit_warnings = content_audit_problems(recs, load_content_audit())
+    for msg in audit_errors:
+        rep.error(msg)
+    for msg in audit_warnings:
+        rep.warn(msg)
 
     if stats["empty_gist"]:
         rep.note(f"gist is empty on {stats['empty_gist']}/{stats['count']} records (allowed, optional)")
