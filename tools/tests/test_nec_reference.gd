@@ -4,6 +4,7 @@ extends SceneTree
 
 var failures: Array[String] = []
 var checks := 0
+var book := Edition.short_label()
 
 func check(cond: bool, label: String) -> void:
 	checks += 1
@@ -16,6 +17,15 @@ func eq(got, want, label: String) -> void:
 
 
 func _init() -> void:
+	print("=== edition (data/edition.json) ===")
+	var year := str(Edition.year())
+	check(Edition.year() >= 2023, "edition year is set (%s)" % year)
+	check(book.contains(year) and Edition.long_label().contains(year), "short and long labels name the year")
+	eq(NecReference.code_book(), book, "breadcrumbs start with the edition label")
+	eq(NecReference.articles_path(), Edition.data_path("articles.json"), "article table is the edition's")
+	check(Edition.data_path("articles.json").contains("/%s/" % year), "edition data folder names the year")
+	check(FileAccess.file_exists(NecReference.articles_path()), "edition article table exists")
+
 	print("=== article_title ===")
 	eq(NecReference.article_title("NEC 210.8(A)"), "Branch Circuits Not Over 1000 Volts AC, 1500 Volts DC, Nominal", "known article")
 	eq(NecReference.article_title("314.23(E)"),
@@ -30,9 +40,9 @@ func _init() -> void:
 	eq(NecReference.primary_article("Table 310.16"), 310, "table")
 	eq(NecReference.primary_article("NEC 250.66 and 250.102(C)"), 250, "first of several")
 	eq(NecReference.primary_article("Neb. Rev. Stat. 81-2108"), -1, "state law")
-	eq(NecReference.primary_article("311.10"), -1, "article not in NEC 2023")
+	eq(NecReference.primary_article("311.10"), -1, "article not in the edition")
 	eq(NecReference.expected_breadcrumb({"article": "314.23(E)", "article_title": "stale"}),
-		"NEC 2023  ►  Chapter 3: Wiring Methods and Materials  ►  Article 314 (Outlet, Device, Pull, and Junction Boxes; Conduit Bodies; Fittings; and Handhole Enclosures)",
+		book + "  ►  Chapter 3: Wiring Methods and Materials  ►  Article 314 (Outlet, Device, Pull, and Junction Boxes; Conduit Bodies; Fittings; and Handhole Enclosures)",
 		"expected breadcrumb ignores a stale title")
 	eq(NecReference.article_title("Table 310.16"), "Conductors for General Wiring", "table number")
 	eq(NecReference.article_title("NEC 999.1"), "NEC Article 999", "unknown article")
@@ -48,10 +58,10 @@ func _init() -> void:
 
 	print("=== lookup_path ===")
 	eq(NecReference.lookup_path({"article": "NEC 210.8(A)", "article_title": "Branch Circuits"}),
-		"NEC 2023  ►  Chapter 2: Wiring and Protection  ►  Article 210 (Branch Circuits)", "section")
+		book + "  ►  Chapter 2: Wiring and Protection  ►  Article 210 (Branch Circuits)", "section")
 	eq(NecReference.lookup_path({"article": "NEC 310.16"}),
-		"NEC 2023  ►  Chapter 3: Wiring Methods and Materials  ►  Article 310", "no title")
-	eq(NecReference.lookup_path({"article": "Chapter 9, Table 8"}), "NEC 2023  ►  Chapter 9: Tables", "chapter only")
+		book + "  ►  Chapter 3: Wiring Methods and Materials  ►  Article 310", "no title")
+	eq(NecReference.lookup_path({"article": "Chapter 9, Table 8"}), book + "  ►  Chapter 9: Tables", "chapter only")
 	eq(NecReference.lookup_path({"article": "NFPA 70E"}),
 		"NFPA 70E  ►  Standard for Electrical Safety in the Workplace", "NFPA 70E")
 	eq(NecReference.lookup_path({"article": "General math"}), "CALCULATION  ►  Basic Ohm's Law / General Math", "math")
@@ -66,9 +76,9 @@ func _init() -> void:
 	check(NecReference.is_reference_seeking("Which ARTICLE ___ covers services?"), "article blank, any case")
 	check(not NecReference.is_reference_seeking("Which table lists ampacities?"), "no blank")
 	check(not NecReference.is_reference_seeking("The minimum is ___ inches."), "blank but not a reference")
-	eq(NecReference.chapter_only_path("NEC 2023  ►  Chapter 2: Wiring and Protection  ►  Article 210 (Branch Circuits)"),
-		"NEC 2023  ►  Chapter 2: Wiring and Protection", "drops the article")
-	eq(NecReference.chapter_only_path("NEC 2023  ►  Chapter 9: Tables"), "NEC 2023  ►  Chapter 9: Tables", "already chapter only")
+	eq(NecReference.chapter_only_path(book + "  ►  Chapter 2: Wiring and Protection  ►  Article 210 (Branch Circuits)"),
+		book + "  ►  Chapter 2: Wiring and Protection", "drops the article")
+	eq(NecReference.chapter_only_path(book + "  ►  Chapter 9: Tables"), book + "  ►  Chapter 9: Tables", "already chapter only")
 
 	print("=== bank sweep ===")
 	var records := BankLoader.load_records()

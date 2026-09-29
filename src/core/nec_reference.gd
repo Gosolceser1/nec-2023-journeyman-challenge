@@ -16,19 +16,25 @@ static func is_state_law(reference: String) -> bool:
 static func code_label(reference: String) -> String:
 	return "Nebraska law" if is_state_law(reference) else "NEC"
 
-## The one table of NEC 2023 chapter and article titles. The bank builder and
-## validator read the same file.
-const ARTICLES_PATH := "res://data/nec_2023_articles.json"
+## The one table of the edition's chapter and article titles
+## (data/<edition dir>/articles.json). The bank builder and validator read the
+## same file.
+static func articles_path() -> String:
+	return Edition.data_path("articles.json")
 
 static var _table: Dictionary = {}
 
 static func _articles() -> Dictionary:
 	if _table.is_empty():
-		var parsed = JSON.parse_string(FileAccess.get_file_as_string(ARTICLES_PATH))
+		var parsed = JSON.parse_string(FileAccess.get_file_as_string(articles_path()))
 		_table = parsed if parsed is Dictionary else {"chapters": {}, "articles": {}}
 	return _table
 
-## Official NEC 2023 title of an article number, "" if the number is not an article.
+## The code book segment that starts every NEC breadcrumb: "NEC 2023".
+static func code_book() -> String:
+	return Edition.short_label()
+
+## Official title of an article number in the edition, "" if the number is not an article.
 static func canonical_article_title(article_number: int) -> String:
 	return str((_articles()["articles"] as Dictionary).get(str(article_number), ""))
 
@@ -81,7 +87,7 @@ static func expected_breadcrumb(record: Dictionary) -> String:
 	if article < 100:
 		return lookup_path(record)
 	var chapter := chapter_of_article(article)
-	return "NEC 2023  ►  Chapter %d: %s  ►  Article %d (%s)" % [chapter, chapter_title(chapter), article, canonical_article_title(article)]
+	return "%s  ►  Chapter %d: %s  ►  Article %d (%s)" % [code_book(), chapter, chapter_title(chapter), article, canonical_article_title(article)]
 
 ## Where to look the answer up in the code book, chapter then article.
 static func lookup_path(record: Dictionary) -> String:
@@ -112,8 +118,8 @@ static func lookup_path(record: Dictionary) -> String:
 			var article_path := "Article " + article_number
 			if title != "":
 				article_path += " (" + title + ")"
-			return "NEC 2023  ►  Chapter %d: %s  ►  %s" % [chapter, chapter_names[chapter], article_path]
-		return "NEC 2023  ►  Chapter %d: %s" % [chapter, chapter_names[chapter]]
+			return "%s  ►  Chapter %d: %s  ►  %s" % [code_book(), chapter, chapter_names[chapter], article_path]
+		return "%s  ►  Chapter %d: %s" % [code_book(), chapter, chapter_names[chapter]]
 	if code.to_lower().contains("nfpa 70e"):
 		return "NFPA 70E  ►  Standard for Electrical Safety in the Workplace"
 	var article_lower := code.to_lower()
@@ -132,7 +138,7 @@ static func is_reference_seeking(prompt: String) -> bool:
 	return lowered.contains("table") or lowered.contains("article") or lowered.contains("section")
 
 static func chapter_only_path(full_path: String) -> String:
-	# "NEC 2023  ►  Chapter 3: ...  ►  Article 300 (...)" -> drops the article segment.
+	# "<code book>  ►  Chapter 3: ...  ►  Article 300 (...)" -> drops the article segment.
 	var parts := full_path.split("►", false)
 	if parts.size() >= 3:
 		return parts[0].strip_edges() + "  ►  " + parts[1].strip_edges()

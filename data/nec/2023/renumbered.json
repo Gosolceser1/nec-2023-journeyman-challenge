@@ -1,0 +1,13 @@
+{
+  "edition": 2023,
+  "about": "Section numbers that exist only in earlier editions, with their home in this edition. The validator rejects them in explanatory fields unless the sentence calls them old; tools/pipeline/edition_migration_report.py reads the next edition's file to list records to re-cite.",
+  "sections": [
+    {"pattern": "\\b310\\.15\\(B\\)\\(16\\)", "home": "Table 310.16 (renumbered in 2020)"},
+    {"pattern": "\\b310\\.15\\(B\\)\\(2\\)\\(a\\)", "home": "Table 310.15(B)(1)(1) (renumbered in 2020)"},
+    {"pattern": "\\b310\\.104\\b", "home": "Table 310.4(1) (renumbered in 2020)"},
+    {"pattern": "\\bTable 220\\.12\\b", "home": "Table 220.42(A) (renumbered in 2023)"},
+    {"pattern": "\\b725\\.(?:4[1-9]|5\\d)\\b", "home": "Article 724 (Class 1 moved in 2023)"},
+    {"pattern": "\\b300\\.50\\b", "home": "305.15 (moved in 2023)"},
+    {"pattern": "\\bArticle (?:311|399|490|727|720)\\b", "home": "renumbered or deleted in 2023"}
+  ]
+}

@@ -6,7 +6,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gists import GISTS, SCENES
-from pipeline_paths import answer_key_ocr_dir, exam_ocr_dir
+from pipeline_paths import answer_key_ocr_dir, exam_ocr_dir, nec_data
 from bank_overrides import apply_overrides
 from exam_parser import read_key, read_questions
 from exam_sources import discover, record_id
@@ -1878,8 +1878,8 @@ def formula_for(exam, number):
 def worked_for(exam, number):
     return WORKED_SOLUTIONS.get((exam, number), "")
 
-# NEC 2023 article titles: one table shared with the app and the validator.
-NEC_ARTICLES = json.loads((ROOT / "data" / "nec_2023_articles.json").read_text(encoding="utf-8"))
+# The edition's article titles: one table shared with the app and the validator.
+NEC_ARTICLES = json.loads(nec_data("articles.json").read_text(encoding="utf-8"))
 ARTICLE_TITLES = {int(number): title for number, title in NEC_ARTICLES["articles"].items()}
 
 def article_title(reference):
@@ -1887,45 +1887,6 @@ def article_title(reference):
     if not match:
         return reference
     return ARTICLE_TITLES.get(int(match.group(1)), "")
-
-CHAPTER_SLUGS = {
-    1: "general", 2: "wiring-and-protection",
-    3: "wiring-methods-and-materials", 4: "equipment-for-general-use",
-    5: "special-occupancies", 6: "special-equipment",
-    7: "special-conditions", 8: "communications-systems",
-    9: "tables",
-}
-
-def article_chapter(article_number):
-    if article_number < 200:
-        return 1
-    if article_number < 300:
-        return 2
-    if article_number < 400:
-        return 3
-    if article_number < 500:
-        return 4
-    if article_number < 600:
-        return 5
-    if article_number < 700:
-        return 6
-    if article_number < 800:
-        return 7
-    return 8
-
-def upcodes_url(reference):
-    clean = reference.replace("NEC ", "").strip()
-    match = re.search(r"(\d{3}(?:\.\d+)?(?:\([A-Z0-9]+\))*)", clean, re.I)
-    if not match:
-        return ""
-    section = match.group(1)
-    article_number = int(re.search(r"\d{3}", section).group(0))
-    chapter = article_chapter(article_number)
-    anchor = re.sub(r"\(([A-Za-z0-9]+)\)", r"_(\1)", section)
-    return (
-        "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/%d/%s#%s"
-        % (chapter, CHAPTER_SLUGS[chapter], anchor)
-    )
 
 bank = []
 missing = []

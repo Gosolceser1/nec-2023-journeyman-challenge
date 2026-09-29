@@ -36,8 +36,13 @@ import unicodedata
 from collections import Counter
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from pipeline_paths import edition, nec_data  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_BANK = ROOT / "data" / "question_bank.json"
+EDITION = edition()["short"]  # "NEC 2023", in messages
+EDITION_YEAR = edition()["year"]
 
 SCHEMA_VERSION = 2
 
@@ -116,7 +121,7 @@ SCAFFOLD_PATTERNS = [
      "tells the learner the question cannot be answered"),
     (r"(?i)\btested here at\b",
      "the Code's own measurement was replaced with the test value"),
-    (r"\(2023 NEC\)",
+    (r"\(\d{4} NEC\)",
      "editorial edition annotation inside quoted Code text"),
     (r"(?i)\b(lorem ipsum|placeholder|\bTODO\b|\bTBD\b)\b",
      "unresolved placeholder"),
@@ -293,30 +298,32 @@ def article_reference_is_recognized(reference: str) -> bool:
 
 # --------------------------------------------------------------------------
 # locations: breadcrumb, reference line and every citation point at the same,
-# existing NEC 2023 place
+# existing place in the edition (data/edition.json)
 # --------------------------------------------------------------------------
-NEC_ARTICLES_PATH = ROOT / "data" / "nec_2023_articles.json"
+NEC_ARTICLES_PATH = nec_data("articles.json")
 PRIMARY_ARTICLE_RE = re.compile(r"^(?:NEC\s+)?(?:Table\s+|Article\s+)?(\d{2,3})(?:\.\d|\b)")
 PRIMARY_SECTION_RE = re.compile(r"^(?:NEC\s+)?(?:Table\s+)?(\d{3}\.\d+)((?:\([A-Za-z0-9]+\))*)")
 CITATION_RE = re.compile(r"(?<![\w.$])([1-8]\d\d)\.(\d+)((?:\([A-Za-z0-9]+\))*)(?!\d)")
 ARTICLE_CITATION_RE = re.compile(r"\bArticles?\s+([1-8]\d\d|90)\b")
 # Explanatory fields: the exam's own wording (prompt, answers) may quote old
-# numbers as distractors; everything the app writes must use 2023 numbering.
+# numbers as distractors; everything the app writes must use the edition's numbering.
 EXPLANATION_FIELDS = ["gist", "info_tip", "lookup_summary", "reference_text", "reference_table",
                       "tip_title", "tip_short", "choice_notes", "formula", "worked"]
-# Section numbers that exist only in earlier editions, with their 2023 home.
-PRE_2023_SECTIONS = [
-    (re.compile(r"\b310\.15\(B\)\(16\)"), "Table 310.16 (renumbered in 2020)"),
-    (re.compile(r"\b310\.15\(B\)\(2\)\(a\)"), "Table 310.15(B)(1)(1) (renumbered in 2020)"),
-    (re.compile(r"\b310\.104\b"), "Table 310.4(1) (renumbered in 2020)"),
-    (re.compile(r"\bTable 220\.12\b"), "Table 220.42(A) (renumbered in 2023)"),
-    (re.compile(r"\b725\.(?:4[1-9]|5\d)\b"), "Article 724 (Class 1 moved in 2023)"),
-    (re.compile(r"\b300\.50\b"), "305.15 (moved in 2023)"),
-    (re.compile(r"\bArticle (?:311|399|490|727|720)\b"), "renumbered or deleted in 2023"),
-]
+RENUMBERED_PATH = nec_data("renumbered.json")
 
 
-CONTENT_AUDIT_PATH = ROOT / "tools" / "pipeline" / "content_audit_2023.json"
+def load_renumbered(path: Path = RENUMBERED_PATH) -> list[tuple[re.Pattern, str]]:
+    """Section numbers that exist only in earlier editions, with their home in this edition."""
+    if not path.exists():
+        return []
+    data = json.loads(path.read_text(encoding="utf-8"))
+    return [(re.compile(e["pattern"]), e["home"]) for e in data["sections"]]
+
+
+RENUMBERED_SECTIONS = load_renumbered()
+
+
+CONTENT_AUDIT_PATH = nec_data("content_audit.json")
 AUDIT_STATUSES = {"verified", "fixed", "flagged", "non_nec"}
 
 
@@ -328,7 +335,7 @@ def provision_digest(rec: dict) -> str:
 
 
 def content_audit_problems(records: list, audit: dict) -> tuple[list[str], list[str]]:
-    """(errors, warnings) for records unaudited, or whose provision or key changed since the 2023 content audit."""
+    """(errors, warnings) for records unaudited, or whose provision or key changed since the edition's content audit."""
     errors: list[str] = []
     warnings: list[str] = []
     entries = audit.get("records", {}) if isinstance(audit, dict) else {}
@@ -341,7 +348,7 @@ def content_audit_problems(records: list, audit: dict) -> tuple[list[str], list[
             errors.append(f"{rid}: content audit status {entry.get('status')!r} not in {sorted(AUDIT_STATUSES)}")
             continue
         if entry.get("provision") != provision_digest(rec):
-            errors.append(f"{rid}: provision text changed since the NEC 2023 content audit "
+            errors.append(f"{rid}: provision text changed since the {EDITION} content audit "
                           f"({entry.get('verified_on')}); re-verify it and update {CONTENT_AUDIT_PATH.name}")
         if entry.get("correct_index") != rec.get("correct_index"):
             errors.append(f"{rid}: correct_index {rec.get('correct_index')} differs from the audited key "
@@ -351,7 +358,7 @@ def content_audit_problems(records: list, audit: dict) -> tuple[list[str], list[
     if covered:
         for rec in nec:
             if rec.get("id") not in entries:
-                errors.append(f"{rec.get('id')}: no NEC 2023 content audit entry in {CONTENT_AUDIT_PATH.name}")
+                errors.append(f"{rec.get('id')}: no {EDITION} content audit entry in {CONTENT_AUDIT_PATH.name}")
     return errors, warnings
 
 
@@ -394,9 +401,9 @@ def location_problems(rec: dict, articles: dict) -> list[str]:
     if article is None:
         return problems
     if article not in articles:
-        return [f"article {reference!r}: {article} is not an NEC 2023 article"]
+        return [f"article {reference!r}: {article} is not an {EDITION} article"]
     if rec.get("article_title") != articles[article]:
-        problems.append(f"article_title {rec.get('article_title')!r} is not the NEC 2023 title of "
+        problems.append(f"article_title {rec.get('article_title')!r} is not the {EDITION} title of "
                         f"Article {article} ({articles[article]!r})")
 
     heading = _flat(rec.get("reference_text")).split("\n", 1)[0]
@@ -444,15 +451,15 @@ def location_problems(rec: dict, articles: dict) -> list[str]:
         text = _flat(rec.get(field))
         for m in CITATION_RE.finditer(text):
             if int(m.group(1)) not in articles:
-                problems.append(f"{field} cites {m.group(0)}: {m.group(1)} is not an NEC 2023 article")
+                problems.append(f"{field} cites {m.group(0)}: {m.group(1)} is not an {EDITION} article")
         for m in ARTICLE_CITATION_RE.finditer(text):
             if int(m.group(1)) not in articles:
-                problems.append(f"{field} cites Article {m.group(1)}, not an NEC 2023 article")
-        for rx, home in PRE_2023_SECTIONS:
+                problems.append(f"{field} cites Article {m.group(1)}, not an {EDITION} article")
+        for rx, home in RENUMBERED_SECTIONS:
             for m in rx.finditer(text):
                 sentence = text[text.rfind(".", 0, m.start()) + 1:text.find(".", m.end()) + 1 or None]
                 if not re.search(r"\b(?:old|numbering|renumbered|earlier edition)\b", sentence, re.I):
-                    problems.append(f"{field} cites {m.group(0)}, pre-2023 numbering: {home}")
+                    problems.append(f"{field} cites {m.group(0)}, pre-{EDITION_YEAR} numbering: {home}")
     return problems
 
 

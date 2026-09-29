@@ -195,6 +195,39 @@ class ValidatorRuleTests(unittest.TestCase):
         self.assertEqual(validator.ragged_table_rows(table), [(1, 1)])
 
 
+class EditionTests(unittest.TestCase):
+    """data/edition.json is the one place the year is written; edition data sits in its folder."""
+
+    def test_edition_names_its_year_and_folder(self):
+        info = pipeline_paths.edition()
+        year = str(info["year"])
+        self.assertIn(year, info["short"])
+        self.assertIn(year, info["long"])
+        self.assertEqual(info["dir"], f"nec/{year}")
+
+    def test_edition_data_files_live_in_the_edition_folder(self):
+        info = pipeline_paths.edition()
+        for name in ("articles.json", "content_audit.json", "renumbered.json"):
+            path = pipeline_paths.nec_data(name)
+            self.assertEqual(path.parent, ROOT / "data" / info["dir"], name)
+            self.assertTrue(path.exists(), name)
+        self.assertEqual(validator.NEC_ARTICLES_PATH, pipeline_paths.nec_data("articles.json"))
+        self.assertEqual(validator.CONTENT_AUDIT_PATH, pipeline_paths.nec_data("content_audit.json"))
+
+    def test_nec_data_follows_another_edition(self):
+        other = {"year": 2026, "short": "NEC 2026", "long": "x", "dir": "nec/2026"}
+        self.assertEqual(pipeline_paths.nec_data("articles.json", other), ROOT / "data" / "nec" / "2026" / "articles.json")
+
+    def test_renumbered_sections_load_with_their_home(self):
+        rules = validator.load_renumbered()
+        self.assertTrue(rules)
+        self.assertTrue(any(rx.search("Table 220.12") and "220.42(A)" in home for rx, home in rules))
+
+    def test_edition_annotation_of_any_year_is_scaffolding(self):
+        for text in ("Text (2023 NEC) more.", "Text (2026 NEC) more."):
+            self.assertTrue(any(rx.search(text) for rx, _ in validator.SCAFFOLD_RE), text)
+
+
 class LocationRuleTests(unittest.TestCase):
     ARTICLES = validator.load_nec_articles()
     BOX_TITLE = "Outlet, Device, Pull, and Junction Boxes; Conduit Bodies; Fittings; and Handhole Enclosures"
