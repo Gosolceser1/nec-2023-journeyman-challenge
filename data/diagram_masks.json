@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "about": "Per question figure (file name in assets/diagrams/): the answer-revealing regions found in a pixel review ('leaks') and the '?' badges that cover them until the question is answered ('masks'). Rects are [x, y, w, h] as fractions of the image. Every figure in diagrams.json must have an entry; every leak must lie inside a mask. See docs/DIAGRAMS_AUDIT.md.",
+  "diagrams": {
+    "final-exam-1-005.png": {
+      "reviewed": "2026-09-28",
+      "note": "Meter readings (0 V across S1, 120 V across L1) and the ON position are givens from the stem. The lamp filament is drawn intact, so nothing shows the open lamp.",
+      "leaks": [],
+      "masks": []
+    },
+    "final-exam-1-013.png": {
+      "reviewed": "2026-09-28",
+      "note": "Meters are labelled only I, II, III METER (no A/V symbols); the series/parallel wiring is the question itself.",
+      "leaks": [],
+      "masks": []
+    },
+    "final-exam-1-047.png": {
+      "reviewed": "2026-09-28",
+      "note": "Symbols carry only the letters (a)-(d); no names.",
+      "leaks": [],
+      "masks": []
+    }
+  }
+}

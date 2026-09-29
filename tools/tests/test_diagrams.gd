@@ -82,6 +82,64 @@ func _data_checks() -> void:
 	for r in recs:
 		if m.has(str(r.get("id", ""))):
 			t.check(str(r.get("diagram", "")) == "", "%s: no stale ASCII diagram next to the PDF figure" % r.get("id", ""))
+	_mask_data_checks(m)
+
+
+static func _inside_unit(r) -> bool:
+	return r is Array and r.size() == 4 and float(r[2]) > 0.0 and float(r[3]) > 0.0 \
+			and float(r[0]) >= 0.0 and float(r[1]) >= 0.0 \
+			and float(r[0]) + float(r[2]) <= 1.0001 and float(r[1]) + float(r[3]) <= 1.0001
+
+
+static func _contains(outer: Array, inner: Array) -> bool:
+	return float(inner[0]) >= float(outer[0]) - 0.0001 and float(inner[1]) >= float(outer[1]) - 0.0001 \
+			and float(inner[0]) + float(inner[2]) <= float(outer[0]) + float(outer[2]) + 0.0001 \
+			and float(inner[1]) + float(inner[3]) <= float(outer[1]) + float(outer[3]) + 0.0001
+
+
+## The leak guard: every region flagged as giving the answer away must sit
+## inside a mask, or the figure would show it before answering.
+static func leak_problems(file: String, entry: Dictionary) -> PackedStringArray:
+	var out := PackedStringArray()
+	var masks: Array = entry.get("masks", [])
+	for mk in masks:
+		if not (mk is Dictionary and _inside_unit(mk.get("rect"))):
+			out.append("%s: mask rect %s is not a box inside the image" % [file, mk])
+	for leak in entry.get("leaks", []):
+		var region = leak.get("region") if leak is Dictionary else null
+		if not _inside_unit(region):
+			out.append("%s: leak %s has no valid region" % [file, leak])
+			continue
+		var covered := false
+		for mk in masks:
+			if mk is Dictionary and _inside_unit(mk.get("rect")) and _contains(mk["rect"], region):
+				covered = true
+		if not covered:
+			out.append("%s: leak '%s' at %s has no mask" % [file, leak.get("what", ""), region])
+	return out
+
+
+func _mask_data_checks(m: Dictionary) -> void:
+	var parsed = JSON.parse_string(FileAccess.get_file_as_string(DiagramView.MASKS_PATH))
+	t.check(parsed is Dictionary and parsed.get("diagrams") is Dictionary, "diagram_masks.json parses")
+	var entries: Dictionary = parsed.get("diagrams", {}) if parsed is Dictionary else {}
+	var files := {}
+	for qid in m:
+		files[str(m[qid].get("file", "")).get_file()] = qid
+	for file in entries:
+		t.check(files.has(file), "%s: mask entry maps to a figure in diagrams.json" % file)
+		t.check(ResourceLoader.exists("res://assets/diagrams/" + file), "%s: mask entry's figure exists in assets/diagrams" % file)
+		var e: Dictionary = entries[file]
+		t.check(str(e.get("reviewed", "")) != "", "%s: pixel review is dated" % file)
+		for p in leak_problems(file, e):
+			t.check(false, p)
+	for file in files:
+		t.check(entries.has(file), "%s: figure has a leak review in diagram_masks.json (every figure must)" % file)
+	# The guard itself must catch an unmasked leak and accept a covered one.
+	var leak := {"region": [0.2, 0.2, 0.1, 0.1], "what": "dimension"}
+	t.check(not leak_problems("x.png", {"leaks": [leak], "masks": []}).is_empty(), "guard fails a leak with no mask")
+	t.check(not leak_problems("x.png", {"leaks": [leak], "masks": [{"rect": [0.25, 0.2, 0.1, 0.1]}]}).is_empty(), "guard fails a mask that only partly covers the leak")
+	t.check(leak_problems("x.png", {"leaks": [leak], "masks": [{"rect": [0.15, 0.15, 0.2, 0.2]}]}).is_empty(), "guard accepts a covered leak")
 
 
 func _sweep() -> void:
@@ -135,17 +193,85 @@ func _sweep() -> void:
 		t.check(not view.is_zoomed(), "%s: Android Back closes the zoom" % qid)
 		t.check(not main.menu_overlay.visible, "%s: Android Back on a zoomed figure stays on the question" % qid)
 		main._last_go_back_msec = -100000
+		var file_masks := DiagramView.masks_for_file(str(m.get(qid, {}).get("file", "")))
+		t.eq(view.masks.size(), file_masks.size(), "%s: the figure carries its masks from diagram_masks.json" % qid)
+		if not file_masks.is_empty():
+			t.check(view.is_masked(), "%s: answer regions masked before answering" % qid)
+			view.open_zoom()
+			await _frames(2)
+			var sheet = view._zoom.get_child(0)
+			t.eq(view.mask_rects(sheet._card_rect().grow(-16)).size(), file_masks.size(), "%s: zoom view is masked too" % qid)
+			view.close_zoom()
+			await _frames(2)
 		var ci := int(rec.get("correct_index", 0))
 		main._answer_selected(ci)
 		main._auto_token += 1
 		main._stop_reading()
-		await _frames(2)
+		await _wait(DiagramView.MASK_FADE + 0.15)
 		t.check(panel.is_visible_in_tree(), "%s: figure stays up after answering" % qid)
 		t.eq(view.is_revealed(), m.get(qid, {}).has("highlight"), "%s: answer part highlighted only after answering" % qid)
+		t.check(not view.is_masked(), "%s: no mask left after answering" % qid)
 		main._show_question()
 		t.check(not view.is_revealed(), "%s: highlight cleared when the question is shown again" % qid)
+		t.eq(view.is_masked(), not file_masks.is_empty(), "%s: masks come back when the question is shown again" % qid)
 	t.eq(shown, _map().size(), "every mapped figure was shown by the 283-record sweep")
 	print("  swept %d records, %d with figures" % [main.records.size(), shown])
+	await _masked_figure_checks()
+
+
+func _wait(sec: float) -> void:
+	await create_timer(sec).timeout
+	await process_frame
+
+
+## The shipped figures need no masks today (docs/DIAGRAMS_AUDIT.md), so the
+## mask path is exercised with one injected on a real figure record.
+func _masked_figure_checks() -> void:
+	var m := _map()
+	var qid: String = m.keys()[0]
+	var i := -1
+	for k in main.records.size():
+		if str(main.records[k].get("id", "")) == qid:
+			i = k
+	var view: DiagramView = main.question_diagram_view
+	for reduce in [false, true]:
+		main.audio.reduce_motion = reduce
+		main.order = [i, (i + 1) % main.records.size()] as Array[int]
+		main.current_index = 0
+		main._show_question()
+		main._auto_token += 1
+		await _frames(3)
+		var h0 := view.custom_minimum_size
+		view.masks = [{"rect": [0.1, 0.2, 0.3, 0.1], "ring": true}, {"rect": [0.6, 0.6, 0.2, 0.2], "label": "? ft"}]
+		view.queue_redraw()
+		await _frames(2)
+		var tag := "injected mask (%s)" % ("Reduce motion" if reduce else "animated")
+		t.check(view.is_masked(), tag + ": masked before answering")
+		t.eq(view.custom_minimum_size, h0, tag + ": masks never change the figure's size")
+		var a := Rect2(10, 20, 400, 300)
+		var r1 := view.mask_rects(a)
+		var r2 := view.mask_rects(Rect2(20, 40, 800, 600))
+		var img := view.image_rect(a)
+		t.check(r1.size() == 2 and img.encloses(r1[0]) and img.encloses(r1[1]), tag + ": badges lie on the picture")
+		t.check(r1.size() == 2 and r2[0].size.is_equal_approx(r1[0].size * 2.0), tag + ": badges scale with the figure")
+		view.open_zoom()
+		await _frames(2)
+		var sheet = view._zoom.get_child(0)
+		var zr: Array[Rect2] = view.mask_rects(sheet._card_rect().grow(-16))
+		t.check(zr.size() == 2 and view.image_rect(sheet._card_rect().grow(-16)).encloses(zr[0]), tag + ": zoom view is masked, badges on the enlarged picture")
+		view.close_zoom()
+		await _frames(2)
+		main._answer_selected(int(main.records[i].get("correct_index", 0)))
+		main._auto_token += 1
+		main._stop_reading()
+		if reduce:
+			t.check(not view.is_masked(), tag + ": badges gone at once with Reduce motion")
+		else:
+			t.check(view.is_masked(), tag + ": badges fade rather than vanish")
+			await _wait(DiagramView.MASK_FADE + 0.15)
+			t.check(not view.is_masked(), tag + ": badges gone after the fade")
+		t.eq(view.mask_rects(a).size(), 0, tag + ": nothing masked after answering")
+	main.audio.reduce_motion = false
 
 
 func _run_mobile_child() -> bool:

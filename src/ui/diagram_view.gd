@@ -8,10 +8,16 @@ extends Control
 ## monospace font. The drawing scales to the width it is given (no minimum
 ## width, no wrapping) and a tap opens it fullscreen.
 ##
-## Pre-answer nothing is marked. reveal(correct_index) outlines the part of the
-## figure the answer key points at (the mapping's "highlight" box).
+## Pre-answer nothing is marked, and any region of the picture that would give
+## the answer away (data/diagram_masks.json) is covered by an opaque "?" badge.
+## reveal(correct_index) fades the badges out (instantly with Reduce motion),
+## rings the regions flagged "ring" and outlines the part of the figure the
+## answer key points at (the mapping's "highlight" box). The badges are drawn
+## in image space, so they scale with the figure inline and in the zoom.
 
 const MAP_PATH := "res://assets/diagrams/diagrams.json"
+const MASKS_PATH := "res://data/diagram_masks.json"
+const MASK_FADE := 0.22
 const PAD := 4.0
 const TAP_SLOP := 14.0
 const HINT_GUTTER := 36.0
@@ -20,6 +26,8 @@ const HIGHLIGHT := AppTheme.EMERALD_500
 
 static var _map: Dictionary = {}
 static var _loaded := false
+static var _mask_map: Dictionary = {}
+static var _masks_loaded := false
 static var _textures: Dictionary = {}
 static var _mono_font: SystemFont
 
@@ -27,6 +35,12 @@ var figure: Dictionary = {}
 var texture: Texture2D
 var ascii_lines: PackedStringArray = PackedStringArray()
 var revealed := false
+## Mask entries for the current figure: {"rect": [x, y, w, h], "label", "ring"}.
+var masks: Array = []
+var answered := false
+## 1 = badges fully drawn (pre-answer), 0 = gone.
+var mask_alpha := 1.0
+var _mask_tween: Tween
 ## Tallest the figure may grow while following the width's aspect ratio.
 var max_height := 220.0:
 	set(v):
@@ -61,6 +75,22 @@ static func _load_map() -> void:
 static func figure_for(record_id: String) -> Dictionary:
 	_load_map()
 	return _map.get(record_id, {})
+
+
+static func mask_map() -> Dictionary:
+	if not _masks_loaded:
+		_masks_loaded = true
+		var f := FileAccess.open(MASKS_PATH, FileAccess.READ)
+		if f != null:
+			var parsed = JSON.parse_string(f.get_as_text())
+			if parsed is Dictionary and parsed.get("diagrams") is Dictionary:
+				_mask_map = parsed["diagrams"]
+	return _mask_map
+
+
+static func masks_for_file(file: String) -> Array:
+	var entry = mask_map().get(file.get_file(), {})
+	return (entry.get("masks", []) as Array).duplicate(true) if entry is Dictionary else []
 
 
 static func has_figure(record: Dictionary) -> bool:
@@ -119,7 +149,10 @@ func show_record(record: Dictionary) -> bool:
 			text = text.substr(1)
 		if text != "":
 			ascii_lines = text.split("\n")
+	masks = masks_for_file(str(figure.get("file", ""))) if texture != null else []
 	revealed = false
+	answered = false
+	_set_mask_alpha(1.0)
 	_update_height()
 	queue_redraw()
 	return has_content()
@@ -129,15 +162,63 @@ func has_content() -> bool:
 	return texture != null or not ascii_lines.is_empty()
 
 
-func reveal(_correct_index: int) -> void:
+func reveal(_correct_index: int, instant := false) -> void:
+	answered = true
 	revealed = figure.has("highlight")
+	if masks.is_empty() or instant or not is_inside_tree():
+		_set_mask_alpha(0.0)
+	else:
+		_mask_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		_mask_tween.tween_method(_set_mask_alpha, 1.0, 0.0, MASK_FADE)
+	_redraw_all()
+
+
+func is_revealed() -> bool:
+	return revealed
+
+
+## True while any "?" badge is still (even partly) drawn.
+func is_masked() -> bool:
+	return texture != null and not masks.is_empty() and mask_alpha > 0.0
+
+
+func _set_mask_alpha(a: float) -> void:
+	if a >= 1.0 and _mask_tween != null and _mask_tween.is_valid():
+		_mask_tween.kill()
+	mask_alpha = a
+	_redraw_all()
+
+
+func _redraw_all() -> void:
 	queue_redraw()
 	if is_instance_valid(_zoom):
 		_zoom.get_child(0).queue_redraw()
 
 
-func is_revealed() -> bool:
-	return revealed
+## Where the picture lands inside `area` (aspect kept, centred).
+func image_rect(area: Rect2) -> Rect2:
+	var c := _canvas()
+	if texture == null or c.x <= 0.0:
+		return Rect2()
+	var s := minf(area.size.x / c.x, area.size.y / c.y)
+	return Rect2(area.position + (area.size - c * s) * 0.5, c * s)
+
+
+## The mask badges as they would be drawn in `area` right now (empty once gone).
+func mask_rects(area: Rect2) -> Array[Rect2]:
+	var out: Array[Rect2] = []
+	if not is_masked():
+		return out
+	var rect := image_rect(area)
+	for m in masks:
+		out.append(_mask_box(rect, m))
+	return out
+
+
+static func _mask_box(rect: Rect2, m: Dictionary) -> Rect2:
+	var r: Array = m.get("rect", [0, 0, 0, 0])
+	return Rect2(rect.position + Vector2(float(r[0]), float(r[1])) * rect.size,
+			Vector2(float(r[2]), float(r[3])) * rect.size)
 
 
 func is_zoomed() -> bool:
@@ -187,9 +268,9 @@ func draw_figure(ci: CanvasItem, area: Rect2, line_scale: float) -> void:
 	if c.x <= 0.0 or area.size.x <= 1.0 or area.size.y <= 1.0:
 		return
 	if texture != null:
-		var s := minf(area.size.x / c.x, area.size.y / c.y)
-		var rect := Rect2(area.position + (area.size - c * s) * 0.5, c * s)
+		var rect := image_rect(area)
 		ci.draw_texture_rect(texture, rect, false)
+		_draw_masks(ci, rect, line_scale)
 		if revealed:
 			var h: Array = figure["highlight"]
 			var box := Rect2(rect.position + Vector2(float(h[0]), float(h[1])) * rect.size,
@@ -209,6 +290,41 @@ func draw_figure(ci: CanvasItem, area: Rect2, line_scale: float) -> void:
 	var origin := area.position + ((area.size - block) * 0.5).max(Vector2.ZERO)
 	for i in ascii_lines.size():
 		ci.draw_string(font, origin + Vector2(0, i * lh + font.get_ascent(fs)), ascii_lines[i], HORIZONTAL_ALIGNMENT_LEFT, -1, fs, INK)
+
+
+## Opaque "?" badges over the masked regions; after answering they shrink and
+## fade, and regions flagged "ring" get an answer outline.
+func _draw_masks(ci: CanvasItem, rect: Rect2, line_scale: float) -> void:
+	if masks.is_empty():
+		return
+	var font := ThemeDB.fallback_font
+	for m in masks:
+		var box := _mask_box(rect, m)
+		if answered and bool(m.get("ring", false)) and mask_alpha < 1.0:
+			var ring := StyleBoxFlat.new()
+			ring.draw_center = false
+			ring.border_color = Color(HIGHLIGHT, 1.0 - mask_alpha)
+			ring.set_border_width_all(int(round(2.5 * line_scale)))
+			ring.set_corner_radius_all(int(round(6 * line_scale)))
+			ci.draw_style_box(ring, box.grow(3.0 * line_scale))
+		if mask_alpha <= 0.0:
+			continue
+		var shrink := (1.0 - mask_alpha) * minf(box.size.x, box.size.y) * 0.25
+		var b := box.grow(1.0 - shrink)
+		var sb := StyleBoxFlat.new()
+		sb.bg_color = Color(AppTheme.SLATE_900, mask_alpha)
+		sb.border_color = Color(AppTheme.SKY_400, mask_alpha)
+		sb.set_border_width_all(maxi(1, int(round(2.0 * line_scale))))
+		sb.set_corner_radius_all(int(minf(b.size.y * 0.3, 10.0 * line_scale)))
+		ci.draw_style_box(sb, b)
+		var label := str(m.get("label", "?"))
+		var fs := int(clampf(b.size.y * 0.62, 8.0, 44.0 * line_scale))
+		var tw := font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
+		while tw > b.size.x * 0.9 and fs > 8:
+			fs -= 1
+			tw = font.get_string_size(label, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
+		var base := b.position + Vector2((b.size.x - tw) * 0.5, (b.size.y + font.get_ascent(fs) - font.get_descent(fs)) * 0.5)
+		ci.draw_string(font, base, label, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, Color(AppTheme.AMBER_400, mask_alpha))
 
 
 ## Small magnifier in the corner: the figure opens bigger.

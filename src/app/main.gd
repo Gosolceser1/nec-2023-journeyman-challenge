@@ -988,7 +988,7 @@ func _answer_selected(selected: int) -> void:
 
 	question_table_panel.visible = false
 	# The figure stays up: the explanation talks about it by its labels.
-	question_diagram_view.reveal(correct)
+	question_diagram_view.reveal(correct, audio.reduce_motion)
 	question_formula_label.visible = false
 	# The box only follows the label on a resize, so hide it explicitly or an
 	# empty frame is left behind on formula questions.

@@ -48,6 +48,8 @@ src/
 data/     question_bank.json (never edited by hand)  voices.json
           nec_2023_articles.json  canonical NEC 2023 chapter and article titles (app, builder, validator)
           exam_blueprint.json (content outline, chapter map, area overrides)
+          diagram_masks.json  per figure: answer-revealing regions and the "?" masks DiagramView
+                              draws over them until the answer is in (docs/DIAGRAMS_AUDIT.md)
 assets/   diagrams/  sfx/  speech/<qid>__<voice>/ (generated, gitignored)
           branding/  icon.png/.ico, Android icon layers, splash.png; source/ (SVGs, .gdignore)
 docs/     this file, DATA_PIPELINE, VOICE_READING_RULES, SFX_PLAN, KNOWN_ISSUES, RELEASE,
@@ -105,6 +107,12 @@ screen until nothing scrolls. `_answer_selected` hands the pick to
 `session.submit()`, which grades it and returns the verdict. `main` then
 shows the feedback sheet, `QuizFx.play_answer` plays the burst, and
 `fit.compact_answered` hides what no longer matters.
+
+A question figure (`DiagramView`) covers any answer-revealing region listed in
+`data/diagram_masks.json` with an opaque "?" badge, drawn in image space so it
+scales with the figure inline and in the zoom. `reveal()` fades the badges
+after the answer (instantly with Reduce motion); `test_diagrams.gd` fails
+when a flagged leak has no mask.
 
 Reference tables never scroll. The table's ScrollContainer has vertical
 scrolling off (it takes the grid's height) and no horizontal bar;
