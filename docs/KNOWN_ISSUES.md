@@ -5,7 +5,7 @@ that produced false results before. Fixed defects are in git history
 (`77e2cf7`, `16589d5`, `3c5971f`, `3bfc526`, `c8ff389`, for 1.0.1 the
 Android touch scrolling `d6667a6` and voice picker `e5d4a7c`, for 1.0.2
 the Edge voices on Android, for 1.0.3 the Edge voices on Windows without
-Python and the NEC location audit, and since 1.0.3 the NEC 2023 content and
+Python and the NEC location audit, and for 1.0.4 the NEC 2023 content and
 tables/formulas audits, the diagram "?" masks and the `measure_fit.gd`
 crashes at mobile 1024x768 and desktop 540x960 (a `DiagramView` resize loop
 with the page scrollbar, docs/DIAGRAMS_AUDIT.md section 5), each pinned by a

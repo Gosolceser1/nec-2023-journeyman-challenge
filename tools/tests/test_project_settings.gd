@@ -55,7 +55,7 @@ func _init() -> void:
 		"boot splash must show the app's image or none, never Godot's default logo")
 	check(not FileAccess.file_exists("res://icon.svg"), "Godot's default icon.svg must not be in the project")
 	var version := str(ProjectSettings.get_setting("application/config/version"))
-	check(version == "1.0.3", "config/version is 1.0.3")
+	check(version == "1.0.4", "config/version is 1.0.4")
 
 	# Export presets: the Edge voices need the network on Android, and every
 	# build carries the same version.

@@ -346,7 +346,7 @@ screen still overflows with the strip, the explanation sheet (it scrolls
 inside) gives way down to 60 px. The dark figures sit on a dark card
 (`DiagramView.card_style`), inline and in the zoom.
 
-**Size.** 48 drawings, 1,034 KiB of PNG in the repo (about 22 KiB each at 1200 px wide; 96-colour palette, no dithering). The release size delta is in CHANGELOG.md.
+**Size.** 48 drawings, 1,034 KiB of PNG in the repo (about 22 KiB each at 1200 px wide; 96-colour palette, no dithering). In the 1.0.4 builds they take 776 KiB as imported textures plus 80 KiB of figure and mask data, about 0.8 MiB per build; the release as a whole shrank (APK -3.7 MiB, Windows zip -3.8 MiB against 1.0.3) because the voice bundle was re-recorded.
 
 **A resize loop fixed.** `DiagramView` sizes its height from its width. On
 the phone layout at 1024x768 (a tablet in landscape) answering
@@ -502,3 +502,11 @@ different voltages); `final-exam-#1-045` and `open-book-exam-#4-006` say
 `open-book-exam-#1-016`: under 2023 the 25 ft of 210.63 also applies to
 indoor service equipment, so choice A is partly true (key D, "same room or
 area", is the specific rule).
+
+## 7. Release and follow-ups
+
+The 88 figures, the masks and the phone strip ship in 1.0.4. Planned for
+1.0.5: redraw the three PDF figures (`final-exam-#1-005`, `#1-013`,
+`#1-047`) in the same original style with the same meaning and answers, a
+second full accuracy review of every figure against NEC 2023 with masks
+rechecked, and the stem wording flagged in section 6.

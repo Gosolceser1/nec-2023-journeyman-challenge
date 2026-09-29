@@ -1,10 +1,12 @@
 # Changelog
 
-## [Unreleased]
+## [1.0.4] - 2026-09-28
 
 Every NEC question was checked against the 2023 code for content, tables and
-calculations, and figures got a way to hide answer giveaways. No answer key
-changed.
+calculations, and 88 questions got an original study figure that hides its
+answer under a "?" until you answer. No answer key changed. 1.0.3 was never
+published, so this release also brings its changes (the NEC location audit
+and natural voices on Windows without Python).
 
 ### Fixed
 
@@ -60,25 +62,33 @@ changed.
 
 ### Changed
 
-- **New study figures.** 23 questions (working space, grounding electrodes
-  and bonding, burial cover, pool and spa clearances, framing protection,
-  deck receptacles, support spacing, overhead clearances, GFCI locations)
-  now have an original figure drawn from the NEC 2023 text, in one dark
-  style. Before you answer, anything that would give the answer away is
-  under a "?" (inline and in the zoom); after you answer it is revealed.
-  Figures that only teach appear after answering. Each was checked against
-  the 2023 text (docs/DIAGRAMS_AUDIT.md).
+- **New study figures.** 88 questions now have an original figure drawn
+  from the NEC 2023 text, 48 drawings in one dark style: working space,
+  grounding electrodes and bonding, burial cover, pool and spa clearances,
+  framing protection, box fill and depth, support spacing, overhead and
+  antenna clearances, GFCI and wet locations, conduit fill, motor control,
+  switch and meter hookups, voltage drop and more. Before you answer,
+  anything that would give the answer away is under a "?" (inline and in the
+  zoom); after you answer it is revealed with a ring. 75 figures show before
+  you answer, 13 that only teach appear after. On small phone screens a
+  figure that doesn't fit becomes a one-line "Figure: tap to enlarge" strip
+  with a thumbnail, so the question never scrolls. Each figure was reviewed
+  against the 2023 text (7 corrections before release; docs/DIAGRAMS_AUDIT.md).
+  The figures add about 0.8 MiB to each build; the re-recorded voice bundle
+  saves more, so the APK (178.5 MB) is 3.7 MiB and the Windows zip (186.4 MB)
+  3.8 MiB smaller than 1.0.3.
 - **"?" masks on figures.** A figure can now cover any spot that gives the
   answer away with a "?" badge until you answer, inline and in the zoom; the
   badge fades after answering (instantly with Reduce motion). The three
-  shipped figures were reviewed and none needs one yet
-  (docs/DIAGRAMS_AUDIT.md).
+  PDF figures were reviewed and none needs one (docs/DIAGRAMS_AUDIT.md).
 - **Guards** so the audits stay true: the bank validator fails when an
   audited provision or key changes without re-checking
   (`tools/pipeline/content_audit_2023.json`), `check_requirements.py` fails
   when a table or calculation question loses its table, formula or result
-  (`data/question_requirements.json`), and `test_diagrams` fails when a
-  flagged figure region has no mask (`data/diagram_masks.json`).
+  (`data/question_requirements.json`), `test_diagrams` fails when a
+  flagged figure region has no mask (`data/diagram_masks.json`), and
+  `tools/diagrams/build.py --check` fails when a figure is stale or shows a
+  masked answer unmasked.
 
 ## 1.0.3 (2026-09-28)
 

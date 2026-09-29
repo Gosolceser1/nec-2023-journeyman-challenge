@@ -4,7 +4,7 @@
 <h1 align="center">NEC 2023 Journeyman Challenge</h1>
 <p align="center">A study app for the <strong>NEC 2023</strong> <strong>journeyman electrician</strong> exam: timed drills, a full exam simulator built on the <strong>Nebraska</strong> exam blueprint, and a lesson after every answer.</p>
 <p align="center">
-  <img src="https://img.shields.io/badge/version-1.0.3-38bdf8" alt="Version 1.0.3">
+  <img src="https://img.shields.io/badge/version-1.0.4-38bdf8" alt="Version 1.0.4">
   <img src="https://img.shields.io/badge/platform-Windows%20x64%20%7C%20Android-0b1221" alt="Platform: Windows x64 | Android">
   <img src="https://img.shields.io/badge/engine-Godot%204.7-478cbf?logo=godotengine&logoColor=white" alt="Engine: Godot 4.7">
   <img src="https://img.shields.io/badge/NEC-2023-f59e0b" alt="NEC 2023">
@@ -19,8 +19,8 @@ Get the latest build from the
 
 | File | Best for | Requirement |
 |---|---|---|
-| `NEC2023JourneymanChallenge_v1.0.3_Windows.zip` | Windows PCs | Windows 10/11, 64-bit; no install |
-| `NEC2023JourneymanChallenge_v1.0.3_Android.apk` | Android phones and tablets | Allow installs from unknown sources |
+| [`NEC2023JourneymanChallenge_v1.0.4_Windows.zip`](https://github.com/Gosolceser1/nec-2023-journeyman-challenge/releases/tag/v1.0.4) | Windows PCs | Windows 10/11, 64-bit; no install |
+| [`NEC2023JourneymanChallenge_v1.0.4_Android.apk`](https://github.com/Gosolceser1/nec-2023-journeyman-challenge/releases/tag/v1.0.4) | Android phones and tablets | Allow installs from unknown sources |
 
 **Windows:** unzip and run `NEC 2023 Journeyman Challenge.exe`. The app is not
 code-signed, so the first time you open it Windows SmartScreen may show
@@ -158,7 +158,7 @@ changes without being re-checked.
 | [Content](docs/CONTENT_AUDIT_2023.md) | All 279 NEC questions: keyed answer, provision wording, choice notes, tips, cited sections | No answer key changed; 60 explanations corrected; 1 heading to confirm in print |
 | [Tables and formulas](docs/TABLES_FORMULAS_AUDIT.md) | Every question that needs a table, calculation or formula | 33 calculations recomputed from NEC 2023 values, 0 mismatches; missing lookup tables and formula hints added |
 | [Locations](docs/LOCATION_AUDIT.md) | Chapter, article, section and lookup hint of every question | 0 wrong breadcrumbs; 72 article titles corrected to the 2023 wording |
-| [Diagrams](docs/DIAGRAMS_AUDIT.md) | The shipped figures, pixel by pixel, for answer giveaways | All three correct, none needs a mask; the "?" mask system and its leak guard are in place |
+| [Diagrams](docs/DIAGRAMS_AUDIT.md) | The shipped figures, pixel by pixel, for answer giveaways, and every question a figure would help | The three PDF figures need no mask; 88 questions got original NEC 2023 figures (48 drawings) with "?" masks until you answer, each checked against the 2023 text |
 
 Open items (such as the 408.5 heading) are in
 [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md). The audits check the questions
