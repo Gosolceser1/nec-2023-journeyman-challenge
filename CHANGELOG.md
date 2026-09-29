@@ -1,6 +1,24 @@
 # Changelog
 
-## Unreleased
+## 1.0.3 (2026-09-28)
+
+Windows: the natural online voices work on any PC, no Python needed. Every
+NEC location and reference in the question bank was audited against NFPA
+70-2023 (docs/LOCATION_AUDIT.md).
+
+### Fixed
+
+- **NEC locations and titles.** Every question's chapter, article, section
+  line, lookup hint and cited sections were checked against the 2023 code.
+  72 questions showed a shortened or out-of-date article title (for example
+  "Branch Circuits" instead of "Branch Circuits Not Over 1000 Volts AC, 1500
+  Volts DC, Nominal", or the old "Rigid Metal Conduit: Type RMC"); all titles
+  now come from one table of the 2023 article titles. Two citations were
+  corrected (344.10(A)(3) for ferrous raceways, and 800.44 as a whole for the
+  "any of the above" question) and two "Start with …" hints now point at the
+  right section (338.100 and 300.4(A)(2)). No answers changed. A new test
+  walks every question in both layouts and checks the breadcrumb is always
+  that question's own chapter and article.
 
 ### Changed
 

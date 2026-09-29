@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.7")
 run/print_header=false
 config/name="NEC 2023 Journeyman Challenge"
 config/description="NEC 2023 journeyman electrician exam trainer."
-config/version="1.0.2"
+config/version="1.0.3"
 config/icon="res://assets/branding/icon.png"
 config/windows_native_icon="res://assets/branding/icon.ico"
 ; Saves go to %APPDATA%\NEC2023JourneymanChallenge, not %APPDATA%\Godot\app_userdata\...

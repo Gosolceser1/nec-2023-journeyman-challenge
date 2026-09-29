@@ -3,8 +3,9 @@
 Open items that could not be closed headless, plus the verification traps
 that produced false results before. Fixed defects are in git history
 (`77e2cf7`, `16589d5`, `3c5971f`, `3bfc526`, `c8ff389`, for 1.0.1 the
-Android touch scrolling `d6667a6` and voice picker `e5d4a7c`, and for 1.0.2
-the Edge voices on Android), each pinned by a test.
+Android touch scrolling `d6667a6` and voice picker `e5d4a7c`, for 1.0.2
+the Edge voices on Android, and for 1.0.3 the Edge voices on Windows without
+Python and the NEC location audit), each pinned by a test.
 
 ## Open: needs a real device
 
@@ -81,7 +82,8 @@ the Edge voices on Android), each pinned by a test.
   five finish with 0% scroll. A phone never gets a 1024x768 window with the
   mobile UI, but a tablet in landscape could. Still crashes in 1.0.1
   (signal 11); the other eleven size/layout runs finish with 0% scroll.
-  Same crash in 1.0.2; desktop 1280x720 and mobile 540x960 finish with 0%.
+  Same crash in 1.0.2 and 1.0.3; desktop 1280x720 and mobile 540x960 finish
+  with 0%.
 - **`NecReference.lookup_path` reads any 3-digit number as an NEC article.**
   An `article` of "NFPA 70E 130.5" would show "Chapter 1 ► Article 130"
   instead of the NFPA 70E line. The bank only uses the bare "NFPA 70E", which

@@ -2655,7 +2655,7 @@ Main <Control> res://src/app/main.gd
                   .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                   .theme_override_font_sizes/font_size = 11
                   .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
-                  .text = "Aligned with NFPA 70 (NEC 2023) & Nebraska State Electrical Division / PSI Standards\nPacing standard: 3:00 per scored item • 80 questions timed • v1.0.2"
+                  .text = "Aligned with NFPA 70 (NEC 2023) & Nebraska State Electrical Division / PSI Standards\nPacing standard: 3:00 per scored item • 80 questions timed • v1.0.3"
                   .horizontal_alignment = 1
                   .autowrap_mode = 3
                   on visibility_changed -> lambda

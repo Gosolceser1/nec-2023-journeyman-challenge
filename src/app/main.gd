@@ -239,9 +239,9 @@ var chapter_bars: ChapterBars
 var sfx: Sfx
 var sfx_level_buttons: Array[Button] = []  # Off, then one per AudioSettings.SFX_LEVEL_TITLES
 
-## "v1.0.2", from application/config/version (the export presets carry the same number).
+## "v1.0.3", from application/config/version (the export presets carry the same number).
 static func version_label() -> String:
-	return "v" + str(ProjectSettings.get_setting("application/config/version", "1.0.2"))
+	return "v" + str(ProjectSettings.get_setting("application/config/version", "1.0.3"))
 
 func _init() -> void:
 	speech.host = self
