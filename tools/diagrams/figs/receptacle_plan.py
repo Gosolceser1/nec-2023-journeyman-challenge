@@ -88,8 +88,8 @@ def dwelling_plan(f):
 
 
 @figure("equipment_receptacle_210-63", h=450, nec="210.63, 210.63(A), 210.63(B)(1), 210.63(B)(2)",
-        records=["final-exam-#3-049", "open-book-exam-#1-005",
-                 "final-exam-#1-003", "open-book-exam-#1-016"])
+        records={"final-exam-#3-049": {}, "open-book-exam-#1-005": {}, "final-exam-#1-003": {},
+                 "open-book-exam-#1-016": {}, "open-book-exam-#1-018": {"when": "after"}})
 def equipment_receptacle(f):
     dist_rec = ["final-exam-#3-049", "open-book-exam-#1-005"]
     room_rec = ["final-exam-#1-003", "open-book-exam-#1-016"]

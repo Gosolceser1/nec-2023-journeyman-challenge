@@ -5,6 +5,7 @@ FAN = ["final-exam-#1-043", "open-book-exam-#4-011"]
 UNDERGROUND = ["final-exam-#1-060"]
 SIX_FT = ["final-exam-#3-059", "final-exam-#3-007"]
 FOUNTAIN = ["final-exam-#1-024"]
+MOTOR_GFCI = ["open-book-exam-#1-024"]
 
 
 def _fan(f, x, y, half=70, dashed=False):
@@ -56,8 +57,8 @@ def spa_fan(f):
     f.tag(24, f.h - 18, "NEC 680.43(B)(1)")
 
 
-@figure("pool_fountain_distances_680", h=480, nec="680.11(A), 680.22(A)(2), 680.35(D), 680.58",
-        records=UNDERGROUND + SIX_FT + FOUNTAIN)
+@figure("pool_fountain_distances_680", h=560, nec="680.5(B), 680.11(A), 680.21(C), 680.22(A)(2), 680.35(D), 680.58",
+        records=UNDERGROUND + SIX_FT + FOUNTAIN + MOTOR_GFCI)
 def pool_distances(f):
     ft = 16.0
     f.text(20, 30, "plan view, not to scale", T_NOTE, MUTED, "start")
@@ -113,4 +114,9 @@ def pool_distances(f):
     f.ext(qx, fy + 14, qx, 440)
     f.dim_h(fx + fr, qx, 432)
     f.value((fx + fr + qx) / 2, 466, "20 ft", 28, records=FOUNTAIN, label="?")
+    f.text(24, 440, "Pool motor outlets, 680.21(C):", T_MIN, TEXT, "start", True)
+    f.text(24, 466, "Class A GFCI on circuits of 150 V", T_MIN, TEXT, "start")
+    b = f.text(24, 492, "or less to ground and", T_MIN, TEXT, "start")
+    f.value(b[0] + b[2] + 8, 492, "60 A or less", T_MIN, anchor="start", records=MOTOR_GFCI, pad=4,
+            what="the amp limit")
     f.tag(24, f.h - 18, "NEC 680")

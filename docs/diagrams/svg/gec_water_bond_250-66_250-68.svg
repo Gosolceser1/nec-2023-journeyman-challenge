@@ -1,37 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
-<rect x="0.0" y="0.0" width="800.0" height="450.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<rect x="552.0" y="180.0" width="228.0" height="250.0" rx="0" fill="#3f2e1f" fill-opacity="0.75" stroke="none" stroke-width="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+<rect x="0.0" y="0.0" width="800.0" height="500.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="552.0" y="180.0" width="228.0" height="300.0" rx="0" fill="#3f2e1f" fill-opacity="0.75" stroke="none" stroke-width="2"/>
 <circle cx="564.0" cy="198.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="592.0" cy="354.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="620.0" cy="290.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="648.0" cy="226.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="676.0" cy="382.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="704.0" cy="318.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="732.0" cy="254.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="760.0" cy="410.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="788.0" cy="346.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="592.0" cy="424.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="620.0" cy="380.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="648.0" cy="336.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="676.0" cy="292.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="704.0" cy="248.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="732.0" cy="204.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="760.0" cy="430.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="788.0" cy="386.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
 <line x1="552.0" y1="180.0" x2="780.0" y2="180.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
 <text x="774.0" y="168.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="end">grade</text>
-<rect x="20.0" y="330.0" width="508.0" height="100.0" rx="0" fill="#3f2e1f" fill-opacity="0.75" stroke="none" stroke-width="2"/>
+<rect x="20.0" y="330.0" width="508.0" height="150.0" rx="0" fill="#3f2e1f" fill-opacity="0.75" stroke="none" stroke-width="2"/>
 <circle cx="32.0" cy="348.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="60.0" cy="404.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="88.0" cy="390.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="116.0" cy="376.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="144.0" cy="362.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="172.0" cy="348.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="200.0" cy="404.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="228.0" cy="390.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="256.0" cy="376.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="284.0" cy="362.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="312.0" cy="348.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="340.0" cy="404.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="368.0" cy="390.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="60.0" cy="424.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="88.0" cy="380.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="116.0" cy="456.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="144.0" cy="412.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="172.0" cy="368.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="200.0" cy="444.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="228.0" cy="400.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="256.0" cy="356.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="284.0" cy="432.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="312.0" cy="388.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="340.0" cy="464.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="368.0" cy="420.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
 <circle cx="396.0" cy="376.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="424.0" cy="362.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="452.0" cy="348.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="480.0" cy="404.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="508.0" cy="390.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
-<circle cx="536.0" cy="376.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="424.0" cy="452.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="452.0" cy="408.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="480.0" cy="364.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="508.0" cy="440.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="536.0" cy="396.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
 <line x1="20.0" y1="330.0" x2="528.0" y2="330.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
 <rect x="528.0" y="72.0" width="24.0" height="288.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
 <rect x="470.0" y="360.0" width="150.0" height="50.0" rx="0" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
@@ -67,6 +67,10 @@
 <circle cx="480.0" cy="250.0" r="7" fill="#86efac" stroke="none" stroke-width="2"/>
 <polyline points="75.0,220.0 75.0,345.0 500.0,345.0 500.0,382.0" fill="none" stroke="#86efac" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="270.0" y="394.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="middle">need not exceed 4 AWG Cu</text>
+<text x="30.0" y="462.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">250.50 Ex.: in</text>
+<text x="164.7" y="462.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">existing buildings</text>
+<text x="342.8" y="462.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">rebar you can not reach</text>
+<text x="30.0" y="488.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">without disturbing the concrete may be left out</text>
 <rect x="505.6" y="18.0" width="280.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="515.6" y="46.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 250.66(B), 250.68(B)</text>
 </svg>

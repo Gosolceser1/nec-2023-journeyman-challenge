@@ -42,7 +42,7 @@ def _contact(f, x, y, nc=False, gap=10, h=30):
 
 
 @figure("sine_wave_60hz_quarter_cycle", h=450, nec="General knowledge (AC theory)",
-        records=["final-exam-#1-065"])
+        records={"final-exam-#1-065": {}, "final-exam-#3-045": {"terms": ["frequency", "Hz"]}})
 def sine_wave(f):
     x0, x1, cy, amp = 90, 730, 232, 108
     deg = (x1 - x0) / 360
@@ -61,8 +61,9 @@ def sine_wave(f):
         f.text(x, 400, f"{a} deg", T_LABEL, TEXT, bold=True)
     q = x0 + 90 * deg
     f.dim_h(x0, q, 280)
-    f.value((x0 + q) / 2, 322, "1/240 s", 30, records=None, label="? s")
-    f.lines(x0 + 270 * deg, 130, ["60 Hz = 60", "cycles per second"], T_NOTE, MUTED)
+    f.value((x0 + q) / 2, 322, "1/240 s", 30, records=["final-exam-#1-065"], label="? s")
+    f.value_lines(x0 + 270 * deg, 130, ["60 Hz = 60 cycles", "per second (frequency)"], T_NOTE, MUTED,
+                  records=["final-exam-#3-045"], pad=6, gap=1.25, what="the name for cycles per second")
 
 
 @figure("parallel_resistors_equal", h=420, nec="General knowledge (Ohm's law, parallel circuits)",
@@ -164,8 +165,8 @@ def motor_control(f):
     f.text(400, 440, "opening any stop drops out the coil", T_NOTE, MUTED)
 
 
-@figure("voltage_drop_percent", h=420, nec="General knowledge (voltage drop)",
-        records=["final-exam-#1-062"])
+@figure("voltage_drop_percent", h=480, nec="General knowledge (voltage drop), 647.4(D)",
+        records=["final-exam-#1-062", "final-exam-#3-044"])
 def voltage_drop(f):
     f.panel(60, 120, 110, 170, label="panel")
     f.rect(630, 140, 120, 130, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=8)
@@ -179,8 +180,11 @@ def voltage_drop(f):
     f.text(400, 160, "circuit conductors", T_NOTE, MUTED)
     f.text(400, 290, "drop = 125 V - 115 V = 10 V", 28, TEXT, bold=True)
     f.text(400, 340, "percent drop = ?", T_LABEL, MUTED, bold=True)
-    f.value(400, 386, "10 V / 125 V = 0.08 = 8%", 30, records=None, label="?",
+    f.value(400, 386, "10 V / 125 V = 0.08 = 8%", 30, records=["final-exam-#1-062"], label="?",
             what="the percent worked out (base voltage and result)")
+    b = f.text(24, 450, "Sensitive electronics, fixed equipment (647.4(D)): branch", T_MIN, MUTED, "start")
+    f.value(b[0] + b[2] + 8, 450, "1.5%, feeder + branch 2.5%", T_MIN, anchor="start",
+            records=["final-exam-#3-044"], pad=5, what="the sensitive-electronics limits")
 
 
 @figure("drawing_scale_quarter_inch", h=420, nec="General knowledge (reading plans)",

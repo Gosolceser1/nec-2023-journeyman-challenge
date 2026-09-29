@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="576" viewBox="0 0 800 576">
+<rect x="0.0" y="0.0" width="800.0" height="576.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Hazardous locations: what is in the air decides the class</text>
+<rect x="20.0" y="56.0" width="240.0" height="220.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="140.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">gas or vapor</text>
+<circle cx="110.0" cy="156.0" r="26" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+<circle cx="140.0" cy="138.0" r="32" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+<circle cx="172.0" cy="154.0" r="24" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+<circle cx="144.0" cy="172.0" r="22" fill="#334155" stroke="#94a3b8" stroke-width="2"/>
+<text x="132.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="end">Class</text>
+<text x="142.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="start">I</text>
+<rect x="280.0" y="56.0" width="240.0" height="220.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="400.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">combustible dust</text>
+<circle cx="340.0" cy="116.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="377.0" cy="139.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="414.0" cy="162.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="451.0" cy="185.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="368.0" cy="138.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="405.0" cy="161.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="442.0" cy="184.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="359.0" cy="137.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="396.0" cy="160.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="433.0" cy="183.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="350.0" cy="136.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="387.0" cy="159.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="424.0" cy="182.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="341.0" cy="135.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="378.0" cy="158.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="415.0" cy="181.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="452.0" cy="134.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="369.0" cy="157.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="406.0" cy="180.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="443.0" cy="133.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="360.0" cy="156.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="397.0" cy="179.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="434.0" cy="132.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="351.0" cy="155.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="388.0" cy="178.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="425.0" cy="131.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<text x="392.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="end">Class</text>
+<text x="402.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="start">II</text>
+<rect x="540.0" y="56.0" width="240.0" height="220.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="660.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">ignitible fibers</text>
+<path d="M 590 120 q 30 -24 60 0 t 60 0" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 600 132 q 30 -24 60 0 t 60 0" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 610 144 q 30 -24 60 0 t 60 0" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 620 156 q 30 -24 60 0 t 60 0" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 630 168 q 30 -24 60 0 t 60 0" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 640 180 q 30 -24 60 0 t 60 0" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="652.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="end">Class</text>
+<text x="662.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="start">III</text>
+<text x="400.0" y="316.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">Textile mill (fibers everywhere)</text>
+<rect x="20.0" y="330.0" width="370.0" height="200.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="4"/>
+<text x="205.0" y="368.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">carding and spinning:</text>
+<text x="205.0" y="392.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">fibers handled while</text>
+<text x="205.0" y="416.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">being manufactured</text>
+<rect x="60.0" y="454.0" width="40.0" height="30.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="124.0" y="454.0" width="40.0" height="30.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="188.0" y="454.0" width="40.0" height="30.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="252.0" y="454.0" width="40.0" height="30.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="316.0" y="454.0" width="40.0" height="30.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="205.0" y="516.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">Division 1</text>
+<rect x="410.0" y="330.0" width="370.0" height="200.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="4"/>
+<text x="595.0" y="368.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">bale storage: fibers</text>
+<text x="595.0" y="392.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">stored or handled, not</text>
+<text x="595.0" y="416.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">manufactured</text>
+<rect x="450.0" y="454.0" width="40.0" height="30.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="514.0" y="454.0" width="40.0" height="30.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="578.0" y="454.0" width="40.0" height="30.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="642.0" y="454.0" width="40.0" height="30.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="706.0" y="454.0" width="40.0" height="30.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="595.0" y="516.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">Division 2</text>
+<rect x="658.4" y="540.0" width="127.6" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="668.4" y="568.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 500.5</text>
+</svg>

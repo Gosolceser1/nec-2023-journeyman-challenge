@@ -109,6 +109,6 @@
 <polygon points="90.0,280.0 102.0,274.0 102.0,286.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <polygon points="250.0,280.0 238.0,286.0 238.0,274.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="170.0" y="322.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="middle">1/240 s</text>
-<text x="570.0" y="130.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">60 Hz = 60</text>
-<text x="570.0" y="157.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">cycles per second</text>
+<text x="570.0" y="130.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="middle">60 Hz = 60 cycles</text>
+<text x="570.0" y="157.5" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="middle">per second (frequency)</text>
 </svg>

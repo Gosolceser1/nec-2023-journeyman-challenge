@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="486" viewBox="0 0 800 486">
+<rect x="0.0" y="0.0" width="800.0" height="486.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Dwelling appliance demand (worked cards)</text>
+<rect x="20.0" y="56.0" width="370.0" height="390.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="34.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Clothes dryers, Table 220.54</text>
+<rect x="40.0" y="110.0" width="44.0" height="44.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="62.0" cy="135.5" r="12.32" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="106.0" y="110.0" width="44.0" height="44.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="128.0" cy="135.5" r="12.32" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="172.0" y="110.0" width="44.0" height="44.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="194.0" cy="135.5" r="12.32" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="238.0" y="110.0" width="44.0" height="44.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="260.0" cy="135.5" r="12.32" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="304.0" y="110.0" width="44.0" height="44.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="326.0" cy="135.5" r="12.32" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+<text x="34.0" y="200.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">5 dryers x 5 kW = 25 kW</text>
+<text x="34.0" y="226.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">(5 kW each, or the nameplate</text>
+<text x="34.0" y="252.8" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">if larger)</text>
+<text x="34.0" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">demand factor, 5 dryers:</text>
+<text x="34.0" y="346.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">85%</text>
+<text x="34.0" y="408.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">25 kW x 0.85 = 21.25 kW</text>
+<rect x="410.0" y="56.0" width="370.0" height="390.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="424.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">One range, Table 220.55</text>
+<rect x="430.0" y="100.0" width="64.0" height="64.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="449.2" cy="119.2" r="7.68" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="449.2" cy="139.7" r="7.68" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="474.8" cy="119.2" r="7.68" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="474.8" cy="139.7" r="7.68" fill="none" stroke="#e2e8f0" stroke-width="2"/>
+<text x="510.0" y="124.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">14 kW range</text>
+<text x="510.0" y="150.4" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Column C: 8 kW</text>
+<text x="424.0" y="212.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">Note 1: over 12 kW, add 5%</text>
+<text x="424.0" y="238.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">per kW (or major fraction)</text>
+<text x="424.0" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">14 - 12 = 2 kW over:</text>
+<text x="424.0" y="346.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">+10%</text>
+<text x="424.0" y="408.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">8 kW x 1.10 = 8.8 kW</text>
+<rect x="566.7" y="450.0" width="219.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="576.7" y="478.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 220.54, 220.55</text>
+</svg>

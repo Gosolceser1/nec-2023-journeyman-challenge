@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<rect x="0.0" y="0.0" width="800.0" height="600.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Only the device nearest the problem opens</text>
+<line x1="190.0" y1="70.0" x2="190.0" y2="320.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="168.0" y="73.0" width="44.0" height="54.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="182.1" y="86.0" width="15.8" height="28.1" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="224.0" y="108.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">service</text>
+<rect x="168.0" y="163.0" width="44.0" height="54.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="182.1" y="176.0" width="15.8" height="28.1" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="224.0" y="198.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">feeder</text>
+<text x="156.0" y="108.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="end">stays on</text>
+<text x="156.0" y="198.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="end">stays on</text>
+<line x1="70.0" y1="320.0" x2="310.0" y2="320.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="70.0" y1="320.0" x2="70.0" y2="440.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="48.0" y="343.0" width="44.0" height="54.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="62.1" y="356.0" width="15.8" height="28.1" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="70.0" y="470.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">lighting</text>
+<line x1="190.0" y1="320.0" x2="190.0" y2="440.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="168.0" y="343.0" width="44.0" height="54.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#f87171" stroke-width="3"/>
+<rect x="182.1" y="356.0" width="15.8" height="28.1" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#f87171" stroke-width="2"/>
+<text x="190.0" y="470.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">motor</text>
+<line x1="310.0" y1="320.0" x2="310.0" y2="440.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="288.0" y="343.0" width="44.0" height="54.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="302.1" y="356.0" width="15.8" height="28.1" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="310.0" y="470.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">receptacles</text>
+<text x="222.0" y="378.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#f87171" text-anchor="start">opens</text>
+<polyline points="176.0,416.0 192.8,428.6 187.2,431.4 204.0,444.0" fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="214.0" y="438.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#fbbf24" text-anchor="start">fault</text>
+<text x="190.0" y="520.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">selective coordination</text>
+<rect x="390.0" y="56.0" width="390.0" height="490.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="585.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">Two devices in series</text>
+<line x1="480.0" y1="110.0" x2="480.0" y2="380.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="458.0" y="123.0" width="44.0" height="54.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="472.1" y="136.0" width="15.8" height="28.1" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="458.0" y="263.0" width="44.0" height="54.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="472.1" y="276.0" width="15.8" height="28.1" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="480.0" y="412.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">equipment</text>
+<rect x="440.0" y="380.0" width="80.0" height="12.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="680.0" y1="110.0" x2="680.0" y2="380.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="658.0" y="123.0" width="44.0" height="54.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="672.1" y="136.0" width="15.8" height="28.1" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="658.0" y="263.0" width="44.0" height="54.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="672.1" y="276.0" width="15.8" height="28.1" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="680.0" y="412.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">equipment</text>
+<rect x="640.0" y="380.0" width="80.0" height="12.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="680.0" y1="220.0" x2="740.0" y2="220.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="740.0" y1="220.0" x2="740.0" y2="250.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="720.0" y="250.0" width="40.0" height="24.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="720.0" y="206.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#fbbf24" text-anchor="end">load</text>
+<text x="480.0" y="452.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">no loads</text>
+<text x="480.0" y="474.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">in parallel</text>
+<text x="480.0" y="508.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="middle">coordination</text>
+<text x="480.0" y="530.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="middle">not required</text>
+<text x="680.0" y="452.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">something tapped</text>
+<text x="680.0" y="474.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">in parallel</text>
+<text x="680.0" y="508.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#f87171" text-anchor="middle">must</text>
+<text x="680.0" y="530.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#f87171" text-anchor="middle">coordinate</text>
+<rect x="487.2" y="562.0" width="298.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="497.2" y="590.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 700.32, 701.32, 708.54</text>
+</svg>

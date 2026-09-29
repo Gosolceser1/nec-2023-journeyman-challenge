@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="496" viewBox="0 0 800 496">
+<rect x="0.0" y="0.0" width="800.0" height="496.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Receptacle: face marking and back terminals</text>
+<rect x="40.0" y="60.0" width="320.0" height="390.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="200.0" y="92.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">isolated ground receptacle</text>
+<rect x="130.0" y="120.0" width="140.0" height="280.0" rx="14" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="154.0" y="148.0" width="92.0" height="84.0" rx="40" fill="#0f172a" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="182.0" y1="172.0" x2="182.0" y2="194.0" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="218.0" y1="172.0" x2="218.0" y2="194.0" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 192 216 a 8 8 0 0 1 16 0 v 8 h -16 z" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="154.0" y="288.0" width="92.0" height="84.0" rx="40" fill="#0f172a" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="182.0" y1="312.0" x2="182.0" y2="334.0" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="218.0" y1="312.0" x2="218.0" y2="334.0" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 192 356 a 8 8 0 0 1 16 0 v 8 h -16 z" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="200.0,246.0 184.0,274.0 216.0,274.0" fill="#fb923c" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="200.0" y="432.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fb923c" text-anchor="middle">orange triangle</text>
+<rect x="400.0" y="60.0" width="380.0" height="390.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="590.0" y="92.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">back: terminal screws</text>
+<circle cx="440.0" cy="160.0" r="16" fill="#d4a017" stroke="#e2e8f0" stroke-width="2"/>
+<text x="470.0" y="154.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">brass</text>
+<text x="470.0" y="180.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">ungrounded (hot)</text>
+<circle cx="440.0" cy="250.0" r="16" fill="#cbd5e1" stroke="#e2e8f0" stroke-width="2"/>
+<text x="470.0" y="244.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">silver</text>
+<text x="470.0" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">grounded (neutral)</text>
+<circle cx="440.0" cy="340.0" r="16" fill="#16a34a" stroke="#e2e8f0" stroke-width="2"/>
+<text x="470.0" y="334.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">green</text>
+<text x="470.0" y="362.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">EGC only</text>
+<text x="470.0" y="384.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">(equipment grounding)</text>
+<text x="420.0" y="430.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">one conductor type per screw color</text>
+<rect x="549.6" y="460.0" width="236.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="559.6" y="488.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 406.3(E), 406.10</text>
+</svg>

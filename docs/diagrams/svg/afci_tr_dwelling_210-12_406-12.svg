@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560">
+<rect x="0.0" y="0.0" width="800.0" height="560.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Dwelling plan: AFCI rooms and receptacle type (not to scale)</text>
+<rect x="30.0" y="60.0" width="170.0" height="130.0" rx="0" fill="#0ea5e9" fill-opacity="0.22" stroke="none" stroke-width="2"/>
+<rect x="30.0" y="60.0" width="170.0" height="130.0" rx="0" fill="none" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<text x="115.0" y="133.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">bedroom</text>
+<rect x="200.0" y="60.0" width="150.0" height="130.0" rx="0" fill="#0ea5e9" fill-opacity="0.22" stroke="none" stroke-width="2"/>
+<rect x="200.0" y="60.0" width="150.0" height="130.0" rx="0" fill="none" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<text x="275.0" y="133.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">bedroom</text>
+<rect x="350.0" y="60.0" width="100.0" height="130.0" rx="0" fill="none" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<text x="400.0" y="133.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">bath</text>
+<rect x="30.0" y="190.0" width="170.0" height="140.0" rx="0" fill="#0ea5e9" fill-opacity="0.22" stroke="none" stroke-width="2"/>
+<rect x="30.0" y="190.0" width="170.0" height="140.0" rx="0" fill="none" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<text x="115.0" y="268.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">living room</text>
+<rect x="200.0" y="190.0" width="250.0" height="50.0" rx="0" fill="#0ea5e9" fill-opacity="0.22" stroke="none" stroke-width="2"/>
+<rect x="200.0" y="190.0" width="250.0" height="50.0" rx="0" fill="none" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<text x="325.0" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">hallway</text>
+<rect x="200.0" y="240.0" width="140.0" height="90.0" rx="0" fill="#0ea5e9" fill-opacity="0.22" stroke="none" stroke-width="2"/>
+<rect x="200.0" y="240.0" width="140.0" height="90.0" rx="0" fill="none" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<text x="270.0" y="293.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">kitchen</text>
+<rect x="340.0" y="240.0" width="110.0" height="90.0" rx="0" fill="#0ea5e9" fill-opacity="0.22" stroke="none" stroke-width="2"/>
+<rect x="340.0" y="240.0" width="110.0" height="90.0" rx="0" fill="none" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<text x="395.0" y="293.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">laundry</text>
+<rect x="450.0" y="60.0" width="140.0" height="270.0" rx="0" fill="none" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<text x="520.0" y="203.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">garage</text>
+<circle cx="420.0" cy="222.0" r="11" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="403.0" y1="218.0" x2="409.0" y2="218.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="403.0" y1="226.0" x2="409.0" y2="226.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="604.0" y="70.0" width="26.0" height="18.0" rx="3" fill="#0ea5e9" fill-opacity="0.5" stroke="#0ea5e9" stroke-width="2"/>
+<text x="640.0" y="87.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">AFCI required</text>
+<text x="604.0" y="124.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">also 210.12(C), (D):</text>
+<text x="604.0" y="147.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">dorm units, guest</text>
+<text x="604.0" y="170.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">rooms and suites,</text>
+<text x="604.0" y="193.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">nursing patient</text>
+<text x="604.0" y="216.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">sleeping rooms</text>
+<text x="690.0" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">TR</text>
+<text x="690.0" y="294.2" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">(tamper-</text>
+<text x="690.0" y="318.4" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">resistant)</text>
+<line x1="640.0" y1="262.0" x2="432.0" y2="222.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="432.0" cy="222.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<text x="604.0" y="348.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">406.12: all 15/20 A,</text>
+<text x="604.0" y="371.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">125/250 V dwelling</text>
+<text x="604.0" y="394.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">receptacles</text>
+<rect x="30.0" y="420.0" width="80.0" height="100.0" rx="5" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<rect x="50.0" y="445.0" width="40.0" height="50.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="62.8" y="457.0" width="14.4" height="26.0" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="70.0" y="542.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">AFCI</text>
+<line x1="90.0" y1="470.0" x2="740.0" y2="470.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="300.0" cy="500.0" r="11" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="283.0" y1="496.0" x2="289.0" y2="496.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="283.0" y1="504.0" x2="289.0" y2="504.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="300.0" y1="470.0" x2="300.0" y2="489.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="500.0" cy="500.0" r="11" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="483.0" y1="496.0" x2="489.0" y2="496.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="483.0" y1="504.0" x2="489.0" y2="504.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="500.0" y1="470.0" x2="500.0" y2="489.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="700.0" cy="500.0" r="11" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="683.0" y1="496.0" x2="689.0" y2="496.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="683.0" y1="504.0" x2="689.0" y2="504.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="700.0" y1="470.0" x2="700.0" y2="489.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="76.0" y1="434.0" x2="734.0" y2="434.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="70.0,434.0 82.0,428.0 82.0,440.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="740.0,434.0 728.0,440.0 728.0,428.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="420.0" y="420.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">protects the entire branch circuit</text>
+<rect x="566.7" y="524.0" width="219.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="576.7" y="552.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 210.12, 406.12</text>
+</svg>

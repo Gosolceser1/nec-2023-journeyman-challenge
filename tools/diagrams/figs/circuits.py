@@ -8,8 +8,9 @@ def _breaker(f, x, y, w=60, h=70):
     f.rect(x + w * 0.3, y + h * 0.25, w * 0.4, h * 0.5, fill=EDGE, stroke=TEXT, sw=SW_THIN, rx=3)
 
 
-@figure("feeder_tap_10ft_240-21b1", h=450, nec="240.21(B)(1)",
-        records={"final-exam-#1-032": {"terms": ["1/10", "one-tenth", "10 times"]}})
+@figure("feeder_tap_10ft_240-21b1", h=450, nec="240.21(B)(1), 409.21(B)",
+        records={"final-exam-#1-032": {"terms": ["1/10", "one-tenth", "10 times"]},
+                 "open-book-exam-#10-004": {"when": "after"}})
 def feeder_tap_10ft(f):
     _breaker(f, 40, 80, 80, 80)
     f.text(80, 62, "feeder OCPD", T_LABEL, TEXT, bold=True)
@@ -25,7 +26,7 @@ def feeder_tap_10ft(f):
         f.line(tx + dx, 106 + (dx + 8) * 1.75, tx + dx, 330, WIRE_HOT, 3)
     f.lines(310, 222, ["tap conductors,", "40 A ampacity"], T_NOTE, TEXT, "end", True)
     f.panel(tx - 55, 330, 110, 95, label=None, breakers=3)
-    f.lines(tx + 70, 370, ["panelboard or", "disconnect"], T_NOTE, MUTED, "start")
+    f.lines(tx + 70, 370, ["panelboard, disconnect", "or control device"], T_NOTE, MUTED, "start")
     f.ext(tx + 18, 120, 410, 120)
     f.ext(tx + 58, 330, 410, 330)
     f.dim_v(400, 120, 330)

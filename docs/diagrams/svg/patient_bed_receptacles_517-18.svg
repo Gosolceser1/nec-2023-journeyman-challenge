@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="520" viewBox="0 0 800 520">
+<rect x="0.0" y="0.0" width="800.0" height="520.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Category 2 space: one patient bed location</text>
+<rect x="40.0" y="70.0" width="720.0" height="190.0" rx="6" fill="#1e293b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<text x="60.0" y="98.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">headwall</text>
+<rect x="114.0" y="130.0" width="52.0" height="80.0" rx="6" fill="#7f1d1d" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="132.0" y1="144.0" x2="132.0" y2="156.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="148.0" y1="144.0" x2="148.0" y2="156.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="132.0" y1="184.0" x2="132.0" y2="196.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="148.0" y1="184.0" x2="148.0" y2="196.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="204.0" y="130.0" width="52.0" height="80.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="222.0" y1="144.0" x2="222.0" y2="156.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="238.0" y1="144.0" x2="238.0" y2="156.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="222.0" y1="184.0" x2="222.0" y2="196.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="238.0" y1="184.0" x2="238.0" y2="196.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="544.0" y="130.0" width="52.0" height="80.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="562.0" y1="144.0" x2="562.0" y2="156.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="578.0" y1="144.0" x2="578.0" y2="156.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="562.0" y1="184.0" x2="562.0" y2="196.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="578.0" y1="184.0" x2="578.0" y2="196.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="634.0" y="130.0" width="52.0" height="80.0" rx="6" fill="#7f1d1d" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="652.0" y1="144.0" x2="652.0" y2="156.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="668.0" y1="144.0" x2="668.0" y2="156.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="652.0" y1="184.0" x2="652.0" y2="196.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="668.0" y1="184.0" x2="668.0" y2="196.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="300.0" y="200.0" width="200.0" height="240.0" rx="10" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="330.0" y="214.0" width="140.0" height="44.0" rx="10" fill="#94a3b8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">bed</text>
+<rect x="40.0" y="290.0" width="26.0" height="18.0" rx="3" fill="#7f1d1d" fill-opacity="0.5" stroke="#7f1d1d" stroke-width="2"/>
+<text x="76.0" y="307.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">critical branch</text>
+<rect x="40.0" y="322.0" width="26.0" height="18.0" rx="3" fill="#334155" fill-opacity="0.5" stroke="#334155" stroke-width="2"/>
+<text x="76.0" y="339.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">normal system</text>
+<text x="40.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">at least two branch circuits:</text>
+<text x="40.0" y="403.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">critical branch + normal</text>
+<text x="520.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">all hospital grade</text>
+<text x="520.0" y="323.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">(517.18(B)(2))</text>
+<text x="640.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">minimum eight</text>
+<text x="640.0" y="405.3" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">receptacles</text>
+<text x="640.0" y="430.6" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">(4 duplex here)</text>
+<rect x="646.2" y="480.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="656.2" y="508.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 517.18</text>
+</svg>

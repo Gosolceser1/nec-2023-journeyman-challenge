@@ -1,5 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
-<rect x="0.0" y="0.0" width="800.0" height="480.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560">
+<rect x="0.0" y="0.0" width="800.0" height="560.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="20.0" y="30.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">plan view, not to scale</text>
 <rect x="20.0" y="100.0" width="310.0" height="268.0" rx="4" fill="#0ea5e9" fill-opacity="0.08" stroke="#0ea5e9" stroke-width="3"/>
 <rect x="100.0" y="180.0" width="150.0" height="108.0" rx="0" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="3"/>
@@ -31,7 +31,7 @@
 <text x="382.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">pump</text>
 <text x="382.0" y="327.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">receptacle:</text>
 <text x="382.0" y="355.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">GFCI</text>
-<line x1="446.0" y1="30.0" x2="446.0" y2="450.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="446.0" y1="30.0" x2="446.0" y2="530.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <circle cx="510.0" cy="150.0" r="45" fill="#0c4a6e" stroke="#38bdf8" stroke-width="3"/>
 <text x="462.0" y="76.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">storable pool</text>
 <rect x="627.0" y="130.0" width="30.0" height="40.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
@@ -73,6 +73,10 @@
 <polygon points="530.0,432.0 542.0,426.0 542.0,438.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <polygon points="770.0,432.0 758.0,438.0 758.0,426.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="650.0" y="466.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="middle">20 ft</text>
-<rect x="14.0" y="436.0" width="109.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="24.0" y="464.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 680</text>
+<text x="24.0" y="440.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">Pool motor outlets, 680.21(C):</text>
+<text x="24.0" y="466.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">Class A GFCI on circuits of 150 V</text>
+<text x="24.0" y="492.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">or less to ground and</text>
+<text x="219.9" y="492.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">60 A or less</text>
+<rect x="14.0" y="516.0" width="109.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="24.0" y="544.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 680</text>
 </svg>

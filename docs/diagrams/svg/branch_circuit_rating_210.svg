@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+<rect x="0.0" y="0.0" width="800.0" height="500.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">20 A multioutlet circuit, 15 A duplex receptacles</text>
+<rect x="30.0" y="70.0" width="120.0" height="190.0" rx="5" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<text x="90.0" y="286.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">panel</text>
+<rect x="62.0" y="150.0" width="56.0" height="64.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="78.8" y="166.0" width="22.4" height="32.0" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="90.0" y="136.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">20 A</text>
+<line x1="118.0" y1="182.0" x2="700.0" y2="182.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="118.0" y1="198.0" x2="700.0" y2="198.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="322.0" y1="182.0" x2="322.0" y2="226.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="338.0" y1="198.0" x2="338.0" y2="226.0" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="312.1" y="224.0" width="35.8" height="56.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="324.4" y1="235.7" x2="324.4" y2="243.7" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="335.6" y1="235.7" x2="335.6" y2="243.7" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="324.4" y1="260.3" x2="324.4" y2="268.3" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="335.6" y1="260.3" x2="335.6" y2="268.3" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="330.0" y="314.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">15 A</text>
+<line x1="492.0" y1="182.0" x2="492.0" y2="226.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="508.0" y1="198.0" x2="508.0" y2="226.0" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="482.1" y="224.0" width="35.8" height="56.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="494.4" y1="235.7" x2="494.4" y2="243.7" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="505.6" y1="235.7" x2="505.6" y2="243.7" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="494.4" y1="260.3" x2="494.4" y2="268.3" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="505.6" y1="260.3" x2="505.6" y2="268.3" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="500.0" y="314.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">15 A</text>
+<line x1="662.0" y1="182.0" x2="662.0" y2="226.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="678.0" y1="198.0" x2="678.0" y2="226.0" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="652.1" y="224.0" width="35.8" height="56.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="664.4" y1="235.7" x2="664.4" y2="243.7" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="675.6" y1="235.7" x2="675.6" y2="243.7" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="664.4" y1="260.3" x2="664.4" y2="268.3" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="675.6" y1="260.3" x2="675.6" y2="268.3" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="670.0" y="314.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">15 A</text>
+<path d="M 684 262 C 730 292, 740 312, 740 352" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="716.0" y="352.0" width="48.0" height="34.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<text x="708.0" y="376.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="end">tool</text>
+<text x="420.0" y="164.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">#12 Cu conductors</text>
+<text x="100.0" y="350.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">circuit rating =</text>
+<text x="100.0" y="375.3" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">OCPD rating</text>
+<line x1="100.0" y1="328.0" x2="90.0" y2="300.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="90.0" cy="300.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<text x="230.0" y="404.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">conductor ampacity</text>
+<text x="230.0" y="429.3" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">&gt;= 20 A rating</text>
+<line x1="230.0" y1="382.0" x2="250.0" y2="200.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="250.0" cy="200.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<text x="560.0" y="412.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">cord-and-plug load: 12 A max</text>
+<line x1="640.0" y1="392.0" x2="716.0" y2="382.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="716.0" cy="382.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<rect x="487.2" y="464.0" width="298.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="497.2" y="492.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 210.18, 210.19, 210.21</text>
+</svg>

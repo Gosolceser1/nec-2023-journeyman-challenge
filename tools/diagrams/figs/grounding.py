@@ -88,8 +88,10 @@ def electrode_system(f):
     f.tag(f.w - 24, f.h - 24, "NEC 250.52(A), 250.53(A)", anchor="end")
 
 
-@figure("gec_water_bond_250-66_250-68", h=450, nec="250.52(A)(1), 250.52(A)(3), 250.66(B), 250.68(B)",
-        records=["final-exam-#3-027", "final-exam-#3-050"])
+@figure("gec_water_bond_250-66_250-68", h=500,
+        nec="250.50 Ex., 250.52(A)(1), 250.52(A)(3), 250.66(B), 250.68(B)",
+        records={"final-exam-#3-027": {}, "final-exam-#3-050": {},
+                 "final-exam-#3-066": {"terms": ["existing"]}})
 def gec_water_bond(f):
     cee = ["final-exam-#3-027"]
     bond = ["final-exam-#3-050"]
@@ -122,4 +124,9 @@ def gec_water_bond(f):
     f.circle(480, pipe_y, 7, fill=WIRE_GND)
     f.polyline([(75, 220), (75, 345), (500, 345), (500, 382)], WIRE_GND, SW_WIRE)
     f.value(270, 394, "need not exceed 4 AWG Cu", T_LABEL, records=cee)
+    b = f.text(30, 462, "250.50 Ex.: in", T_MIN, TEXT, "start", True)
+    b = f.value(b[0] + b[2] + 8, 462, "existing buildings", T_MIN, anchor="start", records=["final-exam-#3-066"],
+                pad=4, what="where unreachable rebar may be left out")
+    f.text(b[0] + b[2] + 8, 462, "rebar you can not reach", T_MIN, TEXT, "start", True)
+    f.text(30, 488, "without disturbing the concrete may be left out", T_MIN, TEXT, "start", True)
     f.tag(f.w - 24, 44, "NEC 250.66(B), 250.68(B)", anchor="end")

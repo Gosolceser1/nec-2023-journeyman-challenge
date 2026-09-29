@@ -33,6 +33,7 @@ ZONE = "#0ea5e9"      # zones, hatched areas
 OK = "#34d399"        # answer values, "permitted"
 NO = "#f87171"        # "not permitted", hazards
 AMBER = "#fbbf24"     # bonding jumpers, attention
+ORANGE = "#fb923c"    # isolated-ground marking
 WIRE_HOT = "#e2e8f0"  # ungrounded conductors (drawn light)
 WIRE_NEU = "#cbd5e1"  # neutral / grounded conductor
 WIRE_GND = "#86efac"  # EGC, GEC, bonding conductors (green)

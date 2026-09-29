@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<rect x="0.0" y="0.0" width="800.0" height="600.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Three circuit troubles: name the first one</text>
+<rect x="20.0" y="54.0" width="760.0" height="290.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<circle cx="80.0" cy="165.6" r="18" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="80.0" cy="194.4" r="18" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="80.0" y1="150.0" x2="80.0" y2="120.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="80.0" y1="120.0" x2="560.0" y2="120.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="178.0" y="93.0" width="44.0" height="54.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="192.1" y="106.0" width="15.8" height="28.1" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="200.0" y="84.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">OCPD opens</text>
+<line x1="80.0" y1="210.0" x2="80.0" y2="250.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="80.0" y1="250.0" x2="520.0" y2="250.0" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="420.0" y="240.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">neutral</text>
+<line x1="80.0" y1="250.0" x2="80.0" y2="300.0" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="80.0" y1="300.0" x2="640.0" y2="300.0" stroke="#86efac" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="100.0" y="290.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#fbbf24" text-anchor="start">bonded at the source</text>
+<text x="420.0" y="326.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#86efac" text-anchor="middle">EGC</text>
+<line x1="560.0" y1="300.0" x2="507.2" y2="300.0" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="500.0,300.0 512.0,294.0 512.0,306.0" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<line x1="440.0" y1="300.0" x2="387.2" y2="300.0" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="380.0,300.0 392.0,294.0 392.0,306.0" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<line x1="320.0" y1="300.0" x2="267.2" y2="300.0" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="260.0,300.0 272.0,294.0 272.0,306.0" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="560.0" y="90.0" width="160.0" height="180.0" rx="6" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<rect x="578.0" y="108.0" width="124.0" height="144.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="640.0" y="82.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">metal enclosure</text>
+<polyline points="560.0,120.0 600.0,120.0 620.0,170.0 576.0,214.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="558.0,206.0 574.8,218.6 569.2,221.4 586.0,234.0" fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="640.0" y1="270.0" x2="640.0" y2="300.0" stroke="#86efac" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="756.0" y="160.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">hot</text>
+<text x="756.0" y="182.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">touches</text>
+<text x="756.0" y="204.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">the metal</text>
+<text x="400.0" y="186.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="middle">ground fault</text>
+<rect x="20.0" y="360.0" width="370.0" height="180.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<circle cx="64.0" cy="418.8" r="14" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="64.0" cy="441.2" r="14" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="64.0" y1="406.0" x2="64.0" y2="394.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="64.0" y1="454.0" x2="64.0" y2="466.0" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="64.0" y1="466.0" x2="320.0" y2="466.0" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="340.0" cy="430.0" r="26" fill="#334155" stroke="#e2e8f0" stroke-width="3"/>
+<text x="340.0" y="438.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">M</text>
+<line x1="320.0" y1="466.0" x2="340.0" y2="456.0" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="64.0" y1="394.0" x2="170.0" y2="394.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="200.0" y1="394.0" x2="340.0" y2="394.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="340.0" y1="394.0" x2="340.0" y2="404.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="170.0" cy="394.0" r="4" fill="#f87171" stroke="none" stroke-width="2"/>
+<circle cx="200.0" cy="394.0" r="4" fill="#f87171" stroke="none" stroke-width="2"/>
+<text x="185.0" y="384.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#f87171" text-anchor="middle">broken</text>
+<text x="205.0" y="516.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">open circuit</text>
+<rect x="410.0" y="360.0" width="370.0" height="180.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<circle cx="454.0" cy="418.8" r="14" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="454.0" cy="441.2" r="14" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="454.0" y1="406.0" x2="454.0" y2="394.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="454.0" y1="454.0" x2="454.0" y2="466.0" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="454.0" y1="466.0" x2="710.0" y2="466.0" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="730.0" cy="430.0" r="26" fill="#334155" stroke="#e2e8f0" stroke-width="3"/>
+<text x="730.0" y="438.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">M</text>
+<line x1="710.0" y1="466.0" x2="730.0" y2="456.0" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="454.0" y1="394.0" x2="730.0" y2="394.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="730.0" y1="394.0" x2="730.0" y2="404.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="610.0" y1="394.0" x2="610.0" y2="466.0" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<polyline points="600.0,420.0 612.0,429.0 608.0,431.0 620.0,440.0" fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="620.0" y="384.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#fbbf24" text-anchor="start">hot to neutral</text>
+<text x="595.0" y="516.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">short circuit</text>
+<rect x="632.7" y="562.0" width="153.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="642.7" y="590.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Art. 100</text>
+<text x="770.0" y="76.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="end">(a)</text>
+<text x="40.0" y="384.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="start">(b)</text>
+<text x="430.0" y="384.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="start">(c)</text>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="536" viewBox="0 0 800 536">
+<rect x="0.0" y="0.0" width="800.0" height="536.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Raceway fill: which table?</text>
+<rect x="20.0" y="56.0" width="470.0" height="440.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="200.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="end">Chapter 9,</text>
+<text x="210.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">Table 1</text>
+<text x="255.0" y="116.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">percent of raceway area</text>
+<circle cx="100.0" cy="220.0" r="62" fill="#0f172a" stroke="#94a3b8" stroke-width="4"/>
+<circle cx="100.0" cy="220.0" r="34" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<text x="100.0" y="322.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">one</text>
+<text x="100.0" y="356.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#38bdf8" text-anchor="middle">53%</text>
+<circle cx="255.0" cy="220.0" r="62" fill="#0f172a" stroke="#94a3b8" stroke-width="4"/>
+<circle cx="231.0" cy="220.0" r="22" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<circle cx="279.0" cy="220.0" r="22" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<text x="255.0" y="322.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">two</text>
+<text x="255.0" y="356.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#38bdf8" text-anchor="middle">31%</text>
+<circle cx="410.0" cy="220.0" r="62" fill="#0f172a" stroke="#94a3b8" stroke-width="4"/>
+<circle cx="390.0" cy="200.0" r="17" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<circle cx="430.0" cy="200.0" r="17" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<circle cx="390.0" cy="240.0" r="17" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<circle cx="430.0" cy="240.0" r="17" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<text x="410.0" y="322.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">over two</text>
+<text x="410.0" y="356.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#38bdf8" text-anchor="middle">40%</text>
+<text x="34.0" y="410.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">LFNC:</text>
+<text x="112.0" y="410.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">356.22 sends you to Table 1</text>
+<text x="34.0" y="450.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">(most raceways work the same way)</text>
+<rect x="510.0" y="56.0" width="270.0" height="440.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="645.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">trade size 3/8 FMC</text>
+<circle cx="645.0" cy="190.0" r="54" fill="#0f172a" stroke="#64748b" stroke-width="10"/>
+<text x="524.0" y="290.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">too small for</text>
+<text x="524.0" y="316.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">Chapter 9: own table</text>
+<text x="524.0" y="348.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">Table 348.22</text>
+<text x="524.0" y="392.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">largest THHN:</text>
+<text x="645.0" y="440.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="middle">10 AWG</text>
+<rect x="580.1" y="500.0" width="205.9" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="590.1" y="528.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Ch. 9, 348.22</text>
+</svg>
