@@ -466,6 +466,23 @@ choices are unchanged.
 
 Voice clips regenerated: `final-exam-#1-011`, `final-exam-#1-019`, `final-exam-#1-051`.
 
+### Follow-up: grammar in displayed text (after voice check 05f3a8a)
+
+The voice check fixed "an hot wire", "an reachable location", "motors are has",
+"rated at at most", "NM cables is not permitted" and cut-off rule quotes ("…two
+No.", "…overcurrent devic.", ".."). Those came from the shared lesson-line code
+(`plain_words`, `answer_sentence`), which also fills the on-screen WHAT THE CODE
+SAYS lines, so the same fix corrected the screen. A dump of every displayed lesson
+line (283 records) and a scan of every bank field for a/an, doubled words, "..",
+"is/are has", "at at" and plural subjects with "is" found only these:
+
+| Record | Field | Before | After |
+|---|---|---|---|
+| `final-exam-#1-034`, `open-book-exam-#4-025` | stem | Which of the following cord types is permitted in a wet location and is sunlight resistant? | Which of the following cord types are permitted in a wet location and are sunlight resistant? |
+| `final-exam-#3-052` | choice note D, tip | …so four units is not required. | …so four units are not required. |
+
+Voice clips regenerated: `final-exam-#1-034`, `open-book-exam-#4-025`.
+
 `tools/tests/test_typo_regressions.py` (run by `tools/verify.sh`) fails if any
 fixed "before" text in this file comes back in the built bank or the results
 screen strings.

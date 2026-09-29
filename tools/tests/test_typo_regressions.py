@@ -21,6 +21,7 @@ CHOICES = ("answers",)
 STEM_CHOICES = ("prompt", "answers")
 NOTES = ("choice_notes", "tip_short")
 GIST = ("gist",)
+SHOWN = ("prompt", "answers", "gist", "tip_short", "choice_notes", "reference_text", "worked", "formula")
 
 # (record id or None for every record, fields, kind, needle)
 # kind: "has" = case-sensitive substring, "is" = whole value (or list item), "re" = regex search.
@@ -43,6 +44,14 @@ BANK_RULES = [
     (None, STEM, "re", r"[A-Za-z]__"),
     (None, STEM, "re", r"(?<!_)__(?!_)"),
     (None, STEM, "has", "____"),
+    # Grammar slips the voice rules once produced ("an hot wire", "motors are
+    # has", "rated at at most", "NM cables is not permitted"); none may appear
+    # in text shown on screen either.
+    (None, SHOWN, "re", r"\b[Aa]n (hot|reachable)\b"),
+    (None, SHOWN, "re", r"\b(is|are) has\b"),
+    (None, SHOWN, "re", r"\bat at\b"),
+    (None, SHOWN, "re", r"\b(cables|cords|cord types|motors) is (not )?(permitted|required)\b"),
+    (None, SHOWN, "re", r"(?<!\.)\.\.(?!\.)"),
     # Final Exam #1
     ("final-exam-#1-004", STEM, "has", "sq.ft."),
     ("final-exam-#1-005", GIST, "has", "yet the lamp is dark:"),
@@ -52,6 +61,7 @@ BANK_RULES = [
     ("final-exam-#1-026", STEM, "has", "on the insulation, what does"),
     ("final-exam-#1-030", STEM, "has", "space-heating equipment"),
     ("final-exam-#1-034", STEM, "has", "permitted in wet location"),
+    ("final-exam-#1-034", STEM, "has", "cord types is permitted"),
     ("final-exam-#1-042", CHOICES, "is", "weather proof"),
     ("final-exam-#1-048", CHOICES, "is", "need a 20 amp receptacle"),
     ("final-exam-#1-051", STEM, "re", r"^Personnel doors where"),
@@ -68,6 +78,7 @@ BANK_RULES = [
     ("final-exam-#3-047", STEM, "has", "formed ina"),
     ("final-exam-#3-049", CHOICES, "is", '10"'),
     ("final-exam-#3-049", CHOICES, "is", '50"'),
+    ("final-exam-#3-052", NOTES, "has", "four units is not required"),
     ("final-exam-#3-068", CHOICES, "is", "the branch circuit feeding it"),
     # Final Exam #5
     ("final-exam-#5-006", STEM, "has", "necessary does not have"),
@@ -83,6 +94,7 @@ BANK_RULES = [
     # Open Book exams
     ("open-book-exam-#1-005", STEM, "has", "requires GFCI protected"),
     ("open-book-exam-#1-010", STEM, "has", "receptacles that are installed within"),
+    ("open-book-exam-#4-025", STEM, "has", "cord types is permitted"),
     ("open-book-exam-#7-002", GIST, "has", "which table holds it."),
     ("open-book-exam-#7-005", STEM, "re", r"^___ The highest"),
     ("open-book-exam-#7-016", GIST, "has", "During normal power loss"),
@@ -154,10 +166,14 @@ class BankTypoRegressions(unittest.TestCase):
             {"id": "final-exam-#3-058", "prompt": "The definition is found in Article__."},
             {"id": "final-exam-#3-011", "prompt": "Most incidents and injuries are initiated by ."},
             {"id": "open-book-exam-#7-016", "prompt": "type and ___ of each onsite emergency power source."},
+            {"id": "open-book-exam-#4-025", "prompt": "Which of the following cord types is permitted in a wet location and is sunlight resistant?"},
+            {"id": "final-exam-#3-061", "choice_notes": ["Motors are has terminal housings rated at at most 167 percent."]},
+            {"id": "final-exam-#1-030", "tip_short": "Located in an reachable location, next to an hot wire."},
         ]
         found = violations(before)
         for rid in ("final-exam-#1-019", "final-exam-#1-051", "final-exam-#1-061", "final-exam-#5-023",
-                    "final-exam-#3-058", "final-exam-#3-011", "open-book-exam-#7-016"):
+                    "final-exam-#3-058", "final-exam-#3-011", "open-book-exam-#7-016",
+                    "open-book-exam-#4-025", "final-exam-#3-061", "final-exam-#1-030"):
             self.assertTrue(any(v.startswith(rid + " ") for v in found), rid)
 
     def test_corrected_text_is_not_flagged(self):

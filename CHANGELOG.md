@@ -33,7 +33,10 @@ changed.
   PDF's own slips are now fixed too (final-exam-#1-019 "equation", complete
   stems for final-exam-#1-011 and #1-051, the #1-066 hint no longer calls MC
   cable a raceway), docs use American spelling, and a regression test
-  (tools/tests/test_typo_regressions.py) keeps the fixed typos out.
+  (tools/tests/test_typo_regressions.py) keeps the fixed typos out. After
+  the voice check, the displayed text was scanned for the same slips: the two
+  cord-type stems now read "are permitted … and are sunlight resistant", and
+  the test bans "an hot", "at at", "is has" and similar in every shown field.
 - **Voice:** the Table 310.16 "COPPER" / "ALUMINUM" headers are read as words,
   not spelled out.
 - **Voice completeness and reading.** The rule line no longer stops mid-thought

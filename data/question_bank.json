@@ -1184,7 +1184,7 @@
       "id": "final-exam-#1-034",
       "exam": "Final Exam #1",
       "question_number": 34,
-      "prompt": "Which of the following cord types is permitted in a wet location and is sunlight resistant?",
+      "prompt": "Which of the following cord types are permitted in a wet location and are sunlight resistant?",
       "answers": [
         "SPT-2",
         "STOOW",
@@ -5267,14 +5267,14 @@
         ]
       ],
       "tip_title": "Motor circuits",
-      "tip_short": "Three-phase motor: three overload units, one in each phase, per Table 430.37. Correct: C — 3. Table 430.37 requires three overload units, one in each phase. Not A: One overload unit is used for some single-phase motors, not three-phase motors. Not B: Two units were allowed in old editions; Table 430.37 now requires three for three-phase motors. Not D: A three-phase motor has only three ungrounded conductors, so four units is not required.",
+      "tip_short": "Three-phase motor: three overload units, one in each phase, per Table 430.37. Correct: C — 3. Table 430.37 requires three overload units, one in each phase. Not A: One overload unit is used for some single-phase motors, not three-phase motors. Not B: Two units were allowed in old editions; Table 430.37 now requires three for three-phase motors. Not D: A three-phase motor has only three ungrounded conductors, so four units are not required.",
       "formula": "",
       "worked": "",
       "choice_notes": [
         "One overload unit is used for some single-phase motors, not three-phase motors.",
         "Two units were allowed in old editions; Table 430.37 now requires three for three-phase motors.",
         "Table 430.37 requires three overload units, one in each phase.",
-        "A three-phase motor has only three ungrounded conductors, so four units is not required."
+        "A three-phase motor has only three ungrounded conductors, so four units are not required."
       ],
       "available": true
     },
@@ -8289,7 +8289,7 @@
       "id": "open-book-exam-#4-025",
       "exam": "Open Book Exam #4",
       "question_number": 25,
-      "prompt": "Which of the following cord types is permitted in a wet location and is sunlight resistant?",
+      "prompt": "Which of the following cord types are permitted in a wet location and are sunlight resistant?",
       "answers": [
         "SPT-2",
         "STOOW",

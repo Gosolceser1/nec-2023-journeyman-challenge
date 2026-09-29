@@ -2074,7 +2074,7 @@
       ]
     },
     "open-book-exam-#4-025": {
-      "prompt": "Which of the following cord types is permitted in a wet location and is sunlight resistant?",
+      "prompt": "Which of the following cord types are permitted in a wet location and are sunlight resistant?",
       "reference_text": "Table 400.4 Flexible Cords and Flexible Cables\nCords that comply with the requirements for outdoor cords and are so listed shall be permitted to be designated as weather and water resistant with the suffix \"W\" after the Code type designation. Cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant.",
       "tip_short": "In cord codes, W means wet-location and sunlight-resistant, so STOOW is the outdoor-rated flexible cord. Correct: B — STOOW. Table 400.4 lists STOOW as permitted in wet locations and sunlight resistant; the W suffix shows this. Not A: SPT-2 is parallel thermoplastic lamp cord and is not marked for wet locations or sunlight resistance. Not C: THWN is a building wire in Table 310.4(1), not a flexible cord type in Table 400.4. Not D: XHWN is a building wire in Table 310.4(1), not a flexible cord type in Table 400.4.",
       "choice_notes": [
@@ -2539,7 +2539,7 @@
         "THWN is building wire for raceways, not a flexible cord type in Table 400.4.",
         "XHWN is a building wire designation, not a flexible cord type in Table 400.4."
       ],
-      "prompt": "Which of the following cord types is permitted in a wet location and is sunlight resistant?",
+      "prompt": "Which of the following cord types are permitted in a wet location and are sunlight resistant?",
       "reference_table": [
         [
           "Table 400.4 type letter",
@@ -3345,12 +3345,12 @@
     },
     "final-exam-#3-052": {
       "reference_text": "Table 430.37 Overload Units\nKind of Motor\tSupply System\tNumber and Location of Overload Units, Such as Trip Coils or Relays\n3-phase ac\tAny 3-phase\t3, one in each phase*\n*Exception: An overload unit in each phase shall not be required where overload protection is provided by other approved means.",
-      "tip_short": "Three-phase motor: three overload units, one in each phase, per Table 430.37. Correct: C — 3. Table 430.37 requires three overload units, one in each phase. Not A: One overload unit is used for some single-phase motors, not three-phase motors. Not B: Two units were allowed in old editions; Table 430.37 now requires three for three-phase motors. Not D: A three-phase motor has only three ungrounded conductors, so four units is not required.",
+      "tip_short": "Three-phase motor: three overload units, one in each phase, per Table 430.37. Correct: C — 3. Table 430.37 requires three overload units, one in each phase. Not A: One overload unit is used for some single-phase motors, not three-phase motors. Not B: Two units were allowed in old editions; Table 430.37 now requires three for three-phase motors. Not D: A three-phase motor has only three ungrounded conductors, so four units are not required.",
       "choice_notes": [
         "One overload unit is used for some single-phase motors, not three-phase motors.",
         "Two units were allowed in old editions; Table 430.37 now requires three for three-phase motors.",
         "Table 430.37 requires three overload units, one in each phase.",
-        "A three-phase motor has only three ungrounded conductors, so four units is not required."
+        "A three-phase motor has only three ungrounded conductors, so four units are not required."
       ],
       "reference_table": [
         [
