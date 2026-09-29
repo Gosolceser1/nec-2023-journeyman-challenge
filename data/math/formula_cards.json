@@ -1,0 +1,372 @@
+{
+	"version": 1,
+	"note": "Formula cards. Pictures are simple original drawings made of primitives (circle, line, rect, poly, text, zigzag, arc) in the picture's own size units; src/ui/math_picture.gd draws them. Each example is solved by the math engine.",
+	"cards": [
+		{
+			"id": "ohms_law", "skill": "ohms", "title": "Ohm's law",
+			"formula": "E = I × R",
+			"formulas": ["I = E ÷ R", "R = E ÷ I"],
+			"picture": {"size": [120, 120], "items": [
+				{"t": "circle", "c": [60, 60], "r": 54, "color": "sky", "w": 3},
+				{"t": "line", "a": [8, 60], "b": [112, 60], "color": "slate", "w": 3},
+				{"t": "line", "a": [60, 60], "b": [60, 113], "color": "slate", "w": 3},
+				{"t": "text", "p": [60, 36], "text": "E", "size": 30, "color": "amber", "bold": true},
+				{"t": "text", "p": [36, 84], "text": "I", "size": 28, "color": "sky", "bold": true},
+				{"t": "text", "p": [84, 84], "text": "R", "size": 28, "color": "emerald", "bold": true}
+			]},
+			"vars": [
+				{"sym": "E", "meaning": "Voltage", "unit": "volts (V)"},
+				{"sym": "I", "meaning": "Current", "unit": "amps (A)"},
+				{"sym": "R", "meaning": "Resistance", "unit": "ohms (Ω)"}
+			],
+			"tip": "Cover the letter you want. Letters side by side: multiply. One over the other: divide.",
+			"calc": "Type the top number, press ÷, type the bottom number, press =.",
+			"example": {"type": "ohm_current", "inputs": {"E": 120, "R": 15}}
+		},
+		{
+			"id": "power_wheel", "skill": "ohms", "title": "Power (watts)",
+			"formula": "P = E × I",
+			"formulas": ["I = P ÷ E", "E = P ÷ I", "P = I² × R"],
+			"picture": {"size": [120, 120], "items": [
+				{"t": "circle", "c": [60, 60], "r": 54, "color": "amber", "w": 3},
+				{"t": "line", "a": [8, 60], "b": [112, 60], "color": "slate", "w": 3},
+				{"t": "line", "a": [60, 60], "b": [60, 113], "color": "slate", "w": 3},
+				{"t": "text", "p": [60, 36], "text": "P", "size": 30, "color": "amber", "bold": true},
+				{"t": "text", "p": [36, 84], "text": "I", "size": 28, "color": "sky", "bold": true},
+				{"t": "text", "p": [84, 84], "text": "E", "size": 28, "color": "emerald", "bold": true}
+			]},
+			"vars": [
+				{"sym": "P", "meaning": "Power", "unit": "watts (W)"},
+				{"sym": "E", "meaning": "Voltage", "unit": "volts (V)"},
+				{"sym": "I", "meaning": "Current", "unit": "amps (A)"}
+			],
+			"tip": "Same trick as Ohm's law: cover what you want to find. Watts ÷ volts = amps.",
+			"calc": "For I², press the x² key (or type the number × itself).",
+			"example": {"type": "power_current", "inputs": {"P": 1800, "E": 120}}
+		},
+		{
+			"id": "three_phase", "skill": "ohms", "title": "Three-phase power",
+			"formula": "I = P ÷ (E × 1.732)",
+			"formulas": ["P = E × I × 1.732", "VA = E × I × 1.732", "1.732 = √3"],
+			"picture": {"size": [140, 120], "items": [
+				{"t": "poly", "pts": [[70, 10], [128, 108], [12, 108]], "closed": true, "color": "rose", "w": 3},
+				{"t": "circle", "c": [70, 10], "r": 5, "color": "rose", "fill": "rose"},
+				{"t": "circle", "c": [128, 108], "r": 5, "color": "rose", "fill": "rose"},
+				{"t": "circle", "c": [12, 108], "r": 5, "color": "rose", "fill": "rose"},
+				{"t": "text", "p": [70, 72], "text": "× 1.732", "size": 20, "color": "amber", "bold": true}
+			]},
+			"vars": [
+				{"sym": "E", "meaning": "Line-to-line voltage", "unit": "volts"},
+				{"sym": "1.732", "meaning": "Square root of 3", "unit": "(no unit)"}
+			],
+			"tip": "Three-phase always brings in 1.732. Multiply the volts by 1.732 first.",
+			"calc": "E × 1.732 = M+, then P ÷ MR =. Or with brackets: P ÷ ( E × 1.732 ) =",
+			"example": {"type": "power_three_phase", "inputs": {"kw": 10, "E": 208}}
+		},
+		{
+			"id": "series_parallel", "skill": "resistance", "title": "Series and parallel",
+			"formula": "Series: Rt = R1 + R2 + R3",
+			"formulas": ["Two in parallel: Rt = (R1 × R2) ÷ (R1 + R2)", "Equal in parallel: Rt = R ÷ n", "Any parallel: Rt = 1 ÷ (1/R1 + 1/R2 + …)"],
+			"picture": {"size": [200, 130], "items": [
+				{"t": "text", "p": [100, 10], "text": "Series: add", "size": 13, "color": "slate"},
+				{"t": "line", "a": [10, 32], "b": [30, 32], "color": "slate", "w": 2},
+				{"t": "zigzag", "a": [30, 32], "b": [70, 32], "color": "violet", "w": 3},
+				{"t": "line", "a": [70, 32], "b": [80, 32], "color": "slate", "w": 2},
+				{"t": "zigzag", "a": [80, 32], "b": [120, 32], "color": "violet", "w": 3},
+				{"t": "line", "a": [120, 32], "b": [130, 32], "color": "slate", "w": 2},
+				{"t": "zigzag", "a": [130, 32], "b": [170, 32], "color": "violet", "w": 3},
+				{"t": "line", "a": [170, 32], "b": [190, 32], "color": "slate", "w": 2},
+				{"t": "text", "p": [100, 58], "text": "Parallel: smaller than the smallest", "size": 13, "color": "slate"},
+				{"t": "line", "a": [40, 72], "b": [40, 124], "color": "slate", "w": 2},
+				{"t": "line", "a": [160, 72], "b": [160, 124], "color": "slate", "w": 2},
+				{"t": "line", "a": [40, 74], "b": [80, 74], "color": "slate", "w": 2},
+				{"t": "zigzag", "a": [80, 74], "b": [120, 74], "color": "sky", "w": 3},
+				{"t": "line", "a": [120, 74], "b": [160, 74], "color": "slate", "w": 2},
+				{"t": "line", "a": [40, 98], "b": [80, 98], "color": "slate", "w": 2},
+				{"t": "zigzag", "a": [80, 98], "b": [120, 98], "color": "sky", "w": 3},
+				{"t": "line", "a": [120, 98], "b": [160, 98], "color": "slate", "w": 2},
+				{"t": "line", "a": [40, 122], "b": [80, 122], "color": "slate", "w": 2},
+				{"t": "zigzag", "a": [80, 122], "b": [120, 122], "color": "sky", "w": 3},
+				{"t": "line", "a": [120, 122], "b": [160, 122], "color": "slate", "w": 2}
+			]},
+			"vars": [
+				{"sym": "Rt", "meaning": "Total resistance", "unit": "ohms"},
+				{"sym": "n", "meaning": "Number of equal resistors", "unit": "(count)"}
+			],
+			"tip": "Series: one path, resistances add. Parallel: more paths, the total drops below the smallest resistor.",
+			"calc": "Reciprocal key 1/x (or x⁻¹): 10 1/x + 20 1/x + 30 1/x = 1/x",
+			"example": {"type": "parallel_two", "inputs": {"R1": 6, "R2": 12}}
+		},
+		{
+			"id": "box_fill", "skill": "box_fill", "title": "Box fill (314.16)",
+			"formula": "Volume = allowances × volume per conductor",
+			"formulas": ["Volume per conductor: Table 314.16(B)(1)", "Box volume: Table 314.16(A)"],
+			"picture": {"size": [200, 130], "items": [
+				{"t": "rect", "p": [50, 15], "s": [100, 100], "color": "amber", "w": 3, "r": 6},
+				{"t": "line", "a": [10, 40], "b": [80, 40], "color": "sky", "w": 3},
+				{"t": "line", "a": [10, 52], "b": [80, 52], "color": "rose", "w": 3},
+				{"t": "line", "a": [10, 64], "b": [80, 64], "color": "emerald", "w": 3},
+				{"t": "rect", "p": [85, 30], "s": [30, 70], "color": "slate", "w": 2, "fill": "dim", "r": 4},
+				{"t": "circle", "c": [100, 50], "r": 6, "color": "slate", "w": 2},
+				{"t": "circle", "c": [100, 80], "r": 6, "color": "slate", "w": 2},
+				{"t": "text", "p": [30, 28], "text": "+1 each wire", "size": 11, "color": "sky"},
+				{"t": "text", "p": [100, 122], "text": "+2 per device", "size": 11, "color": "slate"},
+				{"t": "text", "p": [30, 80], "text": "+1 EGCs", "size": 11, "color": "emerald"},
+				{"t": "text", "p": [175, 50], "text": "+1", "size": 13, "color": "amber", "bold": true},
+				{"t": "text", "p": [175, 66], "text": "clamps", "size": 11, "color": "amber"}
+			]},
+			"vars": [
+				{"sym": "1", "meaning": "Each insulated conductor", "unit": "allowance"},
+				{"sym": "1", "meaning": "All internal cable clamps together", "unit": "allowance"},
+				{"sym": "1", "meaning": "Each fixture stud or hickey", "unit": "allowance"},
+				{"sym": "2", "meaning": "Each device yoke (switch, receptacle)", "unit": "allowances"},
+				{"sym": "1 + ¼", "meaning": "Up to 4 EGCs = 1, then ¼ for each extra", "unit": "allowance"}
+			],
+			"tip": "Count first, then multiply once. Use the volume for the largest conductor for clamps, devices and grounds.",
+			"calc": "12 AWG: count × 2.25 =   14 AWG: count × 2.00 =   10 AWG: count × 2.50 =",
+			"example": {"type": "box_fill_volume", "inputs": {"awg": "12", "n": 4, "clamps": 1, "yokes": 1, "egc": 2}}
+		},
+		{
+			"id": "conduit_fill", "skill": "conduit_fill", "title": "Conduit fill (Chapter 9)",
+			"formula": "Wires = 40% area ÷ one wire's area",
+			"formulas": ["Over 2 wires: 40% · 2 wires: 31% · 1 wire: 53% (Table 1)", "Nipple 24 in. or less: 60% (Note 4)", "Round up only at .8 or more (Note 7)"],
+			"picture": {"size": [140, 120], "items": [
+				{"t": "circle", "c": [70, 60], "r": 52, "color": "emerald", "w": 4},
+				{"t": "circle", "c": [52, 48], "r": 13, "color": "sky", "w": 2, "fill": "sky_dim"},
+				{"t": "circle", "c": [80, 44], "r": 13, "color": "rose", "w": 2, "fill": "rose_dim"},
+				{"t": "circle", "c": [64, 74], "r": 13, "color": "amber", "w": 2, "fill": "amber_dim"},
+				{"t": "circle", "c": [92, 72], "r": 13, "color": "slate", "w": 2, "fill": "slate_dim"},
+				{"t": "text", "p": [70, 104], "text": "40%", "size": 16, "color": "emerald", "bold": true}
+			]},
+			"vars": [
+				{"sym": "Table 4", "meaning": "Raceway area by trade size", "unit": "in²"},
+				{"sym": "Table 5", "meaning": "One wire's area by insulation and size", "unit": "in²"}
+			],
+			"tip": "Annex C tables already did this math for same-size wires; the formula works for anything.",
+			"calc": "40% area ÷ wire area =, then look at the decimal: .8 or more rounds up.",
+			"example": {"type": "conduit_fill_count", "inputs": {"rw": "emt", "ins": "thhn", "ts": "3/4", "awg": "12"}}
+		},
+		{
+			"id": "ampacity", "skill": "ampacity", "title": "Ampacity and derating",
+			"formula": "Ampacity = table × correction × adjustment",
+			"formulas": ["Table 310.16: base ampacity", "310.15(B)(1)(1): hot or cold ambient", "310.15(C)(1): more than 3 current-carrying conductors", "240.4(D): 14 Cu 15 A, 12 Cu 20 A, 10 Cu 30 A"],
+			"picture": {"size": [180, 120], "items": [
+				{"t": "rect", "p": [20, 10], "s": [36, 100], "color": "rose", "w": 2, "fill": "rose_dim", "r": 4},
+				{"t": "rect", "p": [72, 28], "s": [36, 82], "color": "amber", "w": 2, "fill": "amber_dim", "r": 4},
+				{"t": "rect", "p": [124, 48], "s": [36, 62], "color": "emerald", "w": 2, "fill": "emerald_dim", "r": 4},
+				{"t": "text", "p": [38, 118], "text": "table", "size": 11, "color": "slate"},
+				{"t": "text", "p": [90, 118], "text": "× temp", "size": 11, "color": "slate"},
+				{"t": "text", "p": [142, 118], "text": "× wires", "size": 11, "color": "slate"}
+			]},
+			"vars": [
+				{"sym": "°C column", "meaning": "60 °C TW, 75 °C THWN/THW, 90 °C THHN/RHH", "unit": ""},
+				{"sym": "CCC", "meaning": "Current-carrying conductors in the raceway", "unit": "count"}
+			],
+			"tip": "At 78–86 °F the correction is 1.00, and 3 or fewer conductors need no adjustment.",
+			"calc": "Table value × correction × adjustment =",
+			"example": {"type": "ampacity_adjusted", "inputs": {"metal": "cu", "size": "12", "temp": 75, "ambient": 86, "ccc": 4}}
+		},
+		{
+			"id": "voltage_drop", "skill": "voltage_drop", "title": "Voltage drop",
+			"formula": "VD = 2 × K × I × L ÷ CM",
+			"formulas": ["Three-phase: VD = 1.732 × K × I × L ÷ CM", "% drop = VD ÷ source volts × 100"],
+			"picture": {"size": [200, 110], "items": [
+				{"t": "rect", "p": [8, 30], "s": [36, 50], "color": "sky", "w": 3, "r": 4},
+				{"t": "text", "p": [26, 55], "text": "V", "size": 18, "color": "sky", "bold": true},
+				{"t": "rect", "p": [156, 30], "s": [36, 50], "color": "amber", "w": 3, "r": 4},
+				{"t": "text", "p": [174, 55], "text": "load", "size": 12, "color": "amber"},
+				{"t": "line", "a": [44, 40], "b": [156, 40], "color": "rose", "w": 3},
+				{"t": "line", "a": [44, 70], "b": [156, 70], "color": "slate", "w": 3},
+				{"t": "text", "p": [100, 28], "text": "L = one way", "size": 12, "color": "rose"},
+				{"t": "text", "p": [100, 90], "text": "× 2 = out and back", "size": 12, "color": "slate"}
+			]},
+			"vars": [
+				{"sym": "K", "meaning": "12.9 copper, 21.2 aluminum (textbook constant)", "unit": "Ω·cmil/ft"},
+				{"sym": "I", "meaning": "Load current", "unit": "amps"},
+				{"sym": "L", "meaning": "One-way length", "unit": "feet"},
+				{"sym": "CM", "meaning": "Circular mils, Chapter 9 Table 8", "unit": "cmil"}
+			],
+			"tip": "L is one way. The 2 already counts the return trip.",
+			"calc": "2 × K × I × L ÷ CM = works left to right on any calculator.",
+			"example": {"type": "vd_single", "inputs": {"metal": "cu", "E": 120, "size": "12", "I": 16, "L": 100}}
+		},
+		{
+			"id": "dwelling_load", "skill": "dwelling_load", "title": "Dwelling load (standard method)",
+			"formula": "Service = lighting + range + dryer + appliances + heat or A/C",
+			"formulas": ["Lighting: ft² × 3 VA (220.41)", "Small appliance and laundry: 1,500 VA each (220.52)", "Table 220.45: 3,000 at 100%, next to 120,000 at 35%, rest 25%", "Amps = VA ÷ 240 V"],
+			"picture": {"size": [160, 130], "items": [
+				{"t": "poly", "pts": [[20, 55], [80, 10], [140, 55]], "closed": false, "color": "emerald", "w": 3},
+				{"t": "rect", "p": [28, 55], "s": [104, 70], "color": "emerald", "w": 3},
+				{"t": "rect", "p": [38, 64], "s": [84, 12], "color": "sky", "w": 1, "fill": "sky_dim"},
+				{"t": "rect", "p": [38, 80], "s": [84, 12], "color": "amber", "w": 1, "fill": "amber_dim"},
+				{"t": "rect", "p": [38, 96], "s": [84, 12], "color": "rose", "w": 1, "fill": "rose_dim"},
+				{"t": "text", "p": [80, 70], "text": "lighting", "size": 9, "color": "white"},
+				{"t": "text", "p": [80, 86], "text": "appliances", "size": 9, "color": "white"},
+				{"t": "text", "p": [80, 102], "text": "heat / A/C", "size": 9, "color": "white"}
+			]},
+			"vars": [
+				{"sym": "ft²", "meaning": "Floor area from outside dimensions (220.5(C))", "unit": "square feet"},
+				{"sym": "VA", "meaning": "Volt-amperes", "unit": "VA"}
+			],
+			"tip": "Do one line at a time, write each result down, then add.",
+			"calc": "Lighting: total − 3000 = × 0.35 = + 3000 =",
+			"example": {"type": "dwelling_lighting", "inputs": {"units": 1, "area": 2000, "sa": 2}}
+		},
+		{
+			"id": "range_demand", "skill": "range_dryer", "title": "Range demand (Table 220.55)",
+			"formula": "Column C × (1 + 5% per kW over 12)",
+			"formulas": ["12 kW or less: Column C as is", "Column B (Note 3): total kW × %", "Major fraction = more than half a kW"],
+			"picture": {"size": [140, 120], "items": [
+				{"t": "rect", "p": [15, 15], "s": [110, 95], "color": "amber", "w": 3, "r": 6},
+				{"t": "circle", "c": [45, 45], "r": 16, "color": "rose", "w": 3},
+				{"t": "circle", "c": [95, 45], "r": 12, "color": "rose", "w": 3},
+				{"t": "circle", "c": [45, 85], "r": 12, "color": "rose", "w": 3},
+				{"t": "circle", "c": [95, 85], "r": 16, "color": "rose", "w": 3}
+			]},
+			"vars": [
+				{"sym": "Column C", "meaning": "Maximum demand in kW (ranges up to 12 kW)", "unit": "kW"},
+				{"sym": "Column B", "meaning": "Demand factor for 3½–8¾ kW appliances", "unit": "%"}
+			],
+			"tip": "One 12 kW range = 8 kW. Every kW over 12 adds 5% to that 8 kW.",
+			"calc": "8 × 1.10 = for 14 kW (2 kW over × 5% = 10%)",
+			"example": {"type": "range_demand", "inputs": {"n": 1, "kw": 14}}
+		},
+		{
+			"id": "dryer_demand", "skill": "range_dryer", "title": "Dryer demand (Table 220.54)",
+			"formula": "Demand = dryers × watts each × Table 220.54 %",
+			"formulas": ["Watts each: 5,000 W or nameplate, whichever is larger (220.54)", "Neutral: × 70% (220.61(B)(1))"],
+			"picture": {"size": [120, 130], "items": [
+				{"t": "rect", "p": [15, 10], "s": [90, 110], "color": "sky", "w": 3, "r": 8},
+				{"t": "line", "a": [15, 32], "b": [105, 32], "color": "sky", "w": 2},
+				{"t": "circle", "c": [60, 76], "r": 28, "color": "sky", "w": 3},
+				{"t": "circle", "c": [60, 76], "r": 16, "color": "slate", "w": 2},
+				{"t": "circle", "c": [30, 21], "r": 4, "color": "amber", "fill": "amber"}
+			]},
+			"vars": [
+				{"sym": "n", "meaning": "Number of dryers", "unit": "count"},
+				{"sym": "%", "meaning": "Table 220.54 demand factor", "unit": "%"}
+			],
+			"tip": "A 4,500 W dryer still counts as 5,000 W.",
+			"calc": "n × 5000 × % (or × % ÷ 100) =",
+			"example": {"type": "dryer_demand", "inputs": {"n": 5, "w": 5500}}
+		},
+		{
+			"id": "motor", "skill": "motors", "title": "Motors (Article 430)",
+			"formula": "Conductors = FLC × 125%",
+			"formulas": ["FLC: Table 430.248 (1φ) or 430.250 (3φ), not the nameplate", "Overloads: nameplate × 125% or 115% (430.32)", "OCPD: FLC × Table 430.52(C)(1) %, next size up allowed", "Feeder: 125% of largest + the others (430.24)"],
+			"picture": {"size": [150, 120], "items": [
+				{"t": "circle", "c": [75, 60], "r": 44, "color": "violet", "w": 4},
+				{"t": "text", "p": [75, 60], "text": "M", "size": 40, "color": "violet", "bold": true},
+				{"t": "line", "a": [5, 40], "b": [31, 40], "color": "slate", "w": 3},
+				{"t": "line", "a": [5, 60], "b": [31, 60], "color": "slate", "w": 3},
+				{"t": "line", "a": [5, 80], "b": [31, 80], "color": "slate", "w": 3},
+				{"t": "line", "a": [119, 60], "b": [145, 60], "color": "amber", "w": 5}
+			]},
+			"vars": [
+				{"sym": "FLC", "meaning": "Full-load current from the NEC table", "unit": "amps"},
+				{"sym": "FLA", "meaning": "Nameplate full-load amps (for overloads)", "unit": "amps"}
+			],
+			"tip": "Table current for wires and breakers. Nameplate current for overloads.",
+			"calc": "FLC × 1.25 =",
+			"example": {"type": "motor_conductor", "inputs": {"V": 460, "hp": "25"}}
+		},
+		{
+			"id": "transformer", "skill": "transformers", "title": "Transformer current",
+			"formula": "Single-phase: I = VA ÷ E",
+			"formulas": ["Three-phase: I = VA ÷ (E × 1.732)", "VA = kVA × 1,000"],
+			"picture": {"size": [160, 120], "items": [
+				{"t": "arc", "c": [55, 30], "r": 10, "from": -90, "to": 90, "color": "rose", "w": 3},
+				{"t": "arc", "c": [55, 50], "r": 10, "from": -90, "to": 90, "color": "rose", "w": 3},
+				{"t": "arc", "c": [55, 70], "r": 10, "from": -90, "to": 90, "color": "rose", "w": 3},
+				{"t": "arc", "c": [55, 90], "r": 10, "from": -90, "to": 90, "color": "rose", "w": 3},
+				{"t": "line", "a": [74, 18], "b": [74, 102], "color": "slate", "w": 3},
+				{"t": "line", "a": [86, 18], "b": [86, 102], "color": "slate", "w": 3},
+				{"t": "arc", "c": [105, 30], "r": 10, "from": 90, "to": 270, "color": "sky", "w": 3},
+				{"t": "arc", "c": [105, 50], "r": 10, "from": 90, "to": 270, "color": "sky", "w": 3},
+				{"t": "arc", "c": [105, 70], "r": 10, "from": 90, "to": 270, "color": "sky", "w": 3},
+				{"t": "arc", "c": [105, 90], "r": 10, "from": 90, "to": 270, "color": "sky", "w": 3},
+				{"t": "text", "p": [25, 60], "text": "pri", "size": 12, "color": "rose"},
+				{"t": "text", "p": [135, 60], "text": "sec", "size": 12, "color": "sky"}
+			]},
+			"vars": [
+				{"sym": "VA", "meaning": "Transformer rating in volt-amperes", "unit": "VA"},
+				{"sym": "E", "meaning": "Voltage of the side you want", "unit": "volts"}
+			],
+			"tip": "Use the primary voltage for primary current and the secondary voltage for secondary current.",
+			"calc": "kVA × 1000 ÷ E =",
+			"example": {"type": "transformer_1ph", "inputs": {"kva": 25, "E": 240}}
+		},
+		{
+			"id": "percent", "skill": "percent", "title": "Percent, fractions, efficiency",
+			"formula": "Part = percent ÷ 100 × whole",
+			"formulas": ["Efficiency = output ÷ input × 100", "Fraction = percent ÷ 100, then reduce", "Decimal = top ÷ bottom", "1 hp = 746 W"],
+			"picture": {"size": [120, 120], "items": [
+				{"t": "circle", "c": [60, 60], "r": 50, "color": "slate", "w": 3},
+				{"t": "poly", "pts": [[60, 60], [60, 10], [85, 16.7], [103.3, 35], [110, 60], [103.3, 85], [85, 103.3], [60, 110]], "closed": true, "color": "sky", "w": 2, "fill": "sky_dim"},
+				{"t": "text", "p": [82, 60], "text": "50%", "size": 16, "color": "sky", "bold": true}
+			]},
+			"vars": [
+				{"sym": "%", "meaning": "Per hundred: 80% = 0.80, 125% = 1.25", "unit": ""}
+			],
+			"tip": "Move the decimal point two places left to turn a percent into a decimal.",
+			"calc": "80 ÷ 100 × 20 = (or 20 × 80 % on calculators with a % key)",
+			"example": {"type": "percent_of", "inputs": {"p": 80, "x": 20}}
+		},
+		{
+			"id": "unit_load", "skill": "code_calcs", "title": "Unit loads and counts",
+			"formula": "Load = ft² × VA per ft² (Table 220.42(A))",
+			"formulas": ["Multioutlet: 180 VA per 5 ft or fraction (220.14(H)(1))", "Garage: 1 receptacle outlet per bay (210.52(G)(1))", "EGC: Table 250.122 by the OCPD rating"],
+			"picture": {"size": [160, 120], "items": [
+				{"t": "rect", "p": [20, 15], "s": [120, 90], "color": "slate", "w": 3},
+				{"t": "line", "a": [60, 15], "b": [60, 105], "color": "dim", "w": 1},
+				{"t": "line", "a": [100, 15], "b": [100, 105], "color": "dim", "w": 1},
+				{"t": "line", "a": [20, 45], "b": [140, 45], "color": "dim", "w": 1},
+				{"t": "line", "a": [20, 75], "b": [140, 75], "color": "dim", "w": 1},
+				{"t": "text", "p": [80, 60], "text": "VA / ft²", "size": 16, "color": "amber", "bold": true}
+			]},
+			"vars": [
+				{"sym": "ft²", "meaning": "Floor area", "unit": "square feet"},
+				{"sym": "VA/ft²", "meaning": "Unit load for the occupancy", "unit": "VA per ft²"}
+			],
+			"tip": "The Table 220.42(A) values already include the 125% continuous-load factor.",
+			"calc": "area × unit load =",
+			"example": {"type": "unit_load", "inputs": {"occ": "office", "area": 5000}}
+		},
+		{
+			"id": "busbar", "skill": "code_calcs", "title": "Busbars and taps",
+			"formula": "Amps = width × thickness × 1,000 (copper)",
+			"formulas": ["Aluminum: 700 A per in² (366.23(A))", "10-ft tap: feeder OCPD ≤ tap ampacity × 10 (240.21(B)(1))"],
+			"picture": {"size": [180, 110], "items": [
+				{"t": "poly", "pts": [[20, 45], [130, 45], [160, 25], [50, 25]], "closed": true, "color": "amber", "w": 2, "fill": "amber_dim"},
+				{"t": "rect", "p": [20, 45], "s": [110, 16], "color": "amber", "w": 2, "fill": "amber_dim"},
+				{"t": "poly", "pts": [[130, 45], [160, 25], [160, 41], [130, 61]], "closed": true, "color": "amber", "w": 2, "fill": "amber_dim"},
+				{"t": "text", "p": [75, 80], "text": "width", "size": 12, "color": "slate"},
+				{"t": "text", "p": [168, 58], "text": "thick", "size": 12, "color": "slate"}
+			]},
+			"vars": [
+				{"sym": "in²", "meaning": "Cross-section = width × thickness", "unit": "square inches"}
+			],
+			"tip": "Fractions first: 1/2 in. = 0.5 in.",
+			"calc": "4 × 0.5 × 1000 =",
+			"example": {"type": "busbar_dims", "inputs": {"metal": "cu", "wd": 4, "th": 0.5}}
+		},
+		{
+			"id": "welder", "skill": "code_calcs", "title": "Welders (Article 630)",
+			"formula": "Arc welder OCPD ≤ I1max × 200%",
+			"formulas": ["Next standard size up is allowed (630.12(A))", "Resistance welder conductors: primary A × Table 630.31(A) multiplier"],
+			"picture": {"size": [160, 110], "items": [
+				{"t": "rect", "p": [15, 25], "s": [70, 60], "color": "sky", "w": 3, "r": 6},
+				{"t": "text", "p": [50, 55], "text": "I1max", "size": 13, "color": "sky", "bold": true},
+				{"t": "line", "a": [85, 55], "b": [120, 55], "color": "slate", "w": 3},
+				{"t": "poly", "pts": [[120, 55], [132, 40], [128, 56], [142, 48], [134, 70]], "closed": false, "color": "amber", "w": 3}
+			]},
+			"vars": [
+				{"sym": "I1max", "meaning": "Maximum rated supply current (nameplate)", "unit": "amps"},
+				{"sym": "duty cycle", "meaning": "Percent of time the welder is on", "unit": "%"}
+			],
+			"tip": "200% of I1max, then go up to the next standard size if needed.",
+			"calc": "I1max × 2 =",
+			"example": {"type": "welder_ocpd", "inputs": {"i1": 43}}
+		}
+	]
+}

@@ -1,0 +1,10 @@
+{
+	"version": 1,
+	"note": "The math study tools as menu entries. Open one with MathHub.open(main, id). icon is an Icons glyph name; accent a MathPicture colour name. count_of says what the {n} in 'detail' counts: trainer_types, cards, drills or skills.",
+	"tools": [
+		{"id": "trainer", "title": "Math trainer", "description": "Endless exam-style math problems with hints and step-by-step solutions", "detail": "{n} problem types · 3 levels", "count_of": "trainer_types", "icon": "bolt", "accent": "amber"},
+		{"id": "cards", "title": "Formula cards", "description": "Every exam formula with a picture, what each letter means and a worked example", "detail": "{n} formulas", "count_of": "cards", "icon": "tip", "accent": "emerald"},
+		{"id": "drills", "title": "Table drills", "description": "Timed lookups in the NEC tables you use most on the exam", "detail": "{n} timed tables", "count_of": "drills", "icon": "stopwatch", "accent": "violet"},
+		{"id": "weak_spots", "title": "Math weak spots", "description": "Your accuracy in each math topic and table, and practice aimed at the weakest", "detail": "{n} topics tracked", "count_of": "skills", "icon": "target", "accent": "rose"}
+	]
+}

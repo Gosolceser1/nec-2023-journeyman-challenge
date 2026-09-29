@@ -1,0 +1,11 @@
+{
+	"note": "Non-NEC constants used by the math engine. NEC table values live in data/nec/<edition>/tables.json.",
+	"values": {
+		"sqrt3": {"value": 1.732, "label": "√3 ≈ 1.732", "source": "Math: the square root of 3, used for three-phase circuits"},
+		"k_cu": {"value": 12.9, "label": "K = 12.9 (copper)", "source": "Textbook constant: ohms per circular-mil-foot of copper (not an NEC value)"},
+		"k_al": {"value": 21.2, "label": "K = 21.2 (aluminum)", "source": "Textbook constant: ohms per circular-mil-foot of aluminum (not an NEC value)"},
+		"watts_per_hp": {"value": 746, "label": "1 hp = 746 W", "source": "Physics: one horsepower equals 746 watts"},
+		"single_phase_service_v": {"value": 240, "label": "240 V", "source": "Standard 120/240 V single-phase dwelling service"},
+		"ne_apprentices_per_licensee": {"value": 3, "label": "3 apprentices per licensee", "source": "Nebraska State Electrical Act, Neb. Rev. Stat. 81-2113(2)"}
+	}
+}

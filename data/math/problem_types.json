@@ -1,0 +1,1304 @@
+{
+	"version": 1,
+	"note": "Math trainer problem types. Vars are generated per level, steps are evaluated in order with Godot Expression and the helpers in src/math/math_functions.gd. NEC values come from data/nec/<edition>/tables.json through t()/trange()/v(); non-NEC constants through k().",
+	"levels": [
+		{"id": 1, "label": "Easy"},
+		{"id": 2, "label": "Medium"},
+		{"id": 3, "label": "Hard"}
+	],
+	"labels": {"emt": "EMT", "imc": "IMC", "rmc": "RMC", "pvc40": "Schedule 40 PVC", "pvc80": "Schedule 80 PVC", "single_phase": "single-phase motor", "squirrel_cage": "three-phase squirrel-cage motor (not Design B energy-efficient)"},
+	"step_titles": {
+		"formula": "The formula",
+		"given": "Numbers from the question",
+		"lookup": "Look it up",
+		"calc": "Do the math",
+		"round": "Round or pick",
+		"rule": "Code rule",
+		"answer": "Answer"
+	},
+	"skills": [
+		{"id": "ohms", "title": "Ohm's law & power", "short": "Ohm's law", "accent": "sky"},
+		{"id": "resistance", "title": "Series & parallel", "short": "Resistance", "accent": "violet"},
+		{"id": "box_fill", "title": "Box fill (314.16)", "short": "Box fill", "accent": "amber"},
+		{"id": "conduit_fill", "title": "Conduit fill (Chapter 9)", "short": "Conduit fill", "accent": "emerald"},
+		{"id": "ampacity", "title": "Ampacity & derating (310.15)", "short": "Ampacity", "accent": "rose"},
+		{"id": "voltage_drop", "title": "Voltage drop", "short": "Voltage drop", "accent": "sky"},
+		{"id": "dwelling_load", "title": "Dwelling load (Article 220)", "short": "Dwelling load", "accent": "emerald"},
+		{"id": "range_dryer", "title": "Range & dryer demand (220.54/55)", "short": "Range/dryer", "accent": "amber"},
+		{"id": "motors", "title": "Motors (Article 430)", "short": "Motors", "accent": "violet"},
+		{"id": "transformers", "title": "Transformer current", "short": "Transformers", "accent": "rose"},
+		{"id": "percent", "title": "Percent, fractions & efficiency", "short": "Percent", "accent": "sky"},
+		{"id": "code_calcs", "title": "Other Code calculations", "short": "Code calcs", "accent": "slate"}
+	],
+	"types": [
+		{
+			"id": "ohm_current",
+			"skill": "ohms",
+			"card": "ohms_law",
+			"title": "Find current (I = E ÷ R)",
+			"prompt": "A heater element with a resistance of {R} Ω is connected to {E} volts. How much current does it draw?",
+			"hint": "Cover I on the Ohm's law wheel: E is over R, so divide.",
+			"levels": {
+				"1": {"vars": [["E", {"pick": [120, 240]}], ["R", {"pick": [10, 12, 15, 20, 24, 30, 40, 60]}]]},
+				"2": {"vars": [["E", {"pick": [120, 208, 240, 277]}], ["R", {"range": [5, 90], "step": 1}]]},
+				"3": {"vars": [["E", {"pick": [12, 24, 48, 120, 208, 240, 277, 480]}], ["R", {"range": [0.5, 40], "step": 0.5}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "I = E ÷ R", "note": "Current (I, amps) equals voltage (E, volts) divided by resistance (R, ohms)."},
+				{"kind": "given", "lines": ["E = {E} V (the voltage)", "R = {R} Ω (the resistance)"]},
+				{"kind": "calc", "set": [["I", "E / R"]], "text": "I = {E} ÷ {R} = {I:4}", "keys": "{E} ÷ {R} ="},
+				{"kind": "round", "set": [["I", "r(I, 2)"]], "text": "I ≈ {I} A", "note": "Round to two decimal places."}
+			],
+			"answer": {"var": "I", "unit": "A", "tol": 0.01, "rel": true, "text": "{I} A"}
+		},
+		{
+			"id": "ohm_voltage",
+			"skill": "ohms",
+			"card": "ohms_law",
+			"title": "Find voltage (E = I × R)",
+			"prompt": "A current of {I} A flows through a {R} Ω resistor. What is the voltage across the resistor?",
+			"hint": "Cover E on the Ohm's law wheel: I and R sit side by side, so multiply.",
+			"levels": {
+				"1": {"vars": [["I", {"range": [1, 12], "step": 1}], ["R", {"pick": [5, 10, 12, 20, 24]}]]},
+				"2": {"vars": [["I", {"range": [0.5, 20], "step": 0.5}], ["R", {"range": [2, 60], "step": 1}]]},
+				"3": {"vars": [["I", {"range": [0.05, 3], "step": 0.05}], ["R", {"range": [100, 2400], "step": 50}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "E = I × R", "note": "Voltage (E) equals current (I) times resistance (R)."},
+				{"kind": "given", "lines": ["I = {I} A (the current)", "R = {R} Ω (the resistance)"]},
+				{"kind": "calc", "set": [["E", "r(I * R, 2)"]], "text": "E = {I} × {R} = {E} V", "keys": "{I} × {R} ="}
+			],
+			"answer": {"var": "E", "unit": "V", "tol": 0.01, "rel": true, "text": "{E} V"}
+		},
+		{
+			"id": "ohm_resistance",
+			"skill": "ohms",
+			"card": "ohms_law",
+			"title": "Find resistance (R = E ÷ I)",
+			"prompt": "A load on a {E} V circuit draws {I} A. What is the resistance of the load?",
+			"hint": "Cover R on the Ohm's law wheel: E is over I, so divide.",
+			"levels": {
+				"1": {"vars": [["E", {"pick": [120, 240]}], ["I", {"pick": [2, 4, 5, 6, 8, 10, 12, 20]}]]},
+				"2": {"vars": [["E", {"pick": [120, 208, 240, 277]}], ["I", {"range": [1.5, 30], "step": 0.5}]]},
+				"3": {"vars": [["E", {"pick": [24, 120, 208, 240, 277, 480]}], ["I", {"range": [0.2, 45], "step": 0.1}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "R = E ÷ I", "note": "Resistance (R, ohms) equals voltage (E) divided by current (I)."},
+				{"kind": "given", "lines": ["E = {E} V (the voltage)", "I = {I} A (the current)"]},
+				{"kind": "calc", "set": [["R", "E / I"]], "text": "R = {E} ÷ {I} = {R:4}", "keys": "{E} ÷ {I} ="},
+				{"kind": "round", "set": [["R", "r(R, 2)"]], "text": "R ≈ {R} Ω", "note": "Round to two decimal places."}
+			],
+			"answer": {"var": "R", "unit": "Ω", "tol": 0.01, "rel": true, "text": "{R} Ω"}
+		},
+		{
+			"id": "power_current",
+			"skill": "ohms",
+			"card": "power_wheel",
+			"title": "Current from watts (I = P ÷ E)",
+			"prompt": "A {P} W load is connected to {E} volts. What current does it draw?",
+			"hint": "Cover I on the power wheel: P is over E, so divide watts by volts.",
+			"levels": {
+				"1": {"vars": [["E", {"pick": [120, 240]}], ["P", {"pick": [600, 960, 1200, 1440, 1800, 2400]}]]},
+				"2": {"vars": [["E", {"pick": [120, 208, 240, 277]}], ["P", {"range": [100, 5000], "step": 50}]]},
+				"3": {"vars": [["E", {"pick": [12, 20, 24, 48, 120, 277]}], ["P", {"range": [1, 300], "step": 1}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "I = P ÷ E", "note": "Current (amps) equals power (watts) divided by voltage (volts)."},
+				{"kind": "given", "lines": ["P = {P} W (the power)", "E = {E} V (the voltage)"]},
+				{"kind": "calc", "set": [["I", "P / E"]], "text": "I = {P} ÷ {E} = {I:4}", "keys": "{P} ÷ {E} ="},
+				{"kind": "round", "set": [["I", "r(I, 2)"]], "text": "I ≈ {I} A", "note": "Round to two decimal places."}
+			],
+			"answer": {"var": "I", "unit": "A", "tol": 0.01, "rel": true, "text": "{I} A"}
+		},
+		{
+			"id": "power_watts",
+			"skill": "ohms",
+			"card": "power_wheel",
+			"title": "Watts (P = E × I)",
+			"prompt": "A motor on a {E} V circuit draws {I} A. How many watts does it use (assume a power factor of 1)?",
+			"hint": "Cover P on the power wheel: I and E sit side by side, so multiply.",
+			"levels": {
+				"1": {"vars": [["E", {"pick": [120, 240]}], ["I", {"range": [2, 20], "step": 1}]]},
+				"2": {"vars": [["E", {"pick": [120, 208, 240, 277]}], ["I", {"range": [0.5, 30], "step": 0.5}]]},
+				"3": {"vars": [["E", {"pick": [115, 208, 230, 277, 460]}], ["I", {"range": [0.2, 48], "step": 0.1}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "P = E × I", "note": "Power (watts) equals voltage times current."},
+				{"kind": "given", "lines": ["E = {E} V (the voltage)", "I = {I} A (the current)"]},
+				{"kind": "calc", "set": [["P", "r(E * I, 2)"]], "text": "P = {E} × {I} = {P} W", "keys": "{E} × {I} ="}
+			],
+			"answer": {"var": "P", "unit": "W", "tol": 0.01, "rel": true, "text": "{P} W"}
+		},
+		{
+			"id": "power_i2r",
+			"skill": "ohms",
+			"card": "power_wheel",
+			"title": "Watts from current (P = I² × R)",
+			"prompt": "A {I} A current flows through a {R} Ω conductor. How many watts are lost as heat?",
+			"hint": "Square the current first (I × I), then multiply by R.",
+			"levels": {
+				"1": {"vars": [["I", {"range": [2, 10], "step": 1}], ["R", {"pick": [1, 2, 3, 4, 5, 10]}]]},
+				"2": {"vars": [["I", {"range": [5, 40], "step": 1}], ["R", {"range": [0.1, 2], "step": 0.1}]]},
+				"3": {"vars": [["I", {"range": [10, 100], "step": 0.5}], ["R", {"range": [0.01, 0.5], "step": 0.01}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "P = I² × R", "note": "Power (watts) equals current squared times resistance. I² means I × I."},
+				{"kind": "given", "lines": ["I = {I} A (the current)", "R = {R} Ω (the resistance)"]},
+				{"kind": "calc", "set": [["I2", "I * I"]], "text": "I² = {I} × {I} = {I2}", "keys": "{I} x²", "basic": "{I} × {I} ="},
+				{"kind": "calc", "set": [["P", "r(I2 * R, 2)"]], "text": "P = {I2} × {R} = {P} W", "keys": "× {R} ="}
+			],
+			"answer": {"var": "P", "unit": "W", "tol": 0.01, "rel": true, "text": "{P} W"}
+		},
+		{
+			"id": "power_three_phase",
+			"skill": "ohms",
+			"card": "three_phase",
+			"title": "Three-phase current (I = P ÷ (E × 1.732))",
+			"prompt": "A balanced three-phase load of {kw} kW (power factor 1) is supplied at {E} volts. What is the line current?",
+			"hint": "Three-phase: multiply the volts by 1.732 first, then divide the watts by that number.",
+			"levels": {
+				"1": {"vars": [["E", {"pick": [208, 240, 480]}], ["kw", {"pick": [10, 15, 20, 25, 30, 50]}]]},
+				"2": {"vars": [["E", {"pick": [208, 240, 480]}], ["kw", {"range": [5, 150], "step": 2.5}]]},
+				"3": {"vars": [["E", {"pick": [208, 240, 480, 600]}], ["kw", {"range": [3, 400], "step": 0.5}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "I = P ÷ (E × 1.732)", "note": "Three-phase current equals watts divided by (line volts × √3). √3 is about 1.732."},
+				{"kind": "given", "lines": ["P = {kw} kW = {P} W (1 kW = 1,000 W)", "E = {E} V (line-to-line voltage)"], "set": [["P", "kw * 1000"], ["s3", "k('sqrt3')"]]},
+				{"kind": "calc", "set": [["den", "E * s3"]], "text": "E × 1.732 = {E} × {s3} = {den:3}", "keys": "{E} × {s3} = M+", "note": "Store this in memory (M+) so you can divide by it next."},
+				{"kind": "calc", "set": [["I", "r(P / den, 2)"]], "text": "I = {P} ÷ {den:3} = {I} A", "keys": "{P} ÷ MR =", "note": "On a scientific calculator you can type it all at once: {P} ÷ ( {E} × {s3} ) ="}
+			],
+			"answer": {"var": "I", "unit": "A", "tol": 0.01, "rel": true, "text": "{I} A"}
+		},
+		{
+			"id": "series_resistance",
+			"skill": "resistance",
+			"card": "series_parallel",
+			"title": "Series resistance",
+			"prompt": "Resistors of {list} are connected in series. What is the total resistance?",
+			"hint": "In series, just add every resistor together.",
+			"levels": {
+				"1": {"vars": [["R1", {"range": [2, 50], "step": 1}], ["R2", {"range": [2, 50], "step": 1}], ["R3", {"expr": "0"}], ["R4", {"expr": "0"}]]},
+				"2": {"vars": [["R1", {"range": [5, 200], "step": 5}], ["R2", {"range": [5, 200], "step": 5}], ["R3", {"range": [5, 200], "step": 5}], ["R4", {"expr": "0"}]]},
+				"3": {"vars": [["R1", {"range": [0.5, 60], "step": 0.5}], ["R2", {"range": [0.5, 60], "step": 0.5}], ["R3", {"range": [0.5, 60], "step": 0.5}], ["R4", {"range": [0.5, 60], "step": 0.5}]]}
+			},
+			"vars": [["list", {"expr": "join_nonzero([R1, R2, R3, R4], ' Ω, ') + ' Ω'"}]],
+			"steps": [
+				{"kind": "formula", "text": "Rt = R1 + R2 + R3 …", "note": "In a series circuit the current has one path, so the resistances add up."},
+				{"kind": "given", "lines": ["The resistors: {list}"]},
+				{"kind": "calc", "set": [["Rt", "r(R1 + R2 + R3 + R4, 2)"]], "text": "Rt = {sum_text} = {Rt} Ω", "keys": "{sum_keys} =", "show": [["sum_text", "join_nonzero([R1, R2, R3, R4], ' + ')"], ["sum_keys", "join_nonzero([R1, R2, R3, R4], ' + ')"]]}
+			],
+			"answer": {"var": "Rt", "unit": "Ω", "tol": 0.01, "rel": true, "text": "{Rt} Ω"}
+		},
+		{
+			"id": "parallel_equal",
+			"skill": "resistance",
+			"card": "series_parallel",
+			"title": "Equal resistors in parallel (Rt = R ÷ n)",
+			"prompt": "A circuit contains {n} resistors of {R} Ω each, connected in parallel. What is the total resistance?",
+			"hint": "Equal resistors in parallel: divide one resistor's value by how many there are.",
+			"levels": {
+				"1": {"vars": [["n", {"range": [2, 4], "step": 1}], ["R", {"pick": [12, 24, 60, 120, 240, 1200]}]]},
+				"2": {"vars": [["n", {"range": [2, 6], "step": 1}], ["R", {"range": [10, 500], "step": 10}]]},
+				"3": {"vars": [["n", {"range": [3, 10], "step": 1}], ["R", {"range": [1, 5000], "step": 1}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "Rt = R ÷ n", "note": "Identical resistors in parallel: one resistor's value divided by the number of resistors. The total is always smaller than any one resistor."},
+				{"kind": "given", "lines": ["R = {R} Ω (each resistor)", "n = {n} (how many in parallel)"]},
+				{"kind": "calc", "set": [["Rt", "R / n"]], "text": "Rt = {R} ÷ {n} = {Rt:4}", "keys": "{R} ÷ {n} ="},
+				{"kind": "round", "set": [["Rt", "r(Rt, 2)"]], "text": "Rt ≈ {Rt} Ω", "note": "Round to two decimal places."}
+			],
+			"answer": {"var": "Rt", "unit": "Ω", "tol": 0.01, "rel": true, "text": "{Rt} Ω"},
+			"from_check": {"kind": "parallel_equal", "map": {"R": "ohms", "n": "count"}}
+		},
+		{
+			"id": "parallel_two",
+			"skill": "resistance",
+			"card": "series_parallel",
+			"title": "Two resistors in parallel (product over sum)",
+			"prompt": "A {R1} Ω resistor and a {R2} Ω resistor are connected in parallel. What is the total resistance?",
+			"hint": "Multiply the two values, then divide by their sum (product over sum).",
+			"levels": {
+				"1": {"vars": [["R1", {"pick": [6, 10, 12, 20, 30, 60]}], ["R2", {"pick": [4, 6, 12, 15, 20, 30]}]]},
+				"2": {"vars": [["R1", {"range": [5, 100], "step": 5}], ["R2", {"range": [5, 100], "step": 5}]]},
+				"3": {"vars": [["R1", {"range": [1, 500], "step": 1}], ["R2", {"range": [1, 500], "step": 1}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "Rt = (R1 × R2) ÷ (R1 + R2)", "note": "Product over sum works for exactly two resistors in parallel."},
+				{"kind": "given", "lines": ["R1 = {R1} Ω", "R2 = {R2} Ω"]},
+				{"kind": "calc", "set": [["prod", "R1 * R2"]], "text": "Product: {R1} × {R2} = {prod}", "keys": "{R1} × {R2} ="},
+				{"kind": "calc", "set": [["sum", "R1 + R2"]], "text": "Sum: {R1} + {R2} = {sum}", "keys": "{R1} + {R2} ="},
+				{"kind": "calc", "set": [["Rt", "prod / sum"]], "text": "Rt = {prod} ÷ {sum} = {Rt:4}", "keys": "{prod} ÷ {sum} =", "note": "Scientific calculator in one go: ( {R1} × {R2} ) ÷ ( {R1} + {R2} ) ="},
+				{"kind": "round", "set": [["Rt", "r(Rt, 2)"]], "text": "Rt ≈ {Rt} Ω", "note": "Round to two decimal places."}
+			],
+			"answer": {"var": "Rt", "unit": "Ω", "tol": 0.01, "rel": true, "text": "{Rt} Ω"}
+		},
+		{
+			"id": "parallel_reciprocal",
+			"skill": "resistance",
+			"card": "series_parallel",
+			"title": "Three resistors in parallel (reciprocal method)",
+			"prompt": "Resistors of {R1} Ω, {R2} Ω and {R3} Ω are connected in parallel. What is the total resistance?",
+			"hint": "Take 1 ÷ each resistor, add those up, then take 1 ÷ the total.",
+			"levels": {
+				"1": {"vars": [["R1", {"pick": [10, 20, 30, 60]}], ["R2", {"pick": [10, 20, 30, 60]}], ["R3", {"pick": [10, 20, 30, 60]}]]},
+				"2": {"vars": [["R1", {"range": [5, 100], "step": 5}], ["R2", {"range": [5, 100], "step": 5}], ["R3", {"range": [5, 100], "step": 5}]]},
+				"3": {"vars": [["R1", {"range": [1, 250], "step": 1}], ["R2", {"range": [1, 250], "step": 1}], ["R3", {"range": [1, 250], "step": 1}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "Rt = 1 ÷ (1/R1 + 1/R2 + 1/R3)", "note": "Works for any number of resistors in parallel."},
+				{"kind": "given", "lines": ["R1 = {R1} Ω", "R2 = {R2} Ω", "R3 = {R3} Ω"]},
+				{"kind": "calc", "set": [["g1", "1.0 / R1"], ["g2", "1.0 / R2"], ["g3", "1.0 / R3"]], "text": "1/{R1} = {g1:4}   1/{R2} = {g2:4}   1/{R3} = {g3:4}", "keys": "{R1} 1/x + {R2} 1/x + {R3} 1/x =", "basic": "1 ÷ {R1} = M+ 1 ÷ {R2} = M+ 1 ÷ {R3} = M+"},
+				{"kind": "calc", "set": [["gs", "g1 + g2 + g3"]], "text": "Add them: {gs:4}", "keys": "", "basic": "MR"},
+				{"kind": "calc", "set": [["Rt", "1.0 / gs"]], "text": "Rt = 1 ÷ {gs:4} = {Rt:4}", "keys": "1/x", "basic": "1 ÷ MR ="},
+				{"kind": "round", "set": [["Rt", "r(Rt, 2)"]], "text": "Rt ≈ {Rt} Ω", "note": "Round to two decimal places."}
+			],
+			"answer": {"var": "Rt", "unit": "Ω", "tol": 0.02, "rel": true, "text": "{Rt} Ω"}
+		},
+		{
+			"id": "wire_resistance_scale",
+			"skill": "resistance",
+			"card": "series_parallel",
+			"title": "Resistance vs. length and size",
+			"prompt": "A conductor has a resistance of {R1} Ω. What is the resistance of a conductor of the same material that is {lf} times as long and has {af} of the cross-sectional area?",
+			"hint": "Longer wire means more resistance (multiply). Smaller wire means more resistance too (divide by the area fraction).",
+			"levels": {
+				"1": {"vars": [["R1", {"range": [1, 10], "step": 1}], ["lf", {"pick": [2, 3, 4]}], ["ad", {"pick": [1]}]]},
+				"2": {"vars": [["R1", {"range": [1, 20], "step": 1}], ["lf", {"pick": [2, 3, 4, 5]}], ["ad", {"pick": [2, 3, 4]}]]},
+				"3": {"vars": [["R1", {"range": [0.5, 25], "step": 0.5}], ["lf", {"pick": [1.5, 2, 2.5, 3, 4]}], ["ad", {"pick": [2, 3, 4, 5]}]]}
+			},
+			"vars": [["af", {"expr": "pick(ad == 1, 'the same', '1/' + name('', ad))"}]],
+			"steps": [
+				{"kind": "formula", "text": "R2 = R1 × (length factor) ÷ (area factor)", "note": "Resistance goes up with length and down with cross-sectional area."},
+				{"kind": "given", "lines": ["R1 = {R1} Ω", "Length: {lf} times as long", "Area: {af}"]},
+				{"kind": "calc", "set": [["Rl", "R1 * lf"]], "text": "Length: {R1} × {lf} = {Rl} Ω", "keys": "{R1} × {lf} ="},
+				{"kind": "calc", "when": "ad != 1", "set": [["Rl", "Rl * ad"]], "text": "Area is 1/{ad}, so resistance is {ad} times: × {ad} = {Rl} Ω", "keys": "× {ad} ="},
+				{"kind": "round", "set": [["R2", "r(Rl, 2)"]], "text": "R2 = {R2} Ω"}
+			],
+			"answer": {"var": "R2", "unit": "Ω", "tol": 0.01, "rel": true, "text": "{R2} Ω"}
+		},
+		{
+			"id": "box_fill_volume",
+			"skill": "box_fill",
+			"card": "box_fill",
+			"title": "Box fill: required volume",
+			"prompt": "A box will contain {n} {awg:awg} insulated conductors{extras}. What minimum box volume is required by 314.16(B)?",
+			"hint": "Count allowances: each conductor 1, all clamps together 1, each device yoke 2, up to four EGCs together 1. Then multiply by the Table 314.16(B)(1) volume.",
+			"levels": {
+				"1": {"vars": [["awg", {"pick": ["14", "12"]}], ["n", {"range": [2, 6], "step": 1}], ["clamps", {"expr": "0"}], ["yokes", {"pick": [0, 1]}], ["egc", {"expr": "0"}]]},
+				"2": {"vars": [["awg", {"pick": ["14", "12", "10"]}], ["n", {"range": [2, 8], "step": 1}], ["clamps", {"pick": [0, 1]}], ["yokes", {"pick": [0, 1, 2]}], ["egc", {"range": [1, 4], "step": 1}]]},
+				"3": {"vars": [["awg", {"pick": ["14", "12", "10"]}], ["n", {"range": [4, 10], "step": 1}], ["clamps", {"pick": [0, 1]}], ["yokes", {"pick": [1, 2]}], ["egc", {"range": [5, 8], "step": 1}]]}
+			},
+			"vars": [["extras", {"expr": "pick(clamps + yokes + egc == 0, '', ' plus ' + join_nonempty([pick(clamps > 0, 'internal cable clamps', ''), pick(yokes > 0, plural(yokes, 'device yoke', 'device yokes'), ''), pick(egc > 0, plural(egc, 'equipment grounding conductor', 'equipment grounding conductors'), '')], ', '))"}]],
+			"steps": [
+				{"kind": "formula", "text": "Volume = allowances × volume per conductor", "note": "314.16(B): count allowances, then use Table 314.16(B)(1) for the volume of one conductor of that size."},
+				{"kind": "lookup", "set": [["a", "t('t314_16b1', awg, 'in3')"]], "text": "Table 314.16(B)(1): {awg:awg} = {a} in³ per allowance"},
+				{"kind": "given", "set": [["cnt", "n"]], "text": "Conductors: {n} × 1 = {n}", "note": "314.16(B)(1): each conductor that starts or ends in the box counts 1."},
+				{"kind": "rule", "when": "clamps > 0", "set": [["cnt", "cnt + 1"]], "text": "Internal clamps: + 1 (total {cnt})", "note": "314.16(B)(2): one allowance for all internal cable clamps together."},
+				{"kind": "rule", "when": "yokes > 0", "set": [["dev", "yokes * v('314.16(B)(4).per_yoke')"], ["cnt", "cnt + dev"]], "text": "Devices: {yokes} × 2 = + {dev} (total {cnt})", "note": "314.16(B)(4): each yoke (switch or receptacle) counts 2."},
+				{"kind": "rule", "when": "egc > 0 and egc <= 4", "set": [["cnt", "cnt + 1"]], "text": "Equipment grounding conductors: + 1 (total {cnt})", "note": "314.16(B)(5): one allowance for up to four EGCs together."},
+				{"kind": "rule", "when": "egc > 4", "set": [["xe", "(egc - v('314.16(B)(5).egc_single')) * v('314.16(B)(5).extra_egc_fraction')"], ["cnt", "cnt + 1 + xe"]], "text": "EGCs: 1 for the first four + ¼ × {egc_x} extra = + {xe1} (total {cnt})", "show": [["egc_x", "egc - v('314.16(B)(5).egc_single')"], ["xe1", "1 + (egc - v('314.16(B)(5).egc_single')) * v('314.16(B)(5).extra_egc_fraction')"]], "note": "314.16(B)(5): one allowance for up to four EGCs, plus ¼ allowance for each one over four."},
+				{"kind": "calc", "set": [["vol", "r(cnt * a, 2)"]], "text": "{cnt} × {a} in³ = {vol} in³", "keys": "{cnt} × {a} ="}
+			],
+			"answer": {"var": "vol", "unit": "in³", "tol": 0.01, "text": "{vol} in³"}
+		},
+		{
+			"id": "box_max_conductors",
+			"skill": "box_fill",
+			"card": "box_fill",
+			"title": "Box fill: how many conductors fit",
+			"prompt": "How many {awg:awg} conductors may be installed in a {box} box{extras_q}?",
+			"hint": "Take the box volume from Table 314.16(A), divide by the conductor volume from Table 314.16(B)(1), and drop any fraction. Subtract other allowances first.",
+			"levels": {
+				"1": {"vars": [["box", {"key": "t314_16a", "from": "4 × 1-1/4 in. round/octagonal", "to": "4-11/16 × 2-1/8 in. square"}], ["awg", {"pick": ["14", "12", "10"]}], ["yokes", {"expr": "0"}], ["clamps", {"expr": "0"}]]},
+				"2": {"vars": [["box", {"key": "t314_16a", "from": "4 × 1-1/2 in. square", "to": "4-11/16 × 2-1/8 in. square"}], ["awg", {"pick": ["14", "12"]}], ["yokes", {"pick": [1]}], ["clamps", {"pick": [0, 1]}]]},
+				"3": {"vars": [["box", {"key": "t314_16a", "from": "4 × 2-1/8 in. square", "to": "4-11/16 × 2-1/8 in. square"}], ["awg", {"pick": ["14", "12"]}], ["yokes", {"pick": [1, 2]}], ["clamps", {"pick": [1]}]]}
+			},
+			"vars": [["extras_q", {"expr": "pick(clamps + yokes == 0, '', ' that also has ' + join_nonempty([pick(clamps > 0, 'internal cable clamps', ''), pick(yokes > 0, plural(yokes, 'device yoke', 'device yokes'), '')], ' and '))"}]],
+			"steps": [
+				{"kind": "formula", "text": "Conductors = box volume ÷ volume per conductor", "note": "Always round down: a part of a conductor does not fit."},
+				{"kind": "lookup", "set": [["V", "t('t314_16a', box, 'in3')"]], "text": "Table 314.16(A): {box} = {V} in³"},
+				{"kind": "lookup", "set": [["a", "t('t314_16b1', awg, 'in3')"]], "text": "Table 314.16(B)(1): {awg:awg} = {a} in³"},
+				{"kind": "calc", "set": [["q", "V / a"]], "text": "{V} ÷ {a} = {q:2} allowances", "keys": "{V} ÷ {a} ="},
+				{"kind": "round", "set": [["cap", "floor(q + 0.0000001)"]], "text": "Round down: {cap} allowances"},
+				{"kind": "rule", "when": "yokes + clamps > 0", "set": [["used", "yokes * v('314.16(B)(4).per_yoke') + clamps"], ["cap", "cap - used"]], "text": "Subtract {used} for {used_what}: {cap} conductors", "show": [["used_what", "join_nonempty([pick(yokes > 0, plural(yokes, 'yoke', 'yokes'), ''), pick(clamps > 0, 'clamps', '')], ' and ')"]], "note": "Each yoke takes 2 allowances; all clamps together take 1."},
+				{"kind": "round", "set": [["N", "cap"]], "text": "Maximum: {N} conductors"}
+			],
+			"answer": {"var": "N", "unit": "conductors", "tol": 0, "text": "{N}"}
+		},
+		{
+			"id": "conduit_fill_count",
+			"skill": "conduit_fill",
+			"card": "conduit_fill",
+			"title": "Conduit fill: how many wires fit",
+			"prompt": "How many {awg:awg} {ins_name} conductors may be installed in trade size {ts} {rw_name}{nip_text}?",
+			"hint": "Take the 40% area for the raceway (Chapter 9, Table 4; 60% for a nipple of 24 in. or less), divide by one wire's area (Table 5). Round up only if the decimal is 0.8 or more (Note 7).",
+			"levels": {
+				"1": {"vars": [["rw", {"pick": ["emt"]}], ["ins", {"pick": ["thhn"]}], ["ts", {"pick": ["1/2", "3/4", "1"]}], ["awg", {"pick": ["14", "12", "10"]}]]},
+				"2": {"vars": [["rw", {"pick": ["emt", "rmc", "pvc40"]}], ["ins", {"pick": ["thhn", "thw"]}], ["ts", {"pick": ["1/2", "3/4", "1", "1-1/4", "1-1/2"]}], ["awg", {"pick": ["14", "12", "10", "8", "6"]}]]},
+				"3": {"vars": [["rw", {"pick": ["emt", "imc", "rmc", "pvc40", "pvc80"]}], ["ins", {"pick": ["thhn", "thw", "xhhw"]}], ["ts", {"pick": ["1", "1-1/4", "1-1/2", "2", "2-1/2", "3"]}], ["awg", {"pick": ["8", "6", "4", "3", "2", "1", "1/0", "2/0", "3/0", "4/0"]}], ["nipple", {"pick": [0, 0, 1]}], ["nip_len", {"pick": [12, 18, 20, 24]}]]}
+			},
+			"vars": [["nipple", {"expr": "0"}], ["nip_len", {"expr": "0"}], ["nip_text", {"expr": "pick(nipple == 1, ', ' + fmt(nip_len) + ' in. long (a nipple)', '')"}], ["col", {"expr": "pick(nipple == 1, 'a60', 'a40')"}], ["pct_text", {"expr": "pick(nipple == 1, '60%', '40%')"}], ["rw_name", {"expr": "label(rw)"}], ["ins_name", {"expr": "upper(ins)"}], ["t4", {"expr": "'ch9_t4_' + rw"}], ["t5", {"expr": "'ch9_t5_' + pick(ins == 'tw', 'thw', ins)"}]],
+			"require": ["N >= 3 or nipple == 1", "N >= 1"],
+			"steps": [
+				{"kind": "formula", "text": "Wires = {pct_text} raceway area ÷ one wire's area", "note": "{fill_rule}", "show": [["fill_rule", "pick(nipple == 1, 'Chapter 9, Note 4: a nipple 24 in. or shorter may be filled to 60%.', 'Chapter 9, Table 1: over 2 wires may fill 40% of the raceway.')"]]},
+				{"kind": "lookup", "set": [["A", "t(t4, ts, col)"]], "text": "Chapter 9, Table 4, {rw_name} trade size {ts}, {pct_text} column = {A} in²"},
+				{"kind": "lookup", "set": [["w", "t(t5, awg, 'in2')"]], "text": "Chapter 9, Table 5, {ins_name} {awg:awg} = {w} in²"},
+				{"kind": "calc", "set": [["q", "A / w"]], "text": "{A} ÷ {w} = {q:2}", "keys": "{A} ÷ {w} ="},
+				{"kind": "round", "set": [["N", "upfrac(q, v('ch9.note7_round_up_at'))"]], "text": "{round_why} {N} wires", "show": [["round_why", "pick(frac(q) >= v('ch9.note7_round_up_at') - 0.0000001, 'The decimal is 0.8 or more, so round up (Note 7):', 'The decimal is under 0.8, so drop it (Note 7):')"]], "note": "Chapter 9, Note 7: round up only when the decimal is 0.8 or larger."}
+			],
+			"answer": {"var": "N", "unit": "wires", "tol": 0, "text": "{N}"}
+		},
+		{
+			"id": "conduit_size",
+			"skill": "conduit_fill",
+			"card": "conduit_fill",
+			"title": "Conduit fill: pick the raceway size",
+			"prompt": "What minimum trade size {rw_name} is required for {n} {awg:awg} {ins_name} conductors?",
+			"hint": "Multiply one wire's area (Table 5) by the number of wires, then find the first raceway whose 40% column is at least that big (Table 4).",
+			"levels": {
+				"1": {"vars": [["rw", {"pick": ["emt"]}], ["ins", {"pick": ["thhn"]}], ["n", {"range": [3, 9], "step": 1}], ["awg", {"pick": ["12", "10", "8"]}]]},
+				"2": {"vars": [["rw", {"pick": ["emt", "rmc", "pvc40"]}], ["ins", {"pick": ["thhn", "thw"]}], ["n", {"range": [3, 12], "step": 1}], ["awg", {"pick": ["12", "10", "8", "6", "4"]}]]},
+				"3": {"vars": [["rw", {"pick": ["emt", "imc", "rmc", "pvc40", "pvc80"]}], ["ins", {"pick": ["thhn", "thw", "xhhw"]}], ["n", {"range": [3, 9], "step": 1}], ["awg", {"pick": ["4", "3", "2", "1", "1/0", "2/0", "3/0", "4/0", "250"]}]]}
+			},
+			"vars": [["rw_name", {"expr": "label(rw)"}], ["ins_name", {"expr": "upper(ins)"}], ["t4", {"expr": "'ch9_t4_' + rw"}], ["t5", {"expr": "'ch9_t5_' + ins"}]],
+			"steps": [
+				{"kind": "formula", "text": "Total wire area ≤ 40% raceway area", "note": "Chapter 9, Table 1: over 2 wires may fill 40% of the raceway."},
+				{"kind": "lookup", "set": [["w", "t(t5, awg, 'in2')"]], "text": "Chapter 9, Table 5, {ins_name} {awg:awg} = {w} in² each"},
+				{"kind": "calc", "set": [["tot", "r(n * w, 4)"]], "text": "{n} × {w} = {tot} in²", "keys": "{n} × {w} ="},
+				{"kind": "lookup", "set": [["ts", "tmin(t4, 'a40', tot)"], ["A", "t(t4, ts, 'a40')"]], "text": "Chapter 9, Table 4, {rw_name}: trade size {ts} holds {A} in² at 40%, the first size that is at least {tot} in²"}
+			],
+			"answer": {"var": "ts", "kind": "choice", "options_table": "t4", "unit": "", "text": "Trade size {ts}"}
+		},
+		{
+			"id": "ampacity_adjusted",
+			"skill": "ampacity",
+			"card": "ampacity",
+			"title": "Ampacity with correction and adjustment",
+			"prompt": "What is the ampacity of a {size:awg} {metal_name} {ins} conductor in an ambient temperature of {ambient}°F with {ccc} current-carrying conductors in the raceway?",
+			"hint": "Start with Table 310.16, multiply by the temperature correction factor, then by the adjustment factor for more than three current-carrying conductors.",
+			"levels": {
+				"1": {"vars": [["metal", {"pick": ["cu"]}], ["temp", {"pick": [75]}], ["size", {"key": "t310_16", "from": "14", "to": "1/0"}], ["ambient", {"pick": [78, 80, 84, 86]}], ["ccc", {"range": [4, 9], "step": 1}]]},
+				"2": {"vars": [["metal", {"pick": ["cu"]}], ["temp", {"pick": [75, 90]}], ["size", {"key": "t310_16", "from": "14", "to": "4/0"}], ["ambient", {"range": [87, 122], "step": 1}], ["ccc", {"range": [3, 9], "step": 1}]]},
+				"3": {"vars": [["metal", {"pick": ["cu", "al"]}], ["temp", {"pick": [60, 75, 90]}], ["size", {"key": "t310_16", "from": "12", "to": "500"}], ["ambient", {"range": [60, 130], "step": 1}], ["ccc", {"range": [4, 24], "step": 1}]]}
+			},
+			"vars": [["metal_name", {"expr": "pick(metal == 'cu', 'copper', 'aluminum')"}], ["ins", {"expr": "pick(temp == 90, 'THHN', pick(temp == 75, 'THWN', 'TW'))"}], ["col", {"expr": "name(metal, temp)"}]],
+			"steps": [
+				{"kind": "formula", "text": "Ampacity = table value × correction × adjustment", "note": "310.15(B) corrects for hot or cold rooms. 310.15(C)(1) adjusts for more than three current-carrying conductors."},
+				{"kind": "lookup", "set": [["base", "t('t310_16', size, col)"]], "text": "Table 310.16, {size:awg}, {metal_name} {temp}°C column ({ins}) = {base} A"},
+				{"kind": "lookup", "set": [["corr", "trange('t310_15b1_1', ambient, name('c', temp))"]], "text": "Table 310.15(B)(1)(1): {ambient}°F is in the {amb_row} °F row, {temp}°C column = {corr}", "show": [["amb_row", "trange_key('t310_15b1_1', ambient)"]]},
+				{"kind": "lookup", "when": "ccc > 3", "set": [["adj_pct", "trange('t310_15c1', ccc, 'percent')"], ["adj", "adj_pct / 100.0"]], "text": "Table 310.15(C)(1): {ccc} conductors is in the {ccc_row} row = {adj_pct}% = {adj}", "show": [["ccc_row", "trange_key('t310_15c1', ccc)"]]},
+				{"kind": "rule", "when": "ccc <= 3", "set": [["adj", "1.0"]], "text": "3 or fewer current-carrying conductors: no adjustment (× 1.00)"},
+				{"kind": "calc", "set": [["amp", "base * corr * adj"]], "text": "{base} × {corr} × {adj} = {amp:4}", "keys": "{base} × {corr} × {adj} ="},
+				{"kind": "round", "set": [["amp", "r(amp, 3)"]], "text": "Ampacity ≈ {amp} A", "note": "Keep up to three decimal places."}
+			],
+			"answer": {"var": "amp", "unit": "A", "tol": 0.01, "rel": true, "text": "{amp} A"},
+			"from_check": {"kind": "ampacity", "map": {"size": "awg", "temp": "column_c", "ambient": "ambient_f", "ccc": "ccc"}, "fixed": {"metal": "cu"}}
+		},
+		{
+			"id": "vd_single",
+			"skill": "voltage_drop",
+			"card": "voltage_drop",
+			"title": "Voltage drop, single-phase (2KIL ÷ CM)",
+			"prompt": "A {E} V single-phase load draws {I} A at a distance of {L} ft (one way) using {size:awg} {metal_name} conductors. What is the voltage drop?",
+			"hint": "VD = 2 × K × I × L ÷ CM. L is the one-way distance; the 2 counts the trip out and back. CM comes from Chapter 9, Table 8.",
+			"levels": {
+				"1": {"vars": [["metal", {"pick": ["cu"]}], ["E", {"pick": [120, 240]}], ["size", {"pick": ["12", "10", "8"]}], ["I", {"range": [10, 20], "step": 1}], ["L", {"range": [50, 150], "step": 10}]]},
+				"2": {"vars": [["metal", {"pick": ["cu"]}], ["E", {"pick": [120, 240]}], ["size", {"pick": ["10", "8", "6", "4", "3", "2"]}], ["I", {"range": [15, 60], "step": 1}], ["L", {"range": [75, 250], "step": 5}]]},
+				"3": {"vars": [["metal", {"pick": ["cu", "al"]}], ["E", {"pick": [120, 208, 240, 277]}], ["size", {"pick": ["6", "4", "2", "1", "1/0", "2/0", "3/0", "4/0"]}], ["I", {"range": [30, 150], "step": 1}], ["L", {"range": [100, 400], "step": 5}]]}
+			},
+			"vars": [["metal_name", {"expr": "pick(metal == 'cu', 'copper', 'aluminum')"}]],
+			"require": ["I <= t('t310_16', size, name(metal, 75))"],
+			"steps": [
+				{"kind": "formula", "text": "VD = 2 × K × I × L ÷ CM", "note": "K = resistance constant, I = amps, L = one-way length in feet, CM = circular mils of the wire."},
+				{"kind": "given", "lines": ["I = {I} A", "L = {L} ft (one way)"]},
+				{"kind": "lookup", "set": [["K", "k(name('k_', metal))"]], "text": "K = {K} for {metal_name}", "note": "K is a textbook constant (ohms per circular-mil-foot), not an NEC table value."},
+				{"kind": "lookup", "set": [["CM", "t('ch9_t8', size, 'cmil')"]], "text": "Chapter 9, Table 8: {size:awg} = {CM} circular mils"},
+				{"kind": "calc", "set": [["top", "2 * K * I * L"]], "text": "2 × {K} × {I} × {L} = {top}", "keys": "2 × {K} × {I} × {L} ="},
+				{"kind": "calc", "set": [["VD", "top / CM"]], "text": "{top} ÷ {CM} = {VD:4}", "keys": "÷ {CM} ="},
+				{"kind": "round", "set": [["VD", "r(VD, 2)"]], "text": "VD ≈ {VD} V", "note": "Round to two decimal places."}
+			],
+			"answer": {"var": "VD", "unit": "V", "tol": 0.02, "rel": true, "text": "{VD} V"}
+		},
+		{
+			"id": "vd_three",
+			"skill": "voltage_drop",
+			"card": "voltage_drop",
+			"title": "Voltage drop, three-phase (1.732KIL ÷ CM)",
+			"prompt": "A {E} V three-phase load draws {I} A at a distance of {L} ft using {size:awg} {metal_name} conductors. What is the voltage drop?",
+			"hint": "Three-phase uses 1.732 instead of 2: VD = 1.732 × K × I × L ÷ CM.",
+			"levels": {
+				"1": {"vars": [["metal", {"pick": ["cu"]}], ["E", {"pick": [208, 480]}], ["size", {"pick": ["10", "8", "6"]}], ["I", {"range": [15, 30], "step": 1}], ["L", {"range": [50, 150], "step": 10}]]},
+				"2": {"vars": [["metal", {"pick": ["cu"]}], ["E", {"pick": [208, 240, 480]}], ["size", {"pick": ["8", "6", "4", "3", "2", "1"]}], ["I", {"range": [20, 100], "step": 1}], ["L", {"range": [75, 300], "step": 5}]]},
+				"3": {"vars": [["metal", {"pick": ["cu", "al"]}], ["E", {"pick": [208, 240, 480]}], ["size", {"pick": ["2", "1", "1/0", "2/0", "3/0", "4/0", "250", "350", "500"]}], ["I", {"range": [50, 300], "step": 1}], ["L", {"range": [100, 500], "step": 5}]]}
+			},
+			"vars": [["metal_name", {"expr": "pick(metal == 'cu', 'copper', 'aluminum')"}]],
+			"require": ["I <= t('t310_16', size, name(metal, 75))"],
+			"steps": [
+				{"kind": "formula", "text": "VD = 1.732 × K × I × L ÷ CM", "note": "Three-phase circuits use √3 (1.732) in place of 2."},
+				{"kind": "given", "lines": ["I = {I} A", "L = {L} ft"], "set": [["s3", "k('sqrt3')"]]},
+				{"kind": "lookup", "set": [["K", "k(name('k_', metal))"]], "text": "K = {K} for {metal_name}", "note": "K is a textbook constant (ohms per circular-mil-foot), not an NEC table value."},
+				{"kind": "lookup", "set": [["CM", "t('ch9_t8', size, 'cmil')"]], "text": "Chapter 9, Table 8: {size} = {CM} circular mils"},
+				{"kind": "calc", "set": [["top", "s3 * K * I * L"]], "text": "{s3} × {K} × {I} × {L} = {top:2}", "keys": "{s3} × {K} × {I} × {L} ="},
+				{"kind": "calc", "set": [["VD", "top / CM"]], "text": "{top:2} ÷ {CM} = {VD:4}", "keys": "÷ {CM} ="},
+				{"kind": "round", "set": [["VD", "r(VD, 2)"]], "text": "VD ≈ {VD} V", "note": "Round to two decimal places."}
+			],
+			"answer": {"var": "VD", "unit": "V", "tol": 0.02, "rel": true, "text": "{VD} V"}
+		},
+		{
+			"id": "vd_percent",
+			"skill": "voltage_drop",
+			"card": "voltage_drop",
+			"title": "Percent voltage drop",
+			"prompt": "You have {Vs} volts at the panel and {Vl} volts at the load. What is the percentage of voltage drop?",
+			"hint": "Subtract to get the drop, divide by the panel (source) voltage, then × 100.",
+			"levels": {
+				"1": {"vars": [["Vs", {"pick": [120, 240]}], ["drop", {"pick": [2.4, 3.6, 4.8, 6, 7.2]}]]},
+				"2": {"vars": [["Vs", {"pick": [120, 125, 208, 240, 480]}], ["drop", {"range": [1, 12], "step": 0.5}]]},
+				"3": {"vars": [["Vs", {"pick": [118, 120, 122, 208, 236, 240, 277, 480]}], ["drop", {"range": [0.5, 20], "step": 0.1}]]}
+			},
+			"vars": [["Vl", {"expr": "r(Vs - drop, 2)"}]],
+			"steps": [
+				{"kind": "formula", "text": "% drop = (V source − V load) ÷ V source × 100", "note": "Always divide by the source (panel) voltage."},
+				{"kind": "given", "lines": ["V source = {Vs} V (at the panel)", "V load = {Vl} V (at the load)"]},
+				{"kind": "calc", "set": [["d", "r(Vs - Vl, 4)"]], "text": "Drop = {Vs} − {Vl} = {d} V", "keys": "{Vs} − {Vl} ="},
+				{"kind": "calc", "set": [["pct", "d / Vs * 100"]], "text": "{d} ÷ {Vs} × 100 = {pct:4}%", "keys": "÷ {Vs} × 100 ="},
+				{"kind": "round", "set": [["pct", "r(pct, 2)"]], "text": "Voltage drop ≈ {pct}%", "note": "Round to two decimal places."}
+			],
+			"answer": {"var": "pct", "unit": "%", "tol": 0.02, "rel": true, "text": "{pct}%"},
+			"from_check": {"kind": "percent_drop", "map": {"Vs": "source_v", "Vl": "load_v"}, "derive": [["drop", "Vs - Vl"]]}
+		},
+		{
+			"id": "dwelling_lighting",
+			"skill": "dwelling_load",
+			"card": "dwelling_load",
+			"title": "Dwelling general lighting demand",
+			"prompt": "{intro} What is the demand load for general lighting, small-appliance and laundry circuits (standard method)?",
+			"hint": "Area × 3 VA, plus 1,500 VA for each small-appliance and laundry circuit. Then Table 220.45: first 3,000 VA at 100%, next up to 120,000 VA at 35%, the rest at 25%.",
+			"levels": {
+				"1": {"vars": [["units", {"expr": "1"}], ["area", {"range": [1000, 2400], "step": 50}], ["sa", {"pick": [2]}]]},
+				"2": {"vars": [["units", {"expr": "1"}], ["area", {"range": [1800, 4500], "step": 25}], ["sa", {"pick": [2, 3]}]]},
+				"3": {"vars": [["units", {"range": [12, 40], "step": 1}], ["area", {"range": [800, 1400], "step": 50}], ["sa", {"pick": [2]}]]}
+			},
+			"vars": [["intro", {"expr": "pick(units == 1, 'A ' + fmt(area) + ' ft² dwelling has ' + fmt(sa) + ' small-appliance circuits and one laundry circuit.', 'An apartment building has ' + fmt(units) + ' units. Each unit is ' + fmt(area) + ' ft² with 2 small-appliance circuits and one laundry circuit.')"}]],
+			"steps": [
+				{"kind": "formula", "text": "Lighting + small appliance + laundry, then demand factors", "note": "220.41 (3 VA per ft²), 220.52(A) and (B) (1,500 VA per circuit), Table 220.45 demand factors."},
+				{"kind": "calc", "set": [["gl", "area * v('220.41.va_per_ft2')"]], "text": "General lighting: {area} ft² × 3 VA = {gl} VA", "keys": "{area} × 3 ="},
+				{"kind": "calc", "set": [["sav", "sa * v('220.52(A).va_per_circuit')"]], "text": "Small appliance: {sa} × 1,500 = {sav} VA", "note": "220.52(A): at least two 20-ampere small-appliance circuits (210.11(C)(1))."},
+				{"kind": "calc", "set": [["lau", "v('220.52(B).va_per_circuit')"]], "text": "Laundry: 1 × 1,500 = {lau} VA", "note": "220.52(B)."},
+				{"kind": "calc", "set": [["unit_total", "gl + sav + lau"], ["total", "unit_total"]], "text": "Total: {gl} + {sav} + {lau} = {unit_total} VA", "keys": "{gl} + {sav} + {lau} ="},
+				{"kind": "calc", "when": "units > 1", "set": [["total", "unit_total * units"]], "text": "All units: {unit_total} × {units} = {total} VA", "keys": "× {units} ="},
+				{"kind": "lookup", "set": [["d1", "tier('t220_45', total, 0) * tierpct('t220_45', 0) / 100.0"]], "text": "Table 220.45: first 3,000 VA at 100% = {d1} VA"},
+				{"kind": "lookup", "set": [["p2", "tier('t220_45', total, 1)"], ["d2", "p2 * tierpct('t220_45', 1) / 100.0"]], "text": "Next {p2} VA at 35% = {d2} VA", "keys": "{total} − 3000 = × 35 % ", "basic": "{total} − 3000 = × 0.35 =", "note": "3,001 to 120,000 VA at 35%."},
+				{"kind": "lookup", "when": "total > 120000", "set": [["p3", "tier('t220_45', total, 2)"], ["d3", "p3 * tierpct('t220_45', 2) / 100.0"]], "text": "Over 120,000: {p3} VA at 25% = {d3} VA", "keys": "{p3} × 0.25 ="},
+				{"kind": "calc", "set": [["dem", "r(d1 + d2 + pick(total > 120000, tier('t220_45', total, 2) * tierpct('t220_45', 2) / 100.0, 0), 2)"]], "text": "Demand load = {dem} VA", "note": "Add the pieces together."}
+			],
+			"answer": {"var": "dem", "unit": "VA", "tol": 1, "text": "{dem} VA"}
+		},
+		{
+			"id": "dwelling_service",
+			"skill": "dwelling_load",
+			"card": "dwelling_load",
+			"title": "Dwelling service load (standard method)",
+			"prompt": "A {area} ft² dwelling has 2 small-appliance circuits, a laundry circuit, a {rkw} kW range, a {dry} W dryer, a {wh} W water heater, a {dw} W dishwasher, a {disp} W disposal{extra_text}, {heat} kW of electric heat and a {ac} VA air conditioner. What is the minimum service load in amperes at 120/240 V (standard method)?",
+			"hint": "Work down the list: lighting demand, range (Table 220.55), dryer (220.54, at least 5,000 W), fixed appliances (75% if four or more), the larger of heat or A/C, then divide by 240 V.",
+			"levels": {
+				"1": {"vars": [["area", {"range": [1200, 2400], "step": 50}], ["rkw", {"pick": [8, 10, 12]}], ["dry", {"pick": [4500, 5000]}], ["wh", {"pick": [4500]}], ["dw", {"pick": [1200]}], ["disp", {"pick": [900]}], ["extra", {"expr": "0"}], ["heat", {"pick": [5, 7.5]}], ["ac", {"pick": [3600, 4800]}]]},
+				"2": {"vars": [["area", {"range": [1500, 3000], "step": 50}], ["rkw", {"pick": [12, 13, 14, 15]}], ["dry", {"pick": [5000, 5500, 5760]}], ["wh", {"pick": [4500, 5000]}], ["dw", {"pick": [1200, 1500]}], ["disp", {"pick": [800, 900, 1000]}], ["extra", {"pick": [1500]}], ["heat", {"pick": [5, 7.5, 10]}], ["ac", {"pick": [3600, 4800, 6000]}]]},
+				"3": {"vars": [["area", {"range": [2000, 4000], "step": 25}], ["rkw", {"pick": [13, 14, 15, 16, 17]}], ["dry", {"pick": [5500, 5760, 6000]}], ["wh", {"pick": [4500, 5500]}], ["dw", {"pick": [1200, 1500]}], ["disp", {"pick": [800, 1000, 1150]}], ["extra", {"pick": [1200, 1500]}], ["heat", {"pick": [10, 12.5, 15, 20]}], ["ac", {"pick": [4800, 6000, 7200]}]]}
+			},
+			"vars": [["extra_text", {"expr": "pick(extra > 0, ', a ' + fmt(extra) + ' W built-in microwave', '')"}]],
+			"steps": [
+				{"kind": "formula", "text": "Service = lighting + range + dryer + appliances + larger of heat or A/C", "note": "Standard method, Article 220 Parts II and III. Divide the total VA by 240 V."},
+				{"kind": "calc", "set": [["tot_l", "area * v('220.41.va_per_ft2') + 2 * v('220.52(A).va_per_circuit') + v('220.52(B).va_per_circuit')"]], "text": "Lighting: {area} × 3 + 3,000 + 1,500 = {tot_l} VA", "note": "220.41, 220.52(A), 220.52(B).", "keys": "{area} × 3 + 3000 + 1500 ="},
+				{"kind": "lookup", "set": [["dem_l", "tier('t220_45', tot_l, 0) * tierpct('t220_45', 0) / 100.0 + tier('t220_45', tot_l, 1) * tierpct('t220_45', 1) / 100.0"]], "text": "Table 220.45: 3,000 + ({tot_l} − 3,000) × 35% = {dem_l} VA", "keys": "{tot_l} − 3000 = × 0.35 = + 3000 ="},
+				{"kind": "lookup", "set": [["r_base", "t('t220_55', '1', 'col_c')"], ["r_over", "major(max(0, rkw - v('220.55.note1_base_kw')))"], ["r_kw", "r(r_base * (1 + r_over * v('220.55.note1_percent_per_kw') / 100.0), 3)"], ["r_va", "r_kw * 1000"]], "text": "Range: Table 220.55, Column C, 1 range = {r_base} kW{r_note} → {r_va} VA", "show": [["r_note", "pick(r_over > 0, ', + ' + fmt(r_over * 5) + '% (Note 1: ' + fmt(r_over) + ' kW over 12) = ' + fmt(r(r_base * (1 + r_over * 0.05), 3)) + ' kW', '')"]]},
+				{"kind": "rule", "set": [["dry_va", "max(dry, v('220.54.min_watts'))"]], "text": "Dryer: larger of {dry} W or 5,000 W = {dry_va} VA", "note": "220.54: at least 5,000 W or the nameplate, whichever is larger."},
+				{"kind": "calc", "set": [["app_n", "3 + nz(extra)"], ["app", "wh + dw + disp + extra"]], "text": "Fixed appliances ({app_n}): {app_list} = {app} VA", "show": [["app_list", "join_nonzero([wh, dw, disp, extra], ' + ')"]], "keys": "{app_list} =", "note": "Water heater, dishwasher, disposal and similar appliances fastened in place."},
+				{"kind": "rule", "when": "app_n >= v('220.53.min_count')", "set": [["app_d", "app * v('220.53.percent') / 100.0"]], "text": "Four or more: × 75% = {app_d} VA", "note": "220.53: 75% demand for four or more fastened-in-place appliances.", "keys": "{app} × 0.75 ="},
+				{"kind": "rule", "when": "app_n < v('220.53.min_count')", "set": [["app_d", "app"]], "text": "Fewer than four: 100% = {app_d} VA", "note": "220.53 applies only to four or more appliances."},
+				{"kind": "rule", "set": [["heat_va", "heat * 1000"], ["hvac", "max(heat_va, ac)"]], "text": "Heat {heat_va} VA vs. A/C {ac} VA: use the larger = {hvac} VA", "note": "220.60: noncoincident loads, use only the larger."},
+				{"kind": "calc", "set": [["va", "dem_l + r_va + dry_va + app_d + hvac"]], "text": "Total: {dem_l} + {r_va} + {dry_va} + {app_d} + {hvac} = {va} VA", "keys": "{dem_l} + {r_va} + {dry_va} + {app_d} + {hvac} ="},
+				{"kind": "calc", "set": [["amps", "r(va / k('single_phase_service_v'), 1)"]], "text": "{va} ÷ 240 V = {amps} A", "keys": "÷ 240 ="}
+			],
+			"answer": {"var": "amps", "unit": "A", "tol": 0.01, "rel": true, "text": "{amps} A"}
+		},
+		{
+			"id": "range_demand",
+			"skill": "range_dryer",
+			"card": "range_demand",
+			"title": "Range demand (Table 220.55)",
+			"prompt": "{intro} What is the demand load in kW?",
+			"hint": "Column C gives the demand for ranges up to 12 kW. For bigger ranges, add 5% to the Column C value for each kW (or major fraction) over 12 kW (Note 1).",
+			"levels": {
+				"1": {"vars": [["n", {"expr": "1"}], ["kw", {"pick": [9, 10, 11, 12, 13, 14]}]]},
+				"2": {"vars": [["n", {"expr": "1"}], ["kw", {"pick": [12.8, 13, 14, 15, 15.6, 16, 17, 18, 20]}]]},
+				"3": {"vars": [["n", {"range": [2, 45], "step": 1}], ["kw", {"pick": [8, 10, 12, 13, 13.7, 14, 15, 16, 16.3, 18]}]]}
+			},
+			"vars": [["intro", {"expr": "pick(n == 1, 'A ' + fmt(kw) + ' kW range is installed in a dwelling unit.', fmt(n) + ' ranges rated ' + fmt(kw) + ' kW each are installed in an apartment building.')"}]],
+			"steps": [
+				{"kind": "formula", "text": "Demand = Column C × (1 + 5% × kW over 12)", "note": "Table 220.55, Column C and Note 1."},
+				{"kind": "lookup", "when": "n <= 25", "set": [["base", "trange('t220_55', n, 'col_c')"]], "text": "Table 220.55, Column C, {n} range(s) = {base} kW"},
+				{"kind": "lookup", "when": "n > 25", "set": [["base", "trange('t220_55', n, 'col_c')"]], "text": "Table 220.55, Column C, {row} ranges: {rule} = {base} kW", "show": [["row", "trange_key('t220_55', n)"], ["rule", "trange_text('t220_55', n, 'col_c_label')"], ["rule_keys", "trange_text('t220_55', n, 'col_c_expr').replace('n', name('', n)).replace('*', '×') + ' ='"]], "keys": "{rule_keys}", "note": "For 26 or more ranges Column C is a formula: n = {n} ranges."},
+				{"kind": "rule", "when": "kw <= v('220.55.note1_base_kw')", "set": [["dem", "base"]], "text": "{kw} kW is not over 12 kW, so Column C applies as is: {dem} kW"},
+				{"kind": "calc", "when": "kw > v('220.55.note1_base_kw')", "set": [["over_raw", "r(kw - v('220.55.note1_base_kw'), 3)"], ["over", "major(over_raw)"]], "text": "{kw} − 12 = {over_raw} kW over → counts as {over} kW", "note": "Note 1: each kW or major fraction (more than half) of a kW counts."},
+				{"kind": "calc", "when": "kw > v('220.55.note1_base_kw')", "set": [["inc", "over * v('220.55.note1_percent_per_kw')"]], "text": "{over} × 5% = {inc}% increase", "keys": "{over} × 5 ="},
+				{"kind": "calc", "when": "kw > v('220.55.note1_base_kw')", "set": [["dem", "r(base * (1 + inc / 100.0), 3)"]], "text": "{base} kW × {mult} = {dem} kW", "show": [["mult", "r(1 + inc / 100.0, 3)"]], "keys": "{base} × {mult} ="}
+			],
+			"answer": {"var": "dem", "unit": "kW", "tol": 0.01, "rel": true, "text": "{dem} kW"},
+			"from_check": {"kind": "range_demand", "map": {"kw": "kw"}, "fixed": {"n": 1}}
+		},
+		{
+			"id": "dryer_demand",
+			"skill": "range_dryer",
+			"card": "dryer_demand",
+			"title": "Dryer demand (Table 220.54)",
+			"prompt": "{n} electric clothes dryers rated {w} W each are installed in a multifamily building. What is the demand load in kW?",
+			"hint": "Each dryer counts at least 5,000 W (or its nameplate if bigger). Add them up, then use the Table 220.54 percentage for the number of dryers.",
+			"levels": {
+				"1": {"vars": [["n", {"range": [2, 4], "step": 1}], ["w", {"pick": [4500, 5000, 5500]}]]},
+				"2": {"vars": [["n", {"range": [5, 11], "step": 1}], ["w", {"pick": [4500, 5000, 5500, 5760]}]]},
+				"3": {"vars": [["n", {"range": [12, 40], "step": 1}], ["w", {"pick": [5000, 5500, 5760, 6000]}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "Demand = dryers × watts each × Table 220.54 %", "note": "220.54: use 5,000 W or the nameplate rating, whichever is larger."},
+				{"kind": "rule", "set": [["each", "max(w, v('220.54.min_watts'))"]], "text": "Each dryer: larger of {w} W or 5,000 W = {each} W"},
+				{"kind": "calc", "set": [["tot", "n * each"]], "text": "{n} × {each} = {tot} W", "keys": "{n} × {each} ="},
+				{"kind": "lookup", "set": [["pct", "trange('t220_54', n, 'percent')"]], "text": "Table 220.54, {n} dryers ({row}) = {pct}%", "show": [["row", "trange_key('t220_54', n)"]]},
+				{"kind": "calc", "set": [["dem_w", "r(tot * pct / 100.0, 2)"]], "text": "{tot} × {pct}% = {dem_w} W", "keys": "{tot} × {pct} %", "basic": "{tot} × {pct} ÷ 100 ="},
+				{"kind": "calc", "set": [["dem", "r(dem_w / 1000.0, 4)"]], "text": "{dem_w} W ÷ 1,000 = {dem} kW", "keys": "÷ 1000 ="}
+			],
+			"answer": {"var": "dem", "unit": "kW", "tol": 0.001, "rel": true, "text": "{dem} kW"}
+		},
+		{
+			"id": "dryer_neutral",
+			"skill": "range_dryer",
+			"card": "dryer_demand",
+			"title": "Dryer feeder neutral (220.61(B))",
+			"prompt": "What is the feeder neutral demand for {n} household electric clothes dryers rated {w} W each?",
+			"hint": "Work out the Table 220.54 dryer demand first, then take 70% of it for the neutral (220.61(B)(1)).",
+			"levels": {
+				"1": {"vars": [["n", {"range": [2, 4], "step": 1}], ["w", {"pick": [4500, 5000, 5500]}]]},
+				"2": {"vars": [["n", {"range": [5, 11], "step": 1}], ["w", {"pick": [4500, 5000, 5500, 5760]}]]},
+				"3": {"vars": [["n", {"range": [12, 40], "step": 1}], ["w", {"pick": [5000, 5500, 5760, 6000]}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "Neutral = dryer demand × 70%", "note": "220.61(B)(1): a 70% demand factor is permitted on the neutral for household dryers figured with Table 220.54."},
+				{"kind": "rule", "set": [["each", "max(w, v('220.54.min_watts'))"]], "text": "Each dryer: larger of {w} W or 5,000 W = {each} W", "note": "220.54."},
+				{"kind": "calc", "set": [["tot", "n * each"]], "text": "{n} × {each} = {tot} W", "keys": "{n} × {each} ="},
+				{"kind": "lookup", "set": [["pct", "trange('t220_54', n, 'percent')"], ["dem_w", "tot * pct / 100.0"]], "text": "Table 220.54, {n} dryers = {pct}% → {tot} × {pct}% = {dem_w} W", "keys": "× {pct} %", "basic": "× {pct} ÷ 100 ="},
+				{"kind": "calc", "set": [["neu_w", "r(dem_w * v('220.61(B).neutral_percent') / 100.0, 2)"]], "text": "Neutral: {dem_w} × 70% = {neu_w} W", "keys": "× 0.7 ="},
+				{"kind": "calc", "set": [["neu", "r(neu_w / 1000.0, 4)"]], "text": "{neu_w} W ÷ 1,000 = {neu} kW", "keys": "÷ 1000 ="}
+			],
+			"answer": {"var": "neu", "unit": "kW", "tol": 0.001, "rel": true, "text": "{neu} kW"}
+		},
+		{
+			"id": "range_col_b",
+			"skill": "range_dryer",
+			"card": "range_demand",
+			"title": "Cooking appliances, Column B (Table 220.55 Note 3)",
+			"prompt": "What is the demand load for {n} household cooking appliances rated {kw} kW each (use Column B, Note 3)?",
+			"hint": "Add the nameplate ratings, then multiply by the Column B percentage for the number of appliances. Column B is for appliances from 3½ kW through 8¾ kW.",
+			"levels": {
+				"1": {"vars": [["n", {"range": [1, 4], "step": 1}], ["kw", {"pick": [4, 5, 6, 8]}]]},
+				"2": {"vars": [["n", {"range": [2, 12], "step": 1}], ["kw", {"pick": [3.5, 4, 4.5, 5, 6, 7, 8]}]]},
+				"3": {"vars": [["n", {"range": [5, 40], "step": 1}], ["kw", {"pick": [3.5, 4, 4.5, 5, 5.5, 6, 7, 7.5, 8, 8.5]}]]}
+			},
+			"vars": [["total", {"expr": "n * kw"}], ["sum_text", {"expr": "fmt(n) + ' × ' + fmt(kw) + ' kW'"}]],
+			"steps": [
+				{"kind": "formula", "text": "Demand = total nameplate kW × Column B %", "note": "Table 220.55, Note 3: permitted instead of Column C for appliances over 1¾ kW through 8¾ kW."},
+				{"kind": "calc", "text": "Total nameplate: {sum_text} = {total} kW"},
+				{"kind": "lookup", "set": [["pct", "trange('t220_55', n, 'col_b')"]], "text": "Table 220.55, Column B, {n} appliance(s) = {pct}%"},
+				{"kind": "calc", "set": [["dem", "r(total * pct / 100.0, 3)"]], "text": "{total} × {pct}% = {dem} kW", "keys": "{total} × {pct} %", "basic": "{total} × {pct} ÷ 100 ="}
+			],
+			"answer": {"var": "dem", "unit": "kW", "tol": 0.01, "rel": true, "text": "{dem} kW"}
+		},
+		{
+			"id": "motor_flc",
+			"skill": "motors",
+			"card": "motor",
+			"title": "Motor full-load current (Tables 430.248/250)",
+			"prompt": "What full-load current is used to size the conductors for a {hp} hp, {V} V, {phase_name} induction motor?",
+			"hint": "430.6(A)(1): use the table current, not the nameplate. Single-phase is Table 430.248, three-phase is Table 430.250.",
+			"levels": {
+				"1": {"vars": [["ph", {"pick": [3]}], ["V", {"pick": [230, 460]}], ["hp", {"pick": ["1", "2", "3", "5", "7-1/2", "10", "15", "20", "25", "30", "40", "50"]}]]},
+				"2": {"vars": [["ph", {"pick": [1]}], ["V", {"pick": [115, 230]}], ["hp", {"pick": ["1/2", "3/4", "1", "1-1/2", "2", "3", "5"]}]]},
+				"3": {"vars": [["ph", {"pick": [1, 3]}], ["V", {"pick": [208, 200]}], ["hp", {"pick": ["1", "2", "3", "5", "7-1/2", "10"]}]]}
+			},
+			"vars": [["phase_name", {"expr": "pick(ph == 1, 'single-phase', 'three-phase')"}], ["tbl", {"expr": "pick(ph == 1, 't430_248', 't430_250')"}], ["tname", {"expr": "pick(ph == 1, 'Table 430.248', 'Table 430.250')"}]],
+			"steps": [
+				{"kind": "rule", "text": "Use the table current, not the nameplate", "note": "430.6(A)(1): conductor and overcurrent sizing use the NEC table full-load current."},
+				{"kind": "lookup", "set": [["flc", "t(tbl, hp, name('v', V))"]], "text": "{tname}, {hp} hp, {V} V column = {flc} A"}
+			],
+			"answer": {"var": "flc", "unit": "A", "tol": 0.001, "rel": true, "text": "{flc} A"}
+		},
+		{
+			"id": "motor_conductor",
+			"skill": "motors",
+			"card": "motor",
+			"title": "Motor branch-circuit conductor (125%)",
+			"prompt": "What minimum conductor ampacity is required for a {hp} hp, {V} V, {phase_name} motor (single motor, continuous duty)?",
+			"hint": "Find the table full-load current (Table 430.248 single-phase, 430.250 three-phase) and multiply by 125% (430.22).",
+			"levels": {
+				"1": {"vars": [["ph", {"pick": [3]}], ["V", {"pick": [460]}], ["hp", {"pick": ["5", "7-1/2", "10", "15", "20", "25", "30"]}]]},
+				"2": {"vars": [["ph", {"pick": [1, 3]}], ["V", {"pick": [115, 230, 460]}], ["hp", {"pick": ["3/4", "1", "2", "3", "5", "7-1/2", "10", "15", "20", "25", "30", "40", "50"]}]]},
+				"3": {"vars": [["ph", {"pick": [1, 3]}], ["V", {"pick": [200, 208, 230, 460, 575]}], ["hp", {"pick": ["1-1/2", "3", "5", "10", "15", "20", "25", "30", "40", "50", "60", "75", "100"]}]]}
+			},
+			"vars": [["ph", {"expr": "3"}], ["phase_name", {"expr": "pick(ph == 1, 'single-phase', 'three-phase')"}], ["tbl", {"expr": "pick(ph == 1, 't430_248', 't430_250')"}], ["tname", {"expr": "pick(ph == 1, 'Table 430.248', 'Table 430.250')"}]],
+			"steps": [
+				{"kind": "formula", "text": "Conductor ampacity = FLC × 125%", "note": "430.22: a single continuous-duty motor needs conductors rated at least 125% of its full-load current."},
+				{"kind": "lookup", "set": [["flc", "t(tbl, hp, name('v', V))"]], "text": "{tname}, {hp} hp, {V} V = {flc} A"},
+				{"kind": "calc", "set": [["amp", "r(flc * v('430.22.percent') / 100.0, 2)"]], "text": "{flc} × 1.25 = {amp} A", "keys": "{flc} × 1.25 ="}
+			],
+			"answer": {"var": "amp", "unit": "A", "tol": 0.01, "rel": true, "text": "{amp} A"}
+		},
+		{
+			"id": "motor_overload",
+			"skill": "motors",
+			"card": "motor",
+			"title": "Motor overload protection (430.32)",
+			"prompt": "A motor has a nameplate full-load current of {fla} A and {marking}. What is the maximum rating of the separate overload device?",
+			"hint": "Overloads use the nameplate current. 125% if the service factor is 1.15 or more or the temperature rise is 40°C or less; 115% for all other motors.",
+			"levels": {
+				"1": {"vars": [["fla", {"range": [4, 40], "step": 1}], ["mk", {"pick": [1, 3]}]]},
+				"2": {"vars": [["fla", {"range": [2, 60], "step": 0.5}], ["mk", {"pick": [1, 2, 3]}]]},
+				"3": {"vars": [["fla", {"range": [1.2, 120], "step": 0.1}], ["mk", {"pick": [1, 2, 3]}]]}
+			},
+			"vars": [["marking", {"expr": "pick(mk == 1, 'a service factor of 1.15', pick(mk == 2, 'a marked temperature rise of 40°C', 'a service factor of 1.0'))"}]],
+			"steps": [
+				{"kind": "rule", "text": "Overloads are sized from the nameplate", "note": "430.6(A)(2): separate motor overload protection is based on the motor nameplate current."},
+				{"kind": "rule", "set": [["pct", "pick(mk == 1, v('430.32(A)(1).service_factor_percent'), pick(mk == 2, v('430.32(A)(1).temp_rise_percent'), v('430.32(A)(1).other_percent')))"]], "text": "430.32(A)(1): {why} → {pct}%", "show": [["why", "pick(mk == 1, 'service factor 1.15 or more', pick(mk == 2, 'temperature rise 40°C or less', 'all other motors'))"]]},
+				{"kind": "calc", "set": [["ol", "r(fla * pct / 100.0, 2)"]], "text": "{fla} × {mult} = {ol} A", "show": [["mult", "pct / 100.0"]], "keys": "{fla} × {mult} ="}
+			],
+			"answer": {"var": "ol", "unit": "A", "tol": 0.01, "rel": true, "text": "{ol} A"}
+		},
+		{
+			"id": "motor_ocpd",
+			"skill": "motors",
+			"card": "motor",
+			"title": "Motor short-circuit/ground-fault protection (430.52)",
+			"prompt": "What is the maximum {device_name} rating for the branch-circuit short-circuit and ground-fault protection of a {hp} hp, {V} V, {motor_name}?",
+			"hint": "Table FLC × the Table 430.52(C)(1) percentage for the device type. If that is not a standard size, 430.52(C)(1)(a) lets you go up to the next standard size in 240.6(A).",
+			"levels": {
+				"1": {"vars": [["ph", {"pick": [3]}], ["dev", {"pick": ["inverse_breaker"]}], ["V", {"pick": [460]}], ["hp", {"pick": ["5", "7-1/2", "10", "15", "20", "25", "30"]}]]},
+				"2": {"vars": [["ph", {"pick": [1, 3]}], ["dev", {"pick": ["inverse_breaker", "dual_fuse"]}], ["V", {"pick": [115, 230, 460]}], ["hp", {"pick": ["1", "2", "3", "5", "7-1/2", "10", "15", "20", "25", "30", "40", "50"]}]]},
+				"3": {"vars": [["ph", {"pick": [1, 3]}], ["dev", {"pick": ["inverse_breaker", "dual_fuse", "nontime_fuse"]}], ["V", {"pick": [200, 208, 230, 460, 575]}], ["hp", {"pick": ["1-1/2", "3", "5", "10", "15", "20", "25", "30", "40", "50", "60", "75", "100"]}]]}
+			},
+			"vars": [["ph", {"expr": "3"}], ["device_name", {"expr": "pick(dev == 'inverse_breaker', 'inverse time circuit breaker', pick(dev == 'dual_fuse', 'dual-element (time-delay) fuse', 'nontime-delay fuse'))"}], ["mtype", {"expr": "pick(ph == 1, 'single_phase', 'squirrel_cage')"}], ["motor_name", {"expr": "label(mtype)"}], ["tbl", {"expr": "pick(ph == 1, 't430_248', 't430_250')"}], ["tname", {"expr": "pick(ph == 1, 'Table 430.248', 'Table 430.250')"}]],
+			"steps": [
+				{"kind": "formula", "text": "Max rating = FLC × Table 430.52(C)(1) %", "note": "Then 430.52(C)(1)(a) permits the next higher standard size."},
+				{"kind": "lookup", "set": [["flc", "t(tbl, hp, name('v', V))"]], "text": "{tname}, {hp} hp, {V} V = {flc} A"},
+				{"kind": "lookup", "set": [["pct", "t('t430_52c1', mtype, dev)"]], "text": "Table 430.52(C)(1), {motor_name}, {device_name} = {pct}%"},
+				{"kind": "calc", "set": [["raw", "r(flc * pct / 100.0, 2)"]], "text": "{flc} × {mult} = {raw} A", "show": [["mult", "pct / 100.0"]], "keys": "{flc} × {mult} ="},
+				{"kind": "round", "set": [["ocpd", "tnext('t240_6a', 'amps', raw)"]], "text": "Next standard size (240.6(A)) at or above {raw} A = {ocpd} A", "note": "430.52(C)(1)(a): where the value is not a standard size, the next higher standard size is permitted."}
+			],
+			"answer": {"var": "ocpd", "unit": "A", "tol": 0, "text": "{ocpd} A"}
+		},
+		{
+			"id": "transformer_1ph",
+			"skill": "transformers",
+			"card": "transformer",
+			"title": "Single-phase transformer current",
+			"prompt": "What is the full-load secondary current of a {kva} kVA single-phase transformer with a {E} V secondary?",
+			"hint": "Change kVA to VA (× 1,000), then divide by the voltage.",
+			"levels": {
+				"1": {"vars": [["kva", {"pick": [10, 15, 25, 50]}], ["E", {"pick": [120, 240]}]]},
+				"2": {"vars": [["kva", {"pick": [5, 10, 15, 25, 37.5, 50, 75, 100]}], ["E", {"pick": [120, 208, 240, 277, 480]}]]},
+				"3": {"vars": [["kva", {"pick": [3, 7.5, 37.5, 75, 167, 250]}], ["E", {"pick": [120, 208, 240, 277, 480, 600]}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "I = VA ÷ E", "note": "Single-phase: volt-amperes divided by volts."},
+				{"kind": "given", "set": [["VA", "kva * 1000"]], "lines": ["{kva} kVA × 1,000 = {VA} VA", "E = {E} V"]},
+				{"kind": "calc", "set": [["I", "VA / E"]], "text": "I = {VA} ÷ {E} = {I:4}", "keys": "{VA} ÷ {E} ="},
+				{"kind": "round", "set": [["I", "r(I, 2)"]], "text": "I ≈ {I} A", "note": "Round to two decimal places."}
+			],
+			"answer": {"var": "I", "unit": "A", "tol": 0.01, "rel": true, "text": "{I} A"}
+		},
+		{
+			"id": "transformer_3ph",
+			"skill": "transformers",
+			"card": "transformer",
+			"title": "Three-phase transformer current",
+			"prompt": "What is the full-load {side} current of a {kva} kVA three-phase transformer at {E} V?",
+			"hint": "Three-phase: I = VA ÷ (E × 1.732). Multiply E × 1.732 first.",
+			"levels": {
+				"1": {"vars": [["kva", {"pick": [45, 75, 112.5, 150]}], ["E", {"pick": [208, 480]}], ["side", {"pick": ["secondary"]}]]},
+				"2": {"vars": [["kva", {"pick": [30, 45, 75, 112.5, 150, 225, 300]}], ["E", {"pick": [208, 240, 480]}], ["side", {"pick": ["primary", "secondary"]}]]},
+				"3": {"vars": [["kva", {"pick": [15, 30, 45, 75, 112.5, 150, 225, 300, 500, 750]}], ["E", {"pick": [208, 240, 480, 600]}], ["side", {"pick": ["primary", "secondary"]}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "I = VA ÷ (E × 1.732)", "note": "Three-phase: volt-amperes divided by (line volts × √3)."},
+				{"kind": "given", "set": [["VA", "kva * 1000"], ["s3", "k('sqrt3')"]], "lines": ["{kva} kVA × 1,000 = {VA} VA", "E = {E} V"]},
+				{"kind": "calc", "set": [["den", "E * s3"]], "text": "{E} × {s3} = {den:3}", "keys": "{E} × {s3} = M+"},
+				{"kind": "calc", "set": [["I", "VA / den"]], "text": "I = {VA} ÷ {den:3} = {I:4}", "keys": "{VA} ÷ MR =", "note": "Scientific calculator in one go: {VA} ÷ ( {E} × {s3} ) ="},
+				{"kind": "round", "set": [["I", "r(I, 2)"]], "text": "I ≈ {I} A", "note": "Round to two decimal places."}
+			],
+			"answer": {"var": "I", "unit": "A", "tol": 0.01, "rel": true, "text": "{I} A"}
+		},
+		{
+			"id": "percent_of",
+			"skill": "percent",
+			"card": "percent",
+			"title": "Percent of a number",
+			"prompt": "What is {p}% of {x}?",
+			"hint": "Change the percent to a decimal (move the point two places left), then multiply.",
+			"levels": {
+				"1": {"vars": [["p", {"pick": [10, 25, 50, 75, 80, 125]}], ["x", {"range": [10, 200], "step": 10}]]},
+				"2": {"vars": [["p", {"pick": [35, 40, 60, 65, 80, 115, 125, 175, 250]}], ["x", {"range": [5, 500], "step": 1}]]},
+				"3": {"vars": [["p", {"range": [1, 300], "step": 0.5}], ["x", {"range": [1, 2000], "step": 0.5}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "Part = percent ÷ 100 × number", "note": "Percent means per hundred: 80% = 0.80, 125% = 1.25."},
+				{"kind": "calc", "set": [["dec", "p / 100.0"]], "text": "{p}% = {p} ÷ 100 = {dec}", "keys": "{p} ÷ 100 ="},
+				{"kind": "calc", "set": [["ans", "r(dec * x, 2)"]], "text": "{dec} × {x} = {ans}", "keys": "× {x} ="}
+			],
+			"answer": {"var": "ans", "unit": "", "tol": 0.01, "rel": true, "text": "{ans}"}
+		},
+		{
+			"id": "efficiency",
+			"skill": "percent",
+			"card": "percent",
+			"title": "Efficiency (output ÷ input)",
+			"prompt": "A motor delivers {hp} hp of output while drawing {win} W of input power. What is its efficiency?",
+			"hint": "Change horsepower to watts (× 746), then efficiency = output ÷ input × 100.",
+			"levels": {
+				"1": {"vars": [["hp", {"pick": [1, 2, 5, 10]}], ["eff_t", {"pick": [80, 85, 90]}]]},
+				"2": {"vars": [["hp", {"pick": [0.5, 1, 1.5, 2, 3, 5, 7.5, 10]}], ["eff_t", {"range": [70, 95], "step": 1}]]},
+				"3": {"vars": [["hp", {"pick": [0.25, 0.75, 1.5, 3, 7.5, 15, 25, 40]}], ["eff_t", {"range": [65, 96], "step": 0.5}]]}
+			},
+			"vars": [["win", {"expr": "round(hp * k('watts_per_hp') / (eff_t / 100.0))"}]],
+			"steps": [
+				{"kind": "formula", "text": "Efficiency = output ÷ input × 100", "note": "Both must be in the same units (watts)."},
+				{"kind": "calc", "set": [["wout", "hp * k('watts_per_hp')"]], "text": "Output: {hp} hp × 746 = {wout} W", "keys": "{hp} × 746 ="},
+				{"kind": "calc", "set": [["eff", "wout / win * 100"]], "text": "{wout} ÷ {win} × 100 = {eff:4}%", "keys": "÷ {win} × 100 ="},
+				{"kind": "round", "set": [["eff", "r(eff, 1)"]], "text": "Efficiency ≈ {eff}%", "note": "Round to one decimal place."}
+			],
+			"answer": {"var": "eff", "unit": "%", "tol": 0.2, "text": "{eff}%"}
+		},
+		{
+			"id": "percent_to_fraction",
+			"skill": "percent",
+			"card": "percent",
+			"title": "Percent to fraction",
+			"prompt": "{p}% is equivalent to what fraction?",
+			"hint": "Write it over 100, then divide top and bottom by the biggest number that goes into both.",
+			"levels": {
+				"1": {"vars": [["p", {"pick": [10, 20, 25, 50, 75]}]]},
+				"2": {"vars": [["p", {"pick": [5, 15, 30, 40, 60, 70, 80, 90]}]]},
+				"3": {"vars": [["p", {"pick": [12.5, 35, 45, 62.5, 65, 85, 87.5, 95]}]]}
+			},
+			"vars": [["num0", {"expr": "p * pick(p == floor(p), 1, 10)"}], ["den0", {"expr": "100 * pick(p == floor(p), 1, 10)"}]],
+			"steps": [
+				{"kind": "formula", "text": "Percent ÷ 100 = fraction", "note": "Percent means per hundred."},
+				{"kind": "given", "text": "{p}% = {num0} / {den0}"},
+				{"kind": "calc", "set": [["g", "gcd(num0, den0)"]], "text": "The biggest number that divides both {num0} and {den0} is {g}"},
+				{"kind": "calc", "set": [["fr", "fraction(num0, den0)"]], "text": "{num0} ÷ {g} = {fn}  and  {den0} ÷ {g} = {fd}  →  {fr}", "show": [["fn", "num0 / gcd(num0, den0)"], ["fd", "den0 / gcd(num0, den0)"]], "keys": "{p} ÷ 100 =", "note": "Check on the calculator: {p} ÷ 100 and {fn} ÷ {fd} give the same decimal."}
+			],
+			"answer": {"var": "fr", "kind": "choice", "distractors": ["fraction(num0 + den0 / 20, den0)", "fraction(den0 - num0, den0)", "fraction(num0, den0 * 2)"], "text": "{fr}"},
+			"from_check": {"kind": "fraction", "map": {"fn_in": "numerator", "fd_in": "denominator"}, "derive": [["p", "fn_in / fd_in * 100"]]}
+		},
+		{
+			"id": "phase_time",
+			"skill": "percent",
+			"card": "percent",
+			"title": "Time for part of an AC cycle",
+			"prompt": "A {hz} Hz sine wave travels {deg} degrees in how many seconds?",
+			"hint": "One full cycle is 360° and takes 1/Hz seconds. Find what fraction of 360° you have.",
+			"levels": {
+				"1": {"vars": [["hz", {"pick": [60]}], ["deg", {"pick": [90, 180, 360]}]]},
+				"2": {"vars": [["hz", {"pick": [50, 60]}], ["deg", {"pick": [30, 45, 60, 90, 120, 180, 270]}]]},
+				"3": {"vars": [["hz", {"pick": [50, 60, 400]}], ["deg", {"pick": [15, 30, 45, 60, 72, 90, 120, 135, 240]}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "t = (degrees ÷ 360) × (1 ÷ Hz)", "note": "One cycle = 360°. At 60 Hz one cycle takes 1/60 of a second."},
+				{"kind": "calc", "set": [["part", "fraction(deg, 360)"]], "text": "{deg}° ÷ 360° = {part} of a cycle"},
+				{"kind": "calc", "set": [["t", "fraction(deg, 360 * hz)"]], "text": "{part} × 1/{hz} = {t} second", "keys": "{deg} ÷ 360 ÷ {hz} =", "note": "Compare the decimal with each choice: 1 ÷ 240 = 0.00417."}
+			],
+			"answer": {"var": "t", "kind": "choice", "distractors": ["fraction(deg * 2, 360 * hz)", "fraction(deg, 180 * hz)", "fraction(1, hz)"], "text": "{t} s"},
+			"from_check": {"kind": "phase_time", "map": {"deg": "degrees", "hz": "hertz"}}
+		},
+		{
+			"id": "scale_drawing",
+			"skill": "percent",
+			"card": "percent",
+			"title": "Scale drawings",
+			"prompt": "A plan is drawn at a scale of {scale_text} inch = 1 foot. A dimension of {inch} inches on the drawing equals how many feet?",
+			"hint": "Divide the drawing inches by the inches that stand for one foot.",
+			"levels": {
+				"1": {"vars": [["sc", {"pick": [0.25]}], ["inch", {"range": [1, 12], "step": 0.5}]]},
+				"2": {"vars": [["sc", {"pick": [0.125, 0.25, 0.5]}], ["inch", {"range": [0.5, 15], "step": 0.25}]]},
+				"3": {"vars": [["sc", {"pick": [0.0625, 0.125, 0.1875, 0.25, 0.375, 0.5]}], ["inch", {"range": [0.25, 20], "step": 0.125}]]}
+			},
+			"vars": [["scale_text", {"expr": "fraction(sc * 16, 16)"}]],
+			"steps": [
+				{"kind": "formula", "text": "Feet = drawing inches ÷ scale inches", "note": "At 1/4 in = 1 ft, every 1/4 inch is one foot, so there are 4 feet per inch."},
+				{"kind": "given", "lines": ["Scale: {scale_text} in = 1 ft ({sc} in)", "Drawing: {inch} in"]},
+				{"kind": "calc", "set": [["ft", "r(inch / sc, 2)"]], "text": "{inch} ÷ {sc} = {ft} ft", "keys": "{inch} ÷ {sc} ="}
+			],
+			"answer": {"var": "ft", "unit": "ft", "tol": 0.01, "rel": true, "text": "{ft} feet"}
+		},
+		{
+			"id": "unit_load",
+			"skill": "code_calcs",
+			"card": "unit_load",
+			"title": "Commercial lighting load (Table 220.42(A))",
+			"prompt": "Disregarding demand factors, what is the calculated general lighting load for a {area} ft² {occ_label}?",
+			"hint": "Find the VA per square foot for the occupancy in Table 220.42(A) and multiply by the area.",
+			"levels": {
+				"1": {"vars": [["occ", {"pick": ["office", "store", "warehouse"]}], ["area", {"range": [1000, 10000], "step": 500}]]},
+				"2": {"vars": [["occ", {"key": "t220_42a"}], ["area", {"range": [1500, 25000], "step": 250}]]},
+				"3": {"vars": [["occ", {"key": "t220_42a"}], ["area", {"range": [2000, 90000], "step": 100}]]}
+			},
+			"vars": [["occ_label", {"expr": "lower(tlabel('t220_42a', occ))"}]],
+			"steps": [
+				{"kind": "formula", "text": "Load = area × VA per ft²", "note": "Table 220.42(A) gives the unit load per square foot for each occupancy."},
+				{"kind": "lookup", "set": [["u", "t('t220_42a', occ, 'va_ft2')"]], "text": "Table 220.42(A), {occ_label} = {u} VA per ft²"},
+				{"kind": "calc", "set": [["va", "r(area * u, 2)"]], "text": "{area} × {u} = {va} VA", "keys": "{area} × {u} ="}
+			],
+			"answer": {"var": "va", "unit": "VA", "tol": 0.5, "text": "{va} VA"},
+			"from_check": {"kind": "unit_load", "map": {"area": "area_ft2", "occ": "occupancy"}}
+		},
+		{
+			"id": "multioutlet",
+			"skill": "code_calcs",
+			"card": "unit_load",
+			"title": "Multioutlet assembly load (220.14(H))",
+			"prompt": "What is the calculated load of a {L} ft fixed multioutlet assembly where the appliances are not likely to be used at the same time?",
+			"hint": "220.14(H)(1): 180 VA for each 5 ft or fraction of 5 ft. Round the number of sections up.",
+			"levels": {
+				"1": {"vars": [["L", {"pick": [5, 10, 15, 20, 25, 30]}]]},
+				"2": {"vars": [["L", {"range": [6, 60], "step": 1}]]},
+				"3": {"vars": [["L", {"range": [3, 150], "step": 0.5}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "Load = (length ÷ 5 ft, rounded up) × 180 VA", "note": "220.14(H)(1): each 5 ft or fraction of 5 ft counts as one outlet of 180 VA."},
+				{"kind": "calc", "set": [["q", "L / v('220.14(H)(1).feet')"]], "text": "{L} ÷ 5 = {q:2}", "keys": "{L} ÷ 5 ="},
+				{"kind": "round", "set": [["sec", "ceil(q - 0.0000001)"]], "text": "Any fraction counts, so round up: {sec} sections"},
+				{"kind": "calc", "set": [["va", "sec * v('220.14(H).va_per_outlet')"]], "text": "{sec} × 180 = {va} VA", "keys": "{sec} × 180 ="}
+			],
+			"answer": {"var": "va", "unit": "VA", "tol": 0, "text": "{va} VA"},
+			"from_check": {"kind": "multioutlet", "map": {"L": "length_ft"}, "when": "simultaneous == false"}
+		},
+		{
+			"id": "busbar_area",
+			"skill": "code_calcs",
+			"card": "busbar",
+			"title": "Busbar ampacity from area (366.23(A))",
+			"prompt": "What is the maximum continuous current for a {area} in² {metal_name} busbar in an auxiliary gutter?",
+			"hint": "366.23(A): copper bars 1,000 A per square inch, aluminum 700 A per square inch.",
+			"levels": {
+				"1": {"vars": [["metal", {"pick": ["cu"]}], ["area", {"pick": [0.5, 1, 1.5, 2, 3]}]]},
+				"2": {"vars": [["metal", {"pick": ["cu", "al"]}], ["area", {"range": [0.25, 4], "step": 0.25}]]},
+				"3": {"vars": [["metal", {"pick": ["cu", "al"]}], ["area", {"range": [0.125, 6], "step": 0.125}]]}
+			},
+			"vars": [["metal_name", {"expr": "pick(metal == 'cu', 'copper', 'aluminum')"}], ["rate_key", {"expr": "pick(metal == 'cu', '366.23(A).copper_a_per_in2', '366.23(A).aluminum_a_per_in2')"}]],
+			"steps": [
+				{"kind": "formula", "text": "Amps = area × amps per in²", "note": "366.23(A): 1,000 A per in² for copper, 700 A per in² for aluminum."},
+				{"kind": "lookup", "set": [["rate", "v(rate_key)"]], "text": "366.23(A), {metal_name} = {rate} A per in²"},
+				{"kind": "calc", "set": [["amps", "r(area * rate, 2)"]], "text": "{area} × {rate} = {amps} A", "keys": "{area} × {rate} ="}
+			],
+			"answer": {"var": "amps", "unit": "A", "tol": 0.5, "text": "{amps} A"},
+			"from_check": {"kind": "busbar", "map": {"area": "area_in2"}, "fixed": {"metal": "cu"}, "when": "has('area_in2')"}
+		},
+		{
+			"id": "busbar_dims",
+			"skill": "code_calcs",
+			"card": "busbar",
+			"title": "Busbar ampacity from size (366.23(A))",
+			"prompt": "A {metal_name} busbar is {wd} in. wide by {th} in. thick. What is its maximum continuous current (366.23(A))?",
+			"hint": "Width × thickness gives the area in square inches. Then × 1,000 for copper (700 for aluminum).",
+			"levels": {
+				"1": {"vars": [["metal", {"pick": ["cu"]}], ["wd", {"pick": [1, 2, 3, 4]}], ["th", {"pick": [0.25, 0.5]}]]},
+				"2": {"vars": [["metal", {"pick": ["cu", "al"]}], ["wd", {"pick": [1, 1.5, 2, 3, 4, 5, 6]}], ["th", {"pick": [0.125, 0.25, 0.375, 0.5]}]]},
+				"3": {"vars": [["metal", {"pick": ["cu", "al"]}], ["wd", {"range": [0.5, 8], "step": 0.5}], ["th", {"pick": [0.0625, 0.125, 0.1875, 0.25, 0.375, 0.5, 0.75]}]]}
+			},
+			"vars": [["metal_name", {"expr": "pick(metal == 'cu', 'copper', 'aluminum')"}], ["rate_key", {"expr": "pick(metal == 'cu', '366.23(A).copper_a_per_in2', '366.23(A).aluminum_a_per_in2')"}]],
+			"steps": [
+				{"kind": "formula", "text": "Amps = width × thickness × amps per in²", "note": "366.23(A): 1,000 A per in² for copper, 700 A per in² for aluminum."},
+				{"kind": "calc", "set": [["area", "wd * th"]], "text": "Area: {wd} × {th} = {area} in²", "keys": "{wd} × {th} ="},
+				{"kind": "lookup", "set": [["rate", "v(rate_key)"]], "text": "366.23(A), {metal_name} = {rate} A per in²"},
+				{"kind": "calc", "set": [["amps", "r(area * rate, 2)"]], "text": "{area} × {rate} = {amps} A", "keys": "× {rate} ="}
+			],
+			"answer": {"var": "amps", "unit": "A", "tol": 0.5, "text": "{amps} A"},
+			"from_check": {"kind": "busbar", "map": {"wd": "width_in", "th": "thickness_in"}, "fixed": {"metal": "cu"}, "when": "has('width_in')"}
+		},
+		{
+			"id": "welder_ocpd",
+			"skill": "code_calcs",
+			"card": "welder",
+			"title": "Arc welder overcurrent device (630.12(A))",
+			"prompt": "An arc welder has an I1max rating of {i1} A. What is the maximum rating of the overcurrent device supplying it?",
+			"hint": "630.12(A): not more than 200% of I1max. If that is not a standard size, the next higher standard rating (240.6(A)) is permitted.",
+			"levels": {
+				"1": {"vars": [["i1", {"pick": [20, 25, 30, 35, 40, 50]}]]},
+				"2": {"vars": [["i1", {"range": [12, 60], "step": 1}]]},
+				"3": {"vars": [["i1", {"range": [8, 150], "step": 0.5}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "OCPD ≤ I1max × 200%", "note": "630.12(A)."},
+				{"kind": "calc", "set": [["raw", "r(i1 * v('630.12(A).percent') / 100.0, 2)"]], "text": "{i1} × 2 = {raw} A", "keys": "{i1} × 2 ="},
+				{"kind": "round", "set": [["ocpd", "tnext('t240_6a', 'amps', raw)"]], "text": "Next standard rating (240.6(A)) at or above {raw} A = {ocpd} A", "note": "630.12(A) permits the next higher standard rating when 200% is not a standard size."}
+			],
+			"answer": {"var": "ocpd", "unit": "A", "tol": 0, "text": "{ocpd} A"},
+			"from_check": {"kind": "welder_ocpd", "map": {"i1": "i1max"}}
+		},
+		{
+			"id": "welder_duty",
+			"skill": "code_calcs",
+			"card": "welder",
+			"title": "Resistance welder conductors (630.31(A))",
+			"prompt": "What is the minimum ampacity of the supply conductors for a resistance welder with a duty cycle of {duty}% and a primary current of {ip} A?",
+			"hint": "Multiply the primary current by the Table 630.31(A) multiplier for the duty cycle.",
+			"levels": {
+				"1": {"vars": [["duty", {"pick": ["50", "25", "10"]}], ["ip", {"range": [10, 60], "step": 1}]]},
+				"2": {"vars": [["duty", {"key": "t630_31a"}], ["ip", {"range": [10, 120], "step": 1}]]},
+				"3": {"vars": [["duty", {"key": "t630_31a"}], ["ip", {"range": [5, 250], "step": 0.5}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "Ampacity = primary current × multiplier", "note": "630.31(A)(2): for a resistance welder with a known duty cycle, use Table 630.31(A)."},
+				{"kind": "lookup", "set": [["m", "t('t630_31a', duty, 'multiplier')"]], "text": "Table 630.31(A), {duty}% duty cycle = {m}"},
+				{"kind": "calc", "set": [["amp", "r(ip * m, 2)"]], "text": "{ip} × {m} = {amp} A", "keys": "{ip} × {m} ="}
+			],
+			"answer": {"var": "amp", "unit": "A", "tol": 0.01, "rel": true, "text": "{amp} A"},
+			"from_check": {"kind": "welder_duty", "map": {"ip": "primary_a", "duty": "duty_pct"}}
+		},
+		{
+			"id": "tap_10ft",
+			"skill": "code_calcs",
+			"card": "busbar",
+			"title": "10-foot feeder tap (240.21(B)(1))",
+			"prompt": "For a field-installed feeder tap not over 10 ft long, what is the maximum rating of the feeder overcurrent device if the tap conductors have an ampacity of {tap} A?",
+			"hint": "240.21(B)(1)(4): the feeder device may not exceed 10 times the tap conductor ampacity.",
+			"levels": {
+				"1": {"vars": [["tap", {"pick": [20, 25, 30, 40, 50]}]]},
+				"2": {"vars": [["tap", {"pick": [15, 20, 25, 30, 35, 40, 50, 55, 65, 75, 85]}]]},
+				"3": {"vars": [["tap", {"range": [15, 150], "step": 5}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "Feeder OCPD ≤ tap ampacity × 10", "note": "240.21(B)(1)(4): field-installed taps up to 10 ft."},
+				{"kind": "calc", "set": [["max_ocpd", "tap * v('240.21(B)(1).tap_ratio')"]], "text": "{tap} × 10 = {max_ocpd} A", "keys": "{tap} × 10 ="}
+			],
+			"answer": {"var": "max_ocpd", "unit": "A", "tol": 0, "text": "{max_ocpd} A"},
+			"from_check": {"kind": "tap_10ft_ocpd", "map": {"tap": "tap_ampacity"}}
+		},
+		{
+			"id": "garage_receptacles",
+			"skill": "code_calcs",
+			"card": "unit_load",
+			"trainer": false,
+			"title": "Garage receptacles (210.52(G)(1))",
+			"prompt": "How many receptacle outlets are required in an attached garage with {bays} vehicle bays?",
+			"hint": "210.52(G)(1): at least one receptacle outlet for each car space (bay).",
+			"levels": {"1": {"vars": [["bays", {"range": [1, 4], "step": 1}]]}},
+			"steps": [
+				{"kind": "rule", "text": "One receptacle outlet per vehicle bay", "note": "210.52(G)(1), in addition to any for specific equipment."},
+				{"kind": "calc", "set": [["rec", "bays * v('210.52(G)(1).per_bay')"]], "text": "{bays} bays × 1 = {rec}"}
+			],
+			"answer": {"var": "rec", "unit": "", "tol": 0, "text": "{rec}"}
+		},
+		{
+			"id": "apprentice_ratio",
+			"skill": "code_calcs",
+			"card": "unit_load",
+			"trainer": false,
+			"title": "Apprentices per licensee (Nebraska)",
+			"prompt": "How many apprentice electricians may work with {lic} licensed journeymen?",
+			"hint": "Neb. Rev. Stat. 81-2113(2): up to three apprentices per licensee.",
+			"levels": {"1": {"vars": [["lic", {"range": [1, 5], "step": 1}]]}},
+			"steps": [
+				{"kind": "rule", "set": [["per", "k('ne_apprentices_per_licensee')"]], "text": "Up to {per} apprentices for each licensee", "note": "Nebraska State Electrical Act, Neb. Rev. Stat. 81-2113(2)."},
+				{"kind": "calc", "set": [["app", "lic * per"]], "text": "{lic} × {per} = {app} apprentices", "keys": "{lic} × {per} ="}
+			],
+			"answer": {"var": "app", "unit": "", "tol": 0, "text": "{app}"}
+		},
+		{
+			"id": "motor_overload_max",
+			"skill": "motors",
+			"card": "motor",
+			"title": "Maximum overload setting (430.32(C))",
+			"prompt": "A motor with a full-load current of {fla} A and {marking} will not start with the normal overload setting. What is the maximum overload trip rating permitted?",
+			"hint": "430.32(C) lets you go higher when the motor won't start: 140% for a service factor of 1.15 or more or a 40°C rise, 130% for all other motors.",
+			"levels": {
+				"1": {"vars": [["fla", {"range": [4, 40], "step": 1}], ["mk", {"pick": [1, 3]}]]},
+				"2": {"vars": [["fla", {"range": [2, 60], "step": 0.5}], ["mk", {"pick": [1, 2, 3]}]]},
+				"3": {"vars": [["fla", {"range": [1.2, 120], "step": 0.1}], ["mk", {"pick": [1, 2, 3]}]]}
+			},
+			"vars": [["src", {"expr": "'nameplate'"}], ["ph", {"expr": "1"}], ["V", {"expr": "0"}], ["hp", {"expr": "''"}], ["marking", {"expr": "pick(mk == 1, 'a service factor of 1.15', pick(mk == 2, 'a marked temperature rise of 40°C', 'a service factor of 1.0'))"}], ["tbl", {"expr": "pick(ph == 1, 't430_248', 't430_250')"}], ["tname", {"expr": "pick(ph == 1, 'Table 430.248', 'Table 430.250')"}]],
+			"steps": [
+				{"kind": "lookup", "when": "src == 'table'", "set": [["fla", "t(tbl, hp, name('v', V))"]], "text": "{tname}, {hp} hp, {V} V = {fla} A"},
+				{"kind": "rule", "set": [["pct", "pick(mk == 1, v('430.32(C).service_factor_percent'), pick(mk == 2, v('430.32(C).temp_rise_percent'), v('430.32(C).other_percent')))"]], "text": "430.32(C): {why} → {pct}%", "show": [["why", "pick(mk == 1, 'service factor 1.15 or more', pick(mk == 2, 'temperature rise 40°C or less', 'all other motors'))"]], "note": "The normal settings in 430.32(A)(1) are 125% / 115%; 430.32(C) is the most you may go up to if the motor will not start."},
+				{"kind": "calc", "set": [["ol", "r(fla * pct / 100.0, 2)"]], "text": "{fla} × {mult} = {ol} A", "show": [["mult", "pct / 100.0"]], "keys": "{fla} × {mult} ="}
+			],
+			"answer": {"var": "ol", "unit": "A", "tol": 0.01, "rel": true, "text": "{ol} A"}
+		},
+		{
+			"id": "motor_feeder",
+			"skill": "motors",
+			"card": "motor",
+			"title": "Feeder for two motors (430.24)",
+			"prompt": "A feeder supplies a {hp1} hp and a {hp2} hp, {V} V, {phase_name} motor. What minimum ampacity must the feeder conductors have?",
+			"hint": "430.24: 125% of the largest motor's full-load current plus 100% of the other motor's full-load current (table values).",
+			"levels": {
+				"1": {"vars": [["ph", {"pick": [3]}], ["V", {"pick": [460]}], ["hp1", {"pick": ["5", "10", "15", "20"]}], ["hp2", {"pick": ["5", "10", "15", "20"]}]]},
+				"2": {"vars": [["ph", {"pick": [1, 3]}], ["V", {"pick": [230]}], ["hp1", {"pick": ["1", "1-1/2", "2", "3", "5", "7-1/2", "10"]}], ["hp2", {"pick": ["1", "1-1/2", "2", "3", "5", "7-1/2", "10"]}]]},
+				"3": {"vars": [["ph", {"pick": [1, 3]}], ["V", {"pick": [115, 200, 208, 230, 460]}], ["hp1", {"pick": ["1/2", "1", "2", "3", "5", "10", "15", "25", "40"]}], ["hp2", {"pick": ["1/2", "1", "2", "3", "5", "10", "15", "25", "40"]}]]}
+			},
+			"vars": [["phase_name", {"expr": "pick(ph == 1, 'single-phase', 'three-phase')"}], ["tbl", {"expr": "pick(ph == 1, 't430_248', 't430_250')"}], ["tname", {"expr": "pick(ph == 1, 'Table 430.248', 'Table 430.250')"}]],
+			"steps": [
+				{"kind": "formula", "text": "Feeder = 125% × largest FLC + other FLC", "note": "430.24, using the table full-load currents (430.6(A)(1))."},
+				{"kind": "lookup", "set": [["f1", "t(tbl, hp1, name('v', V))"], ["f2", "t(tbl, hp2, name('v', V))"]], "text": "{tname}, {V} V: {hp1} hp = {f1} A, {hp2} hp = {f2} A"},
+				{"kind": "calc", "set": [["big", "max(f1, f2)"], ["small", "min(f1, f2)"], ["big125", "big * v('430.24.largest_percent') / 100.0"]], "text": "Largest: {big} × 1.25 = {big125} A", "keys": "{big} × 1.25 ="},
+				{"kind": "calc", "set": [["amp", "r(big125 + small, 2)"]], "text": "{big125} + {small} = {amp} A", "keys": "+ {small} ="}
+			],
+			"answer": {"var": "amp", "unit": "A", "tol": 0.01, "rel": true, "text": "{amp} A"}
+		},
+		{
+			"id": "motor_va",
+			"skill": "motors",
+			"card": "three_phase",
+			"title": "Motor load in VA (three-phase)",
+			"prompt": "What is the load in volt-amperes of a {hp} hp, {V} V, three-phase induction motor?",
+			"hint": "Find the Table 430.250 full-load current, then VA = amps × volts × 1.732.",
+			"levels": {
+				"1": {"vars": [["V", {"pick": [230, 460]}], ["hp", {"pick": ["5", "10", "15", "20", "25"]}]]},
+				"2": {"vars": [["V", {"pick": [208, 230, 460]}], ["hp", {"pick": ["3", "5", "7-1/2", "10", "15", "20", "25", "30"]}]]},
+				"3": {"vars": [["V", {"pick": [200, 208, 230, 460, 575]}], ["hp", {"pick": ["2", "5", "7-1/2", "15", "25", "40", "50", "75", "100"]}]]}
+			},
+			"vars": [["nearest", {"expr": "0"}]],
+			"steps": [
+				{"kind": "formula", "text": "VA = FLC × V × 1.732", "note": "Three-phase volt-amperes use √3 (1.732)."},
+				{"kind": "lookup", "set": [["flc", "t('t430_250', hp, name('v', V))"], ["s3", "k('sqrt3')"]], "text": "Table 430.250, {hp} hp, {V} V = {flc} A"},
+				{"kind": "calc", "set": [["va", "r(flc * V * s3, 0)"]], "text": "{flc} × {V} × {s3} = {va} VA", "keys": "{flc} × {V} × {s3} ="},
+				{"kind": "round", "when": "nearest > 0", "set": [["va", "round(va / nearest) * nearest"]], "text": "Closest choice: about {va} VA", "note": "The question asks for the closest value."}
+			],
+			"answer": {"var": "va", "unit": "VA", "tol": 0.005, "rel": true, "text": "{va} VA"}
+		},
+		{
+			"id": "box_fill_mixed",
+			"skill": "box_fill",
+			"card": "box_fill",
+			"title": "Box fill with two wire sizes",
+			"prompt": "What is the minimum volume required for a box containing {n1} {awg1:awg} conductors and {n2} {awg2:awg} conductors?",
+			"hint": "Each size gets its own Table 314.16(B)(1) volume: count × volume for each size, then add.",
+			"levels": {
+				"1": {"vars": [["awg1", {"pick": ["14"]}], ["awg2", {"pick": ["12"]}], ["n1", {"range": [2, 4], "step": 1}], ["n2", {"range": [2, 4], "step": 1}]]},
+				"2": {"vars": [["awg1", {"pick": ["14", "12"]}], ["awg2", {"pick": ["10", "8"]}], ["n1", {"range": [2, 6], "step": 1}], ["n2", {"range": [2, 6], "step": 1}]]},
+				"3": {"vars": [["awg1", {"pick": ["14", "12", "10"]}], ["awg2", {"pick": ["8", "6"]}], ["n1", {"range": [2, 9], "step": 1}], ["n2", {"range": [1, 4], "step": 1}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "Volume = Σ (count × volume for that size)", "note": "314.16(B)(1): each conductor counts at the volume for its own size."},
+				{"kind": "lookup", "set": [["a1", "t('t314_16b1', awg1, 'in3')"], ["a2", "t('t314_16b1', awg2, 'in3')"]], "text": "Table 314.16(B)(1): {awg1:awg} = {a1} in³, {awg2:awg} = {a2} in³"},
+				{"kind": "calc", "set": [["v1", "n1 * a1"]], "text": "{n1} × {a1} = {v1} in³", "keys": "{n1} × {a1} = M+"},
+				{"kind": "calc", "set": [["v2", "n2 * a2"]], "text": "{n2} × {a2} = {v2} in³", "keys": "{n2} × {a2} = M+"},
+				{"kind": "calc", "set": [["vol", "r(v1 + v2, 2)"]], "text": "{v1} + {v2} = {vol} in³", "keys": "MR", "basic": "{v1} + {v2} ="}
+			],
+			"answer": {"var": "vol", "unit": "in³", "tol": 0.01, "text": "{vol} in³"}
+		},
+		{
+			"id": "wire_area_sum",
+			"skill": "conduit_fill",
+			"card": "conduit_fill",
+			"title": "Total conductor area (Chapter 9, Table 5)",
+			"prompt": "What is the total area of {n1} {awg1:awg} and {n2} {awg2:awg} {ins_name} conductors?",
+			"hint": "Look up one wire's area for each size in Chapter 9, Table 5, multiply by the count, then add.",
+			"levels": {
+				"1": {"vars": [["ins", {"pick": ["thhn"]}], ["awg1", {"pick": ["12"]}], ["awg2", {"pick": ["10"]}], ["n1", {"range": [2, 6], "step": 1}], ["n2", {"range": [1, 3], "step": 1}]]},
+				"2": {"vars": [["ins", {"pick": ["thhn", "thw"]}], ["awg1", {"pick": ["12", "10", "8"]}], ["awg2", {"pick": ["6", "4"]}], ["n1", {"range": [2, 8], "step": 1}], ["n2", {"range": [1, 4], "step": 1}]]},
+				"3": {"vars": [["ins", {"pick": ["thhn", "thw", "xhhw"]}], ["awg1", {"pick": ["8", "6", "4"]}], ["awg2", {"pick": ["2", "1/0", "2/0", "4/0"]}], ["n1", {"range": [2, 9], "step": 1}], ["n2", {"range": [1, 4], "step": 1}]]}
+			},
+			"vars": [["ins_name", {"expr": "upper(ins)"}], ["t5", {"expr": "'ch9_t5_' + pick(ins == 'tw', 'thw', ins)"}]],
+			"steps": [
+				{"kind": "formula", "text": "Total = Σ (count × area of one wire)", "note": "Areas from Chapter 9, Table 5 (THHN/THWN from its own section)."},
+				{"kind": "lookup", "set": [["w1", "t(t5, awg1, 'in2')"], ["w2", "t(t5, awg2, 'in2')"]], "text": "Table 5, {ins_name}: {awg1:awg} = {w1} in², {awg2:awg} = {w2} in²"},
+				{"kind": "calc", "set": [["s1", "n1 * w1"]], "text": "{n1} × {w1} = {s1} in²", "keys": "{n1} × {w1} = M+"},
+				{"kind": "calc", "set": [["s2", "n2 * w2"]], "text": "{n2} × {w2} = {s2} in²", "keys": "{n2} × {w2} = M+"},
+				{"kind": "calc", "set": [["tot", "r(s1 + s2, 4)"]], "text": "{s1} + {s2} = {tot} in²", "keys": "MR", "basic": "{s1} + {s2} ="}
+			],
+			"answer": {"var": "tot", "unit": "in²", "tol": 0.0001, "text": "{tot} in²"}
+		},
+		{
+			"id": "conduit_space_left",
+			"skill": "conduit_fill",
+			"card": "conduit_fill",
+			"title": "Space left in a raceway",
+			"prompt": "How much space remains without exceeding the allowed fill when {n} {awg:awg} {ins_name} conductors are placed in trade size {ts} {rw_name}?",
+			"hint": "40% area of the raceway (Chapter 9, Table 4) minus the wires' total area (count × Table 5 area).",
+			"levels": {
+				"1": {"vars": [["rw", {"pick": ["emt"]}], ["ins", {"pick": ["thhn"]}], ["ts", {"pick": ["3/4", "1"]}], ["awg", {"pick": ["12", "10"]}], ["n", {"range": [3, 8], "step": 1}]]},
+				"2": {"vars": [["rw", {"pick": ["emt", "rmc", "imc"]}], ["ins", {"pick": ["thhn", "xhhw"]}], ["ts", {"pick": ["3/4", "1", "1-1/4"]}], ["awg", {"pick": ["12", "10", "8"]}], ["n", {"range": [3, 12], "step": 1}]]},
+				"3": {"vars": [["rw", {"pick": ["emt", "rmc", "imc", "pvc40", "pvc80"]}], ["ins", {"pick": ["thhn", "xhhw", "thw"]}], ["ts", {"pick": ["1", "1-1/4", "1-1/2", "2"]}], ["awg", {"pick": ["10", "8", "6", "4", "2"]}], ["n", {"range": [3, 12], "step": 1}]]}
+			},
+			"vars": [["rw_name", {"expr": "label(rw)"}], ["ins_name", {"expr": "upper(ins)"}], ["t4", {"expr": "'ch9_t4_' + rw"}], ["t5", {"expr": "'ch9_t5_' + pick(ins == 'tw', 'thw', ins)"}]],
+			"require": ["left > 0"],
+			"steps": [
+				{"kind": "formula", "text": "Space left = 40% area − wire area", "note": "Chapter 9, Table 1: over 2 wires may fill 40%."},
+				{"kind": "lookup", "set": [["A", "t(t4, ts, 'a40')"]], "text": "Chapter 9, Table 4, {rw_name} trade size {ts}, 40% = {A} in²"},
+				{"kind": "lookup", "set": [["w", "t(t5, awg, 'in2')"]], "text": "Chapter 9, Table 5, {ins_name} {awg:awg} = {w} in²"},
+				{"kind": "calc", "set": [["used", "r(n * w, 4)"]], "text": "Wires: {n} × {w} = {used} in²", "keys": "{n} × {w} ="},
+				{"kind": "calc", "set": [["left", "r(A - used, 4)"]], "text": "{A} − {used} = {left} in²", "keys": "{A} − {used} ="}
+			],
+			"answer": {"var": "left", "unit": "in²", "tol": 0.0001, "text": "{left} in²"}
+		},
+		{
+			"id": "dwelling_gl",
+			"skill": "dwelling_load",
+			"card": "dwelling_load",
+			"title": "Dwelling general lighting load (220.41)",
+			"prompt": "What is the general lighting load for a dwelling with {area} ft² of floor area?",
+			"hint": "220.41: 3 VA per square foot, using the outside dimensions (220.5(C)). Open porches, garages and unused spaces are not counted.",
+			"levels": {
+				"1": {"vars": [["area", {"range": [1000, 2500], "step": 100}]]},
+				"2": {"vars": [["area", {"range": [900, 4000], "step": 25}]]},
+				"3": {"vars": [["area", {"range": [800, 6000], "step": 1}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "Lighting load = area × 3 VA", "note": "220.41: 3 VA per ft², area from the outside dimensions (220.5(C))."},
+				{"kind": "calc", "set": [["va", "area * v('220.41.va_per_ft2')"]], "text": "{area} × 3 = {va} VA", "keys": "{area} × 3 ="}
+			],
+			"answer": {"var": "va", "unit": "VA", "tol": 0, "text": "{va} VA"}
+		},
+		{
+			"id": "sa_laundry",
+			"skill": "dwelling_load",
+			"card": "dwelling_load",
+			"title": "Small-appliance and laundry load (220.52)",
+			"prompt": "A dwelling has {sa} small-appliance branch circuits and {lau} laundry circuit(s). What load is included for them in the service calculation?",
+			"hint": "220.52: 1,500 VA for each 2-wire small-appliance circuit and each laundry circuit.",
+			"levels": {
+				"1": {"vars": [["sa", {"pick": [2]}], ["lau", {"pick": [1]}]]},
+				"2": {"vars": [["sa", {"pick": [2, 3]}], ["lau", {"pick": [1]}]]},
+				"3": {"vars": [["sa", {"pick": [2, 3, 4]}], ["lau", {"pick": [1, 2]}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "Load = (small-appliance + laundry circuits) × 1,500 VA", "note": "220.52(A) and (B). At least two small-appliance circuits are required (210.11(C)(1))."},
+				{"kind": "calc", "set": [["cnt", "sa + lau"]], "text": "{sa} + {lau} = {cnt} circuits"},
+				{"kind": "calc", "set": [["va", "cnt * v('220.52(A).va_per_circuit')"]], "text": "{cnt} × 1,500 = {va} VA", "keys": "{cnt} × 1500 ="}
+			],
+			"answer": {"var": "va", "unit": "VA", "tol": 0, "text": "{va} VA"}
+		},
+		{
+			"id": "lighting_circuits",
+			"skill": "dwelling_load",
+			"card": "dwelling_load",
+			"title": "Number of lighting circuits",
+			"prompt": "A dwelling has {area} ft². How many {amps} A, 120 V circuits are required for the general lighting load?",
+			"hint": "Lighting VA = area × 3. One circuit carries 120 V × its amps. Divide, then round up to a whole circuit.",
+			"levels": {
+				"1": {"vars": [["area", {"range": [1000, 3000], "step": 100}], ["amps", {"pick": [15]}]]},
+				"2": {"vars": [["area", {"range": [1200, 4000], "step": 50}], ["amps", {"pick": [15, 20]}]]},
+				"3": {"vars": [["area", {"range": [1500, 6000], "step": 10}], ["amps", {"pick": [15, 20]}]]}
+			},
+			"steps": [
+				{"kind": "formula", "text": "Circuits = (area × 3 VA) ÷ (120 V × amps)", "note": "220.41 load; any fraction needs another circuit."},
+				{"kind": "calc", "set": [["va", "area * v('220.41.va_per_ft2')"]], "text": "{area} × 3 = {va} VA", "keys": "{area} × 3 ="},
+				{"kind": "calc", "set": [["per", "120 * amps"]], "text": "One circuit: 120 × {amps} = {per} VA", "keys": "120 × {amps} ="},
+				{"kind": "calc", "set": [["q", "va / per"]], "text": "{va} ÷ {per} = {q:2}", "keys": "{va} ÷ {per} ="},
+				{"kind": "round", "set": [["cir", "ceil(q - 0.0000001)"]], "text": "Round up: {cir} circuits"}
+			],
+			"answer": {"var": "cir", "unit": "circuits", "tol": 0, "text": "{cir}"}
+		},
+		{
+			"id": "appliance_demand",
+			"skill": "dwelling_load",
+			"card": "dwelling_load",
+			"title": "Fastened-in-place appliances (220.53)",
+			"prompt": "{intro} What is their demand load on the service (standard method)?",
+			"hint": "220.53: four or more fastened-in-place appliances (not ranges, dryers, heat or A/C) may be taken at 75%.",
+			"levels": {
+				"1": {"vars": [["n", {"range": [2, 6], "step": 1}], ["kw", {"pick": [1, 1.2, 1.5, 4.5]}]]},
+				"2": {"vars": [["n", {"range": [3, 12], "step": 1}], ["kw", {"pick": [0.8, 1.2, 1.5, 4.5, 5]}]]},
+				"3": {"vars": [["n", {"range": [4, 30], "step": 1}], ["kw", {"pick": [0.5, 0.9, 1.15, 3.8, 4.5, 5.5]}]]}
+			},
+			"vars": [["intro", {"expr": "'A building has ' + fmt(n) + ' fastened-in-place water heaters rated ' + fmt(kw) + ' kW each.'"}]],
+			"steps": [
+				{"kind": "formula", "text": "Demand = total × 75% (4 or more appliances)", "note": "220.53."},
+				{"kind": "calc", "set": [["tot", "n * kw"]], "text": "{n} × {kw} kW = {tot} kW", "keys": "{n} × {kw} ="},
+				{"kind": "rule", "when": "n >= v('220.53.min_count')", "set": [["dem", "r(tot * v('220.53.percent') / 100.0, 3)"]], "text": "{n} appliances is four or more: {tot} × 75% = {dem} kW", "keys": "× 0.75 ="},
+				{"kind": "rule", "when": "n < v('220.53.min_count')", "set": [["dem", "tot"]], "text": "Fewer than four appliances: 100% = {dem} kW"}
+			],
+			"answer": {"var": "dem", "unit": "kW", "tol": 0.01, "rel": true, "text": "{dem} kW"}
+		},
+		{
+			"id": "ocpd_small_conductor",
+			"skill": "ampacity",
+			"card": "ampacity",
+			"title": "Small conductor protection (240.4(D))",
+			"prompt": "What is the maximum overcurrent protection for a {size:awg} {metal_name} {ins} conductor in an ambient temperature of {ambient}°F with {ccc} current-carrying conductors?",
+			"hint": "Correct the ampacity first, then remember 240.4(D): 14 AWG copper 15 A, 12 AWG copper 20 A, 10 AWG copper 30 A (aluminum 12 AWG 15 A, 10 AWG 25 A).",
+			"levels": {
+				"1": {"vars": [["metal", {"pick": ["cu"]}], ["temp", {"pick": [90]}], ["size", {"pick": ["14", "12", "10"]}], ["ambient", {"pick": [80, 86]}], ["ccc", {"pick": [3]}]]},
+				"2": {"vars": [["metal", {"pick": ["cu"]}], ["temp", {"pick": [75, 90]}], ["size", {"pick": ["14", "12", "10"]}], ["ambient", {"range": [87, 122], "step": 1}], ["ccc", {"range": [3, 6], "step": 1}]]},
+				"3": {"vars": [["metal", {"pick": ["cu", "al"]}], ["temp", {"pick": [60, 75, 90]}], ["size", {"pick": ["12", "10"]}], ["ambient", {"range": [70, 130], "step": 1}], ["ccc", {"range": [3, 9], "step": 1}]]}
+			},
+			"vars": [["metal_name", {"expr": "pick(metal == 'cu', 'copper', 'aluminum')"}], ["ins", {"expr": "pick(temp == 90, 'RHH', pick(temp == 75, 'THW', 'TW'))"}], ["col", {"expr": "name(metal, temp)"}]],
+			"steps": [
+				{"kind": "formula", "text": "OCPD ≤ corrected ampacity, and ≤ the 240.4(D) limit", "note": "240.4(D) applies after correction and adjustment factors."},
+				{"kind": "lookup", "set": [["base", "t('t310_16', size, col)"]], "text": "Table 310.16, {size:awg}, {metal_name} {temp}°C = {base} A"},
+				{"kind": "lookup", "set": [["corr", "trange('t310_15b1_1', ambient, name('c', temp))"], ["adj", "pick(ccc > 3, trange('t310_15c1', ccc, 'percent'), 100) / 100.0"]], "text": "Correction {corr} ({ambient}°F), adjustment {adj} ({ccc} conductors)"},
+				{"kind": "calc", "set": [["amp", "r(base * corr * adj, 2)"]], "text": "{base} × {corr} × {adj} = {amp} A", "keys": "{base} × {corr} × {adj} ="},
+				{"kind": "lookup", "set": [["cap", "v('240.4(D).' + metal + '_' + size)"]], "text": "240.4(D): {size:awg} {metal_name} is limited to {cap} A"},
+				{"kind": "round", "set": [["ocpd", "min(cap, tnext('t240_6a', 'amps', amp))"], ["std", "tnext('t240_6a', 'amps', amp)"]], "text": "{why} → {ocpd} A", "show": [["why", "pick(cap <= std, 'The 240.4(D) limit is the smaller value', 'The next standard size above ' + fmt(amp) + ' A (240.4(B)) is ' + fmt(std) + ' A')"]], "note": "240.4(B) allows the next standard size above the ampacity, but never more than 240.4(D)."}
+			],
+			"answer": {"var": "ocpd", "unit": "A", "tol": 0, "text": "{ocpd} A"}
+		},
+		{
+			"id": "egc_size",
+			"skill": "code_calcs",
+			"card": "unit_load",
+			"title": "Equipment grounding conductor (Table 250.122)",
+			"prompt": "What is the minimum size {metal_name} equipment grounding conductor for a circuit protected by a {rating} A overcurrent device?",
+			"hint": "Find the first Table 250.122 row whose rating is at least the device rating.",
+			"levels": {
+				"1": {"vars": [["metal", {"pick": ["cu"]}], ["rating", {"pick": [15, 20, 30, 40, 60, 100]}]]},
+				"2": {"vars": [["metal", {"pick": ["cu"]}], ["rating", {"key": "t240_6a", "from": "15", "to": "400"}]]},
+				"3": {"vars": [["metal", {"pick": ["cu", "al"]}], ["rating", {"key": "t240_6a", "from": "15", "to": "1200"}]]}
+			},
+			"vars": [["metal_name", {"expr": "pick(metal == 'cu', 'copper', 'aluminum')"}]],
+			"steps": [
+				{"kind": "rule", "text": "Size by the overcurrent device rating", "note": "250.122(A): use the rating of the device ahead of the circuit, not the load."},
+				{"kind": "lookup", "set": [["row", "tmin('t250_122', 'amps', rating)"], ["egc", "t('t250_122', row, metal)"]], "text": "Table 250.122: {rating} A falls in the {row} A row → {egc:awg} {metal_name}", "note": "Use the first row whose rating is not exceeded by the device."}
+			],
+			"answer": {"var": "egc", "kind": "choice", "options_table": "t250_122", "options_col": "metal", "text": "{egc:awg}"},
+			"from_check": {"kind": "egc", "map": {"rating": "rating"}, "fixed": {"metal": "cu"}}
+		},
+		{
+			"id": "fraction_to_decimal",
+			"skill": "percent",
+			"card": "percent",
+			"title": "Fraction to decimal",
+			"prompt": "What is the decimal equivalent of {num}/{den} in.?",
+			"hint": "Divide the top number by the bottom number.",
+			"levels": {
+				"1": {"vars": [["den", {"pick": [2, 4, 8]}], ["num", {"pick": [1, 3]}]]},
+				"2": {"vars": [["den", {"pick": [8, 16]}], ["num", {"pick": [1, 3, 5, 7]}]]},
+				"3": {"vars": [["den", {"pick": [16, 32, 64]}], ["num", {"pick": [3, 5, 7, 9, 11, 13, 15]}]]}
+			},
+			"require": ["num < den"],
+			"steps": [
+				{"kind": "formula", "text": "Decimal = top ÷ bottom", "note": "A fraction is a division problem."},
+				{"kind": "calc", "set": [["dec", "r(num / den, 6)"]], "text": "{num} ÷ {den} = {dec:6}", "keys": "{num} ÷ {den} ="}
+			],
+			"answer": {"var": "dec", "unit": "", "tol": 0.0001, "text": "{dec:6}"}
+		},
+		{
+			"id": "neutral_current",
+			"skill": "ohms",
+			"card": "power_wheel",
+			"title": "Maximum neutral current (120/240 V)",
+			"prompt": "On a 120/240 V system, Line 1 to neutral carries {p1} W and Line 2 to neutral carries {p2} W. What is the most current the neutral can carry with only one line on?",
+			"hint": "With one line off, the neutral carries all of the other line's current: I = P ÷ 120 V for the larger load.",
+			"levels": {
+				"1": {"vars": [["p1", {"range": [1200, 6000], "step": 600}], ["p2", {"range": [1200, 6000], "step": 600}]]},
+				"2": {"vars": [["p1", {"range": [1000, 12000], "step": 100}], ["p2", {"range": [1000, 12000], "step": 100}]]},
+				"3": {"vars": [["p1", {"range": [500, 20000], "step": 50}], ["p2", {"range": [500, 20000], "step": 50}]]}
+			},
+			"vars": [["nearest", {"expr": "0"}]],
+			"steps": [
+				{"kind": "formula", "text": "I = P ÷ E (larger line-to-neutral load)", "note": "When only one line is on, the neutral carries that line's full current."},
+				{"kind": "rule", "set": [["p", "max(p1, p2)"]], "text": "Larger load: {p} W"},
+				{"kind": "calc", "set": [["I", "r(p / 120.0, 2)"]], "text": "{p} ÷ 120 = {I} A", "keys": "{p} ÷ 120 ="},
+				{"kind": "round", "when": "nearest > 0", "set": [["I", "round(I / nearest) * nearest"]], "text": "About {I} A", "note": "The question asks for the closest whole number."}
+			],
+			"answer": {"var": "I", "unit": "A", "tol": 0.01, "rel": true, "text": "{I} A"}
+		}
+	]
+}
