@@ -18,6 +18,12 @@ static func count_in_section(records: Array, section: String) -> int:
 			count += 1
 	return count
 
+## The record count the bank file declares ("playable"); -1 when unreadable.
+## Suites compare load_records() against it instead of pinning a bank size.
+static func declared_count(path: String = BANK_PATH) -> int:
+	var parsed = JSON.parse_string(FileAccess.get_file_as_string(path)) if FileAccess.file_exists(path) else null
+	return int(parsed.get("playable", -1)) if parsed is Dictionary else -1
+
 static func load_records(path: String = BANK_PATH) -> Array:
 	var records: Array = []
 	if not FileAccess.file_exists(path):

@@ -137,7 +137,7 @@ bank_validate() {
   echo "  python: $py ($("$py" -c 'import sys; print(sys.version.split()[0])'))"
   export PYTHON="$py"
   bash tools/tests/test_build_guard.sh || return $?
-  "$py" -m unittest tools.tests.test_validate_question_bank tools.tests.test_spellcheck_bank tools.tests.test_typo_regressions tools.tests.test_speak_question tools.tests.test_audit_bundle tools.tests.test_question_requirements tools.tests.test_diagram_figures || return $?
+  "$py" -m unittest tools.tests.test_validate_question_bank tools.tests.test_spellcheck_bank tools.tests.test_typo_regressions tools.tests.test_speak_question tools.tests.test_audit_bundle tools.tests.test_question_requirements tools.tests.test_diagram_figures tools.tests.test_exam_sources || return $?
   "$py" tools/pipeline/spellcheck_bank.py --offline || return $?
   "$py" tools/pipeline/validate_question_bank.py --no-warn
   return $?
@@ -159,7 +159,7 @@ bundle_audio() {
 }
 
 if [ -d assets/speech ]; then
-  stage "+    Speech bundle (283/283)"  "$GODOT" --headless --path . --script tools/speech/test_bundle.gd || true
+  stage "+    Speech bundle (every record)"  "$GODOT" --headless --path . --script tools/speech/test_bundle.gd || true
   # Every clip whole: clean MP3 frames, a plausible length for its words,
   # silence before and after the speech (edges need Python's av + numpy).
   stage "+    Speech bundle audio"      bundle_audio || true

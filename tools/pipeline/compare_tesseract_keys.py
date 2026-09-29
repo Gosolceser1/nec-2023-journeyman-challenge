@@ -2,20 +2,9 @@ import json
 import re
 from pathlib import Path
 
-from pipeline_paths import answer_key_ocr_dir
+from exam_sources import discover
 
 ROOT = Path(__file__).resolve().parents[2]
-KEYS = answer_key_ocr_dir()
-
-STEMS = {
-    "Journeyman open book final exam #1 answer key": "Final Exam #1",
-    "Journeyman open book final exam #3 answer key": "Final Exam #3",
-    "Journeyman open book final exam #5 answer key": "Final Exam #5",
-    "Journeyman open book exam #1 Answer key": "Open Book Exam #1",
-    "Journeyman open book exam #4 Answer key": "Open Book Exam #4",
-    "Journeyman open book exam #7 Answer key": "Open Book Exam #7",
-    "Journeyman open book exam #10 Answer key": "Open Book Exam #10",
-}
 
 bank = json.loads((ROOT / "data" / "question_bank.json").read_text(encoding="utf-8"))
 recs = {(r["exam"], r["question_number"]): r for r in bank["records"]}
@@ -23,8 +12,9 @@ recs = {(r["exam"], r["question_number"]): r for r in bank["records"]}
 total = 0
 mismatches = []
 unparsed = []
-for stem, source in STEMS.items():
-    text = (KEYS / f"{stem}.txt").read_text(encoding="utf-8", errors="replace")
+for exam in discover():
+    source = exam.label
+    text = exam.key_ocr_path().read_text(encoding="utf-8", errors="replace")
     answers = {}
     for m in re.finditer(
         r"(?m)^\s*[_|:;]*\s*(\d{1,2})[\.,]?\s*\(([a-d])\)",
@@ -34,8 +24,7 @@ for stem, source in STEMS.items():
         n = int(m.group(1))
         if n not in answers:
             answers[n] = ord(m.group(2).lower()) - ord("a")
-    count = 70 if "Final" in source else 25
-    for number in range(1, count + 1):
+    for number in range(1, exam.question_count() + 1):
         rec = recs.get((source, number))
         if number not in answers:
             unparsed.append(f"{source} Q{number}: key not parsed")

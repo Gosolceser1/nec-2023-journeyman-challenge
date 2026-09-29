@@ -150,7 +150,7 @@ func _apportion() -> void:
 				bad += 1
 		if sum != n:
 			bad += 1
-	check(bad == 0, "every size 0..279 is split exactly, within each area's records (%d bad)" % bad)
+	check(bad == 0, "every size up to the pool is split exactly, within each area's records (%d bad)" % bad)
 	var exam := ExamBlueprint.apportion(80, cap)
 	print("  simulator: %s" % str(exam))
 	for k in exam:
@@ -219,7 +219,7 @@ func _drills() -> void:
 		check(dupes == 0, "%d-question drills: no duplicate within a run" % size)
 		check(repeats == 0, "%d-question drills: no question repeats before its whole area was asked (%d)" % [size, repeats])
 		check(overlaps == 0, "%d-question drills: consecutive drills share no question outside areas too small to avoid it (%d)" % [size, overlaps])
-		check(covered_at > 0 and covered_at <= need + 2, "%d-question drills: all 279 seen in %d runs (bound %d: slowest area + 2)" % [size, covered_at, need + 2])
+		check(covered_at > 0 and covered_at <= need + 2, "%d-question drills: whole pool seen in %d runs (bound %d: slowest area + 2)" % [size, covered_at, need + 2])
 		var worst := 0.0
 		for k in by_area:
 			worst = maxf(worst, absf(float(per_area_total.get(k, 0)) / runs - mean[k]))

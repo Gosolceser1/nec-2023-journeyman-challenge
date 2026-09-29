@@ -49,7 +49,7 @@ def as_number(value):
     m = re.fullmatch(r"(\d+)\s*/\s*(\d+)", text)
     if m:
         return Fraction(int(m.group(1)), int(m.group(2)))
-    m = re.search(r"\d+(?:\.\d+)?", text)
+    m = re.search(r"\d*\.\d+|\d+", text)
     return float(m.group(0)) if m else None
 
 

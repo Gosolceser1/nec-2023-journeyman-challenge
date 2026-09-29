@@ -15,7 +15,7 @@ func check(cond: bool, label: String) -> void:
 func _init() -> void:
 	print("=== shipped bank ===")
 	var records := BankLoader.load_records()
-	check(records.size() == 283, "283 records load (%d)" % records.size())
+	check(records.size() > 0 and records.size() == BankLoader.declared_count(), "all %d declared records load (%d)" % [BankLoader.declared_count(), records.size()])
 	var ids := {}
 	for rec in records:
 		var id := str(rec.get("id", ""))

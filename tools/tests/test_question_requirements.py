@@ -43,6 +43,33 @@ class BankRequirementsTests(unittest.TestCase):
         self.assertEqual(check_worked_solutions.main_for(BANK["records"]), [])
 
 
+class WorkedSolutionTests(unittest.TestCase):
+    def scan(self, text):
+        problems = []
+        check_worked_solutions.scan_text("q-001", "worked", text, problems)
+        return problems
+
+    def test_parentheses_and_chained_results_are_evaluated_as_written(self):
+        for text in ("(2 + 1) × 1500 VA = 4500 VA", "(4 + 4 + 5) kW × 0.55 = 7.15 kW",
+                     "6 x 0.0437 + 2 x 0.0590 = 0.2622 + 0.1180 = 0.3802 square inches.",
+                     "0.355 − 9 × 0.0181 = 0.355 − 0.1629 = 0.1921",
+                     "4 in × 0.5 in = 2 sq in × 1,000 A = 2,000 A", "60/100 = 6/10 = 3/5"):
+            self.assertEqual(self.scan(text), [], text)
+
+    def test_wrong_arithmetic_is_still_reported(self):
+        for text in ("(2 + 1) × 1500 VA = 3000 VA", "6 x 0.0437 + 2 x 0.0590 = 0.2622 + 0.1180 = 0.3902",
+                     "60/100 = 6/10 = 2/5", "(10 / 125) × 100 = 9%"):
+            self.assertEqual(len(self.scan(text)), 1, text)
+
+    def test_formula_record_needs_a_recomputation(self):
+        record = {"id": "q-001", "answers": ["20 A", "25 A"], "correct_index": 0, "formula": "I = P / E"}
+        missing = check_worked_solutions.main_for([record], {"records": {}})
+        self.assertEqual(missing, ["q-001: has formula/worked text but no recomputation in CHECKS"])
+        for req in ({"class": "calc", "check": {"kind": "quotient", "a": 2400, "b": 120}}, {"class": "table"}):
+            self.assertEqual(check_worked_solutions.main_for([record], {"records": {"q-001": req}}), [])
+        self.assertEqual(len(check_worked_solutions.main_for([record], {"records": {"q-001": {"class": "calc"}}})), 1)
+
+
 class GuardRuleTests(unittest.TestCase):
     """Each rule fails a record that breaks it."""
 
@@ -100,6 +127,11 @@ class GuardRuleTests(unittest.TestCase):
         del req["check"]
         self.assertIn("no check", " ".join(self.problems(None, req)))
 
+    def test_decimal_answer_without_leading_zero_is_read_as_a_decimal(self):
+        self.assertEqual(check_requirements.as_number(".6875"), 0.6875)
+        self.assertTrue(check_requirements.same_value(0.6875, ".6875"))
+        self.assertEqual(check_requirements.as_number("1.5 m (5 ft)"), 1.5)
+
 
 class CalcHelperTests(unittest.TestCase):
     """Textbook cases worked by hand from the NEC 2023 tables."""
@@ -145,6 +177,8 @@ class CalcHelperTests(unittest.TestCase):
         self.assertEqual(nec_calc.next_standard(86), 90)
         self.assertEqual(nec_calc.egc_cu(50), "10")
         self.assertAlmostEqual(nec_calc.ampacity(25, 1.0, 4), 20)
+        self.assertAlmostEqual(nec_calc.evaluate(
+            {"kind": "ampacity", "awg": "12", "column_c": 60, "ambient_f": 75, "ccc": 3}), 21.6)
         self.assertEqual(nec_calc.multioutlet_va(12), 540)
         self.assertEqual(nec_calc.multioutlet_va(12, simultaneous=True), 2160)
 

@@ -29,8 +29,9 @@ func _init() -> void:
 	await process_frame
 
 	print("=== bank load ===")
-	check(main.records.size() == 283, "records count == 283, got %d" % main.records.size())
-	check(BankLoader.count_in_section(main.records, BankLoader.SECTION_NEC) == 279, "NEC pool == 279")
+	check(main.records.size() == BankLoader.declared_count(), "records count == declared %d, got %d" % [BankLoader.declared_count(), main.records.size()])
+	var nec_pool := BankLoader.count_in_section(main.records, BankLoader.SECTION_NEC)
+	check(nec_pool > 0 and nec_pool == main.records.size() - BankLoader.count_in_section(main.records, BankLoader.SECTION_NE_STATE_LAW), "NEC pool == %d" % nec_pool)
 	check(BankLoader.count_in_section(main.records, BankLoader.SECTION_NE_STATE_LAW) == 4, "Nebraska state-law pool == 4")
 	check(main.voice_ids.size() > 0, "voice catalog (data/voices.json) loaded: %d voices" % main.voice_ids.size())
 

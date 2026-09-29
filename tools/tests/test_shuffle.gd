@@ -15,6 +15,8 @@ const MODES := [10, 20, 30, 40, 50, 80]
 var failures: Array[String] = []
 var checks := 0
 var bank: Array = []
+## Size of the NEC pool, read from the bank.
+var nec := 0
 
 func check(cond: bool, label: String) -> void:
 	checks += 1
@@ -46,8 +48,9 @@ func _chi(counts: Array, expected: float) -> float:
 
 func _initialize() -> void:
 	bank = BankLoader.load_records()
-	check(bank.size() == 283, "bank has 283 records (%d)" % bank.size())
-	check(BankLoader.count_in_section(bank, BankLoader.SECTION_NEC) == 279, "279 of them are NEC questions")
+	check(bank.size() == BankLoader.declared_count(), "every declared record loads (%d)" % bank.size())
+	nec = BankLoader.count_in_section(bank, BankLoader.SECTION_NEC)
+	check(nec > 0 and nec == bank.size() - BankLoader.count_in_section(bank, BankLoader.SECTION_NE_STATE_LAW), "%d of them are NEC questions" % nec)
 	var snapshot: Array = bank.duplicate(true)
 	_rng_isolation()
 	_modes()
@@ -116,14 +119,14 @@ func _modes() -> void:
 	var uniq := {}
 	for i in all.order:
 		uniq[i] = true
-	check(all.order.size() == 279 and uniq.size() == 279, "a whole-bank run holds each question once")
-	for first in [100, 250, 279]:
+	check(all.order.size() == nec and uniq.size() == nec, "a whole-bank run holds each question once")
+	for first in [100, 250, nec]:
 		all.begin(first, 60, false, "Part")
 		all.begin(9999, 60, false, "All again")
 		uniq.clear()
 		for i in all.order:
 			uniq[i] = true
-		check(uniq.size() == 279, "a whole-bank run after a %d-question run still holds each question once" % first)
+		check(uniq.size() == nec, "a whole-bank run after a %d-question run still holds each question once" % first)
 
 
 ## A question's chance to open a run is its area's share of the run spread
@@ -136,7 +139,7 @@ func _first_question_uniform() -> void:
 	for k in by_area:
 		capacity[k] = (by_area[k] as Array).size()
 	var first_split := ExamBlueprint.apportion(10, capacity)
-	var n := 279 * 25
+	var n := nec * 25
 	var counts: Array = []
 	counts.resize(bank.size())
 	counts.fill(0)
@@ -219,7 +222,7 @@ func _choice_uniform() -> void:
 	var shuffled_total := 0
 	var prev := {}
 	for r in runs:
-		s.begin(279, 60, false, "All")
+		s.begin(nec, 60, false, "All")
 		for ri in s.order:
 			var rec: Dictionary = bank[ri]
 			var perm: Array = s.choice_orders[ri]
@@ -310,7 +313,7 @@ func _grading_every_record() -> void:
 						or miss["correct_index"] != int(rec["correct_index"]) or miss["selected_index"] != perm[pick]:
 					bad_grade += 1
 			more = s.advance()
-		check(s.score + s.missed_questions.size() == 279, "run %d: score + missed == 279" % r)
+		check(s.score + s.missed_questions.size() == nec, "run %d: score + missed == %d" % [r, nec])
 	check(bad_grade == 0, "grading by original index is right for every record and pick (%d wrong)" % bad_grade)
 	check(bad_text == 0, "correct_index on the display copy points at the right text (%d)" % bad_text)
 	check(bad_notes == 0, "choice notes follow their choices (%d)" % bad_notes)

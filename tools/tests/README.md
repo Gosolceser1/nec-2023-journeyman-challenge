@@ -46,12 +46,12 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | File | Covers |
 |---|---|
 | `t_report.gd` | shared assertion collector (`check` / `eq` / `ne` / `has` / `lacks` / `no_leak` / `defect`). Not a suite. |
-| `test_no_leak.gd` | the leak guard: `redact_answer_spans`, `find_match_in`, `answer_sentence`, + a sweep of all 283 bank records |
+| `test_no_leak.gd` | the leak guard: `redact_answer_spans`, `find_match_in`, `answer_sentence`, + a sweep of every bank record |
 | `test_audio_explanation_generator.gd` | `_normalize_for_compare`, `_is_duplicate_text`, `_rule_adds_value`, `prompt_intent`, `prompt_with_answer`, `lesson_point`, `plain_words`, `lesson_lines`, `format_lesson_text`, `generate_explanation` |
-| `test_speech_text.gd` | `speakable`, `spoken_fraction`, `_normalize_spoken`, `spoken_segments`, `teach_segments`, `speech_plan`, the delegation shims + a sweep of all 283 speech plans |
+| `test_speech_text.gd` | `speakable`, `spoken_fraction`, `_normalize_spoken`, `spoken_segments`, `teach_segments`, `speech_plan`, the delegation shims + a sweep of every record's speech plan |
 | `test_speech_rules.gd` | `speech_rules.gd`: golden input -> spoken cases for every pipeline rule (fails if a rule has none), idempotence, reading order and "Option X." letter clips, the rules version stamp, no answer before answering, and a whole-bank sweep for unspelled caps / raw symbols / doubled periods (spec: `docs/VOICE_READING_RULES.md`) |
-| `test_unit_matcher.gd` | `format_answer_number`, `answer_match_candidates` + a sweep of all 283 answers |
-| `test_info_panel.gd` | `InfoPanelRenderer`: a MEMORY TIP with per-choice rows is never hidden as an echo (plus a 283-record sweep), and the answer chip lands on the occurrence next to the stem's blank |
+| `test_unit_matcher.gd` | `format_answer_number`, `answer_match_candidates` + a sweep of every answer |
+| `test_info_panel.gd` | `InfoPanelRenderer`: a MEMORY TIP with per-choice rows is never hidden as an echo (plus a whole-bank sweep), and the answer chip lands on the occurrence next to the stem's blank |
 | `test_shuffle.gd` | question and choice shuffling: per-mode size and no duplicates, own seedable RNG, chi-square fairness of the first question and of choice slots, locked / pinned choices, grading and display letters under random choice orders, speech letter order |
 | `test_question_deck.gd` | `ExamBlueprint` and `QuestionDeck`: area classification and overrides, blueprint apportionment and remainder rotation, per-area no-repeat decks and coverage, article cap and interleaving, missed-question reviews (gap, cap), simulator blueprint, single-area drills, fixed seeds, save / relaunch / version-1 migration / damaged file / reset, mastery and readiness |
 | `test_study_feedback.gd` | session area tallies and pace (fake clock, 6:00 flag), area bars and weak rows, the report's study feedback (scored line, weak areas, pace, readiness) and the weakest-area menu button, desktop and mobile |
@@ -68,7 +68,8 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | `fake_edge_server.gd` | a local stand-in for the Edge read-aloud WebSocket, used by `test_edge_client.gd`, `test_desktop_edge.gd` and `test_voice_picker.gd`. Not a suite. |
 | `test_audit_bundle.py` | `tools/speech/audit_bundle.py`, the bundled-clip audit verify.sh runs over `assets/speech`: MP3 frame walking (clean run, torn last frame, junk, ID3), unfinished manifest text, duration bounds per word count |
 | `run_all.gd` | combined runner |
-| `test_validate_question_bank.py` | Python regression checks for validator/render parity, shared OCR path resolution, the NEC 2023 location rules and the content-audit guard |
+| `test_validate_question_bank.py` | Python regression checks for validator/render parity, shared OCR path resolution, the NEC 2023 location rules, the content-audit guard and stale stem quotes in `info_tip` |
+| `test_exam_sources.py` | exam discovery from `exams_source_pdf/` (names, keys, orphans, ids), transcript counts, the question-number parsers above 70, and every answer-key entry reaching the bank |
 | `test_question_requirements.py` | runs `tools/pipeline/check_requirements.py`: every table, calculation and formula record in `data/question_requirements.json` keeps its pre-answer table, formula hint and recomputed NEC 2023 result (docs/TABLES_FORMULAS_AUDIT.md) |
 | `test_diagram_figures.py` | runs `tools/diagrams/build.py --check` (the original figures, their masks and labels are current and leak-free) and self-tests the leak scan; skipped without PyMuPDF/Pillow |
 | `test_build_guard.sh` | proves builds refuse default, relative, and absolute targets that would overwrite the curated bank |
@@ -91,7 +92,7 @@ part of the suite:
   8 times over the same string, so a second pass must be a no-op.
 - `find_match_in` span correctness: the reported `start`/`length` must actually
   point at the answer with clean boundaries on both sides.
-- A **whole-bank sweep**: for all 283 records, redact every pre-answer field
+- A **whole-bank sweep**: for every record, redact every pre-answer field
   (`reference_text`, `formula`, `worked`, `gist`, `tip_short`, `info_tip`,
   `lookup_summary`, `article`, `article_title`) and assert the answer is then
   unfindable. Also asserts the reverse: every record's `lesson_lines` DO state the
@@ -123,7 +124,7 @@ that folding keeps every cell once. `test_table_fit.gd` checks the live tables.
 - **`main.gd` and the UI-bound components** (`SpeechController`,
   `FitController`, the layout builders). The builders are pinned by
   `test_layout_tree.gd`; the rest has its own end-to-end harness at
-  `tools/harness.gd`, which drives the real quiz flow headlessly (283 records, all
+  `tools/harness.gd`, which drives the real quiz flow headlessly (every record, all
   render branches, the teach gate, the speech thread join, timer expiry, stale
   speech callbacks). That is the right tool for those; these unit tests are for
   the pure functions underneath it.
@@ -190,7 +191,7 @@ removed, so a regression is red rather than a printed warning.
 | 13 | `unit_matcher.gd` | an `NN%` answer had no `N percent` candidate, so it was never redacted | `83%` -> `83 percent`, `eighty-three percent`. The **bare** number is deliberately excluded: as a candidate it blanked the 8 in `8 AWG` |
 | 14 | `speech_text.gd` | `unspaced_mixed` rewrote the live `15/16` fraction as `"1 and five sixteenths"` | the numerator is pinned to `1`, so `15/16 in.` stays a fraction (`Fifteen sixteenths of an inch`) |
 
-**The leak guarantee itself currently holds:** 0 of 283 records leak a surviving
+**The leak guarantee itself currently holds:** 0 of 598 records leak a surviving
 answer into any pre-answer field. The gaps that were found are now closed in
 fidelity as well — a number that reads as a unit the TTS mangles, and a lesson
 that could not highlight its own answer, are both fixed.

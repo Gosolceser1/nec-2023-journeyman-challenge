@@ -104,6 +104,8 @@ class ValidatorRuleTests(unittest.TestCase):
             "NFPA 70E",
             "Chapter 9, Note 4",
             "Table 8, Chapter 9",
+            "Chapter 9, Table 4",
+            "Chapter 9, Table 5",
             "General knowledge",
             "General calculation",
         )
@@ -130,6 +132,18 @@ class ValidatorRuleTests(unittest.TestCase):
         self.assertEqual(len(self._prompt_leak_errors("final-exam-#3-041", pdf_prompt)), 1)
         reworded = pdf_prompt.replace("is permitted", "shall be permitted")
         self.assertEqual(len(self._prompt_leak_errors("final-exam-#3-042", reworded)), 1)
+
+    def test_info_tip_must_quote_the_current_stem(self):
+        def tip(quoted):
+            return f'WHAT THIS QUESTION MEANS\nIn plain terms, the question is: "{quoted}" Subject: boxes.'
+
+        prompt = "Boxes shall be ___ supported."
+        self.assertEqual(validator.stale_stem_quote(tip(prompt), prompt), "")
+        self.assertEqual(validator.stale_stem_quote(tip("Boxes shall be…"), prompt), "")
+        self.assertEqual(validator.stale_stem_quote(tip("Boxes shal be ___ supported."), prompt),
+                         "Boxes shal be ___ supported.")
+        self.assertEqual(validator.stale_stem_quote(tip("Panels shall…"), prompt), "Panels shall…")
+        self.assertEqual(validator.stale_stem_quote("No quoted stem here.", prompt), "")
 
     def test_recognizes_nebraska_state_law_citations(self):
         for value in ("Neb. Rev. Stat. 81-2113(2)", "Neb. Rev. Stat. 81-2108(2) and 81-2113(2)", "Title 100 NAC Rule 13"):
@@ -232,6 +246,9 @@ class LocationRuleTests(unittest.TestCase):
         problems = self.record(choice_notes=["", "Correct: 314.23(F) requires hubs."])
         self.assertTrue(any("rationale cites 314.23(F)" in p for p in problems), problems)
 
+    def test_standard_numbers_are_not_nec_sections(self):
+        self.assertEqual(self.record(info_tip="See ANSI Z535.4-2011 for sign design."), [])
+
     def test_citation_of_an_article_missing_from_nec_2023_is_reported(self):
         problems = self.record(info_tip="See 311.10 for medium voltage.")
         self.assertTrue(any("311" in p for p in problems), problems)
@@ -269,12 +286,23 @@ class ContentAuditTests(unittest.TestCase):
         self.assertTrue(any("q-001" in e and "provision" in e for e in errors), errors)
         self.assertTrue(any("q-002" in e and "correct_index" in e for e in errors), errors)
 
-    def test_unaudited_record_in_a_real_bank_is_reported(self):
+    def test_unaudited_record_in_a_real_bank_is_an_error(self):
         recs = self.records()
         audit = self.audit(recs[:2])
-        _, warnings = validator.content_audit_problems(recs, audit)
-        self.assertEqual(len(warnings), 1)
-        self.assertIn("q-003", warnings[0])
+        errors, _ = validator.content_audit_problems(recs, audit)
+        self.assertEqual(len(errors), 1)
+        self.assertIn("q-003", errors[0])
+
+    def test_unaudited_records_outnumbering_audited_ones_are_each_an_error(self):
+        recs = self.records()
+        audit = self.audit(recs[:1])
+        errors, _ = validator.content_audit_problems(recs, audit)
+        self.assertEqual(sorted(e.split(":")[0] for e in errors), ["q-002", "q-003"])
+
+    def test_fixture_bank_unknown_to_the_audit_is_not_held_to_it(self):
+        recs = self.records()
+        audit = {"version": 1, "records": {"other-001": {"status": "verified"}}}
+        self.assertEqual(validator.content_audit_problems(recs, audit), ([], []))
 
     def test_state_law_records_are_not_audited(self):
         recs = self.records() + [{"id": "ne-001", "section": "ne_state_law", "reference_text": "x",

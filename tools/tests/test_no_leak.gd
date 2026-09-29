@@ -9,7 +9,7 @@ extends SceneTree
 ##
 ## The assertions below pin the FIXED regressions (single-digit needles,
 ## digit-inside-larger-number, "two"<->"2", multi-word answers, 125-volt) AND
-## sweep all 283 real bank records for surviving matches.
+## sweep every real bank record for surviving matches.
 
 const AEG = preload("res://src/speech/audio_explanation_generator.gd")
 const UM = preload("res://src/speech/unit_matcher.gd")
@@ -333,17 +333,17 @@ func match_in_semantics() -> void:
 
 
 # --------------------------------------------------------------------------
-# 8. Bank-wide sweep: the real guarantee over all 283 records
+# 8. Bank-wide sweep: the real guarantee over every record
 # --------------------------------------------------------------------------
 func bank_wide_sweep() -> void:
-	print("=== bank-wide leak sweep (283 real records) ===")
+	print("=== bank-wide leak sweep (every real record) ===")
 	var prompt_hits: Array[String] = []
 	var parsed = JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json"))
 	if not (parsed is Dictionary):
 		t.check(false, "question_bank.json parses to a Dictionary")
 		return
 	var recs: Array = (parsed as Dictionary).get("records", [])
-	t.eq(recs.size(), 283, "bank has the expected 283 records")
+	t.eq(recs.size(), int((parsed as Dictionary).get("playable", -1)), "bank has every declared record (%d)" % recs.size())
 	t.eq(field(recs[0], "id"), "final-exam-#1-002", "bank read is NOT vacuous (first id)")
 	t.check(field(recs[0], "reference_text").length() > 20, "reference_text read is not a stub")
 

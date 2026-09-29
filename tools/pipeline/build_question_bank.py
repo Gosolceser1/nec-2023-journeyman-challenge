@@ -8,6 +8,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from gists import GISTS, SCENES
 from pipeline_paths import answer_key_ocr_dir, exam_ocr_dir
 from bank_overrides import apply_overrides
+from exam_parser import read_key, read_questions
+from exam_sources import discover, record_id
 from state_law_source import load_all as load_state_law
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -17,88 +19,8 @@ OUT = Path(os.environ.get("WIRE_BANK_OUT", str(ROOT / "data" / "question_bank.js
 if OUT.resolve() == (ROOT / "data" / "question_bank.json").resolve():
     raise SystemExit("Refusing to write over the curated bank; set WIRE_BANK_OUT to a candidate file.")
 
-SOURCES = {
-    "Journeyman open book final exam #1": "Final Exam #1",
-    "Journeyman open book final exam #3": "Final Exam #3",
-    "Journeyman open book final exam #5": "Final Exam #5",
-    "Journeyman open book exam #1": "Open Book Exam #1",
-    "Journeyman open book exam #4": "Open Book Exam #4",
-    "Journeyman open book exam #7": "Open Book Exam #7",
-    "Journeyman open book exam #10": "Open Book Exam #10",
-}
-
-def normalize(text):
-    text = text.replace("\u000c", " ")
-    text = re.sub(r"=== PAGE \d+ ===", " ", text, flags=re.I)
-    text = re.sub(r"\bTH\s*\d+\b", " ", text, flags=re.I)
-    text = re.sub(r"\bTH\b", " ", text)
-    text = re.sub(r"\b(?:Journeyman Final Exam #\d+|OB #\d+)\b", " ", text, flags=re.I)
-    text = text.replace("|", " ")
-    text = re.sub(r"(\w)-\s+(\w)", r"\1\2", text)
-    replacements = {
-        "eupper": "upper", "sevices": "services", "fect": "feet",
-        "Effeetive": "Effective", "effeetive": "effective", "affeeted": "affected",
-        "Ibsinch": "lbs-inch", "Iess": "less", "Knief": "Knife",
-        "Taceways": "raceways", "adwelling": "a dwelling", "anisolated": "an isolated",
-        "cordand": "cord-and", "degreesC": "degrees C", "dewelling": "dwelling",
-        "electrcal": "electrical", "messsenger": "messenger", "groundfault": "ground-fault",
-        "isafactory": "is a factory", "netallic": "metallic", "racewaysis": "raceways is",
-        "sheated": "sheathed", "tating": "rating", "voitage": "voltage",
-        "toloads": "to-loads", "largerthan": "larger than", "supi ported": "supported",
-        "ghing": "weighing", "plaster tings": "plaster rings", "Class TI": "Class II",
-        "kvVA": "kVA", "are-fault": "arc-fault", "Lonly": "I only", "Wonly": "III only",
-    }
-    for bad, good in replacements.items():
-        text = text.replace(bad, good)
-    text = re.sub(r"\s+", " ", text)
-    return text.strip(" |\t")
-
-def read_questions(path):
-    text = path.read_text(encoding="utf-8", errors="replace")
-    starts = list(re.finditer(r"(?m)^\s*[_|:;!]*\s*(\d{1,2})[\.,]\s*", text))
-    found = {}
-    for pos, match in enumerate(starts):
-        number = int(match.group(1))
-        if number > 70 or number in found:
-            continue
-        block_end = starts[pos + 1].start() if pos + 1 < len(starts) else len(text)
-        block = text[match.end():block_end]
-        block = block.replace("()", "(c)").replace("M6", "(d) 6")
-        block = block.replace("(G)", "(c)").replace("(dad)", "(d)")
-        block = block.replace("(a}", "(a)").replace("(b}", "(b)").replace("(c}", "(c)").replace("(d}", "(d)")
-        block = block.replace("(qd)", "(d)").replace("(3", "(c) 3").replace("©", "(c)")
-        block = re.sub(r"\bM(\d)", r"(d) \1", block)
-        option_matches = list(re.finditer(r"\(([a-d])\)\s*", block, re.I))
-        if len(option_matches) < 4:
-            continue
-        prompt = normalize(block[:option_matches[0].start()])
-        choices = []
-        for i, option in enumerate(option_matches[:4]):
-            end = option_matches[i + 1].start() if i + 1 < len(option_matches[:4]) else len(block)
-            choices.append(normalize(block[option.end():end]))
-        choices = [re.sub(r"\s*[:;]\s*\d{2,3}\s*$", "", re.sub(r"\s+", " ", choice).strip(" |;:")) for choice in choices]
-        choices = [choice if choice else f"Diagram option {chr(65 + i)}" for i, choice in enumerate(choices)]
-        if prompt:
-            found[number] = {"prompt": prompt, "choices": choices}
-    return found
-
-def read_key(path):
-    text = path.read_text(encoding="utf-8", errors="replace")
-    answer = {}
-    refs = {}
-    for match in re.finditer(r"(?m)^\s*[_|:;]*\s*(\d{1,2})[\.,]?\s*\(([a-d])\)\s*([^\n]*)", text, re.I):
-        number = int(match.group(1))
-        if number <= 70 and number not in answer:
-            answer[number] = ord(match.group(2).lower()) - ord("a")
-            tail = normalize(match.group(3))
-            references = re.findall(r"(Table\s+\d+(?:\.\d+)?(?:\([A-Z0-9]+\))*|T\.\s*\d+(?:\.\d+)?(?:\([A-Z0-9]+\))*|\d{3}\.\s*\d+(?:\([A-Z0-9]+\))*|DEF\s+100|NFPA\s+70E)", tail, re.I)
-            ref = references[-1] if references else "General knowledge"
-            refs[number] = re.sub(r"^T\.\s*", "", ref, flags=re.I)
-            refs[number] = re.sub(r"(\d{3})\.\s+", r"\1.", refs[number])
-    return answer, refs
-
-def source_key(stem):
-    return SOURCES[stem]
+EXAMS = discover()
+QUESTION_COUNTS = {exam.label: exam.question_count(OCR) for exam in EXAMS}
 
 def difficulty(number):
     if number <= 8:
@@ -877,6 +799,26 @@ def explain_question(prompt, keywords, article=""):
     if note:
         meaning = "PLAIN-LANGUAGE BACKGROUND\n%s\n\n%s" % (note, meaning)
     return "WHAT THIS QUESTION MEANS\n%s\n\nLOOKUP FOCUS\n%s" % (meaning, ", ".join(keywords))
+
+
+def _stem_paragraph(info_tip):
+    """(index, prefix) of the paragraph of an explain_question() tip that restates the stem."""
+    parts = info_tip.split("\n\n")
+    if len(parts) < 2 or not parts[-1].startswith("LOOKUP FOCUS\n"):
+        return None, parts
+    return len(parts) - 2, parts
+
+
+def restate_stem(info_tip, prompt, keywords, article=""):
+    """info_tip with its stem paragraph rebuilt from prompt; the background note is kept."""
+    i, parts = _stem_paragraph(info_tip)
+    j, fresh = _stem_paragraph(explain_question(prompt, keywords, article))
+    if i is None or j is None:
+        return info_tip
+    head = "WHAT THIS QUESTION MEANS\n"
+    old, new = parts[i], fresh[j].removeprefix(head)
+    parts[i] = head + new if old.startswith(head) else new
+    return "\n\n".join(parts)
 
 MOTOR_CONTROLLER_TEXT = """430.8 Marking on Motor Controllers
 A motor controller shall be marked with the manufacturer's name or identification, the voltage, the current or horsepower rating, the short-circuit current rating, and other necessary data to properly indicate the applications for which it is suitable. Exception No. 1: The short-circuit current rating is not required for motor controllers applied in accordance with 430.81(A) or (B). Exception No. 2: The short-circuit current rating is not required to be marked on the motor controller when the short-circuit current rating of the motor controller is marked elsewhere on the assembly. Exception No. 3: The short-circuit current rating is not required to be marked on the motor controller when the assembly into which it is installed has a marked short-circuit current rating. Exception No. 4: Short-circuit current ratings are not required for motor controllers rated less than 2 hp at 300 V or less and listed exclusively for general-purpose branch circuits. A motor controller that includes motor overload protection suitable for group motor application shall be marked with the motor overload protection and the maximum branch-circuit short-circuit and ground-fault protection for such applications. Combination motor controllers that employ adjustable instantaneous trip circuit breakers shall be clearly marked to indicate the ampere settings of the adjustable trip element. Where a motor controller is built in as an integral part of a motor or of a motor-generator set, individual marking of the motor controller shall not be required if the necessary data are on the nameplate. For motor controllers that are an integral part of equipment approved as a unit, the above marking shall be permitted on the equipment nameplate. Informational Note: See 110.10 for information on circuit impedance and other characteristics."""
@@ -1883,7 +1825,7 @@ FORMULA_HINTS = {
     ("Final Exam #1", 21): "Ranges use Table 220.55 demand, not the nameplate — look up the row for this kW size.",
     ("Final Exam #1", 25): "Welder overcurrent ≤ 200% of I1max (630.12(A)), then go to the next standard breaker size.",
     ("Final Exam #1", 27): "Multiply the base ampacity by the temperature correction factor for the given ambient.",
-    ("Final Exam #1", 32): "Field 10-ft tap: feeder overcurrent device rating cannot exceed 10 times the tap ampacity.",
+    ("Final Exam #1", 32): "Field 10-ft tap, 240.21(B)(1): compare the tap conductor ampacity with the rating of the feeder overcurrent device.",
     ("Final Exam #1", 36): "Dwelling services 100–400 A need only 83% of the rating (310.12(A)).",
     ("Final Exam #1", 40): "Multiple dryers use the Table 220.54 demand factor for that dryer count.",
     ("Final Exam #1", 46): "Divide the percent by 100, then reduce the fraction.",
@@ -1893,7 +1835,7 @@ FORMULA_HINTS = {
     ("Final Exam #1", 67): "Nipples 24 in. or shorter may fill to 60% (Chapter 9, Note 4).",
     ("Final Exam #1", 68): "Size the EGC from Table 250.122 using the branch-circuit rating.",
     ("Final Exam #1", 70): "Read the full-load current straight from Table 430.250 for this HP and voltage.",
-    ("Final Exam #1", 22): "Count one receptacle outlet per vehicle bay.",
+    ("Final Exam #1", 22): "Count the receptacle outlets 210.52(G)(1) requires for the garage in the stem.",
     ("Final Exam #3", 26): "Each truck space counts a fixed minimum kVA (626.11).",
     ("Final Exam #3", 33): "Ohm's power law: amps = watts ÷ volts.",
     ("Final Exam #3", 40): "Welder duty factor = √(duty cycle). Multiply the primary current by it.",
@@ -1988,14 +1930,19 @@ def upcodes_url(reference):
 bank = []
 missing = []
 report = []
-for stem, source in SOURCES.items():
-    question_path = OCR / f"{stem}.txt"
-    key_candidates = list(KEYS.glob(f"{stem} answer key.txt"))
-    if not key_candidates:
-        key_candidates = list(KEYS.glob(f"{stem} Answer key.txt"))
-    questions = read_questions(question_path)
-    answers, refs = read_key(key_candidates[0])
-    for number in range(1, 71 if "Final" in source else 26):
+for exam in EXAMS:
+    source = exam.label
+    transcript = exam.transcript()
+    if transcript is not None:
+        # Typed from the PDF page images: replaces the OCR parse for this exam.
+        typed = {item["number"]: item for item in transcript["questions"]}
+        questions = {n: {"prompt": q["prompt"], "choices": q["answers"]} for n, q in typed.items()}
+        answers = {n: q["correct_index"] for n, q in typed.items()}
+        refs = {n: q["reference"] for n, q in typed.items()}
+    else:
+        questions = read_questions(exam.ocr_path(OCR), QUESTION_COUNTS[source])
+        answers, refs = read_key(exam.key_ocr_path(KEYS), QUESTION_COUNTS[source])
+    for number in range(1, QUESTION_COUNTS[source] + 1):
         if number not in questions:
             missing.append({"source": source, "number": number, "answer_index": answers.get(number)})
             continue
@@ -2246,7 +2193,7 @@ records = []
 for item in bank:
     keywords, lookup_summary = extract_lookup(item[1], item[2], item[4])
     records.append({
-        "id": "%s-%03d" % (item[5].lower().replace(" ", "-"), item[6]),
+        "id": record_id(item[5], item[6]),
         "exam": item[5],
         "question_number": item[6],
         "prompt": PROMPT_REPAIRS.get((item[5], item[6]), (item[1], item[2]))[0],
@@ -2279,6 +2226,13 @@ if os.environ.get("WIRE_SKIP_BANK_OVERRIDES") != "1":
     overrides_path = Path(__file__).with_name("question_bank_overrides.json")
     overlay = json.loads(overrides_path.read_text(encoding="utf-8"))
     apply_overrides(records, overlay)
+    # The paragraph that restates the stem quotes it and lists its numbers, so a
+    # curated stem must not leave the raw OCR stem (typos, answer words) there.
+    # The background note above it stays as reviewed.
+    for record in records:
+        fields = overlay["records"].get(record["id"], {})
+        if "info_tip" not in fields and not record.get("section"):
+            record["info_tip"] = restate_stem(record["info_tip"], record["prompt"], record["keywords"], record["article"])
 # Titles follow the final citation: an override that moves a record to another
 # article must not keep the title of the OCR citation it replaced.
 for record in records:
@@ -2292,10 +2246,9 @@ for record in records:
 # units). main.gd read only "records"; keeping both doubled the file and left a
 # latent fallback to unredacted data. Curated rows only.
 playable = len(bank) + len(state_records)
-payload = {"version": 2, "total_expected": 310 + len(state_records), "playable": playable, "missing_source_items": missing, "audit_notes": report, "records": records}
+payload = {"version": 2, "total_expected": sum(QUESTION_COUNTS.values()) + len(state_records), "playable": playable, "missing_source_items": missing, "audit_notes": report, "records": records}
 manifest = []
-for stem, source in SOURCES.items():
-    count = 70 if "Final" in source else 25
+for source, count in QUESTION_COUNTS.items():
     for number in range(1, count + 1):
         match = next((item for item in bank if item[5] == source and item[6] == number), None)
         manifest.append({"source": source, "number": number, "available": match is not None})

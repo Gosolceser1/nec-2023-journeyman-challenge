@@ -233,6 +233,27 @@ def _pre_answer_tip(tip: str) -> str:
     return task
 
 
+STEM_QUOTE_RE = re.compile(
+    r'the question is: "(.*)"(?= (?:Subject:|Numbers in the question:|Break it into pieces))')
+
+
+def stale_stem_quote(tip, prompt) -> str:
+    """The stem an info_tip quotes when it is not the record's prompt ("" when it matches).
+
+    The builder quotes the OCR stem; a curated prompt that leaves the old quote
+    behind shows the learner a different question, with its typos or answer words.
+    """
+    if not isinstance(tip, str) or not isinstance(prompt, str):
+        return ""
+    m = STEM_QUOTE_RE.search(tip)
+    if not m:
+        return ""
+    quoted = m.group(1)
+    if quoted.endswith("…"):
+        return "" if prompt.strip().startswith(quoted[:-1]) else quoted
+    return "" if prompt.strip() == quoted else quoted
+
+
 def prompt_leak_excepted(record_id, prompt) -> bool:
     return PROMPT_LEAK_EXCEPTIONS.get(record_id) == prompt
 
@@ -263,7 +284,7 @@ def article_reference_is_recognized(reference: str) -> bool:
         return True
     if folded.startswith("chapter 9, note ") and clean[15:].strip().isdigit():
         return True
-    if folded == "table 8, chapter 9":
+    if re.fullmatch(r"chapter 9, table \d+|table \d+, chapter 9", folded):
         return True
     if STATE_LAW_RE.match(clean):
         return True
@@ -277,7 +298,7 @@ def article_reference_is_recognized(reference: str) -> bool:
 NEC_ARTICLES_PATH = ROOT / "data" / "nec_2023_articles.json"
 PRIMARY_ARTICLE_RE = re.compile(r"^(?:NEC\s+)?(?:Table\s+|Article\s+)?(\d{2,3})(?:\.\d|\b)")
 PRIMARY_SECTION_RE = re.compile(r"^(?:NEC\s+)?(?:Table\s+)?(\d{3}\.\d+)((?:\([A-Za-z0-9]+\))*)")
-CITATION_RE = re.compile(r"(?<![\d.$])([1-8]\d\d)\.(\d+)((?:\([A-Za-z0-9]+\))*)(?!\d)")
+CITATION_RE = re.compile(r"(?<![\w.$])([1-8]\d\d)\.(\d+)((?:\([A-Za-z0-9]+\))*)(?!\d)")
 ARTICLE_CITATION_RE = re.compile(r"\bArticles?\s+([1-8]\d\d|90)\b")
 # Explanatory fields: the exam's own wording (prompt, answers) may quote old
 # numbers as distractors; everything the app writes must use 2023 numbering.
@@ -307,7 +328,7 @@ def provision_digest(rec: dict) -> str:
 
 
 def content_audit_problems(records: list, audit: dict) -> tuple[list[str], list[str]]:
-    """(errors, warnings) for records whose provision or key changed since the 2023 content audit."""
+    """(errors, warnings) for records unaudited, or whose provision or key changed since the 2023 content audit."""
     errors: list[str] = []
     warnings: list[str] = []
     entries = audit.get("records", {}) if isinstance(audit, dict) else {}
@@ -325,11 +346,12 @@ def content_audit_problems(records: list, audit: dict) -> tuple[list[str], list[
         if entry.get("correct_index") != rec.get("correct_index"):
             errors.append(f"{rid}: correct_index {rec.get('correct_index')} differs from the audited key "
                           f"{entry.get('correct_index')}; record the evidence in {CONTENT_AUDIT_PATH.name}")
-    # A real bank (not a unit-test fixture) must have every NEC record audited.
-    if covered and len(covered) * 2 >= len(nec):
+    # Once the audit covers any record of this bank, every NEC record must be audited, however many are new.
+    # A fixture bank whose ids the audit has never seen is not held to the checked-in audit.
+    if covered:
         for rec in nec:
             if rec.get("id") not in entries:
-                warnings.append(f"{rec.get('id')}: no NEC 2023 content audit entry in {CONTENT_AUDIT_PATH.name}")
+                errors.append(f"{rec.get('id')}: no NEC 2023 content audit entry in {CONTENT_AUDIT_PATH.name}")
     return errors, warnings
 
 
@@ -714,6 +736,10 @@ def check_records(data, rep: Report) -> dict:
                         f"{rid}: correct answer {truncate(ans)!r} appears in info_tip "
                         f"chapter '{chapter}' (shown before answering)"
                     )
+
+        stale = stale_stem_quote(rec.get("info_tip"), rec.get("prompt"))
+        if stale:
+            rep.error(f"{rid}: info_tip quotes a stem other than the prompt: {truncate(stale)!r}")
 
         # reference_table
         tbl = rec.get("reference_table")
