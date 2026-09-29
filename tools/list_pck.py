@@ -1,6 +1,8 @@
 """List the files inside a Godot 4 .pck (format 2, 3 or 4) and flag what should not ship.
 
-    python tools/list_pck.py build/NEC2023JourneymanChallenge.pck [--desktop] [--all]
+    python tools/list_pck.py build/<file_stem>.pck [--desktop] [--all]
+
+<file_stem> is data/app.json's file_stem for the edition (NEC2023JourneymanChallenge).
 
 Prints a per-top-level-folder summary, then fails (exit 1) if a path that the
 export presets exclude made it in (anything under tools/, docs, source
@@ -90,6 +92,8 @@ def main():
     need = {
         "question bank": lambda r: r.endswith("question_bank.json"),
         "voice catalog": lambda r: r.endswith("voices.json"),
+        "app identity (save-folder migration)": lambda r: r.endswith("data/app.json"),
+        "edition": lambda r: r.endswith("data/edition.json"),
         "diagrams map": lambda r: r.endswith("diagrams/diagrams.json"),
         "NEC figures map": lambda r: r.endswith("diagrams/nec/figures.json"),
         "NEC figures (imported)": lambda r: "diagrams/nec/" in r and r.endswith(".png.import"),

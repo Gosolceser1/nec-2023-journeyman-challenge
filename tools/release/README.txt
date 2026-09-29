@@ -1,8 +1,8 @@
-NEC 2023 Journeyman Challenge  -  version {version}
+{app_name}  -  version {version}
 =====================================================
 
-A study app for the NEC 2023 journeyman electrician exam: timed practice
-drills, a full 80-question exam simulator, a Nebraska State Law drill, and a
+A study app for the {edition} journeyman electrician exam: timed practice
+drills, a full {scored_items}-question exam simulator, a Nebraska State Law drill, and a
 short lesson with the NEC reference after every answer. Questions can be read
 aloud by the built-in voice.
 
@@ -12,7 +12,7 @@ HOW TO RUN
 1. Right-click the zip file and choose "Extract All...", then open the
    extracted folder. (Running it from inside the zip preview also works, but
    extracting is tidier.)
-2. Double-click "NEC 2023 Journeyman Challenge.exe".
+2. Double-click "{app_name}.exe".
 
 That's it: there is no installer and nothing else to download. The app runs
 fully offline.
@@ -27,7 +27,7 @@ once.
 
 To make sure your copy is the original, compare its SHA-256 fingerprint with
 the one in SHA256SUMS.txt (sent alongside the zip). In PowerShell:
-    Get-FileHash "NEC 2023 Journeyman Challenge.exe"
+    Get-FileHash "{app_name}.exe"
 
 
 SYSTEM REQUIREMENTS
@@ -41,7 +41,7 @@ SYSTEM REQUIREMENTS
 YOUR PROGRESS
 -------------
 Progress and settings are saved automatically, on this PC only, in:
-    %APPDATA%\NEC2023JourneymanChallenge
+    %APPDATA%\{user_dir}
 (paste that line into the File Explorer address bar to open it).
 
 - To move your progress to another PC, copy that folder to the same place there.

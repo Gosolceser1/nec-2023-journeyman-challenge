@@ -5,7 +5,8 @@ extends SceneTree
 ## tools/ is excluded from exports, so pass this script by absolute path:
 ##
 ##   cd build
-##   ..\Godot_v4.7.2-stable_win64_console.exe --headless --main-pack NEC2023JourneymanChallenge.pck \
+## (<file_stem> is data/app.json's file_stem, e.g. NEC2023JourneymanChallenge)
+##   ..\Godot_v4.7.2-stable_win64_console.exe --headless --main-pack <file_stem>.pck \
 ##       --script "<repo>/tools/speech/check_export_pack.gd"
 
 var failures: Array[String] = []
@@ -23,6 +24,8 @@ func _init() -> void:
 	check(records.size() > 0 and records.size() == int(bank.get("playable", -1)), "bank loads from the pack: %d records" % records.size())
 	var voices = JSON.parse_string(FileAccess.get_file_as_string("res://data/voices.json"))
 	check(voices is Array and not (voices as Array).is_empty(), "voice catalog loads from the pack")
+	check(AppIdentity.display_name() != "" and not AppIdentity.legacy_project_names().is_empty(),
+		"app identity loads from the pack (the save-folder migration needs its legacy names)")
 
 	var host = load("res://src/app/main.gd").new()
 	var speech_text = load("res://src/speech/speech_text.gd")

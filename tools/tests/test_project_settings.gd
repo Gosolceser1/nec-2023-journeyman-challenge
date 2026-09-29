@@ -57,8 +57,17 @@ func _init() -> void:
 	var version := str(ProjectSettings.get_setting("application/config/version"))
 	check(version == "1.0.4", "config/version is 1.0.4")
 
+	# Name and identifiers: data/app.json + data/edition.json (sync_identity.py
+	# writes them; the save folder and Android package id are frozen).
+	check(str(ProjectSettings.get_setting("application/config/name")) == AppIdentity.display_name(),
+		"config/name is data/app.json's display_name (%s)" % AppIdentity.display_name())
+	check(str(ProjectSettings.get_setting("application/config/description")) == AppIdentity.fill(str(AppIdentity.data().get("description", ""))),
+		"config/description is data/app.json's description")
+	check(str(ProjectSettings.get_setting("application/config/custom_user_dir_name")) == AppIdentity.user_dir(),
+		"custom_user_dir_name is the frozen user_dir (%s)" % AppIdentity.user_dir())
+
 	# Export presets: the Edge voices need the network on Android, and every
-	# build carries the same version.
+	# build carries the same version and name.
 	var presets := ConfigFile.new()
 	check(presets.load("res://export_presets.cfg") == OK, "export_presets.cfg parses")
 	var androids := 0
@@ -72,9 +81,14 @@ func _init() -> void:
 			check(presets.get_value(opts, "permissions/internet", false) == true,
 				"%s asks for INTERNET (the Edge voices stream over the network)" % presets.get_value(sec, "name"))
 			check(str(presets.get_value(opts, "version/name", "")) == version, "%s version/name is %s" % [presets.get_value(sec, "name"), version])
+			check(str(presets.get_value(opts, "package/unique_name", "")) == AppIdentity.android_package(),
+				"%s package id is the frozen android_package" % presets.get_value(sec, "name"))
+			check(str(presets.get_value(opts, "package/name", "")) == AppIdentity.display_name(), "%s app name" % presets.get_value(sec, "name"))
 		elif platform == "Windows Desktop":
 			check(str(presets.get_value(opts, "application/file_version", "")) == version
 				and str(presets.get_value(opts, "application/product_version", "")) == version, "Windows file/product version is %s" % version)
+			check(str(presets.get_value(opts, "application/product_name", "")) == AppIdentity.display_name(), "Windows product name")
+			check(str(presets.get_value(sec, "export_path", "")).get_file() == AppIdentity.display_name() + ".exe", "Windows exe is named after the app")
 	check(androids == 2, "both Android presets checked (%d)" % androids)
 
 	# No setting name may contain a comment character or a space: that is the

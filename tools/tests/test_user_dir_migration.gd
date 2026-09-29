@@ -28,6 +28,7 @@ func _init() -> void:
 	_partial_old_folder()
 	_same_folder()
 	_find_legacy_dir()
+	_legacy_names()
 
 	_remove_tree(tmp_root)
 	check(not DirAccess.dir_exists_absolute(tmp_root), "temp folders cleaned up")
@@ -42,10 +43,11 @@ func _init() -> void:
 func _settings() -> void:
 	check(ProjectSettings.get_setting("application/config/use_custom_user_dir") == true,
 		"use_custom_user_dir is on")
-	check(ProjectSettings.get_setting("application/config/custom_user_dir_name") == "NEC2023JourneymanChallenge",
-		"custom user folder is NEC2023JourneymanChallenge")
+	var frozen := AppIdentity.user_dir()
+	check(frozen != "" and ProjectSettings.get_setting("application/config/custom_user_dir_name") == frozen,
+		"custom user folder is data/app.json's frozen user_dir (%s)" % frozen)
 	var user_dir := OS.get_user_data_dir()
-	check(user_dir.ends_with("NEC2023JourneymanChallenge") and not user_dir.contains("app_userdata"),
+	check(user_dir.ends_with(frozen) and not user_dir.contains("app_userdata"),
 		"user:// resolves to the custom folder (got %s)" % user_dir)
 	check(UserDirMigration.FILES == PackedStringArray(["audio.cfg", "voice.cfg", "question_bag.cfg"]),
 		"migrates the settings and the study progress")
@@ -119,7 +121,7 @@ func _same_folder() -> void:
 
 func _find_legacy_dir() -> void:
 	var data := _case_dir("appdata")
-	var name := "NEC 2023 Journeyman Challenge"
+	var name := AppIdentity.legacy_project_names()[0]
 	check(UserDirMigration.find_legacy_dir(data, name) == "", "no legacy folder: empty path")
 	var legacy := data.path_join("Godot/app_userdata").path_join(name)
 	DirAccess.make_dir_recursive_absolute(legacy)
@@ -129,10 +131,27 @@ func _find_legacy_dir() -> void:
 	check(UserDirMigration.find_legacy_dir("", name) == "", "no data dir: empty path")
 	# The whole path as main.gd runs it, against a fake APPDATA layout.
 	_write(legacy, "question_bag.cfg", "legacy progress")
-	var new := data.path_join("NEC2023JourneymanChallenge")
+	var new := data.path_join(AppIdentity.user_dir())
 	check(UserDirMigration.migrate(found, new) == PackedStringArray(["question_bag.cfg"]),
 		"fake APPDATA: legacy progress lands in the new folder")
 	check(_read(legacy, "question_bag.cfg") == "legacy progress", "fake APPDATA: legacy file kept")
+
+
+## The pre-1.0 folder is found by the legacy names, not by config/name, so an
+## app renamed for a new edition still migrates the old progress.
+func _legacy_names() -> void:
+	var names := AppIdentity.legacy_project_names()
+	check(names.has("NEC 2023 Journeyman Challenge"), "legacy names hold the pre-1.0 project name (%s)" % str(names))
+	var data := _case_dir("renamed")
+	var legacy := data.path_join("Godot/app_userdata").path_join(names[0])
+	DirAccess.make_dir_recursive_absolute(legacy)
+	_write(legacy, "question_bag.cfg", "pre-1.0 progress")
+	check(UserDirMigration.find_legacy_dir(data, "NEC 2032 Journeyman Challenge") == "", "a renamed app has no default folder of its own")
+	var found := UserDirMigration.find_first_legacy_dir(data, PackedStringArray(["NEC 2032 Journeyman Challenge"]) + names)
+	check(found.to_lower() == legacy.to_lower(), "the first legacy name with a folder wins (got %s)" % found)
+	check(UserDirMigration.find_first_legacy_dir(data, PackedStringArray()) == "", "no names: empty path")
+	var new := data.path_join(AppIdentity.user_dir())
+	check(UserDirMigration.migrate(found, new) == PackedStringArray(["question_bag.cfg"]), "renamed app: pre-1.0 progress still lands in the frozen folder")
 
 
 func _case_dir(rel: String) -> String:

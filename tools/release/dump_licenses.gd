@@ -14,7 +14,7 @@ func _init() -> void:
 	lines.append("THIRD-PARTY SOFTWARE LICENSES")
 	lines.append("=============================")
 	lines.append("")
-	lines.append("NEC 2023 Journeyman Challenge is built with the Godot Engine")
+	lines.append("%s is built with the Godot Engine" % AppIdentity.display_name())
 	lines.append("(https://godotengine.org), used under the MIT license below, together")
 	lines.append("with the third-party components the engine includes.")
 	lines.append("")

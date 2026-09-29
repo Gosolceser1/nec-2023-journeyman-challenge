@@ -1,10 +1,10 @@
-NEC 2023 Journeyman Challenge  -  version {version}
+{app_name}  -  version {version}
 Credits and licenses
 =====================================================
 
 APP
 ---
-NEC 2023 Journeyman Challenge (c) 2026 Live Wire Training.
+{app_name} (c) 2026 {company}.
 Free to share as this unmodified zip or APK.
 
 

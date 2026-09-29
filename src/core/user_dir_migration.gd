@@ -15,8 +15,17 @@ const MARKER := "user_dir_migration.cfg"
 static func run() -> PackedStringArray:
 	if not ProjectSettings.get_setting("application/config/use_custom_user_dir", false):
 		return PackedStringArray()
-	var project_name := str(ProjectSettings.get_setting("application/config/name", ""))
-	return migrate(find_legacy_dir(OS.get_data_dir(), project_name), OS.get_user_data_dir())
+	return migrate(find_first_legacy_dir(OS.get_data_dir(), AppIdentity.legacy_project_names()), OS.get_user_data_dir())
+
+
+## The default user folder of the first of names that has one, or "". The
+## names come from data/app.json, not config/name, which follows the edition.
+static func find_first_legacy_dir(data_dir: String, names: PackedStringArray) -> String:
+	for n in names:
+		var dir := find_legacy_dir(data_dir, n)
+		if dir != "":
+			return dir
+	return ""
 
 
 ## Godot's default user folder for this project, or "" if there is none.
