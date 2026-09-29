@@ -12,6 +12,9 @@ src/
   app/    main.gd           composition root, quiz flow, menu, input, harness facade
           desktop_layout.gd DesktopLayout.build(host): the Windows UI
           mobile_layout.gd  MobileLayout.build(host): the Android UI
+          menu/             the main menu, built from data/menu.json (see "Main menu" below):
+                            main_menu.gd (MainMenu), menu_model.gd (MenuModel), menu_tile.gd,
+                            meter_bar.gd, outline_bars.gd
   core/   node-free, unit-tested
           quiz_session.gd   QuizSession: order (one question pool), score, streak, verdicts, missed list, clocks
           question_deck.gd  QuestionDeck: which questions a run gets, reviews, study stats, question_bag.cfg
@@ -20,6 +23,8 @@ src/
           bank_loader.gd    BankLoader: reads data/question_bank.json, normalizes records, question pools
           nec_reference.gd  NecReference: article titles (data/nec_2023_articles.json), lookup paths (NEC and Nebraska law)
           safe_area.gd      SafeArea.margins: notch / cutout insets
+          edition.gd        Edition: the NEC edition labels, from data/edition.json
+          study_progress.gd StudyProgress: best score per exam and the unfinished run, study_progress.cfg
           audio_settings.gd AudioSettings: audio modes, speed, pauses, sound effects, audio.cfg
           user_dir_migration.gd  UserDirMigration: one-time copy from the pre-1.0 user folder
   speech/ speech_controller.gd  SpeechController: bundled clips, Edge voices and cache,
@@ -105,8 +110,42 @@ Nebraska State Law records carry `"section": "ne_state_law"`.
 goes through the deck below; `ExamBlueprint.area_of` gives other pools no
 area, so the NEC drills, the simulator, the reviews and the readiness never
 see a state question. Any other pool is simply shuffled, with shuffled
-choices. The menu's NEBRASKA STATE LAW drill
-(`Widgets.add_state_law_section`) asks for every record in its pool.
+choices. Nebraska State Law shows up in the menu as one more exam family
+(its records carry an `exam` label like every other exam).
+
+### Main menu
+
+`data/menu.json` describes the menu; `MainMenu` (`host.menu`, an owned
+object) builds it into both layouts' menu column and `MenuModel` does the
+node-free part (spec, `{placeholder}` filling, exam discovery, progress
+counts). The spec lists the tabs in order (Home, Exams, Drills, Study,
+Settings), each with the blocks it shows; every block kind has one builder
+in `main_menu.gd` and its texts in the spec's `blocks`. Nothing in the code
+names an exam, a count or the edition:
+
+- Exams come from the bank. `MenuModel.families` groups records by their
+  `exam` label without the `#N` ("Open Book Exam #3" -> family "Open Book
+  Exam"), sorted by `family_order` and number. A new exam in
+  `data/question_bank.json` gets a tile on the next launch; a new family
+  gets its own chip. Tiles show questions seen, the best score against the
+  pass mark, and page when a family outgrows its grid.
+- The full exam's item count, time and pass mark come from
+  `data/exam_blueprint.json` (`ExamBlueprint.minutes`, `pass_percent`), the
+  edition from `data/edition.json` (`Edition`).
+- Home shows "Continue where you left off" when `StudyProgress` holds an
+  unfinished run (`session.snapshot()` after every graded answer,
+  `session.restore()` to resume), the quick drill, the weakest-area drill,
+  missed-question review and the full exam with its content outline bars.
+- Study lists `data/math/tools.json` through the entry script named in
+  `study_tools.entry_script`, loaded by path: when it is not in the build
+  the block shows its `missing` text and the quiz hooks
+  (`menu.study_hook`: attach, question, answered, back) do nothing.
+- Every tab fits without scrolling at the 12 fit sizes; the holder keeps
+  Home's height so the panel does not jump between tabs, and Back on a tab
+  other than Home returns to Home.
+
+`test_menu.gd` covers the model, every entry, the progress flow, exam
+discovery and the fit; `test_menu_cards.gd` the card sizes per tab.
 
 The flow of one question: `_show_question` asks `session` for the record,
 renders the stem, choices, table or figure, then `fit.begin()` shrinks the
@@ -174,7 +213,7 @@ outline in `data/exam_blueprint.json` (ExamBlueprint). In short:
 - Study feedback reads the same state: `session.area_stats` and
   `answer_seconds` for the report (ResultsView, ChapterBars area rows),
   `deck.mastery()` for readiness and the menu's weakest-area drill
-  (`main.study_button`, refreshed by `_show_menu`).
+  (`main.study_button`, refreshed by `menu.refresh()` from `_show_menu`).
 
 `docs/STUDY_SYSTEM.md` has the blueprint, the pool counts, and the
 algorithms in detail.

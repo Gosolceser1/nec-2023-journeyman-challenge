@@ -17,6 +17,19 @@
   the motor-group feeder, insulation colors, the TC bending radius, battery
   room ventilation and the RV park receptacles. As before, the answer stays
   hidden until you answer.
+- **New main menu in five tabs: Home, Exams, Drills, Study, Settings.** Home
+  has "Continue where you left off" (an unfinished run picks up at the same
+  question with the same score, even after closing the app), the quick
+  drill, your weakest area, "Review missed questions" and the Full
+  Journeyman Exam (80 questions, 240 minutes, 75% to pass) with bars for
+  what the real exam asks per subject and how you do in each.
+- **Every practice exam on the Exams tab**, grouped as Open Book, Finals and
+  State Law, each tile showing how many of its questions you have seen and
+  your best score against the pass mark. New exams show up by themselves.
+- **Drills tab:** the 10 to 50 question drills plus a 10-question drill for
+  each subject area, with its share of the exam and your recent accuracy.
+- **Study tab** for the math and table study tools, and a "Show steps"
+  button after answering a calculation question when they are installed.
 
 ### Fixed
 
@@ -40,6 +53,9 @@
   readings (Final Exam #1 Q5), the three meter hookups (Q13) and the four
   switch symbols (Q47). Same meaning, same answers, sharper on every screen,
   and the keyed part is outlined after you answer.
+- **Everything in the menu fits on one screen** at every supported desktop
+  and phone size, with no scrolling; Audio & Voice moved to the Settings
+  tab, and Back on another tab returns to Home first.
 
 ## [1.0.4] - 2026-09-28
 

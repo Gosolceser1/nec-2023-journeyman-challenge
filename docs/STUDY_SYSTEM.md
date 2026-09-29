@@ -177,10 +177,11 @@ The app has no settings reset, so nothing calls it yet.
 
 ### Weakest-area drill (menu)
 
-One mode button under the drills: "10 QUESTIONS • WEAKEST AREA", subtitle
+One card on the menu's Home tab: "10 QUESTIONS • WEAKEST AREA", subtitle
 `<area> (<mastery>|new) • readiness N% • 30 minutes timed`. It picks the
 heaviest area not practiced yet, else the lowest mastery (heavier on ties).
 Pressing it starts 10 questions from that area's deck (fewer if the area
 is smaller), with that area's due reviews first, 3:00 per question. The
-subtitle is recomputed whenever the menu opens. A full area picker would
-not fit the phone menu without scrolling, so the menu gets this one button.
+subtitle is recomputed whenever the menu opens. The Drills tab has the full
+area picker: one tile per blueprint area with its share of the exam and its
+recent accuracy, each starting the same 10-question area drill.
