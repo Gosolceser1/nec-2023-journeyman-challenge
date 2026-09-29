@@ -1,6 +1,8 @@
 # Tables & Formulas Audit — NEC 2023
 
 Second pass, 2026-09-28. Scope: all 283 records (279 NEC, 4 Nebraska State Electrical Act).
+The 315 records of the 9 exams imported on 2026-09-29 were classified and checked the same
+way (see *Exam import*); the class counts below cover all 598 records.
 The question for each record is whether it needs a table lookup, a calculation or a formula.
 If it does, the audit checks that the app gives the student what they need to answer without
 the codebook, and that the numbers are right for NEC 2023. The first pass (2026-09, when UpCodes
@@ -21,13 +23,13 @@ and `tools/tests/test_question_requirements.py` enforce it (see *Guards*).
 
 | Class | Records | Meaning |
 |---|---|---|
-| recall | 245 | Answer is a rule or definition; no lookup or arithmetic |
-| table | 18 | Answer is read from an NEC table or tabular provision |
-| calc | 12 | Arithmetic on values in the stem or in a short rule (for example 1/10 tap rule, 1000 A/in²) |
-| table+calc | 4 | A table lookup feeds a calculation (ampacity, range demand, welder duty cycle) |
-| formula | 4 | A general electrical formula (voltage drop %, phase time, Ohm's law, parallel resistance) |
+| recall | 492 | Answer is a rule or definition; no lookup or arithmetic |
+| table | 37 | Answer is read from an NEC table or tabular provision |
+| calc | 24 | Arithmetic on values in the stem or in a short rule (for example 1/10 tap rule, 1000 A/in²) |
+| table+calc | 40 | A table lookup feeds a calculation (ampacity, range demand, welder duty cycle) |
+| formula | 5 | A general electrical formula (voltage drop %, phase time, Ohm's law, parallel resistance) |
 
-33 records carry a machine-checkable `check`. `nec_calc.evaluate` recomputes each one from
+86 records carry a machine-checkable `check`. `nec_calc.evaluate` recomputes each one from
 NEC 2023 constants and compares it with the keyed answer.
 
 ## Coverage gaps found and fixed
@@ -247,6 +249,89 @@ No table, calculation or formula is needed. Question numbers by exam:
 - **Open Book Exam #10** (24): 10-001, 10-002, 10-003, 10-004, 10-005, 10-006, 10-007, 10-008, 10-009, 10-010, 10-011, 10-012, 10-013, 10-014, 10-015, 10-017, 10-018, 10-019, 10-020, 10-021, 10-022, 10-023, 10-024, 10-025
 - **Open Book Exam #4** (22): 4-001, 4-002, 4-003, 4-005, 4-006, 4-007, 4-008, 4-009, 4-010, 4-011, 4-012, 4-013, 4-014, 4-016, 4-017, 4-018, 4-019, 4-020, 4-021, 4-022, 4-023, 4-024
 - **Open Book Exam #7** (25): 7-001, 7-002, 7-003, 7-004, 7-005, 7-006, 7-007, 7-008, 7-009, 7-010, 7-011, 7-012, 7-013, 7-014, 7-015, 7-016, 7-017, 7-018, 7-019, 7-020, 7-021, 7-022, 7-023, 7-024, 7-025
+| final-exam-#2-019 | formula | Length × 3: 5 × 3 = 15 ohms; Area × 1/2: 15 ÷ 0.5 = 30 ohms | none | yes | new (2026-09-29 import) | [General calculation]() |
+| final-exam-#2-023 | table | Table 110.28 outdoor use, Corrosive agents row: X under Types 3X, 3RX, 3SX, 4X, 6P; Types 12 and 13 are indoor only | after answering | none | new (2026-09-29 import) | [Table 110.28](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110) |
+| final-exam-#2-046 | table | Table 110.26(A)(1), Condition 2 note: concrete, brick, or tile walls are considered grounded; Read the Condition 2 definition under Table 110.26(A)(1) | none | none | new (2026-09-29 import) | [110.26(A)(1) Condition 2](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110) |
+| final-exam-#2-057 | calc | Decimal = numerator ÷ denominator; 11 ÷ 16 = 0.6875 | none | yes | new (2026-09-29 import) | [General calculation]() |
+| final-exam-#4-005 | table | Table 314.16(A): 3 x 2 x 2 device box = 10.0 in.3; Find the 3 x 2 x 2 device box row and read the minimum volume | none | none | new (2026-09-29 import) | [Table 314.16(A)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314) |
+| final-exam-#4-006 | table | Chapter 9, Table 9: 4/0 aluminum, steel conduit, per 1000 ft: AC resistance 0.11, effective Z at 0.85 PF 0.11; Use the per-1000-ft row for 4/0 and read the aluminum, steel conduit columns | none | none | new (2026-09-29 import) | [Table 9, Chapter 9](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables) |
+| final-exam-#4-009 | table | Table 392.60(B) steel: 200 A = 0.70 in.2; 400 A = 1.00 in.2; 0.79 in.2 meets the 0.70 in.2 row but not the 1.00 in.2 row | after answering | none | new (2026-09-29 import) | [Table 392.60(B)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#392) |
+| final-exam-#4-011 | table | Table 314.16(A): 3 x 2 x 2 = 10.0 in.3; 3 x 2 x 2-1/4 = 10.5 in.3; Pick the smallest listed device box with at least 10.25 in.3 | none | none | new (2026-09-29 import) | [Table 314.16(A)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314) |
+| final-exam-#4-021 | table | Table 314.16(B)(1): 12 AWG = 2.25 in.3, 14 AWG = 2.00 in.3; Table 314.16(A): 4 x 2-1/8 octagon = 21.5 in.3; 5 x 2.25 + 4 x 2.00 = 19.25 in.3; Smallest octagon box of at least 19.25 in.3: 4 x 2-1/8 in. (21.5 in.3) | none | yes | new (2026-09-29 import) | [Table 314.16(B)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314) |
+| final-exam-#4-022 | table | Chapter 9, Table 4, EMT: 1 in., over 2 wires 40% = 0.346 in.2; Compare 0.30 in.2 with 0.346 in.2 | none | none | new (2026-09-29 import) | [Table 4, Chapter 9](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables) |
+| final-exam-#4-023 | table+calc | Table 220.55 Column B: 8 appliances = 36%; Table 220.55 Column C: 8 appliances = 23 kW; 32 kW x 0.36 = 11.52 kW (Column B, Note 3); Column B gives less than the 23 kW of Column C | none | yes | new (2026-09-29 import) | [Table 220.55](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| final-exam-#4-024 | table+calc | Table 310.16: 14 AWG Cu, 75°C (THW) = 20 A; Table 310.15(C)(1): 4–6 conductors = 80%; 20 A x 1.00 x 0.80 = 16 A | none | yes | new (2026-09-29 import) | [Table 310.15(C)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310) |
+| final-exam-#4-025 | table+calc | Table 220.55 Column C: 2 appliances = 11 kW; Two appliances, none over 12 kW: Column C = 11 kW | none | yes | new (2026-09-29 import) | [Table 220.55](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| final-exam-#4-026 | table+calc | Table 430.248: 3/4 hp, 115 V = 13.8 A; 13.8 A x 1.25 = 17.25 A | none | yes | new (2026-09-29 import) | [Table 430.248](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430) |
+| final-exam-#4-027 | calc | 2000 ft2 x 3 VA/ft2 = 6000 VA | none | yes | new (2026-09-29 import) | [220.5(C)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| final-exam-#4-028 | calc | 3 circuits x 1500 VA = 4500 VA | none | yes | new (2026-09-29 import) | [220.52](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| final-exam-#4-029 | table | Table 250.66: 2/0 or 3/0 Cu = 4 AWG Cu GEC; Find the 2/0 copper row and read the copper GEC size | none | none | new (2026-09-29 import) | [Table 250.66](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250) |
+| final-exam-#4-030 | table+calc | Table 430.248: 1-1/2 hp, 230 V = 10 A; 10 x 1.25 + 10 = 22.5 A | none | yes | new (2026-09-29 import) | [430.24](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430) |
+| final-exam-#4-031 | table+calc | Table 310.16: 12 AWG Cu, 60°C (TW) = 20 A; Table 310.15(B)(1)(1): 69–77°F, 60°C column = 1.08; 20 A x 1.08 = 21.6 A | none | yes | new (2026-09-29 import) | [Table 310.15(B)(1)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310) |
+| final-exam-#4-032 | table+calc | Table 430.248: 3 hp, 115 V = 34 A; Table 430.52(C)(1): dual element fuse = 175%; 34 x 1.75 = 59.5 A; Next standard size (240.6(A)) = 60 A | none | yes | new (2026-09-29 import) | [Table 430.52(C)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430) |
+| final-exam-#4-033 | table+calc | Table 310.16: 14 AWG Cu, 75°C (THW) = 20 A; Table 310.15(C)(1): 4–6 conductors = 80%; 20 A x 1.00 x 0.80 = 16 A | none | yes | new (2026-09-29 import) | [Table 310.15(C)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310) |
+| final-exam-#4-034 | table+calc | Table 430.248: 3 hp, 230 V = 17 A; 430.32(C): all other motors = 130%; 17 x 1.30 = 22.1 A | none | yes | new (2026-09-29 import) | [430.32(C)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430) |
+| final-exam-#4-035 | table | Table 310.15(B)(1)(1): 96–104°F, 60°C = 0.82; Read the 96–104°F row in the 60°C column | none | none | new (2026-09-29 import) | [Table 310.15(B)(1)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310) |
+| final-exam-#4-037 | calc | 430.32(C): service factor 1.15 or greater = 140%; 24 x 1.40 = 33.6 A | none | yes | new (2026-09-29 import) | [430.32(C)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430) |
+| final-exam-#4-038 | table+calc | Table 314.16(B)(1): 12 AWG = 2.25 in.3; 4 conductors + 1 clamp + 2 device + 1 EGC = 8 allowances; 8 x 2.25 = 18 in.3 | none | yes | new (2026-09-29 import) | [314.16(B)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314) |
+| final-exam-#4-039 | table+calc | Table 430.250: 10 hp, 230 V = 28 A; 28 x 1.25 = 35 A | none | yes | new (2026-09-29 import) | [Table 430.250](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430) |
+| final-exam-#4-040 | table+calc | Table 310.16: 12 AWG Cu, 90°C (THHN) = 30 A; Table 310.15(C)(1): 7–9 conductors = 70%; 30 x 0.70 = 21 A | none | yes | new (2026-09-29 import) | [Table 310.15(C)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310) |
+| final-exam-#4-041 | table+calc | Table 310.16: 12 AWG Cu, 75°C (THW) = 25 A; Table 310.15(B)(1)(1): 26–30°C = 1.00; 25 x 1.00 = 25 A | none | yes | new (2026-09-29 import) | [Table 310.16](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310) |
+| final-exam-#4-042 | calc | 10 x 4.5 = 45 kW; 45 x 0.75 = 33.75 kW | none | yes | new (2026-09-29 import) | [220.53](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| final-exam-#4-043 | table+calc | Table 310.16: 10 AWG Cu, 90°C (RHH) = 40 A; Table 310.15(B)(1)(1): 96–104°F, 90°C = 0.91; 240.4(D)(8): 10 AWG Cu = 30 A; 40 x 0.91 = 36.4 A; 240.4(D) limit = 30 A | after answering | yes | new (2026-09-29 import) | [240.4(D)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#240) |
+| final-exam-#4-045 | table+calc | Table 220.55 Column B: 3 appliances = 55%; 13 kW x 0.55 = 7.15 kW | none | yes | new (2026-09-29 import) | [Table 220.55](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| final-exam-#4-046 | table+calc | 220.54: 5 kW minimum per dryer; Table 220.54: 6 dryers = 75%; 220.61(B)(1): neutral 70%; 6 x 5 = 30 kW; 30 x 0.75 = 22.5 kW; 22.5 x 0.70 = 15.75 kW | none | yes | new (2026-09-29 import) | [Table 220.54](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| final-exam-#4-047 | calc | 2500 x 3 = 7500 VA; 7500 / 1800 = 4.17, round up to 5 | none | yes | new (2026-09-29 import) | [220.41](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| final-exam-#4-049 | table+calc | Table 220.55 Column B: 15 appliances = 32%; Table 220.55 Column C: 15 appliances = 30 kW; 52.5 x 0.32 = 16.8 kW (Column B, Note 3); Column B gives less than the 30 kW of Column C | none | yes | new (2026-09-29 import) | [Table 220.55](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| final-exam-#4-050 | table | Chapter 9, Table 5: 14 AWG RHH* (no outer covering) = 0.0209 in.2; Use the asterisk row for RHH without an outer covering | none | none | new (2026-09-29 import) | [Table 5, Chapter 9](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables) |
+| final-exam-#4-051 | table+calc | Table 220.55 Column B: 1 appliance = 80%; Table 220.55 Column C: 1 appliance = 8 kW; 8 x 0.80 = 6.4 kW (Column B, Notes 3 and 4) | none | yes | new (2026-09-29 import) | [Table 220.55](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| final-exam-#4-052 | calc | 1800 ft2 x 3 VA/ft2 = 5400 VA | none | yes | new (2026-09-29 import) | [220.5(C)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| final-exam-#4-053 | table+calc | Table 430.248: 2 hp, 208 V = 13.2 A; Table 430.52(C)(1): dual element fuse = 175%; 13.2 x 1.75 = 23.1 A; Next standard size (240.6(A)) = 25 A maximum; Only the 20 A choice is within it | none | yes | new (2026-09-29 import) | [Table 430.52(C)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430) |
+| final-exam-#4-054 | table+calc | Table 314.16(B)(1): 12 AWG = 2.25 in.3; 2 x 2.25 + 2.25 = 6.75 in.3 | none | yes | new (2026-09-29 import) | [314.16(B)(5)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314) |
+| final-exam-#4-055 | table+calc | Table 250.122: 100 A = 8 AWG Cu; 80 A is not over 100 A: 8 AWG copper | none | yes | new (2026-09-29 import) | [Table 250.122](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250) |
+| final-exam-#4-056 | table+calc | Table 430.248: 2 hp, 208 V = 13.2 A; 430.32(C): all other motors = 130%; 13.2 x 1.30 = 17.16 A | none | yes | new (2026-09-29 import) | [430.32(C)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430) |
+| final-exam-#4-057 | table+calc | Chapter 9, Table 5 XHHW: 8 AWG = 0.0437 in.2, 6 AWG = 0.0590 in.2; 6 x 0.0437 = 0.2622; 2 x 0.0590 = 0.1180; 0.2622 + 0.1180 = 0.3802 in.2 | none | yes | new (2026-09-29 import) | [Table 5, Chapter 9](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables) |
+| final-exam-#4-058 | calc | 9500 / 120 = 79.2 A | none | yes | new (2026-09-29 import) | [General calculation]() |
+| final-exam-#4-059 | table+calc | Chapter 9, Table 4, RMC: 1 in., 40% = 0.355 in.2; Chapter 9, Table 5: 12 AWG XHHW = 0.0181 in.2; 9 x 0.0181 = 0.1629; 0.355 - 0.1629 = 0.1921 in.2 | none | yes | new (2026-09-29 import) | [Table 4, Chapter 9](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables) |
+| final-exam-#4-060 | table+calc | Chapter 9, Table 4, IMC: 1 in., 60% = 0.575 in.2; Chapter 9, Table 5: 8 AWG TW = 0.0437 in.2; Chapter 9, Note 4: nipples 24 in. or less = 60%; 0.575 / 0.0437 = 13.16; Decimal below 0.8: 13 conductors | none | yes | new (2026-09-29 import) | [Table 4, Chapter 9](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables) |
+| final-exam-#4-061 | table | Table 430.52(C)(1): wound-rotor, nontime delay fuse = 150%; Read the wound-rotor row, nontime delay fuse column | none | none | new (2026-09-29 import) | [Table 430.52(C)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430) |
+| final-exam-#4-062 | table+calc | Chapter 9, Table 4, PVC Schedule 80: 2 in., 40% = 1.150 in.2; Chapter 9, Table 5: 6 AWG XHHW = 0.0590 in.2; 1.150 / 0.0590 = 19.49; Decimal below 0.8: 19 conductors | none | yes | new (2026-09-29 import) | [Table 4, Chapter 9](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables) |
+| final-exam-#4-063 | table+calc | Table 310.16: 14 AWG Cu, 90°C (RHH) = 25 A; Table 310.15(B)(1)(1): 41–45°C, 90°C = 0.87; Table 310.15(C)(1): 7–9 conductors = 70%; 25 x 0.87 x 0.70 = 15.225 A | none | yes | new (2026-09-29 import) | [Table 310.15(C)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310) |
+| final-exam-#4-064 | table+calc | Table 314.16(B)(1): 12 AWG = 2.25 in.3, 10 AWG = 2.50 in.3; 3 x 2.25 + 3 x 2.50 = 14.25 in.3 | none | yes | new (2026-09-29 import) | [Table 314.16(B)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314) |
+| final-exam-#4-065 | table | Chapter 9, Table 5: 3 AWG THWN = 0.0973, 8 AWG THW = 0.0437, 10 AWG THW = 0.0243 in.2; Chapter 9, Table 4, PVC Schedule 80: 1-1/2 in. 40% = 0.684, 2 in. 40% = 1.150 in.2; 0.5838 + 0.1311 + 0.0486 = 0.7635 in.2; Smallest size with 40% area of at least 0.7635: 2 in. | none | yes | new (2026-09-29 import) | [Table 4, Chapter 9](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables) |
+| final-exam-#4-066 | table+calc | Chapter 9, Table 4, RMC: 1 in., 60% = 0.532 in.2; Chapter 9, Table 5: 8 AWG THW = 0.0437 in.2; Chapter 9, Note 4: nipples 24 in. or less = 60%; 0.532 / 0.0437 = 12.17; Decimal below 0.8: 12 conductors | none | yes | new (2026-09-29 import) | [Table 4, Chapter 9](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables) |
+| final-exam-#4-067 | table+calc | Table 430.248: 3 hp, 230 V = 17 A; Table 430.52(C)(1): inverse time breaker = 250%; 17 x 2.50 = 42.5 A; Next standard size (240.6(A)) = 45 A | none | yes | new (2026-09-29 import) | [Table 430.52(C)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430) |
+| final-exam-#4-068 | table+calc | Chapter 9, Table 4, IMC: 1-1/2 in., 40% = 0.890 in.2; Chapter 9, Table 5: 6 AWG XHHW = 0.0590 in.2; 0.890 / 0.0590 = 15.08; 15 conductors | none | yes | new (2026-09-29 import) | [Table 4, Chapter 9](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables) |
+| final-exam-#4-069 | table+calc | Table 220.55 Column C: 26–30 ranges = 15 kW + 1 kW per range; 15 + 28 = 43 kW | none | yes | new (2026-09-29 import) | [Table 220.55](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| final-exam-#4-070 | table+calc | Table 430.250: 15 hp, 208 V = 46.2 A; 46.2 x 208 x 1.732 = 16,644 VA; Closest choice: 17,000 VA | none | yes | new (2026-09-29 import) | [Table 430.250](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430) |
+| open-book-exam-#2-012 | table+calc | Table 310.16: 12 AWG Cu, 75°C (THWN) = 25 A; Table 310.15(B)(1)(1): 86°F (30°C) ambient = 1.00; Table 310.15(C)(1): 4–6 current-carrying conductors = 80%; Ampacity = table ampacity × temperature correction × adjustment; 25 A × 1.00 × 0.80 = 20 A | before answering | yes | new (2026-09-29 import) | [Table 310.16](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310) |
+| open-book-exam-#2-018 | calc | 220.14(H)(1): each 5 ft or fraction of multioutlet assembly = one outlet of 180 VA (appliances not used simultaneously); Outlets = 12 ft ÷ 5 ft = 2.4, round up to 3; 3 × 180 VA = 540 VA | none | yes | new (2026-09-29 import) | [220.14(H)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| open-book-exam-#3-002 | calc | 240.21(B)(1), list item (4): field-installed tap leaving the enclosure: tap ampacity ≥ 1/10 of the feeder OCPD rating; Maximum feeder OCPD = 10 × tap ampacity; 10 × 40 A = 400 A | none | yes | new (2026-09-29 import) | [240.21(B)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#240) |
+| open-book-exam-#3-010 | table+calc | Table 310.16: 10 AWG Cu, 90°C (THWN-2) = 40 A; Table 310.15(B)(1)(1): 105–113°F (41–45°C), 90°C column = 0.87; Table 310.15(C)(1): 3 current-carrying conductors, no adjustment; Ampacity = table ampacity × temperature correction; 40 A × 0.87 = 34.8 A | before answering | yes | new (2026-09-29 import) | [Table 310.15(B)(1)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310) |
+| open-book-exam-#3-011 | table | Table 310.4(1): RHW = 75°C, RHW-2 = 90°C, dry and wet locations; The -2 suffix marks a 90°C rating in dry and wet locations | after answering | none | new (2026-09-29 import) | [Table 310.4(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310) |
+| open-book-exam-#3-013 | calc | 630.12(A): arc-welder OCPD not more than 200% of I1max; 630.12 and 240.6(A): the next higher standard rating is permitted (standard ratings step 10 A from 60 A to 110 A); 43 A × 200% = 86 A; Next higher standard rating = 90 A | none | yes | new (2026-09-29 import) | [630.12(A)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#630) |
+| open-book-exam-#3-017 | calc | 210.52(G)(1): at least one receptacle outlet in each vehicle bay; Outlets = vehicle bays × 1; 2 × 1 = 2 | none | yes | new (2026-09-29 import) | [210.52(G)(1)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210) |
+| open-book-exam-#3-019 | table+calc | Table 220.55, Column C: one range not over 12 kW = 8 kW; Table 220.55 Note 1: +5% for each kW or major fraction over 12 kW; 14 kW − 12 kW = 2 kW over; 2 × 5% = 10%; 8 kW × 1.10 = 8.8 kW | before answering | yes | new (2026-09-29 import) | [Table 220.55](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220) |
+| open-book-exam-#6-010 | table | Table 430.250: 50 hp, induction-type wound rotor, 460 V column (used for a 480 V system) = 65 A; 430.6(A)(1): use the table current, not the nameplate; Read the full-load current for the horsepower in the 460 V column | before answering | yes | new (2026-09-29 import) | [Table 430.250](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430) |
+| open-book-exam-#6-012 | table | Table 250.122: a 50 A rating falls in the 'not exceeding 60 A' row = 10 AWG copper; Size the EGC from the OCPD rating; a rating between rows takes the next larger row | before answering | yes | new (2026-09-29 import) | [Table 250.122](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250) |
+| open-book-exam-#6-014 | table | Chapter 9, Note (4): nipples 24 in. or shorter between enclosures may be filled to 60%; Apply Note (4) instead of Table 1 for short nipples | before answering | yes | new (2026-09-29 import) | [Chapter 9, Note 4](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables) |
+| open-book-exam-#6-016 | table | Table 352.30(B): PVC trade size 1 1/4-2 = 1.5 m (5 ft) between supports; Find the row that contains the trade size and read the spacing | after answering | none | new (2026-09-29 import) | [Table 352.30(B)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#352) |
+| open-book-exam-#12-023 | table | Table 250.122: 30 A device -> 10 AWG copper (60 A row); 250.122(A): not required larger than the 12 AWG circuit conductors | after answering | none | new (2026-09-29 import) | [250.122(A)](https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250) |
+
+## Exam import (2026-09-29)
+
+Open Book #2, #3, #5, #6, #9, #11, #12 and Final #2 and #4 add 68 table, calculation or formula
+records (rows marked "new" below). Every table value in their lookup tables and provisions is a
+verbatim line of the NEC 2023 text cache, and `check_requirements.py` recomputes every `check`
+from NEC 2023 constants: PASS, 0 mismatches.
+
+- `nec_calc` gained the Table 310.15(B)(1)(1) 69–77°F row (1.08 / 1.05 / 1.04), which
+  final-exam-#4-031 needs (12 AWG TW at 75°F: 20 A × 1.08 = 21.6 A).
+- Final #4 Q25, Q49, Q51 and Q69 stems now name the Table 310.16 column the key uses.
+- final-exam-#4-006 (Chapter 9 Table 9): the PDF choice 0.102 is the older value; 2023 lists 0.11,
+  and the choice was updated (key unchanged).
+- Final Exam #1 Q22 and Q32 formula strips no longer state the rule's answer before answering
+  (request from the diagrams audit); the full rule stays in the post-answer tip.
 
 ## Checks (worktree, before landing)
 

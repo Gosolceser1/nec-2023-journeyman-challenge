@@ -30,8 +30,28 @@
   each subject area, with its share of the exam and your recent accuracy.
 - **Study tab** for the math and table study tools, and a "Show steps"
   button after answering a calculation question when they are installed.
+- **Nine more practice exams, 315 new questions** (598 in all: 594 NEC 2023
+  from 16 exams plus 4 Nebraska State Law). Open Book #2, #3, #5, #6, #9,
+  #11 and #12 (25 questions each) and Final #2 and #4 (70 each), each with
+  the NEC 2023 provision, a lesson, a memory tip, a note on every choice and,
+  where a lookup or calculation is needed, the table and formula steps. They
+  were checked against NEC 2023 like the older questions
+  (docs/CONTENT_AUDIT_2023.md). No answer key changed: where the printed exam
+  follows an older code, the stem or a choice now uses the 2023 wording, so
+  the keyed answer is still the one right answer (for example Open Book #12
+  Q17, the 30 V rapid-shutdown limit outside the array boundary).
 
 ### Fixed
+
+- **The FORMULA strip no longer gives the answer away** before you answer
+  on Final Exam #1 Q22 (garage receptacles) and Q32 (10 ft feeder tap).
+- **"What this question means" quotes the question you see.** 17 lessons
+  still quoted the printed wording after the stem had been corrected (its
+  typos included). The build now restates the corrected stem, and the bank
+  check fails if a lesson quotes a different one.
+- **Voice:** ".6875" is read "0.6875", not "six thousand eight hundred
+  seventy-five"; a lesson line with two tables names both; a line ending in a
+  unit such as "18 cu.in." still ends as a sentence.
 
 - **Figures no longer hint at the answer before you answer**
   (docs/DIAGRAMS_AUDIT.md section 6). Final Exam #1 Q32: the tap figure's

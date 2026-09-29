@@ -35,7 +35,7 @@ if Android asks.
 
 ## Features
 
-- **283 questions:** 279 NEC 2023 questions from seven practice exams plus 4
+- **598 questions:** 594 NEC 2023 questions from 16 practice exams plus 4
   Nebraska State Law questions. Every answer shows the NEC reference, a short
   lesson, a memory tip, why each wrong choice is wrong, and the code provision.
 - **Timed practice drills** of 10, 20, 30, 40 or 50 questions at the exam's
@@ -155,8 +155,8 @@ changes without being re-checked.
 
 | Audit | What was checked | Result |
 |---|---|---|
-| [Content](docs/CONTENT_AUDIT_2023.md) | All 279 NEC questions: keyed answer, provision wording, choice notes, tips, cited sections | No answer key changed; 60 explanations corrected; 1 heading to confirm in print |
-| [Tables and formulas](docs/TABLES_FORMULAS_AUDIT.md) | Every question that needs a table, calculation or formula | 33 calculations recomputed from NEC 2023 values, 0 mismatches; missing lookup tables and formula hints added |
+| [Content](docs/CONTENT_AUDIT_2023.md) | All 594 NEC questions: keyed answer, provision wording, choice notes, tips, cited sections | No answer key changed; 60 explanations corrected; 19 questions from the new exams updated to the 2023 wording (key kept); 1 heading to confirm in print |
+| [Tables and formulas](docs/TABLES_FORMULAS_AUDIT.md) | Every question that needs a table, calculation or formula | 86 calculations recomputed from NEC 2023 values, 0 mismatches; missing lookup tables and formula hints added |
 | [Locations](docs/LOCATION_AUDIT.md) | Chapter, article, section and lookup hint of every question | 0 wrong breadcrumbs; 72 article titles corrected to the 2023 wording |
 | [Diagrams](docs/DIAGRAMS_AUDIT.md) | The shipped figures, pixel by pixel, for answer giveaways, and every question a figure would help | The three PDF figures need no mask; 88 questions got original NEC 2023 figures (48 drawings) with "?" masks until you answer, each checked against the 2023 text |
 

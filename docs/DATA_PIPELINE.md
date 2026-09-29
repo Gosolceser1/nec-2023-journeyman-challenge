@@ -2,7 +2,7 @@
 
 ## Current bank
 
-`question_bank.json` is schema v2. It contains 283 playable records: 279 NEC records across 7 exams and 4 Nebraska State Law records (exam `NE State Act #3`, `"section": "ne_state_law"`), plus a 314-entry manifest and 31 unavailable source entries. Its current top-level keys are `version`, `total_expected`, `playable`, `missing_source_items`, `audit_notes`, `records`, and `manifest`. The old `questions` array is absent; the validator accepts it only as an optional legacy key and checks it if present.
+`question_bank.json` is schema v2. It contains 598 playable records: 594 NEC records across 16 exams and 4 Nebraska State Law records (exam `NE State Act #3`, `"section": "ne_state_law"`), plus a 629-entry manifest and 31 unavailable source entries (Final Exam #5's scan lacks four question pages). Its current top-level keys are `version`, `total_expected`, `playable`, `missing_source_items`, `audit_notes`, `records`, and `manifest`. The old `questions` array is absent; the validator accepts it only as an optional legacy key and checks it if present.
 
 The bank validator is a structural and spoiler-safety gate, not a proof that each answer is technically correct. The regression suite leaves NEC answer correctness to source review (`tools/tests/README.md`, “What is NOT covered”). That review was done for NEC 2023 in the content, tables/formulas and location audits (`docs/CONTENT_AUDIT_2023.md`, `docs/TABLES_FORMULAS_AUDIT.md`, `docs/LOCATION_AUDIT.md`), and the guards below keep an audited record from changing unnoticed. New or changed section-level NEC claims must still be checked against the 2023 NEC.
 
@@ -31,6 +31,14 @@ WIRE_BANK_OUT=/path/to/candidate.json bash tools/pipeline/build_question_bank.sh
 
 The OCR scripts skip output files that already exist. Remove or replace a stale OCR text file when the source PDF needs to be processed again.
 
+## Exams and transcripts
+
+`tools/pipeline/exam_sources.py` discovers the exams from the PDFs in `exams_source_pdf/`: `Journeyman open book exam #N.pdf` or `Journeyman open book final exam #N.pdf`, each with `<same name> answer key.pdf`. Nothing in the builder lists exams by name or pins a question count; record ids are the label lower-cased with dashes plus the three-digit number (`open-book-exam-#2-001`, `final-exam-#4-070`).
+
+A reviewed transcript, `tools/pipeline/sources/exams/<pdf stem>.json`, replaces the OCR parse for its exam: `question_count` and `questions` with `number`, `prompt`, `answers`, `correct_index` and the key's `reference`, typed from the PDF page images word for word (PDF typos included; they are corrected through the overlay like any other typo). The nine exams added on 2026-09-29 come from transcripts, so their build needs no Tesseract output. The explanation fields of those records are curated in the overlay; the content audit, requirements and typo log cover them like the older records.
+
+To add an exam: copy both PDFs into `exams_source_pdf/`, add its transcript, build the raw bank (`WIRE_SKIP_BANK_OVERRIDES=1`), curate overlay entries for the new ids, then follow the candidate build below. The Godot suites and `tools/harness.gd` compare against the bank's own `playable` count (`BankLoader.declared_count()`), so no test needs a new number.
+
 ## Curated bank reproducibility
 
 The raw OCR/parser output is normalized by the deterministic field overlay in `tools/pipeline/question_bank_overrides.json`. `tools/pipeline/bank_overrides.py` applies those reviewed, record-ID keyed changes after parsing, preserving the curated bank without scattering one-off edits through the OCR pipeline.
@@ -41,7 +49,7 @@ The raw OCR/parser output is normalized by the deterministic field overlay in `t
 
 `data/question_requirements.json` records which records need a table, a calculation or a formula (`docs/TABLES_FORMULAS_AUDIT.md`). `tools/pipeline/check_requirements.py` (run by `tools/tests/test_question_requirements.py` in `verify.sh`) fails when a listed record loses its pre-answer table, table columns, formula hint or recomputed worked result. The table values come from `tools/pipeline/nec_calc.py`, which was checked against NEC 2023 on UpCodes.
 
-Every build still writes to a separate candidate path. `tools/pipeline/build_question_bank.sh` refuses the checked-in `question_bank.json` so an unreviewed candidate cannot overwrite the learner bank. A controlled build with the current source and overlay produced all 283 records and exactly matched the checked-in bank; strict validation reported 0 errors and 0 warnings. This proves reproducibility and schema validity, not NEC answer correctness.
+Every build still writes to a separate candidate path. `tools/pipeline/build_question_bank.sh` refuses the checked-in `question_bank.json` so an unreviewed candidate cannot overwrite the learner bank. A controlled build with the current source and overlay produced all 598 records and exactly matched the checked-in bank; strict validation reported 0 errors and 0 warnings. This proves reproducibility and schema validity, not NEC answer correctness.
 
 To intentionally refresh the overlay after a reviewed bank change:
 
@@ -76,7 +84,7 @@ State Electrical Act and Board Rules questions do not come from the exam PDFs or
 
 The builder appends these records after the NEC records and adds their manifest entries, so `total_expected` and `playable` grow by the question count and the NEC records are untouched. `tip_short` is assembled as `<tip> Correct: X — <answer>. <note> Not A: <note> …`. The records carry `"section": "ne_state_law"`; `QuizSession.begin` draws only the `nec` pool (records without `section`) unless asked for another, so state questions never enter the NEC drills or the simulator. The menu's NEBRASKA STATE LAW drill uses every record in that section, shuffled.
 
-To add a quiz: add both files (a new `exam` label gives new ids, `ne-state-act-#4-001`…; the id is `exam` lower-cased with spaces as dashes plus the number), quote the current statute text (the July 2025 Act is the reference edition), keep the gist free of the answer words, then build a candidate, validate with `--no-warn`, check that the existing records are unchanged and copy it over `data/question_bank.json`. Then update the record counts in `tools/harness.gd` and the sweep suites (they assert the exact bank size), run `spellcheck_bank.py --update-lexicon` after reviewing any new words, re-run `dump_speech.gd`, and run `pregenerate_speech.py --bundle` so `test_bundle.gd` finds the new clips.
+To add a quiz: add both files (a new `exam` label gives new ids, `ne-state-act-#4-001`…; the id is `exam` lower-cased with spaces as dashes plus the number), quote the current statute text (the July 2025 Act is the reference edition), keep the gist free of the answer words, then build a candidate, validate with `--no-warn`, check that the existing records are unchanged and copy it over `data/question_bank.json`. Then update the Nebraska pool size in `tools/harness.gd` (the total comes from the bank's `playable`), run `spellcheck_bank.py --update-lexicon` after reviewing any new words, re-run `dump_speech.gd`, and run `pregenerate_speech.py --bundle` so `test_bundle.gd` finds the new clips.
 
 ## What validation checks
 
@@ -88,6 +96,7 @@ To add a quiz: add both files (a new `exam` label gives new ids, `ne-state-act-#
 - Correct answers leaking verbatim into the prompt (one pinned exception, see the wording rule).
 - NEC 2023 locations (`location_problems`): canonical article titles, and headings, lookup hints and rationales that name the cited section.
 - The content audit: every NEC record has an entry in `content_audit_2023.json`, and its provision checksum and `correct_index` still match it.
+- The "In plain terms, the question is: …" paragraph of `info_tip` quotes the record's current stem. The builder regenerates only that paragraph after the overlay (unless the overlay sets `info_tip` itself), so a stem rewrite cannot leave the old wording in the explanation.
 
 Current validation result: **0 errors, 0 warnings**. The validator enforces the audits' results; the answer-key audit itself is `docs/CONTENT_AUDIT_2023.md`.
 

@@ -283,3 +283,22 @@ snapshots and with in-page text extraction.
     - 620.51 Disconnecting Means (lead-in and (A) Type read); 620.51(D)(1) see the flag above.
   - https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/8/communications-systems
     - 800.44 Overhead (Aerial) Wires and Cables; (A)(1) Relative Location, (A)(2) Attachment to Cross-Arms, (A)(3) Climbing Space, (A)(4) Clearances; (B) Above Roofs with Exceptions No. 1 and 2. Quoted verbatim in final-exam-#3-031.
+
+## Exam import (2026-09-29)
+
+The 315 records of Open Book #2, #3, #5, #6, #9, #11, #12 and Final #2 and #4
+got the same pointer checks before they entered the bank:
+
+- Every `article` resolves to a 2023 article in `data/nec_2023_articles.json`
+  (chapter and full 2023 title), enforced by `validate_question_bank.py`.
+- Every `reference_text` line is a verbatim line of the NEC 2023 text cache,
+  with the cited section's heading first; Chapter 9 tables are cited as
+  "Table N, Chapter 9".
+- Choice notes, tips and lookup hints cite the same section as `article`, or
+  name the other section on purpose (for example the 310.60 choice of
+  final-exam-#2-024 says medium-voltage ampacities are Article 315 in 2023).
+- Citations the PDF keys got wrong for 2023 were moved to the 2023 section:
+  open-book-exam-#6-019 cites 250.53(A)(2) (the key cites the 250.52(A)
+  items), and open-book-exam-#9-004 now tests 620.54 (the 620.51(D) sentence
+  the key cites is not in 2023). The keyed answers did not change.
+- `tools/tests/test_breadcrumb.gd` walks all 598 records in both layouts.
