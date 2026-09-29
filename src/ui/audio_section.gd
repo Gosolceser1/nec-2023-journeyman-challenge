@@ -214,7 +214,7 @@ static func refresh(host: Main) -> void:
 		host.sfx_level_buttons[i].set_pressed_no_signal(i == (host.audio.sfx_level + 1 if host.audio.sfx_enabled else 0))
 	# Listen sessions run untimed, so "30 minutes timed" on the drills would lie.
 	for b in host.menu_mode_buttons:
-		if not is_instance_valid(b) or not b.has_meta("base_text") or bool(b.get_meta("full_exam")):
+		if not is_instance_valid(b) or not b.has_meta("base_text") or bool(b.get_meta("full_exam")) or b.get_meta("keeps_detail", false):
 			continue
 		var base := str(b.get_meta("base_text"))
 		if host.audio.mode == AudioSettings.Mode.LISTEN:

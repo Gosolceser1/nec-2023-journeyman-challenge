@@ -13,7 +13,7 @@ const MODE_BADGE_PX := 44
 ## Every card goes through connect_session_start, so a new mode (the
 ## Nebraska State Law section, say) gets the start cue and press animation
 ## without extra wiring.
-static func add_mode_button(host: Main, parent: VBoxContainer, title_text: String, subtitle_text: String, callback: Callable, accent: Color = AppTheme.SKY_400, bg: Color = AppTheme.SURFACE_BOTTOM, is_major: bool = false, min_height: float = -1.0, font_size: int = -1, icon_name: String = "stopwatch") -> void:
+static func add_mode_button(host: Main, parent: VBoxContainer, title_text: String, subtitle_text: String, callback: Callable, accent: Color = AppTheme.SKY_400, bg: Color = AppTheme.SURFACE_BOTTOM, is_major: bool = false, min_height: float = -1.0, font_size: int = -1, icon_name: String = "stopwatch") -> Button:
 	var button := Button.new()
 	button.text = title_text + "\n" + subtitle_text
 	button.custom_minimum_size = Vector2(0, min_height if min_height > 0.0 else (60.0 if is_major else 54.0))
@@ -76,20 +76,7 @@ static func add_mode_button(host: Main, parent: VBoxContainer, title_text: Strin
 	connect_session_start(host, button, callback)
 	parent.add_child(button)
 	host.menu_mode_buttons.append(button)
-
-
-## "NEBRASKA STATE LAW" heading plus one drill of every state-law question,
-## shuffled. Adds nothing when the bank has none.
-static func add_state_law_section(host: Main, parent: VBoxContainer, min_height: float = -1.0, font_size: int = -1) -> void:
-	var count := BankLoader.count_in_section(host.records, BankLoader.SECTION_NE_STATE_LAW)
-	if count == 0:
-		return
-	parent.add_child(make_section_header("NEBRASKA STATE LAW", AppTheme.SKY_300))
-	var seconds: int = host._practice_time(count)
-	add_mode_button(host, parent, "%d QUESTIONS" % count,
-		"State Electrical Act & Board Rules • %d minutes timed" % (seconds / 60),
-		host._start_quiz.bind(count, seconds, true, "Nebraska State Law", "", BankLoader.SECTION_NE_STATE_LAW),
-		AppTheme.SKY_300, AppTheme.SURFACE_BOTTOM, false, min_height, font_size, "code")
+	return button
 
 
 static func _mode_style(fill: Color, border: Color, elevation: int, glow: Color) -> StyleBoxFlat:
@@ -263,9 +250,9 @@ static func tint_hud_segment(cell: PanelContainer, tint: Color) -> void:
 		style.bg_color = AppTheme.hud_tint(tint)
 
 
-## Menu hero: the readiness ring, the title block and a chip that starts the
-## weakest-area drill. Assigns host.readiness_ring and host.weakest_chip.
-static func add_menu_hero(host: Main, parent: VBoxContainer, ring_px: float, title_px: int, standards: String) -> void:
+## Menu hero: the readiness ring beside the standards line, title and tagline
+## (MainMenu fills them from data/menu.json). Assigns host.readiness_ring.
+static func add_menu_hero(host: Main, parent: VBoxContainer, ring_px: float, title_px: int, standards: String, title_text: String, tagline: String) -> void:
 	var hero := HBoxContainer.new()
 	hero.add_theme_constant_override("separation", AppTheme.SPACE_LG + (0 if host.ui_mobile else AppTheme.SPACE_SM))
 	parent.add_child(hero)
@@ -284,7 +271,7 @@ static func add_menu_hero(host: Main, parent: VBoxContainer, ring_px: float, tit
 	meta.add_theme_color_override("font_color", AppTheme.SKY_400)
 	block.add_child(meta)
 	var title := Label.new()
-	title.text = "NEC 2023 // JOURNEYMAN CHALLENGE"
+	title.text = title_text
 	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	title.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_BOLD))
 	title.add_theme_font_size_override("font_size", title_px)
@@ -292,24 +279,11 @@ static func add_menu_hero(host: Main, parent: VBoxContainer, ring_px: float, tit
 	block.add_child(title)
 	UiFx.electrify_title(title)
 	var subtitle := Label.new()
-	subtitle.text = "Master the National Electrical Code • Comprehensive Exam Prep"
+	subtitle.text = tagline
 	subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	subtitle.add_theme_font_size_override("font_size", AppTheme.TYPE_CAPTION)
 	subtitle.add_theme_color_override("font_color", AppTheme.SLATE_400)
 	block.add_child(subtitle)
-	host.weakest_chip = Button.new()
-	host.weakest_chip.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	host.weakest_chip.custom_minimum_size = Vector2(0, 44 if host.ui_mobile else 30)
-	host.weakest_chip.clip_text = true
-	AppTheme.style_ghost_button(host.weakest_chip, AppTheme.RADIUS_INNER)
-	host.weakest_chip.icon = Icons.texture("target", 14)
-	host.weakest_chip.add_theme_constant_override("icon_max_width", 14)
-	host.weakest_chip.add_theme_color_override("icon_normal_color", AppTheme.AMBER_400)
-	host.weakest_chip.add_theme_color_override("font_color", AppTheme.AMBER_200)
-	host.weakest_chip.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_SEMIBOLD))
-	host.weakest_chip.add_theme_font_size_override("font_size", AppTheme.TYPE_META)
-	connect_session_start(host, host.weakest_chip, host._start_area_drill)
-	block.add_child(host.weakest_chip)
 
 
 static func make_voice_picker(host: Main, h: float, font_size: int) -> OptionButton:

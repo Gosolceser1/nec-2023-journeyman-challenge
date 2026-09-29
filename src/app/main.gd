@@ -4,6 +4,9 @@ extends Control
 const ANSWER_LETTERS := QuizSession.ANSWER_LETTERS
 const SESSION_LENGTH := QuizSession.SESSION_LENGTH
 const EXAM_NAME := "NE JOURNEYMAN ELECTRICIAN"
+## Session name of the full timed exam; the results report keys off
+## session.session_simulation, not this text.
+const SIMULATION_NAME := "Full Journeyman Exam"
 const EXAM_SCORED_ITEMS := QuizSession.EXAM_SCORED_ITEMS
 const EXAM_MINUTES := QuizSession.EXAM_MINUTES
 const PASS_PERCENT := QuizSession.PASS_PERCENT
@@ -172,9 +175,12 @@ var _menu_separation := -1
 var menu_mode_buttons: Array[Button] = []
 ## The weakest-area drill; its subtitle shows the area and the readiness.
 var study_button: Button
-## Menu hero (Widgets.add_menu_hero): readiness dial and weakest-area chip.
+## Menu hero (Widgets.add_menu_hero): readiness dial.
 var readiness_ring: ReadinessRing
-var weakest_chip: Button
+## The tabbed launch menu (tabs, pages, exam and area tiles), from data/menu.json.
+var menu := MainMenu.new()
+## Practice-exam best scores and the run to continue (user://study_progress.cfg).
+var progress: StudyProgress
 
 # Study audio (menu "Audio & Voice" section + compact quiz dock controls)
 var audio := AudioSettings.new()
@@ -246,6 +252,7 @@ static func version_label() -> String:
 func _init() -> void:
 	speech.host = self
 	fit.host = self
+	menu.host = self
 	session.bag_path = QuizSession.BAG_PATH
 
 func _exit_tree() -> void:
@@ -272,8 +279,10 @@ func _ready() -> void:
 	add_child(speech.edge_client)
 	speech.edge_client.clip_ready.connect(speech._on_edge_clip)
 	speech.edge_client.request_failed.connect(speech._on_edge_failed)
-	# Before the build: the menu sizes the state-law drill from the bank.
+	# Before the build: the menu lists the bank's practice exams.
 	records = BankLoader.load_records()
+	# A memory-only deck (tests) gets memory-only progress too.
+	progress = StudyProgress.new(StudyProgress.PATH if session.bag_path != "" else "")
 	_build_ui()
 	info_panel.label = info_label
 	QuizFx.attach(self)
@@ -302,6 +311,7 @@ func _ready() -> void:
 	add_child(speech.reader)
 	speech._setup_speech_bus()
 	_setup_sfx()
+	menu.study_hook("attach", [self])
 	_listen_timer = Timer.new()
 	_listen_timer.wait_time = 1.0
 	_listen_timer.timeout.connect(_on_listen_tick)
@@ -409,13 +419,50 @@ func _apply_safe_area() -> void:
 func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION_TIME_SECONDS, timed: bool = true, mode_name: String = "Practice Test", area: String = "", section: String = BankLoader.SECTION_NEC) -> void:
 	if BankLoader.count_in_section(records, section) == 0:
 		return
-	var simulation := mode_name == "Full Journeyman Exam"
+	var simulation := mode_name == SIMULATION_NAME
+	_begin_session(simulation, func(listening: bool) -> bool:
+		session.begin(question_count, time_limit, timed and not listening, mode_name + (" · Listen" if listening else ""), simulation, area, section)
+		return true)
+
+## These questions in this order: a practice exam as written (exam = its
+## label, so the results keep its best score) or the missed-question review.
+func _start_fixed(indices: Array[int], time_limit: int, mode_name: String, exam: String = "") -> void:
+	if indices.is_empty():
+		return
+	_begin_session(false, func(listening: bool) -> bool:
+		session.begin_fixed(indices, time_limit, not listening, mode_name + (" · Listen" if listening else ""), exam if not listening else "")
+		return true)
+
+## Up to the review_missed block's max of the questions whose latest answer
+## was wrong.
+func _start_review() -> void:
+	var cap := int(MenuModel.block("review_missed").get("max", 20))
+	var missed := MenuModel.missed_indices(records, session.deck.history(records), cap)
+	_start_fixed(missed, _practice_time(missed.size()), "Review Missed")
+
+## The unfinished run saved after its last graded answer. Always graded: a
+## listen-mode setting resumes as Tap to hear.
+func _resume_session() -> void:
+	var snap := progress.resume_snapshot
+	if snap.is_empty():
+		return
+	_begin_session(bool(snap.get("simulation", false)), func(_listening: bool) -> bool: return session.restore(snap), true)
+
+## Shared start of every session: the audio mode for it, then begin (given
+## whether this is a listen session; false = nothing to start), then the
+## clock and the fade into the first question.
+func _begin_session(simulation: bool, begin: Callable, graded: bool = false) -> void:
 	session_audio_mode = AudioSettings.session_mode(audio.mode, simulation)
+	if graded and not AudioSettings.grades_answers(session_audio_mode):
+		session_audio_mode = AudioSettings.Mode.TAP
 	session_muted = AudioSettings.starts_muted(session_audio_mode)
 	listen_phase = AudioSettings.ListenPhase.IDLE
 	listen_paused = false
-	var listening := session_audio_mode == AudioSettings.Mode.LISTEN
-	session.begin(question_count, time_limit, timed and not listening, mode_name + (" · Listen" if listening else ""), simulation, area, section)
+	if not begin.call(session_audio_mode == AudioSettings.Mode.LISTEN):
+		progress.clear_resume()
+		session_audio_mode = AudioSettings.Mode.SILENT
+		menu.refresh()
+		return
 	_refresh_dock_audio()
 	if timed_session:
 		timer.start()
@@ -514,7 +561,7 @@ func _wire_ui_sounds(node: Node) -> void:
 	var toggles := button.toggle_mode or button == mute_button
 	if not button.has_meta("starts_session"):
 		button.pressed.connect(_sfx.bind("toggle" if toggles else "click"))
-	if not ui_mobile and menu_mode_buttons.has(button):
+	if not ui_mobile and (menu_mode_buttons.has(button) or menu.tiles.has(button)):
 		button.mouse_entered.connect(func() -> void:
 			if not button.disabled:
 				_sfx("hover"))
@@ -693,38 +740,31 @@ func _on_playback_complete(generation: int) -> void:
 func _practice_time(question_count: int) -> int:
 	return question_count * SECONDS_PER_SCORED_ITEM
 
-## Ten questions from the subject area with the lowest recent accuracy (or
-## the heaviest one not practised yet).
-func _start_area_drill() -> void:
-	var area := QuestionDeck.weakest_area(session.deck.mastery(records), records)
-	_start_quiz(10, _practice_time(10), true, "Area Drill · " + ExamBlueprint.title(area), area)
+## A drill of `size` questions from one subject area; by default the one with
+## the lowest recent accuracy (or the heaviest one not practised yet).
+func _start_area_drill(size: int = 10, area: String = "") -> void:
+	if area == "":
+		area = QuestionDeck.weakest_area(session.deck.mastery(records), records)
+	_start_quiz(size, _practice_time(size), true, "Area Drill · " + ExamBlueprint.title(area), area)
 
-func _study_button_subtitle() -> String:
-	if records.is_empty():
-		return "Weakest subject area • 30 minutes timed"
-	var mastery := session.deck.mastery(records)
-	var area := QuestionDeck.weakest_area(mastery, records)
-	var m: Dictionary = mastery.get(area, {})
-	var level := "new" if int(m.get("answers", 0)) == 0 else "%d%%" % roundi(100.0 * float(m["right"]) / float(m["answers"]))
-	return "%s (%s) • readiness %d%% • 30 minutes timed" % [ExamBlueprint.title(area), level, roundi(100.0 * QuestionDeck.readiness(mastery))]
-
+## Every menu card and tile, and the readiness dial, from the current progress.
 func _refresh_study_button() -> void:
-	if not is_instance_valid(study_button):
-		return
-	var base := str(study_button.get_meta("base_text", ""))
-	study_button.set_meta("base_text", base.get_slice("\n", 0) + "\n" + _study_button_subtitle())
-	study_button.text = str(study_button.get_meta("base_text"))
+	menu.refresh()
 	if records.is_empty():
 		return
-	var mastery := session.deck.mastery(records)
 	if is_instance_valid(readiness_ring):
-		readiness_ring.set_value(QuestionDeck.readiness(mastery))
-	if is_instance_valid(weakest_chip):
-		weakest_chip.text = "Weakest: " + ExamBlueprint.title(QuestionDeck.weakest_area(mastery, records))
+		readiness_ring.set_value(QuestionDeck.readiness(session.deck.mastery(records)))
 
-## Tightens the menu's row spacing just enough that the whole menu fits the
-## screen without scrolling, down to 4 px; a roomy screen keeps the layout's
-## own spacing.
+## The menu's tabs, for tests and the snapshot tools.
+func menu_tab_count() -> int:
+	return menu.pages.size()
+
+func menu_show_tab(i: int) -> void:
+	menu.show_tab(i)
+
+## Tightens the menu's row spacing (the column and the open page) just enough
+## that the whole menu fits the screen without scrolling, down to 4 px; a
+## roomy screen keeps the layout's own spacing.
 func _fit_menu_spacing() -> void:
 	if not is_instance_valid(menu_column) or not is_instance_valid(menu_center_box):
 		return
@@ -733,16 +773,22 @@ func _fit_menu_spacing() -> void:
 		return
 	if _menu_separation < 0:
 		_menu_separation = menu_column.get_theme_constant("separation")
-	var gaps := -1
-	for c in menu_column.get_children():
-		if c is Control and (c as Control).visible:
-			gaps += 1
+	var boxes: Array[BoxContainer] = [menu_column]
+	if not menu.pages.is_empty():
+		boxes.append(menu.pages[menu.current])
+	var gaps := 0
+	# Overflow at the full spacing: undo what each box is tightened by now.
+	var overflow := menu_center_box.get_combined_minimum_size().y - scroll.size.y
+	for box in boxes:
+		var n := maxi(0, box.get_children().filter(func(c): return c is Control and c.visible).size() - 1)
+		gaps += n
+		overflow += (_menu_separation - box.get_theme_constant("separation")) * n
 	gaps = maxi(gaps, 1)
-	var current := menu_column.get_theme_constant("separation")
-	var overflow := menu_center_box.get_combined_minimum_size().y - scroll.size.y + (_menu_separation - current) * gaps
 	var fitted := clampi(_menu_separation - ceili(maxf(overflow, 0.0) / gaps), 4, _menu_separation)
-	if fitted != current:
-		menu_column.add_theme_constant_override("separation", fitted)
+	for box in boxes:
+		if box.get_theme_constant("separation") != fitted:
+			box.add_theme_constant_override("separation", fitted)
+	menu.hold_height()
 
 func _show_menu() -> void:
 	timer.stop()
@@ -766,8 +812,9 @@ func _show_menu() -> void:
 		menu_overlay.visible = true
 		if is_instance_valid(main_margin):
 			main_margin.focus_behavior_recursive = Control.FOCUS_BEHAVIOR_DISABLED
-		if not ui_mobile and not menu_mode_buttons.is_empty():
-			menu_mode_buttons[0].grab_focus.call_deferred()
+		var first := menu.first_focus()
+		if not ui_mobile and first != null:
+			first.grab_focus.call_deferred()
 		UiFx.screen_enter(menu_overlay, audio.reduce_motion)
 
 		# Staggered entrance for mode buttons
@@ -921,6 +968,7 @@ func _show_question() -> void:
 	feedback_scroll.visible = false
 	fit.refresh_ref_column()
 	fit.begin()
+	menu.study_hook("question", [self])
 	_schedule_auto_read()
 	_update_key_hint()
 
@@ -948,6 +996,8 @@ func _answer_selected(selected: int) -> void:
 	var record: Dictionary = result["record"]
 	var correct: int = result["correct"]
 	var correct_text: String = result["correct_text"]
+	if result["verdict"] != QuizSession.Verdict.REVIEWED:
+		progress.set_resume(session.snapshot())
 	var cards := answers_box.get_children()
 	for i in cards.size():
 		var card = cards[i]
@@ -1014,6 +1064,7 @@ func _answer_selected(selected: int) -> void:
 		var target_kw := _extract_table_target_keyword(record, table)
 		table_highlighted = _populate_reference_table(feedback_table_grid, feedback_table_note, table, correct_text, true, target_kw)
 	info_panel.show(record, correct_text, table_highlighted)
+	menu.study_hook("answered", [self, record, result["verdict"] == QuizSession.Verdict.CORRECT, result["verdict"] != QuizSession.Verdict.REVIEWED])
 	info_label.visible = true
 	fit.compact_answered(correct, selected)
 	# Answering always stops the readout in progress. The rule then plays by
@@ -1272,14 +1323,20 @@ func _format_time(seconds: int) -> String:
 func _next_question() -> void:
 	# The session clock ran out: the exam is over, like the real one.
 	if timed_session and time_left <= 0:
-		ResultsView.show(self)
+		_show_results()
 		return
 	if session.advance():
 		_show_question()
 	else:
-		ResultsView.show(self)
+		_show_results()
 
+## The run is over: a graded practice exam keeps its score, nothing is left
+## to continue, and the report shows.
 func _show_results() -> void:
+	if session.session_exam != "" and AudioSettings.grades_answers(session_audio_mode):
+		progress.record_exam(session.session_exam, score, session_length)
+	if AudioSettings.grades_answers(session_audio_mode):
+		progress.clear_resume()
 	ResultsView.show(self)
 
 func _show_error(message: String) -> void:
@@ -1290,7 +1347,7 @@ func _show_error(message: String) -> void:
 	if is_instance_valid(restart_button):
 		restart_button.get_parent().visible = false
 	question_label.text = "Project error"
-	exam_label.text = "NEC 2023 JOURNEYMAN CHALLENGE"
+	exam_label.text = MenuModel.fill(str(MenuModel.spec().get("title", "")), menu.vars())
 	article_label.text = ""
 	progress_label.text = "Unable to start"
 	feedback_panel.visible = true
@@ -1313,6 +1370,8 @@ func _on_go_back() -> void:
 	if is_instance_valid(voice_sheet):
 		voice_sheet.close()
 		return
+	if menu.study_hook("back", [self]) == true:
+		return
 	if is_instance_valid(question_diagram_view) and question_diagram_view.is_zoomed():
 		question_diagram_view.close_zoom()
 		return
@@ -1325,6 +1384,9 @@ func _on_go_back() -> void:
 		return
 	var starting := _start_tween != null and _start_tween.is_running()
 	if menu_overlay != null and menu_overlay.visible and not starting:
+		if menu.current != 0:
+			menu.show_tab(0)
+			return
 		get_tree().quit()
 		return
 	_request_menu()

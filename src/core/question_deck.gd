@@ -161,6 +161,23 @@ func mastery(records: Array) -> Dictionary:
 	return out
 
 
+## question id -> {"right", "answers", "last_right"} over its last HISTORY
+## answers, for every question answered at least once.
+func history(records: Array) -> Dictionary:
+	load_state(records)
+	var out := {}
+	for id in stats:
+		var st: Array = stats[id]
+		var kept := int(st[5])
+		if kept == 0:
+			continue
+		var right := 0
+		for b in kept:
+			right += (int(st[4]) >> b) & 1
+		out[id] = {"right": right, "answers": kept, "last_right": (int(st[4]) & 1) == 1}
+	return out
+
+
 ## 0..1: rolling accuracy per area weighted by the blueprint; an area not yet
 ## practised counts as 0, so the estimate only rises with coverage.
 static func readiness(mastery_by_area: Dictionary) -> float:

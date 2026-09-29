@@ -45,6 +45,15 @@ static func title(key: String) -> String:
 	return key
 
 
+## Exam time in minutes and the pass mark in percent, from the bulletin.
+static func minutes() -> int:
+	return int(data().get("minutes", 0))
+
+
+static func pass_percent() -> int:
+	return int(data().get("pass_percent", 0))
+
+
 static func scored_items() -> int:
 	var total := 0
 	for a in areas():

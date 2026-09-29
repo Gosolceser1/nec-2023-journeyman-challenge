@@ -62,6 +62,9 @@ var session_time_limit := SESSION_TIME_SECONDS
 var timed_session := true
 var session_name := "Practice Test"
 var session_section := BankLoader.SECTION_NEC
+## The practice exam this run replays ("Open Book Exam #3"), else "".
+var session_exam := ""
+var session_simulation := false
 var question_time_left := SECONDS_PER_SCORED_ITEM
 
 
@@ -81,9 +84,24 @@ func begin(question_count: int, time_limit: int, timed: bool, name: String, simu
 		order = deck.draw_exam(records, question_count, rng)
 	else:
 		order = deck.draw_drill(records, question_count, rng, area)
+	_start(time_limit, timed, name, section, simulation, "")
+
+
+## A fresh session over exactly these record indices, in this order (a practice
+## exam as written, or the missed-question review), with new choice orders.
+## The answers still feed the deck's study stats.
+func begin_fixed(indices: Array[int], time_limit: int, timed: bool, name: String, exam := "") -> void:
+	order = indices.duplicate()
+	var section := BankLoader.section_of(records[indices[0]]) if not indices.is_empty() else BankLoader.SECTION_NEC
+	_start(time_limit, timed, name, section, false, exam)
+
+
+func _start(time_limit: int, timed: bool, name: String, section: String, is_simulation: bool, exam: String) -> void:
 	for i in order:
 		choice_orders[i] = ChoiceOrder.shuffled(records[i], rng)
 	session_section = section
+	session_exam = exam
+	session_simulation = is_simulation
 	session_length = order.size()
 	session_time_limit = time_limit
 	timed_session = timed
@@ -124,6 +142,79 @@ static func pace(seconds: Array) -> Dictionary:
 		if float(e[1]) > SLOW_SECONDS:
 			slow.append(int(e[0]))
 	return {"mean": sum / seconds.size() if not seconds.is_empty() else 0.0, "slow": slow}
+
+
+## What it takes to pick this run up later, positioned on the next unanswered
+## question: question ids and tallies, never answers or choice order. {} when
+## nothing is left to answer.
+func snapshot() -> Dictionary:
+	var next := current_index + (1 if current_answered else 0)
+	if order.is_empty() or next >= order.size() or (timed_session and time_left <= 0):
+		return {}
+	var ids := PackedStringArray()
+	for i in order:
+		ids.append(str(records[i].get("id", "")))
+	var missed := []
+	for m in missed_questions:
+		missed.append([str(records[int(m["record_index"])].get("id", "")), int(m.get("selected_index", -1)), int(m["index"])])
+	return {"ids": ids, "next": next, "score": score, "streak": streak, "answered": answered_count,
+		"time_left": time_left, "time_limit": session_time_limit, "timed": timed_session, "name": session_name,
+		"section": session_section, "exam": session_exam, "simulation": session_simulation, "missed": missed,
+		"area_stats": area_stats.duplicate(true), "chapter_stats": chapter_stats.duplicate(true),
+		"answer_seconds": answer_seconds.duplicate(true)}
+
+
+## Rebuilds a run from snapshot(), with fresh choice orders; false when the
+## snapshot is malformed or names a question the bank no longer has.
+func restore(snap: Dictionary) -> bool:
+	var index_of := {}
+	for i in records.size():
+		index_of[str(records[i].get("id", ""))] = i
+	var ids = snap.get("ids", [])
+	if not (ids is PackedStringArray or ids is Array) or ids.is_empty():
+		return false
+	var indices: Array[int] = []
+	for id in ids:
+		if not index_of.has(str(id)):
+			return false
+		indices.append(int(index_of[str(id)]))
+	var next := int(snap.get("next", 0))
+	if next < 0 or next >= indices.size():
+		return false
+	order = indices
+	_start(int(snap.get("time_limit", SESSION_TIME_SECONDS)), bool(snap.get("timed", true)), str(snap.get("name", "")),
+		str(snap.get("section", BankLoader.SECTION_NEC)), bool(snap.get("simulation", false)), str(snap.get("exam", "")))
+	current_index = next
+	score = int(snap.get("score", 0))
+	streak = int(snap.get("streak", 0))
+	answered_count = int(snap.get("answered", next))
+	time_left = int(snap.get("time_left", session_time_limit))
+	for key in ["area_stats", "chapter_stats"]:
+		var saved = snap.get(key, {})
+		if saved is Dictionary:
+			set(key, saved.duplicate(true))
+	var seconds = snap.get("answer_seconds", [])
+	answer_seconds = seconds.duplicate(true) if seconds is Array else []
+	var missed = snap.get("missed", [])
+	if missed is Array:
+		for m in missed:
+			if m is Array and m.size() >= 3 and index_of.has(str(m[0])):
+				missed_questions.append(_missed_from_bank(int(index_of[str(m[0])]), int(m[1]), int(m[2])))
+	return true
+
+
+## A missed-list entry rebuilt after a restore, lettered in bank order (the
+## run's choice order is not saved).
+func _missed_from_bank(record_index: int, selected_original: int, item: int) -> Dictionary:
+	var record: Dictionary = records[record_index]
+	var answers: Array = record.get("answers", [])
+	var correct_original := int(record.get("correct_index", -1))
+	var selected := "Time expired"
+	if selected_original >= 0 and selected_original < answers.size():
+		selected = "%s — %s" % [ANSWER_LETTERS[selected_original], answers[selected_original]]
+	var entry := _missed(record, record_index, selected, correct_original, str(answers[correct_original]) if correct_original >= 0 and correct_original < answers.size() else "", selected_original, correct_original)
+	entry["index"] = item
+	return entry
 
 
 ## Clears the deck, the review queue and the per-question stats.

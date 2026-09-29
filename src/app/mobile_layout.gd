@@ -420,27 +420,5 @@ static func build(host: Main) -> void:
 	menu_column.add_theme_constant_override("separation", AppTheme.SPACE_SM + 2)
 	menu_margin.add_child(menu_column)
 	host.menu_column = menu_column
-	Widgets.add_menu_hero(host, menu_column, 56, AppTheme.TYPE_TITLE, "NFPA 70 • NEC 2023 • PSI STANDARDS")
-	var practice_header := Widgets.make_section_header("RAPID PRACTICE DRILLS")
-	menu_column.add_child(practice_header)
-	menu_column.move_child(AudioSection.build(host, menu_column), practice_header.get_index())
 	host.menu_mode_buttons.clear()
-	Widgets.add_mode_button(host, menu_column, "10 QUESTIONS", "Quick warm-up drill • 30 minutes timed", host._start_quiz.bind(10, host._practice_time(10), true, "10-Question Practice"), AppTheme.SKY_400, AppTheme.SURFACE_BOTTOM, false, 64.0, AppTheme.TYPE_BODY)
-	Widgets.add_mode_button(host, menu_column, "20 QUESTIONS", "Standard focused session • 60 minutes timed", host._start_quiz.bind(20, host._practice_time(20), true, "20-Question Practice"), AppTheme.SKY_400, AppTheme.SURFACE_BOTTOM, false, 64.0, AppTheme.TYPE_BODY)
-	Widgets.add_mode_button(host, menu_column, "30 QUESTIONS", "Extended study block • 90 minutes timed", host._start_quiz.bind(30, host._practice_time(30), true, "30-Question Practice"), AppTheme.SKY_400, AppTheme.SURFACE_BOTTOM, false, 64.0, AppTheme.TYPE_BODY)
-	Widgets.add_mode_button(host, menu_column, "40 QUESTIONS", "Half-length diagnostic test • 120 minutes timed", host._start_quiz.bind(40, host._practice_time(40), true, "40-Question Practice"), AppTheme.SKY_400, AppTheme.SURFACE_BOTTOM, false, 64.0, AppTheme.TYPE_BODY)
-	Widgets.add_mode_button(host, menu_column, "50 QUESTIONS", "Intensive endurance drill • 150 minutes timed", host._start_quiz.bind(50, host._practice_time(50), true, "50-Question Practice"), AppTheme.SKY_400, AppTheme.SURFACE_BOTTOM, false, 64.0, AppTheme.TYPE_BODY)
-	Widgets.add_mode_button(host, menu_column, "10 QUESTIONS • WEAKEST AREA", host._study_button_subtitle(), host._start_area_drill, AppTheme.SKY_300, AppTheme.SURFACE_BOTTOM, false, 64.0, AppTheme.TYPE_BODY, "target")
-	host.study_button = host.menu_mode_buttons.back()
-	Widgets.add_state_law_section(host, menu_column, 64.0, AppTheme.TYPE_BODY)
-	menu_column.add_child(Widgets.make_section_header("OFFICIAL LICENSING SIMULATION", AppTheme.ROSE_400))
-	Widgets.add_mode_button(host, menu_column, "FULL JOURNEYMAN SIMULATOR", "80 scored questions • 240 minutes • 75% required to pass", host._start_quiz.bind(80, Main.EXAM_MINUTES * 60, true, "Full Journeyman Exam"), AppTheme.ROSE_500, AppTheme.EXAM_BUTTON_BG, true, 72.0, AppTheme.TYPE_BODY, "bolt")
-
-	var menu_note := Label.new()
-	menu_note.text = "Aligned with NFPA 70 (NEC 2023) & Nebraska State Electrical Division / PSI Standards\nPacing standard: 3:00 per scored item • 80 questions timed • " + Main.version_label()
-	menu_note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	menu_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	menu_note.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_REGULAR))
-	menu_note.add_theme_font_size_override("font_size", AppTheme.TYPE_MICRO)
-	menu_note.add_theme_color_override("font_color", AppTheme.SLATE_400)
-	menu_column.add_child(menu_note)
+	host.menu.build(menu_column)

@@ -1,0 +1,95 @@
+{
+	"version": 1,
+	"note": "The main menu as data (MainMenu builds it; docs/ARCHITECTURE.md, 'Main menu'). Tabs in order; each page lists blocks by kind, and each kind has one builder in src/app/menu/main_menu.gd. Exams are not listed here: they are discovered from the question bank ('exam' label, grouped by the label without its '#N'). Exam format numbers come from data/exam_blueprint.json, the edition from data/edition.json. {edition}, {items}, {minutes}, {pass}, {n}, {count}, {area} are filled in by the builder. study_tools loads entry_script by path and calls its static hooks (attach, question, answered, back) only if they exist, so the menu runs with or without the math tools.",
+	"title": "{edition} // JOURNEYMAN CHALLENGE",
+	"title_short": "{edition} // JOURNEYMAN",
+	"standards": "NFPA 70 • {edition} • PSI EXAM STANDARDS",
+	"tagline": "Pick an exam, drill a subject, or run the full timed exam",
+	"footer": "Aligned with NFPA 70 ({edition}) & Nebraska State Electrical Division / PSI standards • {version}",
+	"tabs": [
+		{"id": "home", "title": "Home", "icon": "bolt", "blocks": ["continue", "quick_drill", "weakest_area", "review_missed", "simulator"]},
+		{"id": "exams", "title": "Exams", "icon": "check", "blocks": ["exam_groups"]},
+		{"id": "drills", "title": "Drills", "icon": "stopwatch", "blocks": ["drill_sizes", "area_drills"]},
+		{"id": "study", "title": "Study", "icon": "tip", "blocks": ["study_tools"]},
+		{"id": "settings", "title": "Settings", "icon": "speaker", "blocks": ["audio", "footer"]}
+	],
+	"blocks": {
+		"continue": {
+			"title": "CONTINUE WHERE YOU LEFT OFF",
+			"detail": "{name} • question {next} of {count} • {right} right so far"
+		},
+		"quick_drill": {
+			"size": 10,
+			"title": "QUICK DRILL • {n} QUESTIONS",
+			"detail": "Mixed subjects, weighted like the exam • {minutes} minutes timed"
+		},
+		"weakest_area": {
+			"size": 10,
+			"title": "{n} QUESTIONS • WEAKEST AREA",
+			"detail": "{area} ({level}) • readiness {readiness}% • {minutes} minutes timed",
+			"empty": "Weakest subject area • {minutes} minutes timed"
+		},
+		"review_missed": {
+			"max": 20,
+			"title": "REVIEW MISSED QUESTIONS",
+			"detail": "{count} to retry, missed on your last try • {minutes} minutes timed",
+			"empty": "Nothing to review yet: questions you miss land here"
+		},
+		"simulator": {
+			"header": "OFFICIAL LICENSING SIMULATION",
+			"title": "FULL JOURNEYMAN EXAM",
+			"detail": "{items} scored questions • {minutes} minutes • {pass}% required to pass",
+			"outline": "WHAT THE REAL EXAM ASKS • {items} ITEMS BY SUBJECT"
+		},
+		"exam_groups": {
+			"header": "PRACTICE EXAMS • FROM THE PDF STUDY SET",
+			"family_order": ["Open Book Exam", "Final Exam", "NE State Act"],
+			"family_titles": {"Open Book Exam": "Open Book", "Final Exam": "Finals", "NE State Act": "State Law"},
+			"summary": "{exams} exams • {questions} questions • {seen}% seen",
+			"tile_title": "{family} #{number}",
+			"tile_detail": "{count} questions",
+			"tile_detail_seen": "{seen}/{count} seen",
+			"best": "Best {best}%",
+			"new": "New",
+			"page": "Page {page} of {pages}",
+			"run_detail": "{count} questions in exam order • {minutes} minutes timed",
+			"grid": {"desktop": {"columns": 4, "rows": 3}, "mobile": {"columns": 3, "rows": 4}}
+		},
+		"drill_sizes": {
+			"header": "RAPID PRACTICE DRILLS",
+			"sizes": [
+				{"n": 10, "blurb": "Quick warm-up drill"},
+				{"n": 20, "blurb": "Standard focused session"},
+				{"n": 30, "blurb": "Extended study block"},
+				{"n": 40, "blurb": "Half-length diagnostic test"},
+				{"n": 50, "blurb": "Intensive endurance drill"}
+			],
+			"title": "{n} QUESTIONS",
+			"title_compact": "{n} Q",
+			"detail": "{minutes} minutes timed",
+			"detail_compact": "{minutes} min",
+			"tooltip": "{blurb} • {minutes} minutes timed"
+		},
+		"area_drills": {
+			"header": "SUBJECT AREA DRILLS • {n} QUESTIONS EACH",
+			"size": 10,
+			"tile_detail": "{items} of {total} on the exam",
+			"best": "{accuracy}% recent",
+			"new": "New",
+			"short_titles": {"general": "General Knowledge", "wiring_methods": "Wiring Methods", "equipment": "General Equipment"},
+			"columns": {"desktop": 3, "mobile": 2}
+		},
+		"study_tools": {
+			"header": "MATH & TABLE STUDY TOOLS",
+			"source": "res://data/math/tools.json",
+			"entry_script": "res://src/ui/math_hub.gd",
+			"entry_method": "open",
+			"hooks": {"attach": "attach", "question": "on_question", "answered": "on_answered", "back": "handle_back"},
+			"note": "Calculation questions show a Show steps button after you answer.",
+			"missing": "Math study tools are on their way.",
+			"columns": {"desktop": 2, "mobile": 2}
+		},
+		"audio": {},
+		"footer": {}
+	}
+}

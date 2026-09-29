@@ -11,7 +11,7 @@ static func show(host: Main) -> void:
 	# The report is not a question: keys 1-4 / A-D must not grade anything here.
 	host.current_answered = true
 	clear_confetti(host)
-	var is_exam := host.session_name.begins_with("Full Journeyman Exam")
+	var is_exam := host.session.session_simulation
 	var state_law := host.session.session_section == BankLoader.SECTION_NE_STATE_LAW
 	var provisions := "Nebraska State Electrical Act and Board Rules" if state_law else "NEC 2023"
 	host.question_label.text = "Official Examination Report" if is_exam else "Practice Report"
