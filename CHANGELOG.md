@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+### Added
+
+- **72 more questions get a study figure** (docs/DIAGRAMS_AUDIT.md section 8):
+  26 new drawings in the app's own style, among them the floor-area and
+  ampacity worked examples, ground fault vs. open vs. short, selective
+  coordination, the motor branch circuit, hazardous classes, the AFCI and
+  tamper-resistant dwelling map, FCC layers and the type-letter decoder, plus
+  new notes on six existing figures. Anything that answers the question stays
+  hidden until you answer.
+
 ### Fixed
 
 - **Figures no longer hint at the answer before you answer**

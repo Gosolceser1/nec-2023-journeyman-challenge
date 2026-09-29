@@ -5,11 +5,13 @@ what new figures would help. The short answer: **three questions require a
 figure, and all three are now redrawn in the app's own style (section 1);
 88 would benefit from an original study figure, and all 88 have one**
 (51 drawings for all 91 records, section 5), each checked against the NEC 2023
-text by two separate reviews (section 6).
+text by two separate reviews (section 6). Batch 1 of the gap scan adds 26
+drawings and 6 re-masks for 72 more questions (section 8): 77 drawings for
+163 records in all.
 
 Screenshots: `.audit_tmp/shots/diagrams/` (contact sheets `all_*.png` for
-every record, `changed_*.png` for the 1.0.5 changes; desktop and phone,
-before and after answering). Nothing here copies UpCodes, the exam PDFs or
+every record, `changed_*.png` for the 1.0.5 changes, `batch1/batch1_*.png`
+for batch 1; desktop and phone, before and after answering). Nothing here copies UpCodes, the exam PDFs or
 any other source: every figure is drawn in code (`tools/diagrams/`).
 
 ## 1. Required figures (redrawn for 1.0.5)
@@ -581,3 +583,111 @@ The 88 figures, the masks and the phone strip shipped in 1.0.4. For 1.0.5:
 the three required figures are redrawn, the second accuracy review is done
 and the leaks above are masked. Still open: the two FORMULA / METHOD strips
 above (question bank) and the stem wording flagged in section 6.
+
+## 8. Batch 1 from the gap scan (72 more questions)
+
+`audits/diagram_gap_scan.md` listed the questions that still had no figure
+but would be easier with one. Batch 1 covers its 16 high and 10 medium
+concept groups plus 6 records that fit figures we already had: **26 new
+drawings and 6 re-masks for 72 questions** (tier A for the scan's high
+records, B for medium; `records.py`, family "Batch 1 ..."). No concept was
+skipped. New modules in `tools/diagrams/figs/`: `loads.py` (floor area,
+ampacity with derating, 310.12 dwelling service, branch-circuit rating,
+225.39 building disconnects, dryer and range demand), `protection.py`
+(ground fault vs open vs short, selective coordination, transformer-fed
+panelboard, panelboard spaces and neutral terminals, receptacle markings
+and terminals, AFCI and tamper-resistant dwelling map), `motors.py` (motor
+branch circuit one-line, in-sight disconnects for motors and rooftop A/C),
+`locations.py` (hazardous classes and divisions, antenna and power lines,
+patient bed receptacles, plaques and emergency-source signs, sign
+construction, busway vapor seal, cinder fill and backfill) and
+`construction.py` (switchboard marking and sections, type-letter decoder,
+FCC layers, MI / MC / copper-clad cross-sections, raceway fill). Re-masks:
+the 60 Hz sine (frequency, `#3-045`), voltage drop (647.4(D), `#3-044`),
+the water-pipe bond figure (250.50 existing-building exception, `#3-066`),
+the equipment receptacle (`#1-018`, after only), the pool plan (pool motor
+GFCI, `#1-024`) and the feeder tap (409.21(B), `#10-004`, after only).
+
+Every number and label was checked against the NFPA 70-2023 text cache;
+the scanner (`leakscan.py`) passes, and each record's before shot was
+compared with its keyed answer by hand. Where a picture could give the answer
+away by shape or by elimination rather than by words, it is masked too: the
+AFCI reach arrow, the motor disconnect bracket, every hazardous-class numeral,
+all four switchboard side names, both OCPD spots on the transformer figure
+and the headwall receptacles. Four records get their figure only after
+answering (`#4-023`, `#1-007`, `#1-018`, `#10-004`), where the drawing is the
+answer. Review with NEC sections per drawing: `audits/diagram_batch1_tmp/review.md`.
+| tier | record | figure | shown | masked before answering |
+|---|---|---|---|---|
+| A | `final-exam-#1-044` | `fault_path_art100` | before | name of case (a); name of this case (open circuit); name of this case (short circuit) |
+| A | `final-exam-#1-069` | `sign_construction_600` | before | 2 in (50 mm) min |
+| A | `final-exam-#3-008` | `hazardous_classes_500-5` | before | class for gas or vapor; class for combustible dust; class for ignitible fibers; Division 1; Division 2 |
+| A | `final-exam-#3-009` | `motor_circuit_430` | before | the bracket showing what the disconnect opens; what the disconnect separates from the circuit |
+| A | `final-exam-#3-019` | `in_sight_disconnect_430-102_440-14` | before | the device in sight; disconnecting means |
+| A | `final-exam-#3-052` | `motor_circuit_430` | before | how many overload units; the overload block |
+| A | `final-exam-#3-057` | `ampacity_derating_310-15` | before | EGC not counted (310.15(F)) |
+| A | `final-exam-#5-050` | `busway_wall_368-234` | before | the device at the exterior wall; vapor seal; what the wall device does; the exception |
+| A | `final-exam-#5-068` | `cinder_backfill_344-10c_300-5f` | before | concrete thickness |
+| A | `open-book-exam-#1-003` | `floor_area_220-5c` | before | dimensions run to the outside faces; the inside-face dimension marked wrong |
+| A | `open-book-exam-#1-009` | `panelboard_interior_408` | before | its own terminal |
+| A | `open-book-exam-#1-025` | `in_sight_disconnect_430-102_440-14` | before | readily accessible; what readily accessible means |
+| A | `open-book-exam-#10-002` | `floor_area_220-5c` | before | garage counted (2023); open porch not counted; unfinished space not counted |
+| A | `open-book-exam-#10-011` | `antenna_power_lines_810-16b` | before | 150 V to ground |
+| A | `open-book-exam-#10-019` | `patient_bed_receptacles_517-18` | before | receptacles on this side; receptacle count per bed |
+| A | `open-book-exam-#4-009` | `fault_path_art100` | before | name of case (a); name of this case (open circuit); name of this case (short circuit) |
+| A | `open-book-exam-#4-012` | `afci_tr_dwelling_210-12_406-12` | before | the reach arrow; how far AFCI protection reaches |
+| A | `open-book-exam-#4-023` | `afci_tr_dwelling_210-12_406-12` | after | shown after answering only |
+| A | `open-book-exam-#7-007` | `selective_coordination_700-32` | before | the load tapped between the devices; nothing tapped in parallel with the downstream device |
+| A | `open-book-exam-#7-021` | `transformer_panel_408-36b` | before | the 480 V side marked wrong; panel OCPD between transformer and panel; OCPD for the panel not on the 480 V side; the exception note |
+| A | `open-book-exam-#7-025` | `multiple_supplies_225-37_700-7` | before | where the plaques go; the switch at each plaque |
+| B | `final-exam-#1-002` | `switchboard_sections_408` | before | the rear side; the left side; the right side; the front side; where the marking goes |
+| B | `final-exam-#1-014` | `ampacity_derating_310-15` | before | 25 A; 40 A; 1.00; 0.87; 0.80; 20 A; 34.8 A |
+| B | `final-exam-#1-021` | `appliance_demand_220-54_220-55` | before | 85%; 25 kW x 0.85 = 21.25 kW; +10%; 8 kW x 1.10 = 8.8 kW |
+| B | `final-exam-#1-026` | `type_letters_decoder` | before | what the -2 means |
+| B | `final-exam-#1-027` | `ampacity_derating_310-15` | before | 25 A; 40 A; 1.00; 0.87; 0.80; 20 A; 34.8 A |
+| B | `final-exam-#1-034` | `type_letters_decoder` | before | what the W suffix means |
+| B | `final-exam-#1-036` | `dwelling_service_310-12` | before | 83% x 200 A = 166 A |
+| B | `final-exam-#1-040` | `appliance_demand_220-54_220-55` | before | 85%; 25 kW x 0.85 = 21.25 kW; +10%; 8 kW x 1.10 = 8.8 kW |
+| B | `final-exam-#1-048` | `afci_tr_dwelling_210-12_406-12` | before | hallway receptacle type; the 406.12 rule |
+| B | `final-exam-#1-059` | `branch_circuit_rating_210` | before | circuit rating = OCPD rating |
+| B | `final-exam-#1-061` | `hazardous_classes_500-5` | before | class for gas or vapor; class for combustible dust; class for ignitible fibers |
+| B | `final-exam-#1-070` | `motor_circuit_430` | before | table FLC |
+| B | `final-exam-#3-014` | `branch_circuit_rating_210` | before | cord-and-plug load: 12 A max |
+| B | `final-exam-#3-024` | `outbuilding_disconnect_225-39` | before | 15 A min; 30 A min |
+| B | `final-exam-#3-029` | `selective_coordination_700-32` | before | the defined term; caption naming the term |
+| B | `final-exam-#3-038` | `motor_circuit_430` | before | starting current |
+| B | `final-exam-#3-044` | `voltage_drop_percent` | before | the sensitive-electronics limits |
+| B | `final-exam-#3-045` | `sine_wave_60hz_quarter_cycle` | before | the name for cycles per second |
+| B | `final-exam-#3-046` | `panelboard_interior_408` | before | the closure plate type |
+| B | `final-exam-#3-048` | `raceway_fill_ch9_348-22` | before | largest conductor |
+| B | `final-exam-#3-056` | `outbuilding_disconnect_225-39` | before | 15 A min; 30 A min |
+| B | `final-exam-#3-065` | `dwelling_service_310-12` | before | the system the table is for; the occupancy the table is for |
+| B | `final-exam-#3-066` | `gec_water_bond_250-66_250-68` | before | where unreachable rebar may be left out |
+| B | `final-exam-#5-001` | `fcc_layers_324` | before | how the square is held down |
+| B | `final-exam-#5-003` | `cable_cutaways_332_310` | before | the cable type |
+| B | `final-exam-#5-004` | `fcc_layers_324` | before | where FCC meets other wiring; the box at the wall |
+| B | `final-exam-#5-007` | `fcc_layers_324` | before | the layer above the cable; the layer between floor and cable |
+| B | `final-exam-#5-020` | `cable_cutaways_332_310` | before | solid copper conductors; sheath: mechanical protection; sheath: grounding path |
+| B | `final-exam-#5-022` | `type_letters_decoder` | before | the underground service-entrance cable |
+| B | `final-exam-#5-032` | `raceway_fill_ch9_348-22` | before | largest conductor |
+| B | `final-exam-#5-066` | `raceway_fill_ch9_348-22` | before | the fill table; where LFNC fill comes from |
+| B | `open-book-exam-#1-007` | `switchboard_sections_408` | after | shown after answering only |
+| B | `open-book-exam-#1-015` | `switchboard_sections_408` | before | the rear side; the left side; the right side; the front side; where the marking goes |
+| B | `open-book-exam-#1-018` | `equipment_receptacle_210-63` | after | shown after answering only |
+| B | `open-book-exam-#1-024` | `pool_fountain_distances_680` | before | the amp limit |
+| B | `open-book-exam-#10-003` | `receptacle_markings_406` | before | the only conductor on the green screw |
+| B | `open-book-exam-#10-004` | `feeder_tap_10ft_240-21b1` | after | shown after answering only |
+| B | `open-book-exam-#10-005` | `cinder_backfill_344-10c_300-5f` | before | corrosion |
+| B | `open-book-exam-#10-015` | `cable_cutaways_332_310` | before | minimum copper share |
+| B | `open-book-exam-#10-017` | `hazardous_classes_500-5` | before | class for gas or vapor; class for combustible dust; class for ignitible fibers |
+| B | `open-book-exam-#10-018` | `receptacle_markings_406` | before | the face marking; orange triangle |
+| B | `open-book-exam-#10-025` | `cinder_backfill_344-10c_300-5f` | before | damage |
+| B | `open-book-exam-#4-005` | `afci_tr_dwelling_210-12_406-12` | before | hallway receptacle type; the 406.12 rule |
+| B | `open-book-exam-#4-007` | `receptacle_markings_406` | before | the face marking; orange triangle |
+| B | `open-book-exam-#4-015` | `appliance_demand_220-54_220-55` | before | 85%; 25 kW x 0.85 = 21.25 kW; +10%; 8 kW x 1.10 = 8.8 kW |
+| B | `open-book-exam-#4-022` | `dwelling_service_310-12` | before | 83% x 200 A = 166 A |
+| B | `open-book-exam-#4-025` | `type_letters_decoder` | before | what the W suffix means |
+| B | `open-book-exam-#7-009` | `outbuilding_disconnect_225-39` | before | 15 A min; 30 A min; calculated |
+| B | `open-book-exam-#7-011` | `branch_circuit_rating_210` | before | conductor ampacity >= 20 A rating |
+| B | `open-book-exam-#7-016` | `multiple_supplies_225-37_700-7` | before | where the source is; the second item on the sign |
+| B | `open-book-exam-#7-020` | `sign_construction_600` | before | sign body |
