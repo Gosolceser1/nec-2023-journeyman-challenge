@@ -9,7 +9,7 @@ def _breaker(f, x, y, w=60, h=70):
 
 
 @figure("feeder_tap_10ft_240-21b1", h=450, nec="240.21(B)(1)",
-        records=["final-exam-#1-032"])
+        records={"final-exam-#1-032": {"terms": ["1/10", "one-tenth", "10 times"]}})
 def feeder_tap_10ft(f):
     _breaker(f, 40, 80, 80, 80)
     f.text(80, 62, "feeder OCPD", T_LABEL, TEXT, bold=True)
@@ -30,14 +30,20 @@ def feeder_tap_10ft(f):
     f.ext(tx + 58, 330, 410, 330)
     f.dim_v(400, 120, 330)
     f.lines(414, 220, ["10 ft", "max"], 28, DIM, "start", True)
-    f.rect(500, 170, 280, 150, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    f.lines(514, 198, ["field-installed tap", "leaves the enclosure:", "tap >= 1/10 of the", "feeder OCPD rating"],
-            T_NOTE, TEXT, "start")
+    x, y = 494, 176
+    f.rect(x - 14, 150, 310, 200, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
+    f.text(x, y, "10-ft tap checklist", T_MIN, TEXT, "start", True)
+    for i, row in enumerate(("ampacity >= load served", "ends in one panel/disc.", "enclosed in a raceway",
+                             "leaves the enclosure:")):
+        f.text(x, y + 30 + i * 28, "- " + row, T_MIN, MUTED, "start")
+    b = f.text(x + 14, y + 142, "tap >=", T_MIN, MUTED, "start")
+    b = f.value(b[0] + b[2] + 8, y + 142, "1/10", T_MIN, anchor="start", pad=5)
+    f.text(b[0] + b[2] + 8, y + 142, "of OCPD", T_MIN, MUTED, "start")
     f.tag(f.w - 24, f.h - 14, "NEC 240.21(B)(1)", anchor="end")
 
 
 @figure("multiwire_branch_circuit_210-4", h=470, nec="210.4(A)-(C)",
-        records=["open-book-exam-#1-001", "open-book-exam-#4-008"])
+        records={"open-book-exam-#1-001": {}, "open-book-exam-#4-008": {"terms": ["line-to-neutral"]}})
 def multiwire_branch_circuit(f):
     q1, q2 = ["open-book-exam-#1-001"], ["open-book-exam-#4-008"]
     h1, nn, h2 = 130, 260, 400
@@ -54,13 +60,15 @@ def multiwire_branch_circuit(f):
     f.mask(200, 104, 30, 92, records=q1, what="handle tie across both poles")
     f.value_lines(530, 40, ["handle tie: all ungrounded", "conductors open together"], T_LABEL, records=q1)
     f.rect(212, nn - 20, 36, 40, fill=WIRE_NEU, rx=4)
-    f.text(194, nn + 8, "N", T_LABEL, TEXT, "end", True)
+    b = f.text(194, nn + 8, "N", T_LABEL, TEXT, "end", True)
+    f.mask(b[0] - 12, b[1] - 8, b[2] + 24, b[3] + 16, records=q2, what="'N' bar label")
     f.line(230, h1, 470, h1, WIRE_HOT, SW_WIRE)
     f.polyline([(230, 170), (250, 170), (250, 200), (190, 200), (190, h2), (650, h2)], WIRE_HOT, SW_WIRE)
     f.line(248, nn, 650, nn, WIRE_NEU, SW_WIRE)
     f.text(360, h1 - 12, "L1 (hot)", T_NOTE, TEXT, bold=True)
     f.text(420, h2 - 12, "L2 (hot)", T_NOTE, TEXT, bold=True)
-    f.text(300, nn + 28, "shared grounded conductor", T_NOTE, WIRE_NEU, "start", True)
+    b = f.text(300, nn + 28, "shared grounded conductor", T_NOTE, WIRE_NEU, "start", True)
+    f.mask(b[0] - 8, b[1] - 6, b[2] + 16, b[3] + 12, records=q2, what="'shared grounded conductor'")
     for x, ya, yb, lx, anchor in ((470, h1, nn, 505, "start"), (650, nn, h2, 615, "end")):
         f.line(x, ya, x, yb, WIRE_HOT if ya == h1 else WIRE_NEU, SW_WIRE)
         f.line(x, (ya + yb) / 2, x, yb, WIRE_NEU if ya == h1 else WIRE_HOT, SW_WIRE)
@@ -71,7 +79,7 @@ def multiwire_branch_circuit(f):
 
 
 @figure("high_leg_marking_408-3f1", h=470, nec="408.3(F)(1), 408.3(E)(1), 110.15",
-        records={"open-book-exam-#7-024": {"terms": ["delta"]}})
+        records={"open-book-exam-#7-024": {"terms": ["delta", "high leg", "208"]}})
 def high_leg_marking(f):
     rid = ["open-book-exam-#7-024"]
     f.title("4-wire system, midpoint of one winding grounded", y=40)
@@ -91,16 +99,24 @@ def high_leg_marking(f):
     f.line(ax, ya, px, ya, WIRE_HOT, SW_WIRE)
     f.line(ax, yn, px, yn, WIRE_NEU, SW_WIRE)
     f.line(ax, yc, px, yc, WIRE_HOT, SW_WIRE)
-    f.polyline([(bx, yn), (bx, yb), (px, yb)], AMBER, SW_WIRE + 1)
-    for y, lab in ((ya, "A"), (yn, "N"), (yc, "C")):
+    f.polyline([(bx, yn), (bx, yb), (px, yb)], WIRE_HOT, SW_WIRE)
+    f.rect(452, yb - 9, 26, 18, fill=AMBER, rx=3)
+    f.mask(442, yb - 20, 46, 40, records=rid, what="orange marking on the B conductor")
+    for y, lab in ((ya, "A"), (yn, "N"), (yc, "C"), (yb, "B")):
         f.text(320, y - 10, lab, T_NOTE, TEXT, bold=True)
-    f.text(320, yb - 10, "B  high leg (orange)", T_NOTE, AMBER, "start", True)
+    b = f.text(322, yb + 46, "high leg (orange)", T_NOTE, AMBER, "start", True)
+    f.mask(b[0] - 8, b[1] - 6, b[2] + 16, b[3] + 12, records=rid, what="'high leg (orange)'")
     f.text(430, (ya + yn) / 2 + 8, "120 V", T_NOTE, DIM, bold=True)
     f.text(430, (yn + yc) / 2 + 8, "120 V", T_NOTE, DIM, bold=True)
     f.rect(px, 110, 250, 270, fill=PANEL, stroke=TEXT, sw=SW_OBJ + 1, rx=8)
     f.text(645, 404, "panelboard", T_LABEL, TEXT, bold=True)
     f.rect(px + 20, 140, 210, 150, fill=BG, stroke=AMBER, sw=SW_OBJ, rx=6)
-    f.lines(px + 125, 172, ["CAUTION", "B PHASE HAS", "208 VOLTS", "TO GROUND"], T_NOTE, AMBER, bold=True)
+    f.text(px + 125, 176, "CAUTION", T_NOTE, AMBER, bold=True)
+    b = f.value(px + 50, 206, "B", T_NOTE, AMBER, "start", pad=6, records=rid, what="'B' phase on the sign")
+    f.text(b[0] + b[2] + 12, 206, "PHASE HAS", T_NOTE, AMBER, "start", True)
+    b = f.value(px + 62, 236, "208", T_NOTE, AMBER, "start", pad=6, records=rid, what="'208' volts on the sign")
+    f.text(b[0] + b[2] + 12, 236, "VOLTS", T_NOTE, AMBER, "start", True)
+    f.text(px + 125, 266, "TO GROUND", T_NOTE, AMBER, bold=True)
     f.text(px + 125, 330, "(example values)", T_MIN, MUTED)
     f.tag(f.w - 24, f.h - 12, "NEC 408.3(F)(1)", anchor="end")
 

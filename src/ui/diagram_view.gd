@@ -484,6 +484,7 @@ func _exit_tree() -> void:
 
 
 class _ZoomSheet extends Control:
+	const HINT_STRIP := 30.0
 	var view: DiagramView
 
 	func _init() -> void:
@@ -495,9 +496,10 @@ class _ZoomSheet extends Control:
 		modulate.a = 0.0
 		create_tween().tween_property(self, "modulate:a", 1.0, 0.14)
 
+	## The figure's card; the close hint sits in a strip under it (HINT_STRIP).
 	func _card_rect() -> Rect2:
 		var vp := get_viewport_rect().size
-		var avail := Rect2(Vector2(vp.x * 0.04, vp.y * 0.08), Vector2(vp.x * 0.92, vp.y * 0.80))
+		var avail := Rect2(Vector2(vp.x * 0.04, vp.y * 0.08), Vector2(vp.x * 0.92, vp.y * 0.80 - HINT_STRIP))
 		var c := view._canvas()
 		if c.x <= 0.0:
 			return avail
@@ -514,13 +516,17 @@ class _ZoomSheet extends Control:
 		sb.border_color = AppTheme.SKY_400
 		sb.set_border_width_all(2)
 		sb.set_corner_radius_all(14)
-		draw_style_box(sb, card)
+		# The hint lives inside the card, so it never lands on the page text
+		# (choice A on phones) that shows through the backdrop.
+		draw_style_box(sb, Rect2(card.position, card.size + Vector2(0, HINT_STRIP)))
 		view.draw_figure(self, card.grow(-16), 1.6)
 		var font := get_theme_default_font()
 		var hint := "Tap anywhere or press Esc to close"
 		var fs := 15
 		var w := font.get_string_size(hint, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
-		draw_string(font, Vector2((get_viewport_rect().size.x - w) * 0.5, card.end.y + 30), hint, HORIZONTAL_ALIGNMENT_LEFT, -1, fs, AppTheme.SLATE_400)
+		var base_y := card.end.y + (HINT_STRIP - font.get_height(fs)) * 0.5 - 6 + font.get_ascent(fs)
+		draw_string(font, Vector2(card.get_center().x - w * 0.5, base_y), hint, HORIZONTAL_ALIGNMENT_LEFT, -1, fs,
+				AppTheme.SLATE_400 if view.is_dark() else AppTheme.SLATE_600)
 
 	func _gui_input(event: InputEvent) -> void:
 		if (event is InputEventMouseButton or event is InputEventScreenTouch) and not event.pressed:

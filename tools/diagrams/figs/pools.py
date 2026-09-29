@@ -59,10 +59,10 @@ def spa_fan(f):
 @figure("pool_fountain_distances_680", h=480, nec="680.11(A), 680.22(A)(2), 680.35(D), 680.58",
         records=UNDERGROUND + SIX_FT + FOUNTAIN)
 def pool_distances(f):
-    ft = 12.0
-    f.text(20, 30, "plan view", T_NOTE, MUTED, "start")
+    ft = 16.0
+    f.text(20, 30, "plan view, not to scale", T_NOTE, MUTED, "start")
     # Permanently installed pool.
-    px0, py0, px1, py1 = 80, 180, 260, 288
+    px0, py0, px1, py1 = 100, 180, 250, 288
     d5 = 5 * ft
     f.zone(px0 - d5, py0 - d5, px1 - px0 + 2 * d5, py1 - py0 + 2 * d5, ZONE, 0.08)
     f.rect(px0, py0, px1 - px0, py1 - py0, fill=WATER, stroke=WATER_EDGE, sw=SW_OBJ)
@@ -76,17 +76,19 @@ def pool_distances(f):
     f.conduit(cx, 50, cx, py0 - 2, width=10)
     f.lines(cx - 16, 70, ["LFMC listed for", "direct burial"], T_NOTE, TEXT, "end")
     # Pump receptacle.
-    rx, ry = px1 + 6 * ft, 226
+    # Drawn well outside the 5 ft zone: at true scale 6 ft would sit on its edge.
+    rx, ry = px1 + d5 + 36, 226
     f.plan_receptacle(rx, ry, gfci=True)
-    f.rect(rx + 26, ry - 22, 56, 44, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
-    f.text(rx + 54, ry + 8, "M", T_LABEL, TEXT, bold=True)
-    f.line(rx + 12, ry, rx + 26, ry, TEXT, 3)
-    f.lines(rx + 54, 164, ["pump", "motor"], T_NOTE, TEXT)
+    f.rect(rx + 22, ry - 20, 44, 40, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
+    f.text(rx + 44, ry + 8, "M", T_LABEL, TEXT, bold=True)
+    f.line(rx + 12, ry, rx + 22, ry, TEXT, 3)
+    f.lines(rx + 44, 164, ["pump", "motor"], T_NOTE, TEXT)
     f.ext(rx, ry + 14, rx, 262)
     f.dim_h(px1, rx, 254)
     f.value((px1 + rx) / 2, 286, "6 ft", 28, records=SIX_FT, label="?")
-    f.lines(rx + 46, 300, ["pump", "receptacle:", "GFCI"], T_NOTE, TEXT)
-    f.line(442, 30, 442, f.h - 30, EDGE, SW_THIN)
+    f.lines(rx + 16, 300, ["pump", "receptacle:", "GFCI"], T_NOTE, TEXT)
+    f.line(446, 30, 446, f.h - 30, EDGE, SW_THIN)
+    ft = 12.0
     # Storable pool with audio equipment.
     sx, sy, sr = 510, 150, 45
     f.circle(sx, sy, sr, fill=WATER, stroke=WATER_EDGE, sw=SW_OBJ)

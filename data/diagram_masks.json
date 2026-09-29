@@ -164,9 +164,9 @@
         {
           "region": [
             0.045,
-            0.128,
+            0.092,
             0.3225,
-            0.224
+            0.26
           ],
           "what": "receptacles drawn one per bay, and the one-per-bay rule"
         }
@@ -175,14 +175,14 @@
         {
           "rect": [
             0.045,
-            0.128,
+            0.092,
             0.3225,
-            0.224
+            0.26
           ],
           "ring": true
         }
       ],
-      "reviewed": "2026-09-28"
+      "reviewed": "2026-09-29"
     },
     "final-exam-#1-023": {
       "file": "parallel_egc_250-122f.png",
@@ -370,6 +370,15 @@
             0.0978
           ],
           "what": "'400 A max'"
+        },
+        {
+          "region": [
+            0.7096,
+            0.6609,
+            0.0611,
+            0.0667
+          ],
+          "what": "'1/10'"
         }
       ],
       "masks": [
@@ -382,9 +391,23 @@
           ],
           "label": "? A",
           "ring": true
+        },
+        {
+          "rect": [
+            0.7096,
+            0.6609,
+            0.0611,
+            0.0667
+          ],
+          "ring": true
         }
       ],
-      "reviewed": "2026-09-28"
+      "terms": [
+        "1/10",
+        "one-tenth",
+        "10 times"
+      ],
+      "reviewed": "2026-09-29"
     },
     "final-exam-#1-033": {
       "file": "three_way_switch_spdt.png",
@@ -745,7 +768,7 @@
       "leaks": [
         {
           "region": [
-            0.145,
+            0.17,
             0.6253,
             0.0725,
             0.0917
@@ -756,7 +779,7 @@
       "masks": [
         {
           "rect": [
-            0.145,
+            0.17,
             0.6253,
             0.0725,
             0.0917
@@ -764,7 +787,7 @@
           "ring": true
         }
       ],
-      "reviewed": "2026-09-28"
+      "reviewed": "2026-09-29"
     },
     "final-exam-#1-062": {
       "file": "voltage_drop_percent.png",
@@ -937,7 +960,7 @@
       "leaks": [
         {
           "region": [
-            0.3337,
+            0.3488,
             0.5337,
             0.0725,
             0.0917
@@ -957,7 +980,7 @@
       "masks": [
         {
           "rect": [
-            0.3337,
+            0.3488,
             0.5337,
             0.0725,
             0.0917
@@ -974,7 +997,7 @@
           "ring": true
         }
       ],
-      "reviewed": "2026-09-28"
+      "reviewed": "2026-09-29"
     },
     "final-exam-#3-013": {
       "file": "supports_emt_strut_358-30.png",
@@ -1293,7 +1316,7 @@
       "leaks": [
         {
           "region": [
-            0.3337,
+            0.3488,
             0.5337,
             0.0725,
             0.0917
@@ -1313,7 +1336,7 @@
       "masks": [
         {
           "rect": [
-            0.3337,
+            0.3488,
             0.5337,
             0.0725,
             0.0917
@@ -1330,7 +1353,7 @@
           "ring": true
         }
       ],
-      "reviewed": "2026-09-28"
+      "reviewed": "2026-09-29"
     },
     "final-exam-#3-064": {
       "file": "gfci_locations_210-8.png",
@@ -2296,6 +2319,24 @@
       "leaks": [
         {
           "region": [
+            0.2058,
+            0.5134,
+            0.0517,
+            0.0851
+          ],
+          "what": "'N' bar label"
+        },
+        {
+          "region": [
+            0.365,
+            0.5635,
+            0.3867,
+            0.0723
+          ],
+          "what": "'shared grounded conductor'"
+        },
+        {
+          "region": [
             0.6212,
             0.3529,
             0.2033,
@@ -2316,6 +2357,24 @@
       "masks": [
         {
           "rect": [
+            0.2058,
+            0.5134,
+            0.0517,
+            0.0851
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.365,
+            0.5635,
+            0.3867,
+            0.0723
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
             0.6212,
             0.3529,
             0.2033,
@@ -2333,7 +2392,10 @@
           "ring": true
         }
       ],
-      "reviewed": "2026-09-28"
+      "terms": [
+        "line-to-neutral"
+      ],
+      "reviewed": "2026-09-29"
     },
     "open-book-exam-#4-011": {
       "file": "spa_fan_height_680-43.png",
@@ -2548,6 +2610,42 @@
             0.5745
           ],
           "what": "the transformer winding connection"
+        },
+        {
+          "region": [
+            0.5525,
+            0.7021,
+            0.0575,
+            0.0851
+          ],
+          "what": "orange marking on the B conductor"
+        },
+        {
+          "region": [
+            0.3925,
+            0.7933,
+            0.2431,
+            0.0723
+          ],
+          "what": "'high leg (orange)'"
+        },
+        {
+          "region": [
+            0.705,
+            0.389,
+            0.0349,
+            0.0723
+          ],
+          "what": "'B' phase on the sign"
+        },
+        {
+          "region": [
+            0.72,
+            0.4529,
+            0.0609,
+            0.0723
+          ],
+          "what": "'208' volts on the sign"
         }
       ],
       "masks": [
@@ -2559,12 +2657,50 @@
             0.5745
           ],
           "ring": true
+        },
+        {
+          "rect": [
+            0.5525,
+            0.7021,
+            0.0575,
+            0.0851
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.3925,
+            0.7933,
+            0.2431,
+            0.0723
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.705,
+            0.389,
+            0.0349,
+            0.0723
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.72,
+            0.4529,
+            0.0609,
+            0.0723
+          ],
+          "ring": true
         }
       ],
       "terms": [
-        "delta"
+        "delta",
+        "high leg",
+        "208"
       ],
-      "reviewed": "2026-09-28"
+      "reviewed": "2026-09-29"
     }
   }
 }

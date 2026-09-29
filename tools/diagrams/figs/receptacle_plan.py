@@ -49,7 +49,7 @@ def dwelling_plan(f):
     for cx in ((gx0 + bay_x) / 2, (bay_x + hx0) / 2):
         _wall_receptacle(f, cx, top, "up")
     f.lines(bay_x, 128, ["one in each", "vehicle bay"], T_NOTE, OK, bold=True, gap=1.1)
-    f.mask(gx0 + 6, top + 4, hx0 - gx0 - 12, 112, records=garage_rec,
+    f.mask(gx0 + 6, top - 14, hx0 - gx0 - 12, 130, records=garage_rec,
            what="receptacles drawn one per bay, and the one-per-bay rule")
     # Bedroom: wall space between the doorway and the corner.
     f.text((hx0 + lx0) / 2, 100, "BEDROOM", T_LABEL, TEXT, bold=True)
