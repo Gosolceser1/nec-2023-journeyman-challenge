@@ -152,47 +152,9 @@
     },
     "final-exam-#1-004": {
       "file": "office_lighting_220-42a.png",
-      "when": "before",
-      "leaks": [
-        {
-          "region": [
-            0.705,
-            0.2585,
-            0.2516,
-            0.0864
-          ],
-          "what": "the office unit load"
-        },
-        {
-          "region": [
-            0.6079,
-            0.4968,
-            0.1763,
-            0.1045
-          ],
-          "what": "'6,500 VA'"
-        }
-      ],
-      "masks": [
-        {
-          "rect": [
-            0.705,
-            0.2585,
-            0.2516,
-            0.0864
-          ],
-          "ring": true
-        },
-        {
-          "rect": [
-            0.6079,
-            0.4968,
-            0.1763,
-            0.1045
-          ],
-          "ring": true
-        }
-      ],
+      "when": "after",
+      "leaks": [],
+      "masks": [],
       "reviewed": "2026-09-29"
     },
     "final-exam-#1-005": {
@@ -5062,47 +5024,9 @@
     },
     "open-book-exam-#1-021": {
       "file": "office_lighting_220-42a.png",
-      "when": "before",
-      "leaks": [
-        {
-          "region": [
-            0.705,
-            0.2585,
-            0.2516,
-            0.0864
-          ],
-          "what": "the office unit load"
-        },
-        {
-          "region": [
-            0.6079,
-            0.4968,
-            0.1763,
-            0.1045
-          ],
-          "what": "'6,500 VA'"
-        }
-      ],
-      "masks": [
-        {
-          "rect": [
-            0.705,
-            0.2585,
-            0.2516,
-            0.0864
-          ],
-          "ring": true
-        },
-        {
-          "rect": [
-            0.6079,
-            0.4968,
-            0.1763,
-            0.1045
-          ],
-          "ring": true
-        }
-      ],
+      "when": "after",
+      "leaks": [],
+      "masks": [],
       "reviewed": "2026-09-29"
     },
     "open-book-exam-#1-022": {

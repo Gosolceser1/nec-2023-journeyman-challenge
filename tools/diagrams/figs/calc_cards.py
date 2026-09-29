@@ -20,7 +20,7 @@ def _motor(f, cx, cy, r=34, label="M"):
     f.text(cx, cy + 9, label, T_LABEL, TEXT, bold=True)
 
 
-@figure("office_lighting_220-42a", h=440, nec="220.42, Table 220.42(A), 220.5(C)",
+@figure("office_lighting_220-42a", h=440, nec="220.42, Table 220.42(A), 220.5(C)", when="after",
         records=["final-exam-#1-004", "open-book-exam-#1-021"])
 def office_lighting(f):
     f.title("General lighting load of an office (plan, not to scale)", y=34)

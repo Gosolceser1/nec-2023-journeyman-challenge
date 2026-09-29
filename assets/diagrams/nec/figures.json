@@ -30,7 +30,7 @@
   "figure": "office_lighting_220-42a",
   "source": "original",
   "style": "dark",
-  "when": "before",
+  "when": "after",
   "size": [
    1200,
    660
@@ -1790,7 +1790,7 @@
   "figure": "office_lighting_220-42a",
   "source": "original",
   "style": "dark",
-  "when": "before",
+  "when": "after",
   "size": [
    1200,
    660

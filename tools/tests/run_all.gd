@@ -27,6 +27,9 @@ const SUITES := [
 	# Tables used to scroll inside a box sized from a 33 px row guess; a wrapped
 	# row put a scrollbar on the table. Now every table shows whole.
 	{"name": "reference tables (no scrollbar, both layouts)", "path": "res://tools/tests/test_table_fit.gd"},
+	# A figure beside a 31-row table put 30 px of page scroll before the answer
+	# on phones; headless runs have one window size, so this one emulates each.
+	{"name": "figure + table records fit (every standard window size)", "path": "res://tools/tests/test_figure_table_fit.gd"},
 	# Layout regression guard. The scene harness asserts quiz LOGIC and never
 	# inspects a margin, so a broken safe-area calculation shipped green and left
 	# the app rendering a blank strip where the question should be.
