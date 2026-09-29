@@ -41,10 +41,10 @@ func _init() -> void:
 	check(s.score == 0 and s.streak == 0 and s.answered_count == 0 and s.current_index == 0, "counters reset")
 	check(s.missed_questions.is_empty() and s.chapter_stats.is_empty(), "missed list and tallies reset")
 	check(s.time_left == 540 and s.session_time_limit == 540 and s.timed_session and s.session_name == "Practice", "limit, timing and name")
-	check(s.question_time_left == QuizSession.SECONDS_PER_SCORED_ITEM, "full item time")
+	check(s.question_time_left == ExamBlueprint.seconds_per_item(), "full item time")
 	s.begin(50, 60, false, "Big")
 	check(s.order.size() == recs.size() and s.session_length == recs.size(), "count capped at the bank size")
-	check(QuizSession.SECONDS_PER_SCORED_ITEM == 180, "exam pace: 240 min / 80 items = 180 s")
+	check(ExamBlueprint.seconds_per_item() == 180, "exam pace: 240 min / 80 items = 180 s")
 
 	print("=== submit ===")
 	s = _session(recs)

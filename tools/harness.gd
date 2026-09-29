@@ -85,7 +85,7 @@ func _init() -> void:
 	quit(0 if failures.is_empty() else 1)
 
 func _run_session(main: Node, count: int, timed: bool, section := BankLoader.SECTION_NEC) -> void:
-	main._start_quiz(count, main.SESSION_TIME_SECONDS, timed, "Harness", "", section)
+	main._start_quiz(count, QuizSession.session_seconds(), timed, "Harness", "", section)
 	await process_frame
 	await process_frame
 	var total: int = mini(count, BankLoader.count_in_section(main.records, section))
@@ -129,7 +129,7 @@ func _state_law_source_count() -> int:
 func _full_exam_excludes_state_law(main: Node) -> void:
 	var items := ExamBlueprint.scored_items()
 	for attempt in 5:
-		main._start_quiz(items, main.EXAM_MINUTES * 60, true, "Full Journeyman Exam")
+		main._start_quiz(items, ExamBlueprint.minutes() * 60, true, Main.SIMULATION_NAME)
 		await process_frame
 		var drawn := 0
 		for idx in main.order:

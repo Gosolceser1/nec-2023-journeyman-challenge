@@ -27,7 +27,7 @@ func _draw() -> void:
 		return
 	draw_circle(c, r - width * 0.5, Color(AppTheme.SURFACE_BOTTOM, 0.9))
 	draw_arc(c, r, 0.0, TAU, 64, Color(AppTheme.WHITE, 0.08), width, true)
-	var col := ResultGauge.tint_for(fraction * 100.0, float(Main.PASS_PERCENT)) if fraction > 0.0 else AppTheme.SKY_400
+	var col := ResultGauge.tint_for(fraction * 100.0, float(ExamBlueprint.pass_percent())) if fraction > 0.0 else AppTheme.SKY_400
 	if fraction > 0.0:
 		var a0 := -PI * 0.5
 		var a1 := a0 + TAU * fraction

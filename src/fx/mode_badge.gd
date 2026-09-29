@@ -39,7 +39,7 @@ func _draw() -> void:
 		return
 	draw_circle(c, r, Color(accent, 0.08 + 0.06 * charge))
 	draw_arc(c, r, 0.0, TAU, 40, Color(1, 1, 1, 0.08), 3.0, true)
-	var rest := 1.0 if full_exam else clampf(float(question_count) / 80.0, 0.0, 1.0)
+	var rest := 1.0 if full_exam else clampf(float(question_count) / float(maxi(1, ExamBlueprint.scored_items())), 0.0, 1.0)
 	var frac := lerpf(rest, 1.0, charge)
 	if charge > 0.0:
 		draw_arc(c, r, -PI * 0.5, -PI * 0.5 + TAU * frac, 40, Color(accent, 0.25 * charge), 7.0, true)

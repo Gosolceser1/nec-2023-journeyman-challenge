@@ -75,7 +75,7 @@ static func update_time_gauges(host: Main) -> void:
 			pace_col = UiFx.RED
 		elif host.question_time_left <= 60:
 			pace_col = UiFx.AMBER
-		host.pace_gauge.set_value(float(maxi(host.question_time_left, 0)) / float(Main.SECONDS_PER_SCORED_ITEM), pace_col,
+		host.pace_gauge.set_value(float(maxi(host.question_time_left, 0)) / float(ExamBlueprint.seconds_per_item()), pace_col,
 			not host.current_answered and host.question_time_left > 0 and host.question_time_left <= 30)
 
 

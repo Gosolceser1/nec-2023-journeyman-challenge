@@ -21,7 +21,7 @@ static func show(host: Main) -> void:
 	host.question_table_panel.visible = false
 	host.question_diagram_panel.visible = false
 	host.question_formula_label.visible = false
-	host.exam_label.text = "STATE ELECTRICAL DIVISION  •  NEBRASKA (NSED / PSI)"
+	host.exam_label.text = ExamBlueprint.authority()
 	host.article_label.text = "CANDIDATE PERFORMANCE SUMMARY  •  " + ("NEBRASKA STATE ELECTRICAL ACT & BOARD RULES" if state_law else standards_label())
 	if is_instance_valid(host.question_hint_row):
 		host.question_hint_row.visible = true
@@ -55,7 +55,7 @@ static func show(host: Main) -> void:
 	var total := maxi(host.answered_count, host.order.size())
 	var unanswered := total - host.answered_count
 	var accuracy := 100.0 * float(host.score) / maxf(1.0, float(total))
-	var passed := accuracy >= Main.PASS_PERCENT
+	var passed := accuracy >= ExamBlueprint.pass_percent()
 	if passed:
 		host.score_label.text = "RESULT: PASSED"
 		host.score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
@@ -79,7 +79,7 @@ static func show(host: Main) -> void:
 	
 	# The gauge and the title already state the percentage and the verdict.
 	var summary_text := "%d of %d correct  •  %d%% needed to pass  •  %s" % [
-		host.score, total, Main.PASS_PERCENT,
+		host.score, total, ExamBlueprint.pass_percent(),
 		"%d missed item%s to review below" % [host.missed_questions.size(), "" if host.missed_questions.size() == 1 else "s"] if not host.missed_questions.is_empty() else "no misses"
 	]
 	if unanswered > 0:
@@ -155,9 +155,9 @@ static func append_study_feedback(host: Main, is_exam: bool, total: int) -> void
 	host.info_panel.append_heading("STUDY FEEDBACK\n", AppTheme.SKY_300)
 	host.info_label.push_color(AppTheme.SLATE_200)
 	if is_exam:
-		var needed := ceili(total * Main.PASS_PERCENT / 100.0)
-		host.info_label.add_text("Scored line: %d of %d correct, %d needed for %d%%: %s.\n" % [host.score, total, needed, Main.PASS_PERCENT, "PASS" if host.score >= needed else "DID NOT PASS"])
-	var rows := ChapterBars.rows_from_areas(host.session.area_stats, float(Main.PASS_PERCENT))
+		var needed := ceili(total * ExamBlueprint.pass_percent() / 100.0)
+		host.info_label.add_text("Scored line: %d of %d correct, %d needed for %d%%: %s.\n" % [host.score, total, needed, ExamBlueprint.pass_percent(), "PASS" if host.score >= needed else "DID NOT PASS"])
+	var rows := ChapterBars.rows_from_areas(host.session.area_stats, float(ExamBlueprint.pass_percent()))
 	var weak := PackedStringArray()
 	var weakest := ""
 	for row in rows:
@@ -166,17 +166,17 @@ static func append_study_feedback(host: Main, is_exam: bool, total: int) -> void
 		if row["weakest"] and weakest == "":
 			weakest = str(row["label"])
 	if not weak.is_empty():
-		host.info_label.add_text("Below %d%%: %s. Weakest: %s.\n" % [Main.PASS_PERCENT, ", ".join(weak), weakest])
+		host.info_label.add_text("Below %d%%: %s. Weakest: %s.\n" % [ExamBlueprint.pass_percent(), ", ".join(weak), weakest])
 	elif not rows.is_empty():
-		host.info_label.add_text("Every subject area at or above %d%%.\n" % Main.PASS_PERCENT)
+		host.info_label.add_text("Every subject area at or above %d%%.\n" % ExamBlueprint.pass_percent())
 	var pace := QuizSession.pace(host.session.answer_seconds)
 	if float(pace["mean"]) > 0.0:
-		var line := "Pace: %s per answer (exam pace %s)." % [clock_text(pace["mean"]), clock_text(QuizSession.SECONDS_PER_SCORED_ITEM)]
+		var line := "Pace: %s per answer (exam pace %s)." % [clock_text(pace["mean"]), clock_text(ExamBlueprint.seconds_per_item())]
 		var slow := PackedStringArray()
 		for n in pace["slow"]:
 			slow.append("#%d" % n)
 		if not slow.is_empty():
-			line += " Over %s: item%s %s." % [clock_text(QuizSession.SLOW_SECONDS), "" if slow.size() == 1 else "s", ", ".join(slow)]
+			line += " Over %s: item%s %s." % [clock_text(QuizSession.slow_seconds()), "" if slow.size() == 1 else "s", ", ".join(slow)]
 		host.info_label.add_text(line + "\n")
 	if host.session.session_section == BankLoader.SECTION_NEC:
 		var mastery := host.session.deck.mastery(host.records)
@@ -245,14 +245,14 @@ static func show_visual(host: Main, accuracy: float, passed: bool) -> void:
 	host._results_seq += 1
 	var seq := host._results_seq
 	host.result_gauge.landed.connect(func(): land(host, seq, passed), CONNECT_ONE_SHOT)
-	host.result_gauge.play(accuracy, float(Main.PASS_PERCENT), host.audio.reduce_motion)
+	host.result_gauge.play(accuracy, float(ExamBlueprint.pass_percent()), host.audio.reduce_motion)
 	if host.session.area_stats.is_empty():
 		host.chapter_bars.set_rows(ChapterBars.rows_from_stats(host.chapter_stats))
 	else:
-		host.chapter_bars.set_rows(ChapterBars.rows_from_areas(host.session.area_stats, float(Main.PASS_PERCENT)))
+		host.chapter_bars.set_rows(ChapterBars.rows_from_areas(host.session.area_stats, float(ExamBlueprint.pass_percent())))
 	var pace := host.chapter_bars.get_parent().get_node("PaceSparkline") as PaceSparkline
 	pace.set_points(host.session.answer_seconds)
-	UiFx.glow_pulse(host.feedback_panel, ResultGauge.tint_for(accuracy, float(Main.PASS_PERCENT)), 30, 1.2)
+	UiFx.glow_pulse(host.feedback_panel, ResultGauge.tint_for(accuracy, float(ExamBlueprint.pass_percent())), 30, 1.2)
 
 
 ## The dial reached the score: the result sound plays on the landing, and a pass

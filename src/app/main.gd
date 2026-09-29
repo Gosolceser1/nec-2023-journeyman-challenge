@@ -3,15 +3,9 @@ extends Control
 
 const ANSWER_LETTERS := QuizSession.ANSWER_LETTERS
 const SESSION_LENGTH := QuizSession.SESSION_LENGTH
-const EXAM_NAME := "NE JOURNEYMAN ELECTRICIAN"
 ## Session name of the full timed exam; the results report keys off
 ## session.session_simulation, not this text.
 const SIMULATION_NAME := "Full Journeyman Exam"
-const EXAM_SCORED_ITEMS := QuizSession.EXAM_SCORED_ITEMS
-const EXAM_MINUTES := QuizSession.EXAM_MINUTES
-const PASS_PERCENT := QuizSession.PASS_PERCENT
-const SECONDS_PER_SCORED_ITEM := QuizSession.SECONDS_PER_SCORED_ITEM
-const SESSION_TIME_SECONDS := QuizSession.SESSION_TIME_SECONDS
 const SpeechText = preload("res://src/speech/speech_text.gd")
 const BUNDLED_VOICE_ID := VoiceCatalog.BUNDLED_VOICE_ID
 const BUNDLED_VOICE_LABEL := VoiceCatalog.BUNDLED_VOICE_LABEL
@@ -416,7 +410,7 @@ func _apply_safe_area() -> void:
 		mms.x = clampf(vp_size.x - float(m["side"]) * 2.0 - 16.0, 288.0, vp_size.x)
 		menu_panel.custom_minimum_size = mms
 
-func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = SESSION_TIME_SECONDS, timed: bool = true, mode_name: String = "Practice Test", area: String = "", section: String = BankLoader.SECTION_NEC) -> void:
+func _start_quiz(question_count: int = SESSION_LENGTH, time_limit: int = QuizSession.session_seconds(), timed: bool = true, mode_name: String = "Practice Test", area: String = "", section: String = BankLoader.SECTION_NEC) -> void:
 	if BankLoader.count_in_section(records, section) == 0:
 		return
 	var simulation := mode_name == SIMULATION_NAME
@@ -738,7 +732,7 @@ func _on_playback_complete(generation: int) -> void:
 		_listen_enter(AudioSettings.ListenPhase.GAP)
 
 func _practice_time(question_count: int) -> int:
-	return question_count * SECONDS_PER_SCORED_ITEM
+	return question_count * ExamBlueprint.seconds_per_item()
 
 ## A drill of `size` questions from one subject area; by default the one with
 ## the lowest recent accuracy (or the heaviest one not practised yet).
@@ -892,11 +886,11 @@ func _show_question() -> void:
 		question_formula_label.visible = true
 	else:
 		question_formula_label.visible = false
-	exam_label.text = "%s  |  %s  |  AVG %s / ITEM" % [session_name.to_upper(), EXAM_NAME, _format_time(SECONDS_PER_SCORED_ITEM)]
+	exam_label.text = "%s  |  %s  |  AVG %s / ITEM" % [session_name.to_upper(), ExamBlueprint.exam_name(), _format_time(ExamBlueprint.seconds_per_item())]
 	if is_instance_valid(exam_mode_pill):
 		exam_mode_pill.text = session_name.to_upper()
 	if is_instance_valid(exam_license_pill):
-		exam_license_pill.text = EXAM_NAME
+		exam_license_pill.text = ExamBlueprint.exam_name()
 	# Pre-answer subtitle: the gist first; when empty, the info_tip's task-framing
 	# paragraph ("This asks...", never answer-bearing). Tips must NEVER stand in
 	# here — they name the answer ("Correct: B — ...") and blanking can hide the
@@ -1135,7 +1129,7 @@ func _update_score_badges() -> void:
 		streak_label.add_theme_color_override("font_color", AppTheme.SKY_300)
 		return
 	if answered_count == 0:
-		score_label.text = "TARGET: 75%"
+		score_label.text = "TARGET: %d%%" % ExamBlueprint.pass_percent()
 		score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
 		if is_instance_valid(pass_badge):
 			Widgets.tint_hud_segment(pass_badge, AppTheme.EMERALD_400)
@@ -1147,20 +1141,20 @@ func _update_score_badges() -> void:
 	var pct_int: int = roundi(pct)
 	streak_label.text = "%d/%d (%d%%)" % [score, answered_count, pct_int]
 
-	if pct >= 75.0:
+	if pct >= ExamBlueprint.pass_percent():
 		score_label.text = "PASSING: " + str(pct_int) + "%"
 		score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
 		if is_instance_valid(pass_badge):
 			Widgets.tint_hud_segment(pass_badge, AppTheme.EMERALD_400)
 		streak_label.add_theme_color_override("font_color", AppTheme.EMERALD_400)
-	elif pct >= 60.0:
+	elif pct >= ExamBlueprint.at_risk_percent():
 		score_label.text = "AT RISK: " + str(pct_int) + "%"
 		score_label.add_theme_color_override("font_color", AppTheme.YELLOW_300)
 		if is_instance_valid(pass_badge):
 			Widgets.tint_hud_segment(pass_badge, AppTheme.AMBER_400)
 		streak_label.add_theme_color_override("font_color", AppTheme.YELLOW_300)
 	else:
-		score_label.text = "BELOW 75%: " + str(pct_int) + "%"
+		score_label.text = "BELOW %d%%: %d%%" % [ExamBlueprint.pass_percent(), pct_int]
 		score_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
 		if is_instance_valid(pass_badge):
 			Widgets.tint_hud_segment(pass_badge, AppTheme.RED_400)

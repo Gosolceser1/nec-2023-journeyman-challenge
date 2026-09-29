@@ -146,7 +146,7 @@ func _initialize() -> void:
 	await _wait(70)
 	_snap("07_diagram_question")
 
-	main._start_quiz(80, Main.EXAM_MINUTES * 60, true, "Full Journeyman Exam")
+	main._start_quiz(ExamBlueprint.scored_items(), ExamBlueprint.minutes() * 60, true, Main.SIMULATION_NAME)
 	await _wait(40)
 	main.timer.stop()
 	for i in 37:
@@ -154,7 +154,7 @@ func _initialize() -> void:
 		await process_frame
 		main._next_question()
 		await process_frame
-	main.time_left = Main.EXAM_MINUTES * 60 - 37 * 151
+	main.time_left = ExamBlueprint.minutes() * 60 - 37 * 151
 	main._tick_timer()
 	main.timer.stop()
 	await _wait(80)

@@ -54,6 +54,26 @@ static func pass_percent() -> int:
 	return int(data().get("pass_percent", 0))
 
 
+## Scores from here up to the pass mark read "at risk" on the HUD.
+static func at_risk_percent() -> int:
+	return int(data().get("at_risk_percent", 0))
+
+
+## The exam's pace: its minutes over its scored items (240 min / 80 = 180 s).
+static func seconds_per_item() -> int:
+	return minutes() * 60 / maxi(1, scored_items())
+
+
+## "NE JOURNEYMAN ELECTRICIAN", the license the exam is for.
+static func exam_name() -> String:
+	return str(data().get("exam_name", ""))
+
+
+## "STATE ELECTRICAL DIVISION  •  NEBRASKA (NSED / PSI)", who gives the exam.
+static func authority() -> String:
+	return str(data().get("authority", ""))
+
+
 static func scored_items() -> int:
 	var total := 0
 	for a in areas():

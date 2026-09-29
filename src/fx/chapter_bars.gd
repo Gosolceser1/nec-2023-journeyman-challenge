@@ -95,6 +95,7 @@ func _draw() -> void:
 	var font := AppTheme.ui_font(AppTheme.WEIGHT_MEDIUM)
 	var digits := AppTheme.numeric_font(AppTheme.WEIGHT_MEDIUM)
 	var label_w := minf(190.0, size.x * 0.46)
+	var pass_pct := float(ExamBlueprint.pass_percent())
 	var count_w := 76.0
 	var bar_x := label_w + AppTheme.SPACE_SM
 	var bar_w := maxf(20.0, size.x - bar_x - count_w)
@@ -104,7 +105,7 @@ func _draw() -> void:
 		var y := float(i) * ROW_H
 		var total: int = maxi(int(row["total"]), 1)
 		var ratio := float(row["correct"]) / float(total)
-		var col := ResultGauge.tint_for(ratio * 100.0, 75.0)
+		var col := ResultGauge.tint_for(ratio * 100.0, pass_pct)
 		var label := ("▸ " if row.get("weakest", false) else "") + str(row["label"])
 		draw_string(font, Vector2(0, y + 16.0), label, HORIZONTAL_ALIGNMENT_LEFT, label_w, AppTheme.TYPE_META, AppTheme.AMBER_400 if row.get("weak", false) else AppTheme.SLATE_300)
 		var mid := y + 12.0
@@ -114,7 +115,7 @@ func _draw() -> void:
 			_capsule(bar_x, bar_x + fill, mid, bar_h + 6.0, Color(col, 0.18))
 			_capsule(bar_x, bar_x + fill, mid, bar_h, col)
 		if row.has("weak"):
-			var tick_x := bar_x + bar_w * 0.75
+			var tick_x := bar_x + bar_w * pass_pct / 100.0
 			draw_line(Vector2(tick_x, y + 3.0), Vector2(tick_x, y + 21.0), Color(AppTheme.WHITE, 0.45), 1.0)
 		draw_string(digits, Vector2(bar_x + bar_w + 6.0, y + 16.0), "%d/%d  %d%%" % [int(row["correct"]), int(row["total"]), roundi(ratio * 100.0)],
 			HORIZONTAL_ALIGNMENT_LEFT, count_w, AppTheme.TYPE_META, AppTheme.SLATE_400)

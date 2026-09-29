@@ -8,9 +8,6 @@ extends SceneTree
 
 const SpeechText = preload("res://src/speech/speech_text.gd")
 const LETTERS := ["A", "B", "C", "D"]
-## Session sizes the menu offers (practice drills, the simulator); listen mode
-## uses the same draw untimed.
-const MODES := [10, 20, 30, 40, 50, 80]
 
 var failures: Array[String] = []
 var checks := 0
@@ -88,16 +85,26 @@ func _rng_isolation() -> void:
 	check(e.order != c.order, "another seed gives another order")
 
 
+## Session sizes the menu offers (data/menu.json drill sizes, the simulator);
+## listen mode uses the same draw untimed.
+func _mode_sizes() -> Array[int]:
+	var out: Array[int] = []
+	for s in MenuModel.block("drill_sizes").get("sizes", []):
+		out.append(int(s["n"]))
+	out.append(ExamBlueprint.scored_items())
+	return out
+
+
 func _modes() -> void:
 	print("=== every mode: size, no duplicates, new order each run ===")
-	for size in MODES:
+	for size in _mode_sizes():
 		var s := _session(1000 + size)
 		var bad_size := 0
 		var dupes := 0
 		var same_order := 0
 		var prev: Array[int] = []
 		for r in 12:
-			s.begin(size, size * QuizSession.SECONDS_PER_SCORED_ITEM, true, "Mode", size == 80)
+			s.begin(size, size * ExamBlueprint.seconds_per_item(), true, "Mode", size == ExamBlueprint.scored_items())
 			if s.order.size() != size or s.session_length != size:
 				bad_size += 1
 			var run := {}

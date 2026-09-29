@@ -72,7 +72,7 @@ static func build(host: Main) -> void:
 	host.progress_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	title_box.add_child(host.progress_label)
 
-	# Status strip: pass target (75% per PSI), score, exam clock, item clock.
+	# Status strip: pass target (the blueprint's pass mark), score, exam clock, item clock.
 	var hud := Widgets.make_hud_strip(header)
 	host.score_label = Label.new()
 	host.pass_badge = Widgets.hud_segment(hud, host.score_label, AppTheme.TYPE_META, AppTheme.EMERALD_300)
@@ -301,7 +301,7 @@ static func build(host: Main) -> void:
 
 	host.timer_bar = ProgressBar.new()
 	host.timer_bar.min_value = 0
-	host.timer_bar.max_value = Main.SESSION_TIME_SECONDS
+	host.timer_bar.max_value = QuizSession.session_seconds()
 	host.timer_bar.show_percentage = false
 	host.timer_bar.custom_minimum_size = Vector2(0, ProgressSegments.BAR_H)
 	var bar_bg := AppTheme.panel_style(AppTheme.PANEL_BOTTOM, AppTheme.HAIRLINE, 0, 2)

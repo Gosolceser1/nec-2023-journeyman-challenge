@@ -1,8 +1,11 @@
 {
   "source": "Nebraska Journeyman Electrician examination bulletin (NSED / PSI), content outline",
+  "exam_name": "NE JOURNEYMAN ELECTRICIAN",
+  "authority": "STATE ELECTRICAL DIVISION  •  NEBRASKA (NSED / PSI)",
   "scored_items": 80,
   "minutes": 240,
   "pass_percent": 75,
+  "at_risk_percent": 60,
   "unscored_items": 8,
   "unscored_minutes": 30,
   "areas": [

@@ -1,9 +1,13 @@
 extends SceneTree
-## Screen text that names the NEC edition comes from data/edition.json (Edition),
-## so switching editions is a data change:
+## Screen text that names the NEC edition comes from data/edition.json (Edition)
+## and the exam format from data/exam_blueprint.json (ExamBlueprint), so a new
+## edition or a new bulletin is a data change:
 ##   - no shipped script writes the edition label in a string literal
 ##   - with a different edition loaded in memory, the header title, the menu
 ##     hero and the report headers name that edition
+##   - with a different blueprint loaded in memory (items, minutes, pass mark,
+##     at-risk band, exam name, authority), the menu, HUD, clocks and report
+##     follow it
 ##
 ##   Godot --headless --path . --script tools/tests/test_app_strings.gd [-- --mobile-ui]
 ##
@@ -33,6 +37,8 @@ func _initialize() -> void:
 	FAKE_EDITION["dir"] = str(Edition.data().get("dir", ""))
 	Edition._data = FAKE_EDITION.duplicate()
 	await _edition_on_screen(shipped)
+	ExamBlueprint._data = _fake_blueprint()
+	await _blueprint_on_screen()
 	var child_ok := true
 	if not mobile:
 		child_ok = _run_mobile_child()
@@ -91,6 +97,62 @@ func _edition_on_screen(shipped: String) -> void:
 	check(main.article_label.text.ends_with(short.to_upper() + " STANDARDS"), "listen summary header: %s" % main.article_label.text)
 	main.queue_free()
 	await process_frame
+
+
+## The shipped outline with every format number changed: 100 items (the first
+## area grows by 20), 250 minutes (2:30 per item), pass 70%, at risk from 55%.
+func _fake_blueprint() -> Dictionary:
+	var bp: Dictionary = ExamBlueprint.data().duplicate(true)
+	bp["areas"][0]["items"] = int(bp["areas"][0]["items"]) + 100 - ExamBlueprint.scored_items()
+	bp["scored_items"] = 100
+	bp["minutes"] = 250
+	bp["pass_percent"] = 70
+	bp["at_risk_percent"] = 55
+	bp["exam_name"] = "TEST JOURNEYMAN LICENSE"
+	bp["authority"] = "TEST LICENSING BOARD"
+	return bp
+
+
+func _blueprint_on_screen() -> void:
+	check(ExamBlueprint.scored_items() == 100 and ExamBlueprint.seconds_per_item() == 150, "fake blueprint: 100 items at 2:30")
+	check(QuizSession.session_seconds() == 150 * QuizSession.SESSION_LENGTH and QuizSession.slow_seconds() == 300, "drill clock and slow mark follow the pace")
+	var main: Main = load("res://scenes/main.tscn").instantiate()
+	main.audio_cfg_path = "user://test_app_strings_audio.cfg"
+	main.session.bag_path = ""
+	root.add_child(main)
+	for i in 3:
+		await process_frame
+	var sim := MenuModel.fill(str(MenuModel.block("simulator").get("detail", "")), main.menu.vars())
+	check(sim.contains("100") and sim.contains("250") and sim.contains("70%"), "simulator detail template filled from the blueprint: %s" % sim)
+	check(_texts_containing(main, sim) > 0, "the menu shows '%s'" % sim)
+	check(_texts_containing(main, "80 scored") == 0 and _texts_containing(main, "240 minutes") == 0, "no menu text keeps the shipped format")
+	check(main._practice_time(20) == 20 * 150, "practice drills are timed at the blueprint pace")
+	main._on_audio_mode_picked(AudioSettings.Mode.SILENT)
+	main._start_quiz(4, main._practice_time(4), true, "Format check")
+	main._show_question()
+	check(main.session.question_time_left == 150, "item clock starts at the blueprint pace")
+	check(main.score_label.text == "TARGET: 70%", "HUD target: %s" % main.score_label.text)
+	check(main.exam_label.text.contains("TEST JOURNEYMAN LICENSE") and main.exam_label.text.contains("AVG 02:30 / ITEM"), "exam strip: %s" % main.exam_label.text)
+	for case in [[3, 4, "PASSING: 75%"], [3, 5, "AT RISK: 60%"], [1, 2, "BELOW 70%: 50%"]]:
+		main.score = case[0]
+		main.answered_count = case[1]
+		main._update_score_badges()
+		check(main.score_label.text == case[2], "HUD at %d/%d: %s (want %s)" % [case[0], case[1], main.score_label.text, case[2]])
+	ResultsView.show(main)
+	check(main.exam_label.text == "TEST LICENSING BOARD", "report names the authority: %s" % main.exam_label.text)
+	check(is_equal_approx(main.result_gauge.pass_pct, 70.0), "score dial marks the blueprint pass line")
+	main.queue_free()
+	await process_frame
+
+
+## Labels and buttons whose text contains text.
+func _texts_containing(node: Node, text: String) -> int:
+	var n := 0
+	if node is Label and (node as Label).text.contains(text) or node is Button and (node as Button).text.contains(text):
+		n = 1
+	for c in node.get_children():
+		n += _texts_containing(c, text)
+	return n
 
 
 ## Labels whose text is (or, with partial, contains) text.

@@ -101,7 +101,7 @@ func _initialize() -> void:
 
 func _blueprint() -> void:
 	print("=== blueprint: outline, classification, overrides ===")
-	check(ExamBlueprint.scored_items() == 80, "the outline has 80 scored items")
+	check(ExamBlueprint.scored_items() == int(ExamBlueprint.data()["scored_items"]), "the areas add up to the bulletin's scored items (%d)" % ExamBlueprint.scored_items())
 	var want := {"general": 10, "wiring_protection": 20, "wiring_methods": 15, "equipment": 15, "special_occupancies": 10, "special_equipment": 5, "special_conditions": 5}
 	for k in want:
 		check(ExamBlueprint.items(k) == want[k], "%s has %d items" % [k, want[k]])

@@ -12,7 +12,7 @@ const SWEEP_DEG := 240.0
 const LAND_SECONDS := 1.15
 
 var target_pct := 0.0
-var pass_pct := 75.0
+var pass_pct := float(ExamBlueprint.pass_percent())
 var _shown := 0.0
 var _tween: Tween
 

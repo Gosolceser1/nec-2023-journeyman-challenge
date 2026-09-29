@@ -66,7 +66,7 @@ func _session_tallies() -> void:
 	var pace := QuizSession.pace(s.answer_seconds)
 	check(is_equal_approx(float(pace["mean"]), 150.0), "mean pace 150 s (%.1f)" % float(pace["mean"]))
 	check(pace["slow"] == [3, 7], "answers over 6:00 flagged: items 3 and 7 (%s)" % str(pace["slow"]))
-	check(QuizSession.SLOW_SECONDS == 360, "slow means over twice the exam's 3:00 per item")
+	check(QuizSession.slow_seconds() == 360, "slow means over twice the exam's 3:00 per item")
 	check(ResultsView.clock_text(150.0) == "2:30" and ResultsView.clock_text(59.6) == "1:00", "clock text")
 	var l := QuizSession.new()
 	l.records = bank
@@ -115,7 +115,7 @@ func _scene(mobile: bool) -> void:
 	check(is_instance_valid(button) and main.menu_mode_buttons.has(button), "%s: the weakest-area drill is a menu mode button" % tag)
 	check(button.text.contains("Wiring and Protection (new)") and button.text.contains("readiness 0%"), "%s: before any answers it offers the heaviest area: %s" % [tag, button.text.get_slice("\n", 1)])
 
-	main._start_quiz(80, 240 * 60, true, "Full Journeyman Exam")
+	main._start_quiz(ExamBlueprint.scored_items(), ExamBlueprint.minutes() * 60, true, Main.SIMULATION_NAME)
 	await process_frame
 	main.menu_overlay.visible = false
 	for q in main.order.size():
@@ -131,8 +131,10 @@ func _scene(mobile: bool) -> void:
 	await process_frame
 	var text: String = main.info_label.get_parsed_text()
 	check(text.contains("STUDY FEEDBACK"), "%s: the report has a study feedback block" % tag)
-	check(text.contains("Scored line: %d of 80 correct, 60 needed for 75%%: PASS." % main.session.score), "%s: the simulator states the scored line" % tag)
-	check(text.contains("Below 75%: Special Occupancies 0/10 (0%). Weakest: Special Occupancies."), "%s: the weak area is named with its tally" % tag)
+	var items := ExamBlueprint.scored_items()
+	var pass_pct := ExamBlueprint.pass_percent()
+	check(text.contains("Scored line: %d of %d correct, %d needed for %d%%: PASS." % [main.session.score, items, ceili(items * pass_pct / 100.0), pass_pct]), "%s: the simulator states the scored line" % tag)
+	check(text.contains("Below %d%%: Special Occupancies 0/10 (0%%). Weakest: Special Occupancies." % pass_pct), "%s: the weak area is named with its tally" % tag)
 	check(text.contains("Pace: ") and text.contains("exam pace 3:00"), "%s: pace against the exam's 3:00" % tag)
 	check(text.contains("Exam readiness: 88%") and text.contains("Next: drill Special Occupancies."), "%s: readiness 70/80 and the next area to drill" % tag)
 	var labels := []

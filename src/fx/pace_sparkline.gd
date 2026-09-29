@@ -8,7 +8,7 @@ const PAD := 6.0
 
 ## [[question number, seconds], ...] (QuizSession.answer_seconds).
 var points: Array = []
-var limit := float(QuizSession.SECONDS_PER_SCORED_ITEM)
+var limit := float(ExamBlueprint.seconds_per_item())
 
 
 func _init() -> void:

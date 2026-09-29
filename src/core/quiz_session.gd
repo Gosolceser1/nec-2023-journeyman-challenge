@@ -14,13 +14,9 @@ const ANSWER_LETTERS := ["A", "B", "C", "D"]
 ## only, no answers.
 const BAG_PATH := "user://question_bag.cfg"
 const SESSION_LENGTH := 10
-const EXAM_SCORED_ITEMS := 80
-const EXAM_MINUTES := 240
-const PASS_PERCENT := 75
-const SECONDS_PER_SCORED_ITEM: int = (EXAM_MINUTES * 60) / EXAM_SCORED_ITEMS
-const SESSION_TIME_SECONDS: int = SECONDS_PER_SCORED_ITEM * SESSION_LENGTH
-## Twice the exam's pace: answers slower than this are flagged on the report.
-const SLOW_SECONDS := SECONDS_PER_SCORED_ITEM * 2
+## The pass mark, for code outside the quiz screens. Exam format numbers
+## (items, minutes, pass, pace) live in data/exam_blueprint.json: ExamBlueprint.
+static var PASS_PERCENT: int = ExamBlueprint.pass_percent()
 
 enum Verdict { REVIEWED, TIMED_OUT, CORRECT, WRONG }
 ## What the clock asks the screen to do after a tick.
@@ -56,16 +52,26 @@ var answer_seconds: Array = []
 ## Milliseconds now; tests swap it for a fake clock.
 var clock := Callable(Time, "get_ticks_msec")
 var _shown_msec := 0
-var time_left := SESSION_TIME_SECONDS
+var time_left := session_seconds()
 var session_length := SESSION_LENGTH
-var session_time_limit := SESSION_TIME_SECONDS
+var session_time_limit := session_seconds()
 var timed_session := true
 var session_name := "Practice Test"
 var session_section := BankLoader.SECTION_NEC
 ## The practice exam this run replays ("Open Book Exam #3"), else "".
 var session_exam := ""
 var session_simulation := false
-var question_time_left := SECONDS_PER_SCORED_ITEM
+var question_time_left := ExamBlueprint.seconds_per_item()
+
+
+## A default SESSION_LENGTH drill at the exam's pace.
+static func session_seconds() -> int:
+	return ExamBlueprint.seconds_per_item() * SESSION_LENGTH
+
+
+## Twice the exam's pace: answers slower than this are flagged on the report.
+static func slow_seconds() -> int:
+	return ExamBlueprint.seconds_per_item() * 2
 
 
 func _init() -> void:
@@ -116,7 +122,7 @@ func _start(time_limit: int, timed: bool, name: String, section: String, is_simu
 	area_stats.clear()
 	answer_seconds.clear()
 	time_left = session_time_limit
-	question_time_left = SECONDS_PER_SCORED_ITEM
+	question_time_left = ExamBlueprint.seconds_per_item()
 
 
 func _shuffled_section(section: String, count: int) -> Array[int]:
@@ -133,13 +139,14 @@ func _shuffled_section(section: String, count: int) -> Array[int]:
 
 
 ## {"mean": seconds per answered question, "slow": item numbers over
-## SLOW_SECONDS}; mean is 0 with no answers.
+## slow_seconds()}; mean is 0 with no answers.
 static func pace(seconds: Array) -> Dictionary:
 	var sum := 0.0
 	var slow: Array[int] = []
+	var limit := slow_seconds()
 	for e in seconds:
 		sum += float(e[1])
-		if float(e[1]) > SLOW_SECONDS:
+		if float(e[1]) > limit:
 			slow.append(int(e[0]))
 	return {"mean": sum / seconds.size() if not seconds.is_empty() else 0.0, "slow": slow}
 
@@ -182,7 +189,7 @@ func restore(snap: Dictionary) -> bool:
 	if next < 0 or next >= indices.size():
 		return false
 	order = indices
-	_start(int(snap.get("time_limit", SESSION_TIME_SECONDS)), bool(snap.get("timed", true)), str(snap.get("name", "")),
+	_start(int(snap.get("time_limit", session_seconds())), bool(snap.get("timed", true)), str(snap.get("name", "")),
 		str(snap.get("section", BankLoader.SECTION_NEC)), bool(snap.get("simulation", false)), str(snap.get("exam", "")))
 	current_index = next
 	score = int(snap.get("score", 0))
@@ -243,7 +250,7 @@ func current_record() -> Dictionary:
 ## The current question goes up: unanswered, full item time.
 func start_question() -> void:
 	current_answered = false
-	question_time_left = SECONDS_PER_SCORED_ITEM
+	question_time_left = ExamBlueprint.seconds_per_item()
 	_shown_msec = int(clock.call())
 
 

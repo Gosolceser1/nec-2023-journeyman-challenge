@@ -249,7 +249,7 @@ static func build(host: Main) -> void:
 
 	host.timer_bar = ProgressBar.new()
 	host.timer_bar.min_value = 0
-	host.timer_bar.max_value = Main.SESSION_TIME_SECONDS
+	host.timer_bar.max_value = QuizSession.session_seconds()
 	host.timer_bar.show_percentage = false
 	host.timer_bar.custom_minimum_size = Vector2(0, ProgressSegments.BAR_H + 2)
 	var bar_bg := AppTheme.panel_style(AppTheme.PANEL_BOTTOM, AppTheme.HAIRLINE, 0, 3)
