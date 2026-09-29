@@ -214,6 +214,7 @@ const SPELL := [
 const SAY_AS := {
 	"IEEE": "I triple E", "NEMA": "NEMA", "OSHA": "OSHA", "HVAC": "HVAC", "PAR": "par",
 	"NOT": "NOT", "ON": "ON", "OFF": "OFF", "GIVEN": "GIVEN", "ONLY": "ONLY", "ALL": "ALL",
+	"COPPER": "copper", "ALUMINUM": "aluminum",
 }
 
 static var _cache := {}
