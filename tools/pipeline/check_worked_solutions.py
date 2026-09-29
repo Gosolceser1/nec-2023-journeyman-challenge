@@ -126,6 +126,7 @@ CHECKS = {
     "final-exam-#3-040": ("Table 630.31(A)(2): 21 A x 0.39", 21 * T630_31A2[15]),
     "final-exam-#5-070": ("Table 352.30, 1/2 in", lookup_range(T352_30, 0.5)),
     "final-exam-#1-022": ("210.52(G)(1): one per bay x 2 bays", 2),
+    "ne-state-act-#3-003": ("Neb. Rev. Stat. 81-2113(2): 3 apprentices per licensee x 3 licensees", 3 * 3),
 }
 # formula/worked present but nothing numeric to recompute
 NON_NUMERIC = {
@@ -217,18 +218,15 @@ def scan_text(rid: str, field: str, text: str, problems: list):
             problems.append(f"{rid} [{field}] '{expr} = {stated}' evaluates to {value:.4g}")
 
 
-def main() -> int:
-    args = [a for a in sys.argv[1:] if a != "-v"]
-    bank_path = Path(args[0]) if args else ROOT / "data" / "question_bank.json"
-    records = json.loads(bank_path.read_text(encoding="utf-8"))["records"]
+def main_for(records: list[dict]) -> list[str]:
+    """Both passes over `records`; returns the mismatches."""
+    SCANNED.clear()
     problems: list[str] = []
-    checked = 0
     for rec in records:
         rid = rec["id"]
         keyed = str(rec["answers"][rec["correct_index"]])
         if rid in CHECKS:
             desc, computed = CHECKS[rid]
-            checked += 1
             if not values_match(computed, keyed):
                 problems.append(f"{rid}: {desc} gives {computed!r}, keyed answer is {keyed!r}")
         elif (rec.get("formula") or rec.get("worked")) and rid not in NON_NUMERIC:
@@ -239,6 +237,15 @@ def main() -> int:
             for text in texts:
                 if isinstance(text, str) and text:
                     scan_text(rid, field, text, problems)
+    return problems
+
+
+def main() -> int:
+    args = [a for a in sys.argv[1:] if a != "-v"]
+    bank_path = Path(args[0]) if args else ROOT / "data" / "question_bank.json"
+    records = json.loads(bank_path.read_text(encoding="utf-8"))["records"]
+    problems = main_for(records)
+    checked = sum(1 for rec in records if rec["id"] in CHECKS)
     print(f"records: {len(records)}  recomputed: {checked}  non-numeric formula records: {len(NON_NUMERIC)}"
           f"  arithmetic chains evaluated: {len(SCANNED)}")
     if "-v" in sys.argv:

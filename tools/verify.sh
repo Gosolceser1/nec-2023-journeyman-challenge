@@ -137,7 +137,7 @@ bank_validate() {
   echo "  python: $py ($("$py" -c 'import sys; print(sys.version.split()[0])'))"
   export PYTHON="$py"
   bash tools/tests/test_build_guard.sh || return $?
-  "$py" -m unittest tools.tests.test_validate_question_bank tools.tests.test_spellcheck_bank tools.tests.test_speak_question || return $?
+  "$py" -m unittest tools.tests.test_validate_question_bank tools.tests.test_spellcheck_bank tools.tests.test_speak_question tools.tests.test_question_requirements || return $?
   "$py" tools/pipeline/spellcheck_bank.py --offline || return $?
   "$py" tools/pipeline/validate_question_bank.py --no-warn
   return $?

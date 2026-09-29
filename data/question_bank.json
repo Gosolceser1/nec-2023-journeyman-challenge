@@ -1205,17 +1205,27 @@
       "reference_text": "Table 400.4 Flexible Cords and Flexible Cables\nCords that comply with the requirements for outdoor cords and are so listed shall be permitted to be designated as weather and water resistant with the suffix \"W\" after the Code type designation. Cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant.",
       "reference_table": [
         [
-          "Flexible cord type",
-          "Wet-location use",
-          "Sunlight-resistant"
+          "Table 400.4 type letter",
+          "Voltage",
+          "Use"
+        ],
+        [
+          "SPT-2",
+          "300",
+          "Damp locations"
+        ],
+        [
+          "SPT-2W",
+          "300",
+          "Damp and wet locations"
         ],
         [
           "STOOW",
-          "Yes",
-          "Yes"
+          "600",
+          "Damp and wet locations"
         ],
         [
-          "NOTE: For this item, find a cord type marked for both wet use and sunlight resistance."
+          "NOTE: Table 400.4 Note 9: cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant."
         ]
       ],
       "tip_title": "Flexible cords",
@@ -1587,12 +1597,20 @@
       "reference_text": "Table 300.5(A) Minimum Cover Requirements, 0 to 1000 Volts ac, 1500 Volts dc, Nominal, Burial in Millimeters (Inches)\nLocation of Wiring Method or Circuit\tColumn 1 Direct Burial Cables or Conductors\n\tmm\tin.\nIn trench below 50 mm (2 in.) thick concrete or equivalent\t450\t18",
       "reference_table": [
         [
-          "Installation condition",
-          "Minimum cover"
+          "Table 300.5(A) location",
+          "Column 1: direct burial",
+          "Column 2: RMC or IMC",
+          "Column 3: other raceways",
+          "Column 4: residential 120 V, GFCI, 20 A",
+          "Column 5: control circuits 30 V or less"
         ],
         [
-          "Direct-buried cable in a trench below 2 in. of concrete",
-          "18 in."
+          "Trench below 2 in. concrete",
+          "18 in.",
+          "6 in.",
+          "12 in.",
+          "6 in.",
+          "6 in."
         ]
       ],
       "tip_title": "Conduit and raceways",
@@ -3920,14 +3938,14 @@
       ],
       "lookup_summary": "Lookup clues: branch circuit, disconnecting means. Start with 620.51, then read the matching subsection and exceptions.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nElevator and dumbwaiter motors live an intermittent life — short hard runs, long rests — so the Code sizes their conductors and protection by duty rating instead of continuous-duty rules. Their machine rooms and controllers get the same disconnect-within-sight treatment as any motor.\n\nThis is a maximum-limit question. Subject: elevator. The correct choice is the maximum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nbranch circuit, disconnecting means",
-      "reference_text": "620.51(D)(1) More Than One Driving Machine\nWhere there is more than one driving machine in a machine room, the disconnecting means shall be numbered to correspond to the identifying number of the driving machine that they control. The disconnecting means shall be provided with a sign to identify the location of the supply side overcurrent protective device.",
+      "reference_text": "620.51(D)(1) More Than One Driving Machine (NEC 2020 text, removed in NEC 2023)\nWhere there is more than one driving machine in a machine room, the disconnecting means shall be numbered to correspond to the identifying number of the driving machine that they control. The disconnecting means shall be provided with a sign to identify the location of the supply side overcurrent protective device.",
       "reference_table": [],
       "tip_title": "Elevators",
-      "tip_short": "With more than one driving machine in a machine room, number each disconnect to match the driving machine it controls, per 620.51(D)(1). Correct: A — driving machine they control. 620.51(D)(1) requires each disconnect to be numbered to match the identifying number of the driving machine it controls. Not B: The feeding panelboard number is not what identifies an elevator disconnect. Not C: Branch circuit numbers are not used; the disconnect is matched to the machine it serves. Not D: Only the driving machine number is used, so all of these is wrong.",
+      "tip_short": "With more than one driving machine in a machine room, number each disconnect to match the driving machine it controls (NEC 2020 620.51(D)(1); NEC 2023 keeps this numbering rule only in 620.53 to 620.55). Correct: A — driving machine they control. NEC 2020 620.51(D)(1) required each disconnect to be numbered to match the driving machine it controls. NEC 2023 dropped that sentence; 620.53 to 620.55 keep the same numbering rule for car light, car heating and air-conditioning, and other equipment disconnects. Not B: The feeding panelboard number is not what identifies an elevator disconnect. Not C: Branch circuit numbers are not used; the disconnect is matched to the machine it serves. Not D: Only the driving machine number is used, so all of these is wrong.",
       "formula": "",
       "worked": "",
       "choice_notes": [
-        "620.51(D)(1) requires each disconnect to be numbered to match the identifying number of the driving machine it controls.",
+        "NEC 2020 620.51(D)(1) required each disconnect to be numbered to match the driving machine it controls. NEC 2023 dropped that sentence; 620.53 to 620.55 keep the same numbering rule for car light, car heating and air-conditioning, and other equipment disconnects.",
         "The feeding panelboard number is not what identifies an elevator disconnect.",
         "Branch circuit numbers are not used; the disconnect is matched to the machine it serves.",
         "Only the driving machine number is used, so all of these is wrong."
@@ -6034,7 +6052,7 @@
       "reference_table": [],
       "tip_title": "Overcurrent protection",
       "tip_short": "Welder OCPD: up to 200 percent of I1max, and if that is not a standard size, go up to the next standard rating. Correct: B — 90 amp. 200 percent of 43 amperes is 86 amperes; 630.12 permits the next higher standard size, 90 amperes. Not A: 85 amperes is below the 86 amperes computed (200 percent of 43) and is not a standard 240.6 size. Not C: 95 amperes is not a standard 240.6 rating and exceeds the next size up from 86 amperes. Not D: 100 amperes skips past 90 amperes, the next standard size above the 86 amperes calculated.",
-      "formula": "Welder overcurrent ≤ 200% of I1max (630.12(A)), then go to the next standard breaker size.",
+      "formula": "Welder overcurrent device ≤ 200% of I1max (630.12(A)). If that is not a standard rating, 630.12 permits the next higher standard rating (240.6(A) ratings rise by 10 A from 60 A to 110 A).",
       "worked": "43 × 2.0 = 86 A → next standard size 90 A.",
       "choice_notes": [
         "85 amperes is below the 86 amperes computed (200 percent of 43) and is not a standard 240.6 size.",
@@ -7443,12 +7461,20 @@
       "reference_text": "Table 300.5(A) Minimum Cover Requirements, 0 to 1000 Volts ac, 1500 Volts dc, Nominal, Burial in Millimeters (Inches)\nLocation of Wiring Method or Circuit\tColumn 1 Direct Burial Cables or Conductors\n\tmm\tin.\nIn trench below 50 mm (2 in.) thick concrete or equivalent\t450\t18",
       "reference_table": [
         [
-          "Installation condition",
-          "Minimum cover"
+          "Table 300.5(A) location",
+          "Column 1: direct burial",
+          "Column 2: RMC or IMC",
+          "Column 3: other raceways",
+          "Column 4: residential 120 V, GFCI, 20 A",
+          "Column 5: control circuits 30 V or less"
         ],
         [
-          "Direct-buried cable in a trench below 2 in. of concrete",
-          "18 in."
+          "Trench below 2 in. concrete",
+          "18 in.",
+          "6 in.",
+          "12 in.",
+          "6 in.",
+          "6 in."
         ]
       ],
       "tip_title": "Conduit and raceways",
@@ -8284,17 +8310,27 @@
       "reference_text": "Table 400.4 Flexible Cords and Flexible Cables\nCords that comply with the requirements for outdoor cords and are so listed shall be permitted to be designated as weather and water resistant with the suffix \"W\" after the Code type designation. Cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant.",
       "reference_table": [
         [
-          "Flexible cord type",
-          "Wet-location use",
-          "Sunlight-resistant"
+          "Table 400.4 type letter",
+          "Voltage",
+          "Use"
+        ],
+        [
+          "SPT-2",
+          "300",
+          "Damp locations"
+        ],
+        [
+          "SPT-2W",
+          "300",
+          "Damp and wet locations"
         ],
         [
           "STOOW",
-          "Yes",
-          "Yes"
+          "600",
+          "Damp and wet locations"
         ],
         [
-          "NOTE: For this item, find a cord type marked for both wet use and sunlight resistance."
+          "NOTE: Table 400.4 Note 9: cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant."
         ]
       ],
       "tip_title": "Flexible cords",
@@ -10190,7 +10226,7 @@
         "bonding"
       ],
       "lookup_summary": "Lookup clues: grounding electrode, equipment grounding conductor, grounded conductor, bonding. Start with Definition 100, then read the matching subsection and exceptions.",
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree jobs, three parts. Grounding connects the system to the earth (rods, plates, concrete-encased electrodes) to drain lightning and surges. Bonding joins all the metal parts together so fault current has a fast low-resistance road back to the source that trips the breaker. The grounded conductor (neutral, white) carries normal current; the grounding conductor (green/bare) carries only fault current. The main bonding jumper is where neutral and ground meet — at the service, and only there.\n\nThis asks you to name the grounding or bonding part in this installation. Subject: grounding electrode. Trace the fault-current path: what connects the equipment back to the source?\n\nLOOKUP FOCUS\ngrounding electrode, equipment grounding conductor, grounded conductor, bonding",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree jobs, three parts. Grounding connects the system to the earth (rods, plates, concrete-encased electrodes) to drain lightning and surges. Bonding joins all the metal parts together so fault current has a fast low-resistance road back to the source that trips the breaker. The grounded conductor (neutral, white) carries normal current; the equipment grounding conductor (green/bare) carries only fault current. The main bonding jumper is where neutral and ground meet — at the service, and only there.\n\nThis asks you to name the grounding or bonding part in this installation. Subject: grounding electrode. Trace the fault-current path: what connects the equipment back to the source?\n\nLOOKUP FOCUS\ngrounding electrode, equipment grounding conductor, grounded conductor, bonding",
       "reference_text": "Article 100 Definitions — Grounding Electrode Conductor (GEC)\nGrounding Electrode Conductor (GEC). A conductor used to connect the system grounded conductor or the equipment to a grounding electrode or to a point on the grounding electrode system. (CMP—5)",
       "reference_table": [],
       "tip_title": "Grounding vs bonding",
@@ -11043,7 +11079,7 @@
         "ampacity",
         "conductors"
       ],
-      "lookup_summary": "Lookup clues: ampacity, conductors. Start with Table 630.31(A)(2), then read the matching subsection and exceptions.",
+      "lookup_summary": "Lookup clues: ampacity, conductors. Start with Table 630.31(A), then read the matching subsection and exceptions.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nThis asks how many amps the conductor may safely carry under the stated conditions. Subject: welder. Numbers in the question: 15%, 21 amps. Apply temperature and adjustment factors first, then read the resulting ampacity.\n\nLOOKUP FOCUS\nampacity, conductors",
       "reference_text": "630.31(A) Individual Welders\nThe ampacity of conductors for individual welders shall comply with the following:\n(2) The ampacity of the supply conductors for a welder wired for a specific operation for which the actual primary current and duty cycle are known and remain unchanged shall not be less than the product of the actual primary current and the multiplier specified in Table 630.31(A) for the duty cycle at which the welder will be operated.\nTable 630.31(A) Duty Cycle Multiplication Factors for Resistance Welders\nDuty Cycle (%)\tMultiplier\n50\t0.71\n40\t0.63\n30\t0.55\n25\t0.50\n20\t0.45\n15\t0.39\n10\t0.32\n7.5\t0.27\n5 or less\t0.22",
       "reference_table": [
@@ -11471,7 +11507,7 @@
       "reference_table": [],
       "tip_title": "State Act: apprentice ratio",
       "tip_short": "Apprentices ride on licenses: each licensee may bring up to three, so multiply the licensees on the crew by three. Correct: B — 9. 81-2113(2) caps the ratio at three apprentice electricians to one licensee, so three journeymen may supervise 3 × 3 = 9. Not A: 12 apprentices would need four licensees at three apprentices each. Not C: 6 apprentices is the limit for two licensees; three journeymen may supervise 9. Not D: 3 apprentices is the limit for one licensee, not for a crew of three journeymen.",
-      "formula": "",
+      "formula": "Neb. Rev. Stat. 81-2113(2) allows up to three apprentice electricians per licensee: apprentices = licensees × 3.",
       "worked": "Neb. Rev. Stat. 81-2113(2) allows three apprentice electricians per licensee: 3 journeymen × 3 = 9 apprentice electricians.",
       "choice_notes": [
         "12 apprentices would need four licensees at three apprentices each.",

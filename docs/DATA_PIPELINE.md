@@ -39,6 +39,8 @@ The raw OCR/parser output is normalized by the deterministic field overlay in `t
 
 `tools/pipeline/content_audit_2023.json` records the NEC 2023 content audit (`docs/CONTENT_AUDIT_2023.md`): per NEC record a status, `verified_on`, sections, UpCodes URL, the audited `correct_index` and a checksum of `reference_text` + `reference_table` (no NEC text). The validator fails when a provision or key changes without the entry being updated. Re-verify the provision against NEC 2023, then update the entry (status, date, new `provision` digest from `provision_digest`).
 
+`data/question_requirements.json` records which records need a table, a calculation or a formula (`docs/TABLES_FORMULAS_AUDIT.md`). `tools/pipeline/check_requirements.py` (run by `tools/tests/test_question_requirements.py` in `verify.sh`) fails when a listed record loses its pre-answer table, table columns, formula hint or recomputed worked result. The table values come from `tools/pipeline/nec_calc.py`, which was checked against NEC 2023 on UpCodes.
+
 Every build still writes to a separate candidate path. `tools/pipeline/build_question_bank.sh` refuses the checked-in `question_bank.json` so an unreviewed candidate cannot overwrite the learner bank. A controlled build with the current source and overlay produced all 283 records and exactly matched the checked-in bank; strict validation reported 0 errors and 0 warnings. This proves reproducibility and schema validity, not NEC answer correctness.
 
 To intentionally refresh the overlay after a reviewed bank change:

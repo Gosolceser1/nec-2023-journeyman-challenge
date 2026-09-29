@@ -167,11 +167,21 @@ where the NEC 2023 fact was verified.
   conductor"; "grounding conductor" has not been a defined term since 2014.
   The record's rationale already explains this. The answer is kept per the
   "don't change answers unless provably wrong" rule, since it is the only
-  choice that names that conductor.
+  choice that names that conductor. **Resolved:** the stem is the 2023 Article
+  100 definition of *Grounding Electrode Conductor*, and the only definition
+  starting "Grounding Conductor" is "Grounding Conductor, Equipment (EGC)". Choice D
+  now reads "grounding electrode conductor" (same letter and meaning, content
+  audit). The background line says "equipment grounding conductor" for the
+  green/bare wire (tables/formulas audit).
 - **open-book-exam-#1-018** (210.8(E)): the rationale for choice C cites
   "210.8(A) Exception No. 2" for a permanently installed security system
-  receptacle. Not yet verified on UpCodes; the record's article (210.8(E)) and answer are unaffected.
-- **final-exam-#3-068** (620.51): the citation is "620.51" and the provision heading "620.51(D)(1) More Than One Driving Machine". The UpCodes text extraction returned "Available Fault Current Field Marking" for 620.51(D)(1), which may be a mis-sliced neighbour (the extraction matched the first "(1)" after "(D)"). The record was left unchanged: the citation and the breadcrumb (Chapter 6, Article 620) are right either way. Re-check the 620.51(D) list numbering by hand. Resolved in `docs/CONTENT_AUDIT_2023.md`: 2023 620.51(D) has only (1) Available Fault Current Field Marking, so the record tests a removed rule and is flagged there.
+  receptacle. **Verified:** 2023 210.8(A) Exception No. 2 reads "A receptacle
+  supplying only a permanently installed premises security system shall be
+  permitted to omit ground-fault circuit-interrupter protection". No change.
+- **final-exam-#3-068** (620.51): the citation is "620.51" and the provision heading "620.51(D)(1) More Than One Driving Machine". The UpCodes text extraction returned "Available Fault Current Field Marking" for 620.51(D)(1), which may be a mis-sliced neighbour (the extraction matched the first "(1)" after "(D)"). The record was left unchanged: the citation and the breadcrumb (Chapter 6, Article 620) are right either way. Re-check the 620.51(D) list numbering by hand. Resolved in `docs/CONTENT_AUDIT_2023.md`: 2023 620.51(D) has only (1) Available Fault Current Field Marking, so the record tests a removed rule and is flagged there. The tables/formulas audit confirmed
+  this: the phrase "numbered to correspond to the identifying number" appears in 2023 Chapter 6
+  only in 620.53, 620.54 and 620.55. It labelled the provision heading, the tip and the choice A
+  note as NEC 2020 text. The key is unchanged.
 - **open-book-exam-#10-002** (220.5(C), garages now counted): verified. The
   2023 220.5(C) excludes only open porches and unfinished areas not
   adaptable for future use, and the record matches it word for word.
@@ -246,6 +256,17 @@ snapshots and with in-page text extraction.
   that basis. The 2026-09-28 content audit (`docs/CONTENT_AUDIT_2023.md`)
   found every section and table on this list in NEC 2023 under the cited
   heading.
+  The tables/formulas audit (`docs/TABLES_FORMULAS_AUDIT.md`) then checked all
+  44 section/heading pairs cited by records independently: it walked each
+  chapter page's heading tree and read the tables by their `#table_…`
+  anchors. **All 44 are verified; none is wrong.** Three need a note:
+  - 225.19(D)(1) is headed "Clearance From Windows". open-book-exam-#10-010
+    cites "225.19(D)(1) and 225.19(D)(3)", which is consistent.
+  - 630.31(A)(2) is an unheaded list item (the "specific operation" welder
+    rule), and 220.14(H)(1) is list item (1) of 220.14(H). Both exist, even
+    though they are not headings.
+  - The 2023 table numbers are Table 344.30(B), Table 352.30(B), Table 630.31(A)
+    and Table 314.16(B)(1). The bank uses these names.
 - **Section numbers, headings and text (targeted pass):**
   - https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials
     - 314.23(E) Raceway-Supported Enclosure, Without Devices, Luminaires, or Lampholders: full text matches open-book-exam-#10-013.

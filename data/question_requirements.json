@@ -1,0 +1,1327 @@
+{
+ "version": 1,
+ "classes": {
+  "table": "answer is read from an NEC table (or a table's notes); the table must be shown, before answering when that does not reveal the answer",
+  "calc": "arithmetic on code values; needs a formula hint and the tables that supply the inputs",
+  "formula": "electrical theory or trade-math formula; needs a formula hint",
+  "table+calc": "both: the inputs come from tables, then arithmetic",
+  "recall": "the answer is a single provision's wording or value; no table or formula is needed"
+ },
+ "records": {
+  "final-exam-#1-002": {
+   "class": "recall"
+  },
+  "final-exam-#1-003": {
+   "class": "recall"
+  },
+  "final-exam-#1-004": {
+   "class": "calc",
+   "tables": [
+    "Table 220.42(A): office = 1.3 VA/ft²"
+   ],
+   "steps": [
+    "General lighting load = floor area × unit load (220.42)",
+    "5,000 ft² × 1.3 VA/ft² = 6,500 VA"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "unit_load",
+    "area_ft2": 5000,
+    "occupancy": "office"
+   }
+  },
+  "final-exam-#1-006": {
+   "class": "recall"
+  },
+  "final-exam-#1-008": {
+   "class": "recall"
+  },
+  "final-exam-#1-009": {
+   "class": "recall"
+  },
+  "final-exam-#1-010": {
+   "class": "calc",
+   "tables": [
+    "220.14(H)(1): each 5 ft or fraction of multioutlet assembly = one outlet of 180 VA (appliances not used simultaneously)"
+   ],
+   "steps": [
+    "Outlets = 12 ft ÷ 5 ft = 2.4, round up to 3",
+    "3 × 180 VA = 540 VA"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "multioutlet",
+    "length_ft": 12,
+    "simultaneous": false
+   }
+  },
+  "final-exam-#1-011": {
+   "class": "recall"
+  },
+  "final-exam-#1-012": {
+   "class": "recall"
+  },
+  "final-exam-#1-014": {
+   "class": "table+calc",
+   "tables": [
+    "Table 310.16: 12 AWG Cu, 75°C (THWN) = 25 A",
+    "Table 310.15(B)(1)(1): 86°F (30°C) ambient = 1.00",
+    "Table 310.15(C)(1): 4–6 current-carrying conductors = 80%"
+   ],
+   "steps": [
+    "Ampacity = table ampacity × temperature correction × adjustment",
+    "25 A × 1.00 × 0.80 = 20 A"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "ampacity",
+    "awg": "12",
+    "column_c": 75,
+    "ambient_f": 86,
+    "ccc": 4
+   }
+  },
+  "final-exam-#1-015": {
+   "class": "recall"
+  },
+  "final-exam-#1-016": {
+   "class": "recall"
+  },
+  "final-exam-#1-018": {
+   "class": "recall"
+  },
+  "final-exam-#1-019": {
+   "class": "recall",
+   "note": "Terminology of W = E × I; the formula is in the stem."
+  },
+  "final-exam-#1-020": {
+   "class": "recall"
+  },
+  "final-exam-#1-024": {
+   "class": "recall"
+  },
+  "final-exam-#1-026": {
+   "class": "table",
+   "tables": [
+    "Table 310.4(1): RHW-2 = 90°C, dry and wet locations"
+   ],
+   "steps": [
+    "The -2 suffix marks a 90°C rating in wet and dry locations"
+   ],
+   "pre_answer_table": false,
+   "note": "The table row states the answer, so it appears after answering."
+  },
+  "final-exam-#1-027": {
+   "class": "table+calc",
+   "tables": [
+    "Table 310.16: 10 AWG Cu, 90°C (THWN-2) = 40 A",
+    "Table 310.15(B)(1)(1): 105–113°F (41–45°C), 90°C column = 0.87",
+    "Table 310.15(C)(1): 3 current-carrying conductors, no adjustment"
+   ],
+   "steps": [
+    "Ampacity = table ampacity × temperature correction",
+    "40 A × 0.87 = 34.8 A"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "ampacity",
+    "awg": "10",
+    "column_c": 90,
+    "ambient_f": 112,
+    "ccc": 3
+   }
+  },
+  "final-exam-#1-028": {
+   "class": "recall"
+  },
+  "final-exam-#1-029": {
+   "class": "recall"
+  },
+  "final-exam-#1-030": {
+   "class": "recall"
+  },
+  "final-exam-#1-032": {
+   "class": "calc",
+   "tables": [
+    "240.21(B)(1), list item (4): field-installed tap leaving the enclosure: tap ampacity ≥ 1/10 of the feeder OCPD rating"
+   ],
+   "steps": [
+    "Maximum feeder OCPD = 10 × tap ampacity",
+    "10 × 40 A = 400 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "tap_10ft_ocpd",
+    "tap_ampacity": 40
+   }
+  },
+  "final-exam-#1-033": {
+   "class": "recall"
+  },
+  "final-exam-#1-034": {
+   "class": "table",
+   "tables": [
+    "Table 400.4: SPT-2 = damp locations; SPT-2W and STOOW = damp and wet locations",
+    "Table 400.4 Note 9: cords with the W suffix are suitable for wet locations and sunlight resistant",
+    "THWN and XHWN are building wire (Table 310.4(1)), not flexible cords"
+   ],
+   "steps": [
+    "Find the cord type rated for wet locations that is also sunlight resistant"
+   ],
+   "pre_answer_table": true,
+   "note": "The STOOW cell is blanked before answering."
+  },
+  "final-exam-#1-036": {
+   "class": "recall",
+   "note": "Recall of the 310.12(A) 83 percent rule; the formula hint is redacted before answering."
+  },
+  "final-exam-#1-037": {
+   "class": "recall"
+  },
+  "final-exam-#1-041": {
+   "class": "recall"
+  },
+  "final-exam-#1-042": {
+   "class": "recall"
+  },
+  "final-exam-#1-043": {
+   "class": "recall"
+  },
+  "final-exam-#1-044": {
+   "class": "recall"
+  },
+  "final-exam-#1-045": {
+   "class": "recall"
+  },
+  "final-exam-#1-046": {
+   "class": "calc",
+   "tables": [],
+   "steps": [
+    "40% = 40/100",
+    "Reduce by 20: 2/5"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "fraction",
+    "numerator": 40,
+    "denominator": 100
+   }
+  },
+  "final-exam-#1-048": {
+   "class": "recall"
+  },
+  "final-exam-#1-049": {
+   "class": "table",
+   "tables": [
+    "Table 300.5(A), row 'In trench below 2-in. thick concrete or equivalent': Column 1 direct burial = 18 in.; Columns 2-5 = 6, 12, 6, 6 in."
+   ],
+   "steps": [
+    "Pick the row for the location, then the column for the wiring method"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "value",
+    "value": "18 inches"
+   },
+   "note": "The answer cell is blanked before answering."
+  },
+  "final-exam-#1-050": {
+   "class": "recall"
+  },
+  "final-exam-#1-056": {
+   "class": "recall"
+  },
+  "final-exam-#1-057": {
+   "class": "recall"
+  },
+  "final-exam-#1-058": {
+   "class": "recall"
+  },
+  "final-exam-#1-059": {
+   "class": "recall"
+  },
+  "final-exam-#1-060": {
+   "class": "recall"
+  },
+  "final-exam-#1-062": {
+   "class": "formula",
+   "tables": [],
+   "steps": [
+    "% voltage drop = (source V − load V) ÷ source V × 100",
+    "(125 − 115) ÷ 125 × 100 = 8%"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "percent_drop",
+    "source_v": 125,
+    "load_v": 115
+   }
+  },
+  "final-exam-#1-065": {
+   "class": "formula",
+   "tables": [],
+   "steps": [
+    "t = (angle ÷ 360°) × (1 ÷ frequency)",
+    "(90 ÷ 360) × (1 ÷ 60) = 1/240 s"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "phase_time",
+    "degrees": 90,
+    "hertz": 60
+   }
+  },
+  "final-exam-#1-066": {
+   "class": "recall"
+  },
+  "final-exam-#1-068": {
+   "class": "table",
+   "tables": [
+    "Table 250.122: a 50 A rating falls in the 'not exceeding 60 A' row = 10 AWG copper"
+   ],
+   "steps": [
+    "Size the EGC from the OCPD rating; a rating between rows takes the next larger row"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "egc",
+    "rating": 50
+   },
+   "note": "The answer cell is blanked before answering."
+  },
+  "final-exam-#1-070": {
+   "class": "table",
+   "tables": [
+    "Table 430.250: 50 hp, induction-type wound rotor, 460 V column (used for a 480 V system) = 65 A",
+    "430.6(A)(1): use the table current, not the nameplate"
+   ],
+   "steps": [
+    "Read the full-load current for the horsepower in the 460 V column"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "value",
+    "value": 65
+   },
+   "note": "The answer cell is blanked before answering."
+  },
+  "final-exam-#3-001": {
+   "class": "recall"
+  },
+  "final-exam-#3-004": {
+   "class": "recall"
+  },
+  "final-exam-#3-005": {
+   "class": "recall"
+  },
+  "final-exam-#3-006": {
+   "class": "recall"
+  },
+  "final-exam-#3-008": {
+   "class": "recall"
+  },
+  "final-exam-#3-009": {
+   "class": "recall"
+  },
+  "final-exam-#3-010": {
+   "class": "recall"
+  },
+  "final-exam-#3-011": {
+   "class": "recall"
+  },
+  "final-exam-#3-012": {
+   "class": "recall"
+  },
+  "final-exam-#3-013": {
+   "class": "recall"
+  },
+  "final-exam-#3-014": {
+   "class": "table",
+   "tables": [
+    "Table 210.21(B)(2): 15 or 20 A circuit, 15 A receptacle = 12 A maximum load"
+   ],
+   "steps": [
+    "Read the row for the circuit and receptacle rating"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "value",
+    "value": 12
+   }
+  },
+  "final-exam-#3-015": {
+   "class": "recall"
+  },
+  "final-exam-#3-017": {
+   "class": "table",
+   "tables": [
+    "Table 250.122: 15 A = 14 AWG, 20 A = 12 AWG, 30 A (60 A row) = 10 AWG copper",
+    "240.4(D): 14/12/10 AWG circuit conductors on 15/20/30 A"
+   ],
+   "steps": [
+    "Compare each EGC size with the circuit conductor size for that rating"
+   ],
+   "pre_answer_table": true
+  },
+  "final-exam-#3-018": {
+   "class": "recall"
+  },
+  "final-exam-#3-019": {
+   "class": "recall"
+  },
+  "final-exam-#3-020": {
+   "class": "recall"
+  },
+  "final-exam-#3-021": {
+   "class": "recall"
+  },
+  "final-exam-#3-023": {
+   "class": "recall"
+  },
+  "final-exam-#3-024": {
+   "class": "recall"
+  },
+  "final-exam-#3-025": {
+   "class": "recall"
+  },
+  "final-exam-#3-026": {
+   "class": "recall",
+   "note": "Recall of the 626.11(A) 11 kVA per space rule; the table cell is blanked before answering."
+  },
+  "final-exam-#3-027": {
+   "class": "recall"
+  },
+  "final-exam-#3-028": {
+   "class": "recall"
+  },
+  "final-exam-#3-029": {
+   "class": "recall"
+  },
+  "final-exam-#3-030": {
+   "class": "recall"
+  },
+  "final-exam-#3-031": {
+   "class": "recall"
+  },
+  "final-exam-#3-032": {
+   "class": "recall"
+  },
+  "final-exam-#3-034": {
+   "class": "recall"
+  },
+  "final-exam-#3-037": {
+   "class": "recall"
+  },
+  "final-exam-#3-038": {
+   "class": "recall"
+  },
+  "final-exam-#3-039": {
+   "class": "recall"
+  },
+  "final-exam-#3-041": {
+   "class": "recall"
+  },
+  "final-exam-#3-043": {
+   "class": "recall"
+  },
+  "final-exam-#3-044": {
+   "class": "recall"
+  },
+  "final-exam-#3-045": {
+   "class": "recall"
+  },
+  "final-exam-#3-047": {
+   "class": "recall"
+  },
+  "final-exam-#3-049": {
+   "class": "recall"
+  },
+  "final-exam-#3-050": {
+   "class": "recall"
+  },
+  "final-exam-#3-051": {
+   "class": "recall"
+  },
+  "final-exam-#3-056": {
+   "class": "recall"
+  },
+  "final-exam-#3-057": {
+   "class": "recall"
+  },
+  "final-exam-#3-058": {
+   "class": "recall"
+  },
+  "final-exam-#3-060": {
+   "class": "recall"
+  },
+  "final-exam-#3-061": {
+   "class": "recall"
+  },
+  "final-exam-#3-062": {
+   "class": "recall"
+  },
+  "final-exam-#3-063": {
+   "class": "calc",
+   "tables": [
+    "366.23(A): bare copper bars, 1000 A per in² of cross section (aluminum 700 A)"
+   ],
+   "steps": [
+    "Capacity = cross section × 1000 A/in²",
+    "1.5 in² × 1000 = 1500 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "busbar",
+    "area_in2": 1.5
+   }
+  },
+  "final-exam-#3-064": {
+   "class": "recall"
+  },
+  "final-exam-#3-066": {
+   "class": "recall"
+  },
+  "final-exam-#3-067": {
+   "class": "recall"
+  },
+  "final-exam-#3-068": {
+   "class": "recall"
+  },
+  "final-exam-#3-069": {
+   "class": "recall",
+   "note": "430.62(A) rule statement; the formula hint restates it."
+  },
+  "final-exam-#5-001": {
+   "class": "recall"
+  },
+  "final-exam-#5-002": {
+   "class": "recall",
+   "note": "320.80(A) rule; Table 310.16 rows shown after answering."
+  },
+  "final-exam-#5-004": {
+   "class": "recall"
+  },
+  "final-exam-#5-006": {
+   "class": "recall"
+  },
+  "final-exam-#5-007": {
+   "class": "recall"
+  },
+  "final-exam-#5-008": {
+   "class": "recall"
+  },
+  "final-exam-#5-017": {
+   "class": "recall"
+  },
+  "final-exam-#5-018": {
+   "class": "recall"
+  },
+  "final-exam-#5-020": {
+   "class": "recall"
+  },
+  "final-exam-#5-021": {
+   "class": "recall"
+  },
+  "final-exam-#5-022": {
+   "class": "recall"
+  },
+  "final-exam-#5-023": {
+   "class": "recall"
+  },
+  "final-exam-#5-032": {
+   "class": "table",
+   "tables": [
+    "Table 348.22: 3/8 FMC, THHN column: 10 AWG = 1 conductor (fittings inside or outside)"
+   ],
+   "steps": [
+    "The largest size with a nonzero count is the answer"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": "#10"
+   },
+   "note": "A pre-answer table would show the answer by its position (the last row), so the table appears after answering."
+  },
+  "final-exam-#5-033": {
+   "class": "recall"
+  },
+  "final-exam-#5-034": {
+   "class": "recall"
+  },
+  "final-exam-#5-036": {
+   "class": "recall"
+  },
+  "final-exam-#5-037": {
+   "class": "recall"
+  },
+  "final-exam-#5-038": {
+   "class": "recall"
+  },
+  "final-exam-#5-039": {
+   "class": "calc",
+   "tables": [
+    "366.23(A): bare copper bars, 1000 A per in² of cross section (aluminum 700 A)"
+   ],
+   "steps": [
+    "Cross section = 4 in × 0.5 in = 2 in²",
+    "2 in² × 1000 = 2000 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "busbar",
+    "width_in": 4,
+    "thickness_in": 0.5
+   }
+  },
+  "final-exam-#5-050": {
+   "class": "recall"
+  },
+  "final-exam-#5-051": {
+   "class": "recall"
+  },
+  "final-exam-#5-052": {
+   "class": "recall"
+  },
+  "final-exam-#5-053": {
+   "class": "recall"
+  },
+  "final-exam-#5-054": {
+   "class": "recall"
+  },
+  "final-exam-#5-069": {
+   "class": "recall"
+  },
+  "final-exam-#1-001": {
+   "class": "calc",
+   "tables": [],
+   "steps": [
+    "60% = 60/100",
+    "Reduce by 20: 3/5"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "fraction",
+    "numerator": 60,
+    "denominator": 100
+   }
+  },
+  "final-exam-#1-022": {
+   "class": "calc",
+   "tables": [
+    "210.52(G)(1): at least one receptacle outlet in each vehicle bay"
+   ],
+   "steps": [
+    "Outlets = bays × 1",
+    "2 × 1 = 2"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": 2
+   }
+  },
+  "final-exam-#3-042": {
+   "class": "recall"
+  },
+  "final-exam-#1-031": {
+   "class": "recall"
+  },
+  "final-exam-#1-035": {
+   "class": "recall"
+  },
+  "final-exam-#1-054": {
+   "class": "recall"
+  },
+  "final-exam-#3-052": {
+   "class": "table",
+   "tables": [
+    "Table 430.37: 3-phase ac motor, any 3-phase supply = three overload units, one in each phase"
+   ],
+   "steps": [
+    "Read the row for the motor and supply system"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "value",
+    "value": 3
+   }
+  },
+  "final-exam-#3-053": {
+   "class": "table",
+   "tables": [
+    "Table 344.30(B): RMC trade size 1 = 12 ft between supports (threaded couplings)"
+   ],
+   "steps": [
+    "Read the support spacing for the trade size"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": "12 feet"
+   },
+   "note": "Shown after answering."
+  },
+  "final-exam-#3-059": {
+   "class": "recall"
+  },
+  "final-exam-#5-048": {
+   "class": "recall"
+  },
+  "final-exam-#5-049": {
+   "class": "recall"
+  },
+  "final-exam-#5-064": {
+   "class": "recall"
+  },
+  "final-exam-#5-066": {
+   "class": "recall",
+   "note": "Asks which Chapter 9 table; Table 1 shown after answering."
+  },
+  "final-exam-#5-068": {
+   "class": "recall"
+  },
+  "final-exam-#1-005": {
+   "class": "recall"
+  },
+  "final-exam-#1-064": {
+   "class": "recall"
+  },
+  "final-exam-#3-065": {
+   "class": "recall",
+   "note": "Scope of 310.12(A); table after answering."
+  },
+  "final-exam-#5-005": {
+   "class": "recall"
+  },
+  "final-exam-#1-040": {
+   "class": "table",
+   "tables": [
+    "Table 220.54: 5 dryers = 85%"
+   ],
+   "steps": [
+    "Read the demand factor for the number of dryers"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "dryer_demand",
+    "count": 5
+   },
+   "note": "Pre-answer table shows every row; the 5-dryer cell is blanked until answered."
+  },
+  "final-exam-#1-067": {
+   "class": "table",
+   "tables": [
+    "Chapter 9, Note (4): nipples 24 in. or shorter between enclosures may be filled to 60%"
+   ],
+   "steps": [
+    "Apply Note (4) instead of Table 1 for short nipples"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "value",
+    "value": "60%"
+   },
+   "note": "The answer cell is blanked before answering."
+  },
+  "final-exam-#3-003": {
+   "class": "recall"
+  },
+  "final-exam-#3-007": {
+   "class": "recall"
+  },
+  "final-exam-#3-046": {
+   "class": "recall"
+  },
+  "final-exam-#5-019": {
+   "class": "recall"
+  },
+  "final-exam-#1-025": {
+   "class": "calc",
+   "tables": [
+    "630.12(A): arc-welder OCPD not more than 200% of I1max",
+    "630.12 and 240.6(A): the next higher standard rating is permitted (standard ratings step 10 A from 60 A to 110 A)"
+   ],
+   "steps": [
+    "43 A × 200% = 86 A",
+    "Next higher standard rating = 90 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "welder_ocpd",
+    "i1max": 43
+   }
+  },
+  "final-exam-#1-047": {
+   "class": "recall"
+  },
+  "final-exam-#3-033": {
+   "class": "formula",
+   "tables": [],
+   "steps": [
+    "I = P ÷ E",
+    "2 W ÷ 20 V = 0.10 A"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "quotient",
+    "a": 2,
+    "b": 20
+   }
+  },
+  "final-exam-#3-048": {
+   "class": "table",
+   "tables": [
+    "Table 348.22: 3/8 FMC, THHN column: 10 AWG = 1 conductor (fittings inside or outside)"
+   ],
+   "steps": [
+    "The largest size with a nonzero count is the answer"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "value",
+    "value": "#10"
+   },
+   "note": "A pre-answer table would show the answer by its position (the last row), so the table appears after answering."
+  },
+  "final-exam-#3-070": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-001": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-002": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-003": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-004": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-005": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-006": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-007": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-008": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-009": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-010": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-011": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-012": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-013": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-014": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-015": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-016": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-017": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-018": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-019": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-020": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-021": {
+   "class": "calc",
+   "tables": [
+    "Table 220.42(A): office = 1.3 VA/ft²"
+   ],
+   "steps": [
+    "General lighting load = floor area × unit load (220.42)",
+    "5,000 ft² × 1.3 VA/ft² = 6,500 VA"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "unit_load",
+    "area_ft2": 5000,
+    "occupancy": "office"
+   }
+  },
+  "open-book-exam-#1-022": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-023": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-024": {
+   "class": "recall"
+  },
+  "open-book-exam-#1-025": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-001": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-002": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-003": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-004": {
+   "class": "table",
+   "tables": [
+    "Table 300.5(A), row 'In trench below 2-in. thick concrete or equivalent': Column 1 direct burial = 18 in.; Columns 2-5 = 6, 12, 6, 6 in."
+   ],
+   "steps": [
+    "Pick the row for the location, then the column for the wiring method"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "value",
+    "value": "18 inches"
+   },
+   "note": "The answer cell is blanked before answering."
+  },
+  "open-book-exam-#4-005": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-006": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-007": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-008": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-009": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-010": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-011": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-012": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-013": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-014": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-015": {
+   "class": "table",
+   "tables": [
+    "Table 220.54: 5 dryers = 85%"
+   ],
+   "steps": [
+    "Read the demand factor for the number of dryers"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "dryer_demand",
+    "count": 5
+   },
+   "note": "Pre-answer table shows every row; the 5-dryer cell is blanked until answered."
+  },
+  "open-book-exam-#4-016": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-017": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-018": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-019": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-020": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-021": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-022": {
+   "class": "recall",
+   "note": "Recall of the 310.12(A) 83 percent rule; the formula hint is redacted before answering."
+  },
+  "open-book-exam-#4-023": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-024": {
+   "class": "recall"
+  },
+  "open-book-exam-#4-025": {
+   "class": "table",
+   "tables": [
+    "Table 400.4: SPT-2 = damp locations; SPT-2W and STOOW = damp and wet locations",
+    "Table 400.4 Note 9: cords with the W suffix are suitable for wet locations and sunlight resistant",
+    "THWN and XHWN are building wire (Table 310.4(1)), not flexible cords"
+   ],
+   "steps": [
+    "Find the cord type rated for wet locations that is also sunlight resistant"
+   ],
+   "pre_answer_table": true,
+   "note": "The STOOW cell is blanked before answering."
+  },
+  "open-book-exam-#7-001": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-002": {
+   "class": "recall",
+   "note": "Asks which Chapter 9 table; Table 8 rows shown after answering."
+  },
+  "open-book-exam-#7-003": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-004": {
+   "class": "recall",
+   "note": "517.73(A)(2) rule statement; the formula hint restates it."
+  },
+  "open-book-exam-#7-005": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-006": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-007": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-008": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-009": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-010": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-011": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-012": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-013": {
+   "class": "recall",
+   "note": "Asks the table number; the title is redacted before answering."
+  },
+  "open-book-exam-#7-014": {
+   "class": "recall",
+   "note": "Asks the table number; the title is redacted before answering."
+  },
+  "open-book-exam-#7-015": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-016": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-017": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-018": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-019": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-020": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-021": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-022": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-023": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-024": {
+   "class": "recall"
+  },
+  "open-book-exam-#7-025": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-001": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-002": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-003": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-004": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-005": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-006": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-007": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-008": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-009": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-010": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-011": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-012": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-013": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-014": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-015": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-016": {
+   "class": "table",
+   "tables": [
+    "Table 110.26(A)(1), Condition 2 note: concrete, brick, or tile walls are considered grounded"
+   ],
+   "steps": [
+    "Read the Condition 2 definition under Table 110.26(A)(1)"
+   ],
+   "pre_answer_table": false,
+   "note": "The note states the answer, so the table appears after answering (in the code provision)."
+  },
+  "open-book-exam-#10-017": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-018": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-019": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-020": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-021": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-022": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-023": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-024": {
+   "class": "recall"
+  },
+  "open-book-exam-#10-025": {
+   "class": "recall"
+  },
+  "final-exam-#1-007": {
+   "class": "recall"
+  },
+  "final-exam-#1-013": {
+   "class": "recall"
+  },
+  "final-exam-#1-017": {
+   "class": "recall"
+  },
+  "final-exam-#1-061": {
+   "class": "recall"
+  },
+  "final-exam-#1-023": {
+   "class": "recall"
+  },
+  "final-exam-#1-038": {
+   "class": "recall"
+  },
+  "final-exam-#1-052": {
+   "class": "recall"
+  },
+  "final-exam-#1-053": {
+   "class": "recall"
+  },
+  "final-exam-#1-055": {
+   "class": "recall"
+  },
+  "final-exam-#1-063": {
+   "class": "calc",
+   "tables": [],
+   "steps": [
+    "Feet = drawing inches ÷ scale inches per foot",
+    "3.5 ÷ 0.25 = 14 ft"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "quotient",
+    "a": 3.5,
+    "b": 0.25
+   }
+  },
+  "final-exam-#1-039": {
+   "class": "recall"
+  },
+  "final-exam-#1-051": {
+   "class": "recall"
+  },
+  "final-exam-#1-021": {
+   "class": "table+calc",
+   "tables": [
+    "Table 220.55, Column C: one range not over 12 kW = 8 kW",
+    "Table 220.55 Note 1: +5% for each kW or major fraction over 12 kW"
+   ],
+   "steps": [
+    "14 kW − 12 kW = 2 kW over",
+    "2 × 5% = 10%",
+    "8 kW × 1.10 = 8.8 kW"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "range_demand",
+    "kw": 14
+   }
+  },
+  "final-exam-#1-069": {
+   "class": "recall"
+  },
+  "final-exam-#3-002": {
+   "class": "recall"
+  },
+  "final-exam-#3-022": {
+   "class": "recall"
+  },
+  "final-exam-#3-054": {
+   "class": "recall"
+  },
+  "final-exam-#3-055": {
+   "class": "formula",
+   "tables": [],
+   "steps": [
+    "Equal resistors in parallel: R_total = R ÷ n",
+    "2,000 Ω ÷ 2 = 1,000 Ω"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "parallel_equal",
+    "ohms": 2000,
+    "count": 2
+   }
+  },
+  "final-exam-#3-016": {
+   "class": "recall"
+  },
+  "final-exam-#3-035": {
+   "class": "recall"
+  },
+  "final-exam-#3-036": {
+   "class": "recall"
+  },
+  "final-exam-#3-040": {
+   "class": "table+calc",
+   "tables": [
+    "Table 630.31(A): 15% duty cycle = 0.39"
+   ],
+   "steps": [
+    "Supply ampacity = primary current × duty-cycle multiplier",
+    "21 A × 0.39 = 8.19 A"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "welder_duty",
+    "primary_a": 21,
+    "duty_pct": 15
+   }
+  },
+  "final-exam-#5-003": {
+   "class": "recall"
+  },
+  "final-exam-#5-024": {
+   "class": "recall"
+  },
+  "final-exam-#5-035": {
+   "class": "recall"
+  },
+  "final-exam-#5-055": {
+   "class": "recall"
+  },
+  "final-exam-#5-065": {
+   "class": "recall"
+  },
+  "final-exam-#5-067": {
+   "class": "recall",
+   "note": "342.30(B)(3) riser spacing is section text, not a table value."
+  },
+  "final-exam-#5-070": {
+   "class": "table",
+   "tables": [
+    "Table 352.30(B): PVC trade size 1/2–1 = 3 ft between supports"
+   ],
+   "steps": [
+    "Read the support spacing for the trade size"
+   ],
+   "pre_answer_table": true,
+   "check": {
+    "kind": "value",
+    "value": "3 feet"
+   },
+   "note": "The answer cell is blanked before answering."
+  },
+  "ne-state-act-#3-001": {
+   "class": "recall"
+  },
+  "ne-state-act-#3-002": {
+   "class": "recall"
+  },
+  "ne-state-act-#3-003": {
+   "class": "calc",
+   "tables": [
+    "Neb. Rev. Stat. 81-2113(2): not more than three apprentice electricians per licensee"
+   ],
+   "steps": [
+    "Apprentices = licensees × 3",
+    "3 × 3 = 9"
+   ],
+   "pre_answer_table": false,
+   "check": {
+    "kind": "product",
+    "factors": [
+     3,
+     3
+    ]
+   }
+  },
+  "ne-state-act-#3-004": {
+   "class": "recall"
+  }
+ }
+}

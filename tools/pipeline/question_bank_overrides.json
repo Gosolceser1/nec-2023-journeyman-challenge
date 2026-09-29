@@ -261,6 +261,24 @@
         "12 inches is the cover for 20 ampere GFCI residential branch circuits, not direct-buried cable.",
         "Table 300.5(A) Column 1 requires 18 inches of cover for direct-buried cable below 2 inches of concrete.",
         "24 inches is the general direct burial cover; the 2 inch concrete cap reduces it to 18 inches."
+      ],
+      "reference_table": [
+        [
+          "Table 300.5(A) location",
+          "Column 1: direct burial",
+          "Column 2: RMC or IMC",
+          "Column 3: other raceways",
+          "Column 4: residential 120 V, GFCI, 20 A",
+          "Column 5: control circuits 30 V or less"
+        ],
+        [
+          "Trench below 2 in. concrete",
+          "18 in.",
+          "6 in.",
+          "12 in.",
+          "6 in.",
+          "6 in."
+        ]
       ]
     },
     "final-exam-#1-060": {
@@ -1006,7 +1024,8 @@
         "200 percent of 43 amperes is 86 amperes; 630.12 permits the next higher standard size, 90 amperes.",
         "95 amperes is not a standard 240.6 rating and exceeds the next size up from 86 amperes.",
         "100 amperes skips past 90 amperes, the next standard size above the 86 amperes calculated."
-      ]
+      ],
+      "formula": "Welder overcurrent device ≤ 200% of I1max (630.12(A)). If that is not a standard rating, 630.12 permits the next higher standard rating (240.6(A) ratings rise by 10 A from 60 A to 110 A)."
     },
     "final-exam-#1-047": {
       "gist": "The symbol for a temperature-actuated switch is a switch contact combined with a bimetallic or heat-sensing element. Look for the curved sensing line drawn across the contact, then pick the matching diagram.",
@@ -1527,7 +1546,8 @@
         "bonding jumper",
         "main bonding jumper",
         "grounding electrode conductor"
-      ]
+      ],
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree jobs, three parts. Grounding connects the system to the earth (rods, plates, concrete-encased electrodes) to drain lightning and surges. Bonding joins all the metal parts together so fault current has a fast low-resistance road back to the source that trips the breaker. The grounded conductor (neutral, white) carries normal current; the equipment grounding conductor (green/bare) carries only fault current. The main bonding jumper is where neutral and ground meet — at the service, and only there.\n\nThis asks you to name the grounding or bonding part in this installation. Subject: grounding electrode. Trace the fault-current path: what connects the equipment back to the source?\n\nLOOKUP FOCUS\ngrounding electrode, equipment grounding conductor, grounded conductor, bonding"
     },
     "final-exam-#1-013": {
       "gist": "An ammeter measures current and must be connected in series with the load. The question asks which diagram shows an ammeter.",
@@ -2057,6 +2077,31 @@
         "Table 400.4 lists STOOW as permitted in wet locations and sunlight resistant; the W suffix shows this.",
         "THWN is a building wire in Table 310.4(1), not a flexible cord type in Table 400.4.",
         "XHWN is a building wire in Table 310.4(1), not a flexible cord type in Table 400.4."
+      ],
+      "reference_table": [
+        [
+          "Table 400.4 type letter",
+          "Voltage",
+          "Use"
+        ],
+        [
+          "SPT-2",
+          "300",
+          "Damp locations"
+        ],
+        [
+          "SPT-2W",
+          "300",
+          "Damp and wet locations"
+        ],
+        [
+          "STOOW",
+          "600",
+          "Damp and wet locations"
+        ],
+        [
+          "NOTE: Table 400.4 Note 9: cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant."
+        ]
       ]
     },
     "open-book-exam-#7-001": {
@@ -2489,7 +2534,32 @@
         "THWN is building wire for raceways, not a flexible cord type in Table 400.4.",
         "XHWN is a building wire designation, not a flexible cord type in Table 400.4."
       ],
-      "prompt": "Which of the following cord types is permitted in a wet location and is sunlight resistant?"
+      "prompt": "Which of the following cord types is permitted in a wet location and is sunlight resistant?",
+      "reference_table": [
+        [
+          "Table 400.4 type letter",
+          "Voltage",
+          "Use"
+        ],
+        [
+          "SPT-2",
+          "300",
+          "Damp locations"
+        ],
+        [
+          "SPT-2W",
+          "300",
+          "Damp and wet locations"
+        ],
+        [
+          "STOOW",
+          "600",
+          "Damp and wet locations"
+        ],
+        [
+          "NOTE: Table 400.4 Note 9: cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant."
+        ]
+      ]
     },
     "final-exam-#1-037": {
       "reference_text": "392.100(F) Nonmetallic Cable Tray\nNonmetallic cable trays shall be made of flame-retardant material.",
@@ -3043,12 +3113,12 @@
       "prompt": "The rating of the attachment plug and receptacle must not exceed ___ @ 250 volts for a cord-and-plug connected air conditioner."
     },
     "final-exam-#3-068": {
-      "reference_text": "620.51(D)(1) More Than One Driving Machine\nWhere there is more than one driving machine in a machine room, the disconnecting means shall be numbered to correspond to the identifying number of the driving machine that they control. The disconnecting means shall be provided with a sign to identify the location of the supply side overcurrent protective device.",
+      "reference_text": "620.51(D)(1) More Than One Driving Machine (NEC 2020 text, removed in NEC 2023)\nWhere there is more than one driving machine in a machine room, the disconnecting means shall be numbered to correspond to the identifying number of the driving machine that they control. The disconnecting means shall be provided with a sign to identify the location of the supply side overcurrent protective device.",
       "article": "620.51",
       "lookup_summary": "Lookup clues: branch circuit, disconnecting means. Start with 620.51, then read the matching subsection and exceptions.",
-      "tip_short": "With more than one driving machine in a machine room, number each disconnect to match the driving machine it controls, per 620.51(D)(1). Correct: A — driving machine they control. 620.51(D)(1) requires each disconnect to be numbered to match the identifying number of the driving machine it controls. Not B: The feeding panelboard number is not what identifies an elevator disconnect. Not C: Branch circuit numbers are not used; the disconnect is matched to the machine it serves. Not D: Only the driving machine number is used, so all of these is wrong.",
+      "tip_short": "With more than one driving machine in a machine room, number each disconnect to match the driving machine it controls (NEC 2020 620.51(D)(1); NEC 2023 keeps this numbering rule only in 620.53 to 620.55). Correct: A — driving machine they control. NEC 2020 620.51(D)(1) required each disconnect to be numbered to match the driving machine it controls. NEC 2023 dropped that sentence; 620.53 to 620.55 keep the same numbering rule for car light, car heating and air-conditioning, and other equipment disconnects. Not B: The feeding panelboard number is not what identifies an elevator disconnect. Not C: Branch circuit numbers are not used; the disconnect is matched to the machine it serves. Not D: Only the driving machine number is used, so all of these is wrong.",
       "choice_notes": [
-        "620.51(D)(1) requires each disconnect to be numbered to match the identifying number of the driving machine it controls.",
+        "NEC 2020 620.51(D)(1) required each disconnect to be numbered to match the driving machine it controls. NEC 2023 dropped that sentence; 620.53 to 620.55 keep the same numbering rule for car light, car heating and air-conditioning, and other equipment disconnects.",
         "The feeding panelboard number is not what identifies an elevator disconnect.",
         "Branch circuit numbers are not used; the disconnect is matched to the machine it serves.",
         "Only the driving machine number is used, so all of these is wrong."
@@ -3466,6 +3536,24 @@
         "12 inches is too shallow; Column 1 requires 18 inches under 2 inches of concrete.",
         "Table 300.5(A) Column 1 requires 18 inches for direct-buried cables below 2 inches of concrete.",
         "24 inches is the general direct-burial cover; the 2-inch concrete cap reduces it to 18 inches."
+      ],
+      "reference_table": [
+        [
+          "Table 300.5(A) location",
+          "Column 1: direct burial",
+          "Column 2: RMC or IMC",
+          "Column 3: other raceways",
+          "Column 4: residential 120 V, GFCI, 20 A",
+          "Column 5: control circuits 30 V or less"
+        ],
+        [
+          "Trench below 2 in. concrete",
+          "18 in.",
+          "6 in.",
+          "12 in.",
+          "6 in.",
+          "6 in."
+        ]
       ]
     },
     "open-book-exam-#4-005": {
@@ -3959,7 +4047,8 @@
         ]
       ],
       "formula": "Multiply the actual primary current by the Table 630.31(A) multiplier for the duty cycle (each multiplier is the square root of the duty cycle, rounded).",
-      "worked": "Table 630.31(A): 15% → 0.39; 21 × 0.39 = 8.19 A."
+      "worked": "Table 630.31(A): 15% → 0.39; 21 × 0.39 = 8.19 A.",
+      "lookup_summary": "Lookup clues: ampacity, conductors. Start with Table 630.31(A), then read the matching subsection and exceptions."
     },
     "final-exam-#3-006": {
       "tip_short": "Crawl space lighting outlets up to 120 volts need GFCI protection because crawl spaces are damp and cramped. Correct: D — 120. 210.8(C) requires GFCI protection for crawl space lighting outlets not exceeding 120 volts. Not A: 30 volts is a low-voltage limit from other articles; 210.8(C) sets the limit at 120 volts. Not B: 50 volts is not the 210.8(C) threshold; the rule covers lighting outlets not exceeding 120 volts. Not C: 90 volts is not used in 210.8(C); the rule covers lighting outlets up to 120 volts.",

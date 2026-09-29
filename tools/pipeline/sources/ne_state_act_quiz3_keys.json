@@ -66,6 +66,7 @@
       "gist": "Apprentice electricians may only work under licensees, and the Act caps how many apprentices each licensee may supervise. The question asks how many apprentices a crew of three journeymen may bring.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThe Nebraska State Electrical Act (Neb. Rev. Stat. 81-2101 to 81-2144) decides who may do electrical work for another person. A journeyman electrician is a licensee who may wire and may supervise apprentice electricians.\n\nThis asks for a crew limit set by state law. Find the apprentice ratio for one licensee, then apply it to every journeyman on the crew.\n\nLOOKUP FOCUS\napprentice supervision ratio, journeyman electrician",
       "reference_text": "81-2113(2) Apprentice Electrician; Supervision Ratio\nThe licensee may employ or supervise apprentice electricians at a ratio not to exceed three apprentice electricians to one licensee, except that such ratio and the other requirements of this section shall not be applicable to a teacher-student relationship within a classroom of a community college.",
+      "formula": "Neb. Rev. Stat. 81-2113(2) allows up to three apprentice electricians per licensee: apprentices = licensees × 3.",
       "worked": "Neb. Rev. Stat. 81-2113(2) allows three apprentice electricians per licensee: 3 journeymen × 3 = 9 apprentice electricians.",
       "tip_title": "State Act: apprentice ratio",
       "tip": "Apprentices ride on licenses: each licensee may bring up to three, so multiply the licensees on the crew by three.",
