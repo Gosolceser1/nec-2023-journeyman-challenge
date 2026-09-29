@@ -15,8 +15,8 @@ The full 2023 text was cached locally, outside the repository, and every provisi
 
 | Status | Records |
 |---|---|
-| verified | 461 |
-| fixed | 86 |
+| verified | 460 |
+| fixed | 87 |
 | flagged | 1 |
 | non_nec | 46 |
 | total | 594 |
@@ -44,6 +44,8 @@ Other 2023 wording updates (key unchanged): `final-exam-#2-020` (Table 310.16, w
 Stems that stated their own answer were minimally reworded: `open-book-exam-#9-009` (no "75°C" in the stem), `open-book-exam-#11-011` (no "service" in the stem), `final-exam-#2-025` (no "open" in the stem).
 
 `open-book-exam-#5-007` choices B-D now read `required to be phase "C"` (and B, A) instead of `the "C" phase`, so the voice does not read the letter as the article "a"; key (C) unchanged.
+
+Found during the import review: `open-book-exam-#7-017` (an older exam) ended "temperature rating of the conductor"; NEC 2023 110.14(C)(2) says "of the connector". Stem corrected, key (C) identified unchanged.
 
 Final #4 notes: Q24 and Q33 are the same question in the PDF (both kept); Q25, Q49, Q51 and Q69 stems now say which Table 310.16 column applies; Q53's key note gives 25 A and the stem was clarified to match; Q61 keeps the PDF's "single-phase wound rotor".
 
@@ -299,7 +301,7 @@ Key: `verified` means no change was needed. `fixed` means explanation fields cha
 | `open-book-exam-#7-014` | Table 300.1(C) | fixed | [reference_text] 300.1(C): 2023 text says "shall be in accordance with Table 300.1(C)", not "shall be as designated in". | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300 |
 | `open-book-exam-#7-015` | 310.15(A) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310 |
 | `open-book-exam-#7-016` | 700.7(A) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/7/special-conditions#700 |
-| `open-book-exam-#7-017` | 110.14(C)(2) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110 |
+| `open-book-exam-#7-017` | 110.14(C)(2) | fixed | The stem ended "temperature rating of the conductor"; NEC 2023 110.14(C)(2) says "of the connector". Stem corrected; key (C) identified unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110 |
 | `open-book-exam-#7-018` | 210.11(A) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210 |
 | `open-book-exam-#7-019` | 110.12(B) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110 |
 | `open-book-exam-#7-020` | Article 100 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#100 |

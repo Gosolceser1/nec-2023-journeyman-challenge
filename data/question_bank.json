@@ -20823,7 +20823,7 @@
       "id": "open-book-exam-#7-017",
       "exam": "Open Book Exam #7",
       "question_number": 17,
-      "prompt": "Separately installed pressure connectors shall be used with conductors at the ampacities not exceeding the ampacity at the listed and ___ temperature rating of the conductor.",
+      "prompt": "Separately installed pressure connectors shall be used with conductors at the ampacities not exceeding the ampacity at the listed and ___ temperature rating of the connector.",
       "answers": [
         "marked",
         "tested",

@@ -2413,15 +2413,15 @@
       "note": "Key, provision, notes, tip and headings match NEC 2023."
     },
     "open-book-exam-#7-017": {
-      "status": "verified",
-      "verified_on": "2026-09-28",
+      "status": "fixed",
+      "verified_on": "2026-09-29",
       "sections": [
         "110.14(C)(2)"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110",
       "provision": "3f98316ab5e9d7cd",
       "correct_index": 2,
-      "note": "Key, provision, notes, tip and headings match NEC 2023."
+      "note": "The stem ended \"temperature rating of the conductor\"; NEC 2023 110.14(C)(2) says \"of the connector\". Stem corrected; key (C) identified unchanged."
     },
     "open-book-exam-#7-018": {
       "status": "verified",

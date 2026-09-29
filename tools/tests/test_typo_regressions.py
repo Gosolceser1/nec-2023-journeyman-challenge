@@ -146,6 +146,7 @@ BANK_RULES = [
     ("open-book-exam-#9-003", STEM, "has", "Information note:"),
     ("open-book-exam-#9-008", STEM, "has", "point of connection ."),
     ("open-book-exam-#9-010", CHOICES, "has", "1/2'"),
+    ("open-book-exam-#7-017", STEM, "has", "temperature rating of the conductor"),
     # A curated stem must also replace the OCR stem quoted in the plain-language background.
     ("open-book-exam-#2-010", ("info_tip",), "has", "messsenger"),
     ("open-book-exam-#5-019", ("info_tip",), "has", "sytems"),
