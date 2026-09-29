@@ -1,0 +1,131 @@
+{
+  "working_space_110-26.png": {
+    "records": [
+      "final-exam-#1-057"
+    ],
+    "leaks": [
+      {
+        "region": [
+          0.05,
+          0.016,
+          0.9,
+          0.14
+        ],
+        "what": "answer drawn in the figure"
+      },
+      {
+        "region": [
+          0.2525,
+          0.192,
+          0.1075,
+          0.208
+        ],
+        "what": "answer drawn in the figure"
+      }
+    ],
+    "masks": [
+      {
+        "rect": [
+          0.05,
+          0.016,
+          0.9,
+          0.14
+        ]
+      },
+      {
+        "rect": [
+          0.2525,
+          0.192,
+          0.1075,
+          0.208
+        ],
+        "ring": true
+      }
+    ]
+  },
+  "balcony_receptacle_210-52E3.png": {
+    "records": [
+      "final-exam-#1-008",
+      "open-book-exam-#10-020"
+    ],
+    "leaks": [
+      {
+        "region": [
+          0.4275,
+          0.36,
+          0.3625,
+          0.16
+        ],
+        "what": "answer drawn in the figure"
+      }
+    ],
+    "masks": [
+      {
+        "rect": [
+          0.4275,
+          0.36,
+          0.3625,
+          0.16
+        ],
+        "label": "? max",
+        "ring": true
+      }
+    ]
+  },
+  "burial_under_concrete_300-5.png": {
+    "records": [
+      "final-exam-#1-049",
+      "open-book-exam-#4-004"
+    ],
+    "leaks": [
+      {
+        "region": [
+          0.1875,
+          0.468,
+          0.1725,
+          0.164
+        ],
+        "what": "answer drawn in the figure"
+      }
+    ],
+    "masks": [
+      {
+        "rect": [
+          0.1875,
+          0.468,
+          0.1725,
+          0.164
+        ],
+        "label": "cover ?",
+        "ring": true
+      }
+    ]
+  },
+  "service_bonding_250.png": {
+    "records": [
+      "open-book-exam-#1-002"
+    ],
+    "leaks": [
+      {
+        "region": [
+          0.515,
+          0.404,
+          0.2325,
+          0.128
+        ],
+        "what": "answer drawn in the figure"
+      }
+    ],
+    "masks": [
+      {
+        "rect": [
+          0.515,
+          0.404,
+          0.2325,
+          0.128
+        ],
+        "ring": true
+      }
+    ]
+  }
+}
