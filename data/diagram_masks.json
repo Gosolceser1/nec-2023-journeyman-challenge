@@ -150,6 +150,51 @@
       ],
       "reviewed": "2026-09-28"
     },
+    "final-exam-#1-004": {
+      "file": "office_lighting_220-42a.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.705,
+            0.2585,
+            0.2516,
+            0.0864
+          ],
+          "what": "the office unit load"
+        },
+        {
+          "region": [
+            0.6079,
+            0.4968,
+            0.1763,
+            0.1045
+          ],
+          "what": "'6,500 VA'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.705,
+            0.2585,
+            0.2516,
+            0.0864
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.6079,
+            0.4968,
+            0.1763,
+            0.1045
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-29"
+    },
     "final-exam-#1-005": {
       "file": "lamp_switch_meter_readings.png",
       "when": "before",
@@ -184,6 +229,76 @@
         }
       ],
       "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-009": {
+      "file": "conductor_colors_310-6.png",
+      "when": "after",
+      "leaks": [],
+      "masks": [],
+      "reviewed": "2026-09-29"
+    },
+    "final-exam-#1-010": {
+      "file": "multioutlet_assembly_220-14h.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.1234,
+            0.633,
+            0.1974,
+            0.0667
+          ],
+          "what": "the length per outlet"
+        },
+        {
+          "region": [
+            0.2388,
+            0.7247,
+            0.1042,
+            0.0667
+          ],
+          "what": "the VA per outlet"
+        },
+        {
+          "region": [
+            0.2449,
+            0.8997,
+            0.3709,
+            0.0667
+          ],
+          "what": "the worked load"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.1234,
+            0.633,
+            0.1974,
+            0.0667
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.2388,
+            0.7247,
+            0.1042,
+            0.0667
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.2449,
+            0.8997,
+            0.3709,
+            0.0667
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-29"
     },
     "final-exam-#1-011": {
       "file": "dwelling_receptacles_210-52.png",
@@ -374,6 +489,81 @@
             0.7072,
             0.1107,
             0.0731
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "final-exam-#1-016": {
+      "file": "holiday_lighting_trees_590-4j.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.3182,
+            0.2905,
+            0.2693,
+            0.0727
+          ],
+          "what": "the other permitted device"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.3182,
+            0.2905,
+            0.2693,
+            0.0727
+          ],
+          "ring": true
+        }
+      ],
+      "terms": [
+        "strain relief"
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "final-exam-#1-019": {
+      "file": "ohms_law_wheel.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.485,
+            0.2085,
+            0.48,
+            0.2809
+          ],
+          "what": "what each letter stands for"
+        },
+        {
+          "region": [
+            0.7654,
+            0.728,
+            0.1181,
+            0.0851
+          ],
+          "what": "the example current"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.485,
+            0.2085,
+            0.48,
+            0.2809
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.7654,
+            0.728,
+            0.1181,
+            0.0851
           ],
           "ring": true
         }
@@ -599,6 +789,51 @@
             0.7789,
             0.092,
             0.0786
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "final-exam-#1-025": {
+      "file": "welder_supply_630.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.035,
+            0.3474,
+            0.3086,
+            0.076
+          ],
+          "what": "the 200% step"
+        },
+        {
+          "region": [
+            0.2423,
+            0.6412,
+            0.0942,
+            0.084
+          ],
+          "what": "'90 A'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.035,
+            0.3474,
+            0.3086,
+            0.076
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.2423,
+            0.6412,
+            0.0942,
+            0.084
           ],
           "ring": true
         }
@@ -1791,6 +2026,69 @@
       "masks": [],
       "reviewed": "2026-09-28"
     },
+    "final-exam-#1-068": {
+      "file": "egc_size_250-122.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.8241,
+            0.3079,
+            0.1371,
+            0.0766
+          ],
+          "what": "the 15 A row"
+        },
+        {
+          "region": [
+            0.8241,
+            0.4015,
+            0.1371,
+            0.0766
+          ],
+          "what": "the 20 A row"
+        },
+        {
+          "region": [
+            0.8241,
+            0.4951,
+            0.1371,
+            0.0766
+          ],
+          "what": "the 60 A row"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.8241,
+            0.3079,
+            0.1371,
+            0.0766
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.8241,
+            0.4015,
+            0.1371,
+            0.0766
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.8241,
+            0.4951,
+            0.1371,
+            0.0766
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-29"
+    },
     "final-exam-#1-069": {
       "file": "sign_construction_600.png",
       "when": "before",
@@ -1842,6 +2140,36 @@
           ],
           "ring": true
         }
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "final-exam-#3-002": {
+      "file": "rv_park_supply_551-71_551-72.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.6125,
+            0.24,
+            0.35,
+            0.66
+          ],
+          "what": "the feeder conductors"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.6125,
+            0.24,
+            0.35,
+            0.66
+          ],
+          "ring": true
+        }
+      ],
+      "terms": [
+        "two ungrounded"
       ],
       "reviewed": "2026-09-29"
     },
@@ -2125,6 +2453,106 @@
       ],
       "reviewed": "2026-09-29"
     },
+    "final-exam-#3-015": {
+      "file": "ocpd_vertical_240-33.png",
+      "when": "after",
+      "leaks": [],
+      "masks": [],
+      "reviewed": "2026-09-29"
+    },
+    "final-exam-#3-017": {
+      "file": "egc_size_250-122.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.8241,
+            0.3079,
+            0.1371,
+            0.0766
+          ],
+          "what": "the 15 A row"
+        },
+        {
+          "region": [
+            0.8241,
+            0.4015,
+            0.1371,
+            0.0766
+          ],
+          "what": "the 20 A row"
+        },
+        {
+          "region": [
+            0.8241,
+            0.4951,
+            0.1371,
+            0.0766
+          ],
+          "what": "the 60 A row"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.8241,
+            0.3079,
+            0.1371,
+            0.0766
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.8241,
+            0.4015,
+            0.1371,
+            0.0766
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.8241,
+            0.4951,
+            0.1371,
+            0.0766
+          ],
+          "ring": true
+        }
+      ],
+      "terms": [
+        "same size"
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "final-exam-#3-018": {
+      "file": "room_ac_cord_440-64.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.0425,
+            0.3525,
+            0.1667,
+            0.087
+          ],
+          "what": "'10 ft max'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.0425,
+            0.3525,
+            0.1667,
+            0.087
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-29"
+    },
     "final-exam-#3-019": {
       "file": "in_sight_disconnect_430-102_440-14.png",
       "when": "before",
@@ -2362,6 +2790,33 @@
       "masks": [],
       "reviewed": "2026-09-28"
     },
+    "final-exam-#3-033": {
+      "file": "ohms_law_wheel.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.7654,
+            0.728,
+            0.1181,
+            0.0851
+          ],
+          "what": "the example current"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.7654,
+            0.728,
+            0.1181,
+            0.0851
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-29"
+    },
     "final-exam-#3-034": {
       "file": "box_depth_314-24b5.png",
       "when": "before",
@@ -2445,6 +2900,58 @@
       ],
       "terms": [
         "starting"
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "final-exam-#3-039": {
+      "file": "single_load_circuits_210-11_422-12.png",
+      "when": "after",
+      "leaks": [],
+      "masks": [],
+      "reviewed": "2026-09-29"
+    },
+    "final-exam-#3-040": {
+      "file": "welder_supply_630.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.845,
+            0.3928,
+            0.0586,
+            0.056
+          ],
+          "what": "the 15% multiplier"
+        },
+        {
+          "region": [
+            0.5225,
+            0.7332,
+            0.1255,
+            0.084
+          ],
+          "what": "'8.19 A'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.845,
+            0.3928,
+            0.0586,
+            0.056
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.5225,
+            0.7332,
+            0.1255,
+            0.084
+          ],
+          "ring": true
+        }
       ],
       "reviewed": "2026-09-29"
     },
@@ -2891,6 +3398,117 @@
       ],
       "reviewed": "2026-09-29"
     },
+    "final-exam-#3-060": {
+      "file": "battery_ventilation_480-10a.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.336,
+            0.9196,
+            0.1378,
+            0.0711
+          ],
+          "what": "the mixture type"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.336,
+            0.9196,
+            0.1378,
+            0.0711
+          ],
+          "ring": true
+        }
+      ],
+      "terms": [
+        "explosive"
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "final-exam-#3-063": {
+      "file": "busbar_ampacity_366-23a.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.1243,
+            0.4668,
+            0.2708,
+            0.0837
+          ],
+          "what": "the copper density"
+        },
+        {
+          "region": [
+            0.1265,
+            0.5678,
+            0.1376,
+            0.093
+          ],
+          "what": "'1,500 A'"
+        },
+        {
+          "region": [
+            0.5425,
+            0.6206,
+            0.3842,
+            0.0791
+          ],
+          "what": "the bar B working"
+        },
+        {
+          "region": [
+            0.05,
+            0.7674,
+            0.9,
+            0.1163
+          ],
+          "what": "the density rule"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.1243,
+            0.4668,
+            0.2708,
+            0.0837
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.1265,
+            0.5678,
+            0.1376,
+            0.093
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.5425,
+            0.6206,
+            0.3842,
+            0.0791
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.05,
+            0.7674,
+            0.9,
+            0.1163
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-29"
+    },
     "final-exam-#3-064": {
       "file": "gfci_locations_210-8.png",
       "when": "after",
@@ -2974,6 +3592,51 @@
       ],
       "terms": [
         "existing"
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "final-exam-#3-069": {
+      "file": "motor_group_feeder_430-62a.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.2923,
+            0.1137,
+            0.4904,
+            0.1208
+          ],
+          "what": "the feeder rule"
+        },
+        {
+          "region": [
+            0.2349,
+            0.8577,
+            0.5302,
+            0.068
+          ],
+          "what": "the rounding note"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.2923,
+            0.1137,
+            0.4904,
+            0.1208
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.2349,
+            0.8577,
+            0.5302,
+            0.068
+          ],
+          "ring": true
+        }
       ],
       "reviewed": "2026-09-29"
     },
@@ -3263,6 +3926,55 @@
       ],
       "reviewed": "2026-09-29"
     },
+    "final-exam-#5-023": {
+      "file": "tc_bending_radius_336-24.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.2025,
+            0.6599,
+            0.1833,
+            0.0851
+          ],
+          "what": "the shielded multiple"
+        },
+        {
+          "region": [
+            0.7687,
+            0.5462,
+            0.1082,
+            0.0766
+          ],
+          "what": "the shielded multiple"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.2025,
+            0.6599,
+            0.1833,
+            0.0851
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.7687,
+            0.5462,
+            0.1082,
+            0.0766
+          ],
+          "ring": true
+        }
+      ],
+      "terms": [
+        "12 times",
+        "12 x"
+      ],
+      "reviewed": "2026-09-29"
+    },
     "final-exam-#5-032": {
       "file": "raceway_fill_ch9_348-22.png",
       "when": "before",
@@ -3284,6 +3996,105 @@
             0.766,
             0.1588,
             0.0784
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "final-exam-#5-039": {
+      "file": "busbar_ampacity_366-23a.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.1243,
+            0.4668,
+            0.2708,
+            0.0837
+          ],
+          "what": "the copper density"
+        },
+        {
+          "region": [
+            0.1265,
+            0.5678,
+            0.1376,
+            0.093
+          ],
+          "what": "'1,500 A'"
+        },
+        {
+          "region": [
+            0.6843,
+            0.5087,
+            0.1155,
+            0.0837
+          ],
+          "what": "the bar area"
+        },
+        {
+          "region": [
+            0.5425,
+            0.6206,
+            0.3842,
+            0.0791
+          ],
+          "what": "the bar B working"
+        },
+        {
+          "region": [
+            0.05,
+            0.7674,
+            0.9,
+            0.1163
+          ],
+          "what": "the density rule"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.1243,
+            0.4668,
+            0.2708,
+            0.0837
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.1265,
+            0.5678,
+            0.1376,
+            0.093
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.6843,
+            0.5087,
+            0.1155,
+            0.0837
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.5425,
+            0.6206,
+            0.3842,
+            0.0791
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.05,
+            0.7674,
+            0.9,
+            0.1163
           ],
           "ring": true
         }
@@ -4222,6 +5033,78 @@
       "masks": [],
       "reviewed": "2026-09-29"
     },
+    "open-book-exam-#1-020": {
+      "file": "single_load_circuits_210-11_422-12.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.4074,
+            0.1765,
+            0.0811,
+            0.075
+          ],
+          "what": "'20 A'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.4074,
+            0.1765,
+            0.0811,
+            0.075
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "open-book-exam-#1-021": {
+      "file": "office_lighting_220-42a.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.705,
+            0.2585,
+            0.2516,
+            0.0864
+          ],
+          "what": "the office unit load"
+        },
+        {
+          "region": [
+            0.6079,
+            0.4968,
+            0.1763,
+            0.1045
+          ],
+          "what": "'6,500 VA'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.705,
+            0.2585,
+            0.2516,
+            0.0864
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.6079,
+            0.4968,
+            0.1763,
+            0.1045
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-29"
+    },
     "open-book-exam-#1-022": {
       "file": "dwelling_receptacles_210-52.png",
       "when": "before",
@@ -4451,6 +5334,43 @@
       "terms": [
         "corrosion"
       ],
+      "reviewed": "2026-09-29"
+    },
+    "open-book-exam-#10-006": {
+      "file": "disconnect_relay_control_art100.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.4424,
+            0.8496,
+            0.3746,
+            0.0727
+          ],
+          "what": "the defined term"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.4424,
+            0.8496,
+            0.3746,
+            0.0727
+          ],
+          "ring": true
+        }
+      ],
+      "terms": [
+        "Remote Disconnect Control"
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "open-book-exam-#10-008": {
+      "file": "welding_tray_signs_630-42c.png",
+      "when": "after",
+      "leaks": [],
+      "masks": [],
       "reviewed": "2026-09-29"
     },
     "open-book-exam-#10-010": {
@@ -4875,6 +5795,33 @@
         }
       ],
       "reviewed": "2026-09-28"
+    },
+    "open-book-exam-#10-023": {
+      "file": "rv_park_supply_551-71_551-72.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.2989,
+            0.6854,
+            0.0775,
+            0.072
+          ],
+          "what": "'70%'"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.2989,
+            0.6854,
+            0.0775,
+            0.072
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-29"
     },
     "open-book-exam-#10-024": {
       "file": "service_bonding_250-24.png",
@@ -5498,6 +6445,36 @@
       ],
       "reviewed": "2026-09-28"
     },
+    "open-book-exam-#4-019": {
+      "file": "box_screws_314-27d.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.5175,
+            0.3721,
+            0.2353,
+            0.0864
+          ],
+          "what": "the screw size"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.5175,
+            0.3721,
+            0.2353,
+            0.0864
+          ],
+          "ring": true
+        }
+      ],
+      "terms": [
+        "No. 6"
+      ],
+      "reviewed": "2026-09-29"
+    },
     "open-book-exam-#4-021": {
       "file": "gfci_locations_210-8.png",
       "when": "after",
@@ -5593,6 +6570,114 @@
       ],
       "reviewed": "2026-09-29"
     },
+    "open-book-exam-#7-001": {
+      "file": "grounded_connection_200-3.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.568,
+            0.7954,
+            0.1547,
+            0.0681
+          ],
+          "what": "the connection word"
+        },
+        {
+          "region": [
+            0.0312,
+            0.8711,
+            0.7101,
+            0.0638
+          ],
+          "what": "the definition"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.568,
+            0.7954,
+            0.1547,
+            0.0681
+          ],
+          "ring": true
+        },
+        {
+          "rect": [
+            0.0312,
+            0.8711,
+            0.7101,
+            0.0638
+          ],
+          "ring": true
+        }
+      ],
+      "terms": [
+        "electrical connection"
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "open-book-exam-#7-004": {
+      "file": "imaging_feeder_517-73b.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.3744,
+            0.8763,
+            0.1607,
+            0.0681
+          ],
+          "what": "the rating used"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.3744,
+            0.8763,
+            0.1607,
+            0.0681
+          ],
+          "ring": true
+        }
+      ],
+      "terms": [
+        "momentary"
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "open-book-exam-#7-005": {
+      "file": "max_water_level_art100.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.08,
+            0.2612,
+            0.3563,
+            0.0905
+          ],
+          "what": "the defined term"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.08,
+            0.2612,
+            0.3563,
+            0.0905
+          ],
+          "ring": true
+        }
+      ],
+      "terms": [
+        "Maximum Water Level"
+      ],
+      "reviewed": "2026-09-29"
+    },
     "open-book-exam-#7-007": {
       "file": "selective_coordination_700-32.png",
       "when": "before",
@@ -5635,6 +6720,36 @@
           ],
           "ring": true
         }
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "open-book-exam-#7-008": {
+      "file": "equipment_airflow_110-13b.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.2442,
+            0.8973,
+            0.15,
+            0.0744
+          ],
+          "what": "the opening type"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.2442,
+            0.8973,
+            0.15,
+            0.0744
+          ],
+          "ring": true
+        }
+      ],
+      "terms": [
+        "ventilating"
       ],
       "reviewed": "2026-09-29"
     },
@@ -5767,6 +6882,33 @@
       "masks": [],
       "reviewed": "2026-09-28"
     },
+    "open-book-exam-#7-015": {
+      "file": "termination_temp_110-14c.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.5129,
+            0.6151,
+            0.1622,
+            0.0615
+          ],
+          "what": "what caps the ampacity"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.5129,
+            0.6151,
+            0.1622,
+            0.0615
+          ],
+          "ring": true
+        }
+      ],
+      "reviewed": "2026-09-29"
+    },
     "open-book-exam-#7-016": {
       "file": "multiple_supplies_225-37_700-7.png",
       "when": "before",
@@ -5812,6 +6954,33 @@
       ],
       "terms": [
         "location"
+      ],
+      "reviewed": "2026-09-29"
+    },
+    "open-book-exam-#7-017": {
+      "file": "termination_temp_110-14c.png",
+      "when": "before",
+      "leaks": [
+        {
+          "region": [
+            0.4288,
+            0.8535,
+            0.1347,
+            0.0615
+          ],
+          "what": "the rating word"
+        }
+      ],
+      "masks": [
+        {
+          "rect": [
+            0.4288,
+            0.8535,
+            0.1347,
+            0.0615
+          ],
+          "ring": true
+        }
       ],
       "reviewed": "2026-09-29"
     },

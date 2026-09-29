@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+<rect x="0.0" y="0.0" width="800.0" height="500.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Welder supply: two worked cards</text>
+<rect x="20.0" y="56.0" width="370.0" height="400.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="34.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Arc welder: overcurrent device</text>
+<text x="34.0" y="110.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">nameplate I1max = 43 A</text>
+<text x="34.0" y="160.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">OCPD not more than</text>
+<text x="34.0" y="200.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">200% x 43 A = 86 A</text>
+<text x="34.0" y="256.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">not a standard rating (240.6(A)):</text>
+<text x="34.0" y="282.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">the next higher one is permitted</text>
+<text x="34.0" y="350.0" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#e2e8f0" text-anchor="start">max OCPD =</text>
+<text x="199.9" y="350.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">90 A</text>
+<text x="34.0" y="404.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">I1max: rated supply current</text>
+<text x="34.0" y="426.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">at maximum rated output</text>
+<rect x="410.0" y="56.0" width="370.0" height="400.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="424.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Resistance welder: conductors</text>
+<text x="424.0" y="110.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">21 A primary, 15% duty cycle</text>
+<text x="424.0" y="150.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">Table 630.31(A) multipliers:</text>
+<text x="440.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">50%</text>
+<text x="510.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#38bdf8" text-anchor="start">0.71</text>
+<text x="440.0" y="216.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">40%</text>
+<text x="510.0" y="216.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#38bdf8" text-anchor="start">0.63</text>
+<text x="440.0" y="248.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">30%</text>
+<text x="510.0" y="248.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#38bdf8" text-anchor="start">0.55</text>
+<text x="440.0" y="280.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">25%</text>
+<text x="510.0" y="280.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#38bdf8" text-anchor="start">0.50</text>
+<text x="610.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">20%</text>
+<text x="680.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#38bdf8" text-anchor="start">0.45</text>
+<text x="610.0" y="216.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">15%</text>
+<text x="680.0" y="216.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">0.39</text>
+<text x="610.0" y="248.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">10%</text>
+<text x="680.0" y="248.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#38bdf8" text-anchor="start">0.32</text>
+<text x="424.0" y="350.0" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#e2e8f0" text-anchor="start">21 A x multiplier =</text>
+<text x="424.0" y="396.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">8.19 A</text>
+<rect x="566.7" y="462.0" width="219.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="576.7" y="490.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 630.12, 630.31</text>
+</svg>

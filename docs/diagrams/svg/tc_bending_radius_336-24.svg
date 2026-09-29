@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470">
+<rect x="0.0" y="0.0" width="800.0" height="470.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Type TC tray cable: minimum bending radius</text>
+<path d="M 110 150 A 230 230 0 0 1 340 380" fill="none" stroke="#0f172a" stroke-width="34" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 110 150 A 230 230 0 0 1 340 380" fill="none" stroke="#334155" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 110 150 A 230 230 0 0 1 340 380" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="50.0" y1="150.0" x2="110.0" y2="150.0" stroke="#334155" stroke-width="30" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="340.0" y1="380.0" x2="340.0" y2="420.0" stroke="#334155" stroke-width="30" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="110.0" cy="380.0" r="5" fill="#38bdf8" stroke="none" stroke-width="2"/>
+<line x1="110.0" y1="380.0" x2="267.5" y2="222.5" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="272.6,217.4 268.4,230.1 259.9,221.6" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="168.0" y="338.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="start">R = 12 x D</text>
+<text x="390.0" y="414.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">D = overall diameter</text>
+<circle cx="430.0" cy="350.0" r="22" fill="#334155" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="414.0" y1="386.0" x2="446.0" y2="386.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="408.0,386.0 420.0,380.0 420.0,392.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="452.0,386.0 440.0,392.0 440.0,380.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="400.0" y="60.0" width="380.0" height="250.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="414.0" y="90.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Minimum radius, 336.24</text>
+<text x="416.0" y="118.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="start">no metal shielding:</text>
+<text x="416.0" y="152.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">4 x D  (D up to 1 in)</text>
+<text x="416.0" y="180.6" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">5 x D  (over 1 in to 2 in)</text>
+<text x="416.0" y="209.2" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">6 x D  (over 2 in)</text>
+<text x="416.0" y="282.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="start">metallic shielding:</text>
+<text x="619.9" y="282.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">12 x D</text>
+<rect x="646.2" y="434.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="656.2" y="462.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 336.24</text>
+</svg>

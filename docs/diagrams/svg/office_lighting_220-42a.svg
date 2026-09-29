@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
+<rect x="0.0" y="0.0" width="800.0" height="440.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">General lighting load of an office (plan, not to scale)</text>
+<rect x="60.0" y="90.0" width="360.0" height="200.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="4"/>
+<line x1="180.0" y1="90.0" x2="180.0" y2="170.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="300.0" y1="90.0" x2="300.0" y2="170.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="180.0" y1="170.0" x2="300.0" y2="170.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="86.0" y="200.0" width="28.0" height="50.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="126.0" y="200.0" width="28.0" height="50.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="326.0" y="200.0" width="28.0" height="50.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="366.0" y="200.0" width="28.0" height="50.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="240.0" y="150.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">offices</text>
+<line x1="60.0" y1="86.0" x2="60.0" y2="79.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="60.0" y1="73.0" x2="60.0" y2="66.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="420.0" y1="86.0" x2="420.0" y2="79.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="420.0" y1="73.0" x2="420.0" y2="66.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="66.0" y1="70.0" x2="414.0" y2="70.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="60.0,70.0 72.0,64.0 72.0,76.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="420.0,70.0 408.0,76.0 408.0,64.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="240.0" y="322.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#38bdf8" text-anchor="middle">5,000 sq ft</text>
+<text x="240.0" y="352.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">(outside dimensions, 220.5(C))</text>
+<rect x="450.0" y="70.0" width="330.0" height="300.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="464.0" y="100.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Table 220.42(A) unit load</text>
+<text x="466.0" y="140.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#e2e8f0" text-anchor="start">office:</text>
+<text x="570.0" y="140.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">1.3 VA per sq ft</text>
+<text x="466.0" y="200.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">5,000 sq ft x unit load</text>
+<text x="466.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#e2e8f0" text-anchor="start">=</text>
+<text x="494.4" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">6,500 VA</text>
+<text x="466.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">125% continuous factor is</text>
+<text x="466.0" y="323.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">already in the table (Note)</text>
+<rect x="552.1" y="400.0" width="233.9" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="562.1" y="428.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Table 220.42(A)</text>
+</svg>

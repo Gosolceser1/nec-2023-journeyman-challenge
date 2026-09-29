@@ -25,6 +25,19 @@
   "nec": "210.63, 210.63(A), 210.63(B)(1), 210.63(B)(2)",
   "svg_sha1": "3ddd9444c5fc"
  },
+ "final-exam-#1-004": {
+  "file": "res://assets/diagrams/nec/office_lighting_220-42a.png",
+  "figure": "office_lighting_220-42a",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   660
+  ],
+  "nec": "220.42, Table 220.42(A), 220.5(C)",
+  "svg_sha1": "1832852bf4b3"
+ },
  "final-exam-#1-005": {
   "file": "res://assets/diagrams/nec/lamp_switch_meter_readings.png",
   "figure": "lamp_switch_meter_readings",
@@ -56,6 +69,32 @@
   ],
   "nec": "210.52(E)(3)",
   "svg_sha1": "87e27657d3b7"
+ },
+ "final-exam-#1-009": {
+  "file": "res://assets/diagrams/nec/conductor_colors_310-6.png",
+  "figure": "conductor_colors_310-6",
+  "source": "original",
+  "style": "dark",
+  "when": "after",
+  "size": [
+   1200,
+   705
+  ],
+  "nec": "310.6, 200.6(A), 250.119, 210.5(C)",
+  "svg_sha1": "575338936439"
+ },
+ "final-exam-#1-010": {
+  "file": "res://assets/diagrams/nec/multioutlet_assembly_220-14h.png",
+  "figure": "multioutlet_assembly_220-14h",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   720
+  ],
+  "nec": "220.14(H)",
+  "svg_sha1": "ec958bface7a"
  },
  "final-exam-#1-011": {
   "file": "res://assets/diagrams/nec/dwelling_receptacles_210-52.png",
@@ -114,6 +153,32 @@
   ],
   "nec": "310.15(B), 310.15(C)(1), 310.15(F), Table 310.16",
   "svg_sha1": "3251bc54afc7"
+ },
+ "final-exam-#1-016": {
+  "file": "res://assets/diagrams/nec/holiday_lighting_trees_590-4j.png",
+  "figure": "holiday_lighting_trees_590-4j",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   660
+  ],
+  "nec": "590.4(J) Exception, 590.3(B)",
+  "svg_sha1": "5bfd87a10dd8"
+ },
+ "final-exam-#1-019": {
+  "file": "res://assets/diagrams/nec/ohms_law_wheel.png",
+  "figure": "ohms_law_wheel",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   705
+  ],
+  "nec": "general electrical theory (W = E x I, Ohm's law)",
+  "svg_sha1": "494326c081d8"
  },
  "final-exam-#1-020": {
   "file": "res://assets/diagrams/nec/electrode_system_250-52_250-53.png",
@@ -179,6 +244,19 @@
   ],
   "nec": "680.5(B), 680.11(A), 680.21(C), 680.22(A)(2), 680.35(D), 680.58",
   "svg_sha1": "4a5d96823a43"
+ },
+ "final-exam-#1-025": {
+  "file": "res://assets/diagrams/nec/welder_supply_630.png",
+  "figure": "welder_supply_630",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   750
+  ],
+  "nec": "630.12, 630.12(A), 240.6(A), 630.31(A), Table 630.31(A)",
+  "svg_sha1": "a7ddec2946a6"
  },
  "final-exam-#1-026": {
   "file": "res://assets/diagrams/nec/type_letters_decoder.png",
@@ -615,6 +693,19 @@
   "nec": "Chapter 9, Notes to Tables, Note (4)",
   "svg_sha1": "752ec053a96f"
  },
+ "final-exam-#1-068": {
+  "file": "res://assets/diagrams/nec/egc_size_250-122.png",
+  "figure": "egc_size_250-122",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   705
+  ],
+  "nec": "250.122(A), Table 250.122",
+  "svg_sha1": "bfc1fd265851"
+ },
  "final-exam-#1-069": {
   "file": "res://assets/diagrams/nec/sign_construction_600.png",
   "figure": "sign_construction_600",
@@ -640,6 +731,19 @@
   ],
   "nec": "430.6(A)(1), Table 430.250, 430.52(B), Table 430.37, 430.101",
   "svg_sha1": "f482f56a1227"
+ },
+ "final-exam-#3-002": {
+  "file": "res://assets/diagrams/nec/rv_park_supply_551-71_551-72.png",
+  "figure": "rv_park_supply_551-71_551-72",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   750
+  ],
+  "nec": "551.71(A)-(C), 551.72(B)",
+  "svg_sha1": "6c397a885944"
  },
  "final-exam-#3-006": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
@@ -719,6 +823,45 @@
   "nec": "210.18, 210.19(B), Table 210.21(B)(2)",
   "svg_sha1": "8d39b17ac263"
  },
+ "final-exam-#3-015": {
+  "file": "res://assets/diagrams/nec/ocpd_vertical_240-33.png",
+  "figure": "ocpd_vertical_240-33",
+  "source": "original",
+  "style": "dark",
+  "when": "after",
+  "size": [
+   1200,
+   720
+  ],
+  "nec": "240.33, 240.81",
+  "svg_sha1": "4af6094cacc8"
+ },
+ "final-exam-#3-017": {
+  "file": "res://assets/diagrams/nec/egc_size_250-122.png",
+  "figure": "egc_size_250-122",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   705
+  ],
+  "nec": "250.122(A), Table 250.122",
+  "svg_sha1": "bfc1fd265851"
+ },
+ "final-exam-#3-018": {
+  "file": "res://assets/diagrams/nec/room_ac_cord_440-64.png",
+  "figure": "room_ac_cord_440-64",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   690
+  ],
+  "nec": "440.64, 440.65",
+  "svg_sha1": "d479b9f301fb"
+ },
  "final-exam-#3-019": {
   "file": "res://assets/diagrams/nec/in_sight_disconnect_430-102_440-14.png",
   "figure": "in_sight_disconnect_430-102_440-14",
@@ -797,6 +940,19 @@
   "nec": "800.44(A)(1), (A)(2), 800.44(B)",
   "svg_sha1": "1b6b493027bd"
  },
+ "final-exam-#3-033": {
+  "file": "res://assets/diagrams/nec/ohms_law_wheel.png",
+  "figure": "ohms_law_wheel",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   705
+  ],
+  "nec": "general electrical theory (W = E x I, Ohm's law)",
+  "svg_sha1": "494326c081d8"
+ },
  "final-exam-#3-034": {
   "file": "res://assets/diagrams/nec/box_depth_314-24b5.png",
   "figure": "box_depth_314-24b5",
@@ -835,6 +991,32 @@
   ],
   "nec": "430.6(A)(1), Table 430.250, 430.52(B), Table 430.37, 430.101",
   "svg_sha1": "f482f56a1227"
+ },
+ "final-exam-#3-039": {
+  "file": "res://assets/diagrams/nec/single_load_circuits_210-11_422-12.png",
+  "figure": "single_load_circuits_210-11_422-12",
+  "source": "original",
+  "style": "dark",
+  "when": "after",
+  "size": [
+   1200,
+   720
+  ],
+  "nec": "210.11(C)(2), 210.52(F), 422.12",
+  "svg_sha1": "6eea249aab0c"
+ },
+ "final-exam-#3-040": {
+  "file": "res://assets/diagrams/nec/welder_supply_630.png",
+  "figure": "welder_supply_630",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   750
+  ],
+  "nec": "630.12, 630.12(A), 240.6(A), 630.31(A), Table 630.31(A)",
+  "svg_sha1": "a7ddec2946a6"
  },
  "final-exam-#3-044": {
   "file": "res://assets/diagrams/nec/voltage_drop_percent.png",
@@ -1018,6 +1200,32 @@
   "nec": "680.5(B), 680.11(A), 680.21(C), 680.22(A)(2), 680.35(D), 680.58",
   "svg_sha1": "4a5d96823a43"
  },
+ "final-exam-#3-060": {
+  "file": "res://assets/diagrams/nec/battery_ventilation_480-10a.png",
+  "figure": "battery_ventilation_480-10a",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   675
+  ],
+  "nec": "480.10(A)",
+  "svg_sha1": "0ce06c399446"
+ },
+ "final-exam-#3-063": {
+  "file": "res://assets/diagrams/nec/busbar_ampacity_366-23a.png",
+  "figure": "busbar_ampacity_366-23a",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   645
+  ],
+  "nec": "366.23(A)",
+  "svg_sha1": "f96c1d7161a3"
+ },
  "final-exam-#3-064": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
   "figure": "gfci_locations_210-8",
@@ -1056,6 +1264,19 @@
   ],
   "nec": "250.50 Ex., 250.52(A)(1), 250.52(A)(3), 250.66(B), 250.68(B)",
   "svg_sha1": "dd3b8ee3c270"
+ },
+ "final-exam-#3-069": {
+  "file": "res://assets/diagrams/nec/motor_group_feeder_430-62a.png",
+  "figure": "motor_group_feeder_430-62a",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   750
+  ],
+  "nec": "430.62(A), Table 430.52",
+  "svg_sha1": "7a5b057d3ab6"
  },
  "final-exam-#3-070": {
   "file": "res://assets/diagrams/nec/delta_generator_symbol.png",
@@ -1161,6 +1382,19 @@
   "nec": "Table 310.4(1), 338.100, Table 400.4",
   "svg_sha1": "8b598977e124"
  },
+ "final-exam-#5-023": {
+  "file": "res://assets/diagrams/nec/tc_bending_radius_336-24.png",
+  "figure": "tc_bending_radius_336-24",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   705
+  ],
+  "nec": "336.24",
+  "svg_sha1": "ff235ebf7e3d"
+ },
  "final-exam-#5-032": {
   "file": "res://assets/diagrams/nec/raceway_fill_ch9_348-22.png",
   "figure": "raceway_fill_ch9_348-22",
@@ -1173,6 +1407,19 @@
   ],
   "nec": "Chapter 9 Table 1, 348.22, Table 348.22, 356.22",
   "svg_sha1": "18098ca92f8e"
+ },
+ "final-exam-#5-039": {
+  "file": "res://assets/diagrams/nec/busbar_ampacity_366-23a.png",
+  "figure": "busbar_ampacity_366-23a",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   645
+  ],
+  "nec": "366.23(A)",
+  "svg_sha1": "f96c1d7161a3"
  },
  "final-exam-#5-048": {
   "file": "res://assets/diagrams/nec/gutter_bare_parts_366-100e.png",
@@ -1525,6 +1772,32 @@
   "nec": "210.63, 210.63(A), 210.63(B)(1), 210.63(B)(2)",
   "svg_sha1": "3ddd9444c5fc"
  },
+ "open-book-exam-#1-020": {
+  "file": "res://assets/diagrams/nec/single_load_circuits_210-11_422-12.png",
+  "figure": "single_load_circuits_210-11_422-12",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   720
+  ],
+  "nec": "210.11(C)(2), 210.52(F), 422.12",
+  "svg_sha1": "6eea249aab0c"
+ },
+ "open-book-exam-#1-021": {
+  "file": "res://assets/diagrams/nec/office_lighting_220-42a.png",
+  "figure": "office_lighting_220-42a",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   660
+  ],
+  "nec": "220.42, Table 220.42(A), 220.5(C)",
+  "svg_sha1": "1832852bf4b3"
+ },
  "open-book-exam-#1-022": {
   "file": "res://assets/diagrams/nec/dwelling_receptacles_210-52.png",
   "figure": "dwelling_receptacles_210-52",
@@ -1615,6 +1888,32 @@
   ],
   "nec": "344.10(C), 300.5(F), 305.15(E)",
   "svg_sha1": "ddb3bcf05f66"
+ },
+ "open-book-exam-#10-006": {
+  "file": "res://assets/diagrams/nec/disconnect_relay_control_art100.png",
+  "figure": "disconnect_relay_control_art100",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   660
+  ],
+  "nec": "Article 100, 645.10",
+  "svg_sha1": "9bace1d0b6b6"
+ },
+ "open-book-exam-#10-008": {
+  "file": "res://assets/diagrams/nec/welding_tray_signs_630-42c.png",
+  "figure": "welding_tray_signs_630-42c",
+  "source": "original",
+  "style": "dark",
+  "when": "after",
+  "size": [
+   1200,
+   600
+  ],
+  "nec": "630.42(A), 630.42(C)",
+  "svg_sha1": "1276a5711ab1"
  },
  "open-book-exam-#10-010": {
   "file": "res://assets/diagrams/nec/overhead_clearances_225-18.png",
@@ -1745,6 +2044,19 @@
   ],
   "nec": "695.12(D)",
   "svg_sha1": "3ce4e5e9cc3f"
+ },
+ "open-book-exam-#10-023": {
+  "file": "res://assets/diagrams/nec/rv_park_supply_551-71_551-72.png",
+  "figure": "rv_park_supply_551-71_551-72",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   750
+  ],
+  "nec": "551.71(A)-(C), 551.72(B)",
+  "svg_sha1": "6c397a885944"
  },
  "open-book-exam-#10-024": {
   "file": "res://assets/diagrams/nec/service_bonding_250-24.png",
@@ -1928,6 +2240,19 @@
   "nec": "312.5(C) Exception No. 1",
   "svg_sha1": "6d3f3eb4f359"
  },
+ "open-book-exam-#4-019": {
+  "file": "res://assets/diagrams/nec/box_screws_314-27d.png",
+  "figure": "box_screws_314-27d",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   660
+  ],
+  "nec": "314.27(D) Exception, 314.27(A)",
+  "svg_sha1": "740f62c8b836"
+ },
  "open-book-exam-#4-021": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
   "figure": "gfci_locations_210-8",
@@ -1993,6 +2318,45 @@
   "nec": "Table 310.4(1), 338.100, Table 400.4",
   "svg_sha1": "8b598977e124"
  },
+ "open-book-exam-#7-001": {
+  "file": "res://assets/diagrams/nec/grounded_connection_200-3.png",
+  "figure": "grounded_connection_200-3",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   705
+  ],
+  "nec": "200.3",
+  "svg_sha1": "df02ebc47c3c"
+ },
+ "open-book-exam-#7-004": {
+  "file": "res://assets/diagrams/nec/imaging_feeder_517-73b.png",
+  "figure": "imaging_feeder_517-73b",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   705
+  ],
+  "nec": "517.73(B)",
+  "svg_sha1": "21e20adbdb9c"
+ },
+ "open-book-exam-#7-005": {
+  "file": "res://assets/diagrams/nec/max_water_level_art100.png",
+  "figure": "max_water_level_art100",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   630
+  ],
+  "nec": "Article 100, 680.9, 680.22(B), 680.43(B)",
+  "svg_sha1": "1e8125d95503"
+ },
  "open-book-exam-#7-007": {
   "file": "res://assets/diagrams/nec/selective_coordination_700-32.png",
   "figure": "selective_coordination_700-32",
@@ -2005,6 +2369,19 @@
   ],
   "nec": "Article 100 (Selective Coordination), 700.32, 701.32, 708.54",
   "svg_sha1": "c5cbc6fd863f"
+ },
+ "open-book-exam-#7-008": {
+  "file": "res://assets/diagrams/nec/equipment_airflow_110-13b.png",
+  "figure": "equipment_airflow_110-13b",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   645
+  ],
+  "nec": "110.13(B)",
+  "svg_sha1": "759fd0bed312"
  },
  "open-book-exam-#7-009": {
   "file": "res://assets/diagrams/nec/outbuilding_disconnect_225-39.png",
@@ -2058,6 +2435,19 @@
   "nec": "Table 300.5(A) Column 1, 300.5(A) cover definition",
   "svg_sha1": "0334f58c5baf"
  },
+ "open-book-exam-#7-015": {
+  "file": "res://assets/diagrams/nec/termination_temp_110-14c.png",
+  "figure": "termination_temp_110-14c",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   780
+  ],
+  "nec": "310.15(A), 110.14(C), 110.14(C)(2), Table 310.16",
+  "svg_sha1": "ebd62fc8f7d3"
+ },
  "open-book-exam-#7-016": {
   "file": "res://assets/diagrams/nec/multiple_supplies_225-37_700-7.png",
   "figure": "multiple_supplies_225-37_700-7",
@@ -2070,6 +2460,19 @@
   ],
   "nec": "225.37, 230.2(E), 700.7(A)",
   "svg_sha1": "9174cec8263d"
+ },
+ "open-book-exam-#7-017": {
+  "file": "res://assets/diagrams/nec/termination_temp_110-14c.png",
+  "figure": "termination_temp_110-14c",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   780
+  ],
+  "nec": "310.15(A), 110.14(C), 110.14(C)(2), Table 310.16",
+  "svg_sha1": "ebd62fc8f7d3"
  },
  "open-book-exam-#7-020": {
   "file": "res://assets/diagrams/nec/sign_construction_600.png",

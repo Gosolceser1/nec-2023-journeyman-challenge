@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
+<rect x="0.0" y="0.0" width="800.0" height="440.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Light equipment on an ordinary box (section)</text>
+<rect x="130.0" y="60.0" width="110.0" height="340.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="160.0" y="150.0" width="60.0" height="140.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<text x="130.0" y="138.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="end">box</text>
+<rect x="220.0" y="140.0" width="22.0" height="160.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="250.0" y="128.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">plaster ring</text>
+<rect x="242.0" y="150.0" width="16.0" height="140.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="258.0" y="170.0" width="150.0" height="100.0" rx="10" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<text x="333.0" y="228.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">equipment</text>
+<line x1="200.0" y1="170.0" x2="262.0" y2="170.0" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="262.0" cy="170.0" r="7" fill="#fbbf24" stroke="none" stroke-width="2"/>
+<line x1="200.0" y1="270.0" x2="262.0" y2="270.0" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="262.0" cy="270.0" r="7" fill="#fbbf24" stroke="none" stroke-width="2"/>
+<text x="420.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">6 lb or less</text>
+<text x="420.0" y="150.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">yoke held by two</text>
+<text x="420.0" y="190.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">No. 6 or larger</text>
+<text x="420.0" y="228.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">screws</text>
+<line x1="416.0" y1="184.0" x2="268.0" y2="170.0" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="268.0" cy="170.0" r="4" fill="#fbbf24" stroke="none" stroke-width="2"/>
+<text x="420.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">heavier: the box must support it</text>
+<text x="420.0" y="404.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">like a luminaire (314.27(A))</text>
+<rect x="14.0" y="406.0" width="209.5" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="24.0" y="434.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 314.27(D) Ex.</text>
+</svg>

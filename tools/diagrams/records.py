@@ -1,8 +1,9 @@
 """The records that get a figure: 3 that need one to be answered, the 88 the
-diagrams audit found would benefit, and the 72 of diagram batch 1.
+diagrams audit found would benefit, the 72 of diagram batch 1 and the 31 of
+diagram batch 2.
 
 id: (tier, topic, family). Tiers: R required, A high, B medium, C low. From docs/DIAGRAMS_AUDIT.md
-(batch 1: section 8).
+(batch 1: section 8, batch 2: section 9).
 """
 
 NEED = {
@@ -170,4 +171,35 @@ NEED = {
     'open-book-exam-#1-018': ('B', '210.8(E) Which receptacles need GFCI under 210.8(E)', 'Batch 1 R04 Reuse equipment_receptacle_210-63'),
     'open-book-exam-#1-024': ('B', '680.21(C) and 680.5(B) Pool motor outlet GFCI amp limit', 'Batch 1 R05 Reuse pool_fountain_distances_680'),
     'open-book-exam-#10-004': ('B', '409.21 Industrial control panel supply conductors', 'Batch 1 R06 Reuse feeder_tap_10ft_240-21b1'),
+    'final-exam-#1-004': ('B', 'Table 220.42(A) Office general lighting load, 5,000 sq ft', 'Batch 2 M02 General lighting load from floor area (Table 220.42(A))'),
+    'open-book-exam-#1-021': ('B', 'Table 220.42(A) Office general lighting load, 5,000 sq ft', 'Batch 2 M02 General lighting load from floor area (Table 220.42(A))'),
+    'final-exam-#1-019': ('B', 'General knowledge Meaning of I in W = E x I', 'Batch 2 M06 Ohms law / power wheel'),
+    'final-exam-#3-033': ('B', 'General calculation Current from 2 W at 20 V DC', 'Batch 2 M06 Ohms law / power wheel'),
+    'final-exam-#1-068': ('B', 'Table 250.122 EGC for a 50 A circuit', 'Batch 2 M10 EGC sizing from the OCPD (Table 250.122)'),
+    'final-exam-#3-017': ('B', 'Table 250.122 EGC same size as circuit conductors', 'Batch 2 M10 EGC sizing from the OCPD (Table 250.122)'),
+    'final-exam-#3-039': ('B', '422.12 Central heating equipment circuit type', 'Batch 2 M14 Single-load branch circuits (laundry, central heating)'),
+    'open-book-exam-#1-020': ('B', '210.11(C)(2) Laundry branch circuit rating', 'Batch 2 M14 Single-load branch circuits (laundry, central heating)'),
+    'final-exam-#3-063': ('B', '366.23(A) Busbar ampacity, 1 1/2 sq in', 'Batch 2 M16 Busbar cross-section ampacity (366.23(A))'),
+    'final-exam-#5-039': ('B', '366.23(A) Busbar ampacity, 4 in x 1/2 in', 'Batch 2 M16 Busbar cross-section ampacity (366.23(A))'),
+    'final-exam-#1-025': ('B', '630.12(A) Arc welder OCPD from I1max', 'Batch 2 M24 Welder supply calculations (Article 630)'),
+    'final-exam-#3-040': ('B', '630.31(A)(2) Resistance welder supply ampacity', 'Batch 2 M24 Welder supply calculations (Article 630)'),
+    'open-book-exam-#7-015': ('B', '310.15(A) Corrected ampacity limited by the end-connection rating', 'Batch 2 M25 Temperature limits at conductor end connections (110.14(C))'),
+    'open-book-exam-#7-017': ('B', '110.14(C)(2) Pressure connector temperature rating', 'Batch 2 M25 Temperature limits at conductor end connections (110.14(C))'),
+    'open-book-exam-#10-023': ('B', '551.71(B) RV sites with 30 A receptacles', 'Batch 2 M34 RV park supply (551.71, 551.72)'),
+    'final-exam-#3-002': ('B', '551.72(B) RV feeder conductors, 208Y/120 V', 'Batch 2 M34 RV park supply (551.71, 551.72)'),
+    'final-exam-#1-009': ('B', '310.6(C) Acceptable ungrounded conductor color', 'Batch 2 M03 Conductor color code'),
+    'final-exam-#1-010': ('B', '220.14(H) 12 ft multioutlet assembly load', 'Batch 2 M04 Fixed multioutlet assembly load (220.14(H))'),
+    'final-exam-#1-016': ('B', '590.4(J) Trees supporting holiday lighting spans', 'Batch 2 M05 Holiday lighting spans supported by trees (590.4(J))'),
+    'final-exam-#3-015': ('B', '240.33 OCPD enclosure mounting position', 'Batch 2 M11 OCPD enclosure mounting position (240.33)'),
+    'final-exam-#3-018': ('B', '440.64 Room A-C cord length, 120 V', 'Batch 2 M12 Room air conditioner cord (440.64)'),
+    'final-exam-#3-060': ('B', '480.10(A) Battery gas ventilation', 'Batch 2 M15 Battery room ventilation (480.10(A))'),
+    'final-exam-#3-069': ('B', '430.62(A) Feeder protection for motor group', 'Batch 2 M17 Feeder protection for a group of motors (430.62(A))'),
+    'final-exam-#5-023': ('B', '336.24 TC shielded cable bending radius', 'Batch 2 M20 Cable bending radius (TC, 336.24)'),
+    'open-book-exam-#4-019': ('B', '314.27(D) Ex. Screws for <= 6 lb equipment on a box', 'Batch 2 M27 Light equipment supported from a box (314.27(D) Ex.)'),
+    'open-book-exam-#7-001': ('B', '200.3 Premises wiring connection to supply', 'Batch 2 M28 Grounded conductor continuity (200.3)'),
+    'open-book-exam-#7-004': ('B', '517.73(B) Imaging equipment feeder demand', 'Batch 2 M29 Diagnostic imaging feeder demand (517.73(B))'),
+    'open-book-exam-#7-005': ('B', 'Article 100 Highest water level before spilling (definition)', 'Batch 2 M30 Spa/hot tub water level term'),
+    'open-book-exam-#7-008': ('B', '110.13(B) Openings that need free air circulation', 'Batch 2 M31 Free air circulation around equipment openings (110.13(B))'),
+    'open-book-exam-#10-006': ('B', 'Article 100 Device that controls a disconnect through a relay (definition)', 'Batch 2 M32 Relay-operated control of a disconnect'),
+    'open-book-exam-#10-008': ('B', '630.42(C) Welding cable tray sign text', 'Batch 2 M33 Welding cable tray signs (630.42(C))'),
 }
