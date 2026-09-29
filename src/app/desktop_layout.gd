@@ -60,7 +60,7 @@ static func build(host: Main) -> void:
 	header.add_child(title_box)
 
 	var title := Label.new()
-	title.text = "NEC 2023 // JOURNEYMAN CHALLENGE"
+	title.text = MenuModel.fill(str(MenuModel.spec().get("title", "")), {"edition": Edition.short_label()})
 	title.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_BOLD))
 	title.add_theme_font_size_override("font_size", AppTheme.TYPE_BODY_LG)
 	title.add_theme_color_override("font_color", AppTheme.SLATE_50)

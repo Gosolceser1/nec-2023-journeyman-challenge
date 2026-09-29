@@ -13,7 +13,7 @@ static func show(host: Main) -> void:
 	clear_confetti(host)
 	var is_exam := host.session.session_simulation
 	var state_law := host.session.session_section == BankLoader.SECTION_NE_STATE_LAW
-	var provisions := "Nebraska State Electrical Act and Board Rules" if state_law else "NEC 2023"
+	var provisions := "Nebraska State Electrical Act and Board Rules" if state_law else Edition.short_label()
 	host.question_label.text = "Official Examination Report" if is_exam else "Practice Report"
 	host.chapter_hint_label.visible = false
 	host.lookup_box.visible = false
@@ -22,7 +22,7 @@ static func show(host: Main) -> void:
 	host.question_diagram_panel.visible = false
 	host.question_formula_label.visible = false
 	host.exam_label.text = "STATE ELECTRICAL DIVISION  •  NEBRASKA (NSED / PSI)"
-	host.article_label.text = "CANDIDATE PERFORMANCE SUMMARY  •  " + ("NEBRASKA STATE ELECTRICAL ACT & BOARD RULES" if state_law else "NEC 2023 STANDARDS")
+	host.article_label.text = "CANDIDATE PERFORMANCE SUMMARY  •  " + ("NEBRASKA STATE ELECTRICAL ACT & BOARD RULES" if state_law else standards_label())
 	if is_instance_valid(host.question_hint_row):
 		host.question_hint_row.visible = true
 	host.exam_pills_row.visible = not host.ui_mobile
@@ -191,9 +191,14 @@ static func clock_text(seconds: float) -> String:
 	return "%d:%02d" % [s / 60, s % 60]
 
 
+## "NEC 2023 STANDARDS", the report header's code book.
+static func standards_label() -> String:
+	return Edition.short_label().to_upper() + " STANDARDS"
+
+
 static func show_listen(host: Main) -> void:
 	host.question_label.text = "Listening Session Summary"
-	host.article_label.text = "HANDS-FREE REVIEW  •  NEC 2023 STANDARDS"
+	host.article_label.text = "HANDS-FREE REVIEW  •  " + standards_label()
 	host._update_score_badges()
 	for child in host.answers_box.get_children():
 		host.answers_box.remove_child(child)

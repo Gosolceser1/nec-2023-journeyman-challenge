@@ -46,7 +46,7 @@ static func build(host: Main) -> void:
 	title_box.add_theme_constant_override("separation", AppTheme.SPACE_SM + 2)
 	header.add_child(title_box)
 	var title := Label.new()
-	title.text = "NEC 2023 // JOURNEYMAN"
+	title.text = MenuModel.fill(str(MenuModel.spec().get("title_short", "")), {"edition": Edition.short_label()})
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	title.clip_text = true
 	title.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_BOLD))

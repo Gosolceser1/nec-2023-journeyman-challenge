@@ -47,6 +47,7 @@ const SUITES := [
 	{"name": "study feedback (subject areas, pace, readiness, weakest-area drill)", "path": "res://tools/tests/test_study_feedback.gd"},
 	{"name": "app theme (palette, factories)", "path": "res://tools/tests/test_app_theme.gd"},
 	{"name": "nec reference (titles, lookup path)", "path": "res://tools/tests/test_nec_reference.gd"},
+	{"name": "app strings (edition and exam format from data, both layouts)", "path": "res://tools/tests/test_app_strings.gd"},
 	# An Android report showed a breadcrumb that did not match the question.
 	# Every record, shuffled, through the real Next flow in both layouts: the
 	# breadcrumb and reference line name the record's own chapter and article.
