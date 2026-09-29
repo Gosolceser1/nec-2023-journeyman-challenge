@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470">
+<rect x="0.0" y="0.0" width="800.0" height="470.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="30.0" y="80.0" width="250.0" height="360.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<text x="80.0" y="430.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="middle">panel</text>
+<line x1="80.0" y1="110.0" x2="80.0" y2="220.0" stroke="#e2e8f0" stroke-width="7" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="80.0" y="248.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">L1</text>
+<line x1="120.0" y1="150.0" x2="120.0" y2="220.0" stroke="#e2e8f0" stroke-width="7" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="120.0" y="248.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">L2</text>
+<rect x="170.0" y="112.0" width="60.0" height="36.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="170.0" y="152.0" width="60.0" height="36.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="80.0" y1="130.0" x2="170.0" y2="130.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="120.0" y1="170.0" x2="170.0" y2="170.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="215.0" y1="118.0" x2="215.0" y2="182.0" stroke="#fbbf24" stroke-width="8" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="530.0" y="40.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="middle">handle tie: all ungrounded</text>
+<text x="530.0" y="68.8" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="middle">conductors open together</text>
+<rect x="212.0" y="240.0" width="36.0" height="40.0" rx="4" fill="#cbd5e1" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="194.0" y="268.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="end">N</text>
+<line x1="230.0" y1="130.0" x2="470.0" y2="130.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<polyline points="230.0,170.0 250.0,170.0 250.0,200.0 190.0,200.0 190.0,400.0 650.0,400.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="248.0" y1="260.0" x2="650.0" y2="260.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="360.0" y="118.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">L1 (hot)</text>
+<text x="420.0" y="388.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">L2 (hot)</text>
+<text x="300.0" y="288.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#cbd5e1" text-anchor="start">shared grounded conductor</text>
+<line x1="470.0" y1="130.0" x2="470.0" y2="260.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="470.0" y1="195.0" x2="470.0" y2="260.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="438.0" y="165.0" width="64.0" height="60.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<text x="470.0" y="203.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">120 V</text>
+<text x="505.0" y="191.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">line-to-neutral</text>
+<text x="505.0" y="217.4" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">load</text>
+<line x1="650.0" y1="260.0" x2="650.0" y2="400.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="650.0" y1="330.0" x2="650.0" y2="400.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="618.0" y="300.0" width="64.0" height="60.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<text x="650.0" y="338.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">120 V</text>
+<text x="615.0" y="326.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="end">line-to-neutral</text>
+<text x="615.0" y="352.4" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="end">load</text>
+<rect x="658.4" y="432.0" width="127.6" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="668.4" y="460.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 210.4</text>
+</svg>

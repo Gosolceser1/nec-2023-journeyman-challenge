@@ -283,7 +283,7 @@ support-spacing figure; those are ours to draw.
 
 ## 5. New original figures (all 88 "benefit" records)
 
-**Status:** the high tier (A: 23 records on 13 drawings) ships in the app. The medium (B) and low (C) tiers are drawn and reviewed; they land next, each with the full checks.
+**Status:** the high (A: 23 records) and medium (B: 42 records) tiers ship in the app, 65 records on 31 drawings. The low tier (C) is drawn and reviewed; it lands next, with the full checks.
 
 **One visual system.** `tools/diagrams/nec_style.py` holds the palette (dark
 slate `#0f172a` ground, cyan `#38bdf8` dimensions, green `#34d399` answer
@@ -338,10 +338,15 @@ unmasked.
 
 **Phones.** The figure is a compact thumbnail that `FitController` shrinks
 (down to 96 px) so the question never scrolls; tapping it opens the zoom,
-which carries the same masks. The dark figures sit on a dark card
+which carries the same masks. Where even 96 px would scroll (today only
+`open-book-exam-#10-010`, a long stem and long choices, at phone 360x640
+and 540x960), the figure collapses to a 40 px strip: a small thumbnail and
+"Figure: tap to enlarge", same masks, same zoom. After answering, if the
+screen still overflows with the strip, the explanation sheet (it scrolls
+inside) gives way down to 60 px. The dark figures sit on a dark card
 (`DiagramView.card_style`), inline and in the zoom.
 
-**Size.** 13 drawings, 323 KiB of PNG (about 25 KiB each at 1200 px wide).
+**Size.** 31 drawings, 717 KiB of PNG (about 23 KiB each at 1200 px wide).
 
 **A resize loop fixed.** `DiagramView` sizes its height from its width. On
 the phone layout at 1024x768 (a tablet in landscape) answering

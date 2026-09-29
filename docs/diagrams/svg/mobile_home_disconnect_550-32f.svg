@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470">
+<rect x="0.0" y="0.0" width="800.0" height="470.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="40.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Outdoor mobile home disconnecting means</text>
+<rect x="560.0" y="150.0" width="220.0" height="200.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="3"/>
+<text x="670.0" y="200.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">MOBILE HOME</text>
+<rect x="572.0" y="350.0" width="16.0" height="50.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="752.0" y="350.0" width="16.0" height="50.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="20.0" y="400.0" width="760.0" height="32.0" rx="0" fill="#3f2e1f" fill-opacity="0.75" stroke="none" stroke-width="2"/>
+<circle cx="32.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="60.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="88.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="116.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="144.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="172.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="200.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="228.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="256.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="284.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="312.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="340.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="368.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="396.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="424.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="452.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="480.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="508.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="536.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="564.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="592.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="620.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="648.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="676.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="704.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="732.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="760.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="788.0" cy="418.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<line x1="20.0" y1="400.0" x2="780.0" y2="400.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="396.0" y="390.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">finished grade</text>
+<rect x="244.0" y="170.0" width="14.0" height="230.0" rx="0" fill="#a16207" fill-opacity="0.55" stroke="#ca8a04" stroke-width="2"/>
+<path d="M 248 227.5 q 3.5 -6 7.0 0 t -1.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 248 285.0 q 3.5 -6 7.0 0 t -1.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 248 342.5 q 3.5 -6 7.0 0 t -1.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="200.0" y="218.0" width="100.0" height="110.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<text x="250.0" y="204.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">disconnect</text>
+<line x1="300.0" y1="270.0" x2="322.0" y2="240.0" stroke="#e2e8f0" stroke-width="7" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="322.0" cy="240.0" r="6" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<line x1="230.0" y1="328.0" x2="230.0" y2="420.0" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="230.0" y1="328.0" x2="230.0" y2="420.0" stroke="#64748b" stroke-width="12" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="230.0" y1="420.0" x2="670.0" y2="420.0" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="230.0" y1="420.0" x2="670.0" y2="420.0" stroke="#64748b" stroke-width="12" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="670.0" y1="420.0" x2="670.0" y2="350.0" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="670.0" y1="420.0" x2="670.0" y2="350.0" stroke="#64748b" stroke-width="12" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="200.0" y1="328.0" x2="193.0" y2="328.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="187.0" y1="328.0" x2="180.0" y2="328.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="174.0" y1="328.0" x2="167.0" y2="328.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="161.0" y1="328.0" x2="154.0" y2="328.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="160.0" y1="334.0" x2="160.0" y2="394.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="160.0,328.0 166.0,340.0 154.0,340.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="160.0,400.0 154.0,388.0 166.0,388.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="146.0" y="356.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="end">24 in min</text>
+<text x="146.0" y="389.6" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="end">(600 mm)</text>
+<line x1="328.0" y1="240.0" x2="335.0" y2="240.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="341.0" y1="240.0" x2="348.0" y2="240.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="354.0" y1="240.0" x2="361.0" y2="240.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="367.0" y1="240.0" x2="370.0" y2="240.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="360.0" y1="246.0" x2="360.0" y2="394.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="360.0,240.0 366.0,252.0 354.0,252.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="360.0,400.0 354.0,388.0 366.0,388.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="376.0" y="262.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">handle grip,</text>
+<text x="376.0" y="289.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">highest position:</text>
+<text x="376.0" y="320.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#38bdf8" text-anchor="start">6 ft 7 in max</text>
+<text x="376.0" y="355.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#38bdf8" text-anchor="start">(2.0 m)</text>
+<rect x="618.1" y="434.0" width="167.9" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="628.1" y="462.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 550.32(F)</text>
+</svg>
