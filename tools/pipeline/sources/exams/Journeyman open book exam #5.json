@@ -1,0 +1,305 @@
+{
+ "question_count": 25,
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "Portable structures for fairs, carnivals and similar events shall not be located under or within a space 15 feet horizontally of conductors operating in excess of ___ volts.",
+   "answers": [
+    "1000",
+    "600",
+    "300",
+    "250"
+   ],
+   "correct_index": 1,
+   "reference": "525.5(B)(2)"
+  },
+  {
+   "number": 2,
+   "prompt": "Which of the following is not required to be marked on the name plate of a transformer?",
+   "answers": [
+    "Frequency",
+    "Amount of insulating liquid",
+    "AWG size",
+    "Clearance for ventilating openings"
+   ],
+   "correct_index": 2,
+   "reference": "450.11(A)"
+  },
+  {
+   "number": 3,
+   "prompt": "Temporary electric power and lighting installations shall be permitted for a period not to exceed ___ days for decorative holiday lighting and similar purposes.",
+   "answers": [
+    "25",
+    "50",
+    "60",
+    "90"
+   ],
+   "correct_index": 3,
+   "reference": "590.3(B)"
+  },
+  {
+   "number": 4,
+   "prompt": "___ is permitted in the dedicated electrical space above a panelboard.",
+   "answers": [
+    "Water piping",
+    "Leak protection",
+    "Sprinkler protection",
+    "Air-conditioning ducts"
+   ],
+   "correct_index": 2,
+   "reference": "110.26(E)(1)(c)"
+  },
+  {
+   "number": 5,
+   "prompt": "Grounded conductors of circuits with parallel conductors in a panelboard shall be permitted to terminate in a single terminal if the terminal is ___ for connection of more than one conductor.",
+   "answers": [
+    "identified",
+    "listed",
+    "recognized",
+    "suitable"
+   ],
+   "correct_index": 0,
+   "reference": "408.41 Exception"
+  },
+  {
+   "number": 6,
+   "prompt": "A household electric range with a rating of 8 3/4 kW or more, the minimum branch circuit rating shall be ___ amps.",
+   "answers": [
+    "35",
+    "40",
+    "45",
+    "50"
+   ],
+   "correct_index": 1,
+   "reference": "210.19(C)"
+  },
+  {
+   "number": 7,
+   "prompt": "The phase having the higher voltage to ground is ___, when an industrial control panel is supplied from a 3ø, 4-wire, delta connected electrical system.",
+   "answers": [
+    "permitted to be any phase on a delta connection",
+    "required to be the \"C\" phase on a delta connection",
+    "required to be the \"B\" phase on a delta connection",
+    "required to be the \"A\" phase on a delta connection"
+   ],
+   "correct_index": 2,
+   "reference": "409.102(B)"
+  },
+  {
+   "number": 8,
+   "prompt": "The maximum ampere rating permitted for a 125 volt, single-phase, receptacle outlet having a cord-and-plug connected motor load that does not have individual overload protection is ___.",
+   "answers": [
+    "15 amps",
+    "20 amps",
+    "25 amps",
+    "30 amps"
+   ],
+   "correct_index": 0,
+   "reference": "430.42(C)"
+  },
+  {
+   "number": 9,
+   "prompt": "Service equipment at carnivals and fairs, shall not be installed in a location that is accessible to unqualified persons, unless the equipment ___.",
+   "answers": [
+    "is installed at a height over 6 feet",
+    "is provided with GFCI protection",
+    "is provided with AFCI protection",
+    "is lockable"
+   ],
+   "correct_index": 3,
+   "reference": "525.10(A)"
+  },
+  {
+   "number": 10,
+   "prompt": "Where an NM cable is installed parallel to framing members, the cable shall be installed so that the nearest edge of the cable is not less than ___ from the nearest edge of the framing member.",
+   "answers": [
+    "1/2\"",
+    "1\"",
+    "1 1/4\"",
+    "1 1/2\""
+   ],
+   "correct_index": 2,
+   "reference": "300.4(D)"
+  },
+  {
+   "number": 11,
+   "prompt": "Flexible cords shall be used only in continuous lengths, without splices, other than splices for the repair of hard-service cord or ___ cord under certain conditions.",
+   "answers": [
+    "junior hard-service",
+    "lamp",
+    "tinsel",
+    "portable"
+   ],
+   "correct_index": 0,
+   "reference": "400.13"
+  },
+  {
+   "number": 12,
+   "prompt": "Feeder and branch circuit conductors that are installed on piers shall be provided ground-fault protection not exceeding ___.",
+   "answers": [
+    "30 mA",
+    "25 mA",
+    "20 mA",
+    "18 mA"
+   ],
+   "correct_index": 0,
+   "reference": "682.15(B)"
+  },
+  {
+   "number": 13,
+   "prompt": "Cartridge fuses in circuits of any voltage, and all fuses in circuits over ___ volts to ground, shall be provided with a disconnecting means on their supply side so that each circuit containing fuses can be independently disconnected from the source of power.",
+   "answers": [
+    "150",
+    "125",
+    "120",
+    "60"
+   ],
+   "correct_index": 0,
+   "reference": "240.40"
+  },
+  {
+   "number": 14,
+   "prompt": "Overhead conductors not over 1,000 volts pass over a track rails of railroads, they shall have a minimum clearance of not less than ___ feet above finished grade.",
+   "answers": [
+    "12",
+    "15",
+    "18",
+    "24 1/2"
+   ],
+   "correct_index": 3,
+   "reference": "225.18(5)"
+  },
+  {
+   "number": 15,
+   "prompt": "Outdoor mobile home disconnecting means shall be installed so the bottom of the enclosure containing the disconnecting means is not less than ___ above finished grade or working platform.",
+   "answers": [
+    "24\"",
+    "36\"",
+    "48\"",
+    "60\""
+   ],
+   "correct_index": 0,
+   "reference": "550.32(F)"
+  },
+  {
+   "number": 16,
+   "prompt": "For dwelling units, GFCI protection shall be provided for personnel in ___. I. bathrooms II. crawl spaces III. basements",
+   "answers": [
+    "I only",
+    "I and II only",
+    "I and III only",
+    "I, II, and III"
+   ],
+   "correct_index": 3,
+   "reference": "210.8(A)(1), (4), (5)"
+  },
+  {
+   "number": 17,
+   "prompt": "Personnel doors where equipment rated 800 amperes or more that contains overcurrent devices, is installed and there is a personnel door(s) intended for entrance to and egress from the working space less than ___ feet from the nearest edge of the working space.",
+   "answers": [
+    "12",
+    "15",
+    "20",
+    "25"
+   ],
+   "correct_index": 3,
+   "reference": "110.26(C)(3)"
+  },
+  {
+   "number": 18,
+   "prompt": "Communications wires and cables and CATV type coaxial cables shall have a vertical clearance of not less than ___ from all points of roofs which they pass.",
+   "answers": [
+    "18\"",
+    "36\"",
+    "6 feet",
+    "8 feet"
+   ],
+   "correct_index": 3,
+   "reference": "800.44(B)"
+  },
+  {
+   "number": 19,
+   "prompt": "The installation and wiring of separately derived sytems operating at 120 volts line-to-line and ___ volts to ground for sensitive electronic equipment.",
+   "answers": [
+    "30",
+    "50",
+    "60",
+    "85"
+   ],
+   "correct_index": 2,
+   "reference": "647.1"
+  },
+  {
+   "number": 20,
+   "prompt": "Installation of direct buried cables in an area that is subject to movement by frost or settlement of the soil shall be ___.",
+   "answers": [
+    "heated electrically",
+    "of XHHW only",
+    "on running boards",
+    "placed with \"S\" loops"
+   ],
+   "correct_index": 3,
+   "reference": "300.5(J) Exception"
+  },
+  {
+   "number": 21,
+   "prompt": "Grounding electrodes of pipe or conduit shall not be smaller than trade size ___ and, where of steel, shall have the outer surface galvanized or otherwise metal-coated for corrosion protection.",
+   "answers": [
+    "1/2\"",
+    "3/4\"",
+    "1\"",
+    "1 1/4\""
+   ],
+   "correct_index": 1,
+   "reference": "250.52(A)(5)(1)"
+  },
+  {
+   "number": 22,
+   "prompt": "All switchboards, switchgear, and panelboards supplied by a ___ in other than one or two-family dwellings shall be permanently marked to indicate each device or equipment where the power originates.",
+   "answers": [
+    "feeder",
+    "service",
+    "generator",
+    "alternator"
+   ],
+   "correct_index": 0,
+   "reference": "408.4(B)"
+  },
+  {
+   "number": 23,
+   "prompt": "Where exposed NM cable passes through a floor, the NM cable shall be protected from damage by an approved means extending at least ___ above the floor.",
+   "answers": [
+    "18\"",
+    "16\"",
+    "8\"",
+    "6\""
+   ],
+   "correct_index": 3,
+   "reference": "334.15(B)"
+  },
+  {
+   "number": 24,
+   "prompt": "PVC conduit shall be securely fastened within ___ of each outlet, junction device, conduit body, or other conduit termination box.",
+   "answers": [
+    "24\"",
+    "30\"",
+    "36\"",
+    "48\""
+   ],
+   "correct_index": 2,
+   "reference": "352.30(A)"
+  },
+  {
+   "number": 25,
+   "prompt": "Grounding conductors and bonding jumpers shall not be connected by ___.",
+   "answers": [
+    "listed pressure connectors",
+    "exothermic welding process",
+    "terminal bars",
+    "sheet metal screws"
+   ],
+   "correct_index": 3,
+   "reference": "250.8(A)"
+  }
+ ]
+}

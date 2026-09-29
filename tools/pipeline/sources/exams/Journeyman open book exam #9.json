@@ -1,0 +1,305 @@
+{
+ "question_count": 25,
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "In a concealed knob-and-tube wiring system, a minimum clearance of ___ must be maintained between conductors.",
+   "answers": [
+    "2\"",
+    "3\"",
+    "4\"",
+    "6\""
+   ],
+   "correct_index": 1,
+   "reference": "394.19(A)"
+  },
+  {
+   "number": 2,
+   "prompt": "Table ___ lists the minimum size equipment grounding conductors.",
+   "answers": [
+    "250.66",
+    "250.94",
+    "250.102(C)(1)",
+    "250.122"
+   ],
+   "correct_index": 3,
+   "reference": "Table 250.122"
+  },
+  {
+   "number": 3,
+   "prompt": "Information note: ANSI ___-2017, Product Safety Signs and Labels, provides guidelines for suitable font sizes, words, colors, symbols, and location requirements for labels.",
+   "answers": [
+    "Z535.4",
+    "Z541.B",
+    "Z212.W",
+    "Z1956.G"
+   ],
+   "correct_index": 0,
+   "reference": "110.21(B) Informational Note No. 2"
+  },
+  {
+   "number": 4,
+   "prompt": "Where there is more than one driving machine in a machine room, the disconnecting means shall be numbered to correspond to the identifying number of the driving machine that they control. The disconnecting means shall be provided with a sign to identify the ___ of the supply side overcurrent protective device.",
+   "answers": [
+    "amperage",
+    "load",
+    "location",
+    "voltage"
+   ],
+   "correct_index": 2,
+   "reference": "620.51(C)"
+  },
+  {
+   "number": 5,
+   "prompt": "___ lists the percent of cross sectional fill permitted in conduit and tubing fill for conductors and cables.",
+   "answers": [
+    "Table 4, Chapter 9",
+    "Table 8, Chapter 9",
+    "Table 1, Chapter 9",
+    "Table 5, Chapter 9"
+   ],
+   "correct_index": 2,
+   "reference": "Chapter 9, Table 1"
+  },
+  {
+   "number": 6,
+   "prompt": "Where the overcurrent device is rated over 800 amperes, the ampacity of the conductors it protects shall be ___ the rating of the overcurrent device defined in section 240.6.",
+   "answers": [
+    "80% of",
+    "100% of",
+    "equal to or greater than",
+    "not less than"
+   ],
+   "correct_index": 2,
+   "reference": "240.4(C)"
+  },
+  {
+   "number": 7,
+   "prompt": "Where corrosion protection is necessary, and the conduit is threaded in the field, the threads shall be coated with a/an ___ electrically conductive, corrosion-resistant compound.",
+   "answers": [
+    "Approved",
+    "UL Listed",
+    "Identified",
+    "Labeled"
+   ],
+   "correct_index": 0,
+   "reference": "300.6(A)"
+  },
+  {
+   "number": 8,
+   "prompt": "A permanent and legible ___ diagram of the local switching arrangement, clearly identifying each point of connection to the high-voltage section, shall be provided within sight of each point of connection .",
+   "answers": [
+    "schematic",
+    "riser",
+    "single-line",
+    "connection"
+   ],
+   "correct_index": 2,
+   "reference": "495.25(B)"
+  },
+  {
+   "number": 9,
+   "prompt": "For motors marked with design letters B, C, or D, conductors having an insulation rating of 75°C or higher shall be permitted to be used, provided the ampacity of such conductors does not exceed the ___ ampacity.",
+   "answers": [
+    "60°C",
+    "75°C",
+    "90°C",
+    "104°C"
+   ],
+   "correct_index": 1,
+   "reference": "110.14(C)(1)(a)(4)"
+  },
+  {
+   "number": 10,
+   "prompt": "Signs and outline lighting systems with lampholders for incandescent lamps shall be marked to indicate the maximum allowable lamp wattage per lampholder. The markings shall be permanently installed, in letters at least ___ high, and shall be located where visible during relamping.",
+   "answers": [
+    "1/4\"",
+    "1/2'",
+    "1\"",
+    "2\""
+   ],
+   "correct_index": 0,
+   "reference": "600.4(C)"
+  },
+  {
+   "number": 11,
+   "prompt": "Table ___ lists the maximum rating or setting of motor branch-circuit short circuit and ground fault protective devices.",
+   "answers": [
+    "430.248",
+    "430.52(C)(1)",
+    "430.37",
+    "430.22"
+   ],
+   "correct_index": 1,
+   "reference": "Table 430.52"
+  },
+  {
+   "number": 12,
+   "prompt": "Branch circuits recognized by this article shall be rated in accordance with the maximum permitted ampere rating or ___ of the overcurrent device.",
+   "answers": [
+    "listing",
+    "marking",
+    "setting",
+    "rating"
+   ],
+   "correct_index": 2,
+   "reference": "210.18"
+  },
+  {
+   "number": 13,
+   "prompt": "Ventilating pipes for motors, generators, or other rotating electrical machinery, or for enclosures for electrical equipment, shall be of metal not less than .021\" in thickness or of equally substantial noncombustible material and shall comply with: ___.",
+   "answers": [
+    "have no more than 360° of bend",
+    "lead directly into attic air space",
+    "be protected against physical damage and against rusting or other corrosive influences",
+    "have hinged openings at each end to prevent the entrance of rodents or small birds"
+   ],
+   "correct_index": 2,
+   "reference": "502.128(3)"
+  },
+  {
+   "number": 14,
+   "prompt": "Table ___ lists the maximum cord-and-plug-connected load to a receptacle.",
+   "answers": [
+    "210.21(B)(2)",
+    "210.24",
+    "210.21(B)(3)",
+    "220.3"
+   ],
+   "correct_index": 0,
+   "reference": "Table 210.21(B)(2)"
+  },
+  {
+   "number": 15,
+   "prompt": "Boxes that enclose devices or utilization equipment that projects more than ___ rearward from the mounting plane of the box shall have a depth that is not less than the depth of the equipment plus 1/4\".",
+   "answers": [
+    "1/4\"",
+    "1/2\"",
+    "3/4\"",
+    "1 7/8\""
+   ],
+   "correct_index": 3,
+   "reference": "314.24(B)(1)"
+  },
+  {
+   "number": 16,
+   "prompt": "Separately installed pressure connectors shall be used with conductors at the ampacities not exceeding the ampacity at the listed and identified temperature rating of the ___.",
+   "answers": [
+    "connector",
+    "equipment",
+    "system",
+    "conductors"
+   ],
+   "correct_index": 0,
+   "reference": "110.14(C)(2)"
+  },
+  {
+   "number": 17,
+   "prompt": "Table ___ lists clearances over roadways, walkways, rail, water, and open land.",
+   "answers": [
+    "300.5",
+    "220.102",
+    "235.360(A)",
+    "225.61"
+   ],
+   "correct_index": 2,
+   "reference": "Table 225.60"
+  },
+  {
+   "number": 18,
+   "prompt": "Where conductors of higher ampacity are used for any reason, the ampere rating or setting of the specified overcurrent device determines the ___.",
+   "answers": [
+    "conductor size",
+    "inverse time",
+    "circuit rating",
+    "total ampacity"
+   ],
+   "correct_index": 2,
+   "reference": "210.18"
+  },
+  {
+   "number": 19,
+   "prompt": "Table ___ lists minimum depth of clear working space at electrical equipment.",
+   "answers": [
+    "110.28",
+    "110.34(A)",
+    "110.34(E)",
+    "210.3"
+   ],
+   "correct_index": 1,
+   "reference": "Table 110.34(A)"
+  },
+  {
+   "number": 20,
+   "prompt": "The ampere rating of an electric range receptacle is permitted to be based on the demand load of a single range as specified in Table ___.",
+   "answers": [
+    "210.21(B)(2)",
+    "210.21(B)(3)",
+    "210.24",
+    "220.55"
+   ],
+   "correct_index": 3,
+   "reference": "210.21(B)(4)"
+  },
+  {
+   "number": 21,
+   "prompt": "What section of the NEC determines the installation of service equipment on manufactured buildings?",
+   "answers": [
+    "230.60",
+    "545.7",
+    "240.6",
+    "250.66"
+   ],
+   "correct_index": 1,
+   "reference": "230.70"
+  },
+  {
+   "number": 22,
+   "prompt": "Torque motors are rated for operation ___.",
+   "answers": [
+    "at full torque",
+    "at F.L.C.",
+    "at standstill",
+    "with code letter"
+   ],
+   "correct_index": 2,
+   "reference": "430.7(C)"
+  },
+  {
+   "number": 23,
+   "prompt": "\"Z.P.\" is an abbreviated marking used for motors to indicate ___.",
+   "answers": [
+    "single-phase",
+    "induction-protected",
+    "thermally protected",
+    "impedance protected"
+   ],
+   "correct_index": 3,
+   "reference": "430.7(A)(14)"
+  },
+  {
+   "number": 24,
+   "prompt": "___ RMC shall be permitted to be installed for direct burial and swimming pool applications.",
+   "answers": [
+    "Stainless steel",
+    "Galvanized steel",
+    "Aluminum",
+    "Red brass"
+   ],
+   "correct_index": 3,
+   "reference": "344.10(A)(1)"
+  },
+  {
+   "number": 25,
+   "prompt": "Which of the following is not considered part of a luminaire?",
+   "answers": [
+    "ballast",
+    "a lampholder",
+    "lamp or lamps",
+    "parts designed to position the light source"
+   ],
+   "correct_index": 1,
+   "reference": "Article 100 Luminaire"
+  }
+ ]
+}

@@ -1,0 +1,307 @@
+{
+ "question_count": 25,
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "If an exit enclosure (stair tower) is required to be separated from the building, only electrical wiring methods serving equipment permitted by the ___ is permitted within the exit enclosure.",
+   "answers": [
+    "electrical inspector",
+    "building inspector",
+    "fire marshal",
+    "AHJ"
+   ],
+   "correct_index": 3,
+   "reference": "300.25"
+  },
+  {
+   "number": 2,
+   "prompt": "For large-scale PV installations (5,000 kW or more), buildings whose sole purpose is to house supply station equipment shall ___ comply with 690.12 for rapid shutdown systems.",
+   "answers": [
+    "never",
+    "be required to",
+    "not be required to",
+    "always"
+   ],
+   "correct_index": 2,
+   "reference": "691.9"
+  },
+  {
+   "number": 3,
+   "prompt": "The emergency shutoff device for a fuel dispenser must simultaneously disconnect all conductors of the circuit(s), including the ___ conductor if any.",
+   "answers": [
+    "grounded",
+    "grounding electrode",
+    "equipment grounding",
+    "all of these"
+   ],
+   "correct_index": 0,
+   "reference": "514.11(A)"
+  },
+  {
+   "number": 4,
+   "prompt": "Unless otherwise permitted, wiring for ___ loads shall be kept independent from all other wiring and equipment.",
+   "answers": [
+    "emergency",
+    "legally-required standby",
+    "optional standby",
+    "all of these"
+   ],
+   "correct_index": 0,
+   "reference": "700.10(B)"
+  },
+  {
+   "number": 5,
+   "prompt": "A building may have more than one service if the capacity requirement exceeds ___ amperes at 1,000 volts or less.",
+   "answers": [
+    "1,000",
+    "1,200",
+    "2,000",
+    "2,400"
+   ],
+   "correct_index": 2,
+   "reference": "230.2(C)(1)"
+  },
+  {
+   "number": 6,
+   "prompt": "Equipment intended to interrupt current at fault levels shall have a/an ___ rating, at normal voltage, that is at least equal to the available fault current at the line terminals of the equipment.",
+   "answers": [
+    "time delay",
+    "interrupting",
+    "short-time",
+    "long-time"
+   ],
+   "correct_index": 1,
+   "reference": "110.9"
+  },
+  {
+   "number": 7,
+   "prompt": "Microgrid systems shall be permitted to disconnect from other sources and operate in ___.",
+   "answers": [
+    "stand by",
+    "stand alone",
+    "parallel",
+    "island mode"
+   ],
+   "correct_index": 3,
+   "reference": "705.50"
+  },
+  {
+   "number": 8,
+   "prompt": "Openings around electrical penetrations into or through fire-resistance rated ___ shall be firestopped using approved methods.",
+   "answers": [
+    "walls",
+    "floors",
+    "ceilings",
+    "all of these"
+   ],
+   "correct_index": 3,
+   "reference": "300.21"
+  },
+  {
+   "number": 9,
+   "prompt": "The dc conductors of a PV system shall not occupy the same ___ as PV system ac conductors unless separated by a barrier or partition.",
+   "answers": [
+    "raceway",
+    "cable",
+    "enclosure",
+    "all of these"
+   ],
+   "correct_index": 3,
+   "reference": "690.31(B)(1)"
+  },
+  {
+   "number": 10,
+   "prompt": "On a 4-wire, delta-connected system where the midpoint of one phase winding is grounded, the conductor having the higher voltage to ground shall be marked by an outer finish that is orange or ___.",
+   "answers": [
+    "gray",
+    "yellow",
+    "brown",
+    "other effective means"
+   ],
+   "correct_index": 3,
+   "reference": "110.15"
+  },
+  {
+   "number": 11,
+   "prompt": "The voltage at the load terminals of a fire pump controller shall not drop more than ___ percent below the voltage rating of the connected motor when operating at 115% of the full-load current of the motor.",
+   "answers": [
+    "1.2",
+    "3",
+    "5",
+    "7.5"
+   ],
+   "correct_index": 2,
+   "reference": "695.7(D)"
+  },
+  {
+   "number": 12,
+   "prompt": "Vegetation such as trees shall not be used for support of ___.",
+   "answers": [
+    "luminaires",
+    "boxes",
+    "overhead conductor spans",
+    "any of these"
+   ],
+   "correct_index": 2,
+   "reference": "225.26"
+  },
+  {
+   "number": 13,
+   "prompt": "A/an ___ listed shall be installed between a wind-electric system and any loads served by the premises wiring system.",
+   "answers": [
+    "surge protective device",
+    "GFCI",
+    "AFCI",
+    "arrester"
+   ],
+   "correct_index": 0,
+   "reference": "694.7(D)"
+  },
+  {
+   "number": 14,
+   "prompt": "A luminaire in a commercial cooking hood must, among other requirements, exclude grease, oil, and ___ from the lamp and wiring compartment.",
+   "answers": [
+    "solids",
+    "moisture",
+    "oxygen",
+    "exhaust vapors"
+   ],
+   "correct_index": 3,
+   "reference": "410.10(C)(2)"
+  },
+  {
+   "number": 15,
+   "prompt": "A device that uses power electronics to convert one form of electrical power into another form of electrical power is known as a/an ___.",
+   "answers": [
+    "solar cell",
+    "wind turbine",
+    "inverter",
+    "electronic power converter"
+   ],
+   "correct_index": 3,
+   "reference": "Article 100",
+   "key_note": "DEF 100"
+  },
+  {
+   "number": 16,
+   "prompt": "Stainless steel rigid metal conduit may use galvanized steel boxes and enclosures if those enclosures are not subject to ___.",
+   "answers": [
+    "severe corrosive influences",
+    "unauthorized contact",
+    "corrosive influences",
+    "physical damage"
+   ],
+   "correct_index": 0,
+   "reference": "344.14"
+  },
+  {
+   "number": 17,
+   "prompt": "For a PV system, the rapid shutdown for conductors inside the array boundry must limit the voltage to not more than ___ volts within 30 seconds of the shutdown initiation.",
+   "answers": [
+    "10",
+    "15",
+    "24",
+    "30"
+   ],
+   "correct_index": 3,
+   "reference": "690.12(B)(1)"
+  },
+  {
+   "number": 18,
+   "prompt": "The sum of the multiconductor cable fill area as a percentage of the allowable fill area for the tray calculated in accordance with 392.22(A), and the single-conductor cable fill area as a percentage of the allowable fill area for the tray calculated in accordance with 392.22(B), totals not more than ___%.",
+   "answers": [
+    "75",
+    "80",
+    "100",
+    "125"
+   ],
+   "correct_index": 2,
+   "reference": "392.80(A)(3)"
+  },
+  {
+   "number": 19,
+   "prompt": "The maximum voltage of an ESS shall be the rated ESS input and ___ voltage(s).",
+   "answers": [
+    "output",
+    "line",
+    "secondary",
+    "load"
+   ],
+   "correct_index": 0,
+   "reference": "706.9"
+  },
+  {
+   "number": 20,
+   "prompt": "There shall be no voltage marking on a Type TC cable employing ___ wire.",
+   "answers": [
+    "covered",
+    "fixture",
+    "rubber insulated",
+    "thermocouple extension"
+   ],
+   "correct_index": 3,
+   "reference": "336.120"
+  },
+  {
+   "number": 21,
+   "prompt": "The maximum size FMT permitted is ___.",
+   "answers": [
+    "1/2\"",
+    "3/4\"",
+    "1\"",
+    "1 1/4\""
+   ],
+   "correct_index": 1,
+   "reference": "360.20(B)"
+  },
+  {
+   "number": 22,
+   "prompt": "Fastening of unbroken lengths of EMT conduit can be increased to a distance of ___ from the termination point where the structural members do not readily permit fastening within 3 feet.",
+   "answers": [
+    "4'",
+    "5'",
+    "6'",
+    "10'"
+   ],
+   "correct_index": 1,
+   "reference": "358.30(A) Ex. 1",
+   "key_note": "358.30(A) ex.1"
+  },
+  {
+   "number": 23,
+   "prompt": "The minimum size copper equipment grounding conductor required on a motor branch circuit with a 30 amp circuit breaker and #12 copper conductor is ___.",
+   "answers": [
+    "#10",
+    "#8",
+    "#12",
+    "#14"
+   ],
+   "correct_index": 2,
+   "reference": "Table 250.122"
+  },
+  {
+   "number": 24,
+   "prompt": "What is the maximum length of an unprotected feeder tap conductor?",
+   "answers": [
+    "10 feet",
+    "25 feet",
+    "50 feet",
+    "100 feet"
+   ],
+   "correct_index": 3,
+   "reference": "240.21(B)(4)"
+  },
+  {
+   "number": 25,
+   "prompt": "Individual open conductors and cables other than service entrance cables shall not be installed less than ___ feet from grade level.",
+   "answers": [
+    "8",
+    "10",
+    "15",
+    "18"
+   ],
+   "correct_index": 1,
+   "reference": "225.18(1)"
+  }
+ ]
+}

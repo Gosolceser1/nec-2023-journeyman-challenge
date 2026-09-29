@@ -1,0 +1,845 @@
+{
+ "question_count": 70,
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "When applying the demand factors of Table 220.56, in no case can the feeder or service demand load be less than the sum of the ___.",
+   "answers": [
+    "largest two kitchen equipment loads",
+    "heat and air conditioning loads",
+    "rating of the appliance loads",
+    "total receptacle load"
+   ],
+   "correct_index": 0,
+   "reference": "220.56"
+  },
+  {
+   "number": 2,
+   "prompt": "The ampacity of capacitor circuit conductors must not be less than ___ of capacitor current.",
+   "answers": [
+    "80%",
+    "100%",
+    "125%",
+    "135%"
+   ],
+   "correct_index": 3,
+   "reference": "460.8(A)"
+  },
+  {
+   "number": 3,
+   "prompt": "The number of conductors allowed in LFNC must not exceed that permitted in ___.",
+   "answers": [
+    "Table 7",
+    "Appendix D",
+    "Table 1",
+    "Table 4"
+   ],
+   "correct_index": 2,
+   "reference": "356.22"
+  },
+  {
+   "number": 4,
+   "prompt": "A single piece of equipment consisting of a multiple receptacle comprised of ___ or more receptacles must be computed at not less than 90 va per receptacle.",
+   "answers": [
+    "one",
+    "two",
+    "three",
+    "four"
+   ],
+   "correct_index": 3,
+   "reference": "220.14(I)"
+  },
+  {
+   "number": 5,
+   "prompt": "Per the Code, the volume of a 3\" x 2\" x 2\" device box is ___ cubic inches.",
+   "answers": [
+    "10",
+    "12",
+    "14",
+    "15"
+   ],
+   "correct_index": 0,
+   "reference": "Table 314.16(A)"
+  },
+  {
+   "number": 6,
+   "prompt": "The AC ohms-to-neutral impedance per 1,000 feet of #4/0 aluminum in a steel raceway is ___.",
+   "answers": [
+    "0.052",
+    "0.0102",
+    "0.1012",
+    "0.102"
+   ],
+   "correct_index": 3,
+   "reference": "Chapter 9, Table 9"
+  },
+  {
+   "number": 7,
+   "prompt": "A value assigned to a circuit or system for the purpose of conveniently designating its voltage class such as 120/240 volt is called ___ voltage.",
+   "answers": [
+    "average",
+    "source",
+    "nominal",
+    "effective"
+   ],
+   "correct_index": 2,
+   "reference": "Article 100"
+  },
+  {
+   "number": 8,
+   "prompt": "A 240 volt single-phase room air conditioner shall be considered as a single-phase motor unit if its rating is not more than ___.",
+   "answers": [
+    "20 amps",
+    "25 amps",
+    "30 amps",
+    "40 amps"
+   ],
+   "correct_index": 3,
+   "reference": "440.62(A)(2)"
+  },
+  {
+   "number": 9,
+   "prompt": "A steel cable tray of .79 square inches is used as an equipment ground conductor. The maximum rating of the circuit breaker permitted for this application is ___ amps.",
+   "answers": [
+    "1000",
+    "600",
+    "200",
+    "400"
+   ],
+   "correct_index": 2,
+   "reference": "Table 392.60(B)"
+  },
+  {
+   "number": 10,
+   "prompt": "A bathroom in a dwelling has a counter space of seven feet including the sink. How many receptacles are required to serve this area?",
+   "answers": [
+    "1",
+    "3",
+    "4",
+    "none are required"
+   ],
+   "correct_index": 0,
+   "reference": "210.52(D)"
+  },
+  {
+   "number": 11,
+   "prompt": "An installation requires a device box with a capacity of 10.25 cubic inches. What is the minimum size box allowed?",
+   "answers": [
+    "2\" x 2\" x 3\"",
+    "3\" x 2\" x 2 1/4\"",
+    "3\" x 2\" x 2\"",
+    "2\" x 3\" x 3\""
+   ],
+   "correct_index": 1,
+   "reference": "Table 314.16(A)"
+  },
+  {
+   "number": 12,
+   "prompt": "A show window is calculated at ___ va per linear foot.",
+   "answers": [
+    "180",
+    "1500",
+    "1800",
+    "200"
+   ],
+   "correct_index": 3,
+   "reference": "220.14(G)(2)"
+  },
+  {
+   "number": 13,
+   "prompt": "The maximum number of 15 amp receptacles permitted on a free standing office partition is ___.",
+   "answers": [
+    "10",
+    "13",
+    "12",
+    "6"
+   ],
+   "correct_index": 1,
+   "reference": "605.9(C)"
+  },
+  {
+   "number": 14,
+   "prompt": "Several motors, each not exceeding 1 horsepower in rating, shall be permitted on a nominal 120 volt branch circuit protected at not over ___ amperes.",
+   "answers": [
+    "15",
+    "20",
+    "30",
+    "40"
+   ],
+   "correct_index": 1,
+   "reference": "430.53(A)"
+  },
+  {
+   "number": 15,
+   "prompt": "At least one receptacle outlet per unit, accessible at grade level, shall be installed at the front and back on ___.",
+   "answers": [
+    "commercial buildings",
+    "office buildings only",
+    "motels",
+    "one and two family dwellings"
+   ],
+   "correct_index": 3,
+   "reference": "210.52(E)(1)"
+  },
+  {
+   "number": 16,
+   "prompt": "Which of the following receptacles may be connected to the small appliance branch circuit?",
+   "answers": [
+    "Outside receptacles",
+    "Electric clock in a dining room",
+    "Hallway receptacle which is within 20 feet of kitchen",
+    "Garage ceiling receptacle for automatic garage door opener"
+   ],
+   "correct_index": 1,
+   "reference": "210.52(B)(2) Ex. 1"
+  },
+  {
+   "number": 17,
+   "prompt": "Where the ampacity of a conductor does not correspond with the standard ampere rating of a fuse or circuit breaker, the next higher standard size is permitted only if the rating does not exceed ___ amperes.",
+   "answers": [
+    "600",
+    "800",
+    "1,000",
+    "1,200"
+   ],
+   "correct_index": 1,
+   "reference": "240.4(B)(3)"
+  },
+  {
+   "number": 18,
+   "prompt": "Where wet contact is likely to occur in a permanent amusement attraction, ungrounded 2-wire DC control circuits shall be limited to ___ maximum for continuous DC or 12.4 volts peak for DC that is interrupted at a rate of 10 to 200 Hz.",
+   "answers": [
+    "12 volts",
+    ".031 va",
+    "24 watts",
+    "30 volts"
+   ],
+   "correct_index": 3,
+   "reference": "522.28"
+  },
+  {
+   "number": 19,
+   "prompt": "It shall be permissible to apply a demand factor of 75% to the nameplate-rating load of 4 or more ___ fastened in place in a dwelling. I. water heaters II. dishwashers III. clothes dryers",
+   "answers": [
+    "I only",
+    "II only",
+    "I and II only",
+    "I, II and III"
+   ],
+   "correct_index": 2,
+   "reference": "220.53"
+  },
+  {
+   "number": 20,
+   "prompt": "When more than one calculated or tabulated ampacity could apply for a given circuit length, the ___ value shall be used.",
+   "answers": [
+    "lowest",
+    "average",
+    "highest",
+    "none of these"
+   ],
+   "correct_index": 0,
+   "reference": "310.14(A)(2)"
+  },
+  {
+   "number": 21,
+   "prompt": "What size octagon box is required for 5 - #12 and 4 - #14 conductors?",
+   "answers": [
+    "1 1/4\"",
+    "1 1/2\"",
+    "2\"",
+    "2 1/8\""
+   ],
+   "correct_index": 3,
+   "reference": "Table 314.16(B)(1)"
+  },
+  {
+   "number": 22,
+   "prompt": "Assuming that the area of all the conductors (over 4 conductors) to be installed in a 1\" EMT conduit is 0.30 sq. in., which of the following is true?",
+   "answers": [
+    "The conductors' area is greater than the allowable area of tubing fill.",
+    "The conductors' area is less than the allowable area of tubing fill.",
+    "It is necessary to select another trade size.",
+    "It is necessary to change the THW conductors to RHW."
+   ],
+   "correct_index": 1,
+   "reference": "Chapter 9, Table 4"
+  },
+  {
+   "number": 23,
+   "prompt": "When sizing the service conductors for an apartment complex, the minimum demand load in kW for eight 4 kW ranges would be ___ kW.",
+   "answers": [
+    "11.52",
+    "16.96",
+    "32",
+    "None of these"
+   ],
+   "correct_index": 0,
+   "reference": "Table 220.55"
+  },
+  {
+   "number": 24,
+   "prompt": "The ampacity of a #14 THW conductor, when there are six conductors in a conduit and the temperature is 30° C, would be ___ amps.",
+   "answers": [
+    "25",
+    "22",
+    "20",
+    "16"
+   ],
+   "correct_index": 3,
+   "reference": "Table 310.15(C)(1)"
+  },
+  {
+   "number": 25,
+   "prompt": "In a custom house, the demand load (load applied for service calculation) for a 12 kW range and a 4 kW oven is ___ kW.",
+   "answers": [
+    "11",
+    "11.2",
+    "12",
+    "16"
+   ],
+   "correct_index": 0,
+   "reference": "Table 220.55"
+  },
+  {
+   "number": 26,
+   "prompt": "The branch circuit conductor supplying a 3/4 hp, 1ø 115 volt motor shall have an ampacity of at least ___.",
+   "answers": [
+    "13.8 amps",
+    "17.25 amps",
+    "20 amps",
+    "21.3 amps"
+   ],
+   "correct_index": 1,
+   "reference": "Table 430.248"
+  },
+  {
+   "number": 27,
+   "prompt": "You are wiring a house that has 2200 square feet under the roof. The living area accounts for 2000 square feet of this space. The minimum general lighting load for this dwelling would be ___ VA.",
+   "answers": [
+    "6000",
+    "6600",
+    "7700",
+    "8000"
+   ],
+   "correct_index": 0,
+   "reference": "220.5(C)"
+  },
+  {
+   "number": 28,
+   "prompt": "When sizing the service on a dwelling unit, the small appliance load plus laundry load should be computed at ___ VA.",
+   "answers": [
+    "1,500",
+    "3,000",
+    "4,500",
+    "6,000"
+   ],
+   "correct_index": 2,
+   "reference": "220.52(A)"
+  },
+  {
+   "number": 29,
+   "prompt": "#2/0 THW copper service conductors would require a grounding electrode conductor of ___.",
+   "answers": [
+    "#6",
+    "#4",
+    "#3",
+    "#2"
+   ],
+   "correct_index": 1,
+   "reference": "Table 250.66"
+  },
+  {
+   "number": 30,
+   "prompt": "The feeder carrying two single phase, 1 1/2 hp, 230v motors would be required to have a load current rating of ___ amps.",
+   "answers": [
+    "12",
+    "16",
+    "22.5",
+    "30"
+   ],
+   "correct_index": 2,
+   "reference": "430.24"
+  },
+  {
+   "number": 31,
+   "prompt": "What is the allowable ampacity of a #12 TW copper conductor in a raceway with an ambient temperature of 75°F?",
+   "answers": [
+    "20 amps",
+    "25 amps",
+    "21.6 amps",
+    "30 amps"
+   ],
+   "correct_index": 2,
+   "reference": "Table 310.15(B)(1)(1)"
+  },
+  {
+   "number": 32,
+   "prompt": "The branch-circuit protection for a 1ø, 115v, 3 hp motor would normally be ___ using dual element time delay fuses.",
+   "answers": [
+    "35 amps",
+    "40 amps",
+    "60 amps",
+    "90 amps"
+   ],
+   "correct_index": 2,
+   "reference": "Table 430.52(C)(1)"
+  },
+  {
+   "number": 33,
+   "prompt": "The ampacity of a #14 THW conductor, when there are six conductors in a conduit and the temperature is 30°C, would be ___ amps.",
+   "answers": [
+    "25",
+    "22",
+    "20",
+    "16"
+   ],
+   "correct_index": 3,
+   "reference": "Table 310.15(C)(1)"
+  },
+  {
+   "number": 34,
+   "prompt": "The maximum motor-running overload protection would be ___ amps for a 3 hp 1ø 230V motor.",
+   "answers": [
+    "15",
+    "20",
+    "22.1",
+    "29.1"
+   ],
+   "correct_index": 2,
+   "reference": "430.32(C)"
+  },
+  {
+   "number": 35,
+   "prompt": "The correction factor (C.F.) for 104°F is ___ for a 60°C insulated conductor.",
+   "answers": [
+    "0.80",
+    "0.82",
+    "0.91",
+    "0.90"
+   ],
+   "correct_index": 1,
+   "reference": "Table 310.15(B)(1)(1)"
+  },
+  {
+   "number": 36,
+   "prompt": "The branch-circuit load for one 6 kW oven would be ___ kW.",
+   "answers": [
+    "6",
+    "4.8",
+    "4.2",
+    "5"
+   ],
+   "correct_index": 0,
+   "reference": "Table 220.55 Note 4"
+  },
+  {
+   "number": 37,
+   "prompt": "If the full load current of a 2 hp, 115v, 1ø motor with a service factor of 1.2 is 24 amps. What is the maximum motor running overload relay protection?",
+   "answers": [
+    "24",
+    "27.6",
+    "31.2",
+    "33.6"
+   ],
+   "correct_index": 3,
+   "reference": "430.32(C)"
+  },
+  {
+   "number": 38,
+   "prompt": "What is the cubic inch capacity required for a device box containing one duplex receptacle, cable clamps and two #12-2 with ground nonmetallic sheathed cables (romex)?",
+   "answers": [
+    "13.5 cu.in.",
+    "15.75 cu.in.",
+    "16 cu.in.",
+    "18 cu.in."
+   ],
+   "correct_index": 3,
+   "reference": "314.16(B)"
+  },
+  {
+   "number": 39,
+   "prompt": "The branch circuit conductor supplying a 10 hp 3ø 230v motor shall have an ampacity of at least ___ amps.",
+   "answers": [
+    "38.5",
+    "40.25",
+    "35",
+    "17.5"
+   ],
+   "correct_index": 2,
+   "reference": "Table 430.250"
+  },
+  {
+   "number": 40,
+   "prompt": "There are seven current carrying #12 THHN conductors run in a conduit where the ambient temperature is 30°C. What is the ampacity of each conductor?",
+   "answers": [
+    "21",
+    "17.5",
+    "16",
+    "14"
+   ],
+   "correct_index": 0,
+   "reference": "Table 310.15(C)(1)"
+  },
+  {
+   "number": 41,
+   "prompt": "The ampacity of a #12 THW conductor when there are not more than three conductors in a raceway and the ambient temperature is 28°C, would be how many amps?",
+   "answers": [
+    "20",
+    "25",
+    "30",
+    "35"
+   ],
+   "correct_index": 1,
+   "reference": "Table 310.16"
+  },
+  {
+   "number": 42,
+   "prompt": "A 10 unit apartment building has a 4.5 kW water heater in each unit. What is the demand on the service for these water heaters? Use standard method of calculation.",
+   "answers": [
+    "45 kW",
+    "50 kW",
+    "33.75 kW",
+    "36 kW"
+   ],
+   "correct_index": 2,
+   "reference": "220.53"
+  },
+  {
+   "number": 43,
+   "prompt": "The overcurrent protection for a #10 RHH conductor in a conduit at 104°F is ___ amps.",
+   "answers": [
+    "30",
+    "36.4",
+    "40",
+    "20"
+   ],
+   "correct_index": 0,
+   "reference": "240.4(D)"
+  },
+  {
+   "number": 44,
+   "prompt": "Under the optional calculation, the air conditioning is added to the service at ___.",
+   "answers": [
+    "125%",
+    "full load",
+    "80%",
+    "demand load"
+   ],
+   "correct_index": 1,
+   "reference": "220.82(C)(1)"
+  },
+  {
+   "number": 45,
+   "prompt": "A feeder supplying two 4 kW wall-mounted ovens and a 5 kW counter-mounted cooking unit shall have a demand of ___ kW.",
+   "answers": [
+    "8.4",
+    "7.15",
+    "13",
+    "none of these"
+   ],
+   "correct_index": 1,
+   "reference": "Table 220.55"
+  },
+  {
+   "number": 46,
+   "prompt": "What is the feeder neutral demand for six - 4.5 kW household clothes dryers?",
+   "answers": [
+    "18.9 kW",
+    "21 kW",
+    "27 kW",
+    "15.7 kW"
+   ],
+   "correct_index": 3,
+   "reference": "Table 220.54"
+  },
+  {
+   "number": 47,
+   "prompt": "A dwelling has a total of 2500 sq.ft, how many 15 amp circuits are required for the general lighting?",
+   "answers": [
+    "2",
+    "3",
+    "4",
+    "5"
+   ],
+   "correct_index": 3,
+   "reference": "220.41"
+  },
+  {
+   "number": 48,
+   "prompt": "An owner wishes to add 12 receptacle outlets to the drawings of his residence. What load will these additional receptacles add to the service load?",
+   "answers": [
+    "36va",
+    "1200va",
+    "2160va",
+    "none of these"
+   ],
+   "correct_index": 3,
+   "reference": "220.41"
+  },
+  {
+   "number": 49,
+   "prompt": "The demand load in kW for 15 - 3.5 kW ovens in an apartment complex would be ___ kW.",
+   "answers": [
+    "9.6",
+    "16.8",
+    "30",
+    "none of these"
+   ],
+   "correct_index": 1,
+   "reference": "Table 220.55"
+  },
+  {
+   "number": 50,
+   "prompt": "The approximate area in square inches of a #14 RHH conductor without outer cover is ___ square inches.",
+   "answers": [
+    "0.0209",
+    "0.0293",
+    "0.026",
+    "0.0097"
+   ],
+   "correct_index": 0,
+   "reference": "Chapter 9, Table 5"
+  },
+  {
+   "number": 51,
+   "prompt": "The branch circuit demand for one 8 kW range in a residence would be ___ kW.",
+   "answers": [
+    "12",
+    "8",
+    "6.4",
+    "5.2"
+   ],
+   "correct_index": 2,
+   "reference": "Table 220.55"
+  },
+  {
+   "number": 52,
+   "prompt": "What is the general lighting load for a single dwelling that measures 1400 sq.ft. inside and has an outside dimension of 1800 sq.ft.?",
+   "answers": [
+    "4200va",
+    "4500va",
+    "4800va",
+    "5400va"
+   ],
+   "correct_index": 3,
+   "reference": "220.5(C)"
+  },
+  {
+   "number": 53,
+   "prompt": "What size dual-element fuse does the Code require for a 2 hp, 208 volt, single-phase motor?",
+   "answers": [
+    "20 amp",
+    "30 amp",
+    "35 amp",
+    "40 amp"
+   ],
+   "correct_index": 0,
+   "reference": "Table 430.52(C)(1)"
+  },
+  {
+   "number": 54,
+   "prompt": "The volume required for two #12 TW grounding conductors and two #12 TW conductors in a box would be ___ cubic inches.",
+   "answers": [
+    "9",
+    "6.75",
+    "6",
+    "4.5"
+   ],
+   "correct_index": 1,
+   "reference": "314.16(B)(5)"
+  },
+  {
+   "number": 55,
+   "prompt": "What is the minimum size copper equipment grounding conductor required for a 80 amp circuit breaker?",
+   "answers": [
+    "#12",
+    "#10",
+    "#8",
+    "#6"
+   ],
+   "correct_index": 2,
+   "reference": "Table 250.122"
+  },
+  {
+   "number": 56,
+   "prompt": "What is the maximum size overload relay permitted for protection against overload for a 1ø, 2 hp, 208 volt motor?",
+   "answers": [
+    "15.18",
+    "16.5",
+    "17.16",
+    "none of these"
+   ],
+   "correct_index": 2,
+   "reference": "430.32(C)"
+  },
+  {
+   "number": 57,
+   "prompt": "The total area of 6 - #8 XHHW conductors and 2 - #6 XHHW conductors is ___ square inches.",
+   "answers": [
+    "0.3026",
+    "0.3265",
+    "0.3295",
+    "0.3802"
+   ],
+   "correct_index": 3,
+   "reference": "Chapter 9, Table 5"
+  },
+  {
+   "number": 58,
+   "prompt": "The maximum current on the neutral with either Line one or Line two on is ___ amps if the load on Line one to neutral is 9000 watts and the load Line two to neutral is 9500 watts. The voltage is 120/240v.",
+   "answers": [
+    "75",
+    "77",
+    "79",
+    "154"
+   ],
+   "correct_index": 2,
+   "reference": "General calculation"
+  },
+  {
+   "number": 59,
+   "prompt": "How much space remains to be filled without exceeding the percentage allowed when nine #12 XHHW conductors are placed in a 1\" rigid metal conduit?",
+   "answers": [
+    "0.1297 sq.in.",
+    "0.1831 sq.in.",
+    "0.1921 sq.in.",
+    "0.0181 sq.in."
+   ],
+   "correct_index": 2,
+   "reference": "Chapter 9, Table 4"
+  },
+  {
+   "number": 60,
+   "prompt": "How many #8 TW conductors can be installed in a 1\" IMC conduit, 18\" long?",
+   "answers": [
+    "6",
+    "8",
+    "11",
+    "13"
+   ],
+   "correct_index": 3,
+   "reference": "Chapter 9, Table 4"
+  },
+  {
+   "number": 61,
+   "prompt": "A 5 hp, single-phase, 230 volt, wound rotor motor would have nontime delay fuses sized at ___ percent.",
+   "answers": [
+    "300",
+    "175",
+    "150",
+    "250"
+   ],
+   "correct_index": 2,
+   "reference": "Table 430.52(C)(1)"
+  },
+  {
+   "number": 62,
+   "prompt": "How many #6 XHHW can be installed in a 2\" PVC schedule 80 conduit?",
+   "answers": [
+    "16",
+    "18",
+    "19",
+    "20"
+   ],
+   "correct_index": 2,
+   "reference": "Chapter 9, Table 4"
+  },
+  {
+   "number": 63,
+   "prompt": "What is the ampacity of each conductor of a group of nine #14 RHH all in one conduit with an ambient temperature of 45°C?",
+   "answers": [
+    "25a",
+    "15.225a",
+    "17.5a",
+    "20a"
+   ],
+   "correct_index": 1,
+   "reference": "Table 310.15(C)(1)"
+  },
+  {
+   "number": 64,
+   "prompt": "What is the minimum volume required for a box containing three - #12 THW conductors and three - #10 TW conductors?",
+   "answers": [
+    "10.5 cu.in.",
+    "12.75 cu.in.",
+    "14.25 cu.in.",
+    "14.5 cu.in."
+   ],
+   "correct_index": 2,
+   "reference": "Table 314.16(B)(1)"
+  },
+  {
+   "number": 65,
+   "prompt": "What is the minimum size schedule 80 PVC conduit required for all of the following conductors? 6 - #3 THWN, 3 - #8 THW, 2 - #10 THW",
+   "answers": [
+    "2\"",
+    "2 1/2\"",
+    "1 1/2\"",
+    "3\""
+   ],
+   "correct_index": 0,
+   "reference": "Chapter 9, Table 4"
+  },
+  {
+   "number": 66,
+   "prompt": "How many #8 THW conductors can you install in a 1\" rigid steel conduit, 20\" in length?",
+   "answers": [
+    "12",
+    "9",
+    "6",
+    "none of these"
+   ],
+   "correct_index": 0,
+   "reference": "Chapter 9, Table 4"
+  },
+  {
+   "number": 67,
+   "prompt": "What size branch circuit inverse time breaker is required for a 3 hp, 230v, single-phase motor?",
+   "answers": [
+    "20a",
+    "25a",
+    "30a",
+    "45a"
+   ],
+   "correct_index": 3,
+   "reference": "Table 430.52(C)(1)"
+  },
+  {
+   "number": 68,
+   "prompt": "What is the maximum number of #6 XHHW conductors permitted in a 1 1/2\" IMC conduit?",
+   "answers": [
+    "11",
+    "13",
+    "15",
+    "14"
+   ],
+   "correct_index": 2,
+   "reference": "Chapter 9, Table 4"
+  },
+  {
+   "number": 69,
+   "prompt": "In an apartment building, what is the maximum demand for 28 - 8 kW ranges?",
+   "answers": [
+    "43 kW",
+    "53.76 kW",
+    "60 kW",
+    "none of these"
+   ],
+   "correct_index": 0,
+   "reference": "Table 220.55"
+  },
+  {
+   "number": 70,
+   "prompt": "The total load of a 15 hp, 208v, three-phase induction motor is closest to ___ va.",
+   "answers": [
+    "10,000",
+    "11,000",
+    "15,000",
+    "17,000"
+   ],
+   "correct_index": 3,
+   "reference": "Table 430.250"
+  }
+ ]
+}

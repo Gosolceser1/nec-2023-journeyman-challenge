@@ -1,0 +1,309 @@
+{
+ "question_count": 25,
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "Panelboards shall not be installed in the ___ position.",
+   "answers": [
+    "face-up",
+    "prone",
+    "posterior",
+    "transverse"
+   ],
+   "correct_index": 0,
+   "reference": "408.43"
+  },
+  {
+   "number": 2,
+   "prompt": "Where two or more branch circuits supply devices or equipment on the same yoke or mounting strap, a means to simultaneously disconnect the ungrounded supply conductors shall be provided at the point at which the branch circuit ___.",
+   "answers": [
+    "starts",
+    "terminates",
+    "originates",
+    "separates"
+   ],
+   "correct_index": 2,
+   "reference": "210.7"
+  },
+  {
+   "number": 3,
+   "prompt": "Fastened in place utilization equipment, other than luminaires, that is connected to a branch circuit with other loads shall not exceed ___ of the branch circuit rating.",
+   "answers": [
+    "100%",
+    "80%",
+    "75%",
+    "50%"
+   ],
+   "correct_index": 3,
+   "reference": "210.23(B)(2)"
+  },
+  {
+   "number": 4,
+   "prompt": "GFCI protection shall be provided for lighting outlets not exceeding ___ volts installed in crawl spaces.",
+   "answers": [
+    "60",
+    "120",
+    "240",
+    "300"
+   ],
+   "correct_index": 1,
+   "reference": "210.8(C)"
+  },
+  {
+   "number": 5,
+   "prompt": "The Code requires branch circuits be rated in accordance with the overcurrent protective device. Therefore, which of the following combinations are permitted for lighting branch circuits?",
+   "answers": [
+    "20, 25, 35, 40 and 50 amperes",
+    "20, 25, 30, 40 and 50 amperes",
+    "15, 25, 30, 40 and 50 amperes",
+    "10, 15, 20, 30, 40 and 50 amperes"
+   ],
+   "correct_index": 3,
+   "reference": "210.18"
+  },
+  {
+   "number": 6,
+   "prompt": "Panelboards in other than dwelling units that are likely to require examination, adjustment, servicing, or maintenance while energized, shall be field or factory marked to warn ___ persons of potential electric arc flash hazards.",
+   "answers": [
+    "all",
+    "maintenance",
+    "qualified",
+    "repairmen"
+   ],
+   "correct_index": 2,
+   "reference": "110.16"
+  },
+  {
+   "number": 7,
+   "prompt": "Receptacle outlets shall be installed so that no point along the wall line is more than ___ measured horizontally from a receptacle outlet in that space.",
+   "answers": [
+    "10\"",
+    "12\"",
+    "18\"",
+    "24\""
+   ],
+   "correct_index": 3,
+   "reference": "210.52(C)(1)"
+  },
+  {
+   "number": 8,
+   "prompt": "For temporary holiday lighting, trees shall be permitted for supporting overhead spans of conductors and cables if the overhead wiring is arranged with ___, tension take-up devices, or other approved means to avoid damage from live vegetation.",
+   "answers": [
+    "fittings",
+    "cable ties",
+    "strain relief devices",
+    "overhead clamps"
+   ],
+   "correct_index": 2,
+   "reference": "590.4(J) ex."
+  },
+  {
+   "number": 9,
+   "prompt": "At least one 125 volt, single-phase, 15 or 20 amp rated receptacle outlet shall be installed within ___ of the top of a show window for each 12 linear feet or major fraction thereof of show window area measured horizontally at its maximum width.",
+   "answers": [
+    "10\"",
+    "12\"",
+    "18\"",
+    "24\""
+   ],
+   "correct_index": 2,
+   "reference": "210.62"
+  },
+  {
+   "number": 10,
+   "prompt": "If festoon lighting is installed without a messsenger, the smallest allowable overhead conductor is ___ AWG.",
+   "answers": [
+    "#10",
+    "#12",
+    "#14",
+    "#16"
+   ],
+   "correct_index": 1,
+   "reference": "225.6(B)"
+  },
+  {
+   "number": 11,
+   "prompt": "AFCI protection on all 120 volt, single-phase, 15 and 20 amp branch circuits in dwelling units supplying outlets is required in all of the following locations listed locations except ___.",
+   "answers": [
+    "sunroom, closet, hallway",
+    "parlor, library, den",
+    "bathrooms and garages",
+    "living room, kitchen, laundry"
+   ],
+   "correct_index": 2,
+   "reference": "210.12(B)"
+  },
+  {
+   "number": 12,
+   "prompt": "What is the ampacity of a #12 THWN conductor installed in an ambient temperature of 86°F if the raceway contains four current-carrying conductors?",
+   "answers": [
+    "17.5a",
+    "20a",
+    "23a",
+    "26a"
+   ],
+   "correct_index": 1,
+   "reference": "Table 310.16",
+   "key_note": "T.310.16 is 25a x 80% T.310.15(C)(1)"
+  },
+  {
+   "number": 13,
+   "prompt": "A wall-mounted central vacuum assembly connected to a single receptacle located in an attached garage shall be provided with ___ protection for personnel.",
+   "answers": [
+    "LCDI",
+    "GFCI",
+    "AFCI",
+    "both AFCI and GFCI"
+   ],
+   "correct_index": 1,
+   "reference": "210.8(A)(2)"
+  },
+  {
+   "number": 14,
+   "prompt": "If a disconnecting means is required to be lockable open, it shall be capable of being locked in the open position with the provisions for locking remaining in place with or without the ___ installed.",
+   "answers": [
+    "cover",
+    "lock",
+    "switch",
+    "device"
+   ],
+   "correct_index": 1,
+   "reference": "110.25"
+  },
+  {
+   "number": 15,
+   "prompt": "In a dwelling bedroom, any wall space ___ or more in width (including space measured around corners) and unbroken along the floor line by doorways and similar openings, fireplaces, and fixed cabinets that do not have countertops or similar work surfaces.",
+   "answers": [
+    "18\"",
+    "24\"",
+    "30\"",
+    "36\""
+   ],
+   "correct_index": 1,
+   "reference": "210.52(A)(2)(1)"
+  },
+  {
+   "number": 16,
+   "prompt": "Where the highest continuous current trip setting for which the actual overcurrent device installed in a circuit breaker is rated or can be adjusted is ___ amperes or higher, arc-energy reduction is required.",
+   "answers": [
+    "600",
+    "750",
+    "800",
+    "1200"
+   ],
+   "correct_index": 3,
+   "reference": "240.87"
+  },
+  {
+   "number": 17,
+   "prompt": "For the purpose of this section, where using multioutlet assemblies, each ___ of multioutlet assembly containing two or more receptacles installed in individual or continuous lengths shall be considered one receptacle outlet.",
+   "answers": [
+    "6\"",
+    "12\"",
+    "18\"",
+    "24\""
+   ],
+   "correct_index": 1,
+   "reference": "210.52(C)"
+  },
+  {
+   "number": 18,
+   "prompt": "The calculated load of a 12 foot length of fixed multioutlet assembly in a commercial facility is ___ volt-amperes if the appliances it supplies are not likely to be used at the same time.",
+   "answers": [
+    "1000",
+    "720",
+    "540",
+    "380"
+   ],
+   "correct_index": 2,
+   "reference": "220.14(H)",
+   "key_note": "180va for 5 feet"
+  },
+  {
+   "number": 19,
+   "prompt": "Lighting equipment identified for horticultural use shall be ___.",
+   "answers": [
+    "marked",
+    "approved",
+    "labeled",
+    "listed"
+   ],
+   "correct_index": 3,
+   "reference": "410.172"
+  },
+  {
+   "number": 20,
+   "prompt": "A ___ location may be temporarily subject to dampness and wetness.",
+   "answers": [
+    "moist",
+    "dry",
+    "wet",
+    "damp"
+   ],
+   "correct_index": 1,
+   "reference": "Article 100",
+   "key_note": "Definitions 100 Location, dry"
+  },
+  {
+   "number": 21,
+   "prompt": "A service disconnect may be installed in all of the following locations, except ___.",
+   "answers": [
+    "a residential garage",
+    "outdoors",
+    "an exit foyer",
+    "a bathroom"
+   ],
+   "correct_index": 3,
+   "reference": "230.70(A)(2)"
+  },
+  {
+   "number": 22,
+   "prompt": "An acceptable color for ungrounded conductors is ___.",
+   "answers": [
+    "green",
+    "gray",
+    "pink",
+    "white"
+   ],
+   "correct_index": 2,
+   "reference": "200.6"
+  },
+  {
+   "number": 23,
+   "prompt": "All receptacles located within ___ of a therapeutic tub shall be GFCI protected.",
+   "answers": [
+    "36\"",
+    "48\"",
+    "60\"",
+    "72\""
+   ],
+   "correct_index": 3,
+   "reference": "680.61(E)"
+  },
+  {
+   "number": 24,
+   "prompt": "For recptacles used during building construction, other than those rated 125-volt, single-phase, 15, 20, or 30 ampere; GFCI protection or a/an ___ equipment grounding conductor program is required.",
+   "answers": [
+    "required",
+    "assured",
+    "personnel",
+    "authorized"
+   ],
+   "correct_index": 1,
+   "reference": "590.6(B)(2)"
+  },
+  {
+   "number": 25,
+   "prompt": "Balconies, decks and porches that are with in 4\" horizontally of the dwelling unit shall have at least one receptacle outlet accessible from the balcony, deck, or porch. The receptacle outlet shall not be located more than ___ above the balcony, deck, or porch walking surface.",
+   "answers": [
+    "36\"",
+    "48\"",
+    "60\"",
+    "78\""
+   ],
+   "correct_index": 3,
+   "reference": "210.52(E)(3)",
+   "key_note": "78\" = 6 1/2 feet"
+  }
+ ]
+}

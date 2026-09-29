@@ -1,0 +1,305 @@
+{
+ "question_count": 25,
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "Which of the following wiring methods is not permitted in the ceiling space used as a return-air plenum?",
+   "answers": [
+    "PVC",
+    "MI cable",
+    "AC cable",
+    "IMC conduit"
+   ],
+   "correct_index": 0,
+   "reference": "300.22(C)(1)"
+  },
+  {
+   "number": 2,
+   "prompt": "The ampacity of a conductor is the current, in amperes, that the conductor can carry continuously under the conditions of use without exceeding its ___ rating.",
+   "answers": [
+    "insulation",
+    "inductive",
+    "voltage",
+    "temperature"
+   ],
+   "correct_index": 3,
+   "reference": "Article 100"
+  },
+  {
+   "number": 3,
+   "prompt": "A copper-coated steel ground rod shall be at least ___.",
+   "answers": [
+    "3/8\"",
+    "1/2\"",
+    "9/16\"",
+    "5/8\""
+   ],
+   "correct_index": 3,
+   "reference": "250.52(A)(5)(2)"
+  },
+  {
+   "number": 4,
+   "prompt": "Shore power for boats shall be provided by single receptacles rated not less than ___ amperes.",
+   "answers": [
+    "15",
+    "20",
+    "25",
+    "30"
+   ],
+   "correct_index": 3,
+   "reference": "555.33(A)(4)"
+  },
+  {
+   "number": 5,
+   "prompt": "Overhead conductors not over 1,000 volts pass over a public driveway, they shall have a minimum clearance of not less than ___ feet above finished grade.",
+   "answers": [
+    "10",
+    "12",
+    "15",
+    "18"
+   ],
+   "correct_index": 3,
+   "reference": "225.18(4)"
+  },
+  {
+   "number": 6,
+   "prompt": "Where a rock bottom is encountered, the ground rod shall be permitted to be buried in a trench that is at least ___ deep.",
+   "answers": [
+    "2 1/2 feet",
+    "3 feet",
+    "24\"",
+    "48\""
+   ],
+   "correct_index": 0,
+   "reference": "250.53(A)(4)"
+  },
+  {
+   "number": 7,
+   "prompt": "Instruments, pilot lights, voltage transformers, and other switchboard or switchgear devices with potential coils shall be supplied by a circuit that is protected by standard overcurrent devices rated ___ amperes or less.",
+   "answers": [
+    "30",
+    "20",
+    "15",
+    "25"
+   ],
+   "correct_index": 2,
+   "reference": "408.52"
+  },
+  {
+   "number": 8,
+   "prompt": "Direct buried conductors emerging from grade shall be protected by enclosures or raceways up to a point at least ___ above finished grade.",
+   "answers": [
+    "8'",
+    "10'",
+    "12'",
+    "22\""
+   ],
+   "correct_index": 0,
+   "reference": "300.5(D)(1)"
+  },
+  {
+   "number": 9,
+   "prompt": "The controller disconnecting means for a motor, and the motor is not in sight of the disconnecting means, the following is required ___.",
+   "answers": [
+    "the driven machinery location must be located closer to the disconnect",
+    "the disconnecting means shall be lockable in the open position",
+    "the disconnecting means must be readily accessible",
+    "the disconnecting means shall be an isolating switch"
+   ],
+   "correct_index": 1,
+   "reference": "430.102(B)(2) Exception"
+  },
+  {
+   "number": 10,
+   "prompt": "What is the full load current of a 50 horsepower, 3ø, 480v, wound rotor, AC motor?",
+   "answers": [
+    "104 amps",
+    "52 amps",
+    "65 amps",
+    "41 amps"
+   ],
+   "correct_index": 2,
+   "reference": "Table 430.250"
+  },
+  {
+   "number": 11,
+   "prompt": "In panelboards, fuses of any type shall be installed on the ___ side of any switches.",
+   "answers": [
+    "positive",
+    "negative",
+    "load",
+    "line"
+   ],
+   "correct_index": 2,
+   "reference": "408.39"
+  },
+  {
+   "number": 12,
+   "prompt": "What is the minimum size equipment grounding conductor for a 50 amp rated branch circuit?",
+   "answers": [
+    "#14",
+    "#12",
+    "#10",
+    "#8"
+   ],
+   "correct_index": 2,
+   "reference": "Table 250.122"
+  },
+  {
+   "number": 13,
+   "prompt": "Liquidtight flexible metal conduit (LFMC) shall be securely fastened in place by an approved means within ___ of each box, cabinet, conduit body, or other conduit termination.",
+   "answers": [
+    "8\"",
+    "12\"",
+    "16\"",
+    "24\""
+   ],
+   "correct_index": 1,
+   "reference": "350.30(A)"
+  },
+  {
+   "number": 14,
+   "prompt": "Conduit nipples not over 24\" in length may be filled to a maximum of ___ of their CSA.",
+   "answers": [
+    "50%",
+    "60%",
+    "70%",
+    "80%"
+   ],
+   "correct_index": 1,
+   "reference": "Chapter 9, Note 4"
+  },
+  {
+   "number": 15,
+   "prompt": "The interior of raceways installed underground shall be considered a/an ___ location.",
+   "answers": [
+    "buried",
+    "isolated",
+    "damp",
+    "wet"
+   ],
+   "correct_index": 3,
+   "reference": "300.5(B)"
+  },
+  {
+   "number": 16,
+   "prompt": "Rigid PVC, size 1 1/2\" shall be supported every ___.",
+   "answers": [
+    "18\"",
+    "36\"",
+    "5 feet",
+    "8 feet"
+   ],
+   "correct_index": 2,
+   "reference": "Table 352.30(B)"
+  },
+  {
+   "number": 17,
+   "prompt": "Flat conductor cable (FCC) individual branch circuits shall have ratings not exceeding ___.",
+   "answers": [
+    "30 amps",
+    "25 amps",
+    "20 amps",
+    "15 amps"
+   ],
+   "correct_index": 0,
+   "reference": "324.10(B)(2)"
+  },
+  {
+   "number": 18,
+   "prompt": "A battery room where batteries are being charged, requires ventilation to prevent ___.",
+   "answers": [
+    "corrosion",
+    "electrostatic charge",
+    "acid corrosion",
+    "an explosive mixture"
+   ],
+   "correct_index": 3,
+   "reference": "480.10(A)"
+  },
+  {
+   "number": 19,
+   "prompt": "A single ground rod that does not have a resistance to ground of 25 ohms or less, can be supplemented by which of the following?",
+   "answers": [
+    "Ground ring",
+    "Concrete encased electrode",
+    "Metal frame of building",
+    "Any of these"
+   ],
+   "correct_index": 3,
+   "reference": "250.52(A)(2)(3)(4)"
+  },
+  {
+   "number": 20,
+   "prompt": "Openings around electrical penetrations into or through fire-resistant-rated walls, partitions, floors, or ceilings shall be firestopped using ___ methods to maintain the fire resistance rating.",
+   "answers": [
+    "suitable",
+    "listed",
+    "identified",
+    "approved"
+   ],
+   "correct_index": 3,
+   "reference": "300.21"
+  },
+  {
+   "number": 21,
+   "prompt": "Panelboards equipped with snap switches rated at 30 amperes or less shall have overcurrent protection of ___ amperes or less.",
+   "answers": [
+    "30",
+    "60",
+    "100",
+    "200"
+   ],
+   "correct_index": 3,
+   "reference": "408.36(A)"
+  },
+  {
+   "number": 22,
+   "prompt": "Type MC cable shall be permitted to be unsupported and unsecured where the cable is not more than ___ in length from the last point of connection to luminaires.",
+   "answers": [
+    "36\"",
+    "48\"",
+    "60\"",
+    "72\""
+   ],
+   "correct_index": 3,
+   "reference": "330.30(D)(2)"
+  },
+  {
+   "number": 23,
+   "prompt": "Underground wiring within ___ horizontally from the inside wall of the pool shall be permitted in liquidtight flexible metal conduit listed for direct burial use.",
+   "answers": [
+    "18\"",
+    "24\"",
+    "48\"",
+    "60\""
+   ],
+   "correct_index": 3,
+   "reference": "680.11(A)(7)"
+  },
+  {
+   "number": 24,
+   "prompt": "Branch circuits shall be rated in accordance with the ___.",
+   "answers": [
+    "ampere rating of the largest receptacle",
+    "maximum permitted rating of the fuse or breaker",
+    "number of receptacle outlets in the branch circuit",
+    "ampere rating of the largest conductor"
+   ],
+   "correct_index": 1,
+   "reference": "210.18"
+  },
+  {
+   "number": 25,
+   "prompt": "Color coding shall be permitted to identify intrinsically safe conductors where they are colored ___ and where no other conductors of the same color are used.",
+   "answers": [
+    "pink",
+    "light blue",
+    "yellow",
+    "purple"
+   ],
+   "correct_index": 1,
+   "reference": "504.80(C)"
+  }
+ ]
+}

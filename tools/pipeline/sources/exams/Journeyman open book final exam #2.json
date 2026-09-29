@@ -1,0 +1,850 @@
+{
+ "question_count": 70,
+ "questions": [
+  {
+   "number": 1,
+   "prompt": "Portable structures for fairs, carnivals and similar events shall not be located under or within a space 15 feet horizontally of conductors operating in excess of ___ volts.",
+   "answers": [
+    "1000",
+    "600",
+    "300",
+    "250"
+   ],
+   "correct_index": 1,
+   "reference": "525.5(B)(2)"
+  },
+  {
+   "number": 2,
+   "prompt": "Which of the following wiring methods is not permitted in the ceiling space used as a return-air plenum?",
+   "answers": [
+    "PVC",
+    "MI cable",
+    "AC cable",
+    "IMC conduit"
+   ],
+   "correct_index": 0,
+   "reference": "300.22(C)(1)"
+  },
+  {
+   "number": 3,
+   "prompt": "A copper-coated steel ground rod shall be at least ___.",
+   "answers": [
+    "3/8\"",
+    "1/2\"",
+    "9/16\"",
+    "5/8\""
+   ],
+   "correct_index": 3,
+   "reference": "250.52(A)(5)(2)"
+  },
+  {
+   "number": 4,
+   "prompt": "Shore power for boats shall be provided by single receptacles rated not less than ___ amperes.",
+   "answers": [
+    "15",
+    "20",
+    "25",
+    "30"
+   ],
+   "correct_index": 3,
+   "reference": "555.33(A)(4)"
+  },
+  {
+   "number": 5,
+   "prompt": "Where a rock bottom is encountered, the ground rod shall be permitted to be buried in a trench that is at least ___ deep.",
+   "answers": [
+    "2 1/2 feet",
+    "3 feet",
+    "24\"",
+    "48\""
+   ],
+   "correct_index": 0,
+   "reference": "250.53(A)(4)"
+  },
+  {
+   "number": 6,
+   "prompt": "A ___ is a portion of a sign that may provide protection from the weather but is not an electrical enclosure.",
+   "answers": [
+    "Section Sign",
+    "Sign Body",
+    "Sign Gutter",
+    "Sign Enclosure"
+   ],
+   "correct_index": 1,
+   "reference": "Article 100",
+   "key_note": "DEF 100"
+  },
+  {
+   "number": 7,
+   "prompt": "Internal parts of electrical equipment, including busbars, wiring terminals, insulators, and other surfaces, shall not be damaged or contaminated by foreign materials such as paint, plaster, cleaners, abrasives, or ___",
+   "answers": [
+    "moisture",
+    "organic residues",
+    "corrosive residues",
+    "dust and dirt"
+   ],
+   "correct_index": 2,
+   "reference": "110.12(B)"
+  },
+  {
+   "number": 8,
+   "prompt": "Where a building or structure has any combination of feeders, branch circuits, or services passing through it or supplying it, a permanent plaque or directory shall be installed at each feeder and branch circuit ___ location denoting all other services, feeders, or branch circuits supplying that building or structure or passing through that building or structure and the area served by each.",
+   "answers": [
+    "disconnect",
+    "connection",
+    "termination",
+    "entrance"
+   ],
+   "correct_index": 0,
+   "reference": "225.37"
+  },
+  {
+   "number": 9,
+   "prompt": "___. The highest level that water can reach before it spills out.",
+   "answers": [
+    "Over Flow",
+    "Escape Limit",
+    "Datum Level",
+    "Maximum Water Level"
+   ],
+   "correct_index": 3,
+   "reference": "Article 100",
+   "key_note": "DEF 100"
+  },
+  {
+   "number": 10,
+   "prompt": "The ___ number of branch circuits shall be determined from the total calculated load and the size or rating of the circuits used.",
+   "answers": [
+    "minimum",
+    "maximum",
+    "total",
+    "largest"
+   ],
+   "correct_index": 0,
+   "reference": "210.11(A)"
+  },
+  {
+   "number": 11,
+   "prompt": "An open resistor when checked with an ohmmeter reads ___.",
+   "answers": [
+    "infinite",
+    "zero",
+    "low but not zero",
+    "high but within the tolerance"
+   ],
+   "correct_index": 0,
+   "reference": "General Knowledge"
+  },
+  {
+   "number": 12,
+   "prompt": "In relation to a transformer, the ratio 20:1 indicates that ___.",
+   "answers": [
+    "there are 20 turns in the primary and 1 turn in the secondary",
+    "secondary voltage is 1/20 of the primary voltage",
+    "for every 20 turns on the primary, there is one turn on the secondary",
+    "all of these"
+   ],
+   "correct_index": 3,
+   "reference": "General Knowledge"
+  },
+  {
+   "number": 13,
+   "prompt": "In a parallel circuit, the voltage across each branch is ___ the source voltage.",
+   "answers": [
+    "equal to",
+    "greater than",
+    "less than",
+    "none of these"
+   ],
+   "correct_index": 0,
+   "reference": "General Knowledge"
+  },
+  {
+   "number": 14,
+   "prompt": "When a 60 watt bulb is connected in series with a 500 watt room heater and the bulb is replaced with a 25 watt bulb on a 120 volt circuit the ___.",
+   "answers": [
+    "heater output will decrease",
+    "heater output will increase",
+    "bulb will not glow",
+    "heater output will remain unchanged"
+   ],
+   "correct_index": 0,
+   "reference": "General Knowledge"
+  },
+  {
+   "number": 15,
+   "prompt": "If the secondary voltage of a transformer is step-down, the primary will have ___.",
+   "answers": [
+    "half as many turns as the secondary",
+    "fewer turns than the secondary",
+    "more turns than the secondary",
+    "as many turns as the secondary"
+   ],
+   "correct_index": 2,
+   "reference": "General Knowledge"
+  },
+  {
+   "number": 16,
+   "prompt": "In a parallel circuit with an unequal resistance on each branch ___.",
+   "answers": [
+    "the power drawn on each branch is equal",
+    "the current on each branch is equal",
+    "the voltage across each branch is equal",
+    "none of these"
+   ],
+   "correct_index": 2,
+   "reference": "General Knowledge"
+  },
+  {
+   "number": 17,
+   "prompt": "A circuit with a lagging current means the circuit is ___.",
+   "answers": [
+    "capacitive",
+    "reactive",
+    "inductive",
+    "at resonance"
+   ],
+   "correct_index": 2,
+   "reference": "\"ELI the ICE man\""
+  },
+  {
+   "number": 18,
+   "prompt": "The ___ value is considered as the most important value of a sine wave.",
+   "answers": [
+    "peak",
+    "instantaneous",
+    "effective",
+    "average"
+   ],
+   "correct_index": 2,
+   "reference": "General Knowledge"
+  },
+  {
+   "number": 19,
+   "prompt": "A wire has a resistance of 5 ohms. What will be the resistance of another wire of the same material three times as long and half the cross sectional area?",
+   "answers": [
+    "7.5Ω",
+    "15Ω",
+    "30Ω",
+    "50Ω"
+   ],
+   "correct_index": 2,
+   "reference": "General Knowledge",
+   "key_note": "5 Ω x 3 = 15 Ω ÷ .5 = 30 Ω"
+  },
+  {
+   "number": 20,
+   "prompt": "Flexible cord used in extension cords made with separately listed and installed components shall be permitted to be supplied by a branch circuit in accordance with ___.",
+   "answers": [
+    "sized per Table 400.5(A)(1)&(2)",
+    "sized per Table 310.15(B)(16)",
+    "separate components are not allowed to be field assembled",
+    "20 amp circuits - #16 AWG and larger"
+   ],
+   "correct_index": 3,
+   "reference": "240.5(B)(4)"
+  },
+  {
+   "number": 21,
+   "prompt": "Warning signs shall be ___ posted at points of access to conductors in all conduit systems and cable systems. The warning sign(s) shall carry the following wording: Danger-High Voltage-Keep Out.",
+   "answers": [
+    "permanently",
+    "clearly",
+    "legibly",
+    "conspicuously"
+   ],
+   "correct_index": 3,
+   "reference": "305.12"
+  },
+  {
+   "number": 22,
+   "prompt": "The grounding electrode conductor shall be of copper, aluminum, copper-clad aluminum, or the items permitted in 250.68(C). The material selected shall be resistant to any ___ condition existing at the installation or shall be protected against corrosion.",
+   "answers": [
+    "chemical",
+    "corrosive",
+    "deteriorating",
+    "damaging"
+   ],
+   "correct_index": 1,
+   "reference": "250.62"
+  },
+  {
+   "number": 23,
+   "prompt": "One type of enclosure permitted for use in outdoor corrosive environments is ___.",
+   "answers": [
+    "Type 4 X",
+    "Type 6",
+    "Type 12",
+    "Type 13"
+   ],
+   "correct_index": 0,
+   "reference": "Table 110.28"
+  },
+  {
+   "number": 24,
+   "prompt": "Table ___ lists the volume allowances required per conductor for outlet, device and junction boxes.",
+   "answers": [
+    "314.16(A)",
+    "310.60",
+    "314.16(B)",
+    "300.5"
+   ],
+   "correct_index": 2,
+   "reference": "Table 314.16(B)(1)"
+  },
+  {
+   "number": 25,
+   "prompt": "Overhead spans of ___ conductors and open multiconductor cables shall have a vertical clearance of not less than 8' 6\" above the roof surface.",
+   "answers": [
+    "insulated",
+    "open",
+    "service",
+    "bare"
+   ],
+   "correct_index": 1,
+   "reference": "225.19(A)"
+  },
+  {
+   "number": 26,
+   "prompt": "Nonconductive coatings (such as paint, lacquer, and enamel) on equipment to be grounded shall be removed from threads and other contact surfaces to ensure good electrical continuity by means of fittings ___ so as to make such removal unnecessary.",
+   "answers": [
+    "approved",
+    "labeled",
+    "listed",
+    "designed"
+   ],
+   "correct_index": 3,
+   "reference": "250.12"
+  },
+  {
+   "number": 27,
+   "prompt": "___ lists the dimensions of insulated conductors and fixture wires.",
+   "answers": [
+    "300.1(C)",
+    "300.19(A)",
+    "Table 2, Chapter 9",
+    "Table 5, Chapter 9"
+   ],
+   "correct_index": 3,
+   "reference": "Chapter 9, Table 5"
+  },
+  {
+   "number": 28,
+   "prompt": "Table ___ lists demand factors for kitchen equipment other than dwelling units.",
+   "answers": [
+    "220.55",
+    "220.56",
+    "220.83",
+    "220.84"
+   ],
+   "correct_index": 1,
+   "reference": "Table 220.56"
+  },
+  {
+   "number": 29,
+   "prompt": "___ lists the percent of cross sectional fill permitted in conduit and tubing fill for conductors and cables.",
+   "answers": [
+    "Table 4, Chapter 9",
+    "Table 8, Chapter 9",
+    "Table 1, Chapter 9",
+    "Table 5, Chapter 9"
+   ],
+   "correct_index": 2,
+   "reference": "Table 1, Chapter 9"
+  },
+  {
+   "number": 30,
+   "prompt": "Signs and outline lighting systems with lampholders for incandescent lamps shall be marked to indicate the maximum allowable lamp wattage per lampholder. The markings shall be permanently installed, in letters at least ___ high, and shall be located where visible during relamping.",
+   "answers": [
+    "1/4\"",
+    "1/2'",
+    "1\"",
+    "2\""
+   ],
+   "correct_index": 0,
+   "reference": "600.4(C)"
+  },
+  {
+   "number": 31,
+   "prompt": "___ is the process by which one conductor produces or induces a voltage in another conductor even though there is no mechanical coupling between the two conductors.",
+   "answers": [
+    "Cutting of fluxes",
+    "Short circuit",
+    "Induction",
+    "Eddy current"
+   ],
+   "correct_index": 2,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 32,
+   "prompt": "Electrical current is measured in terms of ___.",
+   "answers": [
+    "electron pressure",
+    "electrons passing a point per second",
+    "watts",
+    "resistance"
+   ],
+   "correct_index": 1,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 33,
+   "prompt": "The resistance of a circuit may vary due to ___.",
+   "answers": [
+    "a loose connection",
+    "change in voltage",
+    "change in current",
+    "induction"
+   ],
+   "correct_index": 0,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 34,
+   "prompt": "An alternation is ___.",
+   "answers": [
+    "one-half cycle",
+    "one hertz",
+    "one alternator",
+    "two cycles"
+   ],
+   "correct_index": 0,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 35,
+   "prompt": "A shunt is used to measure ___.",
+   "answers": [
+    "resistance",
+    "capacitance",
+    "current",
+    "wattage"
+   ],
+   "correct_index": 2,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 36,
+   "prompt": "If two equal resistance conductors are connected in parallel, the resistance of the two conductors is equal to ___.",
+   "answers": [
+    "the resistance of one conductor",
+    "twice the resistance of one conductor",
+    "one-half the resistance of one conductor",
+    "the resistance of both conductors"
+   ],
+   "correct_index": 2,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 37,
+   "prompt": "Table ___ lists the maximum rating or setting of motor branch-circuit short circuit and ground fault protective devices.",
+   "answers": [
+    "430.248",
+    "430.52(C)(1)",
+    "430.37",
+    "430.22"
+   ],
+   "correct_index": 1,
+   "reference": "Table 430.52(C)(1)"
+  },
+  {
+   "number": 38,
+   "prompt": "Branch circuits recognized by this article shall be rated in accordance with the maximum permitted ampere rating or ___ of the overcurrent device.",
+   "answers": [
+    "listing",
+    "marking",
+    "setting",
+    "rating"
+   ],
+   "correct_index": 2,
+   "reference": "210.18"
+  },
+  {
+   "number": 39,
+   "prompt": "Table ___ lists the maximum cord-and-plug-connected load to receptacle.",
+   "answers": [
+    "210.21(B)(2)",
+    "210.24",
+    "210.21(B)(3)",
+    "220.3"
+   ],
+   "correct_index": 0,
+   "reference": "Table 210.21(B)(2)"
+  },
+  {
+   "number": 40,
+   "prompt": "Table ___ lists clearances over roadways, walkways, rail, water, and open land.",
+   "answers": [
+    "300.5",
+    "220.102",
+    "235.360(A)",
+    "225.61"
+   ],
+   "correct_index": 2,
+   "reference": "Table 235.360(A)"
+  },
+  {
+   "number": 41,
+   "prompt": "Which of the following is not considered part of a luminaire?",
+   "answers": [
+    "ballast",
+    "a lampholder",
+    "lamp or lamps",
+    "parts designed to position the light source"
+   ],
+   "correct_index": 1,
+   "reference": "Article 100"
+  },
+  {
+   "number": 42,
+   "prompt": "___ RMC shall be permitted to be installed for direct burial and swimming pool applications.",
+   "answers": [
+    "Stainless steel",
+    "Galvanized steel",
+    "Aluminum",
+    "Red brass"
+   ],
+   "correct_index": 3,
+   "reference": "344.10(A)(1)"
+  },
+  {
+   "number": 43,
+   "prompt": "Backfill that contains large rocks, paving materials, cinders, large or sharply angular substances, or corrosive material shall not be placed in an excavation where materials may damage raceways, cables, conductors, or other structures or prevent adequate compaction of fill or contribute to the ___ of raceways, cables, or other substructures.",
+   "answers": [
+    "damage",
+    "deterioration",
+    "aging",
+    "corrosion"
+   ],
+   "correct_index": 3,
+   "reference": "300.5(F)"
+  },
+  {
+   "number": 44,
+   "prompt": "Enclosures that are not over 100 cubic inches in size and which have two conduits supported within three feet on either side of the enclosure and the enclosure does not contain devices or support fixtures shall not be required to have the enclosure supported if the conduits are ___.",
+   "answers": [
+    "rigid nonmetallic conduits",
+    "threaded into hubs identified for the purpose",
+    "installed with locknuts inside and outside enclosure",
+    "shoulders of fittings outside and locknuts inside the box"
+   ],
+   "correct_index": 1,
+   "reference": "314.23(E)"
+  },
+  {
+   "number": 45,
+   "prompt": "Conductors drawn from a copper-clad aluminum rod with the copper metallurgically bonded to an aluminum core. The copper forms a minimum of ___ percent of the csa.",
+   "answers": [
+    "10",
+    "20",
+    "40",
+    "70"
+   ],
+   "correct_index": 0,
+   "reference": "310.3"
+  },
+  {
+   "number": 46,
+   "prompt": "Concrete, brick or tile walls are considered as being ___.",
+   "answers": [
+    "isolated",
+    "insulators",
+    "grounded",
+    "dry locations"
+   ],
+   "correct_index": 2,
+   "reference": "Table 110.26(A)(1)"
+  },
+  {
+   "number": 47,
+   "prompt": "An isolated ground receptacle shall be identified by ___.",
+   "answers": [
+    "CO/ALR orange marking on the face of the receptacle",
+    "a metal faceplate not less than 0.030 inches in thickness",
+    "a reset type test button on the face of the receptacle",
+    "an orange triangle located on the face of the receptacle"
+   ],
+   "correct_index": 3,
+   "reference": "406.3(E)"
+  },
+  {
+   "number": 48,
+   "prompt": "In a hospital General Care Area, each patient bed location shall be provided with a minimum of ___ receptacles.",
+   "answers": [
+    "3 single",
+    "2 single or 1 duplex",
+    "2 duplex or 4 single",
+    "4 duplex or 8 single"
+   ],
+   "correct_index": 3,
+   "reference": "517.18(B)"
+  },
+  {
+   "number": 49,
+   "prompt": "Balconies, decks, and porches that are attached to the dwelling unit and are accessible from inside the dwelling unit shall have at least one receptacle outlet accessible from the balcony, deck, or porch. The receptacle outlet shall not be located more than ___ above the balcony, deck, or porch walking surface.",
+   "answers": [
+    "6'",
+    "6'6\"",
+    "7'",
+    "8'"
+   ],
+   "correct_index": 1,
+   "reference": "210.52(E)(3)"
+  },
+  {
+   "number": 50,
+   "prompt": "Conductors having ___ insulation and operating at different voltage levels shall not occupy the same enclosure, cable, or raceway.",
+   "answers": [
+    "thermoset",
+    "flame-retardant",
+    "nonshielded",
+    "silicone rubber"
+   ],
+   "correct_index": 2,
+   "reference": "305.4"
+  },
+  {
+   "number": 51,
+   "prompt": "The total opposition to current flow in an AC circuit is expressed in ohms and is called ___.",
+   "answers": [
+    "impedance",
+    "conductance",
+    "reluctance",
+    "resistance"
+   ],
+   "correct_index": 0,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 52,
+   "prompt": "If a 240 volt heater is used on 120 volts, the amount of heat produced will be ___.",
+   "answers": [
+    "twice as great",
+    "four times as great",
+    "1/4 as much",
+    "the same"
+   ],
+   "correct_index": 2,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 53,
+   "prompt": "The length of time that a fault current would flow on the equipment grounding conductor would be approximately ___.",
+   "answers": [
+    "1/2 cycle",
+    "6 seconds",
+    "60 cycles",
+    "120 cycles"
+   ],
+   "correct_index": 0,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 54,
+   "prompt": "A one-quarter bend in a raceway is equivalent to an angle of ___ degrees.",
+   "answers": [
+    "90",
+    "45",
+    "25",
+    "180"
+   ],
+   "correct_index": 0,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 55,
+   "prompt": "Which of the following will not affect the resistance of a circuit?",
+   "answers": [
+    "Length of the Conductor",
+    "Diameter of the Conductor",
+    "Insulation of the Conductor",
+    "Temperature"
+   ],
+   "correct_index": 2,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 56,
+   "prompt": "The voltage will lead the current when the ___ in the circuit.",
+   "answers": [
+    "inductive reactance exceeds the capacitive reactance",
+    "reactance exceeds the resistance in the circuit",
+    "resistance exceeds reactance",
+    "capacitive reactance exceeds the inductive reactance"
+   ],
+   "correct_index": 0,
+   "reference": "General knowledge"
+  },
+  {
+   "number": 57,
+   "prompt": "The decimal equivalent for 11/16\" is ___.",
+   "answers": [
+    ".8125",
+    ".6875",
+    ".5625",
+    ".9375"
+   ],
+   "correct_index": 1,
+   "reference": "General calculation",
+   "key_note": "11 ÷ 16 = .6875"
+  },
+  {
+   "number": 58,
+   "prompt": "Extreme ___ may cause PVC conduit to become brittle, and therefore more susceptible to damage from physical contact.",
+   "answers": [
+    "heat",
+    "cold",
+    "sunlight",
+    "moisture"
+   ],
+   "correct_index": 1,
+   "reference": "352.10"
+  },
+  {
+   "number": 59,
+   "prompt": "Where metal fences are located within ___ feet of the exposed electrical conductors or equipment, the fence shall be bonded to the grounding electrode system with bonding jumpers.",
+   "answers": [
+    "25",
+    "24",
+    "20",
+    "16"
+   ],
+   "correct_index": 3,
+   "reference": "250.194(A)"
+  },
+  {
+   "number": 60,
+   "prompt": "In multifamily dwellings, Type NM Cable is permitted in buildings that are permitted to be type(s) ___.",
+   "answers": [
+    "V",
+    "III",
+    "IV",
+    "all of these"
+   ],
+   "correct_index": 3,
+   "reference": "334.10(2)"
+  },
+  {
+   "number": 61,
+   "prompt": "When sizing a branch circuit for a fixed storage-type water heater with a capacity of 120 gallons or less, the water heater is considered a/an ___.",
+   "answers": [
+    "varying load",
+    "intermittent load",
+    "noncontinuous load",
+    "continuous load"
+   ],
+   "correct_index": 3,
+   "reference": "422.13"
+  },
+  {
+   "number": 62,
+   "prompt": "In other than one-and two-family dwelling units, the available fault current and the date of the calculation was performed shall be field marked on the enclosure of ___.",
+   "answers": [
+    "switchgear",
+    "panelboards",
+    "switchboards",
+    "all of these"
+   ],
+   "correct_index": 3,
+   "reference": "408.6"
+  },
+  {
+   "number": 63,
+   "prompt": "If the emergency disconnecting means required in 230.85 for dwelling units is a meter disconnect, it must be ___ the meter mounting equipment.",
+   "answers": [
+    "near",
+    "remote from",
+    "adjacent to",
+    "integral to"
+   ],
+   "correct_index": 3,
+   "reference": "230.85(B)",
+   "key_note": "230.85(B)(2)"
+  },
+  {
+   "number": 64,
+   "prompt": "If locating a motor's disconnecting means within sight of the motor would result in an increased hazard, the motor controller may act as the required disconnect if it is ___.",
+   "answers": [
+    "serviceable",
+    "accessible",
+    "lockable",
+    "readily accessible"
+   ],
+   "correct_index": 2,
+   "reference": "430.102(B)(2) Ex."
+  },
+  {
+   "number": 65,
+   "prompt": "A three-way switch is counted as ___ conductor(s) based on the largest conductor connected to the switch in determining conductor fill in a device box.",
+   "answers": [
+    "one",
+    "two",
+    "three",
+    "not required to be counted"
+   ],
+   "correct_index": 1,
+   "reference": "314.16(B)(4)"
+  },
+  {
+   "number": 66,
+   "prompt": "Equipment intended to interrupt current at fault levels shall have a/an ___ rating, at normal voltage, that is at least equal to the available fault current at the line terminals of the equipment.",
+   "answers": [
+    "time delay",
+    "interrupting",
+    "short-time",
+    "long-time"
+   ],
+   "correct_index": 1,
+   "reference": "110.9"
+  },
+  {
+   "number": 67,
+   "prompt": "Vegetation such as trees shall not be used for support of ___.",
+   "answers": [
+    "luminaires",
+    "boxes",
+    "overhead conductor spans",
+    "any of these"
+   ],
+   "correct_index": 2,
+   "reference": "225.26"
+  },
+  {
+   "number": 68,
+   "prompt": "A luminaire in a commercial cooking hood must, among other requirements, exclude grease, oil, and ___ from the lamp and wiring compartment.",
+   "answers": [
+    "solids",
+    "moisture",
+    "oxygen",
+    "exhaust vapors"
+   ],
+   "correct_index": 3,
+   "reference": "410.10(C)"
+  },
+  {
+   "number": 69,
+   "prompt": "Stainless steel rigid metal conduit may use galvanized steel boxes and enclosures if those enclosures are not subject to ___.",
+   "answers": [
+    "severe corrosive influences",
+    "unauthorized contact",
+    "corrosive influences",
+    "physical damage"
+   ],
+   "correct_index": 0,
+   "reference": "344.14"
+  },
+  {
+   "number": 70,
+   "prompt": "The maximum size FMT permitted is ___.",
+   "answers": [
+    "1/2\"",
+    "3/4\"",
+    "1\"",
+    "1 1/4\""
+   ],
+   "correct_index": 1,
+   "reference": "360.20(B)"
+  }
+ ]
+}
