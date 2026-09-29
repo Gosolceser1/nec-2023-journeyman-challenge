@@ -79,6 +79,7 @@ class Fig:
         self.parts = []
         self.labels = []   # [text, x, y, w, h] in canvas units (for the leak scan)
         self.masks = []    # {"rect": [x,y,w,h] canvas, "label", "ring", "records", "what"}
+        self.highlights = []  # {"rect": [x,y,w,h] canvas, "records"}: outlined after answering
         self.rect(0, 0, w, h, fill=BG)
 
     # ------------------------------------------------------------ primitives
@@ -172,6 +173,12 @@ class Fig:
             m["records"] = list(records)
         self.masks.append(m)
         return m
+
+    def highlight(self, x, y, w, h, records=None):
+        """Outline [x, y, w, h] after the question is answered (the part the key points at).
+
+        Nothing is drawn before answering, so it never gives the answer away."""
+        self.highlights.append({"rect": [x, y, w, h], "records": None if records is None else list(records)})
 
     def value(self, x, y, s, size=T_VALUE, fill=OK, anchor="middle", bold=True, records=None,
               label="?", pad=8, ring=True, what=None, rotate=None):

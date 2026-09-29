@@ -1,10 +1,10 @@
 extends SceneTree
 ## Question figures: every figure the source PDFs print for a question must be
-## on screen BEFORE the learner answers, look like the PDF (it is a crop of the
-## page, not a redraw), and give nothing away until the answer is in. The
-## original study figures (assets/diagrams/nec/) follow the same rules: masked
-## per question before answering (inline and zoomed), revealed after, no label
-## showing the answer outside a mask, and "after" figures only once answered.
+## on screen BEFORE the learner answers (redrawn as an original figure, with
+## the keyed part outlined after answering) and give nothing away until the
+## answer is in. All figures (assets/diagrams/nec/) are masked per question
+## before answering (inline and zoomed), revealed after, show no label with
+## the answer outside a mask, and "after" figures only once answered.
 ##
 ##   Godot --headless --path . --script tools/tests/test_diagrams.gd [-- --mobile-ui]
 ##
@@ -18,6 +18,8 @@ const LABELS_PATH := "res://docs/diagrams/labels.json"
 const BANK_PATH := "res://data/question_bank.json"
 ## Prompt/choice wording that only makes sense with a picture next to it.
 const NEEDS_FIGURE := "(?i)(refer to the figure|figure below|shown below|diagram [a-d]\\b|which of the following is an? (ammeter|voltmeter|wattmeter|ohmmeter)\\b)"
+## Questions the printed exam answers only with its figure; each is redrawn.
+const REQUIRED := ["final-exam-#1-005", "final-exam-#1-013", "final-exam-#1-047"]
 
 var t: R = R.new()
 var main: Node
@@ -74,7 +76,11 @@ func _bank_by_id() -> Dictionary:
 
 func _data_checks() -> void:
 	var m := _map()
-	t.check(not _pdf_map().is_empty(), "diagrams.json parses and is not empty")
+	t.check(JSON.parse_string(FileAccess.get_file_as_string(MAP_PATH)) is Dictionary, "diagrams.json parses")
+	for qid in REQUIRED:
+		var e: Dictionary = m.get(qid, {})
+		t.check(str(e.get("source", "")) == "original" and not e.has("pdf"), "%s: required exam figure is a redrawn original, not a PDF crop" % qid)
+		t.check(e.has("highlight") and DiagramView.shows_before_answer(e), "%s: required figure shows before answering and outlines the keyed part after" % qid)
 	var by_id := _bank_by_id()
 	var recs: Array = by_id.values()
 	for qid in m:
@@ -95,13 +101,13 @@ func _data_checks() -> void:
 		if e.has("highlight"):
 			var h: Array = e["highlight"]
 			t.check(h.size() == 4 and float(h[2]) > 0.0 and float(h[3]) > 0.0 and float(h[0]) >= -0.01 and float(h[1]) >= -0.01 \
-					and float(h[0]) + float(h[2]) <= 1.01 and float(h[1]) + float(h[3]) <= 1.01, "%s: highlight box lies inside the crop" % qid)
+					and float(h[0]) + float(h[2]) <= 1.01 and float(h[1]) + float(h[3]) <= 1.01, "%s: highlight box lies inside the figure" % qid)
 	var re := RegEx.create_from_string(NEEDS_FIGURE)
 	for r in recs:
 		var text := str(r.get("prompt", "")) + " | " + " | ".join(PackedStringArray(r.get("answers", [])))
 		if re.search(text) != null:
 			t.check(DiagramView.has_figure(r), "%s: stem/choices refer to a picture, so it must have a figure" % r.get("id", ""))
-	# PDF figures replace the old ASCII drafts: nothing may still carry one.
+	# Figures replace the old ASCII drafts: nothing may still carry one.
 	for r in recs:
 		if m.has(str(r.get("id", ""))):
 			t.check(str(r.get("diagram", "")) == "", "%s: no stale ASCII diagram next to the figure" % r.get("id", ""))
@@ -429,7 +435,7 @@ func _sweep() -> void:
 		main._show_question()
 		t.check(not view.is_revealed(), "%s: highlight cleared when the question is shown again" % qid)
 		t.eq(view.is_masked(), not file_masks.is_empty(), "%s: masks come back when the question is shown again" % qid)
-	t.eq(shown, _map().size(), "every mapped figure was shown by the 283-record sweep")
+	t.eq(shown, _map().size(), "every mapped figure was shown by the whole-bank sweep")
 	print("  swept %d records, %d with figures" % [main.records.size(), shown])
 	await _masked_figure_checks()
 
@@ -463,11 +469,10 @@ func _wait(sec: float) -> void:
 	await process_frame
 
 
-## The shipped figures need no masks today (docs/DIAGRAMS_AUDIT.md), so the
-## mask path is exercised with one injected on a real figure record.
+## The mask fade and zoom are exercised with masks injected on a real figure
+## record that has none of its own.
 func _masked_figure_checks() -> void:
-	var m := _pdf_map()
-	var qid: String = m.keys()[0]
+	var qid: String = REQUIRED[0]
 	var i := -1
 	for k in main.records.size():
 		if str(main.records[k].get("id", "")) == qid:

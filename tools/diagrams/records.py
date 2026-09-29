@@ -1,9 +1,13 @@
-"""The 88 records the diagrams audit found would benefit from a figure.
+"""The records the diagrams audit gave a figure: 3 that need one to be answered
+and 88 that would benefit.
 
-id: (tier, topic, family). Tiers: A high, B medium, C low. From docs/DIAGRAMS_AUDIT.md.
+id: (tier, topic, family). Tiers: R required, A high, B medium, C low. From docs/DIAGRAMS_AUDIT.md.
 """
 
 NEED = {
+    'final-exam-#1-005': ('R', 'Troubleshooting a switch/lamp circuit (meter readings)', 'Required exam figure'),
+    'final-exam-#1-013': ('R', 'Meter hookups: which one is an ammeter', 'Required exam figure'),
+    'final-exam-#1-047': ('R', 'Control symbols: temperature-actuated switch', 'Required exam figure'),
     'final-exam-#1-020': ('A', '250.53(A)(3) rod spacing 6 ft', 'F1 Grounding electrode system + service bonding'),
     'open-book-exam-#1-008': ('A', '250.53(A)(5) plate electrode depth 30 in', 'F1 Grounding electrode system + service bonding'),
     'open-book-exam-#10-024': ('A', 'Grounding electrode conductor (definition)', 'F1 Grounding electrode system + service bonding (P4, GEC masked)'),

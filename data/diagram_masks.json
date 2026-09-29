@@ -1,26 +1,7 @@
 {
   "version": 1,
-  "about": "Per question figure (file name in assets/diagrams/): the answer-revealing regions found in a pixel review ('leaks') and the '?' badges that cover them until the question is answered ('masks'). Rects are [x, y, w, h] as fractions of the image. Every figure in diagrams.json must have an entry; every leak must lie inside a mask. See docs/DIAGRAMS_AUDIT.md.",
-  "diagrams": {
-    "final-exam-1-005.png": {
-      "reviewed": "2026-09-28",
-      "note": "Meter readings (0 V across S1, 120 V across L1) and the ON position are givens from the stem. The lamp filament is drawn intact, so nothing shows the open lamp.",
-      "leaks": [],
-      "masks": []
-    },
-    "final-exam-1-013.png": {
-      "reviewed": "2026-09-28",
-      "note": "Meters are labelled only I, II, III METER (no A/V symbols); the series/parallel wiring is the question itself.",
-      "leaks": [],
-      "masks": []
-    },
-    "final-exam-1-047.png": {
-      "reviewed": "2026-09-28",
-      "note": "Symbols carry only the letters (a)-(d); no names.",
-      "leaks": [],
-      "masks": []
-    }
-  },
+  "about": "Answer-revealing regions per figure and the '?' badges that cover them until the question is answered. 'records': original figures (assets/diagrams/nec/, written by tools/diagrams/build.py), per question. 'diagrams': scanned PDF crops listed in assets/diagrams/diagrams.json, per file (none ship: the three exam figures are redrawn). 'leaks' are the regions that would give the answer away; every leak must lie inside a mask. Rects are [x, y, w, h] as fractions of the image. See docs/DIAGRAMS_AUDIT.md.",
+  "diagrams": {},
   "records": {
     "final-exam-#1-003": {
       "file": "equipment_receptacle_210-63.png",
@@ -66,6 +47,13 @@
         }
       ],
       "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-005": {
+      "file": "lamp_switch_meter_readings.png",
+      "when": "before",
+      "leaks": [],
+      "masks": [],
+      "reviewed": "2026-09-29"
     },
     "final-exam-#1-008": {
       "file": "balcony_receptacle_210-52e3.png",
@@ -129,6 +117,13 @@
       "leaks": [],
       "masks": [],
       "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-013": {
+      "file": "meter_hookups_three_meters.png",
+      "when": "before",
+      "leaks": [],
+      "masks": [],
+      "reviewed": "2026-09-29"
     },
     "final-exam-#1-020": {
       "file": "electrode_system_250-52_250-53.png",
@@ -553,6 +548,13 @@
         }
       ],
       "reviewed": "2026-09-28"
+    },
+    "final-exam-#1-047": {
+      "file": "switch_symbols_a_to_d.png",
+      "when": "before",
+      "leaks": [],
+      "masks": [],
+      "reviewed": "2026-09-29"
     },
     "final-exam-#1-049": {
       "file": "burial_under_concrete_300-5.png",

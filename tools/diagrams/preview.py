@@ -35,10 +35,14 @@ def font(size):
     return ImageFont.load_default()
 
 
-def draw_state(img, masks, answered, scale=1.0):
+def draw_state(img, masks, answered, scale=1.0, highlight=None):
     im = img.convert("RGB").copy()
     d = ImageDraw.Draw(im)
     w, h = im.size
+    if answered and highlight:
+        x, y, hw, hh = highlight
+        d.rounded_rectangle([x * w, y * h, (x + hw) * w, (y + hh) * h], radius=int(6 * scale),
+                            outline=EMERALD_500, width=max(2, int(2.5 * scale)))
     for m in masks:
         x, y, mw, mh = m["rect"]
         box = [x * w, y * h, (x + mw) * w, (y + mh) * h]
@@ -95,7 +99,7 @@ def main():
                 sheet.paste(draw_state(img, e.get("masks", []), False, 1.5), (10, y + 30))
             else:
                 d.text((20, y + 60), "(not shown before answering)", font=hf, fill=HEAD)
-            sheet.paste(draw_state(img, e.get("masks", []), True, 1.5), (w + 20, y + 30))
+            sheet.paste(draw_state(img, e.get("masks", []), True, 1.5, fig_map[rid].get("highlight")), (w + 20, y + 30))
         sheet.save(out / f"{name}.png", optimize=True)
         t = img.convert("RGB").copy()
         t.thumbnail((400, 300))

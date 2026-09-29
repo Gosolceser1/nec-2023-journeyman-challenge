@@ -43,8 +43,9 @@ BANK = ROOT / "data" / "question_bank.json"
 SCALE = 1.5
 PALETTE = 96
 
-# Tiers wired into the app (the rest are drawn but not shipped).
-WIRED_TIERS = "ABC"
+# Tiers wired into the app (the rest are drawn but not shipped). R = the
+# questions that cannot be answered without their figure.
+WIRED_TIERS = "RABC"
 
 
 def load_figs(modules=None):
@@ -90,6 +91,14 @@ def record_masks(f, rid):
     return ms
 
 
+def record_highlight(f, rid):
+    for hl in f.highlights:
+        if hl["records"] is None or rid in hl["records"]:
+            x, y, w, h = hl["rect"]
+            return [_r(x / f.w), _r(y / f.h), _r(w / f.w), _r(h / f.h)]
+    return None
+
+
 def unit_labels(f):
     return [[t, _r(x / f.w), _r(y / f.h), _r(w / f.w), _r(h / f.h)] for t, x, y, w, h in f.labels]
 
@@ -126,7 +135,7 @@ def validate(drawn, bank, check_missing=True):
             errors.append(f"{rid}: wired tier {NEED[rid][0]} but no figure draws it")
     for rid in seen:
         if rid not in NEED:
-            errors.append(f"{rid}: drawn, but not one of the audit's 88 records (tools/diagrams/records.py)")
+            errors.append(f"{rid}: drawn, but not one of the audit's figure records (tools/diagrams/records.py)")
     return errors
 
 
@@ -160,7 +169,7 @@ def scratch(modules, out_dir, bank):
                 sheet.paste(preview.draw_state(img, ms, False, SCALE), (10, y + 30))
             else:
                 dr.text((20, y + 60), "(not shown before answering)", font=hf, fill=preview.HEAD)
-            sheet.paste(preview.draw_state(img, ms, True, SCALE), (w + 20, y + 30))
+            sheet.paste(preview.draw_state(img, ms, True, SCALE, record_highlight(f, rid)), (w + 20, y + 30))
         sheet.save(out_dir / f"{name}_preview.png")
         print(out_dir / f"{name}_preview.png", f"{png.stat().st_size / 1024:.0f} KiB")
     for e in errors:
@@ -195,6 +204,9 @@ def outputs(drawn, bank, old_map):
             fig_map[rid] = {"file": f"res://assets/diagrams/nec/{name}.png", "figure": name,
                             "source": "original", "style": "dark", "when": when,
                             "size": [int(f.w * SCALE), int(f.h * SCALE)], "nec": d["nec"], "svg_sha1": sha}
+            hl = record_highlight(f, rid)
+            if hl is not None:
+                fig_map[rid]["highlight"] = hl
             ms = record_masks(f, rid) if when == "before" else []
             entry = {"file": f"{name}.png", "when": when,
                      "leaks": [{"region": m["rect"], "what": what} for m, what in ms],

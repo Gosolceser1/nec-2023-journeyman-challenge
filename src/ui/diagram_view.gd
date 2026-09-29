@@ -1,11 +1,11 @@
 class_name DiagramView
 extends Control
 
-## A question's figure. Either a crop of the scanned exam page
-## (assets/diagrams/diagrams.json, from tools/pipeline/extract_diagrams.py),
-## shown on a paper-white card so the black line art reads on the dark theme,
-## or an original study figure (assets/diagrams/nec/figures.json, from
-## tools/diagrams/build.py), dark slate art shown on a dark card. Records with
+## A question's figure. Either an original study figure
+## (assets/diagrams/nec/figures.json, from tools/diagrams/build.py), dark slate
+## art shown on a dark card, or a crop of a scanned exam page
+## (assets/diagrams/diagrams.json, from tools/pipeline/extract_diagrams.py;
+## none ship now), shown on a paper-white card. Records with
 ## neither fall back to their ASCII "diagram" text in a monospace font. The
 ## drawing scales to the width it is given (no minimum width, no wrapping) and
 ## a tap opens it fullscreen.
@@ -87,7 +87,7 @@ static func _read_json(path: String) -> Dictionary:
 	return parsed if parsed is Dictionary else {}
 
 
-## The PDF crops win over an original figure mapped to the same record.
+## A scanned crop, if one is mapped, wins over an original figure for the same record.
 static func _load_map() -> void:
 	if _loaded:
 		return

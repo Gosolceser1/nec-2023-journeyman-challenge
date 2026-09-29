@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+<rect x="0.0" y="0.0" width="800.0" height="380.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<circle cx="60.0" cy="120.0" r="8" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="60.0" cy="290.0" r="8" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
+<text x="60.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="middle">supply</text>
+<line x1="68.0" y1="120.0" x2="152.0" y2="120.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="208.0" y1="120.0" x2="332.0" y2="120.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="388.0" y1="120.0" x2="700.0" y2="120.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="68.0" y1="290.0" x2="700.0" y2="290.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="700.0" y1="120.0" x2="700.0" y2="161.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="700.0" y1="249.0" x2="700.0" y2="290.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="700.0" cy="205.0" r="44" fill="#334155" stroke="#e2e8f0" stroke-width="4"/>
+<text x="700.0" y="213.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">LOAD</text>
+<circle cx="180.0" cy="120.0" r="28" fill="#1e293b" stroke="#e2e8f0" stroke-width="4"/>
+<text x="180.0" y="128.6" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">I</text>
+<line x1="180.0" y1="148.0" x2="180.0" y2="290.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="180.0" cy="290.0" r="6" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="360.0" cy="120.0" r="28" fill="#1e293b" stroke="#e2e8f0" stroke-width="4"/>
+<text x="360.0" y="128.6" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">II</text>
+<circle cx="540.0" cy="120.0" r="6" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="540.0" cy="290.0" r="6" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<line x1="540.0" y1="120.0" x2="540.0" y2="177.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="540.0" y1="233.0" x2="540.0" y2="290.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="540.0" cy="205.0" r="28" fill="#1e293b" stroke="#e2e8f0" stroke-width="4"/>
+<text x="540.0" y="213.6" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">III</text>
+<text x="400.0" y="52.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="middle">Three meters connected three ways</text>
+</svg>

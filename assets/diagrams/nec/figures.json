@@ -12,6 +12,25 @@
   "nec": "210.63, 210.63(A), 210.63(B)(1), 210.63(B)(2)",
   "svg_sha1": "3ddd9444c5fc"
  },
+ "final-exam-#1-005": {
+  "file": "res://assets/diagrams/nec/lamp_switch_meter_readings.png",
+  "figure": "lamp_switch_meter_readings",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   705
+  ],
+  "nec": "General knowledge (troubleshooting with a voltmeter)",
+  "svg_sha1": "2019eae409b5",
+  "highlight": [
+   0.575,
+   0.4723,
+   0.1925,
+   0.2468
+  ]
+ },
  "final-exam-#1-008": {
   "file": "res://assets/diagrams/nec/balcony_receptacle_210-52e3.png",
   "figure": "balcony_receptacle_210-52e3",
@@ -50,6 +69,25 @@
   ],
   "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
   "svg_sha1": "549bdc4646ae"
+ },
+ "final-exam-#1-013": {
+  "file": "res://assets/diagrams/nec/meter_hookups_three_meters.png",
+  "figure": "meter_hookups_three_meters",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   570
+  ],
+  "nec": "General knowledge (meter connections)",
+  "svg_sha1": "b4b511c90d1a",
+  "highlight": [
+   0.3975,
+   0.1947,
+   0.105,
+   0.2421
+  ]
  },
  "final-exam-#1-020": {
   "file": "res://assets/diagrams/nec/electrode_system_250-52_250-53.png",
@@ -232,6 +270,25 @@
   ],
   "nec": "422.16(B)(1)",
   "svg_sha1": "f0f34f825b79"
+ },
+ "final-exam-#1-047": {
+  "file": "res://assets/diagrams/nec/switch_symbols_a_to_d.png",
+  "figure": "switch_symbols_a_to_d",
+  "source": "original",
+  "style": "dark",
+  "when": "before",
+  "size": [
+   1200,
+   480
+  ],
+  "nec": "General knowledge (control symbols)",
+  "svg_sha1": "b734bdf546ab",
+  "highlight": [
+   0.05,
+   0.1938,
+   0.175,
+   0.725
+  ]
  },
  "final-exam-#1-049": {
   "file": "res://assets/diagrams/nec/burial_under_concrete_300-5.png",
