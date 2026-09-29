@@ -6,7 +6,7 @@ the product's core promise: **the answer must not appear anywhere above the
 question until the learner answers.**
 
 Everything here runs headless with no autoloads. Most suites are node-free;
-the layout-tree, menu-alignment, figure, table-fit and desktop Edge suites instantiate
+the layout-tree, menu-card, figure, breadcrumb, table-fit, touch-scroll, voice-picker, desktop Edge, shuffle, study-feedback and sfx suites instantiate
 `scenes/main.tscn`. A full run takes about a minute.
 
 ## Running
@@ -36,7 +36,7 @@ one as a child Godot process and reads its exit code. Slower than an in-process
 runner, but it exercises exactly the path a developer runs by hand, and one
 suite's failure cannot abort the rest.
 
-**Current status: 8,138 Godot checks across 32 suites, 35 Python tests (validator, spellcheck, speak_question), 1 build-guard shell test, 0 failures, 0 documented product defects.** The scene harness adds 390 (desktop) / 406 (mobile) checks. The desktop Edge suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
+**Current status: 8,178 Godot checks across 32 suites, 59 Python tests (validator, spellcheck, speak_question, question requirements), 1 build-guard shell test, 0 failures, 0 documented product defects.** The scene harness adds 390 (desktop) / 406 (mobile) checks. The desktop Edge suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
 
 Every formerly pinned defect is fixed and promoted to a real assertion, so a
 regression fails its suite rather than appearing in the defect list. The test table prefix case is covered directly: `NOTED: x` must remain unchanged.
@@ -57,6 +57,8 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | `test_study_feedback.gd` | session area tallies and pace (fake clock, 6:00 flag), area bars and weak rows, the report's study feedback (scored line, weak areas, pace, readiness) and the weakest-area menu button, desktop and mobile |
 | `test_menu_cards.gd` | menu mode cards (the Nebraska State Law card included) and answer cards sit in their column slot (same x and width as the column and each other, scale 1) after the menu settles, quick hover passes, a hover spanning a re-sort (hover is glow only, no slide), focus moves, the start press animation and a quiz round-trip; one content box for every card state; audio toggles flush with the row labels; the desktop menu fits 960 px. Desktop and mobile |
 | `test_user_dir_migration.gd` | the one-time copy of `audio.cfg`, `voice.cfg` and `question_bag.cfg` from `%APPDATA%\Godot\app_userdata\<name>` into the custom user folder: byte-for-byte copy, old files kept, tool leftovers skipped, runs once (a reset stays reset), a folder already in use is never touched, missing or same folder, a fake APPDATA layout. All in temp dirs |
+| `test_breadcrumb.gd` | every record, shuffled, through the real answer and Next flow in both layouts: the breadcrumb and the "Article N Title — section" line always name that record's own chapter and article, with the NEC 2023 title from `data/nec_2023_articles.json` (docs/LOCATION_AUDIT.md) |
+| `test_diagrams.gd` | question figures in both layouts: shown before answering, never leaking the answer; every figure has a dated review in `data/diagram_masks.json`, every flagged leak lies inside a "?" mask, masks cover the figure inline and in the zoom until the answer is in, then fade (instantly with Reduce motion) (docs/DIAGRAMS_AUDIT.md) |
 | `test_table_viewer.gd` | the pure parts: folding (`_folded_lines`, `max_blocks`), column widths (`_column_floors`, `_column_widths`), `extract_target_keyword`, `is_note_row`, `_strip_note_prefix` + a sweep of all 30 bank tables |
 | `test_table_fit.gd` | every table question, both layouts: the lookup table before answering and the feedback table after show whole, with no scrollbar and nothing left to scroll either way |
 | `test_desktop_edge.gd` | the desktop game with an Edge voice, PATH emptied: no Python helper node, the full desktop list (Ryan kept), prefetch of the current and next question, a cached read in the same frame, a streamed read ("PREPARING AVA") from the stem, the rule held until answered, "Hear the rule" from the cache, Stop while preparing, the Ryan preview, and no internet falling back to the recorded Andrew or "System voice (no internet)" |
@@ -64,12 +66,13 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | `test_edge_client.gd` | `EdgeTtsClient`, the Edge voices without Python (Windows and Android): Sec-MS-GEC token against edge-tts, XML escaping and chunking, a round trip through a local fake service (clips, manifest last, 96 kbps config, SSML voice), shared and cancelled requests, a silent service timing out, and no internet failing in milliseconds without blocking a frame, refusing new requests while down and recovering |
 | `fake_edge_server.gd` | a local stand-in for the Edge read-aloud WebSocket, used by `test_edge_client.gd`, `test_desktop_edge.gd` and `test_voice_picker.gd`. Not a suite. |
 | `run_all.gd` | combined runner |
-| `test_validate_question_bank.py` | Python regression checks for validator/render parity and shared OCR path resolution |
+| `test_validate_question_bank.py` | Python regression checks for validator/render parity, shared OCR path resolution, the NEC 2023 location rules and the content-audit guard |
+| `test_question_requirements.py` | runs `tools/pipeline/check_requirements.py`: every table, calculation and formula record in `data/question_requirements.json` keeps its pre-answer table, formula hint and recomputed NEC 2023 result (docs/TABLES_FORMULAS_AUDIT.md) |
 | `test_build_guard.sh` | proves builds refuse default, relative, and absolute targets that would overwrite the curated bank |
 
 ## What IS covered
 
-**The no-answer-leak guarantee** (`test_no_leak.gd`, 225 checks) — the highest-value
+**The no-answer-leak guarantee** (`test_no_leak.gd`, 235 checks) — the highest-value
 part of the suite:
 
 - `redact_answer_spans` as a table of `(text, answer) -> expected` cases, covering
@@ -91,7 +94,7 @@ part of the suite:
   unfindable. Also asserts the reverse: every record's `lesson_lines` DO state the
   answer, so the teardown can actually teach it.
 
-**TTS readability** (`test_speech_text.gd`, 456 checks) — `speakable()` is
+**TTS readability** (`test_speech_text.gd`, 470 checks) — `speakable()` is
 asserted against exact output for inches, feet, mixed numbers and fractions
 (`1 1/4"` -> `1 and one quarter inches`), every electrical unit (`240V` ->
 `240 volts`, `mA` vs `A`, `kVA`, `kW`, `deg C`/`deg F`, `Hz`, `mm`), jargon
@@ -102,7 +105,7 @@ sizes, conductor types, blank runs, and every symbol. Plus `spoken_fraction`,
 the segment planners, and the guarantee that teach clips are a contiguous tail of
 the speech plan (the playback gate depends on that).
 
-**Answer matching** (`test_unit_matcher.gd`, 189 checks) — `answer_match_candidates`
+**Answer matching** (`test_unit_matcher.gd`, 198 checks) — `answer_match_candidates`
 is the foundation of redaction: a missing candidate is a leak. Asserts the
 number-word map both ways, feet<->inches<->metric conversion in both directions,
 thousands separators (`1200` <-> `1,200`), unit spellings, and the leading-`#` form.
@@ -133,7 +136,10 @@ that folding keeps every cell once. `test_table_fit.gd` checks the live tables.
   `correct_index`, an answer that appears nowhere in its own record), but it does
   not judge whether an answer is *right*. Where it pins specific records
   (numbered notes, underscore subscripts) it is as a regression guard, not a
-  content audit.
+  content audit. The NEC 2023 audits did that review
+  (`docs/CONTENT_AUDIT_2023.md`, `docs/TABLES_FORMULAS_AUDIT.md`); the bank
+  validator and `test_question_requirements.py` only keep their results from
+  changing unnoticed.
 
 ## Two conventions worth knowing
 

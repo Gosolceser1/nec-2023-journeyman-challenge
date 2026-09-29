@@ -246,9 +246,8 @@ snapshots and with in-page text extraction.
   - Ch 4: 422.16(B)(1), Tables 400.4, 430.37, 430.250.
   - Ch 5: 500.5(D), 500.5(D)(2), 590.4(F), 590.4(G), 590.4(J).
   - Ch 6: 630.31(A)(2), 680.22(A)(2), 680.43(B)(1).
-  A follow-up pass (after the account moved to an UpCodes Premium trial; the
-  "Start Free Trial" button was gone and the viewer's search box worked)
-  still reported these as "not found". That includes sections that are
+  A follow-up pass, with the viewer's search box working, still reported
+  these as "not found". That includes sections that are
   certainly in NEC 2023, such as 210.8(E) Equipment Requiring Servicing,
   110.26(B) Clear Spaces and 590.4(G) Splices. It also contradicted its own
   earlier reading of 620.51(D). So "not found" here means "not verified by

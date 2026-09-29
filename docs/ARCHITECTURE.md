@@ -50,6 +50,8 @@ data/     question_bank.json (never edited by hand)  voices.json
           exam_blueprint.json (content outline, chapter map, area overrides)
           diagram_masks.json  per figure: answer-revealing regions and the "?" masks DiagramView
                               draws over them until the answer is in (docs/DIAGRAMS_AUDIT.md)
+          question_requirements.json  which records need a table, calculation or formula
+                              (read by tools/pipeline, not by the app; docs/TABLES_FORMULAS_AUDIT.md)
 assets/   diagrams/  sfx/  speech/<qid>__<voice>/ (generated, gitignored)
           branding/  icon.png/.ico, Android icon layers, splash.png; source/ (SVGs, .gdignore)
 docs/     this file, DATA_PIPELINE, VOICE_READING_RULES, SFX_PLAN, KNOWN_ISSUES, RELEASE,
@@ -57,7 +59,8 @@ docs/     this file, DATA_PIPELINE, VOICE_READING_RULES, SFX_PLAN, KNOWN_ISSUES,
 tools/    verify.sh  harness.gd  list_pck.py
           branding/  build_branding.py + render_svg.gd: every icon and the splash from the SVGs
           release/   make_release.py, the recipient README/CREDITS, dump_licenses.gd (docs/RELEASE.md)
-          pipeline/  bank build, overrides, validator, spellcheck, OCR
+          pipeline/  bank build, overrides, validator, spellcheck, OCR; audit guards:
+                     content_audit_2023.json, check_requirements.py + nec_calc.py
           speech/    dump_speech.gd  pregenerate_speech.py  test_bundle.gd  check_export_pack.gd
           visual/    snap.gd  snap_all.gd  snap_motion.gd  snap_tables.gd  measure_fit.gd  compare_shots.py (output: .audit_tmp/)
                      snap_showcase.gd + make_showcase.py: the README screenshots and hero (docs/media/)
@@ -294,7 +297,7 @@ tests and the native TTS callbacks refer to them by name.
 `bash tools/verify.sh` runs everything below except the last three:
 
 - import and `--check-only` parse of every script;
-- `tools/tests/run_all.gd`: 31 suites, including `test_breadcrumb` (every
+- `tools/tests/run_all.gd`: 32 suites, including `test_breadcrumb` (every
   record, shuffled, through the real Next flow in both layouts: the
   breadcrumb and the "Article N Title — section" line name the record's own
   chapter and article, from `data/nec_2023_articles.json`), `test_touch_scroll` (a
@@ -307,7 +310,9 @@ tests and the native TTS callbacks refer to them by name.
   in their column slot through hover, focus and a quiz round-trip) and
   `test_quiz_session`;
 - `tools/harness.gd` on both layouts (quiz flow, speech queue, teach gate);
-- the Python tests and the bank validator (`--no-warn`: 0 errors, 0 warnings).
+- the Python tests (including `check_requirements.py` through
+  `test_question_requirements.py`) and the bank validator with its location
+  and content-audit guards (`--no-warn`: 0 errors, 0 warnings).
 
 Also:
 

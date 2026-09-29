@@ -127,7 +127,8 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 | `Title 100 NAC Rule 13`, `NAC` | Title 100 of the Nebraska Administrative Code, Rule 13; Nebraska Administrative Code |
 
 Unknown all-caps tokens: consonant-only ones are spelled ("Q R Z"). A line
-shouted in capitals is lowercased. `ON`, `OFF`, `NOT` and `ONLY` are read as words.
+shouted in capitals is lowercased. `ON`, `OFF`, `NOT` and `ONLY` are read as words,
+and so are the Table 310.16 band headers `COPPER` and `ALUMINUM` ("copper", "aluminum").
 
 ### Voice-independent by design
 

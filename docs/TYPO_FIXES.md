@@ -17,6 +17,11 @@ and survive a rebuild. `tools/pipeline/spellcheck_bank.py` guards against regres
 
 Baseline: `question_bank.json` at git HEAD (c8ff389). 129 records differ.
 
+Later changes are not listed here: the NEC 2023 content audit rewrote the stem of
+`final-exam-#3-068` (now 620.51(A)) and clarified `final-exam-#5-008` (control and signal
+conductors, 330.104), so their rows below show only the typo fix. See
+`docs/CONTENT_AUDIT_2023.md`.
+
 ## Typos and slips in the PDF, corrected (38 changes)
 
 Includes Final #3 Q42, which now shows the exact PDF stem ("an accessible separable

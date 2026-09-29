@@ -1,5 +1,48 @@
 # Changelog
 
+## [Unreleased]
+
+Every NEC question was checked against the 2023 code for content, tables and
+calculations, and figures got a way to hide answer giveaways. No answer key
+changed.
+
+### Fixed
+
+- **NEC 2023 content audit** (docs/CONTENT_AUDIT_2023.md). All 279 NEC
+  questions were checked against NFPA 70-2023: the keyed answer, the quoted
+  provision, the per-choice notes, the memory tip and every cited section.
+  60 questions had explanation fixes (2020 or paraphrased provision text,
+  subsection labels, 2023 table numbers such as Table 344.30(B) and Table
+  352.30(B), notes that stated a wrong fact). Two questions changed more:
+  final-exam-#3-068 tested a 620.51(D)(1) rule that NEC 2023 removed and now
+  tests 620.51(A) (disconnect lockable only in the open position), and
+  final-exam-#5-008 now says it asks about control and signal conductors
+  (330.104). One heading (408.5) is left to confirm in print
+  (docs/KNOWN_ISSUES.md).
+- **Tables and formulas audit** (docs/TABLES_FORMULAS_AUDIT.md). Every
+  question is classified as recall, table, calculation or formula. All 33
+  calculations were recomputed from NEC 2023 values and match their keys.
+  Questions that could not be answered without the codebook got a real
+  lookup table or formula hint (Table 300.5(A), Table 400.4 with Note 9, the
+  240.6(A) standard ratings, the Nebraska apprentice ratio), and the Table
+  220.45 note now includes the 25% tier.
+- **Voice:** the Table 310.16 "COPPER" / "ALUMINUM" headers are read as words,
+  not spelled out.
+
+### Changed
+
+- **"?" masks on figures.** A figure can now cover any spot that gives the
+  answer away with a "?" badge until you answer, inline and in the zoom; the
+  badge fades after answering (instantly with Reduce motion). The three
+  shipped figures were reviewed and none needs one yet
+  (docs/DIAGRAMS_AUDIT.md).
+- **Guards** so the audits stay true: the bank validator fails when an
+  audited provision or key changes without re-checking
+  (`tools/pipeline/content_audit_2023.json`), `check_requirements.py` fails
+  when a table or calculation question loses its table, formula or result
+  (`data/question_requirements.json`), and `test_diagrams` fails when a
+  flagged figure region has no mask (`data/diagram_masks.json`).
+
 ## 1.0.3 (2026-09-28)
 
 Windows: the natural online voices work on any PC, no Python needed. Every

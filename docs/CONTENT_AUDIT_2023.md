@@ -29,7 +29,7 @@ The 4 Nebraska state-law records are outside the NEC bank and are not part of th
 
 - **#1-027, 105–113 °F band.** The Table 310.15(B)(1)(1) 41–45 °C / 105–113 °F row is 0.71 / 0.82 / 0.87 for 60 / 75 / 90 °C, so 40 A × 0.87 = 34.8 A is right. The table header in the provision was restored.
 - **TYPO_FIXES medium-confidence provisions (50).** Each was compared with the 2023 text. Those still paraphrased, truncated or on 2020 wording were fixed (see below). The rest verified.
-- **LOCATION_AUDIT sections the automated pass did not match.** All 34 sections and 10 tables on that list exist in 2023 under the cited headings (for example 210.8(E) Equipment Requiring Servicing, 110.26(B) Clear Spaces, 590.4(G) Splices). The 620.51(D) question is settled: 2023 has no driving-machine numbering rule (see the flags below).
+- **LOCATION_AUDIT sections the automated pass did not match.** All 34 sections and 10 tables on that list exist in 2023 under the cited headings (for example 210.8(E) Equipment Requiring Servicing, 110.26(B) Clear Spaces, 590.4(G) Splices). The 620.51(D) question is settled: 2023 has no driving-machine numbering rule, so `final-exam-#3-068` was rewritten (see Notable fixes).
 
 ## Flagged for a human
 

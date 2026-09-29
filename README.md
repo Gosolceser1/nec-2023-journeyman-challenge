@@ -57,7 +57,11 @@ if Android asks.
   built in on Windows and Android with nothing extra to install (Windows also
   offers the British Ryan). Without a connection the recorded voice takes over.
 - **Reference tables and diagrams** right next to the question, with tables
-  laid out to fit the screen.
+  laid out to fit the screen. Figures are reviewed for anything that gives the
+  answer away, and such a spot stays under a "?" until you answer.
+- **Checked against NEC 2023:** every question's answer, code provision,
+  lookup table and calculation was audited against the 2023 code (see
+  [Accuracy](#accuracy)).
 - **Electrical answer animations and sounds** (with a Reduce motion option),
   and keyboard shortcuts on desktop (A-D or 1-4, Enter for next).
 - **Works offline:** the questions, the voice and the sounds are all inside
@@ -143,6 +147,23 @@ answer feeds a per-question history, which drives the readiness estimate, the
 weakest-area drill and the review queue. The details are in
 [docs/STUDY_SYSTEM.md](docs/STUDY_SYSTEM.md).
 
+## Accuracy
+
+The question bank was audited against NFPA 70-2023. Each audit has its own
+report, and a guard in `tools/verify.sh` fails the build if an audited item
+changes without being re-checked.
+
+| Audit | What was checked | Result |
+|---|---|---|
+| [Content](docs/CONTENT_AUDIT_2023.md) | All 279 NEC questions: keyed answer, provision wording, choice notes, tips, cited sections | No answer key changed; 60 explanations corrected; 1 heading to confirm in print |
+| [Tables and formulas](docs/TABLES_FORMULAS_AUDIT.md) | Every question that needs a table, calculation or formula | 33 calculations recomputed from NEC 2023 values, 0 mismatches; missing lookup tables and formula hints added |
+| [Locations](docs/LOCATION_AUDIT.md) | Chapter, article, section and lookup hint of every question | 0 wrong breadcrumbs; 72 article titles corrected to the 2023 wording |
+| [Diagrams](docs/DIAGRAMS_AUDIT.md) | The shipped figures, pixel by pixel, for answer giveaways | All three correct, none needs a mask; the "?" mask system and its leak guard are in place |
+
+Open items (such as the 408.5 heading) are in
+[docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md). The audits check the questions
+against the code; they are not a substitute for your own copy of the NEC.
+
 ## Building from source
 
 The app is Godot 4.7.2 and GDScript. The sections below cover running,
@@ -188,7 +209,8 @@ Godot_v4.7.2-stable_win64_console.exe --headless --path . --import
 
 ```
 bash tools/verify.sh                               # import, parse, unit suites, harness x2, bank checks
-python tools/pipeline/validate_question_bank.py --no-warn   # bank schema + spoiler gate
+python tools/pipeline/validate_question_bank.py --no-warn   # bank schema, spoiler gate, NEC 2023 location and content-audit guards
+python tools/pipeline/check_requirements.py                 # every table/calc question keeps its table, formula and recomputed result
 ```
 
 `GODOT` and `PYTHON` override the binaries verify.sh uses.
@@ -216,6 +238,10 @@ signing, the shareable zip and checksums.
 - `docs/STUDY_SYSTEM.md`: exam blueprint, question selection, study feedback
 - `docs/DATA_PIPELINE.md`: how the question bank is built and validated
 - `docs/VOICE_READING_RULES.md`: how questions are spoken
+- `docs/ANDROID_VOICES.md`: the Android voice list, names and the Edge voices
 - `docs/SFX_PLAN.md`: which moments get a sound
+- `docs/CONTENT_AUDIT_2023.md`, `docs/TABLES_FORMULAS_AUDIT.md`,
+  `docs/LOCATION_AUDIT.md`, `docs/DIAGRAMS_AUDIT.md`: the NEC 2023 audits
+- `docs/TYPO_FIXES.md`: every stem and choice correction against the PDFs
 - `docs/KNOWN_ISSUES.md`: open items and verification traps
 - `docs/RELEASE.md`: building and packaging a release

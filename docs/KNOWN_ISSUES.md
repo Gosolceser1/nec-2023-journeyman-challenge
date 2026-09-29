@@ -4,8 +4,10 @@ Open items that could not be closed headless, plus the verification traps
 that produced false results before. Fixed defects are in git history
 (`77e2cf7`, `16589d5`, `3c5971f`, `3bfc526`, `c8ff389`, for 1.0.1 the
 Android touch scrolling `d6667a6` and voice picker `e5d4a7c`, for 1.0.2
-the Edge voices on Android, and for 1.0.3 the Edge voices on Windows without
-Python and the NEC location audit), each pinned by a test.
+the Edge voices on Android, for 1.0.3 the Edge voices on Windows without
+Python and the NEC location audit, and since 1.0.3 the NEC 2023 content and
+tables/formulas audits and the diagram "?" masks), each pinned by a test or
+a validator guard.
 
 ## Open: needs a real device
 

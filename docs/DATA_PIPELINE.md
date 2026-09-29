@@ -4,7 +4,7 @@
 
 `question_bank.json` is schema v2. It contains 283 playable records: 279 NEC records across 7 exams and 4 Nebraska State Law records (exam `NE State Act #3`, `"section": "ne_state_law"`), plus a 314-entry manifest and 31 unavailable source entries. Its current top-level keys are `version`, `total_expected`, `playable`, `missing_source_items`, `audit_notes`, `records`, and `manifest`. The old `questions` array is absent; the validator accepts it only as an optional legacy key and checks it if present.
 
-The bank validator is a structural and spoiler-safety gate, not a proof that each answer is technically correct. The regression suite explicitly leaves NEC answer correctness to source review (`tools/tests/README.md`, “What is NOT covered”). Section-level NEC claims must be checked against the 2023 NEC.
+The bank validator is a structural and spoiler-safety gate, not a proof that each answer is technically correct. The regression suite leaves NEC answer correctness to source review (`tools/tests/README.md`, “What is NOT covered”). That review was done for NEC 2023 in the content, tables/formulas and location audits (`docs/CONTENT_AUDIT_2023.md`, `docs/TABLES_FORMULAS_AUDIT.md`, `docs/LOCATION_AUDIT.md`), and the guards below keep an audited record from changing unnoticed. New or changed section-level NEC claims must still be checked against the 2023 NEC.
 
 ## Commands
 
@@ -16,7 +16,7 @@ WIRE_BANK_OUT=/path/to/candidate.json bash tools/pipeline/build_question_bank.sh
 WIRE_BANK_OUT=/path/to/candidate.json bash tools/pipeline/build_question_bank.sh --full
 ```
 
-`--no-warn` makes validator warnings fail the gate. The local and CI gates use it. `tools/tests/test_build_guard.sh`, the Python tests (`test_validate_question_bank.py`, `test_spellcheck_bank.py`, `test_speak_question.py`) and `spellcheck_bank.py --offline` run inside the gate before the strict bank validator. The Godot suites cover app behavior and the no-answer-leak guarantee.
+`--no-warn` makes validator warnings fail the gate. The local and CI gates use it. `tools/tests/test_build_guard.sh`, the Python tests (`test_validate_question_bank.py`, `test_spellcheck_bank.py`, `test_speak_question.py`, `test_question_requirements.py`) and `spellcheck_bank.py --offline` run inside the gate before the strict bank validator. The Godot suites cover app behavior and the no-answer-leak guarantee.
 
 ## OCR input/output locations
 
@@ -86,8 +86,10 @@ To add a quiz: add both files (a new `exam` label gives new ids, `ne-state-act-#
 - Pre-answer answer mentions using the same visible-text precedence as the app (gist first; task-framing tip only when gist is empty).
 - Learner-facing editorial scaffolding that should not ship.
 - Correct answers leaking verbatim into the prompt (one pinned exception, see the wording rule).
+- NEC 2023 locations (`location_problems`): canonical article titles, and headings, lookup hints and rationales that name the cited section.
+- The content audit: every NEC record has an entry in `content_audit_2023.json`, and its provision checksum and `correct_index` still match it.
 
-Current validation result: **0 errors, 0 warnings**. That is not an NEC answer-key audit.
+Current validation result: **0 errors, 0 warnings**. The validator enforces the audits' results; the answer-key audit itself is `docs/CONTENT_AUDIT_2023.md`.
 
 ## Speech assets
 

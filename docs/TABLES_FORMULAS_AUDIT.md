@@ -70,10 +70,10 @@ ne-state-act-#3-003, which was added.
   that sentence.** On UpCodes, 2023 620.51(D) "Identification and Signs" contains only
   (1) "Available Fault Current Field Marking". The "numbered to correspond to the identifying
   number" rule survives only in 620.53 (car light), 620.54 (car heating and air-conditioning)
-  and 620.55 (other utilization equipment). The record now says so: the reference heading
-  reads "(NEC 2020 text, removed in NEC 2023)", and the tip and choice A note say that 2023 keeps
-  the rule only in 620.53–620.55. The key is kept. The content audit flags the same record
-  (`KNOWN_ISSUES.md`). **Resolved:** the question was rewritten to test 2023 620.51(A) (disconnect lockable only in the open position per 110.25); the NEC 2020 label is gone (`CONTENT_AUDIT_2023.md`).
+  and 620.55 (other utilization equipment). This pass first labelled the record's provision
+  "(NEC 2020 text, removed in NEC 2023)" and kept the key. **Resolved:** the question was then
+  rewritten to test 2023 620.51(A) (disconnect lockable only in the open position per 110.25);
+  the NEC 2020 label is gone (`CONTENT_AUDIT_2023.md`).
 - **final-exam-#5-008** (330.104): the key "#18" is literally right, because 330.104 allows
   18 AWG copper for *control and signal* conductors (UpCodes text matches the record). But the
   stem ("minimum size copper conductor permitted in metal-clad cable") does not say "control".
