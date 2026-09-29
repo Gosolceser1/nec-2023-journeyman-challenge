@@ -97,16 +97,6 @@ def bank_sources():
                 yield rec["id"], path, text
 
 
-def gist_sources():
-    sys.path.insert(0, str(ROOT / "tools" / "pipeline"))
-    try:
-        from gists import GISTS
-    finally:
-        sys.path.pop(0)
-    for (exam, qnum), text in GISTS.items():
-        yield "gists.py", f"({exam!r}, {qnum})", text
-
-
 def words_of(text: str):
     for m in WORD_RE.finditer(text):
         w = m.group(0).replace("\u2019", "'")
@@ -158,7 +148,7 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
 
     allow, ignores = load_allowlist()
-    sources = list(bank_sources()) + list(gist_sources())
+    sources = list(bank_sources())
 
     if args.update_lexicon:
         # Only dictionary words go in, so an unreviewed typo can never be grandfathered.

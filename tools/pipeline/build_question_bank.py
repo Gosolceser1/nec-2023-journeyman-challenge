@@ -5,7 +5,6 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from gists import GISTS, SCENES
 from pipeline_paths import answer_key_ocr_dir, exam_ocr_dir, nec_data
 from bank_overrides import apply_overrides
 from exam_parser import read_key, read_questions
@@ -1151,213 +1150,6 @@ REFERENCE_TABLES = {
     ]
 }
 
-PROMPT_REPAIRS = {
-    ("Final Exam #5", 6): (
-        "Lengths of not more than ___ of AC cable at terminals where flexibility is necessary does not have to be supported.",
-        ["28 inches", "2 feet", "30 inches", "3 feet"],
-    ),
-    ("Final Exam #3", 28): (
-        "Appliances, provided for public use rated 250v or less and 60 amps or less, single-phase or three-phase, shall be provided with GFCI protection for personnel.",
-        ["vending machines", "tire inflation machines", "drinking water coolers", "all of these"],
-    ),
-    ("Final Exam #1", 2): (
-        "Each section of equipment that requires rear or side access to make field connections shall be so marked by the manufacturer on the ___.",
-        ["front", "right side", "left side", "rear"],
-    ),
-    ("Final Exam #1", 3): (
-        "In other than one and two family dwellings, a receptacle outlet for indoor service equipment shall be located within ___ of the service equipment.",
-        ["25 feet", "50 feet", "75 feet", "the same room or area"],
-    ),
-    ("Final Exam #1", 6): (
-        "Decorative lighting and similar accessories used for holiday lighting and similar purposes shall be listed and ___.",
-        ["marked", "approved", "labeled", "stamped"],
-    ),
-    ("Final Exam #1", 9): (
-        "An acceptable color for ungrounded conductors is ___.",
-        ["green", "gray", "pink", "white"],
-    ),
-    ("Final Exam #1", 10): (
-        "The calculated load of a 12 foot length of fixed multioutlet assembly in a commercial facility is ___ volt-amperes if the appliances it supplies are not likely to be used at the same time.",
-        ["1000", "720", "540", "380"],
-    ),
-    ("Final Exam #1", 12): (
-        "A wall-mounted central vacuum assembly connected to a single receptacle located in an attached garage shall be provided with ___ protection for personnel.",
-        ["LCDI", "GFCI", "AFCI", "both AFCI and GFCI"],
-    ),
-    ("Final Exam #1", 15): (
-        "If festoon lighting is installed without a messenger, the smallest allowable overhead conductor is ___ AWG.",
-        ["#10", "#12", "#14", "#16"],
-    ),
-    ("Final Exam #1", 16): (
-        "For temporary holiday lighting, trees shall be permitted for supporting overhead spans of conductors and cables if the overhead wiring is arranged with ___, tension take-up devices, or other approved means to avoid damage from live vegetation.",
-        ["fittings", "cable ties", "strain relief devices", "overhead clamps"],
-    ),
-    ("Final Exam #1", 18): (
-        "Duty on elevator and dumbwaiter driving machine motors and driving motors of motor-generators used with generator field control shall be rated as ___.",
-        ["intermittent", "lockable", "continuous", "varying"],
-    ),
-    ("Final Exam #1", 19): (
-        "What does the alpha character I represent when stating the equation W = E x I?",
-        ["Intrinsic circuit", "Intrinsic electromotive force", "Intensity of current", "Isotopic character"],
-    ),
-    ("Final Exam #1", 20): (
-        "Where multiple driven ground rods are used to form the grounding electrode system, in order to maintain an effective grounding electrode system, they shall be spaced not less than ___ apart.",
-        ["36 inches", "48 inches", "60 inches", "72 inches"],
-    ),
-    ("Final Exam #1", 24): (
-        "All 15 or 20 amp, single-phase, 125 volt through 250 volt receptacles located within ___ feet of a fountain edge shall be provided with GFCI protection.",
-        ["20", "24", "25", "30"],
-    ),
-    ("Final Exam #1", 27): (
-        "The ampacity of three #10 THWN-2 conductors installed in a raceway is ___ amps if the ambient temperature is 112°F.",
-        ["31.6", "34.8", "35", "37.2"],
-    ),
-    ("Final Exam #1", 28): (
-        "Fuel dispensing systems shall be provided with one or more clearly identified emergency shutoff devices or electrical disconnects. Such disconnects or devices shall be installed in approved locations but not less than 20 feet or more than ___ feet from the fuel dispensing devices that they serve.",
-        ["50", "75", "80", "100"],
-    ),
-    ("Final Exam #1", 29): (
-        "Where conduits enter a floor-standing switchboard, switchgear, or panelboard at the bottom, the conduits, including their end fittings, shall not rise more than ___ inches above the bottom of the enclosure.",
-        ["2", "3", "4", "6"],
-    ),
-    ("Final Exam #1", 36): (
-        "For a service rated 100 through 400 amps, the service conductors supplying the entire load of a one family dwelling shall be permitted to have an ampacity ___ of the service rating.",
-        ["83%", "80%", "75%", "70%"],
-    ),
-    ("Final Exam #1", 37): (
-        "Nonmetallic cable trays shall be made of ___ material.",
-        ["watertight", "waterproof", "fire-resistant", "flame-retardant"],
-    ),
-    ("Final Exam #1", 40): (
-        "The permitted demand factor for five household clothes dryers in a multifamily dwelling is ___.",
-        ["70%", "75%", "80%", "85%"],
-    ),
-    ("Final Exam #1", 41): (
-        "A stop switch is wired in ___ with a motor circuit.",
-        ["series", "series-shunt", "series-parallel", "parallel"],
-    ),
-    ("Final Exam #1", 42): (
-        "All 15 and 20 amp, 125 and 250 volt, nonlocking receptacles located in a wet location shall be listed ___ type.",
-        ["weather proof", "water proof", "water resistant", "weather resistant"],
-    ),
-    ("Final Exam #1", 43): (
-        "Where no GFCI protection is provided, the mounting height of a paddle fan located above a spa or hot tub shall not be less than ___ feet.",
-        ["6", "8", "10", "12"],
-    ),
-    ("Final Exam #1", 44): (
-        "An unintentional, electrically conducting connection between an ungrounded conductor of an electrical circuit and the normally non-current-carrying conductors, metallic enclosures, metallic raceways, metallic equipment or earth is referred to as a ___.",
-        ["ground fault", "open circuit", "short circuit", "circuit bypass"],
-    ),
-    ("Final Exam #1", 46): (
-        "40% is equivalent to ___.",
-        ["5/8", "3/5", "2/5", "5/16"],
-    ),
-    ("Final Exam #1", 48): (
-        "A 125 volt, 15 amp rated receptacle located in a hallway of a dwelling unit is required to be ___.",
-        ["GFCI protected", "on a dedicated circuit", "need a 20 amp receptacle", "listed tamper-resistant"],
-    ),
-    ("Final Exam #1", 49): (
-        "Direct-buried cables located in a trench below 2 inches of concrete shall have a minimum cover of ___.",
-        ["6 inches", "12 inches", "18 inches", "24 inches"],
-    ),
-    ("Final Exam #1", 56): (
-        "The maximum ampere rating permitted for a 125 volt, single-phase, receptacle outlet having a cord-and-plug connected motor load that does not have individual overload protection is ___.",
-        ["15 amps", "20 amps", "25 amps", "30 amps"],
-    ),
-    ("Final Exam #1", 57): (
-        "___ is permitted in the dedicated electrical space above a panelboard.",
-        ["Water piping", "Leak protection", "Sprinkler protection", "Air-conditioning ducts"],
-    ),
-    ("Final Exam #1", 59): (
-        "Branch circuits shall be rated in accordance with the ___.",
-        ["ampere rating of the largest receptacle", "maximum permitted rating of the fuse or breaker", "number of receptacle outlets in the branch circuit", "ampere rating of the largest conductor"],
-    ),
-    ("Final Exam #1", 60): (
-        "Underground wiring within ___ horizontally from the inside wall of the pool shall be permitted in liquidtight flexible metal conduit listed for direct burial use.",
-        ["18 inches", "24 inches", "48 inches", "60 inches"],
-    ),
-    ("Final Exam #1", 62): (
-        "You have 125 volts at the panel and 115 volts at the load. What is the percentage of voltage drop?",
-        ["5%", "4.35%", "4.17%", "8%"],
-    ),
-    ("Final Exam #1", 64): (
-        "When working from an electrical drawing, you should start from the ___.",
-        ["Lower right-hand corner", "Center", "Upper left-hand corner", "Bottom"],
-    ),
-    ("Final Exam #1", 67): (
-        "Conduit nipples not over 24 inches in length may be filled to a maximum of ___.",
-        ["50%", "60%", "70%", "80%"],
-    ),
-    ("Final Exam #1", 4): (
-        "Disregarding demand factors, the calculated lighting load for a 5,000 sq.ft. office building is ___ volt-amperes.",
-        ["16,500", "15,400", "8,000", "6,500"],
-    ),
-    ("Final Exam #1", 30): (
-        "Thermostatically controlled switching devices serving as both controllers and disconnecting means for fixed electric space-heating equipment shall ___.",
-        [
-            "not be permitted",
-            "be located not more than 8 feet above floor level",
-            "open all grounded conductors when placed in the off position",
-            "be designed so that the circuit cannot be energized automatically after the device has been manually placed in the off position",
-        ],
-    ),
-    ("Final Exam #5", 18): (
-        "The ampacity of Type UF cable shall be that of ___ conductors.",
-        ["60 degrees F", "75 degrees C", "140 degrees C", "60 degrees C"],
-    ),
-    ("Final Exam #3", 69): (
-        "A feeder supplying a specific fixed motor load must have a protective device with a rating or setting ___ the largest branch-circuit short-circuit and ground-fault rating or setting in the group, plus the sum of the full-load currents of the other motors.",
-        ["125 percent of", "not greater than", "225 percent of", "none of these"],
-    ),
-    ("Final Exam #3", 57): (
-        "When determining the number of conductors considered as current-carrying, a grounding conductor is ___.",
-        [
-            "counted as one current-carrying conductor",
-            "counted as one conductor for each ground wire in the raceway",
-            "considered to be a current-carrying conductor but not counted",
-            "considered to be a noncurrent-carrying conductor and is not counted",
-        ],
-    ),
-    ("Final Exam #5", 2): (
-        "Armored cable installed in thermal insulation shall have conductors rated at ___. The ampacity of the cable installed in these applications shall not exceed that of 60 degree C conductors.",
-        ["60 degrees C", "194 degrees F", "75 degrees C", "90 degrees F"],
-    ),
-    ("Final Exam #1", 11): (
-        "In a dwelling bedroom, any wall space ___ or more in width (including space measured around corners) and unbroken along the floor line by doorways and similar openings, fireplaces, and fixed cabinets that do not have countertops or similar work surfaces.",
-        ["18 inches", "24 inches", "30 inches", "36 inches"],
-    ),
-    ("Final Exam #1", 8): (
-        "Balconies, decks, and porches that are within 4 inches horizontally of the dwelling unit shall have at least one receptacle outlet accessible from the balcony, deck, or porch. The receptacle outlet shall not be located more than ___ above the balcony, deck, or porch walking surface.",
-        ["36 inches", "48 inches", "60 inches", "78 inches"],
-    ),
-    ("Final Exam #1", 70): (
-        "What is the full load current of a 50 horsepower, 3, 480v, wound-rotor AC motor?",
-        ["104 amps", "52 amps", "65 amps", "41 amps"],
-    ),
-    ("Final Exam #1", 50): (
-        "Communications wires and cables and CATV type coaxial cables shall have a vertical clearance of not less than ___ from all points of roofs above which they pass.",
-        ["18 inches", "36 inches", "6 feet", "8 feet"],
-    ),
-    ("Final Exam #1", 33): (
-        "A three-way switch is equivalent to a ___ switch.",
-        ["DPST", "DPDT", "SPST", "SPDT"],
-    ),
-    ("Final Exam #1", 32): (
-        "For a feeder tap not exceeding 10 feet in length and field installation, the maximum overcurrent device rating supplying a tap conductor with an ampacity of 40 amps is ___.",
-        ["150 A", "200 A", "350 A", "400 A"],
-    ),
-    ("Final Exam #1", 45): (
-        "Residential in-sink electrically operated kitchen waste disposers shall be permitted to be cord-and-plug connected; however, the flexible cord is to be not less than 18 inches in length and not over ___ in length.",
-        ["24 inches", "30 inches", "36 inches", "48 inches"],
-    ),
-}
-
-QUESTION_REFERENCE_TEXTS = {
-    ("Final Exam #1", 5): "Switch and Lamp Troubleshooting" + chr(10) + "With S1 closed and 0 volts measured across it, the switch contacts are conducting. With full 120 volts still present across the lamp, the lamp circuit is open downstream of the switch, so current never reaches the filament.",
-    ("Open Book Exam #10", 9): "Operator. The individual responsible for starting, stopping, and controlling an amusement ride or supervising a concession. (525) (CMP—15)",
-    ("Open Book Exam #10", 10): "225.19(D)(1) Final Spans — Clearance from Windows and Doors. Maintain at least 900 mm (3 ft) horizontal clearance from operable windows and doors. 225.19(D)(3) Building Openings. Do not install overhead branch-circuit or feeder conductors beneath openings used to move materials, or where they obstruct entrance to those openings."
-}
-
 def reference_key(reference):
     clean = reference.replace("NEC ", "").strip()
     if clean in REFERENCE_TEXTS:
@@ -1370,10 +1162,7 @@ def reference_key(reference):
             return key
     return clean
 
-def reference_text(reference, exam="", question_number=0):
-    specific = QUESTION_REFERENCE_TEXTS.get((exam, question_number), "")
-    if specific:
-        return specific
+def reference_text(reference):
     return REFERENCE_TEXTS.get(reference_key(reference), "")
 
 def reference_table(reference):
@@ -1810,67 +1599,6 @@ def choice_notes_for(answers):
         notes.append(ANSWER_GLOSSARY.get(key, ""))
     return notes
 
-FORMULA_HINTS = {
-    ("Final Exam #1", 1): "Write 60 over 100, then divide the numerator and denominator by their greatest common factor.",
-    ("Final Exam #1", 4): "Offices use 1.3 VA per sq ft (Table 220.42(A)). Multiply by the floor area.",
-    ("Final Exam #1", 10): "Not simultaneous: one 180 VA outlet per 5 ft or fraction (220.14(H)(1)). Count the outlets first.",
-    ("Final Exam #1", 14): "At 86°F use the 75°C table value with no temperature correction, then multiply by 0.80 for four current-carrying conductors.",
-    ("Final Exam #1", 21): "Ranges use Table 220.55 demand, not the nameplate — look up the row for this kW size.",
-    ("Final Exam #1", 25): "Welder overcurrent ≤ 200% of I1max (630.12(A)), then go to the next standard breaker size.",
-    ("Final Exam #1", 27): "Multiply the base ampacity by the temperature correction factor for the given ambient.",
-    ("Final Exam #1", 32): "Field 10-ft tap, 240.21(B)(1): compare the tap conductor ampacity with the rating of the feeder overcurrent device.",
-    ("Final Exam #1", 36): "Dwelling services 100–400 A need only 83% of the rating (310.12(A)).",
-    ("Final Exam #1", 40): "Multiple dryers use the Table 220.54 demand factor for that dryer count.",
-    ("Final Exam #1", 46): "Divide the percent by 100, then reduce the fraction.",
-    ("Final Exam #1", 62): "Volts lost divided by source volts: (panel − load) ÷ panel.",
-    ("Final Exam #1", 63): "Divide the drawing inches by the inches-per-foot of the scale.",
-    ("Final Exam #1", 65): "One 360° cycle takes 1/60 s — figure out what fraction 90° is.",
-    ("Final Exam #1", 67): "Nipples 24 in. or shorter may fill to 60% (Chapter 9, Note 4).",
-    ("Final Exam #1", 68): "Size the EGC from Table 250.122 using the branch-circuit rating.",
-    ("Final Exam #1", 70): "Read the full-load current straight from Table 430.250 for this HP and voltage.",
-    ("Final Exam #1", 22): "Count the receptacle outlets 210.52(G)(1) requires for the garage in the stem.",
-    ("Final Exam #3", 26): "Each truck space counts a fixed minimum kVA (626.11).",
-    ("Final Exam #3", 33): "Ohm's power law: amps = watts ÷ volts.",
-    ("Final Exam #3", 40): "Welder duty factor = √(duty cycle). Multiply the primary current by it.",
-    ("Final Exam #3", 55): "Two equal resistors in parallel equal half of one.",
-    ("Final Exam #3", 63): "Unventilated copper busbar ≈ 1,000 A per square inch — find the cross-section first.",
-    ("Final Exam #3", 69): "Feeder protection = largest motor's protection plus the rest at full load (430.62(A)).",
-    ("Final Exam #5", 39): "Unventilated copper busbar ≈ 1,000 A per square inch — find the cross-section first.",
-    ("Open Book Exam #1", 21): "Offices use 1.3 VA per sq ft (Table 220.42(A)). Multiply by the floor area.",
-    ("Open Book Exam #4", 15): "Multiple dryers use the Table 220.54 demand factor for that dryer count.",
-    ("Open Book Exam #4", 22): "Dwelling services 100–400 A need only 83% of the rating (310.12(A)).",
-    ("Open Book Exam #7", 4): "Biplane X-ray uses 100% of the momentary demand rating for supply and protection.",
-}
-
-WORKED_SOLUTIONS = {
-    ("Final Exam #1", 1): "60 ÷ 100 = 3/5.",
-    ("Final Exam #1", 4): "5,000 × 1.3 = 6,500 VA.",
-    ("Final Exam #1", 10): "12 ft → three 5-ft fractions × 180 VA = 540 VA.",
-    ("Final Exam #1", 14): "25 × 0.80 = 20 A.",
-    ("Final Exam #1", 21): "14 kW → Table 220.55 = 8.8 kW.",
-    ("Final Exam #1", 25): "43 × 2.0 = 86 A → next standard size 90 A.",
-    ("Final Exam #1", 27): "40 × 0.87 = 34.8 A.",
-    ("Final Exam #1", 32): "40 × 10 = 400 A.",
-    ("Final Exam #1", 40): "Table 220.54, five dryers = 85%.",
-    ("Final Exam #1", 46): "40 ÷ 100 = 2/5.",
-    ("Final Exam #1", 62): "10 ÷ 125 = 8%.",
-    ("Final Exam #1", 63): "3.5 ÷ 0.25 = 14 ft.",
-    ("Final Exam #1", 65): "(1/60) ÷ 4 = 1/240 s.",
-    ("Final Exam #3", 33): "2 ÷ 20 = 0.10 A.",
-    ("Final Exam #3", 40): "√0.15 ≈ 0.39; 21 × 0.39 = 8.19 A.",
-    ("Final Exam #3", 55): "2,000 ÷ 2 = 1,000 Ω.",
-    ("Final Exam #3", 63): "1.5 sq in × 1,000 = 1,500 A.",
-    ("Final Exam #5", 39): "4 × 0.5 = 2 sq in × 1,000 = 2,000 A.",
-    ("Open Book Exam #1", 21): "5,000 × 1.3 = 6,500 VA.",
-    ("Open Book Exam #4", 15): "Table 220.54, five dryers = 85%.",
-}
-
-def formula_for(exam, number):
-    return FORMULA_HINTS.get((exam, number), "")
-
-def worked_for(exam, number):
-    return WORKED_SOLUTIONS.get((exam, number), "")
-
 # The edition's article titles: one table shared with the app and the validator.
 NEC_ARTICLES = json.loads(nec_data("articles.json").read_text(encoding="utf-8"))
 ARTICLE_TITLES = {int(number): title for number, title in NEC_ARTICLES["articles"].items()}
@@ -1922,22 +1650,22 @@ for item in bank:
         "id": record_id(item[5], item[6]),
         "exam": item[5],
         "question_number": item[6],
-        "prompt": PROMPT_REPAIRS.get((item[5], item[6]), (item[1], item[2]))[0],
-        "answers": PROMPT_REPAIRS.get((item[5], item[6]), (item[1], item[2]))[1],
-        "gist": GISTS.get((item[5], item[6]), ""),
-        "scene": SCENES.get((item[5], item[6]), ""),
+        "prompt": item[1],
+        "answers": item[2],
+        "gist": "",
+        "scene": "",
         "correct_index": item[3],
         "article": item[4],
         "article_title": article_title(item[4]),
         "keywords": keywords,
         "lookup_summary": lookup_summary,
         "info_tip": explain_question(item[1], keywords, item[4]),
-        "reference_text": reference_text(item[4], item[5], item[6]),
+        "reference_text": reference_text(item[4]),
         "reference_table": reference_table(item[4]),
         "tip_title": CONCEPT_SHORT.get(concept_key_for(item[1].lower(), item[4]), ("In plain language", ""))[0],
         "tip_short": concept_tip_short(concept_key_for(item[1].lower(), item[4]), item[2], item[3]),
-        "formula": formula_for(item[5], item[6]),
-        "worked": worked_for(item[5], item[6]),
+        "formula": "",
+        "worked": "",
         "choice_notes": choice_notes_for(item[2]),
         "available": True,
     })
