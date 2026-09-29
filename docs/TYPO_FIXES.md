@@ -483,6 +483,72 @@ line (283 records) and a scan of every bank field for a/an, doubled words, "..",
 
 Voice clips regenerated: `final-exam-#1-034`, `open-book-exam-#4-025`.
 
+## Exam import (2026-09-29): 9 new exams
+
+Open book #2, #3, #5, #6, #9, #11, #12 and final #2, #4 were typed from the PDFs
+(`tools/pipeline/sources/exams/`), so there was no OCR damage to restore. Misspellings,
+dropped words and punctuation slips in the PDFs were corrected through the overrides
+(43 changes). Stem rewrites for NEC 2023 or clarity are listed in
+`docs/CONTENT_AUDIT_2023.md`, not here.
+
+| Record | Field | Before | After |
+|---|---|---|---|
+| `final-exam-#2-009` | choice A | Over Flow | Overflow |
+| `final-exam-#2-023` | choice A | Type 4 X | Type 4X |
+| `final-exam-#2-030` | choice B | 1/2' | 1/2" |
+| `final-exam-#2-055` | choice A | Length of the Conductor | Length of the conductor |
+| `final-exam-#2-055` | choice B | Diameter of the Conductor | Diameter of the conductor |
+| `final-exam-#2-055` | choice C | Insulation of the Conductor | Insulation of the conductor |
+| `final-exam-#2-062` | stem | one-and two-family | one- and two-family |
+| `final-exam-#2-062` | stem | the date of the calculation was performed | the date the calculation was performed |
+| `final-exam-#2-066` | stem | at normal voltage | at nominal circuit voltage |
+| `final-exam-#2-070` | choice B | 3/4” | 3/4" |
+| `final-exam-#4-022` | stem | 0.30 sq. in., | 0.30 square inches, |
+| `final-exam-#4-047` | stem | 2500 sq.ft, how many | 2500 sq. ft. How many |
+| `final-exam-#4-052` | stem | 1400 sq.ft. inside and has an outside dimension of 1800 sq.ft.? | 1400 sq. ft. inside and has an outside dimension of 1800 sq. ft.? |
+| `open-book-exam-#11-018` | stem | one-and two-family | one- and two-family |
+| `open-book-exam-#11-018` | stem | the date of the calculation was performed | the date the calculation was performed |
+| `open-book-exam-#12-006` | stem | at normal voltage | at nominal circuit voltage |
+| `open-book-exam-#12-021` | choice B | 3/4” | 3/4" |
+| `open-book-exam-#12-022` | choice B | 5’ | 5' |
+| `open-book-exam-#2-010` | stem | messsenger | messenger |
+| `open-book-exam-#2-011` | stem | in all of the following locations listed locations except | in all of the following listed locations except |
+| `open-book-exam-#2-024` | stem | recptacles | receptacles |
+| `open-book-exam-#2-025` | stem | with in | within |
+| `open-book-exam-#3-004` | choice D | neither GFCI and AFCI | neither GFCI nor AFCI |
+| `open-book-exam-#3-007` | stem | serving both controllers | serving as both controllers |
+| `open-book-exam-#3-008` | stem | switchgear or, panelboard | switchgear, or panelboard |
+| `open-book-exam-#3-011` | stem | on the insulation, what does | on the insulation. What does |
+| `open-book-exam-#3-017` | stem | receptacle outlet(s) shall be installed | receptacle outlet(s) to be installed |
+| `open-book-exam-#3-023` | stem | grounded electrode system | grounding electrode system |
+| `open-book-exam-#3-024` | choice D | to withstand environment | to withstand the environment |
+| `open-book-exam-#5-002` | stem | name plate | nameplate |
+| `open-book-exam-#5-006` | stem | A household electric range | For a household electric range |
+| `open-book-exam-#5-009` | stem | carnivals and fairs, shall | carnivals and fairs shall |
+| `open-book-exam-#5-012` | stem | shall be provided ground-fault protection | shall be provided with ground-fault protection |
+| `open-book-exam-#5-014` | stem | Overhead conductors not over 1,000 volts pass over a track rails of railroads | Where overhead conductors not over 1,000 volts pass over the track rails of railroads |
+| `open-book-exam-#5-017` | stem | overcurrent devices, is installed | overcurrent devices is installed |
+| `open-book-exam-#5-018` | stem | roofs which they pass | roofs above which they pass |
+| `open-book-exam-#5-019` | stem | sytems | systems |
+| `open-book-exam-#6-005` | stem | Overhead conductors not over 1,000 volts pass over | Where overhead conductors not over 1,000 volts pass over |
+| `open-book-exam-#6-018` | stem | being charged, requires | being charged requires |
+| `open-book-exam-#6-019` | stem | 25 ohms or less, can be | 25 ohms or less can be |
+| `open-book-exam-#9-003` | stem | Information note: | Informational Note: |
+| `open-book-exam-#9-008` | stem | point of connection . | point of connection. |
+| `open-book-exam-#9-010` | choice B | 1/2' | 1/2" |
+
+The plain-language background (`info_tip`) quoted the PDF stem, so it kept these typos
+after the stem was fixed. The builder now rebuilds the paragraph that restates the stem
+from the final stem (the background note above it is unchanged), and
+`validate_question_bank.py` rejects an `info_tip` that quotes any other stem. That also
+refreshed the restated stem of 14 older records whose curated stems had changed, and three
+curated `info_tip` overrides (`final-exam-#1-011`, `#1-040`, `#3-065`) now quote the current stem.
+
+Spell check: new NEC and trade terms were added to `tools/pipeline/spellcheck_allowlist.txt`
+(countertop, nontime, firestopped, microgrid, overvoltage, SPDs, …), plus two ignore lines
+for verbatim text ("e.g.," in the Article 100 definition of nominal voltage; the turns
+symbol Ns). The lexicon was regenerated.
+
 `tools/tests/test_typo_regressions.py` (run by `tools/verify.sh`) fails if any
 fixed "before" text in this file comes back in the built bank or the results
 screen strings.
