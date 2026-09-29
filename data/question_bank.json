@@ -1542,7 +1542,7 @@
       "answers": [
         "GFCI protected",
         "on a dedicated circuit",
-        "need a 20 amp receptacle",
+        "in need of a 20 amp receptacle",
         "listed tamper-resistant"
       ],
       "gist": "A 15-ampere hallway receptacle in a dwelling must meet child-protection construction requirements. The question asks which protection that outlet needs.",
@@ -4455,14 +4455,14 @@
       "reference_text": "336.24 Bending Radius\nBends in Type TC cable shall be made so as not to damage the cable. For Type TC cable without metal shielding, the minimum bending radius shall be as follows:\nFour times the overall diameter for cables 25 mm (1 in.) or less in diameter\nFive times the overall diameter for cables larger than 25 mm (1 in.) but not more than 50 mm (2 in.) in diameter\nSix times the overall diameter for cables larger than 50 mm (2 in.) in diameter\nType TC cables with metallic shielding shall have a minimum bending radius of not less than 12 times the cable overall diameter.",
       "reference_table": [],
       "tip_title": "Cable types",
-      "tip_short": "TC bend radius: 4, 5, or 6 times diameter if unshielded; any TC cable with metallic shielding needs 12 times. Correct: B — twelve. 336.24 requires TC cable with metallic shielding to bend no tighter than 12 times its overall diameter. Not A: Ten times is not a 336.24 value; shielded TC needs 12 times the overall diameter. Not C: Twenty four times is double the 336.24 requirement of 12 times the diameter. Not D: Thirty six times is not in 336.24; the shielded TC minimum is 12 times the diameter.",
+      "tip_short": "TC bend radius: 4, 5, or 6 times diameter if unshielded; any TC cable with metallic shielding needs 12 times. Correct: B — twelve. 336.24 requires TC cable with metallic shielding to bend no tighter than 12 times its overall diameter. Not A: Ten times is not a 336.24 value; shielded TC needs 12 times the overall diameter. Not C: Twenty-four times is double the 336.24 requirement of 12 times the diameter. Not D: Thirty-six times is not in 336.24; the shielded TC minimum is 12 times the diameter.",
       "formula": "",
       "worked": "",
       "choice_notes": [
         "Ten times is not a 336.24 value; shielded TC needs 12 times the overall diameter.",
         "336.24 requires TC cable with metallic shielding to bend no tighter than 12 times its overall diameter.",
-        "Twenty four times is double the 336.24 requirement of 12 times the diameter.",
-        "Thirty six times is not in 336.24; the shielded TC minimum is 12 times the diameter."
+        "Twenty-four times is double the 336.24 requirement of 12 times the diameter.",
+        "Thirty-six times is not in 336.24; the shielded TC minimum is 12 times the diameter."
       ],
       "available": true
     },
@@ -5594,7 +5594,7 @@
         "the light is good but the switch does not make contact",
         "there is a break in the wiring of the circuit"
       ],
-      "gist": "With 0 volts across the switch and full voltage across the lamp, yet the lamp is dark: each reading narrows the fault location.",
+      "gist": "There are 0 volts across the switch and full voltage across the lamp, yet the lamp is dark; each reading narrows the fault location.",
       "scene": "",
       "correct_index": 0,
       "article": "General knowledge",
@@ -8393,7 +8393,7 @@
         "Table 5, Chapter 9",
         "Table 4, Chapter 9"
       ],
-      "gist": "Copper conductor resistance values are tabulated in Chapter 9. The question asks which table holds it.",
+      "gist": "Copper conductor resistance values are tabulated in Chapter 9. The question asks which table holds them.",
       "scene": "",
       "correct_index": 0,
       "article": "Table 8, Chapter 9",
@@ -8999,14 +8999,14 @@
       "id": "open-book-exam-#7-016",
       "exam": "Open Book Exam #7",
       "question_number": 16,
-      "prompt": "A sign shall be placed at the service entrance equipment, indicating type and ___ of each onsite emergency power source.",
+      "prompt": "A sign shall be placed at the service entrance equipment, indicating type and ___ of each on-site emergency power source.",
       "answers": [
         "voltage",
         "kW",
         "hours of fuel",
         "location"
       ],
-      "gist": "During normal power loss, occupants must locate the emergency supply. The sign at the entrance names its type plus one more fact. The question asks what that fact is.",
+      "gist": "During a loss of normal power, occupants must locate the emergency supply. The sign at the entrance names its type plus one more fact. The question asks what that fact is.",
       "scene": "",
       "correct_index": 3,
       "article": "700.7(A)",
@@ -9016,7 +9016,7 @@
         "identify the equipment, location, and requirement"
       ],
       "lookup_summary": "Lookup clues: identify the equipment, location, and requirement. Start with 700.7(A), then read the matching subsection and exceptions.",
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nEmergency systems must work when normal power doesn't: fire-pump controllers and parts sit high and dry above floors, the emergency source gets marked at the service entrance, and emergency wiring stays independent so one fault can't kill both normal and backup power.\n\nIn plain terms, the question is: \"A sign shall be placed at the service entrance equipment, indicating type and ___ of each onsite emergency power source.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nEmergency systems must work when normal power doesn't: fire-pump controllers and parts sit high and dry above floors, the emergency source gets marked at the service entrance, and emergency wiring stays independent so one fault can't kill both normal and backup power.\n\nIn plain terms, the question is: \"A sign shall be placed at the service entrance equipment, indicating type and ___ of each on-site emergency power source.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
       "reference_text": "700.7(A) Emergency Sources\nA sign shall be placed at the service-entrance equipment, indicating type and location of each on-site emergency power source.\nException: A sign shall not be required for individual unit equipment as specified in 700.12(H).",
       "reference_table": [],
       "tip_title": "Emergency systems",
@@ -9951,12 +9951,12 @@
       "id": "open-book-exam-#10-017",
       "exam": "Open Book Exam #10",
       "question_number": 17,
-      "prompt": "___ locations are those that are hazardous because of the presence of easily ignitable fibers or flyings.",
+      "prompt": "___ locations are those that are hazardous because of the presence of easily ignitible fibers or flyings.",
       "answers": [
         "Class I",
         "Class II",
         "Class III",
-        "Class II, Division II"
+        "Class II, Division 2"
       ],
       "gist": "Gases, dusts, and fibers are assigned separate hazardous-location classes. The question describes fibers and flyings and asks which class that is.",
       "scene": "",
@@ -9968,7 +9968,7 @@
         "hazardous location"
       ],
       "lookup_summary": "Lookup clues: hazardous location. Start with 500.5(D), then read the matching subsection and exceptions.",
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nYou cannot see electricity, so safety is a procedure, not a sense. Plan every job: identify all energy sources, lock and tag them open, verify zero voltage with a meter, and use insulated tools on anything that might be live. Treat pools, heaters, old panels, and anything unfamiliar as energized until your meter proves otherwise.\n\nIn plain terms, the question is: \"___ locations are those that are hazardous because of the presence of easily ignitable fibers or flyings.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nhazardous location",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nYou cannot see electricity, so safety is a procedure, not a sense. Plan every job: identify all energy sources, lock and tag them open, verify zero voltage with a meter, and use insulated tools on anything that might be live. Treat pools, heaters, old panels, and anything unfamiliar as energized until your meter proves otherwise.\n\nIn plain terms, the question is: \"___ locations are those that are hazardous because of the presence of easily ignitible fibers or flyings.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nhazardous location",
       "reference_text": "500.5(D) Class III Locations\nClass III locations shall be locations meeting the requirements of 500.5(D)(1) and (D)(2).\n(1) Class III, Division 1\nClass III, Division 1 locations shall include those locations specified in 500.5(D)(1)(a) and (D)(1)(b).\nCombustible Fibers/Flyings. Locations where nonmetal combustible fibers/flyings are in the air under normal operating conditions in quantities sufficient to produce explosible mixtures or where mechanical failure or abnormal operation of machinery or equipment might cause combustible fibers/flyings to be produced and might also provide a source of ignition through simultaneous failure of electrical equipment, through operation of protection devices, or from other causes shall be classified as Class III, Division 1. Locations where metal combustible fibers/flyings are present shall be classified as Class II, Division 1, Group E.",
       "reference_table": [],
       "tip_title": "Electrical safety",
@@ -10177,7 +10177,7 @@
         "40",
         "70"
       ],
-      "gist": "Recreational-vehicle sites predominantly require 30-ampere receptacles. The question asks what percent of sites must have it.",
+      "gist": "Recreational-vehicle sites predominantly require 30-ampere receptacles. The question asks what percent of sites must have one.",
       "scene": "",
       "correct_index": 3,
       "article": "551.71(B)",
@@ -10391,12 +10391,12 @@
       "id": "final-exam-#1-061",
       "exam": "Final Exam #1",
       "question_number": 61,
-      "prompt": "___ locations are those that are hazardous because of the presence of easily ignitable fibers or flyings.",
+      "prompt": "___ locations are those that are hazardous because of the presence of easily ignitible fibers or flyings.",
       "answers": [
         "Class I",
         "Class II",
         "Class III",
-        "Class II, Division II"
+        "Class II, Division 2"
       ],
       "gist": "Gases, dusts, and fibers are assigned separate hazardous-location classes. The question describes fibers and flyings and asks which class that is.",
       "scene": "",
@@ -10408,7 +10408,7 @@
         "hazardous location"
       ],
       "lookup_summary": "Lookup clues: hazardous location. Start with 503.1, then read the matching subsection and exceptions.",
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nYou cannot see electricity, so safety is a procedure, not a sense. Plan every job: identify all energy sources, lock and tag them open, verify zero voltage with a meter, and use insulated tools on anything that might be live. Treat pools, heaters, old panels, and anything unfamiliar as energized until your meter proves otherwise.\n\nIn plain terms, the question is: \"___ locations are those that are hazardous because of the presence of easily ignitable fibers or flyings.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nhazardous location",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nYou cannot see electricity, so safety is a procedure, not a sense. Plan every job: identify all energy sources, lock and tag them open, verify zero voltage with a meter, and use insulated tools on anything that might be live. Treat pools, heaters, old panels, and anything unfamiliar as energized until your meter proves otherwise.\n\nIn plain terms, the question is: \"___ locations are those that are hazardous because of the presence of easily ignitible fibers or flyings.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nhazardous location",
       "reference_text": "503.1 Scope\nThis article covers the requirements for electrical and electronic equipment and wiring for all voltages in Class III, Division 1 and Division 2 locations where fire or explosion hazards might exist due to nonmetal combustible fibers/flyings or ignitible fibers/flyings.",
       "reference_table": [],
       "tip_title": "Electrical safety",

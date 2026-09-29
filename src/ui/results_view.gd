@@ -93,12 +93,12 @@ static func show(host: Main) -> void:
 	append_study_feedback(host, is_exam, total)
 	if host.missed_questions.is_empty() and unanswered > 0:
 		host.info_panel.append_heading("TIME EXPIRED\n", AppTheme.AMBER_400)
-		host.info_label.add_text("Every question you reached was correct, but %d were left unanswered when the session clock ran out." % unanswered)
+		host.info_label.add_text("Every question you reached was correct, but %d %s left unanswered when the session clock ran out." % [unanswered, "was" if unanswered == 1 else "were"])
 	elif host.missed_questions.is_empty():
 		host.info_panel.append_heading("PERFECT SCORE ACHIEVED\n", AppTheme.EMERALD_400)
 		host.info_label.add_text("Congratulations! You answered 100%% of questions correctly. You have demonstrated full mastery of these %s provisions." % provisions)
 	else:
-		host.info_panel.append_heading("AREAS FOR TARGETED CODE STUDY (%d FAILED ITEMS)\n" % host.missed_questions.size(), AppTheme.RED_400)
+		host.info_panel.append_heading("AREAS FOR TARGETED CODE STUDY (%d FAILED ITEM%s)\n" % [host.missed_questions.size(), "" if host.missed_questions.size() == 1 else "S"], AppTheme.RED_400)
 		host.info_label.add_text("The following questions were answered incorrectly or timed out. Review each %s carefully before retaking the test:\n\n" % ("cited statute or board rule" if state_law else "NEC article reference"))
 
 		for i in host.missed_questions.size():
@@ -135,7 +135,7 @@ static func show(host: Main) -> void:
 					host.info_label.add_text("\n")
 				else:
 					host.info_label.push_color(AppTheme.BLUE_300)
-					host.info_label.add_text("Code Key:  %s\n" % tip)
+					host.info_label.add_text("Code key:  %s\n" % tip)
 					host.info_label.pop()
 
 			host.info_label.add_text("\n")
@@ -176,7 +176,7 @@ static func append_study_feedback(host: Main, is_exam: bool, total: int) -> void
 		for n in pace["slow"]:
 			slow.append("#%d" % n)
 		if not slow.is_empty():
-			line += " Over %s: item %s." % [clock_text(QuizSession.SLOW_SECONDS), ", ".join(slow)]
+			line += " Over %s: item%s %s." % [clock_text(QuizSession.SLOW_SECONDS), "" if slow.size() == 1 else "s", ", ".join(slow)]
 		host.info_label.add_text(line + "\n")
 	if host.session.session_section == BankLoader.SECTION_NEC:
 		var mastery := host.session.deck.mastery(host.records)

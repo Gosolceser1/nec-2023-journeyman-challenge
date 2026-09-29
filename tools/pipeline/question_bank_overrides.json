@@ -649,12 +649,12 @@
     },
     "final-exam-#5-023": {
       "reference_text": "336.24 Bending Radius\nBends in Type TC cable shall be made so as not to damage the cable. For Type TC cable without metal shielding, the minimum bending radius shall be as follows:\nFour times the overall diameter for cables 25 mm (1 in.) or less in diameter\nFive times the overall diameter for cables larger than 25 mm (1 in.) but not more than 50 mm (2 in.) in diameter\nSix times the overall diameter for cables larger than 50 mm (2 in.) in diameter\nType TC cables with metallic shielding shall have a minimum bending radius of not less than 12 times the cable overall diameter.",
-      "tip_short": "TC bend radius: 4, 5, or 6 times diameter if unshielded; any TC cable with metallic shielding needs 12 times. Correct: B — twelve. 336.24 requires TC cable with metallic shielding to bend no tighter than 12 times its overall diameter. Not A: Ten times is not a 336.24 value; shielded TC needs 12 times the overall diameter. Not C: Twenty four times is double the 336.24 requirement of 12 times the diameter. Not D: Thirty six times is not in 336.24; the shielded TC minimum is 12 times the diameter.",
+      "tip_short": "TC bend radius: 4, 5, or 6 times diameter if unshielded; any TC cable with metallic shielding needs 12 times. Correct: B — twelve. 336.24 requires TC cable with metallic shielding to bend no tighter than 12 times its overall diameter. Not A: Ten times is not a 336.24 value; shielded TC needs 12 times the overall diameter. Not C: Twenty-four times is double the 336.24 requirement of 12 times the diameter. Not D: Thirty-six times is not in 336.24; the shielded TC minimum is 12 times the diameter.",
       "choice_notes": [
         "Ten times is not a 336.24 value; shielded TC needs 12 times the overall diameter.",
         "336.24 requires TC cable with metallic shielding to bend no tighter than 12 times its overall diameter.",
-        "Twenty four times is double the 336.24 requirement of 12 times the diameter.",
-        "Thirty six times is not in 336.24; the shielded TC minimum is 12 times the diameter."
+        "Twenty-four times is double the 336.24 requirement of 12 times the diameter.",
+        "Thirty-six times is not in 336.24; the shielded TC minimum is 12 times the diameter."
       ],
       "prompt": "Type TC cables with metallic shielding shall have a minimum bending radius of not less than ___ times the cable overall diameter.",
       "answers": [
@@ -1352,7 +1352,9 @@
         "Kilowatt rating is not required on the 700.7(A) sign.",
         "Hours of fuel is not required on the 700.7(A) sign.",
         "700.7(A) requires a sign indicating the type and location of each on-site emergency source."
-      ]
+      ],
+      "prompt": "A sign shall be placed at the service entrance equipment, indicating type and ___ of each on-site emergency power source.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nEmergency systems must work when normal power doesn't: fire-pump controllers and parts sit high and dry above floors, the emergency source gets marked at the service entrance, and emergency wiring stays independent so one fault can't kill both normal and backup power.\n\nIn plain terms, the question is: \"A sign shall be placed at the service entrance equipment, indicating type and ___ of each on-site emergency power source.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "open-book-exam-#7-017": {
       "reference_text": "110.14(C)(2) Separate Connector Provisions\nSeparately installed pressure connectors shall be used with conductors at the ampacities not exceeding the ampacity at the listed and identified temperature rating of the connector.\nInformational Note: Equipment markings or listing information may additionally restrict the sizing and temperature ratings of connected conductors.",
@@ -2606,6 +2608,12 @@
         "Hallway receptacles may share a general-purpose branch circuit; no dedicated circuit is required.",
         "A 15 ampere receptacle is fine on a 15 or 20 ampere circuit; no 20 ampere receptacle is required.",
         "406.12 requires 15 and 20 ampere, 125 volt receptacles in all dwelling units to be listed tamper-resistant."
+      ],
+      "answers": [
+        "GFCI protected",
+        "on a dedicated circuit",
+        "in need of a 20 amp receptacle",
+        "listed tamper-resistant"
       ]
     },
     "final-exam-#1-056": {
@@ -3879,7 +3887,15 @@
         "Class II locations involve combustible dust, not fibers or flyings.",
         "500.5(D) classifies locations with combustible fibers or flyings as Class III.",
         "Class II, Division 2 is a dust location, not a fiber or flyings location."
-      ]
+      ],
+      "prompt": "___ locations are those that are hazardous because of the presence of easily ignitible fibers or flyings.",
+      "answers": [
+        "Class I",
+        "Class II",
+        "Class III",
+        "Class II, Division 2"
+      ],
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nYou cannot see electricity, so safety is a procedure, not a sense. Plan every job: identify all energy sources, lock and tag them open, verify zero voltage with a meter, and use insulated tools on anything that might be live. Treat pools, heaters, old panels, and anything unfamiliar as energized until your meter proves otherwise.\n\nIn plain terms, the question is: \"___ locations are those that are hazardous because of the presence of easily ignitible fibers or flyings.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nhazardous location"
     },
     "open-book-exam-#10-018": {
       "reference_text": "406.3(E) Isolated Ground Receptacles\nReceptacles incorporating an isolated equipment grounding conductor connection intended for the reduction of electromagnetic interference as permitted in 250.146(D) shall be identified by an orange triangle located on the face of the receptacle.\n(1) Isolated Equipment Grounding Conductor Required\nReceptacles so identified shall be used only with equipment grounding conductors that are isolated in accordance with 250.146(D).\n(2) Installation in Nonmetallic Boxes\nIsolated ground receptacles installed in nonmetallic boxes shall be covered with a nonmetallic faceplate.\nException: Where an isolated ground receptacle is installed in a nonmetallic box, a metal faceplate shall be permitted if the box contains a feature or accessory that permits the connection of the faceplate to the equipment grounding conductor.",
@@ -3959,7 +3975,15 @@
         "Class II locations involve combustible dust, not fibers or flyings.",
         "503.1 covers Class III locations, where the hazard is combustible or ignitible fibers or flyings.",
         "Class II, Division 2 is a dust location, not a fiber or flyings location."
-      ]
+      ],
+      "prompt": "___ locations are those that are hazardous because of the presence of easily ignitible fibers or flyings.",
+      "answers": [
+        "Class I",
+        "Class II",
+        "Class III",
+        "Class II, Division 2"
+      ],
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nYou cannot see electricity, so safety is a procedure, not a sense. Plan every job: identify all energy sources, lock and tag them open, verify zero voltage with a meter, and use insulated tools on anything that might be live. Treat pools, heaters, old panels, and anything unfamiliar as energized until your meter proves otherwise.\n\nIn plain terms, the question is: \"___ locations are those that are hazardous because of the presence of easily ignitible fibers or flyings.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nhazardous location"
     },
     "final-exam-#1-038": {
       "reference_text": "340.10 Uses Permitted\nType UF cable shall be permitted as follows:\n(1) For use underground, including direct burial in the earth.\n(2) As single-conductor cables. Where installed as single-conductor cables, all conductors of the feeder or branch circuit, including the grounded conductor and equipment grounding conductor, if any, shall be installed in accordance with 300.3.\n(3) For wiring in wet, dry, or corrosive locations.\n(4) Installed as nonmetallic-sheathed cable. Where so installed, the installation and conductor requirements shall comply with Parts II and III of Article 334, except for 334.12(B), and shall be of the multiconductor type.\n(5) As single-conductor cables as the nonheating leads for heating cables as provided in 424.43.\n(6) Supported by cable trays. Type UF cable supported by cable trays shall be of the multiconductor type.\nInformational Note: See 310.14(A)(3) for temperature limitation of conductors.",

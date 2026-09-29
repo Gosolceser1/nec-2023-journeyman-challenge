@@ -26,6 +26,10 @@ changed.
   lookup table or formula hint (Table 300.5(A), Table 400.4 with Note 9, the
   240.6(A) standard ratings, the Nebraska apprentice ratio), and the Table
   220.45 note now includes the 25% tier.
+- **Spell check** (docs/TYPO_FIXES.md). Typos and grammar slips fixed in 8
+  questions ("ignitible" and "on-site" as NEC spells them, "Class II, Division
+  2", four hint sentences) and in the results screen (singular/plural of
+  failed, unanswered and slow items). No answer changed.
 - **Voice:** the Table 310.16 "COPPER" / "ALUMINUM" headers are read as words,
   not spelled out.
 - **Hints next to the figures.** The Final Exam #1 Q13 hint named the meter

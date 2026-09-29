@@ -234,7 +234,7 @@ signing, the shareable zip and checksums.
 
 ## Docs
 
-- `docs/ARCHITECTURE.md`: how the code is organised
+- `docs/ARCHITECTURE.md`: how the code is organized
 - `docs/STUDY_SYSTEM.md`: exam blueprint, question selection, study feedback
 - `docs/DATA_PIPELINE.md`: how the question bank is built and validated
 - `docs/VOICE_READING_RULES.md`: how questions are spoken

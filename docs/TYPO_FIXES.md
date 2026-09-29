@@ -423,3 +423,27 @@ text on UpCodes Premium; results per record in `docs/CONTENT_AUDIT_2023.md`.
 | `open-book-exam-#10-013` | reference_text | formatting / truncation (medium) |
 | `open-book-exam-#10-015` | reference_text | formatting / truncation (high) |
 | `open-book-exam-#10-024` | choice_notes, tip_short | inconsistency (medium) |
+
+## Spell check pass (2026-09-28)
+
+Dictionary (pyspellchecker, codespell) plus manual review of every stem, choice,
+gist, note and tip, the UI strings and the docs. No meaning, number, section or
+`correct_index` changed. The `info_tip` quotes of the three changed stems follow them.
+
+| Record / file | Field | Before | After |
+|---|---|---|---|
+| `final-exam-#1-048` | choice C | need a 20 amp receptacle | in need of a 20 amp receptacle |
+| `open-book-exam-#7-016` | stem | each onsite emergency power source | each on-site emergency power source (700.7(A) spelling) |
+| `final-exam-#1-061`, `open-book-exam-#10-017` | stem | easily ignitable fibers | easily ignitible fibers (NEC spelling) |
+| `final-exam-#1-061`, `open-book-exam-#10-017` | choice D | Class II, Division II | Class II, Division 2 |
+| `final-exam-#5-023` | choice notes C/D, tip | Twenty four times, Thirty six times | Twenty-four times, Thirty-six times |
+| `final-exam-#1-005` | gist | With 0 volts across the switch … yet the lamp is dark: each reading … | There are 0 volts across the switch … yet the lamp is dark; each reading … |
+| `open-book-exam-#7-002` | gist | which table holds it | which table holds them |
+| `open-book-exam-#7-016` | gist | During normal power loss | During a loss of normal power |
+| `open-book-exam-#10-023` | gist | must have it | must have one |
+| `src/ui/results_view.gd` | results | 1 FAILED ITEMS; 1 were left unanswered; Over 1:30: item #3, #7. | 1 FAILED ITEM; 1 was left unanswered; Over 1:30: items #3, #7. |
+| `src/ui/results_view.gd` | results | Code Key: | Code key: (matches the heading) |
+| `README.md` | docs | organised | organized |
+
+Voice clips regenerated (spoken stem or choice changed): `final-exam-#1-048`,
+`final-exam-#1-061`, `open-book-exam-#7-016`, `open-book-exam-#10-017`.
