@@ -1,22 +1,43 @@
 # Diagrams audit (September 2026)
 
-Which questions need a figure, whether the three figures we ship are right, and
+Which questions need a figure, whether the figures we ship are right, and
 what new figures would help. The short answer: **three questions require a
-figure and already have a correct one; 88 would benefit from an original
-study figure, and all 88 now have one** (48 drawings, section 5), each checked
-against the NEC 2023 text by a separate review (section 6).
+figure, and all three are now redrawn in the app's own style (section 1);
+88 would benefit from an original study figure, and all 88 have one**
+(51 drawings for all 91 records, section 5), each checked against the NEC 2023
+text by two separate reviews (section 6).
 
-Screenshots: `.audit_tmp/shots/diagrams/` (contact sheets `overview_all*.png`,
-existing figures in `existing/`). Nothing here copies UpCodes or any other
-source: every figure is drawn in code from the NEC 2023 text
-(`tools/diagrams/`).
+Screenshots: `.audit_tmp/shots/diagrams/` (contact sheets `all_*.png` for
+every record, `changed_*.png` for the 1.0.5 changes; desktop and phone,
+before and after answering). Nothing here copies UpCodes, the exam PDFs or
+any other source: every figure is drawn in code (`tools/diagrams/`).
 
-## 1. Existing figures (`assets/diagrams/`)
+## 1. Required figures (redrawn for 1.0.5)
 
-All three are crops of *Journeyman open book final exam #1.pdf*
-(`tools/pipeline/extract_diagrams.py`), shown on a paper-white card with a tap
-to zoom, and outlined after answering by the `highlight` box in
-`diagrams.json`.
+Up to 1.0.4 these three were crops of *Journeyman open book final exam
+#1.pdf* (`tools/pipeline/extract_diagrams.py`) on a paper-white card. For
+1.0.5 they are drawn from scratch in `tools/diagrams/figs/exam_required.py`
+(tier "R" in `records.py`), in the same dark style as every other figure.
+They keep the electrical meaning of the printed figure, so the answer keys
+stand, and they are outlined after answering by a `highlight` box
+(`Fig.highlight`, written to `figures.json`). The PDF crops, their
+`.import` files, the `diagrams.json` entries and the per-file mask entries
+are gone; `DiagramView` still reads `diagrams.json` (now `{}`), so a future
+crop would still work.
+
+| Record | Drawing | What it shows | Keyed part outlined after answering |
+|---|---|---|---|
+| `final-exam-#1-005` | `lamp_switch_meter_readings` | 120 V supply, switch S1 closed ("ON"), lamp L1 with an unbroken filament, a voltmeter across S1 reading 0 V and one across L1 reading 120 V | lamp L1 (answer A) |
+| `final-exam-#1-013` | `meter_hookups_three_meters` | supply, load, meter I in one conductor with a lead to the other, meter II in one conductor only, meter III across the two conductors; labelled only I, II, III | meter II (answer B) |
+| `final-exam-#1-047` | `switch_symbols_a_to_d` | four normally open sensing contacts: (a) stepped thermal element, (b) flow flag, (c) pressure diaphragm, (d) float; labelled only (a)-(d) | symbol (a) (answer A) |
+
+Symbols follow the usual control-diagram conventions (temperature-actuated:
+stepped element under the blade; flow: flag; pressure/vacuum: diaphragm;
+liquid level: float). Before answering nothing needs a mask: the readings,
+the ON position and the meter positions are givens from the stem, the
+filament is intact, and no meter or symbol carries a name or an A/V letter.
+
+The 1.0.4 review of the crops (kept for the record) found the same:
 
 | Record | Figure | Crop | Matches question | Answer region highlight (post) | Phone 540x960 | Desktop 1280x720 |
 |---|---|---|---|---|---|---|
@@ -34,9 +55,10 @@ checked at 3x zoom:
   V symbol); the wiring is the question itself. No mask needed.
 - `final-exam-1-047.png`: letters (a)-(d) only, no names. No mask needed.
 
-The three reviews are recorded in `data/diagram_masks.json` (empty `leaks` and
-`masks`), and `tools/tests/test_diagrams.gd` fails if a figure ever lacks a
-review or a flagged leak lacks a mask.
+Those reviews lived in `data/diagram_masks.json` (`diagrams`, now empty);
+the redrawn figures have per-record entries like every other original, and
+`tools/tests/test_diagrams.gd` fails if a figure ever lacks a review or a
+flagged leak lacks a mask.
 
 **Text around the figures (not the images), fixed in 1.0.4** through the
 overlay and the pipeline (`tools/pipeline/question_bank_overrides.json`,
@@ -60,7 +82,7 @@ and the content audit checksums cover the provision text only:
 - Still open (harmless): `final-exam-#1-013` and `#1-047` carry the generic
   "Electrical math" background paragraph and tip title.
 
-No image fix was needed: crops, masks and highlights are all correct.
+No image fix was needed in 1.0.4: crops, masks and highlights were correct.
 
 ## 2. Mask / reveal system (landed)
 
@@ -76,15 +98,16 @@ over the picture only, so they never change layout. After the answer,
 never reads figure pixels, and the teach gate is unchanged.
 
 Tests (`tools/tests/test_diagrams.gd`, both layouts):
-- Every mask entry names a figure in `diagrams.json` that exists in
-  `assets/diagrams`, and every figure has a dated review.
+- Every mask entry names a figure that exists, and every figure has a dated
+  review. The three required records must be redrawn originals shown before
+  answering, with a highlight.
 - The guard fails a flagged leak that isn't fully inside a mask (with
   self-tests for "no mask", "partly covered" and "covered").
 - For every figure with masks: masked before answering, masked in the zoom
   too, nothing left after answering, and masked again when the question
   returns.
-- Because no shipped figure needs a mask today, the same path is also
-  exercised with masks injected on a real figure record. That covers masked
+- The same path is also exercised with masks injected on a real figure
+  record that has none (`final-exam-#1-005`). That covers masked
   before answering, unchanged size, badges on the picture and scaling 1:1
   with it, a masked zoom, a fade (or instant with Reduce motion), and nothing
   masked afterwards. A deliberately broken reveal makes these checks fail.
@@ -283,7 +306,7 @@ support-spacing figure; those are ours to draw.
 
 ## 5. New original figures (all 88 "benefit" records)
 
-**Status:** all three tiers ship in the app: high (A, 23 records), medium (B, 42) and low (C, 23), 88 records on 48 drawings, landed in that order, each with the full checks.
+**Status:** all three tiers ship in the app: high (A, 23 records), medium (B, 42) and low (C, 23), 88 records on 48 drawings, landed in that order, each with the full checks. With the three required figures (tier R, section 1) that is 91 records on 51 drawings.
 
 **One visual system.** `tools/diagrams/nec_style.py` holds the palette (dark
 slate `#0f172a` ground, cyan `#38bdf8` dimensions, green `#34d399` answer
@@ -323,7 +346,9 @@ against the *current* record, a value drawn for a different question can't
 give this one away. `test_diagrams.gd` repeats the scan in GDScript over
 `labels.json`, so a hand edit to the masks can't slip one through. The two
 drawings whose lengths could be read off the picture (the electrode section
-and the spa fan) are drawn out of proportion and say "not to scale".
+and the spa fan) are drawn out of proportion and say "not to scale"; so is
+the pool plan, where the pump receptacle is drawn well outside the 5 ft
+zone (at true scale 6 ft would sit on its edge).
 
 **Before or after, per record.** 75 records get the figure *before*
 answering (it sets up the question: distances, positions, what is measured
@@ -346,7 +371,7 @@ screen still overflows with the strip, the explanation sheet (it scrolls
 inside) gives way down to 60 px. The dark figures sit on a dark card
 (`DiagramView.card_style`), inline and in the zoom.
 
-**Size.** 48 drawings, 1,034 KiB of PNG in the repo (about 22 KiB each at 1200 px wide; 96-colour palette, no dithering). In the 1.0.4 builds they take 776 KiB as imported textures plus 80 KiB of figure and mask data, about 0.8 MiB per build; the release as a whole shrank (APK -3.7 MiB, Windows zip -3.8 MiB against 1.0.3) because the voice bundle was re-recorded.
+**Size.** 51 drawings, 1,082 KiB of PNG in the repo in 1.0.5 (the three PDF crops, about 250 KiB, are gone). In 1.0.4: 48 drawings, 1,034 KiB of PNG (about 22 KiB each at 1200 px wide; 96-colour palette, no dithering). In the 1.0.4 builds they take 776 KiB as imported textures plus 80 KiB of figure and mask data, about 0.8 MiB per build; the release as a whole shrank (APK -3.7 MiB, Windows zip -3.8 MiB against 1.0.3) because the voice bundle was re-recorded.
 
 **A resize loop fixed.** `DiagramView` sizes its height from its width. On
 the phone layout at 1024x768 (a tablet in landscape) answering
@@ -373,6 +398,9 @@ lays them out one row per record.
 
 | tier | record | figure | shown | masked before answering |
 |---|---|---|---|---|
+| R | `final-exam-#1-005` | `lamp_switch_meter_readings` | before | nothing (the figure shows only givens) |
+| R | `final-exam-#1-013` | `meter_hookups_three_meters` | before | nothing (the figure shows only givens) |
+| R | `final-exam-#1-047` | `switch_symbols_a_to_d` | before | nothing (the figure shows only givens) |
 | A | `final-exam-#1-008` | `balcony_receptacle_210-52e3` | before | '6 ft 6 in max (2.0 m, 78 in)' |
 | A | `final-exam-#1-011` | `dwelling_receptacles_210-52` | before | '2 ft (24 in) or more' |
 | A | `final-exam-#1-020` | `electrode_system_250-52_250-53` | before | '6 ft min' |
@@ -403,7 +431,7 @@ lays them out one row per record.
 | B | `final-exam-#1-028` | `fuel_dispenser_shutoff_514-11` | before | '100 ft (30 m) max' |
 | B | `final-exam-#1-029` | `conduit_stub_up_408-5` | before | '3 in max (75 mm)' |
 | B | `final-exam-#1-031` | `dwelling_receptacles_210-52` | before | '10 ft or more' |
-| B | `final-exam-#1-032` | `feeder_tap_10ft_240-21b1` | before | '400 A max' |
+| B | `final-exam-#1-032` | `feeder_tap_10ft_240-21b1` | before | '400 A max'; '1/10' |
 | B | `final-exam-#1-035` | `electrode_system_250-52_250-53` | before | '10 ft or more' |
 | B | `final-exam-#1-050` | `communications_overhead_800-44` | before | '8 ft min' |
 | B | `final-exam-#1-052` | `mobile_home_disconnect_550-32f` | before | '24 in min (600 mm)' |
@@ -434,10 +462,10 @@ lays them out one row per record.
 | B | `open-book-exam-#1-022` | `dwelling_receptacles_210-52` | before | 'within 6 ft (72 in)' |
 | B | `open-book-exam-#10-013` | `raceway_supported_box_314-23e` | before | threaded hub at the box entry; threaded hub at the box entry; 'threaded wrenchtight into the box or identified hubs' |
 | B | `open-book-exam-#4-002` | `gfci_locations_210-8` | before | '50 A or less' |
-| B | `open-book-exam-#4-008` | `multiwire_branch_circuit_210-4` | before | 'line-to-neutral load'; 'line-to-neutral load' |
+| B | `open-book-exam-#4-008` | `multiwire_branch_circuit_210-4` | before | 'N' bar label; 'shared grounded conductor'; 'line-to-neutral load'; 'line-to-neutral load' |
 | B | `open-book-exam-#4-018` | `nm_cable_sleeve_312-5c` | before | '18 in min (450 mm)' |
 | B | `open-book-exam-#4-024` | `electrode_system_250-52_250-53` | before | '10 ft or more' |
-| B | `open-book-exam-#7-024` | `high_leg_marking_408-3f1` | before | the transformer winding connection |
+| B | `open-book-exam-#7-024` | `high_leg_marking_408-3f1` | before | the transformer winding connection; orange marking on the B conductor; 'high leg (orange)'; 'B' phase on the sign; '208' volts on the sign |
 | C | `final-exam-#1-023` | `parallel_egc_250-122f` | before | EGC drawn in this raceway; EGC drawn in this raceway; 'wire-type EGC in each raceway, in parallel' |
 | C | `final-exam-#1-033` | `three_way_switch_spdt` | after | (whole figure after answering) |
 | C | `final-exam-#1-041` | `motor_stop_start_control` | after | (whole figure after answering) |
@@ -503,10 +531,53 @@ different voltages); `final-exam-#1-045` and `open-book-exam-#4-006` say
 indoor service equipment, so choice A is partly true (key D, "same room or
 area", is the specific rule).
 
+### Second review (1.0.5)
+
+Every drawing was checked again against the local NFPA 70-2023 text, and
+layout realism was checked against public trade sources. Values, min/max
+direction and measuring points all agree with the 2023 text, among them
+210.52(G)(1) (one in each vehicle bay, 5 1/2 ft), 210.52(H), 210.50(C),
+210.52(E)(3), 680.11(A), 680.22(A)(2), 680.35, 680.43(B)(1), 680.58,
+110.26(A)/(C)/(E), 240.21(B)(1), 408.3(F)(1), 250.52/250.53/250.68(B),
+225.18/225.19(D), 800.44, 810.13, 300.4(D), 300.5, Chapter 9 Note 4,
+358.30, 344.30, 376.30(B), 342.30, 320/330/334.30, 312.5(C), 314.24(B)(5),
+366.100(E), 382.15(A), 424.36, 470.11, 514.11, 550.32(F), 422.16(B)(1),
+406.9(B)(1) and 695.12(D). Nothing was dropped. Changed:
+
+- `pool_fountain_distances_680`: the pump receptacle (labelled 6 ft) was drawn
+  on the edge of the 5 ft underground-wiring zone, as if it were at 5 ft. It
+  now sits clearly outside the zone, and the plan says "not to scale".
+- Before-answer leaks, fixed with masks or a redesign (the figure still sets
+  up the question):
+  - `feeder_tap_10ft_240-21b1` (`final-exam-#1-032`): a box said
+    "tap >= 1/10 of the feeder OCPD rating", which is the answer (10 x 40 A).
+    It is now a 240.21(B)(1) checklist with only "1/10" masked.
+  - `high_leg_marking_408-3f1` (`open-book-exam-#7-024`): the orange B
+    conductor, its "high leg (orange)" caption and the sign's "B" and "208"
+    pointed to delta. B is drawn as a plain hot, and the orange band, the
+    caption and the two sign values are masked, like the blanks in the stem.
+  - `multiwire_branch_circuit_210-4` (`open-book-exam-#4-008`): the "N" bar
+    label and "shared grounded conductor" pointed to "neutral"; both are now
+    masked for that question only.
+  - `dwelling_receptacles_210-52` (`final-exam-#1-022`): the prongs of the
+    two garage receptacles showed above the "?" badge; the badge now reaches
+    over the wall line.
+- Left as is (minor): the electrode section runs the GEC under the slab to
+  the footing electrode; unusual but not wrong.
+
+The zoom's "Tap anywhere or press Esc to close" hint was drawn below the card
+over the page, where on phones it ran into choice A. It now sits inside the
+card, under the figure.
+
+Text next to the figure (not the image) that still gives an answer away
+before answering belongs to the question bank and was sent to the bank owner:
+the FORMULA / METHOD strips of `final-exam-#1-022` ("one receptacle outlet
+per vehicle bay") and `#1-032` ("cannot exceed 10 times the tap ampacity").
+The `open-book-exam-#7-024` gist mentions "high leg" (weak).
+
 ## 7. Release and follow-ups
 
-The 88 figures, the masks and the phone strip ship in 1.0.4. Planned for
-1.0.5: redraw the three PDF figures (`final-exam-#1-005`, `#1-013`,
-`#1-047`) in the same original style with the same meaning and answers, a
-second full accuracy review of every figure against NEC 2023 with masks
-rechecked, and the stem wording flagged in section 6.
+The 88 figures, the masks and the phone strip shipped in 1.0.4. For 1.0.5:
+the three required figures are redrawn, the second accuracy review is done
+and the leaks above are masked. Still open: the two FORMULA / METHOD strips
+above (question bank) and the stem wording flagged in section 6.

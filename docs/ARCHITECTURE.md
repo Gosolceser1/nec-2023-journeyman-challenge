@@ -115,11 +115,11 @@ screen until nothing scrolls. `_answer_selected` hands the pick to
 shows the feedback sheet, `QuizFx.play_answer` plays the burst, and
 `fit.compact_answered` hides what no longer matters.
 
-A question figure (`DiagramView`) comes from one of two maps: the PDF crops
-in `assets/diagrams/diagrams.json` (`tools/pipeline/extract_diagrams.py`,
-paper-white card) and the original NEC figures in
-`assets/diagrams/nec/figures.json` (`tools/diagrams/build.py`, dark card); a
-record in both gets the PDF crop. It covers any answer-revealing region with
+A question figure (`DiagramView`) comes from one of two maps: the original
+figures in `assets/diagrams/nec/figures.json` (`tools/diagrams/build.py`, dark
+card; this includes the three figures the exams require) and PDF crops in
+`assets/diagrams/diagrams.json` (`tools/pipeline/extract_diagrams.py`,
+paper-white card; empty since 1.0.5); a record in both gets the PDF crop. It covers any answer-revealing region with
 an opaque "?" badge, drawn in image space so it scales with the figure inline
 and in the zoom: PDF crops take their masks per file (`diagrams` in
 `data/diagram_masks.json`), original figures per record (`records`), so one

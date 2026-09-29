@@ -1,5 +1,30 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- **Figures no longer hint at the answer before you answer**
+  (docs/DIAGRAMS_AUDIT.md section 6). Final Exam #1 Q32: the tap figure's
+  "1/10 of the feeder OCPD" note is now a 240.21(B)(1) checklist with the
+  ratio hidden. Open Book #7 Q24: the orange high leg, its caption and the
+  "B" and "208" on the caution sign are hidden until you answer. Open Book #4
+  Q8: the "N" bar label and "shared grounded conductor" are hidden. Final
+  Exam #1 Q22: the garage receptacles no longer peek out above the "?".
+- **Pool plan:** the pump receptacle (6 ft) was drawn on the edge of the 5 ft
+  underground-wiring zone; it now sits clearly outside it, and the plan says
+  "not to scale".
+- **Figure zoom on phones:** "Tap anywhere or press Esc to close" ran into
+  choice A. It now sits inside the zoomed card.
+
+### Changed
+
+- **The three figures the exams require are redrawn** in the app's own style
+  instead of cropped from the PDF: the switch and lamp circuit with its meter
+  readings (Final Exam #1 Q5), the three meter hookups (Q13) and the four
+  switch symbols (Q47). Same meaning, same answers, sharper on every screen,
+  and the keyed part is outlined after you answer.
+
 ## [1.0.4] - 2026-09-28
 
 Every NEC question was checked against the 2023 code for content, tables and
