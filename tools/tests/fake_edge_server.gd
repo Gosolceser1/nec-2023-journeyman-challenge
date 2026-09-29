@@ -4,10 +4,14 @@ extends RefCounted
 ## the way the service does: turn.start, one binary audio message (2-byte
 ## header length, headers, MP3 bytes), turn.end. Call poll() every frame.
 ##
-## mode "ok" answers, "silent" accepts and never answers.
+## mode "ok" answers, "silent" accepts and never answers, "torn" answers with
+## the audio cut inside its last frame (then turn.end, as if nothing happened).
+## With `pad` on, `audio` is lengthened with silent frames to a plausible length
+## for the words asked for, since the client refuses audio that stops early.
 
 var mode := "ok"
 var audio := PackedByteArray()
+var pad := true
 var port := 0
 var configs: Array[String] = []
 var ssml: Array[String] = []
@@ -37,6 +41,7 @@ func stop() -> void:
 func poll() -> void:
 	while _tcp.is_connection_available():
 		var ws := WebSocketPeer.new()
+		ws.outbound_buffer_size = 4 << 20
 		ws.accept_stream(_tcp.take_connection())
 		_peers.append(ws)
 	for ws: WebSocketPeer in _peers.duplicate():
@@ -50,15 +55,27 @@ func poll() -> void:
 				configs.append(text)
 			elif text.contains("Path:ssml"):
 				ssml.append(text)
-				if mode == "ok":
-					_answer(ws)
+				if mode == "ok" or mode == "torn":
+					_answer(ws, text)
 
 
-func _answer(ws: WebSocketPeer) -> void:
+func _answer(ws: WebSocketPeer, request: String) -> void:
 	ws.send_text("X-RequestId:0\r\nContent-Type:application/json; charset=utf-8\r\nPath:turn.start\r\n\r\n{}")
+	var body := audio.duplicate()
+	if pad:
+		var re := RegEx.create_from_string("<[^>]*>")
+		var spoken := re.sub(request.get_slice("\r\n\r\n", 1), " ", true)
+		var need := EdgeTtsClient.min_clip_bytes(spoken.split(" ", false).size()) + 2880
+		while body.size() < need:
+			var frame := PackedByteArray([0xFF, 0xF3, 0xA4, 0xC4])
+			frame.resize(288)
+			body.append_array(frame)
+	if mode == "torn":
+		body = body.slice(0, body.size() - 100)
 	var head := "X-RequestId:0\r\nContent-Type:audio/mpeg\r\nX-StreamId:0\r\nPath:audio\r\n".to_utf8_buffer()
-	var msg := PackedByteArray([head.size() >> 8, head.size() & 255])
-	msg.append_array(head)
-	msg.append_array(audio)
-	ws.send(msg, WebSocketPeer.WRITE_MODE_BINARY)
+	for start in range(0, body.size(), 8192):
+		var msg := PackedByteArray([head.size() >> 8, head.size() & 255])
+		msg.append_array(head)
+		msg.append_array(body.slice(start, start + 8192))
+		ws.send(msg, WebSocketPeer.WRITE_MODE_BINARY)
 	ws.send_text("X-RequestId:0\r\nContent-Type:application/json; charset=utf-8\r\nPath:turn.end\r\n\r\n{}")

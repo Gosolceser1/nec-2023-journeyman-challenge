@@ -137,7 +137,7 @@ bank_validate() {
   echo "  python: $py ($("$py" -c 'import sys; print(sys.version.split()[0])'))"
   export PYTHON="$py"
   bash tools/tests/test_build_guard.sh || return $?
-  "$py" -m unittest tools.tests.test_validate_question_bank tools.tests.test_spellcheck_bank tools.tests.test_typo_regressions tools.tests.test_speak_question tools.tests.test_question_requirements tools.tests.test_diagram_figures || return $?
+  "$py" -m unittest tools.tests.test_validate_question_bank tools.tests.test_spellcheck_bank tools.tests.test_typo_regressions tools.tests.test_speak_question tools.tests.test_audit_bundle tools.tests.test_question_requirements tools.tests.test_diagram_figures || return $?
   "$py" tools/pipeline/spellcheck_bank.py --offline || return $?
   "$py" tools/pipeline/validate_question_bank.py --no-warn
   return $?
@@ -152,8 +152,17 @@ stage "5/5  Question bank"           bank_validate    || true
 
 # The voice bundle is gitignored, so fresh clones and CI skip this; where it
 # exists, a stale or partial bundle must not pass silently.
+bundle_audio() {
+  local py
+  py="${PYTHON:-$(find_python)}" || { echo "  ✗ no working Python 3 found"; return 1; }
+  "$py" tools/speech/audit_bundle.py
+}
+
 if [ -d assets/speech ]; then
   stage "+    Speech bundle (283/283)"  "$GODOT" --headless --path . --script tools/speech/test_bundle.gd || true
+  # Every clip whole: clean MP3 frames, a plausible length for its words,
+  # silence before and after the speech (edges need Python's av + numpy).
+  stage "+    Speech bundle audio"      bundle_audio || true
 else
   echo ""
   echo "  (assets/speech/ not generated — bundled-voice checks skipped)"

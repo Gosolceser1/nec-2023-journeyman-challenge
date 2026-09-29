@@ -17,9 +17,10 @@ spec.loader.exec_module(speak)
 class FakeRender:
     """Stands in for Edge: per-call delays, optional failures, counts calls."""
 
-    def __init__(self, delays, fail_calls=()):
+    def __init__(self, delays, fail_calls=(), size=4000):
         self.delays = list(delays)
         self.fail_calls = set(fail_calls)
+        self.size = size
         self.calls = 0
 
     async def __call__(self, text, part, voice):
@@ -28,7 +29,7 @@ class FakeRender:
         await asyncio.sleep(self.delays[min(call, len(self.delays) - 1)])
         if call in self.fail_calls:
             raise OSError("fake failure %d" % call)
-        Path(part).write_bytes(b"ID3fake")
+        Path(part).write_bytes(b"ID3" + bytes(self.size))
 
 
 class SpeakClip(unittest.TestCase):
@@ -71,6 +72,22 @@ class SpeakClip(unittest.TestCase):
             asyncio.run(speak._speak("hi", self.dir / "0.mp3", "v"))
         self.assertFalse((self.dir / "0.mp3").exists())
         self.assertEqual(self.leftovers(), [])
+
+    def test_cut_off_clip_is_refused(self):
+        text = "A sign must be placed at the service-entrance equipment, indicating the type and location of each on-site emergency power source."
+        self.assertGreater(speak.min_clip_bytes(text), 40_000)
+        speak._render = FakeRender([0.01], size=2_880)
+        with self.assertRaisesRegex(RuntimeError, "cut-off audio"):
+            asyncio.run(speak._speak(text, self.dir / "0.mp3", "v"))
+        self.assertEqual(speak._render.calls, 3)
+        self.assertFalse((self.dir / "0.mp3").exists())
+        self.assertEqual(self.leftovers(), [])
+
+    def test_long_enough_clip_is_kept(self):
+        text = "Section 700 point 7: a sign at the service equipment."
+        speak._render = FakeRender([0.01], size=speak.min_clip_bytes(text) + 1)
+        asyncio.run(speak._speak(text, self.dir / "0.mp3", "v"))
+        self.assertTrue((self.dir / "0.mp3").exists())
 
     def test_failed_synthesis_leaves_no_clips_or_manifest(self):
         speak._render = FakeRender([0.01], fail_calls=set(range(1, 40)))

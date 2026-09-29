@@ -67,6 +67,17 @@ Golden input → spoken cases for every rule live in
   `.`, and a `.` that is already there is not doubled.
 - Roman-numeral lists read as "Item 1, …", and Roman choices as numbers
   ("1 and 2 only").
+- The rule line quotes whole sentences only (`AudioExplanationGenerator.answer_sentence`):
+  the sentence that carries the answer, or as many whole sentences as fit in
+  420 characters. A sentence never ends at "No." ("Exception No. 1:", "two
+  No. 6 screws"), before a digit or lowercase word, or on a list marker
+  ("b."); a trailing line that only opens the next provision ("Exception
+  No.", "2.", "Combustible Fibers/Flyings.") is dropped; a bare definition
+  heading ("Labeled.") is read with its definition. Line breaks end a
+  sentence only before an Exception or Informational Note, so a list stays
+  with the sentence that introduces it.
+- Every line of every plan ends a sentence and none needs chunking (under
+  2500 bytes); `test_speech_text.gd` sweeps the whole bank for both.
 
 ## 2. Pauses
 
@@ -99,7 +110,11 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 | `THHN wire`, `THWN conductors` | T H H N, wire; T H W N, conductors (pause after a type ending in N) |
 | `THWN-2`, `XHHW-2`, `SPT-2` | T H W N, dash 2 (pause, then "dash") |
 | `NM-B`, `XHHW insulation` | N M B, X H H W insulation |
-| `GFCI AFCI AWG EMT PVC STOOW MI HARC` | spelled letter by letter |
+| `GFCI AFCI AWG EMT PVC STOOW MI HARC IBEW` | spelled letter by letter |
+| `(CMP—18)`, `[499:3.3.4.2]` after a definition | dropped (panel tag, NFPA extract source) |
+| `15 \| 20 \| 12` (a table row in prose), `*In addition`, `(FMC)*` | 15, 20, 12; footnote star dropped (a spaced ` * ` is still "times") |
+| `blank @ 250 V`, `[based on …]` | blank at 250 volts; brackets read as parentheses |
+| `5 µA` | 5 microamps |
 | `OCPD EGC GEC AHJ HP` | overcurrent protective device, equipment grounding conductor, grounding electrode conductor, authority having jurisdiction, horsepower |
 | `IEEE`, `NEMA`, `OSHA`, `HVAC` | I triple E; the others are passed through for the voice to say as words |
 | `CU/AL`, `and/or` | copper or aluminum, and or |
@@ -188,8 +203,12 @@ tuning renders were scratch and are not kept; what they showed:
   jargon swapped for plain words (`plain_words`). "Shall" becomes a modal that
   agrees with any subject: "shall be" is "must be", "shall be permitted to" is
   "may", "shall be provided with" is "must have". The old "shall be" to "is"
-  read "garbage disposals is permitted" and "is has". The article is then
-  fixed case-sensitively ("an ampacity" becomes "a current rating", never "A
+  read "garbage disposals is permitted" and "is has". "Shall (not) be
+  permitted" after a plural ("cables", not "Cablebus") is "are (not)
+  permitted"; "are/is provided with" is "have/has"; "at not more than" is "at
+  most" (never "at at most"). The article is then fixed case-sensitively for
+  every swapped word ("an ungrounded conductor" becomes "a hot wire", "an
+  accessible" "a reachable", "an ampacity" "a current rating", never "A
   current rating", which the voice reads as the letter A).
 - Right or wrong is shown visually and by the sound effect. It is not spoken,
   because the clips are rendered once per question.

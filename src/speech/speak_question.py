@@ -98,6 +98,16 @@ async def _render(text: str, part: Path, voice: str) -> None:
     await _edge().Communicate(text, _english_voice(voice), rate=RATE).save(str(part))
 
 
+# The service can end a stream early and still report success; no clip is
+# spoken faster than MAX_WORDS_PER_SEC (same bound as tools/speech/audit_bundle.py).
+MAX_WORDS_PER_SEC = 4.6
+BYTES_PER_SEC = 96_000 // 8
+
+
+def min_clip_bytes(text: str) -> int:
+    return int(len(text.split()) / MAX_WORDS_PER_SEC * BYTES_PER_SEC)
+
+
 def _part_paths(output_path: Path) -> tuple:
     return (output_path.with_name(output_path.name + ".part"), output_path.with_name(output_path.name + ".h.part"))
 
@@ -113,8 +123,11 @@ def _unlink_quietly(path: Path) -> None:
 async def _attempt(text: str, part: Path, voice: str) -> None:
     try:
         await asyncio.wait_for(_render(text, part, voice), CLIP_TIMEOUT)
-        if part.stat().st_size == 0:
+        size = part.stat().st_size
+        if size == 0:
             raise RuntimeError("empty audio")
+        if not FAKE_CLIP and size < min_clip_bytes(text):
+            raise RuntimeError("cut-off audio: %d bytes for %d words" % (size, len(text.split())))
     except BaseException:
         _unlink_quietly(part)
         raise

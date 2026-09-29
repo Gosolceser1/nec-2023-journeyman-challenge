@@ -411,6 +411,54 @@ func bank_speakable_sweep() -> void:
 			t.check(str((seg_v as Dictionary).get("text", "")).strip_edges() != "",
 				"no empty teach clip in %s" % str(rec2.get("id", "")))
 			break  # one per record is enough for the smoke check
+	bank_complete_sentences_sweep(recs)
+
+
+## Every clip must be a finished sentence: a line that stops on "Exception
+## No.", a bare list number, or mid-word sounds like the voice broke off.
+func bank_complete_sentences_sweep(recs: Array) -> void:
+	print("=== bank complete-sentence sweep ===")
+	var dangling := RegEx.create_from_string("(?i)(\\b(no|nos|note|exception|fig|sec)\\.|\\.\\s+[a-z0-9]{1,2}\\.)$")
+	var unfinished: Array[String] = []
+	var too_long: Array[String] = []
+	var cut_words: Array[String] = []
+	for rec_v in recs:
+		var rec: Dictionary = rec_v
+		var rid := str(rec.get("id", ""))
+		var ref := str(rec.get("reference_text", ""))
+		var answers: Array = rec.get("answers", [])
+		var ci := int(rec.get("correct_index", -1))
+		for seg_v in ST.speech_plan(rec):
+			var txt := str((seg_v as Dictionary).get("text", "")).strip_edges()
+			if txt == "" or not txt.substr(txt.length() - 1) in [".", "?", "!"]:
+				unfinished.append("%s: ...%s" % [rid, txt.right(50)])
+			elif bool((seg_v as Dictionary).get("teach", false)) and dangling.search(txt) != null:
+				unfinished.append("%s: ...%s" % [rid, txt.right(50)])
+			# Edge chunks at 3000 bytes and Android refuses over ~4000 characters.
+			if txt.to_utf8_buffer().size() > 2500:
+				too_long.append(rid)
+		# The quoted rule ends on a whole word of the source, never "devic.".
+		var body := ref.substr(ref.find("\n") + 1) if ref.contains("\n") else ref
+		var quote: String = AudioExplanationGenerator.answer_sentence(body.strip_edges(), str(answers[ci]) if ci >= 0 and ci < answers.size() else "")
+		var last := RegEx.create_from_string("([A-Za-z]+)[^A-Za-z]*$").search(quote)
+		if last != null and not RegEx.create_from_string("%s\\b" % last.get_string(1)).search(body):
+			cut_words.append("%s: ...%s" % [rid, quote.right(40)])
+	# Misreadings: an article left behind by a plain-language swap, a doubled
+	# word or verb, and citation debris the voice would read out.
+	var misread := RegEx.create_from_string("\\b[Aa]n (hot|ground|neutral|reachable|breaker|current|circuit|house|floor|light|main)\\b"
+		+ "|(?<!Class |Type |Option )\\b[Aa] (outlet|extra|electrical)\\b|\\bat at\\b|\\b(are|is) (has|have)\\b|\\bmust has\\b"
+		+ "|[|@\\[\\]]|\\*[A-Za-z]|\\bC M P\\b")
+	var misreads: Array[String] = []
+	for rec_v in recs:
+		for seg_v in ST.speech_plan(rec_v):
+			var said := str((seg_v as Dictionary).get("text", ""))
+			var m := misread.search(said)
+			if m != null:
+				misreads.append("%s: '%s'" % [str((rec_v as Dictionary).get("id", "")), m.get_string(0)])
+	t.eq(misreads, [] as Array[String], "no wrong article, doubled word, pipe, footnote star, '@' or panel tag is spoken")
+	t.eq(unfinished, [] as Array[String], "every spoken line of all 283 plans ends a sentence (no 'Exception No.', no dangling list marker)")
+	t.eq(too_long, [] as Array[String], "no spoken line is long enough to need chunking")
+	t.eq(cut_words, [] as Array[String], "no quoted rule stops mid-word")
 
 
 func known_defects() -> void:

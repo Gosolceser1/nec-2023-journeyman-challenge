@@ -37,6 +37,8 @@ func _initialize() -> void:
 	await _roundtrip()
 	await _cancel_and_supersede()
 	await _silent_service()
+	await _torn_audio()
+	await _short_audio()
 	await _no_network()
 	fake.stop()
 	print("")
@@ -67,6 +69,27 @@ func _pure_cases() -> void:
 		ok = ok and c.to_utf8_buffer().size() <= EdgeTtsClient.MAX_CHUNK_BYTES and not c.ends_with("&amp") and not c.ends_with("&")
 	check(ok, "every chunk fits the service limit and no entity is cut")
 	check(" ".join(chunks).replace(" ", "") == EdgeTtsClient.xml_escape(long).replace(" ", ""), "chunks keep every word")
+	# Long speech is chunked at sentence ends, and every word and number survives.
+	var prose := ""
+	for i in 400:
+		prose += "Section 310.16 covers ampacity %d. " % i
+	var pieces := EdgeTtsClient.chunks_of(prose)
+	var at_ends := true
+	for i in pieces.size() - 1:
+		at_ends = at_ends and pieces[i].ends_with(".") and pieces[i + 1].begins_with("Section 310.16")
+	check(pieces.size() > 1 and at_ends, "a long text is chunked at sentence ends, never inside '310.16' (%d chunks)" % pieces.size())
+	check(" ".join(pieces) == prose.strip_edges(), "sentence chunks keep every word in order")
+	check(EdgeTtsClient.xml_escape("It's \"rated\" — 90°C, ½ in., 80% & up") == "It's \"rated\" — 90°C, ½ in., 80% &amp; up",
+		"quotes, dashes, degrees, fractions and percent reach the service untouched")
+	# Only whole MP3 streams are cached: a clip cut inside a frame stops mid-word.
+	var frames := _frame_run(20)
+	check(EdgeTtsClient.mp3_problem(frames) == "", "a clean frame run is accepted")
+	check(EdgeTtsClient.mp3_problem(frames.slice(0, frames.size() - 100)) != "", "audio cut inside its last frame is refused")
+	var junk := frames.duplicate()
+	junk.append_array(PackedByteArray([1, 2, 3, 4, 5, 6]))
+	check(EdgeTtsClient.mp3_problem(junk) != "", "junk after the last frame is refused")
+	check(EdgeTtsClient.mp3_problem(PackedByteArray()) != "", "no audio is refused")
+	check(EdgeTtsClient.mp3_frame_size(0xF3, 0xA4) == 288, "a 24 kHz 96 kbps frame is 288 bytes")
 	var rows := EdgeTtsClient.plan_rows([{"text": "Stem", "choice": -1, "rules": 3}, {"text": "  "}, {"text": "A", "choice": 0, "teach": false}])
 	check(rows.size() == 2 and int(rows[1][0]) == 2 and rows[1][1]["file"] == "2.mp3", "empty segments are skipped, files keep their segment index")
 	check(rows[0][1]["format"] == SpeechController.SPEECH_FORMAT and int(rows[0][1]["rules"]) == 3,
@@ -126,6 +149,45 @@ func _silent_service() -> void:
 	print("  silent service: failed after %d ms (%s)" % [Time.get_ticks_msec() - t0, failed[0] if failed else ""])
 	check(not client.is_offline(), "a reachable but silent service does not mark the network down")
 	fake.mode = "ok"
+	client.queue_free()
+
+
+## A turn that ends with a torn last frame is retried, then failed; nothing
+## half-spoken lands in the cache.
+func _torn_audio() -> void:
+	var client := _client()
+	fake.mode = "torn"
+	var folder := _folder("torn")
+	var failed: Array = []
+	client.request_failed.connect(func(id: int, why: String) -> void: failed.append(why))
+	var before := fake.ssml.size()
+	client.request(folder, "en-US-BrianNeural", [{"text": "hello there"}], EdgeTtsClient.PRIO_LIVE)
+	check(await _until(func() -> bool: return not failed.is_empty(), 5.0), "torn audio fails the clip instead of caching it")
+	check(fake.ssml.size() - before == 1 + EdgeTtsClient.RETRIES, "torn audio is asked for again before giving up")
+	check(not FileAccess.file_exists(folder.path_join("0.mp3")) and not FileAccess.file_exists(folder.path_join("manifest.json")),
+		"no clip or manifest is left from torn audio")
+	check(not client.is_offline(), "torn audio does not mark the network down")
+	fake.mode = "ok"
+	client.queue_free()
+
+
+## Whole frames and a turn.end, but 0.24 s for a 21-word rule: refused, like torn audio.
+func _short_audio() -> void:
+	var client := _client()
+	var saved := fake.audio
+	fake.audio = _frame_run(10)
+	fake.pad = false
+	var folder := _folder("short")
+	var failed: Array = []
+	client.request_failed.connect(func(id: int, why: String) -> void: failed.append(why))
+	var before := fake.ssml.size()
+	client.request(folder, "en-US-BrianNeural", [{"text": "A sign must be placed at the service-entrance equipment, indicating the type and location of each on-site emergency power source."}], EdgeTtsClient.PRIO_LIVE)
+	check(await _until(func() -> bool: return not failed.is_empty(), 5.0), "audio that stops early fails the clip")
+	check(fake.ssml.size() - before == 1 + EdgeTtsClient.RETRIES, "audio that stops early is asked for again")
+	check(not FileAccess.file_exists(folder.path_join("0.mp3")), "no clip is cached from audio that stops early")
+	check(EdgeTtsClient.min_clip_bytes(1) < 2880, "a one-word clip of 0.24 s is long enough")
+	fake.audio = saved
+	fake.pad = true
 	client.queue_free()
 
 
@@ -189,9 +251,16 @@ func _fixture_audio() -> PackedByteArray:
 			var clip := speech.path_join(dir).path_join("0.mp3")
 			if FileAccess.file_exists(clip):
 				return FileAccess.get_file_as_bytes(clip)
+	return _frame_run(60)
+
+
+## `count` silent-ish frames in the Edge output format (24 kHz, 96 kbps).
+func _frame_run(count: int) -> PackedByteArray:
 	var out := PackedByteArray()
-	out.resize(4096)
-	out.fill(0x55)
+	for i in count:
+		var frame := PackedByteArray([0xFF, 0xF3, 0xA4, 0xC4])
+		frame.resize(288)
+		out.append_array(frame)
 	return out
 
 

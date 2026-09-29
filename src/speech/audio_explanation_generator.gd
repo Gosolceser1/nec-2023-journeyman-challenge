@@ -57,7 +57,7 @@ static func generate_explanation(record: Dictionary, answer: String = "") -> Dic
 	# saw is spoken as its own clip in front (SpeechText.display_order).
 	var answer_callout := ""
 	if choice_text != "":
-		answer_callout = "Answer: " + choice_text + "."
+		answer_callout = "Answer: " + _sentence_end(choice_text)
 
 	return {
 		"question_id": str(record.get("id", "")),
@@ -232,31 +232,105 @@ static func prompt_with_answer(prompt: String, answer: String) -> String:
 		return trimmed.trim_suffix("...").strip_edges() + " " + answer + "."
 	return ""
 
+## Longest quote read when no sentence carries the answer.
+const QUOTE_CAP := 420
+## A sentence ends at ". " before a capital, quote or bracket; never before a
+## digit or a lowercase word, so "Exception No. 1:", "two No. 6 or larger
+## screws" and "6 ft. above" stay whole. A line break ends one only before an
+## Exception or Informational Note: a list stays with the sentence that
+## introduces it.
+const SENTENCE_BREAK := "([.?!])(?:[ \\t]+(?=[A-Z\"“'(\\[])|[ \\t]*\\n\\s*(?=Exception|Informational Note))"
+## Words whose period is not a sentence end even before a capital.
+const NO_BREAK_AFTER := ["no", "nos", "fig", "sec", "art", "ex", "e.g", "i.e", "approx", "vs"]
+
+## [start, end) of every sentence of `body`, in order, covering all of it.
+static func sentence_spans(body: String) -> Array[Vector2i]:
+	var spans: Array[Vector2i] = []
+	var last_word := RegEx.create_from_string("(\\S+)$")
+	# "b." opening a list line starts the next item; it never ends this one,
+	# and it splits off a new sentence only after one that already ended.
+	var list_marker := RegEx.create_from_string("\\n[ \\t]*\\(?[A-Za-z0-9]{1,3}\\)?$")
+	var from := 0
+	for m in RegEx.create_from_string(SENTENCE_BREAK).search_all(body):
+		var head := body.substr(from, m.get_start() - from)
+		var word := last_word.search(head)
+		if word != null and word.get_string(1).to_lower().lstrip("(") in NO_BREAK_AFTER:
+			continue
+		var marker := list_marker.search(head)
+		if marker != null:
+			var before := head.substr(0, marker.get_start()).strip_edges()
+			if before != "" and before.substr(before.length() - 1) in [".", "?", "!"]:
+				spans.append(Vector2i(from, from + marker.get_start()))
+				from += marker.get_start() + 1
+			continue
+		if head.strip_edges() != "":
+			spans.append(Vector2i(from, m.get_end(1)))
+		from = m.get_end()
+	if body.substr(from).strip_edges() != "":
+		spans.append(Vector2i(from, body.length()))
+	return spans
+
+static func sentences_of(body: String) -> PackedStringArray:
+	var out := PackedStringArray()
+	for s in sentence_spans(body):
+		out.append(body.substr(s.x, s.y - s.x).strip_edges())
+	return out
+
+## Ends a quoted line on a full stop: "conditions are met:" and a last list
+## item with no period are both read (and shown) as a finished sentence.
+static func _sentence_end(text: String) -> String:
+	var body := text.strip_edges()
+	while body != "" and body.substr(body.length() - 1) in [":", ";", ","]:
+		body = body.substr(0, body.length() - 1).strip_edges()
+	if body == "" or body.substr(body.length() - 1) in [".", "?", "!"]:
+		return body
+	return body + "."
+
+## Drops trailing lines that only open the NEXT provision ("Exception No. 1:",
+## "2.", "Combustible Fibers/Flyings.") after a line that already ended a
+## sentence. A line carrying `answer` is never dropped.
+static func _drop_dangling_lines(text: String, answer: String) -> String:
+	var lines := text.strip_edges().split("\n")
+	while lines.size() > 1:
+		var last := lines[lines.size() - 1].strip_edges()
+		var before := lines[lines.size() - 2].strip_edges()
+		if before == "" or not before.substr(before.length() - 1) in [".", "?", "!"]:
+			break
+		if last.split(" ", false).size() > 4 or (answer != "" and not find_match_in(last, answer).is_empty()):
+			break
+		lines.remove_at(lines.size() - 1)
+	return "\n".join(lines)
+
 static func answer_sentence(body: String, answer: String) -> String:
-	var parts := body.split(". ")
-	for part in parts:
-		var sentence := str(part).strip_edges()
-		if sentence != "" and not UnitMatcher.answer_match_candidates(answer).is_empty():
-			if not find_match_in(sentence, answer).is_empty():
-				if not sentence.ends_with("."):
-					sentence += "."
-				return sentence
-	if body.length() > 420:
-		var truncated := body.substr(0, 420).strip_edges()
-		var last_period := truncated.rfind(".")
-		# Not the point of "630.31": the cut used to leave "Table 630." dangling.
-		while last_period > 0 and last_period + 1 < body.length() and body.substr(last_period + 1, 1).is_valid_int():
-			last_period = truncated.rfind(".", last_period - 1)
-		if last_period > 200:
-			return truncated.substr(0, last_period + 1)
-		# No sentence end: a line break still ends a list item, where the raw cut
-		# stopped mid-word ("Wher.").
-		var last_break := truncated.rfind("\n")
-		if last_break > 200:
-			var head := truncated.substr(0, last_break).strip_edges()
-			return head if head.ends_with(".") else head + "."
-		return truncated + "."
-	return body
+	var spans := sentence_spans(body)
+	if not UnitMatcher.answer_match_candidates(answer).is_empty():
+		for i in spans.size():
+			var s: Vector2i = spans[i]
+			if find_match_in(body.substr(s.x, s.y - s.x), answer).is_empty():
+				continue
+			# A bare definition heading ("Labeled.") teaches nothing: read the definition with it.
+			if body.substr(s.x, s.y - s.x).split(" ", false).size() <= 3 and i + 1 < spans.size():
+				s.y = spans[i + 1].y
+			return _sentence_end(_drop_dangling_lines(body.substr(s.x, s.y - s.x), answer))
+	if body.length() <= QUOTE_CAP:
+		return _sentence_end(body) if body != "" else body
+	# Whole sentences only, as many as fit: a raw cut once stopped mid-word
+	# ("overcurrent devic.") or on "Exception No.".
+	var end := 0
+	for s in spans:
+		if s.y > QUOTE_CAP:
+			break
+		end = s.y
+	if end == 0 and not spans.is_empty():
+		end = spans[0].y
+		# One sentence longer than the cap: stop at its last line end that fits.
+		var head := body.substr(0, mini(end, QUOTE_CAP))
+		var cut := maxi(head.rfind(".\n"), maxi(head.rfind("?\n"), head.rfind("!\n")))
+		if end > QUOTE_CAP and cut > 200:
+			end = cut + 1
+		elif end > QUOTE_CAP and head.rfind("\n") > 200:
+			end = head.rfind("\n")
+	return _sentence_end(_drop_dangling_lines(body.substr(0, end), ""))
 
 ## prompt is optional: when it has a "___" blank, the occurrence whose surrounding
 ## words best match the words around the blank wins; otherwise the first one does.
@@ -439,6 +513,12 @@ static func plain_words(text: String) -> String:
 		# Modals agree with any subject: "shall be" -> "is" read "garbage disposals
 		# is permitted", and ran before "provided with" -> "has" ("is has").
 		["shall be provided with", "must have"],
+		["are provided with", "have"],
+		["is provided with", "has"],
+		# After a plural ("Types NM and NMC cables shall not be permitted"); a
+		# word ending in ss/us/is ("Cablebus") stays singular.
+		["(?<=[^sui]s )shall not be permitted", "are not permitted"],
+		["(?<=[^sui]s )shall be permitted(?! to)", "are permitted"],
 		["shall not be permitted", "is not permitted"],
 		["shall be permitted to be", "may be"],
 		["shall be permitted to", "may"],
@@ -457,6 +537,9 @@ static func plain_words(text: String) -> String:
 		["dwelling unit", "house"],
 		["walking surface", "floor"],
 		["accessible", "reachable"],
+		# "rated at not more than" would read "rated at at most".
+		["at not less than", "at least"],
+		["at not more than", "at most"],
 		["not less than", "at least"],
 		["not more than", "at most"],
 		["not exceeding", "up to"],
@@ -470,9 +553,21 @@ static func plain_words(text: String) -> String:
 	# Article agreement after the swaps, case-sensitive: a mid-sentence "an
 	# current" must become "a current", because a capital "A" is voiced as the
 	# letter. After a naming word ("Class A outlet") the A is a letter, not an article.
-	for pair in [["An current", "A current"], ["an current", "a current"],
-			["A outlet", "An outlet"], ["a outlet", "an outlet"]]:
+	var pairs: Array = []
+	for w in SWAPPED_CONSONANT_WORDS:
+		pairs.append_array([["An " + w, "A " + w], ["an " + w, "a " + w]])
+	for w in SWAPPED_VOWEL_WORDS:
+		pairs.append_array([["A " + w, "An " + w], ["a " + w, "an " + w]])
+	for pair in pairs:
 		var article := RegEx.new()
 		article.compile("(?<!Class |Type |Option |Answer |paragraph |sub-item )\\b" + pair[0] + "\\b")
 		plain = article.sub(plain, pair[1], true)
 	return plain
+
+## First words of plain_words replacements, by the sound they start with: the
+## swap keeps the source's article, so "an ungrounded conductor" became "an
+## hot wire" and "an accessible location" "an reachable location".
+const SWAPPED_CONSONANT_WORDS := ["current", "hot", "ground", "neutral", "reachable", "breaker",
+	"three-prong", "main", "building", "tap", "disconnect", "light", "fixed", "garbage", "circuit",
+	"share", "running", "house", "floor"]
+const SWAPPED_VOWEL_WORDS := ["outlet", "extra", "electrical"]

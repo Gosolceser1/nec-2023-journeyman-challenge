@@ -173,6 +173,38 @@ func answer_sentence() -> void:
 	t.check(AEG.answer_sentence(list_body, "zzz-not-present").ends_with("\nItem two."),
 		"a list with no periods is cut at a line break")
 
+	# Sentences are never cut at an abbreviation or on the next provision's heading.
+	t.eq(AEG.answer_sentence("Secured to the box with no fewer than two No. 6 or larger screws. Other text.", "6"),
+		"Secured to the box with no fewer than two No. 6 or larger screws.",
+		"'No. 6' does not end the sentence (open-book-exam-#4-019 stopped on 'two No.')")
+	t.eq(AEG.answer_sentence("Wires shall clear roofs by 2.5 m (8 ft).\nException No. 1: Wires on a slope.", "2.5 m"),
+		"Wires shall clear roofs by 2.5 m (8 ft).",
+		"the rule does not end on 'Exception No.' (final-exam-#1-050)")
+	t.eq(AEG.answer_sentence("Fastening may be increased to 1.5 m (5 ft) where needed.\nException No. 2: Fished lengths.", "1.5 m"),
+		"Fastening may be increased to 1.5 m (5 ft) where needed.",
+		"an Exception line is its own sentence")
+	t.eq(AEG.answer_sentence("Must be 30°C (86°F).\n2. Section 310 applies.", "30°C"), "Must be 30°C (86°F).",
+		"a dangling list number after the sentence is dropped (final-exam-#1-014)")
+	t.eq(AEG.answer_sentence("Taps comply with the following:\na. Not less than 150 A on the circuits\nb. Not less than the rating", "150 A"),
+		"Taps comply with the following:\na. Not less than 150 A on the circuits\nb. Not less than the rating.",
+		"a list line's 'b.' starts the next item instead of ending this one on 'b.' (final-exam-#1-032)")
+	t.eq(AEG.answer_sentence("Class II locations include (b).\nCombustible Fibers/Flyings. Locations where fibers are handled.", "Class II"),
+		"Class II locations include (b).", "the next definition's heading is dropped (final-exam-#3-008)")
+	t.eq(AEG.answer_sentence("Labeled. Equipment to which a label has been attached. (CMP-1)", "labeled"),
+		"Labeled. Equipment to which a label has been attached.",
+		"a bare definition heading is read with its definition (open-book-exam-#4-013 said only 'Labeled.')")
+	t.eq(AEG.answer_sentence("E M T must be made of: Steel. Aluminum. Stainless steel", "zzz"),
+		"E M T must be made of: Steel. Aluminum. Stainless steel.", "a last list item still ends on a full stop")
+	var busway := "Overcurrent protection shall be required where busways are reduced in ampacity.\nException: For industrial " \
+		+ "establishments only, omission shall be permitted " + "where the busway is short and ".repeat(12) + "has at least one-third the rating of the overcurrent device next back on the line."
+	var cut: String = AEG.answer_sentence(busway, "zzz-not-present")
+	t.eq(cut, "Overcurrent protection shall be required where busways are reduced in ampacity.",
+		"over the cap, whole sentences only (final-exam-#5-052 stopped on 'overcurrent devic.')")
+	t.check(AEG.answer_sentence("x".repeat(300) + " conditions are met:\n(1) One item " + "y ".repeat(80), "zzz").ends_with(" conditions are met."),
+		"a cut at a list intro ends on a full stop, not ':.'")
+	t.eq(AEG.generate_explanation({"answers": ["It must be protected."], "correct_index": 0})["tts_script"]["answer_callout"],
+		"Answer: It must be protected.", "a choice that ends in a period is not read with '..'")
+
 
 # --------------------------------------------------------------------------
 # lesson_point -- the TEACH ORDER: code sentence > worked > prompt fill > answer
@@ -197,6 +229,17 @@ func lesson_point() -> void:
 func plain_words() -> void:
 	print("=== plain_words ===")
 	var swaps := [
+		["between an ungrounded conductor and earth", "between a hot wire and earth", "an + swapped consonant word (final-exam-#1-044)"],
+		["at an accessible location", "at a reachable location", "an accessible -> a reachable (final-exam-#3-049)"],
+		["has an equipment grounding conductor", "has a ground wire", "an EGC -> a ground wire (final-exam-#1-045)"],
+		["a utilization equipment rack", "an electrical equipment rack", "a + swapped vowel word"],
+		["Class A receptacle", "Class A outlet", "a naming letter is not an article"],
+		["Where motors are provided with terminal housings", "Where motors have terminal housings", "no 'are has' (final-exam-#3-061)"],
+		["rated at not more than 167 percent", "rated at most 167 percent", "no 'at at' (open-book-exam-#10-012)"],
+		["Type NM cables shall not be permitted", "Type NM cables are not permitted", "a plural subject gets 'are' (final-exam-#5-024)"],
+		["Flexible cords shall be permitted for", "Flexible cords are permitted for", "plural 'shall be permitted'"],
+		["Cablebus shall be permitted", "Cablebus is permitted", "a word ending in 'us' stays singular"],
+		["cords shall be permitted to be used", "cords may be used", "'permitted to be' is still 'may be'"],
 		["Receptacle outlets shall be listed.", "outlets must be listed.", "receptacle outlets + shall be"],
 		["equipment grounding conductor", "ground wire", "singular EGC"],
 		["Overcurrent protection shall be provided.", "breaker or fuse protection must be provided.", "OCPD"],
@@ -215,8 +258,8 @@ func plain_words() -> void:
 		["Each transformer shall be provided with a nameplate.", "Each transformer must have a nameplate.",
 			"provided with, no 'is has'"],
 		["they shall be reevaluated", "they must be reevaluated", "no 'they is'"],
-		["Cables shall not be permitted in ducts.", "Cables is not permitted in ducts.",
-			"no 'must not be permitted' (plural agreement is still off here)"],
+		["Cables shall not be permitted in ducts.", "Cables are not permitted in ducts.",
+			"no 'must not be permitted', and a plural subject gets 'are'"],
 		["Transformers shall be permitted to supply circuits.", "Transformers may supply circuits.",
 			"permitted to"],
 		["Cablebus shall be permitted as follows", "Cablebus is permitted as follows", "bare permitted"],

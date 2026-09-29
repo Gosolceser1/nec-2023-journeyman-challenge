@@ -11,15 +11,23 @@ extends RefCounted
 ## bundled audio rendered under older rules is never replayed. Bump it whenever
 ## a change here can alter spoken output.
 
-const VERSION := 3
+const VERSION := 4
 
 ## Ordered pipeline. [id, pattern, replacement] is a regex substitution;
 ## [id, ""] is a function stage (see _apply_function). Order matters: e.g. the
 ## unspaced mixed number must run before the inch mark and cable rules, and
 ## units run before acronym spelling so "20 A" becomes "20 amps", not "20 A".
 const PIPELINE := [
+	# Code-Making Panel tags and NFPA extract sources close Article 100
+	# definitions; read aloud they are "(C M P, 18)" and "[499 colon 3.3.4.2]".
+	["panel_tag", "\\s*\\(CMP[\\s\\-—–]*\\d+\\)", ""],
+	["extract_tag", "\\s*\\[\\d+[A-Z]?:[\\w.()\\-]+\\]", ""],
 	["table_block", ""],
 	["typography", ""],
+	# A table row flattened into prose ("15 | 20 | 12"): a pause, not "vertical bar".
+	["table_pipes", "\\s*\\|\\s*", ", "],
+	# A footnote mark on a word ("*In addition", "(FMC)*"); a spaced * is multiplication.
+	["footnote_star", "(?<![\\w)*])\\*(?=[A-Za-z])|(?<=[A-Za-z)])\\*(?![\\w*])", ""],
 	# Before number_range turns the Nebraska section 81-2113 into "81 to 2113".
 	["state_citations", ""],
 	["abbreviations", ""],
@@ -46,6 +54,8 @@ const PIPELINE := [
 	["roman_choice_after", "\\b(II|III|IV)(,?) (and|or) I\\b", "$1$2 $3 1"],
 	["roman_choice_only", "^I(?= only\\b)", "1"],
 	["area_units", ""],
+	# Before symbols turns µ into "micro" and leaves the A a letter ("microA").
+	["unit_microamps", "(\\d+(?:\\.\\d+)?)\\s*µA\\b", "$1 microamps"],
 	["symbols", ""],
 	["degrees_c", "(?i)\\b(\\d+(?:\\.\\d+)?)\\s*(?:°|degrees?\\s*)C\\b", "$1 degrees Celsius"],
 	["degrees_f", "(?i)\\b(\\d+(?:\\.\\d+)?)\\s*(?:°|degrees?\\s*)F\\b", "$1 degrees Fahrenheit"],
@@ -137,6 +147,7 @@ const LOST_BLANK_RE := "(?<=[A-Za-z'])\\s+\\.\\s*$"
 const TYPOGRAPHY := {
 	"“": "\"", "”": "\"", "″": "\"", "‘": "'", "’": "'", "′": "'",
 	"«": "", "»": "", "…": "...", "•": ", ", "\u00a0": " ",
+	"[": "(", "]": ")",
 }
 
 ## Case-insensitive, matched only at a word start.
@@ -153,6 +164,7 @@ const SYMBOLS := {
 	"√": " square root of ", "≈": " is about ", "Ω": " ohms ", "¢": " cents ",
 	"−": " minus ", "≤": " less than or equal to ", "≥": " greater than or equal to ",
 	"±": " plus or minus ", "µ": " micro", "²": " squared", "³": " cubed",
+	"@": " at ",
 }
 
 const AREA_UNITS := {"mm": "square millimeters", "in": "square inches", "ft": "square feet"}
@@ -207,6 +219,7 @@ const SPELL := [
 	"SPDT", "SPST", "DPDT", "DPST", "PWR", "MCM", "ASTM", "IEC", "HARC", "PV", "EV",
 	"RV", "TV", "VD", "MV", "PF", "PB", "AA", "PSI", "UPS", "SWD", "HID", "LED",
 	"CT", "GFPE", "FPN", "ANSI", "UV", "SPD", "HACR", "FAA", "USB", "CSA", "XHHN", "TFN", "TFFN",
+	"IBEW",
 ]
 
 ## Read as a word or a fixed phrase, never spelled or lower-cased. Emphasis

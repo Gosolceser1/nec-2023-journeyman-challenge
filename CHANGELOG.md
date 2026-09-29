@@ -36,6 +36,16 @@ changed.
   (tools/tests/test_typo_regressions.py) keeps the fixed typos out.
 - **Voice:** the Table 310.16 "COPPER" / "ALUMINUM" headers are read as words,
   not spelled out.
+- **Voice completeness and reading.** The rule line no longer stops mid-thought
+  ("...two No." for "two No. 6 screws", "...Exception No.", "...overcurrent
+  devic.", a lone "Labeled."): it quotes whole sentences only. Fixed misreadings
+  "an hot wire", "an reachable location", "motors are has", "rated at at
+  most", "cables is not permitted", and the "(C M P, 18)" / "[499:3.3.4.2]"
+  tags, table pipes and footnote stars are no longer read out; IBEW is spelled.
+  Edge clips are cached only when they are whole MP3 streams long enough for
+  their words (the service once ended a 27-word clip after 0.24 s), long text is
+  chunked at sentence ends, and every bundled clip is audited for length and
+  clean edges (tools/speech/audit_bundle.py). Andrew's bundle was re-recorded.
 - **Hints next to the figures.** The Final Exam #1 Q13 hint named the meter
   hookup the question asks for, and the Q47 hint described a symbol shape
   the figure doesn't have; both now describe the figure without giving the

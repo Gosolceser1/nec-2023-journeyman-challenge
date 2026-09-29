@@ -175,7 +175,9 @@ static func xml_escape(text: String) -> String:
 	return out.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
 
 
-## Escaped text split into pieces the service accepts, at spaces, never inside an entity.
+## Escaped text split into pieces the service accepts: at a sentence end when
+## one is in the back half of the piece, else at a space; never inside an
+## entity or a number ("310.16" has no space after its point).
 static func chunks_of(text: String) -> PackedStringArray:
 	var out := PackedStringArray()
 	var rest := xml_escape(text).strip_edges()
@@ -186,6 +188,9 @@ static func chunks_of(text: String) -> PackedStringArray:
 			if cut < 0:
 				cut = MAX_CHUNK_BYTES / 4
 				break
+		var stop := maxi(rest.rfind(". ", cut - 1), maxi(rest.rfind("? ", cut - 1), rest.rfind("! ", cut - 1)))
+		if stop > cut / 2:
+			cut = stop + 1
 		var amp := rest.rfind("&", cut - 1)
 		if amp >= 0 and rest.find(";", amp) >= cut:
 			cut = amp
@@ -330,16 +335,66 @@ func _on_text(job: Dictionary, text: String) -> bool:
 	if not head.contains("Path:turn.end"):
 		return false
 	(job["ws"] as WebSocketPeer).close()
-	if (job["audio"] as PackedByteArray).is_empty():
-		_job_error(job, "no audio received")
+	var bad := mp3_problem(job["audio"])
+	if bad != "":
+		_job_error(job, bad)
 		return true
 	job["chunk"] = int(job["chunk"]) + 1
 	if int(job["chunk"]) < (job["chunks"] as PackedStringArray).size():
 		if not _open(job):
 			_job_error(job, "could not open the connection")
 		return true
+	var words := " ".join(job["chunks"] as PackedStringArray).split(" ", false).size()
+	if (job["audio"] as PackedByteArray).size() < min_clip_bytes(words):
+		_job_error(job, "the audio stops early (%d bytes for %d words)" % [(job["audio"] as PackedByteArray).size(), words])
+		return true
 	_finish_clip(job)
 	return true
+
+
+## The service can end a stream early, on a clean frame, and still send
+## turn.end. No clip is spoken faster than 4.6 words a second (the bound in
+## tools/speech/audit_bundle.py); OUTPUT_FORMAT is 96 kbit/s, 12000 bytes a second.
+static func min_clip_bytes(words: int) -> int:
+	return int(words / 4.6 * 12000.0)
+
+
+## Why `audio` must not be cached, or "" for a whole MP3 stream: frames from
+## the first byte (after any ID3 tag) to the end of the last one. A clip cut
+## inside a frame would play, then stop mid-word.
+static func mp3_problem(audio: PackedByteArray) -> String:
+	if audio.size() < 4:
+		return "no audio received"
+	var pos := 0
+	if audio[0] == 0x49 and audio[1] == 0x44 and audio[2] == 0x33 and audio.size() >= 10:
+		pos = 10 + ((audio[6] << 21) | (audio[7] << 14) | (audio[8] << 7) | audio[9])
+	var frames := 0
+	while pos < audio.size():
+		if audio.size() - pos < 4 or audio[pos] != 0xFF or (audio[pos + 1] & 0xE0) != 0xE0:
+			return "the audio is not a clean MP3 stream (byte %d of %d)" % [pos, audio.size()]
+		var size := mp3_frame_size(audio[pos + 1], audio[pos + 2])
+		if size <= 0:
+			return "bad MP3 frame header at byte %d" % pos
+		if pos + size > audio.size():
+			return "the audio stops inside its last frame"
+		pos += size
+		frames += 1
+	return "" if frames > 0 else "no audio received"
+
+
+## Bytes in an MPEG Layer III frame from header bytes 1 and 2; 0 when invalid.
+static func mp3_frame_size(b1: int, b2: int) -> int:
+	var version := (b1 >> 3) & 3
+	var layer := (b1 >> 1) & 3
+	var bitrate_idx := (b2 >> 4) & 15
+	var rate_idx := (b2 >> 2) & 3
+	if version == 1 or layer != 1 or bitrate_idx == 0 or bitrate_idx == 15 or rate_idx == 3:
+		return 0
+	var kbps: Array = [32, 40, 48, 56, 64, 80, 96, 112, 128, 160, 192, 224, 256, 320] if version == 3 \
+		else [8, 16, 24, 32, 40, 48, 56, 64, 80, 96, 112, 128, 144, 160]
+	var rates: Array = [[11025, 12000, 8000], [], [22050, 24000, 16000], [44100, 48000, 32000]]
+	var rate: int = rates[version][rate_idx]
+	return (144 if version == 3 else 72) * int(kbps[bitrate_idx - 1]) * 1000 / rate + ((b2 >> 1) & 1)
 
 
 func _on_binary(job: Dictionary, packet: PackedByteArray) -> void:
