@@ -52,7 +52,17 @@ var max_height := 220.0:
 	set(v):
 		max_height = v
 		_update_height()
-var min_height := 64.0
+var min_height := MIN_H
+const MIN_H := 64.0
+## A thin tappable strip: a small thumbnail and "tap to enlarge", for a phone
+## screen where even the smallest figure would scroll. The zoom is unchanged.
+const STRIP_H := 40.0
+var compact := false:
+	set(v):
+		compact = v
+		min_height = STRIP_H if v else MIN_H
+		_update_height()
+		queue_redraw()
 const HEIGHT_PASSES := 4
 var _height_frame := -1
 var _height_passes := 0
@@ -332,6 +342,16 @@ func _draw() -> void:
 		area.size.x -= HINT_GUTTER
 		area.position.x += HINT_GUTTER * 0.5
 		_draw_zoom_hint()
+	if compact and texture != null and has_content():
+		var c := _canvas()
+		var thumb := Rect2(area.position, Vector2(minf(area.size.x * 0.4, area.size.y * c.x / c.y), area.size.y))
+		draw_figure(self, thumb, 0.5)
+		var font := get_theme_default_font()
+		var fs := 14
+		var x := thumb.end.x + 10.0
+		draw_string(font, Vector2(x, size.y * 0.5 + font.get_ascent(fs) * 0.5 - 1.0), "Figure: tap to enlarge",
+				HORIZONTAL_ALIGNMENT_LEFT, maxf(1.0, area.end.x - x), fs, AppTheme.SKY_400 if is_dark() else AppTheme.SKY_700)
+		return
 	draw_figure(self, area, 1.0)
 
 

@@ -16,6 +16,7 @@ const FIT_HINT_DESKTOP := [14, 13, 13, 12]
 const DIAGRAM_MAX_H_DESKTOP := 320.0
 const DIAGRAM_MAX_H_MOBILE := 250.0
 const FIT_DIAGRAM_MIN_H := 96.0
+const FEEDBACK_MIN_H_STRIP := 60.0
 const SIDE_BY_SIDE_MIN_WIDTH := 1100.0
 ## Table layout picks per fit (each measured a frame after the last).
 const TABLE_PASSES := 5
@@ -59,6 +60,7 @@ func begin() -> void:
 	if host.question_table_panel.visible:
 		TableViewer.apply_layout(host.question_table_grid, [1, 0])
 	if is_instance_valid(host.question_diagram_view):
+		host.question_diagram_view.compact = false
 		host.question_diagram_view.max_height = DIAGRAM_MAX_H_MOBILE if host.ui_mobile else DIAGRAM_MAX_H_DESKTOP
 	_fit_after_frames(_fit_gen, 2)
 
@@ -136,8 +138,13 @@ func _restore_dropped() -> void:
 	_dropped.clear()
 
 func _shrink_diagram(over: float) -> void:
-	var cur := host.question_diagram_view.custom_minimum_size.y
-	host.question_diagram_view.max_height = maxf(FIT_DIAGRAM_MIN_H, cur - over)
+	var view := host.question_diagram_view
+	var target := view.custom_minimum_size.y - over
+	if target < FIT_DIAGRAM_MIN_H and host.ui_mobile:
+		view.compact = true
+		view.max_height = DiagramView.STRIP_H
+		return
+	view.max_height = maxf(FIT_DIAGRAM_MIN_H, target)
 
 func refresh_ref_column() -> void:
 	if not is_instance_valid(host.ref_column):
@@ -210,6 +217,10 @@ func _fit_answered(gen: int) -> void:
 		over = _quiz_overflow()
 	if over > 0.5 and host.question_diagram_panel.visible:
 		_shrink_diagram(over)
+		over = _quiz_overflow()
+		# The figure is already a strip; the sheet (it scrolls inside) gives the rest.
+		if over > 0.5 and host.question_diagram_view.compact:
+			host.feedback_scroll.custom_minimum_size.y = maxf(FEEDBACK_MIN_H_STRIP, host.feedback_scroll.custom_minimum_size.y - over)
 	# The sheet scrolls for the explanation below the table, never for the
 	# table: it gets the layout that shows it whole in the sheet's first view.
 	if host.feedback_table_scroll.visible and _table_passes < TABLE_PASSES:
