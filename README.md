@@ -46,6 +46,17 @@ if Android asks.
   readiness.
 - **10 Questions • Weakest Area:** a drill of the subject area that needs it
   most, picked from your recent answers.
+- **Step-by-step math:** after you answer an exam calculation question (70 of
+  them), "Show steps" walks through it one idea at a time: the formula, the
+  numbers, the table row, the math, the exact calculator keys, then the
+  answer.
+- **Math trainer:** endless practice problems in 58 types over 12 topics
+  (Ohm's law to motors and dwelling loads) at three levels, with a hint,
+  a keypad, the steps and a "practice my weak spots" mix.
+- **Formula cards and table drills:** 17 picture cards (each letter
+  explained, units, calculator keys, a worked example) and 17 timed NEC table
+  lookup drills with a best run to beat. Math weak spots shows your accuracy
+  by topic (see [docs/MATH_TRAINER.md](docs/MATH_TRAINER.md)).
 - **Nebraska State Law:** a drill on the State Electrical Act and Board Rules,
   cited to the statute.
 - **No repeats, smart reviews:** questions and answer choices are shuffled
@@ -237,6 +248,8 @@ signing, the shareable zip and checksums.
 - `docs/ARCHITECTURE.md`: how the code is organized
 - `docs/STUDY_SYSTEM.md`: exam blueprint, question selection, study feedback
 - `docs/DATA_PIPELINE.md`: how the question bank is built and validated
+- `docs/MATH_TRAINER.md`: step-by-step solutions, math trainer, formula
+  cards, table drills and weak spots
 - `docs/VOICE_READING_RULES.md`: how questions are spoken
 - `docs/ANDROID_VOICES.md`: the Android voice list, names and the Edge voices
 - `docs/SFX_PLAN.md`: which moments get a sound

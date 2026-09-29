@@ -40,6 +40,14 @@
   follows an older code, the stem or a choice now uses the 2023 wording, so
   the keyed answer is still the one right answer (for example Open Book #12
   Q17, the 30 V rapid-shutdown limit outside the array boundary).
+- **Math help for the calculation questions** (docs/MATH_TRAINER.md).
+  "Show steps" appears after you answer one of 70 exam calculation
+  questions and solves it one step per screen with the calculator keys,
+  always reaching the keyed answer. A math trainer with 58 problem types in
+  12 topics and three levels, 17 formula cards with pictures and worked
+  examples, 17 timed NEC table drills, and math weak spots that steer
+  practice to your weakest topics. Table values come from NEC 2023
+  (data/nec/2023/tables.json). Open them from the Study tab.
 
 ### Fixed
 
