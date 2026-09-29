@@ -89,6 +89,8 @@ const SUITES := [
 	{"name": "edge client (Edge voices without Python, offline fallback)", "path": "res://tools/tests/test_edge_client.gd"},
 	# Release builds never start a process for speech.
 	{"name": "no speech process (no OS.execute, no shipped .py)", "path": "res://tools/tests/test_no_speech_process.gd"},
+	{"name": "math engine (hand-verified answers, exam calc keys, generated problems, drills, stats)", "path": "res://tools/tests/test_math_engine.gd"},
+	{"name": "math screens (every screen, fit at desktop + phone sizes, Show steps after answer only)", "path": "res://tools/tests/test_math_ui.gd"},
 ]
 
 const NOISE := "Unreferenced static string|string_name\\.cpp:|NavMeshGeometryParser|PagedAllocator"
