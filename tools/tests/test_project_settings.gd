@@ -55,7 +55,7 @@ func _init() -> void:
 		"boot splash must show the app's image or none, never Godot's default logo")
 	check(not FileAccess.file_exists("res://icon.svg"), "Godot's default icon.svg must not be in the project")
 	var version := str(ProjectSettings.get_setting("application/config/version"))
-	check(version == "1.0.4", "config/version is 1.0.4")
+	check(RegEx.create_from_string("^\\d+\\.\\d+\\.\\d+$").search(version) != null, "config/version is x.y.z (%s)" % version)
 
 	# Name and identifiers: data/app.json + data/edition.json (sync_identity.py
 	# writes them; the save folder and Android package id are frozen).

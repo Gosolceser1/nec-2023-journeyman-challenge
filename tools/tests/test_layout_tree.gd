@@ -11,7 +11,12 @@ extends SceneTree
 ##
 ## Computed layout (size, position, offsets inside containers) and the voice
 ## list are left out: they depend on the machine's fonts and installed voices,
-## not on what the builder wrote.
+## not on what the builder wrote. The app version and the edition label are
+## stored as {VERSION} and {EDITION}, so a version bump or an edition switch
+## (data/edition.json) needs no new snapshot. After a real change to the tree,
+## regenerate both snapshots and review the diff:
+##
+##   Godot --headless --path . --script tools/tests/test_layout_tree.gd -- --update
 
 const GOLDEN_DIR := "res://tools/tests/golden/"
 const SKIP_PROPS := ["script", "size", "position", "global_position", "rotation", "scale", "pivot_offset",
@@ -50,7 +55,7 @@ func _initialize() -> void:
 	root.add_child(main)
 	while lines.is_empty():
 		await process_frame
-	var text := "\n".join(lines) + "\n"
+	var text := placeholders("\n".join(lines) + "\n")
 	var path := GOLDEN_DIR + "layout_tree_%s.txt" % layout
 	if update:
 		DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(GOLDEN_DIR))
@@ -69,6 +74,16 @@ func _initialize() -> void:
 	print("checks: %d  failures: %d" % [checks, failures.size()])
 	print("RESULT: ", "PASS" if failures.is_empty() and child_ok else "FAIL")
 	quit(0 if failures.is_empty() and child_ok else 1)
+
+
+## The version and the edition label as {VERSION} / {EDITION}.
+static func placeholders(text: String) -> String:
+	var version := str(ProjectSettings.get_setting("application/config/version", ""))
+	if version != "":
+		text = text.replace(version, "{VERSION}")
+	if Edition.short_label() != "":
+		text = text.replace(Edition.short_label(), "{EDITION}")
+	return text
 
 
 func _compare(want: PackedStringArray, got: PackedStringArray) -> void:

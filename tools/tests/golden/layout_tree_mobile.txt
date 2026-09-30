@@ -80,7 +80,7 @@ Main <Control> res://src/app/main.gd
             .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
             .theme_override_font_sizes/font_size = 16
             .theme_override_colors/font_color = Color(0.972549, 0.98039216, 0.9882353, 1)
-            .text = "NEC 2023 // JOURNEYMAN"
+            .text = "{EDITION} // JOURNEYMAN"
             .clip_text = true
             on visibility_changed -> lambda
             on size_flags_changed -> lambda
@@ -1290,7 +1290,7 @@ Main <Control> res://src/app/main.gd
                       .theme_override_fonts/font = FontVariation{base_font=SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}, spacing_glyph=1}
                       .theme_override_font_sizes/font_size = 11
                       .theme_override_colors/font_color = Color(0.21960784, 0.7411765, 0.972549, 1)
-                      .text = "NFPA 70 • NEC 2023 • PSI EXAM STANDARDS"
+                      .text = "NFPA 70 • {EDITION} • PSI EXAM STANDARDS"
                       on visibility_changed -> lambda
                       on size_flags_changed -> lambda
                       on maximum_size_changed -> lambda
@@ -1302,7 +1302,7 @@ Main <Control> res://src/app/main.gd
                       .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                       .theme_override_font_sizes/font_size = 22
                       .theme_override_colors/font_color = Color(0.972549, 0.98039216, 0.9882353, 1)
-                      .text = "NEC 2023 // JOURNEYMAN"
+                      .text = "{EDITION} // JOURNEYMAN"
                       .autowrap_mode = 3
                       on visibility_changed -> lambda
                       on resized -> lambda
@@ -6716,7 +6716,7 @@ Main <Control> res://src/app/main.gd
                       .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                       .theme_override_font_sizes/font_size = 11
                       .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
-                      .text = "Aligned with NFPA 70 (NEC 2023) & Nebraska State Electrical Division / PSI standards • v1.0.4"
+                      .text = "Aligned with NFPA 70 ({EDITION}) & Nebraska State Electrical Division / PSI standards • v{VERSION}"
                       .horizontal_alignment = 1
                       .autowrap_mode = 3
                       on visibility_changed -> lambda
