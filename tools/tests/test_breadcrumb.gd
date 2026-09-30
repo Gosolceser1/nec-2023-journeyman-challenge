@@ -71,7 +71,7 @@ func _sweep() -> void:
 		t.eq(main.question_label.get_parsed_text(), str(rec.get("prompt", "")), "%s: stem on screen" % qid)
 		var shown: String = main.chapter_hint_label.text
 		var want := NecReference.expected_breadcrumb(rec)
-		if NecReference.is_reference_seeking(str(rec.get("prompt", ""))):
+		if NecReference.is_reference_seeking(str(rec.get("prompt", "")), rec.get("answers", [])):
 			want = NecReference.chapter_only_path(want)
 		if want != "":
 			t.check(main.chapter_hint_label.visible, "%s: breadcrumb visible before answering" % qid)

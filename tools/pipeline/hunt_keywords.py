@@ -104,14 +104,19 @@ def no_lookup_reason(record: dict, cited: list[str]) -> str:
     return "trade knowledge (not in the NEC)"
 
 
-def is_reference_seeking(prompt: str) -> bool:
+CITATION_ANSWER = re.compile(r"^(?:NEC\s+)?(?:(?:Article|Table|Section)\s+\S|\d{3}\.\d+(?:\([A-Za-z0-9]+\))*$)")
+
+
+def is_reference_seeking(prompt: str, answers: list | None = None) -> bool:
     """Same test as NecReference.is_reference_seeking in the app."""
     lowered = prompt.lower()
-    return "___" in lowered and any(w in lowered for w in ("table", "article", "section"))
+    if "___" in lowered and any(w in lowered for w in ("table", "article", "section")):
+        return True
+    return sum(1 for a in answers or [] if CITATION_ANSWER.search(str(a).strip())) >= 2
 
 
 def show_article(record: dict, cited: list[str]) -> bool:
-    if is_reference_seeking(str(record.get("prompt", ""))):
+    if is_reference_seeking(str(record.get("prompt", "")), record.get("answers", [])):
         return False
     answer = correct_text(record)
     for article in cited:
@@ -179,7 +184,7 @@ def keywords_for(record: dict, cited: list[str], terms: list[dict], override: di
         if primary == "100":
             article = "100"
         elif term.get("broad"):
-            if primary == CHAPTER_9:
+            if primary == CHAPTER_9 or primary not in term.get("seen_in", [primary]):
                 continue
             article = primary
         else:

@@ -76,6 +76,12 @@ func _init() -> void:
 	check(NecReference.is_reference_seeking("Which ARTICLE ___ covers services?"), "article blank, any case")
 	check(not NecReference.is_reference_seeking("Which table lists ampacities?"), "no blank")
 	check(not NecReference.is_reference_seeking("The minimum is ___ inches."), "blank but not a reference")
+	check(NecReference.is_reference_seeking("What section of the NEC covers this?", ["230.60", "545.7", "240.6", "250.66"]),
+			"no blank, section numbers as choices")
+	check(NecReference.is_reference_seeking("___ lists conductor dimensions.", ["300.1(C)", "300.19(A)", "Table 2, Chapter 9", "Table 5, Chapter 9"]),
+			"table choices")
+	check(not NecReference.is_reference_seeking("The ampacity is ___ amps.", ["31.6", "34.8", "35", "37.2"]),
+			"decimal values are not citations")
 	eq(NecReference.chapter_only_path(book + "  ►  Chapter 2: Wiring and Protection  ►  Article 210 (Branch Circuits)"),
 		book + "  ►  Chapter 2: Wiring and Protection", "drops the article")
 	eq(NecReference.chapter_only_path(book + "  ►  Chapter 9: Tables"), book + "  ►  Chapter 9: Tables", "already chapter only")

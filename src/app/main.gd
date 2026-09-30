@@ -923,7 +923,7 @@ func _show_question() -> void:
 	article_label.visible = gist != ""
 	if is_instance_valid(question_hint_row):
 		question_hint_row.visible = gist != ""
-	if NecReference.is_reference_seeking(str(record.get("prompt", ""))):
+	if NecReference.is_reference_seeking(str(record.get("prompt", "")), record.get("answers", [])):
 		# The stem asks WHICH table/article holds the rule — printing the article
 		# hands over the answer, so pre-answer navigation stops at chapter level.
 		chapter_hint_label.text = NecReference.chapter_only_path(NecReference.lookup_path(record))

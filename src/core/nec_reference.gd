@@ -133,13 +133,19 @@ static func lookup_path(record: Dictionary) -> String:
 		return "GENERAL TRADE KNOWLEDGE  ►  Standard Electrical Practice"
 	return ""
 
-static func is_reference_seeking(prompt: String) -> bool:
+static func is_reference_seeking(prompt: String, answers: Array = []) -> bool:
 	# True when the question asks for the reference itself ("Table ___ lists...",
-	# "which article..."). Those prompts get redacted lookup aids pre-answer.
+	# "What section of the NEC..." with section numbers as choices). Those
+	# prompts get redacted lookup aids pre-answer.
 	var lowered := prompt.to_lower()
-	if not lowered.contains("___"):
-		return false
-	return lowered.contains("table") or lowered.contains("article") or lowered.contains("section")
+	if lowered.contains("___") and (lowered.contains("table") or lowered.contains("article") or lowered.contains("section")):
+		return true
+	var citation := RegEx.create_from_string("^(?:NEC\\s+)?(?:(?:Article|Table|Section)\\s+\\S|\\d{3}\\.\\d+(?:\\([A-Za-z0-9]+\\))*$)")
+	var cited := 0
+	for answer in answers:
+		if citation.search(str(answer).strip_edges()) != null:
+			cited += 1
+	return cited >= 2
 
 static func chapter_only_path(full_path: String) -> String:
 	# "<code book>  ►  Chapter 3: ...  ►  Article 300 (...)" -> drops the article segment.
