@@ -60,7 +60,7 @@ case "$BANK" in
   *) BANK="$ROOT/$BANK" ;;
 esac
 BANK_W="$(winpath "$BANK")"
-GODOT="${GODOT:-$ROOT/Godot_v4.7.2-stable_win64_console.exe}"
+GODOT="${GODOT:-$ROOT/$(. "$ROOT/tools/godot.env" && echo "$GODOT_BINARY")}"
 GODOT_W="$(winpath "$GODOT")"
 BUILDER_W="$(winpath "$ROOT/tools/pipeline/build_question_bank.py")"
 VALIDATOR_W="$(winpath "$ROOT/tools/pipeline/validate_question_bank.py")"

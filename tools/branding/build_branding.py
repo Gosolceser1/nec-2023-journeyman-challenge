@@ -2,8 +2,8 @@
 
     python tools/branding/build_branding.py
 
-Needs Pillow and the Godot console binary ($GODOT, default: the one in the repo
-root), which rasterises the SVGs (tools/branding/render_svg.gd). Run it with a
+Needs Pillow and the Godot console binary ($GODOT, default: tools/godot.env's
+GODOT_BINARY in the repo root), which rasterises the SVGs (tools/branding/render_svg.gd). Run it with a
 temporary APPDATA like every other Godot run.
 
 Writes:
@@ -17,7 +17,6 @@ Writes:
 """
 from __future__ import annotations
 
-import os
 import shutil
 import subprocess
 import sys
@@ -27,6 +26,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "release"))
+sys.path.insert(0, str(ROOT / "tools"))
+from godot_env import godot_binary  # noqa: E402
 from sync_identity import identity  # noqa: E402
 
 IDENTITY = identity(ROOT)
@@ -49,7 +50,7 @@ SKY_400 = "#38bdf8"
 
 
 def godot() -> str:
-    exe = os.environ.get("GODOT") or str(ROOT / "Godot_v4.7.2-stable_win64_console.exe")
+    exe = godot_binary(ROOT)
     if not Path(exe).exists():
         sys.exit(f"Godot not found: {exe} (set GODOT)")
     return exe

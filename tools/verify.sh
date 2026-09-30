@@ -15,13 +15,14 @@
 # Exit 0 = all green. Non-zero = at least one stage failed, with its output.
 #
 # Env overrides:
-#   GODOT   Godot console binary   (default: <repo>/Godot_v4.7.2-stable_win64_console.exe)
+#   GODOT   Godot console binary   (default: <repo>/<GODOT_BINARY from tools/godot.env>)
 #   PYTHON  Python 3 interpreter   (default: first working python / python.exe / py.exe / python3)
 
 set -uo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-GODOT="${GODOT:-$ROOT/Godot_v4.7.2-stable_win64_console.exe}"
+. "$ROOT/tools/godot.env"
+GODOT="${GODOT:-$ROOT/$GODOT_BINARY}"
 
 # Godot spews harmless static-string/NavMesh teardown noise on exit.
 NOISE='Unreferenced static string|string_name\.cpp:|NavMeshGeometryParser|PagedAllocator'
@@ -137,7 +138,7 @@ bank_validate() {
   echo "  python: $py ($("$py" -c 'import sys; print(sys.version.split()[0])'))"
   export PYTHON="$py"
   bash tools/tests/test_build_guard.sh || return $?
-  "$py" -m unittest tools.tests.test_validate_question_bank tools.tests.test_spellcheck_bank tools.tests.test_typo_regressions tools.tests.test_speak_question tools.tests.test_audit_bundle tools.tests.test_question_requirements tools.tests.test_diagram_figures tools.tests.test_exam_sources tools.tests.test_sync_identity tools.tests.test_bump_version tools.tests.test_branding_text || return $?
+  "$py" -m unittest tools.tests.test_validate_question_bank tools.tests.test_spellcheck_bank tools.tests.test_typo_regressions tools.tests.test_speak_question tools.tests.test_audit_bundle tools.tests.test_question_requirements tools.tests.test_diagram_figures tools.tests.test_exam_sources tools.tests.test_sync_identity tools.tests.test_bump_version tools.tests.test_branding_text tools.tests.test_godot_env || return $?
   "$py" tools/pipeline/spellcheck_bank.py --offline || return $?
   "$py" tools/pipeline/validate_question_bank.py --no-warn
   return $?

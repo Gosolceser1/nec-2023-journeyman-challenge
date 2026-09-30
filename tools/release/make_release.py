@@ -20,7 +20,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 import shutil
 import subprocess
 import sys
@@ -28,6 +27,8 @@ import zipfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from godot_env import godot_binary  # noqa: E402
 from sync_identity import identity  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -63,7 +64,7 @@ def sounds_block() -> str:
 
 
 def dump_licenses(dest: Path) -> None:
-    exe = os.environ.get("GODOT") or str(ROOT / "Godot_v4.7.2-stable_win64_console.exe")
+    exe = godot_binary(ROOT)
     res = subprocess.run([exe, "--headless", "--path", str(ROOT), "--script",
                           "res://tools/release/dump_licenses.gd", "--", str(dest)],
                          capture_output=True, text=True)

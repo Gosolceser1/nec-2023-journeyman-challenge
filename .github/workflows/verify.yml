@@ -17,6 +17,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Godot version (tools/godot.env)
+        shell: bash
+        run: |
+          . tools/godot.env
+          { echo "GODOT_VERSION=$GODOT_VERSION"; echo "GODOT_BINARY=$GODOT_BINARY"; echo "GODOT_EDITOR=$GODOT_EDITOR"; } >> "$GITHUB_ENV"
+
       - name: Cache Godot binary
         id: godot-cache
         uses: actions/cache@v4
@@ -24,9 +30,9 @@ jobs:
           # The console exe is a 200 KB wrapper that launches the editor exe
           # next to it, so both must be cached.
           path: |
-            Godot_v4.7.2-stable_win64.exe
-            Godot_v4.7.2-stable_win64_console.exe
-          key: godot-4.7.2-win64-both
+            ${{ env.GODOT_EDITOR }}
+            ${{ env.GODOT_BINARY }}
+          key: godot-${{ env.GODOT_VERSION }}-win64-both
 
       - name: Download Godot (console build)
         if: steps.godot-cache.outputs.cache-hit != 'true'
@@ -34,11 +40,11 @@ jobs:
         run: |
           # The zip holds both the editor and the console wrapper; the wrapper
           # is not a separate release asset.
-          $url = "https://github.com/godotengine/godot/releases/download/4.7.2-stable/Godot_v4.7.2-stable_win64.exe.zip"
+          $url = "https://github.com/godotengine/godot/releases/download/$env:GODOT_VERSION-stable/$env:GODOT_EDITOR.zip"
           Invoke-WebRequest -Uri $url -OutFile godot.zip
           Expand-Archive -Path godot.zip -DestinationPath . -Force
           Remove-Item godot.zip
-          foreach ($exe in "Godot_v4.7.2-stable_win64.exe", "Godot_v4.7.2-stable_win64_console.exe") {
+          foreach ($exe in $env:GODOT_EDITOR, $env:GODOT_BINARY) {
             if (-not (Test-Path $exe)) { throw "$exe missing from the release zip" }
           }
 
