@@ -157,3 +157,38 @@ func _pad() -> void:
 	t.check(not pad.matches(), "a different figure is not a match")
 	t.has(pad.hint_text(), "the step says 40", "and the hint shows both")
 	pad.free()
+	_answer_pad()
+
+
+## The Math Trainer's answer pad: "?" until a key, the unit beside the number,
+## keys stop while locked, and keyboard presses map to pad keys.
+func _answer_pad() -> void:
+	t.check(_run("12 ×").awaiting_operand(), "12 × waits for a number")
+	t.check(not _run("12 × 2").awaiting_operand() and not _run("12 × 2 =").awaiting_operand(), "12 × 2 does not")
+	var pad := CalcPad.new()
+	pad.reset()
+	pad.set_unit("V")
+	t.eq(pad.display_text(), "?", "blank until a key")
+	t.check(pad._unit.visible and pad._unit.text == "V", "the unit shows")
+	for k in CalcEngine.sequence_keys("12 × 24 ="):
+		pad.press(k)
+	t.eq(pad.display_text(), "288", "12 × 24 = 288")
+	pad.locked = true
+	pad.press("5")
+	t.eq(pad.display_text(), "288", "locked: keys do nothing")
+	pad.locked = false
+	pad.press("C")
+	t.eq(pad.display_text(), "?", "C blanks the entry again")
+	var cases := {"7": "7", "*": "×", "x": "×", "/": "÷", "-": "−", "+": "+", "%": "%", ".": ".", "a": ""}
+	for ch in cases:
+		var e := InputEventKey.new()
+		e.pressed = true
+		e.unicode = ch.unicode_at(0)
+		t.eq(CalcPad.key_for_event(e), cases[ch], "keyboard '%s'" % ch)
+	var enter := InputEventKey.new()
+	enter.pressed = true
+	enter.keycode = KEY_ENTER
+	t.eq(CalcPad.key_for_event(enter), "=", "Enter is =")
+	enter.echo = true
+	t.eq(CalcPad.key_for_event(enter), "", "a held Enter does not repeat")
+	pad.free()

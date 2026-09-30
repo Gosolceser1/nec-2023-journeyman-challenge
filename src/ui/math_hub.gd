@@ -47,8 +47,8 @@ static func hub(main: Main) -> MathHub:
 	return h
 
 
-## Opens a tool by its data/math/tools.json id: trainer, cards, drills,
-## weak_spots or calculator. Unknown ids open the trainer.
+## Opens a tool by its data/math/tools.json id: trainer, cards, drills or
+## weak_spots. Unknown ids open the trainer.
 static func open(main: Main, tool_id: String) -> void:
 	var h := hub(main)
 	h._stack.clear()
@@ -60,8 +60,6 @@ static func open(main: Main, tool_id: String) -> void:
 			h.push(title, "TIMED NEC TABLE LOOKUPS", MathDrillView.list.bind(h))
 		"weak_spots":
 			h.push(title, "ACCURACY OVER YOUR LAST %d ANSWERS PER TOPIC" % MathStats.RECENT, MathTrainerView.weak_spots.bind(h))
-		"calculator":
-			h.push(title, "A BASIC CALCULATOR, LIKE THE ONE IN THE EXAM ROOM", CalcPad.screen.bind(h))
 		_:
 			h.push(title, "ENDLESS PRACTICE · STEP-BY-STEP HELP", MathTrainerView.pick.bind(h))
 	h._show()

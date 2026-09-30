@@ -9,25 +9,32 @@ extends VBoxContainer
 ## whether the number agrees with the step's working line. Any other key still
 ## works, the guide just steps aside until Restart.
 ##
-## Standalone (the Calculator tool) takes the keyboard too; inline under the
-## steps it does not, so Enter and Backspace still walk the steps there.
+## As the Math Trainer's answer entry the pad takes no keyboard itself (the
+## trainer maps keys with key_for_event), shows the answer's unit beside the
+## number and a dim "?" until the first key.
 
 signal guide_finished(matched: bool)
 
 ## Keys to a row; the last row is 0 (three keys wide) and = (two).
 const ROW_SIZE := 5
 const WIDE_KEYS := {"0": 3.0, "=": 2.0}
-## Keyboard characters -> keys (standalone only).
+## Keyboard characters -> keys.
 const TYPED := {"+": "+", "-": "−", "*": "×", "x": "×", "/": "÷", "%": "%", "=": "=", ".": ".", ",": "."}
 
 var mobile := false
-var keyboard := false
 var engine := CalcEngine.new()
 ## Plays an interface sound by Sfx id (the hub passes its sfx).
 var sfx: Callable
+## Keys do nothing while locked (an answer already checked).
+var locked := false
+## True until a key is pressed (and again after C): the display shows "?".
+var blank := false
+## The key height the pad is built with (set_key_height may grow it).
+var base_key_height := 0.0
 
 var _pending: Label
 var _number: Label
+var _unit: Label
 var _memory: Label
 var _hint: Label
 var _restart: Button
@@ -64,7 +71,15 @@ func _init(is_mobile: bool = false, inline: bool = false) -> void:
 	_number.add_theme_font_override("font", AppTheme.numeric_font(AppTheme.WEIGHT_SEMIBOLD))
 	_number.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	_number.clip_text = true
-	col.add_child(_number)
+	_number.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	var number_row := HBoxContainer.new()
+	number_row.add_theme_constant_override("separation", AppTheme.SPACE_SM)
+	col.add_child(number_row)
+	number_row.add_child(_number)
+	_unit = MathUi.label("", MathUi.px(MathUi.TEXT, mobile), AppTheme.SLATE_400, AppTheme.WEIGHT_SEMIBOLD)
+	_unit.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	_unit.visible = false
+	number_row.add_child(_unit)
 	var hint_row := HBoxContainer.new()
 	hint_row.add_theme_constant_override("separation", AppTheme.SPACE_SM)
 	add_child(hint_row)
@@ -75,7 +90,8 @@ func _init(is_mobile: bool = false, inline: bool = false) -> void:
 	_restart.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	hint_row.add_child(_restart)
 	hint_row.visible = false
-	var key_h: float = MathUi.px(MathUi.KEY_H, mobile) * (1.0 if inline else 1.2)
+	base_key_height = MathUi.px(MathUi.KEY_H, mobile) * (1.0 if inline else 1.2)
+	var key_h := base_key_height
 	var font: int = MathUi.px(MathUi.KEY, mobile)
 	var row: HBoxContainer = null
 	for i in CalcEngine.KEYS.size():
@@ -168,7 +184,10 @@ func is_guiding() -> bool:
 
 
 func press(key: String) -> void:
+	if locked:
+		return
 	engine.press(key)
+	blank = key == "C"
 	if sfx.is_valid():
 		sfx.call("select")
 	if _guide_at >= 0 and _guide_at < _guide.size():
@@ -179,6 +198,34 @@ func press(key: String) -> void:
 		else:
 			_guide_at = -1
 	_refresh()
+
+
+## A fresh calculator with memory cleared, showing "?" until a key.
+func reset() -> void:
+	engine = CalcEngine.new()
+	blank = true
+	locked = false
+	_refresh()
+
+
+## Row count of the key grid.
+static func key_rows() -> int:
+	return ceili(CalcEngine.KEYS.size() / float(ROW_SIZE))
+
+
+func key_height() -> float:
+	return (_buttons["0"] as Button).custom_minimum_size.y
+
+
+func set_key_height(h: float) -> void:
+	for b in _buttons.values():
+		(b as Button).custom_minimum_size.y = h
+
+
+## The unit shown after the number ("V", "A"); "" hides it.
+func set_unit(text: String) -> void:
+	_unit.text = text
+	_unit.visible = text != ""
 
 
 ## True when the display agrees with the step (or the step has no figure).
@@ -199,8 +246,8 @@ func key_button(key: String) -> Button:
 
 
 func _refresh() -> void:
-	_number.text = engine.display()
-	_number.add_theme_color_override("font_color", AppTheme.ROSE_300 if engine.error else AppTheme.SLATE_50)
+	_number.text = "?" if blank else engine.display()
+	_number.add_theme_color_override("font_color", AppTheme.SLATE_600 if blank else (AppTheme.ROSE_300 if engine.error else AppTheme.SLATE_50))
 	_pending.text = engine.pending()
 	_memory.modulate.a = 1.0 if engine.memory != 0.0 else 0.0
 	var lit := next_key()
@@ -226,10 +273,11 @@ func _refresh() -> void:
 		_hint.add_theme_color_override("font_color", AppTheme.ROSE_300)
 
 
-func _unhandled_key_input(event: InputEvent) -> void:
-	if not keyboard or not is_visible_in_tree() or not (event is InputEventKey) or not event.pressed:
-		return
-	var e := event as InputEventKey
+## The pad key a keyboard press stands for ("" for none): digits, + - * x / %
+## = . , Enter (=), Backspace, Delete (C). Held keys repeat only Backspace.
+static func key_for_event(e: InputEventKey) -> String:
+	if not e.pressed:
+		return ""
 	var key := ""
 	match e.keycode:
 		KEY_ENTER, KEY_KP_ENTER:
@@ -244,29 +292,4 @@ func _unhandled_key_input(event: InputEvent) -> void:
 				key = ch
 			else:
 				key = str(TYPED.get(ch.to_lower(), ""))
-	if key == "" or (e.echo and key != "⌫"):
-		return
-	press(key)
-	get_viewport().set_input_as_handled()
-
-
-## The Calculator tool's screen: the pad, keyboard on, and how it adds up.
-static func screen(hub: MathHub) -> Control:
-	var col := VBoxContainer.new()
-	col.add_theme_constant_override("separation", AppTheme.SPACE_MD)
-	var pad := CalcPad.new(hub.mobile)
-	pad.keyboard = true
-	pad.sfx = hub.sfx
-	if hub.mobile:
-		col.add_child(pad)
-	else:
-		var center := CenterContainer.new()
-		center.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-		pad.custom_minimum_size = Vector2(480, 0)
-		center.add_child(pad)
-		col.add_child(center)
-	var note := MathUi.label("Works left to right like a basic calculator: 2 + 3 × 4 = shows 20, so multiply first: 3 × 4 + 2 = shows 14." \
-		+ ("" if hub.mobile else "  The keyboard works too: digits, + − * /, Enter, Backspace, Delete clears."),
-		MathUi.px(MathUi.NOTE, hub.mobile), AppTheme.SLATE_400, AppTheme.WEIGHT_REGULAR, true)
-	col.add_child(note)
-	return col
+	return "" if e.echo and key != "⌫" else key

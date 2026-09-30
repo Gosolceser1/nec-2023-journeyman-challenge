@@ -113,10 +113,12 @@ func _screens() -> void:
 	hub.push("Find current", "OHMS", MathTrainerView.solve.bind(hub, "ohms", "ohm_current"))
 	await _fits("trainer problem")
 	var view := hub.current_screen() as MathTrainerView
-	check(view != null and view._pad.visible and not view._result.visible, "%s keypad shown before answering" % size_label)
+	check(view != null and view._pad.visible and not view._result.visible, "%s calculator shown before answering" % size_label)
+	check(CalcEngine.KEYS.all(func(k: String) -> bool: return view._pad.key_button(k) != null and view._pad.key_button(k).is_visible_in_tree()),
+		"%s the answer calculator has every key" % size_label)
+	check(view._pad.display_text() == "?" and view._pad._unit.text == "A", "%s blank entry with the unit (%s %s)" % [size_label, view._pad.display_text(), view._pad._unit.text])
 	var want := str(view.problem["answer"]["value"])
-	for ch in MathFormat.number(float(want), -1, false):
-		view._press_key(ch)
+	view.press_keys(MathFormat.number(float(want), -1, false))
 	view._on_check()
 	check(view.answered and view._verdict.text == "Correct!", "%s typed answer %s graded correct" % [size_label, want])
 	await _fits("trainer answered")
@@ -129,11 +131,11 @@ func _screens() -> void:
 	check(not view._steps_box.visible, "%s Done returns to the problem" % size_label)
 	check(hub.stats.attempts("type", "ohm_current") >= 1, "%s trainer answer recorded" % size_label)
 	view._on_check()
-	check(not view.answered and view._entry_label.text == "?", "%s Next problem clears the entry" % size_label)
-	view._press_key("9")
-	view._press_key("9")
+	check(not view.answered and view._pad.display_text() == "?" and view.entry() == "" and not view._pad.locked, "%s Next problem clears the entry" % size_label)
+	view.press_keys("99")
 	view._on_check()
 	check(view._verdict.text == "Not quite" or view.problem["answer"]["value"] == 99.0, "%s wrong answer graded" % size_label)
+	await _work_on_pad(view)
 	# A choice-answer type shows choices, not the keypad.
 	hub.replace("EGC", "CODE", MathTrainerView.solve.bind(hub, "code_calcs", "egc_size"))
 	await _fits("trainer choices")
@@ -187,15 +189,61 @@ func _screens() -> void:
 	check(hub.current_screen() is MathTrainerView, "%s mix opens a problem" % size_label)
 	hub.close()
 
-	MathHub.open(main, "calculator")
-	await _fits("calculator")
-	var pad := _find_type(hub.current_screen(), "CalcPad") as CalcPad
-	check(pad != null and pad.keyboard and not pad.is_guiding(), "%s calculator tool: a free pad with the keyboard" % size_label)
-	for key in CalcEngine.sequence_keys("12 × 1.25 ="):
-		pad.key_button(key).pressed.emit()
-	check(pad.display_text() == "15", "%s calculator tool: 12 × 1.25 = shows 15 (%s)" % [size_label, pad.display_text()])
-	hub.close()
 	await _steps_pad()
+
+
+func _key(view: MathTrainerView, keycode: Key, ch: String = "") -> void:
+	var e := InputEventKey.new()
+	e.keycode = keycode
+	e.unicode = ch.unicode_at(0) if ch != "" else 0
+	e.pressed = true
+	view._unhandled_key_input(e)
+
+
+## A fresh problem graded against a fixed answer.
+func _fixed(view: MathTrainerView, value: float, text: String, tol: float = 0.0) -> void:
+	view.next_problem()
+	view.problem = MathEngine.solve("ohm_voltage", {"I": 12, "R": 24}, 1)
+	view.problem["answer"].merge({"value": value, "text": text, "tol": tol, "rel": false}, true)
+
+
+## The problem is worked on the answer calculator: Check finishes a pending
+## operation and submits the number shown; Enter does = then Check; a
+## fraction answer goes in as a division; keys stop once checked.
+func _work_on_pad(view: MathTrainerView) -> void:
+	_fixed(view, 288.0, "288 V")
+	view.press_keys("12 × 24")
+	check(view._pad.display_text() == "24" and view._pad.engine.pending() == "12 ×" and not view._result.visible,
+		"%s 12 × 24 is pending, nothing revealed" % size_label)
+	view._on_check()
+	check(view.answered and view._verdict.text == "Correct!" and view._pad.display_text() == "288", "%s 12 × 24 then Check: 288 correct" % size_label)
+	view._pad.press("5")
+	check(view._pad.display_text() == "288", "%s the pad is locked once checked" % size_label)
+	_fixed(view, 288.0, "288 V")
+	for ch in "12*24":
+		_key(view, KEY_NONE, ch)
+	_key(view, KEY_ENTER)
+	check(not view.answered and view._pad.display_text() == "288", "%s keyboard 12*24 Enter shows 288 (%s)" % [size_label, view._pad.display_text()])
+	_key(view, KEY_ENTER)
+	check(view.answered and view._verdict.text == "Correct!", "%s a second Enter checks" % size_label)
+	_fixed(view, 288.0, "288 V")
+	for ch in "123":
+		_key(view, KEY_NONE, ch)
+	_key(view, KEY_BACKSPACE)
+	check(view._pad.display_text() == "12", "%s Backspace deletes a digit" % size_label)
+	view.press_keys("×")
+	view._on_check()
+	check(not view.answered, "%s Check waits while an operator has no number" % size_label)
+	_fixed(view, 0.95, "19/20")
+	view.press_keys("19 ÷ 20 =")
+	view._on_check()
+	check(view._verdict.text == "Correct!", "%s fraction answer 19/20 entered as 19 ÷ 20" % size_label)
+	_fixed(view, 1.0 / 300.0, "1/300")
+	view.press_keys("1 ÷ 300")
+	view._on_check()
+	check(view._verdict.text == "Correct!", "%s fraction answer 1/300 entered as 1 ÷ 300 (%s)" % [size_label, view._pad.display_text()])
+	_fixed(view, 288.0, "288 V")
+	await _fits("trainer pad working")
 
 
 ## "Try it on the calculator" under a step with keys: the pad follows the row,
@@ -287,7 +335,8 @@ func _exam_steps() -> void:
 
 
 func _tools_data() -> void:
-	for id in ["trainer", "cards", "drills", "weak_spots", "calculator"]:
+	check(MathData.tools().size() == 4 and MathData.tool("calculator").is_empty(), "Study lists the four tools, no standalone calculator")
+	for id in ["trainer", "cards", "drills", "weak_spots"]:
 		var t := MathData.tool(id)
 		check(str(t.get("title", "")) != "" and str(t.get("description", "")) != "", "tool %s described" % id)
 		check(Icons.sdf(str(t.get("icon", "")), Vector2(12, 12)) < 1e5, "tool %s icon exists" % id)

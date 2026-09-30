@@ -4,9 +4,14 @@
 
 ### Added
 
-- **Calculator.** A basic calculator like the one allowed in the exam room
-  (left to right, memory, percent, square root, 1/x) is a new tool on the
-  Study tab. On a desktop the keyboard works too.
+- **Math Trainer answers on a calculator.** The answer keypad is now a basic
+  calculator like the one allowed in the exam room (+ − × ÷ =, memory,
+  percent, x², square root, 1/x, ±), so you can work the problem right there:
+  Check submits the number showing and finishes a pending operation first
+  (12 × 24, then Check, answers 288). A fraction answer goes in as a division
+  (19 ÷ 20). On a desktop the keyboard works too: Enter does =, then Check.
+  It also fills the empty space under the question. There is no separate
+  Calculator tile on the Study tab; the calculator lives where you need it.
 - **Try it on the calculator** in Show steps: under a step's calculator keys,
   a calculator walks you through the keys one at a time (the next key lights
   up) and says when you land on the step's number. Earlier steps' results and

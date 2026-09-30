@@ -2,17 +2,16 @@ class_name MathTrainerView
 extends VBoxContainer
 ## Math Trainer. pick(): difficulty, "Practice my weak spots" and every skill
 ## with its accuracy. types(): one skill's problem types. An instance is the
-## problem screen: a generated problem, a keypad (or choices), Hint, the
-## formula card, Check, and the solution's steps shown in place.
-
-const KEYPAD_ROWS := [["7", "8", "9", "⌫"], ["4", "5", "6", "C"], ["1", "2", "3", "/"], ["0", "."]]
-const MAX_ENTRY := 12
+## problem screen: a generated problem, a calculator to work it on (or
+## choices), Hint, the formula card, Check, and the solution's steps shown in
+## place. Check submits the number the calculator shows, finishing a pending
+## operation first ("12 × 24" checks 288). A fraction answer is entered as a
+## division (19 ÷ 20): answers are checked by value.
 
 var hub: MathHub
 var skill := ""
 var type_id := ""
 var problem: Dictionary = {}
-var entry := ""
 var answered := false
 var right := 0
 var total := 0
@@ -24,10 +23,8 @@ var _meta: Label
 var _score: Label
 var _prompt: Label
 var _hint: Label
-var _entry_row: PanelContainer
-var _entry_label: Label
-var _unit_label: Label
-var _pad: VBoxContainer
+var _text_col: VBoxContainer
+var _pad: CalcPad
 var _choices: GridContainer
 var _result: PanelContainer
 var _verdict: Label
@@ -236,15 +233,15 @@ func _build_problem_box() -> void:
 	top.add_child(_score)
 	var scroll := MathUi.scroll()
 	_problem_box.add_child(scroll)
-	var text_col := VBoxContainer.new()
-	text_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	text_col.add_theme_constant_override("separation", AppTheme.SPACE_SM)
-	scroll.add_child(text_col)
+	_text_col = VBoxContainer.new()
+	_text_col.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_text_col.add_theme_constant_override("separation", AppTheme.SPACE_SM)
+	scroll.add_child(_text_col)
 	_prompt = MathUi.label("", MathUi.px(MathUi.TEXT, mobile), AppTheme.SLATE_50, AppTheme.WEIGHT_MEDIUM, true)
-	text_col.add_child(_prompt)
+	_text_col.add_child(_prompt)
 	_hint = MathUi.label("", MathUi.px(MathUi.NOTE, mobile), AppTheme.AMBER_200, AppTheme.WEIGHT_REGULAR, true)
 	_hint.visible = false
-	text_col.add_child(_hint)
+	_text_col.add_child(_hint)
 	_result = MathUi.panel(AppTheme.FEEDBACK_BG, AppTheme.FEEDBACK_BORDER)
 	_result.visible = false
 	var result_col := VBoxContainer.new()
@@ -255,36 +252,12 @@ func _build_problem_box() -> void:
 	_answer_line.add_theme_font_override("font", AppTheme.numeric_font(AppTheme.WEIGHT_SEMIBOLD))
 	result_col.add_child(_answer_line)
 	_problem_box.add_child(_result)
-	_entry_row = MathUi.panel(AppTheme.TABLE_PANEL_BG, AppTheme.SKY_700, AppTheme.SPACE_LG, AppTheme.SPACE_XS)
-	var entry_h := HBoxContainer.new()
-	entry_h.add_theme_constant_override("separation", AppTheme.SPACE_SM)
-	_entry_row.add_child(entry_h)
-	_entry_label = MathUi.label("", MathUi.px(MathUi.ENTRY, mobile), AppTheme.SLATE_50, AppTheme.WEIGHT_BOLD)
-	_entry_label.add_theme_font_override("font", AppTheme.numeric_font())
-	_entry_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	_entry_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	_entry_label.clip_text = true
-	entry_h.add_child(_entry_label)
-	_unit_label = MathUi.label("", MathUi.px(MathUi.TEXT, mobile), AppTheme.SLATE_400, AppTheme.WEIGHT_SEMIBOLD)
-	_unit_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	entry_h.add_child(_unit_label)
-	_problem_box.add_child(_entry_row)
-	_pad = VBoxContainer.new()
-	_pad.add_theme_constant_override("separation", AppTheme.SPACE_XS + 2)
+	_pad = CalcPad.new(mobile)
+	_pad.name = "AnswerPad"
+	_pad.sfx = hub.sfx
 	_problem_box.add_child(_pad)
-	var key_h: float = MathUi.px(MathUi.KEY_H, mobile)
-	for row_keys in KEYPAD_ROWS:
-		var row := HBoxContainer.new()
-		row.add_theme_constant_override("separation", AppTheme.SPACE_XS + 2)
-		_pad.add_child(row)
-		for key in row_keys:
-			var b := MathUi.choice(key, key_h, MathUi.px(MathUi.KEY, mobile), _press_key.bind(key))
-			b.name = "Key_" + {"⌫": "back", "C": "clear", "/": "slash", ".": "dot"}.get(key, key)
-			if key == "0":
-				b.size_flags_stretch_ratio = 2.0
-			if key in ["⌫", "C", "/", "."]:
-				b.add_theme_color_override("font_color", AppTheme.AMBER_200)
-			row.add_child(b)
+	_problem_box.resized.connect(_fit_pad.call_deferred)
+	_text_col.resized.connect(_fit_pad.call_deferred)
 	_choices = GridContainer.new()
 	_choices.columns = 1 if mobile else 2
 	_choices.add_theme_constant_override("h_separation", AppTheme.SPACE_SM)
@@ -311,7 +284,6 @@ func next_problem() -> void:
 	problem = MathEngine.generate(t, hub.level, hub.rng)
 	if problem.is_empty():
 		problem = MathEngine.generate(t, 1, hub.rng)
-	entry = ""
 	answered = false
 	_hint.visible = false
 	_hint.text = str(problem.get("hint", ""))
@@ -327,8 +299,8 @@ func next_problem() -> void:
 	_card_button.visible = MathData.card(str(problem.get("card", ""))).size() > 0
 	var answer: Dictionary = problem.get("answer", {})
 	var is_choice := str(answer.get("kind", "")) == "choice"
-	_unit_label.text = str(answer.get("unit", ""))
-	_entry_row.visible = not is_choice
+	_pad.reset()
+	_pad.set_unit(str(answer.get("unit", "")))
 	_pad.visible = not is_choice
 	_choices.visible = is_choice
 	for c in _choices.get_children():
@@ -342,8 +314,8 @@ func next_problem() -> void:
 	_check_button.text = "Check"
 	_check_button.visible = not is_choice
 	_steps_button.text = "Steps"
-	_render_entry()
 	_hide_steps()
+	_fit_pad.call_deferred()
 	if not UiFx.reduce_motion and is_inside_tree():
 		UiFx.screen_enter(_problem_box, false)
 
@@ -360,46 +332,36 @@ func _pick_type() -> String:
 	return hub.stats.pick_weighted("type", ids, hub.rng)
 
 
-func _render_entry() -> void:
-	_entry_label.text = entry if entry != "" else "?"
-	_entry_label.add_theme_color_override("font_color", AppTheme.SLATE_50 if entry != "" else AppTheme.SLATE_600)
+## What Check would submit: the number showing, "" before any key or on Error.
+func entry() -> String:
+	return "" if _pad.blank or _pad.engine.error else _pad.engine.display()
 
 
-func _press_key(key: String) -> void:
-	if answered:
-		return
-	hub.sfx("click")
-	match key:
-		"⌫":
-			entry = entry.substr(0, maxi(0, entry.length() - 1))
-		"C":
-			entry = ""
-		_:
-			if entry.length() < MAX_ENTRY and not (key in [".", "/"] and entry.contains(key)):
-				entry += key
-	_render_entry()
+## Presses a key row on the answer calculator ("12 × 24 =").
+func press_keys(keys: String) -> void:
+	for key in CalcEngine.sequence_keys(keys):
+		_pad.press(key)
 
 
 func _unhandled_key_input(event: InputEvent) -> void:
-	if not is_visible_in_tree() or _steps_box.visible or not (event is InputEventKey) or not event.pressed or event.echo:
+	if not is_visible_in_tree() or _steps_box.visible or not (event is InputEventKey) or not event.pressed:
 		return
 	var k := event as InputEventKey
-	var ch := String.chr(k.unicode) if k.unicode > 0 else ""
 	if answered:
-		if k.keycode in [KEY_ENTER, KEY_KP_ENTER, KEY_SPACE, KEY_RIGHT]:
+		if not k.echo and k.keycode in [KEY_ENTER, KEY_KP_ENTER, KEY_SPACE, KEY_RIGHT]:
 			_on_check()
 			get_viewport().set_input_as_handled()
 		return
-	if ch != "" and "0123456789./".contains(ch):
-		_press_key(ch)
-	elif k.keycode == KEY_BACKSPACE:
-		_press_key("⌫")
-	elif k.keycode == KEY_DELETE:
-		_press_key("C")
-	elif k.keycode in [KEY_ENTER, KEY_KP_ENTER]:
+	if not _pad.visible:
+		return
+	var key := CalcPad.key_for_event(k)
+	if key == "":
+		return
+	# Enter finishes a pending operation first; on a finished number it checks.
+	if key == "=" and k.keycode in [KEY_ENTER, KEY_KP_ENTER] and _pad.engine.pending() == "":
 		_on_check()
 	else:
-		return
+		_pad.press(key)
 	get_viewport().set_input_as_handled()
 
 
@@ -409,11 +371,14 @@ func _on_check() -> void:
 		hub.sfx("click")
 		next_problem()
 		return
-	if entry == "" or is_nan(MathFormat.parse(entry)):
+	if _pad.engine.pending() != "" and not _pad.engine.awaiting_operand():
+		_pad.press("=")
+	var given := entry()
+	if given == "" or _pad.engine.awaiting_operand() or is_nan(MathFormat.parse(given)):
 		hub.sfx("warning")
-		UiFx.screen_enter(_entry_row, false)
+		UiFx.screen_enter(_pad, false)
 		return
-	_grade(MathEngine.check(problem, entry), entry)
+	_grade(MathEngine.check(problem, given), given)
 
 
 func _pick_choice(option: String) -> void:
@@ -441,7 +406,7 @@ func _grade(ok: bool, given: String) -> void:
 	if not ok and given != "" and str(answer.get("kind", "")) != "choice":
 		_answer_line.text += "   (you entered %s)" % given
 	_result.visible = true
-	_entry_row.visible = false
+	_pad.locked = true
 	_pad.visible = false
 	_check_button.text = "Next problem"
 	_check_button.visible = true
@@ -454,6 +419,18 @@ func _grade(ok: bool, given: String) -> void:
 func _show_hint() -> void:
 	hub.sfx("click")
 	_hint.visible = not _hint.visible
+	_fit_pad()
+
+
+## Keys grow into the room the question leaves (up to 1.6 times their height),
+## so a short question has no empty gap above the calculator.
+func _fit_pad() -> void:
+	if not _pad.visible or _problem_box.size.y <= 0.0:
+		return
+	var slack := _problem_box.size.y - _problem_box.get_combined_minimum_size().y \
+		- _text_col.get_combined_minimum_size().y - AppTheme.SPACE_LG
+	var base := _pad.base_key_height
+	_pad.set_key_height(clampf(_pad.key_height() + slack / CalcPad.key_rows(), base, base * 1.6))
 
 
 func _open_card() -> void:

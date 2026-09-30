@@ -62,6 +62,11 @@ func value() -> float:
 	return 0.0 if error else _val
 
 
+## True after an operator with no number typed yet ("12 ×").
+func awaiting_operand() -> bool:
+	return _op != "" and not _operand and not error
+
+
 ## One key press; aliases from the step key rows are accepted ("-", "M-").
 func press(key: String) -> void:
 	key = {"-": "−", "M-": "M−", "*": "×", "/": "÷", "AC": "C", "CE": "C", "+/-": "±"}.get(key, key)
