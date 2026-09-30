@@ -101,10 +101,15 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 | `680.58:` at line start, `§ 90.2` | Section 680 point 58, Section 90 point 2 |
 | `708.54 Ex.:` | Section 708 point 54 Exception: |
 | bare `210.12` choice to a "which section" question | 210 point 12 |
-| `under 250.122`, `required by 408.36`, `in 110.26` | under section 250 point 122, … (a citing word: under, in, by, per, see, with, of) |
+| `under 250.122`, `required by 408.36`, `in 110.26`, `Under NEC 626.11`, `conforming to 551.81` | under section 250 point 122, … (a citing word: under, in, by, per, see, with, of, NEC, Code, conforming/refer/according/subject/comply to) |
+| `× 125% (430.22)`, `the 220.41 dwelling unit load`, `= 5,000 W 220.54.`, `(F) and 310.12`, `430.24 gives` | section 430 point 22, … (a citation in parentheses, after "the/a" before a word, after a unit or ")" at the end of a formula, after "(X) and/or", or before "requires/says/allows/gives/…") |
+| `Table 430.248 (1φ) or 430.250 (3φ)` | Table 430 point 248 … or Table 430 point 250 (a follower of a Table in an and/or list is a Table) |
+| `÷ 831.36`, `divided by 240.21`, `multiply 240.21 by 2`, `= 310.16`, `is 250.66` | 831.36 … (arithmetic before or after a bare number makes it a quantity, even after "by") |
 | `352.100, 352.12(B), and 352.60:`, `352.100 Construction` | section 352 point 100, section 352 point 12, paragraph B, and section 352 point 60; a list is read as sections when one member is, and a heading after a line start or `label: ` is a section |
 | `.6875` (a decimal with no leading zero) | 0.6875 |
-| `31.6 amps`, `8.19 A`, `0.5`, `888.8 ohms` (not a reference) | 31.6 amps … (a bare number is a section only in the cases above, only as 90 or 100–999 point N, and never with a unit after it) |
+| `31.6 amps`, `8.19 A`, `0.5`, `888.8 ohms`, `831.36`, `240.05` (not a reference) | 31.6 amps … (a bare number is a section only in the cases above, only when its article exists in NEC 2023 (`data/nec_2023_articles.json`), never with a leading-zero part, a unit after it, or arithmetic around it) |
+| `17.5a`, `400a` (a choice typed with a glued lowercase a) | 17.5 amps |
+| `6.24 x 10^18`, `a ratio of 20:1`, `what does the -2 represent` | 6.24 times 10 to the power of 18; 20 to 1; the dash 2 |
 | `1/0`, `4/0` | one aught, four aught |
 | `12/3 NM` | 12 slash 3 N M |
 | `250 kcmil` | 250 thousand circular mil |
@@ -135,6 +140,7 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 | `90°C`, `112°F`, `90°` | 90 degrees Celsius, 112 degrees Fahrenheit, 90 degrees |
 | `125%`, `#10`, `No. 12` | 125 percent, number 10, number 12 |
 | `mm² in² sq. ft. cu. in.` | square millimeters, square inches, square feet, cubic inches |
+| `3 VA per ft²` | 3 volt amperes per square foot |
 | `7 lb-in.`, `20 lb-ft` | 7 pound-inches, 20 pound-feet |
 | `100-400 A` | 100 to 400 amps |
 | `___` | blank (after "Article/Section": "which Article") |

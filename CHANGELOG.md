@@ -62,6 +62,16 @@
 
 ### Fixed
 
+- **Voice: numbers in math read as numbers, citations as sections.** A
+  decimal in arithmetic ("÷ 831.36", "divided by 240.21", "multiply 240.21 by
+  2") is no longer read as "section 831 point 36"; a bare number is a section
+  only when its article exists in NEC 2023. Citations written without a
+  Section word are now read as sections: "(430.22)" after a formula, "the
+  220.41 dwelling unit load", "= 5,000 W 220.54", "conforming to 551.81",
+  "Under NEC 626.11", "Table 430.248 or 430.250". Also "17.5a" is 17.5 amps,
+  "10^18" is "10 to the power of 18", "a ratio of 20:1" is "20 to 1", and
+  "the -2" is "the dash 2". "per ft²" is "per square foot". Nine recorded
+  questions re-recorded.
 - **No page scrolling before you answer on Final Exam #1 Q4 and Open Book
   #1 Q21 on phones.** Their office-lighting figure sat next to the 31-row
   Table 220.42(A), which left about 30 px of scroll with shuffled choices.

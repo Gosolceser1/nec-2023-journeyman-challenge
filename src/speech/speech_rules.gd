@@ -58,6 +58,12 @@ const PIPELINE := [
 	["area_units", ""],
 	# Before symbols turns µ into "micro" and leaves the A a letter ("microA").
 	["unit_microamps", "(\\d+(?:\\.\\d+)?)\\s*µA\\b", "$1 microamps"],
+	# "6.24 x 10^18 electrons"; read as "10 caret 18" otherwise.
+	["power_of_ten", "\\b10\\s*\\^\\s*(\\d+)\\b", "10 to the power of $1"],
+	# "a ratio of 20:1" is read as a clock time.
+	["ratio_colon", "(?i)\\b(ratios?(?:\\s+of)?\\s+)(\\d+):(\\d+)\\b", "$1$2 to $3"],
+	# "What does the -2 represent?" (THWN-2): a suffix, not minus 2.
+	["suffix_dash", "\\b(the) -(\\d)\\b", "$1 dash $2"],
 	["symbols", ""],
 	["degrees_c", "(?i)\\b(\\d+(?:\\.\\d+)?)\\s*(?:°|degrees?\\s*)C\\b", "$1 degrees Celsius"],
 	["degrees_f", "(?i)\\b(\\d+(?:\\.\\d+)?)\\s*(?:°|degrees?\\s*)F\\b", "$1 degrees Fahrenheit"],
@@ -112,6 +118,8 @@ const PIPELINE := [
 	["unit_volts", "(?i)\\b(\\d+(?:\\.\\d+)?)\\s*v\\b", "$1 volts"],
 	["unit_ma", "\\b(\\d+(?:\\.\\d+)?)\\s*mA\\b", "$1 milliamps"],
 	["unit_amps", "\\b(\\d+(?:\\.\\d+)?)\\s*A\\b", "$1 amps"],
+	# Choices typed "17.5a", "400a": read as the letter A otherwise.
+	["unit_amps_glued", "\\b(\\d+(?:\\.\\d+)?)a\\b", "$1 amps"],
 	["unit_watts", "\\b(\\d+(?:\\.\\d+)?)\\s*W\\b", "$1 watts"],
 	["unit_hz", "(?i)\\b(\\d+)\\s*hz\\b", "$1 hertz"],
 	["percent", "\\s*%", " percent"],
@@ -376,8 +384,12 @@ static func _apply_function(id: String, text: String) -> String:
 			return _each(text, "(?<![^\\s])(III|II|IV|I)\\.(?=\\s+[a-z])", func(m: RegExMatch, _src: String) -> String:
 				return ". Item %s," % str(ROMAN_LIST[m.get_string(1)]))
 		"area_units":
-			return _each(text, "\\b(mm|in|ft)(?:²|\\^2)", func(m: RegExMatch, _src: String) -> String:
-				return str(AREA_UNITS[m.get_string(1)]))
+			# "3 VA per ft²" is per square foot, not "per square feet".
+			return _each(text, "(\\bper\\s+)?\\b(mm|in|ft)(?:²|\\^2)", func(m: RegExMatch, _src: String) -> String:
+				var unit := str(AREA_UNITS[m.get_string(2)])
+				if m.get_string(1) != "":
+					return m.get_string(1) + unit.replace("feet", "foot").replace("inches", "inch").trim_suffix("s")
+				return unit)
 		"symbols":
 			return _replace_table(text, SYMBOLS)
 		"vulgar_fractions":
@@ -542,10 +554,23 @@ static func _unshout(text: String) -> String:
 const REFERENCE_RE := "(?:\\b(Sections?|sections?|Tables?|tables?|Articles?|articles?)\\s+|(§)\\s*)?\\b(\\d{2,3})\\.(\\d{1,3})\\b((?:\\((?:[A-Za-z]|\\d{1,2})\\))*)"
 
 
-## NEC articles run 90 through 840; a bare "31.6" or "0.39" is never one.
-const ARTICLE_NUMBER_RE := "^(?:90|[1-9]\\d{2})$"
-## A word that cites a bare section in running text: "as covered by 240.21".
-const CITE_CUE_RE := "(?i)\\b(?:under|in|by|per|see|with|of)\\s+$"
+## A word that cites a bare section in running text: "as covered by 240.21",
+## "Under NEC 626.11", "conforming to 551.81".
+const CITE_CUE_RE := "(?i)(?:\\b(?:under|in|by|per|see|with|of|NEC|Code)|\\b(?:conforming|refer|according|pursuant|subject|comply|complying|complies)\\s+to)\\s+$"
+## Arithmetic around a number makes it a quantity: "÷ 831.36" (already "divided
+## by" here), "multiply 240.21 by 2", "= 310.16", "240.21 × 2".
+const ARITH_BEFORE_RE := "(?i)(?:[=÷×*/+−]|\\b(?:divided|multiplied)\\s+by|\\b(?:multiply|divide|times|equals|plus|minus|over|is|are|gives?|to get|about|approximately)|\\d\\s*[xX])\\s*$"
+const ARITH_AFTER_RE := "(?i)^\\s*(?:[=÷×*/+−]|[xX]\\s*\\d|(?:times|divided|multiplied|plus|minus|equals)\\b|by\\s+[\\d.])"
+## Written where only a citation fits: "(430.22)", "the 250.62 wording",
+## "(F) and 310.12", "= 5,000 W 220.54." after a formula, "430.24 gives".
+const CITE_PAREN_BEFORE_RE := "\\(\\s*$"
+const CITE_PAREN_AFTER_RE := "^\\s*[),]"
+const CITE_ARTICLE_BEFORE_RE := "(?i)\\b(?:the|a|an)\\s+$"
+const CITE_ARTICLE_AFTER_RE := "^ [a-z]"
+const CITE_AFTER_PAREN_LIST_RE := "\\)\\s*(?:,\\s*)?(?:and|or)\\s+$"
+const CITE_AFTER_UNIT_BEFORE_RE := "(?:[)%]|\\b(?:[A-Z]{1,4}|amps|volts|watts|loads?))\\s+$"
+const CITE_AFTER_UNIT_AFTER_RE := "^(?:[.,;]|\\s+(?:load|dwelling)\\b|\\s*$)"
+const CITE_VERB_AFTER_RE := "^ (?:requires|says|allows|covers|applies|uses|permits|prohibits|limits|gives|sets|exempts|excuses|treats|rates|addresses|restricts)\\b"
 ## A unit after the number makes it a measurement: "of 888.8 ohms".
 const UNIT_AFTER_RE := "^\\s*(?:%|°|\"|'|(?:percent|amps?|amperes?|A|mA|kA|V|volts?|kV|VA|kVA|W|watts?|kW|ohms?|Ω|m|mm|meters?|millimeters?|ft|feet|foot|in|inch(?:es)?|s|seconds?|Hz|hertz|lbs?|pounds?|kcmil|degrees?|sq|cu)\\b)"
 ## Joins the members of a reference list: "352.100, 352.12(B), and 352.60".
@@ -564,8 +589,15 @@ const LIST_GAP_RE := "^(?:,\\s*|,?\\s+(?:and|or|through)\\s+)$"
 static func _references(text: String) -> String:
 	var matches := _re(REFERENCE_RE).search_all(text)
 	var prefixes: Array[String] = []
-	for m in matches:
-		prefixes.append(_reference_prefix(m, text))
+	for i in matches.size():
+		var prefix := _reference_prefix(matches[i], text)
+		# "Table 430.248 (1φ) or 430.250 (3φ)": the second is a table too.
+		if prefix == "section" and i > 0 and prefixes[i - 1].to_lower().begins_with("table") \
+				and matches[i].get_string(1) == "" and matches[i].get_string(2) == "" \
+				and _re("^(?:\\s*\\([^()]{1,6}\\))?\\s*(?:,\\s*)?(?:and|or)\\s+$").search(
+					text.substr(matches[i - 1].get_end(), matches[i].get_start() - matches[i - 1].get_end())) != null:
+			prefix = "Table"
+		prefixes.append(prefix)
 	# A list is spoken as references when any member is one.
 	var run_start := 0
 	for i in matches.size() + 1:
@@ -608,19 +640,39 @@ static func _reference_prefix(m: RegExMatch, src: String) -> String:
 		return "section"
 	if not _looks_like_section(m, src):
 		return ""
-	var before := src.substr(maxi(0, m.get_start() - 12), m.get_start() - maxi(0, m.get_start() - 12))
+	var before := _before(m, src)
 	var heading_start := at_line_start or before.ends_with(": ")
 	var heading := heading_start and _re("^ [A-Za-z]").search(after) != null
-	if after.begins_with(":") or heading or _re(CITE_CUE_RE).search(before) != null:
+	if after.begins_with(":") or heading or _re(CITE_CUE_RE).search(before) != null \
+			or _re(CITE_VERB_AFTER_RE).search(after) != null \
+			or _re(CITE_AFTER_PAREN_LIST_RE).search(before) != null \
+			or (_re(CITE_PAREN_BEFORE_RE).search(before) != null and _re(CITE_PAREN_AFTER_RE).search(after) != null) \
+			or (_re(CITE_ARTICLE_BEFORE_RE).search(before) != null and _re(CITE_ARTICLE_AFTER_RE).search(after) != null) \
+			or (_re(CITE_AFTER_UNIT_BEFORE_RE).search(before) != null and _re(CITE_AFTER_UNIT_AFTER_RE).search(after) != null):
 		return "section"
 	return ""
 
 
-## A bare NNN.N with nothing after it that makes it a measurement.
+static func _before(m: RegExMatch, src: String) -> String:
+	var from := maxi(0, m.get_start() - 24)
+	return src.substr(from, m.get_start() - from)
+
+
+## A bare NNN.N that could be an NEC section: its article exists in NEC 2023
+## (so "831.36" and "31.6" never are), no leading-zero part ("240.05"), no
+## unit after it, and no arithmetic around it.
 static func _looks_like_section(m: RegExMatch, src: String) -> bool:
-	return m.get_string(1) == "" and m.get_string(2) == "" \
-		and _re(ARTICLE_NUMBER_RE).search(m.get_string(3)) != null \
-		and _re(UNIT_AFTER_RE).search(src.substr(m.get_end(), 12)) == null
+	if m.get_string(1) != "" or m.get_string(2) != "":
+		return false
+	var part := m.get_string(4)
+	if part.length() > 1 and part.begins_with("0"):
+		return false
+	if NecReference.canonical_article_title(int(m.get_string(3))) == "":
+		return false
+	var after := src.substr(m.get_end(), 16)
+	return _re(UNIT_AFTER_RE).search(after) == null \
+		and _re(ARITH_AFTER_RE).search(after) == null \
+		and _re(ARITH_BEFORE_RE).search(_before(m, src)) == null
 
 
 ## A later list member carries no Section/Table word of its own.

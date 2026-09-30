@@ -106,6 +106,33 @@ const GOLDEN := [
 	["references", "a value of 888.8 ohms", "A value of 888.8 ohms"],
 	["references", "within 1.5 seconds, a 1.5% drop", "Within 1.5 seconds, a 1.5 percent drop"],
 	["references", "in 120.5 V and 42.4, 34.8", "In 120.5 volts and 42.4, 34.8"],
+	# Arithmetic makes a decimal a quantity, even after "by" or with a real article.
+	["references", "199,526 VA ÷ 831.36 = 240 A", "199,526 volt amperes divided by 831.36 equals 240 amps"],
+	["references", "divided by 240.21", "Divided by 240.21"],
+	["references", "Multiply 240.21 by 2.", "Multiply 240.21 by 2."],
+	["references", "240.21 × 2 = 480.42", "240.21 times 2 equals 480.42"],
+	["references", "The result equals 310.16", "The result equals 310.16"],
+	["references", "Result is 250.66, round up.", "Result is 250.66, round up."],
+	["references", "Multiply 50 A times 1.25, then by 0.8", "Multiply 50 amps times 1.25, then by 0.8"],
+	# Not an NEC 2023 article, or a leading-zero part: never a section.
+	["references", "covered by 831.36", "Covered by 831.36"],
+	["references", "covered by 240.05", "Covered by 240.05"],
+	# Citations written without a Section word.
+	["references", "FLC × 125% (430.22).", "F L C times 125 percent (section 430 point 22)."],
+	["references", "× the 220.41 dwelling unit load", "Times the section 220 point 41 dwelling unit load"],
+	["references", "= 5,000 W 220.54.", "Equals 5,000 watts section 220 point 54."],
+	["references", "other FLC 430.24, using", "Other F L C section 430 point 24, using"],
+	["references", "310.15(A) through (F) and 310.12.", "Section 310 point 15, paragraph A through (F) and section 310 point 12."],
+	["references", "conforming to 551.81.", "Conforming to section 551 point 81."],
+	["references", "Under NEC 626.11, services", "Under N E C section 626 point 11, services"],
+	["references", "430.24 gives 22.5 amperes.", "Section 430 point 24 gives 22.5 amperes."],
+	["references", "Table 430.248 (1φ) or 430.250 (3φ)", "Table 430 point 248 (1φ) or Table 430 point 250 (3φ)"],
+	["area_units", "3 VA per ft², 12 in² and 4 mm²", "3 volt amperes per square foot, 12 square inches and 4 square millimeters"],
+	["power_of_ten", "about 6.24 x 10^18 electrons", "About 6.24 times 10 to the power of 18 electrons"],
+	["ratio_colon", "a transformer ratio of 20:1", "A transformer ratio of 20 to 1"],
+	["suffix_dash", "What does the -2 represent?", "What does the dash 2 represent?"],
+	["unit_amps_glued", "17.5a", "17.5 amps"],
+	["unit_amps_glued", "Answer: 400a.", "Answer: 400 amps."],
 	["designator_pair", "item 1 through (B)(5)", "Item 1 through paragraph B, item 5"],
 	["wire_aught", "1/0 and 4/0", "One aught and four aught"],
 	["cable_designation", "12/3 and 10/2 NM", "12 slash 3 and 10 slash 2 N M"],
@@ -263,7 +290,7 @@ func reading_order() -> void:
 	}
 	var segs: Array = ST.spoken_segments(rec)
 	t.eq(segs.size(), 9, "stem + 4 choices, each a letter line then its text")
-	t.eq(str(segs[0]["text"]), "The conductor is marked R H W, dash 2 on the insulation, what does the -2 represent.",
+	t.eq(str(segs[0]["text"]), "The conductor is marked R H W, dash 2 on the insulation, what does the dash 2 represent.",
 		"stem first, terminated once")
 	t.eq(str(segs[2]["text"]), "The cable has two conductors.", "a choice already ending in '.' is not doubled")
 	t.eq(str(segs[4]["text"]), "Double insulated.", "choice B")

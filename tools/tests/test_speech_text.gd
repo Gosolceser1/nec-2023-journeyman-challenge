@@ -463,6 +463,25 @@ func bank_complete_sentences_sweep(recs: Array) -> void:
 			if m != null:
 				misreads.append("%s: '%s'" % [str((rec_v as Dictionary).get("id", "")), m.get_string(0)])
 	t.eq(misreads, [] as Array[String], "no wrong article, doubled word, pipe, footnote star, '@' or panel tag is spoken")
+	# Numbers: a quantity in arithmetic is never a section, a section is always
+	# of a real NEC 2023 article, and a citation written "(430.22)" or after a
+	# formula is never read as a decimal.
+	var arith_section := RegEx.create_from_string("(?i)\\b(?:divided by|multiplied by|times|equals|plus|minus)\\s+section\\b")
+	var said_section := RegEx.create_from_string("(?i)\\bsections? (\\d{2,3}) point \\d")
+	var cite_decimal := RegEx.create_from_string("\\(\\d{3}\\.\\d{1,3}\\)|(?:watts|amps|volt amperes|F L C|\\)) \\d{3}\\.\\d{1,3}[.,;]")
+	var number_misreads: Array[String] = []
+	for rec_v in recs:
+		for seg_v in ST.speech_plan(rec_v):
+			var said := str((seg_v as Dictionary).get("text", ""))
+			var rid := str((rec_v as Dictionary).get("id", ""))
+			for re in [arith_section, cite_decimal]:
+				var m: RegExMatch = re.search(said)
+				if m != null:
+					number_misreads.append("%s: '%s'" % [rid, m.get_string(0)])
+			for m in said_section.search_all(said):
+				if NecReference.canonical_article_title(int(m.get_string(1))) == "":
+					number_misreads.append("%s: '%s' (no such article)" % [rid, m.get_string(0)])
+	t.eq(number_misreads, [] as Array[String], "no arithmetic quantity is read as a section, no citation as a decimal")
 	t.eq(unfinished, [] as Array[String], "every spoken line of every plan ends a sentence (no 'Exception No.', no dangling list marker)")
 	t.eq(too_long, [] as Array[String], "no spoken line is long enough to need chunking")
 	t.eq(cut_words, [] as Array[String], "no quoted rule stops mid-word")
