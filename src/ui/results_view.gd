@@ -10,6 +10,8 @@ static func show(host: Main) -> void:
 	host._sfx("transition")
 	# The report is not a question: keys 1-4 / A-D must not grade anything here.
 	host.current_answered = true
+	# The report reuses the verdict row: the last question's "Show steps" must go.
+	host.menu.study_hook("question", [host])
 	clear_confetti(host)
 	var is_exam := host.session.session_simulation
 	var state_law := host.session.session_section == BankLoader.SECTION_NE_STATE_LAW
@@ -41,7 +43,7 @@ static func show(host: Main) -> void:
 	# Quiz-only chrome would contradict the report ("QUESTION 01 OF 10",
 	# "Hear the rule" for a question no longer on screen, a second menu button).
 	if host.ui_mobile:
-		host.progress_label.text = "COMPLETE  •  %d / %d" % [host.answered_count, host.order.size()]
+		host.progress_label.text = "COMPLETE  %d/%d" % [host.answered_count, host.order.size()]
 	else:
 		host.progress_label.text = "SESSION COMPLETE  •  %d OF %d ANSWERED" % [host.answered_count, host.order.size()]
 	host.question_timer_label.text = "REVIEW"

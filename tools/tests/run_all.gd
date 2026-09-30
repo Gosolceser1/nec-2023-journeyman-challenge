@@ -54,6 +54,9 @@ const SUITES := [
 	{"name": "breadcrumb follows the question (every record, both layouts)", "path": "res://tools/tests/test_breadcrumb.gd"},
 	# Stem words to look up in the code book's Index: colored, never the answer, same voice, 0% scroll.
 	{"name": "hunt keywords (every record, both layouts, all standard sizes)", "path": "res://tools/tests/test_hunt_keywords.gd"},
+	# Hover/tap promised "just its entry" but hover was never wired and a finger
+	# never reached meta_clicked (mouse emulation is off).
+	{"name": "hunt keyword hover/tap (real mouse + touch events, fit-hidden line, whole-word colors)", "path": "res://tools/tests/test_hunt_keyword_input.gd"},
 	{"name": "bank loader (shapes, leak guard)", "path": "res://tools/tests/test_bank_loader.gd"},
 	# project.godot is parsed by ConfigFile, whose only comment char is ";".
 	# A "#" comment silently fused onto the next setting's NAME and left
@@ -96,6 +99,7 @@ const SUITES := [
 	# Release builds never start a process for speech.
 	{"name": "no speech process (no OS.execute, no shipped .py)", "path": "res://tools/tests/test_no_speech_process.gd"},
 	{"name": "math engine (hand-verified answers, exam calc keys, generated problems, drills, stats)", "path": "res://tools/tests/test_math_engine.gd"},
+	{"name": "calculator (basic-calculator rules, every Show steps key row lands on its working line)", "path": "res://tools/tests/test_calc_engine.gd"},
 	{"name": "math screens (every screen, fit at desktop + phone sizes, Show steps after answer only)", "path": "res://tools/tests/test_math_ui.gd"},
 	# Show steps' Read used only the OS voice, ran parts together and never
 	# stopped: every step reads whole with the picked voice, Read/Stop, stop on

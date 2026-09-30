@@ -18,7 +18,7 @@
 	},
 	"skills": [
 		{"id": "ohms", "title": "Ohm's law & power", "short": "Ohm's law", "accent": "sky"},
-		{"id": "resistance", "title": "Series & parallel", "short": "Resistance", "accent": "violet"},
+		{"id": "resistance", "title": "Series & parallel", "short": "Series/parallel", "accent": "violet"},
 		{"id": "box_fill", "title": "Box fill (314.16)", "short": "Box fill", "accent": "amber"},
 		{"id": "conduit_fill", "title": "Conduit fill (Chapter 9)", "short": "Conduit fill", "accent": "emerald"},
 		{"id": "ampacity", "title": "Ampacity & derating (310.15)", "short": "Ampacity", "accent": "rose"},
@@ -488,7 +488,8 @@
 				{"kind": "calc", "set": [["unit_total", "gl + sav + lau"], ["total", "unit_total"]], "text": "Total: {gl} + {sav} + {lau} = {unit_total} VA", "keys": "{gl} + {sav} + {lau} ="},
 				{"kind": "calc", "when": "units > 1", "set": [["total", "unit_total * units"]], "text": "All units: {unit_total} × {units} = {total} VA", "keys": "× {units} ="},
 				{"kind": "lookup", "set": [["d1", "tier('t220_45', total, 0) * tierpct('t220_45', 0) / 100.0"]], "text": "Table 220.45: first 3,000 VA at 100% = {d1} VA"},
-				{"kind": "lookup", "set": [["p2", "tier('t220_45', total, 1)"], ["d2", "p2 * tierpct('t220_45', 1) / 100.0"]], "text": "Next {p2} VA at 35% = {d2} VA", "keys": "{total} − 3000 = × 35 % ", "basic": "{total} − 3000 = × 0.35 =", "note": "3,001 to 120,000 VA at 35%."},
+				{"kind": "lookup", "when": "total <= 120000", "set": [["p2", "tier('t220_45', total, 1)"], ["d2", "p2 * tierpct('t220_45', 1) / 100.0"]], "text": "Next {p2} VA at 35% = {d2} VA", "keys": "{total} − 3000 = × 35 % ", "basic": "{total} − 3000 = × 0.35 =", "note": "3,001 to 120,000 VA at 35%."},
+				{"kind": "lookup", "when": "total > 120000", "set": [["p2", "tier('t220_45', total, 1)"], ["d2", "p2 * tierpct('t220_45', 1) / 100.0"]], "text": "Next {p2} VA at 35% = {d2} VA", "keys": "{p2} × 35 %", "basic": "{p2} × 0.35 =", "note": "3,001 to 120,000 VA at 35%: the whole 117,000 VA band."},
 				{"kind": "lookup", "when": "total > 120000", "set": [["p3", "tier('t220_45', total, 2)"], ["d3", "p3 * tierpct('t220_45', 2) / 100.0"]], "text": "Over 120,000: {p3} VA at 25% = {d3} VA", "keys": "{p3} × 0.25 ="},
 				{"kind": "calc", "set": [["dem", "r(d1 + d2 + pick(total > 120000, tier('t220_45', total, 2) * tierpct('t220_45', 2) / 100.0, 0), 2)"]], "text": "Demand load = {dem} VA", "note": "Add the pieces together."}
 			],
@@ -538,7 +539,7 @@
 			"steps": [
 				{"kind": "formula", "text": "Demand = Column C × (1 + 5% × kW over 12)", "note": "Table 220.55, Column C and Note 1."},
 				{"kind": "lookup", "when": "n <= 25", "set": [["base", "trange('t220_55', n, 'col_c')"]], "text": "Table 220.55, Column C, {n} range(s) = {base} kW"},
-				{"kind": "lookup", "when": "n > 25", "set": [["base", "trange('t220_55', n, 'col_c')"]], "text": "Table 220.55, Column C, {row} ranges: {rule} = {base} kW", "show": [["row", "trange_key('t220_55', n)"], ["rule", "trange_text('t220_55', n, 'col_c_label')"], ["rule_keys", "trange_text('t220_55', n, 'col_c_expr').replace('n', name('', n)).replace('*', '×') + ' ='"]], "keys": "{rule_keys}", "note": "For 26 or more ranges Column C is a formula: n = {n} ranges."},
+				{"kind": "lookup", "when": "n > 25", "set": [["base", "trange('t220_55', n, 'col_c')"]], "text": "Table 220.55, Column C, {row} ranges: {rule} = {base} kW", "show": [["row", "trange_key('t220_55', n)"], ["rule", "trange_text('t220_55', n, 'col_c_label')"], ["rule_keys", "trange_text('t220_55', n, 'col_c_expr').replace('n', name('', n)).replace('*', '×') + ' ='"], ["rule_basic", "trange_text('t220_55', n, 'col_c_expr').get_slice(' + ', 1).replace('n', name('', n)).replace('*', '×') + ' + ' + trange_text('t220_55', n, 'col_c_expr').get_slice(' + ', 0) + ' ='"]], "keys": "{rule_keys}", "basic": "{rule_basic}", "note": "For 26 or more ranges Column C is a formula: n = {n} ranges."},
 				{"kind": "rule", "when": "kw <= v('220.55.note1_base_kw')", "set": [["dem", "base"]], "text": "{kw} kW is not over 12 kW, so Column C applies as is: {dem} kW"},
 				{"kind": "calc", "when": "kw > v('220.55.note1_base_kw')", "set": [["over_raw", "r(kw - v('220.55.note1_base_kw'), 3)"], ["over", "major(over_raw)"]], "text": "{kw} − 12 = {over_raw} kW over → counts as {over} kW", "note": "Note 1: each kW or major fraction (more than half) of a kW counts."},
 				{"kind": "calc", "when": "kw > v('220.55.note1_base_kw')", "set": [["inc", "over * v('220.55.note1_percent_per_kw')"]], "text": "{over} × 5% = {inc}% increase", "keys": "{over} × 5 ="},

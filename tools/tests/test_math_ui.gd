@@ -187,6 +187,48 @@ func _screens() -> void:
 	check(hub.current_screen() is MathTrainerView, "%s mix opens a problem" % size_label)
 	hub.close()
 
+	MathHub.open(main, "calculator")
+	await _fits("calculator")
+	var pad := _find_type(hub.current_screen(), "CalcPad") as CalcPad
+	check(pad != null and pad.keyboard and not pad.is_guiding(), "%s calculator tool: a free pad with the keyboard" % size_label)
+	for key in CalcEngine.sequence_keys("12 × 1.25 ="):
+		pad.key_button(key).pressed.emit()
+	check(pad.display_text() == "15", "%s calculator tool: 12 × 1.25 = shows 15 (%s)" % [size_label, pad.display_text()])
+	hub.close()
+	await _steps_pad()
+
+
+## "Try it on the calculator" under a step with keys: the pad follows the row,
+## lights the next key, stays open on the next step, and fits.
+func _steps_pad() -> void:
+	var sol := MathEngine.solve("dwelling_lighting", {"units": 14, "area": 1250, "sa": 2}, 3)
+	check(sol.get("ok", false), "%s dwelling solution for the pad" % size_label)
+	MathHub.open(main, "trainer")
+	hub.push("Step-by-step", "PAD", hub.steps_screen.bind(sol, ""))
+	var view := _find_type(hub.current_screen(), "MathStepsView") as MathStepsView
+	var at := -1
+	for i in view.steps.size():
+		if str(view.steps[i].get("keys", "")).begins_with("×"):
+			at = i
+			break
+	check(at > 0, "%s a step continues from the last result" % size_label)
+	view.index = at
+	view._render()
+	check(view.pad == null and _find(view, "PadToggle") != null, "%s pad closed until asked" % size_label)
+	view.toggle_pad()
+	await _fits("steps with calculator")
+	var pad := view.pad
+	check(pad != null and pad.is_guiding(), "%s toggle opens a guided pad" % size_label)
+	var row := CalcEngine.pad_keys(view.steps[at])
+	check(pad.next_key() == CalcEngine.sequence_keys(row)[0], "%s the first key of the row is lit" % size_label)
+	for key in CalcEngine.sequence_keys(row):
+		pad.key_button(key).pressed.emit()
+	check(pad.next_key() == "" and pad.matches() and pad.hint_text().begins_with("Done"),
+		"%s the primed pad lands on the step's figure (%s: %s)" % [size_label, pad.display_text(), pad.hint_text()])
+	view._go(1)
+	check(view.pad_open, "%s the calculator stays open on the next step" % size_label)
+	hub.close()
+
 
 ## Every trainer type at every level fits the smallest window of the layout.
 func _all_types_fit(size: Vector2i) -> void:
@@ -245,7 +287,7 @@ func _exam_steps() -> void:
 
 
 func _tools_data() -> void:
-	for id in ["trainer", "cards", "drills", "weak_spots"]:
+	for id in ["trainer", "cards", "drills", "weak_spots", "calculator"]:
 		var t := MathData.tool(id)
 		check(str(t.get("title", "")) != "" and str(t.get("description", "")) != "", "tool %s described" % id)
 		check(Icons.sdf(str(t.get("icon", "")), Vector2(12, 12)) < 1e5, "tool %s icon exists" % id)

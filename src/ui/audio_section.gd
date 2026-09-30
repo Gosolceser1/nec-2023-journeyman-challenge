@@ -126,7 +126,7 @@ static func build(host: Main, parent: VBoxContainer) -> Control:
 		host.audio_pause_row.add_child(pause_hint)
 
 	host.audio_exam_note = Label.new()
-	host.audio_exam_note.text = "The Full Journeyman Simulator stays exam-quiet: nothing plays by itself, like the real exam. The Read button still works there."
+	host.audio_exam_note.text = "The Full Journeyman Exam stays exam-quiet: nothing plays by itself, like the real exam. The Read button still works there."
 	host.audio_exam_note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	host.audio_exam_note.add_theme_font_override("font", AppTheme.ui_font(400))
 	host.audio_exam_note.add_theme_font_size_override("font_size", 12 if host.ui_mobile else 11)

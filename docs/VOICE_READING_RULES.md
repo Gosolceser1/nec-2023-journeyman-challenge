@@ -112,6 +112,7 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 | `6.24 x 10^18`, `a ratio of 20:1`, `what does the -2 represent` | 6.24 times 10 to the power of 18; 20 to 1; the dash 2 |
 | `1/0`, `4/0` | one aught, four aught |
 | `12/3 NM` | 12 slash 3 N M |
+| `1/R1 + 1/R2` (a number over a symbol) | 1 over R1 plus 1 over R2 |
 | `250 kcmil` | 250 thousand circular mil |
 | `208Y/120 V` | 208 wye 120 volts |
 | `120/240-volt` | 120 slash 240-volt (never "to": that is a range) |
@@ -123,6 +124,10 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 | `15 \| 20 \| 12` (a table row in prose), `*In addition`, `(FMC)*` | 15, 20, 12; footnote star dropped (a spaced ` * ` is still "times") |
 | `blank @ 250 V`, `[based on …]` | blank at 250 volts; brackets read as parentheses |
 | `5 µA` | 5 microamps |
+| `1ø 115-volt`, `3ø 230-volt` (not in parentheses: `(1φ)` after a table stays) | single-phase 115-volt, three-phase 230-volt |
+| `Σ (count × area)`, `†Steel cable trays` | the sum of (count times area); footnote dagger dropped |
+| `125%/115%`, `I1max`, `#12-2 with ground` | 125 percent or 115 percent; I 1 max; number 12 2 with ground (never "12 to 2") |
+| `33 VA/m2 (3 VA/ft2)` | 33 volt amperes per square meter (3 volt amperes per square foot) |
 | `OCPD EGC GEC AHJ HP` | overcurrent protective device, equipment grounding conductor, grounding electrode conductor, authority having jurisdiction, horsepower |
 | `IEEE`, `NEMA`, `OSHA`, `HVAC` | I triple E; the others are passed through for the voice to say as words |
 | `CU/AL`, `and/or` | copper or aluminum, and or |

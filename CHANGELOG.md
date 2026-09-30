@@ -1,5 +1,60 @@
 # Changelog
 
+## [Unreleased]
+
+### Added
+
+- **Calculator.** A basic calculator like the one allowed in the exam room
+  (left to right, memory, percent, square root, 1/x) is a new tool on the
+  Study tab. On a desktop the keyboard works too.
+- **Try it on the calculator** in Show steps: under a step's calculator keys,
+  a calculator walks you through the keys one at a time (the next key lights
+  up) and says when you land on the step's number. Earlier steps' results and
+  memory are already in it, so rows like "× 14 =" or "1 ÷ MR =" work as shown.
+
+### Fixed
+
+- Range demand for 26 or more ranges: "15 + 1 × 28 =" gives the wrong number on
+  a basic calculator, so the step now also shows the basic-calculator order
+  (1 × 28 + 15 =).
+- Apartment lighting demand over 120,000 VA: the 35% key row used the whole
+  load instead of the 117,000 VA band.
+- The results report no longer shows the last question's "Show steps" button.
+- Phones: the results header ("COMPLETE 10/10") is no longer cut off.
+- Code-book keywords: hovering a colored word on desktop, or tapping it on a
+  phone, now really shows just that word's Index entry (hover was never wired
+  and a finger tap never arrived). A second tap brings back the full line, and
+  it works even when the INDEX line was hidden to make room.
+- Code-book keywords are colored as whole words ("wire", not the start of
+  "wireless").
+- Question notes no longer hint at the answer before you answer on Final Exam
+  #2 Q40 and Open Book #9 Q17, Q19 and Q21.
+- The type-letters figure no longer gives away the wet-location cord (Final
+  Exam #1 Q34, Open Book #4 Q25).
+- Figures: fixed clipped or overlapping labels, misplaced arrows and outlines on
+  15 study figures.
+- 24 non-math questions no longer show "Memory tip — Electrical math".
+- Exams tab: "Final #1" (was "Finals #1") and "1 exam".
+- Figure zoom: the close hint says "Tap anywhere to close" on phones and "Click
+  anywhere or press Esc to close" on a PC.
+- Voice: the trainer reads "1/R1" as "1 over R1"; recorded questions now say
+  "single-phase"/"three-phase" for 1ø/3ø, "the sum of" for Σ, "12 2 with
+  ground" for #12-2 (not "12 to 2"), "125 percent or 115 percent", "I 1 max",
+  and "volt amperes per square meter/foot"; a footnote dagger is no longer
+  read. The 19 affected recordings were re-recorded.
+- The trainer's topic list says "Series/parallel", like Math weak spots (it
+  said "Resistance" on phones).
+- The automatic checks on GitHub pass again: one test expected the voice
+  recordings, which are not stored in the repository.
+- The timer bars no longer look like an underlined link under the time.
+- Math weak spots no longer list topics you got 100% on as the weakest.
+- Phones: the explanation after answering a question with a figure gets more
+  room (the figure shrinks to at least 140 px instead).
+- The math screens' Close button shows a cross, not the menu icon.
+- Phones: study tool descriptions are no longer cut off.
+- The voice settings note now calls the full exam "Full Journeyman Exam", like
+  the rest of the app.
+
 ## [1.0.5] - 2026-09-29
 
 ### Added

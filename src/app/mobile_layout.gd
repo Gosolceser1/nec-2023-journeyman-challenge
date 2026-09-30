@@ -125,7 +125,7 @@ static func build(host: Main) -> void:
 	lic_pill_panel.add_child(host.exam_license_pill)
 	host.exam_pills_row.add_child(lic_pill_panel)
 	host.question_label = HuntView.make_stem_label(AppTheme.TYPE_TITLE + 1)
-	host.question_label.meta_clicked.connect(host.hunt.on_keyword_clicked)
+	host.hunt.attach(host.question_label)
 	question_column.add_child(host.question_label)
 
 	var hint_hbox := HBoxContainer.new()

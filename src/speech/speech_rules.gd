@@ -28,6 +28,20 @@ const PIPELINE := [
 	["table_pipes", "\\s*\\|\\s*", ", "],
 	# A footnote mark on a word ("*In addition", "(FMC)*"); a spaced * is multiplication.
 	["footnote_star", "(?<![\\w)*])\\*(?=[A-Za-z])|(?<=[A-Za-z)])\\*(?![\\w*])", ""],
+	["footnote_dagger", "[†‡]", ""],
+	# "1ø 115-volt motor": the phase sign is silent on every voice.
+	["phase_single", "(?<!\\()\\b1\\s*[øØφΦ](?!\\w)", "single-phase"],
+	["phase_three", "(?<!\\()\\b3\\s*[øØφΦ](?!\\w)", "three-phase"],
+	["sigma_sum", "Σ\\s*", "the sum of "],
+	# "125%/115%" (430.32(A)(1)): two alternatives, not a division.
+	["percent_or", "(\\d)\\s*%\\s*/\\s*(\\d)", "$1% or $2"],
+	# The welder's rated primary current, one symbol: not "I-one-max" run together.
+	["welder_i1max", "\\bI1max\\b", "I 1 max"],
+	# "#12-2 with ground" is said "twelve two", never "12 to 2" (number_range).
+	["cable_dash", "#\\s*(\\d{1,2})-([234])\\b(?=\\s+(?:with|w/|NM|cable|conductors?)\\b)", "number $1 $2"],
+	# "33 VA/m2 (3 VA/ft2)": a unit load per area.
+	["per_square_meter", "/\\s*m2\\b", " per square meter"],
+	["per_square_foot", "/\\s*ft2\\b", " per square foot"],
 	# Before number_range turns the Nebraska section 81-2113 into "81 to 2113".
 	["state_citations", ""],
 	["abbreviations", ""],
@@ -77,6 +91,8 @@ const PIPELINE := [
 	["kcmil", "(?i)kcmil", " thousand circular mil "],
 	["expand_acronyms", ""],
 	["compound_slash", ""],
+	# "Rt = 1 ÷ (1/R1 + 1/R2)": a number over a symbol, read "slash" otherwise.
+	["reciprocal_slash", "(?<![\\w./])(\\d+(?:\\.\\d+)?)/([A-Za-z]\\w*)", "$1 over $2"],
 	["number_abbrev", "(?i)\\bNo\\.\\s*(\\d+)\\b", "number $1"],
 	["references", ""],
 	["designator_pair", "(?<![\\w)])\\(([A-Z])\\)\\((\\d{1,2})\\)", "paragraph $1, item $2"],

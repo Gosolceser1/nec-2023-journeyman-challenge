@@ -165,7 +165,7 @@ static func build(host: Main) -> void:
 	host.exam_pills_row.add_child(host.prompt_voice_badge)
 
 	host.question_label = HuntView.make_stem_label(AppTheme.TYPE_TITLE)
-	host.question_label.meta_clicked.connect(host.hunt.on_keyword_clicked)
+	host.hunt.attach(host.question_label)
 	question_column.add_child(host.question_label)
 
 	# Subtitle / Gist Hint with Left Accent Bar

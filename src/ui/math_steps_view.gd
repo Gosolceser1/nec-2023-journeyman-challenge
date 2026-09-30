@@ -2,7 +2,8 @@ class_name MathStepsView
 extends VBoxContainer
 ## A solution from MathEngine shown one step at a time: the step's title, its
 ## sentence, the worked lines in big figures, a note, and the calculator keys
-## as key caps. Back / Next walk the steps; the last step's button says Done.
+## as key caps, with a calculator (CalcPad) that walks those keys on request.
+## Back / Next walk the steps; the last step's button says Done.
 
 signal done
 signal step_changed(index: int)
@@ -41,6 +42,9 @@ var stop: Callable
 ## Read each step as it is shown (the Auto-read and Listen voice modes).
 var auto_read := false
 var reading := false
+## "Try it on the calculator" stays open from step to step once opened.
+var pad_open := false
+var pad: CalcPad
 var _voice_note: Label
 
 var _counter: Label
@@ -195,7 +199,9 @@ func set_reading(playing: bool, note: String = "") -> void:
 	_voice_note.visible = playing and note != ""
 
 
-func _render() -> void:
+## fresh: false when only the calculator opened or closed on the same step
+## (no entrance, no scroll to top, no re-read).
+func _render(fresh: bool = true) -> void:
 	for c in _body.get_children():
 		_body.remove_child(c)
 		c.queue_free()
@@ -246,9 +252,12 @@ func _render() -> void:
 		_body.add_child(key_row("ON YOUR CALCULATOR", str(step["keys"]), mobile))
 	if str(step.get("basic", "")) != "":
 		_body.add_child(key_row("BASIC CALCULATOR (NO SPECIAL KEY)", str(step["basic"]), mobile))
+	_add_pad(step)
 	_back.disabled = index == 0
 	_next.text = "Done" if is_last() else "Next step"
 	_read.visible = speak.is_valid()
+	if not fresh:
+		return
 	_scroll.scroll_vertical = 0
 	if not UiFx.reduce_motion:
 		UiFx.screen_enter(_body, false)
@@ -259,6 +268,47 @@ func _render() -> void:
 
 func _exit_tree() -> void:
 	stop_reading()
+
+
+## The toggle and, when open, a calculator that walks this step's keys (the
+## basic-calculator row when the step has one: the pad has no precedence).
+func _add_pad(step: Dictionary) -> void:
+	pad = null
+	var row := CalcEngine.pad_keys(step)
+	if row == "":
+		return
+	var toggle := MathUi.ghost_button("Hide calculator" if pad_open else "Try it on the calculator",
+		MathUi.px(MathUi.KEY_H, mobile), toggle_pad, "calculator", MathUi.px(MathUi.BUTTON, mobile))
+	toggle.name = "PadToggle"
+	toggle.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	toggle.add_theme_color_override("icon_normal_color", AppTheme.SKY_300)
+	_body.add_child(toggle)
+	if not pad_open:
+		return
+	var earlier: Array = []
+	for j in index:
+		var r := CalcEngine.pad_keys(steps[j])
+		if r != "":
+			earlier.append(r)
+	pad = CalcPad.new(mobile, true)
+	pad.sfx = sfx
+	_body.add_child(pad)
+	pad.guide(row, earlier, CalcEngine.expected_values(step, steps[index + 1] if index + 1 < steps.size() else {}))
+
+
+func toggle_pad() -> void:
+	pad_open = not pad_open
+	if sfx.is_valid():
+		sfx.call("click")
+	_render(false)
+	if pad_open:
+		_scroll_to_pad.call_deferred()
+
+
+func _scroll_to_pad() -> void:
+	await get_tree().process_frame
+	if is_instance_valid(pad):
+		_scroll.ensure_control_visible(pad)
 
 
 ## A caption and the key sequence as caps, wrapping onto more rows as needed.

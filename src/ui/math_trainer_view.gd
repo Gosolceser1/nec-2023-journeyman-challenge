@@ -73,9 +73,13 @@ static func pick(hub: MathHub) -> Control:
 		hub.push("Weak-spot mix", "MORE PRACTICE WHERE YOU MISS MOST", MathTrainerView.solve.bind(hub, "", "")))
 	mix.name = "WeakSpotMix"
 	col.add_child(mix)
-	var answered: Array = weakest.filter(func(id): return hub.stats.accuracy("skill", str(id)) >= 0.0)
+	var answered: Array = weakest.filter(func(id):
+		var acc: float = hub.stats.accuracy("skill", str(id))
+		return acc >= 0.0 and acc < 1.0)
 	var note := "Answer a few problems in each topic and the mix leans toward the ones you miss."
-	if not answered.is_empty():
+	if answered.is_empty() and weakest.any(func(id): return hub.stats.accuracy("skill", str(id)) >= 0.0):
+		note = "No misses so far in the topics you tried. Try a new topic or a harder level."
+	elif not answered.is_empty():
 		var names: Array = []
 		for id in answered.slice(0, 3):
 			names.append(str(MathData.skill_def(str(id)).get("short", id)))

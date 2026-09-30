@@ -17,6 +17,11 @@ const DIAGRAM_MAX_H_DESKTOP := 320.0
 const DIAGRAM_MAX_H_MOBILE := 250.0
 const FIT_DIAGRAM_MIN_H := 96.0
 const FEEDBACK_MIN_H_STRIP := 60.0
+## Answered, phone: the part of the screen height the explanation sheet gets
+## before the figure keeps its full size.
+const FEEDBACK_SHARE_MOBILE := 0.3
+## ...but the figure stays readable (it shows the worked answer now).
+const FIT_DIAGRAM_ANSWERED_MIN_H := 140.0
 const SIDE_BY_SIDE_MIN_WIDTH := 1100.0
 ## Table layout picks per fit (each measured a frame after the last).
 const TABLE_PASSES := 5
@@ -215,6 +220,13 @@ func feedback_min_h() -> float:
 ## height; let the sheet give way (it scrolls inside), then the type steps
 ## down, before the page scrolls.
 func _fit_answered(gen: int) -> void:
+	# Phone: the explanation is what you read now; a full-height figure left it a
+	# 150 px slot, so the figure gives way until the sheet has a readable share.
+	if host.ui_mobile and host.question_diagram_panel.visible and not host.question_diagram_view.compact:
+		var short := host.get_viewport().get_visible_rect().size.y * FEEDBACK_SHARE_MOBILE - host.feedback_scroll.size.y
+		if short > 0.5:
+			var view := host.question_diagram_view
+			view.max_height = maxf(FIT_DIAGRAM_ANSWERED_MIN_H, view.custom_minimum_size.y - short)
 	var over := _quiz_overflow()
 	if over > 0.5:
 		host.feedback_scroll.custom_minimum_size.y = maxf(84.0, host.feedback_scroll.custom_minimum_size.y - over)

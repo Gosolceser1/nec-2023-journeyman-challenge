@@ -51,7 +51,13 @@ func _draw() -> void:
 		if _pulse > 0.0:
 			draw_arc(c, r + 3.0 * _pulse, 0.0, TAU, 48, Color(color, 0.5 * _pulse), 1.5, true)
 	else:
-		var y := size.y - 2.0
+		# Down in the badge's own padding, clear of the text: right under the
+		# digits it reads as an underlined link.
+		var pad := 0.0
+		var badge := get_parent() as PanelContainer
+		if badge != null and badge.get_theme_stylebox("panel") != null:
+			pad = badge.get_theme_stylebox("panel").get_margin(SIDE_BOTTOM)
+		var y := size.y + pad * 0.6 - 1.0
 		var x0 := 6.0
 		var x1 := size.x - 6.0
 		if x1 <= x0:

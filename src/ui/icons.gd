@@ -10,7 +10,7 @@ extends RefCounted
 const GRID := 24.0
 const STROKE := 1.1
 const NAMES: Array[String] = ["speaker", "speaker_off", "replay", "menu", "pause", "skip", "play",
-		"stopwatch", "target", "bolt", "tip", "code", "check", "cross", "clock"]
+		"stopwatch", "target", "bolt", "tip", "code", "check", "cross", "clock", "calculator"]
 
 static var _cache: Dictionary = {}
 
@@ -76,6 +76,14 @@ static func sdf(icon: String, p: Vector2) -> float:
 		"clock":
 			var dial := absf(p.distance_to(Vector2(12, 12)) - 8.0)
 			return minf(dial, minf(_seg(p, Vector2(12, 12), Vector2(12, 7)), _seg(p, Vector2(12, 12), Vector2(15.5, 14)))) - STROKE
+		"calculator":
+			var body := absf(_box(p, Vector2(12, 12), Vector2(6.5, 8.8)) - 0.8) - STROKE
+			var screen := _box(p, Vector2(12, 7.2), Vector2(3.8, 1.4))
+			var dots := 1e6
+			for row in 3:
+				for col in 3:
+					dots = minf(dots, p.distance_to(Vector2(8.8 + col * 3.2, 11.8 + row * 3.1)) - 1.0)
+			return minf(body, minf(screen, dots))
 	return 1e6
 
 

@@ -86,7 +86,7 @@ Main <Control> res://src/app/main.gd
             on maximum_size_changed -> lambda
             on minimum_size_changed -> lambda
             on _desired_size_changed -> lambda
-          @HBoxContainer@490 <HBoxContainer>
+          @HBoxContainer@499 <HBoxContainer>
             .mouse_filter = 2
             .theme_override_constants/separation = 12
             on child_order_changed -> lambda
@@ -107,7 +107,7 @@ Main <Control> res://src/app/main.gd
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
-            @Control@491 <Control> res://src/fx/progress_segments.gd
+            @Control@500 <Control> res://src/fx/progress_segments.gd
               .custom_minimum_size = Vector2(120, 16)
               .size_flags_horizontal = 3
               .size_flags_vertical = 4
@@ -197,7 +197,7 @@ Main <Control> res://src/app/main.gd
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
-              @HBoxContainer@492 <HBoxContainer>
+              @HBoxContainer@501 <HBoxContainer>
                 .mouse_filter = 2
                 .theme_override_constants/separation = 8
                 on child_order_changed -> lambda
@@ -208,7 +208,7 @@ Main <Control> res://src/app/main.gd
                 on maximum_size_changed -> lambda
                 on minimum_size_changed -> lambda
                 on _desired_size_changed -> lambda
-                @Control@493 <Control> res://src/fx/time_gauge.gd
+                @Control@502 <Control> res://src/fx/time_gauge.gd
                   .custom_minimum_size = Vector2(18, 18)
                   .size_flags_vertical = 4
                   .mouse_filter = 2
@@ -239,7 +239,7 @@ Main <Control> res://src/app/main.gd
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
-              @HBoxContainer@494 <HBoxContainer>
+              @HBoxContainer@503 <HBoxContainer>
                 .mouse_filter = 2
                 .theme_override_constants/separation = 8
                 on child_order_changed -> lambda
@@ -250,7 +250,7 @@ Main <Control> res://src/app/main.gd
                 on maximum_size_changed -> lambda
                 on minimum_size_changed -> lambda
                 on _desired_size_changed -> lambda
-                @Control@495 <Control> res://src/fx/time_gauge.gd
+                @Control@504 <Control> res://src/fx/time_gauge.gd
                   .custom_minimum_size = Vector2(18, 18)
                   .size_flags_vertical = 4
                   .mouse_filter = 2
@@ -506,7 +506,9 @@ Main <Control> res://src/app/main.gd
                   on child_order_changed -> lambda
                   on visibility_changed -> lambda
                   on item_rect_changed -> lambda
+                  on gui_input -> RefCounted._on_stem_input
                   on gui_input -> lambda
+                  on mouse_exited -> lambda
                   on size_flags_changed -> lambda
                   on maximum_size_changed -> lambda
                   on maximum_size_changed -> lambda
@@ -886,7 +888,7 @@ Main <Control> res://src/app/main.gd
                     on maximum_size_changed -> lambda
                     on minimum_size_changed -> lambda
                     on _desired_size_changed -> lambda
-                  @Control@499 <Control>
+                  @Control@508 <Control>
                     .size_flags_horizontal = 3
                     .mouse_filter = 2
                     on visibility_changed -> lambda
@@ -1270,7 +1272,7 @@ Main <Control> res://src/app/main.gd
               on maximum_size_changed -> lambda
               on minimum_size_changed -> lambda
               on _desired_size_changed -> lambda
-            @Label@496 <Label>
+            @Label@505 <Label>
               .size_flags_horizontal = 3
               .size_flags_stretch_ratio = 0.7
               .theme_override_fonts/font = FontVariation{base_font=SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}, spacing_glyph=1}
@@ -1627,7 +1629,7 @@ Main <Control> res://src/app/main.gd
                     on _desired_size_changed -> lambda
                     on pressed -> lambda
                     on pressed -> lambda
-                  @Button@435 <Button>
+                  @Button@444 <Button>
                     .custom_minimum_size = Vector2(0, 38)
                     .size_flags_horizontal = 3
                     .mouse_filter = 1
@@ -3408,7 +3410,7 @@ Main <Control> res://src/app/main.gd
                         .custom_minimum_size = Vector2(0, 70)
                         .clip_contents = true
                         .size_flags_horizontal = 3
-                        .tooltip_text = "Finals #1 • 70 questions  •  New"
+                        .tooltip_text = "Final #1 • 70 questions  •  New"
                         .mouse_filter = 1
                         .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 0.4), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3), shadow_size=4, shadow_offset=Vector2(0, 2)}
                         .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.03666667, 0.060000006, 0.11000001, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
@@ -3417,7 +3419,7 @@ Main <Control> res://src/app/main.gd
                         .theme_override_styles/disabled = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.10980392, 0.16078432, 0.2509804, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
                         .theme_override_styles/focus = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                         meta starts_session = true
-                        meta base_text = "Finals #1\n70 questions"
+                        meta base_text = "Final #1\n70 questions"
                         on child_order_changed -> lambda
                         on visibility_changed -> lambda
                         on item_rect_changed -> lambda
@@ -3459,7 +3461,7 @@ Main <Control> res://src/app/main.gd
                               .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                               .theme_override_font_sizes/font_size = 14
                               .theme_override_colors/font_color = Color(0.972549, 0.98039216, 0.9882353, 1)
-                              .text = "Finals #1"
+                              .text = "Final #1"
                               .text_overrun_behavior = 3
                               on visibility_changed -> lambda
                               on size_flags_changed -> lambda
@@ -3516,7 +3518,7 @@ Main <Control> res://src/app/main.gd
                         .custom_minimum_size = Vector2(0, 70)
                         .clip_contents = true
                         .size_flags_horizontal = 3
-                        .tooltip_text = "Finals #2 • 70 questions  •  New"
+                        .tooltip_text = "Final #2 • 70 questions  •  New"
                         .mouse_filter = 1
                         .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 0.4), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3), shadow_size=4, shadow_offset=Vector2(0, 2)}
                         .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.03666667, 0.060000006, 0.11000001, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
@@ -3525,7 +3527,7 @@ Main <Control> res://src/app/main.gd
                         .theme_override_styles/disabled = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.10980392, 0.16078432, 0.2509804, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
                         .theme_override_styles/focus = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                         meta starts_session = true
-                        meta base_text = "Finals #2\n70 questions"
+                        meta base_text = "Final #2\n70 questions"
                         on child_order_changed -> lambda
                         on visibility_changed -> lambda
                         on item_rect_changed -> lambda
@@ -3567,7 +3569,7 @@ Main <Control> res://src/app/main.gd
                               .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                               .theme_override_font_sizes/font_size = 14
                               .theme_override_colors/font_color = Color(0.972549, 0.98039216, 0.9882353, 1)
-                              .text = "Finals #2"
+                              .text = "Final #2"
                               .text_overrun_behavior = 3
                               on visibility_changed -> lambda
                               on size_flags_changed -> lambda
@@ -3624,7 +3626,7 @@ Main <Control> res://src/app/main.gd
                         .custom_minimum_size = Vector2(0, 70)
                         .clip_contents = true
                         .size_flags_horizontal = 3
-                        .tooltip_text = "Finals #3 • 70 questions  •  New"
+                        .tooltip_text = "Final #3 • 70 questions  •  New"
                         .mouse_filter = 1
                         .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 0.4), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3), shadow_size=4, shadow_offset=Vector2(0, 2)}
                         .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.03666667, 0.060000006, 0.11000001, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
@@ -3633,7 +3635,7 @@ Main <Control> res://src/app/main.gd
                         .theme_override_styles/disabled = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.10980392, 0.16078432, 0.2509804, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
                         .theme_override_styles/focus = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                         meta starts_session = true
-                        meta base_text = "Finals #3\n70 questions"
+                        meta base_text = "Final #3\n70 questions"
                         on child_order_changed -> lambda
                         on visibility_changed -> lambda
                         on item_rect_changed -> lambda
@@ -3675,7 +3677,7 @@ Main <Control> res://src/app/main.gd
                               .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                               .theme_override_font_sizes/font_size = 14
                               .theme_override_colors/font_color = Color(0.972549, 0.98039216, 0.9882353, 1)
-                              .text = "Finals #3"
+                              .text = "Final #3"
                               .text_overrun_behavior = 3
                               on visibility_changed -> lambda
                               on size_flags_changed -> lambda
@@ -3732,7 +3734,7 @@ Main <Control> res://src/app/main.gd
                         .custom_minimum_size = Vector2(0, 70)
                         .clip_contents = true
                         .size_flags_horizontal = 3
-                        .tooltip_text = "Finals #4 • 70 questions  •  New"
+                        .tooltip_text = "Final #4 • 70 questions  •  New"
                         .mouse_filter = 1
                         .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 0.4), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3), shadow_size=4, shadow_offset=Vector2(0, 2)}
                         .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.03666667, 0.060000006, 0.11000001, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
@@ -3741,7 +3743,7 @@ Main <Control> res://src/app/main.gd
                         .theme_override_styles/disabled = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.10980392, 0.16078432, 0.2509804, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
                         .theme_override_styles/focus = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                         meta starts_session = true
-                        meta base_text = "Finals #4\n70 questions"
+                        meta base_text = "Final #4\n70 questions"
                         on child_order_changed -> lambda
                         on visibility_changed -> lambda
                         on item_rect_changed -> lambda
@@ -3783,7 +3785,7 @@ Main <Control> res://src/app/main.gd
                               .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                               .theme_override_font_sizes/font_size = 14
                               .theme_override_colors/font_color = Color(0.972549, 0.98039216, 0.9882353, 1)
-                              .text = "Finals #4"
+                              .text = "Final #4"
                               .text_overrun_behavior = 3
                               on visibility_changed -> lambda
                               on size_flags_changed -> lambda
@@ -3840,7 +3842,7 @@ Main <Control> res://src/app/main.gd
                         .custom_minimum_size = Vector2(0, 70)
                         .clip_contents = true
                         .size_flags_horizontal = 3
-                        .tooltip_text = "Finals #5 • 39 questions  •  New"
+                        .tooltip_text = "Final #5 • 39 questions  •  New"
                         .mouse_filter = 1
                         .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 0.4), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3), shadow_size=4, shadow_offset=Vector2(0, 2)}
                         .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.03666667, 0.060000006, 0.11000001, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
@@ -3849,7 +3851,7 @@ Main <Control> res://src/app/main.gd
                         .theme_override_styles/disabled = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.10980392, 0.16078432, 0.2509804, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
                         .theme_override_styles/focus = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
                         meta starts_session = true
-                        meta base_text = "Finals #5\n39 questions"
+                        meta base_text = "Final #5\n39 questions"
                         on child_order_changed -> lambda
                         on visibility_changed -> lambda
                         on item_rect_changed -> lambda
@@ -3891,7 +3893,7 @@ Main <Control> res://src/app/main.gd
                               .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                               .theme_override_font_sizes/font_size = 14
                               .theme_override_colors/font_color = Color(0.972549, 0.98039216, 0.9882353, 1)
-                              .text = "Finals #5"
+                              .text = "Final #5"
                               .text_overrun_behavior = 3
                               on visibility_changed -> lambda
                               on size_flags_changed -> lambda
@@ -5614,6 +5616,7 @@ Main <Control> res://src/app/main.gd
                       on item_rect_changed -> lambda
                       on item_rect_changed -> lambda
                       on item_rect_changed -> lambda
+                      on item_rect_changed -> lambda
                       on size_flags_changed -> lambda
                       on maximum_size_changed -> lambda
                       on minimum_size_changed -> lambda
@@ -6102,11 +6105,132 @@ Main <Control> res://src/app/main.gd
                             on maximum_size_changed -> lambda
                             on minimum_size_changed -> lambda
                             on _desired_size_changed -> lambda
-                    @Label@427 <Label>
+                      @Button@434 <Button> res://src/app/menu/menu_tile.gd
+                        .material = ShaderMaterial{shader=Shader{code="shader_type canvas_item;\n\n// One material for every raised surface (UiFx.add_glass / UiFx.add_shine).\n// It only touches the control's own drawing (its StyleBox, and a Button's\n// label), never child controls, and every effect is off at its default.\n//\n// Glass: inside the rounded rect the fill is lifted by fill_lift at the top\n// edge, fading to the StyleBox colour at the bottom (a vertical gradient),\n// and a 1 px highlight runs just under the top border (bevel).\n//\n// Tint: the fill blends toward tint_to across the width (the primary button's\n// cyan -> deep blue bar). Pure-white fragments are the button's label and are\n// left alone, so the text keeps its contrast.\n//\n// Shine: a diagonal light sweep; shine_pos runs -0.3 -> 1.5 (tweened).\n//\n// Current: one pulse of light runs around the border; current_pos runs\n// 0 -> 1 + current_tail (tweened), below 0 it is off.\n//\n// Flow: a slow, endless light on the border (the official simulator card),\n// flow_strength 0 = off. Runs on TIME, so it costs no CPU.\nuniform vec2 rect_size = vec2(400.0, 60.0);\nuniform float corner_radius = 12.0;\nuniform vec3 fill_lift = vec3(0.0);\nuniform float bevel = 0.0;\nuniform vec4 tint_to : source_color = vec4(0.0);\nuniform float tint_amount = 0.0;\nuniform float shine_pos = -1.0;\nuniform float shine_width = 0.12;\nuniform float strength = 0.14;\nuniform float current_pos = -1.0;\nuniform float current_tail = 0.22;\nuniform float current_strength = 1.0;\nuniform vec4 current_color : source_color = vec4(0.49, 0.83, 0.99, 1.0);\nuniform float flow_strength = 0.0;\nuniform float flow_speed = 0.08;\nuniform vec4 flow_color : source_color = vec4(0.98, 0.75, 0.14, 1.0);\n\nvarying vec2 local_pos;\n\nvoid vertex() {\n	local_pos = VERTEX;\n}\n\n// 0..1 around the outline, clockwise from the top-left corner.\nfloat perimeter_t(vec2 q, vec2 b) {\n	float dx = b.x - abs(q.x);\n	float dy = b.y - abs(q.y);\n	float per = 4.0 * (b.x + b.y);\n	float s;\n	if (dy < dx) {\n		s = q.y < 0.0 ? q.x + b.x : 2.0 * b.x + 2.0 * b.y + (b.x - q.x);\n	} else {\n		s = q.x > 0.0 ? 2.0 * b.x + (q.y + b.y) : 4.0 * b.x + 2.0 * b.y + (b.y - q.y);\n	}\n	return s / per;\n}\n\n// Brightness of a light head at `pos` (0..1 around the outline) with a tail.\nfloat head_at(float pos, float t, float tail) {\n	float behind = pos - t;\n	behind = behind < 0.0 ? behind + 1.0 : behind;\n	return behind <= tail ? 1.0 - behind / tail : 0.0;\n}\n\nvoid fragment() {\n	vec4 base = COLOR * texture(TEXTURE, UV);\n	vec2 size = max(rect_size, vec2(1.0));\n	vec2 p = local_pos / size;\n	vec2 b = size * 0.5;\n	vec2 q = local_pos - b;\n	vec2 k = abs(q) - b + vec2(corner_radius);\n	float sdf = length(max(k, vec2(0.0))) + min(max(k.x, k.y), 0.0) - corner_radius;\n	bool is_label = min(base.r, min(base.g, base.b)) > 0.97;\n	if (sdf <= 0.0 && !is_label) {\n		base.rgb += fill_lift * (1.0 - clamp(p.y, 0.0, 1.0));\n		base.rgb = mix(base.rgb, tint_to.rgb, tint_amount * clamp(p.x, 0.0, 1.0));\n		if (bevel > 0.0) {\n			float band = 1.0 - smoothstep(0.0, 1.0, abs(local_pos.y - 1.5));\n			float ends = smoothstep(0.0, corner_radius, min(local_pos.x, size.x - local_pos.x));\n			base.rgb += vec3(bevel * band * ends);\n		}\n	}\n	float d = abs((p.x + p.y * 0.35) - shine_pos);\n	base.rgb += vec3((1.0 - smoothstep(0.0, shine_width, d)) * strength);\n	float edge = 1.0 - smoothstep(0.0, 4.0, abs(sdf + 1.0));\n	if (current_pos >= 0.0) {\n		float along = perimeter_t(q, b);\n		float behind = current_pos - along;\n		behind = behind < 0.0 ? behind + 1.0 : behind;\n		float head = behind <= current_tail && current_pos - behind >= -0.001 ? 1.0 - behind / current_tail : 0.0;\n		float glow = head * head * edge * current_strength;\n		base.rgb += current_color.rgb * glow;\n		base.a = max(base.a, glow * 0.85);\n	}\n	if (flow_strength > 0.0) {\n		float along = perimeter_t(q, b);\n		float t = fract(TIME * flow_speed);\n		float h = head_at(t, along, 0.18) + head_at(fract(t + 0.5), along, 0.18);\n		float glow = h * h * edge * flow_strength;\n		base.rgb += flow_color.rgb * glow;\n		base.a = max(base.a, glow * 0.7);\n	}\n	COLOR = base;\n}\n"}, shader_parameter/rect_size=Vector2(24, 84), shader_parameter/corner_radius=12.0, shader_parameter/fill_lift=Vector3(0.03529412, 0.04705882, 0.07058823), shader_parameter/bevel=0.07, shader_parameter/tint_to=null, shader_parameter/tint_amount=null, shader_parameter/shine_pos=null, shader_parameter/shine_width=null, shader_parameter/strength=null, shader_parameter/current_pos=null, shader_parameter/current_tail=null, shader_parameter/current_strength=null, shader_parameter/current_color=null, shader_parameter/flow_strength=null, shader_parameter/flow_speed=null, shader_parameter/flow_color=null}
+                        .custom_minimum_size = Vector2(0, 84)
+                        .clip_contents = true
+                        .size_flags_horizontal = 3
+                        .tooltip_text = "Calculator • A basic calculator like the one in the exam room: memory, percent, square root"
+                        .mouse_filter = 1
+                        .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 0.4), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3), shadow_size=4, shadow_offset=Vector2(0, 2)}
+                        .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.03666667, 0.060000006, 0.11000001, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
+                        .theme_override_styles/hover = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.090980396, 0.11705883, 0.17294118, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0.20392157, 0.827451, 0.6, 0.28), shadow_size=10}
+                        .theme_override_styles/hover_pressed = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.03666667, 0.060000006, 0.11000001, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.20392157, 0.827451, 0.6, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
+                        .theme_override_styles/disabled = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.10980392, 0.16078432, 0.2509804, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
+                        .theme_override_styles/focus = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, draw_center=false, border_width_left=2, border_width_top=2, border_width_right=2, border_width_bottom=2, border_color=Color(0.49019608, 0.827451, 0.9882353, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, expand_margin_left=3.0, expand_margin_top=3.0, expand_margin_right=3.0, expand_margin_bottom=3.0}
+                        meta base_text = "Calculator\nA basic calculator like the one in the exam room: memory, percent, square root"
+                        on child_order_changed -> lambda
+                        on visibility_changed -> lambda
+                        on item_rect_changed -> lambda
+                        on resized -> lambda
+                        on mouse_entered -> lambda
+                        on mouse_entered -> lambda
+                        on size_flags_changed -> lambda
+                        on maximum_size_changed -> lambda
+                        on minimum_size_changed -> lambda
+                        on _desired_size_changed -> lambda
+                        on pressed -> lambda
+                        on pressed -> lambda
+                        @VBoxContainer@427 <VBoxContainer>
+                          .layout_mode = 0
+                          .anchor_right = 1.0
+                          .anchor_bottom = 1.0
+                          .offset_left = 12.0
+                          .offset_top = 8.0
+                          .offset_right = -12.0
+                          .offset_bottom = -8.0
+                          .mouse_filter = 2
+                          .theme_override_constants/separation = 4
+                          .alignment = 1
+                          on child_order_changed -> lambda
+                          on item_rect_changed -> lambda
+                          on item_rect_changed -> lambda
+                          on item_rect_changed -> lambda
+                          @HBoxContainer@428 <HBoxContainer>
+                            .mouse_filter = 2
+                            .theme_override_constants/separation = 4
+                            on child_order_changed -> lambda
+                            on visibility_changed -> lambda
+                            on item_rect_changed -> lambda
+                            on item_rect_changed -> lambda
+                            on size_flags_changed -> lambda
+                            on maximum_size_changed -> lambda
+                            on minimum_size_changed -> lambda
+                            on _desired_size_changed -> lambda
+                            @TextureRect@435 <TextureRect>
+                              .modulate = Color(0.43137255, 0.90588236, 0.7176471, 1)
+                              .mouse_filter = 2
+                              .texture = ImageTexture{size=(16.0, 16.0)}
+                              .stretch_mode = 3
+                              on visibility_changed -> lambda
+                              on size_flags_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on minimum_size_changed -> lambda
+                              on _desired_size_changed -> lambda
+                            @Label@429 <Label>
+                              .size_flags_horizontal = 3
+                              .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
+                              .theme_override_font_sizes/font_size = 14
+                              .theme_override_colors/font_color = Color(0.972549, 0.98039216, 0.9882353, 1)
+                              .text = "Calculator"
+                              .text_overrun_behavior = 3
+                              on visibility_changed -> lambda
+                              on size_flags_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on minimum_size_changed -> lambda
+                              on _desired_size_changed -> lambda
+                          @HBoxContainer@430 <HBoxContainer>
+                            .mouse_filter = 2
+                            .theme_override_constants/separation = 4
+                            on child_order_changed -> lambda
+                            on visibility_changed -> lambda
+                            on item_rect_changed -> lambda
+                            on item_rect_changed -> lambda
+                            on size_flags_changed -> lambda
+                            on maximum_size_changed -> lambda
+                            on minimum_size_changed -> lambda
+                            on _desired_size_changed -> lambda
+                            @Label@431 <Label>
+                              .size_flags_horizontal = 3
+                              .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
+                              .theme_override_font_sizes/font_size = 12
+                              .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
+                              .text = "A basic calculator like the one in the exam room: memory, percent, square root"
+                              .autowrap_mode = 3
+                              .text_overrun_behavior = 3
+                              .max_lines_visible = 2
+                              on visibility_changed -> lambda
+                              on size_flags_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on minimum_size_changed -> lambda
+                              on _desired_size_changed -> lambda
+                            @Label@432 <Label>
+                              .theme_override_fonts/font = FontVariation{base_font=SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}, opentype_features={1953396077: 1}}
+                              .theme_override_font_sizes/font_size = 12
+                              .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
+                              on visibility_changed -> lambda
+                              on size_flags_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on maximum_size_changed -> lambda
+                              on minimum_size_changed -> lambda
+                              on _desired_size_changed -> lambda
+                          @Control@433 <Control> res://src/app/menu/meter_bar.gd
+                            .visible = false
+                            .custom_minimum_size = Vector2(0, 6)
+                            .size_flags_horizontal = 3
+                            .mouse_filter = 2
+                            on visibility_changed -> lambda
+                            on size_flags_changed -> lambda
+                            on maximum_size_changed -> lambda
+                            on minimum_size_changed -> lambda
+                            on _desired_size_changed -> lambda
+                    @Label@436 <Label>
                       .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                       .theme_override_font_sizes/font_size = 12
                       .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
-                      .text = "Calculation questions show a Show steps button after you answer."
+                      .text = "Calculation questions show a Show steps button after you answer, and each step's keys can be tried on the calculator."
                       .autowrap_mode = 3
                       on visibility_changed -> lambda
                       on size_flags_changed -> lambda
@@ -6114,7 +6238,7 @@ Main <Control> res://src/app/main.gd
                       on maximum_size_changed -> lambda
                       on minimum_size_changed -> lambda
                       on _desired_size_changed -> lambda
-                    @HBoxContainer@430 <HBoxContainer>
+                    @HBoxContainer@439 <HBoxContainer>
                       .mouse_filter = 2
                       .theme_override_constants/separation = 8
                       on child_order_changed -> lambda
@@ -6125,7 +6249,7 @@ Main <Control> res://src/app/main.gd
                       on maximum_size_changed -> lambda
                       on minimum_size_changed -> lambda
                       on _desired_size_changed -> lambda
-                      @ColorRect@428 <ColorRect>
+                      @ColorRect@437 <ColorRect>
                         .custom_minimum_size = Vector2(4, 14)
                         .size_flags_vertical = 4
                         .mouse_filter = 2
@@ -6135,7 +6259,7 @@ Main <Control> res://src/app/main.gd
                         on maximum_size_changed -> lambda
                         on minimum_size_changed -> lambda
                         on _desired_size_changed -> lambda
-                      @Label@429 <Label>
+                      @Label@438 <Label>
                         .theme_override_fonts/font = FontVariation{base_font=SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}, spacing_glyph=1}
                         .theme_override_font_sizes/font_size = 12
                         .theme_override_colors/font_color = Color(0.9843137, 0.7490196, 0.14117648, 1)
@@ -6146,7 +6270,7 @@ Main <Control> res://src/app/main.gd
                         on maximum_size_changed -> lambda
                         on minimum_size_changed -> lambda
                         on _desired_size_changed -> lambda
-                    @Label@431 <Label>
+                    @Label@440 <Label>
                       .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                       .theme_override_font_sizes/font_size = 12
                       .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
@@ -6158,7 +6282,7 @@ Main <Control> res://src/app/main.gd
                       on maximum_size_changed -> lambda
                       on minimum_size_changed -> lambda
                       on _desired_size_changed -> lambda
-                    @Label@432 <Label>
+                    @Label@441 <Label>
                       .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                       .theme_override_font_sizes/font_size = 12
                       .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
@@ -6170,7 +6294,7 @@ Main <Control> res://src/app/main.gd
                       on maximum_size_changed -> lambda
                       on minimum_size_changed -> lambda
                       on _desired_size_changed -> lambda
-                    @Label@433 <Label>
+                    @Label@442 <Label>
                       .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                       .theme_override_font_sizes/font_size = 12
                       .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
@@ -6182,7 +6306,7 @@ Main <Control> res://src/app/main.gd
                       on maximum_size_changed -> lambda
                       on minimum_size_changed -> lambda
                       on _desired_size_changed -> lambda
-                    @Label@434 <Label>
+                    @Label@443 <Label>
                       .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                       .theme_override_font_sizes/font_size = 12
                       .theme_override_colors/font_color = Color(0.79607844, 0.8352941, 0.88235295, 1)
@@ -6206,7 +6330,7 @@ Main <Control> res://src/app/main.gd
                     on maximum_size_changed -> lambda
                     on minimum_size_changed -> lambda
                     on _desired_size_changed -> lambda
-                    @PanelContainer@436 <PanelContainer>
+                    @PanelContainer@445 <PanelContainer>
                       .mouse_filter = 2
                       .theme_override_styles/panel = StyleBoxFlat{content_margin_left=16.0, content_margin_top=16.0, content_margin_right=16.0, content_margin_bottom=16.0, bg_color=Color(0.039215688, 0.06666667, 0.1254902, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.11764706, 0.16078432, 0.23137255, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12}
                       on child_order_changed -> lambda
@@ -6216,7 +6340,7 @@ Main <Control> res://src/app/main.gd
                       on maximum_size_changed -> lambda
                       on minimum_size_changed -> lambda
                       on _desired_size_changed -> lambda
-                      @VBoxContainer@437 <VBoxContainer>
+                      @VBoxContainer@446 <VBoxContainer>
                         .mouse_filter = 2
                         .theme_override_constants/separation = 10
                         on child_order_changed -> lambda
@@ -6227,7 +6351,7 @@ Main <Control> res://src/app/main.gd
                         on maximum_size_changed -> lambda
                         on minimum_size_changed -> lambda
                         on _desired_size_changed -> lambda
-                        @HBoxContainer@438 <HBoxContainer>
+                        @HBoxContainer@447 <HBoxContainer>
                           .mouse_filter = 2
                           .theme_override_constants/separation = 8
                           on child_order_changed -> lambda
@@ -6240,7 +6364,7 @@ Main <Control> res://src/app/main.gd
                           on maximum_size_changed -> lambda
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
-                          @ColorRect@439 <ColorRect>
+                          @ColorRect@448 <ColorRect>
                             .custom_minimum_size = Vector2(4, 16)
                             .mouse_filter = 2
                             .color = Color(0.20392157, 0.827451, 0.6, 1)
@@ -6249,7 +6373,7 @@ Main <Control> res://src/app/main.gd
                             on maximum_size_changed -> lambda
                             on minimum_size_changed -> lambda
                             on _desired_size_changed -> lambda
-                          @Label@440 <Label>
+                          @Label@449 <Label>
                             .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                             .theme_override_font_sizes/font_size = 12
                             .theme_override_colors/font_color = Color(0.20392157, 0.827451, 0.6, 1)
@@ -6260,7 +6384,7 @@ Main <Control> res://src/app/main.gd
                             on maximum_size_changed -> lambda
                             on minimum_size_changed -> lambda
                             on _desired_size_changed -> lambda
-                          @Label@441 <Label>
+                          @Label@450 <Label>
                             .size_flags_horizontal = 3
                             .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=600}
                             .theme_override_font_sizes/font_size = 13
@@ -6273,7 +6397,7 @@ Main <Control> res://src/app/main.gd
                             on maximum_size_changed -> lambda
                             on minimum_size_changed -> lambda
                             on _desired_size_changed -> lambda
-                          @Button@442 <Button>
+                          @Button@451 <Button>
                             .custom_minimum_size = Vector2(84, 32)
                             .mouse_filter = 1
                             .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=4.0, content_margin_right=12.0, content_margin_bottom=4.0, bg_color=Color(1, 1, 1, 0.02), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.16470589, 0.23137255, 0.34117648, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8}
@@ -6300,7 +6424,7 @@ Main <Control> res://src/app/main.gd
                             on _desired_size_changed -> lambda
                             on pressed -> main._toggle_audio_section
                             on pressed -> lambda
-                        @VBoxContainer@443 <VBoxContainer>
+                        @VBoxContainer@452 <VBoxContainer>
                           .visible = false
                           .mouse_filter = 2
                           .theme_override_constants/separation = 10
@@ -6316,7 +6440,7 @@ Main <Control> res://src/app/main.gd
                           on maximum_size_changed -> lambda
                           on minimum_size_changed -> lambda
                           on _desired_size_changed -> lambda
-                          @GridContainer@444 <GridContainer>
+                          @GridContainer@453 <GridContainer>
                             .mouse_filter = 2
                             .theme_override_constants/h_separation = 8
                             .theme_override_constants/v_separation = 8
@@ -6331,7 +6455,7 @@ Main <Control> res://src/app/main.gd
                             on maximum_size_changed -> lambda
                             on minimum_size_changed -> lambda
                             on _desired_size_changed -> lambda
-                            @Button@445 <Button>
+                            @Button@454 <Button>
                               .custom_minimum_size = Vector2(0, 40)
                               .size_flags_horizontal = 3
                               .mouse_filter = 1
@@ -6357,7 +6481,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
                               on pressed -> lambda
-                            @Button@446 <Button>
+                            @Button@455 <Button>
                               .custom_minimum_size = Vector2(0, 40)
                               .size_flags_horizontal = 3
                               .mouse_filter = 1
@@ -6382,7 +6506,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
                               on pressed -> lambda
-                            @Button@447 <Button>
+                            @Button@456 <Button>
                               .custom_minimum_size = Vector2(0, 40)
                               .size_flags_horizontal = 3
                               .mouse_filter = 1
@@ -6407,7 +6531,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
                               on pressed -> lambda
-                            @Button@448 <Button>
+                            @Button@457 <Button>
                               .custom_minimum_size = Vector2(0, 40)
                               .size_flags_horizontal = 3
                               .mouse_filter = 1
@@ -6432,7 +6556,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
                               on pressed -> lambda
-                          @Label@449 <Label>
+                          @Label@458 <Label>
                             .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                             .theme_override_font_sizes/font_size = 12
                             .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
@@ -6444,7 +6568,7 @@ Main <Control> res://src/app/main.gd
                             on maximum_size_changed -> lambda
                             on minimum_size_changed -> lambda
                             on _desired_size_changed -> lambda
-                          @VBoxContainer@450 <VBoxContainer>
+                          @VBoxContainer@459 <VBoxContainer>
                             .visible = false
                             .mouse_filter = 2
                             .theme_override_constants/separation = 10
@@ -6458,7 +6582,7 @@ Main <Control> res://src/app/main.gd
                             on maximum_size_changed -> lambda
                             on minimum_size_changed -> lambda
                             on _desired_size_changed -> lambda
-                            @HBoxContainer@451 <HBoxContainer>
+                            @HBoxContainer@460 <HBoxContainer>
                               .mouse_filter = 2
                               .theme_override_constants/separation = 20
                               on child_order_changed -> lambda
@@ -6469,7 +6593,7 @@ Main <Control> res://src/app/main.gd
                               on maximum_size_changed -> lambda
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
-                              @HBoxContainer@452 <HBoxContainer>
+                              @HBoxContainer@461 <HBoxContainer>
                                 .size_flags_horizontal = 3
                                 .mouse_filter = 2
                                 .theme_override_constants/separation = 8
@@ -6482,7 +6606,7 @@ Main <Control> res://src/app/main.gd
                                 on maximum_size_changed -> lambda
                                 on minimum_size_changed -> lambda
                                 on _desired_size_changed -> lambda
-                                @Label@453 <Label>
+                                @Label@462 <Label>
                                   .custom_minimum_size = Vector2(48, 0)
                                   .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                                   .theme_override_font_sizes/font_size = 11
@@ -6494,7 +6618,7 @@ Main <Control> res://src/app/main.gd
                                   on maximum_size_changed -> lambda
                                   on minimum_size_changed -> lambda
                                   on _desired_size_changed -> lambda
-                                @OptionButton@464 <OptionButton>
+                                @OptionButton@473 <OptionButton>
                                   .custom_minimum_size = Vector2(0, 40)
                                   .size_flags_horizontal = 3
                                   .mouse_filter = 1
@@ -6518,7 +6642,7 @@ Main <Control> res://src/app/main.gd
                                   on pressed -> lambda
                                   on item_selected -> main.speech._on_voice_picked
                                   on item_selected -> lambda
-                                @Button@465 <Button>
+                                @Button@474 <Button>
                                   .custom_minimum_size = Vector2(84, 40)
                                   .mouse_filter = 1
                                   .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=4.0, content_margin_right=12.0, content_margin_bottom=4.0, bg_color=Color(1, 1, 1, 0.02), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.16470589, 0.23137255, 0.34117648, 1), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8}
@@ -6545,7 +6669,7 @@ Main <Control> res://src/app/main.gd
                                   on _desired_size_changed -> lambda
                                   on pressed -> main.speech._preview_voice
                                   on pressed -> lambda
-                              @HBoxContainer@466 <HBoxContainer>
+                              @HBoxContainer@475 <HBoxContainer>
                                 .mouse_filter = 2
                                 .theme_override_constants/separation = 6
                                 on child_order_changed -> lambda
@@ -6559,7 +6683,7 @@ Main <Control> res://src/app/main.gd
                                 on maximum_size_changed -> lambda
                                 on minimum_size_changed -> lambda
                                 on _desired_size_changed -> lambda
-                                @Label@467 <Label>
+                                @Label@476 <Label>
                                   .custom_minimum_size = Vector2(48, 0)
                                   .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                                   .theme_override_font_sizes/font_size = 11
@@ -6571,7 +6695,7 @@ Main <Control> res://src/app/main.gd
                                   on maximum_size_changed -> lambda
                                   on minimum_size_changed -> lambda
                                   on _desired_size_changed -> lambda
-                                @Button@468 <Button>
+                                @Button@477 <Button>
                                   .custom_minimum_size = Vector2(56, 40)
                                   .size_flags_horizontal = 3
                                   .mouse_filter = 1
@@ -6596,7 +6720,7 @@ Main <Control> res://src/app/main.gd
                                   on _desired_size_changed -> lambda
                                   on pressed -> lambda
                                   on pressed -> lambda
-                                @Button@469 <Button>
+                                @Button@478 <Button>
                                   .custom_minimum_size = Vector2(56, 40)
                                   .size_flags_horizontal = 3
                                   .mouse_filter = 1
@@ -6622,7 +6746,7 @@ Main <Control> res://src/app/main.gd
                                   on _desired_size_changed -> lambda
                                   on pressed -> lambda
                                   on pressed -> lambda
-                                @Button@470 <Button>
+                                @Button@479 <Button>
                                   .custom_minimum_size = Vector2(56, 40)
                                   .size_flags_horizontal = 3
                                   .mouse_filter = 1
@@ -6647,7 +6771,7 @@ Main <Control> res://src/app/main.gd
                                   on _desired_size_changed -> lambda
                                   on pressed -> lambda
                                   on pressed -> lambda
-                                @Button@471 <Button>
+                                @Button@480 <Button>
                                   .custom_minimum_size = Vector2(56, 40)
                                   .size_flags_horizontal = 3
                                   .mouse_filter = 1
@@ -6672,7 +6796,7 @@ Main <Control> res://src/app/main.gd
                                   on _desired_size_changed -> lambda
                                   on pressed -> lambda
                                   on pressed -> lambda
-                            @CheckButton@472 <CheckButton>
+                            @CheckButton@481 <CheckButton>
                               .visible = false
                               .custom_minimum_size = Vector2(0, 32)
                               .mouse_filter = 1
@@ -6697,7 +6821,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
                               on toggled -> main._on_auto_teach_toggled
-                            @HBoxContainer@473 <HBoxContainer>
+                            @HBoxContainer@482 <HBoxContainer>
                               .visible = false
                               .mouse_filter = 2
                               .theme_override_constants/separation = 6
@@ -6712,7 +6836,7 @@ Main <Control> res://src/app/main.gd
                               on maximum_size_changed -> lambda
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
-                              @Label@474 <Label>
+                              @Label@483 <Label>
                                 .custom_minimum_size = Vector2(48, 0)
                                 .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                                 .theme_override_font_sizes/font_size = 11
@@ -6724,7 +6848,7 @@ Main <Control> res://src/app/main.gd
                                 on maximum_size_changed -> lambda
                                 on minimum_size_changed -> lambda
                                 on _desired_size_changed -> lambda
-                              @Button@475 <Button>
+                              @Button@484 <Button>
                                 .custom_minimum_size = Vector2(56, 40)
                                 .mouse_filter = 1
                                 .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
@@ -6748,7 +6872,7 @@ Main <Control> res://src/app/main.gd
                                 on _desired_size_changed -> lambda
                                 on pressed -> lambda
                                 on pressed -> lambda
-                              @Button@476 <Button>
+                              @Button@485 <Button>
                                 .custom_minimum_size = Vector2(56, 40)
                                 .mouse_filter = 1
                                 .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
@@ -6773,7 +6897,7 @@ Main <Control> res://src/app/main.gd
                                 on _desired_size_changed -> lambda
                                 on pressed -> lambda
                                 on pressed -> lambda
-                              @Button@477 <Button>
+                              @Button@486 <Button>
                                 .custom_minimum_size = Vector2(56, 40)
                                 .mouse_filter = 1
                                 .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
@@ -6797,7 +6921,7 @@ Main <Control> res://src/app/main.gd
                                 on _desired_size_changed -> lambda
                                 on pressed -> lambda
                                 on pressed -> lambda
-                              @Label@478 <Label>
+                              @Label@487 <Label>
                                 .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
                                 .theme_override_font_sizes/font_size = 12
                                 .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
@@ -6808,12 +6932,12 @@ Main <Control> res://src/app/main.gd
                                 on maximum_size_changed -> lambda
                                 on minimum_size_changed -> lambda
                                 on _desired_size_changed -> lambda
-                            @Label@479 <Label>
+                            @Label@488 <Label>
                               .visible = false
                               .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                               .theme_override_font_sizes/font_size = 11
                               .theme_override_colors/font_color = Color(0.99215686, 0.6431373, 0.6862745, 1)
-                              .text = "The Full Journeyman Simulator stays exam-quiet: nothing plays by itself, like the real exam. The Read button still works there."
+                              .text = "The Full Journeyman Exam stays exam-quiet: nothing plays by itself, like the real exam. The Read button still works there."
                               .autowrap_mode = 3
                               on visibility_changed -> lambda
                               on size_flags_changed -> lambda
@@ -6821,7 +6945,7 @@ Main <Control> res://src/app/main.gd
                               on maximum_size_changed -> lambda
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
-                          @HBoxContainer@480 <HBoxContainer>
+                          @HBoxContainer@489 <HBoxContainer>
                             .mouse_filter = 2
                             .theme_override_constants/separation = 6
                             on child_order_changed -> lambda
@@ -6836,7 +6960,7 @@ Main <Control> res://src/app/main.gd
                             on maximum_size_changed -> lambda
                             on minimum_size_changed -> lambda
                             on _desired_size_changed -> lambda
-                            @Label@481 <Label>
+                            @Label@490 <Label>
                               .custom_minimum_size = Vector2(48, 0)
                               .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=700}
                               .theme_override_font_sizes/font_size = 11
@@ -6848,7 +6972,7 @@ Main <Control> res://src/app/main.gd
                               on maximum_size_changed -> lambda
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
-                            @Button@482 <Button>
+                            @Button@491 <Button>
                               .custom_minimum_size = Vector2(72, 40)
                               .mouse_filter = 1
                               .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
@@ -6872,7 +6996,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
                               on pressed -> lambda
-                            @Button@483 <Button>
+                            @Button@492 <Button>
                               .custom_minimum_size = Vector2(72, 40)
                               .mouse_filter = 1
                               .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
@@ -6896,7 +7020,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
                               on pressed -> lambda
-                            @Button@484 <Button>
+                            @Button@493 <Button>
                               .custom_minimum_size = Vector2(72, 40)
                               .mouse_filter = 1
                               .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
@@ -6921,7 +7045,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
                               on pressed -> lambda
-                            @Button@485 <Button>
+                            @Button@494 <Button>
                               .custom_minimum_size = Vector2(72, 40)
                               .mouse_filter = 1
                               .theme_override_styles/normal = StyleBoxFlat{bg_color=Color(0.06666667, 0.09803922, 0.15686275, 1), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.18039216, 0.23921569, 0.34117648, 1), corner_radius_top_left=9, corner_radius_top_right=9, corner_radius_bottom_right=9, corner_radius_bottom_left=9}
@@ -6945,7 +7069,7 @@ Main <Control> res://src/app/main.gd
                               on _desired_size_changed -> lambda
                               on pressed -> lambda
                               on pressed -> lambda
-                            @Label@486 <Label>
+                            @Label@495 <Label>
                               .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}
                               .theme_override_font_sizes/font_size = 12
                               .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
@@ -6956,7 +7080,7 @@ Main <Control> res://src/app/main.gd
                               on maximum_size_changed -> lambda
                               on minimum_size_changed -> lambda
                               on _desired_size_changed -> lambda
-                          @CheckButton@487 <CheckButton>
+                          @CheckButton@496 <CheckButton>
                             .custom_minimum_size = Vector2(0, 32)
                             .mouse_filter = 1
                             .theme_override_styles/normal = StyleBoxEmpty{content_margin_left=0.0, content_margin_right=0.0}
@@ -6979,7 +7103,7 @@ Main <Control> res://src/app/main.gd
                             on _desired_size_changed -> lambda
                             on pressed -> lambda
                             on toggled -> main._on_reduce_motion_toggled
-                          @CheckButton@488 <CheckButton>
+                          @CheckButton@497 <CheckButton>
                             .custom_minimum_size = Vector2(0, 32)
                             .tooltip_text = "Colors the stem words to look up in the NEC Index and names the entry before you answer. Off in the Full Exam, like the real test."
                             .mouse_filter = 1
@@ -7004,7 +7128,7 @@ Main <Control> res://src/app/main.gd
                             on _desired_size_changed -> lambda
                             on pressed -> lambda
                             on toggled -> main._on_hunt_keywords_toggled
-                    @Label@489 <Label>
+                    @Label@498 <Label>
                       .theme_override_fonts/font = SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif")}
                       .theme_override_font_sizes/font_size = 11
                       .theme_override_colors/font_color = Color(0.5803922, 0.6392157, 0.72156864, 1)
@@ -7025,9 +7149,9 @@ Main <Control> res://src/app/main.gd
     .mouse_filter = 2
   TouchScroll <Node> res://src/ui/touch_scroll.gd
     .process_mode = 3
-  @Timer@497 <Timer>
+  @Timer@506 <Timer>
     on timeout -> main._tick_timer
-  @AudioStreamPlayer@498 <AudioStreamPlayer>
+  @AudioStreamPlayer@507 <AudioStreamPlayer>
     .bus = &"Speech"
     on finished -> main.speech._on_reader_finished
   Sfx <Node> res://src/fx/sfx.gd
@@ -7075,5 +7199,5 @@ Main <Control> res://src/app/main.gd
       .stream = AudioStreamWAV{data=bytes[22264], format=3, stereo=true}
       .max_polyphony = 2
       .bus = &"SFX"
-  @Timer@500 <Timer>
+  @Timer@509 <Timer>
     on timeout -> main._on_listen_tick

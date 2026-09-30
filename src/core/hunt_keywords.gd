@@ -73,31 +73,63 @@ static func tooltip(record: Dictionary, keyword: Dictionary) -> String:
 	return tip + (", then go to " + where if where != "" else "")
 
 
+## The [hint] a keyword carries in the stem; RichTextLabel.get_tooltip() at a
+## point returns it, which is how a finger finds its keyword (HuntView).
+static func hint_text(record: Dictionary, keyword: Dictionary) -> String:
+	return tooltip(record, keyword).replace("]", ")").replace("[", "(").replace("\"", "'")
+
+
 static func escape_bbcode(text: String) -> String:
 	return text.replace("[", "[lb]")
 
 
-## The stem as BBCode with each keyword's first occurrence colored (and a
-## [url] so a tap can single it out); parsed text equals `prompt` exactly.
+static func _is_word_char(c: String) -> bool:
+	return c != "" and (c.to_lower() != c.to_upper() or c.is_valid_int())
+
+
+## Where `text` sits in `prompt` as a whole word ("wire" not inside "wireless")
+## and clear of `taken` spans; else its first free occurrence; -1 when none.
+static func find_span(prompt: String, text: String, taken: Array = []) -> int:
+	if text == "":
+		return -1
+	var loose := -1
+	var at := prompt.find(text)
+	while at >= 0:
+		var free := true
+		for span in taken:
+			if at < int(span["end"]) and at + text.length() > int(span["start"]):
+				free = false
+		if free:
+			var before := prompt.substr(at - 1, 1) if at > 0 else ""
+			var after := prompt.substr(at + text.length(), 1)
+			var whole := not (_is_word_char(text.left(1)) and _is_word_char(before)) \
+					and not (_is_word_char(text.right(1)) and _is_word_char(after))
+			if whole:
+				return at
+			if loose < 0:
+				loose = at
+		at = prompt.find(text, at + 1)
+	return loose
+
+
+## The stem as BBCode with each keyword colored once, as a whole word where the
+## stem allows (a [url] and [hint] let hover and tap single it out); parsed
+## text equals `prompt` exactly.
 static func stem_bbcode(record: Dictionary, prompt: String, color: Color, show: bool) -> String:
 	var spans: Array = []
-	if show:
-		var list := keywords(record)
-		for i in list.size():
-			var text := str(list[i].get("text", ""))
-			var at := prompt.find(text) if text != "" else -1
-			if at >= 0:
-				spans.append({"start": at, "end": at + text.length(), "i": i})
+	var list := keywords(record) if show else []
+	for i in list.size():
+		var text := str(list[i].get("text", ""))
+		var at := find_span(prompt, text, spans)
+		if at >= 0:
+			spans.append({"start": at, "end": at + text.length(), "i": i})
 	spans.sort_custom(func(a, b): return a["start"] < b["start"])
 	var out := ""
 	var pos := 0
 	var hex := color.to_html(false)
 	for span in spans:
-		if span["start"] < pos:
-			continue
 		out += escape_bbcode(prompt.substr(pos, span["start"] - pos))
-		var kw: Dictionary = keywords(record)[span["i"]]
-		var tip := tooltip(record, kw).replace("]", ")").replace("[", "(").replace("\"", "'")
+		var tip := hint_text(record, list[span["i"]])
 		out += "[url=%d][hint=%s][color=#%s]%s[/color][/hint][/url]" % [span["i"], tip, hex, escape_bbcode(prompt.substr(span["start"], span["end"] - span["start"]))]
 		pos = span["end"]
 	return out + escape_bbcode(prompt.substr(pos))
