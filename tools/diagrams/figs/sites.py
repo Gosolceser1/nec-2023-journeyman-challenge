@@ -96,8 +96,8 @@ def fair_structures(f):
     _zone_circle(f, cx, cy, r)
     for dx in (-30, 30):
         f.circle(cx + dx, cy - 6, 8, fill=WIRE_HOT, stroke=BG, sw=SW_THIN)
-    f.arrow(cx + 6, cy + 6, cx + r * 0.7, cy + r * 0.7, DIM)
-    f.text(cx + 34, cy + 64, "15 ft", T_LABEL, DIM, "start", True)
+    f.arrow(cx + 6, cy - 12, cx + r * 0.68, cy - r * 0.72, DIM)
+    f.text(cx + 24, cy + 30, "15 ft", T_LABEL, DIM, "start", True)
     v = f.value(40, 86, "600 V", 26, anchor="start", pad=5, what="the voltage limit")
     f.text(v[0] + v[2] + 12, 86, "or less:", 26, TEXT, "start", True)
     f.text(40, 116, "15 ft in any direction", T_NOTE, MUTED, "start")
@@ -120,7 +120,7 @@ def fair_structures(f):
     f.mark_no(tx - 25, ground - 110)
     _ride(f, tx + half + 12, ground, 60, 56)
     f.mark_ok(tx + half + 42, ground - 100)
-    f.text(210, ground + 36, "ride or tent", T_MIN, TEXT)
+    f.text(335, ground + 28, "ride or tent", T_MIN, TEXT)
     f.tag(f.w - 24, f.h - 10, "NEC 525.5(B)", anchor="end")
 
 
@@ -187,7 +187,7 @@ def therapeutic_tub(f):
     f.plan_receptacle(x1 - 14, 110)
     f.text(x1 - 40, 96, "outside:", T_MIN, MUTED, "end")
     f.text(x1 - 40, 120, "no rule here", T_MIN, MUTED, "end")
-    f.arrow(cx, cy, cx + r * 0.8, cy + r * 0.6, DIM)
+    f.arrow(cx + 64, cy + 48, cx + r * 0.8, cy + r * 0.6, DIM)
     f.value(cx + 104, cy + 64, "6 ft", 28, anchor="start", pad=6, what="the GFCI radius")
     f.rect(546, 70, 234, 250, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
     f.lines(560, 110, ["Every receptacle", "within the circle", "(measured from the", "tub) has GFCI", "protection."],
@@ -221,7 +221,7 @@ def buried_conductors(f):
             what="the protected height")
     f.lines(rx + 18, 90, ["raceway or", "enclosure"], T_NOTE, TEXT, "start", True, gap=1.1)
     f.leader(rx + 60, 116, rx + 6, 150)
-    f.text(rx + 18, grade + 150, "(protection need not go deeper than 18 in)", T_MIN, MUTED, "start")
+    f.lines(rx + 150, grade + 150, ["(protection need not go", "deeper than 18 in)"], T_MIN, MUTED, gap=1.1)
     # Right: frost heave, slack at the raceway transition.
     sx = 640
     f.rect(sx - 60, grade - 90, 120, 90, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
@@ -230,8 +230,8 @@ def buried_conductors(f):
     loop = f"M {sx} {grade + 50} c 0 30 -70 20 -70 50 s 70 20 70 50 s -70 20 -40 30 L {sx - 180} {grade + 180}"
     f.path(loop, TEXT, 5)
     f.mask(sx - 90, grade + 44, 110, 120, records=LOOPS, what="the slack loop in the cable")
-    f.lines(sx + 34, grade + 90, ["frost heave:", "leave slack"], T_MIN, MUTED, "start", gap=1.1)
-    f.value(sx + 34, grade + 150, "S loop", T_NOTE, anchor="start", pad=5, records=LOOPS, what="the name of the loop")
+    f.lines(sx + 28, grade + 90, ["frost heave:", "leave slack"], T_MIN, MUTED, "start", gap=1.1)
+    f.value(sx + 28, grade + 150, "S loop", T_NOTE, anchor="start", pad=5, records=LOOPS, what="the name of the loop")
     for k in range(3):
         f.arrow(sx - 250 + k * 60, grade + 40, sx - 250 + k * 60, grade + 8, AMBER, SW_THIN)
     f.tag(f.w - 24, 70, "NEC 300.5(D)(1), 300.5(J)", anchor="end")

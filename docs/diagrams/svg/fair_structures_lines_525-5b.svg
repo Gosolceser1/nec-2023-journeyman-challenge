@@ -37,9 +37,9 @@
 <circle cx="200.0" cy="232.0" r="96.0" fill="#0ea5e9" fill-opacity="0.12" stroke="#0ea5e9" stroke-width="3"/>
 <circle cx="170.0" cy="226.0" r="8" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
 <circle cx="230.0" cy="226.0" r="8" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
-<line x1="206.0" y1="238.0" x2="262.1" y2="294.1" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<polygon points="267.2,299.2 254.5,295.0 263.0,286.5" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<text x="234.0" y="296.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="start">15 ft</text>
+<line x1="206.0" y1="220.0" x2="260.1" y2="167.9" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="265.3,162.9 260.8,175.5 252.5,166.9" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="224.0" y="262.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="start">15 ft</text>
 <text x="40.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">600 V</text>
 <text x="119.9" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#e2e8f0" text-anchor="start">or less:</text>
 <text x="40.0" y="116.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">15 ft in any direction</text>
@@ -96,7 +96,7 @@
 <polygon points="752.0,338.0 768.0,344.0 752.0,350.0" fill="#fbbf24" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <circle cx="752.0" cy="310.0" r="18" fill="#34d399" stroke="none" stroke-width="2"/>
 <polyline points="743.9,310.0 749.8,316.8 761.0,303.2" fill="none" stroke="#0f172a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="210.0" y="446.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">ride or tent</text>
+<text x="335.0" y="438.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">ride or tent</text>
 <rect x="627.9" y="434.0" width="158.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="637.9" y="462.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 525.5(B)</text>
 </svg>

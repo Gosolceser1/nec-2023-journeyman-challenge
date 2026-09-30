@@ -58,7 +58,7 @@ def kitchen_counter(f):
     f.lines(cx + 14, 316, ["- an electric clock outlet", "- gas range, oven or", "  cooktop accessories"], T_MIN,
             TEXT, "start", gap=1.15)
     f.text(cx + 14, 414, "nothing else", T_MIN, NO, "start", True)
-    f.highlight(cx + 6, 266, 248, 64, records=SABC)
+    f.highlight(cx + 6, 266, 248, 106, records=SABC)
     f.tag(f.w - 24, f.h - 10, "NEC 210.52(B), (C)", anchor="end")
 
 

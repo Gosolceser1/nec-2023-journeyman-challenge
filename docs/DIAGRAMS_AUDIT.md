@@ -647,7 +647,7 @@ answer. Review with NEC sections per drawing: `audits/diagram_batch1_tmp/review.
 | B | `final-exam-#1-021` | `appliance_demand_220-54_220-55` | before | 85%; 25 kW x 0.85 = 21.25 kW; +10%; 8 kW x 1.10 = 8.8 kW |
 | B | `final-exam-#1-026` | `type_letters_decoder` | before | what the -2 means |
 | B | `final-exam-#1-027` | `ampacity_derating_310-15` | before | 25 A; 40 A; 1.00; 0.87; 0.80; 20 A; 34.8 A |
-| B | `final-exam-#1-034` | `type_letters_decoder` | before | what the W suffix means |
+| B | `final-exam-#1-034` | `type_letters_decoder` | before | what the W suffix means; what W means on building wire; what the -2 means |
 | B | `final-exam-#1-036` | `dwelling_service_310-12` | before | 83% x 200 A = 166 A |
 | B | `final-exam-#1-040` | `appliance_demand_220-54_220-55` | before | 85%; 25 kW x 0.85 = 21.25 kW; +10%; 8 kW x 1.10 = 8.8 kW |
 | B | `final-exam-#1-048` | `afci_tr_dwelling_210-12_406-12` | before | hallway receptacle type; the 406.12 rule |
@@ -688,7 +688,7 @@ answer. Review with NEC sections per drawing: `audits/diagram_batch1_tmp/review.
 | B | `open-book-exam-#4-007` | `receptacle_markings_406` | before | the face marking; orange triangle |
 | B | `open-book-exam-#4-015` | `appliance_demand_220-54_220-55` | before | 85%; 25 kW x 0.85 = 21.25 kW; +10%; 8 kW x 1.10 = 8.8 kW |
 | B | `open-book-exam-#4-022` | `dwelling_service_310-12` | before | 83% x 200 A = 166 A |
-| B | `open-book-exam-#4-025` | `type_letters_decoder` | before | what the W suffix means |
+| B | `open-book-exam-#4-025` | `type_letters_decoder` | before | what the W suffix means; what W means on building wire; what the -2 means |
 | B | `open-book-exam-#7-009` | `outbuilding_disconnect_225-39` | before | 15 A min; 30 A min; calculated |
 | B | `open-book-exam-#7-011` | `branch_circuit_rating_210` | before | conductor ampacity >= 20 A rating |
 | B | `open-book-exam-#7-016` | `multiple_supplies_225-37_700-7` | before | where the source is; the second item on the sign |
@@ -718,9 +718,9 @@ answer, in desktop, phone and phone zoom. Masks beyond the scanner:
 - the RV feeder cross-section, whose colors would answer the I/II/III question;
 - the motor-group rounding note, which let the rule be worked back from the example.
 
-Four records get their figure only after answering (`#1-009` colors,
-`#3-015` vertical, `#3-039` individual circuit, `#10-008` sign text), where
-the drawing is the answer. Review with NEC sections per drawing:
+Six records get their figure only after answering: `#1-009` colors,
+`#3-015` vertical, `#3-039` individual circuit and `#10-008` sign text, where
+the drawing is the answer, and the office-lighting pair moved in section 10. Review with NEC sections per drawing:
 `audits/diagram_batch2_tmp/review.md`.
 
 | tier | record | figure | shown | masked before answering |

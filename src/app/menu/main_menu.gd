@@ -286,13 +286,15 @@ func _block_exam_groups(parent: VBoxContainer, cfg: Dictionary) -> void:
 		chips.add_child(chip)
 		family_buttons.append(chip)
 	exam_summary = _note(parent, "")
+	var tile_family: Dictionary = cfg.get("tile_family", {})
 	for f in families.size():
 		var grid := _grid(parent, columns)
 		grid.visible = false
 		family_grids.append(grid)
+		var family_name := str(tile_family.get(families[f]["family"], families[f]["title"]))
 		for exam in families[f]["exams"]:
 			var title := MenuModel.fill(str(cfg.get("tile_title", "{label}")),
-				{"label": exam["label"], "family": families[f]["title"], "number": exam["number"]}) if int(exam["number"]) > 0 else str(exam["label"])
+				{"label": exam["label"], "family": family_name, "number": exam["number"]}) if int(exam["number"]) > 0 else str(exam["label"])
 			var t := _tile(grid, title, AppTheme.SKY_400 if f % 2 == 0 else AppTheme.EMERALD_400,
 				_start_exam.bind(exam), px(70, 80))
 			exam_tiles[exam["label"]] = t
@@ -396,7 +398,8 @@ func _block_study_tools(parent: VBoxContainer, cfg: Dictionary) -> void:
 		# Opening a tool is not a session: a plain click, not the start cue.
 		var t := _tile(grid, str(tool.get("title", id)), AppTheme.EMERALD_400, open_tool.bind(id), px(84, 96), false)
 		t.detail_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		t.detail_label.max_lines_visible = 2
+		# Phone columns are narrow: two lines cut every description mid-word.
+		t.detail_label.max_lines_visible = 3 if host.ui_mobile else 2
 		t.set_status(str(tool.get("description", "")), "", AppTheme.SLATE_400, 0.0)
 		t.meter.visible = false
 		if Icons.NAMES.has(str(tool.get("icon", ""))):
@@ -535,7 +538,8 @@ func _refresh_summary() -> void:
 		all.append_array(exam["indices"])
 	var p := MenuModel.progress(host.records, all, history)
 	exam_summary.text = MenuModel.fill(str(MenuModel.block("exam_groups").get("summary", "")),
-		{"exams": (fam["exams"] as Array).size(), "questions": p["questions"], "seen": roundi(100.0 * p["seen"] / maxf(1.0, p["questions"]))})
+		{"exams": (fam["exams"] as Array).size(), "exam_word": "exam" if (fam["exams"] as Array).size() == 1 else "exams",
+			"questions": p["questions"], "seen": roundi(100.0 * p["seen"] / maxf(1.0, p["questions"]))})
 
 
 func _refresh_continue() -> void:

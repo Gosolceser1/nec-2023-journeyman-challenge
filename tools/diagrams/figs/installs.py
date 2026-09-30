@@ -72,7 +72,7 @@ def room_ac(f):
     f.rect(330, 120, 180, 110, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
     for k in range(5):
         f.line(345, 140 + k * 16, 420, 140 + k * 16, EDGE, 3)
-    f.text(420, 108, "room A/C", T_NOTE, TEXT, bold=True)
+    f.text(440, 108, "room A/C", T_NOTE, TEXT, "start", True)
     f.path("M 400 230 C 390 300, 300 300, 260 350", TEXT, 5)
     f.receptacle(240, 370, 50)
     f.rect(252, 342, 26, 22, fill=AMBER, rx=3)

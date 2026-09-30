@@ -28,9 +28,8 @@
 <polyline points="560.0,120.0 600.0,120.0 620.0,170.0 576.0,214.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 <polyline points="558.0,206.0 574.8,218.6 569.2,221.4 586.0,234.0" fill="none" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 <line x1="640.0" y1="270.0" x2="640.0" y2="300.0" stroke="#86efac" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
-<text x="756.0" y="160.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">hot</text>
-<text x="756.0" y="182.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">touches</text>
-<text x="756.0" y="204.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">the metal</text>
+<text x="654.0" y="298.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">hot touches</text>
+<text x="654.0" y="320.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">the metal</text>
 <text x="400.0" y="186.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="middle">ground fault</text>
 <rect x="20.0" y="360.0" width="370.0" height="180.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <circle cx="64.0" cy="418.8" r="14" fill="none" stroke="#e2e8f0" stroke-width="3"/>

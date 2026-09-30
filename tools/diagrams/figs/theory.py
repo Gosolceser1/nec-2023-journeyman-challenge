@@ -251,7 +251,7 @@ def _lamp(f, x, y, r=22, label=None):
 def _source(f, x, y, label="120 V"):
     f.circle(x, y, 26, fill=PANEL, stroke=TEXT, sw=SW_OBJ)
     f.path(f"M {x - 14} {y} q 7 -14 14 0 t 14 0", TEXT, SW_THIN)
-    f.text(x - 36, y + 8, label, T_NOTE, DIM, "end", True)
+    f.text(x - 32, y + 8, label, T_NOTE, DIM, "end", True)
 
 
 @figure("series_vs_parallel", h=500, nec="General knowledge (series and parallel circuits)", when="after",
@@ -261,7 +261,7 @@ def series_vs_parallel(f):
     # Series: lamp and heater in one loop.
     f.rect(20, 56, 370, 424, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
     f.text(34, 88, "SERIES", T_NOTE, TEXT, "start", True)
-    l, r, t, b = 110, 330, 140, 290
+    l, r, t, b = 120, 330, 140, 290
     f.polyline([(l, 190), (l, t), (r, t), (r, b), (l, b), (l, 240)], WIRE_HOT, SW_WIRE)
     _source(f, l, 215)
     _lamp(f, 220, t, label="bulb")
@@ -271,11 +271,11 @@ def series_vs_parallel(f):
     f.text(220, b + 50, "same current", T_NOTE, OK, bold=True)
     f.lines(34, 376, ["voltages add up to 120 V", "60 W bulb -> 25 W bulb:", "more ohms, less current,",
                       "heater puts out less heat"], T_MIN, TEXT, "start", gap=1.15)
-    f.highlight(26, 340, 358, 130, records=["final-exam-#2-014"])
+    f.highlight(26, 352, 358, 118, records=["final-exam-#2-014"])
     # Parallel: two unequal branches.
     f.rect(410, 56, 370, 424, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
     f.text(424, 88, "PARALLEL", T_NOTE, TEXT, "start", True)
-    l, t, b = 490, 140, 290
+    l, t, b = 504, 140, 290
     f.polyline([(l, 190), (l, t), (680, t)], WIRE_HOT, SW_WIRE)
     f.polyline([(l, 240), (l, b), (680, b)], WIRE_HOT, SW_WIRE)
     _source(f, l, 215)
@@ -342,15 +342,15 @@ def transformer_turns(f):
     f.line(120, top + 204, core_x0 - 26, top + 204, AMBER, SW_WIRE)
     f.line(core_x1 + 26, top + 100, 680, top + 100, OK, SW_WIRE)
     f.line(core_x1 + 26, top + 136, 680, top + 136, OK, SW_WIRE)
-    f.lines(120, top - 16, ["primary", "many turns"], T_NOTE, AMBER, "start", True, gap=1.0)
+    f.lines(104, top - 16, ["primary", "many turns"], T_NOTE, AMBER, "start", True, gap=1.0)
     f.text(120, bot + 34, "2,400 V in", T_LABEL, AMBER, "start", True)
     f.lines(600, top + 30, ["secondary", "fewer turns"], T_NOTE, OK, "start", True, gap=1.0)
     f.text(600, bot + 34, "120 V out", T_LABEL, OK, "start", True)
-    f.rect(120, 384, 560, 52, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
+    f.rect(90, 384, 620, 52, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
     f.text(400, 418, "20:1 = 20 primary turns per secondary turn = 1/20 the voltage", T_MIN, TEXT, bold=True)
     f.text(400, 212, "step-down", T_NOTE, TEXT, bold=True)
-    f.highlight(116, 380, 568, 60, records=["final-exam-#2-012"])
-    f.highlight(110, 50, 170, 70, records=["final-exam-#2-015"])
+    f.highlight(86, 380, 628, 60, records=["final-exam-#2-012"])
+    f.highlight(94, 50, 170, 70, records=["final-exam-#2-015"])
 
 
 @figure("resistance_factors", h=460, nec="General knowledge (conductor resistance)", when="after",

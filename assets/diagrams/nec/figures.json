@@ -10,7 +10,7 @@
    804
   ],
   "nec": "408.18(C), 408.3(A)(2)",
-  "svg_sha1": "c516f86362de"
+  "svg_sha1": "1053b675a6f0"
  },
  "final-exam-#1-003": {
   "file": "res://assets/diagrams/nec/equipment_receptacle_210-63.png",
@@ -451,7 +451,7 @@
    900
   ],
   "nec": "Article 100 (Ground Fault, Effective Ground-Fault Current Path)",
-  "svg_sha1": "4b7abf80c0d4"
+  "svg_sha1": "469e17c3ddf4"
  },
  "final-exam-#1-045": {
   "file": "res://assets/diagrams/nec/disposer_cord_422-16b1.png",
@@ -743,7 +743,7 @@
    705
   ],
   "nec": "525.5(B)(1), 525.5(B)(2)",
-  "svg_sha1": "28d809a9b27c"
+  "svg_sha1": "8bbb40ff92de"
  },
  "final-exam-#2-003": {
   "file": "res://assets/diagrams/nec/electrode_rod_pipe_ring_250-52_250-53a4.png",
@@ -795,7 +795,7 @@
    864
   ],
   "nec": "225.37, 230.2(E), 700.7(A)",
-  "svg_sha1": "9174cec8263d"
+  "svg_sha1": "3fb630dcc398"
  },
  "final-exam-#2-009": {
   "file": "res://assets/diagrams/nec/max_water_level_art100.png",
@@ -821,11 +821,11 @@
    675
   ],
   "nec": "General knowledge (transformers)",
-  "svg_sha1": "93f5a3a8cb89",
+  "svg_sha1": "bb8c84d093b5",
   "highlight": [
-   0.145,
+   0.1075,
    0.8444,
-   0.71,
+   0.785,
    0.1333
   ]
  },
@@ -840,7 +840,7 @@
    750
   ],
   "nec": "General knowledge (series and parallel circuits)",
-  "svg_sha1": "aab1c1109b77",
+  "svg_sha1": "0e930905f7a4",
   "highlight": [
    0.52,
    0.628,
@@ -859,12 +859,12 @@
    750
   ],
   "nec": "General knowledge (series and parallel circuits)",
-  "svg_sha1": "aab1c1109b77",
+  "svg_sha1": "0e930905f7a4",
   "highlight": [
    0.0325,
-   0.68,
+   0.704,
    0.4475,
-   0.26
+   0.236
   ]
  },
  "final-exam-#2-015": {
@@ -878,9 +878,9 @@
    675
   ],
   "nec": "General knowledge (transformers)",
-  "svg_sha1": "93f5a3a8cb89",
+  "svg_sha1": "bb8c84d093b5",
   "highlight": [
-   0.1375,
+   0.1175,
    0.1111,
    0.2125,
    0.1556
@@ -897,7 +897,7 @@
    750
   ],
   "nec": "General knowledge (series and parallel circuits)",
-  "svg_sha1": "aab1c1109b77",
+  "svg_sha1": "0e930905f7a4",
   "highlight": [
    0.52,
    0.628,
@@ -1309,7 +1309,7 @@
    690
   ],
   "nec": "440.64, 440.65",
-  "svg_sha1": "d479b9f301fb"
+  "svg_sha1": "b4af2dd9277f"
  },
  "final-exam-#3-019": {
   "file": "res://assets/diagrams/nec/in_sight_disconnect_430-102_440-14.png",
@@ -1846,7 +1846,7 @@
    0.6575,
    0.532,
    0.31,
-   0.128
+   0.212
   ]
  },
  "final-exam-#4-021": {
@@ -2392,7 +2392,7 @@
    750
   ],
   "nec": "220.5(C)",
-  "svg_sha1": "cb33d153b109"
+  "svg_sha1": "c8896b7a1d5b"
  },
  "final-exam-#4-053": {
   "file": "res://assets/diagrams/nec/motor_percentages_430.png",
@@ -2813,7 +2813,7 @@
    705
   ],
   "nec": "336.24",
-  "svg_sha1": "ff235ebf7e3d"
+  "svg_sha1": "6b287d41cee0"
  },
  "final-exam-#5-032": {
   "file": "res://assets/diagrams/nec/raceway_fill_ch9_348-22.png",
@@ -2878,7 +2878,7 @@
    720
   ],
   "nec": "368.234(A), 368.234(B)",
-  "svg_sha1": "a759710df17d"
+  "svg_sha1": "fc6840de7c45"
  },
  "final-exam-#5-052": {
   "file": "res://assets/diagrams/nec/busway_reduction_368-17b.png",
@@ -3034,7 +3034,7 @@
    750
   ],
   "nec": "220.5(C)",
-  "svg_sha1": "cb33d153b109"
+  "svg_sha1": "c8896b7a1d5b"
  },
  "open-book-exam-#1-004": {
   "file": "res://assets/diagrams/nec/framing_protection_300-4.png",
@@ -3073,7 +3073,7 @@
    804
   ],
   "nec": "408.18(C), 408.3(A)(2)",
-  "svg_sha1": "c516f86362de"
+  "svg_sha1": "1053b675a6f0"
  },
  "open-book-exam-#1-008": {
   "file": "res://assets/diagrams/nec/electrode_system_250-52_250-53.png",
@@ -3164,7 +3164,7 @@
    804
   ],
   "nec": "408.18(C), 408.3(A)(2)",
-  "svg_sha1": "c516f86362de"
+  "svg_sha1": "1053b675a6f0"
  },
  "open-book-exam-#1-016": {
   "file": "res://assets/diagrams/nec/equipment_receptacle_210-63.png",
@@ -3268,7 +3268,7 @@
    750
   ],
   "nec": "220.5(C)",
-  "svg_sha1": "cb33d153b109"
+  "svg_sha1": "c8896b7a1d5b"
  },
  "open-book-exam-#10-003": {
   "file": "res://assets/diagrams/nec/receptacle_markings_406.png",
@@ -3359,7 +3359,7 @@
    780
   ],
   "nec": "810.16(B)",
-  "svg_sha1": "57a7c79ec47d"
+  "svg_sha1": "5a9e5a1af8c8"
  },
  "open-book-exam-#10-013": {
   "file": "res://assets/diagrams/nec/raceway_supported_box_314-23e.png",
@@ -3833,7 +3833,7 @@
    630
   ],
   "nec": "680.62(E)",
-  "svg_sha1": "7dcaeb7e4fdc"
+  "svg_sha1": "ddfff5adc480"
  },
  "open-book-exam-#2-025": {
   "file": "res://assets/diagrams/nec/balcony_receptacle_210-52e3.png",
@@ -4145,7 +4145,7 @@
    900
   ],
   "nec": "Article 100 (Ground Fault, Effective Ground-Fault Current Path)",
-  "svg_sha1": "4b7abf80c0d4"
+  "svg_sha1": "469e17c3ddf4"
  },
  "open-book-exam-#4-011": {
   "file": "res://assets/diagrams/nec/spa_fan_height_680-43.png",
@@ -4301,7 +4301,7 @@
    705
   ],
   "nec": "525.5(B)(1), 525.5(B)(2)",
-  "svg_sha1": "28d809a9b27c"
+  "svg_sha1": "8bbb40ff92de"
  },
  "open-book-exam-#5-004": {
   "file": "res://assets/diagrams/nec/dedicated_space_110-26e.png",
@@ -4418,7 +4418,7 @@
    780
   ],
   "nec": "300.5(D)(1), 300.5(J)",
-  "svg_sha1": "4aa572e809f4"
+  "svg_sha1": "57823d1c7791"
  },
  "open-book-exam-#5-021": {
   "file": "res://assets/diagrams/nec/electrode_rod_pipe_ring_250-52_250-53a4.png",
@@ -4496,7 +4496,7 @@
    780
   ],
   "nec": "300.5(D)(1), 300.5(J)",
-  "svg_sha1": "4aa572e809f4"
+  "svg_sha1": "57823d1c7791"
  },
  "open-book-exam-#6-009": {
   "file": "res://assets/diagrams/nec/in_sight_disconnect_430-102_440-14.png",
@@ -4626,7 +4626,7 @@
    705
   ],
   "nec": "200.3",
-  "svg_sha1": "df02ebc47c3c"
+  "svg_sha1": "542a8b768eac"
  },
  "open-book-exam-#7-004": {
   "file": "res://assets/diagrams/nec/imaging_feeder_517-73b.png",
@@ -4756,7 +4756,7 @@
    864
   ],
   "nec": "225.37, 230.2(E), 700.7(A)",
-  "svg_sha1": "9174cec8263d"
+  "svg_sha1": "3fb630dcc398"
  },
  "open-book-exam-#7-017": {
   "file": "res://assets/diagrams/nec/termination_temp_110-14c.png",
@@ -4834,7 +4834,7 @@
    864
   ],
   "nec": "225.37, 230.2(E), 700.7(A)",
-  "svg_sha1": "9174cec8263d"
+  "svg_sha1": "3fb630dcc398"
  },
  "open-book-exam-#9-012": {
   "file": "res://assets/diagrams/nec/branch_circuit_rating_210.png",

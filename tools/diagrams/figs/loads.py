@@ -36,12 +36,12 @@ def floor_area(f):
     f.rect(hx0, hy0, gx1 - hx0, hy1 - hy0, fill=PANEL_2, stroke=LINE, sw=SW_THIN)
     f.rect(hx0 + wt, hy0 + wt, hx1 - hx0 - 1.5 * wt, hy1 - hy0 - 2 * wt, fill=PANEL, stroke=LINE, sw=SW_THIN)
     f.rect(hx1 + wt / 2, hy0 + wt, gx1 - hx1 - 1.5 * wt, hy1 - hy0 - 2 * wt, fill=PANEL, stroke=LINE, sw=SW_THIN)
-    f.text(300, 236, "living area", T_LABEL, TEXT, bold=True)
+    f.text(330, 236, "living area", T_LABEL, TEXT, bold=True)
     f.text(580, 208, "attached", T_LABEL, TEXT, bold=True)
     f.text(580, 236, "garage", T_LABEL, TEXT, bold=True)
     # Unfinished space in one corner.
-    f.hatch(hx0 + wt, hy0 + wt, 130, 90, EDGE, op=0.22)
-    f.lines(hx0 + wt + 65, hy0 + wt + 36, ["unfinished,", "not adaptable"], T_MIN, TEXT, bold=True, gap=1.1)
+    f.hatch(hx0 + wt, hy0 + wt, 146, 90, EDGE, op=0.22)
+    f.lines(hx0 + wt + 73, hy0 + wt + 36, ["unfinished,", "not adaptable"], T_MIN, TEXT, bold=True, gap=1.1)
     # Open porch: slab outline, no walls.
     px0, px1, py1 = 210, 420, 410
     f.dline(px0, hy1, px0, py1, LINE, SW_OBJ)
@@ -59,7 +59,7 @@ def floor_area(f):
     # What counts toward the dwelling floor area (the #10-002 answer).
     f.value(580, 290, "counted", 26, records=counts, label="?", what="garage counted (2023)")
     f.value(315, 440, "not counted", 26, NO, records=counts, label="?", what="open porch not counted")
-    f.value(hx0 + wt + 65, hy0 + wt + 118, "not counted", T_NOTE, NO, records=counts, label="?",
+    f.value(hx0 + wt + 73, hy0 + wt + 118, "not counted", T_NOTE, NO, records=counts, label="?",
             what="unfinished space not counted")
     f.tag(f.w - 24, f.h - 14, "NEC 220.5(C)", anchor="end")
 

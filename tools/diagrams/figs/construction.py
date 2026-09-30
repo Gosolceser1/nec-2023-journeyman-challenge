@@ -28,8 +28,8 @@ def switchboard_sections(f):
         f.line(x0 + k * w / 3, y0, x0 + k * w / 3, y0 + h, EDGE, 2)
     f.text(x0 + w / 2, y0 + h / 2 + 8, "sections", T_MIN, TEXT, bold=True)
     f.lines(185, 116, ["field connections need", "rear or side access"], T_MIN, AMBER, bold=True, gap=1.1)
-    sides = [(x0 + w / 2, y0 - 36, "rear", NO), (x0 - 44, y0 + h / 2 + 7, "left", NO),
-             (x0 + w + 44, y0 + h / 2 + 7, "right", NO), (x0 + w / 2, y0 + h + 44, "front", OK)]
+    sides = [(x0 + w / 2, y0 - 36, "rear", NO), (x0 - 38, y0 + h / 2 + 7, "left", NO),
+             (x0 + w + 36, y0 + h / 2 + 7, "right", NO), (x0 + w / 2, y0 + h + 44, "front", OK)]
     for sx, sy, name, color in sides:
         f.value(sx, sy, name, T_NOTE, color, records=mark, pad=6, what=f"the {name} side")
     f.value_lines(185, 440, ["marking goes on the", "side seen before opening"], T_MIN, TEXT, records=mark,
@@ -59,9 +59,15 @@ def type_letters(f):
     f.title("Type letters decoder", y=34)
     _card(f, 20, 56, 250, 480, "building wire")
     _rows(f, 34, 116, [("T", "thermoplastic"), ("R", "thermoset"), ("H", "75 C"), ("HH", "high heat,"),
-                        ("", "dry or damp"), ("W", "wet"), ("N", "nylon jacket")])
+                        ("", "dry or damp")])
+    # On the cord questions the building-wire W and -2 rows would answer (or
+    # mislead on SPT-2) by analogy, so they are masked there too.
+    f.text(34, 266, "W", T_MIN, TEXT, "start", True)
+    f.value(90, 266, "wet", T_MIN, MUTED, anchor="start", bold=False, records=wet, pad=5,
+            what="what W means on building wire")
+    _rows(f, 34, 296, [("N", "nylon jacket")])
     f.text(34, 340, "-2", T_NOTE, TEXT, "start", True)
-    f.value_lines(92, 340, ["90 C, wet", "or dry"], T_MIN, anchor="start", records=dash2, pad=6, gap=1.15,
+    f.value_lines(92, 340, ["90 C, wet", "or dry"], T_MIN, anchor="start", records=dash2 + wet, pad=6, gap=1.15,
                   what="what the -2 means")
     f.text(34, 440, "e.g. RHW-2, THWN-2", T_MIN, MUTED, "start")
     _card(f, 285, 56, 230, 480, "cable")

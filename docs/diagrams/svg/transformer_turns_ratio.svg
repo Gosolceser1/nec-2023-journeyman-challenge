@@ -18,13 +18,13 @@
 <line x1="120.0" y1="294.0" x2="224.0" y2="294.0" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="576.0" y1="190.0" x2="680.0" y2="190.0" stroke="#34d399" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="576.0" y1="226.0" x2="680.0" y2="226.0" stroke="#34d399" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
-<text x="120.0" y="74.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="start">primary</text>
-<text x="120.0" y="96.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="start">many turns</text>
+<text x="104.0" y="74.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="start">primary</text>
+<text x="104.0" y="96.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="start">many turns</text>
 <text x="120.0" y="364.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#fbbf24" text-anchor="start">2,400 V in</text>
 <text x="600.0" y="120.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">secondary</text>
 <text x="600.0" y="142.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">fewer turns</text>
 <text x="600.0" y="364.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="start">120 V out</text>
-<rect x="120.0" y="384.0" width="560.0" height="52.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="90.0" y="384.0" width="620.0" height="52.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="400.0" y="418.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">20:1 = 20 primary turns per secondary turn = 1/20 the voltage</text>
 <text x="400.0" y="212.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">step-down</text>
 </svg>

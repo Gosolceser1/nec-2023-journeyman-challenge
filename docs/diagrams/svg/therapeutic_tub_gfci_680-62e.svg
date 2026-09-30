@@ -15,7 +15,7 @@
 <line x1="488.0" y1="114.0" x2="494.0" y2="114.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <text x="480.0" y="96.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="end">outside:</text>
 <text x="480.0" y="120.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="end">no rule here</text>
-<line x1="250.0" y1="238.0" x2="380.2" y2="335.7" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="314.0" y1="286.0" x2="380.2" y2="335.7" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <polygon points="386.0,340.0 372.8,337.6 380.0,328.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="354.0" y="302.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="start">6 ft</text>
 <rect x="546.0" y="70.0" width="234.0" height="250.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>

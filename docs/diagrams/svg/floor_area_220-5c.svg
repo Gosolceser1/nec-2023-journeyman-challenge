@@ -4,22 +4,23 @@
 <rect x="90.0" y="130.0" width="600.0" height="210.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
 <rect x="104.0" y="144.0" width="359.0" height="182.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
 <rect x="477.0" y="144.0" width="199.0" height="182.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
-<text x="300.0" y="236.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">living area</text>
+<text x="330.0" y="236.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">living area</text>
 <text x="580.0" y="208.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">attached</text>
 <text x="580.0" y="236.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">garage</text>
-<rect x="104.0" y="144.0" width="130.0" height="90.0" rx="0" fill="#64748b" fill-opacity="0.22" stroke="#64748b" stroke-width="2"/>
+<rect x="104.0" y="144.0" width="146.0" height="90.0" rx="0" fill="#64748b" fill-opacity="0.22" stroke="#64748b" stroke-width="2"/>
 <line x1="104.0" y1="164.0" x2="124.0" y2="144.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="104.0" y1="184.0" x2="144.0" y2="144.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="104.0" y1="204.0" x2="164.0" y2="144.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="104.0" y1="224.0" x2="184.0" y2="144.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="114.0" y1="234.0" x2="204.0" y2="144.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="134.0" y1="234.0" x2="224.0" y2="144.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="154.0" y1="234.0" x2="234.0" y2="154.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="174.0" y1="234.0" x2="234.0" y2="174.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="194.0" y1="234.0" x2="234.0" y2="194.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="214.0" y1="234.0" x2="234.0" y2="214.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
-<text x="169.0" y="180.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">unfinished,</text>
-<text x="169.0" y="202.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">not adaptable</text>
+<line x1="154.0" y1="234.0" x2="244.0" y2="144.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="174.0" y1="234.0" x2="250.0" y2="158.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="194.0" y1="234.0" x2="250.0" y2="178.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="214.0" y1="234.0" x2="250.0" y2="198.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="234.0" y1="234.0" x2="250.0" y2="218.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="177.0" y="180.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">unfinished,</text>
+<text x="177.0" y="202.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">not adaptable</text>
 <line x1="210.0" y1="340.0" x2="210.0" y2="350.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="210.0" y1="358.0" x2="210.0" y2="368.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="210.0" y1="376.0" x2="210.0" y2="386.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
@@ -61,7 +62,7 @@
 <text x="428.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f87171" text-anchor="end">inside faces: no</text>
 <text x="580.0" y="290.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">counted</text>
 <text x="315.0" y="440.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#f87171" text-anchor="middle">not counted</text>
-<text x="169.0" y="262.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f87171" text-anchor="middle">not counted</text>
+<text x="177.0" y="262.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f87171" text-anchor="middle">not counted</text>
 <rect x="627.9" y="460.0" width="158.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="637.9" y="488.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 220.5(C)</text>
 </svg>

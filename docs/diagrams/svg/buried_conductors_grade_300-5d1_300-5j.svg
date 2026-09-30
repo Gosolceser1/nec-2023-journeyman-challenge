@@ -55,15 +55,16 @@
 <text x="190.0" y="114.2" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">enclosure</text>
 <line x1="232.0" y1="116.0" x2="178.0" y2="150.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <circle cx="178.0" cy="150.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
-<text x="190.0" y="450.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">(protection need not go deeper than 18 in)</text>
+<text x="322.0" y="450.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">(protection need not go</text>
+<text x="322.0" y="472.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">deeper than 18 in)</text>
 <rect x="580.0" y="210.0" width="120.0" height="90.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
 <text x="640.0" y="262.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">equipment</text>
 <line x1="640.0" y1="300.0" x2="640.0" y2="350.0" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="640.0" y1="300.0" x2="640.0" y2="350.0" stroke="#64748b" stroke-width="12" stroke-linecap="round" stroke-opacity="1.0"/>
 <path d="M 640 350 c 0 30 -70 20 -70 50 s 70 20 70 50 s -70 20 -40 30 L 460 480" fill="none" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="674.0" y="390.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">frost heave:</text>
-<text x="674.0" y="412.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">leave slack</text>
-<text x="674.0" y="450.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">S loop</text>
+<text x="668.0" y="390.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">frost heave:</text>
+<text x="668.0" y="412.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">leave slack</text>
+<text x="668.0" y="450.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">S loop</text>
 <line x1="390.0" y1="340.0" x2="390.0" y2="315.2" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <polygon points="390.0,308.0 396.0,320.0 384.0,320.0" fill="#fbbf24" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <line x1="450.0" y1="340.0" x2="450.0" y2="315.2" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>

@@ -244,7 +244,8 @@
         "A three-way connects one common terminal to either of two travelers, which is single pole, double throw."
       ],
       "prompt": "A three-way switch is equivalent to a ___ switch.",
-      "gist": "A hallway switch and a stair switch controlling one luminaire each require three terminals. The question asks which standard switch type that is."
+      "gist": "A hallway switch and a stair switch controlling one luminaire each require three terminals. The question asks which standard switch type that is.",
+      "tip_title": "Switches"
     },
     "final-exam-#1-041": {
       "reference_text": "Motor Control Circuits • Control Station Wiring\nA stop pushbutton switch has normally closed (NC) contacts that must open the control circuit to de-energize the magnetic holding coil. Therefore, the stop switch is always wired in series with the motor control circuit.",
@@ -1013,7 +1014,8 @@
         "6 inches is below the 305 mm (12 inches) threshold in 470.11.",
         "470.11 requires a thermal barrier when spacing to combustibles is less than 305 mm (12 inches)."
       ],
-      "gist": "Resistors and reactors run hot, so they need either distance from combustible material or a thermal barrier. The question asks the spacing below which a barrier is required."
+      "gist": "Resistors and reactors run hot, so they need either distance from combustible material or a thermal barrier. The question asks the spacing below which a barrier is required.",
+      "tip_title": "Resistors and reactors"
     },
     "final-exam-#5-066": {
       "article": "356.22",
@@ -1049,7 +1051,8 @@
           "NOTE: Chapter 9, Table 1, Percent of Cross Section of Conduit and Tubing for Conductors and Cables. Table 4 gives the conduit areas these percentages apply to."
         ]
       ],
-      "gist": "Conductor fill for LFNC comes from a percentage-of-area table in Chapter 9. The question asks which table."
+      "gist": "Conductor fill for LFNC comes from a percentage-of-area table in Chapter 9. The question asks which table.",
+      "tip_title": "Conduit fill"
     },
     "final-exam-#5-068": {
       "article": "344.10(C)",
@@ -1174,7 +1177,8 @@
         "Diagram B does not show the switch contact paired with the thermal element that marks a temperature switch.",
         "Diagram C does not show the switch contact paired with the thermal element that marks a temperature switch.",
         "Diagram D does not show the switch contact paired with the thermal element that marks a temperature switch."
-      ]
+      ],
+      "tip_title": "Switch symbols"
     },
     "final-exam-#3-070": {
       "reference_text": "Electrical Schematic Symbols • Delta-Wound Generator\nOn electrical single-line diagrams, a three-phase delta-connected alternator or generator is represented by a circle with an inscribed equilateral triangle (representing the closed delta loop).",
@@ -1188,7 +1192,8 @@
       ],
       "prompt": "The symbol for a three-phase delta wound generator consists of a circle with a ___ scribed inside.",
       "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"The symbol for a three-phase delta wound generator consists of a circle with a ___ scribed inside.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
-      "gist": "Generator symbols show how the windings are connected by drawing a shape inside a circle. The question asks what shape marks a delta-wound machine."
+      "gist": "Generator symbols show how the windings are connected by drawing a shape inside a circle. The question asks what shape marks a delta-wound machine.",
+      "tip_title": "Generator symbols"
     },
     "open-book-exam-#1-002": {
       "article": "Article 100",
@@ -1688,7 +1693,8 @@
         "40 percent is not the Code value; 310.3(B) sets a 10 percent minimum.",
         "70 percent would make it mostly copper; 310.3(B) requires only 10 percent minimum."
       ],
-      "gist": "Copper-clad aluminum conductors require a minimum copper percentage. The question asks the minimum percent copper."
+      "gist": "Copper-clad aluminum conductors require a minimum copper percentage. The question asks the minimum percent copper.",
+      "tip_title": "Conductor types"
     },
     "open-book-exam-#10-019": {
       "reference_text": "517.18(B)(1) Minimum Number and Supply\nEach patient bed location shall be provided with a minimum of eight receptacles.",
@@ -1732,7 +1738,8 @@
         "Meter II is wired in series in one conductor, so all the load current flows through it: the ammeter connection.",
         "Meter III is connected across the two conductors, in parallel with the load, which is how a voltmeter is connected.",
         "Only meter II is connected purely in series, so I, II, or III is wrong."
-      ]
+      ],
+      "tip_title": "Meters"
     },
     "final-exam-#1-023": {
       "reference_text": "250.122(F)(1) Conductor Installations in Raceways, Auxiliary Gutters, or Cable Trays\n(b) Multiple Raceways. If conductors are installed in multiple raceways and are connected in parallel, a wire-type equipment grounding conductor, if used, shall be installed in each raceway and shall be connected in parallel. The equipment grounding conductor installed in each raceway shall be sized in accordance with 250.122 based on the rating of the overcurrent protective device for the feeder or branch circuit.",
@@ -4106,7 +4113,8 @@
         "Chapter 9 Table 4 lists dimensions and percent area of conduit and tubing."
       ],
       "table_after_answer": true,
-      "gist": "Copper conductor resistance values are tabulated in Chapter 9. The question asks which table holds them."
+      "gist": "Copper conductor resistance values are tabulated in Chapter 9. The question asks which table holds them.",
+      "tip_title": "Conductor properties"
     },
     "open-book-exam-#7-003": {
       "reference_text": "110.16(A) General\nElectrical equipment, such as switchboards, switchgear, enclosed panelboards, industrial control panels, meter socket enclosures, and motor control centers, that is in other than dwelling units, and is likely to require examination, adjustment, servicing, or maintenance while energized, shall be field or factory marked to warn qualified persons of potential electric arc flash hazards. The marking shall meet the requirements in 110.21(B) and shall be located so as to be clearly visible to qualified persons before examination, adjustment, servicing, or maintenance of the equipment.",
@@ -4404,7 +4412,8 @@
         "300.4(D) requires at least 32 millimeters (1 1/4 inches) from the edge of the framing member.",
         "1 1/2 inches exceeds the minimum; 300.4(D) requires only 1 1/4 inches."
       ],
-      "gist": "Fasteners can penetrate cables secured flat against framing, so the Code requires a setback from the framing edge. The question asks that setback distance."
+      "gist": "Fasteners can penetrate cables secured flat against framing, so the Code requires a setback from the framing edge. The question asks that setback distance.",
+      "tip_title": "Cable protection"
     },
     "final-exam-#1-039": {
       "reference_text": "430.8 Marking on Motor Controllers\nA motor controller that includes motor overload protection suitable for group motor application shall be marked with the motor overload protection and the maximum branch-circuit short-circuit and ground-fault protection for such applications.\nCombination motor controllers that employ adjustable instantaneous trip circuit breakers shall be clearly marked to indicate the ampere settings of the adjustable trip element.",
@@ -4987,7 +4996,8 @@
         "Chapter 9, Table 5 gives insulated conductor dimensions, not the fill percentages."
       ],
       "tip_short": "Chapter 9, Table 1: 53 percent for one conductor, 31 percent for two, and 40 percent for more than two. Correct: C — Table 1, Chapter 9. Chapter 9, Table 1 sets the percent of cross section: 53 percent for one, 31 percent for two, and 40 percent for over two. Not A: Chapter 9, Table 4 gives conduit and tubing dimensions and areas, which you use with the fill percentages. Not B: Chapter 9, Table 8 gives conductor properties such as circular mils and DC resistance. Not D: Chapter 9, Table 5 gives insulated conductor dimensions, not the fill percentages.",
-      "lookup_summary": "Lookup clues: conduit, cable, conductors. Start with Chapter 9, Table 1, then read the matching subsection and exceptions."
+      "lookup_summary": "Lookup clues: conduit, cable, conductors. Start with Chapter 9, Table 1, then read the matching subsection and exceptions.",
+      "tip_title": "Conduit fill"
     },
     "final-exam-#2-030": {
       "answers": [
@@ -5107,7 +5117,7 @@
       "tip_short": "Table 210.21(B)(2) caps cord-and-plug load at 80 percent of the receptacle rating: 12, 16, or 24 amperes. Correct: A — 210.21(B)(2)."
     },
     "final-exam-#2-040": {
-      "gist": "Outdoor overhead conductors over 1000 volts must stay high enough above roads, rails, water, and fields. NEC 2023 moved these rules into a new article for over-1000-volt branch circuits and feeders. The question asks the table number.",
+      "gist": "Outdoor overhead conductors over 1000 volts must stay high enough above roads, rails, water, and fields for the traffic that passes beneath them. The question asks which table lists those clearances.",
       "reference_text": "Table 235.360(A) Clearances over Roadways, Walkways, Rail, Water, and Open Land\nLocation\tClearance\nm\tft\nOpen land subject to vehicles, cultivation, or grazing\t5.6\t18.5\nRoadways, driveways, parking lots, and alleys\t5.6\t18.5\nWalkways\t4.1\t13.5\nRails\t8.1\t26.5\nSpaces and ways for pedestrians and restricted traffic\t4.4\t14.5\nWater areas not suitable for boating\t5.2\t17.0",
       "choice_notes": [
         "Table 300.5 is the old name of the burial cover table (now Table 300.5(A)), not overhead clearances.",
@@ -5174,7 +5184,8 @@
         "70 percent would make it mostly copper; 310.3(B) requires only 10 percent minimum."
       ],
       "tip_short": "Copper-clad aluminum: a thin copper skin of at least 10 percent of the cross-sectional area. Correct: A — 10.",
-      "lookup_summary": "Lookup clues: conductors. Start with 310.3(B)(3), then read the matching subsection and exceptions."
+      "lookup_summary": "Lookup clues: conductors. Start with 310.3(B)(3), then read the matching subsection and exceptions.",
+      "tip_title": "Conductor types"
     },
     "final-exam-#2-046": {
       "prompt": "Concrete, brick, or tile walls are considered as being ___.",
@@ -5279,7 +5290,8 @@
         "25 degrees is not a quarter of a circle.",
         "180 degrees is a half circle, two quarter bends."
       ],
-      "tip_short": "A quarter bend is one quarter of 360 degrees, which is a 90-degree bend. Correct: A — 90."
+      "tip_short": "A quarter bend is one quarter of 360 degrees, which is a 90-degree bend. Correct: A — 90.",
+      "tip_title": "Raceway bends"
     },
     "final-exam-#2-055": {
       "answers": [
@@ -5549,7 +5561,8 @@
         "NEC 2023 Table 9 gives 4/0 aluminum in steel conduit 0.11 ohms to neutral per 1000 feet, for both AC resistance and effective Z at 0.85 PF."
       ],
       "tip_short": "Chapter 9, Table 9: each size has two rows, ohms per kilometer then ohms per 1000 feet; pick the aluminum and the steel conduit columns. Correct: D — 0.11.",
-      "lookup_summary": "Lookup clues: raceway. Start with Table 9, Chapter 9, then read the matching subsection and exceptions."
+      "lookup_summary": "Lookup clues: raceway. Start with Table 9, Chapter 9, then read the matching subsection and exceptions.",
+      "tip_title": "Conductor properties"
     },
     "final-exam-#4-007": {
       "gist": "A system called 120/240 may actually measure a few volts higher or lower. The question asks the Article 100 term for the class name given to it.",
@@ -6550,7 +6563,8 @@
         "Labeled is not the term in 408.7; the closures must be identified for the purpose.",
         "Marked is not the term in 408.7; the closures must be identified for the purpose."
       ],
-      "tip_short": "Open breaker spaces in a panelboard get identified filler plates (or other approved means equal to the enclosure wall). Correct: B — identified."
+      "tip_short": "Open breaker spaces in a panelboard get identified filler plates (or other approved means equal to the enclosure wall). Correct: B — identified.",
+      "tip_title": "Panelboards"
     },
     "open-book-exam-#11-003": {
       "article": "Article 100",
@@ -6773,7 +6787,8 @@
         "Common areas are covered, but 406.12(1) also includes dwelling units and accessory buildings.",
         "406.12(1) requires listed tamper-resistant receptacles in dwelling units, their accessory buildings, and common areas."
       ],
-      "tip_short": "Tamper-resistant receptacles: all dwelling units plus their garages, accessory buildings, and common areas. Correct: D — all of these. 406.12(1) requires listed tamper-resistant receptacles in dwelling units, their accessory buildings, and common areas. Not B: Accessory buildings are covered, but 406.12(1) also includes the dwelling units and common areas. Not C: Common areas are covered, but 406.12(1) also includes dwelling units and accessory buildings."
+      "tip_short": "Tamper-resistant receptacles: all dwelling units plus their garages, accessory buildings, and common areas. Correct: D — all of these. 406.12(1) requires listed tamper-resistant receptacles in dwelling units, their accessory buildings, and common areas. Not B: Accessory buildings are covered, but 406.12(1) also includes the dwelling units and common areas. Not C: Common areas are covered, but 406.12(1) also includes dwelling units and accessory buildings.",
+      "tip_title": "Tamper-resistant receptacles"
     },
     "open-book-exam-#11-022": {
       "article": "430.102(B)",
@@ -6842,7 +6857,8 @@
         "691.9 says buildings whose sole purpose is to house and protect supply station equipment shall not be required to comply with 690.12.",
         "Always is the opposite of 691.9, which exempts these buildings from 690.12."
       ],
-      "tip_short": "Large-scale PV (Article 691): buildings that only house supply station equipment are exempt from 690.12 rapid shutdown, but written shutdown procedures must be on site. Correct: C — not be required to. Not B: 691.9 exempts these buildings; they are not required to comply with 690.12."
+      "tip_short": "Large-scale PV (Article 691): buildings that only house supply station equipment are exempt from 690.12 rapid shutdown, but written shutdown procedures must be on site. Correct: C — not be required to. Not B: 691.9 exempts these buildings; they are not required to comply with 690.12.",
+      "tip_title": "Solar PV systems"
     },
     "open-book-exam-#12-003": {
       "gist": "At a fuel dispenser, even a current-carrying conductor that is near ground potential can spark in the vapor area. The question asks which conductor the emergency shutoff must also open.",
@@ -6911,7 +6927,8 @@
         "Ceilings are included, but 300.21 also names walls, partitions, and floors.",
         "300.21 requires firestopping of penetrations through fire-resistant-rated walls, partitions, floors, or ceilings."
       ],
-      "tip_short": "Firestop every penetration through a fire-rated wall, partition, floor, or ceiling to keep its rating (300.21). Correct: D — all of these. 300.21 requires firestopping of penetrations through fire-resistant-rated walls, partitions, floors, or ceilings."
+      "tip_short": "Firestop every penetration through a fire-rated wall, partition, floor, or ceiling to keep its rating (300.21). Correct: D — all of these. 300.21 requires firestopping of penetrations through fire-resistant-rated walls, partitions, floors, or ceilings.",
+      "tip_title": "Fire-rated penetrations"
     },
     "open-book-exam-#12-009": {
       "gist": "PV dc circuits can stay energized whenever the sun shines, so they are kept apart from the ac side. The question asks where they may not share space with the ac conductors.",
@@ -6944,7 +6961,8 @@
         "695.7(D) limits the running voltage drop at the contactor load terminals to 5 percent at 115 percent of full-load current.",
         "7.5 percent is more than 695.7(D) allows; the running limit is 5 percent."
       ],
-      "tip_short": "Fire pump voltage drop (695.7): 15 percent at the controller line terminals while starting, 5 percent at the motor terminals while running at 115 percent of full-load current. Correct: C — 5."
+      "tip_short": "Fire pump voltage drop (695.7): 15 percent at the controller line terminals while starting, 5 percent at the motor terminals while running at 115 percent of full-load current. Correct: C — 5.",
+      "tip_title": "Fire pumps"
     },
     "open-book-exam-#12-012": {
       "gist": "Trees sway, grow, and fall in storms, which strains anything tied to them. The question asks what the Code forbids hanging on a tree.",
@@ -7978,7 +7996,8 @@
         "300.4(D) requires the nearest outside surface of the cable to be at least 32 mm (1 1/4 inches) from the nearest edge of the framing member.",
         "1 1/2 inches is more than the minimum; 300.4(D) requires 1 1/4 inches."
       ],
-      "tip_short": "Cables run parallel to studs or joists stay at least 1 1/4 inches back from the edge, or get a 1/16-inch steel plate (300.4(D)). Correct: C — 1 1/4\". 300.4(D) requires the nearest outside surface of the cable to be at least 32 mm (1 1/4 inches) from the nearest edge of the framing member. Not A: 1/2 inch is too close to the edge; 300.4(D) requires at least 1 1/4 inches. Not B: 1 inch is less than the 1 1/4 inches required by 300.4(D). Not D: 1 1/2 inches is more than the minimum; 300.4(D) requires 1 1/4 inches."
+      "tip_short": "Cables run parallel to studs or joists stay at least 1 1/4 inches back from the edge, or get a 1/16-inch steel plate (300.4(D)). Correct: C — 1 1/4\". 300.4(D) requires the nearest outside surface of the cable to be at least 32 mm (1 1/4 inches) from the nearest edge of the framing member. Not A: 1/2 inch is too close to the edge; 300.4(D) requires at least 1 1/4 inches. Not B: 1 inch is less than the 1 1/4 inches required by 300.4(D). Not D: 1 1/2 inches is more than the minimum; 300.4(D) requires 1 1/4 inches.",
+      "tip_title": "Cable protection"
     },
     "open-book-exam-#5-011": {
       "gist": "A splice is the weak point of a cord, so cords are normally installed in one piece, with a repair allowance only for the tougher cord families. The question asks which second cord family may be repaired.",
@@ -8470,7 +8489,8 @@
         "Identified is a different defined term; 300.21 requires approved methods.",
         "300.21 requires openings around penetrations of fire-resistant-rated construction to be firestopped using approved methods."
       ],
-      "tip_short": "Penetrations of fire-rated walls, floors and ceilings must be firestopped by approved methods, meaning acceptable to the authority having jurisdiction (300.21). Correct: D — approved."
+      "tip_short": "Penetrations of fire-rated walls, floors and ceilings must be firestopped by approved methods, meaning acceptable to the authority having jurisdiction (300.21). Correct: D — approved.",
+      "tip_title": "Fire-rated penetrations"
     },
     "open-book-exam-#6-021": {
       "gist": "Small snap switches in a panelboard cannot withstand a large fault, so the panel feeding them has a limit on its overcurrent protection. The question asks that limit.",
@@ -8565,7 +8585,8 @@
         "Z1956.G is not an ANSI standard cited by the NEC for hazard markings in 110.21(B)."
       ],
       "tip_short": "Field-applied hazard labels point to the ANSI Z535 safety-sign family; its part 4 covers product safety signs and labels. Correct: A — Z535.4. 110.21(B) Informational Note No. 2 cites this ANSI standard (2011, reaffirmed 2017), Product Safety Signs and Labels.",
-      "lookup_summary": "Lookup clues: identify the equipment, location, and requirement. Start with 110.21(B), then read the matching subsection and exceptions."
+      "lookup_summary": "Lookup clues: identify the equipment, location, and requirement. Start with 110.21(B), then read the matching subsection and exceptions.",
+      "tip_title": "Warning labels"
     },
     "open-book-exam-#9-004": {
       "prompt": "Where there is equipment for more than one elevator car in the machine room, the heating and air-conditioning disconnecting means shall be numbered to correspond to the identifying number of the elevator car that they control. The disconnecting means shall be provided with a sign to identify the ___ of the supply side overcurrent protective device.",
@@ -8590,7 +8611,8 @@
         "Chapter 9 Table 1 lists the percent of cross section of conduit and tubing for conductors and cables.",
         "Chapter 9 Table 5 gives dimensions of insulated conductors and fixture wires, not fill percentages."
       ],
-      "tip_short": "Chapter 9 Table 1 sets the fill percentage: 53 percent for one conductor, 31 percent for two, 40 percent for over two. Correct: C — Table 1, Chapter 9. Chapter 9 Table 1 lists the percent of cross section of conduit and tubing for conductors and cables. Not A: Chapter 9 Table 4 gives the dimensions and usable areas of conduit and tubing, not the fill percentages. Not B: Chapter 9 Table 8 gives conductor properties such as area and resistance, not fill percentages. Not D: Chapter 9 Table 5 gives dimensions of insulated conductors and fixture wires, not fill percentages."
+      "tip_short": "Chapter 9 Table 1 sets the fill percentage: 53 percent for one conductor, 31 percent for two, 40 percent for over two. Correct: C — Table 1, Chapter 9. Chapter 9 Table 1 lists the percent of cross section of conduit and tubing for conductors and cables. Not A: Chapter 9 Table 4 gives the dimensions and usable areas of conduit and tubing, not the fill percentages. Not B: Chapter 9 Table 8 gives conductor properties such as area and resistance, not fill percentages. Not D: Chapter 9 Table 5 gives dimensions of insulated conductors and fixture wires, not fill percentages.",
+      "tip_title": "Conduit fill"
     },
     "open-book-exam-#9-006": {
       "gist": "Below 800 amperes the Code lets you round up to the next standard device size, but above 800 amperes that allowance ends. The question asks how the conductor ampacity must compare with the device rating.",
@@ -8612,7 +8634,8 @@
         "Identified is a different defined term; 300.6(A) uses approved for the thread compound.",
         "Labeled is not the requirement in 300.6(A); the compound must be approved by the AHJ."
       ],
-      "tip_short": "Field-cut threads on ferrous conduit get an approved electrically conductive, corrosion-resistant compound; approved means acceptable to the AHJ. Correct: A — Approved."
+      "tip_short": "Field-cut threads on ferrous conduit get an approved electrically conductive, corrosion-resistant compound; approved means acceptable to the AHJ. Correct: A — Approved.",
+      "tip_title": "Corrosion protection"
     },
     "open-book-exam-#9-008": {
       "prompt": "A permanent and legible ___ diagram of the local switching arrangement, clearly identifying each point of connection to the high-voltage section, shall be provided within sight of each point of connection.",
@@ -8624,7 +8647,8 @@
         "495.25(B) requires a permanent and legible single-line diagram of the local switching arrangement.",
         "A connection diagram is not the required type; 495.25(B) specifies a single-line diagram."
       ],
-      "tip_short": "Backfeed on over-1000-volt equipment: post a permanent single-line diagram of the switching within sight of each connection point. Correct: C — single-line."
+      "tip_short": "Backfeed on over-1000-volt equipment: post a permanent single-line diagram of the switching within sight of each connection point. Correct: C — single-line.",
+      "tip_title": "Switching diagrams"
     },
     "open-book-exam-#9-009": {
       "prompt": "For motors marked with design letters B, C, or D, conductors having a higher insulation rating shall be permitted to be used, provided the ampacity of such conductors does not exceed the ___ ampacity.",
@@ -8731,7 +8755,7 @@
     },
     "open-book-exam-#9-017": {
       "article": "Table 235.360(A)",
-      "gist": "Outdoor overhead conductors over 1000 volts must stay high enough above roads, rails, water, and fields. NEC 2023 moved these rules into a new article for over-1000-volt branch circuits and feeders. The question asks the table number.",
+      "gist": "Outdoor overhead conductors over 1000 volts must stay high enough above roads, rails, water, and fields for the traffic that passes beneath them. The question asks which table lists those clearances.",
       "reference_text": "Table 235.360(A) Clearances over Roadways, Walkways, Rail, Water, and Open Land\nLocation\tClearance\nm\tft\nOpen land subject to vehicles, cultivation, or grazing\t5.6\t18.5\nRoadways, driveways, parking lots, and alleys\t5.6\t18.5\nWalkways\t4.1\t13.5\nRails\t8.1\t26.5\nSpaces and ways for pedestrians and restricted traffic\t4.4\t14.5\nWater areas not suitable for boating\t5.2\t17.0",
       "choice_notes": [
         "Table 300.5 is the old name of the burial cover table (now Table 300.5(A)), not overhead clearances.",
@@ -8754,7 +8778,7 @@
       "tip_short": "Bigger wire does not raise the circuit rating: the overcurrent device's rating or setting still determines it. Correct: C — circuit rating."
     },
     "open-book-exam-#9-019": {
-      "gist": "Working space depth depends on voltage and on what is behind the worker. The 1000-volt-and-under table is in Part II of Article 110 and the over-1000-volt table is in Part III. This stem matches the title of the Part III table. The question asks its number.",
+      "gist": "The clear space a worker needs in front of equipment gets deeper with voltage and with what is behind the worker, and a table lists how deep. The question asks the number of the table with this title.",
       "reference_text": "Table 110.34(A) Minimum Depth of Clear Working Space at Electrical Equipment\nNominal Voltage to Ground\tMinimum Clear Distance\nCondition 1\tCondition 2\tCondition 3\n1001—2500V\t900 mm (3 ft)\t1.2 m (4 ft)\t1.5 m (5 ft)\n2501—9000 V\t1.2 m (4 ft)\t1.5 m (5 ft)\t1.8 m (6 ft)",
       "choice_notes": [
         "Table 110.28 covers enclosure type selection, not working space depth.",
@@ -8777,7 +8801,7 @@
     },
     "open-book-exam-#9-021": {
       "article": "545.7",
-      "gist": "Manufactured buildings have their own article that points back to the general service rules. The question asks which section in that article covers service equipment.",
+      "gist": "A manufactured building is built in a factory and set on site, and its service equipment still has to be installed where it can be reached and operated safely. The question asks which NEC section covers that.",
       "reference_text": "545.7 Service Equipment\nService equipment shall be installed in accordance with 230.70.",
       "choice_notes": [
         "230.60 is not the manufactured building rule; 545.7 covers their service equipment.",

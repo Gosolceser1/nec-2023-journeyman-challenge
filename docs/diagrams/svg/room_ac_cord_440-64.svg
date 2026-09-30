@@ -9,7 +9,7 @@
 <line x1="345.0" y1="172.0" x2="420.0" y2="172.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="345.0" y1="188.0" x2="420.0" y2="188.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="345.0" y1="204.0" x2="420.0" y2="204.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<text x="420.0" y="108.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">room A/C</text>
+<text x="440.0" y="108.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">room A/C</text>
 <path d="M 400 230 C 390 300, 300 300, 260 350" fill="none" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
 <rect x="224.0" y="345.0" width="32.0" height="50.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
 <line x1="235.0" y1="355.0" x2="235.0" y2="363.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>

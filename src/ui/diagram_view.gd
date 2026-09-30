@@ -521,7 +521,7 @@ class _ZoomSheet extends Control:
 		draw_style_box(sb, Rect2(card.position, card.size + Vector2(0, HINT_STRIP)))
 		view.draw_figure(self, card.grow(-16), 1.6)
 		var font := get_theme_default_font()
-		var hint := "Tap anywhere or press Esc to close"
+		var hint := "Tap anywhere to close" if OS.has_feature("mobile") else "Click anywhere or press Esc to close"
 		var fs := 15
 		var w := font.get_string_size(hint, HORIZONTAL_ALIGNMENT_LEFT, -1, fs).x
 		var base_y := card.end.y + (HINT_STRIP - font.get_height(fs)) * 0.5 - 6 + font.get_ascent(fs)

@@ -45,7 +45,8 @@
 			"header": "PRACTICE EXAMS • FROM THE PDF STUDY SET",
 			"family_order": ["Open Book Exam", "Final Exam", "NE State Act"],
 			"family_titles": {"Open Book Exam": "Open Book", "Final Exam": "Finals", "NE State Act": "State Law"},
-			"summary": "{exams} exams • {questions} questions • {seen}% seen",
+			"tile_family": {"Final Exam": "Final"},
+			"summary": "{exams} {exam_word} • {questions} questions • {seen}% seen",
 			"tile_title": "{family} #{number}",
 			"tile_detail": "{count} questions",
 			"tile_detail_seen": "{seen}/{count} seen",
@@ -85,7 +86,7 @@
 			"entry_script": "res://src/ui/math_hub.gd",
 			"entry_method": "open",
 			"hooks": {"attach": "attach", "question": "on_question", "answered": "on_answered", "back": "handle_back"},
-			"note": "Calculation questions show a Show steps button after you answer.",
+			"note": "Calculation questions show a Show steps button after you answer, and each step's keys can be tried on the calculator.",
 			"missing": "Math study tools are on their way.",
 			"columns": {"desktop": 2, "mobile": 2}
 		},

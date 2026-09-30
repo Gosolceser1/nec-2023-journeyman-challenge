@@ -47,7 +47,7 @@ def fault_path(f):
     f.polyline([(560, top), (600, top), (620, 170), (576, 214)], WIRE_HOT, SW_WIRE)
     _spark(f, 572, 220)
     f.line(640, 270, 640, 300, WIRE_GND, SW_WIRE + 1)
-    f.lines(756, 160, ["hot", "touches", "the metal"], T_MIN, TEXT, bold=True, gap=1.1)
+    f.lines(654, 298, ["hot touches", "the metal"], T_MIN, TEXT, "start", True, gap=1.1)
     f.value(400, 186, "ground fault", 30, records=None, label="? name", what="name of case (a)")
     # (b) Open conductor and (c) hot-to-neutral, small.
     for x0, name in ((20, "open circuit"), (410, "short circuit")):

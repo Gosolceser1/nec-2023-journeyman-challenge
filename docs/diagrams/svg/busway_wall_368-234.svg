@@ -6,8 +6,8 @@
 <rect x="316.0" y="70.0" width="28.0" height="370.0" rx="0" fill="#94a3b8" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
 <text x="330.0" y="464.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">exterior wall</text>
 <rect x="111.0" y="150.0" width="18.0" height="290.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
-<text x="120.0" y="132.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">interior</text>
-<text x="120.0" y="154.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">fire wall</text>
+<text x="120.0" y="116.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">interior</text>
+<text x="120.0" y="138.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">fire wall</text>
 <rect x="20.0" y="206.0" width="760.0" height="48.0" rx="4" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
 <line x1="60.0" y1="206.0" x2="60.0" y2="254.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="150.0" y1="206.0" x2="150.0" y2="254.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>

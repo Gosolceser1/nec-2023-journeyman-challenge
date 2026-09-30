@@ -61,14 +61,14 @@ def antenna_power_lines(f):
     f.path(f"M {mx} 110 A 162 162 0 0 1 {mx + 162} 272", AMBER, 2)
     f.text(mx + 140, 150, "if it falls", T_MIN, AMBER, "start", True)
     # Pole line.
-    px = 640
+    px = 710
     f.line(px, gy, px, 120, WOOD, 12)
     f.line(px - 70, 140, px + 70, 140, WOOD, 8)
     for dx in (-60, 0, 60):
         f.circle(px + dx, 130, 6, fill=TEXT)
     f.line(420, 132, 780, 130, WIRE_HOT, 3)
     f.line(420, 132, 400, 134, WIRE_HOT, 3)
-    f.lines(px, 196, ["overhead light and", "power conductors"], T_MIN, TEXT, bold=True, gap=1.1)
+    f.lines(px - 20, 196, ["overhead light and", "power conductors"], T_MIN, TEXT, "end", True, gap=1.1)
     f.text(420, 300, "keep well away from lines", T_NOTE, TEXT, "start", True)
     b = f.text(420, 334, "of over", T_NOTE, TEXT, "start", True)
     f.value(b[0] + b[2] + 10, 334, "150 V to ground", T_NOTE, anchor="start", pad=6)
@@ -113,7 +113,7 @@ def multiple_supplies(f):
     disc = ["open-book-exam-#7-025"]
     f.title("One building, several supplies: plaques and signs", y=34)
     _card(f, 20, 56, 460, 480, "Building B is supplied by")
-    rows = [(130, "service (utility)"), (250, "feeder from bldg A"), (370, "branch circuit from bldg A")]
+    rows = [(130, "service (utility)"), (250, "feeder from bldg A"), (370, "branch circuit, bldg A")]
     for y, name in rows:
         f.line(40, y, 290, y, WIRE_HOT, SW_WIRE)
         f.text(44, y - 12, name, T_MIN, TEXT, "start", True)
@@ -188,7 +188,7 @@ def busway_wall(f):
     f.wall(330, 70, 440, 28, CONCRETE)
     f.text(330, 464, "exterior wall", T_MIN, MUTED)
     f.wall(120, 150, 440, 18)
-    f.lines(120, 132, ["interior", "fire wall"], T_MIN, MUTED, gap=1.1)
+    f.lines(120, 116, ["interior", "fire wall"], T_MIN, MUTED, gap=1.1)
     f.rect(20, y - 24, 760, 48, fill=STEEL, stroke=TEXT, sw=SW_OBJ, rx=4)
     for x in range(60, 780, 90):
         f.line(x, y - 24, x, y + 24, EDGE, 2)
