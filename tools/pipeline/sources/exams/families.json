@@ -1,0 +1,17 @@
+{
+  "about": "Exam PDF name patterns, in the order the bank lists them. A PDF in exams_source_pdf/ must match one pattern (case-insensitive, <number> captured). label is the name the app shows. id_prefix starts every record id of the family and is FROZEN: the overlay, content audit, requirements, diagram masks, speech folders and saved progress are keyed by those ids, so change label freely but never id_prefix. Add a family here for another publisher or exam type (docs/ADDING_EXAMS.md).",
+  "families": [
+    {
+      "pattern": "^Journeyman open book final exam #(?P<number>\\d+)$",
+      "label": "Final Exam #{number}",
+      "id_prefix": "final-exam-#{number}",
+      "final": true
+    },
+    {
+      "pattern": "^Journeyman open book exam #(?P<number>\\d+)$",
+      "label": "Open Book Exam #{number}",
+      "id_prefix": "open-book-exam-#{number}",
+      "final": false
+    }
+  ]
+}

@@ -20,6 +20,7 @@ if OUT.resolve() == (ROOT / "data" / "question_bank.json").resolve():
 
 EXAMS = discover()
 QUESTION_COUNTS = {exam.label: exam.question_count(OCR) for exam in EXAMS}
+ID_PREFIXES = {exam.label: exam.id_prefix for exam in EXAMS}
 
 def _load(path):
     return json.loads(Path(path).read_text(encoding="utf-8"))
@@ -306,7 +307,7 @@ records = []
 for item in bank:
     keywords, lookup_summary = extract_lookup(item[1], item[2], item[4])
     records.append({
-        "id": record_id(item[5], item[6]),
+        "id": record_id(ID_PREFIXES[item[5]], item[6]),
         "exam": item[5],
         "question_number": item[6],
         "prompt": item[1],

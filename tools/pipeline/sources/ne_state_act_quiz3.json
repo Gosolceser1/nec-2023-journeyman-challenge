@@ -3,6 +3,7 @@
   "source": "Quiz 3 - STATE ELECTRICAL ACT AND BOARD RULES EXAM QUESTIONS",
   "note": "Stems and choices word for word from the quiz sheet (no answer key on the sheet). Keys, citations and explanations are in ne_state_act_quiz3_keys.json.",
   "exam": "NE State Act #3",
+  "id_prefix": "ne-state-act-#3",
   "section": "ne_state_law",
   "questions": [
     {

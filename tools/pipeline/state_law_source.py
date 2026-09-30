@@ -4,7 +4,7 @@ These questions do not come from the OCR'd exam PDFs. Each quiz is two files in
 tools/pipeline/sources/:
 
   <name>.json       the quiz sheet word for word: exam label, section and the
-                    stems and choices, nothing else
+                    stems and choices, plus the frozen record id_prefix
   <name>_keys.json  per question: correct_index, citation, quoted law text and
                     the explanation fields (plus reviewer-only "evidence")
 
@@ -33,10 +33,6 @@ def _tip_short(tip: str, answers: list[str], correct: int, notes: list[str]) -> 
     return " ".join(parts)
 
 
-def _slug(exam: str) -> str:
-    return exam.lower().replace(" ", "-")
-
-
 def load_quiz(question_path: Path) -> tuple[list[dict], list[dict]]:
     """Returns (records, manifest entries) for one quiz."""
     quiz = json.loads(question_path.read_text(encoding="utf-8"))
@@ -61,7 +57,7 @@ def load_quiz(question_path: Path) -> tuple[list[dict], list[dict]]:
         if len(key["choice_notes"]) != len(answers) or not 0 <= correct < len(answers):
             raise ValueError(f"{keys_path.name} #{q['number']}: choice_notes or correct_index do not fit the choices")
         records.append({
-            "id": "%s-%03d" % (_slug(exam), q["number"]),
+            "id": "%s-%03d" % (quiz["id_prefix"], q["number"]),
             "exam": exam,
             "question_number": q["number"],
             "prompt": q["prompt"],

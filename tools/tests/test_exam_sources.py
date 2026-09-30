@@ -26,11 +26,22 @@ class LabelTests(unittest.TestCase):
     def test_open_book_and_final_names(self):
         self.assertEqual(exam_sources.label_for("Journeyman open book exam #11"), ("Open Book Exam #11", False, 11))
         self.assertEqual(exam_sources.label_for("Journeyman open book final exam #2"), ("Final Exam #2", True, 2))
-        self.assertEqual(exam_sources.record_id("Final Exam #2", 7), "final-exam-#2-007")
+        info = exam_sources.match_family("Journeyman open book final exam #2")
+        self.assertEqual(exam_sources.record_id(info["id_prefix"], 7), "final-exam-#2-007")
 
-    def test_unknown_pdf_name_is_an_error(self):
-        with self.assertRaises(ValueError):
+    def test_unknown_pdf_name_is_an_error_naming_families_json(self):
+        with self.assertRaisesRegex(ValueError, "families.json"):
             exam_sources.label_for("Master exam #1")
+
+    def test_a_new_family_needs_only_a_families_entry(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "families.json"
+            path.write_text(json.dumps({"families": [{
+                "pattern": r"^Residential closed book exam (?P<number>\d+)$",
+                "label": "Residential Exam #{number}", "id_prefix": "res-cb-#{number}", "final": False}]}),
+                encoding="utf-8")
+            info = exam_sources.match_family("residential closed book exam 3", path)
+        self.assertEqual((info["label"], info["id_prefix"]), ("Residential Exam #3", "res-cb-#3"))
 
 
 class DiscoverTests(unittest.TestCase):
@@ -170,6 +181,18 @@ class RepositoryTests(unittest.TestCase):
                     self.assertEqual(len(built | missing), len(keys))
         if not checked:
             self.skipTest("no transcripts and no answer-key OCR cache")
+
+    def test_every_shipped_id_survives_a_rebuild(self):
+        # Ids key the overlay, audit, masks, speech and saved progress: the
+        # frozen prefixes must regenerate exactly the shipped ids.
+        import state_law_source
+        rebuilt = set()
+        for exam in self.exams:
+            transcript = exam.transcript()
+            numbers = {q["number"] for q in transcript["questions"]}
+            rebuilt |= {exam_sources.record_id(exam.id_prefix, n) for n in numbers}
+        rebuilt |= {r["id"] for r in state_law_source.load_all()[0]}
+        self.assertEqual(rebuilt, {r["id"] for r in self.bank["records"]})
 
     def test_every_exam_has_a_transcript(self):
         # The build needs no OCR output for the shipped exams (a fresh machine
