@@ -307,6 +307,7 @@ RENUMBERED_SECTIONS = load_renumbered()
 
 
 CONTENT_AUDIT_PATH = nec_data("content_audit.json")
+BLUEPRINT_PATH = ROOT / "data" / "exam_blueprint.json"
 AUDIT_STATUSES = {"verified", "fixed", "flagged", "non_nec"}
 
 
@@ -343,6 +344,17 @@ def content_audit_problems(records: list, audit: dict) -> tuple[list[str], list[
             if rec.get("id") not in entries:
                 errors.append(f"{rec.get('id')}: no {EDITION} content audit entry in {CONTENT_AUDIT_PATH.name}")
     return errors, warnings
+
+
+def blueprint_edition_problems(blueprint: dict) -> list[str]:
+    """The exam blueprint (areas by NEC chapter, weights) must be for the edition in data/edition.json."""
+    stated = blueprint.get("edition")
+    if stated is None:
+        return [f"{BLUEPRINT_PATH.name} names no NEC edition; add \"edition\": {EDITION_YEAR}"]
+    if str(stated) != str(EDITION_YEAR):
+        return [f"{BLUEPRINT_PATH.name} is for NEC {stated} but data/edition.json is {EDITION}; "
+                "check the exam bulletin's areas and weights, then update its \"edition\""]
+    return []
 
 
 def load_content_audit(path: Path = CONTENT_AUDIT_PATH) -> dict:
@@ -869,6 +881,9 @@ def main(argv=None) -> int:
     check_top_level(data, rep)
     stats = check_records(data, rep)
     check_manifest(data, rep)
+    if BLUEPRINT_PATH.exists():
+        for problem in blueprint_edition_problems(json.loads(BLUEPRINT_PATH.read_text(encoding="utf-8"))):
+            rep.warn(problem)
 
     n_err, n_warn = len(rep.errors), len(rep.warnings)
     exit_code = 1 if n_err or (args.no_warn and n_warn) else 0
