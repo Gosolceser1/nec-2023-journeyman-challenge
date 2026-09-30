@@ -258,14 +258,16 @@
     },
     "final-exam-#1-034": {
       "status": "fixed",
-      "verified_on": "2026-09-28",
+      "verified_on": "2026-09-29",
       "sections": [
-        "Table 400.4"
+        "Table 400.4",
+        "Table 400.4 Note 9",
+        "Table 310.4(1)"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#400",
-      "provision": "3fc777fd3ead4149",
+      "provision": "018af9aa6ff67e84",
       "correct_index": 1,
-      "note": "[reference_text] Provision replaced by Table 400.4 Note 9 (the 'W' suffix note) instead of a paraphrase. Tables/formulas audit: pre-answer table is a Table 400.4 excerpt (SPT-2, SPT-2W, STOOW: voltage and use) plus Note 9, verified on UpCodes."
+      "note": "Stem made singular and specific ('a flexible cord type'; the PDF prints 'cord types is permitted'); key (b) STOOW unchanged. Checked in NFPA 70-2023: Table 400.4 SPT-2 damp locations, STOOW damp and wet locations, Note 9 'W' suffix = wet locations and sunlight resistant; Table 310.4(1) THWN and XHWN dry and wet locations (building wire, not flexible cord). Table now shown after answering, one row per choice (the old pre-answer excerpt blanked only the STOOW cell and quoted Note 9, which named the answer and un-masked the figure's W box)."
     },
     "final-exam-#1-036": {
       "status": "verified",
@@ -2216,16 +2218,16 @@
     },
     "open-book-exam-#4-025": {
       "status": "fixed",
-      "verified_on": "2026-09-28",
+      "verified_on": "2026-09-29",
       "sections": [
         "Table 400.4",
         "Table 400.4 Note 9",
         "Table 310.4(1)"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#400",
-      "provision": "3fc777fd3ead4149",
+      "provision": "018af9aa6ff67e84",
       "correct_index": 1,
-      "note": "[reference_text] Provision replaced by Table 400.4 Note 9 (the 'W' suffix note) instead of a paraphrase. Tables/formulas audit: pre-answer table is a Table 400.4 excerpt (SPT-2, SPT-2W, STOOW: voltage and use) plus Note 9, verified on UpCodes."
+      "note": "Stem made singular and specific ('a flexible cord type'; the PDF prints 'cord types is permitted'); key (b) STOOW unchanged. Checked in NFPA 70-2023: Table 400.4 SPT-2 damp locations, STOOW damp and wet locations, Note 9 'W' suffix = wet locations and sunlight resistant; Table 310.4(1) THWN and XHWN dry and wet locations (building wire, not flexible cord). Table now shown after answering, one row per choice (the old pre-answer excerpt blanked only the STOOW cell and quoted Note 9, which named the answer and un-masked the figure's W box)."
     },
     "open-book-exam-#7-001": {
       "status": "verified",

@@ -549,6 +549,23 @@ Spell check: new NEC and trade terms were added to `tools/pipeline/spellcheck_al
 for verbatim text ("e.g.," in the Article 100 definition of nominal voltage; the turns
 symbol Ns). The lexicon was regenerated.
 
+## Cord question and transcript check (2026-09-29)
+
+A learner reported that the wet-location cord question "doesn't make any sense". The PDFs print one question with four choices, "Which of the following cord types is permitted in wet location and is sunlight resistant?", key (b) STOOW. The earlier grammar pass had made the stem plural ("cord types are permitted ... are sunlight resistant"), which reads as "pick every one". THWN and XHWN are building wires, not cord types, so the stem now asks for the one flexible cord. Key unchanged. Content details are in `docs/CONTENT_AUDIT_2023.md` (Notable fixes).
+
+| Record | Field | Before | After |
+|---|---|---|---|
+| `final-exam-#1-034`, `open-book-exam-#4-025` | stem | Which of the following cord types are permitted in a wet location and are sunlight resistant? | Which of the following is a flexible cord type that is permitted in a wet location and is sunlight resistant? |
+
+Every bank record's choices and key were compared with its reviewed transcript (`tools/pipeline/sources/exams/`). All 598 records have four choices and no key points at a missing choice; I/II/III and "Both (b) and (c)" questions keep their statements and letters (their choices do not shuffle). The 40 differences are all documented curation (units spelled out, 2023 rewrites, PDF typos, the two PDF key corrections). Two transcripts did not match their PDF page and were corrected:
+
+| Transcript | Question | Before | After (as printed) |
+|---|---|---|---|
+| Journeyman open book exam #1 | 4, choice (c) | 1 1/8" | 1/8" |
+| Journeyman open book exam #4 | 25, stem | in a wet location | in wet location |
+
+The bank text of both was already right (overrides). Voice clips regenerated: `final-exam-#1-034`, `open-book-exam-#4-025`.
+
 `tools/tests/test_typo_regressions.py` (run by `tools/verify.sh`) fails if any
 fixed "before" text in this file comes back in the built bank or the results
 screen strings.

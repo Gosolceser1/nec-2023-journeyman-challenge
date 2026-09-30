@@ -161,15 +161,15 @@
   "final-exam-#1-034": {
    "class": "table",
    "tables": [
-    "Table 400.4: SPT-2 = damp locations; SPT-2W and STOOW = damp and wet locations",
+    "Table 400.4: SPT-2 = damp locations; STOOW = damp and wet locations",
     "Table 400.4 Note 9: cords with the W suffix are suitable for wet locations and sunlight resistant",
-    "THWN and XHWN are building wire (Table 310.4(1)), not flexible cords"
+    "Table 310.4(1): THWN and XHWN are building wire (dry and wet locations), not flexible cords"
    ],
    "steps": [
     "Find the cord type rated for wet locations that is also sunlight resistant"
    ],
-   "pre_answer_table": true,
-   "note": "The STOOW cell is blanked before answering."
+   "pre_answer_table": false,
+   "note": "Table shown after answering: each choice has its own row, so a pre-answer table would name the answer. Before answering the type-letters figure (W box masked) is the lookup aid."
   },
   "final-exam-#1-036": {
    "class": "recall",
@@ -987,15 +987,15 @@
   "open-book-exam-#4-025": {
    "class": "table",
    "tables": [
-    "Table 400.4: SPT-2 = damp locations; SPT-2W and STOOW = damp and wet locations",
+    "Table 400.4: SPT-2 = damp locations; STOOW = damp and wet locations",
     "Table 400.4 Note 9: cords with the W suffix are suitable for wet locations and sunlight resistant",
-    "THWN and XHWN are building wire (Table 310.4(1)), not flexible cords"
+    "Table 310.4(1): THWN and XHWN are building wire (dry and wet locations), not flexible cords"
    ],
    "steps": [
     "Find the cord type rated for wet locations that is also sunlight resistant"
    ],
-   "pre_answer_table": true,
-   "note": "The STOOW cell is blanked before answering."
+   "pre_answer_table": false,
+   "note": "Table shown after answering: each choice has its own row, so a pre-answer table would name the answer. Before answering the type-letters figure (W box masked) is the lookup aid."
   },
   "open-book-exam-#7-001": {
    "class": "recall"

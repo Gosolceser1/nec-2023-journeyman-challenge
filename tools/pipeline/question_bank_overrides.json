@@ -2280,41 +2280,48 @@
       "gist": "In a multiwire circuit, all conductors must originate from the same equipment. The question asks what that equipment must contain."
     },
     "open-book-exam-#4-025": {
-      "prompt": "Which of the following cord types are permitted in a wet location and are sunlight resistant?",
-      "reference_text": "Table 400.4 Flexible Cords and Flexible Cables\nCords that comply with the requirements for outdoor cords and are so listed shall be permitted to be designated as weather and water resistant with the suffix \"W\" after the Code type designation. Cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant.",
-      "tip_short": "In cord codes, W means wet-location and sunlight-resistant, so STOOW is the outdoor-rated flexible cord. Correct: B — STOOW. Table 400.4 lists STOOW as permitted in wet locations and sunlight resistant; the W suffix shows this. Not A: SPT-2 is parallel thermoplastic lamp cord and is not marked for wet locations or sunlight resistance. Not C: THWN is a building wire in Table 310.4(1), not a flexible cord type in Table 400.4. Not D: XHWN is a building wire in Table 310.4(1), not a flexible cord type in Table 400.4.",
+      "prompt": "Which of the following is a flexible cord type that is permitted in a wet location and is sunlight resistant?",
+      "reference_text": "Table 400.4 Flexible Cords and Flexible Cables, Note 9\nCords that comply with the requirements for outdoor cords and are so listed shall be permitted to be designated as weather and water resistant with the suffix \"W\" after the Code type designation. Cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant.",
+      "tip_short": "Read cord letters like a label: S = hard-service cord, T = thermoplastic, OO = oil-resistant insulation and jacket, W = OK in wet locations and sunlight resistant (Table 400.4 Note 9). No W on a cord means no wet rating. Correct: B — STOOW. STOOW reads S = hard-service cord, T = thermoplastic, OO = oil-resistant insulation and jacket, W = wet locations and sunlight. Table 400.4 lists it for damp and wet locations, and Note 9 says every W cord is sunlight resistant. Not A: SPT-2 is light-duty parallel lamp cord (the flat two-wire kind). Table 400.4 lists it for damp locations only, and it has no W. The same cord with a W, SPT-2W, is rated for wet locations, but SPT-2W is not a choice here. Not C: THWN is a single building wire for dry and wet locations (Table 310.4(1)), pulled in a raceway. It is not a flexible cord, so Table 400.4 does not list it. Not D: XHWN is a single building wire for dry and wet locations (Table 310.4(1)), pulled in a raceway. It is not a flexible cord, so Table 400.4 does not list it.",
       "choice_notes": [
-        "SPT-2 is parallel thermoplastic lamp cord and is not marked for wet locations or sunlight resistance.",
-        "Table 400.4 lists STOOW as permitted in wet locations and sunlight resistant; the W suffix shows this.",
-        "THWN is a building wire in Table 310.4(1), not a flexible cord type in Table 400.4.",
-        "XHWN is a building wire in Table 310.4(1), not a flexible cord type in Table 400.4."
+        "SPT-2 is light-duty parallel lamp cord (the flat two-wire kind). Table 400.4 lists it for damp locations only, and it has no W. The same cord with a W, SPT-2W, is rated for wet locations, but SPT-2W is not a choice here.",
+        "STOOW reads S = hard-service cord, T = thermoplastic, OO = oil-resistant insulation and jacket, W = wet locations and sunlight. Table 400.4 lists it for damp and wet locations, and Note 9 says every W cord is sunlight resistant.",
+        "THWN is a single building wire for dry and wet locations (Table 310.4(1)), pulled in a raceway. It is not a flexible cord, so Table 400.4 does not list it.",
+        "XHWN is a single building wire for dry and wet locations (Table 310.4(1)), pulled in a raceway. It is not a flexible cord, so Table 400.4 does not list it."
       ],
       "reference_table": [
         [
-          "Table 400.4 type letter",
-          "Voltage",
+          "Type",
+          "Listed in",
           "Use"
         ],
         [
           "SPT-2",
-          "300",
+          "Table 400.4, flexible cord",
           "Damp locations"
         ],
         [
-          "SPT-2W",
-          "300",
-          "Damp and wet locations"
-        ],
-        [
           "STOOW",
-          "600",
+          "Table 400.4, flexible cord",
           "Damp and wet locations"
         ],
         [
-          "NOTE: Table 400.4 Note 9: cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant."
+          "THWN",
+          "Table 310.4(1), building wire",
+          "Dry and wet locations"
+        ],
+        [
+          "XHWN",
+          "Table 310.4(1), building wire",
+          "Dry and wet locations"
+        ],
+        [
+          "NOTE: Table 400.4 Note 9: cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant. THWN and XHWN are building wires, not flexible cords."
         ]
       ],
-      "gist": "Outdoor flexible cords require weather-resistant construction identified by their type letters. The question asks which of these four types is rated for wet and sunny."
+      "gist": "Flexible cord type letters tell where a cord may be used. The question asks which one of these four types is a flexible cord rated for wet locations that is also sunlight resistant.",
+      "table_after_answer": true,
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nFlexible cords are temporary wiring, not a substitute for fixed circuits — they must stay continuous (no splices except repairing hard-service cord), stay short, and match the job's toughness: junior hard-service (SJ) for light duty, hard-service (S, ST) for tools and appliances. The letters on a cord are a code: S = hard service, J = junior hard service (300 V), T = thermoplastic, O = oil-resistant jacket, OO = oil-resistant jacket and insulation, W = wet locations and sunlight resistant. Building wires such as THWN and XHWN also carry a W (wet location), but they are single conductors for raceways, not flexible cords, and Table 400.4 does not list them.\n\nIn plain terms, the question is: \"Which of the following is a flexible cord type that is permitted in a wet location and is sunlight resistant?\"\n\nRead the situation, then test each choice against it. Eliminate choices that contradict the stated conditions; the survivor that fits all of them is the answer.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "open-book-exam-#7-001": {
       "prompt": "Premises wiring shall not be ___ connected to a supply system unless the latter contains, for any grounded conductor of the interior system, a corresponding conductor that is grounded.",
@@ -2785,41 +2792,48 @@
       "gist": "Raceways entering the bottom of floor-standing equipment cannot extend so far inside that they interfere with internal components. The question asks how many inches above the bottom they may rise."
     },
     "final-exam-#1-034": {
-      "reference_text": "Table 400.4 Flexible Cords and Flexible Cables\nCords that comply with the requirements for outdoor cords and are so listed shall be permitted to be designated as weather and water resistant with the suffix \"W\" after the Code type designation. Cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant.",
-      "tip_short": "In cord names, the W suffix means wet location and sunlight resistant; OO means oil-resistant jacket and insulation. Correct: B — STOOW. STOOW is hard-service cord, and its W suffix marks it wet-location rated and sunlight resistant. Not A: SPT-2 is thermoplastic parallel lamp cord, not rated for wet locations or sunlight. Not C: THWN is building wire for raceways, not a flexible cord type in Table 400.4. Not D: XHWN is a building wire designation, not a flexible cord type in Table 400.4.",
+      "reference_text": "Table 400.4 Flexible Cords and Flexible Cables, Note 9\nCords that comply with the requirements for outdoor cords and are so listed shall be permitted to be designated as weather and water resistant with the suffix \"W\" after the Code type designation. Cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant.",
+      "tip_short": "Read cord letters like a label: S = hard-service cord, T = thermoplastic, OO = oil-resistant insulation and jacket, W = OK in wet locations and sunlight resistant (Table 400.4 Note 9). No W on a cord means no wet rating. Correct: B — STOOW. STOOW reads S = hard-service cord, T = thermoplastic, OO = oil-resistant insulation and jacket, W = wet locations and sunlight. Table 400.4 lists it for damp and wet locations, and Note 9 says every W cord is sunlight resistant. Not A: SPT-2 is light-duty parallel lamp cord (the flat two-wire kind). Table 400.4 lists it for damp locations only, and it has no W. The same cord with a W, SPT-2W, is rated for wet locations, but SPT-2W is not a choice here. Not C: THWN is a single building wire for dry and wet locations (Table 310.4(1)), pulled in a raceway. It is not a flexible cord, so Table 400.4 does not list it. Not D: XHWN is a single building wire for dry and wet locations (Table 310.4(1)), pulled in a raceway. It is not a flexible cord, so Table 400.4 does not list it.",
       "choice_notes": [
-        "SPT-2 is thermoplastic parallel lamp cord, not rated for wet locations or sunlight.",
-        "STOOW is hard-service cord, and its W suffix marks it wet-location rated and sunlight resistant.",
-        "THWN is building wire for raceways, not a flexible cord type in Table 400.4.",
-        "XHWN is a building wire designation, not a flexible cord type in Table 400.4."
+        "SPT-2 is light-duty parallel lamp cord (the flat two-wire kind). Table 400.4 lists it for damp locations only, and it has no W. The same cord with a W, SPT-2W, is rated for wet locations, but SPT-2W is not a choice here.",
+        "STOOW reads S = hard-service cord, T = thermoplastic, OO = oil-resistant insulation and jacket, W = wet locations and sunlight. Table 400.4 lists it for damp and wet locations, and Note 9 says every W cord is sunlight resistant.",
+        "THWN is a single building wire for dry and wet locations (Table 310.4(1)), pulled in a raceway. It is not a flexible cord, so Table 400.4 does not list it.",
+        "XHWN is a single building wire for dry and wet locations (Table 310.4(1)), pulled in a raceway. It is not a flexible cord, so Table 400.4 does not list it."
       ],
-      "prompt": "Which of the following cord types are permitted in a wet location and are sunlight resistant?",
+      "prompt": "Which of the following is a flexible cord type that is permitted in a wet location and is sunlight resistant?",
       "reference_table": [
         [
-          "Table 400.4 type letter",
-          "Voltage",
+          "Type",
+          "Listed in",
           "Use"
         ],
         [
           "SPT-2",
-          "300",
+          "Table 400.4, flexible cord",
           "Damp locations"
         ],
         [
-          "SPT-2W",
-          "300",
-          "Damp and wet locations"
-        ],
-        [
           "STOOW",
-          "600",
+          "Table 400.4, flexible cord",
           "Damp and wet locations"
         ],
         [
-          "NOTE: Table 400.4 Note 9: cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant."
+          "THWN",
+          "Table 310.4(1), building wire",
+          "Dry and wet locations"
+        ],
+        [
+          "XHWN",
+          "Table 310.4(1), building wire",
+          "Dry and wet locations"
+        ],
+        [
+          "NOTE: Table 400.4 Note 9: cords with the \"W\" suffix are suitable for use in wet locations and are sunlight resistant. THWN and XHWN are building wires, not flexible cords."
         ]
       ],
-      "gist": "Outdoor flexible cords require weather-resistant construction identified by their type letters. The question asks which of these four types is rated for wet and sunny."
+      "gist": "Flexible cord type letters tell where a cord may be used. The question asks which one of these four types is a flexible cord rated for wet locations that is also sunlight resistant.",
+      "table_after_answer": true,
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nFlexible cords are temporary wiring, not a substitute for fixed circuits — they must stay continuous (no splices except repairing hard-service cord), stay short, and match the job's toughness: junior hard-service (SJ) for light duty, hard-service (S, ST) for tools and appliances. The letters on a cord are a code: S = hard service, J = junior hard service (300 V), T = thermoplastic, O = oil-resistant jacket, OO = oil-resistant jacket and insulation, W = wet locations and sunlight resistant. Building wires such as THWN and XHWN also carry a W (wet location), but they are single conductors for raceways, not flexible cords, and Table 400.4 does not list them.\n\nIn plain terms, the question is: \"Which of the following is a flexible cord type that is permitted in a wet location and is sunlight resistant?\"\n\nRead the situation, then test each choice against it. Eliminate choices that contradict the stated conditions; the survivor that fits all of them is the answer.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "final-exam-#1-037": {
       "reference_text": "392.100(F) Nonmetallic Cable Tray\nNonmetallic cable trays shall be made of flame-retardant material.",

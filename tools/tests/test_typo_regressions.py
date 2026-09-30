@@ -62,6 +62,7 @@ BANK_RULES = [
     ("final-exam-#1-030", STEM, "has", "space-heating equipment"),
     ("final-exam-#1-034", STEM, "has", "permitted in wet location"),
     ("final-exam-#1-034", STEM, "has", "cord types is permitted"),
+    ("final-exam-#1-034", STEM, "has", "cord types are permitted"),
     ("final-exam-#1-042", CHOICES, "is", "weather proof"),
     ("final-exam-#1-048", CHOICES, "is", "need a 20 amp receptacle"),
     ("final-exam-#1-051", STEM, "re", r"^Personnel doors where"),
@@ -95,6 +96,7 @@ BANK_RULES = [
     ("open-book-exam-#1-005", STEM, "has", "requires GFCI protected"),
     ("open-book-exam-#1-010", STEM, "has", "receptacles that are installed within"),
     ("open-book-exam-#4-025", STEM, "has", "cord types is permitted"),
+    ("open-book-exam-#4-025", STEM, "has", "cord types are permitted"),
     ("open-book-exam-#7-002", GIST, "has", "which table holds it."),
     ("open-book-exam-#7-005", STEM, "re", r"^___ The highest"),
     ("open-book-exam-#7-016", GIST, "has", "During normal power loss"),
@@ -232,6 +234,48 @@ class BankTypoRegressions(unittest.TestCase):
             {"id": "open-book-exam-#7-024", "prompt": "a 4-wire, ___-connected system marked \u201cCaution ___ Phase Has ___ Volts to Ground.\u201d"},
         ]
         self.assertEqual(violations(after), [])
+
+
+class CordQuestionRegressions(unittest.TestCase):
+    """The wet-location cord question (Table 400.4): one flexible cord among the
+    choices, and a table that names every choice, so it waits until answering."""
+    IDS = ("final-exam-#1-034", "open-book-exam-#4-025")
+
+    @classmethod
+    def setUpClass(cls):
+        records = json.loads(BANK.read_text(encoding="utf-8"))["records"]
+        cls.by_id = {r["id"]: r for r in records}
+
+    def test_table_has_a_row_per_choice_and_waits_for_the_answer(self):
+        for rid in self.IDS:
+            rec = self.by_id[rid]
+            types = [row[0] for row in rec["reference_table"][1:] if len(row) > 1]
+            self.assertEqual(types, rec["answers"], rid)
+            self.assertTrue(rec.get("table_after_answer"), rid)
+
+    def test_stem_asks_for_one_flexible_cord(self):
+        for rid in self.IDS:
+            rec = self.by_id[rid]
+            self.assertIn("is a flexible cord type", rec["prompt"], rid)
+            self.assertEqual(rec["answers"][rec["correct_index"]], "STOOW", rid)
+
+
+class TranscriptRegressions(unittest.TestCase):
+    """Transcripts are the exam as printed; words once mistyped there stay fixed."""
+    RULES = [
+        ("Journeyman open book exam #1", 4, "answers", '1 1/8"'),
+        ("Journeyman open book exam #4", 25, "prompt", "in a wet location"),
+    ]
+
+    def test_transcript_typos_stay_fixed(self):
+        found = []
+        for name, number, field, needle in self.RULES:
+            data = json.loads((ROOT / "tools/pipeline/sources/exams" / (name + ".json")).read_text(encoding="utf-8"))
+            q = next(q for q in data["questions"] if q["number"] == number)
+            texts = q[field] if isinstance(q[field], list) else [q[field]]
+            if any(needle in str(t) for t in texts):
+                found.append("%s Q%d %s contains %r" % (name, number, field, needle))
+        self.assertEqual(found, [])
 
 
 class UiTypoRegressions(unittest.TestCase):

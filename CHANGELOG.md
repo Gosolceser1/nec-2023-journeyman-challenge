@@ -62,6 +62,13 @@
 
 ### Fixed
 
+- **The wet-location cord question makes sense again** (Final Exam #1 Q34,
+  Open Book #4 Q25). It now asks for the one flexible cord that is wet-rated
+  and sunlight resistant (STOOW, same answer as the printed key); it no longer
+  reads as "pick all". The Table 400.4 excerpt shown before answering had one
+  blank row that gave the answer away and listed SPT-2W, which is not a
+  choice. The table now shows after you answer, with a row for each choice,
+  including THWN and XHWN from Table 310.4(1) (building wire, not cords).
 - **Voice: numbers in math read as numbers, citations as sections.** A
   decimal in arithmetic ("÷ 831.36", "divided by 240.21", "multiply 240.21 by
   2") is no longer read as "section 831 point 36"; a bare number is a section
