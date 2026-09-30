@@ -1,0 +1,1160 @@
+{
+  "about": "Plain-language topic notes the bank builder drafts info_tip / tip_title / tip_short from. A record gets the first concept whose trigger phrase is in its stem, else the concept of its article. Written against this edition; review at an edition change. Pipeline only (not exported).",
+  "notes": {
+    "isolated_ground": "An isolated ground receptacle is a special outlet for sensitive electronics (computers, lab gear, medical equipment). Its ground terminal is insulated from the metal outlet box, with a separate insulated ground wire running back to the service panel — this keeps electrical noise from other circuits out of the equipment. You can spot one by the orange triangle on its face.",
+    "receptacle_rules": "The NEC decides where every receptacle must go so nobody needs an extension cord: no point along a living-room or bedroom wall may be more than 6 ft from an outlet, hallways 10 ft or longer need one, balconies and decks need one within reach, and laundry areas need a dedicated 20-amp circuit. Bathrooms, kitchens, garages, and outdoor spots add GFCI protection, and wet spots need weather-resistant types.",
+    "cable_types": "Decode the letters first: MI = Mineral-Insulated (wires in white mineral powder inside a copper tube — fireproof, for hazardous and harsh spots). MC = Metal-Clad (metal armor, goes almost anywhere). NM = Nonmetallic-sheathed, Romex (dry homes only). UF = Underground Feeder (burial and wet spots). SE = Service-Entrance (brings power in). AC = Armored Cable/BX (grounds through its armor plus a bonding strip, needs a red anti-short bushing). USE stays buried outside and may not come indoors.",
+    "grounding_basics": "Three jobs, three parts. Grounding connects the system to the earth (rods, plates, concrete-encased electrodes) to drain lightning and surges. Bonding joins all the metal parts together so fault current has a fast low-resistance road back to the source that trips the breaker. The grounded conductor (neutral, white) carries normal current; the grounding conductor (green/bare) carries only fault current. The main bonding jumper is where neutral and ground meet — at the service, and only there.",
+    "raceway_rules": "Decode the letters first: EMT = Electrical Metallic Tubing (thin-wall, hand-bendable). RMC = Rigid Metal Conduit (thick threaded steel). IMC = Intermediate (in between). FMC = Flexible Metal Conduit (bendable whip). ENT = Electrical Nonmetallic Tubing (blue smurf tube). LFMC = Liquidtight Flexible Metal (sealed whip). RNC = Rigid Nonmetallic Conduit (PVC). Rules answer three things: clearance from wood framing (1-1/4 in. or a nail plate), burial depth, and strapping (within a foot of every box, then every few feet by type).",
+    "outside_clearances": "Article 225 covers outside branch circuits and feeders. For a final span at a building, distinguish the clearance from doors and similar locations from the separate restriction on material-handling openings.",
+    "conduit_fill_table": "Read Table 348.22 by first finding the conductor insulation group, then the AWG row, and finally the column for fittings inside or outside the conduit. A dash means that combination is not listed. For this question, use the TFN/THHN/THWN group.",
+    "gfci_basics": "A GFCI watches the current going out and coming back on a circuit. If even a tiny amount leaks — say, through a person to ground — it trips in a fraction of a second. That is why the NEC demands GFCI protection anywhere water and electricity can meet: bathrooms, kitchens, garages, outdoors, crawl spaces, laundry areas, pools, and spas.",
+    "afci_basics": "An AFCI listens for the electrical signature of dangerous arcing — damaged wires sparking inside walls — and shuts the circuit down before it can start a fire. The NEC requires combination-type AFCI protection on the kitchens, living rooms, bedrooms, dens, laundry, hallways, closets, and similar room circuits in dwelling units (210.12(B) lists them all).",
+    "motor_basics": "A motor circuit has two separate protections doing two jobs. The overload device (heaters, overload relay) guards against a motor slowly cooking from too much load — sized from the motor's own nameplate amps (125% for sturdy motors, 115% for the rest), with one overload unit per phase (three units on a three-phase motor). The breaker or fuses handle violent short circuits and ground faults. The controller starts and stops the motor; the disconnect within sight of the motor lets a worker be sure it cannot restart while hands are on it.",
+    "load_calc_basics": "Load calculations never just add everything up, because a home never runs all loads at once. Start with 3 VA per square foot of living space (outside dimensions, minus open porches and unfinished spaces), add 1,500 VA for each small-appliance and laundry circuit, then shrink the subtotal with the demand factor (first 3,000 VA at full value, 3,001 to 120,000 VA at 35%, the remainder at 25%). Ranges and dryers use their own tables — a range nameplate is only the starting point. Heat and AC: count the larger one, never both.",
+    "disconnect_basics": "A disconnecting means is simply the switch or breaker a worker opens before touching equipment. The golden rule is 'within sight': visible and no more than 50 ft away, so nobody can re-energize it unseen. Motors need a disconnect in sight of both the controller and the motor itself; appliances and AC units need one in sight and quickly reachable. If the disconnect must live far away, it has to be lockable open with the location marked on the equipment.",
+    "working_space": "Working space is the empty bubble an electrician stands in while servicing live gear — nobody may store boxes or park equipment in it. The NEC measures it three ways: depth in front (3+ ft depending on voltage and what faces the gear — concrete or brick walls facing you mean deeper space), 30 in. minimum width (or the equipment's width), and 6-1/2 ft of headroom. Big gear needs doors that swing 90° and a way out that open doors can't block. Above panels, the space up to the ceiling belongs to electrics only — no pipes or ducts.",
+    "hazloc": "Hazardous locations are sorted by what's in the air. Class I means flammable gases or vapors (gasoline, spray booths). Class II means combustible dust (grain, flour, coal). Class III means ignitable fibers or flyings (textiles, wood shops, cotton). Division 1 means the hazard is there during normal work; Division 2 means only if something goes wrong. Memory hook: Gas, Dust, Fibers = I, II, III — and normal vs abnormal = Division 1 vs 2.",
+    "flex_cords": "Flexible cords are temporary wiring, not a substitute for fixed circuits — they must stay continuous (no splices except repairing hard-service cord), stay short, and match the job's toughness: junior hard-service (SJ) for light duty, hard-service (S, ST) for tools and appliances, extra-hard (SO) for construction sites. The letters are a code: O = oil-resistant, T = thermoplastic, W = weather/wet-location plus sunlight-resistant. A cord in a wet place outdoors needs that W — which is why STOOW is the answer there.",
+    "boxes_enclosures": "Boxes are sized by volume, not vibes: every wire, clamp, and device yoke eats cubic inches, so a crowded box is a Code violation and a fire risk. Device boxes need minimum depth (a flush device needs room behind it), and unused breaker or knockout openings must be closed with listed fillers so fingers and sparks can't get in. Switchboards and panelboards add their own rules: conductors belong only in the section they terminate in, and rear-access gear must say so on the front.",
+    "round_boxes": "This is the round-box exception in Article 314: a round box cannot be used when a raceway or connector that needs a locknut or bushing connects to the side. For a false-statement question, compare each choice against the exact section named in its lookup path.",
+    "lighting_temp": "Luminaires (fixtures) follow one idea: bulbs get hot and breakable, so guard them — temporary job-site lamps need a guard or proper holder, and holiday/decorative lighting must be listed. Fluorescent and LED fixtures with serviceable ballasts or drivers in commercial buildings need their own disconnect so relamping doesn't happen live. Outdoors, keep fixtures and their wiring away from power lines and support festoon spans so plants and weather can't damage them.",
+    "switch_basics": "A switch is rated for what it interrupts. Ordinary snap switches handle lighting loads, but inductive loads like motors and ballasts punish contacts, so the NEC caps them at half the switch's ampere rating. A three-way switch is secretly a single-pole double-throw — one lever flipping power between two traveler paths, which is why two of them team up to control one light from two places.",
+    "transformer_service": "Services and transformers are about size and labels. A one-family dwelling service from 100–400 A may use conductors at 83% of the rating (the diversity of a home makes full size unnecessary). Every transformer must wear a nameplate with its ratings — but not trivia like the wire gauge inside it. And transformers generally need a disconnect in sight, or lockable with its location marked on the unit.",
+    "branch_circuits": "Branch circuits are rated by their breaker: the standard sizes are 10, 15, 20, 30, 40, and 50 amps. A multiwire (shared-neutral) circuit must open all its ungrounded legs together so no leg can stay live alone. And the number of circuits in a building comes from the total load divided by circuit size — fractional results always round up, because half a circuit doesn't exist.",
+    "appliance_basics": "Appliances play by cord-and-plug rules: a kitchen disposer may use a short flexible cord (18 in. to 3 ft) instead of hard wiring, and a room air conditioner gets a short cord matched to its voltage (about 10 ft at 120 V, 6 ft at 240 V). Big fixed appliances — ranges, dryers, water heaters — skip simple nameplate math and use their own demand tables, and laundry always gets its own dedicated 20-amp circuit.",
+    "connections": "Every splice and terminal must stay tight for decades: torque screws to spec (a loose aluminum terminal starts fires), use pressure connectors only within their listed ampacity, and house all splices in boxes with insulation as good as the wire itself. One iron rule: a ground fault must never be able to start a motor or sneak around a stop button — so switching always goes in the ungrounded leg.",
+    "safety_basics": "You cannot see electricity, so safety is a procedure, not a sense. Plan every job: identify all energy sources, lock and tag them open, verify zero voltage with a meter, and use insulated tools on anything that might be live. Treat pools, heaters, old panels, and anything unfamiliar as energized until your meter proves otherwise.",
+    "nec_vocab": "Some questions test NEC vocabulary rather than math. Picture the thing described and match the word: a busbar is the bare metal bar that distributes power inside gear; 'datum' or maximum water level is where water would spill over. When asked which article a definition belongs to, remember Article 100 holds the definitions used throughout the whole Code.",
+    "special_systems": "Beyond ordinary wire-in-conduit, the NEC gives each special system its own article: flat FCC/FC cables glued under carpet squares, busways and cablebus feeding big loads, wireways and auxiliary gutters as roomy sheet-metal raceways (mind the spacing between live parts), and surface extensions for remodels. Questions on these almost always ask where the system is allowed, how it attaches, or what it must be marked.",
+    "lowvoltage_basics": "Low-voltage and power-limited circuits (thermostats, doorbells, fire alarms, Class 1 control wiring) get easier rules because a fault can't deliver much energy — but they must stay separated from power wiring so a fault can't cross over. Class 1 power-limited sources are capped (around 30 V and 1,000 VA) precisely so that even a dead short stays small.",
+    "antenna_basics": "Antennas must fail without touching power lines: masts are corrosion-proof metal strong enough for ice and wind, guyed where needed, and stood well clear of any overhead conductors above 150 volts to ground. Lead-in wires get their own clearances, and the whole installation needs lightning protection — a rooftop mast is often the tallest thing around.",
+    "emergency_basics": "Emergency systems must work when normal power doesn't: fire-pump controllers and parts sit high and dry above floors, the emergency source gets marked at the service entrance, and emergency wiring stays independent so one fault can't kill both normal and backup power.",
+    "sign_basics": "An electric sign is a utilization equipment with a structure: its body, supports, and wiring must handle weather and weight, wood enclosures are allowed only well clear of hot lampholders, and signs need a disconnect so service people can kill them without hunting for a breaker.",
+    "elevator_basics": "Elevator and dumbwaiter motors live an intermittent life — short hard runs, long rests — so the Code sizes their conductors and protection by duty rating instead of continuous-duty rules. Their machine rooms and controllers get the same disconnect-within-sight treatment as any motor.",
+    "xray_basics": "X-ray units gulp enormous current for fractions of a second, so their big feeders are sized to momentary versus long-time demand — but the tiny control wires are a different story: fixture wire and flexible cords on control circuits still get overcurrent protection matched to their small size.",
+    "overcurrent_basics": "Overcurrent protection works in layers. The branch breaker or fuse handles violent short circuits and ground faults and must carry the motor's starting surge without tripping. Delicate internals — luminaire ballasts, appliance circuits, control wiring — get smaller supplementary protectors, but those never replace branch-circuit protection. Where staying online matters, selective coordination stages the devices so only the faulted circuit goes dark.",
+    "drawings_basics": "Electrical drawings read like a book: start at the upper left, check the title block, use the scale to convert drawing inches to real feet, and learn the symbol legend — every device on the plan is a symbol, not a picture.",
+    "listing_basics": "'Listed' means an independent lab tested it for one specific purpose — use it only that way and follow its instructions, because the instructions are part of the listing. Novelty and special equipment (USB cover plates with night lights, holiday lighting) must be listed, and required markings must be durable and visible where the inspector and the user will actually see them.",
+    "electrical_theory": "Three formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.",
+    "pool_basics": "Water plus electricity is why pools get the strictest rules in the book. Everything metal near the water — shell, ladder, pump, conduit — gets bonded together into one equal-voltage grid so no stray voltage can exist between touchable parts. Receptacles, lights, and fans near the water need GFCI protection, and fixtures above the water must stay high (about 7-1/2 ft with GFCI, 12 ft without) so nobody can touch them from the water."
+  },
+  "short": {
+    "isolated_ground": [
+      "Isolated-ground receptacle",
+      "An isolated-ground outlet runs its ground wire separately back to the panel to keep electrical noise away from sensitive electronics — look for the orange triangle."
+    ],
+    "receptacle_rules": [
+      "Receptacle placement",
+      "The NEC puts outlets where people need them so cords never stretch across rooms."
+    ],
+    "cable_types": [
+      "Cable types",
+      "MI = Mineral-Insulated, MC = Metal-Clad, NM = Nonmetallic-sheathed, UF = Underground Feeder, SE = Service-Entrance, AC = Armored Cable."
+    ],
+    "grounding_basics": [
+      "Grounding vs bonding",
+      "Grounding connects the electrical system to earth; bonding connects metal parts so fault current opens the overcurrent device quickly."
+    ],
+    "raceway_rules": [
+      "Conduit and raceways",
+      "EMT = thin-wall tubing, RMC = rigid steel, IMC = intermediate, FMC = Flexible Metal Conduit, ENT = plastic tubing, RNC = PVC."
+    ],
+    "outside_clearances": [
+      "Outside conductor clearances",
+      "Article 225 sets one clearance rule for doors and similar locations and a separate restriction for material-handling openings."
+    ],
+    "conduit_fill_table": [
+      "Conduit fill table",
+      "Find the TFN/THHN/THWN group, read the AWG row, and check the inside/outside fitting column. A dash means that combination is not listed."
+    ],
+    "gfci_basics": [
+      "GFCI protection",
+      "A GFCI trips when current leaks — through water or a person."
+    ],
+    "afci_basics": [
+      "AFCI protection",
+      "An AFCI detects arc faults in wiring and opens the circuit before ignition."
+    ],
+    "motor_basics": [
+      "Motor circuits",
+      "Motors require overload protection sized from nameplate current, separate from short-circuit and ground-fault protection."
+    ],
+    "load_calc_basics": [
+      "Load calculations",
+      "Start from the Code's unit value for the occupancy, then apply only the demand the question allows — and skip factors it tells you to disregard."
+    ],
+    "disconnect_basics": [
+      "Disconnecting means",
+      "Every major equipment needs a lockable disconnect within sight — match the question to the right rule (motor, service, or appliance)."
+    ],
+    "pool_basics": [
+      "Pools and spas",
+      "Pool and spa areas require bonding of metal parts and ground-fault protection of electrical equipment."
+    ],
+    "working_space": [
+      "Working space",
+      "Working space requires minimum depth in front, 30 inches of width, 6-1/2 feet of headroom, and an exit path."
+    ],
+    "hazloc": [
+      "Hazardous locations",
+      "Gas = Class I, dust = Class II, fibers = Class III; normal conditions = Division 1, abnormal = Division 2."
+    ],
+    "flex_cords": [
+      "Flexible cords",
+      "Flexible cords are for temporary use: short runs, continuous length, matched to the load and environment (SJ light-duty, ST heavy-duty, W weather-rated)."
+    ],
+    "electrical_theory": [
+      "Electrical math",
+      "Translate the units, pick the one relationship the question tests, and calculate before selecting."
+    ],
+    "boxes_enclosures": [
+      "Boxes and enclosures",
+      "Enclosure size is determined by conductor volume; equipment is restricted to its own section."
+    ],
+    "round_boxes": [
+      "Round boxes • Article 314.2",
+      "Article 314.2 prohibits round boxes where a side entry needs a locknut or bushing. Check the word NOT carefully when comparing the choices."
+    ],
+    "lighting_temp": [
+      "Lighting",
+      "Luminaires generate heat and use breakable parts, so the Code requires guards and listing of decorative lighting."
+    ],
+    "switch_basics": [
+      "Switches",
+      "Switches are rated by what they interrupt — inductive loads get only half the rating."
+    ],
+    "transformer_service": [
+      "Services and transformers",
+      "Dwelling services may count only part of the load; transformers wear nameplates and need visible disconnects."
+    ],
+    "branch_circuits": [
+      "Branch circuits",
+      "A circuit takes its rating from its fuse or breaker — match the load to the right circuit type and size."
+    ],
+    "appliance_basics": [
+      "Appliances",
+      "Appliances use short cords, dedicated circuits, and demand tables instead of nameplate math."
+    ],
+    "connections": [
+      "Connections",
+      "Terminations must be torqued, connectors listed, and splices enclosed."
+    ],
+    "safety_basics": [
+      "Electrical safety",
+      "You can't see electricity — plan, lock out, verify dead, use insulated tools."
+    ],
+    "nec_vocab": [
+      "NEC vocabulary",
+      "Article 100 definitions are exact: match every word of the description to the term."
+    ],
+    "special_systems": [
+      "Special systems",
+      "Flat cables, busways, wireways, and gutters each have their own article."
+    ],
+    "lowvoltage_basics": [
+      "Low-voltage circuits",
+      "Small energy, easier rules — but still separated from power wiring."
+    ],
+    "antenna_basics": [
+      "Antennas",
+      "Antenna masts must withstand weather and fall clear of power conductors."
+    ],
+    "emergency_basics": [
+      "Emergency systems",
+      "Backup power must work when normal power fails and stay independent of it."
+    ],
+    "sign_basics": [
+      "Electric signs",
+      "Signs need sound structure, clearances from heat, and a disconnect."
+    ],
+    "elevator_basics": [
+      "Elevators",
+      "Elevator motors work intermittently, so sizing follows duty ratings."
+    ],
+    "xray_basics": [
+      "X-ray equipment",
+      "X-ray equipment draws brief high-current pulses, so feeders follow momentary ratings while small-gauge control conductors keep low-rated protection."
+    ],
+    "listing_basics": [
+      "Listed equipment",
+      "Listed means lab-tested for one purpose — use it only that way."
+    ],
+    "drawings_basics": [
+      "Reading drawings",
+      "Start at the upper left, check scale and legend."
+    ],
+    "overcurrent_basics": [
+      "Overcurrent protection",
+      "Branch overcurrent devices protect conductors; supplementary devices protect equipment internals only and cannot replace branch protection."
+    ]
+  },
+  "triggers": [
+    [
+      "round boxes",
+      "round_boxes"
+    ],
+    [
+      "material-handling door",
+      "outside_clearances"
+    ],
+    [
+      "material handling opening",
+      "outside_clearances"
+    ],
+    [
+      "table 348.22",
+      "conduit_fill_table"
+    ],
+    [
+      "largest conductor size listed for thhn",
+      "conduit_fill_table"
+    ],
+    [
+      "isolated ground",
+      "isolated_ground"
+    ],
+    [
+      "isolating equipment grounding",
+      "isolated_ground"
+    ],
+    [
+      "safe work",
+      "safety_basics"
+    ],
+    [
+      "hazard",
+      "safety_basics"
+    ],
+    [
+      "live electrical",
+      "safety_basics"
+    ],
+    [
+      "screwdriver",
+      "safety_basics"
+    ],
+    [
+      "see an electrical",
+      "safety_basics"
+    ],
+    [
+      "lockout/tagout",
+      "safety_basics"
+    ],
+    [
+      "gfci",
+      "gfci_basics"
+    ],
+    [
+      "ground-fault circuit",
+      "gfci_basics"
+    ],
+    [
+      "ground fault",
+      "gfci_basics"
+    ],
+    [
+      "arc-fault",
+      "afci_basics"
+    ],
+    [
+      "arc fault",
+      "afci_basics"
+    ],
+    [
+      "grounding electrode",
+      "grounding_basics"
+    ],
+    [
+      "bonding jumper",
+      "grounding_basics"
+    ],
+    [
+      "grounding conductor",
+      "grounding_basics"
+    ],
+    [
+      "grounded conductor",
+      "grounding_basics"
+    ],
+    [
+      "ground rod",
+      "grounding_basics"
+    ],
+    [
+      "main bonding",
+      "grounding_basics"
+    ],
+    [
+      "electrode",
+      "grounding_basics"
+    ],
+    [
+      "working space",
+      "working_space"
+    ],
+    [
+      "dedicated space",
+      "working_space"
+    ],
+    [
+      "egress",
+      "working_space"
+    ],
+    [
+      "guarded",
+      "working_space"
+    ],
+    [
+      "considered as being",
+      "working_space"
+    ],
+    [
+      "hazardous",
+      "hazloc"
+    ],
+    [
+      "class i",
+      "hazloc"
+    ],
+    [
+      "fibers",
+      "hazloc"
+    ],
+    [
+      "flyings",
+      "hazloc"
+    ],
+    [
+      "division",
+      "hazloc"
+    ],
+    [
+      "ignitible",
+      "hazloc"
+    ],
+    [
+      "ignitable",
+      "hazloc"
+    ],
+    [
+      "cord-and-plug",
+      "flex_cords"
+    ],
+    [
+      "flexible cord",
+      "flex_cords"
+    ],
+    [
+      "hard-service",
+      "flex_cords"
+    ],
+    [
+      "hard service",
+      "flex_cords"
+    ],
+    [
+      "extension cord",
+      "flex_cords"
+    ],
+    [
+      "festoon",
+      "flex_cords"
+    ],
+    [
+      "sunlight resistant",
+      "flex_cords"
+    ],
+    [
+      "cord type",
+      "flex_cords"
+    ],
+    [
+      "messenger",
+      "flex_cords"
+    ],
+    [
+      "tinsel",
+      "flex_cords"
+    ],
+    [
+      "identifying mark",
+      "listing_basics"
+    ],
+    [
+      "symbol",
+      "electrical_theory"
+    ],
+    [
+      "cable tray",
+      "special_systems"
+    ],
+    [
+      "portable",
+      "flex_cords"
+    ],
+    [
+      "fcc",
+      "special_systems"
+    ],
+    [
+      "flat conductor",
+      "special_systems"
+    ],
+    [
+      "busway",
+      "special_systems"
+    ],
+    [
+      "cablebus",
+      "special_systems"
+    ],
+    [
+      "wireway",
+      "special_systems"
+    ],
+    [
+      "surface extension",
+      "special_systems"
+    ],
+    [
+      "tap device",
+      "special_systems"
+    ],
+    [
+      "copper bus",
+      "special_systems"
+    ],
+    [
+      "bus bar",
+      "special_systems"
+    ],
+    [
+      "gutter",
+      "special_systems"
+    ],
+    [
+      "communicat",
+      "special_systems"
+    ],
+    [
+      "catv",
+      "special_systems"
+    ],
+    [
+      "antenna",
+      "antenna_basics"
+    ],
+    [
+      "lead-in",
+      "antenna_basics"
+    ],
+    [
+      "clearance",
+      "raceway_rules"
+    ],
+    [
+      "overhead conductor",
+      "raceway_rules"
+    ],
+    [
+      "rnc",
+      "raceway_rules"
+    ],
+    [
+      "definition of",
+      "nec_vocab"
+    ],
+    [
+      "is defined as",
+      "nec_vocab"
+    ],
+    [
+      "is referred to as",
+      "nec_vocab"
+    ],
+    [
+      "abbreviation",
+      "nec_vocab"
+    ],
+    [
+      "highest level",
+      "nec_vocab"
+    ],
+    [
+      "busbar",
+      "nec_vocab"
+    ],
+    [
+      "responsible for",
+      "nec_vocab"
+    ],
+    [
+      "stated in article",
+      "nec_vocab"
+    ],
+    [
+      "drawing",
+      "drawings_basics"
+    ],
+    [
+      "nursing home",
+      "nec_vocab"
+    ],
+    [
+      "supplementary",
+      "overcurrent_basics"
+    ],
+    [
+      "overcurrent",
+      "overcurrent_basics"
+    ],
+    [
+      "short-circuit",
+      "overcurrent_basics"
+    ],
+    [
+      "short circuit",
+      "overcurrent_basics"
+    ],
+    [
+      "selective",
+      "overcurrent_basics"
+    ],
+    [
+      "localization",
+      "overcurrent_basics"
+    ],
+    [
+      "multiconductor",
+      "cable_types"
+    ],
+    [
+      "battery",
+      "emergency_basics"
+    ],
+    [
+      "tested",
+      "listing_basics"
+    ],
+    [
+      "initiated",
+      "safety_basics"
+    ],
+    [
+      "e x i",
+      "electrical_theory"
+    ],
+    [
+      "alpha",
+      "electrical_theory"
+    ],
+    [
+      "ohm",
+      "electrical_theory"
+    ],
+    [
+      "resist",
+      "electrical_theory"
+    ],
+    [
+      "parallel",
+      "electrical_theory"
+    ],
+    [
+      "frequency",
+      "electrical_theory"
+    ],
+    [
+      "cycle",
+      "electrical_theory"
+    ],
+    [
+      "voltage drop",
+      "electrical_theory"
+    ],
+    [
+      "ammeter",
+      "electrical_theory"
+    ],
+    [
+      "diagram",
+      "electrical_theory"
+    ],
+    [
+      "drawing",
+      "electrical_theory"
+    ],
+    [
+      "scale",
+      "electrical_theory"
+    ],
+    [
+      "equivalent to",
+      "electrical_theory"
+    ],
+    [
+      "percent",
+      "electrical_theory"
+    ],
+    [
+      "fraction",
+      "electrical_theory"
+    ],
+    [
+      "circuit current",
+      "electrical_theory"
+    ],
+    [
+      "factory assembly",
+      "cable_types"
+    ],
+    [
+      "tc cable",
+      "cable_types"
+    ],
+    [
+      "nm cable",
+      "cable_types"
+    ],
+    [
+      "uf cable",
+      "cable_types"
+    ],
+    [
+      "mc cable",
+      "cable_types"
+    ],
+    [
+      "se cable",
+      "cable_types"
+    ],
+    [
+      "mi cable",
+      "cable_types"
+    ],
+    [
+      "ac cable",
+      "cable_types"
+    ],
+    [
+      "armored cable",
+      "cable_types"
+    ],
+    [
+      "metal-clad",
+      "cable_types"
+    ],
+    [
+      "nonmetallic-sheathed",
+      "cable_types"
+    ],
+    [
+      "service-entrance cable",
+      "cable_types"
+    ],
+    [
+      "underground feeder",
+      "cable_types"
+    ],
+    [
+      "pool",
+      "pool_basics"
+    ],
+    [
+      "spa ",
+      "pool_basics"
+    ],
+    [
+      "spas",
+      "pool_basics"
+    ],
+    [
+      "hot tub",
+      "pool_basics"
+    ],
+    [
+      "fountain",
+      "pool_basics"
+    ],
+    [
+      "paddle fan",
+      "pool_basics"
+    ],
+    [
+      "elevator",
+      "elevator_basics"
+    ],
+    [
+      "dumbwaiter",
+      "elevator_basics"
+    ],
+    [
+      "motor-generator",
+      "elevator_basics"
+    ],
+    [
+      "driving machine",
+      "elevator_basics"
+    ],
+    [
+      "overload",
+      "motor_basics"
+    ],
+    [
+      "controller",
+      "motor_basics"
+    ],
+    [
+      "three-phase motor",
+      "motor_basics"
+    ],
+    [
+      "3-phase motor",
+      "motor_basics"
+    ],
+    [
+      "motor starter",
+      "motor_basics"
+    ],
+    [
+      "locked-rotor",
+      "motor_basics"
+    ],
+    [
+      "motor",
+      "motor_basics"
+    ],
+    [
+      "heated ceiling",
+      "appliance_basics"
+    ],
+    [
+      "space heating",
+      "appliance_basics"
+    ],
+    [
+      "air conditioner",
+      "appliance_basics"
+    ],
+    [
+      "waste disposer",
+      "appliance_basics"
+    ],
+    [
+      "in-sink",
+      "appliance_basics"
+    ],
+    [
+      "supply cord",
+      "appliance_basics"
+    ],
+    [
+      "laundry equipment",
+      "appliance_basics"
+    ],
+    [
+      "range installed",
+      "appliance_basics"
+    ],
+    [
+      "demand factor",
+      "load_calc_basics"
+    ],
+    [
+      "demand load",
+      "load_calc_basics"
+    ],
+    [
+      "lighting load",
+      "load_calc_basics"
+    ],
+    [
+      "calculated load",
+      "load_calc_basics"
+    ],
+    [
+      "multioutlet assembly",
+      "load_calc_basics"
+    ],
+    [
+      "service and feeder",
+      "load_calc_basics"
+    ],
+    [
+      "feeder demand",
+      "load_calc_basics"
+    ],
+    [
+      "floor area",
+      "load_calc_basics"
+    ],
+    [
+      "square footage",
+      "load_calc_basics"
+    ],
+    [
+      "rounded",
+      "load_calc_basics"
+    ],
+    [
+      "nearest whole",
+      "load_calc_basics"
+    ],
+    [
+      "branch circuit",
+      "branch_circuits"
+    ],
+    [
+      "multiwire",
+      "branch_circuits"
+    ],
+    [
+      "disconnecting means",
+      "disconnect_basics"
+    ],
+    [
+      "disconnect",
+      "disconnect_basics"
+    ],
+    [
+      "in sight",
+      "disconnect_basics"
+    ],
+    [
+      "readily accessible",
+      "disconnect_basics"
+    ],
+    [
+      "lockout",
+      "disconnect_basics"
+    ],
+    [
+      "fire pump",
+      "emergency_basics"
+    ],
+    [
+      "emergency power",
+      "emergency_basics"
+    ],
+    [
+      "emergency source",
+      "emergency_basics"
+    ],
+    [
+      "generator",
+      "emergency_basics"
+    ],
+    [
+      "low-voltage",
+      "lowvoltage_basics"
+    ],
+    [
+      "low voltage",
+      "lowvoltage_basics"
+    ],
+    [
+      "class 1",
+      "lowvoltage_basics"
+    ],
+    [
+      "power-limited",
+      "lowvoltage_basics"
+    ],
+    [
+      "isolating type",
+      "lowvoltage_basics"
+    ],
+    [
+      "antenna",
+      "antenna_basics"
+    ],
+    [
+      "lead-in",
+      "antenna_basics"
+    ],
+    [
+      "sign body",
+      "sign_basics"
+    ],
+    [
+      "sign enclosure",
+      "sign_basics"
+    ],
+    [
+      "sign shall",
+      "sign_basics"
+    ],
+    [
+      "x-ray",
+      "xray_basics"
+    ],
+    [
+      "pressure connector",
+      "connections"
+    ],
+    [
+      "torque",
+      "connections"
+    ],
+    [
+      "terminal housing",
+      "connections"
+    ],
+    [
+      "splice",
+      "connections"
+    ],
+    [
+      "shall be listed",
+      "listing_basics"
+    ],
+    [
+      "must be listed",
+      "listing_basics"
+    ],
+    [
+      "marked",
+      "listing_basics"
+    ],
+    [
+      "switchboard",
+      "boxes_enclosures"
+    ],
+    [
+      "switchgear",
+      "boxes_enclosures"
+    ],
+    [
+      "panelboard",
+      "boxes_enclosures"
+    ],
+    [
+      " box",
+      "boxes_enclosures"
+    ],
+    [
+      "enclosure",
+      "boxes_enclosures"
+    ],
+    [
+      "cabinet",
+      "boxes_enclosures"
+    ],
+    [
+      "conduit body",
+      "boxes_enclosures"
+    ],
+    [
+      "flush device",
+      "boxes_enclosures"
+    ],
+    [
+      "unused opening",
+      "boxes_enclosures"
+    ],
+    [
+      "luminaire",
+      "lighting_temp"
+    ],
+    [
+      "lamp",
+      "lighting_temp"
+    ],
+    [
+      "ballast",
+      "lighting_temp"
+    ],
+    [
+      "holiday lighting",
+      "lighting_temp"
+    ],
+    [
+      "festoon",
+      "lighting_temp"
+    ],
+    [
+      "temporary",
+      "lighting_temp"
+    ],
+    [
+      "decorative lighting",
+      "lighting_temp"
+    ],
+    [
+      "switch",
+      "switch_basics"
+    ],
+    [
+      "snap switch",
+      "switch_basics"
+    ],
+    [
+      "three-way",
+      "switch_basics"
+    ],
+    [
+      "stop switch",
+      "switch_basics"
+    ],
+    [
+      "transformer",
+      "transformer_service"
+    ],
+    [
+      "nameplate",
+      "transformer_service"
+    ],
+    [
+      "service rated",
+      "transformer_service"
+    ],
+    [
+      "service conductor",
+      "transformer_service"
+    ],
+    [
+      "feeder",
+      "transformer_service"
+    ],
+    [
+      "electrified truck",
+      "transformer_service"
+    ],
+    [
+      "rv feeder",
+      "transformer_service"
+    ],
+    [
+      "receptacle",
+      "receptacle_rules"
+    ],
+    [
+      "outlet",
+      "receptacle_rules"
+    ],
+    [
+      "raceway",
+      "raceway_rules"
+    ],
+    [
+      "conduit",
+      "raceway_rules"
+    ],
+    [
+      "emt",
+      "raceway_rules"
+    ],
+    [
+      "rmc",
+      "raceway_rules"
+    ],
+    [
+      "imc",
+      "raceway_rules"
+    ],
+    [
+      "fmc",
+      "raceway_rules"
+    ],
+    [
+      "pvc",
+      "raceway_rules"
+    ],
+    [
+      " ent ",
+      "raceway_rules"
+    ],
+    [
+      "direct-buried",
+      "raceway_rules"
+    ],
+    [
+      "burial",
+      "raceway_rules"
+    ],
+    [
+      "trench",
+      "raceway_rules"
+    ],
+    [
+      "underground",
+      "raceway_rules"
+    ],
+    [
+      "fastened",
+      "raceway_rules"
+    ],
+    [
+      "secured",
+      "raceway_rules"
+    ],
+    [
+      "support",
+      "raceway_rules"
+    ]
+  ],
+  "article_concepts": [
+    [
+      "225",
+      "outside_clearances"
+    ],
+    [
+      "400",
+      "flex_cords"
+    ],
+    [
+      "430",
+      "motor_basics"
+    ],
+    [
+      "220",
+      "load_calc_basics"
+    ],
+    [
+      "250",
+      "grounding_basics"
+    ],
+    [
+      "680",
+      "pool_basics"
+    ],
+    [
+      "500",
+      "hazloc"
+    ],
+    [
+      "503",
+      "hazloc"
+    ],
+    [
+      "110",
+      "working_space"
+    ],
+    [
+      "314",
+      "boxes_enclosures"
+    ],
+    [
+      "404",
+      "switch_basics"
+    ],
+    [
+      "408",
+      "boxes_enclosures"
+    ],
+    [
+      "406",
+      "receptacle_rules"
+    ],
+    [
+      "210",
+      "receptacle_rules"
+    ],
+    [
+      "310",
+      "load_calc_basics"
+    ]
+  ]
+}

@@ -1,0 +1,753 @@
+{
+  "about": "Provision text and table excerpts the bank builder offers as a first draft of a record's reference_text / reference_table, keyed by citation. Quoted from this edition; curated per-record quotes live in tools/pipeline/question_bank_overrides.json. Pipeline only (not exported).",
+  "texts": {
+    "400.36": "400.36 Splices and Terminations\nPortable cables shall not contain splices unless the splices are of the permanent molded, vulcanized types in accordance with 110.14(B). Terminations on portable cables rated over 600 volts, nominal, shall be accessible only to authorized and qualified personnel.",
+    "408.18(C)": "408.18 Clearances (C) Connections\nEach section of equipment that requires rear or side access to make field connections shall be so marked by the manufacturer on the front. Section openings requiring rear or side access shall comply with 110.26. Load terminals for field wiring shall comply with 408.18(C)(1), (C)(2), or (C)(3) as applicable.",
+    "408.3(A)(2)": "408.3 Support and Arrangement of Busbars and Conductors (2) Same Vertical Section\nOther than the required interconnections and control wiring, only those conductors that are intended for termination in a vertical section of a switchboard or switchgear shall be located in that section. Exception: Conductors shall be permitted to travel horizontally through vertical sections of switchboards and switchgear where such conductors are isolated from busbars by a barrier.",
+    "210.63(B)(1)": "210.63 Equipment Requiring Servicing (B) Other Electrical Equipment (1) Indoor Service Equipment\nThe required receptacle outlet shall be located within the same room or area as the service equipment.",
+    "800.44(B)": "800.44(B) Above Roofs\nCommunications wires and cables and CATV-type coaxial cables shall have a vertical clearance of not less than 2.5 m (8 ft) from all points of roofs above which they pass.",
+    "220.5(C)": "220.5(C) Floor Area\nThe floor area for each floor shall be calculated from the outside dimensions of the building, dwelling unit, or other area involved. For dwelling units, the calculated floor area shall not include open porches or unfinished areas not adaptable for future use as a habitable room or occupiable space.",
+    "210.8(C)": "210.8(C) Crawl Space Lighting Outlets\nGFCI protection shall be provided for lighting outlets not exceeding 120 volts installed in crawl spaces.",
+    "210.63": "210.63 Equipment Requiring Servicing\nA 125-volt, single-phase, 15- or 20-ampere-rated receptacle outlet shall be installed at an accessible location within 7.5 m (25 ft) of the equipment as specified in 210.63(A) and (B). Informational Note: See 210.8(E) for requirements on GFCI protection.",
+    "210.52(E)(3)": "210.52(E)(3) Balconies, Decks, and Porches\nDecks within 102 mm (4 in.) sideways of the house need one outlet reachable from the deck. That outlet must be no more than 2.0 m (6 1/2 ft, which is 78 inches) above the walking surface.",
+    "210.50(C)": "210.50(C) Appliance Receptacle Outlets\nAppliance receptacle outlets installed in a dwelling unit for specific appliances, such as laundry equipment, shall be installed within 1.8 m (6 ft) of the intended location of the appliance.",
+    "210.18": "210.18 Rating\nBranch circuits shall be rated in accordance with the maximum permitted ampere rating or setting of the overcurrent device. The rating for other than individual branch circuits shall be 10, 15, 20, 30, 40, and 50 amperes.",
+    "210.52(A)(2)(1)": "210.52(A)(2)(1) Wall Space\nOutlets go so no point along the floor line is more than 1.8 m (6 ft) from one. A wall stretch counts if it is 600 mm (2 ft, which is 24 inches) or wider, measured around corners.",
+    "630.42(C)": "630.42(C) Signs\nA permanent sign shall be attached to the cable tray at intervals not greater than 6.0 m (20 ft). The sign shall read as follows: CABLE TRAY FOR WELDING CABLES ONLY",
+    "110.16(A)": "110.16(A) General\nElectrical equipment, such as switchboards, switchgear, enclosed panelboards, industrial control panels, meter socket enclosures, and motor control centers, that is in other than dwelling units, and is likely to require examination, adjustment, servicing, or maintenance while energized, shall be field or factory marked to warn qualified persons of potential electric arc flash hazards. The marking shall meet the requirements in 110.21(B) and shall be located so as to be clearly visible to qualified persons before examination, adjustment, servicing, or maintenance of the equipment.",
+    "300.4(D)": "300.4(D) Cables and Raceways Parallel to Framing Members and Furring Strips\nIn both exposed and concealed locations, where a cable- or raceway-type wiring method is installed parallel to framing members, such as joists, rafters, or studs, or is installed parallel to furring strips, the cable or raceway shall be installed and supported so that the nearest outside surface of the cable or raceway is not less than 32 mm (1 1/4 in.) from the nearest edge of the framing member or furring strips where nails or screws are likely to penetrate. Where this distance cannot be maintained, the cable or raceway shall be protected from penetration by nails or screws by a steel plate, sleeve, or equivalent at least 1.6 mm (1/16 in.) thick. Exception No. 1: Steel plates, sleeves, or the equivalent shall not be required to protect rigid metal conduit, intermediate metal conduit, rigid nonmetallic conduit, or electrical metallic tubing. Exception No. 2: For concealed work in finished buildings, or finished panels for prefabricated buildings where such supporting is impracticable, it shall be permissible to fish the cables between access points. Exception No. 3: A listed and marked steel plate less than 1.6 mm (1/16 in.) thick that provides equal or better protection against nail or screw penetration shall be permitted.",
+    "312.5(C)": "312.5 Cabinets, Cutout Boxes, and Meter Socket Enclosures\nCable assemblies and insulated conductors entering enclosures within the scope of this article shall be protected from abrasion and shall comply with 312.5(A) through (C). (C) Cables\nWhere cable is used, each cable shall be secured to the cabinet, cutout box, or meter socket enclosure. Exception No. 1: Cables with entirely nonmetallic sheaths shall be permitted to enter the top of a surface-mounted enclosure through one or more nonflexible raceways not less than 450 mm (18 in.) and not more than 3.0 m (10 ft) in length, provided all of the following conditions are met: (1) Each cable is fastened within 300 mm (12 in.), measured along the sheath, of the outer end of the raceway. (2) The raceway extends directly above the enclosure and does not penetrate a structural ceiling. (3) A fitting is provided on each end of the raceway to protect the cable(s) from abrasion and the fittings remain accessible after installation. (4) The raceway is sealed or plugged at the outer end using approved means so as to prevent access to the enclosure through the raceway. (5) The cable sheath is continuous through the raceway and extends into the enclosure beyond the fitting not less than 6 mm (1/4 in.). (6) The raceway is fastened at its outer end and at other points in accordance with the applicable article. (7) Where installed as conduit or tubing, the cable fill does not exceed the amount that would be permitted for complete conduit or tubing systems by Table 1 of Chapter 9 of this Code and all applicable notes thereto. Note 2 to the tables in Chapter 9 does not apply to this condition. Informational Note: See Chapter 9, Table 1, including Note 9, for allowable cable fill in circular raceways. See 310.15(C)(1) for required ampacity reductions for multiple cables installed in a common raceway. Exception No. 2: Single conductors and multiconductor cables shall be permitted to enter enclosures in accordance with 392.46(A) or (B).",
+    "Table 220.42(A)": "Table 220.42(A) Office lighting load\nOffice is 1.3 volt-amperes per square foot. For this exam item, 5,000 sq ft × 1.3 = 6,500 VA. Do not add another multiplier. The table note says the 125 percent continuous-load multiplier is already included.",
+    "810.16(B)": "810.16(B) Self-Supporting Antennas\nOutdoor antennas, such as vertical rods and flat, parabolic, or dipole structures, shall be of corrosion-resistant materials and of strength suitable to withstand ice and wind loading conditions and shall be located well away from overhead conductors of electric light and power circuits of over 150 volts to ground, so as to avoid the possibility of the antenna or structure falling into or making accidental contact with such circuits.",
+    "430.8": "430.8 Marking on Motor Controllers\nA motor controller shall be marked with the manufacturer's name or identification, the voltage, the current or horsepower rating, the short-circuit current rating, and other necessary data to properly indicate the applications for which it is suitable. Exception No. 1: The short-circuit current rating is not required for motor controllers applied in accordance with 430.81(A) or (B). Exception No. 2: The short-circuit current rating is not required to be marked on the motor controller when the short-circuit current rating of the motor controller is marked elsewhere on the assembly. Exception No. 3: The short-circuit current rating is not required to be marked on the motor controller when the assembly into which it is installed has a marked short-circuit current rating. Exception No. 4: Short-circuit current ratings are not required for motor controllers rated less than 2 hp at 300 V or less and listed exclusively for general-purpose branch circuits. A motor controller that includes motor overload protection suitable for group motor application shall be marked with the motor overload protection and the maximum branch-circuit short-circuit and ground-fault protection for such applications. Combination motor controllers that employ adjustable instantaneous trip circuit breakers shall be clearly marked to indicate the ampere settings of the adjustable trip element. Where a motor controller is built in as an integral part of a motor or of a motor-generator set, individual marking of the motor controller shall not be required if the necessary data are on the nameplate. For motor controllers that are an integral part of equipment approved as a unit, the above marking shall be permitted on the equipment nameplate. Informational Note: See 110.10 for information on circuit impedance and other characteristics.",
+    "table 430.8": "430.8 Marking on Motor Controllers\nA motor controller shall be marked with the manufacturer's name or identification, the voltage, the current or horsepower rating, the short-circuit current rating, and other necessary data to properly indicate the applications for which it is suitable. Exception No. 1: The short-circuit current rating is not required for motor controllers applied in accordance with 430.81(A) or (B). Exception No. 2: The short-circuit current rating is not required to be marked on the motor controller when the short-circuit current rating of the motor controller is marked elsewhere on the assembly. Exception No. 3: The short-circuit current rating is not required to be marked on the motor controller when the assembly into which it is installed has a marked short-circuit current rating. Exception No. 4: Short-circuit current ratings are not required for motor controllers rated less than 2 hp at 300 V or less and listed exclusively for general-purpose branch circuits. A motor controller that includes motor overload protection suitable for group motor application shall be marked with the motor overload protection and the maximum branch-circuit short-circuit and ground-fault protection for such applications. Combination motor controllers that employ adjustable instantaneous trip circuit breakers shall be clearly marked to indicate the ampere settings of the adjustable trip element. Where a motor controller is built in as an integral part of a motor or of a motor-generator set, individual marking of the motor controller shall not be required if the necessary data are on the nameplate. For motor controllers that are an integral part of equipment approved as a unit, the above marking shall be permitted on the equipment nameplate. Informational Note: See 110.10 for information on circuit impedance and other characteristics.",
+    "250.68(B)": "250.68(B) Effective Grounding Path\nThe connection of the grounding electrode conductor or bonding jumper shall be made in a manner that will ensure a permanent and effective grounding path. Where necessary to ensure effective grounding for a metal piping system used as a grounding electrode, effective bonding shall be provided around insulated joints and sections and around any equipment that is likely to be disconnected for repairs or replacement. Bonding jumpers shall be of sufficient length to permit removal of such equipment while retaining the integrity of the grounding path.",
+    "406.9(B)": "406.9(B) Receptacles in Damp or Wet Locations\nReceptacles in damp locations shall be weatherproof enclosures or otherwise protected. 15- and 20-ampere, 125- and 250-volt receptacles installed in a wet location shall have an enclosure that is weatherproof whether or not the attachment plug cap is inserted. Outlet box hoods for this purpose shall be listed and identified as extra duty. 15- and 20-ampere, 125- and 250-volt nonlocking receptacles installed in wet locations shall be listed and so identified as the weather-resistant type.",
+    "310.12(A)": "310.12(A) Single-Phase Dwelling Services\nFor a service rated 100 through 400 amperes, the service conductors supplying the entire load associated with a one-family dwelling, or the service conductors supplying the entire load associated with an individual dwelling unit in a two-family dwelling, shall have an ampacity of not less than 83 percent of the service rating.",
+    "392.100(F)": "392.100(F) Nonmetallic Cable Tray\nCable trays of nonmetallic material shall be made of flame-retardant material.",
+    "340.10": "340.10 Uses Permitted (Type UF)\nType UF cable shall be permitted for underground use including direct burial; for wiring in wet, dry, or corrosive locations; as nonmetallic-sheathed cable where the installation meets Article 334; as single-conductor cable with all circuit conductors grouped; and for solar photovoltaic systems. Type UF shall not be used as service-entrance cable.",
+    "406.3(E)": "406.3(E) Isolated Ground Receptacles\nReceptacles with an isolated grounding terminal for the reduction of electrical noise shall be identified by an orange triangle marked on the face of the receptacle.",
+    "422.16(B)(1)": "422.16(B)(1) Electrically Operated In-Sink Waste Disposers\nA disposer may be cord-and-plug connected only with a maker-approved cord, a protected and reachable outlet, and a ground wire with a grounded plug. The cord must be not less than 450 mm (18 in.) and not more than 900 mm (36 in.) long.",
+    "590.5": "590.5 Listed (Temporary Decorative Lighting)\nDecorative lighting and similar accessories used for holiday lighting and similar purposes shall be listed and labeled.",
+    "210.11(C)(2)": "210.11(C)(2) Laundry Branch Circuits\nAt least one additional 20-ampere branch circuit shall be provided to supply the laundry receptacle outlet(s). This circuit shall have no other outlets.",
+    "210.52(G)(1)": "210.52(G) Basements, Garages, and Accessory Buildings\nAt least one receptacle outlet, besides any for specific equipment, shall be installed in each separate unfinished basement portion, in each vehicle bay of an attached garage, and in each vehicle bay of a detached garage or accessory building that has electric power.",
+    "210.52(H)": "210.52(H) Hallways\nAt least one receptacle outlet shall be installed in each hallway 10 ft or more in length, measured along the centerline without passing through a doorway.",
+    "220.14(4)": "220.14 Fixed Multioutlet Assemblies (Commercial, Not Simultaneous)\nEach 5 ft or fraction of continuous multioutlet assembly counts as one 180 VA outlet: 12 ft → three sections × 180 VA = 540 VA.",
+    "Table 310.16": "Table 310.16 #12 THWN\nTHWN is the 75°C column. #12 copper is 25 A. At 86°F, Note 1 says no temperature correction. Four current-carrying conductors use the 80 percent adjustment. 25 × 0.80 = 20 A.",
+    "225.6(B)": "225.6(B) Festoon Lighting Without a Messenger\nOverhead festoon conductors without a messenger: smallest permitted overhead conductor is #12 AWG.",
+    "590.4(J)": "590.4(J) Holiday Trees as Supports\nTrees may support overhead holiday spans only with strain-relief or tension take-up devices protecting the wiring from live growth.",
+    "620.61(B)(1)": "620.61(B)(1) Elevator Driving-Machine Motors\nDuty for elevator and dumbwaiter driving-machine motors, and driving motors of motor-generators with generator field control, is rated intermittent.",
+    "250.53(A)(3)": "250.53(A)(3) Multiple Rod Electrodes\nWhere multiple driven rods form the grounding electrode system, they shall be spaced not less than 6 ft (72 in.) apart to remain effective.",
+    "680.58": "680.58 Fountain Receptacle GFCI\n15- and 20-ampere, 125- through 250-volt receptacles within 20 ft of a fountain edge shall have GFCI protection.",
+    "Table 310.4(1)": "Table 310.4(1) Conductor Applications and Insulations\nRHW-2 is flame-retardant, moisture-resistant thermoset insulation rated 90°C for dry and wet locations.",
+    "315.14": "315.14 Conductor Identification\nPink is an acceptable color for ungrounded conductors.",
+    "514.11(A)": "514.11(A) Fuel Dispensing Emergency Shutoff\nEmergency shutoff devices for fuel dispensing systems shall be installed not less than 20 ft and not more than 100 ft from the dispensing devices served.",
+    "408.5": "408.5 Conduits Entering the Bottom\nWhere conduits enter a floor-standing switchboard, switchgear, or panelboard at the bottom, the conduits including end fittings shall rise not more than 3 in. above the bottom of the enclosure.",
+    "424.20(A)(3)": "424.20(A)(3) No Automatic Restart\nA thermostat may double as the heater disconnect only with a marked off position that opens every hot wire. Even then, the device must be designed so that the circuit cannot be energized automatically after the device has been manually placed in the off position.",
+    "240.21(B)(1)": "240.21(B)(1) Taps not over 10 ft, field installation\nIf the tap leaves the enclosure where it is made, the tap ampacity must be at least one-tenth of the overcurrent device protecting the feeder. A 40 A tap can be supplied by a device rated no more than 400 A.",
+    "Table 400.4": "Table 400.4 Flexible Cord Types\nSTOOW is the cord type permitted in wet locations that is also sunlight resistant.",
+    "430.42(C)": "430.42(C) Receptacle Rating for Motor Loads\nThe maximum ampere rating permitted for a 125-volt, single-phase receptacle with a cord-and-plug motor load and no individual overload protection is 15 amperes.",
+    "110.26(E)(1)(a)(c)": "110.26(E)(1) Dedicated Equipment Space\nThe space above a panelboard is dedicated electrical space: sprinkler protection (not water piping, leak protection, or ducts) is permitted there.",
+    "450.11(A)": "450.11(A) Transformer Nameplates\nFrequency, insulating-liquid amount, and ventilating clearance are required on the nameplate; conductor AWG size is not.",
+    "680.11(A)": "680.11(A) Pool Underground Wiring\nUnderground pool wiring within a stated horizontal distance of the inside pool wall may run in liquidtight flexible metal conduit listed for direct burial (tested here at 60 in.).",
+    "330.30(D)(2)": "330.30(D)(2) Unsupported MC to Luminaires\nType MC cable may run unsupported and unsecured up to 72 in. from the last connection point to luminaires.",
+    "Table 430.250": "Table 430.250 50 hp wound-rotor motor\nA wound-rotor motor uses the induction-type column, not the synchronous column. A 480-volt system uses the 460-volt column. That cell is 65 A.",
+    "406.6(D)": "406.6(D) USB Cover Plates\nA flush device cover plate that also provides a night light or output connectors (USB) shall be listed as Class 2.",
+    "392.10(E)": "392.10(E) Airfield Cable in Tray\nAirfield lighting series-circuit cable up to 5,000 volts, under qualified supervision, may run in cable tray.",
+    "424.101(A)": "424.101(A) Low-Voltage Heating Units\nAn isolating-type low-voltage heating power unit shall have a rated output not exceeding 42.4 volts peak AC.",
+    "500.5(D)(2)": "500.5(D)(2) Class III, Division 2\nLocations where easily ignitable fibers are stored or handled outside the manufacturing process are Class III, Division 2.",
+    "430.101": "430.101 Disconnect the Motor and Controller\nA motor disconnecting means must disconnect both the motor and the controller from the circuit.",
+    "358.30(A)": "358.30(A) EMT Fastening\nUnbroken EMT runs may be fastened up to 5 ft from the termination where structural members prevent fastening within 3 ft.",
+    "Table 210.21(B)(2)": "Table 210.21(B)(2) Cord Load on Receptacles\nMaximum cord-and-plug load on a 15-ampere receptacle fed by a 20-ampere multi-outlet circuit is 12 amperes.",
+    "440.64": "440.64 Room Air-Conditioner Cord Length\nA 120-volt room air conditioner cord shall be not longer than 10 ft.",
+    "430.102(B)(1)": "430.102(B)(1) Motor Disconnect in Sight\nA disconnecting means for the motor shall be located in sight from the motor location and the driven machinery location.",
+    "810.13": "810.13 Antenna Clearances\nOpen antenna and lead-in conductors near electric light or power circuits under 250 volts shall keep at least 24 in. of clearance where proximity cannot be avoided.",
+    "522.21(B)": "522.21(B) Ribbon Cable Size\nConductors in non-jacketed multiconductor (ribbon) cable in permanent amusement attractions shall be no smaller than 26 AWG.",
+    "225.39(B)": "225.39(B) Small Building Disconnect\nFor installations of not more than two 2-wire branch circuits, the building disconnecting means shall be rated not less than 30 amperes.",
+    "225.39(A)": "225.39(A) One-Circuit Disconnect\nA building disconnect for a one-circuit installation with limited loads shall be rated not less than 15 amperes.",
+    "240.10": "240.10 Supplementary Overcurrent Protection\nWhere used for luminaires, appliances, and other equipment or for internal circuits and components of equipment, supplementary overcurrent protection shall not be used as a substitute for required branch-circuit overcurrent devices. Supplementary overcurrent devices shall not be required to be readily accessible.",
+    "626.11": "626.11 Truck Parking Load\nElectrical services and feeders for electrified truck parking spaces shall be calculated at not less than 11 kVA per space.",
+    "250.66(B)": "250.66(B) Concrete-Encased Electrode Conductor\nThe grounding electrode conductor to a concrete-encased electrode need not be larger than #4 copper.",
+    "422.5(A)": "422.5(A) Vending GFCI\nVending machines and similar public appliances rated 250 V or less and 60 A or less shall have GFCI personnel protection — including tire inflators and water coolers: all of these.",
+    "430.9(C)": "430.9(C) Terminal Torque\nScrew-type pressure terminals for #14 and smaller copper in motor control circuits shall be torqued to at least 7 lb-in unless otherwise marked.",
+    "314.24(B)(5)": "314.24(B)(5) Flush Device Box Depth\nThe minimum-size box containing a flush device shall be not less than 15/16 in. deep.",
+    "354.28": "354.28 NUCC Trimming\nNUCC conduit ends shall be trimmed from conductors with an approved method that does not damage insulation (a proper termination).",
+    "430.52(B)": "430.52(B) Carrying Starting Current\nMotor branch-circuit short-circuit and ground-fault devices must carry the motor starting current.",
+    "422.12": "422.12 Central Heating Branch\nCentral heating equipment (other than fixed electric space heat) shall be on an individual branch circuit.",
+    "422.33": "422.33 Appliance Disconnect Access\nFor cord-and-plug-connected appliances, an accessible separable connector or plug and receptacle is permitted to serve as the disconnecting means; it is not required to be readily accessible.",
+    "647.4(D)": "647.4(D) Sensitive-Equipment Voltage Drop\nBranch-circuit voltage drop on sensitive electronic systems shall not exceed 1.5%.",
+    "230.54(B)": "230.54(B) SE Gooseneck\nType SE cable may form a gooseneck taped with weather-resistant thermoplastic at the service.",
+    "430.62(A)": "430.62(A) Motor Feeder Rating\nA feeder supplying a specific fixed motor load shall have a protective device rated or set not greater than the largest rating or setting of the branch-circuit short-circuit and ground-fault device for any motor in the group, plus the sum of the full-load currents of the other motors.",
+    "324.41": "324.41 Floor Coverings\nFlat conductor cable (Type FCC) on floors shall be covered with carpet squares not larger than 914 mm (36 in.) square. Carpet squares that are adhered to the floor shall be attached with release-type adhesives.",
+    "320.80(A)": "320.80(A) AC in Thermal Insulation\nArmored cable installed in thermal insulation shall have conductors rated at 90 degrees C (194 degrees F). The ampacity shall not exceed that of a 60 degrees C rated conductor.",
+    "324.40(D)": "324.40(D) Connection to Other Systems\nPower feed, grounding connection, and shield system connection between the FCC system and other wiring systems shall be accomplished in a transition assembly identified for the use.",
+    "320.30(D)(2)": "320.30(D)(2) Unsupported AC at Terminals\nType AC cable is fastened within 12 in. of every box and at least every 4.5 ft. A tail not over 600 mm (2 ft) at terminals needing flexibility may go unsupported.",
+    "330.104": "330.104 Conductors\nConductors in Type MC cable shall be of copper, aluminum, copper-clad aluminum, nickel or nickel-coated copper, solid or stranded. The minimum conductor size shall be 18 AWG copper, nickel or nickel-coated copper, and 12 AWG aluminum or copper-clad aluminum.",
+    "332.10(7)": "332.10(7) Uses Permitted (Type MI)\nType MI cable shall be permitted in hazardous (classified) locations where specifically permitted by other articles in this Code.",
+    "340.80": "340.80 UF Ampacity\nThe ampacity of Type UF cable shall be that of 60 degrees C conductors.",
+    "332.104": "332.104, 332.108, and 332.116 MI Cable Construction\n332.104 Conductors: solid copper, nickel, or nickel-coated copper. 332.108 Equipment Grounding: the sheath is permitted to serve as the equipment grounding conductor, with an added copper grounding conductor where needed. 332.116 Sheath: a continuous copper or alloy steel sheath that provides mechanical protection and a moisture seal.",
+    "338.10(B)(3)": "338.10(B)(3) Temperature Limitations\nType SE service-entrance cable used to supply appliances shall not be subject to conductor temperatures in excess of the temperature specified for the type of insulation involved.",
+    "336.24": "336.24 Bending Radius (Type TC)\nBends in Type TC cable shall be made so as not to damage the cable. Type TC cable with metallic shielding shall have a minimum bending radius of not less than 12 times the cable overall diameter.",
+    "348.22": "348.22 Number of Conductors\nThe number of conductors in FMC shall not exceed the percentage fill in Table 1, Chapter 9. For 3/8-in. FMC, Table 348.22 gives the maximum number of insulated conductors; the largest size it lists is 10 AWG.",
+    "344.120": "344.120 Marking\nEach length of rigid metal conduit shall be clearly and durably identified in every 3 m (10 ft) as required in the first sentence of 110.21(A).",
+    "358.14": "358.14 Dissimilar Metals\nWhere practicable, dissimilar metals in contact anywhere in the system shall be avoided to eliminate the possibility of galvanic action. Stainless steel and aluminum fittings and enclosures shall be permitted to be used with steel EMT where not subject to severe corrosive influences.",
+    "352.100": "352.100 Construction\nPVC conduit shall be made of rigid (nonplasticized) polyvinyl chloride (PVC). PVC conduit and fittings for use above ground shall have flame-retardant properties and shall be resistant to impact and crushing, distortion from heat under conditions likely to be encountered in service, and low temperature and sunlight effects. For use underground, the material shall be acceptably resistant to moisture and corrosive agents.",
+    "358.100": "358.100 Construction\nEMT shall be made of one of the following: (1) steel (ferrous) with protective coatings, (2) aluminum (nonferrous), (3) stainless steel.",
+    "350.12": "350.12 Uses Not Permitted (LFMC)\nLFMC shall not be used where subject to physical damage, or where any combination of ambient and conductor temperature produces an operating temperature in excess of that for which the material is approved.",
+    "368.234(A)": "368.234(A) Vapor Seals\nBusway runs over 1000 volts that have sections located both inside and outside of buildings shall have a vapor seal at the building wall to prevent interchange of air between indoor and outdoor sections.",
+    "370.10(1)": "370.10(1) Uses Permitted (Cablebus)\nCablebus shall be permitted for services, feeders, and branch circuits, and shall be installed only for exposed work.",
+    "368.17(B)": "368.17(B) Reduction in Ampacity Size of Busway\nOvercurrent protection shall be required where busways are reduced in ampacity.\nException: For industrial establishments only, omission of overcurrent protection is permitted where the smaller busway does not exceed 15 m (50 ft) and has an ampacity of at least one-third the rating or setting of the overcurrent device next back on the line, and is free from contact with combustible material.",
+    "384.30(A)": "384.30(A) Surface Mount\nA surface mount strut-type channel raceway shall be secured to the mounting surface with retention straps external to the channel at intervals not exceeding 3 m (10 ft) and within 900 mm (3 ft) of each outlet box, cabinet, junction box, or other channel raceway termination.",
+    "395.30(A)": "395.30(A) Conductors and Supports\nConductors and their supports for outdoor overhead conductors over 1000 volts shall be designed and installed to withstand the expected mechanical loads. Documentation of the engineered design by a licensed professional engineer engaged primarily in the design of such systems, for the spacing between conductors, shall be available upon request of the authority having jurisdiction.",
+    "334.30(B)(2)": "334.30(B)(2) Unsupported Cables\nNM cable shall be permitted to be unsupported where it is not more than 1.4 m (4 1/2 ft) from the last point of support to the point of connection to a luminaire or other piece of electrical equipment, and the cable and point of connection are within an accessible ceiling.",
+    "Table 430.37": "Table 430.37 Minimum Number of Overload Units\nThe table gives the minimum number and placement of overload units for motor supply configurations. A three-phase motor requires 3 overload units: one in each of the three ungrounded conductors, unless an approved alternative is provided.",
+    "680.22(A)(2)": "680.22(A)(2) Circulation System Receptacles\nReceptacles that provide power for water-pump motors or other loads directly related to the circulation and sanitation system shall be located not less than 1.83 m (6 ft) from the inside walls of the pool, shall be of the grounding type, and shall have GFCI protection.",
+    "680.21(C)": "680.21(C) GFCI Protection\nOutlets supplying all pool motors on branch circuits rated 150 volts or less to ground and 60 amperes or less, single- or 3-phase, shall be provided with Class A ground-fault circuit-interrupter protection (whether by receptacle or direct connection).",
+    "Table 310.12(A)": "310.12(A) Single-Phase Dwelling Services and Feeders (2023)\nFor a service rated 100 through 400 amperes, 120/240-volt, 3-wire, single-phase, supplying the entire load of a one-family dwelling or an individual dwelling unit, the service conductors shall have an ampacity of not less than 83 percent of the service rating. NEC 2023 deleted former Table 310.12; apply the 83 percent rule with Table 310.16.",
+    "Chapter 9, Note 4": "Chapter 9, Notes to Tables, Note 4\nWhere conduit or tubing nipples having a maximum length not to exceed 600 mm (24 in.) are installed between boxes, cabinets, and similar enclosures, the nipples shall be permitted to be filled to 60 percent of their total cross-sectional area.",
+    "Table 348.22": "Table 348.22 Maximum Number of Insulated Conductors in 3/8-in. FMC\nThe table gives conductor counts by insulation type and whether the fitting is inside or outside the conduit. One additional insulated, covered, or bare equipment grounding conductor of the same size is permitted.",
+    "210.4(B)": "210.4(B) Multiwire Branch Circuit Handle Tie\nA multiwire branch circuit's two ungrounded conductors and the neutral shall be capable of being disconnected simultaneously — group handle ties or a listed two-pole breaker.",
+    "300.4(A)(1)": "300.4(A)(1) Protection from Physical Damage\nConductors shall be protected from physical damage where run through metal studs — use listed grommet/plaster guard or bushing.",
+    "404.14(B)(2)": "404.14(B)(2) AC or DC General-Use Snap Switch — Inductive Loads\nA general-use snap switch suitable for use on AC or DC circuits shall control inductive loads not exceeding 50 percent of the ampere rating of the switch at the applied voltage. Switches rated in horsepower are suitable for controlling motor loads within their rating at the voltage applied.",
+    "250.53(A)(5)": "250.53(A)(5) Plate Electrode\nGrounding electrodes must be buried deep enough in the earth to maintain solid, permanent soil contact. Plate electrodes shall be installed not less than 750 mm (30 in. = 2 1/2 ft) below the surface of the earth.",
+    "408.41": "408.41 Grounded Conductors\nEach grounded conductor shall terminate within the panelboard on an individual terminal that is not also used for another conductor.",
+    "110.26(B)": "110.26(B) Clear Spaces\nWorking space required by this section shall not be used for storage. When normally enclosed live parts are exposed for inspection or servicing, the working space, if in a passageway or general open space, shall be suitably guarded.",
+    "110.26(A)(1)": "110.26(A)(1) Depth of Working Space\nDepth is per Table 110.26(A)(1) (e.g., 900 mm / 3 ft for 150 V or less under Condition 1 or 2). Condition 2: exposed live parts on one side and grounded parts on the other side — concrete, brick, or tile walls shall be considered as grounded.",
+    "110.26(C)(3)": "110.26(C)(3) Personnel Doors\nFor equipment rated 800 amperes or more containing overcurrent, switching, or control devices, personnel doors intended for entrance to or egress from the working space and located less than 25 ft from its nearest edge shall open at least 90 degrees in the direction of egress and be equipped with listed panic hardware or listed fire exit hardware (2023 NEC).",
+    "210.8(B)(2)": "210.8(B)(2) Kitchens or Food Prep Areas\nGFCI protection is required for all 125-volt through 250-volt receptacles supplied by single-phase branch circuits rated 150 volts or less to ground, 50 amperes or less, in kitchens or areas with a sink and permanent provisions for either food preparation or cooking.",
+    "210.8(B)(3)": "210.8(B)(2) Kitchens or Areas with a Sink (2023)\nGFCI protection is required for receptacles in kitchens or areas with a sink and permanent provisions for food preparation, beverage preparation, or cooking. (In NEC 2023, 210.8(B)(3) is Rooftops.)",
+    "220.5(B)": "220.5(B) Fractions\nBranch-circuit, feeder, and service load calculations shall be permitted to be rounded to the nearest whole ampere, with decimal fractions smaller than 0.5 dropped.",
+    "210.8(E)": "210.8(E) Equipment Requiring Servicing\nGFCI protection shall be provided for receptacles for equipment requiring servicing (the receptacles required by 210.63, within 25 ft of the equipment).",
+    "590.4(F)": "590.4(F) Lamp Protection\nAll lamps for general illumination in temporary wiring installations shall be protected from accidental contact or breakage by a suitable luminaire or lampholder with a guard.",
+    "680.22(A)(4)": "680.22(A)(4) GFCI and SPGFCI Protection\nAll receptacles rated 125 volts through 250 volts, 60 amperes or less, located within 6.0 m (20 ft) of the inside walls of a pool shall have GFCI protection complying with 680.5(B) or SPGFCI protection complying with 680.5(C), as applicable.",
+    "440.14": "440.14 Location\nDisconnecting means shall be located within sight from, and readily accessible from, the air-conditioning or refrigerating equipment. The disconnecting means shall be permitted to be installed on or within the equipment and shall meet the working space requirements of 110.26(A) (2023 NEC).",
+    "210.8(F)": "210.8(F) Outdoor Outlets\nAll outdoor outlets for dwellings (other than those covered in 210.8(A)(3)) supplied by single-phase branch circuits rated 150 volts to ground or less, 50 amperes or less, shall have GFCI protection for personnel. Exception: GFCI is not required for lighting outlets other than those covered in 210.8(C).",
+    "334.12(B)(4)": "334.12(B)(4) NM Cable Exposed in Garage\nNM cable is not permitted exposed on the unfinished surfaces of a garage or unfinished basement walls/ceilings where subject to physical damage — use conduit, MC, or listed raceway.",
+    "210.4(C)": "210.4(C) Line-to-Neutral Loads\nMultiwire branch circuits shall supply only line-to-neutral loads. Exceptions permit a multiwire branch circuit to supply a single piece of utilization equipment, or line-to-line loads where all ungrounded conductors are opened simultaneously by the branch-circuit overcurrent device.",
+    "590.4(G)": "590.4(G) Splices\nA box, conduit body, or other enclosure shall be required for all splices in temporary wiring installations, such as at tree lots and similar installations.",
+    "210.12(A)(1)": "210.12(A) Means of Protection\n(1) A listed combination-type AFCI installed to provide protection of the entire branch circuit — one of the permitted means of providing the AFCI protection required by 210.12(B) through (E).",
+    "314.27(D) Ex.": "314.27 Outlet Boxes — Utilization Equipment\nBoxes used for the support of utilization equipment shall be designed for the purpose. Exception: Utilization equipment weighing not more than 3 kg (6 lb) shall be permitted to be supported on other boxes or plaster rings secured to other boxes, provided the equipment is secured with no fewer than two No. 6 or larger screws.",
+    "210.12(B)(C)": "210.12(B)/(C) AFCI — Dwelling and Dormitory Units (2023)\n210.12(B): all 120 V, single-phase, 10/15/20 A branch circuits supplying outlets or devices in dwelling unit kitchens, family rooms, dining rooms, living rooms, parlors, libraries, dens, bedrooms, sunrooms, recreation rooms, closets, hallways, laundry areas, and similar areas. 210.12(C): dormitory unit bedrooms, living rooms, hallways, closets, bathrooms, and similar rooms. 210.12(D) adds other occupancies (guest rooms/suites, patient sleeping rooms, fire/police stations). Residential garages are not on any AFCI list.",
+    "250.52(A)(2)": "250.52(A)(2) Metal In-Ground Support Structures\nOne or more metal in-ground support structures in direct contact with the earth vertically for 3.0 m (10 ft) or more, with or without concrete encasement, shall be permitted as a grounding electrode.",
+    "200.3": "200.3 Connection to Grounded System\nGrounded conductors of premises wiring systems shall be electrically connected to the supply system grounded conductor to ensure a common, continuous grounded system. The section defines an electrical connection as a direct connection capable of carrying current, as distinguished from induced currents; it includes an exception for specified utility-interactive inverters.",
+    "517.73(A)": "517.73(A) Diagnostic Equipment (X-Ray)\nThe ampacity of supply branch-circuit conductors and the overcurrent protection shall be not less than 50 percent of the momentary rating or 100 percent of the long-time rating, whichever is greater. Where simultaneous biplane examinations are undertaken, the supply conductors and overcurrent devices shall be 100 percent of the momentary demand rating of the two X-ray tubes.",
+    "240.5(B)(4)": "240.5(B)(4) Extension Cord Sets\nFlexible cord used in extension cords made with separately listed and installed components shall be permitted to be supplied by a branch circuit in accordance with: 20-ampere circuits — 16 AWG and larger.",
+    "708.54 Ex.": "708.54 Selective Coordination\nCritical operations power system overcurrent devices shall be selectively coordinated with all supply-side overcurrent devices.\nException: Selective coordination shall not be required between two overcurrent devices located in series if no loads are connected in parallel with the downstream device.",
+    "110.13(B)": "110.13(B) Cooling of Equipment\nElectrical equipment that depends on the natural circulation of air and convection principles for cooling of exposed surfaces shall be installed so that room airflow over such surfaces is not prevented by walls or by adjacent installed equipment. For equipment designed for floor mounting, clearance between top surfaces and adjacent surfaces shall be provided to dissipate rising warm air. Equipment provided with ventilating openings shall be installed so that walls or other obstructions do not prevent the free circulation of air through the equipment.",
+    "225.39": "225.39 Building Disconnect Ratings\nBuilding disconnecting means ratings: one-circuit installation minimum 15 A, two-circuit minimum 30 A, limited load feeder 60 A (see individual subdivisions).",
+    "424.36": "424.36 Clearances of Wiring in Ceilings\nWiring located above heated ceilings shall be spaced not less than 50 mm (2 in.) above the heated ceiling and shall be considered as operating at an ambient temperature of 50°C (122°F).",
+    "210.19(A)(2)": "210.19(B) Branch Circuits with More Than One Receptacle (2020: 210.19(A)(2))\nConductors of branch circuits supplying more than one receptacle for cord-and-plug-connected portable loads shall have an ampacity of not less than the rating of the branch circuit.",
+    "344.10(A)(3)": "344.10(A)(3) RMC in Corrosive Locations\nRigid metal conduit in corrosive locations shall be of a listed corrosion-resistant material (e.g., stainless, PVC-coated) or protected as required.",
+    "310.15(A)": "310.15(A) Ampacity Tables\nAmpacities in Tables 310.16 and 310.18 are based on not more than three current-carrying conductors in a raceway, cable, or earth (directly buried), at an ambient of 86°F.",
+    "700.7(A)": "700.7(A) Emergency Sources\nA sign shall be placed at the service-entrance equipment, indicating the type and location of each on-site emergency power source.",
+    "110.14(C)(2)": "110.14(C)(2) Separate Connector Provisions\nSeparately installed pressure connectors shall be used with conductors at the ampacities not exceeding the ampacity at the listed and identified temperature rating of the connector.",
+    "210.11(A)": "210.11(A) Number of Branch Circuits\nThe minimum number of branch circuits shall be determined from the total calculated load and the size or rating of the circuits used. In all installations, the number of circuits shall be sufficient to supply the load served.",
+    "110.12(B)": "110.12(B) Integrity of Electrical Equipment and Connections\nInternal parts of electrical equipment, including busbars, wiring terminals, insulators, and other surfaces, shall not be damaged or contaminated by foreign materials such as paint, plaster, cleaners, abrasives, or corrosive residues.",
+    "408.36(B)": "408.36(B) Supplied Through a Transformer\nWhere a panelboard is supplied through a transformer, the overcurrent protection required by 408.36 shall be located on the secondary side of the transformer.",
+    "110.26": "110.26 Spaces About Electrical Equipment\nAccess and working space shall be provided about all electrical equipment; working space shall be at least 30 in. wide and its depth set by Table 110.26(A)(1) (3 ft for 150 V or less under Condition 2). 2023: open equipment doors shall not impede access to or egress from the working space — access is considered impeded if the doors reduce the space to less than 24 in. wide and 6 1/2 ft high.",
+    "408.3(F)(1)": "408.3(F)(1) High-Leg Identification\nA switchboard, switchgear, or panelboard containing a 4-wire, delta-connected system where the midpoint of one phase winding is grounded shall be legibly and permanently field marked: CAUTION ___ PHASE HAS ___ VOLTS TO GROUND.",
+    "225.37": "225.37 Disconnect Location\nEach building or structure supplied by a feeder shall have a means for disconnecting all ungrounded conductors — located within sight of the building/structure or capable of being locked (supplied from another building).",
+    "547.3(A)(B)": "547.3(A)/(B) Agricultural Building Disconnect\nDisconnecting means for agricultural buildings shall be within sight of the livestock equipment and shall disconnect all ungrounded conductors simultaneously.",
+    "406.10(C)": "406.10(C) Grounding Terminal Use\nA receptacle grounding terminal shall not be used for purposes other than connection to the equipment grounding conductor.",
+    "409.21(B)(2)": "409.21(B) Location (Industrial Control Panel Overcurrent Protection)\nWhere overcurrent protection is provided as part of the industrial control panel, the supply conductors shall be considered as either feeders or taps as covered by 240.21.",
+    "300.5(F)": "300.5(F) Backfill\nBackfill containing large rocks, paving materials, cinders, large or sharply angular substances, or corrosive material shall not be placed where it may damage raceways, cables, conductors, or other substructures, prevent adequate compaction, or contribute to corrosion. Where necessary, protect the wiring method with granular or selected material, suitable running boards or sleeves, or other approved means.",
+    "314.2": "314.2 Round Boxes\nRound boxes shall not be used where raceways or connectors requiring locknuts or bushings are connected to the side of the box.",
+    "225.19(D)(1)": "225.19(D)(1) Final Spans — Clearance from Windows and Doors\nOverhead final spans shall maintain at least 900 mm (3 ft) horizontal clearance from operable windows, doors, porches, balconies, ladders, stairs, fire escapes, and similar locations, subject to the Code exception for conductors above the top of a window.",
+    "225.19(D)(3)": "225.19(D)(3) Building Openings\nOverhead branch-circuit and feeder conductors shall not be installed beneath openings through which materials might be moved, and shall not be installed where they obstruct entrance to those building openings.",
+    "724.40": "724.40 Class 1 Power-Limited Circuits\nClass 1 power-limited circuits shall be supplied from a source that has a rated output of not more than 30 volts and 1000 volt-amperes.",
+    "314.23(E)": "314.23(E) Raceway-Supported Enclosure, With Devices, Luminaires, or Lampholders\nAn enclosure not over 1650 cm3 (100 in.3) that contains devices, luminaires, or lampholders shall be permitted to be supported by two or more conduits threaded wrenchtight into the enclosure or into hubs identified for the purpose, with each conduit secured within 450 mm (18 in.) of the enclosure.",
+    "660.9": "660.9 Minimum Size of Conductors (X-Ray Equipment)\nSize 18 AWG or 16 AWG fixture wires and flexible cords shall be permitted for the control and operating circuits of X-ray and auxiliary equipment where protected by not larger than 20-ampere overcurrent devices.",
+    "310.3(B)(3)": "310.3(B)(3) Separation of Circuits\nConductors of different circuits in the same raceway shall be maintained as a system with the same conductor insulation temperature rating (no mixing 90°C and 60/75°C in a fill calculation as mixed).",
+    "500.5(D)": "500.5(D) Class III Locations Defined\nClass III locations are those in which combustible flyings or fibers are manufactured, processed, or stored but where ignition is not likely under normal operation.",
+    "517.18(B)(1)": "517.18(B)(1) Patient Bed Location Receptacles (General Care)\nEach patient bed location in a general care (Category 2) space shall be provided with a minimum of eight receptacles (for example, four duplex or eight single receptacles).",
+    "695.12(D)": "695.12(D) Energized Equipment Parts\nEnergized equipment parts of fire pump controllers shall be located not less than 300 mm (12 in.) above the floor level.",
+    "305.4": "305.4 Conductors of Different Systems\nConductors of circuits rated over 1000 volts AC or 1500 volts DC shall not occupy the same enclosure, cable, or raceway with conductors rated at or below those voltages, except as permitted by the listed exceptions. Conductors with nonshielded insulation operating at different voltage levels shall not occupy the same enclosure, cable, or raceway.",
+    "551.71(B)": "551.71(B) 30-Ampere (RV Park Supply)\nEvery recreational vehicle site with electrical supply shall be equipped with a 30-ampere, 125-volt receptacle, and at least 70 percent of all sites shall be so equipped.",
+    "305.15(E)": "305.15 Underground Installations (E) Backfill\nBackfill containing large rocks, paving materials, cinders, large or sharply angular substances, or corrosive materials shall not be placed in an excavation where materials can damage or contribute to the corrosion of raceways, cables, or other substructures or where it might prevent adequate compaction of fill. Protection in the form of granular or selected material or suitable sleeves shall be provided to prevent physical damage to the raceway or cable.",
+    "503.1": "503.1 Class III Div 2 (Fibers) Defined\nClass III, Division 1: locations where combustible fibers are manufactured, processed, or handled under conditions where ignition hazards exist from ignition sources — Division 2 adds storage areas (see 500.5(D)).",
+    "250.122(F)(1)(b)": "250.122(F)(1)(b) Conductors in Parallel — Multiple Raceways or Cables\nIf conductors are installed in multiple raceways or cables, and an equipment grounding conductor is used, it shall be installed in parallel in each raceway or cable and sized per Table 250.122 based on the overcurrent protective device for the feeder or branch circuit.",
+    "225.18(5)": "225.18(5) Clearance for Overhead Conductors and Cables\nOverhead spans of open conductors and cables not over 1000 volts shall have a clearance of not less than 7.5 m (24 1/2 ft) over track rails of railroads.",
+    "600.9(C)": "600.9(C) Wood and Combustible Materials\nWood or other combustible materials used in or on signs shall be located not less than 50 mm (2 in.) from the nearest lampholder or current-carrying part.",
+    "551.72(B)": "551.72(B) RV Pedestal Disconnect\nEach RV lot pedestal shall have a disconnecting means for the pedestal branch circuit capable of being locked in the open position.",
+    "348.28": "348.28 Trimming\nAll cut ends of FMC shall be trimmed or otherwise finished to remove rough edges, except where fittings that thread into the convolutions are used.",
+    "310.14(A)(3)(2)": "310.14(A)(3) Temperature Limitation of Conductors\nNo conductor shall be used where its operating temperature exceeds its rated temperature. Principal determinants include (2) heat generated internally in the conductor as the result of load current flow, including fundamental and harmonic currents.",
+    "240.5(B)(1)": "240.5(B)(1) Supply Cord of Listed Appliance or Luminaire\nWhere flexible cord or tinsel cord is approved for and used with a specific listed appliance or luminaire, it shall be considered to be protected when applied within the appliance or luminaire listing requirements.",
+    "334.12(A)(3)": "334.12(A)(3) Uses Not Permitted\nTypes NM and NMC cables shall not be used as service-entrance cable.",
+    "362.24(A)": "362.24 Bends — How Made\nBends of ENT shall be made so that the tubing is not damaged and the internal diameter is not effectively reduced. Article 100 defines ENT as a pliable raceway: one that can be bent by hand with a reasonable force but without other assistance.",
+    "388.12(3)": "388.12(3) Uses Not Permitted\nSurface nonmetallic raceways shall not be used where the voltage is 300 volts or more between conductors, unless listed for higher voltage.",
+    "376.30(B)": "376.30(B) Vertical Runs\nVertical runs of metal wireways shall be securely supported at intervals not exceeding 4.5 m (15 ft) and shall not have more than one joint between supports.",
+    "342.30(B)(3)": "342.30(B)(3) Vertical Risers\nExposed vertical risers of IMC from industrial machinery or fixed equipment shall be permitted to be supported at intervals not exceeding 6 m (20 ft) if the conduit is made up with threaded couplings, firmly supported at the top and bottom of the riser, and no other means of intermediate support is readily available.",
+    "400.13": "400.13 Cord and Cable Table\nFlexible cord ampacity per Table 400.5(A): an 18 AWG SJT cord at 60°C is rated 10 A in continuous duty (check exact row per Table 400.5(A)(1)).",
+    "344.30(B)(2)": "344.30(B)(2) Supports for Straight Runs\nStraight runs of RMC made up with threaded couplings shall be permitted to be supported in accordance with the distances in Table 344.30(B)(2), provided such supports prevent transmission of stresses to terminations where the conduit is deflected between supports.",
+    "366.100(E)": "366.100(E) Clearance of Bare Live Parts\nBare conductors in auxiliary gutters shall be securely and rigidly supported so that the minimum clearance between bare current-carrying metal parts of different potential mounted on the same surface is not less than 50 mm (2 in.), nor less than 25 mm (1 in.) for parts held free in the air.",
+    "382.15(A)": "382.15(A) Nonmetallic Extensions\nOne or more extensions shall be permitted to be run in any direction from an existing outlet, but not on the floor or within 50 mm (2 in.) from the floor.",
+    "470.11": "470.11 Location\nResistors and reactors shall not be placed where exposed to physical damage. Where the space between them and any combustible material is less than 305 mm (12 in.), a thermal barrier shall be required.",
+    "356.22": "356.22 Number of Conductors\nThe number of conductors in LFNC shall not exceed that permitted by the percentage fill specified in Table 1, Chapter 9.",
+    "344.10(C)": "344.10(C) Cinder Fill\nRMC shall be permitted in or under cinder fill where subject to permanent moisture where protected on all sides by a layer of noncinder concrete not less than 50 mm (2 in.) thick, where the conduit is not less than 450 mm (18 in.) under the fill, or where protected by corrosion protection approved for the condition.",
+    "Final Exam #1, Question 5": "Switch and Lamp Troubleshooting",
+    "322.56(B)": "322.56(B) Taps\nTaps shall be made between any phase conductor and the grounded conductor or any other phase conductor by means of devices and fittings identified for the use. Tap devices shall be rated at not less than 15 amperes, or more than 300 volts to ground, and shall be color-coded in accordance with 322.120(C).",
+    "425.22(D)": "425.22(D) Process Heating Overload Protection\nElectric process heating equipment shall be provided with overload protection per 427.5 for continuous-duty heating elements where marked.",
+    "680.35(D)": "680.35(D) Audio Equipment\nAudio equipment shall not be installed in or on self-contained storable or portable immersion pools. Audio equipment operating above the low-voltage contact limit and located within 1.83 m (6 ft) of the inside walls of a storable or portable immersion pool shall be grounded and provided with GFCI protection.",
+    "408.7": "408.7 Box Entry — Unused Openings\nUnused openings in panelboard enclosures and cutout boxes shall be closed with listed closures (blank plugs/covers).",
+    "334.116(B)": "334.116(B) Type NMC\nThe overall covering of Type NMC cable shall be flame retardant, moisture resistant, fungus resistant, and corrosion resistant.",
+    "630.12(A)": "630.12(A) Overcurrent Protection for Arc Welders\nEach welder shall have overcurrent protection rated or set at not more than 200 percent of I1max. Where that value does not correspond to a standard rating, the next higher standard rating shall be permitted.",
+    "General calculation": "See the question's WORKED SOLUTION for the calculation method (load, ampacity, or voltage-drop computation).",
+    "Table 8, Chapter 9": "Chapter 9, Table 8 Conductor Properties\nTable 8 lists conductor dimensions, circular-mil area, stranding, and direct-current resistance at 75°C in ohms per 1000 ft (kFT).",
+    "Table 300.1(C)": "Table 300.1(C) Metric Designators and Trade Sizes\nThe table pairs metric designators with trade sizes for conduit, tubing, and associated fittings. The designators identify trade sizes; they are not actual dimensions.",
+    "Table 220.55": "Table 220.55 Household Cooking Appliance Demand\nFor one household range rated 12 kW or less, Column C gives an 8 kW maximum demand. Note 1 increases Column C by 5 percent for each additional kilowatt or major fraction above 12 kW; a 14 kW range therefore uses 8.8 kW.",
+    "Table 630.31(A)(2)": "Table 630.31(A)(2) Duty-Cycle Multiplication Factors for Resistance Welders\nFor a resistance welder wired for a specific operation with known, unchanged primary current and duty cycle, multiply actual primary current by the table factor for that duty cycle.",
+    "Table 352.30(B)": "Table 352.30(B) Support of Rigid PVC Conduit\nA 1/2-in. RNC has a maximum support interval of 3 ft. The table increases support spacing for larger trade sizes; secure the raceway within 3 ft of each termination.",
+    "310.15(F)": "310.15(F) Grounding Conductor Not Counted\nA grounding conductor is a noncurrent-carrying conductor and is not counted among current-carrying conductors.",
+    "480.10(A)": "480.10(A) Battery Ventilation\nBattery rooms need ventilation to prevent an explosive gas mixture.",
+    "430.12(A)": "430.12(A) Terminal Housings\nMotor terminal housings shall be of metal and of substantial construction.",
+    "210.8(A)": "210.8(A) Dwelling Units — GFCI Locations\nAll 125-volt through 250-volt receptacles in the listed dwelling unit locations — bathrooms, garages, outdoors, crawl spaces, basements, kitchens, food/beverage prep areas, sinks within 6 ft, boathouses, bathtubs or shower stalls within 6 ft, laundry areas, and indoor damp/wet locations — supplied by single-phase branch circuits rated 150 volts or less to ground shall have GFCI protection.",
+    "210.8(A) Ex. 1": "210.8(A) Exception No. 1 — Snow-Melting Equipment\nReceptacles that are not readily accessible and are supplied by a branch circuit dedicated to electric snow-melting, deicing, or pipeline and vessel heating equipment shall be permitted to be installed in accordance with 426.28 or 427.22 (ground-fault protection of equipment instead of GFCI).",
+    "210.8(A)(10)": "210.8(A)(10) Bathtubs and Shower Stalls\nGFCI protection is required for receptacles installed within 1.83 m (6 ft) of the outside edge of a bathtub or shower stall where the receptacle is not installed within the bathroom itself.",
+    "250.50": "250.50 Existing Buildings\nConcrete-encased electrodes need not join the grounding system where the rebar is unreachable without disturbing concrete in existing buildings.",
+    "440.55(B)": "440.55(B) AC Cord Rating\nCord-and-plug room air conditioners are limited to a 15-ampere attachment plug and receptacle at 250 volts.",
+    "620.53": "620.51(D)(1) More Than One Driving Machine\nWhere there is more than one driving machine in a machine room, the disconnecting means shall be numbered to correspond to the identifying number of the driving machine that they control. (620.53 covers car light, receptacle, and ventilation disconnecting means.)",
+    "240.33": "240.33 Vertical Mounting\nEnclosures for overcurrent devices shall be mounted vertically (upright) unless impracticable.",
+    "310.15(B)(1)(1)": "310.15(B)(1)(1) Temperature Correction\nThree #10 THWN-2 conductors at 112°F ambient: 40 A × 0.87 correction = 34.8 A.",
+    "210.8(A)(2)": "210.8(A)(2) Garages and Accessory Buildings\n125-volt through 250-volt receptacles in garages and grade-level unfinished accessory buildings, supplied by single-phase branch circuits rated 150 volts or less to ground, shall have GFCI protection for personnel.",
+    "408.19": "408.19 Insulated Conductors in Switchgear\nInsulated conductors used inside switchgear or switchboards shall be listed.",
+    "406.12(1)": "406.12 Tamper-Resistant Receptacles\nIn dwelling units and other areas specified by the Code, 15- and 20-ampere, 125- and 250-volt nonlocking-type receptacles shall be listed tamper-resistant receptacles. Exceptions cover receptacles high above the floor, parts of luminaires or appliances, and dedicated hard-to-move appliance receptacles.",
+    "Table 220.54": "Table 220.54 Demand Factors for Household Electric Clothes Dryers\nFive household dryers use an 85% demand factor.",
+    "Table 250.122": "Table 250.122 Minimum Equipment Grounding Conductors\nSized from the overcurrent device ahead of the circuit: a 50-ampere branch circuit takes a #10 copper equipment grounding conductor.",
+    "Table 300.5(A)": "Table 300.5(A) Minimum Cover Requirements\nDirect-buried cables in a trench below 2 in. of concrete require a minimum cover of 18 in. in Column 1.",
+    "366.23(A)": "366.23(A) Ampacity in Auxiliary Gutters\nCopper busbars in unventilated enclosures are rated at 1,000 amperes per square inch of cross-section (1.5 sq in = 1,500 A; 2 sq in = 2,000 A).",
+    "680.43(B)(1)(a)": "680.43(B)(1) Low-Voltage Luminaires Without GFCI\nLuminaires, lighting outlets, and ceiling-suspended paddle fans located over the spa or hot tub or within 5 ft of the inside walls, where no GFCI protection is provided, shall be located not less than 12 ft above the maximum water level.",
+    "550.32(F)": "550.32(F) Mobile Home Disconnect Height\nThe handle grip at its highest must be no more than 2.0 m above grade. The bottom of the box must be not less than 600 mm (2 ft, which is 24 inches) above finished grade or working platform."
+  },
+  "tables": {
+    "Table 310.16": [
+      [
+        "Conductor size",
+        "Copper 60°C",
+        "Copper 75°C",
+        "Copper 90°C"
+      ],
+      [
+        "#12 THWN",
+        "20 A",
+        "25 A",
+        "30 A"
+      ],
+      [
+        "NOTE: At 86°F ambient, no temperature correction is needed. Four current-carrying conductors use the 80% adjustment factor from Table 310.15(C)(1)."
+      ]
+    ],
+    "Table 310.4(1)": [
+      [
+        "Conductor type",
+        "Insulation",
+        "Maximum temperature",
+        "Application"
+      ],
+      [
+        "RHW-2",
+        "Flame-retardant, moisture-resistant thermoset",
+        "90°C",
+        "Dry and wet locations"
+      ]
+    ],
+    "Table 400.4": [
+      [
+        "Flexible cord type",
+        "Wet-location use",
+        "Sunlight-resistant"
+      ],
+      [
+        "STOOW",
+        "Yes",
+        "Yes"
+      ],
+      [
+        "NOTE: For this item, find a cord type marked for both wet use and sunlight resistance."
+      ]
+    ],
+    "Table 300.5(A)": [
+      [
+        "Installation condition",
+        "Minimum cover"
+      ],
+      [
+        "Direct-buried cable in a trench below 2 in. of concrete",
+        "18 in."
+      ]
+    ],
+    "Table 250.122": [
+      [
+        "OCPD rating",
+        "Minimum copper EGC",
+        "Minimum aluminum EGC"
+      ],
+      [
+        "15 A",
+        "14 AWG",
+        "12 AWG"
+      ],
+      [
+        "20 A",
+        "12 AWG",
+        "10 AWG"
+      ],
+      [
+        "30 A",
+        "10 AWG",
+        "8 AWG"
+      ],
+      [
+        "40–60 A",
+        "10 AWG",
+        "8 AWG"
+      ],
+      [
+        "NOTE: Select the equipment grounding conductor from the rating of the overcurrent device, not from the ungrounded conductor size."
+      ]
+    ],
+    "Table 430.250": [
+      [
+        "Motor horsepower",
+        "Table voltage column for 480 V system",
+        "Three-phase full-load current"
+      ],
+      [
+        "50 hp",
+        "460 V",
+        "65 A"
+      ]
+    ],
+    "Table 210.21(B)(2)": [
+      [
+        "Branch-circuit rating",
+        "Receptacle rating",
+        "Maximum cord-and-plug load"
+      ],
+      [
+        "20 A",
+        "15 A",
+        "12 A"
+      ],
+      [
+        "20 A",
+        "20 A",
+        "16 A"
+      ]
+    ],
+    "Table 430.37": [
+      [
+        "Motor supply type",
+        "Minimum overload units"
+      ],
+      [
+        "Three-phase motor",
+        "3 — one for each ungrounded conductor"
+      ]
+    ],
+    "Table 310.12(A)": [
+      [
+        "Table 310.12(A) applies to",
+        "Service/feeder scope"
+      ],
+      [
+        "Single-phase dwelling service or feeder",
+        "100–400 A; 120/240 V, 3-wire; entire load of a one-family dwelling or an individual dwelling unit"
+      ],
+      [
+        "Sizing allowance",
+        "Conductor ampacity may be 83% of the service or feeder rating"
+      ]
+    ],
+    "Table 220.54": [
+      [
+        "Household dryers served",
+        "Demand factor"
+      ],
+      [
+        "1–4",
+        "100%"
+      ],
+      [
+        "5",
+        "85%"
+      ],
+      [
+        "6",
+        "80%"
+      ],
+      [
+        "7",
+        "75%"
+      ],
+      [
+        "8",
+        "70%"
+      ]
+    ],
+    "Chapter 9, Note 4": [
+      [
+        "Conduit/tubing nipple length",
+        "Maximum fill"
+      ],
+      [
+        "24 in. or less between enclosures",
+        "60% of total cross-sectional area"
+      ]
+    ],
+    "Table 300.1(C)": [
+      [
+        "Metric designator",
+        "Trade size"
+      ],
+      [
+        "12",
+        "3/8 in."
+      ],
+      [
+        "16",
+        "1/2 in."
+      ],
+      [
+        "21",
+        "3/4 in."
+      ],
+      [
+        "27",
+        "1 in."
+      ],
+      [
+        "35",
+        "1 1/4 in."
+      ],
+      [
+        "41",
+        "1 1/2 in."
+      ],
+      [
+        "53",
+        "2 in."
+      ],
+      [
+        "63",
+        "2 1/2 in."
+      ],
+      [
+        "78",
+        "3 in."
+      ],
+      [
+        "91",
+        "3 1/2 in."
+      ],
+      [
+        "103",
+        "4 in."
+      ],
+      [
+        "129",
+        "5 in."
+      ],
+      [
+        "155",
+        "6 in."
+      ],
+      [
+        "NOTE: Metric designators identify trade sizes; they are not actual dimensions."
+      ]
+    ],
+    "Table 220.55": [
+      [
+        "Household cooking appliance case",
+        "Column C maximum demand"
+      ],
+      [
+        "One range rated 12 kW or less",
+        "8 kW"
+      ],
+      [
+        "NOTE 1: For an individual range over 12 kW through 27 kW, increase Column C by 5% for each additional kilowatt or major fraction above 12 kW."
+      ]
+    ],
+    "Table 630.31(A)(2)": [
+      [
+        "Resistance-welder duty cycle",
+        "Multiplication factor"
+      ],
+      [
+        "20%",
+        "0.45"
+      ],
+      [
+        "15%",
+        "0.39"
+      ],
+      [
+        "10%",
+        "0.32"
+      ],
+      [
+        "7.5%",
+        "0.27"
+      ],
+      [
+        "5% or less",
+        "0.22"
+      ],
+      [
+        "NOTE: Supply-conductor ampacity = actual primary current × duty-cycle factor."
+      ]
+    ],
+    "Table 352.30(B)": [
+      [
+        "Rigid PVC conduit trade size",
+        "Maximum support spacing"
+      ],
+      [
+        "1/2–1 in.",
+        "3 ft"
+      ],
+      [
+        "1 1/4–2 in.",
+        "5 ft"
+      ],
+      [
+        "2 1/2–3 in.",
+        "6 ft"
+      ],
+      [
+        "3 1/2–5 in.",
+        "7 ft"
+      ],
+      [
+        "6 in.",
+        "8 ft"
+      ],
+      [
+        "NOTE: This question's 1/2-in. RNC uses the 3-ft row."
+      ]
+    ],
+    "Table 8, Chapter 9": [
+      [
+        "Conductor size",
+        "Stranding",
+        "Copper DC resistance (Ω/kFT) at 75°C"
+      ],
+      [
+        "#12 AWG",
+        "Solid",
+        "1.93"
+      ],
+      [
+        "#12 AWG",
+        "7 strands",
+        "1.98"
+      ],
+      [
+        "#10 AWG",
+        "Solid",
+        "1.21"
+      ],
+      [
+        "#10 AWG",
+        "7 strands",
+        "1.24"
+      ],
+      [
+        "NOTE: Table 8 lists conductor properties, including direct-current resistance per 1000 ft."
+      ]
+    ],
+    "Table 348.22": [
+      [
+        "Size AWG",
+        "RFH-2/SF-2 In",
+        "Out",
+        "TF/XHHW/AF/TW In",
+        "Out",
+        "TFN/THHN/THWN In",
+        "Out",
+        "FEP/FEPB/PF/PGF In",
+        "Out"
+      ],
+      [
+        "18",
+        "2",
+        "3",
+        "3",
+        "5",
+        "5",
+        "8",
+        "5",
+        "8"
+      ],
+      [
+        "16",
+        "1",
+        "2",
+        "3",
+        "4",
+        "4",
+        "6",
+        "4",
+        "6"
+      ],
+      [
+        "14",
+        "1",
+        "2",
+        "2",
+        "3",
+        "3",
+        "4",
+        "3",
+        "4"
+      ],
+      [
+        "12",
+        "—",
+        "—",
+        "1",
+        "2",
+        "2",
+        "3",
+        "2",
+        "3"
+      ],
+      [
+        "10",
+        "—",
+        "—",
+        "1",
+        "1",
+        "1",
+        "1",
+        "1",
+        "2"
+      ],
+      [
+        "NOTE: One additional insulated, covered, or bare equipment grounding conductor of the same size is permitted."
+      ]
+    ],
+    "Table 220.42(A)": [
+      [
+        "Occupancy",
+        "VA/ft2"
+      ],
+      [
+        "Automotive facility",
+        "1.5"
+      ],
+      [
+        "Convention center",
+        "1.4"
+      ],
+      [
+        "Courthouse",
+        "1.4"
+      ],
+      [
+        "Dormitory",
+        "1.5"
+      ],
+      [
+        "Exercise center",
+        "1.4"
+      ],
+      [
+        "Fire station",
+        "1.3"
+      ],
+      [
+        "Gymnasium",
+        "1.7"
+      ],
+      [
+        "Health care clinic",
+        "1.6"
+      ],
+      [
+        "Hospital",
+        "1.6"
+      ],
+      [
+        "Hotel/motel/apartment without cooking",
+        "1.7"
+      ],
+      [
+        "Library",
+        "1.5"
+      ],
+      [
+        "Manufacturing facility",
+        "2.2"
+      ],
+      [
+        "Motion picture theater",
+        "1.6"
+      ],
+      [
+        "Museum",
+        "1.6"
+      ],
+      [
+        "Office",
+        "1.3"
+      ],
+      [
+        "Parking garage",
+        "0.3"
+      ],
+      [
+        "Penitentiary",
+        "1.2"
+      ],
+      [
+        "Performing arts theater",
+        "1.5"
+      ],
+      [
+        "Police station",
+        "1.3"
+      ],
+      [
+        "Post office",
+        "1.6"
+      ],
+      [
+        "Religious facility",
+        "2.2"
+      ],
+      [
+        "Restaurant",
+        "1.5"
+      ],
+      [
+        "Retail",
+        "1.9"
+      ],
+      [
+        "School/university",
+        "1.5"
+      ],
+      [
+        "Sports arena",
+        "1.5"
+      ],
+      [
+        "Town hall",
+        "1.4"
+      ],
+      [
+        "Transportation",
+        "1.2"
+      ],
+      [
+        "Warehouse",
+        "1.2"
+      ],
+      [
+        "Workshop",
+        "1.7"
+      ]
+    ]
+  }
+}

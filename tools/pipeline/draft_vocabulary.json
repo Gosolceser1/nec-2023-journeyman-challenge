@@ -1,0 +1,323 @@
+{
+  "about": "Edition-neutral vocabulary the bank builder uses to draft lookup_summary, keywords and the info_tip subject line: [phrase in the stem or choices, label].",
+  "keyword_terms": [
+    [
+      "ground fault",
+      "ground fault"
+    ],
+    [
+      "ground-fault",
+      "ground fault"
+    ],
+    [
+      "normally non-current-carrying",
+      "normally non-current-carrying"
+    ],
+    [
+      "snap switches",
+      "rating and use of snap switches"
+    ],
+    [
+      "inductive loads",
+      "inductive loads"
+    ],
+    [
+      "inductive load",
+      "inductive loads"
+    ],
+    [
+      "applied voltage",
+      "applied voltage"
+    ],
+    [
+      "ampere rating",
+      "switch ampere rating"
+    ],
+    [
+      "grounding electrode",
+      "grounding electrode"
+    ],
+    [
+      "grounding conductor",
+      "equipment grounding conductor"
+    ],
+    [
+      "grounded conductor",
+      "grounded conductor"
+    ],
+    [
+      "bonding",
+      "bonding"
+    ],
+    [
+      "GFCI",
+      "ground-fault circuit-interrupter"
+    ],
+    [
+      "AFCI",
+      "arc-fault circuit-interrupter"
+    ],
+    [
+      "branch circuit",
+      "branch circuit"
+    ],
+    [
+      "feeder",
+      "feeder"
+    ],
+    [
+      "service equipment",
+      "service equipment"
+    ],
+    [
+      "receptacle",
+      "receptacle outlet"
+    ],
+    [
+      "ampacity",
+      "ampacity"
+    ],
+    [
+      "voltage drop",
+      "voltage drop"
+    ],
+    [
+      "overcurrent",
+      "overcurrent protection"
+    ],
+    [
+      "conduit",
+      "conduit"
+    ],
+    [
+      "raceway",
+      "raceway"
+    ],
+    [
+      "cable",
+      "cable"
+    ],
+    [
+      "conductors",
+      "conductors"
+    ],
+    [
+      "motor",
+      "motor"
+    ],
+    [
+      "transformer",
+      "transformer"
+    ],
+    [
+      "pool",
+      "pool / spa"
+    ],
+    [
+      "mobile home",
+      "mobile home"
+    ],
+    [
+      "dwelling",
+      "dwelling unit"
+    ],
+    [
+      "load calculation",
+      "load calculation"
+    ],
+    [
+      "load",
+      "load calculation"
+    ],
+    [
+      "disconnect",
+      "disconnecting means"
+    ],
+    [
+      "box",
+      "box / enclosure"
+    ],
+    [
+      "hazardous",
+      "hazardous location"
+    ],
+    [
+      "temporary",
+      "temporary wiring"
+    ]
+  ],
+  "subject_labels": [
+    [
+      "mc cable",
+      "Type MC cable"
+    ],
+    [
+      "nm cable",
+      "NM cable"
+    ],
+    [
+      "uf cable",
+      "Type UF cable"
+    ],
+    [
+      "se cable",
+      "Type SE cable"
+    ],
+    [
+      "mi cable",
+      "MI cable"
+    ],
+    [
+      "ac cable",
+      "Type AC cable"
+    ],
+    [
+      "receptacle",
+      "receptacle"
+    ],
+    [
+      "outlet",
+      "outlet"
+    ],
+    [
+      "luminaire",
+      "luminaire"
+    ],
+    [
+      "spas",
+      "spa"
+    ],
+    [
+      "hot tub",
+      "hot tub"
+    ],
+    [
+      "swimming pool",
+      "pool"
+    ],
+    [
+      "pool",
+      "pool"
+    ],
+    [
+      "motor",
+      "motor"
+    ],
+    [
+      "transformer",
+      "transformer"
+    ],
+    [
+      "switchboard",
+      "switchboard"
+    ],
+    [
+      "switchgear",
+      "switchgear"
+    ],
+    [
+      "panelboard",
+      "panelboard"
+    ],
+    [
+      "busway",
+      "busway"
+    ],
+    [
+      "conduit",
+      "conduit"
+    ],
+    [
+      "raceway",
+      "raceway"
+    ],
+    [
+      "cable tray",
+      "cable tray"
+    ],
+    [
+      "antenna",
+      "antenna"
+    ],
+    [
+      "welder",
+      "welder"
+    ],
+    [
+      "elevator",
+      "elevator"
+    ],
+    [
+      "dwelling",
+      "dwelling unit"
+    ],
+    [
+      "garage",
+      "garage"
+    ],
+    [
+      "balcon",
+      "balcony/deck/porch"
+    ],
+    [
+      "deck",
+      "balcony/deck/porch"
+    ],
+    [
+      "porch",
+      "balcony/deck/porch"
+    ],
+    [
+      "hallway",
+      "hallway"
+    ],
+    [
+      "kitchen",
+      "kitchen"
+    ],
+    [
+      "bathroom",
+      "bathroom"
+    ],
+    [
+      "crawl space",
+      "crawl space"
+    ],
+    [
+      "disconnecting means",
+      "disconnecting means"
+    ],
+    [
+      "overload",
+      "overload protection"
+    ],
+    [
+      "grounding electrode",
+      "grounding electrode"
+    ],
+    [
+      "bonding jumper",
+      "bonding jumper"
+    ],
+    [
+      "service equipment",
+      "service equipment"
+    ],
+    [
+      "feeder",
+      "feeder"
+    ],
+    [
+      "branch circuit",
+      "branch circuit"
+    ],
+    [
+      "holiday lighting",
+      "holiday lighting"
+    ],
+    [
+      "fire pump",
+      "fire pump"
+    ]
+  ]
+}

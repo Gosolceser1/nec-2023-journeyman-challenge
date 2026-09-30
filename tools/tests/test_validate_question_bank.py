@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import os
 from pathlib import Path
 import unittest
@@ -213,6 +214,20 @@ class EditionTests(unittest.TestCase):
             self.assertTrue(path.exists(), name)
         self.assertEqual(validator.NEC_ARTICLES_PATH, pipeline_paths.nec_data("articles.json"))
         self.assertEqual(validator.CONTENT_AUDIT_PATH, pipeline_paths.nec_data("content_audit.json"))
+
+    def test_draft_generation_data_is_in_the_edition_folder(self):
+        expected = {
+            "provisions.json": ("texts", "tables"),
+            "concepts.json": ("notes", "short", "triggers", "article_concepts"),
+            "answer_glossary.json": ("glossary",),
+        }
+        for name, keys in expected.items():
+            data = json.loads(pipeline_paths.nec_data(name).read_text(encoding="utf-8"))
+            for key in keys:
+                self.assertTrue(data.get(key), f"{name}: {key}")
+        vocabulary = json.loads((ROOT / "tools" / "pipeline" / "draft_vocabulary.json").read_text(encoding="utf-8"))
+        self.assertTrue(vocabulary["keyword_terms"])
+        self.assertTrue(vocabulary["subject_labels"])
 
     def test_nec_data_follows_another_edition(self):
         other = {"year": 2026, "short": "NEC 2026", "long": "x", "dir": "nec/2026"}
