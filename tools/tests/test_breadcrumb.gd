@@ -68,7 +68,7 @@ func _sweep() -> void:
 		var ri: int = main.order[q]
 		var rec: Dictionary = main.records[ri]
 		var qid := str(rec.get("id", ri))
-		t.eq(main.question_label.text, str(rec.get("prompt", "")), "%s: stem on screen" % qid)
+		t.eq(main.question_label.get_parsed_text(), str(rec.get("prompt", "")), "%s: stem on screen" % qid)
 		var shown: String = main.chapter_hint_label.text
 		var want := NecReference.expected_breadcrumb(rec)
 		if NecReference.is_reference_seeking(str(rec.get("prompt", ""))):

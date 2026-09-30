@@ -233,6 +233,7 @@
 		"open-book-exam-#12-018": {"add": [{"text": "allowable fill area", "index": "Cable trays, fill", "article": "392"}]},
 		"open-book-exam-#10-007": {"none": "the stem names nothing to look up (which statement is false)"},
 		"open-book-exam-#12-005": {"add": [{"text": "more than one service", "index": "Services", "article": "230"}]},
+		"open-book-exam-#9-016": {"add": [{"text": "temperature rating", "index": "Terminals, temperature limitations", "article": "110"}]},
 		"final-exam-#2-045": {"drop": ["bonded"]},
 		"open-book-exam-#10-015": {"drop": ["bonded"]}
 	}

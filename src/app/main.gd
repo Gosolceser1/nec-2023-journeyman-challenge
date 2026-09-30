@@ -66,7 +66,7 @@ var progress_label: Label
 var pass_badge: PanelContainer
 var score_label: Label
 var streak_label: Label
-var question_label: Label
+var question_label: RichTextLabel
 var question_table_panel: PanelContainer
 var question_table_heading: Label
 var question_table_grid: GridContainer
@@ -77,6 +77,7 @@ var question_diagram_view: DiagramView
 var question_formula_label: Label
 var formula_box: PanelContainer
 var chapter_hint_label: Label
+var index_hint_label: Label
 var question_hint_row: HBoxContainer
 var lookup_box: PanelContainer
 var question_panel: PanelContainer
@@ -194,6 +195,7 @@ var audio_pause_buttons: Array[Button] = []
 var audio_pause_row: HBoxContainer
 var auto_teach_toggle: CheckButton
 var reduce_motion_toggle: CheckButton
+var hunt_keywords_toggle: CheckButton
 var audio_exam_note: Label
 var preview_button: Button
 var mute_button: Button
@@ -209,6 +211,7 @@ var answers_row: BoxContainer  # desktop only: choices | lookup material
 var ref_column: VBoxContainer  # desktop only
 var feedback_scroll: ScrollContainer
 var fit := FitController.new()
+var hunt := HuntView.new()
 var _verdict_scroll_tween: Tween
 var _start_tween: Tween
 var _leave_armed_until := 0
@@ -248,6 +251,7 @@ static func version_label() -> String:
 func _init() -> void:
 	speech.host = self
 	fit.host = self
+	hunt.host = self
 	menu.host = self
 	session.bag_path = QuizSession.BAG_PATH
 
@@ -517,6 +521,10 @@ func _on_reduce_motion_toggled(on: bool) -> void:
 	audio.save_to(audio_cfg_path)
 	UiFx.apply_reduce_motion(get_tree(), on)
 	AudioSection.refresh(self)
+
+func _on_hunt_keywords_toggled(on: bool) -> void:
+	audio.hunt_keywords = on
+	audio.save_to(audio_cfg_path)
 
 ## level -1 = Off; otherwise an index into AudioSettings.SFX_LEVEL_TITLES.
 func _on_sfx_level_picked(level: int) -> void:
@@ -855,7 +863,6 @@ func _show_question() -> void:
 		main_margin.focus_behavior_recursive = Control.FOCUS_BEHAVIOR_INHERITED
 	speech._stop_reading()
 	speech._prefetch_speech()
-	question_label.text = str(record.get("prompt", "Question unavailable"))
 	UiFx.screen_enter(question_panel, audio.reduce_motion)
 	# A new question always opens at the top: the verdict glide on a phone may
 	# still be running, and the page may have been scrolled on the last one.
@@ -923,7 +930,7 @@ func _show_question() -> void:
 	else:
 		chapter_hint_label.text = AudioExplanationGenerator.redact_answer_spans(NecReference.lookup_path(record), current_correct_text)
 	chapter_hint_label.visible = chapter_hint_label.text != ""
-	lookup_box.visible = chapter_hint_label.visible
+	hunt.show_question(record, current_correct_text)
 	formula_box.visible = question_formula_label.visible
 	progress_label.text = "QUESTION %02d OF %02d" % [current_index + 1, order.size()]
 	_update_score_badges()
@@ -1214,7 +1221,7 @@ func _touch_filter_walk(node: Node) -> void:
 		return
 	if node is ScrollBar:
 		return
-	if node is BaseButton or node.has_method("cancel_press"):
+	if node is BaseButton or node.has_method("cancel_press") or node.has_meta("keeps_input"):
 		(node as Control).mouse_filter = Control.MOUSE_FILTER_PASS
 		return
 	(node as Control).mouse_filter = Control.MOUSE_FILTER_IGNORE

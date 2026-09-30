@@ -158,6 +158,10 @@ static func build(host: Main, parent: VBoxContainer) -> Control:
 	host.reduce_motion_toggle = _make_toggle(host, "Reduce motion (no shake, pop or sparks on answers)" if not host.ui_mobile else "Reduce motion", fs)
 	host.reduce_motion_toggle.toggled.connect(host._on_reduce_motion_toggled)
 	host.audio_body.add_child(host.reduce_motion_toggle)
+	host.hunt_keywords_toggle = _make_toggle(host, "Highlight code-book keywords (Index hints; off in the Full Exam)" if not host.ui_mobile else "Keyword hints (off in Full Exam)", fs)
+	host.hunt_keywords_toggle.tooltip_text = "Colors the stem words to look up in the NEC Index and names the entry before you answer. " + HuntKeywords.EXAM_NOTE
+	host.hunt_keywords_toggle.toggled.connect(host._on_hunt_keywords_toggled)
+	host.audio_body.add_child(host.hunt_keywords_toggle)
 	return section
 
 
@@ -207,6 +211,8 @@ static func refresh(host: Main) -> void:
 	host.auto_teach_toggle.set_pressed_no_signal(host.audio.auto_teach)
 	if is_instance_valid(host.reduce_motion_toggle):
 		host.reduce_motion_toggle.set_pressed_no_signal(host.audio.reduce_motion)
+	if is_instance_valid(host.hunt_keywords_toggle):
+		host.hunt_keywords_toggle.set_pressed_no_signal(host.audio.hunt_keywords)
 	host.auto_teach_toggle.visible = host.audio.mode == AudioSettings.Mode.AUTO
 	host.audio_pause_row.visible = host.audio.mode == AudioSettings.Mode.LISTEN
 	host.audio_exam_note.visible = AudioSettings.autoplays_question(host.audio.mode)

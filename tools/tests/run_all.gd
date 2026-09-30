@@ -52,6 +52,8 @@ const SUITES := [
 	# Every record, shuffled, through the real Next flow in both layouts: the
 	# breadcrumb and reference line name the record's own chapter and article.
 	{"name": "breadcrumb follows the question (every record, both layouts)", "path": "res://tools/tests/test_breadcrumb.gd"},
+	# Stem words to look up in the code book's Index: colored, never the answer, same voice, 0% scroll.
+	{"name": "hunt keywords (every record, both layouts, all standard sizes)", "path": "res://tools/tests/test_hunt_keywords.gd"},
 	{"name": "bank loader (shapes, leak guard)", "path": "res://tools/tests/test_bank_loader.gd"},
 	# project.godot is parsed by ConfigFile, whose only comment char is ";".
 	# A "#" comment silently fused onto the next setting's NAME and left

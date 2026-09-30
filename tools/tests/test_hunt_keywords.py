@@ -65,6 +65,10 @@ class HuntKeywordsTest(unittest.TestCase):
         shared = {"prompt": "A copper conductor shall be ___.",
                   "answers": ["copper, 6 AWG", "copper, 4 AWG", "copper, 2 AWG", "copper, 1 AWG"], "correct_index": 0}
         self.assertEqual(hunt_keywords.leaks(shared, "copper", "Copper", []), "")
+        plural = {"prompt": "Separately installed pressure connectors shall be rated for the ___.",
+                  "answers": ["connector", "equipment", "system", "conductors"], "correct_index": 0}
+        self.assertEqual(hunt_keywords.leaks(plural, "pressure connectors", "Terminals", []), "keyword contains the correct choice")
+        self.assertEqual(hunt_keywords.leaks(plural, "installed", "Lockable disconnects", []), "")
 
     def test_article_answers_hide_the_article(self):
         rec = {"prompt": "Which article covers swimming pools?", "answers": ["680", "682", "690", "547"],

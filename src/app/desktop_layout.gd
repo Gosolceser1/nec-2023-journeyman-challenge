@@ -164,11 +164,8 @@ static func build(host: Main) -> void:
 	host.prompt_voice_badge.visible = false
 	host.exam_pills_row.add_child(host.prompt_voice_badge)
 
-	host.question_label = Label.new()
-	host.question_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	host.question_label.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_SEMIBOLD))
-	host.question_label.add_theme_font_size_override("font_size", AppTheme.TYPE_TITLE)
-	host.question_label.add_theme_color_override("font_color", AppTheme.WHITE)
+	host.question_label = HuntView.make_stem_label(AppTheme.TYPE_TITLE)
+	host.question_label.meta_clicked.connect(host.hunt.on_keyword_clicked)
 	question_column.add_child(host.question_label)
 
 	# Subtitle / Gist Hint with Left Accent Bar
@@ -202,19 +199,24 @@ static func build(host: Main) -> void:
 	lookup_margin.add_theme_constant_override("margin_top", AppTheme.SPACE_XS + 2)
 	lookup_margin.add_theme_constant_override("margin_bottom", AppTheme.SPACE_XS + 2)
 	host.lookup_box.add_child(lookup_margin)
+	var lookup_lines := VBoxContainer.new()
+	lookup_lines.add_theme_constant_override("separation", 2)
+	lookup_margin.add_child(lookup_lines)
+	host.index_hint_label = HuntView.make_index_label(AppTheme.TYPE_META)
+	lookup_lines.add_child(host.index_hint_label)
 
 	host.chapter_hint_label = Label.new()
 	host.chapter_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	host.chapter_hint_label.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_MEDIUM))
 	host.chapter_hint_label.add_theme_font_size_override("font_size", AppTheme.TYPE_META)
 	host.chapter_hint_label.add_theme_color_override("font_color", AppTheme.SKY_400)
-	lookup_margin.add_child(host.chapter_hint_label)
+	lookup_lines.add_child(host.chapter_hint_label)
 	host.lookup_box.visible = false
 
 	# Connect lookup box visibility to chapter hint
 	host.chapter_hint_label.item_rect_changed.connect(func():
-		if is_instance_valid(host.lookup_box) and is_instance_valid(host.chapter_hint_label):
-			host.lookup_box.visible = host.chapter_hint_label.visible
+		if is_instance_valid(host.lookup_box) and is_instance_valid(host.chapter_hint_label) and is_instance_valid(host.index_hint_label):
+			host.hunt.sync_lookup_box()
 	)
 
 	host.question_table_panel = PanelContainer.new()

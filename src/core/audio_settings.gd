@@ -47,6 +47,9 @@ var sfx_level: int = SFX_DEFAULT_LEVEL
 ## OS "reduce motion / remove animations" switch.
 var reduce_motion: bool = system_reduce_motion()
 var reduce_motion_picked := false
+## Color the code-book Index keywords in the stem and name their Index entry
+## before answering (section "study"). Never shown in the Full Exam.
+var hunt_keywords := true
 
 
 static func sanitize_mode(value) -> int:
@@ -160,6 +163,8 @@ func load_from(path: String = PATH) -> void:
 	var calm = config.get_value("display", "reduce_motion") if config.has_section_key("display", "reduce_motion") else null
 	reduce_motion_picked = calm is bool
 	reduce_motion = calm if calm is bool else system_reduce_motion()
+	var hunt = config.get_value("study", "hunt_keywords", true)
+	hunt_keywords = hunt if hunt is bool else true
 
 
 func save_to(path: String = PATH) -> Error:
@@ -173,4 +178,5 @@ func save_to(path: String = PATH) -> Error:
 	config.set_value("audio", "sfx_level", sfx_level)
 	if reduce_motion_picked:
 		config.set_value("display", "reduce_motion", reduce_motion)
+	config.set_value("study", "hunt_keywords", hunt_keywords)
 	return config.save(path)

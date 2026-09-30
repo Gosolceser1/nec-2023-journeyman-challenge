@@ -65,6 +65,14 @@ def contains_phrase(haystack: str, needle: str) -> bool:
     return re.search(r"(?<![a-z0-9])" + re.escape(n) + r"(?![a-z0-9])", h) is not None
 
 
+def contains_word_start(haystack: str, needle: str) -> bool:
+    """Like contains_phrase, but the needle may start a longer word: 'connector' in 'pressure connectors', 'lock' in 'lockable'."""
+    h, n = norm(haystack), norm(needle)
+    if len(n) < 3:
+        return contains_phrase(haystack, needle)
+    return re.search(r"(?<![a-z0-9])" + re.escape(n), h) is not None
+
+
 def cited_articles(reference: str, article_titles: dict) -> list[str]:
     """NEC articles a record cites, in order: '352.100, 352.12(B)' -> ['352']."""
     reference = reference.strip()
@@ -130,11 +138,11 @@ def leaks(record: dict, text: str, heading: str, synonyms: list[str]) -> str:
     if not norm(answer):
         return ""
     others = [str(a) for i, a in enumerate(record.get("answers", [])) if i != int(record.get("correct_index", -1))]
-    if contains_phrase(text, answer):
+    if contains_word_start(text, answer):
         return "keyword contains the correct choice"
     if contains_phrase(answer, text) and not all(contains_phrase(o, text) for o in others):
         return "keyword is part of the correct choice"
-    if contains_phrase(heading, answer):
+    if contains_word_start(heading, answer):
         return "Index heading names the correct choice"
     for phrase in synonyms:
         if contains_phrase(answer, phrase) and not all(contains_phrase(o, phrase) for o in others):

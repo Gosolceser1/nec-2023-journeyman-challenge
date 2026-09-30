@@ -1,7 +1,7 @@
 class_name FitController
 extends RefCounted
 ## Keeps the question screen free of scrolling: steps fonts and card density
-## down, trims the lookup path, folds or shrinks the table (it never scrolls),
+## down, trims the lookup path and the INDEX line, folds or shrinks the table (it never scrolls),
 ## trims the figure, and after answering lets the
 ## explanation sheet give way first. Also switches the desktop answers row
 ## between side by side and stacked.
@@ -44,7 +44,7 @@ func apply_level(level: int) -> void:
 	_fit_level = clampi(level, 0, FIT_ANSWER.size() - 1)
 	var q_steps: Array = FIT_QUESTION_MOBILE if host.ui_mobile else FIT_QUESTION_DESKTOP
 	var h_steps: Array = FIT_HINT_MOBILE if host.ui_mobile else FIT_HINT_DESKTOP
-	host.question_label.add_theme_font_size_override("font_size", int(q_steps[_fit_level]))
+	HuntView.set_font_size(host.question_label, int(q_steps[_fit_level]))
 	host.article_label.add_theme_font_size_override("font_size", int(h_steps[_fit_level]))
 	for card in _live_cards():
 		card.set_text_size(int(FIT_ANSWER[_fit_level]))
@@ -55,6 +55,7 @@ func apply_level(level: int) -> void:
 func begin() -> void:
 	_fit_gen += 1
 	apply_level(0)
+	host.hunt.refill()
 	_table_passes = 0
 	_dropped.clear()
 	if host.question_table_panel.visible:
@@ -87,12 +88,15 @@ func _fit_run(gen: int) -> void:
 		apply_level(_fit_level + 1)
 		over = _quiz_overflow()
 	# The table heading already says where to look; the chapter path is the
-	# expendable duplicate (kept when the heading had to be redacted).
+	# expendable duplicate (kept when the heading had to be redacted), then the
+	# INDEX line.
 	if over > 0.5 and host.question_table_panel.visible and host.lookup_box.visible \
 			and not host.question_table_heading.text.ends_with("REFERENCE TABLE"):
-		host.chapter_hint_label.visible = false
-		host.lookup_box.visible = false
-		over = _quiz_overflow()
+		for line in [host.chapter_hint_label, host.index_hint_label]:
+			if over > 0.5 and line.visible:
+				line.visible = false
+				host.hunt.sync_lookup_box()
+				over = _quiz_overflow()
 	# The table shows whole (it never scrolls). Its columns take new widths only
 	# when the grid re-sorts, so it steps once per frame and is measured after.
 	var grid := host.question_table_grid
@@ -102,6 +106,8 @@ func _fit_run(gen: int) -> void:
 		if _step_table(grid, box, grid.get_combined_minimum_size().y - over) or (over > 0.5 and _drop_extra()):
 			_fit_after_frames(gen, 1)
 			return
+	while over > 0.5 and host.hunt.shrink_index():
+		over = _quiz_overflow()
 	if over > 0.5 and host.question_diagram_panel.visible:
 		_shrink_diagram(over)
 
@@ -191,6 +197,7 @@ func compact_answered(correct: int, selected: int) -> void:
 	if is_instance_valid(host.question_hint_row):
 		host.question_hint_row.visible = false
 	host.chapter_hint_label.visible = false
+	host.index_hint_label.visible = false
 	host.lookup_box.visible = false
 	host.timer_bar.visible = false
 	refresh_ref_column()

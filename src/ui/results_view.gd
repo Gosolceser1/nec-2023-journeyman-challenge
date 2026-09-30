@@ -16,6 +16,7 @@ static func show(host: Main) -> void:
 	var provisions := "Nebraska State Electrical Act and Board Rules" if state_law else Edition.short_label()
 	host.question_label.text = "Official Examination Report" if is_exam else "Practice Report"
 	host.chapter_hint_label.visible = false
+	host.index_hint_label.visible = false
 	host.lookup_box.visible = false
 	host.formula_box.visible = false
 	host.question_table_panel.visible = false
