@@ -17,6 +17,17 @@
   the motor-group feeder, insulation colors, the TC bending radius, battery
   room ventilation and the RV park receptacles. As before, the answer stays
   hidden until you answer.
+- **152 of the 315 newly imported questions get a study figure**
+  (docs/DIAGRAMS_AUDIT.md section 10). 48 repeat an older question and share
+  its figure, 24 use an existing figure, and 19 new drawings cover the rest:
+  - ground rods in rock, fair rides near power lines, fence bonding, the
+    therapeutic tub GFCI zone, conductors coming out of the ground, luminaires
+    under roof decking;
+  - kitchen and bathroom counters, show windows;
+  - cards for series and parallel circuits, AC waves, transformers, box fill,
+    derating, conduit fill, range and dryer demand, motor percentages and
+    dwelling loads.
+  The answer stays hidden until you answer.
 - **New main menu in five tabs: Home, Exams, Drills, Study, Settings.** Home
   has "Continue where you left off" (an unfinished run picks up at the same
   question with the same score, even after closing the app), the quick
@@ -51,6 +62,11 @@
 
 ### Fixed
 
+- **No page scrolling before you answer on Final Exam #1 Q4 and Open Book
+  #1 Q21 on phones.** Their office-lighting figure sat next to the 31-row
+  Table 220.42(A), which left about 30 px of scroll with shuffled choices.
+  The figure now shows after you answer. A new test checks every question that
+  has both a figure and a table on all seven standard screen sizes.
 - **The FORMULA strip no longer gives the answer away** before you answer
   on Final Exam #1 Q22 (garage receptacles) and Q32 (10 ft feeder tap).
 - **"What this question means" quotes the question you see.** 17 lessons

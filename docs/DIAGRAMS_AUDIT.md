@@ -7,11 +7,13 @@ figure, and all three are now redrawn in the app's own style (section 1);
 (51 drawings for all 91 records, section 5), each checked against the NEC 2023
 text by two separate reviews (section 6). Batch 1 of the gap scan adds 26
 drawings and 6 re-masks for 72 more questions (section 8), and batch 2 adds
-23 drawings for 31 more (section 9): 100 drawings for 194 records in all.
+23 drawings for 31 more (section 9). Batch 3 covers the 315 imported
+questions: 19 new drawings plus mappings onto existing ones give 152 more records a figure
+(section 10): 119 drawings for 346 records in all.
 
 Screenshots: `.audit_tmp/shots/diagrams/` (contact sheets `all_*.png` for
 every record, `changed_*.png` for the 1.0.5 changes, `batch1/batch1_*.png`
-and `batch2/batch2_*.png` for the gap-scan batches; desktop and phone, before and after answering). Nothing here copies UpCodes, the exam PDFs or
+`batch2/batch2_*.png` and `batch3/batch3_*.png` for the gap-scan batches; desktop and phone, before and after answering). Nothing here copies UpCodes, the exam PDFs or
 any other source: every figure is drawn in code (`tools/diagrams/`).
 
 ## 1. Required figures (redrawn for 1.0.5)
@@ -723,7 +725,7 @@ the drawing is the answer. Review with NEC sections per drawing:
 
 | tier | record | figure | shown | masked before answering |
 |---|---|---|---|---|
-| B | `final-exam-#1-004` | `office_lighting_220-42a` | before | the office unit load; 6,500 VA |
+| B | `final-exam-#1-004` | `office_lighting_220-42a` | after | shown after answering only (section 10) |
 | B | `final-exam-#1-009` | `conductor_colors_310-6` | after | shown after answering only |
 | B | `final-exam-#1-010` | `multioutlet_assembly_220-14h` | before | the length per outlet; the VA per outlet; the worked load |
 | B | `final-exam-#1-016` | `holiday_lighting_trees_590-4j` | before | the other permitted device |
@@ -743,7 +745,7 @@ the drawing is the answer. Review with NEC sections per drawing:
 | B | `final-exam-#5-023` | `tc_bending_radius_336-24` | before | the shielded multiple |
 | B | `final-exam-#5-039` | `busbar_ampacity_366-23a` | before | the copper density; 1,500 A; the bar area; the bar B working; the density rule |
 | B | `open-book-exam-#1-020` | `single_load_circuits_210-11_422-12` | before | 20 A |
-| B | `open-book-exam-#1-021` | `office_lighting_220-42a` | before | the office unit load; 6,500 VA |
+| B | `open-book-exam-#1-021` | `office_lighting_220-42a` | after | shown after answering only (section 10) |
 | B | `open-book-exam-#10-006` | `disconnect_relay_control_art100` | before | the defined term |
 | B | `open-book-exam-#10-008` | `welding_tray_signs_630-42c` | after | shown after answering only |
 | B | `open-book-exam-#10-023` | `rv_park_supply_551-71_551-72` | before | 70% |
@@ -754,3 +756,216 @@ the drawing is the answer. Review with NEC sections per drawing:
 | B | `open-book-exam-#7-008` | `equipment_airflow_110-13b` | before | the opening type |
 | B | `open-book-exam-#7-015` | `termination_temp_110-14c` | before | what caps the ampacity |
 | B | `open-book-exam-#7-017` | `termination_temp_110-14c` | before | the rating word |
+
+## 10. Batch 3: the 315 imported questions (152 more records)
+
+The import at `09dc6b5` added 315 questions (Open Book #2, #3, #5, #6, #9,
+#11, #12 and Finals #2, #4). The gap scan (`audits/diagram_gap_scan_new.md`
+and `.json`) sorts them HIGH 39, MEDIUM 131 and NONE 145. Coverage:
+
+- **48 repeats** of an older question use its figure with the same masks
+  and timing, through the new `like` option in the figure registry
+  (`{"like": other_id}` in `records=`, `tools/diagrams/build.py`).
+- **24 more** use an existing figure with a new mask, or after answering.
+- **19 new drawings** for 18 concept groups (8 HIGH,
+  10 MEDIUM groups of two or more) serve 80 questions. The kitchen, bath
+  and outdoor group is split in two, so each drawing stays readable on a phone.
+- **18 single-question MEDIUM concepts were not drawn.** The scan
+  lists why for each one.
+
+New and extended modules in `tools/diagrams/figs/`:
+
+- `sites.py`: rod, pipe and ring electrode sizes with the rock-bottom options, fair rides near overhead lines,
+  fence bonding, the therapeutic tub GFCI zone, conductors emerging from grade with frost S loops, and
+  luminaires under metal roof decking.
+- `counters.py`: kitchen counter spacing, height and small-appliance circuits; bathroom sink counter
+  and front/back outdoor outlets; show window receptacles and load.
+- `theory.py`: series vs. parallel, AC values with lead and lag, transformer turns ratio and resistance
+  factors.
+- `calc_cards.py`: method cards for box fill, ampacity factors, conduit fill, cooking and dryer demand,
+  motor percentages and dwelling loads.
+
+Every value was checked against the NFPA 70-2023 text cache. That covers:
+
+- 250.52(A)(4) and (A)(5), 250.53(A)(4), 525.5(B), 250.194(A);
+- 210.52(B), (C)(1), (C)(3), (D) and (E)(1), 210.62, 220.14(G), 680.62(E);
+- 300.5(D)(1) and (J), 410.10(F);
+- Table 314.16(A) and (B)(1), Tables 310.16, 310.15(B)(1)(1) and 310.15(C)(1);
+- Chapter 9 Table 4 and Note 7, Tables 220.54 and 220.55 and their notes, 220.41, 220.52, 220.53, 220.61(B);
+- Tables 430.248 and 430.52(C)(1), 430.32.
+
+The scanner passes, and each before shot was also compared by hand with its
+keyed answer. Masks beyond the scanner:
+
+- the drawn bathroom receptacle, since a single outlet on the wall is the answer count;
+- the S-shaped cable itself, not only its name;
+- the word "mixture" on the battery room card, for the repeat whose answer is "an explosive mixture";
+- the 4 in distance on the balcony figure, for the repeat that asks for it.
+
+The theory and calculation cards are shown after answering, because there the drawing is the
+answer. After answering, each question's own step is outlined, for example the 4 to 6
+conductors row for a six-conductor derating question. The same goes for the small-appliance card
+(`final-exam-#4-016`) and two repeats whose drawing names the answer word (`open-book-exam-#9-016`
+and `#9-018`). Review with NEC sections per drawing: `audits/diagram_batch3_tmp/review.md`.
+
+**Fix: no page scroll beside a big table.** The office-lighting figure (batch 2) sat beside the
+31-row Table 220.42(A). On phones with shuffled choices, that put about 30 px of page scroll
+before answering for `final-exam-#1-004` and `open-book-exam-#1-021`. The figure is now shown
+after answering. `tools/tests/test_figure_table_fit.gd` checks every record that has both a
+figure and a reference table, on all seven standard window sizes, in three choice orders:
+no page overflow before answering, and the table is shown whole before and after.
+
+| tier | record | figure | shown | masked before answering |
+|---|---|---|---|---|
+| A | `final-exam-#2-001` | `fair_structures_lines_525-5b` | before | the voltage limit |
+| A | `final-exam-#2-003` | `electrode_rod_pipe_ring_250-52_250-53a4` | before | the rod diameter |
+| A | `final-exam-#2-005` | `electrode_rod_pipe_ring_250-52_250-53a4` | before | the trench depth |
+| B | `final-exam-#2-006` | `sign_construction_600` | before | 'sign body' |
+| A | `final-exam-#2-008` | `multiple_supplies_225-37_700-7` | before | where the plaques go; the switch at each plaque |
+| B | `final-exam-#2-009` | `max_water_level_art100` | before | the defined term |
+| B | `final-exam-#2-012` | `transformer_turns_ratio` | after | shown after answering only |
+| B | `final-exam-#2-013` | `series_vs_parallel` | after | shown after answering only |
+| B | `final-exam-#2-014` | `series_vs_parallel` | after | shown after answering only |
+| B | `final-exam-#2-015` | `transformer_turns_ratio` | after | shown after answering only |
+| B | `final-exam-#2-016` | `series_vs_parallel` | after | shown after answering only |
+| B | `final-exam-#2-017` | `ac_wave_values_phase` | after | shown after answering only |
+| B | `final-exam-#2-018` | `ac_wave_values_phase` | after | shown after answering only |
+| B | `final-exam-#2-019` | `resistance_factors` | after | shown after answering only |
+| B | `final-exam-#2-034` | `ac_wave_values_phase` | after | shown after answering only |
+| B | `final-exam-#2-036` | `parallel_resistors_equal` | after | shown after answering only |
+| B | `final-exam-#2-038` | `branch_circuit_rating_210` | before | 'circuit rating = OCPD rating' |
+| B | `final-exam-#2-043` | `cinder_backfill_344-10c_300-5f` | before | 'corrosion' |
+| B | `final-exam-#2-044` | `raceway_supported_box_314-23e` | before | threaded hub at the box entry; 'threaded wrenchtight into the box or identified hubs' |
+| B | `final-exam-#2-045` | `cable_cutaways_332_310` | before | minimum copper share |
+| A | `final-exam-#2-046` | `working_space_110-26` | before | 'considered grounded (Condition 2)' |
+| B | `final-exam-#2-047` | `receptacle_markings_406` | before | the face marking; 'orange triangle' |
+| A | `final-exam-#2-048` | `patient_bed_receptacles_517-18` | before | receptacles on this side; receptacle count per bed |
+| A | `final-exam-#2-049` | `balcony_receptacle_210-52e3` | before | '6 ft 6 in max (2.0 m, 78 in)' |
+| B | `final-exam-#2-055` | `resistance_factors` | after | shown after answering only |
+| B | `final-exam-#2-056` | `ac_wave_values_phase` | after | shown after answering only |
+| A | `final-exam-#2-059` | `fence_bonding_250-194a` | before | the bonding distance |
+| A | `final-exam-#2-064` | `in_sight_disconnect_430-102_440-14` | after | shown after answering only |
+| B | `final-exam-#2-065` | `box_fill_steps_314-16` | after | shown after answering only |
+| B | `final-exam-#4-003` | `raceway_fill_ch9_348-22` | before | the fill table; where LFNC fill comes from |
+| B | `final-exam-#4-005` | `box_fill_steps_314-16` | after | shown after answering only |
+| A | `final-exam-#4-010` | `bath_counter_outdoor_210-52d_e1` | before | how many receptacles; the receptacle drawn on the wall |
+| B | `final-exam-#4-011` | `box_fill_steps_314-16` | after | shown after answering only |
+| B | `final-exam-#4-012` | `show_window_210-62_220-14g` | before | the load per foot; the worked load |
+| A | `final-exam-#4-015` | `bath_counter_outdoor_210-52d_e1` | before | which buildings the rule covers |
+| A | `final-exam-#4-016` | `kitchen_counter_210-52c` | after | shown after answering only |
+| B | `final-exam-#4-021` | `box_fill_steps_314-16` | after | shown after answering only |
+| B | `final-exam-#4-022` | `conduit_fill_steps_ch9` | after | shown after answering only |
+| B | `final-exam-#4-023` | `cooking_dryer_demand_220-54_220-55` | after | shown after answering only |
+| B | `final-exam-#4-024` | `ampacity_steps_310-15` | after | shown after answering only |
+| B | `final-exam-#4-025` | `cooking_dryer_demand_220-54_220-55` | after | shown after answering only |
+| B | `final-exam-#4-026` | `motor_percentages_430` | after | shown after answering only |
+| B | `final-exam-#4-027` | `dwelling_loads_220-41_220-53` | after | shown after answering only |
+| B | `final-exam-#4-028` | `dwelling_loads_220-41_220-53` | after | shown after answering only |
+| B | `final-exam-#4-030` | `motor_percentages_430` | after | shown after answering only |
+| B | `final-exam-#4-031` | `ampacity_steps_310-15` | after | shown after answering only |
+| B | `final-exam-#4-032` | `motor_percentages_430` | after | shown after answering only |
+| B | `final-exam-#4-033` | `ampacity_steps_310-15` | after | shown after answering only |
+| B | `final-exam-#4-034` | `motor_percentages_430` | after | shown after answering only |
+| B | `final-exam-#4-035` | `ampacity_steps_310-15` | after | shown after answering only |
+| B | `final-exam-#4-036` | `cooking_dryer_demand_220-54_220-55` | after | shown after answering only |
+| B | `final-exam-#4-037` | `motor_percentages_430` | after | shown after answering only |
+| B | `final-exam-#4-038` | `box_fill_steps_314-16` | after | shown after answering only |
+| B | `final-exam-#4-039` | `motor_percentages_430` | after | shown after answering only |
+| B | `final-exam-#4-040` | `ampacity_steps_310-15` | after | shown after answering only |
+| B | `final-exam-#4-041` | `ampacity_steps_310-15` | after | shown after answering only |
+| B | `final-exam-#4-042` | `dwelling_loads_220-41_220-53` | after | shown after answering only |
+| B | `final-exam-#4-045` | `cooking_dryer_demand_220-54_220-55` | after | shown after answering only |
+| B | `final-exam-#4-046` | `cooking_dryer_demand_220-54_220-55` | after | shown after answering only |
+| B | `final-exam-#4-047` | `dwelling_loads_220-41_220-53` | after | shown after answering only |
+| B | `final-exam-#4-048` | `dwelling_loads_220-41_220-53` | after | shown after answering only |
+| B | `final-exam-#4-049` | `cooking_dryer_demand_220-54_220-55` | after | shown after answering only |
+| B | `final-exam-#4-050` | `conduit_fill_steps_ch9` | after | shown after answering only |
+| B | `final-exam-#4-051` | `cooking_dryer_demand_220-54_220-55` | after | shown after answering only |
+| A | `final-exam-#4-052` | `floor_area_220-5c` | before | dimensions run to the outside faces; the inside-face dimension marked wrong |
+| B | `final-exam-#4-053` | `motor_percentages_430` | after | shown after answering only |
+| B | `final-exam-#4-054` | `box_fill_steps_314-16` | after | shown after answering only |
+| B | `final-exam-#4-055` | `egc_size_250-122` | after | shown after answering only |
+| B | `final-exam-#4-056` | `motor_percentages_430` | after | shown after answering only |
+| B | `final-exam-#4-057` | `conduit_fill_steps_ch9` | after | shown after answering only |
+| B | `final-exam-#4-059` | `conduit_fill_steps_ch9` | after | shown after answering only |
+| B | `final-exam-#4-060` | `conduit_fill_steps_ch9` | after | shown after answering only |
+| B | `final-exam-#4-061` | `motor_percentages_430` | after | shown after answering only |
+| B | `final-exam-#4-062` | `conduit_fill_steps_ch9` | after | shown after answering only |
+| B | `final-exam-#4-063` | `ampacity_steps_310-15` | after | shown after answering only |
+| B | `final-exam-#4-064` | `box_fill_steps_314-16` | after | shown after answering only |
+| B | `final-exam-#4-065` | `conduit_fill_steps_ch9` | after | shown after answering only |
+| B | `final-exam-#4-066` | `conduit_fill_steps_ch9` | after | shown after answering only |
+| B | `final-exam-#4-067` | `motor_percentages_430` | after | shown after answering only |
+| B | `final-exam-#4-068` | `conduit_fill_steps_ch9` | after | shown after answering only |
+| B | `final-exam-#4-069` | `cooking_dryer_demand_220-54_220-55` | after | shown after answering only |
+| B | `final-exam-#4-070` | `motor_percentages_430` | after | shown after answering only |
+| A | `open-book-exam-#11-001` | `balcony_receptacle_210-52e3` | before | the distance from the dwelling; '6 ft 6 in max (2.0 m, 78 in)' |
+| B | `open-book-exam-#11-002` | `panelboard_interior_408` | before | the closure plate type |
+| A | `open-book-exam-#11-007` | `fence_bonding_250-194a` | before | the bonding distance |
+| B | `open-book-exam-#11-009` | `nm_extension_floor_382-15a` | before | '50 mm (2 in)' |
+| A | `open-book-exam-#11-020` | `electrode_rod_pipe_ring_250-52_250-53a4` | before | the ground ring size |
+| B | `open-book-exam-#11-021` | `afci_tr_dwelling_210-12_406-12` | after | shown after answering only |
+| A | `open-book-exam-#11-022` | `in_sight_disconnect_430-102_440-14` | after | shown after answering only |
+| B | `open-book-exam-#11-023` | `box_fill_steps_314-16` | after | shown after answering only |
+| B | `open-book-exam-#12-010` | `high_leg_marking_408-3f1` | before | - |
+| A | `open-book-exam-#12-022` | `supports_emt_strut_358-30` | before | 'within 5 ft' |
+| B | `open-book-exam-#12-023` | `egc_size_250-122` | after | shown after answering only |
+| A | `open-book-exam-#12-025` | `overhead_clearances_225-18` | after | shown after answering only |
+| B | `open-book-exam-#2-001` | `ocpd_vertical_240-33` | after | shown after answering only |
+| B | `open-book-exam-#2-002` | `multiwire_branch_circuit_210-4` | before | - |
+| B | `open-book-exam-#2-004` | `gfci_locations_210-8` | before | '120 V or less' |
+| A | `open-book-exam-#2-007` | `kitchen_counter_210-52c` | before | the wall-line distance |
+| B | `open-book-exam-#2-008` | `holiday_lighting_trees_590-4j` | before | the other permitted device |
+| A | `open-book-exam-#2-009` | `show_window_210-62_220-14g` | before | the distance from the top |
+| B | `open-book-exam-#2-011` | `afci_tr_dwelling_210-12_406-12` | after | shown after answering only |
+| B | `open-book-exam-#2-012` | `ampacity_derating_310-15` | before | '25 A'; '40 A'; '1.00'; '0.87'; '0.80'; '20 A'; '34.8 A' |
+| B | `open-book-exam-#2-013` | `gfci_locations_210-8` | after | shown after answering only |
+| A | `open-book-exam-#2-015` | `dwelling_receptacles_210-52` | before | '2 ft (24 in) or more' |
+| B | `open-book-exam-#2-018` | `multioutlet_assembly_220-14h` | before | the length per outlet; the VA per outlet; the worked load |
+| B | `open-book-exam-#2-022` | `conductor_colors_310-6` | after | shown after answering only |
+| A | `open-book-exam-#2-023` | `therapeutic_tub_gfci_680-62e` | before | the GFCI radius |
+| A | `open-book-exam-#2-025` | `balcony_receptacle_210-52e3` | before | '6 ft 6 in max (2.0 m, 78 in)' |
+| A | `open-book-exam-#3-001` | `kitchen_counter_210-52c` | before | the height above the counter |
+| B | `open-book-exam-#3-002` | `feeder_tap_10ft_240-21b1` | before | '400 A max'; '1/10' |
+| B | `open-book-exam-#3-003` | `dwelling_receptacles_210-52` | before | '10 ft or more' |
+| B | `open-book-exam-#3-004` | `gfci_locations_210-8` | after | shown after answering only |
+| B | `open-book-exam-#3-008` | `conduit_stub_up_408-5` | before | '3 in max (75 mm)' |
+| B | `open-book-exam-#3-009` | `fuel_dispenser_shutoff_514-11` | before | '100 ft (30 m) max' |
+| B | `open-book-exam-#3-010` | `ampacity_derating_310-15` | before | '25 A'; '40 A'; '1.00'; '0.87'; '0.80'; '20 A'; '34.8 A' |
+| B | `open-book-exam-#3-011` | `type_letters_decoder` | before | what the -2 means |
+| B | `open-book-exam-#3-012` | `pool_fountain_distances_680` | before | the amp limit |
+| B | `open-book-exam-#3-013` | `welder_supply_630` | before | the 200% step; '90 A' |
+| B | `open-book-exam-#3-015` | `pool_fountain_distances_680` | before | '20 ft' |
+| B | `open-book-exam-#3-016` | `parallel_egc_250-122f` | before | EGC drawn in this raceway; 'wire-type EGC in each raceway, in parallel' |
+| B | `open-book-exam-#3-017` | `dwelling_receptacles_210-52` | before | receptacles drawn one per bay, and the one-per-bay rule |
+| B | `open-book-exam-#3-019` | `appliance_demand_220-54_220-55` | before | '85%'; '25 kW x 0.85 = 21.25 kW'; '+10%'; '8 kW x 1.10 = 8.8 kW' |
+| A | `open-book-exam-#3-020` | `electrode_system_250-52_250-53` | before | '6 ft min' |
+| A | `open-book-exam-#3-021` | `luminaire_roof_decking_410-10f` | before | the clearance |
+| A | `open-book-exam-#5-001` | `fair_structures_lines_525-5b` | before | the voltage limit |
+| A | `open-book-exam-#5-004` | `dedicated_space_110-26e` | before | 'Sprinkler protection: permitted  (E)(1)(c)'; the not-permitted list (it narrows the choices); sprinkler head drawn in the dedicated space |
+| B | `open-book-exam-#5-007` | `high_leg_marking_408-3f1` | after | shown after answering only |
+| A | `open-book-exam-#5-010` | `framing_protection_300-4` | before | '1 1/4 in' |
+| A | `open-book-exam-#5-014` | `overhead_clearances_225-18` | after | shown after answering only |
+| B | `open-book-exam-#5-015` | `mobile_home_disconnect_550-32f` | before | '24 in min (600 mm)' |
+| B | `open-book-exam-#5-016` | `gfci_locations_210-8` | after | shown after answering only |
+| A | `open-book-exam-#5-017` | `working_space_110-26` | before | '25 ft' |
+| B | `open-book-exam-#5-018` | `communications_overhead_800-44` | before | '8 ft min' |
+| B | `open-book-exam-#5-020` | `buried_conductors_grade_300-5d1_300-5j` | before | the slack loop in the cable; the name of the loop |
+| A | `open-book-exam-#5-021` | `electrode_rod_pipe_ring_250-52_250-53a4` | before | the pipe trade size |
+| B | `open-book-exam-#5-024` | `supports_pvc_352-30` | after | shown after answering only |
+| A | `open-book-exam-#6-003` | `electrode_rod_pipe_ring_250-52_250-53a4` | before | the rod diameter |
+| A | `open-book-exam-#6-005` | `overhead_clearances_225-18` | after | shown after answering only |
+| A | `open-book-exam-#6-006` | `electrode_rod_pipe_ring_250-52_250-53a4` | before | the trench depth |
+| A | `open-book-exam-#6-008` | `buried_conductors_grade_300-5d1_300-5j` | before | the protected height |
+| A | `open-book-exam-#6-009` | `in_sight_disconnect_430-102_440-14` | after | shown after answering only |
+| B | `open-book-exam-#6-010` | `motor_circuit_430` | before | table FLC |
+| B | `open-book-exam-#6-012` | `egc_size_250-122` | before | the 15 A row; the 20 A row; the 60 A row |
+| B | `open-book-exam-#6-014` | `nipple_fill_ch9_note4` | after | shown after answering only |
+| B | `open-book-exam-#6-016` | `supports_pvc_352-30` | before | '3 ft' |
+| B | `open-book-exam-#6-018` | `battery_ventilation_480-10a` | before | the mixture type; the word mixture |
+| B | `open-book-exam-#6-022` | `supports_unsupported_cable_320-330-334` | before | '6 ft' |
+| A | `open-book-exam-#6-023` | `pool_fountain_distances_680` | before | '5 ft' |
+| B | `open-book-exam-#6-024` | `branch_circuit_rating_210` | before | 'circuit rating = OCPD rating' |
+| B | `open-book-exam-#9-012` | `branch_circuit_rating_210` | before | 'circuit rating = OCPD rating' |
+| B | `open-book-exam-#9-016` | `termination_temp_110-14c` | after | shown after answering only |
+| B | `open-book-exam-#9-018` | `branch_circuit_rating_210` | after | shown after answering only |
