@@ -257,7 +257,7 @@ func _audio_modes(main: Node) -> void:
 	main._show_menu()
 
 	main.audio.mode = AudioSettings.Mode.AUTO
-	main._start_quiz(80, 9999, true, "Full Journeyman Exam")
+	main._start_quiz(ExamBlueprint.scored_items(), 9999, true, Main.SIMULATION_NAME)
 	check(main.session_audio_mode == AudioSettings.Mode.TAP, "simulator downgrades Auto-read to Tap")
 	main._show_menu()
 

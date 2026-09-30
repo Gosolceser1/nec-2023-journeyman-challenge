@@ -342,7 +342,7 @@ func _simulator() -> void:
 	var adjacent := 0
 	var pairs := 0
 	for r in 6:
-		s.begin(80, 240 * 60, true, "Full Journeyman Exam", true)
+		s.begin(ExamBlueprint.scored_items(), ExamBlueprint.minutes() * 60, true, Main.SIMULATION_NAME, true)
 		var counts := {}
 		var run := {}
 		for j in s.order.size():
