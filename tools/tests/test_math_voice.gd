@@ -298,7 +298,9 @@ func _controller_external() -> void:
 	var sid := MathStepSpeech.folder_id(str(rec["id"]), 0)
 	var plan := MathStepSpeech.plan(sol["steps"][0])
 	var recorded: bool = sp._bundled_speech_folder(sid, VoiceCatalog.BUNDLED_VOICE_ID, plan) != ""
-	check(recorded, "exam step 1 of %s is recorded" % sid)
+	# The clips are gitignored: a fresh checkout (CI) has no assets/speech.
+	if DirAccess.dir_exists_absolute("res://assets/speech"):
+		check(recorded, "exam step 1 of %s is recorded" % sid)
 	if edge_id != "" and recorded:
 		sp._select_voice_id(edge_id)
 		states.clear()
