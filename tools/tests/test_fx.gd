@@ -46,6 +46,13 @@ func _init() -> void:
 	check(ProgressSegments.outcomes_for(3, 1, true, [], false) == [O.REVIEWED, O.REVIEWED, O.AHEAD], "Listen mode marks answered items reviewed, never right/wrong")
 	check(ProgressSegments.outcome_color(O.RIGHT) == Color("34d399") and ProgressSegments.outcome_color(O.WRONG) == Color("f87171"), "green right, red missed")
 
+	print("=== chapter labels from the edition's articles.json ===")
+	for ch in range(1, 10):
+		check(NecReference.chapter_short(ch) != "" and ChapterBars.chapter_name(ch) == "Ch %d  %s" % [ch, NecReference.chapter_short(ch)], "chapter %d label: %s" % [ch, ChapterBars.chapter_name(ch)])
+	check(ChapterBars.chapter_name(2) == "Ch 2  Wiring & protection", "short names, not the full titles")
+	check(ChapterBars.chapter_name(0) == "Trade knowledge / math" and ChapterBars.chapter_name(ChapterBars.STATE_LAW) == "NE State Act & Rules", "non-NEC buckets keep their names")
+	check(ChapterBars.chapter_name(42) == "Other", "unknown bucket: Other")
+
 	print("=== bank sweep: article -> chapter bucket ===")
 	var bank = JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json"))
 	var bad: Array[String] = []
@@ -54,7 +61,7 @@ func _init() -> void:
 		for rec in bank.get("records", []):
 			n += 1
 			var ch := ChapterBars.chapter_of(str(rec.get("article", "")))
-			if not ChapterBars.CHAPTER_NAMES.has(ch):
+			if ChapterBars.chapter_name(ch) == "Other":
 				bad.append(str(rec.get("id", "?")))
 	check(n > 0, "bank loaded")
 	check(bad.is_empty(), "records without a chapter bucket: %s" % str(bad))

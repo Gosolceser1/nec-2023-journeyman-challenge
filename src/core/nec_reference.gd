@@ -38,6 +38,10 @@ static func code_book() -> String:
 static func canonical_article_title(article_number: int) -> String:
 	return str((_articles()["articles"] as Dictionary).get(str(article_number), ""))
 
+## Short chapter name for charts ("Wiring & protection"), "" if unknown.
+static func chapter_short(chapter: int) -> String:
+	return str((_articles().get("chapters_short", {}) as Dictionary).get(str(chapter), ""))
+
 static func chapter_title(chapter: int) -> String:
 	return str((_articles()["chapters"] as Dictionary).get(str(chapter), ""))
 

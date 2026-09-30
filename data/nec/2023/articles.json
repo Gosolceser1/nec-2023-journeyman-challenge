@@ -12,6 +12,17 @@
     "8": "Communications Systems",
     "9": "Tables"
   },
+  "chapters_short": {
+    "1": "General",
+    "2": "Wiring & protection",
+    "3": "Wiring methods",
+    "4": "General equipment",
+    "5": "Special occupancies",
+    "6": "Special equipment",
+    "7": "Special conditions",
+    "8": "Communications",
+    "9": "Tables"
+  },
   "articles": {
     "90": "Introduction",
     "100": "Definitions",

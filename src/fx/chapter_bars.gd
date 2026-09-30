@@ -2,23 +2,14 @@ class_name ChapterBars
 extends Control
 
 ## Results-screen breakdown: one horizontal bar per exam subject area (or per
-## NEC chapter) showing the share answered correctly, with the 75% line on
+## NEC chapter) showing the share answered correctly, with the pass line on
 ## area rows. Bars grow in when shown.
 
 const ROW_H := 24.0
 ## Chart key for Nebraska State Electrical Act / Board Rules citations.
 const STATE_LAW := 10
-const CHAPTER_NAMES := {
+const NON_NEC_NAMES := {
 	0: "Trade knowledge / math",
-	1: "Ch 1  General",
-	2: "Ch 2  Wiring & protection",
-	3: "Ch 3  Wiring methods",
-	4: "Ch 4  General equipment",
-	5: "Ch 5  Special occupancies",
-	6: "Ch 6  Special equipment",
-	7: "Ch 7  Special conditions",
-	8: "Ch 8  Communications",
-	9: "Ch 9  Tables",
 	STATE_LAW: "NE State Act & Rules",
 }
 
@@ -47,6 +38,15 @@ static func chapter_of(article: String) -> int:
 	return int(m.get_string(1)) if m != null else 0
 
 
+## Chart label for a chapter_of() key: "Ch 2  Wiring & protection" (short
+## names from the edition's articles.json), the non-NEC buckets, else "Other".
+static func chapter_name(chapter: int) -> String:
+	if NON_NEC_NAMES.has(chapter):
+		return str(NON_NEC_NAMES[chapter])
+	var short := NecReference.chapter_short(chapter)
+	return "Ch %d  %s" % [chapter, short] if short != "" else "Other"
+
+
 ## stats: {chapter:int -> [correct:int, total:int]} -> sorted display rows.
 static func rows_from_stats(stats: Dictionary) -> Array:
 	var keys := stats.keys()
@@ -54,7 +54,7 @@ static func rows_from_stats(stats: Dictionary) -> Array:
 	var out: Array = []
 	for k in keys:
 		var v: Array = stats[k]
-		out.append({"label": str(CHAPTER_NAMES.get(int(k), "Other")), "correct": int(v[0]), "total": int(v[1])})
+		out.append({"label": chapter_name(int(k)), "correct": int(v[0]), "total": int(v[1])})
 	return out
 
 
