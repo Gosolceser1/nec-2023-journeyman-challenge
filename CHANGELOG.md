@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [1.0.5] - 2026-09-29
 
 ### Added
 
@@ -74,6 +74,17 @@
 
 ### Fixed
 
+- **Keyword Index pointers checked against the live NEC 2023 text.** A search
+  of NFPA 70 2023 on UpCodes confirmed 493 of the 560 keyword and article
+  pairs (Article 100 definitions and Chapter 9 tables, which that search does
+  not index well, are right by construction). Big Index headings such as
+  Luminaires or Receptacles no longer point to an article where the search
+  did not find them (for example "Luminaires → Art. 330" on the MC cable
+  question).
+- **"What section of the NEC…" questions no longer show the answer's
+  article before you answer** (Open Book #9 Q21). When the choices are
+  section numbers, the "where to look" path stops at the chapter until you
+  answer, as it already did for fill-in-the-blank reference questions.
 - **The wet-location cord question makes sense again** (Final Exam #1 Q34,
   Open Book #4 Q25). It now asks for the one flexible cord that is wet-rated
   and sunlight resistant (STOOW, same answer as the printed key); it no longer
