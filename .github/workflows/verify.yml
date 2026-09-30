@@ -12,7 +12,8 @@ on:
 jobs:
   verify:
     runs-on: windows-latest
-    timeout-minutes: 20
+    # A full run takes 15-25 minutes on the hosted Windows runner.
+    timeout-minutes: 45
 
     steps:
       - uses: actions/checkout@v4
