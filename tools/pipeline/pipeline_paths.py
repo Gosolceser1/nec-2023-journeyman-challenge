@@ -7,13 +7,14 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import tempfile
 from functools import lru_cache
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_PIPELINE_DIR = Path(tempfile.gettempdir()) / "opencode"
+DEFAULT_PIPELINE_DIR = Path(tempfile.gettempdir()) / "wire_pipeline"
 EDITION_PATH = ROOT / "data" / "edition.json"
 
 
@@ -27,6 +28,20 @@ def exam_ocr_dir() -> Path:
 
 def answer_key_ocr_dir() -> Path:
     return Path(os.environ.get("WIRE_OCR_KEYS", str(DEFAULT_PIPELINE_DIR / "wire_ocr_keys")))
+
+
+def tesseract_exe() -> Path:
+    """Tesseract for the OCR stage: WIRE_TESSERACT, else `tesseract` on PATH, else the Windows installer's folder."""
+    candidates = [os.environ.get("WIRE_TESSERACT"), shutil.which("tesseract")]
+    if os.environ.get("ProgramFiles"):
+        candidates.append(str(Path(os.environ["ProgramFiles"]) / "Tesseract-OCR" / "tesseract.exe"))
+    for candidate in candidates:
+        if candidate and Path(candidate).is_file():
+            return Path(candidate)
+    raise FileNotFoundError(
+        "Tesseract not found. Install it (https://github.com/tesseract-ocr/tesseract), put it on PATH "
+        "or set WIRE_TESSERACT to tesseract(.exe). Exams with a transcript in "
+        "tools/pipeline/sources/exams/ need no OCR.")
 
 
 @lru_cache(maxsize=None)

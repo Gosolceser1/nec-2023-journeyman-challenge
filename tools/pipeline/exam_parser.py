@@ -2,13 +2,18 @@
 
 Question numbers are bounded by the exam's own question count (exam_sources),
 never by a fixed cap, so a longer exam keeps its tail; numbers above the count
-(page numbers, footers) are ignored.
+(page numbers, footers) are ignored. Scan-specific repairs (page headers,
+misread words and choice letters) are data in ocr_fixes.json.
 """
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 
+FIXES = json.loads(Path(__file__).with_name("ocr_fixes.json").read_text(encoding="utf-8"))
+HEADERS = [re.compile(rx, re.I if ignore_case else 0)
+           for rx, ignore_case in zip(FIXES["header_patterns"], FIXES["header_ignore_case"])]
 
 
 def _number(count: int) -> str:
@@ -27,25 +32,11 @@ def _key_line(count: int):
 def normalize(text):
     text = text.replace("\u000c", " ")
     text = re.sub(r"=== PAGE \d+ ===", " ", text, flags=re.I)
-    text = re.sub(r"\bTH\s*\d+\b", " ", text, flags=re.I)
-    text = re.sub(r"\bTH\b", " ", text)
-    text = re.sub(r"\b(?:Journeyman Final Exam #\d+|OB #\d+)\b", " ", text, flags=re.I)
+    for header in HEADERS:
+        text = header.sub(" ", text)
     text = text.replace("|", " ")
     text = re.sub(r"(\w)-\s+(\w)", r"\1\2", text)
-    replacements = {
-        "eupper": "upper", "sevices": "services", "fect": "feet",
-        "Effeetive": "Effective", "effeetive": "effective", "affeeted": "affected",
-        "Ibsinch": "lbs-inch", "Iess": "less", "Knief": "Knife",
-        "Taceways": "raceways", "adwelling": "a dwelling", "anisolated": "an isolated",
-        "cordand": "cord-and", "degreesC": "degrees C", "dewelling": "dwelling",
-        "electrcal": "electrical", "messsenger": "messenger", "groundfault": "ground-fault",
-        "isafactory": "is a factory", "netallic": "metallic", "racewaysis": "raceways is",
-        "sheated": "sheathed", "tating": "rating", "voitage": "voltage",
-        "toloads": "to-loads", "largerthan": "larger than", "supi ported": "supported",
-        "ghing": "weighing", "plaster tings": "plaster rings", "Class TI": "Class II",
-        "kvVA": "kVA", "are-fault": "arc-fault", "Lonly": "I only", "Wonly": "III only",
-    }
-    for bad, good in replacements.items():
+    for bad, good in FIXES["replacements"].items():
         text = text.replace(bad, good)
     text = re.sub(r"\s+", " ", text)
     return text.strip(" |\t")
@@ -60,11 +51,10 @@ def parse_questions(text: str, count: int) -> dict:
             continue
         block_end = starts[pos + 1].start() if pos + 1 < len(starts) else len(text)
         block = text[match.end():block_end]
-        block = block.replace("()", "(c)").replace("M6", "(d) 6")
-        block = block.replace("(G)", "(c)").replace("(dad)", "(d)")
-        block = block.replace("(a}", "(a)").replace("(b}", "(b)").replace("(c}", "(c)").replace("(d}", "(d)")
-        block = block.replace("(qd)", "(d)").replace("(3", "(c) 3").replace("©", "(c)")
-        block = re.sub(r"\bM(\d)", r"(d) \1", block)
+        for bad, good in FIXES["option_fixes"]:
+            block = block.replace(bad, good)
+        for rx, good in FIXES["option_regex_fixes"]:
+            block = re.sub(rx, good, block)
         option_matches = list(re.finditer(r"\(([a-d])\)\s*", block, re.I))
         if len(option_matches) < 4:
             continue

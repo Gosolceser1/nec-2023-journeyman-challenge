@@ -2,15 +2,18 @@
 from __future__ import annotations
 
 import json
+import os
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "pipeline"))
 import exam_parser  # noqa: E402
 import exam_sources  # noqa: E402
+import pipeline_paths  # noqa: E402
 from pipeline_paths import answer_key_ocr_dir  # noqa: E402
 
 
@@ -88,6 +91,32 @@ class ParserTests(unittest.TestCase):
         self.assertEqual(sorted(found), [1, 2])
         self.assertIn("408.36", found[1]["prompt"])
         self.assertEqual(exam_parser.parse_key("71. (b) 110.26\n", 70), ({}, {}))
+
+    def test_ocr_fixes_from_data_repair_a_sample_page(self):
+        page = ("=== PAGE 2 ===\nJourneyman Final Exam #3 TH 12\nThe voitage of a dwel-\nling "
+                "sevices | is ___.\n")
+        self.assertEqual(exam_parser.normalize(page), "The voltage of a dwelling services is ___.")
+        found = exam_parser.parse_questions("1. Pick one.\n(a) 4 (b} 5 () 6 M7\n", 80)
+        self.assertEqual(found[1]["choices"], ["4", "5", "6", "7"])
+
+
+class TesseractTests(unittest.TestCase):
+    def test_env_names_the_executable(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            exe = Path(tmp) / "tesseract.exe"
+            exe.write_bytes(b"")
+            with patch.dict(os.environ, {"WIRE_TESSERACT": str(exe)}):
+                self.assertEqual(pipeline_paths.tesseract_exe(), exe)
+
+    def test_missing_tesseract_is_a_clear_error(self):
+        with tempfile.TemporaryDirectory() as tmp, \
+                patch.dict(os.environ, {"WIRE_TESSERACT": "", "ProgramFiles": tmp}), \
+                patch.object(pipeline_paths.shutil, "which", return_value=None):
+            with self.assertRaisesRegex(FileNotFoundError, "WIRE_TESSERACT"):
+                pipeline_paths.tesseract_exe()
+
+    def test_scratch_folder_is_named_for_the_project(self):
+        self.assertEqual(pipeline_paths.DEFAULT_PIPELINE_DIR.name, "wire_pipeline")
 
 
 class RepositoryTests(unittest.TestCase):

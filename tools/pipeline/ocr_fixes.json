@@ -1,0 +1,101 @@
+{
+  "about": "Publisher- and scan-specific OCR repairs used by exam_parser.py when an exam has no reviewed transcript. header_patterns: page headers/footers removed (regex). replacements: OCR misreads fixed everywhere (literal). option_fixes: misread choice letters fixed inside a question block (literal, in order), then option_regex_fixes (regex).",
+  "header_patterns": [
+    "\\bTH\\s*\\d+\\b",
+    "\\bTH\\b",
+    "\\b(?:Journeyman Final Exam #\\d+|OB #\\d+)\\b"
+  ],
+  "header_ignore_case": [
+    true,
+    false,
+    true
+  ],
+  "replacements": {
+    "eupper": "upper",
+    "sevices": "services",
+    "fect": "feet",
+    "Effeetive": "Effective",
+    "effeetive": "effective",
+    "affeeted": "affected",
+    "Ibsinch": "lbs-inch",
+    "Iess": "less",
+    "Knief": "Knife",
+    "Taceways": "raceways",
+    "adwelling": "a dwelling",
+    "anisolated": "an isolated",
+    "cordand": "cord-and",
+    "degreesC": "degrees C",
+    "dewelling": "dwelling",
+    "electrcal": "electrical",
+    "messsenger": "messenger",
+    "groundfault": "ground-fault",
+    "isafactory": "is a factory",
+    "netallic": "metallic",
+    "racewaysis": "raceways is",
+    "sheated": "sheathed",
+    "tating": "rating",
+    "voitage": "voltage",
+    "toloads": "to-loads",
+    "largerthan": "larger than",
+    "supi ported": "supported",
+    "ghing": "weighing",
+    "plaster tings": "plaster rings",
+    "Class TI": "Class II",
+    "kvVA": "kVA",
+    "are-fault": "arc-fault",
+    "Lonly": "I only",
+    "Wonly": "III only"
+  },
+  "option_fixes": [
+    [
+      "()",
+      "(c)"
+    ],
+    [
+      "M6",
+      "(d) 6"
+    ],
+    [
+      "(G)",
+      "(c)"
+    ],
+    [
+      "(dad)",
+      "(d)"
+    ],
+    [
+      "(a}",
+      "(a)"
+    ],
+    [
+      "(b}",
+      "(b)"
+    ],
+    [
+      "(c}",
+      "(c)"
+    ],
+    [
+      "(d}",
+      "(d)"
+    ],
+    [
+      "(qd)",
+      "(d)"
+    ],
+    [
+      "(3",
+      "(c) 3"
+    ],
+    [
+      "©",
+      "(c)"
+    ]
+  ],
+  "option_regex_fixes": [
+    [
+      "\\bM(\\d)",
+      "(d) \\1"
+    ]
+  ]
+}

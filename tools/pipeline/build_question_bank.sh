@@ -23,8 +23,8 @@
 # protected so an unreviewed candidate cannot replace the curated question set.
 #
 # Env overrides:
-#   WIRE_OCR_PATH   directory of OCR'd exam text      (default: %TEMP%/opencode/wire_ocr)
-#   WIRE_OCR_KEYS   directory of OCR'd answer keys   (default: %TEMP%/opencode/wire_ocr_keys)
+#   WIRE_OCR_PATH   directory of OCR'd exam text      (default: %TEMP%/wire_pipeline/wire_ocr)
+#   WIRE_OCR_KEYS   directory of OCR'd answer keys   (default: %TEMP%/wire_pipeline/wire_ocr_keys)
 #   WIRE_BANK_OUT   output bank path                 (default: <repo>/data/question_bank.json)
 #   PYTHON          interpreter to use               (default: python)
 #   GODOT           Godot console binary             (default: <repo>/Godot_v4.7.2-stable_win64_console.exe)

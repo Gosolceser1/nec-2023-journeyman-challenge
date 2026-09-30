@@ -4,16 +4,16 @@ from pathlib import Path
 import fitz
 
 from exam_sources import discover
-from pipeline_paths import exam_ocr_dir, source_pdf_dir
+from pipeline_paths import exam_ocr_dir, source_pdf_dir, tesseract_exe
 
 OUT = exam_ocr_dir()
-TESSERACT = Path(r"C:\Program Files\Tesseract-OCR\tesseract.exe")
 
 
 def ocr_pdf(pdf_path: Path, out_dir: Path) -> None:
     output_path = out_dir / f"{pdf_path.stem}.txt"
     if output_path.exists():
         return
+    tesseract = tesseract_exe()
     document = fitz.open(pdf_path)
     chunks = []
     for page_number, page in enumerate(document, 1):
@@ -21,7 +21,7 @@ def ocr_pdf(pdf_path: Path, out_dir: Path) -> None:
         image_path = out_dir / f"{pdf_path.stem}__page_{page_number:03d}.png"
         pixmap.save(image_path)
         result = subprocess.run(
-            [str(TESSERACT), str(image_path), "stdout", "--psm", "6"],
+            [str(tesseract), str(image_path), "stdout", "--psm", "6"],
             capture_output=True,
             text=True,
             check=True,
