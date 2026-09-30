@@ -21,9 +21,10 @@ src/
           exam_blueprint.gd ExamBlueprint: the exam's subject areas, record -> area (NEC pool only), apportionment
           choice_order.gd   ChoiceOrder: per-run choice order, locked questions, pinned choices
           bank_loader.gd    BankLoader: reads data/question_bank.json, normalizes records, question pools
-          nec_reference.gd  NecReference: article titles (data/nec_2023_articles.json), lookup paths (NEC and Nebraska law)
+          nec_reference.gd  NecReference: article titles (data/nec/<year>/articles.json), lookup paths (NEC and Nebraska law)
           safe_area.gd      SafeArea.margins: notch / cutout insets
-          edition.gd        Edition: the NEC edition labels, from data/edition.json
+          edition.gd        Edition: the NEC edition labels and data folder, from data/edition.json
+          app_identity.gd   AppIdentity: app name templates, frozen save folder, legacy names (data/app.json)
           study_progress.gd StudyProgress: best score per exam and the unfinished run, study_progress.cfg
           audio_settings.gd AudioSettings: audio modes, speed, pauses, sound effects, audio.cfg
           user_dir_migration.gd  UserDirMigration: one-time copy from the pre-1.0 user folder
@@ -50,9 +51,14 @@ src/
           sfx.gd  speech_chain.gd  time_gauge.gd  progress_segments.gd  readiness_ring.gd
           result_gauge.gd  chapter_bars.gd  pace_sparkline.gd  mode_badge.gd
           shaders/          surface (panels, cards, buttons), circuit_backdrop, electric_title
-data/     question_bank.json (never edited by hand)  voices.json
-          nec_2023_articles.json  canonical NEC 2023 chapter and article titles (app, builder, validator)
-          exam_blueprint.json (content outline, chapter map, area overrides)
+data/     question_bank.json (never edited by hand)  voices.json (default voice marked)
+          edition.json      the NEC edition (year, labels, data folder): the one place the year is written
+          app.json          app name templates; frozen save folder and Android id; legacy names
+          nec/2023/         the edition's data: articles.json (chapter and article titles), tables.json
+                            (table values for the math helpers and nec_calc.py); pipeline only (excluded
+                            from exports): content_audit.json, renumbered.json, provisions.json,
+                            concepts.json, answer_glossary.json
+          exam_blueprint.json (exam format, content outline, chapter map, area overrides, edition)
           diagram_masks.json  per figure (PDF crops) or per record (original figures): answer-revealing
                               regions and the "?" masks DiagramView draws over them until the answer is in
                               (docs/DIAGRAMS_AUDIT.md)
@@ -66,8 +72,11 @@ docs/     this file, DATA_PIPELINE, VOICE_READING_RULES, SFX_PLAN, KNOWN_ISSUES,
 tools/    verify.sh  harness.gd  list_pck.py
           branding/  build_branding.py + render_svg.gd: every icon and the splash from the SVGs
           release/   make_release.py, the recipient README/CREDITS, dump_licenses.gd (docs/RELEASE.md)
-          pipeline/  bank build, overrides, validator, spellcheck, OCR; audit guards:
-                     content_audit_2023.json, check_requirements.py + nec_calc.py
+          pipeline/  bank build, overrides, validator, spellcheck, OCR (ocr_fixes.json); exam
+                     families and transcripts in sources/exams/; audit guards: check_requirements.py
+                     + nec_calc.py; edition_migration_report.py (docs/EDITION_MIGRATION.md)
+          release/   also sync_identity.py (names from data/app.json) and bump_version.py
+          godot.env  the Godot version every script and CI job uses
           diagrams/  build.py + nec_style.py + figs/: the original NEC figures; leakscan.py, preview.py,
                      contact_sheet.py (in-app shots from visual/snap_diagrams.gd)
           speech/    dump_speech.gd  pregenerate_speech.py  test_bundle.gd  check_export_pack.gd
@@ -97,11 +106,14 @@ UI through `main`. Two patterns hang off it:
 member fails at parse time, not at runtime.
 
 Saved state lives in `user://`, which `application/config/use_custom_user_dir`
-puts at `%APPDATA%\NEC2023JourneymanChallenge` on Windows. The first thing
-`_ready` does is `UserDirMigration.run()`: on a first launch it copies
-`audio.cfg`, `voice.cfg` and `question_bag.cfg` from the pre-1.0 folder
-(`%APPDATA%\Godot\app_userdata\<project name>`), never deleting them, and
-leaves a marker so it runs once. The version shown in the menu footer
+puts at `%APPDATA%\NEC2023JourneymanChallenge` on Windows. That folder name and
+the Android package id (`com.livewire.nec2023.trainer`) are frozen in
+`data/app.json` and do not follow the edition: a new folder would strand every
+install's progress, a new package id would install a second app instead of
+upgrading. The first thing `_ready` does is `UserDirMigration.run()`: on a first
+launch it copies `audio.cfg`, `voice.cfg` and `question_bag.cfg` from the pre-1.0
+folder (`%APPDATA%\Godot\app_userdata\<legacy project name>`, names listed in
+`data/app.json`), never deleting them, and leaves a marker so it runs once. The version shown in the menu footer
 (`Main.version_label()`) comes from `application/config/version`.
 
 Question pools: records without a `section` field are the NEC pool; the
@@ -361,7 +373,7 @@ tests and the native TTS callbacks refer to them by name.
 - `tools/tests/run_all.gd`: 32 suites, including `test_breadcrumb` (every
   record, shuffled, through the real Next flow in both layouts: the
   breadcrumb and the "Article N Title — section" line name the record's own
-  chapter and article, from `data/nec_2023_articles.json`), `test_touch_scroll` (a
+  chapter and article, from `data/nec/2023/articles.json`), `test_touch_scroll` (a
   swipe over buttons and answer cards scrolls and presses nothing; a tap
   presses), `test_voice_picker` (450 device voices within a time budget,
   names, US-only list, migration), `test_no_leak` (nothing
@@ -395,3 +407,19 @@ this and the other traps.
 - **Deduplicating `unit_matcher.gd` / `audio_explanation_generator.gd`
   against `speech_text.gd`**: that changes spoken content, which needs a
   listening review and fresh clips. It is a separate job.
+
+## Edition, exam format and identity
+
+The NEC year is written once, in `data/edition.json`. `Edition` (app) and
+`pipeline_paths.edition()` / `nec_data()` (Python) read it; header titles,
+report headers, breadcrumbs and validator messages are built from it, and every
+edition data file is looked up under its `dir` (`data/nec/2023/`). The exam
+format (80 scored items, 240 minutes, 75 % pass, at-risk band, exam name and
+authority) comes from `data/exam_blueprint.json` through `ExamBlueprint`; no
+screen writes those numbers. Visible app names are templates in `data/app.json`;
+`tools/release/sync_identity.py` writes them into `project.godot` and
+`export_presets.cfg`, and `tools/release/bump_version.py` keeps every copy of the
+version in step with `project.godot`. Layout goldens hold `{VERSION}` and
+`{EDITION}` placeholders, so a version bump or edition switch needs no golden
+edit. `docs/EDITION_MIGRATION.md` has the 2026 steps; `docs/ADDING_EXAMS.md` the
+new-exam steps.

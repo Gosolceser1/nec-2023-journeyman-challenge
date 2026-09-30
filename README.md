@@ -248,6 +248,8 @@ signing, the shareable zip and checksums.
 - `docs/ARCHITECTURE.md`: how the code is organized
 - `docs/STUDY_SYSTEM.md`: exam blueprint, question selection, study feedback
 - `docs/DATA_PIPELINE.md`: how the question bank is built and validated
+- `docs/ADDING_EXAMS.md`: adding a practice exam (PDFs, transcript, curation)
+- `docs/EDITION_MIGRATION.md`: switching the NEC edition (2023 to 2026)
 - `docs/MATH_TRAINER.md`: step-by-step solutions, math trainer, formula
   cards, table drills and weak spots
 - `docs/VOICE_READING_RULES.md`: how questions are spoken

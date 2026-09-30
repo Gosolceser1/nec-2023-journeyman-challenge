@@ -12,8 +12,8 @@ source exam PDF word for word, including its odd phrasing, with two exceptions:
 Bank conventions kept: `3ø` written as "three-phase", first letters capitalized.
 Hyphenation of number compounds ("125 volt", "one family") is left as printed.
 
-All corrections live in `tools/pipeline/question_bank_overrides.json` (hints in `tools/pipeline/gists.py`)
-and survive a rebuild. `tools/pipeline/spellcheck_bank.py` guards against regressions.
+All corrections live in `tools/pipeline/question_bank_overrides.json` (hints included; `gists.py` was
+folded into it) and survive a rebuild. `tools/pipeline/spellcheck_bank.py` guards against regressions.
 
 Baseline: `question_bank.json` at git HEAD (c8ff389). 129 records differ.
 

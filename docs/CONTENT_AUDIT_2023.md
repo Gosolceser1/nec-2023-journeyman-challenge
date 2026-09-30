@@ -682,4 +682,4 @@ Key: `verified` means no change was needed. `fixed` means explanation fields cha
 
 ## Guard
 
-`tools/pipeline/content_audit_2023.json` records status, `verified_on`, sections, URL, `correct_index` and a 16-hex checksum of each record's provision (`reference_text` + `reference_table`). `validate_question_bank.py` reports an error when a provision or key changes without the entry being updated, and a warning when an NEC record has no entry. The file stores no NEC text.
+`data/nec/2023/content_audit.json` (moved from `tools/pipeline/content_audit_2023.json`) records status, `verified_on`, sections, URL, `correct_index` and a 16-hex checksum of each record's provision (`reference_text` + `reference_table`). `validate_question_bank.py` reports an error when a provision or key changes without the entry being updated, and a warning when an NEC record has no entry. The file stores no NEC text.

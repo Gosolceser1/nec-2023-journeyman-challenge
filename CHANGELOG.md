@@ -100,6 +100,17 @@
 - **Everything in the menu fits on one screen** at every supported desktop
   and phone size, with no scrolling; Audio & Voice moved to the Settings
   tab, and Back on another tab returns to Home first.
+- **Behind the scenes: exams and the NEC edition are data, not code.** Every
+  exam's questions come from a reviewed transcript file and every hand-written
+  hint, lesson and fix from one curated overlay; the NEC 2023 article titles,
+  table values, provision text and content audit sit in one edition folder,
+  and the year, the exam format (80 questions, 240 minutes, 75% to pass), the
+  app name and the version are each written in one place. Adding an exam is
+  now "drop in the PDFs, add a transcript, curate, build"
+  (docs/ADDING_EXAMS.md), and moving to NEC 2026 is a data change plus a
+  re-audit worklist from a new report tool (docs/EDITION_MIGRATION.md). The
+  save folder and the Android app id stay as they are, so progress and
+  upgrades are not affected. No question, answer or explanation changed.
 
 ## [1.0.4] - 2026-09-28
 
