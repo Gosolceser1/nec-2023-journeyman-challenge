@@ -10,7 +10,7 @@
 		{"id": "home", "title": "Home", "icon": "bolt", "blocks": ["continue", "quick_drill", "weakest_area", "review_missed", "simulator"]},
 		{"id": "exams", "title": "Exams", "icon": "check", "blocks": ["exam_groups"]},
 		{"id": "drills", "title": "Drills", "icon": "stopwatch", "blocks": ["drill_sizes", "area_drills"]},
-		{"id": "study", "title": "Study", "icon": "tip", "blocks": ["study_tools"]},
+		{"id": "study", "title": "Study", "icon": "tip", "blocks": ["study_tools", "hunt_tip"]},
 		{"id": "settings", "title": "Settings", "icon": "speaker", "blocks": ["audio", "footer"]}
 	],
 	"blocks": {
@@ -88,6 +88,15 @@
 			"note": "Calculation questions show a Show steps button after you answer.",
 			"missing": "Math study tools are on their way.",
 			"columns": {"desktop": 2, "mobile": 2}
+		},
+		"hunt_tip": {
+			"header": "HOW TO HUNT IN THE CODE BOOK",
+			"steps": [
+				"1. Read the stem and pick the keyword: practice questions color it in amber.",
+				"2. Look that word up in the Index at the back of the {edition} book (or the Table of Contents).",
+				"3. Go to the article it names, then scan the section titles for the rule.",
+				"4. Read the rule and match it to a choice. The Full Exam shows no hints, like the real test."
+			]
 		},
 		"audio": {},
 		"footer": {}

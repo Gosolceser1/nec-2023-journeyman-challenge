@@ -4,6 +4,18 @@
 
 ### Added
 
+- **Code-book keywords in the question.** The exam is open book, so before you
+  answer, the words to look up are colored amber in the question, and an INDEX
+  line above the "where to look" path names the Index entry and article
+  (for example "Swimming pools → Art. 680"). Hover a colored word on desktop, or
+  tap it on a phone, to see just its entry. Keywords never contain the answer.
+  After you answer, the words stay colored and the usual section reference
+  shows. The voice reads the question as before. Turn it off in Settings
+  ("Highlight code-book keywords"). It is always off in the Full Exam, like the
+  real test. 547 NEC questions have keywords; state law, math and trade
+  questions have none.
+- **How to hunt in the code book** on the Study tab: the four-step lookup
+  routine (keyword, Index, article, rule).
 - **72 more questions get a study figure** (docs/DIAGRAMS_AUDIT.md section 8):
   26 new drawings in the app's own style, among them the floor-area and
   ampacity worked examples, ground fault vs. open vs. short, selective

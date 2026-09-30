@@ -408,6 +408,13 @@ func _block_study_tools(parent: VBoxContainer, cfg: Dictionary) -> void:
 		_note(parent, str(cfg["note"]))
 
 
+## Exam-day lookup routine (Study tab): a header and numbered steps.
+func _block_hunt_tip(parent: VBoxContainer, cfg: Dictionary) -> void:
+	_header(parent, str(cfg.get("header", "")), AppTheme.AMBER_400)
+	for step in cfg.get("steps", []):
+		_note(parent, MenuModel.fill(str(step), vars()), AppTheme.SLATE_300)
+
+
 func _tool_icon(icon: String) -> TextureRect:
 	var r := TextureRect.new()
 	r.texture = Icons.texture(icon, 16)

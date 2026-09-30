@@ -22,6 +22,7 @@ src/
           choice_order.gd   ChoiceOrder: per-run choice order, locked questions, pinned choices
           bank_loader.gd    BankLoader: reads data/question_bank.json, normalizes records, question pools
           nec_reference.gd  NecReference: article titles (data/nec/<year>/articles.json), lookup paths (NEC and Nebraska law)
+          hunt_keywords.gd  HuntKeywords: the stem words to look up in the code book's Index (data/nec/<year>/hunt_keywords.json)
           safe_area.gd      SafeArea.margins: notch / cutout insets
           edition.gd        Edition: the NEC edition labels and data folder, from data/edition.json
           app_identity.gd   AppIdentity: app name templates, frozen save folder, legacy names (data/app.json)
@@ -40,6 +41,7 @@ src/
           touch_scroll.gd   TouchScroll: finger drag-to-scroll for every ScrollContainer, tap vs swipe
           voice_sheet.gd    VoiceSheet: the mobile voice list (rows built a batch per frame)
           fit_controller.gd FitController: keeps the question screen at 0% scroll
+          hunt_view.gd      HuntView: colored hunt keywords in the stem, the INDEX line, tap and hover
           table_viewer.gd   TableViewer: reference tables that never scroll (column fit, folding, type steps)
           info_panel_renderer.gd  InfoPanelRenderer: the explanation RichTextLabel
           results_view.gd   ResultsView: graded and listen results, confetti
@@ -55,9 +57,10 @@ data/     question_bank.json (never edited by hand)  voices.json (default voice 
           edition.json      the NEC edition (year, labels, data folder): the one place the year is written
           app.json          app name templates; frozen save folder and Android id; legacy names
           nec/2023/         the edition's data: articles.json (chapter and article titles), tables.json
-                            (table values for the math helpers and nec_calc.py); pipeline only (excluded
-                            from exports): content_audit.json, renumbered.json, provisions.json,
-                            concepts.json, answer_glossary.json
+                            (table values for the math helpers and nec_calc.py), hunt_keywords.json
+                            (generated); pipeline only (excluded from exports): content_audit.json,
+                            renumbered.json, provisions.json, concepts.json, answer_glossary.json,
+                            index_terms.json
           exam_blueprint.json (exam format, content outline, chapter map, area overrides, edition)
           diagram_masks.json  per figure (PDF crops) or per record (original figures): answer-revealing
                               regions and the "?" masks DiagramView draws over them until the answer is in
@@ -201,6 +204,31 @@ smallest layout does not fit, the gist and then the formula hint give way.
 After answering, the feedback table gets the layout that shows it whole in the
 explanation sheet's first view; the sheet scrolls only for the text below it. `_tick_timer` drives
 `session.tick()` once a second.
+
+### Hunt keywords
+
+The printed exam is open book, so each NEC question names the words to look
+up in the code book's Index. `tools/pipeline/hunt_keywords.py` writes
+`data/nec/<year>/hunt_keywords.json`: per record 1 to 3 exact stem phrases,
+the Index-style heading and the article, and `show_article` (false when the
+stem asks for the reference or the answer holds the article number). The
+curated vocabulary and per-question overrides live in `index_terms.json`
+(pipeline only). `--check` (run by `test_hunt_keywords.py` in verify.sh)
+fails when a keyword is not in the stem, holds the correct choice or starts a
+word of it, its heading names the choice, or its article is not one the record
+cites.
+
+The stem is a RichTextLabel (`HuntView.make_stem_label`); `HuntView.show_question`
+colors each keyword's first occurrence (`[url]` + `[hint]` BBCode, the parsed
+text is the bank stem exactly) and fills the INDEX line (`host.index_hint_label`)
+above the chapter path in the lookup box. Hover shows one entry (desktop); a tap
+puts only that entry in the INDEX line. After answering the INDEX line goes with
+the lookup box, the keywords stay colored and the reference line is unchanged.
+Speech reads the record, never the label. `FitController` shortens the INDEX
+line to its first entry, then hides it, before the page would scroll. The
+setting is `AudioSettings.hunt_keywords` (audio.cfg `[study] hunt_keywords`,
+on by default); `HuntKeywords.enabled` keeps it off in the Full Exam. The
+Study tab's `hunt_tip` block (data/menu.json) lists the lookup routine.
 
 ### Question selection
 
