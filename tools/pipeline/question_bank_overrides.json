@@ -192,7 +192,7 @@
         "I stands for intensity of current, the current flow measured in amperes.",
         "Isotopic character is a chemistry idea, unrelated to the current variable I."
       ],
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"What does the alpha character I represent when stating the equation W = E x I?\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Resistors in parallel combine as the product over the sum. Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"What does the alpha character I represent when stating the equation W = E x I?\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
       "gist": "Power in watts is the product of volts and a second quantity represented by the letter I. The question asks what I stands for."
     },
     "final-exam-#1-020": {
@@ -307,11 +307,11 @@
       "gist": "Convert 40 percent to a fraction and reduce to lowest terms."
     },
     "final-exam-#1-049": {
-      "tip_short": "Direct-buried cable under 2 inches of concrete still needs 18 inches of cover, versus 24 inches without it. Correct: C — 18 inches. Table 300.5(A) Column 1 requires 18 inches of cover for direct-buried cable below 2 inches of concrete. Not A: 6 inches is the value for 20 ampere GFCI residential branch circuits under concrete, not direct-buried cable. Not B: 12 inches is the cover for 20 ampere GFCI residential branch circuits, not direct-buried cable. Not D: 24 inches is the general direct burial cover; the 2 inch concrete cap reduces it to 18 inches.",
+      "tip_short": "Direct-buried cable under 2 inches of concrete still needs 18 inches of cover, versus 24 inches without it. Correct: C — 18 inches. Table 300.5(A) Column 1 requires 18 inches of cover for direct-buried cable below 2 inches of concrete. Not A: 6 inches is the value for 20 ampere GFCI residential branch circuits under concrete, not direct-buried cable. Not B: 12 inches is the Column 3 value (EMT and nonmetallic raceways) under 2 inches of concrete, not direct-buried cable. Not D: 24 inches is the general direct burial cover; the 2 inch concrete cap reduces it to 18 inches.",
       "reference_text": "Table 300.5(A) Minimum Cover Requirements, 0 to 1000 Volts ac, 1500 Volts dc, Nominal, Burial in Millimeters (Inches)\nLocation of Wiring Method or Circuit\tColumn 1 Direct Burial Cables or Conductors\n\tmm\tin.\nIn trench below 50 mm (2 in.) thick concrete or equivalent\t450\t18",
       "choice_notes": [
         "6 inches is the value for 20 ampere GFCI residential branch circuits under concrete, not direct-buried cable.",
-        "12 inches is the cover for 20 ampere GFCI residential branch circuits, not direct-buried cable.",
+        "12 inches is the Column 3 value (EMT and nonmetallic raceways) under 2 inches of concrete, not direct-buried cable.",
         "Table 300.5(A) Column 1 requires 18 inches of cover for direct-buried cable below 2 inches of concrete.",
         "24 inches is the general direct burial cover; the 2 inch concrete cap reduces it to 18 inches."
       ],
@@ -399,7 +399,7 @@
         "A definition tagged with an article number does not apply throughout the Code; this one is (393)."
       ],
       "prompt": "The definition of “busbar” in Article 100 applies ___.",
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSome questions test NEC vocabulary rather than math. Picture the thing described and match the word: a busbar is the bare metal bar that distributes power inside gear; 'datum' or maximum water level is where water would spill over. When asked which article a definition belongs to, remember Article 100 holds the definitions used throughout the whole Code.\n\nIn plain terms, the question is: \"The definition of “busbar” in Article 100 applies ___.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSome questions test NEC vocabulary rather than math. Picture the thing described and match the word: a busbar is the bare metal bar that distributes power inside gear. When asked which article a definition belongs to, remember Article 100 holds the definitions used throughout the whole Code.\n\nIn plain terms, the question is: \"The definition of “busbar” in Article 100 applies ___.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
       "gist": "Some Article 100 definitions carry an article number in parentheses, which limits where that definition applies. The question asks how far the busbar definition reaches."
     },
     "final-exam-#3-011": {
@@ -520,7 +520,7 @@
         "100 is not in the definition; the Article 100 threshold is four or more persons."
       ],
       "prompt": "A nursing home is an area used for the lodging, boarding, and nursing care, on a 24-hour basis, of ___ or more inpatients.",
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSome questions test NEC vocabulary rather than math. Picture the thing described and match the word: a busbar is the bare metal bar that distributes power inside gear; 'datum' or maximum water level is where water would spill over. When asked which article a definition belongs to, remember Article 100 holds the definitions used throughout the whole Code.\n\nIn plain terms, the question is: \"A nursing home is an area used for the lodging, boarding, and nursing care, on a 24-hour basis, of ___ or more inpatients.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSome questions test NEC vocabulary rather than math. Picture the thing described and match the word: a busbar is the bare metal bar that distributes power inside gear. When asked which article a definition belongs to, remember Article 100 holds the definitions used throughout the whole Code.\n\nIn plain terms, the question is: \"A nursing home is an area used for the lodging, boarding, and nursing care, on a 24-hour basis, of ___ or more inpatients.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
       "gist": "The Code defines a nursing home partly by how many round-the-clock inpatients it cares for. The question asks the minimum number in that definition."
     },
     "final-exam-#3-034": {
@@ -590,7 +590,7 @@
         "Timing is not the electrical term for cycles per second; that term is frequency."
       ],
       "prompt": "The total number of AC cycles completed in one second is the current's ___.",
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"The total number of AC cycles completed in one second is the current's ___.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Resistors in parallel combine as the product over the sum. Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"The total number of AC cycles completed in one second is the current's ___.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
       "gist": "AC waveforms are described by several terms, and one of them counts the complete cycles in each second. The question asks which term that is."
     },
     "final-exam-#3-058": {
@@ -1028,7 +1028,7 @@
         "356.22 limits LFNC fill to the percentages specified in Chapter 9, Table 1.",
         "Table 4 gives conduit dimensions and areas, not the allowable fill percentages."
       ],
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"The number of conductors allowed in LFNC must not exceed that permitted by the percentage fill specified…\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nconductors",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Resistors in parallel combine as the product over the sum. Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"The number of conductors allowed in LFNC must not exceed that permitted by the percentage fill specified…\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nconductors",
       "table_after_answer": true,
       "reference_table": [
         [
@@ -1191,7 +1191,7 @@
         "Star is another name for a wye connection, the opposite of a delta winding."
       ],
       "prompt": "The symbol for a three-phase delta wound generator consists of a circle with a ___ scribed inside.",
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Two equal resistors in parallel give half of one (two 2,000-ohm resistors = 1,000 ohms). Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s, so 90° takes a quarter of that — 1/240 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"The symbol for a three-phase delta wound generator consists of a circle with a ___ scribed inside.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Resistors in parallel combine as the product over the sum. Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"The symbol for a three-phase delta wound generator consists of a circle with a ___ scribed inside.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
       "gist": "Generator symbols show how the windings are connected by drawing a shape inside a circle. The question asks what shape marks a delta-wound machine.",
       "tip_title": "Generator symbols"
     },
@@ -1440,8 +1440,8 @@
         "Datum Level",
         "Maximum Water Level"
       ],
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSome questions test NEC vocabulary rather than math. Picture the thing described and match the word: a busbar is the bare metal bar that distributes power inside gear; 'datum' or maximum water level is where water would spill over. When asked which article a definition belongs to, remember Article 100 holds the definitions used throughout the whole Code.\n\nIn plain terms, the question is: \"___. The highest level that water can reach before it spills out.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
-      "gist": "Floodplain measurements reference how high water can rise before spilling over. The question asks the name of that level."
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSome questions test NEC vocabulary rather than math. Picture the thing described and match the word: a busbar is the bare metal bar that distributes power inside gear. When asked which article a definition belongs to, remember Article 100 holds the definitions used throughout the whole Code.\n\nIn plain terms, the question is: \"___. The highest level that water can reach before it spills out.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
+      "gist": "Pool and fountain rules measure many clearances from the point where water would spill over the edge. The question asks the Article 100 term for that level."
     },
     "open-book-exam-#7-008": {
       "reference_text": "110.13(B) Cooling\nElectrical equipment that depends on the natural circulation of air and convection principles for cooling of exposed surfaces shall be installed so that room airflow over such surfaces is not prevented by walls or by adjacent installed equipment. For equipment designed for floor mounting, clearance between top surfaces and adjacent surfaces shall be provided to dissipate rising warm air.\nElectrical equipment provided with ventilating openings shall be installed so that walls or other obstructions do not prevent the free circulation of air through the equipment.",
@@ -1647,7 +1647,7 @@
         "Article 100 defines Operator as the individual who starts, stops, and controls a ride or concession.",
         "Manager is not an Article 100 defined term for this role."
       ],
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSome questions test NEC vocabulary rather than math. Picture the thing described and match the word: a busbar is the bare metal bar that distributes power inside gear; 'datum' or maximum water level is where water would spill over. When asked which article a definition belongs to, remember Article 100 holds the definitions used throughout the whole Code.\n\nIn plain terms, the question is: \"___. The individual responsible for starting, stopping, and controlling an amusement ride or supervising a concession.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSome questions test NEC vocabulary rather than math. Picture the thing described and match the word: a busbar is the bare metal bar that distributes power inside gear. When asked which article a definition belongs to, remember Article 100 holds the definitions used throughout the whole Code.\n\nIn plain terms, the question is: \"___. The individual responsible for starting, stopping, and controlling an amusement ride or supervising a concession.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
       "gist": "An amusement ride has exactly one person responsible for starting, stopping, and controlling it. The question asks what the Code calls that person."
     },
     "open-book-exam-#10-012": {
@@ -2178,7 +2178,7 @@
       ],
       "table_after_answer": true,
       "article": "310.12(A)",
-      "lookup_summary": "Lookup clues: feeder, conductors, dwelling unit. Start with 310.12(A); NEC 2023 deleted former Table 310.12, so apply the 83 percent rule with Table 310.16.",
+      "lookup_summary": "Lookup clues: feeder, conductors, dwelling unit. Start with 310.12(A) and its Table 310.12(A), or apply the 83 percent rule with Table 310.16.",
       "reference_text": "310.12(A) Services\nFor a service rated 100 amperes through 400 amperes, the service conductors supplying the entire load associated with a one-family dwelling, or the service conductors supplying the entire load associated with an individual dwelling unit in a two-family or multifamily dwelling, shall be permitted to have an ampacity not less than 83 percent of the service rating. If no adjustment or correction factors are required, Table 310.12(A) shall be permitted to be applied.\n310.12 Single-Phase Dwelling Services and Feeders\nFor one-family dwellings and the individual dwelling units of two-family and multifamily dwellings, service and feeder conductors supplied by a single-phase, 120/240-volt system shall be permitted to be sized in accordance with 310.12(A) through (D).",
       "reference_table": [
         [
@@ -3246,15 +3246,15 @@
     },
     "final-exam-#3-028": {
       "reference_text": "422.5(A) General\nAppliances identified in 422.5(A)(1) through (A)(7) rated 150 volts or less to ground and 60 amperes or less, single- or 3-phase, shall be provided with Class A protection for personnel. Multiple Class A protective devices shall be permitted but shall not be required.\nAutomotive vacuum machines\nDrinking water coolers and bottle fill stations\nCord-and-plug-connected high-pressure spray washing machines\nTire inflation machines\nVending machines\nSump pumps\nDishwashers\nInformational Note: Section 210.8 specifies requirements for GFCI protection for the branch-circuit outlet where the covered location warrants such protection.",
-      "tip_short": "Public-use appliances like vending machines, tire inflators, and water coolers need Class A GFCI protection. Correct: D — all of these. 422.5(A) lists vending machines, tire inflation machines, and drinking water coolers, so all apply. Not A: Vending machines are listed in 422.5(A), but so are the other appliances named. Not B: Tire inflation machines are listed in 422.5(A), but so are the other appliances named. Not C: Drinking water coolers are listed in 422.5(A), but so are the other appliances named.",
+      "tip_short": "422.5(A) lists appliances rated 150 volts or less to ground and 60 amperes or less, including vending machines, tire inflators, and drinking water coolers, that need Class A GFCI protection. Correct: D — all of these. 422.5(A) lists vending machines, tire inflation machines, and drinking water coolers, so all apply. Not A: Vending machines are listed in 422.5(A), but so are the other appliances named. Not B: Tire inflation machines are listed in 422.5(A), but so are the other appliances named. Not C: Drinking water coolers are listed in 422.5(A), but so are the other appliances named.",
       "choice_notes": [
         "Vending machines are listed in 422.5(A), but so are the other appliances named.",
         "Tire inflation machines are listed in 422.5(A), but so are the other appliances named.",
         "Drinking water coolers are listed in 422.5(A), but so are the other appliances named.",
         "422.5(A) lists vending machines, tire inflation machines, and drinking water coolers, so all apply."
       ],
-      "prompt": "Appliances, ___ provided for public use rated 250v or less and 60 amps or less, single-phase or three-phase, shall be provided with GFCI protection for personnel.",
-      "gist": "Vending machines, tire pumps, and water coolers are accessible to the general public. The question asks which of these public machines needs fast-trip protection for people."
+      "prompt": "Appliances, ___, rated 150 volts or less to ground and 60 amperes or less, single- or 3-phase, shall be provided with Class A GFCI protection for personnel.",
+      "gist": "Some appliances need protection for people built into their supply, wherever they are installed. The question asks what the rule covers."
     },
     "final-exam-#3-031": {
       "reference_text": "800.44 Overhead (Aerial) Wires and Cables\n800.44(A)(1) Relative Location\nIf practicable, the communications wires and cables and CATV-type coaxial cables shall be located below the electric light or power conductors.\n800.44(A)(2) Attachment to Cross-Arms\nCommunications wires and cables and CATV-type coaxial cables shall not be attached to a cross-arm that carries electric light or power conductors.\n800.44(B) Above Roofs\nCommunications wires and cables and CATV-type coaxial cables shall have a vertical clearance of not less than 2.5 m (8 ft) from all points of roofs above which they pass.\nException No. 1: Communications wires and cables and CATV-type coaxial cables shall not be required to have a vertical clearance of not less than 2.5 m (8 ft) above auxiliary buildings, such as garages and the like.\nException No. 2: A reduction in clearance above only the overhanging portion of the roof to not less than 450 mm (18 in.) shall be permitted if (1) not more than 1.2 m (4 ft) of communications and CATV-type service-drop conductors pass above the roof overhang and (2) they are terminated at a through- or above-the-roof raceway or approved support.",
@@ -3472,7 +3472,7 @@
         "circuit breaker"
       ],
       "gist": "An elevator's main disconnect has to let a mechanic safely lock out the car during service. The question asks in which position the Code lets that switch be locked.",
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nElevator and dumbwaiter motors live an intermittent life — short hard runs, long rests — so the Code sizes their conductors and protection by duty rating instead of continuous-duty rules. Their machine rooms and controllers get the same disconnect-within-sight treatment as any motor.\n\nThis asks what the Code requires of the elevator's main disconnecting means. Subject: elevator. Test each choice against the required type of disconnect and how it may be locked.\n\nLOOKUP FOCUS\ndisconnecting means, circuit breaker"
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nElevator and dumbwaiter motors have their own rules in Article 620, which size their conductors and protection from the motor's duty rating. Their machine rooms and controllers get the same disconnect-within-sight treatment as any motor.\n\nThis asks what the Code requires of the elevator's main disconnecting means. Subject: elevator. Test each choice against the required type of disconnect and how it may be locked.\n\nLOOKUP FOCUS\ndisconnecting means, circuit breaker"
     },
     "final-exam-#5-001": {
       "reference_text": "324.41 Floor Coverings\nFloor-mounted Type FCC cable, cable connectors, and insulating ends shall be covered with carpet squares not larger than 1.0 m (39.37 in.) square. Carpet squares that are adhered to the floor shall be attached with release-type adhesives.",
@@ -4021,7 +4021,7 @@
         "340.12 prohibits Type UF cable where subject to physical damage.",
         "340.10 permits Type UF cable for wiring in wet, dry, or corrosive locations."
       ],
-      "gist": "Type UF cable is rated for wet, dry, and corrosive soil. The question asks where it may run, and three answers are places it forbids."
+      "gist": "Type UF is a nonmetallic cable built for underground feeders and branch circuits. The question asks which use the Code permits for it."
     },
     "open-book-exam-#4-018": {
       "reference_text": "312.5(C) Cables\nWhere cable is used, each cable shall be secured to the cabinet, cutout box, or meter socket enclosure.\nException No. 1: Cables with entirely nonmetallic sheaths shall be permitted to enter the top of a surface-mounted enclosure through one or more nonflexible raceways not less than 450 mm (18 in.) and not more than 3.0 m (10 ft) in length, provided all of the following conditions are met:\n(1) Each cable is fastened within 300 mm (12 in.), measured along the sheath, of the outer end of the raceway.\n(2) The raceway extends directly above the enclosure and does not penetrate a structural ceiling.\n(3) A fitting is provided on each end of the raceway to protect the cable(s) from abrasion and the fittings remain accessible after installation.\n(4) The raceway is sealed or plugged at the outer end using approved means so as to prevent access to the enclosure through the raceway.\n(5) The cable sheath is continuous through the raceway and extends into the enclosure beyond the fitting not less than 6 mm (1/4 in.).\n(6) The raceway is fastened at its outer end and at other points in accordance with the applicable article.\n(7) Where installed as conduit or tubing, the cable fill does not exceed the amount that would be permitted for complete conduit or tubing systems by Table 1 of Chapter 9 of this Code and all applicable notes thereto.",
@@ -4065,7 +4065,8 @@
         "Covered is not the condition in 210.8(A) Exception No. 1.",
         "210.8(A) Exception No. 1 applies to receptacles that are not readily accessible on a snow-melting circuit."
       ],
-      "gist": "Snow-melting equipment requires a dedicated receptacle; the rule turns on how reachable it must be. The question asks which word fills the blank."
+      "gist": "Snow-melting equipment requires a dedicated receptacle; the rule turns on how reachable it must be. The question asks which word fills the blank.",
+      "prompt": "For dwelling units, outdoor receptacles that are not ___ and are supplied by a branch circuit dedicated to snow-melting equipment shall be permitted to be installed in accordance with 426.28 instead of having GFCI protection for personnel."
     },
     "open-book-exam-#4-022": {
       "reference_text": "310.12(A) Services\nFor a service rated 100 amperes through 400 amperes, the service conductors supplying the entire load associated with a one-family dwelling, or the service conductors supplying the entire load associated with an individual dwelling unit in a two-family or multifamily dwelling, shall be permitted to have an ampacity not less than 83 percent of the service rating.",
@@ -4305,7 +4306,8 @@
         "7 feet exceeds the 2.0 meter (6 1/2 feet) maximum in 210.52(E)(3).",
         "8 feet exceeds the 2.0 meter (6 1/2 feet) maximum in 210.52(E)(3)."
       ],
-      "gist": "A deck requires its own accessible receptacle within a maximum height. The question asks the maximum height above the deck floor."
+      "gist": "A deck requires its own accessible receptacle within a maximum height. The question asks the maximum height above the deck floor.",
+      "prompt": "Balconies, decks, and porches that are within 4 in. horizontally of the dwelling unit shall have at least one receptacle outlet accessible from the balcony, deck, or porch. The receptacle outlet shall not be located more than ___ above the balcony, deck, or porch walking surface."
     },
     "open-book-exam-#10-021": {
       "reference_text": "695.12(D) Energized Equipment\nAll energized equipment parts shall be located at least 300 mm (12 in.) above the floor level.",
@@ -4867,7 +4869,8 @@
         "Legibility is a 110.21(B) marking quality; 305.12 says the signs shall be conspicuously posted.",
         "305.12 requires danger signs to be conspicuously posted at points of access to conductors in all raceway and cable systems."
       ],
-      "tip_short": "High-voltage access points get DANGER-HIGH VOLTAGE-KEEP OUT signs, conspicuously posted and readily visible. Correct: D — conspicuously. Not A: Permanence is a 110.21(B) marking quality, but the word 305.12 uses for posting the signs is conspicuously. Not C: Legibility is a 110.21(B) marking quality; 305.12 says the signs shall be conspicuously posted."
+      "tip_short": "High-voltage access points get DANGER-HIGH VOLTAGE-KEEP OUT signs, conspicuously posted and readily visible. Correct: D — conspicuously. Not A: Permanence is a 110.21(B) marking quality, but the word 305.12 uses for posting the signs is conspicuously. Not C: Legibility is a 110.21(B) marking quality; 305.12 says the signs shall be conspicuously posted.",
+      "prompt": "Danger signs shall be ___ posted at points of access to conductors in all raceway systems and cable systems. The sign(s) shall state the following: Danger-High Voltage-Keep Out."
     },
     "final-exam-#2-022": {
       "gist": "The grounding electrode conductor often runs outdoors or into soil where it can be eaten away over the years. The question asks what kind of site condition the chosen material must resist.",
@@ -5235,7 +5238,8 @@
         "7 feet exceeds the 2.0 meter (6 1/2 feet) maximum in 210.52(E)(3).",
         "8 feet exceeds the 2.0 meter (6 1/2 feet) maximum in 210.52(E)(3)."
       ],
-      "tip_short": "Deck, balcony, and porch receptacle: no higher than 6 1/2 feet above the walking surface. Correct: B — 6'6\". 210.52(E)(3) sets a maximum of 2.0 meters (6 1/2 feet), which is 6 feet 6 inches. Not A: 6 feet is lower than needed; 210.52(E)(3) allows up to 2.0 meters (6 1/2 feet). Not C: 7 feet exceeds the 2.0 meter (6 1/2 feet) maximum in 210.52(E)(3). Not D: 8 feet exceeds the 2.0 meter (6 1/2 feet) maximum in 210.52(E)(3)."
+      "tip_short": "Deck, balcony, and porch receptacle: no higher than 6 1/2 feet above the walking surface. Correct: B — 6'6\". 210.52(E)(3) sets a maximum of 2.0 meters (6 1/2 feet), which is 6 feet 6 inches. Not A: 6 feet is lower than needed; 210.52(E)(3) allows up to 2.0 meters (6 1/2 feet). Not C: 7 feet exceeds the 2.0 meter (6 1/2 feet) maximum in 210.52(E)(3). Not D: 8 feet exceeds the 2.0 meter (6 1/2 feet) maximum in 210.52(E)(3).",
+      "prompt": "Balconies, decks, and porches that are within 4 in. horizontally of the dwelling unit shall have at least one receptacle outlet accessible from the balcony, deck, or porch. The receptacle outlet shall not be located more than ___ above the balcony, deck, or porch walking surface."
     },
     "final-exam-#2-050": {
       "gist": "Two voltage levels in one raceway require cable with suitable separation construction. The question asks which insulation type the rule covers.",
@@ -5969,7 +5973,7 @@
     },
     "final-exam-#4-034": {
       "gist": "Overload devices may be raised above their normal setting when a motor will not start, but only to a ceiling set by the motor's markings. The question asks that ceiling for a motor with no service factor or temperature rise given.",
-      "reference_text": "430.32 Continuous-Duty Motors\n(C) Selection of Overload Device\nWhere the sensing element or setting or sizing of the overload device selected in accordance with 430.32(A)(1) and 430.32(B)(1) is not sufficient to start the motor or to carry the load, higher size sensing elements or incremental settings or sizing shall be permitted to be used, provided the trip current of the overload device does not exceed the following percentage of motor nameplate full-load current rating:\nMotors with marked service factor 1.15 or greater\t140%\nMotors with a marked temperature rise 40°C or less\t125%\nAll other motors\t115%\nTable 430.248 Full-Load Currents in Amperes, Single-Phase Alternating-Current Motors\nHorsepower\t115 Volts\t200 Volts\t208 Volts\t230 Volts\n3\t34\t19.6\t18.7\t17",
+      "reference_text": "430.32 Continuous-Duty Motors\n(C) Selection of Overload Device\nWhere the sensing element or setting or sizing of the overload device selected in accordance with 430.32(A)(1) and 430.32(B)(1) is not sufficient to start the motor or to carry the load, higher size sensing elements or incremental settings or sizing shall be permitted to be used, provided the trip current of the overload device does not exceed the following percentage of motor nameplate full-load current rating:\nMotors with marked service factor 1.15 or greater\t140%\nMotors with a marked temperature rise 40°C or less\t140%\nAll other motors\t130%\nTable 430.248 Full-Load Currents in Amperes, Single-Phase Alternating-Current Motors\nHorsepower\t115 Volts\t200 Volts\t208 Volts\t230 Volts\n3\t34\t19.6\t18.7\t17",
       "choice_notes": [
         "15 amperes is below the motor's own full-load current.",
         "20 amperes is below the 130 percent maximum and is not what the question asks.",
@@ -6010,7 +6014,7 @@
     },
     "final-exam-#4-037": {
       "gist": "Overload devices may be raised above their normal setting when a motor will not start, but only to a ceiling set by the motor's markings. The question asks that ceiling for this motor's service factor.",
-      "reference_text": "430.32 Continuous-Duty Motors\n(C) Selection of Overload Device\nWhere the sensing element or setting or sizing of the overload device selected in accordance with 430.32(A)(1) and 430.32(B)(1) is not sufficient to start the motor or to carry the load, higher size sensing elements or incremental settings or sizing shall be permitted to be used, provided the trip current of the overload device does not exceed the following percentage of motor nameplate full-load current rating:\nMotors with marked service factor 1.15 or greater\t140%\nMotors with a marked temperature rise 40°C or less\t125%\nAll other motors\t115%",
+      "reference_text": "430.32 Continuous-Duty Motors\n(C) Selection of Overload Device\nWhere the sensing element or setting or sizing of the overload device selected in accordance with 430.32(A)(1) and 430.32(B)(1) is not sufficient to start the motor or to carry the load, higher size sensing elements or incremental settings or sizing shall be permitted to be used, provided the trip current of the overload device does not exceed the following percentage of motor nameplate full-load current rating:\nMotors with marked service factor 1.15 or greater\t140%\nMotors with a marked temperature rise 40°C or less\t140%\nAll other motors\t130%",
       "choice_notes": [
         "24 amperes is the full-load current itself, with no allowance.",
         "27.6 amperes is 115 percent, the normal 430.32(A)(1) setting for this motor, not the maximum.",
@@ -6320,7 +6324,7 @@
     },
     "final-exam-#4-056": {
       "gist": "Overload devices may be raised above their normal setting when a motor will not start, but only to a ceiling set by the motor's markings. The question asks that ceiling for a motor with no service factor or temperature rise given.",
-      "reference_text": "430.32 Continuous-Duty Motors\n(C) Selection of Overload Device\nWhere the sensing element or setting or sizing of the overload device selected in accordance with 430.32(A)(1) and 430.32(B)(1) is not sufficient to start the motor or to carry the load, higher size sensing elements or incremental settings or sizing shall be permitted to be used, provided the trip current of the overload device does not exceed the following percentage of motor nameplate full-load current rating:\nMotors with marked service factor 1.15 or greater\t140%\nMotors with a marked temperature rise 40°C or less\t125%\nAll other motors\t115%\nTable 430.248 Full-Load Currents in Amperes, Single-Phase Alternating-Current Motors\nHorsepower\t115 Volts\t200 Volts\t208 Volts\t230 Volts\n2\t24\t13.8\t13.2\t12",
+      "reference_text": "430.32 Continuous-Duty Motors\n(C) Selection of Overload Device\nWhere the sensing element or setting or sizing of the overload device selected in accordance with 430.32(A)(1) and 430.32(B)(1) is not sufficient to start the motor or to carry the load, higher size sensing elements or incremental settings or sizing shall be permitted to be used, provided the trip current of the overload device does not exceed the following percentage of motor nameplate full-load current rating:\nMotors with marked service factor 1.15 or greater\t140%\nMotors with a marked temperature rise 40°C or less\t140%\nAll other motors\t130%\nTable 430.248 Full-Load Currents in Amperes, Single-Phase Alternating-Current Motors\nHorsepower\t115 Volts\t200 Volts\t208 Volts\t230 Volts\n2\t24\t13.8\t13.2\t12",
       "choice_notes": [
         "15.18 amperes is 115 percent, the normal 430.32(A)(1) setting, not the maximum.",
         "16.5 amperes is 125 percent, which is not a 430.32 overload percentage.",
@@ -6404,7 +6408,8 @@
         "250 percent is the inverse time breaker value for most motors."
       ],
       "tip_short": "Table 430.52(C)(1): find the motor type row and the device column; wound-rotor and DC motors take 150 percent for fuses and inverse time breakers. Correct: C — 150.",
-      "tip_title": "Motor short-circuit protection"
+      "tip_title": "Motor short-circuit protection",
+      "prompt": "A 5 hp, 230 volt, wound rotor motor would have nontime delay fuses sized at ___ percent."
     },
     "final-exam-#4-062": {
       "article": "Table 4, Chapter 9",
@@ -6961,7 +6966,7 @@
         "695.7(D) limits the running voltage drop at the contactor load terminals to 5 percent at 115 percent of full-load current.",
         "7.5 percent is more than 695.7(D) allows; the running limit is 5 percent."
       ],
-      "tip_short": "Fire pump voltage drop (695.7): 15 percent at the controller line terminals while starting, 5 percent at the motor terminals while running at 115 percent of full-load current. Correct: C — 5.",
+      "tip_short": "Fire pump voltage drop (695.7): 15 percent at the controller line terminals while starting, 5 percent at the contactor load terminals while running at 115 percent of full-load current. Correct: C — 5.",
       "tip_title": "Fire pumps"
     },
     "open-book-exam-#12-012": {
@@ -8825,7 +8830,7 @@
     },
     "open-book-exam-#9-023": {
       "article": "430.7(A)",
-      "gist": "Very small motors may carry short letter codes on the nameplate instead of full words. Z is the usual symbol for impedance in electrical work. The question asks what Z.P. stands for.",
+      "gist": "Very small motors may carry short letter codes on the nameplate instead of full words. The question asks what Z.P. stands for.",
       "reference_text": "430.7(A) Usual Motor Applications\nA motor shall be marked with the following information:\nA motor complying with 430.32(B)(4) shall be marked \"impedance protected.\" Impedance-protected motors rated 100 watts or less and complying with 430.32(B)(4) shall be permitted to use the abbreviated marking \"Z.P.\"",
       "choice_notes": [
         "Single-phase is not abbreviated Z.P.; the number of phases is a separate nameplate item in 430.7(A).",

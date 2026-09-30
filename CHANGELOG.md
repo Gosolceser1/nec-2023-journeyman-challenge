@@ -19,6 +19,20 @@
 
 ### Fixed
 
+- All 598 questions re-checked against the NEC 2023 text: no answer key was
+  wrong. The motor overload questions (Final #4 Q34, Q37, Q56) quoted 125% and
+  115% in the 430.32(C) text; the 2023 values are 140% and 130%, the ones the
+  answers use. Stems updated to 2023 wording, same answers: GFCI appliances
+  rated 150 volts to ground (Final #3 Q28), deck receptacles within 4 in. of
+  the dwelling (Final #2 Q49, Open Book #10 Q20), Danger signs in raceway
+  systems (Final #2 Q21). The wound-rotor fuse question (Final #4 Q61) no
+  longer says "single-phase" (that matched a second row), and the snow-melt
+  receptacle question (Open Book #4 Q21) now states the exception the right
+  way round. Three explanations corrected (Final #1 Q49, Open Book #12 Q11,
+  Final #3 Q65).
+- Background and summary text shown before answering no longer gives away the
+  answer on 13 questions (for example "maximum water level", "1/240 s", the
+  orange triangle, 83%, "Z is impedance").
 - Range demand for 26 or more ranges: "15 + 1 × 28 =" gives the wrong number on
   a basic calculator, so the step now also shows the basic-calculator order
   (1 × 28 + 15 =).

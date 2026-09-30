@@ -15,8 +15,8 @@ The full 2023 text was cached locally, outside the repository, and every provisi
 
 | Status | Records |
 |---|---|
-| verified | 460 |
-| fixed | 87 |
+| verified | 451 |
+| fixed | 96 |
 | flagged | 1 |
 | non_nec | 46 |
 | total | 594 |
@@ -47,7 +47,22 @@ Stems that stated their own answer were minimally reworded: `open-book-exam-#9-0
 
 Found during the import review: `open-book-exam-#7-017` (an older exam) ended "temperature rating of the conductor"; NEC 2023 110.14(C)(2) says "of the connector". Stem corrected, key (C) identified unchanged.
 
-Final #4 notes: Q24 and Q33 are the same question in the PDF (both kept); Q25, Q49, Q51 and Q69 stems now say which Table 310.16 column applies; Q53's key note gives 25 A and the stem was clarified to match; Q61 keeps the PDF's "single-phase wound rotor".
+Final #4 notes: Q24 and Q33 are the same question in the PDF (both kept); Q25, Q49, Q51 and Q69 stems now say which Table 310.16 column applies; Q53's key note gives 25 A and the stem was clarified to match; Q61's "single-phase" was removed on 2026-09-30 (see the re-check below).
+
+## UpCodes answer re-check (2026-09-30)
+
+All 598 records (594 NEC plus the 4 Nebraska state-law records, which are not NEC and were only sanity-checked) were checked again against the NFPA 70-2023 text cache (the UpCodes extraction), one reviewer per batch of about 60 and every finding re-checked by hand: keyed answer, cited section, 2023 values and ambiguity. **No answer key is wrong under NEC 2023 and no citation moved.** Changes, all through the overlay (key unchanged in every case):
+
+- `final-exam-#4-034`, `final-exam-#4-037`, `final-exam-#4-056` (430.32(C)): the provision showed the 430.32(A)(1) percentages (125 and 115 percent); 2023 430.32(C) lists 140 percent for a marked temperature rise of 40°C or less and 130 percent for all other motors, the values the keys use.
+- `final-exam-#3-028` (422.5(A)): the stem said "provided for public use rated 250v or less"; 2023 covers the listed appliances rated 150 volts or less to ground and 60 amperes or less, not only public-use ones.
+- `final-exam-#2-049`, `open-book-exam-#10-020` (210.52(E)(3)): the stem used the older condition "attached to the dwelling unit and accessible from inside"; 2023 reads "within 102 mm (4 in.) horizontally of the dwelling unit".
+- `final-exam-#2-021` (305.12): "Warning signs ... conduit systems" is "Danger signs ... raceway systems" in 2023.
+- `final-exam-#4-061` (Table 430.52(C)(1)): "single-phase" matched the single-phase row (300 percent, choice A) as well as the wound-rotor row (the keyed 150 percent); removed.
+- `open-book-exam-#4-021` (210.8(A) Exception No. 1): the stem said these receptacles "are required to have GFCI protection"; the exception permits them to be installed in accordance with 426.28 instead. Stem reworded to the exception.
+- Explanations: `final-exam-#1-049` note B (12 in. under 2 in. of concrete is Table 300.5(A) Column 3), `open-book-exam-#12-011` tip (695.7(D) measures at the contactor load terminals), `final-exam-#3-065` lookup hint (Table 310.12(A) exists in 2023).
+- Pre-answer text that gave the answer away: the shared background paragraphs (`data/nec/2023/concepts.json`) no longer say that drawings start at the upper left, that 90° at 60 Hz is 1/240 s, that two equal parallel resistors give half of one, that an isolated-ground receptacle has an orange triangle, that hallways of 10 ft need a receptacle, that dwelling services use 83 percent, that elevator motors are intermittent, or what the maximum water level is; gists of `open-book-exam-#7-005`, `open-book-exam-#9-023` and `open-book-exam-#4-017` no longer name the answer.
+
+Left as printed (key still the best choice): `final-exam-#3-065` (2023 310.12 also covers 208Y/120-volt dwelling feeders, so "Only 240/120V, 3-wire services" is narrower than the rule); `open-book-exam-#7-001` (stem is the older 200.3 sentence; the 2023 rule and the keyed "electrically" are the same).
 
 ## Priority items
 
@@ -119,7 +134,7 @@ Key: `verified` means no change was needed. `fixed` means explanation fields cha
 | `final-exam-#1-045` | 422.16(B)(1)(1) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#422 |
 | `final-exam-#1-046` | General knowledge | non_nec | Not an NEC question (General knowledge); explanation reviewed for accuracy. |  |
 | `final-exam-#1-048` | 406.12(1) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#406 |
-| `final-exam-#1-049` | Table 300.5(A) | fixed | [reference_text] Table 300.5(A) Column 1 row quoted in table form (same excerpt in #4-004 and #7-013). | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300 |
+| `final-exam-#1-049` | Table 300.5(A) | fixed | UpCodes answer check: note B corrected (12 in. under 2 in. concrete is Table 300.5(A) Column 3). | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300 |
 | `final-exam-#1-050` | 800.44(B) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/8/communications-systems#800 |
 | `final-exam-#1-056` | 430.42(C) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
 | `final-exam-#1-057` | 110.26(E)(1) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110 |
@@ -153,7 +168,7 @@ Key: `verified` means no change was needed. `fixed` means explanation fields cha
 | `final-exam-#3-025` | 240.10 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#240 |
 | `final-exam-#3-026` | 626.11(A) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#626 |
 | `final-exam-#3-027` | 250.66(B) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250 |
-| `final-exam-#3-028` | 422.5(A) | verified | UpCodes 422.5(A) lacks 'rated' before '150 volts or less to ground'; record kept (confirm in print). | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#422 |
+| `final-exam-#3-028` | 422.5(A) | fixed | UpCodes answer check: stem updated to the 2023 422.5(A) rating (150 volts or less to ground, not limited to public use); key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#422 |
 | `final-exam-#3-029` | Article 100 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#100 |
 | `final-exam-#3-030` | 430.9(C) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
 | `final-exam-#3-031` | 800.44 | fixed | [reference_text] 800.44(B) Exception No. 2 (2023) ends "terminated at a through- or above-the-roof raceway or approved support" (record omitted "or above-"). | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/8/communications-systems#800 |
@@ -223,7 +238,7 @@ Key: `verified` means no change was needed. `fixed` means explanation fields cha
 | `final-exam-#5-068` | 344.10(C) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#344 |
 | `final-exam-#1-005` | General knowledge | non_nec | Not an NEC question (General knowledge); explanation reviewed for accuracy. |  |
 | `final-exam-#1-064` | General knowledge | non_nec | Not an NEC question (General knowledge); explanation reviewed for accuracy. |  |
-| `final-exam-#3-065` | 310.12(A) | fixed | [reference_text, tip_short] 310.12(A): record inserted non-Code commentary ("NEC 2023 deleted former Table 310.12 ...") and wrote "100 through 400 amperes"; 2023 text is "For a service rated 100 amperes through 400 amperes ..." and ends "If no adjustment or correction factors are required, Table 310.12(A) shall be permitted to be applied." | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310 |
+| `final-exam-#3-065` | 310.12(A) | fixed | UpCodes answer check: lookup hint corrected (Table 310.12(A) exists in 2023). | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310 |
 | `final-exam-#5-005` | 322.56(B) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#322 |
 | `final-exam-#1-040` | Table 220.54 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220 |
 | `final-exam-#1-067` | Chapter 9, Note 4 | fixed | [reference_text] Chapter 9 Notes to Tables Note (4) has no title in 2023; "Conduit and Tubing Nipples" removed from the heading (text unchanged). | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables |
@@ -281,7 +296,7 @@ Key: `verified` means no change was needed. `fixed` means explanation fields cha
 | `open-book-exam-#4-018` | 312.5(C) Ex. 1 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#312 |
 | `open-book-exam-#4-019` | 314.27(D) Ex. | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314 |
 | `open-book-exam-#4-020` | 392.100(F) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#392 |
-| `open-book-exam-#4-021` | 210.8(A) Ex. 1 | fixed | [reference_text] 210.8(A): 2023 lead-in reads "installed in the following locations and supplied by"; the record's "installed in the locations specified in 210.8(A)(1) through (A)(12)" is not 2023 text. Trimmed to the lead-in, the Outdoors item (3) and Exception No. 1 that supports the answer. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210 |
+| `open-book-exam-#4-021` | 210.8(A) Ex. 1 | fixed | UpCodes answer check: stem reworded to 210.8(A) Exception No. 1 (permitted to follow 426.28 instead of GFCI); key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210 |
 | `open-book-exam-#4-022` | 310.12(A) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310 |
 | `open-book-exam-#4-023` | 210.12(B), (C), and (D) | fixed | [reference_text] 210.12(B): last 2023 item is "Similar areas" (record had "Similar rooms or areas"). | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210 |
 | `open-book-exam-#4-024` | 250.52(A)(2) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250 |
@@ -330,7 +345,7 @@ Key: `verified` means no change was needed. `fixed` means explanation fields cha
 | `open-book-exam-#10-017` | 500.5(D) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#500 |
 | `open-book-exam-#10-018` | 406.3(E) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#406 |
 | `open-book-exam-#10-019` | 517.18(B)(1) | fixed | [prompt, tip_short] 517.18 is 'Category 2 Spaces' in 2023; stem and tip use that term, key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#517 |
-| `open-book-exam-#10-020` | 210.52(E)(3) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210 |
+| `open-book-exam-#10-020` | 210.52(E)(3) | fixed | UpCodes answer check: stem updated to the 2023 210.52(E)(3) condition (within 4 in. horizontally of the dwelling unit); key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210 |
 | `open-book-exam-#10-021` | 695.12(D) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#695 |
 | `open-book-exam-#10-022` | 305.4 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#305 |
 | `open-book-exam-#10-023` | 551.71(B) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#551 |
@@ -385,7 +400,7 @@ Key: `verified` means no change was needed. `fixed` means explanation fields cha
 | `final-exam-#2-018` | General knowledge | non_nec | Theory; explanation checked. |  |
 | `final-exam-#2-019` | General calculation | non_nec | Theory math; R proportional to L/A checked. |  |
 | `final-exam-#2-020` | 240.5(B)(4) | fixed | Wrong choice B printed the old 2017 table number 310.15(B)(16); renumbered to Table 310.16 for 2023. Key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#240 |
-| `final-exam-#2-021` | 305.12 | verified | PDF says 'warning signs' and 'conduit systems'; 2023 305.12 says 'Danger signs' and 'raceway systems'. Wording kept (not misleading); key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#305 |
+| `final-exam-#2-021` | 305.12 | fixed | UpCodes answer check: stem updated to the 2023 305.12 wording (Danger signs, raceway systems); key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#305 |
 | `final-exam-#2-022` | 250.62 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250 |
 | `final-exam-#2-023` | Table 110.28 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110 |
 | `final-exam-#2-024` | Table 314.16(B)(1) | fixed | The per-conductor volume table was numbered Table 314.16(B) in 2020 and is Table 314.16(B)(1) in 2023 (the key already cites 314.16(B)(1)); choice C renumbered. Wrong choice B (310.60) is an old section number kept as printed. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314 |
@@ -413,7 +428,7 @@ Key: `verified` means no change was needed. `fixed` means explanation fields cha
 | `final-exam-#2-046` | 110.26(A)(1) Condition 2 | verified | Same question as open-book-exam-#10-016; provision, notes, and requirements reused. Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110 |
 | `final-exam-#2-047` | 406.3(E) | verified | Same question as open-book-exam-#10-018; provision, notes, and requirements reused. Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#406 |
 | `final-exam-#2-048` | 517.18(B)(1) | fixed | Same question as open-book-exam-#10-019; provision, notes, and requirements reused. [prompt, tip_short] 517.18 is 'Category 2 Spaces' in 2023; stem and tip use that term, key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#517 |
-| `final-exam-#2-049` | 210.52(E)(3) | verified | Same question as open-book-exam-#10-020; provision, notes, and requirements reused. Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210 |
+| `final-exam-#2-049` | 210.52(E)(3) | fixed | UpCodes answer check: stem updated to the 2023 210.52(E)(3) condition (within 4 in. horizontally of the dwelling unit); key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210 |
 | `final-exam-#2-050` | 305.4 | verified | Same question as open-book-exam-#10-022; provision, notes, and requirements reused. Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#305 |
 | `final-exam-#2-051` | General knowledge | non_nec | Not an NEC question (general knowledge); explanation checked for accuracy. |  |
 | `final-exam-#2-052` | General knowledge | non_nec | Not an NEC question (general knowledge); explanation checked for accuracy. |  |
@@ -468,10 +483,10 @@ Key: `verified` means no change was needed. `fixed` means explanation fields cha
 | `final-exam-#4-031` | Table 310.15(B)(1)(1) | verified | Conductor ampacity is 21.6 A; 240.4(D) still limits the overcurrent protection of 12 AWG copper to 20 A. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310 |
 | `final-exam-#4-032` | Table 430.52(C)(1) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
 | `final-exam-#4-033` | Table 310.15(C)(1) | verified | The source exam repeats Q24 word for word as Q33; both are kept as printed. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310 |
-| `final-exam-#4-034` | 430.32(C) | verified | 430.32 sizes overloads from the motor nameplate current; the stem gives none, so the Table 430.248 value (17 A) stands in for it. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
+| `final-exam-#4-034` | 430.32(C) | fixed | UpCodes answer check: 430.32(C) list corrected to the 2023 values (temperature rise 40°C or less 140%, all other motors 130%); key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
 | `final-exam-#4-035` | Table 310.15(B)(1)(1) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310 |
 | `final-exam-#4-036` | Table 220.55 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#220 |
-| `final-exam-#4-037` | 430.32(C) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
+| `final-exam-#4-037` | 430.32(C) | fixed | UpCodes answer check: 430.32(C) list corrected to the 2023 values (140% / 130%); key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
 | `final-exam-#4-038` | 314.16(B) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314 |
 | `final-exam-#4-039` | Table 430.250 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
 | `final-exam-#4-040` | Table 310.15(C)(1) | verified | Adjusted ampacity is 21 A; 240.4(D) still limits the overcurrent protection of 12 AWG copper to 20 A. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310 |
@@ -490,12 +505,12 @@ Key: `verified` means no change was needed. `fixed` means explanation fields cha
 | `final-exam-#4-053` | Table 430.52(C)(1) | verified | The source asked what size the Code requires, but its own key note says 25 A is the correct size and is not a choice. 20 A is the only choice within the 430.52(C)(1) maximum (30 A exceeds even the 225 percent limit of 29.7 A), so the stem now asks which listed size the Code permits. Key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
 | `final-exam-#4-054` | 314.16(B)(5) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314 |
 | `final-exam-#4-055` | Table 250.122 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#250 |
-| `final-exam-#4-056` | 430.32(C) | verified | 430.32 sizes overloads from the motor nameplate current; the stem gives none, so the Table 430.248 value (13.2 A) stands in for it. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
+| `final-exam-#4-056` | 430.32(C) | fixed | UpCodes answer check: 430.32(C) list corrected to the 2023 values (140% / 130%); key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
 | `final-exam-#4-057` | Table 5, Chapter 9 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables |
 | `final-exam-#4-058` | General calculation | non_nec | Not an NEC question (circuit theory); arithmetic checked. |  |
 | `final-exam-#4-059` | Table 4, Chapter 9 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables |
 | `final-exam-#4-060` | Table 4, Chapter 9 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables |
-| `final-exam-#4-061` | Table 430.52(C)(1) | verified | Wound-rotor motors are polyphase machines; the stem's 'single-phase' is as printed, and the wound-rotor row of Table 430.52(C)(1) gives the keyed 150 percent. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
+| `final-exam-#4-061` | Table 430.52(C)(1) | fixed | UpCodes answer check: 'single-phase' removed from the stem (it matched the single-phase row, choice A); wound-rotor row gives the keyed 150 percent. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430 |
 | `final-exam-#4-062` | Table 4, Chapter 9 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/9/tables |
 | `final-exam-#4-063` | Table 310.15(C)(1) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310 |
 | `final-exam-#4-064` | Table 314.16(B)(1) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#314 |
@@ -665,7 +680,7 @@ Key: `verified` means no change was needed. `fixed` means explanation fields cha
 | `open-book-exam-#12-008` | 300.21 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300 |
 | `open-book-exam-#12-009` | 690.31(B)(1) | verified | The stem's 'PV system ac conductors' are the inverter output circuits of 690.31(B)(1); key matches. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#690 |
 | `open-book-exam-#12-010` | 110.15 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/1/general#110 |
-| `open-book-exam-#12-011` | 695.7(D) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#695 |
+| `open-book-exam-#12-011` | 695.7(D) | fixed | UpCodes answer check: tip corrected to 695.7(D) contactor load terminals. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#695 |
 | `open-book-exam-#12-012` | 225.26 | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#225 |
 | `open-book-exam-#12-013` | 694.7(D) | verified | Stem wording aligned with 2023 694.7(D) ('premises electrical system'); key unchanged. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#694 |
 | `open-book-exam-#12-014` | 410.10(C) | verified | Key, provision, notes, tip and headings match NEC 2023. | https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#410 |

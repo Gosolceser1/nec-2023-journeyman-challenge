@@ -368,14 +368,14 @@
     },
     "final-exam-#1-049": {
       "status": "fixed",
-      "verified_on": "2026-09-28",
+      "verified_on": "2026-09-30",
       "sections": [
         "Table 300.5(A)"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#300",
       "provision": "2d8429e6278a729e",
       "correct_index": 2,
-      "note": "[reference_text] Table 300.5(A) Column 1 row quoted in table form (same excerpt in #4-004 and #7-013). Tables/formulas audit: pre-answer table shows the Table 300.5(A) trench-below-2-in.-concrete row, columns 1-5 = 18/6/12/6/6 in., verified on UpCodes."
+      "note": "UpCodes answer check: note B corrected (12 in. under 2 in. concrete is Table 300.5(A) Column 3)."
     },
     "final-exam-#1-050": {
       "status": "verified",
@@ -735,15 +735,15 @@
       "note": "Key, provision, notes, tip and headings match NEC 2023."
     },
     "final-exam-#3-028": {
-      "status": "verified",
-      "verified_on": "2026-09-28",
+      "status": "fixed",
+      "verified_on": "2026-09-30",
       "sections": [
         "422.5(A)"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#422",
       "provision": "17e7246c60a165f3",
       "correct_index": 3,
-      "note": "UpCodes 422.5(A) lacks 'rated' before '150 volts or less to ground'; record kept (confirm in print)."
+      "note": "UpCodes answer check: stem updated to the 2023 422.5(A) rating (150 volts or less to ground, not limited to public use); key unchanged."
     },
     "final-exam-#3-029": {
       "status": "verified",
@@ -1517,7 +1517,7 @@
     },
     "final-exam-#3-065": {
       "status": "fixed",
-      "verified_on": "2026-09-28",
+      "verified_on": "2026-09-30",
       "sections": [
         "310.12",
         "310.12(A)",
@@ -1526,7 +1526,7 @@
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#310",
       "provision": "f94f804916a9d13d",
       "correct_index": 3,
-      "note": "[reference_text, tip_short] 310.12(A): record inserted non-Code commentary (\"NEC 2023 deleted former Table 310.12 ...\") and wrote \"100 through 400 amperes\"; 2023 text is \"For a service rated 100 amperes through 400 amperes ...\" and ends \"If no adjustment or correction factors are required, Table 310.12(A) shall be permitted to be applied.\""
+      "note": "UpCodes answer check: lookup hint corrected (Table 310.12(A) exists in 2023)."
     },
     "final-exam-#5-005": {
       "status": "verified",
@@ -2171,7 +2171,7 @@
     },
     "open-book-exam-#4-021": {
       "status": "fixed",
-      "verified_on": "2026-09-28",
+      "verified_on": "2026-09-30",
       "sections": [
         "210.8(A)",
         "210.8(A) Exception No. 1"
@@ -2179,7 +2179,7 @@
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
       "provision": "fa49a4b792501cf2",
       "correct_index": 3,
-      "note": "[reference_text] 210.8(A): 2023 lead-in reads \"installed in the following locations and supplied by\"; the record's \"installed in the locations specified in 210.8(A)(1) through (A)(12)\" is not 2023 text. Trimmed to the lead-in, the Outdoors item (3) and Exception No. 1 that supports the answer."
+      "note": "UpCodes answer check: stem reworded to 210.8(A) Exception No. 1 (permitted to follow 426.28 instead of GFCI); key unchanged."
     },
     "open-book-exam-#4-022": {
       "status": "verified",
@@ -2733,15 +2733,15 @@
       "note": "[prompt, tip_short] 517.18 is 'Category 2 Spaces' in 2023; stem and tip use that term, key unchanged."
     },
     "open-book-exam-#10-020": {
-      "status": "verified",
-      "verified_on": "2026-09-28",
+      "status": "fixed",
+      "verified_on": "2026-09-30",
       "sections": [
         "210.52(E)(3)"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
       "provision": "0dedb1cf9f7ac5c3",
       "correct_index": 1,
-      "note": "Key, provision, notes, tip and headings match NEC 2023."
+      "note": "UpCodes answer check: stem updated to the 2023 210.52(E)(3) condition (within 4 in. horizontally of the dwelling unit); key unchanged."
     },
     "open-book-exam-#10-021": {
       "status": "verified",
@@ -3317,15 +3317,15 @@
       "note": "Wrong choice B printed the old 2017 table number 310.15(B)(16); renumbered to Table 310.16 for 2023. Key unchanged."
     },
     "final-exam-#2-021": {
-      "status": "verified",
-      "verified_on": "2026-09-29",
+      "status": "fixed",
+      "verified_on": "2026-09-30",
       "sections": [
         "305.12"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/3/wiring-methods-and-materials#305",
       "provision": "00fbe89a9f53dcf8",
       "correct_index": 3,
-      "note": "PDF says 'warning signs' and 'conduit systems'; 2023 305.12 says 'Danger signs' and 'raceway systems'. Wording kept (not misleading); key unchanged."
+      "note": "UpCodes answer check: stem updated to the 2023 305.12 wording (Danger signs, raceway systems); key unchanged."
     },
     "final-exam-#2-022": {
       "status": "verified",
@@ -3624,15 +3624,15 @@
       "note": "Same question as open-book-exam-#10-019; provision, notes, and requirements reused. [prompt, tip_short] 517.18 is 'Category 2 Spaces' in 2023; stem and tip use that term, key unchanged."
     },
     "final-exam-#2-049": {
-      "status": "verified",
-      "verified_on": "2026-09-29",
+      "status": "fixed",
+      "verified_on": "2026-09-30",
       "sections": [
         "210.52(E)(3)"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#210",
       "provision": "0dedb1cf9f7ac5c3",
       "correct_index": 1,
-      "note": "Same question as open-book-exam-#10-020; provision, notes, and requirements reused. Key, provision, notes, tip and headings match NEC 2023."
+      "note": "UpCodes answer check: stem updated to the 2023 210.52(E)(3) condition (within 4 in. horizontally of the dwelling unit); key unchanged."
     },
     "final-exam-#2-050": {
       "status": "verified",
@@ -4224,16 +4224,16 @@
       "note": "The source exam repeats Q24 word for word as Q33; both are kept as printed."
     },
     "final-exam-#4-034": {
-      "status": "verified",
-      "verified_on": "2026-09-29",
+      "status": "fixed",
+      "verified_on": "2026-09-30",
       "sections": [
         "430.32(C)",
         "Table 430.248"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
-      "provision": "4a06ac023158116a",
+      "provision": "f011bfc015459e67",
       "correct_index": 2,
-      "note": "430.32 sizes overloads from the motor nameplate current; the stem gives none, so the Table 430.248 value (17 A) stands in for it."
+      "note": "UpCodes answer check: 430.32(C) list corrected to the 2023 values (temperature rise 40°C or less 140%, all other motors 130%); key unchanged."
     },
     "final-exam-#4-035": {
       "status": "verified",
@@ -4258,15 +4258,15 @@
       "note": "Key, provision, notes, tip and headings match NEC 2023."
     },
     "final-exam-#4-037": {
-      "status": "verified",
-      "verified_on": "2026-09-29",
+      "status": "fixed",
+      "verified_on": "2026-09-30",
       "sections": [
         "430.32(C)"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
-      "provision": "61a0267cd97fa5f9",
+      "provision": "9050ec6997a4c684",
       "correct_index": 3,
-      "note": "Key, provision, notes, tip and headings match NEC 2023."
+      "note": "UpCodes answer check: 430.32(C) list corrected to the 2023 values (140% / 130%); key unchanged."
     },
     "final-exam-#4-038": {
       "status": "verified",
@@ -4479,16 +4479,16 @@
       "note": "Key, provision, notes, tip and headings match NEC 2023."
     },
     "final-exam-#4-056": {
-      "status": "verified",
-      "verified_on": "2026-09-29",
+      "status": "fixed",
+      "verified_on": "2026-09-30",
       "sections": [
         "430.32(C)",
         "Table 430.248"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
-      "provision": "278b9754450ed283",
+      "provision": "457313b605a50722",
       "correct_index": 2,
-      "note": "430.32 sizes overloads from the motor nameplate current; the stem gives none, so the Table 430.248 value (13.2 A) stands in for it."
+      "note": "UpCodes answer check: 430.32(C) list corrected to the 2023 values (140% / 130%); key unchanged."
     },
     "final-exam-#4-057": {
       "status": "verified",
@@ -4533,15 +4533,15 @@
       "note": "Key, provision, notes, tip and headings match NEC 2023."
     },
     "final-exam-#4-061": {
-      "status": "verified",
-      "verified_on": "2026-09-29",
+      "status": "fixed",
+      "verified_on": "2026-09-30",
       "sections": [
         "Table 430.52(C)(1)"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#430",
       "provision": "be492d01ed0d0d0d",
       "correct_index": 2,
-      "note": "Wound-rotor motors are polyphase machines; the stem's 'single-phase' is as printed, and the wound-rotor row of Table 430.52(C)(1) gives the keyed 150 percent."
+      "note": "UpCodes answer check: 'single-phase' removed from the stem (it matched the single-phase row, choice A); wound-rotor row gives the keyed 150 percent."
     },
     "final-exam-#4-062": {
       "status": "verified",
@@ -5037,15 +5037,15 @@
       "note": "Key, provision, notes, tip and headings match NEC 2023."
     },
     "open-book-exam-#12-011": {
-      "status": "verified",
-      "verified_on": "2026-09-29",
+      "status": "fixed",
+      "verified_on": "2026-09-30",
       "sections": [
         "695.7(D)"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#695",
       "provision": "8d61858ee0250894",
       "correct_index": 2,
-      "note": "Key, provision, notes, tip and headings match NEC 2023."
+      "note": "UpCodes answer check: tip corrected to 695.7(D) contactor load terminals."
     },
     "open-book-exam-#12-012": {
       "status": "verified",

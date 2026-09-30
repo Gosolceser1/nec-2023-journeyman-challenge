@@ -200,6 +200,7 @@
 		{"index": "Conductor properties (Chapter 9 tables)", "articles": ["Chapter 9"], "match": ["direct-current resistance", "AC ohms-to-neutral impedance"]}
 	],
 	"records": {
+		"final-exam-#2-021": {"add": [{"text": "Danger signs", "index": "Warning signs and labels", "article": "305"}]},
 		"final-exam-#1-044": {"add": [{"text": "unintentional, electrically conducting connection", "index": "Definitions", "article": "100"}], "drop": ["enclosures"]},
 		"open-book-exam-#4-009": {"add": [{"text": "unintentional, electrically conducting connection", "index": "Definitions", "article": "100"}], "drop": ["enclosures"]},
 		"final-exam-#2-009": {"add": [{"text": "highest level that water can reach", "index": "Definitions", "article": "100"}]},
