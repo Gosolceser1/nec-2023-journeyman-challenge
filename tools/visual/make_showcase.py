@@ -7,6 +7,7 @@
 Reads .audit_tmp/shots/showcase/, writes docs/media/. The answer GIFs are made
 separately: snap_motion.gd -- --answers, then ffmpeg (crop 1280x340, 30 fps).
 """
+import json
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
@@ -36,6 +37,15 @@ STILLS = {
     "mobile-question.png": "mob_02_table_question.png",
     "mobile-results.png": "mob_09_results.png",
 }
+
+
+def hero_facts() -> dict:
+    """What the banner states: the edition, the bank's playable questions, the simulator size."""
+    edition = json.loads((ROOT / "data" / "edition.json").read_text(encoding="utf-8"))
+    bank = json.loads((ROOT / "data" / "question_bank.json").read_text(encoding="utf-8"))
+    blueprint = json.loads((ROOT / "data" / "exam_blueprint.json").read_text(encoding="utf-8"))
+    return {"edition": edition["short"], "questions": int(bank["playable"]),
+            "items": sum(int(a["items"]) for a in blueprint["areas"])}
 
 
 def quantize_save(img: Image.Image, path: Path, colors: int = 256) -> None:
@@ -93,17 +103,18 @@ def hero() -> Image.Image:
 
     icon = Image.open(ICON).convert("RGBA").resize((148, 148), Image.LANCZOS)
     canvas.alpha_composite(icon, (80, 150))
+    facts = hero_facts()
     d = ImageDraw.Draw(canvas)
-    d.text((82, 330), "NFPA 70  •  NEC 2023  •  JOURNEYMAN EXAM PREP", font=font("seguisb.ttf", 18), fill=SKY_400)
-    d.text((78, 362), "NEC 2023 //", font=font("segoeuib.ttf", 58), fill=(255, 255, 255))
+    d.text((82, 330), f"NFPA 70  •  {facts['edition']}  •  JOURNEYMAN EXAM PREP", font=font("seguisb.ttf", 18), fill=SKY_400)
+    d.text((78, 362), f"{facts['edition']} //", font=font("segoeuib.ttf", 58), fill=(255, 255, 255))
     d.text((78, 432), "Journeyman", font=font("segoeuib.ttf", 58), fill=(255, 255, 255))
     d.text((78, 502), "Challenge", font=font("segoeuib.ttf", 58), fill=SKY_400)
     body = font("segoeui.ttf", 23)
-    d.text((82, 598), "283 exam-style questions with the NEC", font=body, fill=SLATE_300)
+    d.text((82, 598), f"{facts['questions']} exam-style questions with the NEC", font=body, fill=SLATE_300)
     d.text((82, 630), "reference, a lesson and a memory tip.", font=body, fill=SLATE_300)
     chip_font = font("seguisb.ttf", 17)
     cx = 82
-    for label in ("Windows", "Android", "Offline", "80-question simulator"):
+    for label in ("Windows", "Android", "Offline", f"{facts['items']}-question simulator"):
         tw = d.textlength(label, font=chip_font)
         d.rounded_rectangle((cx, 690, cx + tw + 28, 724), 17, fill=(11, 18, 33), outline=HAIRLINE, width=2)
         d.text((cx + 14, 696), label, font=chip_font, fill=SLATE_400)

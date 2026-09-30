@@ -26,6 +26,11 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools" / "release"))
+from sync_identity import identity  # noqa: E402
+
+IDENTITY = identity(ROOT)
+EDITION = IDENTITY["edition"]["short"]  # "NEC 2023", drawn into the splash
 BRAND = ROOT / "assets" / "branding"
 SRC = BRAND / "source"
 PNG = SRC / "png"
@@ -87,23 +92,28 @@ def build_splash(icon: Image.Image, dest: Path) -> None:
     ic = icon.resize((168, 168), Image.LANCZOS)
     img.alpha_composite(ic, ((w - 168) // 2, 40))
     title = font(True, 34)
-    parts = [("NEC 2023 ", SLATE_50), ("// ", SKY_400), ("JOURNEYMAN CHALLENGE", SLATE_50)]
+    parts = [(f"{EDITION} ", SLATE_50), ("// ", SKY_400), ("JOURNEYMAN CHALLENGE", SLATE_50)]
     total = sum(d.textlength(t, font=title) for t, _ in parts)
     x = (w - total) / 2
     for t, colour in parts:
         d.text((x, 240), t, font=title, fill=colour)
         x += d.textlength(t, font=title)
     sub = font(True, 15)
-    line = "N F P A   7 0   \u2022   N E C   2 0 2 3   E D I T I O N"
+    line = letter_spaced(f"NFPA 70 \u2022 {EDITION} EDITION")
     d.text(((w - d.textlength(line, font=sub)) / 2, 298), line, font=sub, fill=SLATE_400)
     img.convert("RGB").save(dest)
+
+
+def letter_spaced(text: str) -> str:
+    """"NEC 2023" -> "N E C   2 0 2 3": one space between letters, three between words."""
+    return "   ".join(" ".join(word) for word in text.split())
 
 
 def build_sheet(rows: list[tuple[str, dict[int, Path], bool]], dest: Path) -> None:
     row_h, width = 330, 1560
     sheet = Image.new("RGB", (width, 60 + row_h * len(rows)), "#0b1221")
     d = ImageDraw.Draw(sheet)
-    d.text((20, 16), "NEC 2023 Journeyman Challenge: icon options (actual size on a dark taskbar and a light "
+    d.text((20, 16), f"{IDENTITY['display_name']}: icon options (actual size on a dark taskbar and a light "
            "Explorer window, 4x zoom of 16/24/32 px, and 256 px)", fill="#cbd5e1", font=font(False, 18))
     for r, (label, paths, chosen) in enumerate(rows):
         y0 = 60 + r * row_h
