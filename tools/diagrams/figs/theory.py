@@ -67,7 +67,7 @@ def sine_wave(f):
 
 
 @figure("parallel_resistors_equal", h=420, nec="General knowledge (Ohm's law, parallel circuits)",
-        records=["final-exam-#3-055"])
+        records={"final-exam-#3-055": {}, "final-exam-#2-036": {"when": "after"}})
 def parallel_resistors(f):
     xt, xr, top, bot = 250, 750, 110, 330
     f.title("Two equal resistors in parallel", y=44)
@@ -237,3 +237,139 @@ def delta_symbol(f):
     f.line(wx, wy, wx + k * 0.866, wy - k * 0.5, MUTED, SW_OBJ + 1)
     f.text(wx, 316, "compare: wye (star)", T_NOTE, MUTED, bold=True)
     f.text(wx, 344, "Y inside the circle", T_NOTE, MUTED)
+
+
+def _lamp(f, x, y, r=22, label=None):
+    f.circle(x, y, r, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ)
+    d = r * 0.6
+    f.line(x - d, y - d, x + d, y + d, TEXT, SW_THIN)
+    f.line(x - d, y + d, x + d, y - d, TEXT, SW_THIN)
+    if label:
+        f.text(x, y - r - 12, label, T_NOTE, TEXT, bold=True)
+
+
+def _source(f, x, y, label="120 V"):
+    f.circle(x, y, 26, fill=PANEL, stroke=TEXT, sw=SW_OBJ)
+    f.path(f"M {x - 14} {y} q 7 -14 14 0 t 14 0", TEXT, SW_THIN)
+    f.text(x - 36, y + 8, label, T_NOTE, DIM, "end", True)
+
+
+@figure("series_vs_parallel", h=500, nec="General knowledge (series and parallel circuits)", when="after",
+        records=["final-exam-#2-013", "final-exam-#2-014", "final-exam-#2-016"])
+def series_vs_parallel(f):
+    f.title("Series shares the current, parallel shares the voltage", y=34)
+    # Series: lamp and heater in one loop.
+    f.rect(20, 56, 370, 424, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
+    f.text(34, 88, "SERIES", T_NOTE, TEXT, "start", True)
+    l, r, t, b = 110, 330, 140, 290
+    f.polyline([(l, 190), (l, t), (r, t), (r, b), (l, b), (l, 240)], WIRE_HOT, SW_WIRE)
+    _source(f, l, 215)
+    _lamp(f, 220, t, label="bulb")
+    _resistor_v(f, r, 170, 260)
+    f.text(r - 26, 222, "heater", T_NOTE, TEXT, "end", True)
+    f.arrow(160, b + 18, 280, b + 18, OK)
+    f.text(220, b + 50, "same current", T_NOTE, OK, bold=True)
+    f.lines(34, 376, ["voltages add up to 120 V", "60 W bulb -> 25 W bulb:", "more ohms, less current,",
+                      "heater puts out less heat"], T_MIN, TEXT, "start", gap=1.15)
+    f.highlight(26, 340, 358, 130, records=["final-exam-#2-014"])
+    # Parallel: two unequal branches.
+    f.rect(410, 56, 370, 424, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
+    f.text(424, 88, "PARALLEL", T_NOTE, TEXT, "start", True)
+    l, t, b = 490, 140, 290
+    f.polyline([(l, 190), (l, t), (680, t)], WIRE_HOT, SW_WIRE)
+    f.polyline([(l, 240), (l, b), (680, b)], WIRE_HOT, SW_WIRE)
+    _source(f, l, 215)
+    for x, name in ((556, "10 ohm"), (680, "30 ohm")):
+        _resistor_v(f, x, t, b)
+        f.circle(x, t, 5, fill=WIRE_HOT)
+        f.circle(x, b, 5, fill=WIRE_HOT)
+        f.text(x + 22, 222, name, T_MIN, TEXT, "start", True)
+    f.text(620, b + 50, "120 V across each branch", T_NOTE, OK, bold=True)
+    f.lines(424, 376, ["each branch = source voltage", "currents differ: 12 A and 4 A",
+                       "total current = 16 A"], T_MIN, TEXT, "start", gap=1.15)
+    f.highlight(416, b + 24, 358, 36, records=["final-exam-#2-013", "final-exam-#2-016"])
+
+
+@figure("ac_wave_values_phase", h=500, nec="General knowledge (AC theory)", when="after",
+        records=["final-exam-#2-018", "final-exam-#2-034", "final-exam-#2-017", "final-exam-#2-056"])
+def ac_wave_values(f):
+    f.title("AC values and lead / lag", y=34)
+    # One cycle with peak, effective and one alternation.
+    x0, x1, cy, amp = 60, 430, 190, 100
+    deg = (x1 - x0) / 360
+    f.line(x0 - 10, cy, x1 + 20, cy, LINE, SW_THIN)
+    f.polyline([(x0 + a * deg, cy - amp * math.sin(math.radians(a))) for a in range(0, 361, 3)], OK, SW_WIRE)
+    f.dline(x0, cy - amp, x1, cy - amp, TEXT, SW_THIN, 6, 5)
+    f.text(x1 + 6, cy - amp + 6, "peak", T_MIN, TEXT, "start", True)
+    f.dline(x0, cy - amp * 0.707, x1, cy - amp * 0.707, DIM, SW_THIN, 6, 5)
+    f.lines(x1 + 6, cy - amp * 0.707 + 18, ["effective", "(RMS)"], T_MIN, DIM, "start", True, gap=1.0)
+    half = x0 + 180 * deg
+    f.dim_h(x0, half, cy + 40)
+    f.text((x0 + half) / 2, cy + 72, "1 alternation", T_NOTE, AMBER, bold=True)
+    f.text((x0 + half) / 2, cy + 98, "= half a cycle", T_MIN, AMBER)
+    f.highlight(x0, cy + 50, 190, 56, records=["final-exam-#2-034"])
+    f.lines(560, 110, ["effective = 0.707 x peak", "the value meters read", "and ratings use"], T_MIN, TEXT,
+            "start", gap=1.15)
+    f.highlight(550, 88, 230, 86, records=["final-exam-#2-018"])
+    # Lead and lag.
+    y2, a2 = 400, 56
+    f.line(x0 - 10, y2, x1 + 20, y2, LINE, SW_THIN)
+    f.polyline([(x0 + a * deg, y2 - a2 * math.sin(math.radians(a))) for a in range(0, 361, 3)], WIRE_HOT, SW_WIRE)
+    f.polyline([(x0 + a * deg, y2 - a2 * 0.7 * math.sin(math.radians(a - 60))) for a in range(0, 361, 3)],
+               AMBER, SW_WIRE)
+    f.text(x0 + 90 * deg, y2 - a2 - 12, "E", T_NOTE, WIRE_HOT, bold=True)
+    f.text(x0 + 150 * deg + 8, y2 - a2 * 0.7 - 12, "I", T_NOTE, AMBER, "start", True)
+    f.lines(520, 330, ["current peaks later:", "current LAGS voltage", "= inductive circuit",
+                       "(XL bigger than XC)"], T_MIN, TEXT, "start", gap=1.15)
+    f.text(520, 440, "ELI: E leads I in L", T_NOTE, AMBER, "start", True)
+    f.text(520, 470, "ICE: I leads E in C", T_MIN, MUTED, "start")
+    f.highlight(510, 308, 270, 144, records=["final-exam-#2-017", "final-exam-#2-056"])
+
+
+@figure("transformer_turns_ratio", h=450, nec="General knowledge (transformers)", when="after",
+        records=["final-exam-#2-012", "final-exam-#2-015"])
+def transformer_turns(f):
+    f.title("Turns ratio sets the voltage ratio", y=34)
+    core_x0, core_x1, top, bot = 250, 550, 90, 330
+    f.rect(core_x0, top, core_x1 - core_x0, bot - top, fill="none", stroke=STEEL, sw=22)
+    for k in range(10):
+        y = top + 24 + k * 20
+        f.path(f"M {core_x0 - 26} {y} q 26 -10 52 0", AMBER, SW_OBJ)
+    for k in range(2):
+        y = top + 100 + k * 36
+        f.path(f"M {core_x1 - 26} {y} q 26 -10 52 0", OK, SW_OBJ)
+    f.line(120, top + 24, core_x0 - 26, top + 24, AMBER, SW_WIRE)
+    f.line(120, top + 204, core_x0 - 26, top + 204, AMBER, SW_WIRE)
+    f.line(core_x1 + 26, top + 100, 680, top + 100, OK, SW_WIRE)
+    f.line(core_x1 + 26, top + 136, 680, top + 136, OK, SW_WIRE)
+    f.lines(120, top - 16, ["primary", "many turns"], T_NOTE, AMBER, "start", True, gap=1.0)
+    f.text(120, bot + 34, "2,400 V in", T_LABEL, AMBER, "start", True)
+    f.lines(600, top + 30, ["secondary", "fewer turns"], T_NOTE, OK, "start", True, gap=1.0)
+    f.text(600, bot + 34, "120 V out", T_LABEL, OK, "start", True)
+    f.rect(120, 384, 560, 52, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
+    f.text(400, 418, "20:1 = 20 primary turns per secondary turn = 1/20 the voltage", T_MIN, TEXT, bold=True)
+    f.text(400, 212, "step-down", T_NOTE, TEXT, bold=True)
+    f.highlight(116, 380, 568, 60, records=["final-exam-#2-012"])
+    f.highlight(110, 50, 170, 70, records=["final-exam-#2-015"])
+
+
+@figure("resistance_factors", h=460, nec="General knowledge (conductor resistance)", when="after",
+        records=["final-exam-#2-019", "final-exam-#2-055"])
+def resistance_factors(f):
+    f.title("What sets a conductor's resistance", y=34)
+    f.rect(40, 90, 200, 30, fill=ROD, stroke=AMBER, sw=SW_THIN, rx=6)
+    f.text(250, 112, "5 ohm", T_LABEL, TEXT, "start", True)
+    f.text(40, 76, "original wire", T_MIN, MUTED, "start")
+    f.rect(40, 186, 600, 15, fill=ROD, stroke=AMBER, sw=SW_THIN, rx=4)
+    f.text(40, 172, "3 x as long, half the area", T_MIN, MUTED, "start")
+    f.text(650, 200, "?", T_LABEL, TEXT, "start", True)
+    f.lines(40, 250, ["length x 3 -> ohms x 3", "area x 1/2 -> ohms x 2", "5 x 3 x 2 = 30 ohm"], T_NOTE, TEXT,
+            "start", gap=1.25)
+    f.highlight(30, 226, 300, 96, records=["final-exam-#2-019"])
+    f.rect(400, 230, 380, 210, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
+    f.text(414, 262, "Changes resistance:", T_NOTE, OK, "start", True)
+    f.lines(414, 292, ["length, cross-section area", "(diameter), material,", "temperature"], T_MIN, TEXT,
+            "start", gap=1.15)
+    f.text(414, 384, "Does not:", T_NOTE, NO, "start", True)
+    f.text(414, 414, "the insulation around it", T_MIN, TEXT, "start")
+    f.highlight(406, 362, 368, 66, records=["final-exam-#2-055"])

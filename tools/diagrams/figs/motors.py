@@ -11,7 +11,8 @@ def _switch(f, x, y, s=40, color=TEXT):
 
 @figure("motor_circuit_430", h=640, nec="430.6(A)(1), Table 430.250, 430.52(B), Table 430.37, 430.101",
         records={"final-exam-#1-070": {}, "final-exam-#3-009": {"terms": ["motor and controller"]},
-                 "final-exam-#3-038": {"terms": ["starting"]}, "final-exam-#3-052": {}})
+                 "final-exam-#3-038": {"terms": ["starting"]}, "final-exam-#3-052": {},
+                 "open-book-exam-#6-010": {"like": "final-exam-#1-070"}})
 def motor_circuit(f):
     flc = ["final-exam-#1-070"]
     both = ["final-exam-#3-009"]
@@ -69,7 +70,9 @@ def motor_circuit(f):
 
 
 @figure("in_sight_disconnect_430-102_440-14", h=560, nec="430.102(B)(1), 440.14, Article 100 (In Sight From)",
-        records={"final-exam-#3-019": {}, "open-book-exam-#1-025": {}})
+        records={"final-exam-#3-019": {}, "open-book-exam-#1-025": {},
+                 "final-exam-#2-064": {"when": "after"}, "open-book-exam-#11-022": {"when": "after"},
+                 "open-book-exam-#6-009": {"when": "after"}})
 def in_sight_disconnect(f):
     dm = ["final-exam-#3-019"]
     ra = ["open-book-exam-#1-025"]

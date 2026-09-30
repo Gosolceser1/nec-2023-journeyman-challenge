@@ -10,7 +10,10 @@ OUTDOOR = ["open-book-exam-#4-002"]
         records={"open-book-exam-#1-010": {}, "final-exam-#3-006": {}, "open-book-exam-#1-014": {},
                  "open-book-exam-#4-002": {},
                  "final-exam-#1-012": {"when": "after"}, "final-exam-#3-064": {"when": "after"},
-                 "open-book-exam-#1-012": {"when": "after"}, "open-book-exam-#4-021": {"when": "after"}})
+                 "open-book-exam-#1-012": {"when": "after"}, "open-book-exam-#4-021": {"when": "after"},
+                 "open-book-exam-#2-004": {"like": "final-exam-#3-006"},
+                 "open-book-exam-#2-013": {"like": "final-exam-#1-012"}, "open-book-exam-#3-004": {"when": "after"},
+                 "open-book-exam-#5-016": {"when": "after"}})
 def gfci_locations(f):
     roof, floor, grade = 160, 330, 420
     hx0, gx1, lx1, hx1 = 24, 150, 284, 500

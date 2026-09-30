@@ -73,7 +73,25 @@ def draw_all(modules=None, every_tier=False):
             continue
         f = nec_style.Fig(spec["h"])
         spec["fn"](f)
+        recs = {r: _like(name, spec, f, r, o) for r, o in recs.items()}
         out[name] = dict(spec, fig=f, records=recs)
+    return out
+
+
+def _like(name, spec, f, rid, opts):
+    """{"like": other}: a repeat of another record on the same figure gets its
+    masks, highlight, answer terms and timing (its own options still win)."""
+    src = opts.get("like")
+    if not src:
+        return opts
+    assert src in spec["records"], f"{name}: {rid} is like {src}, which the figure does not serve"
+    base = spec["records"][src]
+    for m in f.masks + f.highlights:
+        if m.get("records") is not None and src in m["records"]:
+            m["records"].append(rid)
+    out = dict(opts)
+    out.setdefault("when", base.get("when", spec["when"]))
+    out["terms"] = list(spec["terms"].get(src, [])) + list(base.get("terms", [])) + list(opts.get("terms", []))
     return out
 
 

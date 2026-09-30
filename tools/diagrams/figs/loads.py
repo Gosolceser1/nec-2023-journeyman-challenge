@@ -23,7 +23,8 @@ def _building(f, x, y, w, h, label):
 
 
 @figure("floor_area_220-5c", h=500, nec="220.5(C)",
-        records=["open-book-exam-#1-003", "open-book-exam-#10-002"])
+        records={"open-book-exam-#1-003": {}, "open-book-exam-#10-002": {},
+                 "final-exam-#4-052": {"like": "open-book-exam-#1-003"}})
 def floor_area(f):
     faces = ["open-book-exam-#1-003"]
     counts = ["open-book-exam-#10-002"]
@@ -64,7 +65,9 @@ def floor_area(f):
 
 
 @figure("ampacity_derating_310-15", h=520, nec="310.15(B), 310.15(C)(1), 310.15(F), Table 310.16",
-        records={"final-exam-#1-014": {}, "final-exam-#1-027": {}, "final-exam-#3-057": {"terms": ["not counted"]}})
+        records={"final-exam-#1-014": {}, "final-exam-#1-027": {}, "final-exam-#3-057": {"terms": ["not counted"]},
+                 "open-book-exam-#2-012": {"like": "final-exam-#1-014"},
+                 "open-book-exam-#3-010": {"like": "final-exam-#1-027"}})
 def ampacity_derating(f):
     calc = ["final-exam-#1-014", "final-exam-#1-027"]
     egc = ["final-exam-#3-057"]
@@ -140,7 +143,11 @@ def dwelling_service(f):
 
 @figure("branch_circuit_rating_210", h=500, nec="210.18, 210.19(B), Table 210.21(B)(2)",
         records={"final-exam-#1-059": {"terms": ["OCPD rating"]}, "final-exam-#3-014": {},
-                 "open-book-exam-#7-011": {"terms": ["not less than", ">="]}})
+                 "open-book-exam-#7-011": {"terms": ["not less than", ">="]},
+                 "open-book-exam-#6-024": {"like": "final-exam-#1-059"},
+                 "final-exam-#2-038": {"like": "final-exam-#1-059"},
+                 "open-book-exam-#9-012": {"like": "final-exam-#1-059"},
+                 "open-book-exam-#9-018": {"when": "after"}})
 def branch_circuit_rating(f):
     rating = ["final-exam-#1-059"]
     cord = ["final-exam-#3-014"]
@@ -213,7 +220,8 @@ def _range(f, x, y, s=64):
 
 
 @figure("appliance_demand_220-54_220-55", h=486, nec="Table 220.54, Table 220.55 and Note 1",
-        records=["final-exam-#1-040", "open-book-exam-#4-015", "final-exam-#1-021"])
+        records={"final-exam-#1-040": {}, "open-book-exam-#4-015": {}, "final-exam-#1-021": {},
+                 "open-book-exam-#3-019": {"like": "final-exam-#1-021"}})
 def appliance_demand(f):
     f.title("Dwelling appliance demand (worked cards)", y=34)
     _card(f, 20, 56, 370, 390, "Clothes dryers, Table 220.54")

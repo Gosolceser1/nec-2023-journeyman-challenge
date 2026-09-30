@@ -10,7 +10,8 @@ def _nm_section(f, x, y, w=36, h=18):
 
 
 @figure("framing_protection_300-4", h=450, nec="300.4(A)(2), 300.4(D)",
-        records=["final-exam-#1-055", "open-book-exam-#1-004"])
+        records={"final-exam-#1-055": {}, "open-book-exam-#1-004": {},
+                 "open-book-exam-#5-010": {"like": "final-exam-#1-055"}})
 def framing_protection(f):
     parallel = ["final-exam-#1-055"]
     notch = ["open-book-exam-#1-004"]

@@ -48,7 +48,8 @@ def service_bonding(f):
 
 @figure("electrode_system_250-52_250-53", h=470,
         nec="250.52(A)(2), 250.52(A)(5), 250.53(A)(3), 250.53(A)(4), 250.53(A)(5)",
-        records=["final-exam-#1-020", "open-book-exam-#1-008", "final-exam-#1-035", "open-book-exam-#4-024"])
+        records={"final-exam-#1-020": {}, "open-book-exam-#1-008": {}, "final-exam-#1-035": {},
+                 "open-book-exam-#4-024": {}, "open-book-exam-#3-020": {"like": "final-exam-#1-020"}})
 def electrode_system(f):
     spacing = ["final-exam-#1-020"]
     plate = ["open-book-exam-#1-008"]

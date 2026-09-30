@@ -19,7 +19,9 @@ def _xfmr(f, x, y):
 
 
 @figure("egc_size_250-122", h=470, nec="250.122(A), Table 250.122",
-        records={"final-exam-#1-068": {}, "final-exam-#3-017": {"terms": ["same size"]}})
+        records={"final-exam-#1-068": {}, "final-exam-#3-017": {"terms": ["same size"]},
+                 "open-book-exam-#6-012": {"like": "final-exam-#1-068"}, "final-exam-#4-055": {"when": "after"},
+                 "open-book-exam-#12-023": {"when": "after"}})
 def egc_size(f):
     f.title("Equipment grounding conductor from the OCPD rating", y=34)
     _ocpd(f, 40, 90, 64, 72)
@@ -52,7 +54,8 @@ def egc_size(f):
 
 
 @figure("termination_temp_110-14c", h=520, nec="310.15(A), 110.14(C), 110.14(C)(2), Table 310.16",
-        records=["open-book-exam-#7-015", "open-book-exam-#7-017"])
+        records={"open-book-exam-#7-015": {}, "open-book-exam-#7-017": {},
+                 "open-book-exam-#9-016": {"when": "after"}})
 def termination_temp(f):
     term = ["open-book-exam-#7-015"]
     conn = ["open-book-exam-#7-017"]
@@ -81,7 +84,7 @@ def termination_temp(f):
 
 
 @figure("conductor_colors_310-6", h=470, when="after", nec="310.6, 200.6(A), 250.119, 210.5(C)",
-        records=["final-exam-#1-009"])
+        records={"final-exam-#1-009": {}, "open-book-exam-#2-022": {"like": "final-exam-#1-009"}})
 def conductor_colors(f):
     f.title("Insulation colors by what the conductor does", y=34)
     groups = [

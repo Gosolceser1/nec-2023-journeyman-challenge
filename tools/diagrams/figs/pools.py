@@ -58,7 +58,9 @@ def spa_fan(f):
 
 
 @figure("pool_fountain_distances_680", h=560, nec="680.5(B), 680.11(A), 680.21(C), 680.22(A)(2), 680.35(D), 680.58",
-        records=UNDERGROUND + SIX_FT + FOUNTAIN + MOTOR_GFCI)
+        records={**{r: {} for r in UNDERGROUND + SIX_FT + FOUNTAIN + MOTOR_GFCI},
+                 "open-book-exam-#3-012": {"like": MOTOR_GFCI[0]}, "open-book-exam-#3-015": {"like": FOUNTAIN[0]},
+                 "open-book-exam-#6-023": {"like": UNDERGROUND[0]}})
 def pool_distances(f):
     ft = 16.0
     f.text(20, 30, "plan view, not to scale", T_NOTE, MUTED, "start")

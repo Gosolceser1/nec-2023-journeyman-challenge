@@ -76,7 +76,8 @@ def antenna_power_lines(f):
     f.tag(f.w - 24, f.h - 14, "NEC 810.16(B)", anchor="end")
 
 
-@figure("patient_bed_receptacles_517-18", h=520, nec="517.18(A), 517.18(B)", records=["open-book-exam-#10-019"])
+@figure("patient_bed_receptacles_517-18", h=520, nec="517.18(A), 517.18(B)",
+        records={"open-book-exam-#10-019": {}, "final-exam-#2-048": {"like": "open-book-exam-#10-019"}})
 def patient_bed(f):
     f.title("Category 2 space: one patient bed location", y=34)
     # Headwall.
@@ -105,7 +106,8 @@ def patient_bed(f):
 
 @figure("multiple_supplies_225-37_700-7", h=576, nec="225.37, 230.2(E), 700.7(A)",
         records={"open-book-exam-#7-016": {"terms": ["location"]},
-                 "open-book-exam-#7-025": {"terms": ["disconnect"]}})
+                 "open-book-exam-#7-025": {"terms": ["disconnect"]},
+                 "final-exam-#2-008": {"like": "open-book-exam-#7-025"}})
 def multiple_supplies(f):
     loc = ["open-book-exam-#7-016"]
     disc = ["open-book-exam-#7-025"]
@@ -143,7 +145,8 @@ def multiple_supplies(f):
 
 
 @figure("sign_construction_600", h=536, nec="Article 100 (Sign Body), 600.9(C)",
-        records={"open-book-exam-#7-020": {"terms": ["body"]}, "final-exam-#1-069": {}})
+        records={"open-book-exam-#7-020": {"terms": ["body"]}, "final-exam-#1-069": {},
+                 "final-exam-#2-006": {"like": "open-book-exam-#7-020"}})
 def sign_construction(f):
     body = ["open-book-exam-#7-020"]
     gap = ["final-exam-#1-069"]
@@ -205,7 +208,8 @@ def busway_wall(f):
 
 @figure("cinder_backfill_344-10c_300-5f", h=560, nec="344.10(C), 300.5(F), 305.15(E)",
         records={"final-exam-#5-068": {}, "open-book-exam-#10-005": {"terms": ["corrosion"]},
-                 "open-book-exam-#10-025": {"terms": ["damage"]}})
+                 "open-book-exam-#10-025": {"terms": ["damage"]},
+                 "final-exam-#2-043": {"like": "open-book-exam-#10-005"}})
 def cinder_backfill(f):
     rmc = ["final-exam-#5-068"]
     cor = ["open-book-exam-#10-005"]

@@ -4,7 +4,7 @@ from nec_style import *  # noqa: F401,F403
 
 
 @figure("nipple_fill_ch9_note4", h=420, nec="Chapter 9, Notes to Tables, Note (4)",
-        records={"final-exam-#1-067": {"when": "after"}})
+        records={"final-exam-#1-067": {"when": "after"}, "open-book-exam-#6-014": {"like": "final-exam-#1-067"}})
 def nipple_fill(f):
     y0, y1 = 196, 244
     f.rect(50, 120, 210, 210, fill=PANEL, stroke=TEXT, sw=SW_OBJ + 1, rx=6)
@@ -84,7 +84,8 @@ def gutter_bare_parts(f):
     f.tag(f.w - 24, f.h - 12, "NEC 366.100(E)", anchor="end")
 
 
-@figure("nm_extension_floor_382-15a", h=450, nec="382.15(A)", records=["final-exam-#5-049"])
+@figure("nm_extension_floor_382-15a", h=450, nec="382.15(A)", records={"final-exam-#5-049": {},
+                                                                       "open-book-exam-#11-009": {"like": "final-exam-#5-049"}})
 def nm_extension(f):
     floor, band, run = 400, 50, 318
     f.floor(floor, 20, 780)

@@ -51,7 +51,7 @@ def switchboard_sections(f):
 
 @figure("type_letters_decoder", h=576, nec="Table 310.4(1), 338.100, Table 400.4",
         records={"final-exam-#1-026": {}, "final-exam-#1-034": {}, "open-book-exam-#4-025": {},
-                 "final-exam-#5-022": {"terms": ["USE"]}})
+                 "final-exam-#5-022": {"terms": ["USE"]}, "open-book-exam-#3-011": {"like": "final-exam-#1-026"}})
 def type_letters(f):
     dash2 = ["final-exam-#1-026"]
     wet = ["final-exam-#1-034", "open-book-exam-#4-025"]
@@ -115,7 +115,8 @@ def fcc_layers(f):
 
 
 @figure("cable_cutaways_332_310", h=536, nec="332.104, 332.108, 332.116, Article 100 (MC), 310.3(B)",
-        records={"final-exam-#5-020": {}, "open-book-exam-#10-015": {}, "final-exam-#5-003": {"terms": ["MC"]}})
+        records={"final-exam-#5-020": {}, "open-book-exam-#10-015": {}, "final-exam-#5-003": {"terms": ["MC"]},
+                 "final-exam-#2-045": {"like": "open-book-exam-#10-015"}})
 def cable_cutaways(f):
     mi = ["final-exam-#5-020"]
     ccal = ["open-book-exam-#10-015"]
@@ -157,7 +158,8 @@ def cable_cutaways(f):
 
 
 @figure("raceway_fill_ch9_348-22", h=536, nec="Chapter 9 Table 1, 348.22, Table 348.22, 356.22",
-        records={"final-exam-#5-032": {}, "final-exam-#3-048": {}, "final-exam-#5-066": {}})
+        records={"final-exam-#5-032": {}, "final-exam-#3-048": {}, "final-exam-#5-066": {},
+                 "final-exam-#4-003": {"like": "final-exam-#5-066"}})
 def raceway_fill(f):
     big = ["final-exam-#5-032", "final-exam-#3-048"]
     tab = ["final-exam-#5-066"]

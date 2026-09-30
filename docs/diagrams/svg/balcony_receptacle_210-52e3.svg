@@ -16,7 +16,9 @@
 <text x="560.0" y="310.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">walking surface</text>
 <line x1="366.0" y1="384.0" x2="256.0" y2="332.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <circle cx="256.0" cy="332.0" r="4" fill="#38bdf8" stroke="none" stroke-width="2"/>
-<text x="372.0" y="392.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">within 4 in of the dwelling</text>
+<text x="372.0" y="392.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">within</text>
+<text x="442.6" y="392.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">4 in</text>
+<text x="487.5" y="392.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">of the dwelling</text>
 <rect x="250.6" y="101.0" width="30.7" height="48.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
 <line x1="261.2" y1="110.4" x2="261.2" y2="118.4" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="270.8" y1="110.4" x2="270.8" y2="118.4" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>

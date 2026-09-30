@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<rect x="0.0" y="0.0" width="800.0" height="450.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Turns ratio sets the voltage ratio</text>
+<rect x="250.0" y="90.0" width="300.0" height="240.0" rx="0" fill="none" fill-opacity="1.0" stroke="#64748b" stroke-width="22"/>
+<path d="M 224 114 q 26 -10 52 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 224 134 q 26 -10 52 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 224 154 q 26 -10 52 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 224 174 q 26 -10 52 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 224 194 q 26 -10 52 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 224 214 q 26 -10 52 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 224 234 q 26 -10 52 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 224 254 q 26 -10 52 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 224 274 q 26 -10 52 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 224 294 q 26 -10 52 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 524 190 q 26 -10 52 0" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 524 226 q 26 -10 52 0" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="120.0" y1="114.0" x2="224.0" y2="114.0" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="120.0" y1="294.0" x2="224.0" y2="294.0" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="576.0" y1="190.0" x2="680.0" y2="190.0" stroke="#34d399" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="576.0" y1="226.0" x2="680.0" y2="226.0" stroke="#34d399" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="120.0" y="74.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="start">primary</text>
+<text x="120.0" y="96.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="start">many turns</text>
+<text x="120.0" y="364.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#fbbf24" text-anchor="start">2,400 V in</text>
+<text x="600.0" y="120.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">secondary</text>
+<text x="600.0" y="142.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">fewer turns</text>
+<text x="600.0" y="364.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="start">120 V out</text>
+<rect x="120.0" y="384.0" width="560.0" height="52.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="400.0" y="418.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">20:1 = 20 primary turns per secondary turn = 1/20 the voltage</text>
+<text x="400.0" y="212.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">step-down</text>
+</svg>

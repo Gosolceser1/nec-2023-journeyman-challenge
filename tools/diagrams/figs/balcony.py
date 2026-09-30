@@ -3,7 +3,9 @@ from nec_style import *  # noqa: F401,F403
 
 
 @figure("balcony_receptacle_210-52e3", h=460, nec="210.52(E)(3)",
-        records=["final-exam-#1-008", "open-book-exam-#10-020"])
+        records={"final-exam-#1-008": {}, "open-book-exam-#10-020": {},
+                 "final-exam-#2-049": {"like": "open-book-exam-#10-020"},
+                 "open-book-exam-#2-025": {"like": "final-exam-#1-008"}, "open-book-exam-#11-001": {}})
 def balcony(f):
     wall_x, deck_y, grade, ft = 250, 320, 420, 30.0
     f.rect(100, 40, wall_x - 100, grade - 40, fill=PANEL, stroke=EDGE, sw=SW_OBJ)
@@ -21,7 +23,10 @@ def balcony(f):
     f.text(560, deck_y - 38, "BALCONY / DECK / PORCH", T_LABEL, MUTED, bold=True)
     f.text(560, deck_y - 10, "walking surface", T_NOTE, MUTED)
     f.leader(366, deck_y + 64, wall_x + 6, deck_y + 12, DIM)
-    f.text(372, deck_y + 72, "within 4 in of the dwelling", T_NOTE, DIM, "start", True)
+    t = f.text(372, deck_y + 72, "within", T_NOTE, DIM, "start", True)
+    v = f.value(t[0] + t[2] + 7, deck_y + 72, "4 in", T_NOTE, fill=DIM, anchor="start", pad=4,
+                records=["open-book-exam-#11-001"], what="the distance from the dwelling")
+    f.text(v[0] + v[2] + 7, deck_y + 72, "of the dwelling", T_NOTE, DIM, "start", True)
     ry = deck_y - 6.5 * ft
     f.receptacle(wall_x + 16, ry, 48)
     f.text(wall_x + 46, ry - 34, "receptacle", T_LABEL, TEXT, "start", True)

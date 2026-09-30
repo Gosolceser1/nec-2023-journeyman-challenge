@@ -28,7 +28,8 @@ OPENING = "open-book-exam-#10-010"
 
 
 @figure("overhead_clearances_225-18", h=480, nec="225.18, 225.19(D)(1)-(3)",
-        records={RAIL: {"when": "after"}, OPENING: {}})
+        records={RAIL: {"when": "after"}, OPENING: {}, "open-book-exam-#5-014": {"like": RAIL},
+                 "open-book-exam-#6-005": {"like": RAIL}, "open-book-exam-#12-025": {"like": RAIL}})
 def overhead_225(f):
     grade, ft = 440, 14.0
     y = lambda h: grade - h * ft  # noqa: E731
@@ -85,7 +86,7 @@ COMM = "final-exam-#3-031"
 
 
 @figure("communications_overhead_800-44", h=460, nec="800.44(A)(1), (A)(2), 800.44(B)",
-        records={ROOF: {}, COMM: {"when": "after"}})
+        records={ROOF: {}, COMM: {"when": "after"}, "open-book-exam-#5-018": {"like": ROOF}})
 def communications_800(f):
     grade = 410
     f.grade(grade, 20, 780, label=None)

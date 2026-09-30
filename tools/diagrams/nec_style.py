@@ -421,7 +421,8 @@ def figure(name, records, h=450, when=None, nec="", terms=None, note=""):
 
     name     file stem (assets/diagrams/nec/<name>.png), lower-case, [a-z0-9_-]
     records  record ids this drawing serves; a dict {id: {"when": ..., "terms": [...]}}
-             sets per-record options
+             sets per-record options; {"like": other_id} makes a repeat question share
+             the other record's masks, highlight, terms and timing
     when     "before" (setup: shown pre-answer, answers masked) or "after"
              (teaching: shown only once answered); default "before"
     nec      section(s) the drawing is authored from, e.g. "250.53(A)(3)"

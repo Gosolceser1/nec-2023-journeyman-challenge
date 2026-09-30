@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect x="0.0" y="0.0" width="800.0" height="460.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">What sets a conductor's resistance</text>
+<rect x="40.0" y="90.0" width="200.0" height="30.0" rx="6" fill="#b45309" fill-opacity="1.0" stroke="#fbbf24" stroke-width="2"/>
+<text x="250.0" y="112.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">5 ohm</text>
+<text x="40.0" y="76.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">original wire</text>
+<rect x="40.0" y="186.0" width="600.0" height="15.0" rx="4" fill="#b45309" fill-opacity="1.0" stroke="#fbbf24" stroke-width="2"/>
+<text x="40.0" y="172.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">3 x as long, half the area</text>
+<text x="650.0" y="200.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">?</text>
+<text x="40.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">length x 3 -&gt; ohms x 3</text>
+<text x="40.0" y="277.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">area x 1/2 -&gt; ohms x 2</text>
+<text x="40.0" y="305.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">5 x 3 x 2 = 30 ohm</text>
+<rect x="400.0" y="230.0" width="380.0" height="210.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="414.0" y="262.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">Changes resistance:</text>
+<text x="414.0" y="292.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">length, cross-section area</text>
+<text x="414.0" y="315.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">(diameter), material,</text>
+<text x="414.0" y="338.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">temperature</text>
+<text x="414.0" y="384.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f87171" text-anchor="start">Does not:</text>
+<text x="414.0" y="414.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">the insulation around it</text>
+</svg>

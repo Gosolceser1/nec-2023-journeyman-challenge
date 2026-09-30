@@ -9,7 +9,7 @@ def _breaker(f, x, y, w=60, h=70):
 
 
 @figure("fuel_dispenser_shutoff_514-11", h=450, nec="514.11(A)",
-        records=["final-exam-#1-028"])
+        records={"final-exam-#1-028": {}, "open-book-exam-#3-009": {"like": "final-exam-#1-028"}})
 def fuel_dispenser_shutoff(f):
     f.title("Emergency shutoff location (plan view, not to scale)", y=40)
     ix0, ix1, iy0, iy1 = 60, 150, 120, 290
@@ -37,7 +37,7 @@ def fuel_dispenser_shutoff(f):
 
 
 @figure("conduit_stub_up_408-5", h=470, nec="408.5, Table 408.5",
-        records=["final-exam-#1-029"])
+        records={"final-exam-#1-029": {}, "open-book-exam-#3-008": {"like": "final-exam-#1-029"}})
 def conduit_stub_up(f):
     f.title("Section: conduits entering the bottom", y=36)
     ex0, ex1, ey0, ey1 = 220, 600, 60, 380
@@ -64,7 +64,8 @@ def conduit_stub_up(f):
 
 
 @figure("mobile_home_disconnect_550-32f", h=470, nec="550.32(F)",
-        records=["final-exam-#1-052", "final-exam-#3-051"])
+        records={"final-exam-#1-052": {}, "final-exam-#3-051": {},
+                 "open-book-exam-#5-015": {"like": "final-exam-#1-052"}})
 def mobile_home_disconnect(f):
     grade, ft = 400, 36.0
     f.title("Outdoor mobile home disconnecting means", y=40)
@@ -167,7 +168,7 @@ def busway_reduction(f):
 
 
 @figure("raceway_supported_box_314-23e", h=450, nec="314.23(E)",
-        records=["open-book-exam-#10-013"])
+        records={"open-book-exam-#10-013": {}, "final-exam-#2-044": {"like": "open-book-exam-#10-013"}})
 def raceway_supported_box(f):
     rid = ["open-book-exam-#10-013"]
     cy, ceil = 210, 120

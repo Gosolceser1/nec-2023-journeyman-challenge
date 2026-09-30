@@ -21,8 +21,10 @@ def _door_gap(f, x0, x1, y):
 
 
 @figure("dwelling_receptacles_210-52", h=500, nec="210.52(A)(2), 210.52(G)(1), 210.52(H), 210.50(C)",
-        records=["final-exam-#1-011", "final-exam-#1-022", "final-exam-#1-031",
-                 "final-exam-#3-035", "open-book-exam-#1-022"])
+        records={"final-exam-#1-011": {}, "final-exam-#1-022": {}, "final-exam-#1-031": {}, "final-exam-#3-035": {},
+                 "open-book-exam-#1-022": {}, "open-book-exam-#2-015": {"like": "final-exam-#1-011"},
+                 "open-book-exam-#3-003": {"like": "final-exam-#1-031"},
+                 "open-book-exam-#3-017": {"like": "final-exam-#1-022"}})
 def dwelling_plan(f):
     wall_rec = ["final-exam-#1-011"]
     garage_rec = ["final-exam-#1-022"]

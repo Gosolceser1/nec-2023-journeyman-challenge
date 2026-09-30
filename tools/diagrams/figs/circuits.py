@@ -10,7 +10,8 @@ def _breaker(f, x, y, w=60, h=70):
 
 @figure("feeder_tap_10ft_240-21b1", h=450, nec="240.21(B)(1), 409.21(B)",
         records={"final-exam-#1-032": {"terms": ["1/10", "one-tenth", "10 times"]},
-                 "open-book-exam-#10-004": {"when": "after"}})
+                 "open-book-exam-#10-004": {"when": "after"},
+                 "open-book-exam-#3-002": {"like": "final-exam-#1-032"}})
 def feeder_tap_10ft(f):
     _breaker(f, 40, 80, 80, 80)
     f.text(80, 62, "feeder OCPD", T_LABEL, TEXT, bold=True)
@@ -44,7 +45,8 @@ def feeder_tap_10ft(f):
 
 
 @figure("multiwire_branch_circuit_210-4", h=470, nec="210.4(A)-(C)",
-        records={"open-book-exam-#1-001": {}, "open-book-exam-#4-008": {"terms": ["line-to-neutral"]}})
+        records={"open-book-exam-#1-001": {}, "open-book-exam-#4-008": {"terms": ["line-to-neutral"]},
+                 "open-book-exam-#2-002": {}})
 def multiwire_branch_circuit(f):
     q1, q2 = ["open-book-exam-#1-001"], ["open-book-exam-#4-008"]
     h1, nn, h2 = 130, 260, 400
@@ -80,7 +82,8 @@ def multiwire_branch_circuit(f):
 
 
 @figure("high_leg_marking_408-3f1", h=470, nec="408.3(F)(1), 408.3(E)(1), 110.15",
-        records={"open-book-exam-#7-024": {"terms": ["delta", "high leg", "208"]}})
+        records={"open-book-exam-#7-024": {"terms": ["delta", "high leg", "208"]},
+                 "open-book-exam-#5-007": {"when": "after"}, "open-book-exam-#12-010": {}})
 def high_leg_marking(f):
     rid = ["open-book-exam-#7-024"]
     f.title("4-wire system, midpoint of one winding grounded", y=40)
@@ -123,7 +126,7 @@ def high_leg_marking(f):
 
 
 @figure("parallel_egc_250-122f", h=450, nec="250.122(F)(1)(b)",
-        records=["final-exam-#1-023"])
+        records={"final-exam-#1-023": {}, "open-book-exam-#3-016": {"like": "final-exam-#1-023"}})
 def parallel_egc(f):
     f.title("Parallel sets in two raceways", x=40, y=40)
     _breaker(f, 30, 150, 80, 150)

@@ -162,7 +162,8 @@ def transformer_panel(f):
     f.tag(f.w - 24, 64, "NEC 408.36(B)", anchor="end")
 
 @figure("panelboard_interior_408", h=530, nec="408.7, 408.41",
-        records={"final-exam-#3-046": {}, "open-book-exam-#1-009": {}})
+        records={"final-exam-#3-046": {}, "open-book-exam-#1-009": {},
+                 "open-book-exam-#11-002": {"like": "final-exam-#3-046"}})
 def panelboard_interior(f):
     closure = ["final-exam-#3-046"]
     term = ["open-book-exam-#1-009"]
@@ -212,7 +213,8 @@ def panelboard_interior(f):
 @figure("receptacle_markings_406", h=496, nec="406.3(E), 406.10(C)",
         records={"open-book-exam-#4-007": {"terms": ["orange", "triangle"]},
                  "open-book-exam-#10-003": {"terms": ["EGC", "equipment"]},
-                 "open-book-exam-#10-018": {"terms": ["orange", "triangle"]}})
+                 "open-book-exam-#10-018": {"terms": ["orange", "triangle"]},
+                 "final-exam-#2-047": {"like": "open-book-exam-#10-018"}})
 def receptacle_markings(f):
     ig = ["open-book-exam-#4-007", "open-book-exam-#10-018"]
     gnd = ["open-book-exam-#10-003"]
@@ -250,7 +252,8 @@ def receptacle_markings(f):
         records={"final-exam-#1-048": {"terms": ["TR", "tamper"]},
                  "open-book-exam-#4-005": {"terms": ["TR", "tamper"]},
                  "open-book-exam-#4-012": {"terms": ["branch"]},
-                 "open-book-exam-#4-023": {"when": "after"}})
+                 "open-book-exam-#4-023": {"when": "after"},
+                 "open-book-exam-#2-011": {"when": "after"}, "open-book-exam-#11-021": {"when": "after"}})
 def afci_tr_dwelling(f):
     tr = ["final-exam-#1-048", "open-book-exam-#4-005"]
     extent = ["open-book-exam-#4-012"]

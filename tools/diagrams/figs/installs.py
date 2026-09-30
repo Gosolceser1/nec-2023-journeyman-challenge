@@ -44,7 +44,7 @@ def single_load(f):
 
 
 @figure("ocpd_vertical_240-33", h=480, when="after", nec="240.33, 240.81",
-        records=["final-exam-#3-015"])
+        records={"final-exam-#3-015": {}, "open-book-exam-#2-001": {"like": "final-exam-#3-015"}})
 def ocpd_vertical(f):
     f.title("How an overcurrent device enclosure is mounted", y=34)
     f.dline(400, 70, 400, 370, EDGE, SW_THIN)
@@ -86,7 +86,8 @@ def room_ac(f):
 
 
 @figure("battery_ventilation_480-10a", h=450, nec="480.10(A)",
-        records={"final-exam-#3-060": {"terms": ["explosive"]}})
+        records={"final-exam-#3-060": {"terms": ["explosive"]},
+                 "open-book-exam-#6-018": {"like": "final-exam-#3-060"}})
 def battery_vent(f):
     f.title("Battery room: gas must not build up (section)", y=34)
     f.ceiling(70, 40, 760)
@@ -112,7 +113,8 @@ def battery_vent(f):
     f.text(64, 406, "low inlet", T_NOTE, OK, "start", True)
     b = f.text(40, 436, "Ventilation prevents an", T_NOTE, TEXT, "start")
     v = f.value(b[0] + b[2] + 10, 436, "explosive", T_NOTE, anchor="start", pad=5, what="the mixture type")
-    f.text(v[0] + v[2] + 16, 436, "mixture", T_NOTE, TEXT, "start")
+    m = f.text(v[0] + v[2] + 16, 436, "mixture", T_NOTE, TEXT, "start")
+    f.mask(m[0] - 5, m[1] - 5, m[2] + 10, m[3] + 10, records=["open-book-exam-#6-018"], what="the word mixture")
     f.tag(f.w - 24, f.h - 8, "NEC 480.10(A)", anchor="end")
 
 
@@ -222,7 +224,8 @@ def welding_tray(f):
 
 
 @figure("max_water_level_art100", h=420, nec="Article 100, 680.9, 680.22(B), 680.43(B)",
-        records={"open-book-exam-#7-005": {"terms": ["Maximum Water Level"]}})
+        records={"open-book-exam-#7-005": {"terms": ["Maximum Water Level"]},
+                 "final-exam-#2-009": {"like": "open-book-exam-#7-005"}})
 def max_water(f):
     f.title("Hot tub (section)", y=34)
     f.floor(320, 30, 770)
@@ -239,7 +242,8 @@ def max_water(f):
 
 
 @figure("holiday_lighting_trees_590-4j", h=440, nec="590.4(J) Exception, 590.3(B)",
-        records={"final-exam-#1-016": {"terms": ["strain relief"]}})
+        records={"final-exam-#1-016": {"terms": ["strain relief"]},
+                 "open-book-exam-#2-008": {"like": "final-exam-#1-016"}})
 def holiday_trees(f):
     f.title("Holiday lighting span supported by a tree (elevation)", y=34)
     f.grade(390, 20, 780, label=None)

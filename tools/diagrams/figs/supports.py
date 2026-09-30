@@ -27,7 +27,8 @@ def _span(f, xa, xb, y_obj, y_dim, text=None, size=24, color=DIM):
 
 
 @figure("supports_emt_strut_358-30", h=470, nec="358.30(A) incl. Exception No. 1, 384.30(A)",
-        records=["final-exam-#3-013", "final-exam-#5-053"])
+        records={"final-exam-#3-013": {}, "final-exam-#5-053": {},
+                 "open-book-exam-#12-022": {"like": "final-exam-#3-013"}})
 def emt_strut(f):
     exc_rec = ["final-exam-#3-013"]
     every_rec = ["final-exam-#5-053"]
@@ -70,7 +71,8 @@ def rmc(f):
 
 
 @figure("supports_pvc_352-30", h=400, nec="352.30(A), Table 352.30(B)",
-        records={"final-exam-#5-070": {"when": "after"}})
+        records={"final-exam-#5-070": {"when": "after"},
+                 "open-book-exam-#5-024": {"like": "final-exam-#5-070"}, "open-book-exam-#6-016": {}})
 def pvc(f):
     y = 150
     f.title("PVC conduit, trade size 1/2 to 1", y=40)
@@ -87,7 +89,8 @@ def pvc(f):
 
 @figure("supports_unsupported_cable_320-330-334", h=480,
         nec="320.30(D)(2)-(3), 330.30(D)(2), 334.30(B)(2)",
-        records=["final-exam-#1-066", "final-exam-#5-069", "final-exam-#5-006"])
+        records={"final-exam-#1-066": {}, "final-exam-#5-069": {}, "final-exam-#5-006": {},
+                 "open-book-exam-#6-022": {"like": "final-exam-#1-066"}})
 def unsupported_cable(f):
     mc = ["final-exam-#1-066"]
     nm = ["final-exam-#5-069"]

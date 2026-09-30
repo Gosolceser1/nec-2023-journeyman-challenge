@@ -24,7 +24,8 @@ GUARDED = "open-book-exam-#1-011"
 
 
 @figure("working_space_110-26", h=480, nec="110.26 (open doors), Table 110.26(A)(1) Condition 2, 110.26(B), 110.26(C)(3)",
-        records=[DOOR_25, MASONRY, OPEN_DOORS, GUARDED])
+        records={**{r: {} for r in [DOOR_25, MASONRY, OPEN_DOORS, GUARDED]},
+                 "final-exam-#2-046": {"like": MASONRY}, "open-book-exam-#5-017": {"like": DOOR_25}})
 def working_space(f):
     f.title("Plan view (not to scale)", y=36)
     wt, wb = 60, 80           # equipment wall
@@ -81,7 +82,7 @@ def working_space(f):
 
 
 @figure("dedicated_space_110-26e", h=500, nec="110.26(A)(1)-(3), 110.26(E)(1)",
-        records=["final-exam-#1-057"])
+        records={"final-exam-#1-057": {}, "open-book-exam-#5-004": {"like": "final-exam-#1-057"}})
 def dedicated_space(f):
     ceil, floor, ft = 96, 440, 40.0
     ws_top = floor - 6.5 * ft
