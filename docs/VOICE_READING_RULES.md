@@ -134,7 +134,10 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 | `1/60` | 1 over 60 |
 | `8'`, `5'9"`, `6 ft.`, `5-ft` | 8 feet, 5 feet 9 inches, 6 feet, 5-foot |
 | `20 A`, `1 A`, `5 mA`, `10 kA` | 20 amps, 1 amp, 5 milliamps, 10 kiloamps |
-| `200 A service`, `20 A breaker`, `240 V single-phase` | 200 amp service, 20 amp breaker, 240 volt single-phase (a unit used as an adjective is singular) |
+| `200 A service`, `a 12 ft assembly`, `15 in. clearance`, `1 in. EMT` | 200-amp service, a 12-foot assembly, 15-inch clearance, 1-inch E M T (a unit used as an adjective is singular and hyphenated: any following word that is not in `ATTRIBUTIVE_STOP`) |
+| `10 ft`, `10 ft long`, `20 ft or more`, `150 V to ground`, `120 V AC` | 10 feet, 10 feet long, 20 feet or more, 150 volts to ground, 120 volts A C (a quantity stays plural) |
+| `a 30 A, 240 V circuit`, `12 kW through 27 kW ranges` | a 30-amp, 240-volt circuit; 12-kilowatt through 27-kilowatt ranges (the first unit of a rating or range is an adjective too) |
+| `It is 10 ft. Keep` | It is 10 feet. Keep (the sentence's full stop stays after `ft.` and `in.`) |
 | `240V`, `48 VDC`, `15 kV` | 240 volts, 48 volts D C, 15 kilovolts |
 | `180 VA`, `10 kVA`, `1.5 kW`, `100 W` | volt amperes, kilovolt amperes, kilowatts, watts |
 | `90°C`, `112°F`, `90°` | 90 degrees Celsius, 112 degrees Fahrenheit, 90 degrees |

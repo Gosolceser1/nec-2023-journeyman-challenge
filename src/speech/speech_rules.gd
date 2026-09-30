@@ -89,8 +89,10 @@ const PIPELINE := [
 	["unit_sq_in", "(?i)\\bsq\\.?\\s*in(?:ches)?\\.?(?!\\w)", "square inches"],
 	["unit_cu_in", "(?i)\\bcu\\.?\\s*in(?:ches)?\\.?(?!\\w)", "cubic inches"],
 	["unit_ft_adjective", "\\b(\\d+(?:\\.\\d+)?)-ft\\b\\.?", "$1-foot"],
+	["unit_ft_dot_end", "\\b[Ff][Tt]\\.(?=\\s+[A-Z](?:[a-z]|\\s)|\\s*$)", "feet."],
 	["unit_ft_dot", "(?i)\\bft\\.", "feet"],
 	["unit_ft", "(\\d|half|quarters?|thirds?|eighths?|sixteenths?)\\s*ft\\b", "$1 feet"],
+	["unit_in_dot_end", "(?<=\\d )[Ii][Nn]\\.(?=\\s+[A-Z](?:[a-z]|\\s)|\\s*$)", "inches."],
 	["unit_in_dot", "(?i)\\bin\\.", "inches"],
 	# Bare "in" only where it cannot be the preposition.
 	["unit_in", "(\\d|half|quarters?|thirds?|eighths?|sixteenths?)\\s+in\\b(?=\\s*(?:[),;:=]|$|per\\b|divided\\b|times\\b))", "$1 inches"],
@@ -203,11 +205,28 @@ const SINGULAR := {
 	"ohms": "ohm", "kilowatts": "kilowatt", "kilovolts": "kilovolt", "milliamps": "milliamp",
 }
 
-## A unit used as an adjective is singular: "a 200 amp service".
-const ATTRIBUTIVE_NOUNS := [
-	"service", "breaker", "breakers", "circuit", "circuits", "fuse", "fuses", "panel",
-	"panelboard", "receptacle", "receptacles", "feeder", "branch", "motor", "lamp", "system",
-	"supply", "transformer", "single-phase", "three-phase", "3-phase", "switch", "outlet",
+## A unit used as an adjective is singular and hyphenated: "a 200-amp service",
+## "a 12-foot assembly", "a 1-inch E M T conduit". It is an adjective when a
+## lowercase word (or a spelled-out raceway like "E M T") follows, unless that
+## word is one of these, which follow a quantity: "10 feet long", "20 feet or
+## more", "150 volts to ground", "180 volt amperes".
+const ATTRIBUTIVE_STOP := [
+	"or", "and", "but", "nor", "x", "times", "equals", "minus", "plus", "divided", "multiplied",
+	"over", "through", "thru", "to", "in", "of", "on", "at", "for", "from", "per", "by",
+	"with", "without", "as", "than", "into", "onto", "between", "above", "below", "under",
+	"within", "beyond", "past", "before", "after", "apart", "away", "off", "up", "down",
+	"is", "are", "was", "were", "be", "been", "being", "does", "do", "did", "shall", "must",
+	"may", "can", "will", "would", "should", "could", "has", "have", "had",
+	"long", "wide", "high", "deep", "thick", "tall", "square", "cubed", "squared",
+	"horizontally", "vertically", "diagonally", "continuously", "nominal", "total",
+	"peak", "maximum", "minimum", "max", "min", "actual", "each", "less", "more", "about",
+	"approximately", "versus", "vs", "rms", "ac", "dc", "line-to-line", "line-to-neutral",
+	"phase-to-phase", "phase-to-ground", "to-ground", "measured", "appearing", "installed",
+	"located", "pass", "passes", "counts", "falls", "fall", "gives", "give", "needed",
+	"required", "allowed", "permitted", "left", "remaining", "if", "when", "where", "which",
+	"that", "so", "then", "while", "unless", "because", "whichever", "respectively",
+	"amperes", "ampere", "amps", "hours", "hour", "feet", "foot", "inches", "inch",
+	"a", "an", "the", "not", "no", "section", "sections", "paragraph", "item",
 ]
 
 ## Longest first behind a word boundary: a plain replace turned VIII into V3.
@@ -425,9 +444,21 @@ static func _apply_function(id: String, text: String) -> String:
 			return _each(text, pattern, func(m: RegExMatch, _src: String) -> String:
 				return "1 " + str(SINGULAR[m.get_string(1)]))
 		"unit_attributive":
-			var pattern := "\\b(\\d+(?:\\.\\d+)?) (" + _words_alternation(SINGULAR.keys()) + ") (?=(?:" + "|".join(ATTRIBUTIVE_NOUNS) + ")\\b)"
-			return _each(text, pattern, func(m: RegExMatch, _src: String) -> String:
-				return m.get_string(1) + " " + str(SINGULAR[m.get_string(2)]) + " ")
+			var units: Array = SINGULAR.keys() + SINGULAR.values()
+			var alt := _words_alternation(units)
+			var pattern := "(?<![\\d.,-])\\b(\\d[\\d,]*(?:\\.\\d+)?) (" + alt + ") (?=([a-z][a-z-]*|[A-Z][A-Z-]+|[A-Z] [A-Z] [A-Z])\\b)"
+			text = _each(text, pattern, func(m: RegExMatch, _src: String) -> String:
+				if ATTRIBUTIVE_STOP.has(m.get_string(3).to_lower()) or m.get_string(3) in ["AC", "DC", "RMS"]:
+					return m.get_string(0)
+				return m.get_string(1) + "-" + str(SINGULAR.get(m.get_string(2), m.get_string(2))) + " ")
+			# "a 30 amps, 240-volt circuit" (a rating: any unit) and "12 kilowatts
+			# through 27-kilowatt ranges" (a range: the same unit) are adjectives too.
+			var list_pattern := "(?<![\\d.,-])\\b(\\d[\\d,]*(?:\\.\\d+)?) (" + alt + ")(,? (?:(?:through|to|or|and) )?)(?=\\d[\\d,]*(?:\\.\\d+)?-(" + alt + ") )"
+			return _each(text, list_pattern, func(m: RegExMatch, _src: String) -> String:
+				var one := str(SINGULAR.get(m.get_string(2), m.get_string(2)))
+				if one != m.get_string(4) and m.get_string(3) != ", ":
+					return m.get_string(0)
+				return m.get_string(1) + "-" + one + m.get_string(3))
 		"roman_numerals":
 			var pattern := "\\b(?:" + _words_alternation(ROMAN.keys()) + ")\\b"
 			return _each(text, pattern, func(m: RegExMatch, _src: String) -> String:

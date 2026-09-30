@@ -79,6 +79,12 @@
   "10^18" is "10 to the power of 18", "a ratio of 20:1" is "20 to 1", and
   "the -2" is "the dash 2". "per ft²" is "per square foot". Nine recorded
   questions re-recorded.
+- **Voice: a unit before a noun is an adjective.** "a 12 ft assembly" is "a
+  12-foot assembly", "a 4.5 kW water heater" is "a 4.5-kilowatt water heater",
+  "a 1 in. EMT" is "a 1-inch E M T" and "a 30 A, 240 V circuit" is "a 30-amp,
+  240-volt circuit". A quantity stays plural: "10 feet", "10 feet long", "150
+  volts to ground". A sentence ending in "ft." keeps its full stop. 56
+  questions and 5 math steps re-recorded.
 - **Show steps: Read now uses your voice and reads the whole step.** Read
   used only the Windows or Android system voice (silent on PCs without one).
   It ignored the voice you picked and Voice off, never stopped, and kept

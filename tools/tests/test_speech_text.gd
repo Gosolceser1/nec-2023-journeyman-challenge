@@ -82,7 +82,7 @@ func speakable_units() -> void:
 		["3.5 V", "3.5 volts", "decimal volts"],
 		["8000 mA", "8000 milliamps", "mA is distinct from A"],
 		["300 mA", "300 milliamps", "mA (the A rule must not win)"],
-		["20A receptacle", "20 amp receptacle", "no space before A; singular as an adjective"],
+		["20A receptacle", "20-amp receptacle", "no space before A; singular as an adjective"],
 		["60 Hz", "60 hertz", "Hz"],
 		["10 mm", "10 millimeters", "mm"],
 		["40°C", "40 degrees Celsius", "deg C"],
@@ -482,6 +482,26 @@ func bank_complete_sentences_sweep(recs: Array) -> void:
 				if NecReference.canonical_article_title(int(m.get_string(1))) == "":
 					number_misreads.append("%s: '%s' (no such article)" % [rid, m.get_string(0)])
 	t.eq(number_misreads, [] as Array[String], "no arithmetic quantity is read as a section, no citation as a decimal")
+	# A unit used as an adjective is singular: "a 12-foot assembly", never "a
+	# 12 feet assembly", in every question and every exam step.
+	var rules = load("res://src/speech/speech_rules.gd")
+	var step_speech = load("res://src/speech/math_step_speech.gd")
+	var plural_adj := RegEx.create_from_string("\\b\\d[\\d,]*(?:\\.\\d+)? (amps|volts|watts|kilowatts|kilovolts|milliamps|feet|inches|meters|millimeters|pounds|ohms|seconds) ([a-z][a-z-]*|[A-Z][A-Z-]+|[A-Z] [A-Z] [A-Z])\\b")
+	var texts: Array = []
+	for rec_v in recs:
+		var rid := str((rec_v as Dictionary).get("id", ""))
+		for seg_v in ST.speech_plan(rec_v):
+			texts.append([rid, str((seg_v as Dictionary).get("text", ""))])
+		var sol: Dictionary = MathEngine.exam_solution(rec_v)
+		for step in sol.get("steps", []):
+			texts.append([rid + " steps", step_speech.spoken(step)])
+	var plural_adjectives: Array[String] = []
+	for pair in texts:
+		for m in plural_adj.search_all(str(pair[1])):
+			var next := m.get_string(2)
+			if not rules.ATTRIBUTIVE_STOP.has(next.to_lower()) and not next in ["A C", "D C", "R M S", "AC", "DC", "RMS"]:
+				plural_adjectives.append("%s: '%s'" % [pair[0], m.get_string(0)])
+	t.eq(plural_adjectives, [] as Array[String], "a number and unit before a noun is read as an adjective ('a 12-foot assembly')")
 	t.eq(unfinished, [] as Array[String], "every spoken line of every plan ends a sentence (no 'Exception No.', no dangling list marker)")
 	t.eq(too_long, [] as Array[String], "no spoken line is long enough to need chunking")
 	t.eq(cut_words, [] as Array[String], "no quoted rule stops mid-word")
