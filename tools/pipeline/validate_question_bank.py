@@ -324,6 +324,10 @@ def content_audit_problems(records: list, audit: dict) -> tuple[list[str], list[
     warnings: list[str] = []
     entries = audit.get("records", {}) if isinstance(audit, dict) else {}
     nec = [r for r in records if isinstance(r, dict) and r.get("section") is None]
+    if nec and not entries:
+        # A new edition starts with an empty audit; the bank must not pass as audited.
+        warnings.append(f"{CONTENT_AUDIT_PATH} has no {EDITION} content audit entries; "
+                        "audit the NEC records (docs/EDITION_MIGRATION.md)")
     covered = [r for r in nec if r.get("id") in entries]
     for rec in covered:
         rid = rec["id"]

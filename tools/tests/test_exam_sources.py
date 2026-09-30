@@ -111,6 +111,28 @@ class ParserTests(unittest.TestCase):
         self.assertEqual(found[1]["choices"], ["4", "5", "6", "7"])
 
 
+class DraftTranscriptTests(unittest.TestCase):
+    def test_draft_from_ocr_marks_itself_unreviewed_and_lists_gaps(self):
+        import draft_transcript
+        stem = "Journeyman open book exam #99"
+        with tempfile.TemporaryDirectory() as tmp:
+            ocr, keys = Path(tmp) / "ocr", Path(tmp) / "keys"
+            ocr.mkdir()
+            keys.mkdir()
+            (ocr / f"{stem}.txt").write_text(
+                "3 QUESTIONS\n1. First stem?\n(a) one (b) two (c) three (d) four\n"
+                "3. Third stem?\n(a) w (b) x (c) y (d) z\n", encoding="utf-8")
+            (keys / f"{stem} answer key.txt").write_text("1. (b) 110.26\n3. (d) 250.66\n", encoding="utf-8")
+            exam = exam_sources.ExamSource(stem, "Open Book Exam #99", False, 99, f"{stem} answer key",
+                                           "open-book-exam-#99")
+            with patch.dict(os.environ, {"WIRE_OCR_PATH": str(ocr), "WIRE_OCR_KEYS": str(keys)}):
+                transcript, gaps = draft_transcript.draft(exam)
+        self.assertEqual(gaps, [2])
+        self.assertTrue(transcript["provenance"].startswith(draft_transcript.DRAFT_MARK))
+        self.assertEqual([(q["number"], q["correct_index"], q["reference"]) for q in transcript["questions"]],
+                         [(1, 1, "110.26"), (3, 3, "250.66")])
+
+
 class TesseractTests(unittest.TestCase):
     def test_env_names_the_executable(self):
         with tempfile.TemporaryDirectory() as tmp:
@@ -193,6 +215,14 @@ class RepositoryTests(unittest.TestCase):
             rebuilt |= {exam_sources.record_id(exam.id_prefix, n) for n in numbers}
         rebuilt |= {r["id"] for r in state_law_source.load_all()[0]}
         self.assertEqual(rebuilt, {r["id"] for r in self.bank["records"]})
+
+    def test_no_transcript_is_an_unreviewed_ocr_draft(self):
+        import draft_transcript
+        for exam in self.exams:
+            transcript = exam.transcript() or {}
+            with self.subTest(exam=exam.label):
+                self.assertFalse(str(transcript.get("provenance", "")).startswith(draft_transcript.DRAFT_MARK),
+                                 f"review {exam.transcript_path.name} against the PDF, then replace its provenance")
 
     def test_every_exam_has_a_transcript(self):
         # The build needs no OCR output for the shipped exams (a fresh machine

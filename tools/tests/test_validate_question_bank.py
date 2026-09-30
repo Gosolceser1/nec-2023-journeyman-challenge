@@ -352,6 +352,13 @@ class ContentAuditTests(unittest.TestCase):
         audit = {"version": 1, "records": {"other-001": {"status": "verified"}}}
         self.assertEqual(validator.content_audit_problems(recs, audit), ([], []))
 
+    def test_an_empty_audit_of_a_new_edition_is_a_warning(self):
+        for audit in ({}, {"version": 1, "records": {}}):
+            errors, warnings = validator.content_audit_problems(self.records(), audit)
+            self.assertEqual(errors, [])
+            self.assertEqual(len(warnings), 1)
+            self.assertIn("no NEC", warnings[0])
+
     def test_state_law_records_are_not_audited(self):
         recs = self.records() + [{"id": "ne-001", "section": "ne_state_law", "reference_text": "x",
                                   "reference_table": [], "correct_index": 0}]

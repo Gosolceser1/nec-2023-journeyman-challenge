@@ -34,5 +34,7 @@ def ocr_pdf(pdf_path: Path, out_dir: Path) -> None:
 
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
+    # An exam with a reviewed transcript needs no OCR.
     for exam in discover():
-        ocr_pdf(source_pdf_dir() / f"{exam.stem}.pdf", OUT)
+        if exam.transcript() is None:
+            ocr_pdf(source_pdf_dir() / f"{exam.stem}.pdf", OUT)

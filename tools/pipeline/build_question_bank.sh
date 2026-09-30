@@ -4,6 +4,7 @@
 #
 #   1. OCR   source PDFs  -> text       (tools/pipeline/ocr_pdfs_tesseract.py)
 #   2. OCR   answer keys  -> text       (tools/pipeline/ocr_answer_keys_tesseract.py)
+#            (only exams without a transcript in tools/pipeline/sources/exams/)
 #   3. BUILD text         -> bank JSON  (tools/pipeline/build_question_bank.py)
 #   4. VALIDATE bank JSON                (tools/pipeline/validate_question_bank.py)   <-- GATE
 #   5. SPEECH bank JSON   -> mp3 clips   (tools/speech/dump_speech.gd + pregenerate_speech.py)
@@ -25,6 +26,7 @@
 # Env overrides:
 #   WIRE_OCR_PATH   directory of OCR'd exam text      (default: %TEMP%/wire_pipeline/wire_ocr)
 #   WIRE_OCR_KEYS   directory of OCR'd answer keys   (default: %TEMP%/wire_pipeline/wire_ocr_keys)
+#   WIRE_TESSERACT  tesseract executable             (default: PATH, then %ProgramFiles%/Tesseract-OCR)
 #   WIRE_BANK_OUT   output bank path                 (default: <repo>/data/question_bank.json)
 #   PYTHON          interpreter to use               (default: python)
 #   GODOT           Godot console binary             (default: <repo>/Godot_v4.7.2-stable_win64_console.exe)
@@ -109,10 +111,11 @@ build() {
 }
 
 ocr() {
+  local env="${WSLENV:+$WSLENV:}WIRE_OCR_PATH/p:WIRE_OCR_KEYS/p:WIRE_TESSERACT/p"
   say "OCR source PDFs"
-  "$PY" "$(winpath "$ROOT/tools/pipeline/ocr_pdfs_tesseract.py")"
+  WSLENV="$env" "$PY" "$(winpath "$ROOT/tools/pipeline/ocr_pdfs_tesseract.py")"
   say "OCR answer keys"
-  "$PY" "$(winpath "$ROOT/tools/pipeline/ocr_answer_keys_tesseract.py")"
+  WSLENV="$env" "$PY" "$(winpath "$ROOT/tools/pipeline/ocr_answer_keys_tesseract.py")"
 }
 
 speech() {

@@ -7,4 +7,5 @@ OUT = answer_key_ocr_dir()
 if __name__ == "__main__":
     OUT.mkdir(parents=True, exist_ok=True)
     for exam in discover():
-        ocr_pdf(source_pdf_dir() / f"{exam.key_stem}.pdf", OUT)
+        if exam.transcript() is None:
+            ocr_pdf(source_pdf_dir() / f"{exam.key_stem}.pdf", OUT)
