@@ -49,20 +49,20 @@ func speakable_inches() -> void:
 		['3/8"', "Three eighths of an inch", "fraction + inch mark"],
 		['1/8"', "One eighth of an inch", "singular fraction stays singular"],
 		['1 1/8"', "1 and one eighth inches", "mixed number with inch mark"],
-		['1 1/4"', "1 and one quarter inches", "mixed quarter"],
+		['1 1/4"', "1 and a quarter inches", "mixed quarter"],
 		['3 5/16"', "3 and five sixteenths inches", "mixed sixteenth"],
 		['10 3/4"', "10 and three quarters inches", "mixed three-quarters"],
 		['1/2 inch', "Half inch", "spelled inch, no mark; trade size 'half inch' (one half is heard as 1.5)"],
-		['1 1/2 inches', "1 and one half inches", "spelled plural inches"],
+		['1 1/2 inches', "1 and a half inches", "spelled plural inches"],
 		['15 3/16 in.', "15 and three sixteenths inches", "'in.' abbreviation"],
 		['1/2-inch RNC', "Half inch R N C", "hyphenated adjective read as a trade size; RNC is spelled"],
-		['1-1/4" knockout', "1 and one quarter inches knockout", "hyphenated mixed number reads exactly like the spaced form"],
+		['1-1/4" knockout', "1 and a quarter inch knockout", "hyphenated mixed number reads exactly like the spaced form"],
 		['1 1/16"', "1 and one sixteenth inches", "sixteenths"],
 		['5 5/8"', "5 and five eighths inches", "eighths"],
 		['3 5/8"', "3 and five eighths inches", "eighths with whole"],
-		['1 1/4" knockout', "1 and one quarter inches knockout", "spaced form (the correct one)"],
+		['1 1/4" knockout', "1 and a quarter inch knockout", "spaced form (the correct one)"],
 		['240/120 V', "240 slash 120 volts", "slash-voltage reads as 'slash', not a fraction"],
-		['3 1/2', "3 and one half", "mixed number with no unit"],
+		['3 1/2', "3 and a half", "mixed number with no unit"],
 	]
 	for row in rows:
 		t.eq(ST.speakable(row[0]), row[1], "speakable(%s) [%s]" % [row[0], row[2]])
@@ -502,6 +502,15 @@ func bank_complete_sentences_sweep(recs: Array) -> void:
 			if not rules.ATTRIBUTIVE_STOP.has(next.to_lower()) and not next in ["A C", "D C", "R M S", "AC", "DC", "RMS"]:
 				plural_adjectives.append("%s: '%s'" % [pair[0], m.get_string(0)])
 	t.eq(plural_adjectives, [] as Array[String], "a number and unit before a noun is read as an adjective ('a 12-foot assembly')")
+	# Box and room sizes are "3 by 2 by 2-inch", never "3 inches times 2 inches";
+	# mixed numbers are "1 and a half".
+	var size_times := RegEx.create_from_string("(?<!square |cubic )\\b(?:inch|inches|foot|feet) times \\d[\\d.,]*(?: and \\w+ \\w+)? (?:inch|inches|foot|feet)\\b|\\b\\d+ and one (?:half|quarter)\\b")
+	var size_misreads: Array[String] = []
+	for pair in texts:
+		var m := size_times.search(str(pair[1]))
+		if m != null:
+			size_misreads.append("%s: '%s'" % [pair[0], m.get_string(0)])
+	t.eq(size_misreads, [] as Array[String], "sizes are read 'by', not 'times'; mixed numbers 'and a half'")
 	t.eq(unfinished, [] as Array[String], "every spoken line of every plan ends a sentence (no 'Exception No.', no dangling list marker)")
 	t.eq(too_long, [] as Array[String], "no spoken line is long enough to need chunking")
 	t.eq(cut_words, [] as Array[String], "no quoted rule stops mid-word")

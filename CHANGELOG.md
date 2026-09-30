@@ -85,6 +85,11 @@
   240-volt circuit". A quantity stays plural: "10 feet", "10 feet long", "150
   volts to ground". A sentence ending in "ft." keeps its full stop. 56
   questions and 5 math steps re-recorded.
+- **Voice: box sizes read like an electrician says them.** '3" x 2" x 2"
+  device box' is "3 by 2 by 2-inch device box" (was "3 inches times 2 inches
+  times 2 inches"), "4 x 2-1/8 in. octagon box" is "4 by 2 and one eighth
+  inch octagon box", and "1 1/2" is "1 and a half". Multiplication still says
+  "times" ("5000 x 1.3 = 6,500"). 34 questions and 5 math steps re-recorded.
 - **Show steps: Read now uses your voice and reads the whole step.** Read
   used only the Windows or Android system voice (silent on PCs without one).
   It ignored the voice you picked and Voice off, never stopped, and kept

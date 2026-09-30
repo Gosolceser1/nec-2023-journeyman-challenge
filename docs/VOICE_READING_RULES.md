@@ -137,6 +137,9 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 | `200 A service`, `a 12 ft assembly`, `15 in. clearance`, `1 in. EMT` | 200-amp service, a 12-foot assembly, 15-inch clearance, 1-inch E M T (a unit used as an adjective is singular and hyphenated: any following word that is not in `ATTRIBUTIVE_STOP`) |
 | `10 ft`, `10 ft long`, `20 ft or more`, `150 V to ground`, `120 V AC` | 10 feet, 10 feet long, 20 feet or more, 150 volts to ground, 120 volts A C (a quantity stays plural) |
 | `a 30 A, 240 V circuit`, `12 kW through 27 kW ranges` | a 30-amp, 240-volt circuit; 12-kilowatt through 27-kilowatt ranges (the first unit of a rating or range is an adjective too) |
+| `3" x 2" x 2" device box`, `4 in. x 1-1/2 in.`, `4 x 4 x 2-1/8`, `10 ft x 12 ft room` | 3 by 2 by 2-inch device box, 4 by 1 and a half inches, 4 by 4 by 2 and one eighth, 10 by 12-foot room (a size: an inch or foot mark, a mixed number, or a box after it; the unit is said once) |
+| `5000 x 1.3 = 6,500`, `5 x 2.25 + 4 x 2.00`, `6 x 5 kW` | 5000 times 1.3 equals 6,500 … (next to = + − ÷ or with another unit it is multiplication) |
+| `1 1/2`, `2 1/4`, `2 3/4` | 1 and a half, 2 and a quarter, 2 and three quarters |
 | `It is 10 ft. Keep` | It is 10 feet. Keep (the sentence's full stop stays after `ft.` and `in.`) |
 | `240V`, `48 VDC`, `15 kV` | 240 volts, 48 volts D C, 15 kilovolts |
 | `180 VA`, `10 kVA`, `1.5 kW`, `100 W` | volt amperes, kilovolt amperes, kilowatts, watts |

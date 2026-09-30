@@ -37,6 +37,8 @@ const PIPELINE := [
 	# "11/2" typed for 1 1/2. Numerator pinned to 1 so the live 15/16 stays a fraction.
 	["mixed_number_unspaced", "(?<![\\d/])([1-9])(1)/([248]|16)(?![\\d/])", "$1 $2/$3"],
 	["mixed_number_hyphen", "\\b(\\d+)-(\\d+)/(\\d+)\\b", "$1 $2/$3"],
+	# Box and room sizes are said "3 by 2 by 2-inch": before the inch marks.
+	["dimensions", ""],
 	["inch_mark_mixed", "(\\d+)\\s+(\\d+)/(\\d+)\\s*\"", "$1 and $2/$3 inches"],
 	["inch_mark_fraction", "(\\d+)/(\\d+)\\s*\"", "$1/$2 inch"],
 	["inch_mark_one", "(?<![\\d.])1\\s*\"", "1 inch"],
@@ -83,6 +85,8 @@ const PIPELINE := [
 	["cable_designation", "(?<![\\d/])([89]|[1-9]\\d)/([23])(?![\\d/])", "$1 slash $2"],
 	["mixed_number", ""],
 	["fraction", ""],
+	# How it is said: "one and a half inch", "two and a quarter".
+	["mixed_a_half", "\\b(\\d+) and one (half|quarter)\\b", "$1 and a $2"],
 	# Before the units: "2x30A" has no word boundary before 30 until x is a word.
 	["times_digits", "(\\d)\\s*[xX]\\s*(\\d)", "$1 times $2"],
 	["unit_sq_ft", "(?i)\\bsq\\.?\\s*ft\\.?(?!\\w)", "square feet"],
@@ -384,8 +388,43 @@ static func _words_alternation(words: Array) -> String:
 	return "|".join(escaped)
 
 
+## "3" x 2" x 2" device box", "4 x 2-1/8 in. octagon box", "10 ft x 12 ft":
+## sizes are "3 by 2 by 2" with the unit once, at the end. A chain is a size
+## when a term has an inch or foot mark, a term is a mixed number, or a box
+## follows; never next to = + − ÷ (arithmetic: "5000 x 1.3 = 6,500").
+const DIM_TERM := "\\d+(?:\\.\\d+)?(?: \\d+/\\d+)?(?:\\s*(?:\"|''|in\\.|inch(?:es)?\\b|ft\\.?|feet\\b|'))?"
+const DIM_TERM_PARTS := "(\\d+(?:\\.\\d+)?(?: \\d+/\\d+)?)(?:\\s*(\"|''|in\\.|inch(?:es)?\\b|ft\\.?|feet\\b|'))?"
+const DIM_ARITH_BEFORE := "[=+−÷*/×xX-]\\s*$"
+const DIM_ARITH_AFTER := "^\\s*(?:[=+−÷*/%]|-\\s*\\d)"
+const DIM_BOX_AFTER := "^\\s*(?:in\\.|inch(?:es)?|\")?\\s*(?:[a-z-]+\\s+){0,2}box(?:es)?\\b"
+
+
+static func _dimensions(text: String) -> String:
+	var chain := "(?<![\\w.])" + DIM_TERM + "(?:\\s*[x×]\\s*" + DIM_TERM + "){1,2}(?![\\w/])"
+	return _each(text, chain, func(m: RegExMatch, src: String) -> String:
+		var before := src.substr(maxi(0, m.get_start() - 12), mini(12, m.get_start()))
+		var after := src.substr(m.get_end(), 40)
+		if _re(DIM_ARITH_BEFORE).search(before) != null or _re(DIM_ARITH_AFTER).search(after) != null:
+			return m.get_string(0)
+		var numbers: PackedStringArray = []
+		var unit := ""
+		var mixed := false
+		for t in _re(DIM_TERM_PARTS).search_all(m.get_string(0)):
+			numbers.append(t.get_string(1))
+			mixed = mixed or t.get_string(1).contains("/")
+			if t.get_string(2) != "":
+				unit = t.get_string(2)
+		if unit == "" and not mixed and _re(DIM_BOX_AFTER).search(after) == null:
+			return m.get_string(0)
+		if unit == "":
+			return " by ".join(numbers)
+		return " by ".join(numbers) + (unit if unit in ["\"", "''", "'"] else " " + unit))
+
+
 static func _apply_function(id: String, text: String) -> String:
 	match id:
+		"dimensions":
+			return _dimensions(text)
 		"table_block":
 			return _table_block(text)
 		"line_breaks":
@@ -454,11 +493,19 @@ static func _apply_function(id: String, text: String) -> String:
 			# "a 30 amps, 240-volt circuit" (a rating: any unit) and "12 kilowatts
 			# through 27-kilowatt ranges" (a range: the same unit) are adjectives too.
 			var list_pattern := "(?<![\\d.,-])\\b(\\d[\\d,]*(?:\\.\\d+)?) (" + alt + ")(,? (?:(?:through|to|or|and) )?)(?=\\d[\\d,]*(?:\\.\\d+)?-(" + alt + ") )"
-			return _each(text, list_pattern, func(m: RegExMatch, _src: String) -> String:
+			text = _each(text, list_pattern, func(m: RegExMatch, _src: String) -> String:
 				var one := str(SINGULAR.get(m.get_string(2), m.get_string(2)))
 				if one != m.get_string(4) and m.get_string(3) != ", ":
 					return m.get_string(0)
 				return m.get_string(1) + "-" + one + m.get_string(3))
+			# "a 2 and one eighth inch octagon box", "a three quarter inch E M T".
+			var fraction_pattern := "\\b(half|halves|quarters?|thirds?|eighths?|sixteenths?) inches (?=([a-z][a-z-]*|[A-Z][A-Z-]+|[A-Z] [A-Z] [A-Z])\\b)"
+			return _each(text, fraction_pattern, func(m: RegExMatch, _src: String) -> String:
+				if ATTRIBUTIVE_STOP.has(m.get_string(2).to_lower()) or m.get_string(2) in ["AC", "DC", "RMS"]:
+					return m.get_string(0)
+				var word := m.get_string(1)
+				word = "half" if word == "halves" else word.trim_suffix("s")
+				return word + " inch ")
 		"roman_numerals":
 			var pattern := "\\b(?:" + _words_alternation(ROMAN.keys()) + ")\\b"
 			return _each(text, pattern, func(m: RegExMatch, _src: String) -> String:
