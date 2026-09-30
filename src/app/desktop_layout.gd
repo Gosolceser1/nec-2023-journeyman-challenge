@@ -202,13 +202,13 @@ static func build(host: Main) -> void:
 	var lookup_lines := VBoxContainer.new()
 	lookup_lines.add_theme_constant_override("separation", 2)
 	lookup_margin.add_child(lookup_lines)
-	host.index_hint_label = HuntView.make_index_label(AppTheme.TYPE_META)
+	host.index_hint_label = HuntView.make_index_label(AppTheme.TYPE_CAPTION)
 	lookup_lines.add_child(host.index_hint_label)
 
 	host.chapter_hint_label = Label.new()
 	host.chapter_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	host.chapter_hint_label.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_MEDIUM))
-	host.chapter_hint_label.add_theme_font_size_override("font_size", AppTheme.TYPE_META)
+	host.chapter_hint_label.add_theme_font_size_override("font_size", AppTheme.TYPE_CAPTION)
 	host.chapter_hint_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	lookup_lines.add_child(host.chapter_hint_label)
 	host.lookup_box.visible = false
@@ -310,7 +310,7 @@ static func build(host: Main) -> void:
 	var bar_fill := AppTheme.panel_style(AppTheme.SKY_500, AppTheme.SKY_400, 0, 2)
 	host.timer_bar.add_theme_stylebox_override("background", bar_bg)
 	host.timer_bar.add_theme_stylebox_override("fill", bar_fill)
-	question_column.add_child(host.timer_bar)
+	question_column.add_child(Widgets.spaced_above(host.timer_bar, AppTheme.SPACE_XS + 1, "TimerBarRow"))
 
 	host.answers_box = VBoxContainer.new()
 	host.answers_box.add_theme_constant_override("separation", AppTheme.SPACE_SM)

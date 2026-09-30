@@ -15,6 +15,8 @@ Rules (also checked by --check on the written file):
 - a keyword is a phrase of the stem, is not the correct choice, does not contain
   it and is not part of it (unless every choice holds it); its Index heading does
   not name the correct choice;
+- neither the keyword nor its Index heading holds any choice, distractors
+  included ('rear or side access' colors the choice 'rear');
 - its article is one the record cites and exists in the edition's articles.json;
 - show_article is false when the stem asks for the reference itself or the
   correct choice holds the article number (the hint then names the heading only).
@@ -152,6 +154,14 @@ def leaks(record: dict, text: str, heading: str, synonyms: list[str]) -> str:
     for phrase in synonyms:
         if contains_phrase(answer, phrase) and not all(contains_phrase(o, phrase) for o in others):
             return "correct choice is a synonym of the keyword"
+    choices = [str(a) for a in record.get("answers", []) if norm(str(a))]
+    for choice in choices:
+        if all(contains_phrase(c, choice) for c in choices):
+            continue
+        if contains_phrase(text, choice):
+            return f"keyword holds the choice {choice!r}"
+        if contains_phrase(heading, choice):
+            return f"Index heading names the choice {choice!r}"
     return ""
 
 

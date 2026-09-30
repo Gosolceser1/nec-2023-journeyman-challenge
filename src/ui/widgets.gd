@@ -387,3 +387,15 @@ static func audio_row_label(text: String, min_w: float) -> Label:
 	label.add_theme_font_size_override("font_size", 11)
 	label.add_theme_color_override("font_color", AppTheme.SLATE_400)
 	return label
+
+
+## `control` with `gap` px of extra room above it, the room shown and hidden
+## with the control. Named, so the nodes built after it keep their names.
+static func spaced_above(control: Control, gap: int, row_name: String) -> MarginContainer:
+	var row := MarginContainer.new()
+	row.name = row_name
+	row.add_theme_constant_override("margin_top", gap)
+	row.add_child(control)
+	row.visible = control.visible
+	control.visibility_changed.connect(func(): row.visible = control.visible)
+	return row

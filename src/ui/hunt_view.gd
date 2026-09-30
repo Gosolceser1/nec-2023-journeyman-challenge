@@ -1,13 +1,21 @@
 class_name HuntView
 extends RefCounted
-## The question stem with its code-book hunt keywords (HuntKeywords): colored
+## The question stem with its code-book hunt keywords (HuntKeywords): marked
 ## words in the stem and the "INDEX ..." line above the lookup path. Hovering a
 ## keyword (desktop) puts just its entry in the INDEX line until the pointer
 ## leaves; a tap or click keeps it there until a second tap. After answering
-## the keywords stay colored and the reference line is the usual section
+## the keywords stay marked and the reference line is the usual section
 ## breadcrumb.
 
+## Keyword looks: amber text on a faint amber tint (a highlighter mark, not a
+## link), a stronger tint under the pointer, and the singled-out keyword as a
+## solid amber chip with dark text.
 const KEYWORD_COLOR := AppTheme.AMBER_200
+const KEYWORD_TINT := Color(AppTheme.AMBER_400, 0.14)
+const HOVER_COLOR := AppTheme.AMBER_100
+const HOVER_TINT := Color(AppTheme.AMBER_400, 0.32)
+const FOCUS_COLOR := AppTheme.SLATE_900
+const FOCUS_TINT := Color(AppTheme.AMBER_400, 0.92)
 const INDEX_COLOR := AppTheme.AMBER_400
 ## A tap and the emulated click of the same finger (when a device emulates the
 ## mouse) arrive this close together; only the first counts.
@@ -31,18 +39,22 @@ var _pick_by_touch := false
 
 
 static func make_stem_label(font_size: int) -> RichTextLabel:
-	var label := RichTextLabel.new()
+	var label := KeywordStemLabel.new()
 	label.bbcode_enabled = true
 	label.fit_content = true
 	label.scroll_active = false
 	label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	label.shortcut_keys_enabled = false
 	label.hint_underlined = false
-	label.meta_underlined = true
+	label.meta_underlined = false
 	label.add_theme_font_override("normal_font", AppTheme.ui_font(AppTheme.WEIGHT_SEMIBOLD))
 	label.add_theme_font_size_override("normal_font_size", font_size)
 	label.add_theme_color_override("default_color", AppTheme.WHITE)
 	label.add_theme_constant_override("line_separation", 2)
+	# The keyword tint reaches a little past the glyphs, inside the line gap; any
+	# wider and it runs under the punctuation after the word.
+	label.add_theme_constant_override("text_highlight_h_padding", 1)
+	label.add_theme_constant_override("text_highlight_v_padding", 1)
 	# Main._touch_filter_walk keeps it PASS: hover and tap reach the keywords,
 	# drags still reach the page scroller.
 	label.set_meta("keeps_input", true)
@@ -85,10 +97,26 @@ func show_question(record: Dictionary, correct_text: String) -> void:
 	_touch = -1
 	_short = false
 	_hidden_by_fit = false
-	var on := showing()
-	var prompt := str(record.get("prompt", "Question unavailable"))
-	host.question_label.text = HuntKeywords.stem_bbcode(record, prompt, KEYWORD_COLOR, on)
+	_render_stem()
 	_fill_index_line()
+
+
+## After answering: nothing singled out, every keyword back to its plain mark.
+func answered() -> void:
+	_focus = -1
+	_hover = -1
+	_touch = -1
+	_render_stem()
+
+
+func _render_stem() -> void:
+	var looks := {}
+	if _hover >= 0:
+		looks[_hover] = [HOVER_COLOR, HOVER_TINT]
+	if _focus >= 0:
+		looks[_focus] = [FOCUS_COLOR, FOCUS_TINT]
+	var prompt := str(_record.get("prompt", "Question unavailable"))
+	host.question_label.text = HuntKeywords.stem_bbcode(_record, prompt, KEYWORD_COLOR, showing(), KEYWORD_TINT, looks)
 
 
 func showing() -> bool:
@@ -174,6 +202,7 @@ func _pick(i: int, by_touch: bool) -> void:
 	_pick_by_touch = by_touch
 	_note_fit_hide()
 	_focus = -1 if i == _focus else i
+	_render_stem()
 	_fill_index_line()
 
 
@@ -189,6 +218,7 @@ func hover_keyword(i: int) -> void:
 	if _hover < 0:
 		_note_fit_hide()
 	_hover = i
+	_render_stem()
 	_fill_index_line()
 
 

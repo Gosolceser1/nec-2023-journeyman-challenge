@@ -66,7 +66,7 @@ static func index_line(record: Dictionary, only: int = -1) -> String:
 	return "INDEX  " + "  ·  ".join(parts) if not parts.is_empty() else ""
 
 
-## Desktop hover text for one keyword.
+## One keyword's [hint] in the stem (KeywordStemLabel never shows it).
 static func tooltip(record: Dictionary, keyword: Dictionary) -> String:
 	var where := article_label(record, keyword)
 	var tip := "Look up \"%s\" in the Index" % str(keyword.get("index", ""))
@@ -114,8 +114,10 @@ static func find_span(prompt: String, text: String, taken: Array = []) -> int:
 
 ## The stem as BBCode with each keyword colored once, as a whole word where the
 ## stem allows (a [url] and [hint] let hover and tap single it out); parsed
-## text equals `prompt` exactly.
-static func stem_bbcode(record: Dictionary, prompt: String, color: Color, show: bool) -> String:
+## text equals `prompt` exactly. Keywords are `color` on a `tint` background;
+## `looks` maps a keyword index to its own [text color, background].
+static func stem_bbcode(record: Dictionary, prompt: String, color: Color, show: bool,
+		tint := Color.TRANSPARENT, looks := {}) -> String:
 	var spans: Array = []
 	var list := keywords(record) if show else []
 	for i in list.size():
@@ -126,10 +128,13 @@ static func stem_bbcode(record: Dictionary, prompt: String, color: Color, show: 
 	spans.sort_custom(func(a, b): return a["start"] < b["start"])
 	var out := ""
 	var pos := 0
-	var hex := color.to_html(false)
 	for span in spans:
 		out += escape_bbcode(prompt.substr(pos, span["start"] - pos))
-		var tip := hint_text(record, list[span["i"]])
-		out += "[url=%d][hint=%s][color=#%s]%s[/color][/hint][/url]" % [span["i"], tip, hex, escape_bbcode(prompt.substr(span["start"], span["end"] - span["start"]))]
+		var i: int = span["i"]
+		var look: Array = looks.get(i, [color, tint])
+		var word := "[color=#%s]%s[/color]" % [(look[0] as Color).to_html(false), escape_bbcode(prompt.substr(span["start"], span["end"] - span["start"]))]
+		if (look[1] as Color).a > 0.0:
+			word = "[bgcolor=#%s]%s[/bgcolor]" % [(look[1] as Color).to_html(true), word]
+		out += "[url=%d][hint=%s]%s[/hint][/url]" % [i, hint_text(record, list[i]), word]
 		pos = span["end"]
 	return out + escape_bbcode(prompt.substr(pos))

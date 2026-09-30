@@ -132,6 +132,23 @@ func _correct(rec: Dictionary) -> String:
 	return str(answers[idx]) if idx >= 0 and idx < answers.size() else ""
 
 
+## Keyword i's markup in the stem label.
+func _markup(i: int) -> String:
+	var text: String = main.question_label.text
+	var start := text.find("[url=%d]" % i)
+	return text.substr(start, text.find("[/url]", start) - start) if start >= 0 else ""
+
+
+## Which look keyword i wears: "focus", "hover" or "rest".
+func _look(i: int) -> String:
+	var code := _markup(i)
+	if code.contains(HuntView.FOCUS_TINT.to_html(true)):
+		return "focus"
+	if code.contains(HuntView.HOVER_TINT.to_html(true)):
+		return "hover"
+	return "rest" if code.contains(HuntView.KEYWORD_TINT.to_html(true)) else "none"
+
+
 func _line(rec: Dictionary, only := -1) -> String:
 	return AudioExplanationGenerator.redact_answer_spans(HuntKeywords.index_line(rec, only), _correct(rec))
 
@@ -294,15 +311,24 @@ func _hover_click_rules(i: int) -> void:
 	var p0 := _spot(rec, 0)
 	var p1 := _spot(rec, 1)
 	var rest: String = main.index_hint_label.text
+	var tip = main.question_label._make_custom_tooltip("x")
+	t.check(tip is Control and not (tip as Control).visible, "hovering a keyword shows no tooltip over the line beneath")
+	if tip is Control:
+		(tip as Control).free()
+	t.check(not main.question_label.meta_underlined, "keywords are not underlined like links")
+	t.eq([_look(0), _look(1), _look(2)], ["rest", "rest", "rest"], "keywords start with the plain mark")
 	_click(p0)
 	await _frames(1)
 	t.eq(main.index_hint_label.text, _line(rec, 0), "click keeps keyword 0's entry")
 	_motion(p1)
 	await _frames(1)
 	t.eq(main.index_hint_label.text, _line(rec, 1), "hovering another keyword shows that one")
+	t.eq([_look(0), _look(1), _look(2)], ["focus", "hover", "rest"], "clicked keyword is a chip, hovered one a stronger tint")
 	_leave()
 	await _frames(1)
 	t.eq(main.index_hint_label.text, _line(rec, 0), "leaving the stem goes back to the clicked entry")
+	t.eq([_look(0), _look(1)], ["focus", "rest"], "leaving drops the hover look only")
+	t.eq(main.question_label.get_parsed_text(), str(rec.get("prompt", "")), "the looks never change the stem text")
 	_motion(p0)
 	_click(p0)
 	await _frames(1)
@@ -326,6 +352,7 @@ func _tap_rules(i: int) -> void:
 	await _frames(1)
 	t.eq(main.index_hint_label.text, _line(rec, 0), "a finger tap names just keyword 0's entry")
 	t.check(main.index_hint_label.visible, "the tapped entry shows")
+	t.eq([_look(0), _look(1)], ["focus", "rest"], "the tapped keyword is a chip, the others keep the plain mark")
 	await _msec_gap()
 	_tap(p1)
 	await _frames(1)
@@ -422,6 +449,11 @@ func _stale_and_answered(i: int) -> void:
 		t.eq(main.index_hint_label.text, _line(next), "the next question shows its full INDEX line")
 	_show(i)
 	await _frames(3)
+	await _msec_gap()
+	_click(_spot(rec, 0))
+	_tap(_spot(rec, 0))
+	await _frames(1)
+	t.eq(_look(0), "focus", "keyword singled out just before answering")
 	var shown: Dictionary = main.session.display_record(i)
 	main._answer_selected((int(shown.get("correct_index", 0)) + 1) % (shown.get("answers", []) as Array).size())
 	main._auto_token += 1
@@ -433,6 +465,7 @@ func _stale_and_answered(i: int) -> void:
 	await _frames(1)
 	t.check(not main.index_hint_label.visible and not main.lookup_box.visible, "after answering, hover/tap shows no INDEX line")
 	t.eq(main.hunt.singled_out(), -1, "after answering nothing is singled out")
+	t.eq(_look(0), "rest", "after answering the keyword is back to the plain mark")
 
 
 func _run_mobile_child() -> bool:

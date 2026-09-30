@@ -205,6 +205,7 @@ func compact_answered(correct: int, selected: int) -> void:
 	host.index_hint_label.visible = false
 	host.lookup_box.visible = false
 	host.timer_bar.visible = false
+	host.hunt.answered()
 	refresh_ref_column()
 	host.feedback_scroll.visible = true
 	host.feedback_scroll.scroll_vertical = 0

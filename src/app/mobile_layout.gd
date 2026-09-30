@@ -258,7 +258,7 @@ static func build(host: Main) -> void:
 	var bar_fill := AppTheme.panel_style(AppTheme.SKY_500, AppTheme.SKY_400, 0, 3)
 	host.timer_bar.add_theme_stylebox_override("background", bar_bg)
 	host.timer_bar.add_theme_stylebox_override("fill", bar_fill)
-	question_column.add_child(host.timer_bar)
+	question_column.add_child(Widgets.spaced_above(host.timer_bar, AppTheme.SPACE_XS, "TimerBarRow"))
 
 	host.answers_box = VBoxContainer.new()
 	host.answers_box.add_theme_constant_override("separation", AppTheme.SPACE_SM)

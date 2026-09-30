@@ -32,6 +32,13 @@
   it works even when the INDEX line was hidden to make room.
 - Code-book keywords are colored as whole words ("wire", not the start of
   "wireless").
+- Code-book keywords look like highlighter marks, not links: a soft amber tint,
+  stronger under the pointer, and the tapped word as a solid amber chip.
+  Hovering no longer pops a tooltip over the line under the question. No
+  keyword holds an answer choice any more (Final Exam #1 Q2 marks "field
+  connections", not "rear or side access", which held the choice "rear").
+  The INDEX box text is a little larger on desktop, and the item timer bar
+  has room above it.
 - Question notes no longer hint at the answer before you answer on Final Exam
   #2 Q40 and Open Book #9 Q17, Q19 and Q21.
 - The type-letters figure no longer gives away the wet-location cord (Final

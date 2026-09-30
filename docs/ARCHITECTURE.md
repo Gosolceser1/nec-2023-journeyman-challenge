@@ -41,7 +41,8 @@ src/
           touch_scroll.gd   TouchScroll: finger drag-to-scroll for every ScrollContainer, tap vs swipe
           voice_sheet.gd    VoiceSheet: the mobile voice list (rows built a batch per frame)
           fit_controller.gd FitController: keeps the question screen at 0% scroll
-          hunt_view.gd      HuntView: colored hunt keywords in the stem, the INDEX line, tap and hover
+          hunt_view.gd      HuntView: marked hunt keywords in the stem, the INDEX line, tap and hover
+          keyword_stem_label.gd  KeywordStemLabel: the stem RichTextLabel, no hover tooltip
           table_viewer.gd   TableViewer: reference tables that never scroll (column fit, folding, type steps)
           info_panel_renderer.gd  InfoPanelRenderer: the explanation RichTextLabel
           results_view.gd   ResultsView: graded and listen results, confetti

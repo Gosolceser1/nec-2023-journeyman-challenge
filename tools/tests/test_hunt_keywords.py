@@ -70,6 +70,28 @@ class HuntKeywordsTest(unittest.TestCase):
         self.assertEqual(hunt_keywords.leaks(plural, "pressure connectors", "Terminals", []), "keyword contains the correct choice")
         self.assertEqual(hunt_keywords.leaks(plural, "installed", "Lockable disconnects", []), "")
 
+    def test_no_keyword_points_at_any_choice(self):
+        # Coloring 'rear or side access' put the distractor 'rear' in amber.
+        rec = {"prompt": "Each section that requires rear or side access to make field connections shall be marked on the ___.",
+               "answers": ["front", "right side", "left side", "rear"], "correct_index": 0}
+        self.assertEqual(hunt_keywords.leaks(rec, "rear or side access", "Switchboards and switchgear", []),
+                         "keyword holds the choice 'rear'")
+        self.assertEqual(hunt_keywords.leaks(rec, "field connections", "Switchboards and switchgear", []), "")
+        sup = {"prompt": "x", "answers": ["Supplementary", "Tap", "By-pass", "Branch circuit"], "correct_index": 3}
+        self.assertEqual(hunt_keywords.leaks(sup, "process heating", "Supplementary overcurrent protection", []),
+                         "Index heading names the choice 'Supplementary'")
+        by_id = {r["id"]: r for r in self.bank["records"]}
+        for rid, entry in self.data["records"].items():
+            choices = [str(a) for a in by_id[rid].get("answers", []) if hunt_keywords.norm(str(a))]
+            for kw in entry["keywords"]:
+                for choice in choices:
+                    if all(hunt_keywords.contains_phrase(c, choice) for c in choices):
+                        continue
+                    with self.subTest(rid=rid, keyword=kw["text"], choice=choice):
+                        self.assertNotEqual(hunt_keywords.norm(kw["text"]), hunt_keywords.norm(choice))
+                        self.assertFalse(hunt_keywords.contains_phrase(kw["text"], choice))
+                        self.assertFalse(hunt_keywords.contains_phrase(kw["index"], choice))
+
     def test_article_answers_hide_the_article(self):
         rec = {"prompt": "Which article covers swimming pools?", "answers": ["680", "682", "690", "547"],
                "correct_index": 0}

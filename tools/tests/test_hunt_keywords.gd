@@ -2,7 +2,8 @@ extends SceneTree
 ## Code-book hunt keywords on the question screen, every record:
 ## - the stem reads exactly as the bank has it (the colors are markup only),
 ##   each keyword is colored and the INDEX line names its entries;
-## - neither names the correct choice; the answers box holds answer cards only;
+## - neither names the correct choice, and no keyword or its Index heading holds
+##   any choice (distractors included); the answers box holds answer cards only;
 ## - after answering the INDEX line goes and the reference line is unchanged;
 ## - the spoken question is the same with the setting on or off;
 ## - the setting off, or the Full Exam, shows no keywords at all;
@@ -70,6 +71,32 @@ func _names_answer(text: String, answer: String) -> bool:
 	return a.length() > 1 and text.to_lower().contains(a)
 
 
+## Lowercase words joined by single spaces, for whole-word containment.
+func _words(text: String) -> String:
+	var out := ""
+	for c in text.to_lower():
+		out += c if (c >= "a" and c <= "z") or (c >= "0" and c <= "9") else " "
+	return " ".join(out.split(" ", false))
+
+
+func _holds(haystack: String, needle: String) -> bool:
+	var n := _words(needle)
+	return n != "" and (" %s " % _words(haystack)).contains(" %s " % n)
+
+
+## Neither a keyword nor its Index heading may hold any choice, distractors
+## included (unless every choice holds it): a marked choice points at itself.
+func _points_at_choice(rec: Dictionary, kw: Dictionary) -> String:
+	var choices: Array = (rec.get("answers", []) as Array).filter(func(a): return _words(str(a)) != "")
+	for choice in choices:
+		if choices.all(func(c): return _holds(str(c), str(choice))):
+			continue
+		if _words(str(kw.get("text", ""))) == _words(str(choice)) or _holds(str(kw.get("text", "")), str(choice)) \
+				or _holds(str(kw.get("index", "")), str(choice)):
+			return str(choice)
+	return ""
+
+
 ## Node-free rules on every record: markup parses back to the stem, colors
 ## one span per keyword, never names the answer.
 func _data_rules() -> void:
@@ -94,6 +121,8 @@ func _data_rules() -> void:
 		for kw in list:
 			t.check(prompt.contains(str(kw.get("text", ""))), "%s: keyword '%s' is in the stem" % [qid, kw.get("text")])
 			t.check(not _names_answer(str(kw.get("text", "")), answer), "%s: keyword '%s' holds the answer" % [qid, kw.get("text")])
+			var choice := _points_at_choice(rec, kw)
+			t.check(choice == "", "%s: keyword '%s' (%s) points at the choice '%s'" % [qid, kw.get("text"), kw.get("index"), choice])
 		var line := HuntKeywords.index_line(rec)
 		t.check(line.begins_with("INDEX  "), "%s: INDEX line '%s'" % [qid, line])
 		if answer.strip_edges().length() > 3 and not answer.strip_edges().is_valid_float():
