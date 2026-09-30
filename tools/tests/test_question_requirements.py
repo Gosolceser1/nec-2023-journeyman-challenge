@@ -1,5 +1,5 @@
 """The table/formula guard: data/question_requirements.json against the bank,
-and the NEC 2023 calculation helpers in tools/pipeline/nec_calc.py."""
+and the NEC calculation helpers in tools/pipeline/nec_calc.py."""
 from __future__ import annotations
 
 import copy
@@ -64,7 +64,7 @@ class WorkedSolutionTests(unittest.TestCase):
     def test_formula_record_needs_a_recomputation(self):
         record = {"id": "q-001", "answers": ["20 A", "25 A"], "correct_index": 0, "formula": "I = P / E"}
         missing = check_worked_solutions.main_for([record], {"records": {}})
-        self.assertEqual(missing, ["q-001: has formula/worked text but no recomputation in CHECKS"])
+        self.assertEqual(missing, ["q-001: has formula/worked text but no check in question_requirements.json"])
         for req in ({"class": "calc", "check": {"kind": "quotient", "a": 2400, "b": 120}}, {"class": "table"}):
             self.assertEqual(check_worked_solutions.main_for([record], {"records": {"q-001": req}}), [])
         self.assertEqual(len(check_worked_solutions.main_for([record], {"records": {"q-001": {"class": "calc"}}})), 1)
@@ -181,6 +181,12 @@ class CalcHelperTests(unittest.TestCase):
             {"kind": "ampacity", "awg": "12", "column_c": 60, "ambient_f": 75, "ccc": 3}), 21.6)
         self.assertEqual(nec_calc.multioutlet_va(12), 540)
         self.assertEqual(nec_calc.multioutlet_va(12, simultaneous=True), 2160)
+
+    def test_tables_come_from_the_edition_folder(self):
+        import pipeline_paths
+        edition = pipeline_paths.edition()
+        self.assertEqual(nec_calc.nec_data("tables.json").parent, ROOT / "data" / edition["dir"])
+        self.assertEqual(str(nec_calc.NEC["edition"]), str(edition["year"]))
 
 
 if __name__ == "__main__":

@@ -173,7 +173,11 @@
   },
   "final-exam-#1-036": {
    "class": "recall",
-   "note": "Recall of the 310.12(A) 83 percent rule; the formula hint is redacted before answering."
+   "note": "Recall of the 310.12(A) 83 percent rule; the formula hint is redacted before answering.",
+   "check": {
+    "kind": "value",
+    "value": "83%"
+   }
   },
   "final-exam-#1-037": {
    "class": "recall"
@@ -386,7 +390,11 @@
   },
   "final-exam-#3-026": {
    "class": "recall",
-   "note": "Recall of the 626.11(A) 11 kVA per space rule; the table cell is blanked before answering."
+   "note": "Recall of the 626.11(A) 11 kVA per space rule; the table cell is blanked before answering.",
+   "check": {
+    "kind": "value",
+    "value": 11
+   }
   },
   "final-exam-#3-027": {
    "class": "recall"
@@ -964,7 +972,11 @@
   },
   "open-book-exam-#4-022": {
    "class": "recall",
-   "note": "Recall of the 310.12(A) 83 percent rule; the formula hint is redacted before answering."
+   "note": "Recall of the 310.12(A) 83 percent rule; the formula hint is redacted before answering.",
+   "check": {
+    "kind": "value",
+    "value": "83%"
+   }
   },
   "open-book-exam-#4-023": {
    "class": "recall"

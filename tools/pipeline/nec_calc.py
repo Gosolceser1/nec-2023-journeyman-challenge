@@ -1,9 +1,9 @@
-"""NEC 2023 table values and the calculations the question bank relies on.
+"""NEC table values and the calculations the question bank relies on.
 
-The table constants were checked against NFPA 70-2023 on UpCodes
-(docs/TABLES_FORMULAS_AUDIT.md lists the table, the rows used and the URL).
-DWELLING_VA_FT2 (220.41), the 1500 VA circuit loads (220.52) and the K values
-were not re-read there. Only the rows a calculation needs are kept.
+Every table row and code value comes from the edition's tables.json
+(data/<edition dir>/tables.json, the file the in-app math helpers read), so a
+new edition changes numbers in one data file. docs/TABLES_FORMULAS_AUDIT.md
+lists the tables and rows the bank's calculations use.
 
 `evaluate(spec)` turns a declarative check from data/question_requirements.json
 into a value, so tools/pipeline/check_requirements.py can recompute a record's
@@ -14,82 +14,70 @@ record can be checked the day it is added.
 """
 from __future__ import annotations
 
+import json
 import math
+import re
+import sys
 from fractions import Fraction
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from pipeline_paths import nec_data  # noqa: E402
+
+NEC = json.loads(nec_data("tables.json").read_text(encoding="utf-8"))
+VALUES = NEC["values"]
+
+
+def rows(table_id: str) -> list[dict]:
+    return NEC["tables"][table_id]["rows"]
+
+
+def column(table_id: str, col: str, key=str) -> dict:
+    return {key(r["key"]): r[col] for r in rows(table_id)}
+
 
 # --- Article 220 -------------------------------------------------------------
-# Table 220.42(A) General Lighting Loads by Non-Dwelling Occupancy (VA/ft2)
-T220_42A_VA_FT2 = {
-    "automotive facility": 1.5, "convention center": 1.4, "courthouse": 1.4,
-    "dormitory": 1.5, "exercise center": 1.4, "fire station": 1.3,
-    "gymnasium": 1.7, "health care clinic": 1.6, "hospital": 1.6,
-    "hotel or motel": 1.7, "library": 1.5, "manufacturing facility": 2.2,
-    "motion picture theater": 1.6, "museum": 1.6, "office": 1.3,
-    "parking garage": 0.3, "penitentiary": 1.2, "performing arts theater": 1.5,
-    "police station": 1.3, "post office": 1.6, "religious facility": 2.2,
-    "restaurant": 1.5, "retail": 1.9, "school/university": 1.5,
-    "sports arena": 1.5, "town hall": 1.4, "transportation": 1.2,
-    "warehouse": 1.2, "workshop": 1.7,
-}
-# 220.41: dwelling units, 3 VA/ft2
-DWELLING_VA_FT2 = 3
-# Table 220.45, dwelling units: first 3000 VA at 100 %, 3001-120,000 VA at 35 %, rest at 25 %
-T220_45_DWELLING = [(3000, 1.00), (120000, 0.35), (math.inf, 0.25)]
-# 220.52(A)/(B): small-appliance and laundry circuits, VA each
-SMALL_APPLIANCE_VA, LAUNDRY_VA = 1500, 1500
-# 220.14(H)(1): each 5 ft (or fraction) of multioutlet assembly = one 180 VA outlet
-MULTIOUTLET_FT, MULTIOUTLET_VA = 5, 180
-# Table 220.54 Demand Factors for Household Electric Clothes Dryers (%)
-T220_54 = {**{n: 100 for n in range(1, 5)}, 5: 85, 6: 75, 7: 65, 8: 60, 9: 55, 10: 50, 11: 47}
-DRYER_MIN_W = 5000
-# Table 220.55 Column C, one appliance (kW); Note 1: +5 % per kW or major fraction over 12 kW
-T220_55_COL_C = {1: 8.0, 2: 11.0, 3: 14.0, 4: 17.0, 5: 20.0}
+T220_42A_VA_FT2 = column("t220_42a", "va_ft2")
+DWELLING_VA_FT2 = VALUES["220.41.va_per_ft2"]
+T220_45_DWELLING = [(r["hi"], r["percent"] / 100) for r in rows("t220_45")]
+T220_45_DWELLING[-1] = (math.inf, T220_45_DWELLING[-1][1])
+SMALL_APPLIANCE_VA = VALUES["220.52(A).va_per_circuit"]
+LAUNDRY_VA = VALUES["220.52(B).va_per_circuit"]
+MULTIOUTLET_FT = VALUES["220.14(H)(1).feet"]
+MULTIOUTLET_VA = VALUES["220.14(H).va_per_outlet"]
+T220_54_ROWS = rows("t220_54")
+DRYER_MIN_W = VALUES["220.54.min_watts"]
+T220_55_COL_C = {int(r["key"]): float(r["col_c"]) for r in rows("t220_55") if r["key"].isdigit()}
+RANGE_NOTE1_BASE_KW = VALUES["220.55.note1_base_kw"]
+RANGE_NOTE1_PCT_PER_KW = VALUES["220.55.note1_percent_per_kw"]
 
 # --- Article 240 / 250 / 310 -------------------------------------------------
-# 240.6(A) standard ampere ratings (through 400 A)
-STD_240_6A = [10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 110, 125, 150, 175,
-              200, 225, 250, 300, 350, 400]
-# Table 250.122 (rating not exceeding, A) -> copper EGC
-T250_122_CU = [(15, "14"), (20, "12"), (60, "10"), (100, "8"), (200, "6"), (300, "4"), (400, "3")]
-# Table 310.16 copper (60 C, 75 C, 90 C)
-T310_16_CU = {"14": (15, 20, 25), "12": (20, 25, 30), "10": (30, 35, 40), "8": (40, 50, 55),
-              "6": (55, 65, 75), "4": (70, 85, 95)}
-# Table 310.15(B)(1)(1) correction factors based on 30 C: (lo F, hi F) -> (60 C, 75 C, 90 C)
-T310_15B11 = [((69, 77), (1.08, 1.05, 1.04)),
-              ((78, 86), (1.00, 1.00, 1.00)), ((87, 95), (0.91, 0.94, 0.96)),
-              ((96, 104), (0.82, 0.88, 0.91)), ((105, 113), (0.71, 0.82, 0.87))]
-# Table 310.15(C)(1) adjustment by number of current-carrying conductors
-T310_15C1 = [((1, 3), 1.00), ((4, 6), 0.80), ((7, 9), 0.70), ((10, 20), 0.50),
-             ((21, 30), 0.45), ((31, 40), 0.40), ((41, 10**6), 0.35)]
+STD_240_6A = [r["amps"] for r in rows("t240_6a")]
+T250_122_CU = [(r["amps"], r["cu"]) for r in rows("t250_122")]
+T310_16_CU = {r["key"]: (r["cu60"], r["cu75"], r["cu90"]) for r in rows("t310_16")}
+T310_15B11 = [((r["lo"], r["hi"]), (r["c60"], r["c75"], r["c90"])) for r in rows("t310_15b1_1")]
+# Table 310.15(C)(1) starts at four current-carrying conductors; fewer need no adjustment.
+T310_15C1 = [((1, 3), 1.0)] + [((r["lo"], r["hi"]), r["percent"] / 100) for r in rows("t310_15c1")]
 
-# --- Box fill: Table 314.16(B) volume allowance per conductor (in3) -----------
-T314_16B_IN3 = {"18": 1.50, "16": 1.75, "14": 2.00, "12": 2.25, "10": 2.50, "8": 3.00, "6": 5.00}
-
-# --- Chapter 9 ---------------------------------------------------------------
-# Table 1: percent fill by number of conductors
-CH9_T1 = {1: 53, 2: 31, "over 2": 40}
-# Table 4, Article 358 EMT, total area 100 % (in2)
-CH9_T4_EMT_IN2 = {"1/2": 0.304, "3/4": 0.533, "1": 0.864, "1-1/4": 1.496, "1-1/2": 2.036, "2": 3.356}
-# Table 5, THHN/THWN/THWN-2 approximate area (in2)
-CH9_T5_THHN_IN2 = {"14": 0.0097, "12": 0.0133, "10": 0.0211, "8": 0.0366, "6": 0.0507,
-                   "4": 0.0824, "3": 0.0973, "2": 0.1158, "1": 0.1562}
-# Table 8: circular mils and uncoated copper dc resistance at 75 C (ohm/kFT), stranded
-CH9_T8_CMIL = {"14": 4110, "12": 6530, "10": 10380, "8": 16510, "6": 26240, "4": 41740,
-               "3": 52620, "2": 66360, "1": 83690}
-CH9_T8_CU_OHM_KFT = {"14": 3.14, "12": 1.98, "10": 1.24, "8": 0.778, "6": 0.491, "4": 0.308,
-                     "3": 0.245, "2": 0.194, "1": 0.154}
-# Approximate K (ohm-cmil/ft) used with VD = 2KIL/CM
+# --- Box fill and Chapter 9 --------------------------------------------------
+T314_16B_IN3 = column("t314_16b1", "in3")
+CH9_T1 = {(int(k) if k.isdigit() else k): v for k, v in column("ch9_t1", "percent").items()}
+CH9_T4_EMT_IN2 = column("ch9_t4_emt", "a100")
+CH9_T5_THHN_IN2 = column("ch9_t5_thhn", "in2")
+CH9_T8_CMIL = column("ch9_t8", "cmil")
+CH9_T8_CU_OHM_KFT = column("ch9_t8", "cu_ohm_kft")
+CH9_NOTE7_ROUND_UP_AT = VALUES["ch9.note7_round_up_at"]
+# Approximate K (ohm-cmil/ft) used with VD = 2KIL/CM (a textbook constant, not an NEC table)
 K_COPPER, K_ALUMINUM = 12.9, 21.2
 
 # --- Other code values used by calculation records ---------------------------
-# 366.23(A): bare bars in sheet metal auxiliary gutters, A per in2
-BUS_A_PER_IN2 = {"copper": 1000, "aluminum": 700}
-# Table 630.31(A) resistance-welder duty-cycle multipliers
-T630_31A = {50: 0.71, 40: 0.63, 30: 0.55, 25: 0.50, 20: 0.45, 15: 0.39, 10: 0.32, 7.5: 0.27, 5: 0.22}
-# 630.12(A): arc-welder OCPD not more than 200 % of I1max
-WELDER_OCPD_PCT = 200
-# 240.21(B)(1)(1)(d): field-installed 10 ft tap ampacity >= 1/10 of the feeder OCPD
-TAP_10FT_RATIO = 10
+BUS_A_PER_IN2 = {"copper": VALUES["366.23(A).copper_a_per_in2"],
+                 "aluminum": VALUES["366.23(A).aluminum_a_per_in2"]}
+T630_31A = column("t630_31a", "multiplier", float)
+WELDER_OCPD_PCT = VALUES["630.12(A).percent"]
+TAP_10FT_RATIO = VALUES["240.21(B)(1).tap_ratio"]
+# Table 220.54 rows above 11 dryers are written as "A - B * (n - C)".
+SLIDING_PERCENT = re.compile(r"([\d.]+) - ([\d.]+) \* \(n - (\d+)\)")
 
 
 def lookup_range(table, value):
@@ -113,19 +101,19 @@ def ampacity(base: float, temp_factor: float = 1.0, ccc: int = 3) -> float:
 
 def range_demand_kw(nameplate_kw: float) -> float:
     """Table 220.55 Column C for one range, with Note 1 above 12 kW."""
-    over = max(0.0, nameplate_kw - 12)
+    over = max(0.0, nameplate_kw - RANGE_NOTE1_BASE_KW)
     steps = math.floor(over) + (1 if over - math.floor(over) > 0.5 else 0)
-    return T220_55_COL_C[1] * (1 + 0.05 * steps)
+    return T220_55_COL_C[1] * (1 + RANGE_NOTE1_PCT_PER_KW / 100 * steps)
 
 
 def dryer_demand_pct(count: int) -> float:
-    if count in T220_54:
-        return T220_54[count]
-    if count <= 23:
-        return 47 - (count - 11)
-    if count <= 42:
-        return 35 - 0.5 * (count - 23)
-    return 25
+    for row in T220_54_ROWS:
+        if row["lo"] <= count <= row["hi"]:
+            if "percent" in row:
+                return row["percent"]
+            start, step, past = SLIDING_PERCENT.fullmatch(row["expr"]).groups()
+            return float(start) - float(step) * (count - int(past))
+    raise KeyError(count)
 
 
 def multioutlet_va(length_ft: float, simultaneous: bool = False) -> float:
@@ -176,7 +164,7 @@ def conduit_max_conductors(conduit_in2: float, wire_in2: float) -> int:
     """Chapter 9 Table 1 (over 2 wires, 40 %); Note 7 rounds up at 0.8 or more."""
     raw = conduit_in2 * CH9_T1["over 2"] / 100 / wire_in2
     whole = math.floor(raw)
-    return whole + 1 if raw - whole >= 0.8 else whole
+    return whole + 1 if raw - whole >= CH9_NOTE7_ROUND_UP_AT else whole
 
 
 def voltage_drop(amps: float, length_ft: float, awg: str | None = None, *, phases: int = 1,
