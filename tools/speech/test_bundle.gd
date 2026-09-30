@@ -29,4 +29,26 @@ func _init() -> void:
 	print("BUNDLE_HITS=%d/%d" % [hits, total])
 	if not missing.is_empty():
 		print("BUNDLE_MISSING=" + ", ".join(missing))
-	quit(0 if hits == total and total > 0 else 1)
+	# Show steps: every step of every calculation question's solution.
+	var step_speech = load("res://src/speech/math_step_speech.gd")
+	var step_hits := 0
+	var step_total := 0
+	var step_missing: Array = []
+	for record in bank["records"]:
+		if not record is Dictionary:
+			continue
+		var sol: Dictionary = MathEngine.exam_solution(record)
+		if not sol.get("ok", false):
+			continue
+		var steps: Array = sol.get("steps", [])
+		for i in steps.size():
+			var sid: String = step_speech.folder_id(str(record.get("id", "")), i)
+			step_total += 1
+			if holder._bundled_speech_folder(sid, holder.BUNDLED_VOICE_ID, step_speech.plan(steps[i])) != "":
+				step_hits += 1
+			elif step_missing.size() < 8:
+				step_missing.append(sid)
+	print("BUNDLE_STEP_HITS=%d/%d" % [step_hits, step_total])
+	if not step_missing.is_empty():
+		print("BUNDLE_STEP_MISSING=" + ", ".join(step_missing))
+	quit(0 if hits == total and total > 0 and step_hits == step_total and step_total > 0 else 1)

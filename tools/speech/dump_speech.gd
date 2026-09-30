@@ -19,6 +19,7 @@ func _init() -> void:
 	var out_dir := OS.get_user_data_dir().path_join("speech_src")
 	DirAccess.make_dir_recursive_absolute(out_dir)
 	var count := 0
+	var steps := 0
 	for record in bank["records"]:
 		if not record is Dictionary:
 			continue
@@ -31,6 +32,7 @@ func _init() -> void:
 		file.store_string(JSON.stringify({"id": str(record.get("id", "")), "segments": plan}))
 		file.close()
 		count += 1
+		steps += _dump_steps(record, out_dir)
 	# The voice picker's preview line, so the recorded voice previews offline.
 	var main_script = load("res://src/app/main.gd")
 	var preview := FileAccess.open(out_dir.path_join(main_script.PREVIEW_ID + ".json"), FileAccess.WRITE)
@@ -39,4 +41,23 @@ func _init() -> void:
 	preview.close()
 	print("SPEECH_SRC_DIR=" + out_dir)
 	print("SPEECH_PLANS=" + str(count))
+	print("SPEECH_STEP_PLANS=" + str(steps))
 	quit(0)
+
+
+## One plan per step of a calculation question's solution (Show steps' Read).
+func _dump_steps(record: Dictionary, out_dir: String) -> int:
+	var step_speech = load("res://src/speech/math_step_speech.gd")
+	var sol: Dictionary = MathEngine.exam_solution(record)
+	if not sol.get("ok", false):
+		return 0
+	var steps: Array = sol.get("steps", [])
+	for i in steps.size():
+		var safe_id: String = step_speech.folder_id(str(record.get("id", "")), i)
+		var file := FileAccess.open(out_dir.path_join(safe_id + ".json"), FileAccess.WRITE)
+		if file == null:
+			push_error("cannot write speech plan for " + safe_id)
+			continue
+		file.store_string(JSON.stringify({"id": safe_id, "segments": step_speech.plan(steps[i])}))
+		file.close()
+	return steps.size()

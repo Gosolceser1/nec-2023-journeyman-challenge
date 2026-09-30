@@ -11,7 +11,6 @@ extends Control
 ## own inner state (the trainer's problem, a running drill) answers Back
 ## itself through handle_back().
 
-const SpeechText = preload("res://src/speech/speech_text.gd")
 const NODE_NAME := "MathHub"
 const STEPS_BUTTON := "MathStepsButton"
 ## Desktop: the column is as wide as the menu card.
@@ -207,14 +206,38 @@ func _apply_margins() -> void:
 
 func _show() -> void:
 	if not visible:
+		_pause_quiz_voice()
 		visible = true
 		sfx("transition")
 		UiFx.screen_enter(_content, UiFx.reduce_motion)
 
 
+## The quiz below stops reading and its hands-free loop waits while these
+## screens are open.
+func _pause_quiz_voice() -> void:
+	if not _over_quiz():
+		return
+	host._auto_token += 1
+	if is_instance_valid(host._listen_timer):
+		host._listen_timer.stop()
+	host.speech._stop_reading()
+
+
+## Listen mode picks up the phase it was in (the answer's teach lines, the
+## pause before the next question).
+func _resume_quiz_voice() -> void:
+	if _over_quiz() and host.session_audio_mode == AudioSettings.Mode.LISTEN \
+			and not host.session_muted and not host.listen_paused \
+			and host.listen_phase != AudioSettings.ListenPhase.IDLE:
+		host._listen_enter(host.listen_phase)
+
+
 func close() -> void:
 	stop_speaking()
+	var was_open := visible
 	visible = false
+	if was_open:
+		_resume_quiz_voice()
 	_stack.clear()
 	if is_instance_valid(_screen):
 		_screen.queue_free()
@@ -303,25 +326,38 @@ func with_click(b: BaseButton) -> BaseButton:
 	return b
 
 
+func _over_quiz() -> bool:
+	return is_instance_valid(host) and not host.menu_overlay.visible and not host.order.is_empty()
+
+
+func _voice_mode() -> int:
+	return host.session_audio_mode if _over_quiz() else host.audio.mode
+
+
+## Voice off (the quiz's mute, or the Silent mode from the menu) hides Read.
 func can_speak() -> bool:
-	return DisplayServer.tts_get_voices().size() > 0
+	if not is_instance_valid(host) or host.speech == null:
+		return false
+	if _over_quiz():
+		return not host.session_muted
+	return not AudioSettings.starts_muted(host.audio.mode)
 
 
-## Reads text through the device voice, worded by the app's speech rules.
-func speak(text: String) -> void:
-	if not can_speak():
-		return
-	if is_instance_valid(host):
-		host.speech._stop_reading()
-	DisplayServer.tts_stop()
-	var voice := host.speech._pick_native_voice() if is_instance_valid(host) else ""
-	var rate := clampf(float(host.audio.speed), 0.5, 2.0) if is_instance_valid(host) else 1.0
-	DisplayServer.tts_speak(SpeechText.speakable(text), voice, 80, 1.0, rate)
+## Auto-read and Listen read each step as it is shown, like the quiz.
+func auto_reads() -> bool:
+	return can_speak() and AudioSettings.autoplays_question(_voice_mode())
+
+
+## Reads a step with the picked voice: its recorded clips, the online voice,
+## then the recorded Andrew or the device voice with a notice.
+func speak(folder_id: String, plan: Array, on_state: Callable) -> void:
+	if can_speak():
+		host.speech.read_external(folder_id, plan, on_state)
 
 
 func stop_speaking() -> void:
-	if can_speak():
-		DisplayServer.tts_stop()
+	if is_instance_valid(host) and host.speech != null:
+		host.speech.stop_external()
 
 
 ## A step viewer wired to the hub's sounds and voice.
@@ -330,6 +366,8 @@ func make_steps_view() -> MathStepsView:
 	view.sfx = sfx
 	if can_speak():
 		view.speak = speak
+		view.stop = stop_speaking
+		view.auto_read = auto_reads()
 	return view
 
 

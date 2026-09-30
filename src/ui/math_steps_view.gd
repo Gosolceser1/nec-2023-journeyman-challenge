@@ -7,6 +7,8 @@ extends VBoxContainer
 signal done
 signal step_changed(index: int)
 
+const MathStepSpeech = preload("res://src/speech/math_step_speech.gd")
+
 ## Title colour per step kind; unknown kinds use the sky accent.
 const KIND_COLORS := {
 	"formula": AppTheme.AMBER_400,
@@ -27,10 +29,19 @@ const MEMORY_KEYS := ["M+", "M-", "M−", "MR", "MC"]
 var mobile := false
 var steps: Array = []
 var index := 0
+## The exam question the steps solve ("" for a generated problem): names the
+## step's recorded clips.
+var record_id := ""
 ## Plays an interface sound by Sfx id (the hub passes Main._sfx).
 var sfx: Callable
-## Reads a step's text aloud (empty: no Read button).
+## speak.call(folder_id, plan, on_state) reads a step; on_state(playing, note)
+## comes back. Empty: no Read button (voice off).
 var speak: Callable
+var stop: Callable
+## Read each step as it is shown (the Auto-read and Listen voice modes).
+var auto_read := false
+var reading := false
+var _voice_note: Label
 
 var _counter: Label
 var _title: Label
@@ -76,10 +87,15 @@ func _init(is_mobile: bool = false) -> void:
 	foot.add_child(_read)
 	_next = Widgets.make_primary_button("Next step", h, fs, _go.bind(1))
 	foot.add_child(_next)
+	_voice_note = MathUi.meta_label("", AppTheme.AMBER_200)
+	_voice_note.visible = false
+	add_child(_voice_note)
 
 
 func show_solution(solution: Dictionary, start: int = 0) -> void:
+	stop_reading()
 	steps = solution.get("steps", [])
+	record_id = str(solution.get("record_id", ""))
 	index = clampi(start, 0, maxi(0, steps.size() - 1))
 	_render()
 
@@ -90,6 +106,7 @@ func is_last() -> bool:
 
 func _go(delta: int) -> void:
 	if delta > 0 and is_last():
+		stop_reading()
 		if sfx.is_valid():
 			sfx.call("click")
 		done.emit()
@@ -97,6 +114,7 @@ func _go(delta: int) -> void:
 	var to := clampi(index + delta, 0, maxi(0, steps.size() - 1))
 	if to == index:
 		return
+	stop_reading()
 	index = to
 	if sfx.is_valid():
 		sfx.call("select")
@@ -132,17 +150,49 @@ func step_text(i: int = -1) -> String:
 	return " ".join(parts)
 
 
-## step_text for the voice. A decimal right after an operator is a quantity:
-## "÷ 831.36" is spoken "831 point 36" so the speech rules' Code citation
-## reading ("by 831.36" -> "by section 831 point 36") cannot apply.
+## What the voice says for a step (MathStepSpeech: every part a sentence, the
+## calculator keys named one by one).
 func spoken_text(i: int = -1) -> String:
-	var re := RegEx.create_from_string("([÷×=+−]\\s*)(\\d[\\d,]*)\\.(\\d+)")
-	return re.sub(step_text(i), "$1$2 point $3", true)
+	return MathStepSpeech.spoken(steps[index if i < 0 else i])
 
 
+## The recorded / cached clip folder for a step.
+func step_folder_id(i: int = -1) -> String:
+	var at := index if i < 0 else i
+	if record_id != "":
+		return MathStepSpeech.folder_id(record_id, at)
+	return MathStepSpeech.live_id(steps[at])
+
+
+## Read toggles: Stop while this step is being read.
 func _read_step() -> void:
-	if speak.is_valid() and not steps.is_empty():
-		speak.call(spoken_text())
+	if reading:
+		stop_reading()
+		return
+	read_current()
+
+
+func read_current() -> void:
+	if not speak.is_valid() or steps.is_empty():
+		return
+	speak.call(step_folder_id(), MathStepSpeech.plan(steps[index]), set_reading)
+
+
+func stop_reading() -> void:
+	if reading and stop.is_valid():
+		stop.call()
+	set_reading(false, "")
+
+
+## The voice's state: the button says Stop while it reads; a fallback voice
+## ("System voice (no internet)") or "Preparing…" shows under the buttons.
+func set_reading(playing: bool, note: String = "") -> void:
+	reading = playing
+	if not is_instance_valid(_read):
+		return
+	_read.text = "Stop" if playing else "Read"
+	_voice_note.text = note
+	_voice_note.visible = playing and note != ""
 
 
 func _render() -> void:
@@ -203,6 +253,12 @@ func _render() -> void:
 	if not UiFx.reduce_motion:
 		UiFx.screen_enter(_body, false)
 	step_changed.emit(index)
+	if auto_read and speak.is_valid():
+		read_current.call_deferred()
+
+
+func _exit_tree() -> void:
+	stop_reading()
 
 
 ## A caption and the key sequence as caps, wrapping onto more rows as needed.

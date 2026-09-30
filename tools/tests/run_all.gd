@@ -95,6 +95,10 @@ const SUITES := [
 	{"name": "no speech process (no OS.execute, no shipped .py)", "path": "res://tools/tests/test_no_speech_process.gd"},
 	{"name": "math engine (hand-verified answers, exam calc keys, generated problems, drills, stats)", "path": "res://tools/tests/test_math_engine.gd"},
 	{"name": "math screens (every screen, fit at desktop + phone sizes, Show steps after answer only)", "path": "res://tools/tests/test_math_ui.gd"},
+	# Show steps' Read used only the OS voice, ran parts together and never
+	# stopped: every step reads whole with the picked voice, Read/Stop, stop on
+	# Next/Back/Close, Voice off hides it, Auto-read reads each step.
+	{"name": "math steps voice (every step's words, Read/Stop, navigation, voice settings)", "path": "res://tools/tests/test_math_voice.gd"},
 ]
 
 const NOISE := "Unreferenced static string|string_name\\.cpp:|NavMeshGeometryParser|PagedAllocator"

@@ -72,6 +72,17 @@
   "10^18" is "10 to the power of 18", "a ratio of 20:1" is "20 to 1", and
   "the -2" is "the dash 2". "per ft²" is "per square foot". Nine recorded
   questions re-recorded.
+- **Show steps: Read now uses your voice and reads the whole step.** Read
+  used only the Windows or Android system voice (silent on PCs without one).
+  It ignored the voice you picked and Voice off, never stopped, and kept
+  talking over the next step. It ran the parts together ("6,500 volt
+  amperes On the calculator") and read "÷ 0.87" as "0 point 87". Now it reads
+  with the picked voice: every step of the 70 exam solutions is recorded
+  with Andrew, and trainer steps use the online voice, or the recorded Andrew
+  or device voice offline, with a note naming it. Each step reads as whole
+  sentences: title, working, note, then the calculator keys ("277, times,
+  1.732, equals, memory plus"). Read turns into Stop. Next, Back, Done and
+  Close stop it. Voice off hides it, and Auto-read reads each step.
 - **No page scrolling before you answer on Final Exam #1 Q4 and Open Book
   #1 Q21 on phones.** Their office-lighting figure sat next to the 31-row
   Table 220.42(A), which left about 30 px of scroll with shuffled choices.

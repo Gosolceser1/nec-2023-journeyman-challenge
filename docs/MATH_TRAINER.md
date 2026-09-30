@@ -25,6 +25,18 @@ drills live in `data/`, and the code only reads them.
 - One step per screen: STEP 2 OF 6 with progress dots, then Back, Read
   (read-aloud voice) and Next step. Arrow keys, Enter, Space and Backspace
   work too.
+- Read uses the voice picked in the app, like the quiz. It reads the title,
+  the working, the note and then the calculator keys one by one ("277,
+  times, 1.732, equals, memory plus"), each part as a sentence
+  (`src/speech/math_step_speech.gd`). Every step of the 70 exam solutions is
+  recorded in the Andrew bundle (`math_<question id>_s<step>` folders, from
+  `tools/speech/dump_speech.gd`). Trainer steps use the online voice, cached
+  after the first read. Offline, the recorded Andrew or the device voice
+  reads the step, and a note under the buttons names that voice. Read turns
+  into Stop while it plays. Next, Back, Done and Close stop it. Voice off
+  (the quiz's mute, or Silent from the menu) hides Read. In Auto-read and
+  Listen modes, each step reads itself when shown. The quiz below stays
+  quiet, and its Listen loop waits until the steps close.
 - Step kinds: the formula, the numbers from the question, a table lookup
   (table name and row), a Code rule, the math, rounding or choosing the next
   standard size, and the answer.
@@ -111,6 +123,11 @@ press.
   - every card's worked example
   - 30 questions per drill, plus fixed table cells checked by hand
   - the weak-spot statistics
+- `tools/tests/test_math_voice.gd` checks the spoken text of every exam
+  step, plus 5 generated problems per type and level: whole sentences, no
+  math symbol left, every calculator key named, and no part cut off. It
+  also checks Read and Stop, the stop on Next, Back and Done, Voice off,
+  Auto-read, and the offline fallbacks.
 - K = 12.9 (copper) and 21.2 (aluminum) are textbook constants, not NEC
   values, and the steps say so.
 

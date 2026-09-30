@@ -64,6 +64,14 @@ var _pending_voice_id := ""
 var _native_active := false
 ## An empty list is asked for again at most this often (voices load late).
 const VOICE_RETRY_MSEC := 2000
+## A read that is not the quiz question (the math steps' Read). Same voices as
+## the quiz; `_ext_state` hears (playing, note) instead of the quiz's Read
+## button, and finishing never counts as the quiz's playback (no hands-free
+## advance, no answer-card highlight).
+var _ext_active := false
+var _ext_id := ""
+var _ext_plan: Array = []
+var _ext_state := Callable()
 
 func _load_voice_catalog() -> void:
 	VoiceCatalog.load_catalog(voice_ids, voice_tiers)
@@ -230,7 +238,70 @@ func _load_voice_choice() -> void:
 func _save_voice_choice() -> void:
 	VoiceCatalog.save_choice(voice_cfg_path, _selected_voice_id())
 
+## Reads `plan` (segments like speech_plan's) with the picked voice: the
+## recorded bundle folder `safe_id` when it matches, else the Edge voice
+## (cached under safe_id, or live), else the device/system voice. on_state is
+## called with (true, note) when it starts or changes voice and (false, "")
+## when it ends or is stopped; note names a fallback voice ("no internet").
+func read_external(safe_id: String, plan: Array, on_state: Callable) -> void:
+	_stop_reading()
+	if plan.is_empty():
+		return
+	_ext_active = true
+	_ext_id = safe_id
+	_ext_plan = plan
+	_ext_state = on_state
+	_voice_fallback = ""
+	var voice := _selected_voice_id()
+	var bundle := _bundled_speech_folder(safe_id, voice, plan)
+	if bundle != "":
+		speak_generation += 1
+		_ext_notify(true)
+		_on_speech_ready(speak_generation, bundle, 0, "bundle")
+		return
+	if _speech_mobile() and not VoiceCatalog.is_edge_voice(voice):
+		_ext_notify(true)
+		_begin_native_tts(plan)
+		return
+	_save_voice_choice()
+	_ext_notify(true)
+	_read_with_edge(safe_id, plan)
+
+func stop_external() -> void:
+	if _ext_active:
+		_stop_reading()
+
+func is_reading_external() -> bool:
+	return _ext_active
+
+func _ext_notify(playing: bool, note: String = "") -> void:
+	if _ext_state.is_valid():
+		_ext_state.call(playing, note if note != "" else _voice_fallback)
+
+## The end of a read: the quiz's hands-free loop hears about its own reads only.
+func _playback_complete() -> void:
+	if _ext_active:
+		_stop_reading()
+		return
+	host._notify_playback_complete()
+
+func _finish_read() -> void:
+	var ext := _ext_active
+	_stop_reading()
+	if not ext:
+		host._notify_playback_complete()
+
+func _show_read_stop() -> void:
+	if host.read_button and not _ext_active:
+		host.read_button.text = "Stop"
+
+func _math_overlay_open() -> bool:
+	var hub := host.get_node_or_null("MathHub") as CanvasItem
+	return hub != null and hub.visible
+
 func _stop_reading() -> void:
+	var was_ext := _ext_active
+	_ext_active = false
 	speak_generation += 1
 	speak_busy = false
 	# The client keeps synthesizing into the cache; only playback detaches.
@@ -259,6 +330,10 @@ func _stop_reading() -> void:
 	_previewing = false
 	if is_instance_valid(host.preview_button):
 		host.preview_button.text = "Preview"
+	if was_ext and _ext_state.is_valid():
+		var state := _ext_state
+		_ext_state = Callable()
+		state.call(false, "")
 
 ## Read-button text while nothing is playing. After answering in a mode that
 ## reads the rule by itself, the rule has just played (or is about to), so the
@@ -375,7 +450,8 @@ func _bundled_teach_tail_offset(folder: String, segments: Array) -> int:
 	return start
 
 func _begin_reading(segments: Array) -> void:
-	if segments.is_empty() or host.menu_overlay.visible:
+	# The quiz is covered by the math screens: their Read owns the voice.
+	if segments.is_empty() or host.menu_overlay.visible or _math_overlay_open():
 		return
 
 	var question_id := ""
@@ -390,7 +466,7 @@ func _begin_reading(segments: Array) -> void:
 	var bundle := _bundled_speech_folder(safe_qid, _selected_voice_id(), segments)
 	if bundle != "":
 		speak_generation += 1
-		host.read_button.text = "Stop"
+		_show_read_stop()
 		host.read_button.disabled = false
 		# Start where the requested clips actually begin: a teach-only request
 		# matched a SUFFIX of the manifest, so index 0 would replay the question
@@ -457,7 +533,7 @@ func _read_with_edge(safe_id: String, plan: Array) -> void:
 			teach_from_index = i
 			break
 	speech_queue_index = teach_from_index if want_teach and teach_from_index >= 0 else 0
-	host.read_button.text = "Stop"
+	_show_read_stop()
 	host.read_button.disabled = false
 	_play_speech_clip()
 
@@ -482,6 +558,21 @@ func _fallback_to_native(why: String) -> void:
 	_live_request = -1
 	speak_busy = false
 	_halt_player()
+	if _ext_active:
+		var ext_bundle := "" if _selected_voice_id() == VoiceCatalog.BUNDLED_VOICE_ID \
+			else _bundled_speech_folder(_ext_id, VoiceCatalog.BUNDLED_VOICE_ID, _ext_plan)
+		if ext_bundle != "":
+			push_warning("Speech: %s unavailable, using the recorded Andrew. %s" % [wanted, why])
+			_voice_fallback = "Andrew (recorded, %s)" % cause
+			speak_generation += 1
+			_ext_notify(true)
+			_on_speech_ready(speak_generation, ext_bundle, 0, "bundle")
+			return
+		push_warning("Speech: %s unavailable, using the system voice. %s" % [wanted, why])
+		_voice_fallback = native
+		_ext_notify(true)
+		_begin_native_tts(_ext_plan)
+		return
 	var plan: Array = [{"text": PREVIEW_TEXT, "choice": -1, "teach": false}]
 	var safe_id := PREVIEW_ID
 	var has_question := not host.order.is_empty() and host.current_index >= 0 and host.current_index < host.order.size()
@@ -496,7 +587,7 @@ func _fallback_to_native(why: String) -> void:
 			push_warning("Speech: %s unavailable, using the recorded Andrew. %s" % [wanted, why])
 			_voice_fallback = "Andrew (recorded, %s)" % cause
 			speak_generation += 1
-			host.read_button.text = "Stop"
+			_show_read_stop()
 			host.read_button.disabled = false
 			_on_speech_ready(speak_generation, bundle, 0, "bundle")
 			return
@@ -546,7 +637,7 @@ static func _is_lesson_line(entry) -> bool:
 
 ## A plan or queue for the current question, in the order its choices are shown.
 func _display(entries: Array) -> Array:
-	if host.order.is_empty() or host.current_index < 0 or host.current_index >= host.order.size():
+	if _ext_active or host.order.is_empty() or host.current_index < 0 or host.current_index >= host.order.size():
 		return entries
 	return SpeechText.display_order(entries, host.session.choice_order(host.order[host.current_index]))
 
@@ -565,6 +656,8 @@ func _teach_index_of(segments: Array, seg_idx: int) -> int:
 	return n
 
 func _update_read_status(choice: int, is_teach: bool, teach_idx: int, teach_total: int) -> void:
+	if _ext_active:
+		return
 	if is_teach:
 		_set_read_status(_status_with_voice("TEACHING: RULE %d OF %d" % [teach_idx + 1, maxi(teach_total, teach_idx + 1)]))
 	elif choice >= 0:
@@ -630,9 +723,8 @@ func _on_native_utterance_canceled(utterance_id: int) -> void:
 	if _native_generation != speak_generation:
 		return
 	_native_seg = -1
-	_stop_reading()
 	# An OS-side cancel (audio focus, engine hiccup) must not stall hands-free play.
-	host._notify_playback_complete()
+	_finish_read()
 
 func _on_native_utterance_started(utterance_id: int) -> void:
 	var seg := _native_seg_of(utterance_id)
@@ -646,7 +738,7 @@ func _on_native_utterance_started(utterance_id: int) -> void:
 	_start_native_watchdog(_native_segments, seg, speak_generation)
 
 func _show_native_highlight(segments: Array, seg_idx: int) -> void:
-	if seg_idx < 0 or seg_idx >= segments.size():
+	if _ext_active or seg_idx < 0 or seg_idx >= segments.size():
 		return
 	var seg: Dictionary = segments[seg_idx]
 	var choice := int(seg.get("choice", -1))
@@ -694,7 +786,7 @@ func _begin_native_tts(segments: Array) -> void:
 	var generation := speak_generation
 	_register_native_tts_callbacks()
 	_native_voice_id = _pick_native_voice()
-	host.read_button.text = "Stop"
+	_show_read_stop()
 	host.read_button.disabled = false
 	_play_next_native_tts_segment(segments, 0, generation)
 
@@ -702,8 +794,7 @@ func _play_next_native_tts_segment(segments: Array, seg_idx: int, generation: in
 	if generation != speak_generation:
 		return
 	if seg_idx >= segments.size():
-		_stop_reading()
-		host._notify_playback_complete()
+		_finish_read()
 		return
 
 	var seg: Dictionary = segments[seg_idx]
@@ -712,8 +803,7 @@ func _play_next_native_tts_segment(segments: Array, seg_idx: int, generation: in
 	var is_teach: bool = bool(seg.get("teach", false))
 
 	if not want_teach and is_teach:
-		_stop_reading()
-		host._notify_playback_complete()
+		_finish_read()
 		return
 	if want_teach and not is_teach:
 		# Learn mode on native TTS: skip the Q stem + choices the learner already
@@ -810,16 +900,16 @@ func _on_speech_ready(generation: int, folder: String, code: int, output: String
 	speech_queue_index = teach_from_index if want_teach and teach_from_index >= 0 else maxi(0, start_index)
 	if speech_queue.is_empty():
 		host.read_button.text = _idle_read_label()
-		host._notify_playback_complete()
+		_playback_complete()
 		return
-	host.read_button.text = "Stop"
+	_show_read_stop()
 	_play_speech_clip()
 
 func _play_speech_clip() -> void:
 	host._clear_speech_highlight()
 	if speech_queue_index >= speech_queue.size():
 		host.read_button.text = _idle_read_label()
-		host._notify_playback_complete()
+		_playback_complete()
 		return
 	var clip: Dictionary = speech_queue[speech_queue_index]
 	var choice := int(clip.get("choice", -1))
@@ -832,7 +922,7 @@ func _play_speech_clip() -> void:
 		if host.read_button:
 			host.read_button.text = _idle_read_label()
 			host.read_button.disabled = false
-		host._notify_playback_complete()
+		_playback_complete()
 		return
 
 	if is_instance_valid(host.dock_visualizer):
@@ -844,10 +934,27 @@ func _play_speech_clip() -> void:
 	var request_id := int(clip.get("request", -1))
 	if request_id >= 0 and edge_client != null and not edge_client.has_clip(request_id, int(clip.get("segment", -1))):
 		speak_busy = true
-		_set_read_status("PREPARING %s…" % _voice_short().to_upper())
+		if _ext_active:
+			_ext_notify(true, "Preparing %s…" % _voice_short())
+		else:
+			_set_read_status("PREPARING %s…" % _voice_short().to_upper())
 		return
 	speak_busy = false
+	if _ext_active:
+		_ext_notify(true)
+	else:
+		_highlight_clip(choice, is_teach)
+	_update_read_status(choice, is_teach, _teach_index_of(speech_queue, speech_queue_index), _count_teach(speech_queue))
+	var stream := _load_clip(str(clip.get("path", "")))
+	if stream == null:
+		# Skip an unplayable clip; the recursion re-enters the teach gate above.
+		speech_queue_index += 1
+		_play_speech_clip()
+		return
+	reader.stream = stream
+	reader.play()
 
+func _highlight_clip(choice: int, is_teach: bool) -> void:
 	if choice >= 0 and choice < host.answers_box.get_child_count():
 		var card = host.answers_box.get_child(choice)
 		if card.has_method("set_speaking"):
@@ -866,16 +973,6 @@ func _play_speech_clip() -> void:
 		# Glow the question panel
 		host._set_question_stem_glow(true)
 
-	_update_read_status(choice, is_teach, _teach_index_of(speech_queue, speech_queue_index), _count_teach(speech_queue))
-	var stream := _load_clip(str(clip.get("path", "")))
-	if stream == null:
-		# Skip an unplayable clip; the recursion re-enters the teach gate above.
-		speech_queue_index += 1
-		_play_speech_clip()
-		return
-	reader.stream = stream
-	reader.play()
-
 func _on_reader_finished() -> void:
 	if speak_busy:
 		return
@@ -889,14 +986,14 @@ func _on_reader_finished() -> void:
 		host.dock_visualizer.set_active(false)
 	if host.read_button:
 		host.read_button.text = _idle_read_label()
-	host._notify_playback_complete()
+	_playback_complete()
 
 func _jump_to_teach() -> void:
 	if teach_from_index < 0 or teach_from_index >= speech_queue.size():
 		return
 	speech_queue_index = teach_from_index
 	_halt_player()
-	host.read_button.text = "Stop"
+	_show_read_stop()
 	_play_speech_clip()
 
 func _halt_player() -> void:
