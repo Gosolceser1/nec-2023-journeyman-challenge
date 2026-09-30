@@ -7,6 +7,10 @@ Ranking (best first):
   classic  - older news/narration voices; clear but more "announcer".
 Skipped: Multilingual variants (they flip to French on inch marks and curly
 quotes, see speak_question.py) and cartoon/child voices.
+The row marked "default": true is the app's starting voice and the voice of the
+recorded clips (VoiceCatalog, speak_question.py); a rebuild keeps the mark on the
+same voice id.
+
 EXTRA_VOICES adds hand-picked non-US voices with a fixed label and tier. Ryan
 is the closest free match to luvvoice's "Dylan Marlow - Gentle Trust" (a
 proprietary cloned voice): calm British male, same pitch range.
@@ -60,6 +64,11 @@ async def main() -> None:
         rows.append({"label": label, "id": short, "tier": tier_of(voice), **meta})
     rows.sort(key=lambda row: (TIER_ORDER[row["tier"]], row["label"]))
     path = Path(__file__).resolve().parents[2] / "data" / "voices.json"
+    old = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+    default_ids = {row["id"] for row in old if row.get("default")}
+    for row in rows:
+        if row["id"] in default_ids:
+            row["default"] = True
     path.write_text(json.dumps(rows, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(len(rows))
 

@@ -7,8 +7,8 @@ const SESSION_LENGTH := QuizSession.SESSION_LENGTH
 ## session.session_simulation, not this text.
 const SIMULATION_NAME := "Full Journeyman Exam"
 const SpeechText = preload("res://src/speech/speech_text.gd")
-const BUNDLED_VOICE_ID := VoiceCatalog.BUNDLED_VOICE_ID
-const BUNDLED_VOICE_LABEL := VoiceCatalog.BUNDLED_VOICE_LABEL
+static var BUNDLED_VOICE_ID: String = VoiceCatalog.BUNDLED_VOICE_ID
+static var BUNDLED_VOICE_LABEL: String = VoiceCatalog.BUNDLED_VOICE_LABEL
 const PREVIEW_TEXT := SpeechController.PREVIEW_TEXT
 const PREVIEW_ID := SpeechController.PREVIEW_ID
 

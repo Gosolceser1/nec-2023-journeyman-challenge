@@ -3,19 +3,32 @@ extends RefCounted
 ## Voice data with no scene state: the desktop cloud catalog in data/voices.json,
 ## the saved choice in voice.cfg, and how device voices are ranked and labelled.
 
-## Microsoft's conversational "Copilot" persona: the most human-sounding US voice
-## on the free Edge endpoint. Also the voice of the bundled offline clips.
-const DEFAULT_VOICE_ID := "en-US-AndrewNeural"
 const VOICE_TIER_HEADINGS := {
 	"natural": "MOST NATURAL",
 	"general": "ASSISTANT",
 	"classic": "CLASSIC NARRATORS",
 }
-const BUNDLED_VOICE_ID := DEFAULT_VOICE_ID
-const BUNDLED_VOICE_LABEL := "Andrew · Recorded (offline)"
 const VOICE_CONFIG_VERSION := 2
 const CATALOG_PATH := "res://data/voices.json"
 const CONFIG_PATH := "user://voice.cfg"
+## The catalog row marked "default": true (en-US-AndrewNeural, Microsoft's
+## conversational "Copilot" persona: the most human-sounding US voice on the
+## free Edge endpoint). Also the voice of the bundled offline clips.
+static var DEFAULT_VOICE_ID: String = str(default_row().get("id", ""))
+static var BUNDLED_VOICE_ID: String = DEFAULT_VOICE_ID
+## "Andrew · Recorded (offline)".
+static var BUNDLED_VOICE_LABEL: String = "%s · Recorded (offline)" % str(default_row().get("label", "")).get_slice(" · ", 0)
+
+
+## The catalog row marked "default": true, else the first row, else {}.
+static func default_row(path: String = CATALOG_PATH) -> Dictionary:
+	var parsed = JSON.parse_string(FileAccess.get_file_as_string(path)) if FileAccess.file_exists(path) else null
+	if not parsed is Array or (parsed as Array).is_empty():
+		return {}
+	for row in parsed:
+		if row is Dictionary and row.get("default", false) == true:
+			return row
+	return parsed[0] if parsed[0] is Dictionary else {}
 
 ## Fills ids (picker label -> voice id) and tiers (label -> "natural" /
 ## "general" / "classic") from the cloud catalog.
@@ -24,7 +37,6 @@ static func load_catalog(ids: Dictionary, tiers: Dictionary, path: String = CATA
 	tiers.clear()
 	var file := FileAccess.open(path, FileAccess.READ)
 	if file == null:
-		ids["Andrew · Male · Warm"] = DEFAULT_VOICE_ID
 		return
 	var parsed = JSON.parse_string(file.get_as_text())
 	file.close()

@@ -31,7 +31,17 @@ import threading
 import time
 from pathlib import Path
 
-DEFAULT_VOICE = "en-US-AndrewNeural"
+def _catalog_default(path: Path = Path(__file__).resolve().parents[2] / "data" / "voices.json") -> str:
+    """The voices.json row marked "default": true (VoiceCatalog reads the same
+    mark); Andrew when the script runs outside the repo."""
+    try:
+        rows = json.loads(path.read_text(encoding="utf-8"))
+        return next((str(r["id"]) for r in rows if r.get("default") is True), str(rows[0]["id"]))
+    except (OSError, ValueError, LookupError, TypeError, AttributeError):
+        return "en-US-AndrewNeural"
+
+
+DEFAULT_VOICE = _catalog_default()
 RATE = "+0%"
 
 # edge-tts hardcodes 48 kbps; the endpoint also serves 96 kbps (48 kHz formats

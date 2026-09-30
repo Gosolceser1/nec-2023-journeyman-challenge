@@ -185,6 +185,7 @@ func _catalog_cases() -> void:
 	check(VoiceCatalog.migrate_voice_id("en-us-x-gone-local", rows) == VoiceCatalog.DEFAULT_VOICE_ID, "a saved voice the phone lost migrates to Andrew")
 	check(VoiceCatalog.migrate_voice_id("en-US-language", rows) == "en-US-language", "a saved system default stays")
 	_edge_catalog_cases()
+	_default_voice_cases()
 
 
 ## The Edge voices from Windows, as the phone lists them.
@@ -194,6 +195,28 @@ const EDGE_LABELS := [
 	"Eric · Male · Online (natural)", "Guy · Male · Online (natural)", "Michelle · Female · Online (natural)",
 	"Roger · Male · Online (natural)", "Steffan · Male · Online (natural)",
 ]
+
+## The default voice is data/voices.json's row marked "default": true.
+func _default_voice_cases() -> void:
+	var rows: Array = JSON.parse_string(FileAccess.get_file_as_string(VoiceCatalog.CATALOG_PATH))
+	var marked := rows.filter(func(r): return r.get("default", false) == true)
+	check(marked.size() == 1, "exactly one catalog voice is marked default (%d)" % marked.size())
+	check(VoiceCatalog.DEFAULT_VOICE_ID == str(marked[0]["id"]) and VoiceCatalog.DEFAULT_VOICE_ID == "en-US-AndrewNeural", "the default voice is the marked row: %s" % VoiceCatalog.DEFAULT_VOICE_ID)
+	check(VoiceCatalog.BUNDLED_VOICE_ID == VoiceCatalog.DEFAULT_VOICE_ID, "the recorded clips are in the default voice")
+	check(VoiceCatalog.BUNDLED_VOICE_LABEL == str(marked[0]["label"]).get_slice(" · ", 0) + " · Recorded (offline)", "recorded row label: %s" % VoiceCatalog.BUNDLED_VOICE_LABEL)
+	check(Main.BUNDLED_VOICE_ID == VoiceCatalog.BUNDLED_VOICE_ID and Main.BUNDLED_VOICE_LABEL == VoiceCatalog.BUNDLED_VOICE_LABEL, "Main exposes the same recorded voice")
+	var path := "user://test_voice_picker_default.json"
+	var f := FileAccess.open(path, FileAccess.WRITE)
+	f.store_string(JSON.stringify([{"label": "Ava · Female", "id": "en-US-AvaNeural"}, {"label": "Brian · Male", "id": "en-US-BrianNeural", "default": true}]))
+	f.close()
+	check(str(VoiceCatalog.default_row(path).get("id")) == "en-US-BrianNeural", "the marked row wins over the first")
+	f = FileAccess.open(path, FileAccess.WRITE)
+	f.store_string(JSON.stringify([{"label": "Ava · Female", "id": "en-US-AvaNeural"}]))
+	f.close()
+	check(str(VoiceCatalog.default_row(path).get("id")) == "en-US-AvaNeural", "no mark: the first row")
+	check(VoiceCatalog.default_row("user://no_such_catalog.json").is_empty(), "no catalog: no row")
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
+
 
 func _edge_catalog_cases() -> void:
 	var rows := VoiceCatalog.edge_voice_rows()

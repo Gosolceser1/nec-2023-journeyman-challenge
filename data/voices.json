@@ -4,7 +4,8 @@
     "id": "en-US-AndrewNeural",
     "tier": "natural",
     "locale": "en-US",
-    "gender": "Male"
+    "gender": "Male",
+    "default": true
   },
   {
     "label": "Ava · Female · Expressive",

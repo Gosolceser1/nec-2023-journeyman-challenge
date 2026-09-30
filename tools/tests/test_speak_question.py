@@ -105,5 +105,20 @@ class SpeakClip(unittest.TestCase):
         self.assertTrue(all(r["format"] == speak.OUTPUT_FORMAT for r in manifest))
 
 
+class DefaultVoiceTests(unittest.TestCase):
+    def test_default_is_the_marked_catalog_row(self):
+        rows = json.loads((ROOT / "data" / "voices.json").read_text(encoding="utf-8"))
+        self.assertEqual(speak.DEFAULT_VOICE, next(r["id"] for r in rows if r.get("default") is True))
+
+    def test_catalog_fallbacks(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "voices.json"
+            path.write_text(json.dumps([{"id": "a"}, {"id": "b", "default": True}]), encoding="utf-8")
+            self.assertEqual(speak._catalog_default(path), "b")
+            path.write_text(json.dumps([{"id": "a"}]), encoding="utf-8")
+            self.assertEqual(speak._catalog_default(path), "a")
+            self.assertEqual(speak._catalog_default(Path(tmp) / "missing.json"), "en-US-AndrewNeural")
+
+
 if __name__ == "__main__":
     unittest.main()
