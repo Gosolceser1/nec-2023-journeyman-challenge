@@ -4,7 +4,8 @@
 
 Needs Pillow and the Godot console binary ($GODOT, default: tools/godot.env's
 GODOT_BINARY in the repo root), which rasterises the SVGs (tools/branding/render_svg.gd). Run it with a
-temporary APPDATA like every other Godot run.
+temporary APPDATA like every other Godot run. Wordmark text is set in Barlow Semi Condensed
+(assets/branding/source/fonts/, SIL OFL) from data/edition.json and the bank, never typed in.
 
 Writes:
   assets/branding/source/png/icon_<size>.png   16 ... 1024 (16 and 24 from icon_small.svg)
@@ -12,8 +13,10 @@ Writes:
   assets/branding/icon.ico                     16-256, one hand-picked image per size
   assets/branding/android_icon_192.png         legacy Android launcher icon
   assets/branding/android_{foreground,background,monochrome}.png   432 px adaptive layers
-  assets/branding/splash.png                   boot splash (icon + wordmark)
-  .audit_tmp/shots/release/icon_options.png    the options sheet
+  assets/branding/mark.png                     the mark alone, for the menu title (Widgets.make_brand_title)
+  assets/branding/splash.png                   1440x1080 boot splash, drawn at 2x and shrunk by stretch_mode Keep
+  docs/media/banner.png                        1280x640 README / social preview banner
+  .audit_tmp/shots/release/icon_sizes.png      the icon at every size, dark and light
 """
 from __future__ import annotations
 
@@ -26,27 +29,38 @@ from PIL import Image, ImageDraw, ImageFont
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools" / "release"))
+sys.path.insert(0, str(ROOT / "tools" / "visual"))
 sys.path.insert(0, str(ROOT / "tools"))
 from godot_env import godot_binary  # noqa: E402
+from make_showcase import hero_facts  # noqa: E402
 from sync_identity import identity  # noqa: E402
 
 IDENTITY = identity(ROOT)
-EDITION = IDENTITY["edition"]["short"]  # "NEC 2023", drawn into the splash
+EDITION = IDENTITY["edition"]["short"]  # "NEC 2023", drawn into the splash and banner
 BRAND = ROOT / "assets" / "branding"
 SRC = BRAND / "source"
 PNG = SRC / "png"
+FONTS = SRC / "fonts"
+BANNER = ROOT / "docs" / "media" / "banner.png"
 SCRATCH = ROOT / ".audit_tmp" / "branding_render"
-SHEET = ROOT / ".audit_tmp" / "shots" / "release" / "icon_options.png"
+SHEET = ROOT / ".audit_tmp" / "shots" / "release" / "icon_sizes.png"
 
 ICON_SIZES = [16, 24, 32, 48, 64, 128, 256, 512, 1024]
-SMALL_SIZES = [16, 24]  # from icon_small.svg: the badge turns to mush below 32 px
+SMALL_SIZES = [16, 24]  # from icon_small.svg: the full icon's sheen and traces turn to mush below 32 px
 ICO_SIZES = [16, 24, 32, 48, 64, 128, 256]
-PREVIEW_SIZES = [16, 24, 32, 48, 64, 256]
+MARK_PX = 128  # menu title mark; shown at 22-48 px, so this stays sharp at 2x UI scale
+MARK_SIZES = [MARK_PX, 640, 120, 80]  # in-app, splash hero, banner wordmark, splash wordmark
 
-BG = "#020408"  # AppTheme.BG_TOP, the boot splash / clear colour
-SLATE_50 = "#f8fafc"
-SLATE_400 = "#94a3b8"
-SKY_400 = "#38bdf8"
+BG = (2, 4, 8)  # AppTheme.BG_TOP, the boot splash / clear colour
+BG_BOTTOM = (8, 16, 30)  # AppTheme.BG_BOTTOM
+SLATE_50 = (248, 250, 252)
+SLATE_300 = (203, 213, 225)
+SLATE_400 = (148, 163, 184)
+SLATE_500 = (100, 116, 139)
+SKY_400 = (56, 189, 248)
+AMBER_400 = (251, 191, 36)
+BORDER_BLUE = (30, 58, 95)
+CHIP_BG = (11, 20, 38)
 
 
 def godot() -> str:
@@ -66,13 +80,55 @@ def render(jobs: list[tuple[Path, Path, list[int]]]) -> None:
         sys.exit(f"render failed ({res.returncode}):\n{res.stdout}\n{res.stderr}")
 
 
-def font(bold: bool, size: int) -> ImageFont.FreeTypeFont:
-    for name in (("segoeuib.ttf", "arialbd.ttf") if bold else ("segoeui.ttf", "arial.ttf")):
-        try:
-            return ImageFont.truetype(name, size)
-        except OSError:
-            continue
-    return ImageFont.load_default()
+def font(weight: str, size: int) -> ImageFont.FreeTypeFont:
+    return ImageFont.truetype(str(FONTS / f"BarlowSemiCondensed-{weight}.ttf"), size)
+
+
+def tracked_width(text: str, f: ImageFont.FreeTypeFont, tracking: float) -> float:
+    return sum(f.getlength(ch) for ch in text) + tracking * max(0, len(text) - 1)
+
+
+def draw_tracked(d: ImageDraw.ImageDraw, x: float, baseline: float, text: str, f: ImageFont.FreeTypeFont,
+                 fill, tracking: float) -> float:
+    for ch in text:
+        d.text((x, baseline), ch, font=f, fill=fill, anchor="ls")
+        x += f.getlength(ch) + tracking
+    return x
+
+
+def wordmark(canvas: Image.Image, cx: float, baseline: float, size: int, mark: Image.Image) -> None:
+    """'NEC 2023 <mark> JOURNEYMAN CHALLENGE' centred on cx: the mark is the title's '//'."""
+    d = ImageDraw.Draw(canvas)
+    f = font("Bold", size)
+    track = size * 0.02
+    lead, tail = EDITION, "JOURNEYMAN CHALLENGE"
+    cap = size * 0.70
+    mh = round(cap * 1.55)  # the mark's box has ~5% padding, so its art stands ~1.4 cap heights
+    m = mark.resize((mh, mh), Image.LANCZOS)
+    gap = size * 0.12
+    wl, wt = tracked_width(lead, f, track), tracked_width(tail, f, track)
+    x = cx - (wl + gap + mh + gap + wt) / 2
+    x = draw_tracked(d, x, baseline, lead, f, SLATE_50, track) + gap
+    canvas.alpha_composite(m, (round(x), round(baseline - cap / 2 - mh / 2)))
+    draw_tracked(d, x + mh + gap, baseline, tail, f, SLATE_50, track)
+
+
+def glow(canvas: Image.Image, box: tuple[int, int, int, int], colour, strength: float) -> None:
+    w, h = box[2] - box[0], box[3] - box[1]
+    # radial_gradient is the distance from the centre in px of a 256 square: 128 at the edge midpoints.
+    alpha = Image.radial_gradient("L").point(lambda v: round(255 * strength * max(0.0, 1 - v / 128) ** 2))
+    alpha = alpha.resize((w, h), Image.BICUBIC)
+    layer = Image.new("RGBA", (w, h), colour)
+    layer.putalpha(alpha)
+    canvas.alpha_composite(layer, (box[0], box[1]))
+
+
+def vertical_gradient(size: tuple[int, int], top, bottom) -> Image.Image:
+    col = Image.new("RGBA", (1, size[1]))
+    for y in range(size[1]):
+        t = y / max(1, size[1] - 1)
+        col.putpixel((0, y), tuple(round(a + (b - a) * t) for a, b in zip(top, bottom)) + (255,))
+    return col.resize(size)
 
 
 def build_ico(images: dict[int, Image.Image], dest: Path) -> None:
@@ -85,63 +141,84 @@ def build_ico(images: dict[int, Image.Image], dest: Path) -> None:
         sys.exit(f"icon.ico has sizes {got}, expected {sorted(ICO_SIZES)}")
 
 
-def build_splash(icon: Image.Image, dest: Path) -> None:
-    """Icon over the wordmark, on the app's clear colour. Shown unscaled and centred."""
-    w, h = 720, 400
-    img = Image.new("RGBA", (w, h), BG)
+def splash_subtitle() -> str:
+    return f"{EDITION} EDITION  \u00b7  JOURNEYMAN EXAM PREP"
+
+
+def build_splash(mark: Image.Image, mark_small: Image.Image, dest: Path) -> None:
+    """Drawn at 2x on the clear colour; stretch_mode Keep fits it to the window. 4:3 rather
+    than 16:9 so a portrait phone, which fits it to its width, still shows it large."""
+    w, h = 1440, 1080
+    img = Image.new("RGBA", (w, h), BG + (255,))
+    glow(img, (180, 60, 1260, 860), SKY_400, 0.30)
+    hero = mark.resize((300, 300), Image.LANCZOS)
+    img.alpha_composite(hero, ((w - 300) // 2, 250))
+    wordmark(img, w / 2, 700, 64, mark_small)
     d = ImageDraw.Draw(img)
-    ic = icon.resize((168, 168), Image.LANCZOS)
-    img.alpha_composite(ic, ((w - 168) // 2, 40))
-    title = font(True, 34)
-    parts = [(f"{EDITION} ", SLATE_50), ("// ", SKY_400), ("JOURNEYMAN CHALLENGE", SLATE_50)]
-    total = sum(d.textlength(t, font=title) for t, _ in parts)
-    x = (w - total) / 2
-    for t, colour in parts:
-        d.text((x, 240), t, font=title, fill=colour)
-        x += d.textlength(t, font=title)
-    sub = font(True, 15)
-    line = letter_spaced(f"NFPA 70 \u2022 {EDITION} EDITION")
-    d.text(((w - d.textlength(line, font=sub)) / 2, 298), line, font=sub, fill=SLATE_400)
-    img.convert("RGB").save(dest)
+    sub, f = splash_subtitle(), font("SemiBold", 26)
+    draw_tracked(d, (w - tracked_width(sub, f, 7.8)) / 2, 772, sub, f, SLATE_500, 7.8)
+    img.convert("RGB").save(dest, optimize=True)
 
 
-def letter_spaced(text: str) -> str:
-    """"NEC 2023" -> "N E C   2 0 2 3": one space between letters, three between words."""
-    return "   ".join(" ".join(word) for word in text.split())
+def build_banner(mark: Image.Image, dest: Path) -> None:
+    """README / social preview: the mark, the wordmark and what the app is, all from data."""
+    facts = hero_facts()
+    w, h = 1280, 640
+    img = vertical_gradient((w, h), BG, BG_BOTTOM)
+    d = ImageDraw.Draw(img)
+    grid = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    gd = ImageDraw.Draw(grid)
+    for x in range(0, w, 64):
+        gd.line((x, 0, x, h), fill=BORDER_BLUE + (56,))
+    for y in range(0, h, 64):
+        gd.line((0, y, w, y), fill=BORDER_BLUE + (56,))
+    img.alpha_composite(grid)
+    glow(img, (-80, 20, 680, 620), SKY_400, 0.36)
+    glow(img, (500, 130, 1340, 530), AMBER_400, 0.16)
+    img.alpha_composite(mark.resize((340, 340), Image.LANCZOS), (90, 150))
+    tx = 470
+    eyebrow, fe = facts["edition"], font("SemiBold", 28)
+    end = draw_tracked(d, tx, 262, eyebrow, fe, SKY_400, 9)
+    rule = Image.new("RGBA", (96, 3))
+    for x in range(96):
+        t = x / 95
+        rule.putpixel((x, 0), tuple(round(a + (b - a) * t) for a, b in zip(SKY_400, AMBER_400)) + (255,))
+    img.alpha_composite(rule.resize((96, 3)), (round(end + 16), 251))
+    draw_tracked(d, tx, 334, "JOURNEYMAN CHALLENGE", font("Bold", 66), SLATE_50, 1.3)
+    tag = f"{facts['questions']} EXAM-STYLE QUESTIONS  \u00b7  A LESSON AFTER EVERY ANSWER"
+    draw_tracked(d, tx, 388, tag, font("SemiBold", 22), SLATE_400, 1.6)
+    cx, fc = tx, font("SemiBold", 18)
+    for chip in ("WINDOWS", "ANDROID", "OFFLINE", f"{facts['items']}-QUESTION SIMULATOR"):
+        cw = tracked_width(chip, fc, 2.2) + 36
+        d.rounded_rectangle((cx, 428, cx + cw, 466), 19, fill=CHIP_BG, outline=BORDER_BLUE, width=2)
+        draw_tracked(d, cx + 18, 453, chip, fc, SLATE_300, 2.2)
+        cx += cw + 12
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    img.convert("RGB").save(dest, optimize=True)
 
 
-def build_sheet(rows: list[tuple[str, dict[int, Path], bool]], dest: Path) -> None:
-    row_h, width = 330, 1560
-    sheet = Image.new("RGB", (width, 60 + row_h * len(rows)), "#0b1221")
+def build_sheet(final: dict[int, Path], dest: Path) -> None:
+    sheet = Image.new("RGB", (1100, 330), "#0b1221")
     d = ImageDraw.Draw(sheet)
-    d.text((20, 16), f"{IDENTITY['display_name']}: icon options (actual size on a dark taskbar and a light "
-           "Explorer window, 4x zoom of 16/24/32 px, and 256 px)", fill="#cbd5e1", font=font(False, 18))
-    for r, (label, paths, chosen) in enumerate(rows):
-        y0 = 60 + r * row_h
-        if chosen:
-            d.rounded_rectangle([8, y0 - 6, width - 8, y0 + row_h - 14], 14, outline="#34d399", width=3)
-        d.text((24, y0 + 4), label, fill="#34d399" if chosen else "#7dd3fc", font=font(True, 20))
-        x = 24
-        for bg in ("#202020", "#f3f3f3"):
-            d.rectangle([x, y0 + 42, x + 260, y0 + 130], fill=bg)
-            cx = x + 10
-            for s in (16, 24, 32, 48, 64):
-                im = Image.open(paths[s]).convert("RGBA")
-                sheet.paste(im, (cx, y0 + 54 + (64 - s) // 2), im)
-                cx += s + 10
-            x += 274
-        zx = 24
-        for s in (16, 24, 32):
-            im = Image.open(paths[s]).convert("RGBA").resize((s * 4, s * 4), Image.NEAREST)
-            d.rectangle([zx, y0 + 150, zx + s * 4 - 1, y0 + 150 + s * 4 - 1], fill="#202020")
-            sheet.paste(im, (zx, y0 + 150), im)
-            d.text((zx, y0 + 156 + s * 4), f"{s} px x4", fill="#94a3b8", font=font(False, 13))
-            zx += s * 4 + 18
-        big = Image.open(paths[256]).convert("RGBA")
-        sheet.paste(big, (width - 24 - 256 - 290, y0 + 36), big)
-        light = Image.new("RGB", (256, 256), "#f3f3f3")
-        light.paste(big, (0, 0), big)
-        sheet.paste(light, (width - 24 - 256, y0 + 36))
+    d.text((20, 14), f"{IDENTITY['display_name']}: icon at actual size on dark and light, 4x zoom of 16/24/32 px",
+           fill="#cbd5e1", font=font("SemiBold", 20))
+    x = 20
+    for bg in ("#202020", "#f3f3f3"):
+        d.rectangle([x, 52, x + 260, 140], fill=bg)
+        cx = x + 10
+        for s in (16, 24, 32, 48, 64):
+            im = Image.open(final[s]).convert("RGBA")
+            sheet.paste(im, (cx, 64 + (64 - s) // 2), im)
+            cx += s + 10
+        x += 274
+    zx = 20
+    for s in (16, 24, 32):
+        im = Image.open(final[s]).convert("RGBA").resize((s * 4, s * 4), Image.NEAREST)
+        d.rectangle([zx, 160, zx + s * 4 - 1, 160 + s * 4 - 1], fill="#202020")
+        sheet.paste(im, (zx, 160), im)
+        zx += s * 4 + 18
+    big = Image.open(final[256]).convert("RGBA").resize((256, 256), Image.LANCZOS)
+    sheet.paste(big, (820, 56), big)
     dest.parent.mkdir(parents=True, exist_ok=True)
     sheet.save(dest)
 
@@ -152,17 +229,14 @@ def main() -> None:
         shutil.rmtree(SCRATCH)
     SCRATCH.mkdir(parents=True)
     big = [s for s in ICON_SIZES if s not in SMALL_SIZES] + [192]
-    jobs = [
-        (SRC / "icon.svg", SCRATCH / "icon", big + SMALL_SIZES),
-        (SRC / "icon_small.svg", SCRATCH / "icon_small", SMALL_SIZES + [32, 48, 64, 256]),
+    render([
+        (SRC / "icon.svg", SCRATCH / "icon", big),
+        (SRC / "icon_small.svg", SCRATCH / "icon_small", SMALL_SIZES),
+        (SRC / "mark.svg", SCRATCH / "mark", MARK_SIZES),
         (SRC / "android_foreground.svg", SCRATCH / "android_foreground", [432]),
         (SRC / "android_background.svg", SCRATCH / "android_background", [432]),
         (SRC / "android_monochrome.svg", SCRATCH / "android_monochrome", [432]),
-    ]
-    options = ["option_a_bolt", "option_b_shield", "option_c_ring"]
-    for name in options:
-        jobs.append((SRC / "options" / f"{name}.svg", SCRATCH / name, PREVIEW_SIZES))
-    render(jobs)
+    ])
 
     final: dict[int, Path] = {}
     for s in ICON_SIZES:
@@ -174,13 +248,13 @@ def main() -> None:
     shutil.copyfile(SCRATCH / "icon_192.png", BRAND / "android_icon_192.png")
     for layer in ("foreground", "background", "monochrome"):
         shutil.copyfile(SCRATCH / f"android_{layer}_432.png", BRAND / f"android_{layer}.png")
-    build_splash(Image.open(final[1024]).convert("RGBA"), BRAND / "splash.png")
-
-    rows = [(f"Option {chr(65 + i)}: {n.split('_', 2)[2]}", {s: SCRATCH / f"{n}_{s}.png" for s in PREVIEW_SIZES}, False)
-            for i, n in enumerate(options)]
-    rows.append(("Chosen: bolt + pass check (plain bolt at 16 and 24 px)", final, True))
-    build_sheet(rows, SHEET)
-    print("branding built:", ", ".join(p.name for p in sorted(BRAND.glob("*.*"))))
+    shutil.copyfile(SCRATCH / f"mark_{MARK_PX}.png", BRAND / "mark.png")
+    mark = Image.open(SCRATCH / "mark_640.png").convert("RGBA")
+    build_splash(mark, Image.open(SCRATCH / "mark_80.png").convert("RGBA"), BRAND / "splash.png")
+    build_banner(mark, BANNER)
+    build_sheet(final, SHEET)
+    print("branding built:", ", ".join(p.name for p in sorted(BRAND.glob("*.*")) if p.suffix != ".import"))
+    print("banner:", BANNER)
     print("sheet:", SHEET)
 
 

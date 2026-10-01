@@ -340,11 +340,20 @@ static func slide_x(ctrl: Control, dx: float, duration: float = 0.12) -> Tween:
 	return tw
 
 
-static func electrify_title(label: Label) -> void:
+## span: a row the label sits in (Widgets.make_brand_title), so one band
+## sweeps the whole row instead of each label on its own.
+static func electrify_title(label: Label, span: Control = null) -> void:
 	var mat := ShaderMaterial.new()
 	mat.shader = TITLE_SHADER
 	label.material = mat
-	label.resized.connect(func(): mat.set_shader_parameter("text_width", label.size.x))
+	if span == null:
+		label.resized.connect(func(): mat.set_shader_parameter("text_width", label.size.x))
+		return
+	var sync := func():
+		mat.set_shader_parameter("text_width", span.size.x)
+		mat.set_shader_parameter("x_offset", label.position.x)
+	span.resized.connect(sync)
+	label.item_rect_changed.connect(sync)
 
 
 static func add_shine(ctrl: Control) -> void:

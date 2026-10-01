@@ -1,21 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="432" height="432" viewBox="0 0 432 432">
+  <!-- Android adaptive background: full-bleed tile, glow and traces (the launcher masks it). -->
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#17233b"/>
-      <stop offset="1" stop-color="#050a14"/>
+    <linearGradient id="tile" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#1d2d4c"/>
+      <stop offset="0.55" stop-color="#0e1830"/>
+      <stop offset="1" stop-color="#060b17"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.48" r="0.5">
+      <stop offset="0" stop-color="#38bdf8" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="0.5" stop-color="#38bdf8" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0.22"/>
     </linearGradient>
   </defs>
-  <rect width="432" height="432" fill="url(#bg)"/>
-  <g fill="none" stroke="#38bdf8" stroke-opacity="0.14" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M40 150 H92 L118 124 H146"/>
-    <path d="M392 282 H340 L314 308 H286"/>
-    <path d="M82 392 V344 L110 316"/>
-    <path d="M350 40 V88 L322 116"/>
-  </g>
-  <g fill="#38bdf8" fill-opacity="0.24">
-    <circle cx="146" cy="124" r="7"/>
-    <circle cx="286" cy="308" r="7"/>
-    <circle cx="110" cy="316" r="7"/>
-    <circle cx="322" cy="116" r="7"/>
+  <rect width="432" height="432" fill="url(#tile)"/>
+  <circle cx="216" cy="210" r="216" fill="url(#glow)"/>
+  <g transform="scale(0.84375)">
+    <g fill="none" stroke="#38bdf8" stroke-opacity="0.10" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 448 H120 L150 418"/>
+      <path d="M496 64 H392 L362 94"/>
+    </g>
+    <g fill="#38bdf8" fill-opacity="0.22">
+      <circle cx="150" cy="418" r="7"/>
+      <circle cx="362" cy="94" r="7"/>
+    </g>
   </g>
 </svg>

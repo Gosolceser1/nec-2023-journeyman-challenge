@@ -21,8 +21,9 @@ class BrandingTextTests(unittest.TestCase):
     def test_splash_text_follows_the_edition(self):
         edition = json.loads((ROOT / "data" / "edition.json").read_text(encoding="utf-8"))
         self.assertEqual(build_branding.EDITION, edition["short"])
-        self.assertEqual(build_branding.letter_spaced("NFPA 70 \u2022 NEC 2023 EDITION"),
-                         "N F P A   7 0   \u2022   N E C   2 0 2 3   E D I T I O N")
+        sub = build_branding.splash_subtitle()
+        self.assertTrue(sub.startswith(edition["short"] + " EDITION"), sub)
+        self.assertNotIn("NFPA", sub, "the splash is brand art, not a code reference")
 
     def test_banner_facts_come_from_the_data(self):
         facts = make_showcase.hero_facts()

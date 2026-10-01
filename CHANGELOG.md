@@ -16,6 +16,11 @@
   a calculator walks you through the keys one at a time (the next key lights
   up) and says when you land on the step's number. Earlier steps' results and
   memory are already in it, so rows like "× 14 =" or "1 ÷ MR =" work as shown.
+- **New logo: the Slash-Bolt.** The `//` from "NEC 2023 // JOURNEYMAN
+  CHALLENGE" with the second slash a bolt, on the app icon, the Windows icon,
+  the Android launcher (adaptive and themed icons now fill the safe zone), a
+  sharp new boot splash and a README banner. The menu title shows the mark in
+  place of its `//`.
 
 ### Changed
 

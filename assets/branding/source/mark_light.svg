@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="328" height="328" viewBox="86 96 328 328">
+  <!-- The mark alone, for light backgrounds. -->
+  <g stroke-linejoin="round" stroke-width="4">
+    <path d="M238 104 H302 L160 416 H96 Z" fill="#0369a1" stroke="#0369a1"/>
+    <path d="M334 104 H404 L342 240 H384 L250 416 L294 276 H256 Z" fill="#d97706" stroke="#d97706"/>
+  </g>
+</svg>

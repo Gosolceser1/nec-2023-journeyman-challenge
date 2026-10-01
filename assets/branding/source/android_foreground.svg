@@ -1,24 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="432" height="432" viewBox="0 0 432 432">
-  <!-- Artwork from icon.svg, scaled into the adaptive-icon safe zone (a 264 px circle at the centre). -->
+  <!-- Android adaptive foreground: the mark as large as the 66dp safe circle (r 132 px) allows. -->
   <defs>
-    <linearGradient id="bolt" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#f0f9ff"/>
-      <stop offset="0.45" stop-color="#7dd3fc"/>
-      <stop offset="1" stop-color="#0ea5e9"/>
+    <linearGradient id="sky" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#e0f2fe"/>
+      <stop offset="0.35" stop-color="#7dd3fc"/>
+      <stop offset="1" stop-color="#0284c7"/>
     </linearGradient>
-    <linearGradient id="badge" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#34d399"/>
-      <stop offset="1" stop-color="#059669"/>
+    <linearGradient id="amber" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#fef3c7"/>
+      <stop offset="0.3" stop-color="#fde68a"/>
+      <stop offset="0.7" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#f59e0b"/>
     </linearGradient>
   </defs>
-  <g transform="translate(216 216) scale(0.5) translate(-293 -266)">
-    <g transform="translate(-14 -6)">
-      <path d="M292 88 L150 288 H244 L212 424 L362 216 H266 Z" fill="none" stroke="#38bdf8" stroke-opacity="0.18" stroke-width="44" stroke-linejoin="round"/>
-      <path d="M292 88 L150 288 H244 L212 424 L362 216 H266 Z" fill="none" stroke="#38bdf8" stroke-opacity="0.32" stroke-width="20" stroke-linejoin="round"/>
-      <path d="M292 88 L150 288 H244 L212 424 L362 216 H266 Z" fill="url(#bolt)" stroke="url(#bolt)" stroke-width="8" stroke-linejoin="round"/>
+  <g transform="translate(216 216) scale(0.59) translate(-250 -260)">
+    <g stroke-linejoin="round" stroke-width="4">
+      <path d="M238 104 H302 L160 416 H96 Z" fill="url(#sky)" stroke="url(#sky)"/>
+      <path d="M334 104 H404 L342 240 H384 L250 416 L294 276 H256 Z" fill="url(#amber)" stroke="url(#amber)"/>
+      <path d="M244 112 H296 M340 112 H396" stroke="#ffffff" stroke-opacity="0.55" stroke-width="5" stroke-linecap="round"/>
     </g>
-    <circle cx="376" cy="376" r="74" fill="#0b1221"/>
-    <circle cx="376" cy="376" r="60" fill="url(#badge)"/>
-    <path d="M346 378 L368 400 L408 356" fill="none" stroke="#ecfdf5" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>

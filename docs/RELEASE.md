@@ -23,10 +23,14 @@ MIT license requires.
 ## Branding sources
 
 `assets/branding/source/` (has a `.gdignore`, so it is never imported or
-packed) holds the hand-written SVGs: `icon.svg` (the icon, bolt + pass check),
-`icon_small.svg` (plain bolt for 16 and 24 px, where the badge smears),
-the three Android adaptive layers, and the rejected `options/`. Rebuild every
-PNG, the `.ico`, the splash and the options sheet with:
+packed) holds the hand-written SVGs of the Slash-Bolt logo (the `//` of
+"NEC 2023 // JOURNEYMAN CHALLENGE" with the second slash a bolt): `icon.svg`
+(the icon), `icon_small.svg` (16 and 24 px: full-bleed tile, bigger mark, no
+glow), `mark.svg` / `mark_light.svg` (the mark alone, for dark and light
+backgrounds) and the three Android adaptive layers (the mark as large as the
+66 dp safe circle allows). `fonts/` holds Barlow Semi Condensed (SIL OFL,
+`fonts/OFL.txt`), the wordmark face of the splash and the banner. Rebuild every
+PNG, the `.ico`, the splash and the banner with:
 
 ```
 python tools/branding/build_branding.py
@@ -36,8 +40,11 @@ It rasterizes with Godot (`tools/branding/render_svg.gd`, ThorVG) and builds
 the rest with Pillow. Outputs: `assets/branding/icon.png` (512,
 `application/config/icon`), `icon.ico` (16/24/32/48/64/128/256, each size its
 own image; `windows_native_icon` and the exe icon), `android_*.png`,
-`splash.png`, `source/png/icon_<16..1024>.png` and
-`.audit_tmp/shots/release/icon_options.png`.
+`mark.png` (the mark in the menu title, in place of its `//`), `splash.png`
+(1440x1080, drawn at 2x; `boot_splash/stretch_mode` Keep shrinks it to fit),
+`docs/media/banner.png` (1280x640 README / social preview banner),
+`source/png/icon_<16..1024>.png` and `.audit_tmp/shots/release/icon_sizes.png`.
+The splash and banner text comes from `data/edition.json` and the bank.
 
 The Windows exporter writes its fixed set of 16/32/48/64/128/256 into the exe
 (pixel-identical to the `.ico`); it drops 24, which Windows then scales from 32.

@@ -7,6 +7,8 @@ extends RefCounted
 ## Right margin of a mode card, reserved for its ModeBadge.
 const MODE_BADGE_ROOM := 66
 const MODE_BADGE_PX := 44
+## The Slash-Bolt mark (tools/branding/build_branding.py), drawn in place of a title's " // ".
+const BRAND_MARK := preload("res://assets/branding/mark.png")
 
 ## A menu mode card that starts a session. is_major: the Full Journeyman
 ## Simulator's official red -> amber card with a slow light on its border.
@@ -270,20 +272,57 @@ static func add_menu_hero(host: Main, parent: VBoxContainer, ring_px: float, tit
 	meta.add_theme_font_size_override("font_size", AppTheme.TYPE_MICRO)
 	meta.add_theme_color_override("font_color", AppTheme.SKY_400)
 	block.add_child(meta)
-	var title := Label.new()
-	title.text = title_text
-	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	title.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_BOLD))
-	title.add_theme_font_size_override("font_size", title_px)
-	title.add_theme_color_override("font_color", AppTheme.SLATE_50)
-	block.add_child(title)
-	UiFx.electrify_title(title)
+	block.add_child(make_brand_title(title_text, title_px))
 	var subtitle := Label.new()
 	subtitle.text = tagline
 	subtitle.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	subtitle.add_theme_font_size_override("font_size", AppTheme.TYPE_CAPTION)
 	subtitle.add_theme_color_override("font_color", AppTheme.SLATE_400)
 	block.add_child(subtitle)
+
+
+## The menu title with the brand mark standing in for its " // " ("NEC 2023
+## <mark> JOURNEYMAN CHALLENGE"). The row's accessibility_name keeps the full
+## text. Only the tail wraps; the mark sits in the first line's box so a wrap
+## never drops it between lines. A title without " // " stays one Label.
+static func make_brand_title(text: String, font_px: int) -> Control:
+	var parts := text.split(" // ", true, 1)
+	if parts.size() < 2:
+		var only := _brand_label(text, font_px)
+		only.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		UiFx.electrify_title(only)
+		return only
+	var row := HBoxContainer.new()
+	row.accessibility_name = text
+	row.add_theme_constant_override("separation", roundi(font_px * 0.22))
+	var lead := _brand_label(parts[0], font_px)
+	lead.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	row.add_child(lead)
+	var mark := TextureRect.new()
+	mark.texture = BRAND_MARK
+	mark.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	mark.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	mark.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	mark.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
+	var line_h := AppTheme.ui_font(AppTheme.WEIGHT_BOLD).get_height(font_px)
+	mark.custom_minimum_size = Vector2(roundf(font_px * 1.1), ceilf(line_h))
+	row.add_child(mark)
+	var tail := _brand_label(parts[1], font_px)
+	tail.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	tail.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(tail)
+	UiFx.electrify_title(lead, row)
+	UiFx.electrify_title(tail, row)
+	return row
+
+
+static func _brand_label(text: String, font_px: int) -> Label:
+	var l := Label.new()
+	l.text = text
+	l.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_BOLD))
+	l.add_theme_font_size_override("font_size", font_px)
+	l.add_theme_color_override("font_color", AppTheme.SLATE_50)
+	return l
 
 
 static func make_voice_picker(host: Main, h: float, font_size: int) -> OptionButton:

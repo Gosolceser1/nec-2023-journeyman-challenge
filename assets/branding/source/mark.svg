@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="328" height="328" viewBox="86 96 328 328">
+  <!-- The mark alone, for dark backgrounds (menu title, splash, banner). -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#e0f2fe"/>
+      <stop offset="0.35" stop-color="#7dd3fc"/>
+      <stop offset="1" stop-color="#0284c7"/>
+    </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#fef3c7"/>
+      <stop offset="0.3" stop-color="#fde68a"/>
+      <stop offset="0.7" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <g stroke-linejoin="round" stroke-width="4">
+    <path d="M238 104 H302 L160 416 H96 Z" fill="url(#sky)" stroke="url(#sky)"/>
+    <path d="M334 104 H404 L342 240 H384 L250 416 L294 276 H256 Z" fill="url(#amber)" stroke="url(#amber)"/>
+    <path d="M244 112 H296 M340 112 H396" stroke="#ffffff" stroke-opacity="0.55" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>

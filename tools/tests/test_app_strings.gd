@@ -158,8 +158,9 @@ func _texts_containing(node: Node, text: String) -> int:
 ## Labels whose text is (or, with partial, contains) text.
 func _labels_with(node: Node, text: String, partial: bool) -> int:
 	var n := 0
-	if node is Label:
-		var t := (node as Label).text
+	# The menu hero's title is a row (Widgets.make_brand_title) named by accessibility_name.
+	var t := (node as Label).text if node is Label else (node as Control).accessibility_name if node is Control else ""
+	if t != "":
 		n = 1 if t == text or partial and t.contains(text) else 0
 	for c in node.get_children():
 		n += _labels_with(c, text, partial)

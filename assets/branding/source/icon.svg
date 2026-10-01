@@ -1,41 +1,49 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Slash-Bolt: the '//' of 'NEC 2023 // JOURNEYMAN CHALLENGE', the second slash a bolt. AppTheme colours. -->
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#17233b"/>
-      <stop offset="1" stop-color="#050a14"/>
+    <linearGradient id="sky" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0" stop-color="#e0f2fe"/>
+      <stop offset="0.35" stop-color="#7dd3fc"/>
+      <stop offset="1" stop-color="#0284c7"/>
     </linearGradient>
+    <linearGradient id="amber" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0" stop-color="#fef3c7"/>
+      <stop offset="0.3" stop-color="#fde68a"/>
+      <stop offset="0.7" stop-color="#fbbf24"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+    <linearGradient id="tile" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#1d2d4c"/>
+      <stop offset="0.55" stop-color="#0e1830"/>
+      <stop offset="1" stop-color="#060b17"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.48" r="0.5">
+      <stop offset="0" stop-color="#38bdf8" stop-opacity="0.26"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0"/>
+    </radialGradient>
     <linearGradient id="rim" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#38bdf8"/>
-      <stop offset="1" stop-color="#0369a1"/>
+      <stop offset="0" stop-color="#ffffff" stop-opacity="0.28"/>
+      <stop offset="0.5" stop-color="#38bdf8" stop-opacity="0.10"/>
+      <stop offset="1" stop-color="#38bdf8" stop-opacity="0.22"/>
     </linearGradient>
-    <linearGradient id="bolt" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#f0f9ff"/>
-      <stop offset="0.45" stop-color="#7dd3fc"/>
-      <stop offset="1" stop-color="#0ea5e9"/>
-    </linearGradient>
-    <linearGradient id="badge" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#34d399"/>
-      <stop offset="1" stop-color="#059669"/>
-    </linearGradient>
+    <clipPath id="clip"><rect x="16" y="16" width="480" height="480" rx="108"/></clipPath>
   </defs>
-  <rect x="24" y="24" width="464" height="464" rx="104" fill="url(#bg)"/>
-  <g fill="none" stroke="#38bdf8" stroke-opacity="0.16" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M60 176 H112 L142 146 H176"/>
-    <path d="M96 420 V372 L130 338"/>
-    <path d="M416 92 V140 L382 174"/>
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#tile)"/>
+  <g clip-path="url(#clip)">
+    <circle cx="256" cy="250" r="240" fill="url(#glow)"/>
+    <g fill="none" stroke="#38bdf8" stroke-opacity="0.10" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M16 448 H120 L150 418"/>
+      <path d="M496 64 H392 L362 94"/>
+    </g>
+    <g fill="#38bdf8" fill-opacity="0.22">
+      <circle cx="150" cy="418" r="7"/>
+      <circle cx="362" cy="94" r="7"/>
+    </g>
   </g>
-  <g fill="#38bdf8" fill-opacity="0.28">
-    <circle cx="176" cy="146" r="9"/>
-    <circle cx="130" cy="338" r="9"/>
-    <circle cx="382" cy="174" r="9"/>
+  <rect x="17.5" y="17.5" width="477" height="477" rx="106.5" fill="none" stroke="url(#rim)" stroke-width="3"/>
+  <g stroke-linejoin="round" stroke-width="4">
+    <path d="M238 104 H302 L160 416 H96 Z" fill="url(#sky)" stroke="url(#sky)"/>
+    <path d="M334 104 H404 L342 240 H384 L250 416 L294 276 H256 Z" fill="url(#amber)" stroke="url(#amber)"/>
+    <path d="M244 112 H296 M340 112 H396" stroke="#ffffff" stroke-opacity="0.55" stroke-width="5" stroke-linecap="round"/>
   </g>
-  <rect x="30" y="30" width="452" height="452" rx="98" fill="none" stroke="url(#rim)" stroke-width="10"/>
-  <g transform="translate(-14 -6)">
-    <path d="M292 88 L150 288 H244 L212 424 L362 216 H266 Z" fill="none" stroke="#38bdf8" stroke-opacity="0.18" stroke-width="44" stroke-linejoin="round"/>
-    <path d="M292 88 L150 288 H244 L212 424 L362 216 H266 Z" fill="none" stroke="#38bdf8" stroke-opacity="0.32" stroke-width="20" stroke-linejoin="round"/>
-    <path d="M292 88 L150 288 H244 L212 424 L362 216 H266 Z" fill="url(#bolt)" stroke="url(#bolt)" stroke-width="8" stroke-linejoin="round"/>
-  </g>
-  <circle cx="376" cy="376" r="74" fill="#0b1221"/>
-  <circle cx="376" cy="376" r="60" fill="url(#badge)"/>
-  <path d="M346 378 L368 400 L408 356" fill="none" stroke="#ecfdf5" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
