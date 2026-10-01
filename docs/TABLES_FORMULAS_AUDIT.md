@@ -52,7 +52,7 @@ following independently, and this pass confirmed each one on UpCodes:
 - the #10-024 answer wording.
 
 When a fix here changes a provision, its checksum is re-stamped in
-`tools/pipeline/content_audit_2023.json` with a note. That applies to #1-034, #4-025, #1-049,
+`tools/pipeline/content_audit_2023.json` (now `data/nec/2023/content_audit.json`) with a note. That applies to #1-034, #4-025, #1-049,
 #4-004 and #3-068.
 
 Every other table/calc/formula record already had a lookup table and/or a correct formula hint.
@@ -445,7 +445,7 @@ Formula text changed in: final-exam-#3-026, #3-040, #3-063, #5-039, and open-boo
 - **Highlight probe** (`TableViewer` matcher):
   - Every changed table highlights exactly the answer cell (220.54 "85%", 250.122 "10", 430.37 "Three*", Note (4) "60%").
   - 310.16, 220.42(A) and 630.31(A) highlight no cell, instead of a wrong one.
-- **Fit check** (`.audit_tmp/measure_fit.gd`): 0% of the 279 records need scrolling, before or after answering, on desktop (1280×720) and mobile (540×960).
+- **Fit check** (`.audit_tmp/measure_fit.gd`, now `tools/visual/measure_fit.gd`): 0% of the 279 records need scrolling, before or after answering, on desktop (1280×720) and mobile (540×960).
 - `python tools/pipeline/validate_question_bank.py --no-warn`: VALID, 0 errors, 0 warnings.
 - `bash tools/verify.sh` (Git Bash): all 5 stages passed.
 - **Screenshots** (desktop and mobile, before and after answering) are in `.audit_tmp/tf/shots/`, taken with `.audit_tmp/tf/snap_tables.gd`. They cover #1-040, #1-068, #1-014, #3-052, #1-067, #1-004, #1-021 and #3-040, and confirm that ², ¾ and φ render.

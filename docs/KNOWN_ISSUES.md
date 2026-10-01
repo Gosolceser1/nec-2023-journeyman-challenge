@@ -8,8 +8,10 @@ the Edge voices on Android, for 1.0.3 the Edge voices on Windows without
 Python and the NEC location audit, and for 1.0.4 the NEC 2023 content and
 tables/formulas audits, the diagram "?" masks and the `measure_fit.gd`
 crashes at mobile 1024x768 and desktop 540x960 (a `DiagramView` resize loop
-with the page scrollbar, docs/DIAGRAMS_AUDIT.md section 5), each pinned by a
-test or a validator guard.
+with the page scrollbar, docs/DIAGRAMS_AUDIT.md section 5), for 1.0.5 the
+figure and FORMULA-strip answer leaks, and since 1.0.5 (unreleased) the keyword hover and
+tap and the NEC 2023 answer re-check (docs/audits/UPCODES_ANSWER_CHECK.md),
+each pinned by a test or a validator guard.
 
 ## Open: needs a real device
 
@@ -49,6 +51,14 @@ test or a validator guard.
   data, a question heard once replays in airplane mode, and in airplane mode an
   unheard question falls back to the recorded Andrew at once with the status
   line saying "no internet".
+- **1.0.5 and newer (unreleased) phone features were verified on desktop only.**
+  `test_hunt_keyword_input` pushes finger taps through the viewport and
+  `test_math_ui` walks every math screen at phone sizes, but no phone was
+  used. On a phone
+  confirm: tapping a highlighted keyword shows just its Index entry and a
+  second tap brings back the full line; the five menu tabs fit; Show steps
+  with Read, Voice off and Auto-read; "Try it on the calculator" lights the
+  next key; the Math Trainer calculator answers with Check.
 - **The Edge read-aloud endpoint is unofficial.** `EdgeTtsClient` copies
   edge-tts 7.2.8: the trusted client token, the Chromium version in
   `Sec-MS-GEC-Version` and the Origin header. If Microsoft changes them, the
@@ -95,7 +105,18 @@ test or a validator guard.
   Entering Bus Enclosures" (singular); the record keeps "Conductors", as in the
   Table 408.5 title. Confirm against the printed code.
 - **final-exam-#3-028, 422.5(A) "rated".** UpCodes omits "rated" before
-  "150 volts or less to ground"; the record keeps it. Confirm in print.
+  "150 volts or less to ground"; the record keeps it (the current stem uses
+  "rated" as ordinary English). Confirm in print.
+- **final-exam-#1-051, 110.26(C)(3) "at least 90 degrees".** Confirm the
+  wording against the printed code.
+- **Missing source questions.** Final Exam #5's scan lacks four question
+  pages (31 questions, listed as `missing_source_items` in the bank), and
+  Open Book Exam #8 is not in the study set. A complete copy of either can be
+  added with docs/ADDING_EXAMS.md.
+- The remaining reviewer notes from the 2026-09-30 answer re-check (stems
+  that omit a 2023 qualifier but keep one right answer, mild pre-answer
+  hints) are listed in docs/audits/UPCODES_ANSWER_CHECK.md, "Left for the
+  user".
 
 ## Open: release 1.0.0
 

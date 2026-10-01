@@ -105,8 +105,17 @@ bank; add reviewed domain words to `spellcheck_allowlist.txt`, or rerun with
 
 ## 6. App assets and release notes
 
+- Code-book keywords: `python tools/pipeline/hunt_keywords.py` regenerates
+  `data/nec/<year>/hunt_keywords.json` for the new records; add vocabulary or
+  per-question overrides to `index_terms.json` when a record gets none, and
+  `hunt_keywords.py --check` must pass.
+- Show steps (optional): a calculation question gets steps from its
+  `question_requirements.json` check, or from an entry in
+  `data/math/exam_steps.json` (`docs/MATH_TRAINER.md`); `test_math_engine.gd`
+  fails when a solution misses the keyed answer.
 - Figures (optional): `docs/DIAGRAMS_AUDIT.md` and `data/diagram_masks.json`.
 - Speech: `tools/speech/dump_speech.gd`, then
-  `tools/speech/pregenerate_speech.py --bundle` (`README.md`).
+  `tools/speech/pregenerate_speech.py --bundle`, then
+  `Godot --headless --path . --import` so the new clips are found (`README.md`).
 - `bash tools/verify.sh` must pass. No test pins a question or exam count.
 - `CHANGELOG.md` (`## [Unreleased]`) and the README counts.

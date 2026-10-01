@@ -33,4 +33,4 @@ Use the verified answer and reference in the quiz bank to locate each rule in th
 
 ## Timing
 
-The source exam uses one overall 60-minute clock. The practice app also shows an average pacing target of 2 minutes 24 seconds per question for this 25-question set.
+The source exam uses one overall 60-minute clock. In the app this exam runs on the full exam's pace of 3 minutes per question (75 minutes for the 25 questions).

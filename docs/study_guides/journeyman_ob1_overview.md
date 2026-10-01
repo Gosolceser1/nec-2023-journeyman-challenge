@@ -32,4 +32,4 @@ The question bank contains the verified answer and reference for all 25 question
 
 ## Timing Note
 
-The 60-minute limit is the source exam's overall clock. The practice app may also show an average pacing timer, but that pacing timer does not replace the overall clock.
+The 60-minute limit is the source exam's overall clock. In the app this exam runs on the full exam's pace of 3 minutes per question (75 minutes for the 25 questions).

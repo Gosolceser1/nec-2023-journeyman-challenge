@@ -38,21 +38,33 @@ if Android asks.
 - **598 questions:** 594 NEC 2023 questions from 16 practice exams plus 4
   Nebraska State Law questions. Every answer shows the NEC reference, a short
   lesson, a memory tip, why each wrong choice is wrong, and the code provision.
+- **A menu in five tabs:** Home (continue where you left off, a quick
+  drill, your weakest area, review missed questions and the Full Journeyman
+  Exam), Exams (every practice exam with the questions you have seen and your
+  best score), Drills, Study and Settings.
 - **Timed practice drills** of 10, 20, 30, 40 or 50 questions at the exam's
-  3 minutes per question, weighted like the exam's content outline.
-- **Full Journeyman Simulator:** 80 questions split over the seven subject
+  3 minutes per question, weighted like the exam's content outline, plus a
+  10-question drill for each subject area.
+- **Full Journeyman Exam:** 80 questions split over the seven subject
   areas like the Nebraska exam blueprint, 240 minutes, 75% to pass. The
   report scores each subject area, charts your pace and estimates your exam
   readiness.
-- **10 Questions • Weakest Area:** a drill of the subject area that needs it
+- **Weakest-area drill:** 10 questions from the subject area that needs it
   most, picked from your recent answers.
+- **Code-book keywords:** the exam is open book, so before you answer, the
+  words to look up are highlighted in the question and an INDEX line names
+  the Index entry and article. Hover a highlighted word on desktop, or tap it
+  on a phone, to see just its entry. Keywords never contain the answer, and
+  the Full Journeyman Exam shows none, like the real test.
 - **Step-by-step math:** after you answer an exam calculation question (70 of
   them), "Show steps" walks through it one idea at a time: the formula, the
   numbers, the table row, the math, the exact calculator keys, then the
-  answer.
+  answer. In the next release, "Try it on the calculator" lights up each key
+  in turn on an on-screen calculator.
 - **Math trainer:** endless practice problems in 58 types over 12 topics
-  (Ohm's law to motors and dwelling loads) at three levels, with a hint,
-  a keypad, the steps and a "practice my weak spots" mix.
+  (Ohm's law to motors and dwelling loads) at three levels, with a hint, the
+  steps and a "practice my weak spots" mix. From the next release you answer
+  on a basic calculator like the one allowed in the exam room.
 - **Formula cards and table drills:** 17 picture cards (each letter
   explained, units, calculator keys, a worked example) and 17 timed NEC table
   lookup drills with a best run to beat. Math weak spots shows your accuracy
@@ -68,11 +80,12 @@ if Android asks.
   built in on Windows and Android with nothing extra to install (Windows also
   offers the British Ryan). Without a connection the recorded voice takes over.
 - **Reference tables and diagrams** right next to the question, with tables
-  laid out to fit the screen. Figures are reviewed for anything that gives the
-  answer away, and such a spot stays under a "?" until you answer.
+  laid out to fit the screen. 346 questions have an original study figure.
+  Figures are reviewed for anything that gives the answer away, and such a
+  spot stays under a "?" until you answer.
 - **Checked against NEC 2023:** every question's answer, code provision,
-  lookup table and calculation was audited against the 2023 code (see
-  [Accuracy](#accuracy)).
+  lookup table and calculation was audited against the 2023 code, and all
+  598 answers were checked again on 2026-09-30 (see [Accuracy](#accuracy)).
 - **Electrical answer animations and sounds** (with a Reduce motion option),
   and keyboard shortcuts on desktop (A-D or 1-4, Enter for next).
 - **Works offline:** the questions, the voice and the sounds are all inside
@@ -169,7 +182,8 @@ changes without being re-checked.
 | [Content](docs/CONTENT_AUDIT_2023.md) | All 594 NEC questions: keyed answer, provision wording, choice notes, tips, cited sections | No answer key changed; 60 explanations corrected; 19 questions from the new exams updated to the 2023 wording (key kept); 1 heading to confirm in print |
 | [Tables and formulas](docs/TABLES_FORMULAS_AUDIT.md) | Every question that needs a table, calculation or formula | 86 calculations recomputed from NEC 2023 values, 0 mismatches; missing lookup tables and formula hints added |
 | [Locations](docs/LOCATION_AUDIT.md) | Chapter, article, section and lookup hint of every question | 0 wrong breadcrumbs; 72 article titles corrected to the 2023 wording |
-| [Diagrams](docs/DIAGRAMS_AUDIT.md) | The shipped figures, pixel by pixel, for answer giveaways, and every question a figure would help | The three PDF figures need no mask; 88 questions got original NEC 2023 figures (48 drawings) with "?" masks until you answer, each checked against the 2023 text |
+| [Diagrams](docs/DIAGRAMS_AUDIT.md) | The figures, pixel by pixel, for answer giveaways, and every question a figure would help | 346 questions have an original NEC 2023 figure (119 drawings, including the three the exams require, redrawn), with "?" masks until you answer, each checked against the 2023 text |
+| [Answer re-check](docs/audits/UPCODES_ANSWER_CHECK.md) | All 598 questions again: keyed answer, cited section and 2023 wording | No answer key wrong and no citation moved; 9 stems or provisions updated to the 2023 wording (key kept), 3 explanations corrected, 13 pre-answer hints removed |
 
 Open items (such as the 408.5 heading) are in
 [docs/KNOWN_ISSUES.md](docs/KNOWN_ISSUES.md). The audits check the questions
@@ -207,7 +221,8 @@ Godot_v4.7.2-stable_win64_console.exe --path .                 # desktop layout
 Godot_v4.7.2-stable_win64_console.exe --path . -- --mobile-ui  # Android layout on desktop
 ```
 
-The bundled voice clips (`assets/speech/`, ~138 MB) are generated, not committed.
+The bundled voice clips (`assets/speech/`, about 340 MB: every question plus
+every Show steps step of the exam calculations) are generated, not committed.
 Without them the app falls back to the system voice. To build them:
 
 ```
@@ -259,4 +274,6 @@ signing, the shareable zip and checksums.
   `docs/LOCATION_AUDIT.md`, `docs/DIAGRAMS_AUDIT.md`: the NEC 2023 audits
 - `docs/TYPO_FIXES.md`: every stem and choice correction against the PDFs
 - `docs/KNOWN_ISSUES.md`: open items and verification traps
+- `docs/audits/`: the working audit reports (answer re-check, diagram gap
+  scans, hardcoding audit)
 - `docs/RELEASE.md`: building and packaging a release

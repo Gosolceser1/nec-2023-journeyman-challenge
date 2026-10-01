@@ -5,9 +5,11 @@ functions that decide what the learner sees and hears, and the ones that enforce
 the product's core promise: **the answer must not appear anywhere above the
 question until the learner answers.**
 
-Everything here runs headless with no autoloads. Most suites are node-free;
-the layout-tree, menu-card, figure, breadcrumb, table-fit, touch-scroll, voice-picker, desktop Edge, shuffle, study-feedback and sfx suites instantiate
-`scenes/main.tscn`. A full run takes about a minute.
+Everything here runs headless with no autoloads. The core suites are
+node-free; the layout, menu, figure, breadcrumb, table-fit, keyword, math
+screen, touch, voice, shuffle, study-feedback and sound suites instantiate
+`scenes/main.tscn`. A full run takes about 15 to 20 minutes, most of it the
+whole-bank sweeps in both layouts.
 
 ## Running
 
@@ -36,7 +38,7 @@ one as a child Godot process and reads its exit code. Slower than an in-process
 runner, but it exercises exactly the path a developer runs by hand, and one
 suite's failure cannot abort the rest.
 
-**Current status: 8,178 Godot checks across 32 suites, 59 Python tests (validator, spellcheck, speak_question, question requirements), 1 build-guard shell test, 0 failures, 0 documented product defects.** The scene harness adds 390 (desktop) / 406 (mobile) checks. The desktop Edge suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
+**Current status: about 150,000 Godot checks across 41 suites, the Python tests listed in `tools/verify.sh`, 1 build-guard shell test, 0 documented product defects.** Most of the checks are whole-bank sweeps (every record, both layouts) and the math engine's generated problems. The scene harness runs on top of these in both layouts. The desktop Edge suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
 
 Every formerly pinned defect is fixed and promoted to a real assertion, so a
 regression fails its suite rather than appearing in the defect list. The test table prefix case is covered directly: `NOTED: x` must remain unchanged.
@@ -73,6 +75,32 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | `test_question_requirements.py` | runs `tools/pipeline/check_requirements.py`: every table, calculation and formula record in `data/question_requirements.json` keeps its pre-answer table, formula hint and recomputed NEC 2023 result (docs/TABLES_FORMULAS_AUDIT.md) |
 | `test_diagram_figures.py` | runs `tools/diagrams/build.py --check` (the original figures, their masks and labels are current and leak-free) and self-tests the leak scan; skipped without PyMuPDF/Pillow |
 | `test_build_guard.sh` | proves builds refuse default, relative, and absolute targets that would overwrite the curated bank |
+| `test_bank_loader.gd` | `BankLoader`: the shipped bank loads whole and well-formed, pre-v2 shapes are rejected, only `records` is read |
+| `test_quiz_session.gd` | `QuizSession` without a scene: order, grading, the missed list, chapter tallies and both clocks |
+| `test_nec_reference.gd` | `NecReference`: article titles, the post-answer reference line and the pre-answer "where to look" path |
+| `test_audio_settings.gd` | `AudioSettings`: audio modes and the rules for when the app may speak (Silent by default, nothing narrates the answer before answering, the simulator never autoplays, a hand-edited config stays in range) |
+| `test_app_strings.gd` | screen text that names the NEC edition or the exam format comes from `data/edition.json` and `data/exam_blueprint.json`; a different edition or blueprint loaded in memory changes every title, clock and report header. Desktop and mobile |
+| `test_app_theme.gd` | `AppTheme`: the palette is the only place colors live, one name per value, and the style and font factories |
+| `test_fx.gd` | helpers behind the visual layer: NEC chapter mapping for the report, stats to rows, gauge tint, and a bank sweep that every article maps to a chapter |
+| `test_answer_card_input.gd` | answer card tap versus drag: a scroll never selects a card (grading cannot be undone) |
+| `test_touch_scroll.gd` | `TouchScroll`: a finger swipe scrolls every list and never presses a button or answers a card; a tap still presses |
+| `test_safe_area.gd` | `SafeArea.margins` with synthetic notch and cutout insets (the real function, not a copy of its math) |
+| `test_project_settings.gd` | `project.godot` keeps the settings the touch model depends on (ConfigFile reads only `;` comments), and the export presets match its version |
+| `test_figure_table_fit.gd` | every question with both a figure and a reference table, at every standard window size and two choice shuffles: no page scroll before answering, and neither table scrolls. Desktop and mobile |
+| `test_hunt_keywords.gd` | code-book keywords on every record: the stem reads exactly as the bank has it, each keyword is marked and the INDEX line names its entries, no keyword or heading holds a choice, the INDEX line goes after answering, speech is the same with the setting on or off, none in the Full Exam or with the setting off, and no page scroll before answering |
+| `test_hunt_keyword_input.gd` | keyword hover and tap through real input events in the viewport: hover shows one entry until the pointer leaves, a click or finger tap keeps it, a second tap brings back the full line, a drag is not a tap |
+| `test_math_engine.gd` | the math engine: hand-worked answers for every problem type, every exam calculation question solved to its keyed answer, generated trainer problems at every level, formula-card examples, table drills and weak-spot statistics (docs/MATH_TRAINER.md) |
+| `test_calc_engine.gd` | the on-screen calculator (`CalcEngine`): basic-calculator rules, and every key row Show steps prints (70 exam solutions, every trainer problem type at each level) lands on the number its step shows |
+| `test_math_ui.gd` | every math screen (trainer, formula cards, table drills, weak spots, Show steps) opens, works and fits without page scroll at the standard desktop and phone sizes; Show steps stays hidden until the question is answered |
+| `test_math_voice.gd` | Show steps' Read: every step read as whole sentences with every calculator key named and no quantity read as a Code section; Read and Stop, Voice off, Auto-read and the offline fallback |
+| `test_sfx.gd` | `Sfx`: only the planned sounds exist, each within its length budget, the right cue per answer and result, the clock warns exactly twice, interface sounds are one per action and rate-limited, the Sounds setting, the SFX bus (docs/SFX_PLAN.md) |
+| `test_speech_chain.gd` | `SpeechChain`: the Speech bus effects (pitch shift first and bypassed at 1x, the anti-image filters after it, the limiter) |
+| `menu_study_stub.gd` | stand-in for the study tools' entry script, used by `test_menu.gd`. Not a suite. |
+| `test_spellcheck_bank.py`, `test_typo_regressions.py` | the bank spellchecker, and the fixed typos of `docs/TYPO_FIXES.md` never coming back |
+| `test_speak_question.py` | `src/speech/speak_question.py`, the edge-tts helper that pregenerates the bundle (against a fake Edge) |
+| `test_hunt_keywords.py` | `tools/pipeline/hunt_keywords.py --check`: the keyword file is fresh and no keyword gives the answer away |
+| `test_edition_migration_report.py` | the 2023 to 2026 migration report: a dry run is empty, a renumbering fixture is found |
+| `test_sync_identity.py`, `test_bump_version.py`, `test_branding_text.py`, `test_godot_env.py` | the app name comes from `data/app.json`, the version from `project.godot`, splash and banner text from data, the Godot version from `tools/godot.env` |
 
 ## What IS covered
 

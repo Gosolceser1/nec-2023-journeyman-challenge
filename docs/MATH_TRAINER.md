@@ -43,6 +43,12 @@ drills live in `data/`, and the code only reads them.
 - Math steps show the working in a large panel and the calculator keys as
   key caps, with a second row for a basic calculator when a scientific key
   (such as √ or x²) is used.
+- "Try it on the calculator" under a step's keys opens a guided calculator
+  (`src/ui/calc_pad.gd` over `src/math/calc_engine.gd`): the next key of the
+  row is lit and named, and when the row is done it says whether the number
+  matches the step. Earlier steps' results and memory are already in it, so
+  rows such as "× 14 =" or "1 ÷ MR =" work as shown. Any other key still
+  works; the guide steps aside until Restart.
 - 70 exam calculation questions have a solution and every one reaches the
   keyed answer exactly (`test_math_engine.gd`, "exam calculation questions
   reach the keyed answer"). One is skipped on purpose: Final Exam #4 Q53 is
@@ -69,9 +75,14 @@ drills live in `data/`, and the code only reads them.
 | Other Code calculations | 8 in the trainer (10 in the engine) |
 
 - Levels: Easy, Medium, Hard (bigger numbers, more steps, more rules).
-- Type the answer on the on-screen keypad or the keyboard. It is checked
+- Answer on the on-screen calculator (the same `CalcPad`: + − × ÷ =,
+  memory, percent, x², square root, 1/x, ±), like the basic calculator
+  allowed in the exam room, or on the keyboard. Check submits the number
+  showing and finishes a pending operation first (12 × 24, then Check,
+  answers 288); a fraction goes in as a division. The answer is checked
   with the tolerance that type allows (for example ±1% on a calculated
-  current). Table and size answers are picked from choices.
+  current). Table and size answers are picked from choices. There is no
+  separate calculator tool on the Study tab.
 - Hint, Card (that topic's formula card) and Steps buttons. Opening the
   steps before answering counts as a miss.
 - "Practice my weak spots" picks types weighted toward low accuracy.
@@ -172,6 +183,6 @@ types · 3 levels").
 | `data/math/drills.json` | The 17 table drills |
 | `data/math/tools.json` | Entry tools for the menu |
 | `data/nec/2023/tables.json` | NEC 2023 table values used by the math |
-| `src/math/*.gd` | Engine, data access, formatting, drills, statistics |
-| `src/ui/math_*.gd` | Hub, steps view, trainer, cards, drills, drawings, shared widgets |
+| `src/math/*.gd` | Engine, calculator engine, data access, formatting, drills, statistics |
+| `src/ui/math_*.gd`, `src/ui/calc_pad.gd` | Hub, steps view, trainer, cards, drills, drawings, shared widgets; the on-screen calculator |
 | `tools/tests/test_math_engine.gd`, `tools/tests/test_math_ui.gd` | Tests |

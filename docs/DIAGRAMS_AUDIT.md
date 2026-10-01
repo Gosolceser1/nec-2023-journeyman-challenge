@@ -588,7 +588,7 @@ above (question bank) and the stem wording flagged in section 6.
 
 ## 8. Batch 1 from the gap scan (72 more questions)
 
-`audits/diagram_gap_scan.md` listed the questions that still had no figure
+`docs/audits/diagram_gap_scan.md` listed the questions that still had no figure
 but would be easier with one. Batch 1 covers its 16 high and 10 medium
 concept groups plus 6 records that fit figures we already had: **26 new
 drawings and 6 re-masks for 72 questions** (tier A for the scan's high
@@ -618,7 +618,8 @@ AFCI reach arrow, the motor disconnect bracket, every hazardous-class numeral,
 all four switchboard side names, both OCPD spots on the transformer figure
 and the headwall receptacles. Four records get their figure only after
 answering (`#4-023`, `#1-007`, `#1-018`, `#10-004`), where the drawing is the
-answer. Review with NEC sections per drawing: `audits/diagram_batch1_tmp/review.md`.
+answer.
+
 | tier | record | figure | shown | masked before answering |
 |---|---|---|---|---|
 | A | `final-exam-#1-044` | `fault_path_art100` | before | name of case (a); name of this case (open circuit); name of this case (short circuit) |
@@ -720,8 +721,7 @@ answer, in desktop, phone and phone zoom. Masks beyond the scanner:
 
 Six records get their figure only after answering: `#1-009` colors,
 `#3-015` vertical, `#3-039` individual circuit and `#10-008` sign text, where
-the drawing is the answer, and the office-lighting pair moved in section 10. Review with NEC sections per drawing:
-`audits/diagram_batch2_tmp/review.md`.
+the drawing is the answer, and the office-lighting pair moved in section 10.
 
 | tier | record | figure | shown | masked before answering |
 |---|---|---|---|---|
@@ -760,8 +760,7 @@ the drawing is the answer, and the office-lighting pair moved in section 10. Rev
 ## 10. Batch 3: the 315 imported questions (152 more records)
 
 The import at `09dc6b5` added 315 questions (Open Book #2, #3, #5, #6, #9,
-#11, #12 and Finals #2, #4). The gap scan (`audits/diagram_gap_scan_new.md`
-and `.json`) sorts them HIGH 39, MEDIUM 131 and NONE 145. Coverage:
+#11, #12 and Finals #2, #4). The gap scan (`docs/audits/diagram_gap_scan_new.md`) sorts them HIGH 39, MEDIUM 131 and NONE 145. Coverage:
 
 - **48 repeats** of an older question use its figure with the same masks
   and timing, through the new `like` option in the figure registry
@@ -806,7 +805,7 @@ The theory and calculation cards are shown after answering, because there the dr
 answer. After answering, each question's own step is outlined, for example the 4 to 6
 conductors row for a six-conductor derating question. The same goes for the small-appliance card
 (`final-exam-#4-016`) and two repeats whose drawing names the answer word (`open-book-exam-#9-016`
-and `#9-018`). Review with NEC sections per drawing: `audits/diagram_batch3_tmp/review.md`.
+and `#9-018`).
 
 **Fix: no page scroll beside a big table.** The office-lighting figure (batch 2) sat beside the
 31-row Table 220.42(A). On phones with shuffled choices, that put about 30 px of page scroll

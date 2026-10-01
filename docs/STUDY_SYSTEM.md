@@ -21,20 +21,23 @@ weights live in code. Each area lists the NEC chapters that feed it; chapter
 
 | Subject area | Exam items | NEC source | Pool |
 |---|---:|---|---:|
-| General Electrical Knowledge | 10 | Ch. 1 (90, 100, 110), Ch. 8, Ch. 9 tables and notes, theory and calculations, NFPA 70E, trade knowledge | 54 |
-| Wiring and Protection | 20 | Ch. 2 (200-285) | 63 |
-| Wiring Methods and Materials | 15 | Ch. 3 (300-399) | 75 |
-| Equipment for General Use | 15 | Ch. 4 (400-495) | 50 |
-| Special Occupancies | 10 | Ch. 5 (500-590) | 17 |
-| Special Equipment | 5 | Ch. 6 (600-695) | 17 |
-| Special Conditions | 5 | Ch. 7 (700-770) | **3** |
-| Total | 80 | | 279 |
+| General Electrical Knowledge | 10 | Ch. 1 (90, 100, 110), Ch. 8, Ch. 9 tables and notes, theory and calculations, NFPA 70E, trade knowledge | 117 |
+| Wiring and Protection | 20 | Ch. 2 (200-285) | 167 |
+| Wiring Methods and Materials | 15 | Ch. 3 (300-399) | 136 |
+| Equipment for General Use | 15 | Ch. 4 (400-495) | 100 |
+| Special Occupancies | 10 | Ch. 5 (500-590) | 33 |
+| Special Equipment | 5 | Ch. 6 (600-695) | 34 |
+| Special Conditions | 5 | Ch. 7 (700-770) | **7** |
+| Total | 80 | | 594 |
 
-**Special Conditions is short:** the bank has 3 Chapter 7 questions for a
-5-item area. The simulator uses all 3 and gives the 2 extra slots to the
-heaviest areas (Wiring and Protection 21, Wiring Methods and Materials 16).
-Drills of 30 or more questions will repeat those 3 questions often. More
-Chapter 7 questions in the bank fix this; no code change is needed.
+Pool counts are from `blueprint_report.gd` on the 598-question bank (the 4
+Nebraska State Law records are outside the blueprint).
+
+**Special Conditions is small:** 7 Chapter 7 questions for a 5-item area.
+Every simulator gets its 5, but drills of 30 or more questions repeat them
+often. More Chapter 7 questions in the bank fix this; no code change is
+needed. If an area ever has fewer questions than its share, the simulator
+gives the extra slots to the heaviest areas.
 
 ### Classifying a record
 
@@ -51,7 +54,7 @@ Overrides in use:
 |---|---|---|
 | final-exam-#1-067 | Wiring Methods and Materials | cited as Chapter 9, Note 4, but it asks about raceway (nipple) fill |
 
-Chapter 8 (communications, 4 questions) goes to General Electrical
+Chapter 8 (communications, 6 questions) goes to General Electrical
 Knowledge, as the mapping says, since the outline has no communications
 area. Re-run `blueprint_report.gd` after a bank rebuild to see the counts
 and catch broken overrides (it exits 1 on one).
@@ -89,14 +92,14 @@ own drill shuffles its pool.
   that pass's showing.
 - **Coverage.** With the blueprint weighting, a whole area is seen in about
   `pool / (drill size x items / 80)` drills. For 10-question drills that is
-  about 44 drills for all 279 (General Electrical Knowledge is the slowest),
-  instead of 28 for an unweighted deck. That is the price of drilling in exam
+  about 94 drills for all 594 (General Electrical Knowledge is the slowest),
+  instead of 60 for an unweighted deck. That is the price of drilling in exam
   proportions.
 
 ### Simulator (Full Journeyman Exam)
 
-- Exactly the blueprint per area (10/20/15/15/10/5/5; see the Special
-  Conditions note above), scaled by largest remainder if the pool or count
+- Exactly the blueprint per area (10/20/15/15/10/5/5), scaled by largest
+  remainder if the pool or count
   differs. With fewer than 80 questions in the pool it uses all of them.
 - Within an area: least recently drawn first, random among equals, so
   consecutive exams share no question wherever the area has enough.
@@ -124,8 +127,11 @@ global `seed()` has no effect.
 
 ### Resume
 
-The app has no mid-session resume. A session's order and choice order are
-fixed when it starts and do not change until it ends. Every new session
+A session's order and choice order are fixed when it starts and do not
+change until it ends. After every graded answer the unfinished run is saved
+(`QuizSession.snapshot()` into `StudyProgress`, `user://study_progress.cfg`),
+and Home's "Continue where you left off" restores it at the same question
+with the same score, even after the app was closed. Every new session
 reshuffles.
 
 ## 3. Saved state

@@ -51,7 +51,7 @@ Final #4 notes: Q24 and Q33 are the same question in the PDF (both kept); Q25, Q
 
 ## UpCodes answer re-check (2026-09-30)
 
-All 598 records (594 NEC plus the 4 Nebraska state-law records, which are not NEC and were only sanity-checked) were checked again against the NFPA 70-2023 text cache (the UpCodes extraction), one reviewer per batch of about 60 and every finding re-checked by hand: keyed answer, cited section, 2023 values and ambiguity. **No answer key is wrong under NEC 2023 and no citation moved.** Changes, all through the overlay (key unchanged in every case):
+All 598 records (594 NEC plus the 4 Nebraska state-law records, which are not NEC and were only sanity-checked) were checked again against the NFPA 70-2023 text cache (the UpCodes extraction), one reviewer per batch of about 60 and every finding re-checked by hand: keyed answer, cited section, 2023 values and ambiguity. **No answer key is wrong under NEC 2023 and no citation moved.** The per-question table is `docs/audits/UPCODES_ANSWER_CHECK.md`. Changes, all through the overlay (key unchanged in every case):
 
 - `final-exam-#4-034`, `final-exam-#4-037`, `final-exam-#4-056` (430.32(C)): the provision showed the 430.32(A)(1) percentages (125 and 115 percent); 2023 430.32(C) lists 140 percent for a marked temperature rise of 40°C or less and 130 percent for all other motors, the values the keys use.
 - `final-exam-#3-028` (422.5(A)): the stem said "provided for public use rated 250v or less"; 2023 covers the listed appliances rated 150 volts or less to ground and 60 amperes or less, not only public-use ones.

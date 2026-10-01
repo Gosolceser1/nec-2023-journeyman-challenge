@@ -86,7 +86,11 @@ edition (templates in `data/app.json`).
    then copy the candidate over `data/question_bank.json` and run
    `bash tools/verify.sh`. Layout goldens hold `{EDITION}` and `{VERSION}`, so
    they need no edit.
-8. **Assets and text**: `python tools/branding/build_branding.py` (splash
+8. **Assets and text**: `python tools/pipeline/hunt_keywords.py` (code-book
+   keywords from the 2026 `index_terms.json`), the original figures
+   (`tools/diagrams/figs/` cite 2023 section numbers on the drawings; re-check
+   them and run `tools/diagrams/build.py`),
+   `python tools/branding/build_branding.py` (splash
    wordmark), `tools/visual/make_showcase.py` (README banner), speech clips
    (`dump_speech.gd`, `pregenerate_speech.py --bundle`), README, store text and
    `CHANGELOG.md`. Keep `data/nec/2023/` in the tree for reference or delete it

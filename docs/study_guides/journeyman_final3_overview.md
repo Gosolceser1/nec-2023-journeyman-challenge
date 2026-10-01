@@ -22,7 +22,7 @@ Use the verified answer and NEC reference for each question to locate the rule i
 
 ## Timing
 
-The source exam uses one overall 3-hour clock. Practice pacing averages about 2 minutes 34 seconds per question for the 70-question set.
+The source exam uses one overall 3-hour clock. That averages about 2 minutes 34 seconds per question for the 70-question set. In the app it runs on the full exam's pace of 3 minutes per question (210 minutes for the 70 questions).
 
 ## Verification
 

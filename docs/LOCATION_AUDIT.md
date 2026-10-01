@@ -70,7 +70,8 @@ Code defects behind the title errors:
 
 Fixes:
 
-- One canonical table, `data/nec_2023_articles.json`: all 162 NEC 2023
+- One canonical table, `data/nec_2023_articles.json` (now
+  `data/nec/2023/articles.json`): all 162 NEC 2023
   articles, titles as listed in the UpCodes table of contents. The app, the
   builder and the validator all read it.
 - The builder now sets `article_title` from the primary cited article after
@@ -289,7 +290,7 @@ snapshots and with in-page text extraction.
 The 315 records of Open Book #2, #3, #5, #6, #9, #11, #12 and Final #2 and #4
 got the same pointer checks before they entered the bank:
 
-- Every `article` resolves to a 2023 article in `data/nec_2023_articles.json`
+- Every `article` resolves to a 2023 article in `data/nec/2023/articles.json`
   (chapter and full 2023 title), enforced by `validate_question_bank.py`.
 - Every `reference_text` line is a verbatim line of the NEC 2023 text cache,
   with the cited section's heading first; Chapter 9 tables are cited as

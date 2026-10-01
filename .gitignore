@@ -46,3 +46,6 @@ desktop.ini
 
 # Release packages (docs/RELEASE.md)
 /release/
+
+# Private working notes (agent board, personal to-dos); public audits live in docs/audits/
+/notes/

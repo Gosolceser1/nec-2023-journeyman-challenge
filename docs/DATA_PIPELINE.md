@@ -4,7 +4,7 @@
 
 `question_bank.json` is schema v2. It contains 598 playable records: 594 NEC records across 16 exams and 4 Nebraska State Law records (exam `NE State Act #3`, `"section": "ne_state_law"`), plus a 629-entry manifest and 31 unavailable source entries (Final Exam #5's scan lacks four question pages). Its top-level keys are `version`, `total_expected`, `playable`, `missing_source_items`, `audit_notes`, `records`, and `manifest`.
 
-The bank validator is a structural and spoiler-safety gate, not a proof that each answer is technically correct. The regression suite leaves NEC answer correctness to source review (`tools/tests/README.md`, “What is NOT covered”). That review was done for NEC 2023 in the content, tables/formulas and location audits (`docs/CONTENT_AUDIT_2023.md`, `docs/TABLES_FORMULAS_AUDIT.md`, `docs/LOCATION_AUDIT.md`), and the guards below keep an audited record from changing unnoticed. New or changed section-level NEC claims must still be checked against the edition in `data/edition.json` (NEC 2023).
+The bank validator is a structural and spoiler-safety gate, not a proof that each answer is technically correct. The regression suite leaves NEC answer correctness to source review (`tools/tests/README.md`, “What is NOT covered”). That review was done for NEC 2023 in the content, tables/formulas and location audits (`docs/CONTENT_AUDIT_2023.md`, `docs/TABLES_FORMULAS_AUDIT.md`, `docs/LOCATION_AUDIT.md`) and in the 2026-09-30 re-check of all 598 answers (`docs/audits/UPCODES_ANSWER_CHECK.md`), and the guards below keep an audited record from changing unnoticed. New or changed section-level NEC claims must still be checked against the edition in `data/edition.json` (NEC 2023).
 
 ## Commands
 
@@ -16,7 +16,7 @@ WIRE_BANK_OUT=/path/to/candidate.json bash tools/pipeline/build_question_bank.sh
 WIRE_BANK_OUT=/path/to/candidate.json bash tools/pipeline/build_question_bank.sh --full
 ```
 
-`--no-warn` makes validator warnings fail the gate. The local and CI gates use it. `tools/tests/test_build_guard.sh`, the Python tests (`test_validate_question_bank.py`, `test_spellcheck_bank.py`, `test_speak_question.py`, `test_question_requirements.py`) and `spellcheck_bank.py --offline` run inside the gate before the strict bank validator. The Godot suites cover app behavior and the no-answer-leak guarantee.
+`--no-warn` makes validator warnings fail the gate. The local and CI gates use it. `tools/tests/test_build_guard.sh`, the Python tests (bank validator, spellcheck, typo regressions, `speak_question`, bundle audit, question requirements, diagram figures, hunt keywords, exam sources, edition migration report, app identity, version bump, branding text and the Godot version; the list is in `tools/verify.sh`) and `spellcheck_bank.py --offline` run inside the gate before the strict bank validator. The Godot suites cover app behavior and the no-answer-leak guarantee.
 
 ## Where the data lives
 
@@ -126,4 +126,4 @@ Current validation result: **0 errors, 0 warnings**. The validator enforces the 
 
 ## Speech assets
 
-`tools/speech/dump_speech.gd` exports the speech plan of the checked-in `data/question_bank.json`; `tools/speech/pregenerate_speech.py --bundle` writes bundled MP3s into `assets/speech/` (without `--bundle` it fills the per-user cache). Spoken text comes from `src/speech/speech_rules.gd` (see `docs/VOICE_READING_RULES.md`); bump its `VERSION` when a rule changes output so stale clips are re-rendered. Generated `assets/speech/` clips are gitignored. Rebuild them with the three commands in `README.md`; `build_question_bank.sh --full` also runs them, but always against the checked-in bank, not the candidate it just built.
+`tools/speech/dump_speech.gd` exports the speech plan of the checked-in `data/question_bank.json`, plus every Show steps step of the exam calculation solutions (`math_<question id>_s<step>`); `tools/speech/pregenerate_speech.py --bundle` writes bundled MP3s into `assets/speech/` (without `--bundle` it fills the per-user cache). Spoken text comes from `src/speech/speech_rules.gd` (see `docs/VOICE_READING_RULES.md`); bump its `VERSION` when a rule changes output so stale clips are re-rendered. Generated `assets/speech/` clips are gitignored. Rebuild them with the three commands in `README.md`; `build_question_bank.sh --full` also runs them, but always against the checked-in bank, not the candidate it just built.
