@@ -38,7 +38,7 @@ func _init() -> void:
 		uniq[i] = true
 		check(i >= 0 and i < recs.size(), "order index %d in range" % i)
 	check(uniq.size() == 3, "no question repeats")
-	check(s.score == 0 and s.streak == 0 and s.answered_count == 0 and s.current_index == 0, "counters reset")
+	check(s.score == 0 and s.answered_count == 0 and s.current_index == 0, "counters reset")
 	check(s.missed_questions.is_empty() and s.chapter_stats.is_empty(), "missed list and tallies reset")
 	check(s.time_left == 540 and s.session_time_limit == 540 and s.timed_session and s.session_name == "Practice", "limit, timing and name")
 	check(s.question_time_left == ExamBlueprint.seconds_per_item(), "full item time")
@@ -51,14 +51,14 @@ func _init() -> void:
 	s.begin(5, 900, true, "P")
 	s.order = [0, 1, 2, 3, 4] as Array[int]
 	var r := s.submit(0, true)
-	check(r["verdict"] == QuizSession.Verdict.CORRECT and s.score == 1 and s.streak == 1 and s.answered_count == 1, "correct pick")
+	check(r["verdict"] == QuizSession.Verdict.CORRECT and s.score == 1 and s.answered_count == 1, "correct pick")
 	check(r["correct_text"] == "a" and r["record_index"] == 0, "verdict carries the answer")
 	check(s.chapter_stats.get(2) == [1, 1], "chapter 2 tally after a right answer")
 	check(s.submit(1, true).is_empty() and s.answered_count == 1 and s.score == 1, "second submit on the same question is ignored")
 	check(s.advance() and s.current_index == 1, "advance")
 	s.start_question()
 	r = s.submit(3, true)
-	check(r["verdict"] == QuizSession.Verdict.WRONG and s.streak == 0 and s.score == 1, "wrong pick resets the streak")
+	check(r["verdict"] == QuizSession.Verdict.WRONG and s.score == 1, "wrong pick scores nothing")
 	check(s.missed_questions.size() == 1, "wrong pick is listed")
 	var miss: Dictionary = s.missed_questions[0]
 	check(miss["index"] == 2 and miss["selected"] == "D — d" and miss["correct"] == "B — b", "missed entry: position, pick, answer")
@@ -71,10 +71,9 @@ func _init() -> void:
 	check(r["selected_text"] == "No answer", "time out has no pick")
 	s.advance()
 	s.start_question()
-	var before := s.streak
 	r = s.submit(0, false)
 	check(r["verdict"] == QuizSession.Verdict.REVIEWED and s.answered_count == 4, "listen answer is reviewed and counted")
-	check(s.score == 1 and s.streak == before and s.missed_questions.size() == 2 and not s.chapter_stats.has(4), "listen answer is not graded")
+	check(s.score == 1 and s.missed_questions.size() == 2 and not s.chapter_stats.has(4), "listen answer is not graded")
 	s.advance()
 	check(not s.advance() and s.current_index == 4, "advance stops at the last question")
 

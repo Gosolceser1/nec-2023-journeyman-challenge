@@ -133,7 +133,8 @@ func _key_button(key: String, h: float, font: int) -> Button:
 	b.add_theme_stylebox_override("hover_pressed", pressed)
 	for state in ["font_color", "font_hover_color", "font_pressed_color", "font_hover_pressed_color"]:
 		b.add_theme_color_override(state, tint)
-	b.pressed.connect(press.bind(key))
+	b.pressed.connect(press.bind(key, false))
+	UiFx.add_press_feedback(b)
 	_buttons[key] = b
 	return b
 
@@ -183,21 +184,39 @@ func is_guiding() -> bool:
 	return _row != ""
 
 
-func press(key: String) -> void:
+## typed: the press came from the keyboard (or code), so the on-screen key
+## dips to show it; a pointer press already dipped it while held.
+func press(key: String, typed: bool = true) -> void:
 	if locked:
 		return
 	engine.press(key)
 	blank = key == "C"
 	if sfx.is_valid():
 		sfx.call("select")
+	if typed and _buttons.has(key):
+		UiFx.tap(_buttons[key])
+	var finished := false
 	if _guide_at >= 0 and _guide_at < _guide.size():
 		if key == str(_guide[_guide_at]):
 			_guide_at += 1
-			if _guide_at == _guide.size():
-				guide_finished.emit(matches())
+			finished = _guide_at == _guide.size()
 		else:
 			_guide_at = -1
 	_refresh()
+	if finished:
+		_finish_guide(matches())
+
+
+## The guided row is done: a match gets the correct tone and the hint pops;
+## a mismatch only nudges the hint (the tone is for answers, not slips).
+func _finish_guide(matched: bool) -> void:
+	if matched and sfx.is_valid():
+		sfx.call("correct")
+	if matched and not UiFx.reduce_motion:
+		UiFx.pop(_hint, 1.04, AppTheme.MOTION_SLOW, Vector2(0.0, 0.5))
+	elif not matched:
+		UiFx.shake(_hint)
+	guide_finished.emit(matched)
 
 
 ## A fresh calculator with memory cleared, showing "?" until a key.

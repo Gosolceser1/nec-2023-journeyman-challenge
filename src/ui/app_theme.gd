@@ -54,8 +54,18 @@ const WEIGHT_SEMIBOLD := 600
 const WEIGHT_BOLD := 700
 
 # --- Motion (seconds / px) ------------------------------------------------------
+## Three durations for everything that eases in or out (UiFx.ease_out: cubic
+## ease-out): FAST for presses and hovers, NORMAL for panels and verdicts
+## appearing, SLOW for glides that travel (scrolls, bars filling).
 const MOTION_FAST := 0.12
+const MOTION_NORMAL := 0.2
+const MOTION_SLOW := 0.32
+## Screen entrances; under NORMAL so the start cue's tail timing holds.
 const MOTION_SCREEN := 0.18
+## Buttons and keys dip to this scale while held.
+const PRESS_SCALE := 0.97
+## Panels that appear in place start this small (scaled about their centre).
+const REVEAL_SCALE := 0.98
 const MOTION_SLIDE_PX := 8.0
 ## Hover/focus lift of cards, drawn as an offset so the layout never moves.
 const LIFT_PX := 2.0

@@ -229,21 +229,25 @@ var _verdict_tweens: Array[Tween] = []
 
 const TRACE_CYAN := AppTheme.SKY_300
 const GLITCH_PX: Array[float] = [5.0, -4.0, 3.0, -3.0, 1.5, 0.0]
+## A held card dips less than a button: it is much wider.
+const CARD_PRESS_SCALE := 0.985
+## Seconds from the right answer to the check's tip, on correct.wav's zap.
+const CELEBRATE_LAND := 0.1
 
-## The pick was right. strength 1.0 = first correct, up to ~1.4 on a streak.
-## pitch is the correct cue's streak pitch_scale: the timing follows the sound
-## (correct.wav: a zap from ~10 ms sweeping up to its peak at ~0.23 s, scaled
-## by 1/pitch), so the electron runs the check on the zap and reaches the tip
-## at ~100 ms, early in the sweep. calm (reduce motion): only the final state.
-func celebrate(strength: float = 1.0, calm: bool = false, pitch: float = 1.0) -> void:
+## The pick was right. The timing follows the sound (correct.wav: a zap from
+## ~10 ms sweeping up to its peak at ~0.23 s), so the electron runs the check
+## on the zap and reaches the tip at CELEBRATE_LAND, early in the sweep. Every
+## right answer gets the same, restrained celebration. calm (reduce motion):
+## only the final state.
+func celebrate(calm: bool = false) -> void:
 	_stop_verdict()
 	if calm:
 		return
 	_energize_bus()
-	var land := 0.1 / maxf(pitch, 0.5)
-	_flash_style(Color(AppTheme.EMERALD_400, 0.35), AppTheme.SKY_300, int(14 + 6 * strength), Color(AppTheme.SKY_400, 0.45), 0.45)
+	var land := CELEBRATE_LAND
+	_flash_style(Color(AppTheme.EMERALD_400, 0.35), AppTheme.SKY_300, 20, Color(AppTheme.SKY_400, 0.45), 0.45)
 	pivot_offset = size / 2.0
-	var peak := 1.0 + 0.03 * strength
+	var peak := 1.03
 	var punch := _verdict_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 	punch.tween_interval(land)
 	punch.tween_property(self, "scale", Vector2(peak, peak), 0.06)
@@ -258,10 +262,10 @@ func celebrate(strength: float = 1.0, calm: bool = false, pitch: float = 1.0) ->
 	# Spark positions are read inside callbacks: the icon only turns visible in
 	# the grading frame and has no settled position until the container sorts.
 	var sparks := _verdict_tween()
-	sparks.tween_callback(func(): UiFx.trail_sparks(self, _icon_path(), land, TRACE_CYAN, roundi(8 * strength)))
+	sparks.tween_callback(func(): UiFx.trail_sparks(self, _icon_path(), land, TRACE_CYAN, 8))
 	sparks.tween_interval(land)
-	sparks.tween_callback(func(): UiFx.card_burst(self, _icon_path()[-1], TRACE_CYAN, roundi(8 * strength), 0.55))
-	_run_current(land, 0.36, 0.9 + 0.25 * (strength - 1.0) / 0.4)
+	sparks.tween_callback(func(): UiFx.card_burst(self, _icon_path()[-1], TRACE_CYAN, 8, 0.55))
+	_run_current(land, 0.36, 0.9)
 
 ## The pick was wrong: the X shorts out on the boom of wrong.wav
 ## (~3 ms; spark pop where the strokes cross), flickers, the card glitches.
@@ -332,7 +336,7 @@ func _stop_verdict() -> void:
 		if tw.is_valid():
 			tw.kill()
 	_verdict_tweens.clear()
-	scale = Vector2.ONE
+	UiFx.settle_press(self)
 	modulate.a = 1.0
 	UiFx.slide_x(self, 0.0, 0.0)
 	accent_bar.modulate = Color.WHITE
@@ -411,10 +415,8 @@ func cancel_press() -> void:
 	if current_state == State.PRESSED:
 		_touch_press_index = -1
 		set_state(State.NORMAL)
-		pivot_offset = size / 2.0
-		var tw := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tw.tween_property(self, "scale", Vector2.ONE, 0.15)
-		UiFx.slide_x(self, 0.0, 0.15)
+		UiFx.press_scale(self, 1.0)
+		UiFx.slide_x(self, 0.0, AppTheme.MOTION_FAST)
 
 func set_speaking(on: bool) -> void:
 	if is_disabled:
@@ -443,17 +445,13 @@ func set_speaking(on: bool) -> void:
 			letter_panel.add_theme_stylebox_override("panel", pill_style)
 		letter_label.add_theme_color_override("font_color", AppTheme.WHITE)
 
-		# Animated gentle bounce
-		pivot_offset = size / 2.0
-		var tw := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-		tw.tween_property(self, "scale", Vector2(1.025, 1.025), 0.12)
-		UiFx.slide_x(self, 8.0)
+		# Gentle lift toward the reader; Reduce motion keeps the card still.
+		UiFx.press_scale(self, 1.025)
+		UiFx.slide_x(self, 0.0 if UiFx.reduce_motion else 8.0, AppTheme.MOTION_FAST)
 	else:
 		_apply_styling()
-		pivot_offset = size / 2.0
-		var tw := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tw.tween_property(self, "scale", Vector2.ONE, 0.15)
-		UiFx.slide_x(self, 0.0, 0.15)
+		UiFx.press_scale(self, 1.0)
+		UiFx.slide_x(self, 0.0, AppTheme.MOTION_FAST)
 
 func set_eliminated() -> void:
 	is_disabled = true
@@ -645,24 +643,19 @@ func _on_gui_input(event: InputEvent) -> void:
 				_touch_press_pos = event.position
 				set_state(State.PRESSED)
 				_pulse_lug()
-				var tween: Tween = create_tween()
-				tween.tween_property(self, "scale", Vector2(0.985, 0.985), 0.05)
+				UiFx.press_scale(self, CARD_PRESS_SCALE)
 		elif event.index == _touch_press_index:
 			var tapped := _touch_release_counts(event.position)
 			_touch_press_index = -1
 			if tapped:
 				set_state(State.HOVER)
-				pivot_offset = size / 2.0
-				var tw: Tween = create_tween()
-				tw.tween_property(self, "scale", Vector2.ONE, 0.08)
+				UiFx.press_scale(self, 1.0)
 				card_clicked.emit(option_index)
 				accept_event()
 			else:
 				_apply_styling()
-				pivot_offset = size / 2.0
-				var tw2 := create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-				tw2.tween_property(self, "scale", Vector2.ONE, 0.15)
-				UiFx.slide_x(self, 0.0, 0.15)
+				UiFx.press_scale(self, 1.0)
+				UiFx.slide_x(self, 0.0, AppTheme.MOTION_FAST)
 		return
 	if event is InputEventScreenDrag and event.index == _touch_press_index:
 		if _touch_press_pos.distance_to(event.position) > TOUCH_SLOP_PX:
@@ -682,13 +675,11 @@ func _on_gui_input(event: InputEvent) -> void:
 				_mouse_press_pos = event.position
 			set_state(State.PRESSED)
 			_pulse_lug()
-			var tween: Tween = create_tween()
-			tween.tween_property(self, "scale", Vector2(0.985, 0.985), 0.05)
+			UiFx.press_scale(self, CARD_PRESS_SCALE)
 		else:
 			var moved: float = _mouse_press_pos.distance_to(event.position)
 			set_state(State.HOVER)
-			var tween: Tween = create_tween()
-			tween.tween_property(self, "scale", Vector2.ONE, 0.08)
+			UiFx.press_scale(self, 1.0)
 			if moved > TOUCH_SLOP_PX:
 				# A drag that ends here is a scroll, not a selection.
 				accept_event()

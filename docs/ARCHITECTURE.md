@@ -16,7 +16,7 @@ src/
                             main_menu.gd (MainMenu), menu_model.gd (MenuModel), menu_tile.gd,
                             meter_bar.gd, outline_bars.gd
   core/   node-free, unit-tested
-          quiz_session.gd   QuizSession: order (one question pool), score, streak, verdicts, missed list, clocks
+          quiz_session.gd   QuizSession: order (one question pool), score, verdicts, missed list, clocks
           question_deck.gd  QuestionDeck: which questions a run gets, reviews, study stats, question_bag.cfg
           exam_blueprint.gd ExamBlueprint: the exam's subject areas, record -> area (NEC pool only), apportionment
           choice_order.gd   ChoiceOrder: per-run choice order, locked questions, pinned choices

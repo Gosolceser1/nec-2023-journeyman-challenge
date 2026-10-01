@@ -27,9 +27,6 @@ var current_index: int:
 var score: int:
 	get: return session.score
 	set(v): session.score = v
-var streak: int:
-	get: return session.streak
-	set(v): session.streak = v
 var answered_count: int:
 	get: return session.answered_count
 	set(v): session.answered_count = v
@@ -836,6 +833,10 @@ func _show_menu() -> void:
 					var prev := btn.get_meta("entrance_tween") as Tween
 					if prev != null and prev.is_valid():
 						prev.kill()
+				if audio.reduce_motion:
+					btn.modulate.a = 1.0
+					btn.scale = Vector2.ONE
+					continue
 				btn.pivot_offset = btn.size * 0.5
 				btn.modulate.a = 0.0
 				btn.scale = Vector2(0.97, 0.97)
@@ -1034,12 +1035,7 @@ func _answer_selected(selected: int) -> void:
 			feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
 			feedback_body.visible = true
 	feedback_panel.visible = true
-	feedback_panel.modulate.a = 0.0
-	feedback_panel.pivot_offset = feedback_panel.size / 2.0
-	feedback_panel.scale = Vector2(0.98, 0.98)
-	var fb_tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	fb_tw.parallel().tween_property(feedback_panel, "modulate:a", 1.0, 0.16)
-	fb_tw.parallel().tween_property(feedback_panel, "scale", Vector2.ONE, 0.2)
+	UiFx.reveal(feedback_panel, audio.reduce_motion)
 
 	question_table_panel.visible = false
 	# The figure stays up: the explanation talks about it by its labels. A
@@ -1052,12 +1048,7 @@ func _answer_selected(selected: int) -> void:
 	feedback_table_scroll.visible = false
 	feedback_table_note.visible = false
 	next_button.visible = true
-	next_button.modulate.a = 0.0
-	next_button.scale = Vector2(0.96, 0.96)
-	next_button.pivot_offset = next_button.size / 2.0
-	var nb_tw := create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	nb_tw.parallel().tween_property(next_button, "modulate:a", 1.0, 0.18)
-	nb_tw.parallel().tween_property(next_button, "scale", Vector2.ONE, 0.22)
+	UiFx.reveal(next_button, audio.reduce_motion, 0.96)
 	feedback_reference.text = NecReference.format_reference(record)
 	feedback_reference.visible = true
 	var table = record.get("reference_table", [])
@@ -1123,13 +1114,16 @@ func _scroll_to_verdict(correct: int) -> void:
 	target = clampi(target, 0, maxi(0, int(content.size.y - scroll.size.y)))
 	if target <= scroll.scroll_vertical:
 		return
-	_verdict_scroll_tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	_verdict_scroll_tween.tween_property(scroll, "scroll_vertical", target, 0.35)
+	if audio.reduce_motion:
+		scroll.scroll_vertical = target
+		return
+	_verdict_scroll_tween = UiFx.ease_out(self)
+	_verdict_scroll_tween.tween_property(scroll, "scroll_vertical", target, AppTheme.MOTION_SLOW)
 
 func _update_score_badges() -> void:
 	if is_instance_valid(progress_segments):
 		progress_segments.set_progress(ProgressSegments.outcomes_for(order.size(), current_index, current_answered,
-			missed_questions, AudioSettings.grades_answers(session_audio_mode)), streak)
+			missed_questions, AudioSettings.grades_answers(session_audio_mode)))
 	if session_audio_mode == AudioSettings.Mode.LISTEN:
 		score_label.text = "LISTEN MODE"
 		score_label.add_theme_color_override("font_color", AppTheme.SKY_300)
@@ -1301,11 +1295,8 @@ func _tick_timer() -> void:
 		question_timer_label.text = "ITEM " + _format_time(max(question_time_left, 0))
 		if question_time_left <= 30:
 			question_timer_label.add_theme_color_override("font_color", AppTheme.RED_400)
-			# Subtle warning pulse
-			question_timer_label.pivot_offset = question_timer_label.size / 2.0
-			var p_tw := create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-			p_tw.tween_property(question_timer_label, "scale", Vector2(1.08, 1.08), 0.1)
-			p_tw.tween_property(question_timer_label, "scale", Vector2.ONE, 0.14)
+			if not audio.reduce_motion:
+				UiFx.pop(question_timer_label, 1.06, AppTheme.MOTION_NORMAL)
 		elif question_time_left <= 60:
 			question_timer_label.add_theme_color_override("font_color", AppTheme.AMBER_400)
 		else:

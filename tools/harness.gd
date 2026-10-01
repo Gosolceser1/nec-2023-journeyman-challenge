@@ -150,7 +150,6 @@ func _answer_every_record(main: Node) -> void:
 	main.timer.stop()
 	main.current_index = 0
 	main.score = 0
-	main.streak = 0
 	main.answered_count = 0
 	main.missed_questions.clear()
 	var idx := 0
@@ -304,7 +303,7 @@ func _audio_modes(main: Node) -> void:
 	var rec: Dictionary = main.records[main.order[main.current_index]]
 	var wrong := (int(rec.get("correct_index", 0)) + 1) % (rec.get("answers", []) as Array).size()
 	main._answer_selected(wrong)
-	check(main.score == 0 and main.streak == 0 and main.missed_questions.is_empty(), "listen answers are not graded")
+	check(main.score == 0 and main.missed_questions.is_empty(), "listen answers are not graded")
 	check(main.chapter_stats.is_empty(), "listen answers stay out of the chapter breakdown")
 	check(main.answered_count == 1, "listen still counts the item as reviewed")
 	check(main.listen_phase == AudioSettings.ListenPhase.TEACH, "answering in listen moves to TEACH")

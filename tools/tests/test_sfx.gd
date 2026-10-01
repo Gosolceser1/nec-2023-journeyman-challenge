@@ -225,8 +225,10 @@ func _initialize() -> void:
 		check(float(spec["vary_db"]) >= 0.0 and float(spec["vary_db"]) <= 2.0, "%s: level variation stays subtle" % id)
 		if id == "hover":
 			check(float(spec["vary_pitch"]) >= 0.03 and float(spec["vary_pitch"]) <= 0.05, "hover: pitch varies about ±4 % per play")
+		elif id == "select":
+			check(float(spec["vary_pitch"]) > 0.0 and float(spec["vary_pitch"]) <= 0.03, "select (calculator keys): pitch varies up to ±3 % per play")
 		else:
-			check(float(spec["vary_pitch"]) == 0.0, "%s: fixed pitch (only hover is jittered)" % id)
+			check(float(spec["vary_pitch"]) == 0.0, "%s: fixed pitch (only hover and select are jittered)" % id)
 		var info := _wav_info(ProjectSettings.globalize_path(Sfx.path_for(id)))
 		check(not info.is_empty() and bool(info.get("ok", false)), "%s: wav file present" % id)
 		if info.is_empty():
@@ -256,17 +258,6 @@ func _initialize() -> void:
 		"start cue is %d dB down by %.2f s, before auto-read can begin (%.2f s)" % [TAIL_DB, start_audible, AppTheme.MOTION_SCREEN + AUTO_READ_DELAY])
 	check(Widgets.START_CUE_ONSET <= AppTheme.MOTION_SCREEN, "start press motion lands inside the menu fade")
 	check(float(Sfx.SOUNDS["start"]["vary_db"]) == 0.0, "start plays as-is (once per session)")
-
-	print("=== streak pitch ===")
-	check(Sfx.streak_pitch(0) == 1.0 and Sfx.streak_pitch(2) == 1.0, "no step before 3 in a row")
-	check(is_equal_approx(Sfx.streak_pitch(3), pow(2.0, 2.0 / 12.0)), "3 in a row: +2 semitones")
-	check(is_equal_approx(Sfx.streak_pitch(8), pow(2.0, 5.0 / 12.0)), "full meter: +5 semitones (a fourth)")
-	check(is_equal_approx(Sfx.streak_pitch(40), Sfx.streak_pitch(8)) and Sfx.streak_pitch(-1) == 1.0, "capped at +5, never below the base pitch")
-	var rising := true
-	for n in range(1, 12):
-		rising = rising and Sfx.streak_pitch(n) >= Sfx.streak_pitch(n - 1)
-	check(rising, "pitch never drops while the streak grows")
-	check(Sfx.streak_strength(0) == 0.0 and Sfx.streak_strength(8) == 1.0, "animation strength runs 0 -> 1 with the pitch steps")
 
 	print("=== exam clock warning ===")
 	var fired: Array[int] = []
@@ -332,15 +323,13 @@ func _initialize() -> void:
 		routed = routed and (p as AudioStreamPlayer).bus == (Sfx.DUCK_BUS if bool(Sfx.SOUNDS[id]["duck"]) else Sfx.BUS)
 	check(routed, "warning routes through the duck bus, every other cue straight to SFX")
 	var correct_stream := (s.get_node("Sfx_correct") as AudioStreamPlayer).stream
-	check(correct_stream is AudioStreamRandomizer and is_equal_approx((correct_stream as AudioStreamRandomizer).random_pitch, 1.0), "answer tones vary randomly in level only; pitch moves in fixed streak steps")
+	check(correct_stream is AudioStreamRandomizer and is_equal_approx((correct_stream as AudioStreamRandomizer).random_pitch, 1.0), "answer tones vary randomly in level only, never in pitch")
 	check(not ((s.get_node("Sfx_pass") as AudioStreamPlayer).stream is AudioStreamRandomizer), "result cues play as-is")
 	s.apply_settings(true, AudioSettings.sfx_bus_db(0))
 	check(is_equal_approx(AudioServer.get_bus_volume_db(bus), AudioSettings.SFX_LEVEL_DB[0]), "level sets the bus volume")
 	check(not AudioServer.is_bus_mute(bus), "on: bus unmuted")
 	check(s.play("correct"), "on: correct plays (dummy driver is fine)")
 	check((s.get_node("Sfx_correct") as AudioStreamPlayer).pitch_scale == 1.0, "a plain correct plays at its own pitch")
-	check(s.play("correct", Sfx.streak_pitch(8)) and is_equal_approx((s.get_node("Sfx_correct") as AudioStreamPlayer).pitch_scale, Sfx.streak_pitch(8)), "a streak correct plays pitched up")
-	check(s.play("correct") and (s.get_node("Sfx_correct") as AudioStreamPlayer).pitch_scale == 1.0, "the pitch resets on the next plain play")
 	check(not s.play("tick"), "a cut cue cannot play")
 	s.voice_active = func() -> bool: return true
 	check(s.play("warning"), "voice on: warning still plays, ducked")

@@ -25,6 +25,8 @@ const BACKDROP_INTENSITY := 0.4
 const BACKDROP_PULSE_SPEED := 0.06
 const BACKDROP_DRIFT_QUIZ := Vector2(2.4, 1.2)
 const BACKDROP_DRIFT_MENU := Vector2(-1.6, 2.2)
+## shake(): the offsets it passes through, ending at the slot.
+const SHAKE_PX: Array[float] = [6.0, -5.0, 3.0, -2.0, 0.0]
 ## Nodes whose motion follows the Reduce-motion setting (apply_reduce_motion).
 const MOTION_GROUP := &"ui_motion"
 ## Mirrors the setting for decoration that has no host to ask (hover shine,
@@ -126,14 +128,111 @@ static func add_border_flow(ctrl: Control, color: Color, strength: float = 0.8) 
 ## place along x. Only for controls resting at x = 0 (a container child
 ## flush left, or an anchored full-rect node): the slide ends at 0.
 ## calm (Reduce motion): the fade only.
+## A second call restarts the entrance instead of racing the first.
 static func screen_enter(ctrl: Control, calm: bool, delay: float = 0.0) -> Tween:
+	_claim(ctrl, &"_enter_tween")
 	ctrl.modulate.a = 0.0
 	ctrl.position.x = 0.0 if calm else AppTheme.MOTION_SLIDE_PX
-	var tw := ctrl.create_tween().set_parallel().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	var tw := ease_out(ctrl).set_parallel()
 	tw.tween_property(ctrl, "modulate:a", 1.0, AppTheme.MOTION_SCREEN).set_delay(delay)
 	if not calm:
 		tw.tween_property(ctrl, "position:x", 0.0, AppTheme.MOTION_SCREEN).set_delay(delay)
+	_claim(ctrl, &"_enter_tween", tw)
 	return tw
+
+
+## A tween on ctrl with the shared easing (cubic ease-out).
+static func ease_out(ctrl: Node) -> Tween:
+	return ctrl.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+
+## Kills the tween ctrl keeps under key, so a re-render restarts an animation
+## instead of stacking a second one on it.
+static func _claim(ctrl: Node, key: StringName, tw: Tween = null) -> void:
+	if ctrl.has_meta(key):
+		var old := ctrl.get_meta(key) as Tween
+		if old != null and old.is_valid():
+			old.kill()
+		ctrl.remove_meta(key)
+	if tw != null:
+		ctrl.set_meta(key, tw)
+
+
+## A panel or button appearing in place: fades in while it grows from
+## from_scale about its centre. Scale and alpha only, so the layout never
+## moves. calm (Reduce motion): shown at once.
+static func reveal(ctrl: Control, calm: bool, from_scale: float = AppTheme.REVEAL_SCALE, duration: float = AppTheme.MOTION_NORMAL, delay: float = 0.0) -> Tween:
+	_claim(ctrl, &"_reveal_tween")
+	ctrl.pivot_offset = ctrl.size * 0.5
+	if calm or not ctrl.is_inside_tree():
+		ctrl.modulate.a = 1.0
+		ctrl.scale = Vector2.ONE
+		return null
+	ctrl.modulate.a = 0.0
+	ctrl.scale = Vector2(from_scale, from_scale)
+	var tw := ease_out(ctrl).set_parallel()
+	# A panel made visible this frame has no size until its container sorts.
+	tw.tween_callback(func() -> void: ctrl.pivot_offset = ctrl.size * 0.5)
+	tw.tween_property(ctrl, "modulate:a", 1.0, duration).set_delay(delay)
+	tw.tween_property(ctrl, "scale", Vector2.ONE, duration).set_delay(delay)
+	_claim(ctrl, &"_reveal_tween", tw)
+	return tw
+
+
+## Held buttons dip to PRESS_SCALE about their centre and spring back on
+## release; nothing under Reduce motion. For buttons that are not in a
+## container that animates their scale already.
+static func add_press_feedback(button: BaseButton) -> void:
+	button.button_down.connect(func() -> void: press_scale(button, AppTheme.PRESS_SCALE))
+	button.button_up.connect(func() -> void: press_scale(button, 1.0))
+	# A press a scroll took over may never see button_up.
+	button.mouse_exited.connect(func() -> void:
+		if button.scale != Vector2.ONE:
+			press_scale(button, 1.0))
+
+
+static func press_scale(ctrl: Control, target: float, duration: float = AppTheme.MOTION_FAST) -> void:
+	_claim(ctrl, &"_press_tween")
+	ctrl.pivot_offset = ctrl.size * 0.5
+	if reduce_motion or not ctrl.is_inside_tree():
+		ctrl.scale = Vector2.ONE
+		return
+	var tw := ease_out(ctrl)
+	tw.tween_property(ctrl, "scale", Vector2(target, target), duration * (0.5 if target < 1.0 else 1.0))
+	_claim(ctrl, &"_press_tween", tw)
+
+
+## Stops a press dip at rest, so a verdict animation owns the scale.
+static func settle_press(ctrl: Control) -> void:
+	_claim(ctrl, &"_press_tween")
+	ctrl.scale = Vector2.ONE
+
+
+## A press that came from the keyboard: the on-screen key dips and returns,
+## so typing shows on the pad.
+static func tap(ctrl: Control) -> void:
+	_claim(ctrl, &"_press_tween")
+	ctrl.pivot_offset = ctrl.size * 0.5
+	if reduce_motion or not ctrl.is_inside_tree():
+		ctrl.scale = Vector2.ONE
+		return
+	var tw := ease_out(ctrl)
+	tw.tween_property(ctrl, "scale", Vector2(AppTheme.PRESS_SCALE, AppTheme.PRESS_SCALE), AppTheme.MOTION_FAST * 0.5)
+	tw.tween_property(ctrl, "scale", Vector2.ONE, AppTheme.MOTION_FAST)
+	_claim(ctrl, &"_press_tween", tw)
+
+
+## "Not yet": a short sideways shake that settles at the control's slot
+## (x = 0, a container child). Reduce motion: no movement.
+static func shake(ctrl: Control) -> void:
+	if reduce_motion or not ctrl.is_inside_tree():
+		slide_x(ctrl, 0.0, 0.0)
+		return
+	slide_x(ctrl, 0.0, 0.0)
+	var tw := ctrl.create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	for dx: float in SHAKE_PX:
+		tw.tween_property(ctrl, "position:x", dx, AppTheme.MOTION_SLOW / SHAKE_PX.size())
+	ctrl.set_meta("_slide_tween", tw)
 
 
 static func make_fx_layer() -> Control:
@@ -311,7 +410,7 @@ static func glow_pulse(panel: Control, color: Color, peak_size: int = 26, durati
 ## pivot is a fraction of the size: left-aligned text in a full-width label
 ## pops from its left edge (0, 0.5), or it swells past the panel and is cut.
 static func pop(ctrl: Control, amount: float = 1.08, duration: float = 0.22, pivot := Vector2(0.5, 0.5)) -> void:
-	if not is_instance_valid(ctrl):
+	if not is_instance_valid(ctrl) or not ctrl.is_inside_tree():
 		return
 	ctrl.pivot_offset = ctrl.size * pivot
 	var tw := ctrl.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)

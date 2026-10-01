@@ -44,6 +44,29 @@
   overlap or sit on lines, and several depictions were corrected (zones
   measured from the tub edge and the overhead conductors, the pool pump
   receptacle at true scale). The style guide is in docs/DIAGRAM_STYLE.md.
+- **Sounds re-leveled.** Every sound now sits at a consistent level for its
+  role: answer and result sounds a little quieter than before and matched to
+  each other, button and key sounds well under them, and none starts or ends
+  with a click. The start sound's piercing top is softened. Fast repeats
+  (typing a number on the calculator) get a little softer each press and
+  vary slightly in pitch, so they fade into the background.
+- **Calmer, more consistent motion.** Panels, buttons and the verdict now use
+  the same short ease-out timings; buttons and calculator keys dip slightly
+  while held, and keys typed on the keyboard show on the on-screen pad.
+  Reduce motion now also stops the verdict panel and Next button pop, the
+  menu cards' entrance, the phone's scroll to the verdict, the item-clock
+  pulse, the reading card's lift and the results' bars growing in.
+- Math Trainer: Check with nothing entered shakes the calculator with a soft
+  click instead of playing the exam-clock warning and blinking the keypad
+  out; Steps before answering no longer plays the wrong-answer sound. A Show
+  steps calculator row that lands on the step's number plays the correct
+  sound.
+
+### Removed
+
+- Removed the streak badge and rising streak sound; it's a practice test, not
+  a game. The progress bar uses the full width, and every right answer gets
+  the same sound and animation.
 
 ### Fixed
 

@@ -92,6 +92,7 @@ const SUITES := [
 	{"name": "main menu (tabs, exam discovery, every entry, continue, best scores, fit)", "path": "res://tools/tests/test_menu.gd"},
 	{"name": "audio settings (modes, autoplay rules)", "path": "res://tools/tests/test_audio_settings.gd"},
 	{"name": "sfx (sound map, voice ducking, bus)", "path": "res://tools/tests/test_sfx.gd"},
+	{"name": "sound and motion polish (loudness, repeats, reduce motion, calculator)", "path": "res://tools/tests/test_motion_polish.gd"},
 	{"name": "speech bus chain (anti-image, pitch bypass)", "path": "res://tools/tests/test_speech_chain.gd"},
 	# Desktop Edge voices through the built-in client: streamed clips, prefetch,
 	# cancel, Ryan kept, honest fallback, with PATH emptied (no Python).

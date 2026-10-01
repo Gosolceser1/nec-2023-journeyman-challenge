@@ -85,7 +85,7 @@ static func update_time_gauges(host: Main) -> void:
 ## parented to the card, so it never changes the fitted layout, and the cards
 ## already carry their final state style, so synchronous callers (the harness)
 ## see the graded screen without waiting. Reduce motion: final icons only.
-##   right:  zap sweeping upward (higher on a streak); the check draws itself as a
+##   right:  zap sweeping upward; the check draws itself as a
 ##           cyan trace with a spark running down it, a solder pad pulses at
 ##           the tip, current runs once around the card; one light haptic tick
 ##   wrong:  low "short" tone; the X strokes cross with a spark pop, flicker
@@ -95,15 +95,13 @@ static func play_answer(host: Main, cards: Array, correct: int, selected: int) -
 	var is_right := selected == correct and selected >= 0
 	var graded := AudioSettings.grades_answers(host.session_audio_mode)
 	var calm := host.audio.reduce_motion
-	var strength := 1.0 + 0.4 * Sfx.streak_strength(host.streak) if is_right else 1.0
-	var pitch := Sfx.streak_pitch(host.streak) if is_right else 1.0
-	host._sfx(Sfx.answer_sound(graded, is_right), pitch)
+	host._sfx(Sfx.answer_sound(graded, is_right))
 	if host.ui_mobile and graded:
 		haptic(host, is_right)
 	if correct >= 0 and correct < cards.size():
 		var right_card: AnswerCard = cards[correct]
 		if is_right:
-			right_card.celebrate(strength, calm, pitch)
+			right_card.celebrate(calm)
 		else:
 			right_card.reveal_right(0.2 if selected >= 0 else 0.06, calm)
 	if not is_right and selected >= 0 and selected < cards.size():

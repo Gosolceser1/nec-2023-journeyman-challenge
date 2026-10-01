@@ -139,6 +139,7 @@ static func make_dock_button(text: String, min_w: float, h: float, font_size: in
 	button.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_SEMIBOLD))
 	button.add_theme_font_size_override("font_size", font_size)
 	button.pressed.connect(callback)
+	UiFx.add_press_feedback(button)
 	return button
 
 
@@ -154,6 +155,7 @@ static func make_primary_button(text: String, h: float, font_size: int, callback
 	UiFx.add_glass(button, [AppTheme.SKY_600, AppTheme.SKY_700], AppTheme.RADIUS, AppTheme.BEVEL * 2.0)
 	UiFx.add_tint(button, AppTheme.GRAD_PRIMARY)
 	button.pressed.connect(callback)
+	UiFx.add_press_feedback(button)
 	return button
 
 

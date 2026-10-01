@@ -375,8 +375,9 @@ func _on_check() -> void:
 		_pad.press("=")
 	var given := entry()
 	if given == "" or _pad.engine.awaiting_operand() or is_nan(MathFormat.parse(given)):
-		hub.sfx("warning")
-		UiFx.screen_enter(_pad, false)
+		# Nothing to check yet: a click and a shake, not the exam-clock warning.
+		hub.sfx("click")
+		UiFx.shake(_pad)
 		return
 	_grade(MathEngine.check(problem, given), given)
 
@@ -391,14 +392,17 @@ func _pick_choice(option: String) -> void:
 		MathUi.set_choice_state(b, "right" if text == want else ("wrong" if text == option else "faded"))
 
 
-func _grade(ok: bool, given: String) -> void:
+## tone: false when the learner gave up for the steps (a miss, but not one to
+## buzz at).
+func _grade(ok: bool, given: String, tone: bool = true) -> void:
 	answered = true
 	total += 1
 	if ok:
 		right += 1
 	hub.stats.record("skill", str(problem.get("skill", "")), ok)
 	hub.stats.record("type", str(problem.get("type", "")), ok)
-	hub.sfx("correct" if ok else "wrong")
+	if tone:
+		hub.sfx("correct" if ok else "wrong")
 	var answer: Dictionary = problem.get("answer", {})
 	_verdict.text = "Correct!" if ok else "Not quite"
 	_verdict.add_theme_color_override("font_color", AppTheme.EMERALD_400 if ok else AppTheme.ROSE_400)
@@ -412,8 +416,7 @@ func _grade(ok: bool, given: String) -> void:
 	_check_button.visible = true
 	_steps_button.text = "Show steps"
 	_score.text = "%d / %d RIGHT" % [right, total]
-	if not UiFx.reduce_motion:
-		UiFx.screen_enter(_result, false)
+	UiFx.reveal(_result, UiFx.reduce_motion)
 
 
 func _show_hint() -> void:
@@ -449,7 +452,7 @@ func _open_card() -> void:
 func _show_steps() -> void:
 	hub.sfx("click")
 	if not answered:
-		_grade(false, "")
+		_grade(false, "", false)
 		_verdict.text = "Here's how"
 		_verdict.add_theme_color_override("font_color", AppTheme.SKY_400)
 	_problem_box.visible = false

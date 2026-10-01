@@ -25,21 +25,23 @@ Only the processed in-app WAVs are committed, never the source MP3s.
 | click.wav | plain button presses | Click | SoundReality | https://pixabay.com/sound-effects/film-special-effects-click-233950/ | 0.11 s |
 | hover.wav | pointer over a menu mode card (desktop) | Pop Atmos | SoundReality | https://pixabay.com/sound-effects/film-special-effects-pop-atmos-312646/ | 0.11 s |
 | toggle.wav | switches, chips, voice mute | Light Switch | SoundReality | https://pixabay.com/sound-effects/film-special-effects-light-switch-156813/ | 0.14 s |
-| select.wav | keyboard / controller focus onto an answer card | Pop Click | SoundReality | https://pixabay.com/sound-effects/film-special-effects-pop-click-312649/ | 0.19 s |
+| select.wav | keyboard / controller focus onto an answer card; calculator keys | Pop Click | SoundReality | https://pixabay.com/sound-effects/film-special-effects-pop-click-312649/ | 0.19 s |
 | transition.wav | screen changes (report, back to menu) | Swoosh 1 | AleXZavesa | https://pixabay.com/sound-effects/swoosh-1-463607/ | 0.62 s |
 
 Processing (the same for all): leading silence trimmed (onset at -40 dB, 5 ms
 pre-roll, 3 ms fade-in); the natural end kept when it fits the sound's length
 budget, otherwise cut at the quietest point near the end with an exponential
 fade to -60 dB; one gain change to a per-role max-momentary loudness (start
--18 LUFS, correct / wrong -16, warning / pass -15, fail -17, click / toggle /
-select / transition -22, hover -25), true peak ≤ -1 dBTP; no limiter, and no
-EQ except on wrong.wav. wrong.wav starts on the boom itself (source 0.44 s,
+-18.5 LUFS, correct / wrong / warning / fail -17, pass -16, click / toggle /
+select / transition -24, hover -27), sample peak ≤ -1 dBFS; no limiter, and
+no EQ except on wrong.wav and a -4 dB high shelf at 8 kHz on start.wav. Every
+file then gets a 3 ms raised-cosine fade-in and a 12 ms fade-out (no clicks);
+`tools/sfx/polish_sfx.py` does the leveling and fades. wrong.wav starts on the boom itself (source 0.44 s,
 skipping the rising crackle before it), ends with a 45 ms fade over the boom's
 natural drop (source 1.34 s), and has a -3 dB low shelf at 150 Hz so phone
 speakers get more of it. transition.wav is the whole swoosh with its natural
 rise and tail (0.62 s). hover.wav plays with a random ±4 % pitch per play
-(`Sfx.SOUNDS`), not baked into the file. correct.wav was trimmed with a 3 ms
+and select.wav ±3 % (`Sfx.SOUNDS`), not baked into the files. correct.wav was trimmed with a 3 ms
 fade-in and ends on its natural decay (silent by 0.73 s).
 16-bit PCM, stereo kept (warning is mono at the source), 44.1 or 48 kHz.
 Details and the reasoning per sound: `docs/SFX_PLAN.md`.

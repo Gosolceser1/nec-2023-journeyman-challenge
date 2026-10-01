@@ -170,7 +170,6 @@ func _initialize() -> void:
 	for i in 80:
 		secs.append([i + 1, clampf(rng.randfn(150.0, 45.0), 45.0, 400.0)])
 	main.session.answer_seconds = secs
-	main.streak = 6
 	main._show_results()
 	_scroll(0)
 	await _wait(120)

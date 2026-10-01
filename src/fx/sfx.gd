@@ -26,8 +26,9 @@ extends Node
 ## bus or imported asset (headless harness).
 ##
 ## Assets are sourced recordings (Pixabay Content License), processed and
-## loudness-matched per role; see assets/sfx/CREDITS.md. The trims below stay
-## at zero.
+## loudness-matched per role (tools/sfx/polish_sfx.py: event cues -16 to -18.5
+## LUFS, interface sounds -24, hover -27); see assets/sfx/CREDITS.md. The trims
+## below stay at zero.
 
 const BUS := "SFX"
 ## Sub-bus of SFX carrying the sidechain ducker; only "duck" cues play on it.
@@ -37,8 +38,9 @@ const DIR := "res://assets/sfx/"
 
 ## db: trim on top of the bus level. vary_db: random level spread per play, so
 ## the 100th answer tone is not a byte-identical copy of the first. vary_pitch:
-## random pitch spread per play (0.04 = about ±4 %), only on hover, the sound
-## that repeats most; the correct tone is pitched by the streak instead. duck: the
+## random pitch spread per play (0.04 = about ±4 %), only on hover and select
+## (calculator keys), the sounds that repeat fastest; answer tones keep their
+## pitch (a practice test, not a game: no streak rise). duck: the
 ## cue can play while the voice is still reading and is squeezed under it.
 const SOUNDS := {
 	"correct": {"db": 0.0, "vary_db": 1.0, "vary_pitch": 0.0, "duck": false},
@@ -50,27 +52,30 @@ const SOUNDS := {
 	"click": {"db": 0.0, "vary_db": 1.0, "vary_pitch": 0.0, "duck": false},
 	"hover": {"db": 0.0, "vary_db": 1.0, "vary_pitch": 0.04, "duck": false},
 	"toggle": {"db": 0.0, "vary_db": 0.0, "vary_pitch": 0.0, "duck": false},
-	"select": {"db": 0.0, "vary_db": 1.0, "vary_pitch": 0.0, "duck": false},
+	"select": {"db": 0.0, "vary_db": 1.0, "vary_pitch": 0.03, "duck": false},
 	"transition": {"db": 0.0, "vary_db": 0.0, "vary_pitch": 0.0, "duck": false},
 }
 ## Interface sounds. rank: when one action asks for several (a Menu press asks
 ## for click and transition), the highest plays. gap: seconds before the same
 ## sound may play again, so sweeping the mouse down the menu doesn't machine-gun.
+## soften: a run of quick repeats recedes (repeat_db).
 const UI := {
-	"transition": {"rank": 3, "gap": 0.25},
-	"toggle": {"rank": 2, "gap": 0.05},
-	"select": {"rank": 2, "gap": 0.05},
-	"click": {"rank": 1, "gap": 0.05},
-	"hover": {"rank": 0, "gap": 0.15},
+	"transition": {"rank": 3, "gap": 0.25, "soften": false},
+	"toggle": {"rank": 2, "gap": 0.05, "soften": false},
+	"select": {"rank": 2, "gap": 0.05, "soften": true},
+	"click": {"rank": 1, "gap": 0.05, "soften": true},
+	"hover": {"rank": 0, "gap": 0.15, "soften": true},
 }
+## A softened sound played again within REPEAT_WINDOW seconds of its last play
+## (typing on the calculator, paging cards) is REPEAT_STEP_DB quieter per
+## repeat, down to REPEAT_FLOOR_DB; a pause resets it.
+const REPEAT_WINDOW := 0.5
+const REPEAT_STEP_DB := -1.5
+const REPEAT_FLOOR_DB := -4.5
 ## An event cue this recent silences pending interface sounds.
 const UI_EVENT_WINDOW_MS := 40
 ## Played by every menu control that starts a session (Widgets.connect_session_start).
 const START := "start"
-
-## Semitones the correct tone rises on a streak (index = streak, last entry
-## holds): 3 in a row +2, 5 +4, 8 (a full streak meter) +5. Same asset, no new cue.
-const STREAK_SEMITONES: Array[int] = [0, 0, 0, 2, 2, 4, 4, 4, 5]
 
 ## Applied to the warning while a voice the Speech-bus ducker cannot hear is
 ## reading (Android / system TTS), about what the ducker takes off a recorded
@@ -95,6 +100,7 @@ var _players: Dictionary = {}
 var _pending: Array[String] = []
 var _event_msec := -100000
 var _ui_msec: Dictionary = {}
+var _ui_repeats: Dictionary = {}
 
 
 static func path_for(id: String) -> String:
@@ -110,18 +116,6 @@ static func answer_sound(graded: bool, is_right: bool) -> String:
 	if not graded:
 		return ""
 	return "correct" if is_right else "wrong"
-
-
-static func streak_pitch(streak: int) -> float:
-	var semis: int = STREAK_SEMITONES[clampi(streak, 0, STREAK_SEMITONES.size() - 1)]
-	return pow(2.0, semis / 12.0)
-
-
-## 0 for a first correct answer, rising to 1 at the top streak step; drives how
-## big the visual celebration is, in step with the pitch.
-static func streak_strength(streak: int) -> float:
-	var semis: int = STREAK_SEMITONES[clampi(streak, 0, STREAK_SEMITONES.size() - 1)]
-	return float(semis) / float(STREAK_SEMITONES[-1])
 
 
 static func result_sound(passed: bool) -> String:
@@ -150,6 +144,13 @@ static func pick_ui(requested: Array) -> String:
 
 static func gap_ok(id: String, since_last: float) -> bool:
 	return since_last >= float(UI[id]["gap"])
+
+
+## Level offset for the repeats-th quick repeat of a softened interface sound.
+static func repeat_db(id: String, repeats: int) -> float:
+	if not is_ui(id) or not bool(UI[id]["soften"]):
+		return 0.0
+	return maxf(REPEAT_FLOOR_DB, REPEAT_STEP_DB * maxi(repeats, 0))
 
 
 ## Hover is the least informative sound: it never plays over a voice.
@@ -206,14 +207,16 @@ func flush_ui() -> void:
 	var reading := voice_reading.is_valid() and bool(voice_reading.call())
 	if reading and not plays_over_voice(id):
 		return
+	var quick := _ui_msec.has(id) and now - int(_ui_msec[id]) < int(REPEAT_WINDOW * 1000.0)
+	_ui_repeats[id] = int(_ui_repeats.get(id, 0)) + 1 if quick else 0
 	_ui_msec[id] = now
 	last_ui = id
-	_start(id, 1.0, reading)
+	_start(id, 1.0, reading, repeat_db(id, int(_ui_repeats[id])))
 
 
-func _start(id: String, pitch: float, voice_on: bool) -> void:
+func _start(id: String, pitch: float, voice_on: bool, extra_db: float = 0.0) -> void:
 	var p: AudioStreamPlayer = _players[id]
-	p.volume_db = float(SOUNDS[id]["db"]) + voice_offset_db(id, voice_on)
+	p.volume_db = float(SOUNDS[id]["db"]) + voice_offset_db(id, voice_on) + extra_db
 	p.pitch_scale = pitch
 	p.play()
 

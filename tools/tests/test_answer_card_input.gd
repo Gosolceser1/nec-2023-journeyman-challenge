@@ -150,14 +150,14 @@ func _verdict_case() -> void:
 		var settled := card.get_theme_stylebox("panel")
 		var min_size := card.get_combined_minimum_size()
 		if state == AnswerCard.State.CORRECT:
-			card.celebrate(1.4, true, 1.335)
+			card.celebrate(true)
 		else:
 			card.reject(true)
 		check(card._verdict_tweens.is_empty(), "reduce motion starts no tween (state %d)" % state)
 		check(_same_style(card.get_theme_stylebox("panel"), settled) and card.icon_progress == 1.0 and card.scale == Vector2.ONE,
 			"reduce motion shows the final card at once (state %d)" % state)
 		if state == AnswerCard.State.CORRECT:
-			card.celebrate(1.4, false, 1.335)
+			card.celebrate(false)
 		else:
 			card.reject(false)
 		check(not card._verdict_tweens.is_empty(), "full motion animates (state %d)" % state)

@@ -96,6 +96,7 @@ static func tile(title: String, subtitle: String, accent: Color, h: float, font_
 	for state in ["font_color", "font_hover_color", "font_pressed_color", "font_hover_pressed_color", "font_focus_color"]:
 		b.add_theme_color_override(state, AppTheme.SLATE_100)
 	b.pressed.connect(callback)
+	UiFx.add_press_feedback(b)
 	return b
 
 
@@ -111,6 +112,7 @@ static func choice(text: String, h: float, font_size: int, callback: Callable) -
 	set_choice_state(b, "idle")
 	b.add_theme_stylebox_override("focus", AppTheme.focus_ring(AppTheme.RADIUS_INNER))
 	b.pressed.connect(callback)
+	UiFx.add_press_feedback(b)
 	return b
 
 

@@ -140,7 +140,6 @@ func _initialize() -> void:
 	main._refresh_dock_audio()
 	main.score = 9
 	main.answered_count = 10
-	main.streak = 5
 	main.chapter_stats = {1: [2, 2], 2: [3, 3], 3: [2, 3], 4: [1, 1], 0: [1, 1]}
 	main.session.area_stats = {"general": [3, 3], "wiring_protection": [3, 3], "wiring_methods": [2, 3], "equipment": [1, 1]}
 	main.session.answer_seconds = [[1, 95.0], [2, 120.0], [3, 150.0], [4, 80.0], [5, 110.0], [6, 130.0], [7, 100.0], [8, 90.0], [9, 140.0], [10, 105.0]]

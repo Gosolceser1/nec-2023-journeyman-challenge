@@ -15,6 +15,7 @@ const NON_NEC_NAMES := {
 
 var rows: Array = []
 var _grow := 0.0
+var _tween: Tween
 var _pill := StyleBoxFlat.new()
 
 
@@ -79,11 +80,15 @@ static func rows_from_areas(stats: Dictionary, pass_percent: float) -> Array:
 func set_rows(new_rows: Array) -> void:
 	rows = new_rows
 	custom_minimum_size.y = ROW_H * rows.size() + 4.0
-	_grow = 0.0
+	if _tween != null and _tween.is_valid():
+		_tween.kill()
+	_grow = 1.0 if UiFx.reduce_motion else 0.0
 	queue_redraw()
-	var tw := create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tw.tween_interval(0.3)
-	tw.tween_method(_set_grow, 0.0, 1.0, 1.0)
+	if _grow >= 1.0:
+		return
+	_tween = UiFx.ease_out(self)
+	_tween.tween_interval(0.3)
+	_tween.tween_method(_set_grow, 0.0, 1.0, 1.0)
 
 
 func _set_grow(v: float) -> void:

@@ -17,7 +17,7 @@ set, but only writes into `assets/sfx/` with `--replace-shipped`.
 | Moment | Sound | Why |
 |---|---|---|
 | A session starts (any menu mode card, the weakest-area chip) | `start`: "Interface 13", a bright, glassy two-step chime (hits at ~40 and ~120 ms), 0.70 s | The one commitment point on the menu. Once per session, so it can't fatigue. It is also the menu → quiz transition: the press plays nothing else. |
-| Answer correct | `correct`: "UI Alert - Confirm Medium", an instant zap sweeping upward ("circuit completed"), silent by 0.73 s, 0.78 s; up to a fourth higher on a streak | The core feedback loop; confirms the pick without having to read the verdict. |
+| Answer correct | `correct`: "UI Alert - Confirm Medium", an instant zap sweeping upward ("circuit completed"), silent by 0.73 s, 0.78 s | The core feedback loop; confirms the pick without having to read the verdict. |
 | Answer wrong / item timed out | `wrong`: "Electric Boom 1", a crackling electric short-circuit boom that hits at once and pulses, 0.90 s | Equally important; fits the X shorting out. A low boom rather than a buzzer. |
 | Results: passed | `pass`: "Level Up", a bright 5-step arpeggio, 2.13 s | Once per session, marks the end of real effort. |
 | Results: did not pass | `fail`: "Game Over 39", five gently descending notes, 1.85 s | Closes the session honestly. |
@@ -25,7 +25,7 @@ set, but only writes into `assets/sfx/` with `--replace-shipped`.
 
 ## Interface sounds
 
-Quiet (-22 LUFS max momentary, hover -25: 6 to 9 dB under the answer tones)
+Quiet (-24 LUFS max momentary, hover -27: 7 to 10 dB under the answer tones)
 and short. One user action makes at most one sound.
 
 | Sound | File | Plays on | Never on |
@@ -33,7 +33,7 @@ and short. One user action makes at most one sound.
 | `click` | "Click", a short dry click, 0.11 s | Plain button presses: Next question / Finish, Read / Stop, Pause / Resume, Skip, Menu (the first, arming press), Change, Preview, opening the voice picker | Session starts (start cue), answer cards |
 | `hover` | "Pop Atmos", a tiny soft pop, 0.11 s, pitch varied ±4 % per play so a sweep never sounds like one sample repeated | Mouse pointer entering a menu mode card, desktop layout only | Plain buttons, chips and switches, answer cards, mobile, while a voice reads |
 | `toggle` | "Light Switch", a real switch flick, 0.14 s | Switches and chips: voice Mute / Turn on, the Audio & Voice mode, speed and think-pause chips, "Also read the rule", "Reduce motion" | The Sounds level chips (they preview with `correct`) |
-| `select` | "Pop Click", 0.19 s | Keyboard or controller focus moving onto an answer card, before answering | A click or tap on a card (the answer tone covers it), after answering |
+| `select` | "Pop Click", 0.19 s, pitch varied ±3 % per play | Keyboard or controller focus moving onto an answer card, before answering; every calculator key (Math Trainer answer pad, Show steps pad) | A click or tap on a card (the answer tone covers it), after answering |
 | `transition` | "Swoosh 1", a full airy swoosh with its natural rise and fall, 0.62 s | Screen changes: quiz → report, back to the menu (Return to Main Menu, Menu, Android back) | The launch menu; menu → quiz (the start cue is that transition) |
 
 How "one per action" works (`Sfx.play` / `Sfx.flush_ui`): interface sounds
@@ -43,8 +43,17 @@ hover). An event cue started within 40 ms silences them all, so a start press
 is the start cue alone and an answer is the answer tone alone, played at
 once. Each interface sound has a minimum gap before it repeats (hover
 0.15 s), so sweeping the mouse down the menu cards gives a few soft pops at
-slightly different pitches, not a burst. Keyboard answering (A–D, 1–4), Enter / Space / → for Next, and the
+slightly different pitches, not a burst. Click, select and hover also recede
+when repeated quickly: each play within 0.5 s of the last is 1.5 dB softer,
+down to -4.5 dB, and a pause resets it, so typing a number on the calculator
+settles into the background. Keyboard answering (A–D, 1–4), Enter / Space / → for Next, and the
 Listen loop stay silent apart from the event cues.
+
+Math screens: the Math Trainer's Check plays `correct` / `wrong` like an
+answer; Check with nothing entered is a click and a shake of the pad (not the
+clock warning), and Steps before answering counts as a miss without the
+`wrong` tone. A Show steps calculator row that lands on the step's figure
+ends on `correct`; a mismatch only nudges the hint.
 
 On the report, `transition` plays as the screen changes (the 0.62 s swoosh
 is over before the dial lands) and `pass` / `fail` when the dial lands 1.15 s later (with Reduce motion the dial lands at once
@@ -57,17 +66,21 @@ and only the result sound plays).
 | Next-question keys and the Listen loop advancing | Plays 80× in a full simulator; the voice reading the next question is the cue. |
 | Per-second countdown ticks | Nagging and stressful; replaced by the two exam-clock warnings. |
 | Per-item clock warnings | The item clock restarts every question: a cue there would fire constantly. The pulse and red color are enough. |
-| Streak milestones | Arcade reward; the streak meter shows it. (A streak only pitches the normal `correct` up: +2 semitones at 3 in a row, +4 at 5, +5 at 8. No extra cue.) |
+| Streaks | It's a practice test, not a game: no streak cue, no rising pitch, no streak badge. |
 | Confetti sparkle | Doubles the pass sound; one result sound is enough. |
 | Listen mode answers | Ungraded, and the voice is about to read the answer. |
 
 ## Levels, the voice and settings
 
-- Loudness-matched per role (max momentary, 400 ms, K-weighted, true peak
-  ≤ -1 dBTP, one gain change, no limiter; no EQ except a -3 dB low shelf at
-  150 Hz on `wrong` for phone speakers): start -18 LUFS, correct and
-  wrong -16, warning and pass -15, fail -17, click / toggle / select /
-  transition -22, hover -25. The per-sound trims in `Sfx.SOUNDS` stay at 0.
+- Loudness-matched per role (max momentary, 400 ms, K-weighted, sample peak
+  ≤ -1 dBFS, one gain change, no limiter; no EQ except a -3 dB low shelf at
+  150 Hz on `wrong` for phone speakers and a -4 dB high shelf at 8 kHz on
+  `start`, whose sparkle sits near 8 kHz): start -18.5 LUFS, correct, wrong,
+  warning and fail -17, pass -16, click / toggle / select / transition -24,
+  hover -27. Every file starts with a 3 ms raised-cosine fade-in and ends
+  with a 12 ms fade, so none clicks. `tools/sfx/polish_sfx.py` applies this,
+  `tools/sfx/measure_sfx.py` reports it, and `test_motion_polish.gd` holds
+  the shipped files to it. The per-sound trims in `Sfx.SOUNDS` stay at 0.
 - One bus: every sound, interface sounds included, plays on the `SFX` bus, so
   Sounds Off / Low / Medium / High applies to all of them. Off mutes the bus
   and `Sfx.play` refuses everything, including an interface sound already
@@ -125,7 +138,6 @@ with the cue, lasts at most ~0.6 s and never delays grading or the layout.
 | 100–460 ms | Current runs once around the card's border; the trace cools to emerald | The X flickers twice like a failing tube (at 0.16 s and 0.49 s, dimming to 55 % / 75 %: under 3 Hz, low contrast) |
 | 200–560 ms | | The right card, only now: its check draws in and a softer current runs around it |
 
-On a streak the cue plays up to a fourth higher, so it lands sooner; the
-animation scales its timing by the same pitch factor and grows its sparks.
-Reduce motion (Settings, or the system setting until changed there) shows the
+Every right answer gets the same cue at the same pitch and the same
+animation: there is no streak (a practice test, not a game). Reduce motion (Settings, or the system setting until changed there) shows the
 final icons only; the sounds still play.

@@ -1,7 +1,7 @@
 class_name QuizSession
 extends RefCounted
 ## Quiz state and rules with no nodes: question order, choice order, score,
-## streak, the missed list, per-chapter tallies and both clocks. Main renders
+## the missed list, per-chapter tallies and both clocks. Main renders
 ## it and exposes the same fields under the old names for the harness.
 ##
 ## Questions come from the whole pool through a QuestionDeck (blueprint
@@ -41,7 +41,6 @@ var bag_path: String:
 	set(v): deck.path = v
 var current_index := 0
 var score := 0
-var streak := 0
 var answered_count := 0
 var current_answered := false
 var missed_questions: Array[Dictionary] = []
@@ -114,7 +113,6 @@ func _start(time_limit: int, timed: bool, name: String, section: String, is_simu
 	session_name = name
 	current_index = 0
 	score = 0
-	streak = 0
 	answered_count = 0
 	current_answered = false
 	missed_questions.clear()
@@ -164,7 +162,7 @@ func snapshot() -> Dictionary:
 	var missed := []
 	for m in missed_questions:
 		missed.append([str(records[int(m["record_index"])].get("id", "")), int(m.get("selected_index", -1)), int(m["index"])])
-	return {"ids": ids, "next": next, "score": score, "streak": streak, "answered": answered_count,
+	return {"ids": ids, "next": next, "score": score, "answered": answered_count,
 		"time_left": time_left, "time_limit": session_time_limit, "timed": timed_session, "name": session_name,
 		"section": session_section, "exam": session_exam, "simulation": session_simulation, "missed": missed,
 		"area_stats": area_stats.duplicate(true), "chapter_stats": chapter_stats.duplicate(true),
@@ -193,7 +191,7 @@ func restore(snap: Dictionary) -> bool:
 		str(snap.get("section", BankLoader.SECTION_NEC)), bool(snap.get("simulation", false)), str(snap.get("exam", "")))
 	current_index = next
 	score = int(snap.get("score", 0))
-	streak = int(snap.get("streak", 0))
+	# Older saves also carry "streak", which is ignored.
 	answered_count = int(snap.get("answered", next))
 	time_left = int(snap.get("time_left", session_time_limit))
 	for key in ["area_stats", "chapter_stats"]:
@@ -290,15 +288,12 @@ func submit(selected: int, graded: bool) -> Dictionary:
 	if not graded:
 		verdict = Verdict.REVIEWED
 	elif selected == -1:
-		streak = 0
 		verdict = Verdict.TIMED_OUT
 		missed_questions.append(_missed(shown, record_index, "Time expired", correct, correct_text, -1, correct_original))
 	elif right:
 		score += 1
-		streak += 1
 		verdict = Verdict.CORRECT
 	else:
-		streak = 0
 		verdict = Verdict.WRONG
 		missed_questions.append(_missed(shown, record_index, "%s — %s" % [ANSWER_LETTERS[selected], selected_text], correct, correct_text, selected_original, correct_original))
 	return {

@@ -92,10 +92,9 @@ func _initialize() -> void:
 	_scroll_down(main, 330)
 	await _wait(3)
 	_snap("7_wrong")
-	# Force a passing, streaky session for the results screen.
+	# Force a passing session for the results screen.
 	main.score = 9
 	main.answered_count = 10
-	main.streak = 5
 	main.chapter_stats = {1: [2, 2], 2: [3, 3], 3: [2, 3], 4: [1, 1], 0: [1, 1]}
 	main._show_results()
 	_scroll_down(main, 0)
