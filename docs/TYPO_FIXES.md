@@ -461,7 +461,7 @@ choices are unchanged.
 | `final-exam-#1-011` | stem | In a dwelling bedroom, any wall space ___ or more in width (…) and unbroken along the floor line by … work surfaces. | In a dwelling bedroom, wall space includes any space ___ or more in width (…) and unbroken along the floor line by … work surfaces. |
 | `final-exam-#1-051` | stem | Personnel doors where equipment rated 800 amperes or more … less than ___ feet from the nearest edge of the working space. | Where equipment rated 800 amperes or more … less than ___ feet from the nearest edge of the working space, the door shall open at least 90 degrees in the direction of egress and be equipped with listed panic hardware or listed fire exit hardware. |
 | `final-exam-#1-066` | gist | A short length of flexible raceway serving a luminaire is exempt from standard support intervals. | Type MC is a cable assembly (Article 330), and a short length serving a luminaire in an accessible ceiling is exempt from the usual support and securing rules. |
-| `docs/study_guides/journeyman_ob1_overview.md` | labels | `NEC REFERENCE` and `READ CODE PROVISION` | `CODE PROVISION`, lesson under `WHAT THE CODE SAYS` |
+| `docs/audits/archive/study_guides/journeyman_ob1_overview.md` | labels | `NEC REFERENCE` and `READ CODE PROVISION` | `CODE PROVISION`, lesson under `WHAT THE CODE SAYS` |
 | docs, `tools/release/CREDITS.txt` | spelling | British (colour, behaviour, labelled, neighbour, organised, synthesise, …; 38 words) | American (color, behavior, labeled, neighbor, organized, synthesize, …) |
 
 Voice clips regenerated: `final-exam-#1-011`, `final-exam-#1-019`, `final-exam-#1-051`.

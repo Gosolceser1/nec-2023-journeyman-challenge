@@ -18,3 +18,4 @@ to its first few words; look up the cited section in the code book.
 | [diagram_gap_scan.md](diagram_gap_scan.md) | 2026-09-28 | Which of the original 279 NEC questions had no figure but would be easier with one, sorted by tier. Drawn as batches 1 and 2 (`docs/DIAGRAMS_AUDIT.md` sections 8 and 9). |
 | [diagram_gap_scan_new.md](diagram_gap_scan_new.md) | 2026-09-29 | The same scan for the 315 questions imported on 2026-09-29. Drawn as batch 3 (`docs/DIAGRAMS_AUDIT.md` section 10). |
 | [release_notes_1.0.5.md](release_notes_1.0.5.md) | 2026-09-29 | The text of the 1.0.5 GitHub release page (the same changes as CHANGELOG.md, 1.0.5). |
+| [archive/study_guides/](archive/study_guides/) | 2026-09 | Early one-page overviews of 6 of the 16 exams (Final #1 and #3, Open Book #1, #4, #7 and #10), written before the app showed per-question lessons. Partial and not maintained; the app itself is the study material. |

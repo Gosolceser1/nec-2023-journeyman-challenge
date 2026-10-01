@@ -11,7 +11,7 @@ drawings and 6 re-masks for 72 more questions (section 8), and batch 2 adds
 questions: 19 new drawings plus mappings onto existing ones give 152 more records a figure
 (section 10): 119 drawings for 346 records in all.
 
-Screenshots: `.audit_tmp/shots/diagrams/` (contact sheets `all_*.png` for
+Screenshots (local scratch, gitignored): `.audit_tmp/shots/diagrams/` (contact sheets `all_*.png` for
 every record, `changed_*.png` for the 1.0.5 changes, `batch1/batch1_*.png`
 `batch2/batch2_*.png` and `batch3/batch3_*.png` for the gap-scan batches; desktop and phone, before and after answering). Nothing here copies UpCodes, the exam PDFs or
 any other source: every figure is drawn in code (`tools/diagrams/`).
@@ -66,7 +66,7 @@ flagged leak lacks a mask.
 
 **Text around the figures (not the images), fixed in 1.0.4** through the
 overlay and the pipeline (`tools/pipeline/question_bank_overrides.json`,
-`tools/pipeline/gists.py`, then a candidate build that differs from the old
+`tools/pipeline/gists.py`, since folded into the overrides and removed, then a candidate build that differs from the old
 bank only in these two gists). Gists are not spoken, so no speech changed,
 and the content audit checksums cover the provision text only:
 
@@ -80,7 +80,7 @@ and the content audit checksums cover the provision text only:
   under the blade, not a curved line across it. Now: "Four switch contacts,
   each with a different symbol drawn under the blade. The question asks which
   symbol stands for a thermal (temperature) element."
-- `tools/pipeline/gists.py` had stale "needs its missing diagrams ... flag it
+- `tools/pipeline/gists.py` (since removed) had stale "needs its missing diagrams ... flag it
   and move on" gists for Final Exam #1 Q13 and Q47; they now match the
   overlay.
 - Still open (harmless): `final-exam-#1-013` and `#1-047` carry the generic

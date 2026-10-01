@@ -107,7 +107,7 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 | `÷ 831.36`, `divided by 240.21`, `multiply 240.21 by 2`, `= 310.16`, `is 250.66` | 831.36 … (arithmetic before or after a bare number makes it a quantity, even after "by") |
 | `352.100, 352.12(B), and 352.60:`, `352.100 Construction` | section 352 point 100, section 352 point 12, paragraph B, and section 352 point 60; a list is read as sections when one member is, and a heading after a line start or `label: ` is a section |
 | `.6875` (a decimal with no leading zero) | 0.6875 |
-| `31.6 amps`, `8.19 A`, `0.5`, `888.8 ohms`, `831.36`, `240.05` (not a reference) | 31.6 amps … (a bare number is a section only in the cases above, only when its article exists in NEC 2023 (`data/nec_2023_articles.json`), never with a leading-zero part, a unit after it, or arithmetic around it) |
+| `31.6 amps`, `8.19 A`, `0.5`, `888.8 ohms`, `831.36`, `240.05` (not a reference) | 31.6 amps … (a bare number is a section only in the cases above, only when its article exists in NEC 2023 (`data/nec/2023/articles.json`), never with a leading-zero part, a unit after it, or arithmetic around it) |
 | `17.5a`, `400a` (a choice typed with a glued lowercase a) | 17.5 amps |
 | `6.24 x 10^18`, `a ratio of 20:1`, `what does the -2 represent` | 6.24 times 10 to the power of 18; 20 to 1; the dash 2 |
 | `1/0`, `4/0` | one aught, four aught |
@@ -253,7 +253,7 @@ text is spoken, or a clip-format change), then refresh the shipped clips:
 Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/speech/dump_speech.gd
 python tools/speech/pregenerate_speech.py --bundle
 Godot_v4.7.2-stable_win64_console.exe --headless --path . --import
-Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/speech/test_bundle.gd   # expect 283/283
+Godot_v4.7.2-stable_win64_console.exe --headless --path . --script tools/speech/test_bundle.gd   # expect 598/598 questions, 378/378 steps
 ```
 
 The `--import` step matters. Bundled clips are loaded as imported

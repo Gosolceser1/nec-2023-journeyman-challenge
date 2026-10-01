@@ -1,5 +1,9 @@
 # REFACTOR PLAN — project organization + `main.gd` decomposition
 
+> **Historical, superseded.** This is the 2026-09-26 plan, kept as a record of how the project was
+> reorganized. Many files, paths and line numbers it names have since been moved or removed. For the
+> current layout read `docs/ARCHITECTURE.md`; for the tests, `tools/tests/README.md`.
+
 **Status:** executed through S11 (commit 83104fd); `docs/ARCHITECTURE.md` describes the result. The inventory, line numbers and paths below (`Main.tscn`, `res://main.gd`, `sfx/`,
 `speech/`, `tools/speak_question.py`, "12 unit suites") are the pre-move audit, kept as history.
 **Original status:** Phase 1 (audit + plan) only. Nothing in the project has been moved, edited or deleted.

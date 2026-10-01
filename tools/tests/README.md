@@ -38,7 +38,7 @@ one as a child Godot process and reads its exit code. Slower than an in-process
 runner, but it exercises exactly the path a developer runs by hand, and one
 suite's failure cannot abort the rest.
 
-**Current status: about 150,000 Godot checks across 41 suites, the Python tests listed in `tools/verify.sh`, 1 build-guard shell test, 0 documented product defects.** Most of the checks are whole-bank sweeps (every record, both layouts) and the math engine's generated problems. The scene harness runs on top of these in both layouts. The desktop Edge suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
+**Current status: about 150,800 Godot checks across 41 suites, 150 Python tests in 14 modules (listed in `tools/verify.sh`), 1 build-guard shell test, 0 documented product defects.** Most of the checks are whole-bank sweeps (every record, both layouts) and the math engine's generated problems. The scene harness runs on top of these in both layouts. The desktop Edge suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
 
 Every formerly pinned defect is fixed and promoted to a real assertion, so a
 regression fails its suite rather than appearing in the defect list. The test table prefix case is covered directly: `NOTED: x` must remain unchanged.

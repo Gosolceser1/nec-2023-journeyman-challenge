@@ -411,7 +411,8 @@ tests and the native TTS callbacks refer to them by name.
 
 ## Safety net
 
-`bash tools/verify.sh` runs everything below except the last three:
+`bash tools/verify.sh` runs everything below except `measure_fit.gd` and
+`check_export_pack.gd`; `test_bundle.gd` runs whenever `assets/speech/` exists:
 
 - import and `--check-only` parse of every script;
 - `tools/tests/run_all.gd`: 41 suites (tools/tests/README.md lists them), including `test_breadcrumb` (every
