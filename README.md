@@ -52,9 +52,9 @@ if Android asks.
 - **Weakest-area drill:** 10 questions from the subject area that needs it
   most, picked from your recent answers.
 - **Code-book keywords:** the exam is open book, so before you answer, the
-  words to look up are highlighted in the question and an INDEX line names
-  the Index entry and article. Hover a highlighted word on desktop, or tap it
-  on a phone, to see just its entry. Keywords never contain the answer, and
+  words to look up are highlighted in the question. Hover a highlighted word
+  on desktop, or tap it on a phone, and the INDEX line names its Index entry
+  and article; a click or tap keeps it there. Keywords never contain the answer, and
   the Full Journeyman Exam shows none, like the real test.
 - **Step-by-step math:** after you answer an exam calculation question (70 of
   them), "Show steps" walks through it one idea at a time: the formula, the

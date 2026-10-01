@@ -16,6 +16,18 @@
   a calculator walks you through the keys one at a time (the next key lights
   up) and says when you land on the step's number. Earlier steps' results and
   memory are already in it, so rows like "× 14 =" or "1 ÷ MR =" work as shown.
+- **The INDEX line shows one entry at a time.** Before you point at anything
+  it is a short dim prompt ("Hover a colored word to see where to look it
+  up", or "Tap ..." on a phone) instead of every keyword's entry at once.
+  Hover a colored word for its entry; a click or tap keeps it there until you
+  tap it again or move to the next question.
+- **Picking a keyword lights the lookup box.** A click or tap on a colored
+  word gives the INDEX box a short amber border and tint that settle back
+  while the entry fades in, so a pick is visible even when hovering already
+  showed that entry (and when the line comes back on a phone that had hidden
+  it). Hovering onto another entry fades the text only. Nothing moves or
+  grows; no pulse on unselect or after answering; with Reduce motion the box
+  simply stays tinted while a keyword is picked.
 - **New logo: the Slash-Bolt.** The `//` from "NEC 2023 // JOURNEYMAN
   CHALLENGE" with the second slash a bolt, on the app icon, the Windows icon,
   the Android launcher (adaptive and themed icons now fill the safe zone), a

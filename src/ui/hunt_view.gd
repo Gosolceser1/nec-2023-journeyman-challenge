@@ -1,9 +1,10 @@
 class_name HuntView
 extends RefCounted
 ## The question stem with its code-book hunt keywords (HuntKeywords): marked
-## words in the stem and the "INDEX ..." line above the lookup path. Hovering a
-## keyword (desktop) puts just its entry in the INDEX line until the pointer
-## leaves; a tap or click keeps it there until a second tap. After answering
+## words in the stem and the "INDEX ..." line above the lookup path. At rest
+## the INDEX line is a dim prompt, never the list of entries. Hovering a
+## keyword (desktop) puts just its entry there until the pointer leaves; a tap
+## or click pins it until a second tap or the next question. After answering
 ## the keywords stay marked and the reference line is the usual section
 ## breadcrumb.
 
@@ -17,9 +18,20 @@ const HOVER_TINT := Color(AppTheme.AMBER_400, 0.32)
 const FOCUS_COLOR := AppTheme.SLATE_900
 const FOCUS_TINT := Color(AppTheme.AMBER_400, 0.92)
 const INDEX_COLOR := AppTheme.AMBER_400
+const PROMPT_COLOR := AppTheme.SLATE_400
+const PROMPT_DESKTOP := "INDEX  Hover a colored word to see where to look it up"
+const PROMPT_PHONE := "INDEX  Tap a colored word to see where to look it up"
 ## A tap and the emulated click of the same finger (when a device emulates the
 ## mouse) arrive this close together; only the first counts.
 const DOUBLE_FIRE_MSEC := 400
+## Picking a keyword lights the lookup box: an amber border and tint that
+## settle back to its own style while the INDEX text fades up. Hovering onto
+## a different entry fades the text only. Colors and alpha only, so nothing
+## moves. Reduce motion: the box stays tinted while a keyword is picked.
+const PULSE_SEC := 0.3
+const PULSE_BORDER := AppTheme.AMBER_400
+const PULSE_TINT := Color(AppTheme.AMBER_400, 0.12)
+const PULSE_TEXT_FROM := 0.35
 
 var host: Main
 var _record: Dictionary = {}
@@ -27,8 +39,6 @@ var _correct := ""
 ## Keyword singled out by a tap/click, and the one under the pointer.
 var _focus := -1
 var _hover := -1
-## The fit gave up room: the INDEX line names only the first entry.
-var _short := false
 ## The fit hid the INDEX line altogether.
 var _hidden_by_fit := false
 ## Finger on the stem: its index and where it went down.
@@ -36,6 +46,10 @@ var _touch := -1
 var _touch_at := Vector2.ZERO
 var _pick_msec := -DOUBLE_FIRE_MSEC
 var _pick_by_touch := false
+var _pulse: Tween
+## The lookup box's own style, put back when a pulse ends.
+var _box: PanelContainer
+var _box_style: StyleBoxFlat
 
 
 static func make_stem_label(font_size: int) -> RichTextLabel:
@@ -95,8 +109,11 @@ func show_question(record: Dictionary, correct_text: String) -> void:
 	_focus = -1
 	_hover = -1
 	_touch = -1
-	_short = false
 	_hidden_by_fit = false
+	stop_pulse()
+	var label := host.index_hint_label
+	if not label.resized.is_connected(_reserve_height):
+		label.resized.connect(_reserve_height)
 	_render_stem()
 	_fill_index_line()
 
@@ -106,6 +123,7 @@ func answered() -> void:
 	_focus = -1
 	_hover = -1
 	_touch = -1
+	stop_pulse()
 	_render_stem()
 
 
@@ -129,37 +147,67 @@ func singled_out() -> int:
 	return _hover if _hover >= 0 else _focus
 
 
-## When the fit had no room for the line, a singled-out entry still shows and
-## the line goes again once nothing is singled out.
+## The rest line: what to do with the colored words, no entries.
+func prompt_text() -> String:
+	return PROMPT_PHONE if host.ui_mobile else PROMPT_DESKTOP
+
+
+func _entry_line(i: int) -> String:
+	var line := HuntKeywords.index_line(_record, i)
+	return AudioExplanationGenerator.redact_answer_spans(line, _correct) if _correct != "" else line
+
+
+## The singled-out entry, else the prompt. When the fit had no room for the
+## line, a singled-out entry still shows and the line goes again once nothing
+## is singled out.
 func _fill_index_line() -> void:
 	var one := singled_out()
-	var only := one if one >= 0 else (0 if _short else -1)
-	var line := HuntKeywords.index_line(_record, only) if showing() else ""
-	if _correct != "":
-		line = AudioExplanationGenerator.redact_answer_spans(line, _correct)
-	host.index_hint_label.text = line
-	host.index_hint_label.visible = line != "" and (one >= 0 or not _hidden_by_fit)
+	var label := host.index_hint_label
+	var line := ""
+	if showing():
+		line = _entry_line(one) if one >= 0 else prompt_text()
+	label.text = line
+	label.add_theme_color_override("font_color", INDEX_COLOR if one >= 0 else PROMPT_COLOR)
+	label.visible = line != "" and (one >= 0 or not _hidden_by_fit)
+	_reserve_height()
 	sync_lookup_box()
 
 
-## Unanswered-screen fit (FitController): the full INDEX line again.
+## The line keeps the height of its tallest text (the prompt or any one entry)
+## at its width, so hovering or tapping never grows the box or scrolls.
+func _reserve_height() -> void:
+	var label := host.index_hint_label
+	var tall := 0.0
+	var font := label.get_theme_font("font")
+	var width := label.size.x
+	if showing() and font != null and width > 0.0:
+		var font_size := label.get_theme_font_size("font_size")
+		var font_h := font.get_height(font_size)
+		var spacing := label.get_theme_constant("line_spacing")
+		var texts: Array[String] = [prompt_text()]
+		for i in HuntKeywords.keywords(_record).size():
+			texts.append(_entry_line(i))
+		for text in texts:
+			var h := font.get_multiline_string_size(text, HORIZONTAL_ALIGNMENT_LEFT, width, font_size).y
+			var lines := maxf(1.0, ceilf(h / font_h - 0.01))
+			tall = maxf(tall, lines * font_h + (lines - 1.0) * spacing)
+	if not is_equal_approx(label.custom_minimum_size.y, tall):
+		label.custom_minimum_size.y = tall
+
+
+## Unanswered-screen fit (FitController): the INDEX line again.
 func refill() -> void:
 	if host.current_answered:
 		return
-	_short = false
 	_hidden_by_fit = false
 	_fill_index_line()
 
 
-## One step of giving up room, for the fit: first only the first entry, then
-## no INDEX line. False when there is nothing left to give.
+## Giving up room, for the fit: no INDEX line. False when there is nothing
+## left to give.
 func shrink_index() -> bool:
 	if not host.index_hint_label.visible:
 		return false
-	if not _short and singled_out() < 0 and HuntKeywords.keywords(_record).size() > 1:
-		_short = true
-		_fill_index_line()
-		return true
 	_hidden_by_fit = true
 	host.index_hint_label.visible = false
 	sync_lookup_box()
@@ -204,6 +252,10 @@ func _pick(i: int, by_touch: bool) -> void:
 	_focus = -1 if i == _focus else i
 	_render_stem()
 	_fill_index_line()
+	if _focus >= 0:
+		_light_index(true)
+	else:
+		stop_pulse()
 
 
 ## The pointer is over keyword `i` (-1: over none). Leaving brings back what
@@ -217,9 +269,65 @@ func hover_keyword(i: int) -> void:
 		return
 	if _hover < 0:
 		_note_fit_hide()
+	var before := singled_out()
 	_hover = i
 	_render_stem()
 	_fill_index_line()
+	if i >= 0 and i != before and not UiFx.reduce_motion:
+		_light_index(false)
+
+
+## True while the lookup box or the INDEX text is easing back.
+func pulsing() -> bool:
+	return _pulse != null and _pulse.is_valid() and _pulse.is_running()
+
+
+## The lookup box style showing now differs from its own (a pulse or the
+## Reduce-motion tint).
+func box_lit() -> bool:
+	return _box != null and _box.get_theme_stylebox("panel") != _box_style
+
+
+## with_box: the box border and tint too (a pick), else the text fade only.
+func _light_index(with_box: bool) -> void:
+	stop_pulse()
+	var box := host.lookup_box
+	if not host.index_hint_label.visible or not box.visible:
+		return
+	if _box != box:
+		_box = box
+		_box_style = box.get_theme_stylebox("panel") as StyleBoxFlat
+	if _box_style == null:
+		return
+	var lit: StyleBoxFlat = null
+	if with_box:
+		lit = _box_style.duplicate() as StyleBoxFlat
+		lit.border_color = PULSE_BORDER
+		lit.bg_color = _box_style.bg_color.blend(PULSE_TINT)
+		box.add_theme_stylebox_override("panel", lit)
+	if UiFx.reduce_motion or not box.is_inside_tree():
+		return
+	host.index_hint_label.modulate.a = PULSE_TEXT_FROM
+	_pulse = box.create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT).set_parallel()
+	_pulse.tween_property(host.index_hint_label, "modulate:a", 1.0, PULSE_SEC)
+	if lit != null:
+		_pulse.tween_property(lit, "border_color", _box_style.border_color, PULSE_SEC)
+		_pulse.tween_property(lit, "bg_color", _box_style.bg_color, PULSE_SEC)
+		_pulse.chain().tween_callback(_restore_box)
+
+
+## Ends a pulse at once: the box in its own style, the INDEX text opaque.
+func stop_pulse() -> void:
+	if _pulse != null and _pulse.is_valid():
+		_pulse.kill()
+	_pulse = null
+	_restore_box()
+	host.index_hint_label.modulate.a = 1.0
+
+
+func _restore_box() -> void:
+	if _box != null and is_instance_valid(_box) and _box_style != null:
+		_box.add_theme_stylebox_override("panel", _box_style)
 
 
 ## The keyword under a point of the stem label (its [hint]), or -1.

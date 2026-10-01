@@ -235,13 +235,18 @@ The stem is a RichTextLabel (`HuntView.make_stem_label`); `HuntView.show_questio
 marks each keyword's first occurrence as a highlighter mark (amber text on a
 faint amber tint, stronger under the pointer; the parsed text is the bank stem
 exactly) and fills the INDEX line (`host.index_hint_label`) above the chapter
-path in the lookup box. Hovering a keyword (desktop) puts just its entry in the
-INDEX line until the pointer leaves; a tap or click keeps it there, shown as a
-solid amber chip, until a second tap. No tooltip pops up. After answering the
+path in the lookup box. At rest the line is a dim prompt ("Hover/Tap a colored
+word to see where to look it up"), never the list of entries. Hovering a
+keyword (desktop) puts just its entry in the INDEX line until the pointer
+leaves; a tap or click pins it, shown as a solid amber chip, until a second tap
+or the next question, and lights the lookup box briefly (amber border and tint
+easing back, colors only; under Reduce motion the box stays tinted while
+pinned). The line reserves the height of its tallest text (prompt or any one
+entry), so a pick never grows the box. No tooltip pops up. After answering the
 INDEX line goes with the lookup box, the keywords stay marked and the reference
 line is unchanged.
-Speech reads the record, never the label. `FitController` shortens the INDEX
-line to its first entry, then hides it, before the page would scroll. The
+Speech reads the record, never the label. `FitController` hides the INDEX line
+before the page would scroll; a pick still shows its entry. The
 setting is `AudioSettings.hunt_keywords` (audio.cfg `[study] hunt_keywords`,
 on by default); `HuntKeywords.enabled` keeps it off in the Full Exam. The
 Study tab's `hunt_tip` block (data/menu.json) lists the lookup routine.

@@ -2,6 +2,8 @@ extends SceneTree
 ## "Hover a colored word on desktop, or tap it on a phone, to see just its
 ## entry" through real input events pushed into the viewport (mouse motion,
 ## mouse clicks, finger touches), not by calling the handlers:
+## - at rest the INDEX line is a dim hover/tap prompt naming no entry, and an
+##   entry never makes the box taller than the prompt did;
 ## - every colored word of a record sample is hoverable/tappable and names
 ##   exactly its own entry; the line comes back when the pointer moves off or
 ##   leaves the stem;
@@ -12,6 +14,10 @@ extends SceneTree
 ##   its emulated click count once;
 ## - with the INDEX line hidden by the fit (either fit path) a tap/hover shows
 ##   just that entry and the line hides again afterwards;
+## - a pick lights the lookup box briefly (amber border and tint easing back,
+##   the INDEX text fading up) without moving anything; hovering onto another
+##   entry fades the text only; no pulse on unselect, after answering or with
+##   Reduce motion (which tints the box while a keyword is picked);
 ## - nothing carries over to the next question; nothing reacts after answering;
 ## - keywords are colored as whole words, never a fragment inside a word.
 ##
@@ -55,6 +61,7 @@ func _initialize() -> void:
 			await _hover_click_rules(multi)
 		await _drag_and_double_fire(multi)
 		await _fit_hidden_rules(multi)
+		await _pulse_rules(multi)
 		await _stale_and_answered(multi)
 	var child_ok := true
 	if not mobile:
@@ -273,6 +280,8 @@ func _sweep() -> void:
 		var plain := _plain_spot(rec)
 		var rest: String = main.index_hint_label.text
 		var rest_visible: bool = main.index_hint_label.visible
+		var rest_h: float = main.lookup_box.size.y
+		t.eq(rest, main.hunt.prompt_text(), "%s: at rest the INDEX line is the prompt, not the entries" % qid)
 		for k in list.size():
 			var at := _spot(rec, k)
 			t.check(at.x >= 0, "%s: colored keyword '%s' can be pointed at" % [qid, list[k].get("text")])
@@ -283,6 +292,9 @@ func _sweep() -> void:
 			await _frames(1)
 			t.eq(main.index_hint_label.text, _line(rec, k), "%s: pointing at '%s' names just its entry" % [qid, list[k].get("text")])
 			t.check(main.index_hint_label.visible and main.lookup_box.visible, "%s: its entry shows" % qid)
+			if rest_visible:
+				await _frames(1)
+				t.eq(main.lookup_box.size.y, rest_h, "%s: '%s' keeps the box height of the prompt" % [qid, list[k].get("text")])
 			if mobile:
 				await _msec_gap()
 				_tap(at)
@@ -317,6 +329,14 @@ func _hover_click_rules(i: int) -> void:
 		(tip as Control).free()
 	t.check(not main.question_label.meta_underlined, "keywords are not underlined like links")
 	t.eq([_look(0), _look(1), _look(2)], ["rest", "rest", "rest"], "keywords start with the plain mark")
+	t.check(rest.begins_with("INDEX  Hover a colored word"), "desktop prompt says hover: '%s'" % rest)
+	t.eq(main.index_hint_label.get_theme_color("font_color"), HuntView.PROMPT_COLOR, "the prompt is dim")
+	_motion(p0)
+	await _frames(1)
+	t.eq(main.index_hint_label.get_theme_color("font_color"), HuntView.INDEX_COLOR, "an entry is amber")
+	_motion(_plain_spot(rec))
+	await _frames(1)
+	t.eq(main.index_hint_label.text, rest, "moving off with nothing picked: the prompt again")
 	_click(p0)
 	await _frames(1)
 	t.eq(main.index_hint_label.text, _line(rec, 0), "click keeps keyword 0's entry")
@@ -348,6 +368,7 @@ func _tap_rules(i: int) -> void:
 	var p1 := _spot(rec, 1)
 	var before: String = main.index_hint_label.text
 	var before_visible: bool = main.index_hint_label.visible
+	t.check(before.begins_with("INDEX  Tap a colored word"), "phone prompt says tap: '%s'" % before)
 	_tap(p0)
 	await _frames(1)
 	t.eq(main.index_hint_label.text, _line(rec, 0), "a finger tap names just keyword 0's entry")
@@ -419,6 +440,9 @@ func _fit_hidden_rules(i: int) -> void:
 		await _frames(1)
 		t.eq(main.index_hint_label.text, _line(rec, 1), "%s: pointing still names just that entry" % how)
 		t.check(main.index_hint_label.visible and main.lookup_box.visible, "%s: the entry shows although the fit hid the line" % how)
+		t.check(main.hunt.pulsing(), "%s: the entry that comes back fades in" % how)
+		if mobile:
+			t.check(main.hunt.box_lit(), "%s: the tap lights the box that comes back" % how)
 		await _msec_gap()
 		if mobile:
 			_unpoint(p1)
@@ -426,6 +450,82 @@ func _fit_hidden_rules(i: int) -> void:
 			_leave()
 		await _frames(1)
 		t.check(not main.index_hint_label.visible, "%s: the line hides again afterwards" % how)
+
+
+# --- the lookup box lights up on a pick ----------------------------------------
+
+func _pulse_over() -> void:
+	await create_timer(HuntView.PULSE_SEC + 0.1).timeout
+
+
+## A click (desktop, pointer already resting on the word) or a tap (phone).
+func _pick_at(local: Vector2) -> void:
+	if mobile:
+		_tap(local)
+	else:
+		_click(local)
+
+
+func _pulse_rules(i: int) -> void:
+	UiFx.reduce_motion = false
+	_show(i)
+	await _frames(3)
+	var rec: Dictionary = main.records[i]
+	var p0 := _spot(rec, 0)
+	var p1 := _spot(rec, 1)
+	var label: Label = main.index_hint_label
+	t.check(not main.hunt.pulsing() and not main.hunt.box_lit(), "pulse: nothing lit before a pick")
+	await _msec_gap()
+	if not mobile:
+		_motion(p0)
+		await _frames(1)
+		t.check(main.hunt.pulsing() and not main.hunt.box_lit(), "pulse: hovering onto an entry fades the text only")
+		await _pulse_over()
+	var box_size: Vector2 = main.lookup_box.size
+	var text_rect: Rect2 = label.get_global_rect()
+	_pick_at(p0)
+	await _frames(1)
+	t.check(main.hunt.pulsing(), "pulse: a pick starts the pulse")
+	t.check(main.hunt.box_lit(), "pulse: the box border/tint lights")
+	t.check(label.modulate.a < 1.0, "pulse: the INDEX text fades up (alpha %.2f)" % label.modulate.a)
+	t.eq(label.text, _line(rec, 0), "pulse: the line names just the picked entry, nothing more")
+	await _frames(2)
+	t.eq(main.lookup_box.size, box_size, "pulse: the box keeps its size")
+	t.eq(label.get_global_rect(), text_rect, "pulse: the INDEX text stays put")
+	await _pulse_over()
+	t.check(not main.hunt.pulsing() and not main.hunt.box_lit(), "pulse: settles back to the box's own style")
+	t.eq(label.modulate.a, 1.0, "pulse: the text ends opaque")
+	await _msec_gap()
+	_pick_at(p0)
+	await _frames(1)
+	t.eq(main.hunt.singled_out(), -1 if mobile else 0, "pulse: second pick unselects")
+	t.check(not main.hunt.pulsing() and not main.hunt.box_lit(), "pulse: none on unselect")
+	if not mobile:
+		_motion(p1)
+		await _frames(1)
+		t.check(main.hunt.pulsing() and not main.hunt.box_lit(), "pulse: hover switch to another entry fades the text only")
+		_motion(_plain_spot(rec))
+		_leave()
+		await _pulse_over()
+	UiFx.reduce_motion = true
+	await _msec_gap()
+	if not mobile:
+		_motion(p1)
+		await _frames(1)
+		t.check(not main.hunt.pulsing(), "reduce motion: no fade on hover")
+	_pick_at(p1)
+	await _frames(1)
+	t.check(not main.hunt.pulsing(), "reduce motion: no tween on a pick")
+	t.check(main.hunt.box_lit(), "reduce motion: the box is tinted at once")
+	t.eq(label.modulate.a, 1.0, "reduce motion: the text shows at full alpha")
+	await _msec_gap()
+	_pick_at(p1)
+	await _frames(1)
+	t.check(not main.hunt.box_lit(), "reduce motion: the tint goes on unselect")
+	if not mobile:
+		_leave()
+		await _frames(1)
+	UiFx.reduce_motion = false
 
 
 # --- nothing carries over; nothing reacts after answering --------------------
@@ -445,8 +545,9 @@ func _stale_and_answered(i: int) -> void:
 	await _frames(3)
 	var next: Dictionary = main.session.current_record()
 	t.eq(main.hunt.singled_out(), -1, "the next question starts with nothing singled out")
+	t.check(not main.hunt.pulsing() and not main.hunt.box_lit(), "the next question starts with the box unlit")
 	if not HuntKeywords.keywords(next).is_empty():
-		t.eq(main.index_hint_label.text, _line(next), "the next question shows its full INDEX line")
+		t.eq(main.index_hint_label.text, main.hunt.prompt_text(), "the next question starts with the prompt")
 	_show(i)
 	await _frames(3)
 	await _msec_gap()
@@ -465,6 +566,7 @@ func _stale_and_answered(i: int) -> void:
 	await _frames(1)
 	t.check(not main.index_hint_label.visible and not main.lookup_box.visible, "after answering, hover/tap shows no INDEX line")
 	t.eq(main.hunt.singled_out(), -1, "after answering nothing is singled out")
+	t.check(not main.hunt.pulsing() and not main.hunt.box_lit(), "after answering a pick lights nothing")
 	t.eq(_look(0), "rest", "after answering the keyword is back to the plain mark")
 
 

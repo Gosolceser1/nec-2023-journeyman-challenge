@@ -1,7 +1,8 @@
 extends SceneTree
 ## Code-book hunt keywords on the question screen, every record:
 ## - the stem reads exactly as the bank has it (the colors are markup only),
-##   each keyword is colored and the INDEX line names its entries;
+##   each keyword is colored, the INDEX line at rest is the hover/tap prompt
+##   and a pick names that keyword's entry;
 ## - neither names the correct choice, and no keyword or its Index heading holds
 ##   any choice (distractors included); the answers box holds answer cards only;
 ## - after answering the INDEX line goes and the reference line is unchanged;
@@ -172,7 +173,10 @@ func _screen_rules() -> void:
 		if not list.is_empty():
 			t.eq(main.question_label.text.count("[color="), list.size(), "%s: keywords colored" % qid)
 			t.check(main.index_hint_label.visible and main.lookup_box.visible, "%s: INDEX line shown" % qid)
-			t.eq(main.index_hint_label.text, AudioExplanationGenerator.redact_answer_spans(HuntKeywords.index_line(rec), _correct(rec)), "%s: INDEX line" % qid)
+			t.eq(main.index_hint_label.text, main.hunt.prompt_text(), "%s: at rest the INDEX line is the prompt" % qid)
+			for kw in list:
+				var heading := str(kw.get("index", ""))
+				t.check(heading == "" or not main.index_hint_label.text.contains(heading), "%s: the rest line names no entry ('%s')" % [qid, heading])
 			if i % 17 == 0:
 				main.hunt.on_keyword_clicked("0")
 				t.eq(main.index_hint_label.text, AudioExplanationGenerator.redact_answer_spans(HuntKeywords.index_line(rec, 0), _correct(rec)), "%s: a tap singles out its entry" % qid)
