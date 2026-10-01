@@ -148,6 +148,92 @@ def covered(box, masks):
     return any(_center_in(box, m["rect"]) and _overlap(box, m["rect"]) >= 0.6 for m in masks)
 
 
+# ---------------------------------------------------------------- strict rule
+# Before answering, a figure may show neither a rule value nor any answer
+# choice (right or wrong: a visible distractor can be ruled out) of any
+# question it serves. Only what the question's own stem states may show.
+
+MEASURE = {"len", "pct", "V", "A", "VA", "W", "deg", "Hz", "ohm", "awg"}
+_REF_RE = re.compile(r"(?:\b(?:Article|Art\.|Table|Tables|Chapter|Ch\.|Note|Figure|Part|Annex|NEC|NFPA)\s+)?"
+                     r"\b\d{2,3}\.\d+[A-Z]?(?:\s*\([A-Za-z0-9]+\))*(?:\s*Ex\.?(?:\s*No\.\s*\d+)?)?|"
+                     r"\b(?:Article|Art\.|Chapter|Ch\.|Note|Part|Annex|NFPA|Table)\s+\d+[A-Z]?(?:\s*\([A-Za-z0-9]+\))*|"
+                     r"\b(?:Exception|Ex\.)\s*(?:No\.\s*)?\d+", re.I)
+# "120/240 V", "15/20 A", "125/250 V": two ratings, not a fraction.
+_PAIR_RE = re.compile(r"\b(\d{2,})/(\d{2,})(\s*)([A-Za-z%]+)?")
+
+
+def _pairs(text):
+    return _PAIR_RE.sub(lambda m: f"{m[1]}{m[3]}{m[4] or ''} / {m[2]}{m[3]}{m[4] or ''}", text)
+_BLAND = STOP | {"yes", "no", "true", "false", "never", "always", "same", "other", "none", "nec"}
+
+
+def strip_refs(text):
+    """Drop section references ('250.53(A)(3)', 'Table 310.16', 'Article 680') and
+    split rating pairs ('120/240 V' -> '120 V / 240 V')."""
+    return _pairs(_REF_RE.sub(" ", str(text)))
+
+
+def same_value(a, b):
+    if a[0] != b[0]:
+        return False
+    if isinstance(a[1], str) or isinstance(b[1], str):
+        return a[1] == b[1]
+    if a[0] == "len":
+        return abs(a[1] - b[1]) <= 0.03 * max(abs(a[1]), abs(b[1]), 1e-9) + 1e-6
+    return abs(a[1] - b[1]) < 1e-6
+
+
+def _any_same(v, pool):
+    return any(same_value(v, p) for p in pool)
+
+
+def _phrase(s):
+    return " ".join(words(s))
+
+
+def strict_keys(record, siblings=(), extra_terms=()):
+    """(given values, choice values, choice phrases) for `record`'s pre-answer render.
+
+    Choices of every sibling question on the same figure count too."""
+    stem = str(record.get("prompt", ""))
+    given = values(strip_refs(stem))
+    stem_low = " " + _phrase(stem) + " "
+    vals, phrases = set(), set()
+    for rec in (record, *siblings):
+        for a in rec.get("answers", []):
+            av = values(strip_refs(a))
+            unit = {v for v in av if v[0] != "n"}
+            vals |= unit or av
+            if not av:
+                p = _phrase(a)
+                if p and len(p) >= 3 and not set(p.split()) <= _BLAND:
+                    phrases.add(p)
+    for t in extra_terms:
+        p = _phrase(t)
+        if p:
+            phrases.add(p)
+    vals = {v for v in vals if not _any_same(v, given)}
+    phrases = {p for p in phrases if f" {p} " not in stem_low}
+    return given, vals, phrases
+
+
+def strict_hits(text, given, vals, phrases):
+    """Why `text` may not show before answering (empty list: it may)."""
+    t = strip_refs(text)
+    lv = values(t)
+    hit = []
+    for v in lv:
+        if v[0] in MEASURE and not _any_same(v, given):
+            hit.append(f"value {v[1]} {v[0]}")
+        elif _any_same(v, vals):
+            hit.append(f"choice value {v[1]}")
+    low = " " + _phrase(t) + " "
+    for p in phrases:
+        if f" {p} " in low:
+            hit.append(f"choice '{p}'")
+    return sorted(set(hit))
+
+
 def leaks(record, labels, masks, extra_terms=()):
     """Labels ([text, x, y, w, h], unit rects) that give record's answer away."""
     vals, phrases, keywords = answer_keys(record, extra_terms)

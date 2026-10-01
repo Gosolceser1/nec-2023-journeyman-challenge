@@ -14,10 +14,11 @@ def _wall_receptacle(f, x, y, side, r=12):
 
 
 def _door_gap(f, x0, x1, y):
-    """Doorway in a horizontal wall: gap plus a quarter swing into the room below."""
+    """Doorway in a horizontal wall: gap plus a door leaf hinged at x0, swung open into the room above."""
+    d = x1 - x0
     f.line(x0, y, x1, y, BG, SW_STRUCT + 4)
-    f.line(x0, y, x0, y + (x1 - x0), EDGE, SW_THIN)
-    f.path(f"M {x0} {y + (x1 - x0)} A {x1 - x0} {x1 - x0} 0 0 0 {x1} {y}", EDGE, SW_THIN)
+    f.line(x0, y, x0, y - d, TEXT, SW_OBJ)
+    f.path(f"M {x0} {y - d} A {d} {d} 0 0 1 {x1} {y}", EDGE, SW_THIN)
 
 
 @figure("dwelling_receptacles_210-52", h=500, nec="210.52(A)(2), 210.52(G)(1), 210.52(H), 210.50(C)",
@@ -43,7 +44,7 @@ def dwelling_plan(f):
     f.dline(gx0 + 14, garage_y1, hx0 - 14, garage_y1, EDGE, SW_OBJ, 16, 8)
     f.text((gx0 + hx0) / 2, garage_y1 + 30, "garage door", T_NOTE, MUTED)
     bay_x = (gx0 + hx0) / 2
-    f.dline(bay_x, 200, bay_x, garage_y1 - 8, MUTED, SW_THIN)
+    f.dline(bay_x, 238, bay_x, garage_y1 - 8, MUTED, SW_THIN)
     for cx in ((gx0 + bay_x) / 2, (bay_x + hx0) / 2):
         f.rect(cx - 38, 222, 76, 150, fill=PANEL_2, stroke=EDGE, sw=SW_OBJ, rx=16)
         f.text(cx, 304, "car", T_NOTE, MUTED)
@@ -57,25 +58,25 @@ def dwelling_plan(f):
     f.text((hx0 + lx0) / 2, 100, "BEDROOM", T_LABEL, TEXT, bold=True)
     d0, d1 = 316, 372
     _door_gap(f, d0, d1, hall_y0)
-    f.line(d0, hall_y0 - 1, d0, hall_y0 - (d1 - d0), EDGE, SW_THIN)
     _wall_receptacle(f, 490, hall_y0, "down")
     f.ext(d1, hall_y0 - 6, d1, 196)
     f.ext(lx0 - 4, hall_y0 - 6, lx0 - 4, 196)
     f.dim_h(d1, lx0 - 4, 206)
     f.text((d1 + lx0) / 2 - 20, 240, "wall space", T_NOTE, MUTED)
     f.value_lines((d1 + lx0) / 2, 148, ["2 ft (24 in)", "or more"], 26, records=wall_rec, label="? in")
-    f.text(344, 268, "door", T_MIN, MUTED)
+    f.text(d0 + 6, 272, "door", T_MIN, MUTED, "start")
     # Laundry: appliance outlet near the washer.
-    f.text(lx0 + 120, 264, "LAUNDRY", T_LABEL, TEXT, bold=True)
+    f.text(lx0 + 150, 264, "LAUNDRY", T_LABEL, TEXT, bold=True)
     wx0, wx1 = lx0 + 16, lx0 + 96
     f.rect(wx0, top + 10, wx1 - wx0, 74, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
+    f.circle((wx0 + wx1) / 2, top + 47, 28, fill="none", stroke=EDGE, sw=SW_THIN)
     f.text((wx0 + wx1) / 2, top + 54, "washer", T_MIN, TEXT, bold=True)
     rx, ry = _wall_receptacle(f, 730, top, "up")
     f.ext(wx1, top + 90, wx1, 180)
     f.ext(rx, ry + 16, rx, 180)
     f.dim_h(wx1, rx, 170)
     f.value_lines((wx1 + rx) / 2 - 4, 200, ["within", "6 ft (72 in)"], 26, records=appl_rec, label="? ft")
-    _door_gap(f, lx0 + 20, lx0 + 76, hall_y0)
+    _door_gap(f, lx0 + 12, lx0 + 60, hall_y0)
     # Hallway: length along the centerline.
     cy = (hall_y0 + hall_y1) / 2
     f.dline(hx0 + 10, cy + 14, hx1 - 10, cy + 14, MUTED, SW_THIN, 12, 8)
@@ -106,14 +107,21 @@ def equipment_receptacle(f):
     ex0, ex1 = 90, 250
     f.panel(ex0, 170, ex1 - ex0, floor - 170, label=None, breakers=5)
     f.lines((ex0 + ex1) / 2, floor + 30, ["service equipment", "or MCC"], T_NOTE, TEXT, bold=True, gap=1.1)
-    rx, ry = 620, 264
+    rx, ry = 530, 264
     f.receptacle(rx, ry, 52, gfci=True)
-    f.lines(rx, ry + 58, ["125 V, 15/20 A", "GFCI 210.8(E)"], T_NOTE, TEXT, gap=1.1)
-    f.text(rx, floor + 30, "accessible location", T_NOTE, MUTED)
+    f.lines(rx, ry + 58, ["125 V, 15/20 A", "GFCI 210.8(E)", "accessible location"], T_MIN, TEXT, gap=1.15)
     f.ext(ex1 + 4, 200, ex1 + 4, 232)
     f.ext(rx - 20, ry - 30, rx - 20, 232)
     f.dim_h(ex1 + 4, rx - 20, 222)
     f.value_lines((ex1 + rx - 20) / 2, 204, ["within 25 ft", "(7.5 m)"], 28, records=dist_rec + room_rec,
                   label="?", gap=1.25)
-    f.text(400, 346, "HVAC/R: same level (A)", T_NOTE, MUTED)
+    # HVAC air handler: (A) wants its receptacle on the same level.
+    ux0, ux1, uy0 = 636, 740, 236
+    f.rect(ux0, uy0, ux1 - ux0, floor - uy0, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=4)
+    f.rect(ux0 + 10, uy0 + 12, ux1 - ux0 - 20, 56, fill=BG, stroke=EDGE, sw=SW_THIN, rx=3)
+    for k in range(1, 6):
+        f.line(ux0 + 14, uy0 + 12 + k * 9.3, ux1 - 14, uy0 + 12 + k * 9.3, EDGE, 2)
+    f.line(ux0 + 6, uy0 + 82, ux1 - 6, uy0 + 82, EDGE, SW_THIN)
+    f.rect(ux1 - 30, uy0 + 92, 14, 20, fill=EDGE, rx=2)
+    f.lines(ux1 - 6, 178, ["HVAC unit:", "same level (A)"], T_MIN, MUTED, "end", True, gap=1.15)
     f.tag(f.w - 20, f.h - 14, "NEC 210.63", anchor="end")

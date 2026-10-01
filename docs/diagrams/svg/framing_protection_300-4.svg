@@ -51,7 +51,9 @@
 <line x1="492.0" y1="262.0" x2="618.0" y2="182.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <circle cx="618.0" cy="182.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
 <rect x="576.0" y="141.0" width="116.0" height="9.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
-<text x="566.0" y="148.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="end">steel plate</text>
+<circle cx="586.0" cy="145.5" r="3" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="682.0" cy="145.5" r="3" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<text x="566.0" y="134.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="end">steel plate</text>
 <text x="634.0" y="108.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="middle">1/16 in</text>
 <line x1="634.0" y1="120.0" x2="634.0" y2="140.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <circle cx="634.0" cy="140.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>

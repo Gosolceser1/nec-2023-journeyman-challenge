@@ -1,31 +1,63 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
 <rect x="0.0" y="0.0" width="800.0" height="450.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <line x1="20.0" y1="400.0" x2="780.0" y2="400.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="70.0" y1="40.0" x2="70.0" y2="400.0" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
-<rect x="74.0" y="388.0" width="700.0" height="10.0" rx="0" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="1"/>
-<rect x="130.0" y="110.0" width="170.0" height="190.0" rx="6" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
-<line x1="70.0" y1="170.0" x2="130.0" y2="170.0" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="70.0" y1="260.0" x2="130.0" y2="260.0" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
-<rect x="150.0" y="272.0" width="130.0" height="16.0" rx="3" fill="#fbbf24" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<text x="215.0" y="58.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">fire pump</text>
-<text x="215.0" y="88.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">controller</text>
-<text x="215.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="middle">lowest energized part</text>
-<line x1="282.0" y1="288.0" x2="289.0" y2="288.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="295.0" y1="288.0" x2="302.0" y2="288.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="308.0" y1="288.0" x2="315.0" y2="288.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="321.0" y1="288.0" x2="328.0" y2="288.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="334.0" y1="288.0" x2="341.0" y2="288.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="347.0" y1="288.0" x2="354.0" y2="288.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="350.0" y1="294.0" x2="350.0" y2="394.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<polygon points="350.0,288.0 356.0,300.0 344.0,300.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<polygon points="350.0,400.0 344.0,388.0 356.0,388.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<text x="370.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">300 mm</text>
-<text x="370.0" y="376.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">(12 in) min</text>
-<rect x="580.0" y="300.0" width="170.0" height="88.0" rx="8" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
-<text x="665.0" y="352.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">pump</text>
-<line x1="665.0" y1="300.0" x2="665.0" y2="200.0" stroke="#94a3b8" stroke-width="24" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="665.0" y1="300.0" x2="665.0" y2="200.0" stroke="#64748b" stroke-width="20" stroke-linecap="round" stroke-opacity="1.0"/>
-<text x="665.0" y="180.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">water discharge</text>
+<rect x="24.0" y="388.0" width="752.0" height="10.0" rx="0" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="1"/>
+<rect x="124.0" y="290.0" width="12.0" height="98.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="264.0" y="290.0" width="12.0" height="98.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="110.0" y="100.0" width="180.0" height="190.0" rx="6" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<rect x="120.0" y="110.0" width="160.0" height="170.0" rx="4" fill="none" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="136.0" y="126.0" width="64.0" height="30.0" rx="3" fill="#0f172a" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<circle cx="222.0" cy="141.0" r="6" fill="#34d399" stroke="none" stroke-width="2"/>
+<circle cx="242.0" cy="141.0" r="6" fill="#fbbf24" stroke="none" stroke-width="2"/>
+<circle cx="262.0" cy="141.0" r="6" fill="#f87171" stroke="none" stroke-width="2"/>
+<rect x="288.0" y="170.0" width="10.0" height="36.0" rx="2" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="296.0" y1="188.0" x2="320.0" y2="164.0" stroke="#e2e8f0" stroke-width="7" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="320.0" cy="164.0" r="6" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="134.0" y="260.0" width="132.0" height="16.0" rx="3" fill="#fbbf24" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<circle cx="148.0" cy="268.0" r="3" fill="#0f172a" stroke="none" stroke-width="2"/>
+<circle cx="174.0" cy="268.0" r="3" fill="#0f172a" stroke="none" stroke-width="2"/>
+<circle cx="200.0" cy="268.0" r="3" fill="#0f172a" stroke="none" stroke-width="2"/>
+<circle cx="226.0" cy="268.0" r="3" fill="#0f172a" stroke="none" stroke-width="2"/>
+<circle cx="252.0" cy="268.0" r="3" fill="#0f172a" stroke="none" stroke-width="2"/>
+<text x="200.0" y="50.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">fire pump</text>
+<text x="200.0" y="75.2" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">controller</text>
+<line x1="268.0" y1="276.0" x2="275.0" y2="276.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="281.0" y1="276.0" x2="288.0" y2="276.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="294.0" y1="276.0" x2="301.0" y2="276.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="307.0" y1="276.0" x2="314.0" y2="276.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="320.0" y1="276.0" x2="327.0" y2="276.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="333.0" y1="276.0" x2="340.0" y2="276.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="346.0" y1="276.0" x2="353.0" y2="276.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="359.0" y1="276.0" x2="366.0" y2="276.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="362.0" y1="282.0" x2="362.0" y2="382.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="362.0,276.0 368.0,288.0 356.0,288.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="362.0,388.0 356.0,376.0 368.0,376.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="384.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="start">lowest</text>
+<text x="384.0" y="274.2" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="start">energized part</text>
+<text x="384.0" y="338.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">300 mm</text>
+<text x="384.0" y="374.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">(12 in) min</text>
+<rect x="540.0" y="366.0" width="230.0" height="20.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="578.0" y="336.0" width="44.0" height="30.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="600.0" y1="286.0" x2="600.0" y2="190.0" stroke="#94a3b8" stroke-width="28" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="600.0" y1="286.0" x2="600.0" y2="190.0" stroke="#64748b" stroke-width="24" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="594.7" y1="286.0" x2="594.7" y2="190.0" stroke="#e2e8f0" stroke-width="2.4000000000000004" stroke-linecap="round" stroke-opacity="0.35"/>
+<circle cx="600.0" cy="316.0" r="38" fill="#334155" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="600.0" cy="316.0" r="12" fill="#64748b" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="657.6" y="354.5" width="20.9" height="9.6" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="729.5" y="354.5" width="20.9" height="9.6" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="648.3" y1="365.5" x2="759.7" y2="365.5" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="646.0" y="296.5" width="116.0" height="60.0" rx="13.2" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="669.2" y1="306.5" x2="738.8" y2="306.5" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="669.2" y1="316.5" x2="738.8" y2="316.5" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="669.2" y1="326.5" x2="738.8" y2="326.5" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="669.2" y1="336.5" x2="738.8" y2="336.5" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="669.2" y1="346.5" x2="738.8" y2="346.5" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="662.2" y1="300.5" x2="662.2" y2="352.5" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="745.8" y1="300.5" x2="745.8" y2="352.5" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="620.5" y="321.1" width="25.5" height="10.8" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="685.4" y="282.1" width="37.1" height="15.6" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="632.0" y="214.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">discharge</text>
+<text x="704.0" y="252.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">fire pump</text>
 <text x="760.0" y="438.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#38bdf8" text-anchor="end">water on the floor</text>
 <rect x="30.0" y="410.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="40.0" y="438.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 695.12(D)</text>

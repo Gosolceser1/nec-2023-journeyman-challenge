@@ -4,12 +4,29 @@
 <rect x="380.0" y="260.0" width="380.0" height="140.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="3"/>
 <polygon points="368.0,260.0 570.0,170.0 772.0,260.0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
 <text x="570.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">HOUSE</text>
-<line x1="440.0" y1="300.0" x2="440.0" y2="150.0" stroke="#64748b" stroke-width="10" stroke-linecap="round" stroke-opacity="1.0"/>
-<path d="M 427 150 q 13 -18 26 0" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="53.0" y="70.0" width="14.0" height="330.0" rx="0" fill="#a16207" fill-opacity="0.8" stroke="#ca8a04" stroke-width="2"/>
-<rect x="20.0" y="100.0" width="80.0" height="10.0" rx="0" fill="#a16207" fill-opacity="0.9" stroke="#ca8a04" stroke-width="2"/>
-<polyline points="90.0,100.0 104.2,107.3 118.3,114.2 132.4,120.7 146.5,126.7 160.6,132.4 174.6,137.6 188.7,142.5 202.7,146.9 216.7,150.9 230.6,154.5 244.6,157.7 258.5,160.5 272.4,162.9 286.3,164.8 300.2,166.4 314.0,167.6 327.8,168.3 341.6,168.6 355.4,168.5 369.2,168.1 382.9,167.2 396.6,165.8 410.3,164.1 424.0,162.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M 424 162 q 14 20 22 0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="440.0" y1="300.0" x2="440.0" y2="154.0" stroke="#94a3b8" stroke-width="14" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="440.0" y1="300.0" x2="440.0" y2="154.0" stroke="#64748b" stroke-width="10" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="437.8" y1="300.0" x2="437.8" y2="154.0" stroke="#e2e8f0" stroke-width="1.0" stroke-linecap="round" stroke-opacity="0.35"/>
+<rect x="427.0" y="140.0" width="26.0" height="16.0" rx="7" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="418.0" y="176.0" width="16.0" height="6.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<circle cx="418.0" cy="179.0" r="5" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="53.0" y="60.0" width="14.0" height="340.0" rx="0" fill="#a16207" fill-opacity="0.8" stroke="#ca8a04" stroke-width="2"/>
+<rect x="20.0" y="80.0" width="80.0" height="10.0" rx="0" fill="#a16207" fill-opacity="0.9" stroke="#ca8a04" stroke-width="2"/>
+<rect x="26.0" y="68.0" width="8.0" height="12.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<circle cx="30.0" cy="65.0" r="5" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="86.0" y="68.0" width="8.0" height="12.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<circle cx="90.0" cy="65.0" r="5" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="75.0" y="124.0" width="40.0" height="52.0" rx="7.199999999999999" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="78.0" y1="133.4" x2="112.0" y2="133.4" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="81.0" y="114.0" width="12.0" height="7.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="82.0" y="106.0" width="10.0" height="7.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="83.0" y="98.0" width="8.0" height="7.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="97.0" y="114.0" width="12.0" height="7.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="98.0" y="106.0" width="10.0" height="7.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="99.0" y="98.0" width="8.0" height="7.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="67.0" y="142.2" width="10.0" height="15.6" rx="2" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<polyline points="115.0,150.0 127.1,156.4 139.2,162.4 151.4,168.0 163.6,173.0 175.8,177.6 188.0,181.8 200.3,185.5 212.6,188.8 224.9,191.6 237.2,193.9 249.6,195.8 262.0,197.2 274.4,198.2 286.9,198.8 299.4,198.8 311.9,198.4 324.4,197.6 337.0,196.3 349.6,194.6 362.2,192.4 374.9,189.7 387.6,186.6 400.3,183.0 413.0,179.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 413 179 q 8 26 20 4 L 433 156" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="240.0" y="50.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">open service conductors,</text>
 <text x="240.0" y="77.5" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">under 250 V between</text>
 <line x1="620.0" y1="192.3" x2="620.0" y2="60.0" stroke="#64748b" stroke-width="8" stroke-linecap="round" stroke-opacity="1.0"/>

@@ -50,8 +50,12 @@ def overhead_225(f):
     ax, ay = 172, y(16)
     px = 400
     _pole(f, px, y(22), grade)
-    f.rect(px - 22, y(22) - 14, 30, 14, fill=AMBER, rx=3)
-    f.text(px, y(22) - 26, "floodlight", T_NOTE, TEXT, bold=True)
+    # Floodlight on a bracket at the pole top, aimed down.
+    ht = y(22) + 4
+    f.line(px, ht + 8, px + 30, ht + 8, STEEL, 5)
+    f.poly([(px + 22, ht - 6), (px + 58, ht - 6), (px + 64, ht + 20), (px + 16, ht + 20)], PANEL_2, TEXT, SW_THIN)
+    f.line(px + 18, ht + 21, px + 62, ht + 21, AMBER, 4)
+    f.text(px - 14, ht + 10, "floodlight", T_NOTE, TEXT, "end", True)
     span = _span((ax, ay), ((ax + px) / 2, y(14)), (px - 7, y(18)))
     f.polyline(span, WIRE_HOT, SW_WIRE)
     f.circle(ax, ay, 6, fill=TEXT)
@@ -107,9 +111,10 @@ def communications_800(f):
         f.rect(x - 5, arm - 16, 10, 16, fill=EDGE)
         f.circle(x, arm - 20, 6, fill=WIRE_HOT)
     f.lines(628, 70, ["power", "conductors"], T_NOTE, TEXT, "end", True)
-    ca = 170
-    f.rect(px + 7, ca - 6, 12, 12, fill=AMBER, rx=2)
-    span = _span((px - 7, ca), (470, 230), (hx1, 204))
+    f.transformer(px + 15, 124, 40, 52, kind="pole")
+    ca = 206
+    f.rect(px - 19, ca - 6, 12, 12, fill=AMBER, rx=2)
+    span = _span((px - 19, ca), (470, 250), (hx1, 204))
     f.polyline(span, AMBER, SW_WIRE)
     f.circle(hx1, 204, 6, fill=AMBER)
     f.text(470, 170, "communications cable", T_NOTE, AMBER, bold=True)
@@ -121,7 +126,7 @@ def communications_800(f):
     b = f.lines(594, 250, ["(A)(1) below power", "if practicable", "(A)(2) not on the", "power cross-arm"],
                 T_NOTE, MUTED, "middle")
     f.mask(b[0] - 8, b[1] - 8, b[2] + 16, b[3] + 16, records=[COMM], what="the 800.44(A) rules")
-    f.leader(600, 228, px - 8, ca + 8)
+    f.leader(600, 228, px - 20, ca + 8)
     f.tag(f.w - 24, f.h - 14, "NEC 800.44", anchor="end")
 
 
@@ -137,15 +142,23 @@ def antenna_810(f):
     f.rect(hx0, eave, hx1 - hx0, grade - eave, fill=PANEL, stroke=EDGE, sw=SW_OBJ)
     f.poly([(hx0 - 12, eave), ridge, (hx1 + 12, eave)], PANEL_2, LINE, SW_OBJ)
     f.text((hx0 + hx1) / 2, 340, "HOUSE", T_LABEL, MUTED, bold=True)
+    # Service mast with its weatherhead; the drop is held on an insulator below it.
     mx, wh = 440, 150
-    f.line(mx, 300, mx, wh, STEEL, 10)
-    f.path(f"M {mx - 13} {wh} q 13 -18 26 0", TEXT, SW_OBJ)
-    px, arm = 60, 100
-    _pole(f, px, 70, grade)
+    f.conduit(mx, 300, mx, wh + 4, 10)
+    f.rect(mx - 13, wh - 10, 26, 16, fill=PANEL_2, stroke=TEXT, sw=SW_THIN, rx=7)
+    f.rect(mx - 22, wh + 26, 16, 6, fill=STEEL, stroke=TEXT, sw=1)
+    f.circle(mx - 22, wh + 29, 5, fill=TEXT)
+    # Utility pole: primaries on the cross-arm, a pole-mount transformer feeding the drop.
+    px, arm = 60, 80
+    _pole(f, px, 60, grade)
     f.rect(px - 40, arm, 80, 10, fill=WOOD, op=0.9, stroke="#ca8a04", sw=SW_THIN)
-    power = _span((px + 30, arm), (260, 190), (mx - 16, wh + 12))
+    for x in (px - 30, px + 30):
+        f.rect(x - 4, arm - 12, 8, 12, fill=EDGE)
+        f.circle(x, arm - 15, 5, fill=WIRE_HOT)
+    f.transformer(px + 15, 124, 40, 52, kind="pole")
+    power = _span((px + 55, 150), (260, 230), (mx - 27, wh + 29))
     f.polyline(power, WIRE_HOT, SW_WIRE)
-    f.path(f"M {mx - 16} {wh + 12} q 14 20 22 0", WIRE_HOT, SW_WIRE)
+    f.path(f"M {mx - 27} {wh + 29} q 8 26 20 4 L {mx - 7} {wh + 6}", WIRE_HOT, SW_WIRE)
     f.lines(240, 50, ["open service conductors,", "under 250 V between"], T_NOTE, TEXT, "middle", True)
     # Antenna on the roof; its lead-in comes down the mast beside the service mast.
     ax = 620

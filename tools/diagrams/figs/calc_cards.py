@@ -2,24 +2,6 @@
 from nec_style import *  # noqa: F401,F403
 
 
-def _card(f, x, y, w, h, title=""):
-    f.rect(x, y, w, h, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    if title:
-        f.text(x + 14, y + 30, title, T_NOTE, TEXT, "start", True)
-
-
-def _ocpd(f, x, y, w=56, h=64, label=None):
-    f.rect(x, y, w, h, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
-    f.rect(x + w * 0.3, y + h * 0.25, w * 0.4, h * 0.5, fill=EDGE, stroke=TEXT, sw=SW_THIN, rx=3)
-    if label:
-        f.text(x + w / 2, y - 12, label, T_LABEL, TEXT, bold=True)
-
-
-def _motor(f, cx, cy, r=34, label="M"):
-    f.circle(cx, cy, r, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ)
-    f.text(cx, cy + 9, label, T_LABEL, TEXT, bold=True)
-
-
 @figure("office_lighting_220-42a", h=440, nec="220.42, Table 220.42(A), 220.5(C)", when="after",
         records=["final-exam-#1-004", "open-book-exam-#1-021"])
 def office_lighting(f):
@@ -37,7 +19,7 @@ def office_lighting(f):
     f.dim_h(x0, x1, 70)
     f.text(240, 322, "5,000 sq ft", T_VALUE, DIM, bold=True)
     f.text(240, 352, "(outside dimensions, 220.5(C))", T_MIN, MUTED)
-    _card(f, 450, 70, 330, 300, "Table 220.42(A) unit load")
+    f.card(450, 70, 330, 300, "Table 220.42(A) unit load")
     f.text(466, 140, "office:", 26, TEXT, "start", True)
     f.value(570, 140, "1.3 VA per sq ft", 26, anchor="start", pad=6, what="the office unit load")
     f.text(466, 200, "5,000 sq ft x unit load", T_NOTE, TEXT, "start")
@@ -64,13 +46,13 @@ def ohms_wheel(f):
         f.text(x, y - 16, k + " =", T_LABEL, DIM, bold=True)
         f.lines(x, y + 14, rows, T_MIN, TEXT, gap=1.15)
     f.text(cx, cy + r + 34, "E2 = E squared, I2 = I squared", T_MIN, MUTED)
-    _card(f, 380, 60, 400, 176, "The letters")
+    f.card(380, 60, 400, 176, "The letters")
     f.text(396, 120, "E = volts (electromotive force)", T_NOTE, TEXT, "start")
     f.text(396, 154, "I = intensity of current, amps", T_NOTE, TEXT, "start")
     f.text(396, 188, "R = ohms,  P (or W) = watts", T_NOTE, TEXT, "start")
     f.text(396, 220, "W = E x I is the same as P = E x I", T_MIN, MUTED, "start")
     f.mask(388, 98, 384, 132, records=letter, what="what each letter stands for")
-    _card(f, 380, 256, 400, 170, "Example: 2 W load on 20 V DC")
+    f.card(380, 256, 400, 170, "Example: 2 W load on 20 V DC")
     f.text(396, 322, "P = 2 W,  E = 20 V", T_NOTE, TEXT, "start")
     b = f.text(396, 370, "I = P / E = 2 / 20 =", 26, TEXT, "start")
     f.value(b[0] + b[2] + 12, 370, "0.10 A", 28, anchor="start", pad=6, what="the example current")
@@ -86,9 +68,7 @@ def multioutlet(f):
     n = 10
     for i in range(n):
         x = x0 + (i + 0.5) * (x1 - x0) / n
-        f.rect(x - 12, y + 8, 24, 24, fill=PANEL, stroke=TEXT, sw=SW_THIN, rx=3)
-        f.line(x - 4, y + 15, x - 4, y + 25, TEXT, 3)
-        f.line(x + 4, y + 15, x + 4, y + 25, TEXT, 3)
+        f.nema_face(x, y + 20, 14, "5-15")
     f.line(x0, 200, x1, 200, LINE, SW_THIN)
     for ft in range(13):
         x = x0 + ft * (x1 - x0) / 12
@@ -96,12 +76,12 @@ def multioutlet(f):
         if ft % 4 == 0:
             f.text(x, 240, f"{ft} ft", T_MIN, MUTED)
     f.text(400, 110, "12 ft continuous length", T_NOTE, TEXT, bold=True)
-    _card(f, 30, 262, 360, 150, "Not used at the same time")
+    f.card(30, 262, 360, 150, "Not used at the same time")
     b = f.text(46, 326, "each", T_NOTE, TEXT, "start")
     f.value(b[0] + b[2] + 10, 326, "5 ft or fraction", T_NOTE, anchor="start", pad=5, what="the length per outlet")
     b = f.text(46, 370, "= one outlet of", T_NOTE, TEXT, "start")
     f.value(b[0] + b[2] + 10, 370, "180 VA", T_NOTE, anchor="start", pad=5, what="the VA per outlet")
-    _card(f, 410, 262, 360, 150, "Used at the same time")
+    f.card(410, 262, 360, 150, "Used at the same time")
     f.lines(426, 326, ["each 1 ft or fraction", "= one outlet of 180 VA"], T_NOTE, MUTED, "start", gap=1.6)
     b = f.text(30, 454, "This assembly:", T_NOTE, TEXT, "start", True)
     f.value(b[0] + b[2] + 12, 454, "3 outlets x 180 VA = 540 VA", T_NOTE, anchor="start", pad=5,
@@ -131,7 +111,7 @@ def busbar(f):
     f.value(b[0] + b[2] + 12, 244, "2 sq in", 26, anchor="start", records=wide, pad=5, what="the bar area")
     f.value_lines(440, 290, ["x 1,000 A per sq in = 2,000 A"], T_NOTE, anchor="start", pad=6,
                   what="the bar B working")
-    _card(f, 30, 318, 740, 70)
+    f.card(30, 318, 740, 70)
     f.text(46, 360, "Continuous current limit: copper 1,000 A, aluminum 700 A per sq in", T_NOTE, TEXT, "start")
     f.mask(40, 330, 720, 50, records=None, what="the density rule")
     f.tag(f.w - 24, f.h - 10, "NEC 366.23(A)", anchor="end")
@@ -144,7 +124,7 @@ def welders(f):
     arc = ["final-exam-#1-025"]
     res = ["final-exam-#3-040"]
     f.title("Welder supply: two worked cards", y=34)
-    _card(f, 20, 56, 370, 400, "Arc welder: overcurrent device")
+    f.card(20, 56, 370, 400, "Arc welder: overcurrent device")
     f.text(34, 110, "nameplate I1max = 43 A", T_NOTE, TEXT, "start", True)
     b = f.text(34, 160, "OCPD not more than", T_NOTE, TEXT, "start")
     f.value(34, 200, "200% x 43 A = 86 A", 26, anchor="start", records=arc, pad=6, what="the 200% step")
@@ -153,7 +133,7 @@ def welders(f):
     b = f.text(34, 350, "max OCPD =", 26, TEXT, "start")
     f.value(b[0] + b[2] + 12, 350, "90 A", 30, anchor="start", records=arc, pad=6)
     f.lines(34, 404, ["I1max: rated supply current", "at maximum rated output"], T_MIN, MUTED, "start", gap=1.1)
-    _card(f, 410, 56, 370, 400, "Resistance welder: conductors")
+    f.card(410, 56, 370, 400, "Resistance welder: conductors")
     f.text(424, 110, "21 A primary, 15% duty cycle", T_NOTE, TEXT, "start", True)
     f.text(424, 150, "Table 630.31(A) multipliers:", T_NOTE, MUTED, "start")
     rows = [("50%", "0.71"), ("40%", "0.63"), ("30%", "0.55"), ("25%", "0.50"), ("20%", "0.45"),
@@ -181,8 +161,11 @@ def imaging_feeder(f):
     for i, (a, pct, res) in enumerate(units):
         x = x0 + i * 110
         hbar = a * 1.1
-        f.rect(x, base - hbar, 70, hbar, fill=PANEL_2, stroke=TEXT, sw=SW_THIN, rx=3)
-        f.rect(x, base - hbar * float(pct[:-1]) / 100, 70, hbar * float(pct[:-1]) / 100, fill=OK, op=0.45)
+        part = hbar * float(pct[:-1]) / 100
+        f.rect(x, base - hbar, 70, hbar, fill=PANEL_2)
+        f.rect(x, base - part, 70, part, fill=OK, op=0.45)
+        f.line(x, base - part, x + 70, base - part, OK, SW_THIN)
+        f.rect(x, base - hbar, 70, hbar, stroke=TEXT, sw=SW_THIN)
         f.text(x + 35, base - hbar - 12, f"{a} A", T_NOTE, TEXT, bold=True)
         f.text(x + 35, base + 30, pct, T_NOTE, DIM, bold=True)
         f.text(x + 35, base + 58, f"= {res:g} A", T_MIN, TEXT)
@@ -190,10 +173,11 @@ def imaging_feeder(f):
     v = f.value(b[0] + b[2] + 10, base + 104, "momentary", T_NOTE, TEXT, "start", records=None, pad=5,
             what="the rating used")
     f.text(v[0] + v[2] + 16, base + 104, "demand rating", T_NOTE, MUTED, "start")
-    _card(f, 540, 70, 240, 300, "Feeder minimum")
-    f.lines(556, 130, ["largest: 50%", "next: 25%", "each other: 10%"], T_NOTE, TEXT, "start", gap=1.4)
-    f.text(556, 262, "100 + 37.5 + 10 + 8", T_NOTE, TEXT, "start")
-    f.text(556, 306, "= 155.5 A", 28, OK, "start", True)
+    f.card(540, 70, 240, 300, "Feeder minimum")
+    f.lines(556, 136, ["largest: 50%", "next: 25%", "each other: 10%"], T_NOTE, TEXT, "start", gap=1.4)
+    f.line(554, 222, 766, 222, EDGE, 1)
+    f.text(556, 260, "100 + 37.5 + 10 + 8", T_NOTE, TEXT, "start")
+    f.text(556, 304, "= 155.5 A", 28, OK, "start", True)
     f.text(556, 346, "(example units)", T_MIN, MUTED, "start")
     f.tag(f.w - 24, f.h - 10, "NEC 517.73(B)", anchor="end")
 
@@ -202,22 +186,24 @@ def imaging_feeder(f):
         records=["final-exam-#3-069"])
 def motor_group(f):
     f.title("Feeder to three motors (one-line, example values)", y=34)
-    _ocpd(f, 60, 70, 60, 70, "")
-    f.text(90, 64, "feeder OCPD", T_NOTE, TEXT, bold=True)
-    f.line(90, 140, 90, 190, WIRE_HOT, SW_WIRE)
+    f.line(90, 52, 90, 70, WIRE_HOT, SW_WIRE)
+    f.breaker(60, 70, 60, 72, poles=3)
+    f.text(132, 112, "feeder OCPD", T_NOTE, TEXT, "start", True)
+    f.line(90, 142, 90, 190, WIRE_HOT, SW_WIRE)
     f.line(90, 190, 690, 190, WIRE_HOT, SW_WIRE)
     motors = [(250, "40 A", "100 A"), (450, "20 A", "50 A"), (650, "10 A", "25 A")]
     for x, flc, br in motors:
-        f.line(x, 190, x, 222, WIRE_HOT, SW_WIRE)
-        _ocpd(f, x - 28, 222, 56, 58)
-        f.text(x + 38, 260, br, T_NOTE, TEXT, "start", True)
-        f.line(x, 280, x, 320, WIRE_HOT, SW_WIRE)
-        _motor(f, x, 352)
+        f.circle(x, 190, 6, fill=WIRE_HOT)
+        f.line(x, 190, x, 220, WIRE_HOT, SW_WIRE)
+        f.breaker(x - 28, 220, 56, 62, poles=3)
+        f.text(x + 40, 260, br, T_NOTE, TEXT, "start", True)
+        f.line(x, 282, x, 320, WIRE_HOT, SW_WIRE)
+        f.motor_symbol(x, 352, 32)
         f.text(x, 414, "FLC " + flc, T_NOTE, TEXT, bold=True)
     f.text(420, 176, "feeder", T_MIN, MUTED)
-    f.text(160, 258, "branch", T_MIN, MUTED, "end")
-    f.text(160, 280, "breakers", T_MIN, MUTED, "end")
-    f.value_lines(430, 80, ["feeder OCPD <= 100 A (largest branch", "device) + 20 A + 10 A = 130 A"],
+    f.text(160, 248, "branch", T_MIN, MUTED, "end")
+    f.text(160, 272, "breakers", T_MIN, MUTED, "end")
+    f.value_lines(484, 80, ["feeder OCPD <= 100 A (largest branch", "device) + 20 A + 10 A = 130 A"],
                   T_NOTE, TEXT, bold=False, pad=6, gap=1.2, what="the feeder rule")
     f.value(400, 452, "no rounding up to the next size: use 125 A", T_NOTE, MUTED, bold=False, pad=6,
             what="the rounding note")
@@ -249,7 +235,7 @@ BOX_DEVICE = ["final-exam-#2-065", "open-book-exam-#11-023"]
                               "final-exam-#4-054", "final-exam-#4-064"])
 def box_fill_steps(f):
     f.title("Box fill: count, multiply, pick the box", y=34)
-    _card(f, 20, 56, 380, 470, "1. Count (314.16(B))")
+    f.card(20, 56, 380, 470, "1. Count (314.16(B))")
     ys = _rows(f, 34, 124, [["each conductor entering", "1"], ["all cable clamps together", "1"],
                             ["each device yoke (switch,", "2"], ["  receptacle): largest wire", ""],
                             ["EGCs, up to four", "1"], ["  each EGC past four", "1/4"]],
@@ -262,7 +248,7 @@ def box_fill_steps(f):
                head=["AWG", "cu in"])
     f.highlight(28, 350, 190, 162, records=["final-exam-#4-064"])
     f.lines(250, 400, ["Table", "314.16(B)(1)"], T_MIN, MUTED, "start", gap=1.1)
-    _card(f, 420, 56, 360, 470, "3. Pick the box (Table 314.16(A))")
+    f.card(420, 56, 360, 470, "3. Pick the box (Table 314.16(A))")
     f.text(434, 124, "device box 3 x 2 x depth:", T_MIN, TEXT, "start", True)
     ys = _rows(f, 434, 156, [["2 in deep", "10.0"], ["2 1/4 in", "10.5"], ["2 1/2 in", "12.5"], ["2 3/4 in", "14.0"],
                              ["3 1/2 in", "18.0"]], [0, 200], T_MIN, 30)
@@ -282,18 +268,18 @@ AMP_14_6 = ["final-exam-#4-024", "final-exam-#4-033"]
                             "final-exam-#4-063"])
 def ampacity_steps(f):
     f.title("Ampacity = table value x ambient factor x count factor", y=34)
-    _card(f, 20, 56, 400, 196, "1. Table 310.16, copper")
+    f.card(20, 56, 400, 196, "1. Table 310.16, copper")
     cols = [0, 90, 180, 270]
     ys = _rows(f, 34, 120, [["14", "15", "20", "25"], ["12", "20", "25", "30"], ["10", "30", "35", "40"]], cols,
                T_MIN, 30, head=["AWG", "60 C", "75 C", "90 C"])
     f.text(34, 240, "TW 60 C, THW 75 C, THHN or RHH 90 C", T_MIN, MUTED, "start")
     f.highlight(26, ys[1] - 22, 388, 30, records=["final-exam-#4-041"])
-    _card(f, 440, 56, 340, 196, "3. Over 3 conductors")
+    f.card(440, 56, 340, 196, "3. Over 3 conductors")
     ys = _rows(f, 454, 124, [["4 to 6", "80%"], ["7 to 9", "70%"], ["10 to 20", "50%"]], [0, 170], T_NOTE, 34)
     f.text(454, 234, "EGCs are not counted", T_MIN, MUTED, "start")
     f.highlight(446, ys[0] - 24, 328, 34, records=AMP_14_6)
     f.highlight(446, ys[1] - 24, 328, 34, records=["final-exam-#4-040", "final-exam-#4-063"])
-    _card(f, 20, 270, 760, 270, "2. Ambient correction, based on 30 C (86 F)")
+    f.card(20, 270, 760, 270, "2. Ambient correction, based on 30 C (86 F)")
     cols = [0, 130, 300, 420, 540]
     ys = _rows(f, 34, 334, [["21-25 C", "69-77 F", "1.08", "1.05", "1.04"], ["26-30 C", "78-86 F", "1.00", "1.00", "1.00"],
                             ["31-35 C", "87-95 F", "0.91", "0.94", "0.96"], ["36-40 C", "96-104 F", "0.82", "0.88", "0.91"],
@@ -328,7 +314,7 @@ def conduit_fill_steps(f):
     boxes = []
     for title, rows in steps:
         h = 44 + len(rows) * 26
-        _card(f, x0, y, 510, h, title)
+        f.card(x0, y, 510, h, title)
         f.lines(x0 + 14, y + 58, rows, T_MIN, TEXT, "start", gap=1.25)
         boxes.append((y, h))
         y += h + 14
@@ -349,8 +335,8 @@ RANGE_B = ["final-exam-#4-023", "final-exam-#4-045", "final-exam-#4-049", "final
         records=RANGE_B + ["final-exam-#4-025", "final-exam-#4-036", "final-exam-#4-046", "final-exam-#4-069"])
 def cooking_dryer_demand(f):
     f.title("Household cooking and dryer demand", y=34)
-    _card(f, 20, 56, 470, 316, "Table 220.55: pick the column by kW")
-    f.lines(34, 112, ["under 3 1/2 kW: Column A (%)", "3 1/2 to 8 3/4 kW: Column B (%)",
+    f.card(20, 56, 470, 316, "Table 220.55: pick the column by kW")
+    f.lines(34, 118, ["under 3 1/2 kW: Column A (%)", "3 1/2 to 8 3/4 kW: Column B (%)",
                       "up to 12 kW: Column C (kW), the default", "over 12 kW: C + 5% per kW over 12 (Note 1)"],
             T_MIN, TEXT, "start", gap=1.15)
     ys = _rows(f, 34, 214, [["1", "80%", "80%", "8"], ["2", "75%", "65%", "11"], ["3", "70%", "55%", "14"],
@@ -360,13 +346,13 @@ def cooking_dryer_demand(f):
     for i, recs in ((0, ["final-exam-#4-051"]), (1, ["final-exam-#4-025"]), (2, ["final-exam-#4-045"]),
                     (3, ["final-exam-#4-023"]), (4, ["final-exam-#4-049"]), (5, ["final-exam-#4-069"])):
         f.highlight(26, ys[i] - 19, 458, 24, records=recs)
-    _card(f, 510, 56, 270, 316, "Branch circuit (Note 4)")
+    f.card(510, 56, 270, 316, "Branch circuit (Note 4)")
     f.lines(524, 118, ["one range: the table", "may be used", "", "one wall oven or one", "cooktop: nameplate",
                        "", "cooktop + up to 2 ovens,", "same room, one circuit:", "add them, treat as", "one range"],
             T_MIN, TEXT, "start", gap=1.2)
     f.highlight(516, 172, 258, 60, records=["final-exam-#4-036"])
     f.highlight(516, 96, 258, 54, records=["final-exam-#4-051"])
-    _card(f, 20, 386, 760, 140, "Dryers (220.54): 5 kW or the nameplate, whichever is larger")
+    f.card(20, 386, 760, 140, "Dryers (220.54): 5 kW or the nameplate, whichever is larger")
     f.text(34, 450, "1-4: 100% | 5: 85% | 6: 75% | 7: 65% | 8: 60%", T_NOTE, TEXT, "start", True)
     f.text(34, 494, "feeder neutral: 70% of the dryer and range demand (220.61(B)(1))", T_MIN, MUTED, "start")
     f.highlight(26, 424, 748, 96, records=["final-exam-#4-046"])
@@ -381,18 +367,18 @@ MOTOR_SC = ["final-exam-#4-032", "final-exam-#4-053", "final-exam-#4-061", "fina
         when="after", records=MOTOR_BC + MOTOR_OL + MOTOR_SC + ["final-exam-#4-030", "final-exam-#4-070"])
 def motor_percentages(f):
     f.title("Motor circuits by the percentages (Article 430)", y=34)
-    _card(f, 20, 56, 760, 84, "Start: FLC from the tables, not the nameplate (430.6(A)(1))")
+    f.card(20, 56, 760, 84, "Start: FLC from the tables, not the nameplate (430.6(A)(1))")
     f.text(34, 122, "single-phase: Table 430.248, three-phase: Table 430.250", T_MIN, TEXT, "start")
-    _card(f, 20, 152, 370, 110, "Conductors")
+    f.card(20, 152, 370, 110, "Conductors")
     f.text(34, 214, "one motor: 125% of FLC", T_MIN, TEXT, "start")
     f.text(34, 244, "feeder: 125% of largest + rest", T_MIN, TEXT, "start")
     f.highlight(26, 194, 358, 28, records=MOTOR_BC)
     f.highlight(26, 224, 358, 30, records=["final-exam-#4-030"])
-    _card(f, 410, 152, 370, 110, "3-phase VA")
+    f.card(410, 152, 370, 110, "3-phase VA")
     f.text(424, 214, "V x FLC x 1.732", T_NOTE, TEXT, "start", True)
     f.text(424, 244, "(single-phase: V x FLC)", T_MIN, MUTED, "start")
     f.highlight(416, 190, 358, 32, records=["final-exam-#4-070"])
-    _card(f, 20, 274, 470, 266, "Short-circuit device, max % of FLC")
+    f.card(20, 274, 470, 266, "Short-circuit device, max % of FLC")
     ys = _rows(f, 34, 334, [["nontime-delay fuse", "300%", "150%"], ["dual-element fuse", "175%", "150%"],
                             ["inverse time breaker", "250%", "150%"], ["instantaneous breaker", "800%", "800%"]],
                [0, 230, 330], T_MIN, 32, head=["", "others", "wound rotor"])
@@ -401,7 +387,7 @@ def motor_percentages(f):
     f.highlight(26, ys[1] - 22, 458, 30, records=["final-exam-#4-032", "final-exam-#4-053"])
     f.highlight(26, ys[0] - 22, 458, 30, records=["final-exam-#4-061"])
     f.highlight(26, ys[2] - 22, 458, 30, records=["final-exam-#4-067"])
-    _card(f, 510, 274, 270, 266, "Overloads (430.32)")
+    f.card(510, 274, 270, 266, "Overloads (430.32)")
     f.lines(524, 334, ["SF 1.15+ or 40 C rise:", "125%, others 115%"], T_MIN, TEXT, "start", gap=1.2)
     f.lines(524, 414, ["if the motor will not", "start (430.32(C)), max:", "SF 1.15+ or 40 C: 140%",
                        "others: 130%"], T_MIN, TEXT, "start", gap=1.2)
@@ -419,18 +405,18 @@ def dwelling_loads(f):
     f.lines(325, 186, ["open", "porch"], T_MIN, MUTED, gap=1.0)
     f.text(160, 270, "measured outside", T_MIN, MUTED)
     f.text(325, 270, "not counted", T_MIN, MUTED)
-    _card(f, 400, 56, 380, 200, "General lighting (220.41)")
+    f.card(400, 56, 380, 200, "General lighting (220.41)")
     f.text(414, 118, "3 VA per sq ft of living area", T_MIN, TEXT, "start", True)
     f.lines(414, 150, ["general-use receptacles are", "included: no added load"], T_MIN, TEXT, "start", gap=1.15)
     f.lines(414, 212, ["circuits = VA / 1,800 (15 A x 120 V),", "round up"], T_MIN, TEXT, "start", gap=1.15)
     f.highlight(406, 96, 368, 32, records=["final-exam-#4-027"])
     f.highlight(406, 128, 368, 50, records=["final-exam-#4-048"])
     f.highlight(406, 190, 368, 56, records=["final-exam-#4-047"])
-    _card(f, 20, 296, 370, 180, "Small appliance, laundry (220.52)")
+    f.card(20, 296, 370, 180, "Small appliance, laundry (220.52)")
     f.lines(34, 360, ["1,500 VA per small-appliance", "circuit (at least 2)", "+ 1,500 VA laundry circuit"],
             T_MIN, TEXT, "start", gap=1.2)
     f.highlight(26, 336, 358, 96, records=["final-exam-#4-028"])
-    _card(f, 410, 296, 370, 180, "Fastened in place (220.53)")
+    f.card(410, 296, 370, 180, "Fastened in place (220.53)")
     f.lines(424, 360, ["4 or more (water heaters,", "dishwashers...): 75% of", "the nameplates",
                        "not ranges, dryers, heat, A/C"], T_MIN, TEXT, "start", gap=1.2)
     f.highlight(416, 336, 358, 130, records=["final-exam-#4-042"])

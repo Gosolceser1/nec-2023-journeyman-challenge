@@ -33,7 +33,10 @@ def gfci_locations(f):
     # Laundry.
     f.text((gx1 + lx1) / 2, 200, "LAUNDRY", T_NOTE, TEXT, bold=True)
     f.rect(168, 262, 64, 68, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
-    f.circle(200, 300, 18, fill="none", stroke=TEXT, sw=SW_THIN)
+    f.line(171, 276, 229, 276, EDGE, SW_THIN)
+    f.circle(220, 269, 3, fill=LINE)
+    f.circle(200, 302, 18, fill=EDGE, stroke=TEXT, sw=SW_THIN)
+    f.circle(200, 302, 12, fill=BG, stroke=LINE, sw=1.5)
     f.receptacle(256, 270, 40, gfci=True)
     # Tub or shower: 6 ft from the outside edge.
     f.text((lx1 + hx1) / 2, 200, "TUB / SHOWER", T_NOTE, TEXT, bold=True)

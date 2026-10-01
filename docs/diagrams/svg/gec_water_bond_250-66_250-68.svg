@@ -41,32 +41,61 @@
 <circle cx="580.0" cy="384.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
 <circle cx="614.0" cy="385.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
 <line x1="482.0" y1="385.0" x2="608.0" y2="385.0" stroke="#64748b" stroke-width="7" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="505.0" y1="385.0" x2="505.0" y2="312.0" stroke="#64748b" stroke-width="7" stroke-linecap="round" stroke-opacity="1.0"/>
 <text x="705.0" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">concrete-encased</text>
 <text x="705.0" y="333.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">electrode (rebar)</text>
 <line x1="705.0" y1="340.0" x2="598.0" y2="384.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <circle cx="598.0" cy="384.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
 <line x1="780.0" y1="250.0" x2="200.0" y2="250.0" stroke="#38bdf8" stroke-width="14" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="780.0" y1="250.0" x2="200.0" y2="250.0" stroke="#0c4a6e" stroke-width="10" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="780.0" y1="247.8" x2="200.0" y2="247.8" stroke="#e2e8f0" stroke-width="1.0" stroke-linecap="round" stroke-opacity="0.35"/>
 <line x1="200.0" y1="257.0" x2="200.0" y2="150.0" stroke="#38bdf8" stroke-width="14" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="200.0" y1="257.0" x2="200.0" y2="150.0" stroke="#0c4a6e" stroke-width="10" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="197.8" y1="257.0" x2="197.8" y2="150.0" stroke="#e2e8f0" stroke-width="1.0" stroke-linecap="round" stroke-opacity="0.35"/>
 <text x="668.0" y="234.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">metal water pipe</text>
-<rect x="300.0" y="226.0" width="70.0" height="48.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
-<text x="335.0" y="308.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">water meter</text>
-<polyline points="270.0,250.0 270.0,200.0 400.0,200.0 400.0,250.0" fill="none" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="270.0" cy="250.0" r="7" fill="#fbbf24" stroke="none" stroke-width="2"/>
-<circle cx="400.0" cy="250.0" r="7" fill="#fbbf24" stroke="none" stroke-width="2"/>
+<rect x="291.0" y="238.0" width="12.0" height="24.0" rx="2" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="367.0" y="238.0" width="12.0" height="24.0" rx="2" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="304.0" y="230.0" width="62.0" height="40.0" rx="10" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="315.0" y="216.0" width="40.0" height="16.0" rx="5" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="335.0" cy="250.0" r="10" fill="#0f172a" stroke="#94a3b8" stroke-width="2"/>
+<line x1="335.0" y1="250.0" x2="341.0" y2="245.0" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="335.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">water meter</text>
+<polyline points="258.0,239.0 258.0,200.0 412.0,200.0 412.0,239.0" fill="none" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="251.0" y="239.0" width="14.0" height="22.0" rx="3" fill="#ca8a04" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="254.0" y1="250.0" x2="262.0" y2="250.0" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="405.0" y="239.0" width="14.0" height="22.0" rx="3" fill="#ca8a04" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="408.0" y1="250.0" x2="416.0" y2="250.0" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <text x="335.0" y="146.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">bonding jumper</text>
 <text x="335.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="middle">sufficient length</text>
 <rect x="30.0" y="90.0" width="90.0" height="130.0" rx="5" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
-<line x1="46.2" y1="122.5" x2="103.8" y2="122.5" stroke="#64748b" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="46.2" y1="155.0" x2="103.8" y2="155.0" stroke="#64748b" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="46.2" y1="187.5" x2="103.8" y2="187.5" stroke="#64748b" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="36.3" y="96.3" width="77.4" height="117.4" rx="3" fill="#334155" fill-opacity="0.55" stroke="#64748b" stroke-width="2"/>
+<circle cx="42.0" cy="102.0" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="108.0" cy="102.0" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="42.0" cy="208.0" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="108.0" cy="208.0" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<rect x="70.5" y="108.2" width="9.0" height="93.7" rx="2" fill="#0f172a" fill-opacity="0.6" stroke="none" stroke-width="2"/>
+<rect x="42.6" y="114.3" width="27.0" height="21.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="57.2" y="119.1" width="9.2" height="12.1" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="80.4" y="114.3" width="27.0" height="21.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="83.6" y="119.1" width="9.2" height="12.1" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="42.6" y="144.2" width="27.0" height="21.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="57.2" y="149.0" width="9.2" height="12.1" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="80.4" y="144.2" width="27.0" height="21.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="83.6" y="149.0" width="9.2" height="12.1" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="42.6" y="174.1" width="27.0" height="21.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="57.2" y="178.9" width="9.2" height="12.1" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="80.4" y="174.1" width="27.0" height="21.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="83.6" y="178.9" width="9.2" height="12.1" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="75.0" y="50.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">service</text>
 <text x="75.0" y="77.5" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">panel</text>
-<polyline points="120.0,100.0 480.0,100.0 480.0,250.0" fill="none" stroke="#86efac" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<circle cx="480.0" cy="250.0" r="7" fill="#86efac" stroke="none" stroke-width="2"/>
-<polyline points="75.0,220.0 75.0,345.0 500.0,345.0 500.0,382.0" fill="none" stroke="#86efac" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="270.0" y="394.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="middle">need not exceed 4 AWG Cu</text>
+<polyline points="120.0,100.0 480.0,100.0 480.0,239.0" fill="none" stroke="#86efac" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="473.0" y="239.0" width="14.0" height="22.0" rx="3" fill="#ca8a04" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="476.0" y1="250.0" x2="484.0" y2="250.0" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<polyline points="75.0,220.0 75.0,318.0 497.0,318.0" fill="none" stroke="#86efac" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="498.0" y="307.0" width="14.0" height="22.0" rx="3" fill="#ca8a04" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="501.0" y1="318.0" x2="509.0" y2="318.0" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="96.0" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">GEC to the rebar</text>
+<text x="260.0" y="376.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="middle">need not exceed 4 AWG Cu</text>
 <text x="30.0" y="462.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">250.50 Ex.: in</text>
 <text x="164.7" y="462.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">existing buildings</text>
 <text x="342.8" y="462.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">rebar you can not reach</text>

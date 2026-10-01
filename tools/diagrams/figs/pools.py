@@ -62,34 +62,34 @@ def spa_fan(f):
                  "open-book-exam-#3-012": {"like": MOTOR_GFCI[0]}, "open-book-exam-#3-015": {"like": FOUNTAIN[0]},
                  "open-book-exam-#6-023": {"like": UNDERGROUND[0]}})
 def pool_distances(f):
-    ft = 16.0
-    f.text(20, 30, "plan view, not to scale", T_NOTE, MUTED, "start")
+    ft = 14.0
+    f.text(20, 30, "plan view", T_NOTE, MUTED, "start")
     # Permanently installed pool.
-    px0, py0, px1, py1 = 100, 180, 250, 288
+    px0, py0, px1, py1 = 90, 190, 210, 290
     d5 = 5 * ft
     f.zone(px0 - d5, py0 - d5, px1 - px0 + 2 * d5, py1 - py0 + 2 * d5, ZONE, 0.08)
     f.rect(px0, py0, px1 - px0, py1 - py0, fill=WATER, stroke=WATER_EDGE, sw=SW_OBJ)
-    f.text((px0 + px1) / 2, 242, "POOL", T_LABEL, TEXT, bold=True)
+    f.text((px0 + px1) / 2, 228, "POOL", T_LABEL, TEXT, bold=True)
     f.text(px1 + d5, py1 + d5 + 32, "underground wiring zone", T_NOTE, ZONE, "end", True)
     x = px0 + 30
     f.dim_v(x, py1, py1 + d5)
-    f.value(x + 14, py1 + 42, "5 ft", 28, anchor="start", records=UNDERGROUND, label="?")
+    f.value(x + 14, py1 + 44, "5 ft", 28, anchor="start", records=UNDERGROUND, label="?")
     # LFMC run into the zone to the pool wall.
-    cx = 200
+    cx = 170
     f.conduit(cx, 50, cx, py0 - 2, width=10)
-    f.lines(cx - 16, 70, ["LFMC listed for", "direct burial"], T_NOTE, TEXT, "end")
-    # Pump receptacle.
-    # Drawn well outside the 5 ft zone: at true scale 6 ft would sit on its edge.
-    rx, ry = px1 + d5 + 36, 226
+    f.lines(cx + 16, 70, ["LFMC listed for", "direct burial"], T_NOTE, TEXT, "start")
+    # Pump motor, cord-connected to its receptacle 6 ft (to scale) from the pool wall.
+    rx, ry = px1 + 6 * ft, 240
     f.plan_receptacle(rx, ry, gfci=True)
-    f.rect(rx + 22, ry - 20, 44, 40, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
-    f.text(rx + 44, ry + 8, "M", T_LABEL, TEXT, bold=True)
-    f.line(rx + 12, ry, rx + 22, ry, TEXT, 3)
-    f.lines(rx + 44, 164, ["pump", "motor"], T_NOTE, TEXT)
-    f.ext(rx, ry + 14, rx, 262)
-    f.dim_h(px1, rx, 254)
-    f.value((px1 + rx) / 2, 286, "6 ft", 28, records=SIX_FT, label="?")
-    f.lines(rx + 16, 300, ["pump", "receptacle:", "GFCI"], T_NOTE, TEXT)
+    mx, my = 396, 240
+    f.motor(mx, my, 56, 34, label=None, shaft="left")
+    f.circle(mx - 28 - 12 - 8, my, 12, fill=PANEL_2, stroke=TEXT, sw=SW_THIN)
+    f.cable([(rx + 10, ry - 6), (rx + 26, my - 34), (mx, my - 34), (mx, my - 26)], TEXT, 3)
+    f.lines(mx, 168, ["pump", "motor"], T_NOTE, TEXT)
+    f.ext(rx, ry + 14, rx, ry + 34)
+    f.dim_h(px1, rx, ry + 26)
+    f.value((px1 + rx) / 2, ry + 58, "6 ft", 28, records=SIX_FT, label="?")
+    f.lines(rx + 76, ry + 62, ["pump", "receptacle:", "GFCI"], T_NOTE, TEXT)
     f.line(446, 30, 446, f.h - 30, EDGE, SW_THIN)
     ft = 12.0
     # Storable pool with audio equipment.

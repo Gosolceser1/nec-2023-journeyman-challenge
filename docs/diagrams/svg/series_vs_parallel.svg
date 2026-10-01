@@ -2,14 +2,14 @@
 <rect x="0.0" y="0.0" width="800.0" height="500.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Series shares the current, parallel shares the voltage</text>
 <rect x="20.0" y="56.0" width="370.0" height="424.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="34.0" y="88.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">SERIES</text>
+<text x="34.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">SERIES</text>
 <polyline points="120.0,190.0 120.0,140.0 330.0,140.0 330.0,290.0 120.0,290.0 120.0,240.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 <circle cx="120.0" cy="215.0" r="26" fill="#1e293b" stroke="#e2e8f0" stroke-width="3"/>
-<path d="M 106 215 q 7 -14 14 0 t 14 0" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="88.0" y="223.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="end">120 V</text>
+<path d="M 106 215 q 7 -14 14 0 t 14 0" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="86.0" y="223.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="end">120 V</text>
 <circle cx="220.0" cy="140.0" r="22" fill="#334155" stroke="#e2e8f0" stroke-width="3"/>
-<line x1="206.8" y1="126.8" x2="233.2" y2="153.2" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="206.8" y1="153.2" x2="233.2" y2="126.8" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="205.5" y1="125.5" x2="234.5" y2="154.5" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="205.5" y1="154.5" x2="234.5" y2="125.5" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <text x="220.0" y="106.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">bulb</text>
 <line x1="330.0" y1="170.0" x2="330.0" y2="188.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="330.0" y1="242.0" x2="330.0" y2="260.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
@@ -23,12 +23,12 @@
 <text x="34.0" y="422.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">more ohms, less current,</text>
 <text x="34.0" y="445.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">heater puts out less heat</text>
 <rect x="410.0" y="56.0" width="370.0" height="424.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="424.0" y="88.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">PARALLEL</text>
+<text x="424.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">PARALLEL</text>
 <polyline points="504.0,190.0 504.0,140.0 680.0,140.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 <polyline points="504.0,240.0 504.0,290.0 680.0,290.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 <circle cx="504.0" cy="215.0" r="26" fill="#1e293b" stroke="#e2e8f0" stroke-width="3"/>
-<path d="M 490 215 q 7 -14 14 0 t 14 0" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="472.0" y="223.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="end">120 V</text>
+<path d="M 490 215 q 7 -14 14 0 t 14 0" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="470.0" y="223.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="end">120 V</text>
 <line x1="556.0" y1="140.0" x2="556.0" y2="170.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="556.0" y1="260.0" x2="556.0" y2="290.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
 <polyline points="556.0,170.0 572.0,173.8 540.0,181.2 572.0,188.8 540.0,196.2 572.0,203.8 540.0,211.2 572.0,218.8 540.0,226.2 572.0,233.8 540.0,241.2 572.0,248.8 540.0,256.2 556.0,260.0" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>

@@ -2,7 +2,10 @@
 <rect x="0.0" y="0.0" width="800.0" height="470.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Equipment grounding conductor from the OCPD rating</text>
 <rect x="40.0" y="90.0" width="64.0" height="72.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
-<rect x="59.2" y="108.0" width="25.6" height="36.0" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="72.0" cy="96.9" r="4.32" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="72.0" cy="155.1" r="4.32" fill="#64748b" stroke="none" stroke-width="2"/>
+<rect x="61.8" y="109.4" width="20.5" height="33.1" rx="2" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="64.2" y="111.4" width="15.6" height="15.2" rx="2" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="72.0" y="80.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">50 A</text>
 <line x1="104.0" y1="110.0" x2="330.0" y2="110.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="104.0" y1="126.0" x2="330.0" y2="126.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
@@ -30,7 +33,7 @@
 <line x1="460.0" y1="316.0" x2="770.0" y2="316.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
 <text x="466.0" y="346.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#e2e8f0" text-anchor="start">200 A</text>
 <text x="764.0" y="346.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#38bdf8" text-anchor="end">6 AWG</text>
-<rect x="20.0" y="230.0" width="410.0" height="200.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="20.0" y="230.0" width="410.0" height="172.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="34.0" y="260.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">How to read it</text>
 <text x="36.0" y="290.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">Use the first row whose rating is</text>
 <text x="36.0" y="318.6" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">at or above the OCPD.</text>

@@ -33,6 +33,9 @@
 <text x="774.0" y="128.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="end">grade</text>
 <text x="400.0" y="36.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Electrodes in the earth (section view, not to scale)</text>
 <rect x="70.0" y="60.0" width="26.0" height="273.2" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<line x1="76.0" y1="62.0" x2="76.0" y2="331.2" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="90.0" y1="62.0" x2="90.0" y2="331.2" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="62.0" y="56.0" width="42.0" height="8.0" rx="1" fill="#64748b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
 <text x="108.0" y="80.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">in-ground metal</text>
 <text x="108.0" y="107.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">support structure</text>
 <line x1="98.0" y1="333.2" x2="105.0" y2="333.2" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
@@ -47,9 +50,13 @@
 <text x="384.0" y="190.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">bonding jumper</text>
 <line x1="300.0" y1="140.0" x2="300.0" y2="316.4" stroke="#b45309" stroke-width="9" stroke-linecap="round" stroke-opacity="1.0"/>
 <polygon points="295.0,316.4 305.0,316.4 300.0,328.4" fill="#b45309" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="292.0" y="148.0" width="16.0" height="12.0" rx="3" fill="#ca8a04" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="308.0" y1="154.0" x2="313.0" y2="154.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <text x="300.0" y="354.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">rod</text>
 <line x1="468.0" y1="140.0" x2="468.0" y2="316.4" stroke="#b45309" stroke-width="9" stroke-linecap="round" stroke-opacity="1.0"/>
 <polygon points="463.0,316.4 473.0,316.4 468.0,328.4" fill="#b45309" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="460.0" y="148.0" width="16.0" height="12.0" rx="3" fill="#ca8a04" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="476.0" y1="154.0" x2="481.0" y2="154.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <text x="468.0" y="354.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">rod</text>
 <line x1="474.0" y1="316.4" x2="481.0" y2="316.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
 <line x1="487.0" y1="316.4" x2="494.0" y2="316.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>

@@ -11,7 +11,7 @@
 <text x="40.0" y="277.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">area x 1/2 -&gt; ohms x 2</text>
 <text x="40.0" y="305.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">5 x 3 x 2 = 30 ohm</text>
 <rect x="400.0" y="230.0" width="380.0" height="210.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="414.0" y="262.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">Changes resistance:</text>
+<text x="414.0" y="260.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">Changes resistance:</text>
 <text x="414.0" y="292.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">length, cross-section area</text>
 <text x="414.0" y="315.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">(diameter), material,</text>
 <text x="414.0" y="338.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">temperature</text>

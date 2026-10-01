@@ -28,8 +28,10 @@
 <rect x="60.0" y="160.0" width="70.0" height="112.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
 <text x="95.0" y="96.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">material door</text>
 <rect x="393.0" y="132.0" width="14.0" height="308.0" rx="0" fill="#a16207" fill-opacity="0.8" stroke="#ca8a04" stroke-width="2"/>
-<rect x="378.0" y="118.0" width="30.0" height="14.0" rx="3" fill="#fbbf24" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<text x="400.0" y="106.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">floodlight</text>
+<line x1="400.0" y1="144.0" x2="430.0" y2="144.0" stroke="#64748b" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="422.0,130.0 458.0,130.0 464.0,156.0 416.0,156.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="418.0" y1="157.0" x2="462.0" y2="157.0" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="386.0" y="146.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="end">floodlight</text>
 <polyline points="172.0,216.0 181.5,218.2 191.0,220.1 200.4,221.7 209.8,223.0 219.2,224.0 228.6,224.8 237.9,225.2 247.2,225.3 256.5,225.2 265.8,224.7 275.0,224.0 284.2,223.0 293.4,221.7 302.6,220.1 311.8,218.2 320.9,216.0 330.0,213.5 339.1,210.8 348.1,207.7 357.1,204.3 366.1,200.7 375.1,196.8 384.1,192.5 393.0,188.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 <circle cx="172.0" cy="216.0" r="6" fill="#e2e8f0" stroke="none" stroke-width="2"/>
 <text x="318.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">120 V</text>

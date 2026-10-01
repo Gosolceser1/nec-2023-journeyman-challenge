@@ -46,6 +46,7 @@ WATER_EDGE = "#38bdf8"
 WOOD = "#a16207"
 STEEL = "#64748b"
 ROD = "#b45309"
+CLAMP = "#ca8a04"     # bronze acorn clamps, lugs
 
 FONT = "Helvetica, Arial, sans-serif"
 
@@ -277,45 +278,276 @@ class Fig:
         """Outlined, lightly filled area (working space, reach zone, ...)."""
         self.rect(x, y, w, h, fill=color, op=op, stroke=color, sw=SW_OBJ, rx=4)
 
-    def panel(self, x, y, w, h, label="panel", breakers=4, label_below=True):
-        """Panelboard / enclosure front: body plus breaker rows."""
+    def panel(self, x, y, w, h, label="panel", breakers=4, label_below=True, main=False):
+        """Panelboard front, top-left (x, y): tub, dead front with trim screws and
+        two columns of breakers on a centre bus cover. breakers=0 leaves the dead
+        front empty for the caller to fill. main: a two-pole main at the top."""
         self.rect(x, y, w, h, fill=PANEL, stroke=TEXT, sw=SW_OBJ + 1, rx=5)
+        m = max(5.0, min(w, h) * 0.07)
+        self.rect(x + m, y + m, w - 2 * m, h - 2 * m, fill=PANEL_2, op=0.55, stroke=EDGE, sw=SW_THIN, rx=3)
+        sr = max(2.0, min(w, h) * 0.018)
+        for sx, sy in ((x + m * 1.9, y + m * 1.9), (x + w - m * 1.9, y + m * 1.9),
+                       (x + m * 1.9, y + h - m * 1.9), (x + w - m * 1.9, y + h - m * 1.9)):
+            self.circle(sx, sy, sr, fill=EDGE)
+        if breakers <= 0:
+            if label:
+                self.text(x + w / 2, y + h + 28 if label_below else y - 12, label, T_LABEL, TEXT, bold=True)
+            return
+        top, bot = y + m * 3.2, y + h - m * 3.2
+        if main:
+            mh = min((bot - top) * 0.24, w * 0.34)
+            self.breaker(x + w / 2 - w * 0.2, top, w * 0.4, mh, poles=2)
+            top += mh + m
+        cw = w * 0.30
+        self.rect(x + w / 2 - w * 0.05, top - 2, w * 0.10, bot - top + 4, fill=BG, op=0.6, rx=2)
+        step = (bot - top) / breakers
+        bh = max(6.0, step * 0.72)
         for i in range(breakers):
-            yy = y + (i + 1) * h / (breakers + 1)
-            self.line(x + w * 0.18, yy, x + w * 0.82, yy, EDGE, 5)
+            yy = top + i * step + (step - bh) / 2
+            for bx in (x + w / 2 - w * 0.06 - cw, x + w / 2 + w * 0.06):
+                self.mini_breaker(bx, yy, cw, bh, handle_left=bx > x + w / 2)
         if label:
             self.text(x + w / 2, y + h + 28 if label_below else y - 12, label, T_LABEL, TEXT, bold=True)
 
+    def mini_breaker(self, x, y, w, h, handle_left=False):
+        """One plug-on breaker in a panel row: body plus a toggle at the bus end."""
+        self.rect(x, y, w, h, fill=PANEL_2, stroke=LINE, sw=1.5, rx=1.5)
+        tw = max(4.0, w * 0.34)
+        tx = x + w * 0.12 if handle_left else x + w - w * 0.12 - tw
+        self.rect(tx, y + h * 0.22, tw, h * 0.56, fill=TEXT, rx=1.5)
+
+    def breaker(self, x, y, w=56, h=64, poles=1, on=True, color=TEXT, fill=PANEL_2, rating=None):
+        """Molded-case breaker front, top-left (x, y): body, line and load lugs,
+        handle slot with the toggle up (ON) or down (OFF); poles > 1 tie the handles."""
+        self.rect(x, y, w, h, fill=fill, stroke=color, sw=SW_OBJ, rx=5)
+        lug = max(3.0, h * 0.06)
+        for yy in (y + lug * 1.6, y + h - lug * 1.6):
+            for k in range(poles):
+                self.circle(x + w * (k + 0.5) / poles, yy, lug, fill=EDGE)
+        sw_ = min(w * 0.42 / poles, w * 0.32)
+        sh = h * 0.46
+        sy = y + (h - sh) / 2
+        xs = [x + w * (k + 0.5) / poles for k in range(poles)]
+        for cx in xs:
+            self.rect(cx - sw_ / 2, sy, sw_, sh, fill=BG, stroke=EDGE, sw=1.5, rx=2)
+            hy = sy + sh * (0.06 if on else 0.48)
+            self.rect(cx - sw_ * 0.38, hy, sw_ * 0.76, sh * 0.46, fill=color, rx=2)
+        if poles > 1:
+            hy = sy + sh * (0.29 if on else 0.71)
+            self.line(xs[0], hy, xs[-1], hy, color, max(2.0, sh * 0.08))
+        if rating:
+            self.text(x + w / 2, y + h + 26, rating, T_NOTE, TEXT, bold=True)
+
+    def disconnect(self, x, y, w=90, h=120, on=True, label=None, label_dy=None):
+        """Enclosed safety switch, top-left (x, y): body, door seam, hasp and the
+        operating handle on the right side, up for ON and down for OFF."""
+        self.rect(x, y, w, h, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ + 1, rx=5)
+        m = max(5.0, w * 0.08)
+        self.rect(x + m, y + m, w - 2 * m, h - 2 * m, fill="none", stroke=EDGE, sw=SW_THIN, rx=3)
+        self.rect(x + w * 0.42, y + h - m - 2, w * 0.16, m + 6, fill=EDGE, stroke=TEXT, sw=1.5, rx=2)
+        px, py = x + w + 2, y + h * 0.30
+        tip = (px + w * 0.26, py - h * 0.20) if on else (px + w * 0.26, py + h * 0.20)
+        self.rect(x + w - 2, py - h * 0.08, 8, h * 0.16, fill=EDGE, stroke=TEXT, sw=1.5, rx=2)
+        self.line(px + 2, py, tip[0], tip[1], TEXT, max(5.0, w * 0.07))
+        self.circle(tip[0], tip[1], max(4.0, w * 0.05), fill=TEXT)
+        self.circle(px + 2, py, max(4.0, w * 0.05), fill=PANEL, stroke=TEXT, sw=1.5)
+        if label:
+            self.text(x + w / 2, y + (label_dy if label_dy is not None else -14), label, T_LABEL, TEXT, bold=True)
+
+    def meter(self, cx, cy, r=24, label=None, label_dx=None):
+        """Watthour meter in its socket, centred on the glass: socket base, sealing
+        ring, glass with the register and dial."""
+        self.rect(cx - r * 1.15, cy - r * 1.55, r * 2.3, r * 3.1, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=r * 0.35)
+        self.circle(cx, cy, r + max(2.0, r * 0.1), fill=EDGE, stroke=TEXT, sw=SW_THIN)
+        self.circle(cx, cy, r, fill=BG, stroke=LINE, sw=SW_THIN)
+        self.rect(cx - r * 0.55, cy - r * 0.48, r * 1.1, r * 0.34, fill=PANEL, stroke=LINE, sw=1, rx=1.5)
+        self.line(cx - r * 0.62, cy + r * 0.32, cx + r * 0.62, cy + r * 0.32, LINE, max(1.5, r * 0.08))
+        self.line(cx, cy + r * 0.32, cx + r * 0.3, cy + r * 0.05, AMBER, max(1.5, r * 0.07))
+        if label:
+            dx = r * 1.15 + 10 if label_dx is None else label_dx
+            self.text(cx + dx, cy + 8, label, T_NOTE, TEXT, "start" if dx >= 0 else "end", True)
+
+    def transformer(self, x, y, w=110, h=90, kind="pad", label=None):
+        """Distribution transformer. kind="pad": pad-mounted cabinet on its pad,
+        top-left (x, y). kind="pole": pole-mounted can, top-left of the can,
+        with two primary bushings on the lid and a hanger bracket."""
+        if kind == "pole":
+            self.rect(x, y, w, h, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=w * 0.18)
+            self.line(x + 3, y + h * 0.18, x + w - 3, y + h * 0.18, EDGE, SW_THIN)
+            for k in (0.3, 0.7):
+                bx = x + w * k
+                for j in range(3):
+                    self.rect(bx - 6 + j, y - 10 - j * 8, 12 - 2 * j, 7, fill=LINE, stroke=TEXT, sw=1, rx=2)
+            self.rect(x - 8, y + h * 0.35, 10, h * 0.3, fill=STEEL, stroke=TEXT, sw=1.5, rx=2)
+        else:
+            self.rect(x - 8, y + h, w + 16, max(10.0, h * 0.12), fill=CONCRETE, stroke=TEXT, sw=SW_THIN)
+            self.rect(x, y, w, h, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ + 1, rx=4)
+            self.line(x + w / 2, y + 6, x + w / 2, y + h - 6, EDGE, SW_THIN)
+            for k in range(1, 5):
+                yy = y + h * k / 5
+                self.line(x - 6, yy, x, yy, EDGE, 3)
+                self.line(x + w, yy, x + w + 6, yy, EDGE, 3)
+            self.rect(x + w / 2 + 8, y + h * 0.42, 6, h * 0.16, fill=EDGE, rx=2)
+        if label:
+            self.text(x + w / 2, y + h + (40 if kind == "pad" else 28), label, T_LABEL, TEXT, bold=True)
+
+    def coils(self, x, y, r=18):
+        """One-line transformer symbol: two touching windings, centred on (x, y)."""
+        self.circle(x, y - r * 0.8, r, stroke=TEXT, sw=SW_OBJ)
+        self.circle(x, y + r * 0.8, r, stroke=TEXT, sw=SW_OBJ)
+
+    def motor(self, cx, cy, w=96, h=64, label="M", shaft="right"):
+        """Totally enclosed motor, side view, centred on the frame: ribbed frame,
+        end bells, shaft, mounting feet and the conduit (terminal) box on top."""
+        x0, y0 = cx - w / 2, cy - h / 2
+        self.rect(x0 + w * 0.1, cy + h / 2 - 2, w * 0.18, h * 0.16, fill=STEEL, stroke=TEXT, sw=1.5)
+        self.rect(x0 + w * 0.72, cy + h / 2 - 2, w * 0.18, h * 0.16, fill=STEEL, stroke=TEXT, sw=1.5)
+        self.line(x0 + w * 0.02, cy + h / 2 + h * 0.15, x0 + w * 0.98, cy + h / 2 + h * 0.15, LINE, 3)
+        self.rect(x0, y0, w, h, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=h * 0.22)
+        for k in range(1, 6):
+            yy = y0 + h * k / 6
+            self.line(x0 + w * 0.2, yy, x0 + w * 0.8, yy, EDGE, 2)
+        for ex in (x0 + w * 0.14, x0 + w * 0.86):
+            self.line(ex, y0 + 4, ex, y0 + h - 4, LINE, 2)
+        sx = x0 + w if shaft == "right" else x0
+        d = 1 if shaft == "right" else -1
+        self.rect(min(sx, sx + d * w * 0.22), cy - h * 0.09, w * 0.22, h * 0.18, fill=LINE, stroke=TEXT, sw=1.5, rx=2)
+        self.rect(cx - w * 0.16, y0 - h * 0.24, w * 0.32, h * 0.26, fill=PANEL_2, stroke=TEXT, sw=SW_THIN, rx=3)
+        if label:
+            self.text(cx, cy + 9, label, T_LABEL, TEXT, bold=True)
+
+    def motor_symbol(self, cx, cy, r=30, label="M"):
+        """One-line motor symbol: circled M."""
+        self.circle(cx, cy, r, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ)
+        self.text(cx, cy + 9, label, T_LABEL, TEXT, bold=True)
+
+    def card(self, x, y, w, h, title=None, align="start", title_fill=TEXT):
+        """Information card: rounded slate panel with an optional bold title."""
+        self.rect(x, y, w, h, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
+        if title:
+            tx = x + 14 if align == "start" else x + w / 2
+            self.text(tx, y + 30, title, T_NOTE, title_fill, align, True)
+
     def box(self, x, y, s=40, label=None, fill=PANEL_2):
-        """Outlet / junction box, square, centred on (x, y)."""
+        """Outlet / junction box with a blank cover, square, centred on (x, y):
+        cover inset and two cover screws on the diagonal."""
         self.rect(x - s / 2, y - s / 2, s, s, fill=fill, stroke=TEXT, sw=SW_OBJ, rx=4)
-        self.circle(x, y, s * 0.12, fill=TEXT)
+        i = s * 0.13
+        self.rect(x - s / 2 + i, y - s / 2 + i, s - 2 * i, s - 2 * i, fill="none", stroke=EDGE, sw=1.5, rx=3)
+        sr = max(2.5, s * 0.07)
+        for sx, sy in ((x - s * 0.24, y - s * 0.24), (x + s * 0.24, y + s * 0.24)):
+            self.circle(sx, sy, sr, fill=LINE)
+            self.line(sx - sr * 0.7, sy, sx + sr * 0.7, sy, BG, 1)
         if label:
             self.text(x, y + s / 2 + 26, label, T_NOTE, TEXT)
 
-    def receptacle(self, x, y, s=44, label=None, gfci=False, label_dy=None):
-        """Duplex receptacle face centred on (x, y)."""
-        self.rect(x - s * 0.32, y - s / 2, s * 0.64, s, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
-        for dy in (-s * 0.22, s * 0.22):
-            self.line(x - s * 0.1, y + dy - 4, x - s * 0.1, y + dy + 4, TEXT, 3)
-            self.line(x + s * 0.1, y + dy - 4, x + s * 0.1, y + dy + 4, TEXT, 3)
-        if gfci:
-            self.rect(x - s * 0.18, y - 4, s * 0.36, 8, fill=OK, rx=2)
+    def receptacle(self, x, y, s=44, label=None, gfci=False, label_dy=None, tr=False, ig=False,
+                   blank_center=False):
+        """Duplex receptacle (NEMA 5-15R) on its strap, centred on (x, y); s is the
+        device height, 0.64 s wide. Each face has the taller neutral slot on the
+        left, the hot slot on the right and the ground hole below. gfci: TEST and
+        RESET buttons between smaller faces. ig: orange triangle. tr: 'TR' (s >= 90).
+        blank_center: leave the centre clear for the caller's own marking."""
+        w = s * 0.64
+        self.rect(x - w / 2, y - s / 2, w, s, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ if s >= 30 else SW_THIN,
+                  rx=max(3.0, s * 0.1))
+        rf = min(w * 0.37, s * (0.17 if gfci else 0.2))
+        dy = s * (0.29 if gfci else 0.23)
+        for fy in (y - dy, y + dy):
+            self.nema_face(x, fy, rf, "5-15")
+        if blank_center:
+            pass
+        elif gfci:
+            bw, bh = w * 0.34, max(4.0, s * 0.1)
+            self.rect(x - bw - 1.5, y - bh / 2, bw, bh, fill=TEXT, rx=1.5)
+            self.rect(x + 1.5, y - bh / 2, bw, bh, fill=OK, rx=1.5)
+        elif ig and s >= 50:
+            t = s * 0.06
+            self.poly([(x, y - t), (x - t * 1.15, y + t), (x + t * 1.15, y + t)], ORANGE)
+        elif tr and s >= 90:
+            self.text(x, y + 7, "TR", T_MIN, MUTED, bold=True)
+        elif s >= 40:
+            self.circle(x, y, max(2.0, s * 0.035), fill=LINE)
         if label:
             self.text(x, y + (label_dy if label_dy is not None else s / 2 + 26), label, T_NOTE, TEXT)
 
-    def plan_receptacle(self, x, y, r=12, gfci=False):
-        """Plan-view receptacle symbol: circle with two lines."""
-        self.circle(x, y, r, fill=BG, stroke=TEXT, sw=SW_OBJ)
-        self.line(x - r - 6, y - 4, x - r, y - 4, TEXT, 3)
-        self.line(x - r - 6, y + 4, x - r, y + 4, TEXT, 3)
-        if gfci:
-            self.circle(x, y, r * 0.45, fill=OK)
+    def nema_face(self, cx, cy, r, cfg="5-15", fill=BG, stroke=TEXT):
+        """One receptacle face, centred on (cx, cy), radius r: round with flats top
+        and bottom. cfg "5-15": two parallel slots, the neutral (left) taller;
+        "5-20": the neutral is a T slot; "6-15": two in-line horizontal slots;
+        "6-20": the left one a T. Grounding hole below."""
+        hf, wf = r * 0.82, r * 0.57
+        self.path(f"M {cx - wf:.1f} {cy - hf:.1f} L {cx + wf:.1f} {cy - hf:.1f} "
+                  f"A {r:.1f} {r:.1f} 0 0 1 {cx + wf:.1f} {cy + hf:.1f} L {cx - wf:.1f} {cy + hf:.1f} "
+                  f"A {r:.1f} {r:.1f} 0 0 1 {cx - wf:.1f} {cy - hf:.1f} Z", stroke, max(1.5, r * 0.08), fill)
+        sw = max(2.0, r * 0.16)
+        sx, top = r * 0.38, cy - r * 0.42
+        if cfg in ("5-15", "5-20"):
+            self.line(cx - sx, top, cx - sx, top + r * 0.5, stroke, sw)
+            self.line(cx + sx, top + r * 0.05, cx + sx, top + r * 0.45, stroke, sw)
+            if cfg == "5-20":
+                self.line(cx - sx, top + r * 0.25, cx - sx - r * 0.25, top + r * 0.25, stroke, sw)
+        else:
+            yy = top + r * 0.22
+            self.line(cx - sx - r * 0.2, yy, cx - sx + r * 0.16, yy, stroke, sw)
+            self.line(cx + sx - r * 0.16, yy, cx + sx + r * 0.2, yy, stroke, sw)
+            if cfg == "6-20":
+                self.line(cx - sx - r * 0.2, yy - r * 0.2, cx - sx - r * 0.2, yy + r * 0.2, stroke, sw)
+        gy = cy + r * 0.4
+        if r >= 10:
+            g = r * 0.16
+            self.path(f"M {cx - g:.1f} {gy + g * 1.4:.1f} V {gy:.1f} A {g:.1f} {g:.1f} 0 0 1 {cx + g:.1f} {gy:.1f} "
+                      f"V {gy + g * 1.4:.1f} Z", stroke, max(1.5, r * 0.09))
+        else:
+            self.circle(cx, gy + r * 0.08, max(1.4, r * 0.14), fill=stroke)
 
-    def conduit(self, x1, y1, x2, y2, width=14, color=STEEL, edge=LINE):
-        """Straight raceway run (drawn as a thick bar with edges)."""
+    def plug(self, x, y, w=40, h=30, facing="left", cord=None, color=EDGE):
+        """Grounding-type attachment plug, side view: body at (x, y) top-left, the
+        blades out of the `facing` side and an optional cord polyline from the back."""
+        self.rect(x, y, w, h, fill=color, stroke=TEXT, sw=SW_THIN, rx=min(w, h) * 0.25)
+        for k in range(1, 3):
+            gx = x + w * (0.35 + 0.2 * k) if facing == "left" else x + w * (0.65 - 0.2 * k)
+            self.line(gx, y + 3, gx, y + h - 3, BG, 1)
+        bl = w * 0.45
+        for by in (y + h * 0.3, y + h * 0.7):
+            if facing == "left":
+                self.line(x - bl, by, x, by, LINE, 4)
+            else:
+                self.line(x + w, by, x + w + bl, by, LINE, 4)
+        if cord:
+            self.cable(cord, TEXT, 5)
+
+    def plan_receptacle(self, x, y, r=12, gfci=False):
+        """Plan-view duplex receptacle symbol: circle with two parallel lines
+        through it. gfci: green circle with a dot."""
+        c = OK if gfci else TEXT
+        self.line(x - r - 6, y - 4, x + r * 0.55, y - 4, c, 3)
+        self.line(x - r - 6, y + 4, x + r * 0.55, y + 4, c, 3)
+        self.circle(x, y, r, fill="none", stroke=c, sw=SW_OBJ)
+        if gfci:
+            self.circle(x + r * 0.45, y, 3, fill=OK)
+
+    def conduit(self, x1, y1, x2, y2, width=14, color=STEEL, edge=LINE, couplings=()):
+        """Straight raceway run: a pipe with edges and a light highlight along one
+        side; `couplings` are fractions 0-1 along the run that get a coupling band."""
         self.line(x1, y1, x2, y2, edge, width + 4)
         self.line(x1, y1, x2, y2, color, width)
+        length = math.hypot(x2 - x1, y2 - y1)
+        if length < 1:
+            return
+        ux, uy = (x2 - x1) / length, (y2 - y1) / length
+        nx, ny = -uy, ux
+        if ny > 0 or (ny == 0 and nx > 0):
+            nx, ny = -nx, -ny
+        o = width * 0.22
+        if width >= 10:
+            self.line(x1 + nx * o, y1 + ny * o, x2 + nx * o, y2 + ny * o, TEXT, max(1.0, width * 0.1), op=0.35)
+        for t in couplings:
+            cx, cy = x1 + (x2 - x1) * t, y1 + (y2 - y1) * t
+            half = width * 0.55
+            self.line(cx - ux * half, cy - uy * half, cx + ux * half, cy + uy * half, edge, width + 10)
+            self.line(cx - ux * (half - 2), cy - uy * (half - 2), cx + ux * (half - 2), cy + uy * (half - 2),
+                      PANEL_2, width + 6)
 
     def cable(self, pts, color=TEXT, sw=5):
         self.polyline(pts, color, sw)
@@ -352,6 +584,10 @@ class Fig:
         """Driven ground rod from y_top down."""
         self.line(x, y_top, x, y_top + length, ROD, 9)
         self.poly([(x - 5, y_top + length), (x + 5, y_top + length), (x, y_top + length + 12)], ROD)
+        if length >= 30:
+            cy = y_top + min(14, length * 0.15)
+            self.rect(x - 8, cy - 6, 16, 12, fill=CLAMP, stroke=TEXT, sw=1.5, rx=3)
+            self.line(x + 8, cy, x + 13, cy, TEXT, 3)
         if label:
             self.text(x, y_top + length + 38, label, T_NOTE, MUTED)
 
@@ -416,7 +652,7 @@ def _union(boxes):
 FIGURES = {}
 
 
-def figure(name, records, h=450, when=None, nec="", terms=None, note=""):
+def figure(name, records, h=450, when=None, nec="", terms=None, note="", keep=()):
     """Register a drawing.
 
     name     file stem (assets/diagrams/nec/<name>.png), lower-case, [a-z0-9_-]
@@ -427,11 +663,14 @@ def figure(name, records, h=450, when=None, nec="", terms=None, note=""):
              (teaching: shown only once answered); default "before"
     nec      section(s) the drawing is authored from, e.g. "250.53(A)(3)"
     terms    extra answer words to scan for, per record: {id: ["MBJ", ...]}
+    keep     regexes for labels that are the question's own data and stay visible
+             before answering although they state a value (required exam figures)
     """
     def deco(fn):
         assert name not in FIGURES, f"duplicate figure {name}"
         recs = records if isinstance(records, dict) else {r: {} for r in records}
         FIGURES[name] = {"fn": fn, "records": recs, "h": h, "when": when or "before",
-                         "nec": nec, "terms": terms or {}, "note": note, "module": fn.__module__}
+                         "nec": nec, "terms": terms or {}, "note": note, "module": fn.__module__,
+                         "keep": list(keep)}
         return fn
     return deco

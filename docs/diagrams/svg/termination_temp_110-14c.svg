@@ -2,7 +2,10 @@
 <rect x="0.0" y="0.0" width="800.0" height="520.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">The lowest temperature rating on the conductor caps it</text>
 <rect x="40.0" y="80.0" width="64.0" height="76.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
-<rect x="59.2" y="99.0" width="25.6" height="38.0" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="72.0" cy="87.3" r="4.56" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="72.0" cy="148.7" r="4.56" fill="#64748b" stroke="none" stroke-width="2"/>
+<rect x="61.8" y="100.5" width="20.5" height="35.0" rx="2" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="64.2" y="102.6" width="15.6" height="16.1" rx="2" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="72.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">breaker lug</text>
 <text x="72.0" y="210.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="middle">marked 75 C</text>
 <line x1="104.0" y1="118.0" x2="560.0" y2="118.0" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
@@ -20,7 +23,7 @@
 <text x="34.0" y="426.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Separate pressure connector (e.g. a splicing block)</text>
 <text x="36.0" y="466.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">ampacity not over its listed and</text>
 <text x="348.0" y="466.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">identified</text>
-<text x="461.8" y="466.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">temperature rating</text>
+<text x="455.8" y="466.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">temperature rating</text>
 <rect x="615.6" y="488.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="625.6" y="516.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 110.14(C)</text>
 </svg>

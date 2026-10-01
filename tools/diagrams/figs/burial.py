@@ -19,7 +19,10 @@ def burial(f):
     f.line(600, grade, f.w - 20, grade, LINE, SW_STRUCT)
     f.text(28, grade - 12, "grade", T_NOTE, MUTED, "start")
     cx = (tx0 + tx1) / 2
-    f.circle(cx, cable_top + 13, 13, fill=BG, stroke=TEXT, sw=4)
+    f.circle(cx, cable_top + 13, 13, fill=PANEL_2, stroke=TEXT, sw=3)
+    for dx, col in ((-5, WIRE_HOT), (5, WIRE_NEU)):
+        f.circle(cx + dx, cable_top + 10, 4, fill=col)
+    f.circle(cx, cable_top + 19, 3.5, fill=WIRE_GND)
     f.text(cx, cable_top + 66, "direct-buried cable", T_LABEL, TEXT, bold=True)
     x = 300
     f.ext(x - 10, cable_top, cx - 14, cable_top)

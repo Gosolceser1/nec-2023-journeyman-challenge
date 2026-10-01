@@ -27,13 +27,17 @@ def motor_circuit(f):
     f.rect(x - 12, 196, 24, 50, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=4)
     f.line(x, 196, x, 246, TEXT, 2)
     f.line(x, 246, x, 290, WIRE_HOT, SW_WIRE)
+    # Controller: a box around a normally open contactor contact.
     f.rect(x - 44, 290, 88, 52, fill=PANEL, stroke=TEXT, sw=SW_OBJ, rx=6)
+    f.line(x, 290, x, 308, WIRE_HOT, SW_WIRE)
+    f.line(x - 18, 308, x + 18, 308, TEXT, SW_OBJ + 1)
+    f.line(x - 18, 324, x + 18, 324, TEXT, SW_OBJ + 1)
+    f.line(x, 324, x, 342, WIRE_HOT, SW_WIRE)
     f.line(x, 342, x, 376, WIRE_HOT, SW_WIRE)
     f.rect(x - 34, 376, 68, 40, fill=PANEL_2, stroke=AMBER, sw=SW_OBJ, rx=5)
     f.path(f"M {x - 20} 396 q 6 -12 12 0 t 12 0 t 12 0", AMBER, 3)
     f.line(x, 416, x, 450, WIRE_HOT, SW_WIRE)
-    f.circle(x, 486, 36, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ + 1)
-    f.text(x, 496, "M", T_LABEL, TEXT, bold=True)
+    f.motor_symbol(x, 486, 36)
     # Labels on the right.
     lx = 320
     f.text(lx, 138, "disconnecting means", T_NOTE, TEXT, "start", True)
@@ -79,45 +83,53 @@ def in_sight_disconnect(f):
     f.title("What must be in sight of the motor and the machine?", y=34)
     fy = 420
     f.floor(fy, 20, 480)
-    # Controller in an MCC room, behind a wall.
+    # Controller in an MCC room, behind a wall: buckets with operating handles.
     f.rect(30, 230, 90, 190, fill=PANEL, stroke=TEXT, sw=SW_OBJ, rx=4)
     for k in range(4):
-        f.rect(40, 244 + k * 42, 70, 32, fill=PANEL_2, stroke=EDGE, sw=SW_THIN, rx=3)
+        by = 242 + k * 43
+        f.rect(40, by, 70, 35, fill=PANEL_2, stroke=EDGE, sw=SW_THIN, rx=3)
+        f.rect(94, by + 8, 9, 19, fill=EDGE, stroke=TEXT, sw=1, rx=2)
     f.lines(75, 200, ["controller", "(MCC room)"], T_MIN, TEXT, bold=True, gap=1.1)
     f.wall(150, 110, fy, 18)
-    # Motor and driven machine.
-    f.rect(300, 340, 70, 60, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=8)
-    f.text(335, 377, "M", T_LABEL, TEXT, bold=True)
-    f.rect(300, 400, 70, 20, fill=STEEL)
-    f.line(370, 370, 396, 370, TEXT, 8)
-    f.rect(396, 320, 76, 100, fill=PANEL, stroke=TEXT, sw=SW_OBJ, rx=6)
-    f.lines(434, 440 + 10, ["driven", "machine"], T_MIN, TEXT, bold=True, gap=1.05)
+    # Motor coupled to a pump (the driven machine).
+    f.motor(330, 386, 84, 50)
+    f.rect(388, 377, 16, 18, fill=EDGE, stroke=TEXT, sw=1.5, rx=2)
+    f.rect(412, 408, 40, 12, fill=STEEL, stroke=TEXT, sw=1.5)
+    f.rect(436, 316, 18, 44, fill=STEEL, stroke=TEXT, sw=1.5)
+    f.rect(430, 310, 30, 8, fill=STEEL, stroke=TEXT, sw=1.5, rx=2)
+    f.circle(432, 384, 28, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ)
+    f.circle(432, 384, 9, fill=EDGE, stroke=TEXT, sw=1.5)
+    f.lines(434, 450, ["driven", "machine"], T_MIN, TEXT, bold=True, gap=1.05)
     # The device on a stand near the motor.
-    f.rect(206, 250, 50, 64, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
-    f.line(256, 270, 270, 256, TEXT, 5)
-    f.line(231, 314, 231, fy, STEEL, 6)
-    f.mask(196, 240, 84, 84, records=dm, what="the device in sight")
-    f.value_lines(231, 150, ["disconnecting", "means"], T_NOTE, records=dm, pad=6, gap=1.1)
-    f.leader(231, 176, 231, 246)
-    for tx, ty in ((320, 340), (430, 320)):
-        f.dline(256, 282, tx, ty, DIM, 2, 6, 5)
+    f.disconnect(200, 236, 48, 64)
+    f.line(224, 300, 224, fy, STEEL, 6)
+    f.mask(190, 226, 86, 84, records=dm, what="the device in sight")
+    f.value_lines(248, 150, ["disconnecting", "means"], T_NOTE, records=dm, pad=6, gap=1.1)
+    f.leader(240, 176, 226, 232)
+    for tx, ty in ((330, 352), (436, 326)):
+        f.dline(268, 276, tx, ty, DIM, 2, 6, 5)
     f.lines(250, 490, ["in sight: visible and", "not more than 50 ft"], T_MIN, DIM, bold=True, gap=1.15)
     f.lines(75, 470, ["out of", "sight"], T_MIN, NO, bold=True, gap=1.1)
-    # Rooftop A/C unit.
+    # Rooftop packaged A/C unit on its curb, with the disconnect on a stand beside it.
     rx0 = 500
     f.rect(rx0, 56, 280, 480, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
     f.text(rx0 + 140, 86, "rooftop A/C", T_NOTE, TEXT, bold=True)
     f.line(rx0 + 16, 400, rx0 + 264, 400, LINE, SW_STRUCT)
-    f.rect(rx0 + 30, 250, 140, 150, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
-    f.circle(rx0 + 100, 310, 40, stroke=TEXT, sw=SW_THIN)
-    for a in range(4):
-        f.line(rx0 + 100, 310, rx0 + 100 + 34 * (1 if a % 2 else -1) * (a < 2),
-               310 + 34 * (1 if a % 2 else -1) * (a >= 2), TEXT, 3)
-    f.rect(rx0 + 200, 290, 44, 56, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
-    f.line(rx0 + 244, 306, rx0 + 256, 294, TEXT, 5)
-    f.line(rx0 + 222, 346, rx0 + 222, 400, STEEL, 6)
+    f.rect(rx0 + 26, 386, 160, 14, fill=STEEL, stroke=TEXT, sw=1.5)
+    f.path(f"M {rx0 + 58} 262 Q {rx0 + 106} 226 {rx0 + 154} 262 Z", TEXT, SW_THIN, fill=PANEL_2)
+    for gx in range(rx0 + 74, rx0 + 140, 16):
+        f.line(gx, 250, gx, 260, EDGE, 2)
+    f.rect(rx0 + 30, 260, 152, 126, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=4)
+    for ly in range(276, 374, 10):
+        f.line(rx0 + 42, ly, rx0 + 100, ly, EDGE, 2)
+    f.rect(rx0 + 112, 276, 58, 96, fill="none", stroke=EDGE, sw=SW_THIN, rx=3)
+    f.rect(rx0 + 158, 316, 6, 18, fill=LINE, rx=2)
+    f.disconnect(rx0 + 202, 300, 40, 54)
+    f.line(rx0 + 222, 354, rx0 + 222, 400, STEEL, 6)
+    f.polyline([(rx0 + 212, 354), (rx0 + 212, 372), (rx0 + 182, 372)], STEEL, 6)
+    f.mask(rx0 + 192, 290, 72, 74, records=dm, what="the device at the unit")
     f.value_lines(rx0 + 140, 140, ["disconnecting", "means"], T_NOTE, records=dm, pad=6, gap=1.1)
-    f.leader(rx0 + 190, 166, rx0 + 222, 286)
+    f.leader(rx0 + 190, 166, rx0 + 220, 296)
     f.text(rx0 + 140, 440, "within sight, and", T_NOTE, TEXT, bold=True)
     f.value(rx0 + 140, 476, "readily accessible", T_NOTE, records=ra, pad=6)
     f.value(rx0 + 140, 510, "(no ladder or obstacles)", T_MIN, MUTED, bold=False, records=ra, pad=4,

@@ -40,6 +40,11 @@ def working_space(f):
     f.wall(rx, hy + dw, cb)
     # Switchboard and its working space.
     f.rect(sx0, wb, sx1 - sx0, sy1 - wb, fill=PANEL, stroke=TEXT, sw=SW_OBJ + 1, rx=4)
+    for k in (1, 2):
+        sx = sx0 + (sx1 - sx0) * k / 3
+        f.line(sx, wb + 2, sx, wb + 9, EDGE, SW_THIN)
+        f.line(sx, sy1 - 2, sx, sy1 - 7, EDGE, SW_THIN)
+    f.line(sx0 + 4, sy1 - 4, sx1 - 4, sy1 - 4, EDGE, SW_THIN)
     f.text((sx0 + sx1) / 2, 110, "800 A SWITCHBOARD", T_NOTE, TEXT, bold=True)
     f.zone(sx0, sy1, sx1 - sx0, ct - sy1)
     f.text(262, 164, "live parts exposed", T_NOTE, NO, bold=True)

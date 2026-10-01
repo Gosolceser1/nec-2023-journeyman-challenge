@@ -10,7 +10,7 @@
    804
   ],
   "nec": "408.18(C), 408.3(A)(2)",
-  "svg_sha1": "1053b675a6f0"
+  "svg_sha1": "50793fabc614"
  },
  "final-exam-#1-003": {
   "file": "res://assets/diagrams/nec/equipment_receptacle_210-63.png",
@@ -23,7 +23,7 @@
    675
   ],
   "nec": "210.63, 210.63(A), 210.63(B)(1), 210.63(B)(2)",
-  "svg_sha1": "3ddd9444c5fc"
+  "svg_sha1": "4d3ec125f535"
  },
  "final-exam-#1-004": {
   "file": "res://assets/diagrams/nec/office_lighting_220-42a.png",
@@ -68,7 +68,7 @@
    690
   ],
   "nec": "210.52(E)(3)",
-  "svg_sha1": "fd22ff3cc44d"
+  "svg_sha1": "3b0df30f3e23"
  },
  "final-exam-#1-009": {
   "file": "res://assets/diagrams/nec/conductor_colors_310-6.png",
@@ -94,7 +94,7 @@
    720
   ],
   "nec": "220.14(H)",
-  "svg_sha1": "ec958bface7a"
+  "svg_sha1": "ee49c7d01712"
  },
  "final-exam-#1-011": {
   "file": "res://assets/diagrams/nec/dwelling_receptacles_210-52.png",
@@ -107,7 +107,7 @@
    750
   ],
   "nec": "210.52(A)(2), 210.52(G)(1), 210.52(H), 210.50(C)",
-  "svg_sha1": "b3a8f5630317"
+  "svg_sha1": "c4ceb464bcd9"
  },
  "final-exam-#1-012": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
@@ -120,7 +120,7 @@
    750
   ],
   "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
-  "svg_sha1": "549bdc4646ae"
+  "svg_sha1": "119828ca6e08"
  },
  "final-exam-#1-013": {
   "file": "res://assets/diagrams/nec/meter_hookups_three_meters.png",
@@ -152,7 +152,7 @@
    780
   ],
   "nec": "310.15(B), 310.15(C)(1), 310.15(F), Table 310.16",
-  "svg_sha1": "3251bc54afc7"
+  "svg_sha1": "658566abaf78"
  },
  "final-exam-#1-016": {
   "file": "res://assets/diagrams/nec/holiday_lighting_trees_590-4j.png",
@@ -191,7 +191,7 @@
    705
   ],
   "nec": "250.52(A)(2), 250.52(A)(5), 250.53(A)(3), 250.53(A)(4), 250.53(A)(5)",
-  "svg_sha1": "1560a30df914"
+  "svg_sha1": "d42188695114"
  },
  "final-exam-#1-021": {
   "file": "res://assets/diagrams/nec/appliance_demand_220-54_220-55.png",
@@ -204,7 +204,7 @@
    729
   ],
   "nec": "Table 220.54, Table 220.55 and Note 1",
-  "svg_sha1": "8aab7d46a809"
+  "svg_sha1": "4de2f4455ea1"
  },
  "final-exam-#1-022": {
   "file": "res://assets/diagrams/nec/dwelling_receptacles_210-52.png",
@@ -217,7 +217,7 @@
    750
   ],
   "nec": "210.52(A)(2), 210.52(G)(1), 210.52(H), 210.50(C)",
-  "svg_sha1": "b3a8f5630317"
+  "svg_sha1": "c4ceb464bcd9"
  },
  "final-exam-#1-023": {
   "file": "res://assets/diagrams/nec/parallel_egc_250-122f.png",
@@ -230,7 +230,7 @@
    675
   ],
   "nec": "250.122(F)(1)(b)",
-  "svg_sha1": "465480541ef8"
+  "svg_sha1": "cd4a11c07958"
  },
  "final-exam-#1-024": {
   "file": "res://assets/diagrams/nec/pool_fountain_distances_680.png",
@@ -243,7 +243,7 @@
    840
   ],
   "nec": "680.5(B), 680.11(A), 680.21(C), 680.22(A)(2), 680.35(D), 680.58",
-  "svg_sha1": "4a5d96823a43"
+  "svg_sha1": "0b4bce000690"
  },
  "final-exam-#1-025": {
   "file": "res://assets/diagrams/nec/welder_supply_630.png",
@@ -266,10 +266,10 @@
   "when": "before",
   "size": [
    1200,
-   864
+   774
   ],
   "nec": "Table 310.4(1), 338.100, Table 400.4",
-  "svg_sha1": "8b598977e124"
+  "svg_sha1": "780fa560bb4f"
  },
  "final-exam-#1-027": {
   "file": "res://assets/diagrams/nec/ampacity_derating_310-15.png",
@@ -282,7 +282,7 @@
    780
   ],
   "nec": "310.15(B), 310.15(C)(1), 310.15(F), Table 310.16",
-  "svg_sha1": "3251bc54afc7"
+  "svg_sha1": "658566abaf78"
  },
  "final-exam-#1-028": {
   "file": "res://assets/diagrams/nec/fuel_dispenser_shutoff_514-11.png",
@@ -308,7 +308,7 @@
    705
   ],
   "nec": "408.5, Table 408.5",
-  "svg_sha1": "c620a6a6dc35"
+  "svg_sha1": "428942be942e"
  },
  "final-exam-#1-031": {
   "file": "res://assets/diagrams/nec/dwelling_receptacles_210-52.png",
@@ -321,7 +321,7 @@
    750
   ],
   "nec": "210.52(A)(2), 210.52(G)(1), 210.52(H), 210.50(C)",
-  "svg_sha1": "b3a8f5630317"
+  "svg_sha1": "c4ceb464bcd9"
  },
  "final-exam-#1-032": {
   "file": "res://assets/diagrams/nec/feeder_tap_10ft_240-21b1.png",
@@ -334,7 +334,7 @@
    675
   ],
   "nec": "240.21(B)(1), 409.21(B)",
-  "svg_sha1": "7e6ef4737568"
+  "svg_sha1": "e7089693f58e"
  },
  "final-exam-#1-033": {
   "file": "res://assets/diagrams/nec/three_way_switch_spdt.png",
@@ -347,7 +347,7 @@
    675
   ],
   "nec": "General knowledge (switch types)",
-  "svg_sha1": "d873ffd98088"
+  "svg_sha1": "3e7eb83426fe"
  },
  "final-exam-#1-034": {
   "file": "res://assets/diagrams/nec/type_letters_decoder.png",
@@ -357,10 +357,10 @@
   "when": "before",
   "size": [
    1200,
-   864
+   774
   ],
   "nec": "Table 310.4(1), 338.100, Table 400.4",
-  "svg_sha1": "8b598977e124"
+  "svg_sha1": "780fa560bb4f"
  },
  "final-exam-#1-035": {
   "file": "res://assets/diagrams/nec/electrode_system_250-52_250-53.png",
@@ -373,7 +373,7 @@
    705
   ],
   "nec": "250.52(A)(2), 250.52(A)(5), 250.53(A)(3), 250.53(A)(4), 250.53(A)(5)",
-  "svg_sha1": "1560a30df914"
+  "svg_sha1": "d42188695114"
  },
  "final-exam-#1-036": {
   "file": "res://assets/diagrams/nec/dwelling_service_310-12.png",
@@ -386,7 +386,7 @@
    675
   ],
   "nec": "310.12, 310.12(A)",
-  "svg_sha1": "0ba5d43cc60f"
+  "svg_sha1": "9dc20d92843e"
  },
  "final-exam-#1-040": {
   "file": "res://assets/diagrams/nec/appliance_demand_220-54_220-55.png",
@@ -399,7 +399,7 @@
    729
   ],
   "nec": "Table 220.54, Table 220.55 and Note 1",
-  "svg_sha1": "8aab7d46a809"
+  "svg_sha1": "4de2f4455ea1"
  },
  "final-exam-#1-041": {
   "file": "res://assets/diagrams/nec/motor_stop_start_control.png",
@@ -412,7 +412,7 @@
    675
   ],
   "nec": "General knowledge (3-wire motor control)",
-  "svg_sha1": "e414d769468b"
+  "svg_sha1": "cc7d8bb4026b"
  },
  "final-exam-#1-042": {
   "file": "res://assets/diagrams/nec/wet_location_receptacle_406-9b.png",
@@ -425,7 +425,7 @@
    675
   ],
   "nec": "406.9(B)(1)",
-  "svg_sha1": "3ba5bf329b65"
+  "svg_sha1": "7d9dea1cc162"
  },
  "final-exam-#1-043": {
   "file": "res://assets/diagrams/nec/spa_fan_height_680-43.png",
@@ -451,7 +451,7 @@
    900
   ],
   "nec": "Article 100 (Ground Fault, Effective Ground-Fault Current Path)",
-  "svg_sha1": "469e17c3ddf4"
+  "svg_sha1": "bf8b6119d4de"
  },
  "final-exam-#1-045": {
   "file": "res://assets/diagrams/nec/disposer_cord_422-16b1.png",
@@ -464,7 +464,7 @@
    705
   ],
   "nec": "422.16(B)(1)",
-  "svg_sha1": "f0f34f825b79"
+  "svg_sha1": "833ab26ca602"
  },
  "final-exam-#1-047": {
   "file": "res://assets/diagrams/nec/switch_symbols_a_to_d.png",
@@ -496,7 +496,7 @@
    840
   ],
   "nec": "210.12(A)-(D), 406.12",
-  "svg_sha1": "79200ff8a442"
+  "svg_sha1": "1fe305b16b7c"
  },
  "final-exam-#1-049": {
   "file": "res://assets/diagrams/nec/burial_under_concrete_300-5.png",
@@ -509,7 +509,7 @@
    675
   ],
   "nec": "Table 300.5(A) Column 1, 300.5(A) cover definition",
-  "svg_sha1": "0334f58c5baf"
+  "svg_sha1": "cb7fb1f382a3"
  },
  "final-exam-#1-050": {
   "file": "res://assets/diagrams/nec/communications_overhead_800-44.png",
@@ -522,7 +522,7 @@
    690
   ],
   "nec": "800.44(A)(1), (A)(2), 800.44(B)",
-  "svg_sha1": "1b6b493027bd"
+  "svg_sha1": "6f4bf27e9b74"
  },
  "final-exam-#1-051": {
   "file": "res://assets/diagrams/nec/working_space_110-26.png",
@@ -535,7 +535,7 @@
    720
   ],
   "nec": "110.26 (open doors), Table 110.26(A)(1) Condition 2, 110.26(B), 110.26(C)(3)",
-  "svg_sha1": "3d1684082818"
+  "svg_sha1": "dc279e04d340"
  },
  "final-exam-#1-052": {
   "file": "res://assets/diagrams/nec/mobile_home_disconnect_550-32f.png",
@@ -548,7 +548,7 @@
    705
   ],
   "nec": "550.32(F)",
-  "svg_sha1": "0ea183f5b0e2"
+  "svg_sha1": "ec19f81430ee"
  },
  "final-exam-#1-053": {
   "file": "res://assets/diagrams/nec/overhead_clearances_225-18.png",
@@ -561,7 +561,7 @@
    720
   ],
   "nec": "225.18, 225.19(D)(1)-(3)",
-  "svg_sha1": "e23ed0cbd816"
+  "svg_sha1": "9f998836c4ec"
  },
  "final-exam-#1-055": {
   "file": "res://assets/diagrams/nec/framing_protection_300-4.png",
@@ -574,7 +574,7 @@
    675
   ],
   "nec": "300.4(A)(2), 300.4(D)",
-  "svg_sha1": "04182a9c9a26"
+  "svg_sha1": "1593375e57fe"
  },
  "final-exam-#1-057": {
   "file": "res://assets/diagrams/nec/dedicated_space_110-26e.png",
@@ -587,7 +587,7 @@
    750
   ],
   "nec": "110.26(A)(1)-(3), 110.26(E)(1)",
-  "svg_sha1": "c80210e93b86"
+  "svg_sha1": "baa7849c49ae"
  },
  "final-exam-#1-059": {
   "file": "res://assets/diagrams/nec/branch_circuit_rating_210.png",
@@ -600,7 +600,7 @@
    750
   ],
   "nec": "210.18, 210.19(B), Table 210.21(B)(2)",
-  "svg_sha1": "8d39b17ac263"
+  "svg_sha1": "6c4571dfcc4d"
  },
  "final-exam-#1-060": {
   "file": "res://assets/diagrams/nec/pool_fountain_distances_680.png",
@@ -613,7 +613,7 @@
    840
   ],
   "nec": "680.5(B), 680.11(A), 680.21(C), 680.22(A)(2), 680.35(D), 680.58",
-  "svg_sha1": "4a5d96823a43"
+  "svg_sha1": "0b4bce000690"
  },
  "final-exam-#1-061": {
   "file": "res://assets/diagrams/nec/hazardous_classes_500-5.png",
@@ -626,7 +626,7 @@
    864
   ],
   "nec": "500.5(B), (C), (D)",
-  "svg_sha1": "ed616f865262"
+  "svg_sha1": "b66d00545f97"
  },
  "final-exam-#1-062": {
   "file": "res://assets/diagrams/nec/voltage_drop_percent.png",
@@ -639,7 +639,7 @@
    720
   ],
   "nec": "General knowledge (voltage drop), 647.4(D)",
-  "svg_sha1": "92ff2274a466"
+  "svg_sha1": "9c1dc9c40d1e"
  },
  "final-exam-#1-063": {
   "file": "res://assets/diagrams/nec/drawing_scale_quarter_inch.png",
@@ -678,7 +678,7 @@
    720
   ],
   "nec": "320.30(D)(2)-(3), 330.30(D)(2), 334.30(B)(2)",
-  "svg_sha1": "b5dbd094edc4"
+  "svg_sha1": "78236f2402ab"
  },
  "final-exam-#1-067": {
   "file": "res://assets/diagrams/nec/nipple_fill_ch9_note4.png",
@@ -688,10 +688,10 @@
   "when": "after",
   "size": [
    1200,
-   630
+   675
   ],
   "nec": "Chapter 9, Notes to Tables, Note (4)",
-  "svg_sha1": "752ec053a96f"
+  "svg_sha1": "83b2e46a5da7"
  },
  "final-exam-#1-068": {
   "file": "res://assets/diagrams/nec/egc_size_250-122.png",
@@ -704,7 +704,7 @@
    705
   ],
   "nec": "250.122(A), Table 250.122",
-  "svg_sha1": "bfc1fd265851"
+  "svg_sha1": "cfb484b27eb7"
  },
  "final-exam-#1-069": {
   "file": "res://assets/diagrams/nec/sign_construction_600.png",
@@ -717,7 +717,7 @@
    804
   ],
   "nec": "Article 100 (Sign Body), 600.9(C)",
-  "svg_sha1": "22a092184ae7"
+  "svg_sha1": "610cfdc0a1cb"
  },
  "final-exam-#1-070": {
   "file": "res://assets/diagrams/nec/motor_circuit_430.png",
@@ -730,7 +730,7 @@
    960
   ],
   "nec": "430.6(A)(1), Table 430.250, 430.52(B), Table 430.37, 430.101",
-  "svg_sha1": "f482f56a1227"
+  "svg_sha1": "e3881039cf37"
  },
  "final-exam-#2-001": {
   "file": "res://assets/diagrams/nec/fair_structures_lines_525-5b.png",
@@ -743,7 +743,7 @@
    705
   ],
   "nec": "525.5(B)(1), 525.5(B)(2)",
-  "svg_sha1": "8bbb40ff92de"
+  "svg_sha1": "baff985bc269"
  },
  "final-exam-#2-003": {
   "file": "res://assets/diagrams/nec/electrode_rod_pipe_ring_250-52_250-53a4.png",
@@ -756,7 +756,7 @@
    750
   ],
   "nec": "250.52(A)(4), 250.52(A)(5), 250.53(A)(4)",
-  "svg_sha1": "413826e2ccbd"
+  "svg_sha1": "53c160fb790b"
  },
  "final-exam-#2-005": {
   "file": "res://assets/diagrams/nec/electrode_rod_pipe_ring_250-52_250-53a4.png",
@@ -769,7 +769,7 @@
    750
   ],
   "nec": "250.52(A)(4), 250.52(A)(5), 250.53(A)(4)",
-  "svg_sha1": "413826e2ccbd"
+  "svg_sha1": "53c160fb790b"
  },
  "final-exam-#2-006": {
   "file": "res://assets/diagrams/nec/sign_construction_600.png",
@@ -782,7 +782,7 @@
    804
   ],
   "nec": "Article 100 (Sign Body), 600.9(C)",
-  "svg_sha1": "22a092184ae7"
+  "svg_sha1": "610cfdc0a1cb"
  },
  "final-exam-#2-008": {
   "file": "res://assets/diagrams/nec/multiple_supplies_225-37_700-7.png",
@@ -795,7 +795,7 @@
    864
   ],
   "nec": "225.37, 230.2(E), 700.7(A)",
-  "svg_sha1": "3fb630dcc398"
+  "svg_sha1": "e6f07411c889"
  },
  "final-exam-#2-009": {
   "file": "res://assets/diagrams/nec/max_water_level_art100.png",
@@ -821,7 +821,7 @@
    675
   ],
   "nec": "General knowledge (transformers)",
-  "svg_sha1": "bb8c84d093b5",
+  "svg_sha1": "8d2a09f40ba8",
   "highlight": [
    0.1075,
    0.8444,
@@ -840,7 +840,7 @@
    750
   ],
   "nec": "General knowledge (series and parallel circuits)",
-  "svg_sha1": "0e930905f7a4",
+  "svg_sha1": "10a834acd001",
   "highlight": [
    0.52,
    0.628,
@@ -859,7 +859,7 @@
    750
   ],
   "nec": "General knowledge (series and parallel circuits)",
-  "svg_sha1": "0e930905f7a4",
+  "svg_sha1": "10a834acd001",
   "highlight": [
    0.0325,
    0.704,
@@ -878,7 +878,7 @@
    675
   ],
   "nec": "General knowledge (transformers)",
-  "svg_sha1": "bb8c84d093b5",
+  "svg_sha1": "8d2a09f40ba8",
   "highlight": [
    0.1175,
    0.1111,
@@ -897,7 +897,7 @@
    750
   ],
   "nec": "General knowledge (series and parallel circuits)",
-  "svg_sha1": "0e930905f7a4",
+  "svg_sha1": "10a834acd001",
   "highlight": [
    0.52,
    0.628,
@@ -954,7 +954,7 @@
    690
   ],
   "nec": "General knowledge (conductor resistance)",
-  "svg_sha1": "35fe66c157ef",
+  "svg_sha1": "68a4d74d5b3d",
   "highlight": [
    0.0375,
    0.4913,
@@ -1005,7 +1005,7 @@
    750
   ],
   "nec": "210.18, 210.19(B), Table 210.21(B)(2)",
-  "svg_sha1": "8d39b17ac263"
+  "svg_sha1": "6c4571dfcc4d"
  },
  "final-exam-#2-043": {
   "file": "res://assets/diagrams/nec/cinder_backfill_344-10c_300-5f.png",
@@ -1018,7 +1018,7 @@
    840
   ],
   "nec": "344.10(C), 300.5(F), 305.15(E)",
-  "svg_sha1": "ddb3bcf05f66"
+  "svg_sha1": "21a1e7553fba"
  },
  "final-exam-#2-044": {
   "file": "res://assets/diagrams/nec/raceway_supported_box_314-23e.png",
@@ -1031,7 +1031,7 @@
    675
   ],
   "nec": "314.23(E)",
-  "svg_sha1": "f768a385e060"
+  "svg_sha1": "b30da5aaa2aa"
  },
  "final-exam-#2-045": {
   "file": "res://assets/diagrams/nec/cable_cutaways_332_310.png",
@@ -1044,7 +1044,7 @@
    804
   ],
   "nec": "332.104, 332.108, 332.116, Article 100 (MC), 310.3(B)",
-  "svg_sha1": "9931ca732a47"
+  "svg_sha1": "b4dfb3acd84b"
  },
  "final-exam-#2-046": {
   "file": "res://assets/diagrams/nec/working_space_110-26.png",
@@ -1057,7 +1057,7 @@
    720
   ],
   "nec": "110.26 (open doors), Table 110.26(A)(1) Condition 2, 110.26(B), 110.26(C)(3)",
-  "svg_sha1": "3d1684082818"
+  "svg_sha1": "dc279e04d340"
  },
  "final-exam-#2-047": {
   "file": "res://assets/diagrams/nec/receptacle_markings_406.png",
@@ -1083,7 +1083,7 @@
    780
   ],
   "nec": "517.18(A), 517.18(B)",
-  "svg_sha1": "3a16b6ae2b53"
+  "svg_sha1": "45b7d436badf"
  },
  "final-exam-#2-049": {
   "file": "res://assets/diagrams/nec/balcony_receptacle_210-52e3.png",
@@ -1096,7 +1096,7 @@
    690
   ],
   "nec": "210.52(E)(3)",
-  "svg_sha1": "fd22ff3cc44d"
+  "svg_sha1": "3b0df30f3e23"
  },
  "final-exam-#2-055": {
   "file": "res://assets/diagrams/nec/resistance_factors.png",
@@ -1109,7 +1109,7 @@
    690
   ],
   "nec": "General knowledge (conductor resistance)",
-  "svg_sha1": "35fe66c157ef",
+  "svg_sha1": "68a4d74d5b3d",
   "highlight": [
    0.5075,
    0.787,
@@ -1160,7 +1160,7 @@
    840
   ],
   "nec": "430.102(B)(1), 440.14, Article 100 (In Sight From)",
-  "svg_sha1": "2cd78772ad29"
+  "svg_sha1": "95b4de4dcd9e"
  },
  "final-exam-#2-065": {
   "file": "res://assets/diagrams/nec/box_fill_steps_314-16.png",
@@ -1192,7 +1192,7 @@
    750
   ],
   "nec": "551.71(A)-(C), 551.72(B)",
-  "svg_sha1": "6c397a885944"
+  "svg_sha1": "0649a182e3d4"
  },
  "final-exam-#3-006": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
@@ -1205,7 +1205,7 @@
    750
   ],
   "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
-  "svg_sha1": "549bdc4646ae"
+  "svg_sha1": "119828ca6e08"
  },
  "final-exam-#3-007": {
   "file": "res://assets/diagrams/nec/pool_fountain_distances_680.png",
@@ -1218,7 +1218,7 @@
    840
   ],
   "nec": "680.5(B), 680.11(A), 680.21(C), 680.22(A)(2), 680.35(D), 680.58",
-  "svg_sha1": "4a5d96823a43"
+  "svg_sha1": "0b4bce000690"
  },
  "final-exam-#3-008": {
   "file": "res://assets/diagrams/nec/hazardous_classes_500-5.png",
@@ -1231,7 +1231,7 @@
    864
   ],
   "nec": "500.5(B), (C), (D)",
-  "svg_sha1": "ed616f865262"
+  "svg_sha1": "b66d00545f97"
  },
  "final-exam-#3-009": {
   "file": "res://assets/diagrams/nec/motor_circuit_430.png",
@@ -1244,7 +1244,7 @@
    960
   ],
   "nec": "430.6(A)(1), Table 430.250, 430.52(B), Table 430.37, 430.101",
-  "svg_sha1": "f482f56a1227"
+  "svg_sha1": "e3881039cf37"
  },
  "final-exam-#3-013": {
   "file": "res://assets/diagrams/nec/supports_emt_strut_358-30.png",
@@ -1254,10 +1254,10 @@
   "when": "before",
   "size": [
    1200,
-   705
+   720
   ],
   "nec": "358.30(A) incl. Exception No. 1, 384.30(A)",
-  "svg_sha1": "836159d67b52"
+  "svg_sha1": "b7e560e9ca3c"
  },
  "final-exam-#3-014": {
   "file": "res://assets/diagrams/nec/branch_circuit_rating_210.png",
@@ -1270,7 +1270,7 @@
    750
   ],
   "nec": "210.18, 210.19(B), Table 210.21(B)(2)",
-  "svg_sha1": "8d39b17ac263"
+  "svg_sha1": "6c4571dfcc4d"
  },
  "final-exam-#3-015": {
   "file": "res://assets/diagrams/nec/ocpd_vertical_240-33.png",
@@ -1283,7 +1283,7 @@
    720
   ],
   "nec": "240.33, 240.81",
-  "svg_sha1": "4af6094cacc8"
+  "svg_sha1": "494201e7056e"
  },
  "final-exam-#3-017": {
   "file": "res://assets/diagrams/nec/egc_size_250-122.png",
@@ -1296,7 +1296,7 @@
    705
   ],
   "nec": "250.122(A), Table 250.122",
-  "svg_sha1": "bfc1fd265851"
+  "svg_sha1": "cfb484b27eb7"
  },
  "final-exam-#3-018": {
   "file": "res://assets/diagrams/nec/room_ac_cord_440-64.png",
@@ -1309,7 +1309,7 @@
    690
   ],
   "nec": "440.64, 440.65",
-  "svg_sha1": "b4af2dd9277f"
+  "svg_sha1": "bce5e2af661e"
  },
  "final-exam-#3-019": {
   "file": "res://assets/diagrams/nec/in_sight_disconnect_430-102_440-14.png",
@@ -1322,7 +1322,7 @@
    840
   ],
   "nec": "430.102(B)(1), 440.14, Article 100 (In Sight From)",
-  "svg_sha1": "2cd78772ad29"
+  "svg_sha1": "95b4de4dcd9e"
  },
  "final-exam-#3-020": {
   "file": "res://assets/diagrams/nec/antenna_leadin_810-13.png",
@@ -1335,7 +1335,7 @@
    660
   ],
   "nec": "810.13",
-  "svg_sha1": "451296051ea9"
+  "svg_sha1": "0d453f5e86fc"
  },
  "final-exam-#3-024": {
   "file": "res://assets/diagrams/nec/outbuilding_disconnect_225-39.png",
@@ -1348,7 +1348,7 @@
    735
   ],
   "nec": "225.39, 225.39(A)-(D)",
-  "svg_sha1": "ddc1e2a4eb1c"
+  "svg_sha1": "853a45c20628"
  },
  "final-exam-#3-027": {
   "file": "res://assets/diagrams/nec/gec_water_bond_250-66_250-68.png",
@@ -1361,7 +1361,7 @@
    750
   ],
   "nec": "250.50 Ex., 250.52(A)(1), 250.52(A)(3), 250.66(B), 250.68(B)",
-  "svg_sha1": "dd3b8ee3c270"
+  "svg_sha1": "367e6a9b91c0"
  },
  "final-exam-#3-029": {
   "file": "res://assets/diagrams/nec/selective_coordination_700-32.png",
@@ -1374,7 +1374,7 @@
    900
   ],
   "nec": "Article 100 (Selective Coordination), 700.32, 701.32, 708.54",
-  "svg_sha1": "c5cbc6fd863f"
+  "svg_sha1": "debe1a2ee21c"
  },
  "final-exam-#3-031": {
   "file": "res://assets/diagrams/nec/communications_overhead_800-44.png",
@@ -1387,7 +1387,7 @@
    690
   ],
   "nec": "800.44(A)(1), (A)(2), 800.44(B)",
-  "svg_sha1": "1b6b493027bd"
+  "svg_sha1": "6f4bf27e9b74"
  },
  "final-exam-#3-033": {
   "file": "res://assets/diagrams/nec/ohms_law_wheel.png",
@@ -1413,7 +1413,7 @@
    675
   ],
   "nec": "314.24(B)(5)",
-  "svg_sha1": "99a2f5962eb7"
+  "svg_sha1": "678d8d657f70"
  },
  "final-exam-#3-035": {
   "file": "res://assets/diagrams/nec/dwelling_receptacles_210-52.png",
@@ -1426,7 +1426,7 @@
    750
   ],
   "nec": "210.52(A)(2), 210.52(G)(1), 210.52(H), 210.50(C)",
-  "svg_sha1": "b3a8f5630317"
+  "svg_sha1": "c4ceb464bcd9"
  },
  "final-exam-#3-038": {
   "file": "res://assets/diagrams/nec/motor_circuit_430.png",
@@ -1439,7 +1439,7 @@
    960
   ],
   "nec": "430.6(A)(1), Table 430.250, 430.52(B), Table 430.37, 430.101",
-  "svg_sha1": "f482f56a1227"
+  "svg_sha1": "e3881039cf37"
  },
  "final-exam-#3-039": {
   "file": "res://assets/diagrams/nec/single_load_circuits_210-11_422-12.png",
@@ -1452,7 +1452,7 @@
    720
   ],
   "nec": "210.11(C)(2), 210.52(F), 422.12",
-  "svg_sha1": "6eea249aab0c"
+  "svg_sha1": "9a1926237175"
  },
  "final-exam-#3-040": {
   "file": "res://assets/diagrams/nec/welder_supply_630.png",
@@ -1478,7 +1478,7 @@
    720
   ],
   "nec": "General knowledge (voltage drop), 647.4(D)",
-  "svg_sha1": "92ff2274a466"
+  "svg_sha1": "9c1dc9c40d1e"
  },
  "final-exam-#3-045": {
   "file": "res://assets/diagrams/nec/sine_wave_60hz_quarter_cycle.png",
@@ -1504,7 +1504,7 @@
    795
   ],
   "nec": "408.7, 408.41",
-  "svg_sha1": "486ba1db8934"
+  "svg_sha1": "3909d62b4e82"
  },
  "final-exam-#3-047": {
   "file": "res://assets/diagrams/nec/se_cable_gooseneck_230-54b.png",
@@ -1517,7 +1517,7 @@
    675
   ],
   "nec": "230.54(B) Exception, 230.54(C), 230.51(A)",
-  "svg_sha1": "a79d5475a013"
+  "svg_sha1": "71ad3418d226"
  },
  "final-exam-#3-048": {
   "file": "res://assets/diagrams/nec/raceway_fill_ch9_348-22.png",
@@ -1530,7 +1530,7 @@
    804
   ],
   "nec": "Chapter 9 Table 1, 348.22, Table 348.22, 356.22",
-  "svg_sha1": "18098ca92f8e"
+  "svg_sha1": "c25f0a24bd27"
  },
  "final-exam-#3-049": {
   "file": "res://assets/diagrams/nec/equipment_receptacle_210-63.png",
@@ -1543,7 +1543,7 @@
    675
   ],
   "nec": "210.63, 210.63(A), 210.63(B)(1), 210.63(B)(2)",
-  "svg_sha1": "3ddd9444c5fc"
+  "svg_sha1": "4d3ec125f535"
  },
  "final-exam-#3-050": {
   "file": "res://assets/diagrams/nec/gec_water_bond_250-66_250-68.png",
@@ -1556,7 +1556,7 @@
    750
   ],
   "nec": "250.50 Ex., 250.52(A)(1), 250.52(A)(3), 250.66(B), 250.68(B)",
-  "svg_sha1": "dd3b8ee3c270"
+  "svg_sha1": "367e6a9b91c0"
  },
  "final-exam-#3-051": {
   "file": "res://assets/diagrams/nec/mobile_home_disconnect_550-32f.png",
@@ -1569,7 +1569,7 @@
    705
   ],
   "nec": "550.32(F)",
-  "svg_sha1": "0ea183f5b0e2"
+  "svg_sha1": "ec19f81430ee"
  },
  "final-exam-#3-052": {
   "file": "res://assets/diagrams/nec/motor_circuit_430.png",
@@ -1582,7 +1582,7 @@
    960
   ],
   "nec": "430.6(A)(1), Table 430.250, 430.52(B), Table 430.37, 430.101",
-  "svg_sha1": "f482f56a1227"
+  "svg_sha1": "e3881039cf37"
  },
  "final-exam-#3-053": {
   "file": "res://assets/diagrams/nec/supports_rmc_344-30.png",
@@ -1595,7 +1595,7 @@
    600
   ],
   "nec": "344.30(A), 344.30(B)(1)-(2), Table 344.30(B)",
-  "svg_sha1": "09ef85453789"
+  "svg_sha1": "217eb647527e"
  },
  "final-exam-#3-055": {
   "file": "res://assets/diagrams/nec/parallel_resistors_equal.png",
@@ -1621,7 +1621,7 @@
    735
   ],
   "nec": "225.39, 225.39(A)-(D)",
-  "svg_sha1": "ddc1e2a4eb1c"
+  "svg_sha1": "853a45c20628"
  },
  "final-exam-#3-057": {
   "file": "res://assets/diagrams/nec/ampacity_derating_310-15.png",
@@ -1634,7 +1634,7 @@
    780
   ],
   "nec": "310.15(B), 310.15(C)(1), 310.15(F), Table 310.16",
-  "svg_sha1": "3251bc54afc7"
+  "svg_sha1": "658566abaf78"
  },
  "final-exam-#3-059": {
   "file": "res://assets/diagrams/nec/pool_fountain_distances_680.png",
@@ -1647,7 +1647,7 @@
    840
   ],
   "nec": "680.5(B), 680.11(A), 680.21(C), 680.22(A)(2), 680.35(D), 680.58",
-  "svg_sha1": "4a5d96823a43"
+  "svg_sha1": "0b4bce000690"
  },
  "final-exam-#3-060": {
   "file": "res://assets/diagrams/nec/battery_ventilation_480-10a.png",
@@ -1686,7 +1686,7 @@
    750
   ],
   "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
-  "svg_sha1": "549bdc4646ae"
+  "svg_sha1": "119828ca6e08"
  },
  "final-exam-#3-065": {
   "file": "res://assets/diagrams/nec/dwelling_service_310-12.png",
@@ -1699,7 +1699,7 @@
    675
   ],
   "nec": "310.12, 310.12(A)",
-  "svg_sha1": "0ba5d43cc60f"
+  "svg_sha1": "9dc20d92843e"
  },
  "final-exam-#3-066": {
   "file": "res://assets/diagrams/nec/gec_water_bond_250-66_250-68.png",
@@ -1712,7 +1712,7 @@
    750
   ],
   "nec": "250.50 Ex., 250.52(A)(1), 250.52(A)(3), 250.66(B), 250.68(B)",
-  "svg_sha1": "dd3b8ee3c270"
+  "svg_sha1": "367e6a9b91c0"
  },
  "final-exam-#3-069": {
   "file": "res://assets/diagrams/nec/motor_group_feeder_430-62a.png",
@@ -1725,7 +1725,7 @@
    750
   ],
   "nec": "430.62(A), Table 430.52",
-  "svg_sha1": "7a5b057d3ab6"
+  "svg_sha1": "ccde0ece9993"
  },
  "final-exam-#3-070": {
   "file": "res://assets/diagrams/nec/delta_generator_symbol.png",
@@ -1751,7 +1751,7 @@
    804
   ],
   "nec": "Chapter 9 Table 1, 348.22, Table 348.22, 356.22",
-  "svg_sha1": "18098ca92f8e"
+  "svg_sha1": "c25f0a24bd27"
  },
  "final-exam-#4-005": {
   "file": "res://assets/diagrams/nec/box_fill_steps_314-16.png",
@@ -1783,7 +1783,7 @@
    720
   ],
   "nec": "210.52(D), 210.52(E)(1)",
-  "svg_sha1": "2d1b6c9aa574"
+  "svg_sha1": "1e54de00c435"
  },
  "final-exam-#4-011": {
   "file": "res://assets/diagrams/nec/box_fill_steps_314-16.png",
@@ -1815,7 +1815,7 @@
    705
   ],
   "nec": "210.62, 220.14(G)",
-  "svg_sha1": "b411a242b4cc"
+  "svg_sha1": "d0e7385786ca"
  },
  "final-exam-#4-015": {
   "file": "res://assets/diagrams/nec/bath_counter_outdoor_210-52d_e1.png",
@@ -1828,7 +1828,7 @@
    720
   ],
   "nec": "210.52(D), 210.52(E)(1)",
-  "svg_sha1": "2d1b6c9aa574"
+  "svg_sha1": "1e54de00c435"
  },
  "final-exam-#4-016": {
   "file": "res://assets/diagrams/nec/kitchen_counter_210-52c.png",
@@ -1841,7 +1841,7 @@
    750
   ],
   "nec": "210.52(B)(1), 210.52(B)(2), 210.52(C)(1), 210.52(C)(3)",
-  "svg_sha1": "1b299c7725f3",
+  "svg_sha1": "8702aa65e5d2",
   "highlight": [
    0.6575,
    0.532,
@@ -1898,7 +1898,7 @@
    810
   ],
   "nec": "Table 220.54, Table 220.55 and Notes 1-4, 220.61(B)(1)",
-  "svg_sha1": "cb79d80017e9",
+  "svg_sha1": "8592ce13a9a7",
   "highlight": [
    0.0325,
    0.5389,
@@ -1936,7 +1936,7 @@
    810
   ],
   "nec": "Table 220.54, Table 220.55 and Notes 1-4, 220.61(B)(1)",
-  "svg_sha1": "cb79d80017e9",
+  "svg_sha1": "8592ce13a9a7",
   "highlight": [
    0.0325,
    0.45,
@@ -2126,7 +2126,7 @@
    810
   ],
   "nec": "Table 220.54, Table 220.55 and Notes 1-4, 220.61(B)(1)",
-  "svg_sha1": "cb79d80017e9",
+  "svg_sha1": "8592ce13a9a7",
   "highlight": [
    0.645,
    0.3185,
@@ -2259,7 +2259,7 @@
    810
   ],
   "nec": "Table 220.54, Table 220.55 and Notes 1-4, 220.61(B)(1)",
-  "svg_sha1": "cb79d80017e9",
+  "svg_sha1": "8592ce13a9a7",
   "highlight": [
    0.0325,
    0.4944,
@@ -2278,7 +2278,7 @@
    810
   ],
   "nec": "Table 220.54, Table 220.55 and Notes 1-4, 220.61(B)(1)",
-  "svg_sha1": "cb79d80017e9",
+  "svg_sha1": "8592ce13a9a7",
   "highlight": [
    0.0325,
    0.7852,
@@ -2335,7 +2335,7 @@
    810
   ],
   "nec": "Table 220.54, Table 220.55 and Notes 1-4, 220.61(B)(1)",
-  "svg_sha1": "cb79d80017e9",
+  "svg_sha1": "8592ce13a9a7",
   "highlight": [
    0.0325,
    0.5833,
@@ -2373,7 +2373,7 @@
    810
   ],
   "nec": "Table 220.54, Table 220.55 and Notes 1-4, 220.61(B)(1)",
-  "svg_sha1": "cb79d80017e9",
+  "svg_sha1": "8592ce13a9a7",
   "highlight": [
    0.0325,
    0.4056,
@@ -2443,7 +2443,7 @@
    705
   ],
   "nec": "250.122(A), Table 250.122",
-  "svg_sha1": "bfc1fd265851"
+  "svg_sha1": "cfb484b27eb7"
  },
  "final-exam-#4-056": {
   "file": "res://assets/diagrams/nec/motor_percentages_430.png",
@@ -2684,7 +2684,7 @@
    810
   ],
   "nec": "Table 220.54, Table 220.55 and Notes 1-4, 220.61(B)(1)",
-  "svg_sha1": "cb79d80017e9",
+  "svg_sha1": "8592ce13a9a7",
   "highlight": [
    0.0325,
    0.6278,
@@ -2722,7 +2722,7 @@
    810
   ],
   "nec": "Article 100 (Bottom Shield, Top Shield, Transition Assembly), 324.40, 324.41",
-  "svg_sha1": "a6ee9ca48045"
+  "svg_sha1": "22e00d98c4fc"
  },
  "final-exam-#5-003": {
   "file": "res://assets/diagrams/nec/cable_cutaways_332_310.png",
@@ -2735,7 +2735,7 @@
    804
   ],
   "nec": "332.104, 332.108, 332.116, Article 100 (MC), 310.3(B)",
-  "svg_sha1": "9931ca732a47"
+  "svg_sha1": "b4dfb3acd84b"
  },
  "final-exam-#5-004": {
   "file": "res://assets/diagrams/nec/fcc_layers_324.png",
@@ -2748,7 +2748,7 @@
    810
   ],
   "nec": "Article 100 (Bottom Shield, Top Shield, Transition Assembly), 324.40, 324.41",
-  "svg_sha1": "a6ee9ca48045"
+  "svg_sha1": "22e00d98c4fc"
  },
  "final-exam-#5-006": {
   "file": "res://assets/diagrams/nec/supports_unsupported_cable_320-330-334.png",
@@ -2761,7 +2761,7 @@
    720
   ],
   "nec": "320.30(D)(2)-(3), 330.30(D)(2), 334.30(B)(2)",
-  "svg_sha1": "b5dbd094edc4"
+  "svg_sha1": "78236f2402ab"
  },
  "final-exam-#5-007": {
   "file": "res://assets/diagrams/nec/fcc_layers_324.png",
@@ -2774,7 +2774,7 @@
    810
   ],
   "nec": "Article 100 (Bottom Shield, Top Shield, Transition Assembly), 324.40, 324.41",
-  "svg_sha1": "a6ee9ca48045"
+  "svg_sha1": "22e00d98c4fc"
  },
  "final-exam-#5-020": {
   "file": "res://assets/diagrams/nec/cable_cutaways_332_310.png",
@@ -2787,7 +2787,7 @@
    804
   ],
   "nec": "332.104, 332.108, 332.116, Article 100 (MC), 310.3(B)",
-  "svg_sha1": "9931ca732a47"
+  "svg_sha1": "b4dfb3acd84b"
  },
  "final-exam-#5-022": {
   "file": "res://assets/diagrams/nec/type_letters_decoder.png",
@@ -2797,10 +2797,10 @@
   "when": "before",
   "size": [
    1200,
-   864
+   774
   ],
   "nec": "Table 310.4(1), 338.100, Table 400.4",
-  "svg_sha1": "8b598977e124"
+  "svg_sha1": "780fa560bb4f"
  },
  "final-exam-#5-023": {
   "file": "res://assets/diagrams/nec/tc_bending_radius_336-24.png",
@@ -2813,7 +2813,7 @@
    705
   ],
   "nec": "336.24",
-  "svg_sha1": "6b287d41cee0"
+  "svg_sha1": "710e2c0b8712"
  },
  "final-exam-#5-032": {
   "file": "res://assets/diagrams/nec/raceway_fill_ch9_348-22.png",
@@ -2826,7 +2826,7 @@
    804
   ],
   "nec": "Chapter 9 Table 1, 348.22, Table 348.22, 356.22",
-  "svg_sha1": "18098ca92f8e"
+  "svg_sha1": "c25f0a24bd27"
  },
  "final-exam-#5-039": {
   "file": "res://assets/diagrams/nec/busbar_ampacity_366-23a.png",
@@ -2852,7 +2852,7 @@
    750
   ],
   "nec": "366.100(E)",
-  "svg_sha1": "7137a80aca6e"
+  "svg_sha1": "23bb5e876465"
  },
  "final-exam-#5-049": {
   "file": "res://assets/diagrams/nec/nm_extension_floor_382-15a.png",
@@ -2865,7 +2865,7 @@
    675
   ],
   "nec": "382.15(A)",
-  "svg_sha1": "875f20b2a2b2"
+  "svg_sha1": "7a56a2d9d0f1"
  },
  "final-exam-#5-050": {
   "file": "res://assets/diagrams/nec/busway_wall_368-234.png",
@@ -2891,7 +2891,7 @@
    705
   ],
   "nec": "368.17(B) and its Exception",
-  "svg_sha1": "ba2d0b61bf63"
+  "svg_sha1": "7ec726e46e75"
  },
  "final-exam-#5-053": {
   "file": "res://assets/diagrams/nec/supports_emt_strut_358-30.png",
@@ -2901,10 +2901,10 @@
   "when": "before",
   "size": [
    1200,
-   705
+   720
   ],
   "nec": "358.30(A) incl. Exception No. 1, 384.30(A)",
-  "svg_sha1": "836159d67b52"
+  "svg_sha1": "b7e560e9ca3c"
  },
  "final-exam-#5-064": {
   "file": "res://assets/diagrams/nec/resistor_thermal_barrier_470-11.png",
@@ -2917,7 +2917,7 @@
    675
   ],
   "nec": "470.11 (Part II, 1000 V or less)",
-  "svg_sha1": "c6a6c49621ae"
+  "svg_sha1": "bd56bece0a69"
  },
  "final-exam-#5-065": {
   "file": "res://assets/diagrams/nec/supports_vertical_376-30_342-30.png",
@@ -2930,7 +2930,7 @@
    750
   ],
   "nec": "376.30(B), 342.30(B)(3)",
-  "svg_sha1": "d8edfef4d6aa"
+  "svg_sha1": "9d5c37438911"
  },
  "final-exam-#5-066": {
   "file": "res://assets/diagrams/nec/raceway_fill_ch9_348-22.png",
@@ -2943,7 +2943,7 @@
    804
   ],
   "nec": "Chapter 9 Table 1, 348.22, Table 348.22, 356.22",
-  "svg_sha1": "18098ca92f8e"
+  "svg_sha1": "c25f0a24bd27"
  },
  "final-exam-#5-067": {
   "file": "res://assets/diagrams/nec/supports_vertical_376-30_342-30.png",
@@ -2956,7 +2956,7 @@
    750
   ],
   "nec": "376.30(B), 342.30(B)(3)",
-  "svg_sha1": "d8edfef4d6aa"
+  "svg_sha1": "9d5c37438911"
  },
  "final-exam-#5-068": {
   "file": "res://assets/diagrams/nec/cinder_backfill_344-10c_300-5f.png",
@@ -2969,7 +2969,7 @@
    840
   ],
   "nec": "344.10(C), 300.5(F), 305.15(E)",
-  "svg_sha1": "ddb3bcf05f66"
+  "svg_sha1": "21a1e7553fba"
  },
  "final-exam-#5-069": {
   "file": "res://assets/diagrams/nec/supports_unsupported_cable_320-330-334.png",
@@ -2982,7 +2982,7 @@
    720
   ],
   "nec": "320.30(D)(2)-(3), 330.30(D)(2), 334.30(B)(2)",
-  "svg_sha1": "b5dbd094edc4"
+  "svg_sha1": "78236f2402ab"
  },
  "final-exam-#5-070": {
   "file": "res://assets/diagrams/nec/supports_pvc_352-30.png",
@@ -2992,10 +2992,10 @@
   "when": "after",
   "size": [
    1200,
-   600
+   705
   ],
   "nec": "352.30(A), Table 352.30(B)",
-  "svg_sha1": "45439a80fbac"
+  "svg_sha1": "048aeb8649fa"
  },
  "open-book-exam-#1-001": {
   "file": "res://assets/diagrams/nec/multiwire_branch_circuit_210-4.png",
@@ -3008,7 +3008,7 @@
    705
   ],
   "nec": "210.4(A)-(C)",
-  "svg_sha1": "914d625acc47"
+  "svg_sha1": "05959e447b24"
  },
  "open-book-exam-#1-002": {
   "file": "res://assets/diagrams/nec/service_bonding_250-24.png",
@@ -3018,10 +3018,10 @@
   "when": "before",
   "size": [
    1200,
-   675
+   870
   ],
   "nec": "Article 100 (main bonding jumper, GEC), 250.24, 250.28",
-  "svg_sha1": "e66b5a7aa1db"
+  "svg_sha1": "c67e91a1b9d9"
  },
  "open-book-exam-#1-003": {
   "file": "res://assets/diagrams/nec/floor_area_220-5c.png",
@@ -3047,7 +3047,7 @@
    675
   ],
   "nec": "300.4(A)(2), 300.4(D)",
-  "svg_sha1": "04182a9c9a26"
+  "svg_sha1": "1593375e57fe"
  },
  "open-book-exam-#1-005": {
   "file": "res://assets/diagrams/nec/equipment_receptacle_210-63.png",
@@ -3060,7 +3060,7 @@
    675
   ],
   "nec": "210.63, 210.63(A), 210.63(B)(1), 210.63(B)(2)",
-  "svg_sha1": "3ddd9444c5fc"
+  "svg_sha1": "4d3ec125f535"
  },
  "open-book-exam-#1-007": {
   "file": "res://assets/diagrams/nec/switchboard_sections_408.png",
@@ -3073,7 +3073,7 @@
    804
   ],
   "nec": "408.18(C), 408.3(A)(2)",
-  "svg_sha1": "1053b675a6f0"
+  "svg_sha1": "50793fabc614"
  },
  "open-book-exam-#1-008": {
   "file": "res://assets/diagrams/nec/electrode_system_250-52_250-53.png",
@@ -3086,7 +3086,7 @@
    705
   ],
   "nec": "250.52(A)(2), 250.52(A)(5), 250.53(A)(3), 250.53(A)(4), 250.53(A)(5)",
-  "svg_sha1": "1560a30df914"
+  "svg_sha1": "d42188695114"
  },
  "open-book-exam-#1-009": {
   "file": "res://assets/diagrams/nec/panelboard_interior_408.png",
@@ -3099,7 +3099,7 @@
    795
   ],
   "nec": "408.7, 408.41",
-  "svg_sha1": "486ba1db8934"
+  "svg_sha1": "3909d62b4e82"
  },
  "open-book-exam-#1-010": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
@@ -3112,7 +3112,7 @@
    750
   ],
   "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
-  "svg_sha1": "549bdc4646ae"
+  "svg_sha1": "119828ca6e08"
  },
  "open-book-exam-#1-011": {
   "file": "res://assets/diagrams/nec/working_space_110-26.png",
@@ -3125,7 +3125,7 @@
    720
   ],
   "nec": "110.26 (open doors), Table 110.26(A)(1) Condition 2, 110.26(B), 110.26(C)(3)",
-  "svg_sha1": "3d1684082818"
+  "svg_sha1": "dc279e04d340"
  },
  "open-book-exam-#1-012": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
@@ -3138,7 +3138,7 @@
    750
   ],
   "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
-  "svg_sha1": "549bdc4646ae"
+  "svg_sha1": "119828ca6e08"
  },
  "open-book-exam-#1-014": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
@@ -3151,7 +3151,7 @@
    750
   ],
   "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
-  "svg_sha1": "549bdc4646ae"
+  "svg_sha1": "119828ca6e08"
  },
  "open-book-exam-#1-015": {
   "file": "res://assets/diagrams/nec/switchboard_sections_408.png",
@@ -3164,7 +3164,7 @@
    804
   ],
   "nec": "408.18(C), 408.3(A)(2)",
-  "svg_sha1": "1053b675a6f0"
+  "svg_sha1": "50793fabc614"
  },
  "open-book-exam-#1-016": {
   "file": "res://assets/diagrams/nec/equipment_receptacle_210-63.png",
@@ -3177,7 +3177,7 @@
    675
   ],
   "nec": "210.63, 210.63(A), 210.63(B)(1), 210.63(B)(2)",
-  "svg_sha1": "3ddd9444c5fc"
+  "svg_sha1": "4d3ec125f535"
  },
  "open-book-exam-#1-018": {
   "file": "res://assets/diagrams/nec/equipment_receptacle_210-63.png",
@@ -3190,7 +3190,7 @@
    675
   ],
   "nec": "210.63, 210.63(A), 210.63(B)(1), 210.63(B)(2)",
-  "svg_sha1": "3ddd9444c5fc"
+  "svg_sha1": "4d3ec125f535"
  },
  "open-book-exam-#1-020": {
   "file": "res://assets/diagrams/nec/single_load_circuits_210-11_422-12.png",
@@ -3203,7 +3203,7 @@
    720
   ],
   "nec": "210.11(C)(2), 210.52(F), 422.12",
-  "svg_sha1": "6eea249aab0c"
+  "svg_sha1": "9a1926237175"
  },
  "open-book-exam-#1-021": {
   "file": "res://assets/diagrams/nec/office_lighting_220-42a.png",
@@ -3229,7 +3229,7 @@
    750
   ],
   "nec": "210.52(A)(2), 210.52(G)(1), 210.52(H), 210.50(C)",
-  "svg_sha1": "b3a8f5630317"
+  "svg_sha1": "c4ceb464bcd9"
  },
  "open-book-exam-#1-024": {
   "file": "res://assets/diagrams/nec/pool_fountain_distances_680.png",
@@ -3242,7 +3242,7 @@
    840
   ],
   "nec": "680.5(B), 680.11(A), 680.21(C), 680.22(A)(2), 680.35(D), 680.58",
-  "svg_sha1": "4a5d96823a43"
+  "svg_sha1": "0b4bce000690"
  },
  "open-book-exam-#1-025": {
   "file": "res://assets/diagrams/nec/in_sight_disconnect_430-102_440-14.png",
@@ -3255,7 +3255,7 @@
    840
   ],
   "nec": "430.102(B)(1), 440.14, Article 100 (In Sight From)",
-  "svg_sha1": "2cd78772ad29"
+  "svg_sha1": "95b4de4dcd9e"
  },
  "open-book-exam-#10-002": {
   "file": "res://assets/diagrams/nec/floor_area_220-5c.png",
@@ -3294,7 +3294,7 @@
    675
   ],
   "nec": "240.21(B)(1), 409.21(B)",
-  "svg_sha1": "7e6ef4737568"
+  "svg_sha1": "e7089693f58e"
  },
  "open-book-exam-#10-005": {
   "file": "res://assets/diagrams/nec/cinder_backfill_344-10c_300-5f.png",
@@ -3307,7 +3307,7 @@
    840
   ],
   "nec": "344.10(C), 300.5(F), 305.15(E)",
-  "svg_sha1": "ddb3bcf05f66"
+  "svg_sha1": "21a1e7553fba"
  },
  "open-book-exam-#10-006": {
   "file": "res://assets/diagrams/nec/disconnect_relay_control_art100.png",
@@ -3320,7 +3320,7 @@
    660
   ],
   "nec": "Article 100, 645.10",
-  "svg_sha1": "9bace1d0b6b6"
+  "svg_sha1": "ab210771eb97"
  },
  "open-book-exam-#10-008": {
   "file": "res://assets/diagrams/nec/welding_tray_signs_630-42c.png",
@@ -3346,7 +3346,7 @@
    720
   ],
   "nec": "225.18, 225.19(D)(1)-(3)",
-  "svg_sha1": "e23ed0cbd816"
+  "svg_sha1": "9f998836c4ec"
  },
  "open-book-exam-#10-011": {
   "file": "res://assets/diagrams/nec/antenna_power_lines_810-16b.png",
@@ -3359,7 +3359,7 @@
    780
   ],
   "nec": "810.16(B)",
-  "svg_sha1": "5a9e5a1af8c8"
+  "svg_sha1": "5268e3e06c85"
  },
  "open-book-exam-#10-013": {
   "file": "res://assets/diagrams/nec/raceway_supported_box_314-23e.png",
@@ -3372,7 +3372,7 @@
    675
   ],
   "nec": "314.23(E)",
-  "svg_sha1": "f768a385e060"
+  "svg_sha1": "b30da5aaa2aa"
  },
  "open-book-exam-#10-015": {
   "file": "res://assets/diagrams/nec/cable_cutaways_332_310.png",
@@ -3385,7 +3385,7 @@
    804
   ],
   "nec": "332.104, 332.108, 332.116, Article 100 (MC), 310.3(B)",
-  "svg_sha1": "9931ca732a47"
+  "svg_sha1": "b4dfb3acd84b"
  },
  "open-book-exam-#10-016": {
   "file": "res://assets/diagrams/nec/working_space_110-26.png",
@@ -3398,7 +3398,7 @@
    720
   ],
   "nec": "110.26 (open doors), Table 110.26(A)(1) Condition 2, 110.26(B), 110.26(C)(3)",
-  "svg_sha1": "3d1684082818"
+  "svg_sha1": "dc279e04d340"
  },
  "open-book-exam-#10-017": {
   "file": "res://assets/diagrams/nec/hazardous_classes_500-5.png",
@@ -3411,7 +3411,7 @@
    864
   ],
   "nec": "500.5(B), (C), (D)",
-  "svg_sha1": "ed616f865262"
+  "svg_sha1": "b66d00545f97"
  },
  "open-book-exam-#10-018": {
   "file": "res://assets/diagrams/nec/receptacle_markings_406.png",
@@ -3437,7 +3437,7 @@
    780
   ],
   "nec": "517.18(A), 517.18(B)",
-  "svg_sha1": "3a16b6ae2b53"
+  "svg_sha1": "45b7d436badf"
  },
  "open-book-exam-#10-020": {
   "file": "res://assets/diagrams/nec/balcony_receptacle_210-52e3.png",
@@ -3450,7 +3450,7 @@
    690
   ],
   "nec": "210.52(E)(3)",
-  "svg_sha1": "fd22ff3cc44d"
+  "svg_sha1": "3b0df30f3e23"
  },
  "open-book-exam-#10-021": {
   "file": "res://assets/diagrams/nec/fire_pump_parts_695-12d.png",
@@ -3463,7 +3463,7 @@
    675
   ],
   "nec": "695.12(D)",
-  "svg_sha1": "3ce4e5e9cc3f"
+  "svg_sha1": "8c859352af76"
  },
  "open-book-exam-#10-023": {
   "file": "res://assets/diagrams/nec/rv_park_supply_551-71_551-72.png",
@@ -3476,7 +3476,7 @@
    750
   ],
   "nec": "551.71(A)-(C), 551.72(B)",
-  "svg_sha1": "6c397a885944"
+  "svg_sha1": "0649a182e3d4"
  },
  "open-book-exam-#10-024": {
   "file": "res://assets/diagrams/nec/service_bonding_250-24.png",
@@ -3486,10 +3486,10 @@
   "when": "before",
   "size": [
    1200,
-   675
+   870
   ],
   "nec": "Article 100 (main bonding jumper, GEC), 250.24, 250.28",
-  "svg_sha1": "e66b5a7aa1db"
+  "svg_sha1": "c67e91a1b9d9"
  },
  "open-book-exam-#10-025": {
   "file": "res://assets/diagrams/nec/cinder_backfill_344-10c_300-5f.png",
@@ -3502,7 +3502,7 @@
    840
   ],
   "nec": "344.10(C), 300.5(F), 305.15(E)",
-  "svg_sha1": "ddb3bcf05f66"
+  "svg_sha1": "21a1e7553fba"
  },
  "open-book-exam-#11-001": {
   "file": "res://assets/diagrams/nec/balcony_receptacle_210-52e3.png",
@@ -3515,7 +3515,7 @@
    690
   ],
   "nec": "210.52(E)(3)",
-  "svg_sha1": "fd22ff3cc44d"
+  "svg_sha1": "3b0df30f3e23"
  },
  "open-book-exam-#11-002": {
   "file": "res://assets/diagrams/nec/panelboard_interior_408.png",
@@ -3528,7 +3528,7 @@
    795
   ],
   "nec": "408.7, 408.41",
-  "svg_sha1": "486ba1db8934"
+  "svg_sha1": "3909d62b4e82"
  },
  "open-book-exam-#11-007": {
   "file": "res://assets/diagrams/nec/fence_bonding_250-194a.png",
@@ -3554,7 +3554,7 @@
    675
   ],
   "nec": "382.15(A)",
-  "svg_sha1": "875f20b2a2b2"
+  "svg_sha1": "7a56a2d9d0f1"
  },
  "open-book-exam-#11-020": {
   "file": "res://assets/diagrams/nec/electrode_rod_pipe_ring_250-52_250-53a4.png",
@@ -3567,7 +3567,7 @@
    750
   ],
   "nec": "250.52(A)(4), 250.52(A)(5), 250.53(A)(4)",
-  "svg_sha1": "413826e2ccbd"
+  "svg_sha1": "53c160fb790b"
  },
  "open-book-exam-#11-021": {
   "file": "res://assets/diagrams/nec/afci_tr_dwelling_210-12_406-12.png",
@@ -3580,7 +3580,7 @@
    840
   ],
   "nec": "210.12(A)-(D), 406.12",
-  "svg_sha1": "79200ff8a442"
+  "svg_sha1": "1fe305b16b7c"
  },
  "open-book-exam-#11-022": {
   "file": "res://assets/diagrams/nec/in_sight_disconnect_430-102_440-14.png",
@@ -3593,7 +3593,7 @@
    840
   ],
   "nec": "430.102(B)(1), 440.14, Article 100 (In Sight From)",
-  "svg_sha1": "2cd78772ad29"
+  "svg_sha1": "95b4de4dcd9e"
  },
  "open-book-exam-#11-023": {
   "file": "res://assets/diagrams/nec/box_fill_steps_314-16.png",
@@ -3625,7 +3625,7 @@
    705
   ],
   "nec": "408.3(F)(1), 408.3(E)(1), 110.15",
-  "svg_sha1": "bef7292d64af"
+  "svg_sha1": "126ef90d1c75"
  },
  "open-book-exam-#12-022": {
   "file": "res://assets/diagrams/nec/supports_emt_strut_358-30.png",
@@ -3635,10 +3635,10 @@
   "when": "before",
   "size": [
    1200,
-   705
+   720
   ],
   "nec": "358.30(A) incl. Exception No. 1, 384.30(A)",
-  "svg_sha1": "836159d67b52"
+  "svg_sha1": "b7e560e9ca3c"
  },
  "open-book-exam-#12-023": {
   "file": "res://assets/diagrams/nec/egc_size_250-122.png",
@@ -3651,7 +3651,7 @@
    705
   ],
   "nec": "250.122(A), Table 250.122",
-  "svg_sha1": "bfc1fd265851"
+  "svg_sha1": "cfb484b27eb7"
  },
  "open-book-exam-#12-025": {
   "file": "res://assets/diagrams/nec/overhead_clearances_225-18.png",
@@ -3664,7 +3664,7 @@
    720
   ],
   "nec": "225.18, 225.19(D)(1)-(3)",
-  "svg_sha1": "e23ed0cbd816"
+  "svg_sha1": "9f998836c4ec"
  },
  "open-book-exam-#2-001": {
   "file": "res://assets/diagrams/nec/ocpd_vertical_240-33.png",
@@ -3677,7 +3677,7 @@
    720
   ],
   "nec": "240.33, 240.81",
-  "svg_sha1": "4af6094cacc8"
+  "svg_sha1": "494201e7056e"
  },
  "open-book-exam-#2-002": {
   "file": "res://assets/diagrams/nec/multiwire_branch_circuit_210-4.png",
@@ -3690,7 +3690,7 @@
    705
   ],
   "nec": "210.4(A)-(C)",
-  "svg_sha1": "914d625acc47"
+  "svg_sha1": "05959e447b24"
  },
  "open-book-exam-#2-004": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
@@ -3703,7 +3703,7 @@
    750
   ],
   "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
-  "svg_sha1": "549bdc4646ae"
+  "svg_sha1": "119828ca6e08"
  },
  "open-book-exam-#2-007": {
   "file": "res://assets/diagrams/nec/kitchen_counter_210-52c.png",
@@ -3716,7 +3716,7 @@
    750
   ],
   "nec": "210.52(B)(1), 210.52(B)(2), 210.52(C)(1), 210.52(C)(3)",
-  "svg_sha1": "1b299c7725f3"
+  "svg_sha1": "8702aa65e5d2"
  },
  "open-book-exam-#2-008": {
   "file": "res://assets/diagrams/nec/holiday_lighting_trees_590-4j.png",
@@ -3742,7 +3742,7 @@
    705
   ],
   "nec": "210.62, 220.14(G)",
-  "svg_sha1": "b411a242b4cc"
+  "svg_sha1": "d0e7385786ca"
  },
  "open-book-exam-#2-011": {
   "file": "res://assets/diagrams/nec/afci_tr_dwelling_210-12_406-12.png",
@@ -3755,7 +3755,7 @@
    840
   ],
   "nec": "210.12(A)-(D), 406.12",
-  "svg_sha1": "79200ff8a442"
+  "svg_sha1": "1fe305b16b7c"
  },
  "open-book-exam-#2-012": {
   "file": "res://assets/diagrams/nec/ampacity_derating_310-15.png",
@@ -3768,7 +3768,7 @@
    780
   ],
   "nec": "310.15(B), 310.15(C)(1), 310.15(F), Table 310.16",
-  "svg_sha1": "3251bc54afc7"
+  "svg_sha1": "658566abaf78"
  },
  "open-book-exam-#2-013": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
@@ -3781,7 +3781,7 @@
    750
   ],
   "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
-  "svg_sha1": "549bdc4646ae"
+  "svg_sha1": "119828ca6e08"
  },
  "open-book-exam-#2-015": {
   "file": "res://assets/diagrams/nec/dwelling_receptacles_210-52.png",
@@ -3794,7 +3794,7 @@
    750
   ],
   "nec": "210.52(A)(2), 210.52(G)(1), 210.52(H), 210.50(C)",
-  "svg_sha1": "b3a8f5630317"
+  "svg_sha1": "c4ceb464bcd9"
  },
  "open-book-exam-#2-018": {
   "file": "res://assets/diagrams/nec/multioutlet_assembly_220-14h.png",
@@ -3807,7 +3807,7 @@
    720
   ],
   "nec": "220.14(H)",
-  "svg_sha1": "ec958bface7a"
+  "svg_sha1": "ee49c7d01712"
  },
  "open-book-exam-#2-022": {
   "file": "res://assets/diagrams/nec/conductor_colors_310-6.png",
@@ -3833,7 +3833,7 @@
    630
   ],
   "nec": "680.62(E)",
-  "svg_sha1": "ddfff5adc480"
+  "svg_sha1": "e475fc860892"
  },
  "open-book-exam-#2-025": {
   "file": "res://assets/diagrams/nec/balcony_receptacle_210-52e3.png",
@@ -3846,7 +3846,7 @@
    690
   ],
   "nec": "210.52(E)(3)",
-  "svg_sha1": "fd22ff3cc44d"
+  "svg_sha1": "3b0df30f3e23"
  },
  "open-book-exam-#3-001": {
   "file": "res://assets/diagrams/nec/kitchen_counter_210-52c.png",
@@ -3859,7 +3859,7 @@
    750
   ],
   "nec": "210.52(B)(1), 210.52(B)(2), 210.52(C)(1), 210.52(C)(3)",
-  "svg_sha1": "1b299c7725f3"
+  "svg_sha1": "8702aa65e5d2"
  },
  "open-book-exam-#3-002": {
   "file": "res://assets/diagrams/nec/feeder_tap_10ft_240-21b1.png",
@@ -3872,7 +3872,7 @@
    675
   ],
   "nec": "240.21(B)(1), 409.21(B)",
-  "svg_sha1": "7e6ef4737568"
+  "svg_sha1": "e7089693f58e"
  },
  "open-book-exam-#3-003": {
   "file": "res://assets/diagrams/nec/dwelling_receptacles_210-52.png",
@@ -3885,7 +3885,7 @@
    750
   ],
   "nec": "210.52(A)(2), 210.52(G)(1), 210.52(H), 210.50(C)",
-  "svg_sha1": "b3a8f5630317"
+  "svg_sha1": "c4ceb464bcd9"
  },
  "open-book-exam-#3-004": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
@@ -3898,7 +3898,7 @@
    750
   ],
   "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
-  "svg_sha1": "549bdc4646ae"
+  "svg_sha1": "119828ca6e08"
  },
  "open-book-exam-#3-008": {
   "file": "res://assets/diagrams/nec/conduit_stub_up_408-5.png",
@@ -3911,7 +3911,7 @@
    705
   ],
   "nec": "408.5, Table 408.5",
-  "svg_sha1": "c620a6a6dc35"
+  "svg_sha1": "428942be942e"
  },
  "open-book-exam-#3-009": {
   "file": "res://assets/diagrams/nec/fuel_dispenser_shutoff_514-11.png",
@@ -3937,7 +3937,7 @@
    780
   ],
   "nec": "310.15(B), 310.15(C)(1), 310.15(F), Table 310.16",
-  "svg_sha1": "3251bc54afc7"
+  "svg_sha1": "658566abaf78"
  },
  "open-book-exam-#3-011": {
   "file": "res://assets/diagrams/nec/type_letters_decoder.png",
@@ -3947,10 +3947,10 @@
   "when": "before",
   "size": [
    1200,
-   864
+   774
   ],
   "nec": "Table 310.4(1), 338.100, Table 400.4",
-  "svg_sha1": "8b598977e124"
+  "svg_sha1": "780fa560bb4f"
  },
  "open-book-exam-#3-012": {
   "file": "res://assets/diagrams/nec/pool_fountain_distances_680.png",
@@ -3963,7 +3963,7 @@
    840
   ],
   "nec": "680.5(B), 680.11(A), 680.21(C), 680.22(A)(2), 680.35(D), 680.58",
-  "svg_sha1": "4a5d96823a43"
+  "svg_sha1": "0b4bce000690"
  },
  "open-book-exam-#3-013": {
   "file": "res://assets/diagrams/nec/welder_supply_630.png",
@@ -3989,7 +3989,7 @@
    840
   ],
   "nec": "680.5(B), 680.11(A), 680.21(C), 680.22(A)(2), 680.35(D), 680.58",
-  "svg_sha1": "4a5d96823a43"
+  "svg_sha1": "0b4bce000690"
  },
  "open-book-exam-#3-016": {
   "file": "res://assets/diagrams/nec/parallel_egc_250-122f.png",
@@ -4002,7 +4002,7 @@
    675
   ],
   "nec": "250.122(F)(1)(b)",
-  "svg_sha1": "465480541ef8"
+  "svg_sha1": "cd4a11c07958"
  },
  "open-book-exam-#3-017": {
   "file": "res://assets/diagrams/nec/dwelling_receptacles_210-52.png",
@@ -4015,7 +4015,7 @@
    750
   ],
   "nec": "210.52(A)(2), 210.52(G)(1), 210.52(H), 210.50(C)",
-  "svg_sha1": "b3a8f5630317"
+  "svg_sha1": "c4ceb464bcd9"
  },
  "open-book-exam-#3-019": {
   "file": "res://assets/diagrams/nec/appliance_demand_220-54_220-55.png",
@@ -4028,7 +4028,7 @@
    729
   ],
   "nec": "Table 220.54, Table 220.55 and Note 1",
-  "svg_sha1": "8aab7d46a809"
+  "svg_sha1": "4de2f4455ea1"
  },
  "open-book-exam-#3-020": {
   "file": "res://assets/diagrams/nec/electrode_system_250-52_250-53.png",
@@ -4041,7 +4041,7 @@
    705
   ],
   "nec": "250.52(A)(2), 250.52(A)(5), 250.53(A)(3), 250.53(A)(4), 250.53(A)(5)",
-  "svg_sha1": "1560a30df914"
+  "svg_sha1": "d42188695114"
  },
  "open-book-exam-#3-021": {
   "file": "res://assets/diagrams/nec/luminaire_roof_decking_410-10f.png",
@@ -4054,7 +4054,7 @@
    675
   ],
   "nec": "410.10(F)",
-  "svg_sha1": "6a0657445079"
+  "svg_sha1": "cdba3f0c5657"
  },
  "open-book-exam-#4-002": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
@@ -4067,7 +4067,7 @@
    750
   ],
   "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
-  "svg_sha1": "549bdc4646ae"
+  "svg_sha1": "119828ca6e08"
  },
  "open-book-exam-#4-004": {
   "file": "res://assets/diagrams/nec/burial_under_concrete_300-5.png",
@@ -4080,7 +4080,7 @@
    675
   ],
   "nec": "Table 300.5(A) Column 1, 300.5(A) cover definition",
-  "svg_sha1": "0334f58c5baf"
+  "svg_sha1": "cb7fb1f382a3"
  },
  "open-book-exam-#4-005": {
   "file": "res://assets/diagrams/nec/afci_tr_dwelling_210-12_406-12.png",
@@ -4093,7 +4093,7 @@
    840
   ],
   "nec": "210.12(A)-(D), 406.12",
-  "svg_sha1": "79200ff8a442"
+  "svg_sha1": "1fe305b16b7c"
  },
  "open-book-exam-#4-006": {
   "file": "res://assets/diagrams/nec/disposer_cord_422-16b1.png",
@@ -4106,7 +4106,7 @@
    705
   ],
   "nec": "422.16(B)(1)",
-  "svg_sha1": "f0f34f825b79"
+  "svg_sha1": "833ab26ca602"
  },
  "open-book-exam-#4-007": {
   "file": "res://assets/diagrams/nec/receptacle_markings_406.png",
@@ -4132,7 +4132,7 @@
    705
   ],
   "nec": "210.4(A)-(C)",
-  "svg_sha1": "914d625acc47"
+  "svg_sha1": "05959e447b24"
  },
  "open-book-exam-#4-009": {
   "file": "res://assets/diagrams/nec/fault_path_art100.png",
@@ -4145,7 +4145,7 @@
    900
   ],
   "nec": "Article 100 (Ground Fault, Effective Ground-Fault Current Path)",
-  "svg_sha1": "469e17c3ddf4"
+  "svg_sha1": "bf8b6119d4de"
  },
  "open-book-exam-#4-011": {
   "file": "res://assets/diagrams/nec/spa_fan_height_680-43.png",
@@ -4171,7 +4171,7 @@
    840
   ],
   "nec": "210.12(A)-(D), 406.12",
-  "svg_sha1": "79200ff8a442"
+  "svg_sha1": "1fe305b16b7c"
  },
  "open-book-exam-#4-014": {
   "file": "res://assets/diagrams/nec/wet_location_receptacle_406-9b.png",
@@ -4184,7 +4184,7 @@
    675
   ],
   "nec": "406.9(B)(1)",
-  "svg_sha1": "3ba5bf329b65"
+  "svg_sha1": "7d9dea1cc162"
  },
  "open-book-exam-#4-015": {
   "file": "res://assets/diagrams/nec/appliance_demand_220-54_220-55.png",
@@ -4197,7 +4197,7 @@
    729
   ],
   "nec": "Table 220.54, Table 220.55 and Note 1",
-  "svg_sha1": "8aab7d46a809"
+  "svg_sha1": "4de2f4455ea1"
  },
  "open-book-exam-#4-018": {
   "file": "res://assets/diagrams/nec/nm_cable_sleeve_312-5c.png",
@@ -4210,7 +4210,7 @@
    705
   ],
   "nec": "312.5(C) Exception No. 1",
-  "svg_sha1": "6d3f3eb4f359"
+  "svg_sha1": "9a4aa63f9079"
  },
  "open-book-exam-#4-019": {
   "file": "res://assets/diagrams/nec/box_screws_314-27d.png",
@@ -4223,7 +4223,7 @@
    660
   ],
   "nec": "314.27(D) Exception, 314.27(A)",
-  "svg_sha1": "740f62c8b836"
+  "svg_sha1": "b89607d79095"
  },
  "open-book-exam-#4-021": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
@@ -4236,7 +4236,7 @@
    750
   ],
   "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
-  "svg_sha1": "549bdc4646ae"
+  "svg_sha1": "119828ca6e08"
  },
  "open-book-exam-#4-022": {
   "file": "res://assets/diagrams/nec/dwelling_service_310-12.png",
@@ -4249,7 +4249,7 @@
    675
   ],
   "nec": "310.12, 310.12(A)",
-  "svg_sha1": "0ba5d43cc60f"
+  "svg_sha1": "9dc20d92843e"
  },
  "open-book-exam-#4-023": {
   "file": "res://assets/diagrams/nec/afci_tr_dwelling_210-12_406-12.png",
@@ -4262,7 +4262,7 @@
    840
   ],
   "nec": "210.12(A)-(D), 406.12",
-  "svg_sha1": "79200ff8a442"
+  "svg_sha1": "1fe305b16b7c"
  },
  "open-book-exam-#4-024": {
   "file": "res://assets/diagrams/nec/electrode_system_250-52_250-53.png",
@@ -4275,7 +4275,7 @@
    705
   ],
   "nec": "250.52(A)(2), 250.52(A)(5), 250.53(A)(3), 250.53(A)(4), 250.53(A)(5)",
-  "svg_sha1": "1560a30df914"
+  "svg_sha1": "d42188695114"
  },
  "open-book-exam-#4-025": {
   "file": "res://assets/diagrams/nec/type_letters_decoder.png",
@@ -4285,10 +4285,10 @@
   "when": "before",
   "size": [
    1200,
-   864
+   774
   ],
   "nec": "Table 310.4(1), 338.100, Table 400.4",
-  "svg_sha1": "8b598977e124"
+  "svg_sha1": "780fa560bb4f"
  },
  "open-book-exam-#5-001": {
   "file": "res://assets/diagrams/nec/fair_structures_lines_525-5b.png",
@@ -4301,7 +4301,7 @@
    705
   ],
   "nec": "525.5(B)(1), 525.5(B)(2)",
-  "svg_sha1": "8bbb40ff92de"
+  "svg_sha1": "baff985bc269"
  },
  "open-book-exam-#5-004": {
   "file": "res://assets/diagrams/nec/dedicated_space_110-26e.png",
@@ -4314,7 +4314,7 @@
    750
   ],
   "nec": "110.26(A)(1)-(3), 110.26(E)(1)",
-  "svg_sha1": "c80210e93b86"
+  "svg_sha1": "baa7849c49ae"
  },
  "open-book-exam-#5-007": {
   "file": "res://assets/diagrams/nec/high_leg_marking_408-3f1.png",
@@ -4327,7 +4327,7 @@
    705
   ],
   "nec": "408.3(F)(1), 408.3(E)(1), 110.15",
-  "svg_sha1": "bef7292d64af"
+  "svg_sha1": "126ef90d1c75"
  },
  "open-book-exam-#5-010": {
   "file": "res://assets/diagrams/nec/framing_protection_300-4.png",
@@ -4340,7 +4340,7 @@
    675
   ],
   "nec": "300.4(A)(2), 300.4(D)",
-  "svg_sha1": "04182a9c9a26"
+  "svg_sha1": "1593375e57fe"
  },
  "open-book-exam-#5-014": {
   "file": "res://assets/diagrams/nec/overhead_clearances_225-18.png",
@@ -4353,7 +4353,7 @@
    720
   ],
   "nec": "225.18, 225.19(D)(1)-(3)",
-  "svg_sha1": "e23ed0cbd816"
+  "svg_sha1": "9f998836c4ec"
  },
  "open-book-exam-#5-015": {
   "file": "res://assets/diagrams/nec/mobile_home_disconnect_550-32f.png",
@@ -4366,7 +4366,7 @@
    705
   ],
   "nec": "550.32(F)",
-  "svg_sha1": "0ea183f5b0e2"
+  "svg_sha1": "ec19f81430ee"
  },
  "open-book-exam-#5-016": {
   "file": "res://assets/diagrams/nec/gfci_locations_210-8.png",
@@ -4379,7 +4379,7 @@
    750
   ],
   "nec": "210.8(A) items (2), (3), (10), (11) and Ex. 1; 210.8(B)(3), (C), (F)",
-  "svg_sha1": "549bdc4646ae"
+  "svg_sha1": "119828ca6e08"
  },
  "open-book-exam-#5-017": {
   "file": "res://assets/diagrams/nec/working_space_110-26.png",
@@ -4392,7 +4392,7 @@
    720
   ],
   "nec": "110.26 (open doors), Table 110.26(A)(1) Condition 2, 110.26(B), 110.26(C)(3)",
-  "svg_sha1": "3d1684082818"
+  "svg_sha1": "dc279e04d340"
  },
  "open-book-exam-#5-018": {
   "file": "res://assets/diagrams/nec/communications_overhead_800-44.png",
@@ -4405,7 +4405,7 @@
    690
   ],
   "nec": "800.44(A)(1), (A)(2), 800.44(B)",
-  "svg_sha1": "1b6b493027bd"
+  "svg_sha1": "6f4bf27e9b74"
  },
  "open-book-exam-#5-020": {
   "file": "res://assets/diagrams/nec/buried_conductors_grade_300-5d1_300-5j.png",
@@ -4418,7 +4418,7 @@
    780
   ],
   "nec": "300.5(D)(1), 300.5(J)",
-  "svg_sha1": "57823d1c7791"
+  "svg_sha1": "fbe965f83ade"
  },
  "open-book-exam-#5-021": {
   "file": "res://assets/diagrams/nec/electrode_rod_pipe_ring_250-52_250-53a4.png",
@@ -4431,7 +4431,7 @@
    750
   ],
   "nec": "250.52(A)(4), 250.52(A)(5), 250.53(A)(4)",
-  "svg_sha1": "413826e2ccbd"
+  "svg_sha1": "53c160fb790b"
  },
  "open-book-exam-#5-024": {
   "file": "res://assets/diagrams/nec/supports_pvc_352-30.png",
@@ -4441,10 +4441,10 @@
   "when": "after",
   "size": [
    1200,
-   600
+   705
   ],
   "nec": "352.30(A), Table 352.30(B)",
-  "svg_sha1": "45439a80fbac"
+  "svg_sha1": "048aeb8649fa"
  },
  "open-book-exam-#6-003": {
   "file": "res://assets/diagrams/nec/electrode_rod_pipe_ring_250-52_250-53a4.png",
@@ -4457,7 +4457,7 @@
    750
   ],
   "nec": "250.52(A)(4), 250.52(A)(5), 250.53(A)(4)",
-  "svg_sha1": "413826e2ccbd"
+  "svg_sha1": "53c160fb790b"
  },
  "open-book-exam-#6-005": {
   "file": "res://assets/diagrams/nec/overhead_clearances_225-18.png",
@@ -4470,7 +4470,7 @@
    720
   ],
   "nec": "225.18, 225.19(D)(1)-(3)",
-  "svg_sha1": "e23ed0cbd816"
+  "svg_sha1": "9f998836c4ec"
  },
  "open-book-exam-#6-006": {
   "file": "res://assets/diagrams/nec/electrode_rod_pipe_ring_250-52_250-53a4.png",
@@ -4483,7 +4483,7 @@
    750
   ],
   "nec": "250.52(A)(4), 250.52(A)(5), 250.53(A)(4)",
-  "svg_sha1": "413826e2ccbd"
+  "svg_sha1": "53c160fb790b"
  },
  "open-book-exam-#6-008": {
   "file": "res://assets/diagrams/nec/buried_conductors_grade_300-5d1_300-5j.png",
@@ -4496,7 +4496,7 @@
    780
   ],
   "nec": "300.5(D)(1), 300.5(J)",
-  "svg_sha1": "57823d1c7791"
+  "svg_sha1": "fbe965f83ade"
  },
  "open-book-exam-#6-009": {
   "file": "res://assets/diagrams/nec/in_sight_disconnect_430-102_440-14.png",
@@ -4509,7 +4509,7 @@
    840
   ],
   "nec": "430.102(B)(1), 440.14, Article 100 (In Sight From)",
-  "svg_sha1": "2cd78772ad29"
+  "svg_sha1": "95b4de4dcd9e"
  },
  "open-book-exam-#6-010": {
   "file": "res://assets/diagrams/nec/motor_circuit_430.png",
@@ -4522,7 +4522,7 @@
    960
   ],
   "nec": "430.6(A)(1), Table 430.250, 430.52(B), Table 430.37, 430.101",
-  "svg_sha1": "f482f56a1227"
+  "svg_sha1": "e3881039cf37"
  },
  "open-book-exam-#6-012": {
   "file": "res://assets/diagrams/nec/egc_size_250-122.png",
@@ -4535,7 +4535,7 @@
    705
   ],
   "nec": "250.122(A), Table 250.122",
-  "svg_sha1": "bfc1fd265851"
+  "svg_sha1": "cfb484b27eb7"
  },
  "open-book-exam-#6-014": {
   "file": "res://assets/diagrams/nec/nipple_fill_ch9_note4.png",
@@ -4545,10 +4545,10 @@
   "when": "after",
   "size": [
    1200,
-   630
+   675
   ],
   "nec": "Chapter 9, Notes to Tables, Note (4)",
-  "svg_sha1": "752ec053a96f"
+  "svg_sha1": "83b2e46a5da7"
  },
  "open-book-exam-#6-016": {
   "file": "res://assets/diagrams/nec/supports_pvc_352-30.png",
@@ -4558,10 +4558,10 @@
   "when": "before",
   "size": [
    1200,
-   600
+   705
   ],
   "nec": "352.30(A), Table 352.30(B)",
-  "svg_sha1": "45439a80fbac"
+  "svg_sha1": "048aeb8649fa"
  },
  "open-book-exam-#6-018": {
   "file": "res://assets/diagrams/nec/battery_ventilation_480-10a.png",
@@ -4587,7 +4587,7 @@
    720
   ],
   "nec": "320.30(D)(2)-(3), 330.30(D)(2), 334.30(B)(2)",
-  "svg_sha1": "b5dbd094edc4"
+  "svg_sha1": "78236f2402ab"
  },
  "open-book-exam-#6-023": {
   "file": "res://assets/diagrams/nec/pool_fountain_distances_680.png",
@@ -4600,7 +4600,7 @@
    840
   ],
   "nec": "680.5(B), 680.11(A), 680.21(C), 680.22(A)(2), 680.35(D), 680.58",
-  "svg_sha1": "4a5d96823a43"
+  "svg_sha1": "0b4bce000690"
  },
  "open-book-exam-#6-024": {
   "file": "res://assets/diagrams/nec/branch_circuit_rating_210.png",
@@ -4613,7 +4613,7 @@
    750
   ],
   "nec": "210.18, 210.19(B), Table 210.21(B)(2)",
-  "svg_sha1": "8d39b17ac263"
+  "svg_sha1": "6c4571dfcc4d"
  },
  "open-book-exam-#7-001": {
   "file": "res://assets/diagrams/nec/grounded_connection_200-3.png",
@@ -4626,7 +4626,7 @@
    705
   ],
   "nec": "200.3",
-  "svg_sha1": "542a8b768eac"
+  "svg_sha1": "252022b7f3e0"
  },
  "open-book-exam-#7-004": {
   "file": "res://assets/diagrams/nec/imaging_feeder_517-73b.png",
@@ -4639,7 +4639,7 @@
    705
   ],
   "nec": "517.73(B)",
-  "svg_sha1": "21e20adbdb9c"
+  "svg_sha1": "512c574e8935"
  },
  "open-book-exam-#7-005": {
   "file": "res://assets/diagrams/nec/max_water_level_art100.png",
@@ -4665,7 +4665,7 @@
    900
   ],
   "nec": "Article 100 (Selective Coordination), 700.32, 701.32, 708.54",
-  "svg_sha1": "c5cbc6fd863f"
+  "svg_sha1": "debe1a2ee21c"
  },
  "open-book-exam-#7-008": {
   "file": "res://assets/diagrams/nec/equipment_airflow_110-13b.png",
@@ -4691,7 +4691,7 @@
    735
   ],
   "nec": "225.39, 225.39(A)-(D)",
-  "svg_sha1": "ddc1e2a4eb1c"
+  "svg_sha1": "853a45c20628"
  },
  "open-book-exam-#7-010": {
   "file": "res://assets/diagrams/nec/heated_ceiling_wiring_424-36.png",
@@ -4704,7 +4704,7 @@
    675
   ],
   "nec": "424.36",
-  "svg_sha1": "268796e98539"
+  "svg_sha1": "ca95e32f87d5"
  },
  "open-book-exam-#7-011": {
   "file": "res://assets/diagrams/nec/branch_circuit_rating_210.png",
@@ -4717,7 +4717,7 @@
    750
   ],
   "nec": "210.18, 210.19(B), Table 210.21(B)(2)",
-  "svg_sha1": "8d39b17ac263"
+  "svg_sha1": "6c4571dfcc4d"
  },
  "open-book-exam-#7-013": {
   "file": "res://assets/diagrams/nec/burial_under_concrete_300-5.png",
@@ -4730,7 +4730,7 @@
    675
   ],
   "nec": "Table 300.5(A) Column 1, 300.5(A) cover definition",
-  "svg_sha1": "0334f58c5baf"
+  "svg_sha1": "cb7fb1f382a3"
  },
  "open-book-exam-#7-015": {
   "file": "res://assets/diagrams/nec/termination_temp_110-14c.png",
@@ -4743,7 +4743,7 @@
    780
   ],
   "nec": "310.15(A), 110.14(C), 110.14(C)(2), Table 310.16",
-  "svg_sha1": "ebd62fc8f7d3"
+  "svg_sha1": "4faddeb2b2b0"
  },
  "open-book-exam-#7-016": {
   "file": "res://assets/diagrams/nec/multiple_supplies_225-37_700-7.png",
@@ -4756,7 +4756,7 @@
    864
   ],
   "nec": "225.37, 230.2(E), 700.7(A)",
-  "svg_sha1": "3fb630dcc398"
+  "svg_sha1": "e6f07411c889"
  },
  "open-book-exam-#7-017": {
   "file": "res://assets/diagrams/nec/termination_temp_110-14c.png",
@@ -4769,7 +4769,7 @@
    780
   ],
   "nec": "310.15(A), 110.14(C), 110.14(C)(2), Table 310.16",
-  "svg_sha1": "ebd62fc8f7d3"
+  "svg_sha1": "4faddeb2b2b0"
  },
  "open-book-exam-#7-020": {
   "file": "res://assets/diagrams/nec/sign_construction_600.png",
@@ -4782,7 +4782,7 @@
    804
   ],
   "nec": "Article 100 (Sign Body), 600.9(C)",
-  "svg_sha1": "22a092184ae7"
+  "svg_sha1": "610cfdc0a1cb"
  },
  "open-book-exam-#7-021": {
   "file": "res://assets/diagrams/nec/transformer_panel_408-36b.png",
@@ -4795,7 +4795,7 @@
    705
   ],
   "nec": "408.36(B), 240.21(C)(1)",
-  "svg_sha1": "ddc6ce0d0db7"
+  "svg_sha1": "4f289227323b"
  },
  "open-book-exam-#7-022": {
   "file": "res://assets/diagrams/nec/working_space_110-26.png",
@@ -4808,7 +4808,7 @@
    720
   ],
   "nec": "110.26 (open doors), Table 110.26(A)(1) Condition 2, 110.26(B), 110.26(C)(3)",
-  "svg_sha1": "3d1684082818"
+  "svg_sha1": "dc279e04d340"
  },
  "open-book-exam-#7-024": {
   "file": "res://assets/diagrams/nec/high_leg_marking_408-3f1.png",
@@ -4821,7 +4821,7 @@
    705
   ],
   "nec": "408.3(F)(1), 408.3(E)(1), 110.15",
-  "svg_sha1": "bef7292d64af"
+  "svg_sha1": "126ef90d1c75"
  },
  "open-book-exam-#7-025": {
   "file": "res://assets/diagrams/nec/multiple_supplies_225-37_700-7.png",
@@ -4834,7 +4834,7 @@
    864
   ],
   "nec": "225.37, 230.2(E), 700.7(A)",
-  "svg_sha1": "3fb630dcc398"
+  "svg_sha1": "e6f07411c889"
  },
  "open-book-exam-#9-012": {
   "file": "res://assets/diagrams/nec/branch_circuit_rating_210.png",
@@ -4847,7 +4847,7 @@
    750
   ],
   "nec": "210.18, 210.19(B), Table 210.21(B)(2)",
-  "svg_sha1": "8d39b17ac263"
+  "svg_sha1": "6c4571dfcc4d"
  },
  "open-book-exam-#9-016": {
   "file": "res://assets/diagrams/nec/termination_temp_110-14c.png",
@@ -4860,7 +4860,7 @@
    780
   ],
   "nec": "310.15(A), 110.14(C), 110.14(C)(2), Table 310.16",
-  "svg_sha1": "ebd62fc8f7d3"
+  "svg_sha1": "4faddeb2b2b0"
  },
  "open-book-exam-#9-018": {
   "file": "res://assets/diagrams/nec/branch_circuit_rating_210.png",
@@ -4873,6 +4873,6 @@
    750
   ],
   "nec": "210.18, 210.19(B), Table 210.21(B)(2)",
-  "svg_sha1": "8d39b17ac263"
+  "svg_sha1": "6c4571dfcc4d"
  }
 }

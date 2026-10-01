@@ -28,7 +28,7 @@ def balcony(f):
                 records=["open-book-exam-#11-001"], what="the distance from the dwelling")
     f.text(v[0] + v[2] + 7, deck_y + 72, "of the dwelling", T_NOTE, DIM, "start", True)
     ry = deck_y - 6.5 * ft
-    f.receptacle(wall_x + 16, ry, 48)
+    f.receptacle(wall_x + 16, ry, 48, gfci=True)
     f.text(wall_x + 46, ry - 34, "receptacle", T_LABEL, TEXT, "start", True)
     x = wall_x + 80
     f.ext(wall_x + 34, ry, x + 14, ry)

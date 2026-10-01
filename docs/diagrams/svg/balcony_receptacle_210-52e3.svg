@@ -19,11 +19,17 @@
 <text x="372.0" y="392.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">within</text>
 <text x="442.6" y="392.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">4 in</text>
 <text x="487.5" y="392.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">of the dwelling</text>
-<rect x="250.6" y="101.0" width="30.7" height="48.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
-<line x1="261.2" y1="110.4" x2="261.2" y2="118.4" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="270.8" y1="110.4" x2="270.8" y2="118.4" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="261.2" y1="131.6" x2="261.2" y2="139.6" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="270.8" y1="131.6" x2="270.8" y2="139.6" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="250.6" y="101.0" width="30.7" height="48.0" rx="4.800000000000001" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 261.3 104.4 L 270.7 104.4 A 8.2 8.2 0 0 1 270.7 117.8 L 261.3 117.8 A 8.2 8.2 0 0 1 261.3 104.4 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="262.9" y1="107.7" x2="262.9" y2="111.7" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="269.1" y1="108.1" x2="269.1" y2="111.3" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="266.0" cy="115.0" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<path d="M 261.3 132.2 L 270.7 132.2 A 8.2 8.2 0 0 1 270.7 145.6 L 261.3 145.6 A 8.2 8.2 0 0 1 261.3 132.2 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="262.9" y1="135.5" x2="262.9" y2="139.6" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="269.1" y1="135.9" x2="269.1" y2="139.2" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="266.0" cy="142.8" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="254.1" y="122.6" width="10.4" height="4.8" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="267.5" y="122.6" width="10.4" height="4.8" rx="1.5" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="296.0" y="91.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">receptacle</text>
 <line x1="284.0" y1="125.0" x2="291.0" y2="125.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
 <line x1="297.0" y1="125.0" x2="304.0" y2="125.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>

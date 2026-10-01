@@ -8,13 +8,19 @@
 <polygon points="325.0,164.0 335.0,164.0 330.0,176.0" fill="#fbbf24" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <line x1="470.0" y1="90.0" x2="470.0" y2="164.0" stroke="#fbbf24" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
 <polygon points="465.0,164.0 475.0,164.0 470.0,176.0" fill="#fbbf24" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<text x="620.0" y="260.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#fbbf24" text-anchor="middle">roofing screws can</text>
-<text x="620.0" y="282.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#fbbf24" text-anchor="middle">come through</text>
-<rect x="260.0" y="194.0" width="280.0" height="44.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
-<rect x="280.0" y="238.0" width="240.0" height="10.0" rx="0" fill="#fbbf24" fill-opacity="0.6" stroke="none" stroke-width="2"/>
-<text x="400.0" y="224.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">luminaire</text>
-<line x1="300.0" y1="194.0" x2="300.0" y2="140.0" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="500.0" y1="194.0" x2="500.0" y2="140.0" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="640.0" y="230.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#fbbf24" text-anchor="middle">roofing screws can</text>
+<text x="640.0" y="252.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#fbbf24" text-anchor="middle">come through</text>
+<line x1="566.0" y1="214.0" x2="476.0" y2="170.0" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="476.0" cy="170.0" r="4" fill="#fbbf24" stroke="none" stroke-width="2"/>
+<line x1="300.0" y1="194.0" x2="300.0" y2="140.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="500.0" y1="194.0" x2="500.0" y2="140.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="290.0" y="138.0" width="20.0" height="6.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="490.0" y="138.0" width="20.0" height="6.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="260.0" y="194.0" width="280.0" height="40.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="252.0" y="198.0" width="10.0" height="44.0" rx="2" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="538.0" y="198.0" width="10.0" height="44.0" rx="2" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<path d="M 264 234.0 Q 400 258.0 536 234.0 Z" fill="#94a3b8" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="400.0" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">luminaire</text>
 <line x1="250.0" y1="140.0" x2="243.0" y2="140.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
 <line x1="237.0" y1="140.0" x2="230.0" y2="140.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
 <line x1="224.0" y1="140.0" x2="217.0" y2="140.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>

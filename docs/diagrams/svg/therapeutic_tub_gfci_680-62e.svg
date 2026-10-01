@@ -2,32 +2,36 @@
 <rect x="0.0" y="0.0" width="800.0" height="420.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Therapy room with a hydrotherapy tub (plan)</text>
 <rect x="40.0" y="70.0" width="480.0" height="330.0" rx="0" fill="#1e293b" fill-opacity="0.4" stroke="#94a3b8" stroke-width="4"/>
-<circle cx="250.0" cy="238.0" r="170.0" fill="#0ea5e9" fill-opacity="0.12" stroke="#0ea5e9" stroke-width="3"/>
-<rect x="170.0" y="190.0" width="160.0" height="96.0" rx="30" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="3"/>
-<text x="250.0" y="246.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">tub</text>
-<circle cx="120.0" cy="196.0" r="12" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
-<line x1="102.0" y1="192.0" x2="108.0" y2="192.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="102.0" y1="200.0" x2="108.0" y2="200.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<circle cx="120.0" cy="196.0" r="5.4" fill="#34d399" stroke="none" stroke-width="2"/>
-<text x="100.0" y="172.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">GFCI</text>
-<circle cx="506.0" cy="110.0" r="12" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
-<line x1="488.0" y1="106.0" x2="494.0" y2="106.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="488.0" y1="114.0" x2="494.0" y2="114.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<text x="480.0" y="96.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="end">outside:</text>
-<text x="480.0" y="120.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="end">no rule here</text>
-<line x1="314.0" y1="286.0" x2="380.2" y2="335.7" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<polygon points="386.0,340.0 372.8,337.6 380.0,328.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<text x="354.0" y="302.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="start">6 ft</text>
+<rect x="44.0" y="82.0" width="376.0" height="312.0" rx="134" fill="#0ea5e9" fill-opacity="0.12" stroke="#0ea5e9" stroke-width="3"/>
+<rect x="152.0" y="190.0" width="160.0" height="96.0" rx="26" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="164.0" y="202.0" width="136.0" height="72.0" rx="18" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="2"/>
+<text x="232.0" y="246.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">tub</text>
+<line x1="44.0" y1="264.0" x2="68.6" y2="264.0" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="44.0" y1="272.0" x2="68.6" y2="272.0" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="62.0" cy="268.0" r="12" fill="none" stroke="#34d399" stroke-width="3"/>
+<circle cx="67.4" cy="268.0" r="3" fill="#34d399" stroke="none" stroke-width="2"/>
+<text x="86.0" y="275.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">GFCI</text>
+<line x1="484.0" y1="246.0" x2="508.6" y2="246.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="484.0" y1="254.0" x2="508.6" y2="254.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="502.0" cy="250.0" r="12" fill="none" stroke="#e2e8f0" stroke-width="3"/>
+<text x="474.0" y="150.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">outside:</text>
+<text x="474.0" y="172.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">no rule</text>
+<text x="474.0" y="194.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">here</text>
+<line x1="308.0" y1="238.0" x2="315.0" y2="238.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="318.0" y1="238.0" x2="414.0" y2="238.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="312.0,238.0 324.0,232.0 324.0,244.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="420.0,238.0 408.0,244.0 408.0,232.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="366.0" y="220.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="middle">6 ft</text>
 <rect x="546.0" y="70.0" width="234.0" height="250.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="560.0" y="110.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">Every receptacle</text>
-<text x="560.0" y="136.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">within the circle</text>
+<text x="560.0" y="136.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">within the zone</text>
 <text x="560.0" y="162.8" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">(measured from the</text>
-<text x="560.0" y="189.2" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">tub) has GFCI</text>
+<text x="560.0" y="189.2" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">tub edge) has GFCI</text>
 <text x="560.0" y="215.6" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">protection.</text>
-<circle cx="572.0" cy="290.0" r="12" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
-<line x1="554.0" y1="286.0" x2="560.0" y2="286.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="554.0" y1="294.0" x2="560.0" y2="294.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<circle cx="572.0" cy="290.0" r="5.4" fill="#34d399" stroke="none" stroke-width="2"/>
+<line x1="554.0" y1="286.0" x2="578.6" y2="286.0" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="554.0" y1="294.0" x2="578.6" y2="294.0" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="572.0" cy="290.0" r="12" fill="none" stroke="#34d399" stroke-width="3"/>
+<circle cx="577.4" cy="290.0" r="3" fill="#34d399" stroke="none" stroke-width="2"/>
 <text x="596.0" y="297.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">= GFCI</text>
 <rect x="616.8" y="384.0" width="169.2" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="626.8" y="412.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 680.62(E)</text>

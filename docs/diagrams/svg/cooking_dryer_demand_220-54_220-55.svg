@@ -3,10 +3,10 @@
 <text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Household cooking and dryer demand</text>
 <rect x="20.0" y="56.0" width="470.0" height="316.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="34.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Table 220.55: pick the column by kW</text>
-<text x="34.0" y="112.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">under 3 1/2 kW: Column A (%)</text>
-<text x="34.0" y="135.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">3 1/2 to 8 3/4 kW: Column B (%)</text>
-<text x="34.0" y="158.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">up to 12 kW: Column C (kW), the default</text>
-<text x="34.0" y="181.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">over 12 kW: C + 5% per kW over 12 (Note 1)</text>
+<text x="34.0" y="118.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">under 3 1/2 kW: Column A (%)</text>
+<text x="34.0" y="141.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">3 1/2 to 8 3/4 kW: Column B (%)</text>
+<text x="34.0" y="164.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">up to 12 kW: Column C (kW), the default</text>
+<text x="34.0" y="187.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">over 12 kW: C + 5% per kW over 12 (Note 1)</text>
 <text x="34.0" y="214.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#94a3b8" text-anchor="start">how many</text>
 <text x="154.0" y="214.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#94a3b8" text-anchor="start">A</text>
 <text x="244.0" y="214.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#94a3b8" text-anchor="start">B</text>

@@ -23,6 +23,11 @@
 <rect x="592.0" y="60.0" width="16.0" height="100.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
 <rect x="592.0" y="250.0" width="16.0" height="76.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
 <rect x="140.0" y="80.0" width="260.0" height="44.0" rx="4" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<line x1="226.7" y1="82.0" x2="226.7" y2="89.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="226.7" y1="122.0" x2="226.7" y2="117.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="313.3" y1="82.0" x2="313.3" y2="89.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="313.3" y1="122.0" x2="313.3" y2="117.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="144.0" y1="120.0" x2="396.0" y2="120.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <text x="270.0" y="110.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">800 A SWITCHBOARD</text>
 <rect x="140.0" y="124.0" width="260.0" height="176.0" rx="4" fill="#0ea5e9" fill-opacity="0.1" stroke="#0ea5e9" stroke-width="3"/>
 <text x="262.0" y="164.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#f87171" text-anchor="middle">live parts exposed</text>

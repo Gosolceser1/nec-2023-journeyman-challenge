@@ -7,14 +7,24 @@
 <path d="M 74 297.5 q 20.0 -6 40.0 0 t 32.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="110.0" y="60.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">combustible</text>
 <text x="110.0" y="87.5" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">material</text>
-<rect x="450.0" y="150.0" width="230.0" height="170.0" rx="6" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
-<polyline points="474.0,176.0 496.0,192.0 518.0,176.0 540.0,192.0 562.0,176.0 584.0,192.0 606.0,176.0 628.0,192.0 650.0,176.0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<polyline points="474.0,210.0 496.0,226.0 518.0,210.0 540.0,226.0 562.0,210.0 584.0,226.0 606.0,210.0 628.0,226.0 650.0,210.0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<polyline points="474.0,244.0 496.0,260.0 518.0,244.0 540.0,260.0 562.0,244.0 584.0,260.0 606.0,244.0 628.0,260.0 650.0,244.0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<polyline points="474.0,278.0 496.0,294.0 518.0,278.0 540.0,294.0 562.0,278.0 584.0,294.0 606.0,278.0 628.0,294.0 650.0,278.0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="466.0" y="316.0" width="20.0" height="42.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="644.0" y="316.0" width="20.0" height="42.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="450.0" y="150.0" width="230.0" height="166.0" rx="6" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<rect x="462.0" y="176.0" width="14.0" height="16.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="654.0" y="176.0" width="14.0" height="16.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<polyline points="480.0,176.0 501.0,192.0 522.0,176.0 543.0,192.0 564.0,176.0 585.0,192.0 606.0,176.0 627.0,192.0 648.0,176.0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="462.0" y="210.0" width="14.0" height="16.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="654.0" y="210.0" width="14.0" height="16.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<polyline points="480.0,210.0 501.0,226.0 522.0,210.0 543.0,226.0 564.0,210.0 585.0,226.0 606.0,210.0 627.0,226.0 648.0,210.0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="462.0" y="244.0" width="14.0" height="16.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="654.0" y="244.0" width="14.0" height="16.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<polyline points="480.0,244.0 501.0,260.0 522.0,244.0 543.0,260.0 564.0,244.0 585.0,260.0 606.0,244.0 627.0,260.0 648.0,244.0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="462.0" y="278.0" width="14.0" height="16.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="654.0" y="278.0" width="14.0" height="16.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<polyline points="480.0,278.0 501.0,294.0 522.0,278.0 543.0,294.0 564.0,278.0 585.0,294.0 606.0,278.0 627.0,294.0 648.0,278.0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="565.0" y="100.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">resistor or</text>
 <text x="565.0" y="130.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">reactor</text>
-<rect x="260.0" y="130.0" width="14.0" height="220.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="260.0" y="130.0" width="14.0" height="228.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
 <text x="300.0" y="180.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">thermal</text>
 <text x="300.0" y="207.5" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">barrier</text>
 <line x1="296.0" y1="190.0" x2="276.0" y2="200.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
@@ -23,13 +33,13 @@
 <line x1="150.0" y1="375.0" x2="150.0" y2="382.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
 <line x1="150.0" y1="388.0" x2="150.0" y2="395.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
 <line x1="150.0" y1="401.0" x2="150.0" y2="402.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="450.0" y1="322.0" x2="450.0" y2="329.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="450.0" y1="335.0" x2="450.0" y2="342.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="450.0" y1="348.0" x2="450.0" y2="355.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="450.0" y1="361.0" x2="450.0" y2="368.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="450.0" y1="374.0" x2="450.0" y2="381.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="450.0" y1="387.0" x2="450.0" y2="394.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="450.0" y1="400.0" x2="450.0" y2="402.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="450.0" y1="318.0" x2="450.0" y2="325.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="450.0" y1="331.0" x2="450.0" y2="338.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="450.0" y1="344.0" x2="450.0" y2="351.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="450.0" y1="357.0" x2="450.0" y2="364.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="450.0" y1="370.0" x2="450.0" y2="377.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="450.0" y1="383.0" x2="450.0" y2="390.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="450.0" y1="396.0" x2="450.0" y2="402.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
 <line x1="156.0" y1="392.0" x2="444.0" y2="392.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <polygon points="150.0,392.0 162.0,386.0 162.0,398.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <polygon points="450.0,392.0 438.0,398.0 438.0,386.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>

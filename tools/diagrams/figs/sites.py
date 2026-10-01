@@ -90,36 +90,38 @@ def fair_structures(f):
     f.grade(ground, 20, f.w - 20, label=None, soil_h=40)
     f.line(400, 60, 400, ground, EDGE, SW_THIN)
     # Left: lower voltage, 15 ft in any direction.
-    cx, cy, r = 200, 232, 96
+    cx, cy, r = 200, 232, 86
     f.line(cx, cy - 20, cx, ground, WOOD, 12)
     f.line(cx - 40, cy - 6, cx + 40, cy - 6, WOOD, 8)
-    _zone_circle(f, cx, cy, r)
+    # 15 ft in any direction from each conductor.
+    f.rect(cx - 30 - r, cy - 6 - r, 60 + 2 * r, 2 * r, fill=ZONE, op=0.12, stroke=ZONE, sw=SW_OBJ, rx=r)
     for dx in (-30, 30):
         f.circle(cx + dx, cy - 6, 8, fill=WIRE_HOT, stroke=BG, sw=SW_THIN)
-    f.arrow(cx + 6, cy - 12, cx + r * 0.68, cy - r * 0.72, DIM)
-    f.text(cx + 24, cy + 30, "15 ft", T_LABEL, DIM, "start", True)
+    f.arrow(cx + 36, cy - 12, cx + 30 + r * 0.707, cy - 6 - r * 0.707, DIM)
+    f.text(cx + 40, cy + 34, "15 ft", T_LABEL, DIM, "start", True)
     v = f.value(40, 86, "600 V", 26, anchor="start", pad=5, what="the voltage limit")
     f.text(v[0] + v[2] + 12, 86, "or less:", 26, TEXT, "start", True)
     f.text(40, 116, "15 ft in any direction", T_NOTE, MUTED, "start")
     _ride(f, 300, ground)
     f.mark_ok(335, ground - 110)
     # Right: higher voltage, a column 15 ft each side, down to grade.
-    tx, ty, half = 600, 170, 110
+    tx, ty, half, oc = 600, 170, 76, 36
     f.line(tx, ty - 10, tx, ground, STEEL, 12)
     f.line(tx - 50, ty, tx + 50, ty, STEEL, 8)
-    f.hatch(tx - half, ty, 2 * half, ground - ty)
-    f.rect(tx - half, ty, 2 * half, ground - ty, stroke=ZONE, sw=SW_OBJ)
-    for dx in (-36, 0, 36):
+    f.hatch(tx - oc - half, ty, 2 * (oc + half), ground - ty)
+    f.rect(tx - oc - half, ty, 2 * (oc + half), ground - ty, stroke=ZONE, sw=SW_OBJ)
+    for dx in (-oc, 0, oc):
         f.circle(tx + dx, ty, 8, fill=WIRE_HOT, stroke=BG, sw=SW_THIN)
-    f.dim_h(tx, tx + half, ty + 40)
-    f.text(tx + half / 2, ty + 72, "15 ft", T_LABEL, DIM, bold=True)
+    f.ext(tx + oc, ty + 10, tx + oc, ty + 52)
+    f.dim_h(tx + oc, tx + oc + half, ty + 40)
+    f.text(tx + oc + half / 2, ty + 72, "15 ft", T_LABEL, DIM, bold=True)
     b = f.text(430, 86, "over", 26, TEXT, "start", True)
     f.value(b[0] + b[2] + 12, 86, "600 V", 26, anchor="start", pad=5, what="the voltage limit")
     f.lines(430, 116, ["not under, nor within 15 ft", "sideways, down to grade"], T_NOTE, MUTED, "start", gap=1.1)
     _ride(f, tx - 60, ground)
     f.mark_no(tx - 25, ground - 110)
-    _ride(f, tx + half + 12, ground, 60, 56)
-    f.mark_ok(tx + half + 42, ground - 100)
+    _ride(f, tx + oc + half + 14, ground, 54, 54)
+    f.mark_ok(tx + oc + half + 41, ground - 98)
     f.text(335, ground + 28, "ride or tent", T_MIN, TEXT)
     f.tag(f.w - 24, f.h - 10, "NEC 525.5(B)", anchor="end")
 
@@ -176,21 +178,24 @@ def therapeutic_tub(f):
     f.title("Therapy room with a hydrotherapy tub (plan)", y=34)
     x0, y0, x1, y1 = 40, 70, 520, 400
     f.rect(x0, y0, x1 - x0, y1 - y0, fill=PANEL, op=0.4, stroke=LINE, sw=SW_STRUCT)
-    tx, ty, tw, th = 170, 190, 160, 96
-    cx, cy, r = tx + tw / 2, ty + th / 2, 170
-    _zone_circle(f, cx, cy, r)
-    f.rect(tx, ty, tw, th, fill=WATER, stroke=WATER_EDGE, sw=SW_OBJ, rx=30)
-    f.text(cx, cy + 8, "tub", T_LABEL, TEXT, bold=True)
-    # Receptacles: one inside the zone, one outside.
-    f.plan_receptacle(x0 + 80, 196, gfci=True)
-    f.text(x0 + 60, 172, "GFCI", T_NOTE, OK, "start", True)
-    f.plan_receptacle(x1 - 14, 110)
-    f.text(x1 - 40, 96, "outside:", T_MIN, MUTED, "end")
-    f.text(x1 - 40, 120, "no rule here", T_MIN, MUTED, "end")
-    f.arrow(cx + 64, cy + 48, cx + r * 0.8, cy + r * 0.6, DIM)
-    f.value(cx + 104, cy + 64, "6 ft", 28, anchor="start", pad=6, what="the GFCI radius")
+    tx, ty, tw, th = 152, 190, 160, 96
+    d = 108
+    # The zone: 6 ft out from the tub edge all around, measured horizontally.
+    f.rect(tx - d, ty - d, tw + 2 * d, th + 2 * d, fill=ZONE, op=0.12, stroke=ZONE, sw=SW_OBJ, rx=26 + d)
+    f.rect(tx, ty, tw, th, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=26)
+    f.rect(tx + 12, ty + 12, tw - 24, th - 24, fill=WATER, stroke=WATER_EDGE, sw=SW_THIN, rx=18)
+    f.text(tx + tw / 2, ty + th / 2 + 8, "tub", T_LABEL, TEXT, bold=True)
+    # Receptacles on the walls: one inside the zone, one outside.
+    f.plan_receptacle(x0 + 22, 268, gfci=True)
+    f.text(x0 + 46, 275, "GFCI", T_NOTE, OK, "start", True)
+    f.plan_receptacle(x1 - 18, 250)
+    f.lines(x1 - 46, 150, ["outside:", "no rule", "here"], T_MIN, MUTED, gap=1.1)
+    ay = ty + th / 2
+    f.ext(tx + tw - 4, ay, tx + tw + 4, ay)
+    f.dim_h(tx + tw, tx + tw + d, ay)
+    f.value(tx + tw + d / 2, ay - 18, "6 ft", 28, pad=6, what="the GFCI radius")
     f.rect(546, 70, 234, 250, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    f.lines(560, 110, ["Every receptacle", "within the circle", "(measured from the", "tub) has GFCI", "protection."],
+    f.lines(560, 110, ["Every receptacle", "within the zone", "(measured from the", "tub edge) has GFCI", "protection."],
             T_NOTE, TEXT, "start", gap=1.2)
     f.plan_receptacle(572, 290, gfci=True)
     f.text(596, 297, "= GFCI", T_NOTE, TEXT, "start")
@@ -224,9 +229,10 @@ def buried_conductors(f):
     f.lines(rx + 150, grade + 150, ["(protection need not go", "deeper than 18 in)"], T_MIN, MUTED, gap=1.1)
     # Right: frost heave, slack at the raceway transition.
     sx = 640
-    f.rect(sx - 60, grade - 90, 120, 90, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
-    f.text(sx, grade - 38, "equipment", T_MIN, TEXT, bold=True)
-    f.conduit(sx, grade, sx, grade + 50, 12)
+    f.rect(sx + 34, grade - 190, 16, 210, fill=WOOD, op=0.8, stroke="#ca8a04", sw=SW_THIN)
+    f.conduit(sx, grade - 86, sx, grade + 50, 12)
+    f.disconnect(sx - 38, grade - 190, 76, 100)
+    f.text(sx - 52, grade - 132, "disconnect", T_NOTE, TEXT, "end", True)
     loop = f"M {sx} {grade + 50} c 0 30 -70 20 -70 50 s 70 20 70 50 s -70 20 -40 30 L {sx - 180} {grade + 180}"
     f.path(loop, TEXT, 5)
     f.mask(sx - 90, grade + 44, 110, 120, records=LOOPS, what="the slack loop in the cable")
@@ -251,14 +257,20 @@ def roof_decking(f):
     for x in (330, 470):
         f.line(x, y_top - 20, x, y_top + rib + 24, AMBER, 4)
         f.poly([(x - 5, y_top + rib + 24), (x + 5, y_top + rib + 24), (x, y_top + rib + 36)], AMBER)
-    f.lines(620, 260, ["roofing screws can", "come through"], T_MIN, AMBER, gap=1.1)
+    f.lines(640, 230, ["roofing screws can", "come through"], T_MIN, AMBER, gap=1.1)
+    f.leader(566, 214, 476, y_top + rib + 30, AMBER)
     low = y_top + rib
     lum_top = low + 1.5 * 36
-    f.rect(260, lum_top, 280, 44, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
-    f.rect(280, lum_top + 44, 240, 10, fill=AMBER, op=0.6)
-    f.text(400, lum_top + 30, "luminaire", T_NOTE, TEXT, bold=True)
-    f.line(300, lum_top, 300, low, TEXT, SW_THIN)
-    f.line(500, lum_top, 500, low, TEXT, SW_THIN)
+    # Strip luminaire on two hangers: channel, end caps, lens below.
+    f.line(300, lum_top, 300, low, LINE, 3)
+    f.line(500, lum_top, 500, low, LINE, 3)
+    for hx in (300, 500):
+        f.rect(hx - 10, low - 2, 20, 6, fill=STEEL, stroke=TEXT, sw=1)
+    f.rect(260, lum_top, 280, 40, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=4)
+    f.rect(252, lum_top + 4, 10, 44, fill=EDGE, stroke=TEXT, sw=1.5, rx=2)
+    f.rect(538, lum_top + 4, 10, 44, fill=EDGE, stroke=TEXT, sw=1.5, rx=2)
+    f.path(f"M 264 {lum_top + 40} Q 400 {lum_top + 64} 536 {lum_top + 40} Z", TEXT, 1.5, LINE)
+    f.text(400, lum_top + 28, "luminaire", T_NOTE, TEXT, bold=True)
     f.ext(250, low, 150, low)
     f.ext(256, lum_top, 150, lum_top)
     f.dim_v(160, low, lum_top)

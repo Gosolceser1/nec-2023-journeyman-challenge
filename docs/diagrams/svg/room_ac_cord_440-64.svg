@@ -10,21 +10,28 @@
 <line x1="345.0" y1="188.0" x2="420.0" y2="188.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="345.0" y1="204.0" x2="420.0" y2="204.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <text x="440.0" y="108.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">room A/C</text>
-<path d="M 400 230 C 390 300, 300 300, 260 350" fill="none" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-<rect x="224.0" y="345.0" width="32.0" height="50.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
-<line x1="235.0" y1="355.0" x2="235.0" y2="363.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="245.0" y1="355.0" x2="245.0" y2="363.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="235.0" y1="377.0" x2="235.0" y2="385.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="245.0" y1="377.0" x2="245.0" y2="385.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<rect x="252.0" y="342.0" width="26.0" height="22.0" rx="3" fill="#fbbf24" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<path d="M 400 230 C 390 300, 250 270, 250 340" fill="none" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="227.6" y="345.0" width="44.8" height="70.0" rx="7.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 242.0 352.4 L 258.0 352.4 A 14.0 14.0 0 0 1 258.0 375.4 L 242.0 375.4 A 14.0 14.0 0 0 1 242.0 352.4 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="244.7" y1="358.0" x2="244.7" y2="365.0" stroke="#e2e8f0" stroke-width="2.24" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="255.3" y1="358.7" x2="255.3" y2="364.3" stroke="#e2e8f0" stroke-width="2.24" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 247.8 372.6 V 369.5 A 2.2 2.2 0 0 1 252.2 369.5 V 372.6 Z" fill="none" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 242.0 384.6 L 258.0 384.6 A 14.0 14.0 0 0 1 258.0 407.6 L 242.0 407.6 A 14.0 14.0 0 0 1 242.0 384.6 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="244.7" y1="390.2" x2="244.7" y2="397.2" stroke="#e2e8f0" stroke-width="2.24" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="255.3" y1="390.9" x2="255.3" y2="396.5" stroke="#e2e8f0" stroke-width="2.24" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 247.8 404.8 V 401.7 A 2.2 2.2 0 0 1 252.2 401.7 V 404.8 Z" fill="none" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="250.0" cy="380.0" r="2.45" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<rect x="226.0" y="338.0" width="48.0" height="44.0" rx="8" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="232.0" y="356.0" width="16.0" height="10.0" rx="2" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="252.0" y="356.0" width="16.0" height="10.0" rx="2" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="40.0" y="150.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">cord, 120 V unit:</text>
 <text x="40.0" y="190.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="start">10 ft max</text>
 <text x="40.0" y="230.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">208 or 240 V unit: 6 ft max</text>
 <text x="540.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">plug has LCDI, AFCI or</text>
 <text x="540.0" y="324.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">HDCI protection within</text>
 <text x="540.0" y="348.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">12 in of the plug (440.65)</text>
-<line x1="536.0" y1="294.0" x2="280.0" y2="352.0" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
-<circle cx="280.0" cy="352.0" r="4" fill="#fbbf24" stroke="none" stroke-width="2"/>
+<line x1="536.0" y1="294.0" x2="276.0" y2="350.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="276.0" cy="350.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
 <rect x="646.2" y="426.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="656.2" y="454.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 440.64</text>
 </svg>

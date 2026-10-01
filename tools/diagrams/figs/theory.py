@@ -34,6 +34,23 @@ def _pushbutton(f, x, y, nc=False, half=28):
     f.line(x - 12, y - 38, x + 12, y - 38, TEXT, SW_OBJ + 1)
 
 
+def _lamp(f, x, y, r=22, label=None):
+    """Lamp: circle with an X, the X reaching the circle."""
+    f.circle(x, y, r, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ)
+    d = r * 0.66
+    f.line(x - d, y - d, x + d, y + d, TEXT, SW_OBJ)
+    f.line(x - d, y + d, x + d, y - d, TEXT, SW_OBJ)
+    if label:
+        f.text(x, y - r - 12, label, T_NOTE, TEXT, bold=True)
+
+
+def _source(f, x, y, label="120 V"):
+    """AC source: circle with one sine cycle."""
+    f.circle(x, y, 26, fill=PANEL, stroke=TEXT, sw=SW_OBJ)
+    f.path(f"M {x - 14} {y} q 7 -14 14 0 t 14 0", TEXT, SW_OBJ)
+    f.text(x - 34, y + 8, label, T_NOTE, DIM, "end", True)
+
+
 def _contact(f, x, y, nc=False, gap=10, h=30):
     f.line(x - gap, y - h / 2, x - gap, y + h / 2, TEXT, SW_OBJ + 1)
     f.line(x + gap, y - h / 2, x + gap, y + h / 2, TEXT, SW_OBJ + 1)
@@ -95,38 +112,29 @@ def parallel_resistors(f):
         records={"final-exam-#1-033": {"when": "after"}})
 def three_way(f):
     y_hot, y_t1, y_t2, y_n = 230, 170, 290, 390
-    f.text(30, 206, "hot", T_NOTE, MUTED, "start")
-    f.line(30, y_hot, 180, y_hot, WIRE_HOT, SW_WIRE)
-    f.text(30, y_n - 12, "neutral", T_NOTE, MUTED, "start")
-    f.line(30, y_n, 700, y_n, WIRE_NEU, SW_WIRE)
-    # Switch 1: common on the left, travelers on the right.
-    for (cx, tx, up) in ((180, 290, True), (620, 510, False)):
+    c1, t1, t2, c2 = 160, 270, 470, 580
+    f.text(30, 216, "hot", T_NOTE, MUTED, "start")
+    f.line(30, y_hot, c1, y_hot, WIRE_HOT, SW_WIRE)
+    f.text(30, y_n - 14, "neutral", T_NOTE, MUTED, "start")
+    # Common on the outside, travelers facing each other.
+    for (cx, tx, up) in ((c1, t1, True), (c2, t2, False)):
         f.rect(min(cx, tx) - 30, 130, abs(tx - cx) + 60, 200, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
+        ty = y_t1 if up else y_t2
+        f.line(cx, y_hot, tx + (-10 if tx > cx else 10), ty + (6 if up else -6), TEXT, SW_OBJ + 1)
         _terminal(f, cx, y_hot)
         _terminal(f, tx, y_t1)
         _terminal(f, tx, y_t2)
-        ty = y_t1 if up else y_t2
-        f.line(cx, y_hot, tx + (-10 if tx > cx else 10), ty + (6 if up else -6), TEXT, SW_OBJ + 2)
-    f.line(290, y_t1, 510, y_t1, WIRE_HOT, SW_WIRE)
-    f.line(290, y_t2, 510, y_t2, WIRE_HOT, SW_WIRE)
-    f.text(400, y_t1 - 14, "traveler", T_NOTE, MUTED)
-    f.text(400, y_t2 - 14, "traveler", T_NOTE, MUTED)
-    f.text(180, 360, "common", T_NOTE, TEXT, bold=True)
-    f.text(620, 360, "common", T_NOTE, TEXT, bold=True)
-    f.leader(180, 340, 180, y_hot + 12)
-    f.leader(620, 340, 620, y_hot + 12)
-    f.line(620, y_hot, 720, y_hot, WIRE_HOT, SW_WIRE)
-    f.line(720, y_hot, 720, y_hot + 40, WIRE_HOT, SW_WIRE)
-    lx, ly, r = 720, y_hot + 70, 30
-    f.circle(lx, ly, r, fill=BG, stroke=TEXT, sw=SW_OBJ)
-    d = r * 0.7
-    f.line(lx - d, ly - d, lx + d, ly + d, TEXT, SW_OBJ)
-    f.line(lx - d, ly + d, lx + d, ly - d, TEXT, SW_OBJ)
-    f.line(lx, ly + r, lx, y_n, WIRE_NEU, SW_WIRE)
-    f.line(700, y_n, lx, y_n, WIRE_NEU, SW_WIRE)
-    f.text(lx, y_hot - 14, "lamp", T_NOTE, MUTED)
-    f.text(235, 114, "3-way", T_LABEL, TEXT, bold=True)
-    f.text(565, 114, "3-way", T_LABEL, TEXT, bold=True)
+        f.text((cx + tx) / 2, 114, "3-way", T_LABEL, TEXT, bold=True)
+        f.text(cx, 362, "common", T_NOTE, TEXT, bold=True)
+        f.leader(cx, 340, cx, y_hot + 12)
+    for yy in (y_t1, y_t2):
+        f.line(t1 + 7, yy, t2 - 7, yy, WIRE_HOT, SW_WIRE)
+        f.text((t1 + t2) / 2, yy - 14, "traveler", T_NOTE, MUTED)
+    lx, ly, r = 690, 300, 28
+    f.polyline([(c2 + 7, y_hot), (lx, y_hot), (lx, ly - r)], WIRE_HOT, SW_WIRE)
+    f.polyline([(30, y_n), (lx, y_n), (lx, ly + r)], WIRE_NEU, SW_WIRE)
+    _lamp(f, lx, ly, r)
+    f.text(lx + r + 12, ly + 8, "lamp", T_NOTE, MUTED, "start")
     f.value(400, 52, "3-way switch = SPDT", 30, records=None)
     f.text(400, 84, "single pole, double throw: 1 common, 2 travelers", T_NOTE, MUTED)
 
@@ -155,12 +163,14 @@ def motor_control(f):
     f.line(250, ys, 320, ys, WIRE_HOT, SW_WIRE)
     f.line(340, ys, 410, ys, WIRE_HOT, SW_WIRE)
     _contact(f, 330, ys)
+    for jx in (250, 410):
+        f.circle(jx, y, 6, fill=WIRE_HOT)
     f.text(160, 128, "STOP (NC)", T_NOTE, TEXT, bold=True)
     f.text(330, 128, "START (NO)", T_NOTE, TEXT, bold=True)
-    f.text(550, 150, "coil", T_NOTE, MUTED)
-    f.text(660, 150, "OL", T_NOTE, MUTED)
+    f.text(550, 150, "coil", T_NOTE, TEXT, bold=True)
+    f.text(660, 150, "OL", T_NOTE, TEXT, bold=True)
     f.text(330, ys + 46, "M seal-in (NO)", T_NOTE, TEXT, bold=True)
-    f.text(560, ys + 6, "parallel with START", T_NOTE, MUTED)
+    f.text(428, ys + 8, "in parallel with START", T_NOTE, MUTED, "start")
     f.value(400, 408, "STOP is in SERIES with the coil", 30, records=None)
     f.text(400, 440, "opening any stop drops out the coil", T_NOTE, MUTED)
 
@@ -239,28 +249,12 @@ def delta_symbol(f):
     f.text(wx, 344, "Y inside the circle", T_NOTE, MUTED)
 
 
-def _lamp(f, x, y, r=22, label=None):
-    f.circle(x, y, r, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ)
-    d = r * 0.6
-    f.line(x - d, y - d, x + d, y + d, TEXT, SW_THIN)
-    f.line(x - d, y + d, x + d, y - d, TEXT, SW_THIN)
-    if label:
-        f.text(x, y - r - 12, label, T_NOTE, TEXT, bold=True)
-
-
-def _source(f, x, y, label="120 V"):
-    f.circle(x, y, 26, fill=PANEL, stroke=TEXT, sw=SW_OBJ)
-    f.path(f"M {x - 14} {y} q 7 -14 14 0 t 14 0", TEXT, SW_THIN)
-    f.text(x - 32, y + 8, label, T_NOTE, DIM, "end", True)
-
-
 @figure("series_vs_parallel", h=500, nec="General knowledge (series and parallel circuits)", when="after",
         records=["final-exam-#2-013", "final-exam-#2-014", "final-exam-#2-016"])
 def series_vs_parallel(f):
     f.title("Series shares the current, parallel shares the voltage", y=34)
     # Series: lamp and heater in one loop.
-    f.rect(20, 56, 370, 424, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    f.text(34, 88, "SERIES", T_NOTE, TEXT, "start", True)
+    f.card(20, 56, 370, 424, "SERIES")
     l, r, t, b = 120, 330, 140, 290
     f.polyline([(l, 190), (l, t), (r, t), (r, b), (l, b), (l, 240)], WIRE_HOT, SW_WIRE)
     _source(f, l, 215)
@@ -273,8 +267,7 @@ def series_vs_parallel(f):
                       "heater puts out less heat"], T_MIN, TEXT, "start", gap=1.15)
     f.highlight(26, 352, 358, 118, records=["final-exam-#2-014"])
     # Parallel: two unequal branches.
-    f.rect(410, 56, 370, 424, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    f.text(424, 88, "PARALLEL", T_NOTE, TEXT, "start", True)
+    f.card(410, 56, 370, 424, "PARALLEL")
     l, t, b = 504, 140, 290
     f.polyline([(l, 190), (l, t), (680, t)], WIRE_HOT, SW_WIRE)
     f.polyline([(l, 240), (l, b), (680, b)], WIRE_HOT, SW_WIRE)
@@ -331,7 +324,8 @@ def ac_wave_values(f):
 def transformer_turns(f):
     f.title("Turns ratio sets the voltage ratio", y=34)
     core_x0, core_x1, top, bot = 250, 550, 90, 330
-    f.rect(core_x0, top, core_x1 - core_x0, bot - top, fill="none", stroke=STEEL, sw=22)
+    f.rect(core_x0 - 11, top - 11, core_x1 - core_x0 + 22, bot - top + 22, fill=STEEL, stroke=LINE, sw=SW_THIN)
+    f.rect(core_x0 + 11, top + 11, core_x1 - core_x0 - 22, bot - top - 22, fill=BG, stroke=LINE, sw=SW_THIN)
     for k in range(10):
         y = top + 24 + k * 20
         f.path(f"M {core_x0 - 26} {y} q 26 -10 52 0", AMBER, SW_OBJ)
@@ -366,8 +360,7 @@ def resistance_factors(f):
     f.lines(40, 250, ["length x 3 -> ohms x 3", "area x 1/2 -> ohms x 2", "5 x 3 x 2 = 30 ohm"], T_NOTE, TEXT,
             "start", gap=1.25)
     f.highlight(30, 226, 300, 96, records=["final-exam-#2-019"])
-    f.rect(400, 230, 380, 210, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    f.text(414, 262, "Changes resistance:", T_NOTE, OK, "start", True)
+    f.card(400, 230, 380, 210, "Changes resistance:", title_fill=OK)
     f.lines(414, 292, ["length, cross-section area", "(diameter), material,", "temperature"], T_MIN, TEXT,
             "start", gap=1.15)
     f.text(414, 384, "Does not:", T_NOTE, NO, "start", True)

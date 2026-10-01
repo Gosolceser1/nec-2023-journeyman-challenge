@@ -30,11 +30,32 @@
 <text x="500.0" y="372.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">panel OCPD</text>
 <text x="500.0" y="397.3" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">on this side</text>
 <rect x="620.0" y="110.0" width="150.0" height="200.0" rx="5" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
-<line x1="647.0" y1="143.3" x2="743.0" y2="143.3" stroke="#64748b" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="647.0" y1="176.7" x2="743.0" y2="176.7" stroke="#64748b" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="647.0" y1="210.0" x2="743.0" y2="210.0" stroke="#64748b" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="647.0" y1="243.3" x2="743.0" y2="243.3" stroke="#64748b" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="647.0" y1="276.7" x2="743.0" y2="276.7" stroke="#64748b" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="630.5" y="120.5" width="129.0" height="179.0" rx="3" fill="#334155" fill-opacity="0.55" stroke="#64748b" stroke-width="2"/>
+<circle cx="640.0" cy="129.9" r="2.6999999999999997" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="750.0" cy="129.9" r="2.6999999999999997" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="640.0" cy="290.1" r="2.6999999999999997" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="750.0" cy="290.1" r="2.6999999999999997" fill="#64748b" stroke="none" stroke-width="2"/>
+<rect x="687.5" y="141.6" width="15.0" height="136.8" rx="2" fill="#0f172a" fill-opacity="0.6" stroke="none" stroke-width="2"/>
+<rect x="641.0" y="147.3" width="45.0" height="19.1" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="665.3" y="151.5" width="15.3" height="10.7" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="704.0" y="147.3" width="45.0" height="19.1" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="709.4" y="151.5" width="15.3" height="10.7" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="641.0" y="173.9" width="45.0" height="19.1" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="665.3" y="178.1" width="15.3" height="10.7" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="704.0" y="173.9" width="45.0" height="19.1" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="709.4" y="178.1" width="15.3" height="10.7" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="641.0" y="200.4" width="45.0" height="19.1" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="665.3" y="204.6" width="15.3" height="10.7" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="704.0" y="200.4" width="45.0" height="19.1" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="709.4" y="204.6" width="15.3" height="10.7" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="641.0" y="227.0" width="45.0" height="19.1" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="665.3" y="231.2" width="15.3" height="10.7" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="704.0" y="227.0" width="45.0" height="19.1" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="709.4" y="231.2" width="15.3" height="10.7" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="641.0" y="253.6" width="45.0" height="19.1" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="665.3" y="257.8" width="15.3" height="10.7" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="704.0" y="253.6" width="45.0" height="19.1" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="709.4" y="257.8" width="15.3" height="10.7" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="695.0" y="338.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">panelboard</text>
 <text x="24.0" y="452.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">Ex.: 240.21(C)(1) two-wire secondary may be protected on the primary.</text>
 <rect x="615.6" y="38.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>

@@ -8,12 +8,12 @@
 <circle cx="168.0" cy="216.0" r="22" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
 <circle cx="200.0" cy="252.0" r="14" fill="#86efac" stroke="#0f172a" stroke-width="2"/>
 <text x="150.0" y="68.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">raceway, cut open</text>
-<text x="150.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">circuit conductors:</text>
-<text x="150.0" y="357.5" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">count them</text>
-<text x="74.0" y="398.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#86efac" text-anchor="start">EGC:</text>
-<text x="132.0" y="398.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">not counted</text>
-<line x1="170.0" y1="380.0" x2="200.0" y2="266.0" stroke="#86efac" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
-<circle cx="200.0" cy="266.0" r="4" fill="#86efac" stroke="none" stroke-width="2"/>
+<text x="74.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#86efac" text-anchor="start">EGC:</text>
+<text x="132.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">not counted</text>
+<line x1="200.0" y1="314.0" x2="200.0" y2="268.0" stroke="#86efac" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="200.0" cy="268.0" r="4" fill="#86efac" stroke="none" stroke-width="2"/>
+<text x="150.0" y="400.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">circuit conductors:</text>
+<text x="150.0" y="427.5" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">count them</text>
 <rect x="290.0" y="60.0" width="495.0" height="420.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="540.0" y="92.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">#12 THWN</text>
 <text x="540.0" y="117.3" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">86 F, 4 CCC</text>

@@ -37,6 +37,60 @@ class DiagramFiguresTest(unittest.TestCase):
                                                              "main bonding jumper", "GEC"], "correct_index": 2}
         self.assertTrue(leakscan.leaks(word, [["MAIN BONDING JUMPER", 0.4, 0.4, 0.2, 0.05]], []))
 
+    def test_strict_rule_unit_variants(self):
+        sys.path.insert(0, str(ROOT / "tools" / "diagrams"))
+        import leakscan
+        rec = {"prompt": "The handle grip in its highest position shall be not more than ___ above grade.",
+               "answers": ["6 ft 7 in", "6 ft", "7 ft", "8 ft"], "correct_index": 0}
+        given, vals, phrases = leakscan.strict_keys(rec)
+        for shown in ("6 ft 7 in max", "6'7\"", "79 in", "2.0 m", "2 m", "(2.0 m)", "7 ft", "96 in"):
+            self.assertTrue(leakscan.strict_hits(shown, given, vals, phrases), shown)
+        for shown in ("handle grip", "NEC 550.32(F)", "Table 310.16", "Article 680", "finished grade"):
+            self.assertFalse(leakscan.strict_hits(shown, given, vals, phrases), shown)
+        self.assertEqual(leakscan.strict_hits("120/240 V", {("V", 120.0), ("V", 240.0)}, set(), set()), [])
+        sib = {"prompt": "x", "answers": ["GFCI", "AFCI", "LCDI", "none of these"], "correct_index": 0}
+        _, vals, phrases = leakscan.strict_keys(rec, [sib])
+        self.assertTrue(leakscan.strict_hits("AFCI breaker", set(), vals, phrases))
+
+
+@unittest.skipUnless(importlib.util.find_spec("pymupdf"), "the figure registry imports PyMuPDF")
+class PreAnswerFigureTextTest(unittest.TestCase):
+    """Committed figures, as the app shows them before answering: no label outside the
+    record's masks may state a rule value the stem doesn't give, or any answer choice
+    (right or wrong) of any question that shares the figure."""
+
+    def test_no_choice_or_value_visible_before_answering(self):
+        import json
+        sys.path.insert(0, str(ROOT / "tools" / "diagrams"))
+        import leakscan
+        bank = {r["id"]: r for r in json.loads((ROOT / "data" / "question_bank.json").read_text(encoding="utf-8"))["records"]}
+        figs = json.loads((ROOT / "assets" / "diagrams" / "nec" / "figures.json").read_text(encoding="utf-8"))
+        masks = json.loads((ROOT / "data" / "diagram_masks.json").read_text(encoding="utf-8"))["records"]
+        labels = json.loads((ROOT / "docs" / "diagrams" / "labels.json").read_text(encoding="utf-8"))
+        import re
+        import build
+        keep = {n: [re.compile(k, re.I) for k in s.get("keep", ())] for n, s in build.load_figs().items()}
+        by_fig = {}
+        for rid, e in figs.items():
+            by_fig.setdefault(e["figure"], []).append(rid)
+        bad, checked = [], 0
+        for rid, e in sorted(figs.items()):
+            if e["when"] != "before":
+                continue
+            checked += 1
+            sib = [bank[r] for r in by_fig[e["figure"]] if r != rid]
+            terms = masks[rid].get("terms", [])
+            given, vals, phrases = leakscan.strict_keys(bank[rid], sib, terms)
+            ms = masks[rid]["masks"]
+            for text, *box in labels[f"{e['figure']}.png"]:
+                if any(k.search(text) for k in keep.get(e["figure"], [])) or leakscan.covered(box, ms):
+                    continue
+                hit = leakscan.strict_hits(text, given, vals, phrases)
+                if hit:
+                    bad.append(f"{rid} ({e['figure']}): {text!r} {hit}")
+        self.assertGreater(checked, 200)
+        self.assertEqual(bad, [], "\n".join(bad[:40]))
+
 
 if __name__ == "__main__":
     unittest.main()

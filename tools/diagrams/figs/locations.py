@@ -3,9 +3,32 @@ from nec_style import *  # noqa: F401,F403
 
 
 def _card(f, x, y, w, h, title=None):
-    f.rect(x, y, w, h, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    if title:
-        f.text(x + w / 2, y + 30, title, T_NOTE, TEXT, bold=True)
+    f.card(x, y, w, h, title, align="middle")
+
+
+def _scatter(n, x, y, w, h, seed=7):
+    """Deterministic, evenly spread pseudo-random points in a box."""
+    pts, s = [], seed
+    for _ in range(n):
+        s = (s * 1103515245 + 12345) % 2147483648
+        u = s / 2147483648
+        s = (s * 1103515245 + 12345) % 2147483648
+        v = s / 2147483648
+        pts.append((x + u * w, y + v * h))
+    return pts
+
+
+def _duplex(f, x, y, s, red=False):
+    """Hospital-grade duplex: green dot on each face; red body for the critical branch."""
+    w = s * 0.64
+    f.rect(x - w / 2, y - s / 2, w, s, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=s * 0.1)
+    if red:
+        f.rect(x - w / 2, y - s / 2, w, s, fill=NO, op=0.75, stroke=TEXT, sw=SW_OBJ, rx=s * 0.1)
+    r = min(w * 0.37, s * 0.2)
+    for fy in (y - s * 0.23, y + s * 0.23):
+        f.nema_face(x, fy, r, "5-20")
+        f.circle(x + r * 0.62, fy - r * 0.62, max(2.5, r * 0.14), fill=OK)
+    f.circle(x, y, max(2.0, s * 0.035), fill=LINE)
 
 
 @figure("hazardous_classes_500-5", h=576, nec="500.5(B), (C), (D)",
@@ -22,8 +45,8 @@ def hazardous_classes(f):
             for dx, dy, r in ((-30, 6, 26), (0, -12, 32), (32, 4, 24), (4, 22, 22)):
                 f.circle(cx + dx, cy + dy, r, fill=PANEL_2, stroke=MUTED, sw=SW_THIN)
         elif num == "II":
-            for k in range(26):
-                f.circle(cx - 60 + (k * 37) % 120, cy - 34 + (k * 23) % 70, 4, fill=MUTED)
+            for k, (px, py) in enumerate(_scatter(34, cx - 70, cy - 40, 140, 80)):
+                f.circle(px, py, 3 + k % 3, fill=MUTED)
         else:
             for k in range(6):
                 f.path(f"M {cx - 70 + k * 10} {cy - 30 + k * 12} q 30 -24 60 0 t 60 0", MUTED, 3)
@@ -37,8 +60,18 @@ def hazardous_classes(f):
                              "Division 2")):
         f.rect(x, 330, w, 200, fill=PANEL, stroke=LINE, sw=SW_STRUCT)
         f.lines(x + w / 2, 368, lines_, T_MIN, TEXT, gap=1.2)
-        for k in range(5):
-            f.rect(x + 40 + k * 64, 454, 40, 30, fill=PANEL_2, stroke=EDGE, sw=SW_THIN, rx=3)
+        if d == "Division 1":
+            for k in range(3):
+                mx = x + 40 + k * 104
+                f.rect(mx, 450, 84, 36, fill=PANEL_2, stroke=EDGE, sw=SW_THIN, rx=4)
+                for rx_ in (mx + 22, mx + 62):
+                    f.circle(rx_, 468, 11, fill=BG, stroke=LINE, sw=SW_THIN)
+        else:
+            for k in range(5):
+                bx = x + 40 + k * 64
+                f.rect(bx, 450, 44, 36, fill=PANEL_2, stroke=EDGE, sw=SW_THIN, rx=3)
+                for sx in (bx + 13, bx + 31):
+                    f.line(sx, 451, sx, 485, LINE, 2)
         f.value(x + w / 2, 516, d, T_NOTE, records=div, pad=5, what=f"'{d}'")
     f.tag(f.w - 24, f.h - 10, "NEC 500.5", anchor="end")
 
@@ -55,8 +88,13 @@ def antenna_power_lines(f):
     f.line(mx, 272, mx, 110, STEEL, 6)
     for k, w in enumerate((70, 54, 38)):
         f.line(mx - w / 2, 120 + k * 22, mx + w / 2, 120 + k * 22, TEXT, 4)
-    f.path(f"M 100 285 a 26 26 0 0 1 36 -26", TEXT, 4)
-    f.line(118, 272, 128, 262, TEXT, 3)
+    # Small dish on a wall bracket.
+    f.line(102, 384, 102, 420, STEEL, 5)
+    f.rect(92, 418, 20, 10, fill=STEEL, stroke=TEXT, sw=1, rx=2)
+    f.path("M 110 352 Q 88 384 110 416", TEXT, 5)
+    f.line(110, 352, 136, 384, LINE, 2)
+    f.line(110, 416, 136, 384, LINE, 2)
+    f.rect(132, 379, 10, 10, fill=LINE, rx=2)
     # Fall arc of the mast.
     f.path(f"M {mx} 110 A 162 162 0 0 1 {mx + 162} 272", AMBER, 2)
     f.text(mx + 140, 150, "if it falls", T_MIN, AMBER, "start", True)
@@ -65,10 +103,10 @@ def antenna_power_lines(f):
     f.line(px, gy, px, 120, WOOD, 12)
     f.line(px - 70, 140, px + 70, 140, WOOD, 8)
     for dx in (-60, 0, 60):
-        f.circle(px + dx, 130, 6, fill=TEXT)
-    f.line(420, 132, 780, 130, WIRE_HOT, 3)
-    f.line(420, 132, 400, 134, WIRE_HOT, 3)
-    f.lines(px - 20, 196, ["overhead light and", "power conductors"], T_MIN, TEXT, "end", True, gap=1.1)
+        f.rect(px + dx - 6, 116, 12, 20, fill=LINE, stroke=TEXT, sw=1, rx=3)
+        f.circle(px + dx, 112, 7, fill=WIRE_HOT, stroke=BG, sw=2)
+    f.lines(px - 20, 196, ["overhead light and", "power conductors", "(end view)"], T_MIN, TEXT, "end", True,
+            gap=1.1)
     f.text(420, 300, "keep well away from lines", T_NOTE, TEXT, "start", True)
     b = f.text(420, 334, "of over", T_NOTE, TEXT, "start", True)
     f.value(b[0] + b[2] + 10, 334, "150 V to ground", T_NOTE, anchor="start", pad=6)
@@ -85,20 +123,22 @@ def patient_bed(f):
     f.text(60, 98, "headwall", T_MIN, MUTED, "start")
     xs = (140, 230, 570, 660)
     for k, x in enumerate(xs):
-        red = k in (0, 3)
-        f.rect(x - 26, 130, 52, 80, fill="#7f1d1d" if red else PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
-        for dy in (150, 190):
-            f.line(x - 8, dy - 6, x - 8, dy + 6, TEXT, 3)
-            f.line(x + 8, dy - 6, x + 8, dy + 6, TEXT, 3)
+        _duplex(f, x, 170, 80, red=k in (0, 3))
     f.mask(90, 112, 190, 116, what="receptacles on this side")
     f.mask(520, 112, 190, 116, what="receptacles on this side")
-    # Bed (plan-ish elevation).
-    f.rect(300, 200, 200, 240, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=10)
-    f.rect(330, 214, 140, 44, fill=LINE, rx=10)
-    f.text(400, 360, "bed", T_LABEL, TEXT, bold=True)
-    f.legend([("#7f1d1d", "critical branch", "box"), (PANEL_2, "normal system", "box")], 40, 300, T_MIN)
+    # Hospital bed seen from its foot, head against the wall.
+    f.floor(440, 270, 530)
+    f.rect(304, 226, 192, 110, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=12)
+    f.rect(340, 292, 120, 28, fill=LINE, rx=13)
+    f.rect(286, 326, 228, 38, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=8)
+    f.text(400, 352, "bed", T_NOTE, TEXT, bold=True)
+    f.rect(296, 364, 208, 16, fill=STEEL, stroke=TEXT, sw=SW_THIN, rx=3)
+    for lx in (318, 482):
+        f.line(lx, 380, lx, 418, STEEL, 8)
+        f.circle(lx, 428, 10, fill=BG, stroke=TEXT, sw=SW_THIN)
+    f.legend([(NO, "critical branch (red)", "box"), (PANEL_2, "normal system", "box")], 40, 300, T_MIN)
     f.lines(40, 380, ["at least two branch circuits:", "critical branch + normal"], T_MIN, TEXT, "start", gap=1.15)
-    f.lines(520, 300, ["all hospital grade", "(517.18(B)(2))"], T_MIN, TEXT, "start", gap=1.15)
+    f.lines(536, 300, ["all hospital grade,", "green dot (517.18(B)(2))"], T_MIN, TEXT, "start", gap=1.15)
     f.value_lines(640, 380, ["minimum eight", "receptacles", "(4 duplex here)"], T_NOTE, pad=6, gap=1.15,
                   what="receptacle count per bed")
     f.tag(f.w - 24, f.h - 14, "NEC 517.18", anchor="end")
@@ -117,9 +157,8 @@ def multiple_supplies(f):
     for y, name in rows:
         f.line(40, y, 290, y, WIRE_HOT, SW_WIRE)
         f.text(44, y - 12, name, T_MIN, TEXT, "start", True)
-        f.rect(290, y - 30, 46, 60, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
-        f.line(336, y - 14, 348, y - 28, TEXT, 5)
-        f.rect(360, y - 34, 104, 68, fill="#e2e8f0", stroke=TEXT, sw=SW_THIN, rx=3)
+        f.disconnect(290, y - 30, 44, 60)
+        f.rect(360, y - 34, 104, 68, fill=TEXT, stroke=LINE, sw=SW_THIN, rx=3)
         for k in range(4):
             f.line(370, y - 20 + k * 14, 454 - (k % 2) * 24, y - 20 + k * 14, BG, 3)
     f.lines(250, 440, ["each plaque lists every other", "supply and the area it serves"], T_MIN, MUTED, gap=1.15)
@@ -131,9 +170,9 @@ def multiple_supplies(f):
     f.mask(282, 90, 74, 320, records=disc, what="the switch at each plaque")
     # Emergency source sign at the service entrance.
     _card(f, 500, 56, 280, 480, "Service entrance")
-    f.rect(530, 110, 90, 140, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
-    f.text(575, 190, "SE", T_LABEL, TEXT, bold=True)
-    f.rect(520, 280, 240, 150, fill="#7f1d1d", stroke=TEXT, sw=SW_OBJ, rx=6)
+    f.panel(530, 104, 84, 140, label=None, breakers=3, main=True)
+    f.lines(632, 166, ["service", "equipment"], T_MIN, TEXT, "start", True, gap=1.15)
+    f.rect(520, 280, 240, 150, fill=NO, op=0.45, stroke=NO, sw=SW_OBJ, rx=6)
     f.text(640, 312, "EMERGENCY SOURCE", T_MIN, TEXT, bold=True)
     f.text(536, 350, "type: standby generator", T_MIN, TEXT, "start")
     f.value(536, 386, "at: rear yard, east side", T_MIN, TEXT, anchor="start", bold=False, records=loc, pad=5,
@@ -157,7 +196,7 @@ def sign_construction(f):
     f.lines(145, 186, ["electrical", "enclosure"], T_MIN, TEXT, bold=True, gap=1.1)
     for x in (260, 320, 380):
         f.rect(x - 12, 170, 24, 40, fill=PANEL_2, stroke=TEXT, sw=SW_THIN, rx=3)
-        f.circle(x, 160, 12, fill="#fde68a")
+        f.circle(x, 160, 12, fill=AMBER)
     f.line(210, 196, 380, 196, WIRE_HOT, 3)
     f.lines(320, 250, ["lampholders"], T_MIN, TEXT, bold=True)
     f.text(230, 330, "outer shell: weather cover only", T_MIN, AMBER, bold=True)
@@ -167,7 +206,7 @@ def sign_construction(f):
     _card(f, 460, 56, 320, 440, "Wood nearby")
     f.stud(500, 110, 60, 330)
     f.rect(620, 240, 40, 60, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=4)
-    f.circle(690, 270, 26, fill="#fde68a")
+    f.circle(690, 270, 26, fill=AMBER)
     f.text(640, 330, "lampholder", T_MIN, TEXT, bold=True)
     f.ext(560, 190, 560, 226)
     f.ext(620, 190, 620, 236)
@@ -217,16 +256,16 @@ def cinder_backfill(f):
     f.title("What surrounds a buried raceway", y=34)
     # RMC in cinder fill.
     _card(f, 20, 56, 370, 460, "RMC in wet cinder fill")
-    f.rect(40, 100, 330, 260, fill="#3b3b3b", stroke=LINE, sw=SW_THIN)
-    for k in range(60):
-        f.circle(52 + (k * 53) % 310, 112 + (k * 31) % 236, 4, fill="#6b6b6b")
-    f.concrete(125, 170, 160, 110)
-    f.circle(205, 225, 24, fill=STEEL, stroke=TEXT, sw=SW_OBJ)
-    f.circle(205, 225, 15, fill=BG)
-    f.ext(181, 225, 181, 266)
-    f.dim_h(125, 181, 262)
-    f.value(153, 158, "2 in min", T_MIN, DIM, records=rmc, pad=4, what="concrete thickness")
-    f.leader(153, 164, 153, 256, DIM)
+    f.rect(40, 100, 330, 260, fill=PANEL_2, stroke=LINE, sw=SW_THIN)
+    cx, cy, r, c = 205, 238, 22, 48
+    for k, (px, py) in enumerate(_scatter(70, 48, 108, 314, 244, seed=11)):
+        if not (cx - r - c - 8 < px < cx + r + c + 8 and cy - r - c - 8 < py < cy + r + c + 8):
+            f.circle(px, py, 3 + k % 3, fill=EDGE)
+    f.concrete(cx - r - c, cy - r - c, 2 * (r + c), 2 * (r + c))
+    f.circle(cx, cy, r, fill=STEEL, stroke=TEXT, sw=SW_OBJ)
+    f.circle(cx, cy, r - 7, fill=BG)
+    f.dim_v(cx, cy - r - c, cy - r)
+    f.value(cx, cy - r - c - 14, "2 in min", T_MIN, DIM, records=rmc, pad=4, what="concrete thickness")
     f.text(205, 396, "noncinder concrete, all sides", T_MIN, TEXT, bold=True)
     f.lines(205, 434, ["or conduit 18 in below the fill,", "or approved protection"], T_MIN, MUTED, gap=1.15)
     # Backfill in a trench.
@@ -237,8 +276,8 @@ def cinder_backfill(f):
         if bad:
             for cx, cy, r in ((470, 170, 18), (530, 150, 14), (500, 220, 20), (550, 210, 12)):
                 f.poly([(cx - r, cy), (cx - r * 0.3, cy - r), (cx + r, cy - r * 0.4), (cx + r * 0.6, cy + r)],
-                       "#78716c", TEXT, SW_THIN)
-            f.poly([(492, 250), (505, 262), (488, 262)], "#a8a29e", TEXT, SW_THIN)
+                       EDGE, TEXT, SW_THIN)
+            f.poly([(492, 250), (505, 262), (488, 262)], LINE, TEXT, SW_THIN)
             f.mark_no(505, 334)
         else:
             for k in range(20):

@@ -17,7 +17,26 @@
   up) and says when you land on the step's number. Earlier steps' results and
   memory are already in it, so rows like "× 14 =" or "1 ÷ MR =" work as shown.
 
+### Changed
+
+- **Study figures look like the real equipment.** Receptacles have proper
+  5-15R/5-20R faces (GFCI test and reset buttons, hospital-grade dots),
+  panelboards show their breakers, and disconnects, meters, transformers,
+  motors, conduit with couplings and one-hole straps, and ground rods with
+  their clamps are drawn the same way in every figure. Labels no longer
+  overlap or sit on lines, and several depictions were corrected (zones
+  measured from the tub edge and the overhead conductors, the pool pump
+  receptacle at true scale). The style guide is in docs/DIAGRAM_STYLE.md.
+
 ### Fixed
+
+- **Figures no longer give answers away.** Before you answer, a figure now
+  hides every rule value the question doesn't state and every word or number
+  from any answer choice, right or wrong, for every question that uses the
+  same figure. Those spots show a "?" until you answer (69 figures, 190
+  questions). Example: the mobile home disconnect figure used to show the
+  6 ft 7 in handle-height limit before answering. A new test fails if any
+  figure shows such text before the answer.
 
 - All 598 questions re-checked against the NEC 2023 text: no answer key was
   wrong. The motor overload questions (Final #4 Q34, Q37, Q56) quoted 125% and

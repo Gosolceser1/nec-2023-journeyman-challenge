@@ -14,6 +14,11 @@ def _source(f, x, y, r=18):
     f.circle(x, y + r * 0.8, r, stroke=TEXT, sw=SW_OBJ)
 
 
+def _cb(f, x, y, color=TEXT, on=True):
+    """Shared breaker drawing, centred on (x, y)."""
+    f.breaker(x - 22, y - 27, 44, 54, on=on, color=color)
+
+
 def _spark(f, x, y, s=14):
     f.polyline([(x - s, y - s), (x + s * 0.2, y - s * 0.1), (x - s * 0.2, y + s * 0.1), (x + s, y + s)], AMBER, 4)
 
@@ -24,14 +29,13 @@ def fault_path(f):
     f.title("Three circuit troubles: name the first one", y=34)
     # (a) Hot conductor touching a metal enclosure; current returns on the EGC.
     f.rect(20, 54, 760, 290, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    sx, top, bot = 80, 120, 250
-    _source(f, sx, 180)
+    sx, top, bot = 80, 120, 244
+    f.coils(sx, 180)
     f.line(sx, 150, sx, top, WIRE_HOT, SW_WIRE)
     f.line(sx, top, 560, top, WIRE_HOT, SW_WIRE)
-    _ocpd(f, 200, top)
+    f.breaker(178, top - 27, 44, 54)
     f.text(200, top - 36, "OCPD opens", T_NOTE, OK, bold=True)
     f.line(sx, 210, sx, bot, WIRE_NEU, SW_WIRE)
-    f.line(sx, bot, 520, bot, WIRE_NEU, SW_WIRE - 1)
     f.text(420, bot - 10, "neutral", T_MIN, MUTED)
     # Main bonding jumper at the source, EGC back from the enclosure.
     f.line(sx, bot, sx, 300, AMBER, SW_WIRE)
@@ -44,6 +48,11 @@ def fault_path(f):
     f.rect(560, 90, 160, 180, fill=STEEL, stroke=TEXT, sw=SW_OBJ + 1, rx=6)
     f.rect(578, 108, 124, 144, fill=PANEL_2, stroke=EDGE, sw=SW_THIN, rx=4)
     f.text(640, 82, "metal enclosure", T_NOTE, TEXT, bold=True)
+    f.line(sx, bot, 664, bot, WIRE_NEU, SW_WIRE - 1)
+    f.line(664, bot, 664, 196, WIRE_NEU, SW_WIRE - 1)
+    f.motor_symbol(664, 172, 24)
+    f.line(664, 148, 664, 136, TEXT, 3)
+    f.circle(664, 131, 5, fill=BG, stroke=TEXT, sw=2)
     f.polyline([(560, top), (600, top), (620, 170), (576, 214)], WIRE_HOT, SW_WIRE)
     _spark(f, 572, 220)
     f.line(640, 270, 640, 300, WIRE_GND, SW_WIRE + 1)
@@ -52,13 +61,11 @@ def fault_path(f):
     # (b) Open conductor and (c) hot-to-neutral, small.
     for x0, name in ((20, "open circuit"), (410, "short circuit")):
         f.rect(x0, 360, 370, 180, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-        _source(f, x0 + 44, 430, 14)
+        f.coils(x0 + 44, 430, 14)
         f.line(x0 + 44, 406, x0 + 44, 394, WIRE_HOT, 3)
         f.line(x0 + 44, 454, x0 + 44, 466, WIRE_NEU, 3)
-        f.line(x0 + 44, 466, x0 + 300, 466, WIRE_NEU, 3)
-        f.circle(x0 + 320, 430, 26, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ)
-        f.text(x0 + 320, 438, "M", T_LABEL, TEXT, bold=True)
-        f.line(x0 + 300, 466, x0 + 320, 456, WIRE_NEU, 3)
+        f.polyline([(x0 + 44, 466), (x0 + 320, 466), (x0 + 320, 456)], WIRE_NEU, 3)
+        f.motor_symbol(x0 + 320, 430, 26)
         if x0 == 20:
             f.line(x0 + 44, 394, x0 + 150, 394, WIRE_HOT, 3)
             f.line(x0 + 180, 394, x0 + 320, 394, WIRE_HOT, 3)
@@ -88,16 +95,16 @@ def selective_coordination(f):
     # Left: one-line with a fault on one branch.
     x = 190
     f.line(x, 70, x, 320, WIRE_HOT, SW_WIRE)
-    _ocpd(f, x, 100)
+    _cb(f, x, 100)
     f.text(x + 34, 108, "service", T_NOTE, TEXT, "start")
-    _ocpd(f, x, 190)
+    _cb(f, x, 190)
     f.text(x + 34, 198, "feeder", T_NOTE, TEXT, "start")
     f.text(x - 34, 108, "stays on", T_MIN, OK, "end", True)
     f.text(x - 34, 198, "stays on", T_MIN, OK, "end", True)
     f.line(70, 320, 310, 320, WIRE_HOT, SW_WIRE)
     for bx, name, opened in ((70, "lighting", False), (190, "motor", True), (310, "receptacles", False)):
         f.line(bx, 320, bx, 440, WIRE_HOT, SW_WIRE)
-        _ocpd(f, bx, 370, color=NO if opened else TEXT)
+        _cb(f, bx, 370, color=NO if opened else TEXT, on=not opened)
         f.text(bx, 470, name, T_MIN, TEXT, bold=True)
     f.text(222, 378, "opens", T_MIN, NO, "start", True)
     _spark(f, 190, 430)
@@ -108,8 +115,8 @@ def selective_coordination(f):
     f.text(585, 86, "Two devices in series", T_NOTE, TEXT, bold=True)
     for cx, tapped in ((480, False), (680, True)):
         f.line(cx, 110, cx, 380, WIRE_HOT, SW_WIRE)
-        _ocpd(f, cx, 150)
-        _ocpd(f, cx, 290)
+        _cb(f, cx, 150)
+        _cb(f, cx, 290)
         f.text(cx, 412, "equipment", T_MIN, TEXT, bold=True)
         f.rect(cx - 40, 380, 80, 12, fill=PANEL_2, stroke=TEXT, sw=SW_THIN)
         if tapped:
@@ -169,20 +176,24 @@ def panelboard_interior(f):
     term = ["open-book-exam-#1-009"]
     f.title("Panelboard: unused spaces and the neutral bar", y=34)
     # Dead front with breaker spaces.
-    f.rect(30, 60, 300, 380, fill=PANEL, stroke=TEXT, sw=SW_OBJ + 1, rx=6)
+    f.panel(24, 60, 286, 380, label=None, breakers=0)
+    f.rect(158, 84, 18, 332, fill=BG, op=0.6, rx=2)
     for i in range(6):
-        y = 90 + i * 58
-        for x in (60, 190):
-            if i == 2 and x == 190:
-                f.rect(x, y, 110, 40, fill=BG, stroke=NO, sw=SW_OBJ, rx=3)
-            elif i == 4 and x == 190:
-                f.rect(x, y, 110, 40, fill=STEEL, stroke=TEXT, sw=SW_THIN, rx=3)
-                f.circle(x + 55, y + 20, 5, fill=TEXT)
+        y = 92 + i * 56
+        for x in (58, 178):
+            if i == 2 and x == 178:
+                # Open knockout: the bus stab behind it shows.
+                f.rect(x, y, 98, 40, fill=BG, stroke=NO, sw=SW_OBJ, rx=3)
+                f.rect(x + 6, y + 12, 30, 16, fill=LINE, stroke=TEXT, sw=1.5, rx=2)
+            elif i == 4 and x == 178:
+                # Filler plate snapped into the opening.
+                f.rect(x, y, 98, 40, fill=STEEL, stroke=TEXT, sw=SW_THIN, rx=3)
+                for tx in (x + 10, x + 88):
+                    f.line(tx, y + 10, tx, y + 30, TEXT, 2)
             else:
-                f.rect(x, y, 110, 40, fill=PANEL_2, stroke=TEXT, sw=SW_THIN, rx=3)
-                f.rect(x + 40, y + 10, 30, 20, fill=EDGE, rx=3)
-    f.mark_no(318, 226, 16)
-    f.mark_ok(318, 342, 16)
+                f.mini_breaker(x, y, 98, 40, handle_left=x > 167)
+    f.mark_no(338, 224, 16)
+    f.mark_ok(338, 336, 16)
     f.text(30, 474, "open space: live parts exposed", T_MIN, NO, "start", True)
     b = f.text(30, 510, "closed with:", T_MIN, TEXT, "start", True)
     f.value(b[0] + b[2] + 10, 510, "identified closure", T_NOTE, anchor="start", records=closure, pad=5,
@@ -279,7 +290,7 @@ def afci_tr_dwelling(f):
     # Strip: panel to the last outlet.
     y = 470
     f.panel(30, y - 50, 80, 100, label="", breakers=0)
-    _ocpd(f, 70, y, 40, 50)
+    f.breaker(50, y - 25, 40, 50)
     f.text(70, y + 72, "AFCI", T_MIN, TEXT, bold=True)
     f.line(90, y, 740, y, WIRE_HOT, SW_WIRE)
     for x in (300, 500, 700):

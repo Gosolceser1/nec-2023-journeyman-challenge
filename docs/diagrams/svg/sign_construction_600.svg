@@ -8,11 +8,11 @@
 <text x="145.0" y="186.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">electrical</text>
 <text x="145.0" y="208.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">enclosure</text>
 <rect x="248.0" y="170.0" width="24.0" height="40.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
-<circle cx="260.0" cy="160.0" r="12" fill="#fde68a" stroke="none" stroke-width="2"/>
+<circle cx="260.0" cy="160.0" r="12" fill="#fbbf24" stroke="none" stroke-width="2"/>
 <rect x="308.0" y="170.0" width="24.0" height="40.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
-<circle cx="320.0" cy="160.0" r="12" fill="#fde68a" stroke="none" stroke-width="2"/>
+<circle cx="320.0" cy="160.0" r="12" fill="#fbbf24" stroke="none" stroke-width="2"/>
 <rect x="368.0" y="170.0" width="24.0" height="40.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
-<circle cx="380.0" cy="160.0" r="12" fill="#fde68a" stroke="none" stroke-width="2"/>
+<circle cx="380.0" cy="160.0" r="12" fill="#fbbf24" stroke="none" stroke-width="2"/>
 <line x1="210.0" y1="196.0" x2="380.0" y2="196.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
 <text x="320.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">lampholders</text>
 <text x="230.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#fbbf24" text-anchor="middle">outer shell: weather cover only</text>
@@ -26,7 +26,7 @@
 <path d="M 504 275.0 q 15.0 -6 30.0 0 t 22.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M 504 357.5 q 15.0 -6 30.0 0 t 22.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
 <rect x="620.0" y="240.0" width="40.0" height="60.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
-<circle cx="690.0" cy="270.0" r="26" fill="#fde68a" stroke="none" stroke-width="2"/>
+<circle cx="690.0" cy="270.0" r="26" fill="#fbbf24" stroke="none" stroke-width="2"/>
 <text x="640.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="middle">lampholder</text>
 <line x1="560.0" y1="190.0" x2="560.0" y2="197.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
 <line x1="560.0" y1="203.0" x2="560.0" y2="210.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>

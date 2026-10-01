@@ -24,6 +24,7 @@ import importlib
 import io
 import json
 import pkgutil
+import re
 import sys
 from pathlib import Path
 
@@ -64,8 +65,10 @@ def _r(v):
     return round(v, 4)
 
 
-def draw_all(modules=None, every_tier=False):
-    """name -> {"fig": Fig, "records": {id: opts}, ...} for figures serving wired records."""
+def draw_all(modules=None, every_tier=False, bank=None):
+    """name -> {"fig": Fig, "records": {id: opts}, ...} for figures serving wired records.
+
+    With `bank`, every pre-answer record also gets the strict masks (strict_masks)."""
     out = {}
     for name, spec in sorted(load_figs(modules).items()):
         recs = {r: o for r, o in spec["records"].items() if every_tier or wired(r)}
@@ -75,7 +78,42 @@ def draw_all(modules=None, every_tier=False):
         spec["fn"](f)
         recs = {r: _like(name, spec, f, r, o) for r, o in recs.items()}
         out[name] = dict(spec, fig=f, records=recs)
+        if bank is not None:
+            strict_masks(out[name], bank)
     return out
+
+
+def strict_hits_for(d, rid, bank):
+    """[(label, reasons)] the record may not see before answering (leakscan strict rule)."""
+    f = d["fig"]
+    sib = [bank[r] for r in d["records"] if r != rid and r in bank]
+    terms = list(d["terms"].get(rid, [])) + list(d["records"][rid].get("terms", []))
+    given, vals, phrases = leakscan.strict_keys(bank[rid], sib, terms)
+    keep = [re.compile(k, re.I) for k in d.get("keep", ())]
+    out = []
+    for lab in f.labels:
+        text = lab[0]
+        if any(k.search(text) for k in keep):
+            continue
+        hit = leakscan.strict_hits(text, given, vals, phrases)
+        if hit:
+            out.append((lab, hit))
+    return out
+
+
+def strict_masks(d, bank):
+    """Mask, per pre-answer record, every label that states a rule value the stem
+    does not give, or any answer choice of any question on the figure."""
+    f = d["fig"]
+    for rid, opts in d["records"].items():
+        if rid not in bank or opts.get("when", d["when"]) != "before":
+            continue
+        own = [m for m in f.masks if m.get("records") is None or rid in m["records"]]
+        for (text, x, y, w, h), hit in strict_hits_for(d, rid, bank):
+            if leakscan.covered([x, y, w, h], [m for m in own]):
+                continue
+            m = f.mask(x - 6, y - 5, w + 12, h + 10, ring=False, records=[rid], what=f"'{text}' ({hit[0]})")
+            own.append(m)
 
 
 def _like(name, spec, f, rid, opts):
@@ -148,6 +186,10 @@ def validate(drawn, bank, check_missing=True):
                 terms = list(d["terms"].get(rid, [])) + list(opts.get("terms", []))
                 for text, hit in leakscan.leaks(bank[rid], unit_labels(f), masks, terms):
                     errors.append(f"{name}: {rid} shows its answer in {text!r} ({', '.join(hit)}) with no mask")
+                own = [m for m in f.masks if m.get("records") is None or rid in m["records"]]
+                for (text, x, y, w, h), hit in strict_hits_for(d, rid, bank):
+                    if not leakscan.covered([x, y, w, h], own):
+                        errors.append(f"{name}: {rid} shows {text!r} before answering ({', '.join(hit)})")
     for rid in NEED:
         if check_missing and wired(rid) and rid not in seen:
             errors.append(f"{rid}: wired tier {NEED[rid][0]} but no figure draws it")
@@ -161,7 +203,7 @@ def scratch(modules, out_dir, bank):
     """Draw only `modules` into out_dir (SVG, PNG, per-record preview); touch nothing shared."""
     import preview
     from PIL import Image
-    drawn = draw_all(modules, every_tier=True)
+    drawn = draw_all(modules, every_tier=True, bank=bank)
     errors = validate(drawn, bank, check_missing=False)
     out_dir.mkdir(parents=True, exist_ok=True)
     for name, d in drawn.items():
@@ -257,7 +299,7 @@ def main():
         if not mods:
             ap.error("--scratch needs --modules")
         return scratch(mods, Path(args.scratch), bank)
-    drawn = draw_all()
+    drawn = draw_all(bank=bank)
     errors = validate(drawn, bank)
     old_map = json.loads(FIG_MAP.read_text(encoding="utf-8")) if FIG_MAP.exists() else {}
     fig_map, rec_masks, labels = outputs(drawn, bank, old_map)

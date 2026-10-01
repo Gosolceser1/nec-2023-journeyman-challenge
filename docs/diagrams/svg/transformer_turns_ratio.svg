@@ -1,7 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
 <rect x="0.0" y="0.0" width="800.0" height="450.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Turns ratio sets the voltage ratio</text>
-<rect x="250.0" y="90.0" width="300.0" height="240.0" rx="0" fill="none" fill-opacity="1.0" stroke="#64748b" stroke-width="22"/>
+<rect x="239.0" y="79.0" width="322.0" height="262.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="261.0" y="101.0" width="278.0" height="218.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
 <path d="M 224 114 q 26 -10 52 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M 224 134 q 26 -10 52 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M 224 154 q 26 -10 52 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>

@@ -1,29 +1,66 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
 <rect x="0.0" y="0.0" width="800.0" height="450.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Service conductor sizing (one-line)</text>
-<circle cx="70.0" cy="152.0" r="20" fill="none" stroke="#e2e8f0" stroke-width="3"/>
-<circle cx="70.0" cy="188.0" r="20" fill="none" stroke="#e2e8f0" stroke-width="3"/>
-<text x="70.0" y="242.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">utility</text>
-<line x1="92.0" y1="160.0" x2="280.0" y2="160.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="92.0" y1="170.0" x2="280.0" y2="170.0" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="92.0" y1="180.0" x2="280.0" y2="180.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<text x="186.0" y="92.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">120/240 V,</text>
-<text x="186.0" y="118.4" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">single-phase, 3-wire</text>
-<circle cx="305.0" cy="170.0" r="26" fill="#334155" stroke="#e2e8f0" stroke-width="3"/>
-<text x="305.0" y="230.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">meter</text>
-<line x1="331.0" y1="160.0" x2="420.0" y2="160.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="331.0" y1="170.0" x2="420.0" y2="170.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="331.0" y1="180.0" x2="420.0" y2="180.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<rect x="420.0" y="136.0" width="64.0" height="68.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
-<rect x="439.2" y="153.0" width="25.6" height="34.0" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
-<text x="452.0" y="124.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">200 A</text>
-<text x="452.0" y="232.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">service</text>
-<line x1="484.0" y1="170.0" x2="560.0" y2="170.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
-<rect x="560.0" y="110.0" width="180.0" height="150.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="3"/>
-<polyline points="552.0,110.0 650.0,50.0 748.0,110.0" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="650.0" y="286.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle"></text>
-<text x="650.0" y="190.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">individual</text>
-<text x="650.0" y="216.4" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">dwelling unit</text>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Service conductor sizing (elevation, not to scale)</text>
+<line x1="20.0" y1="272.0" x2="780.0" y2="272.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="60.0" y1="272.0" x2="60.0" y2="64.0" stroke="#a16207" stroke-width="12" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="30.0" y1="78.0" x2="90.0" y2="78.0" stroke="#a16207" stroke-width="7" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="74.0" y="110.0" width="44.0" height="62.0" rx="7.92" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="77.0" y1="121.2" x2="115.0" y2="121.2" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="81.2" y="100.0" width="12.0" height="7.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="82.2" y="92.0" width="10.0" height="7.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="83.2" y="84.0" width="8.0" height="7.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="98.8" y="100.0" width="12.0" height="7.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="99.8" y="92.0" width="10.0" height="7.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="100.8" y="84.0" width="8.0" height="7.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1"/>
+<rect x="66.0" y="131.7" width="10.0" height="18.6" rx="2" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<text x="96.0" y="206.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">utility</text>
+<rect x="420.0" y="160.0" width="350.0" height="112.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<polyline points="406.0,160.0 595.0,74.0 780.0,160.0" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="462.0" y1="112.0" x2="462.0" y2="186.0" stroke="#94a3b8" stroke-width="14" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="462.0" y1="112.0" x2="462.0" y2="186.0" stroke="#64748b" stroke-width="10" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="459.8" y1="112.0" x2="459.8" y2="186.0" stroke="#e2e8f0" stroke-width="1.0" stroke-linecap="round" stroke-opacity="0.35"/>
+<path d="M 453 114 Q 462 98 475 108" fill="none" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 118 122 Q 270 170 456 109.0" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 118 128 Q 270 176 456 112.0" fill="none" stroke="#cbd5e1" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 118 134 Q 270 182 456 115.0" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="256.0" y="214.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">120/240 V,</text>
+<text x="256.0" y="240.4" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">single-phase, 3-wire</text>
+<rect x="441.3" y="190.1" width="41.4" height="55.8" rx="6.3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="462.0" cy="218.0" r="20.0" fill="#64748b" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="462.0" cy="218.0" r="18" fill="#0f172a" stroke="#94a3b8" stroke-width="2"/>
+<rect x="452.1" y="209.4" width="19.8" height="6.1" rx="1.5" fill="#1e293b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1"/>
+<line x1="450.8" y1="223.8" x2="473.2" y2="223.8" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="462.0" y1="223.8" x2="467.4" y2="218.9" stroke="#fbbf24" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="462.0" y="266.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">meter</text>
+<rect x="536.0" y="168.0" width="64.0" height="96.0" rx="5" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<rect x="541.0" y="173.0" width="54.0" height="86.0" rx="3" fill="#334155" fill-opacity="0.55" stroke="#64748b" stroke-width="2"/>
+<circle cx="545.5" cy="177.5" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="590.5" cy="177.5" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="545.5" cy="254.5" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="590.5" cy="254.5" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<rect x="555.2" y="184.0" width="25.6" height="15.4" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="561.6" cy="188.8" r="3.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="574.4" cy="188.8" r="3.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="561.6" cy="194.6" r="3.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="574.4" cy="194.6" r="3.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<rect x="558.9" y="188.1" width="5.4" height="7.1" rx="2" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="559.6" y="188.6" width="4.1" height="3.3" rx="2" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="571.7" y="188.1" width="5.4" height="7.1" rx="2" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="572.4" y="188.6" width="4.1" height="3.3" rx="2" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<line x1="561.6" y1="190.2" x2="574.4" y2="190.2" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="564.8" y="202.4" width="6.4" height="47.6" rx="2" fill="#0f172a" fill-opacity="0.6" stroke="none" stroke-width="2"/>
+<rect x="545.0" y="207.4" width="19.2" height="15.7" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="555.3" y="210.9" width="6.5" height="8.8" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="571.8" y="207.4" width="19.2" height="15.7" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="574.1" y="210.9" width="6.5" height="8.8" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="545.0" y="229.2" width="19.2" height="15.7" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="555.3" y="232.7" width="6.5" height="8.8" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="571.8" y="229.2" width="19.2" height="15.7" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="574.1" y="232.7" width="6.5" height="8.8" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<line x1="483.0" y1="214.0" x2="536.0" y2="214.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="568.0" y="156.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">200 A main</text>
+<text x="690.0" y="206.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">individual</text>
+<text x="690.0" y="232.4" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">dwelling unit</text>
 <rect x="30.0" y="290.0" width="740.0" height="126.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="44.0" y="320.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Service conductors carrying the entire load, 100-400 A</text>
 <text x="44.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#e2e8f0" text-anchor="start">ampacity not less than</text>

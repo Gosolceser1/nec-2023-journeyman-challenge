@@ -2,23 +2,31 @@
 <rect x="0.0" y="0.0" width="800.0" height="470.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Feeder for several imaging units (example ratings)</text>
 <line x1="80.0" y1="330.0" x2="520.0" y2="330.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<rect x="90.0" y="110.0" width="70.0" height="220.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="90.0" y="110.0" width="70.0" height="220.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <rect x="90.0" y="220.0" width="70.0" height="110.0" rx="0" fill="#34d399" fill-opacity="0.45" stroke="none" stroke-width="2"/>
+<line x1="90.0" y1="220.0" x2="160.0" y2="220.0" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="90.0" y="110.0" width="70.0" height="220.0" rx="0" fill="none" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
 <text x="125.0" y="98.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">200 A</text>
 <text x="125.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="middle">50%</text>
 <text x="125.0" y="388.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">= 100 A</text>
-<rect x="200.0" y="165.0" width="70.0" height="165.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="200.0" y="165.0" width="70.0" height="165.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <rect x="200.0" y="288.8" width="70.0" height="41.2" rx="0" fill="#34d399" fill-opacity="0.45" stroke="none" stroke-width="2"/>
+<line x1="200.0" y1="288.8" x2="270.0" y2="288.8" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="200.0" y="165.0" width="70.0" height="165.0" rx="0" fill="none" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
 <text x="235.0" y="153.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">150 A</text>
 <text x="235.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="middle">25%</text>
 <text x="235.0" y="388.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">= 37.5 A</text>
-<rect x="310.0" y="220.0" width="70.0" height="110.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="310.0" y="220.0" width="70.0" height="110.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <rect x="310.0" y="319.0" width="70.0" height="11.0" rx="0" fill="#34d399" fill-opacity="0.45" stroke="none" stroke-width="2"/>
+<line x1="310.0" y1="319.0" x2="380.0" y2="319.0" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="310.0" y="220.0" width="70.0" height="110.0" rx="0" fill="none" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
 <text x="345.0" y="208.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">100 A</text>
 <text x="345.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="middle">10%</text>
 <text x="345.0" y="388.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">= 10 A</text>
-<rect x="420.0" y="242.0" width="70.0" height="88.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="420.0" y="242.0" width="70.0" height="88.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <rect x="420.0" y="321.2" width="70.0" height="8.8" rx="0" fill="#34d399" fill-opacity="0.45" stroke="none" stroke-width="2"/>
+<line x1="420.0" y1="321.2" x2="490.0" y2="321.2" stroke="#34d399" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="420.0" y="242.0" width="70.0" height="88.0" rx="0" fill="none" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
 <text x="455.0" y="230.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">80 A</text>
 <text x="455.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="middle">10%</text>
 <text x="455.0" y="388.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">= 8 A</text>
@@ -27,11 +35,12 @@
 <text x="439.1" y="434.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">demand rating</text>
 <rect x="540.0" y="70.0" width="240.0" height="300.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="554.0" y="100.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Feeder minimum</text>
-<text x="556.0" y="130.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">largest: 50%</text>
-<text x="556.0" y="160.8" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">next: 25%</text>
-<text x="556.0" y="191.6" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">each other: 10%</text>
-<text x="556.0" y="262.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">100 + 37.5 + 10 + 8</text>
-<text x="556.0" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="start">= 155.5 A</text>
+<text x="556.0" y="136.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">largest: 50%</text>
+<text x="556.0" y="166.8" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">next: 25%</text>
+<text x="556.0" y="197.6" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">each other: 10%</text>
+<line x1="554.0" y1="222.0" x2="766.0" y2="222.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="556.0" y="260.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">100 + 37.5 + 10 + 8</text>
+<text x="556.0" y="304.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="start">= 155.5 A</text>
 <text x="556.0" y="346.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">(example units)</text>
 <rect x="615.6" y="434.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="625.6" y="462.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 517.73(B)</text>

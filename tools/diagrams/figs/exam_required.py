@@ -83,7 +83,7 @@ def lamp_switch_readings(f):
 
 
 @figure("meter_hookups_three_meters", h=380, nec="General knowledge (meter connections)",
-        records=["final-exam-#1-013"])
+        records=["final-exam-#1-013"], keep=[r"^(I|II|III)$"])
 def meter_hookups(f):
     yt, yb, x0, xl = 120, 290, 60, 700
     # Supply terminals, two conductors, the load.

@@ -17,7 +17,7 @@ def kitchen_counter(f):
     f.title("Kitchen counter receptacles (elevation)", y=34)
     top, floor, x0, x1, ppi = 300, 420, 40, 480, 3.5
     f.rect(x0, 70, x1 - x0, 80, fill=PANEL, stroke=EDGE, sw=SW_THIN)
-    for x in (150, 260, 370):
+    for x in (150, 370):
         f.line(x, 70, x, 150, EDGE, SW_THIN)
     f.text((x0 + x1) / 2, 118, "upper cabinets", T_MIN, MUTED)
     f.rect(x0, top, x1 - x0, 14, fill=LINE, stroke=TEXT, sw=SW_THIN)
@@ -82,10 +82,12 @@ def bath_outdoor(f):
     f.dim_h(x0, x1, floor + 22)
     f.text((x0 + x1) / 2, floor + 56, "7 ft counter", T_NOTE, DIM, bold=True)
     zx0, zx1 = sx0 - 3 * ppf, sx1 + 3 * ppf
-    f.add(f'<rect x="{max(x0, zx0):.1f}" y="120" width="{min(x1, zx1) - max(x0, zx0):.1f}" height="{top - 120}" '
-          f'fill="{ZONE}" fill-opacity="0.10" stroke="{ZONE}" stroke-width="2" stroke-dasharray="8 6"/>')
+    zl, zr = max(x0, zx0), min(x1, zx1)
+    f.rect(zl, 120, zr - zl, top - 120, fill=ZONE, op=0.10)
+    for a, b in (((zl, 120), (zr, 120)), ((zl, 120), (zl, top)), ((zr, 120), (zr, top))):
+        f.dline(a[0], a[1], b[0], b[1], ZONE, SW_THIN, 8, 6)
     f.lines(x0 + 6, 146, ["within 3 ft of the outside", "edge of each sink"], T_MIN, DIM, "start", gap=1.1)
-    f.receptacle(310, 208, 38)
+    f.receptacle(310, 208, 38, gfci=True)
     f.value(310, 104, "one outlet", T_NOTE, pad=5, records=BATH, what="how many receptacles")
     f.mask(284, 180, 52, 56, records=BATH, what="the receptacle drawn on the wall")
     # Outdoor: front and back, plan view.

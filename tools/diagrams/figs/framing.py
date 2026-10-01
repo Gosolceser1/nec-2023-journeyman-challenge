@@ -46,7 +46,9 @@ def framing_protection(f):
     f.text(x0 - 10, 270, "NM cable", T_NOTE, TEXT, "end", True)
     f.leader(x0 - 8, 262, n0 + 8, face + nd - 10)
     f.rect(n0 - 34, face - 9, nw + 68, 9, fill=STEEL, stroke=TEXT, sw=SW_THIN)
-    f.text(n0 - 44, face - 2, "steel plate", T_NOTE, TEXT, "end", True)
+    for nx in (n0 - 24, n0 + nw + 24):
+        f.circle(nx, face - 4.5, 3, fill=TEXT)
+    f.text(n0 - 44, face - 16, "steel plate", T_NOTE, TEXT, "end", True)
     f.value(n0 + nw / 2, 108, "1/16 in", records=notch)
     f.leader(n0 + nw / 2, 120, n0 + nw / 2, face - 10)
     f.tag(f.w - 24, f.h - 24, "NEC 300.4(A)(2), 300.4(D)", anchor="end")

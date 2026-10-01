@@ -2,29 +2,13 @@
 from nec_style import *  # noqa: F401,F403
 
 
-def _card(f, x, y, w, h, title=""):
-    f.rect(x, y, w, h, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    if title:
-        f.text(x + 14, y + 30, title, T_NOTE, TEXT, "start", True)
-
-
-def _ocpd(f, x, y, w=56, h=64):
-    f.rect(x, y, w, h, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
-    f.rect(x + w * 0.3, y + h * 0.25, w * 0.4, h * 0.5, fill=EDGE, stroke=TEXT, sw=SW_THIN, rx=3)
-
-
-def _xfmr(f, x, y):
-    for dy in (-18, 18):
-        f.circle(x, y + dy, 20, fill="none", stroke=TEXT, sw=SW_OBJ)
-
-
 @figure("egc_size_250-122", h=470, nec="250.122(A), Table 250.122",
         records={"final-exam-#1-068": {}, "final-exam-#3-017": {"terms": ["same size"]},
                  "open-book-exam-#6-012": {"like": "final-exam-#1-068"}, "final-exam-#4-055": {"when": "after"},
                  "open-book-exam-#12-023": {"when": "after"}})
 def egc_size(f):
     f.title("Equipment grounding conductor from the OCPD rating", y=34)
-    _ocpd(f, 40, 90, 64, 72)
+    f.breaker(40, 90, 64, 72)
     f.text(72, 80, "50 A", T_LABEL, TEXT, bold=True)
     f.line(104, 110, 330, 110, WIRE_HOT, SW_WIRE)
     f.line(104, 126, 330, 126, WIRE_HOT, SW_WIRE)
@@ -33,7 +17,7 @@ def egc_size(f):
     f.text(375, 196, "load", T_NOTE, MUTED)
     f.text(216, 98, "circuit conductors", T_MIN, TEXT)
     f.text(216, 176, "EGC", T_NOTE, WIRE_GND, bold=True)
-    _card(f, 450, 60, 330, 330, "Table 250.122 (copper)")
+    f.card(450, 60, 330, 330, "Table 250.122 (copper)")
     f.text(466, 124, "OCPD not over", T_NOTE, MUTED, "start")
     f.text(764, 124, "EGC", T_NOTE, MUTED, "end")
     rows = [("15 A", "14 AWG", True), ("20 A", "12 AWG", True), ("60 A", "10 AWG", True),
@@ -46,7 +30,7 @@ def egc_size(f):
             f.value(764, y, s, 26, anchor="end", pad=5, what=f"the {a} row")
         else:
             f.text(764, y, s, 26, DIM, "end", True)
-    _card(f, 20, 230, 410, 200, "How to read it")
+    f.card(20, 230, 410, 172, "How to read it")
     f.lines(36, 290, ["Use the first row whose rating is", "at or above the OCPD.",
                       "Never required larger than the", "circuit conductors (250.122(A))."],
             T_NOTE, TEXT, "start", gap=1.3)
@@ -60,7 +44,7 @@ def termination_temp(f):
     term = ["open-book-exam-#7-015"]
     conn = ["open-book-exam-#7-017"]
     f.title("The lowest temperature rating on the conductor caps it", y=34)
-    _ocpd(f, 40, 80, 64, 76)
+    f.breaker(40, 80, 64, 76)
     f.text(72, 184, "breaker lug", T_NOTE, TEXT, bold=True)
     f.text(72, 210, "marked 75 C", T_NOTE, AMBER, bold=True)
     f.line(104, 118, 560, 118, WIRE_HOT, SW_WIRE + 2)
@@ -68,18 +52,18 @@ def termination_temp(f):
     f.rect(560, 88, 70, 60, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
     f.text(595, 176, "load", T_NOTE, MUTED)
     f.text(330, 150, "4 current-carrying conductors in the raceway", T_MIN, MUTED)
-    _card(f, 20, 232, 760, 150, "")
+    f.card(20, 232, 760, 150, "")
     f.text(36, 270, "Table 310.16, #10 Cu:  60 C = 30 A,  75 C = 35 A,  90 C = 40 A", T_NOTE, TEXT, "start")
     f.text(36, 306, "derate from the 90 C column:  40 A x 0.80 = 32 A", T_NOTE, TEXT, "start")
     b = f.text(36, 342, "check: 32 A is not over 35 A, the 75 C", T_NOTE, TEXT, "start")
     f.value(b[0] + b[2] + 10, 342, "termination", T_NOTE, anchor="start", records=term, pad=5,
             what="what caps the ampacity")
     f.text(36, 370, "rating, so 32 A is allowed", T_NOTE, TEXT, "start")
-    _card(f, 20, 396, 760, 96, "Separate pressure connector (e.g. a splicing block)")
+    f.card(20, 396, 760, 96, "Separate pressure connector (e.g. a splicing block)")
     b = f.text(36, 466, "ampacity not over its listed and", T_NOTE, TEXT, "start")
     v = f.value(b[0] + b[2] + 10, 466, "identified", T_NOTE, anchor="start", records=conn, pad=5,
             what="the rating word")
-    f.text(v[0] + v[2] + 16, 466, "temperature rating", T_NOTE, TEXT, "start")
+    f.text(v[0] + v[2] + 10, 466, "temperature rating", T_NOTE, TEXT, "start")
     f.tag(f.w - 24, f.h - 6, "NEC 110.14(C)", anchor="end")
 
 
@@ -130,12 +114,12 @@ def tc_bending(f):
     f.text(cx + r + 50, cy + 34, "D = overall diameter", T_MIN, MUTED, "start")
     f.circle(cx + r + 90, cy - 30, 22, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ)
     f.dim_h(cx + r + 68, cx + r + 112, cy + 6)
-    _card(f, 400, 60, 380, 250, "Minimum radius, 336.24")
+    f.card(400, 60, 380, 222, "Minimum radius, 336.24")
     f.text(416, 118, "no metal shielding:", T_NOTE, MUTED, "start", True)
     f.lines(416, 152, ["4 x D  (D up to 1 in)", "5 x D  (over 1 in to 2 in)", "6 x D  (over 2 in)"],
             T_NOTE, TEXT, "start", gap=1.3)
-    b = f.text(416, 282, "metallic shielding:", T_NOTE, MUTED, "start", True)
-    f.value(b[0] + b[2] + 12, 282, "12 x D", 26, anchor="start", pad=5, what="the shielded multiple")
+    b = f.text(416, 256, "metallic shielding:", T_NOTE, MUTED, "start", True)
+    f.value(b[0] + b[2] + 12, 256, "12 x D", 26, anchor="start", pad=5, what="the shielded multiple")
     f.tag(f.w - 24, f.h - 10, "NEC 336.24", anchor="end")
 
 
@@ -144,8 +128,8 @@ def tc_bending(f):
 def grounded_connection(f):
     f.title("Premises neutral tied to a grounded supply conductor", y=34)
     for x0, ok in ((30, True), (420, False)):
-        _card(f, x0, 56, 350, 290)
-        _xfmr(f, x0 + 50, 150)
+        f.card(x0, 56, 350, 290)
+        f.coils(x0 + 50, 150, 22)
         f.text(x0 + 50, 216, "supply", T_NOTE, MUTED)
         ys = (126, 150, 174)
         for k, y in enumerate(ys):
@@ -157,7 +141,8 @@ def grounded_connection(f):
         f.text(x0 + 290, 232, "premises", T_NOTE, MUTED)
         if ok:
             f.line(x0 + 100, 150, x0 + 100, 250, WIRE_GND, SW_WIRE - 1)
-            f.line(x0 + 84, 250, x0 + 116, 250, WIRE_GND, SW_WIRE)
+            for i, w in enumerate((32, 20, 8)):
+                f.line(x0 + 100 - w / 2, 250 + i * 8, x0 + 100 + w / 2, 250 + i * 8, WIRE_GND, 3)
             f.text(x0 + 170, 86, "grounded conductor", T_MIN, TEXT)
             f.leader(x0 + 170, 92, x0 + 200, 150, MUTED)
             f.mark_ok(x0 + 150, 300)

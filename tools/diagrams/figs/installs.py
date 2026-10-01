@@ -2,15 +2,21 @@
 from nec_style import *  # noqa: F401,F403
 
 
-def _card(f, x, y, w, h, title=""):
-    f.rect(x, y, w, h, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    if title:
-        f.text(x + 14, y + 30, title, T_NOTE, TEXT, "start", True)
+def _plug_cap(f, cx, cy, s):
+    """Attachment plug seen from the cord end, inserted in the face at (cx, cy)."""
+    f.rect(cx - s * 0.42, cy - s * 0.48, s * 0.84, s, fill=EDGE, stroke=TEXT, sw=SW_THIN, rx=s * 0.2)
+    return cx, cy + s * 0.52
 
 
-def _ocpd(f, x, y, w=56, h=64):
-    f.rect(x, y, w, h, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
-    f.rect(x + w * 0.3, y + h * 0.25, w * 0.4, h * 0.5, fill=EDGE, stroke=TEXT, sw=SW_THIN, rx=3)
+def _washer(f, x, y, w=110, h=124):
+    """Front-load washer: cabinet, control strip with a dial, door and its glass."""
+    f.rect(x, y, w, h, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
+    f.line(x + 3, y + h * 0.2, x + w - 3, y + h * 0.2, EDGE, SW_THIN)
+    f.rect(x + w * 0.1, y + h * 0.06, w * 0.4, h * 0.08, fill=BG, rx=2)
+    f.circle(x + w * 0.78, y + h * 0.1, max(4.0, h * 0.05), fill=LINE)
+    cx, cy, r = x + w / 2, y + h * 0.6, min(w, h) * 0.3
+    f.circle(cx, cy, r, fill=EDGE, stroke=TEXT, sw=SW_OBJ)
+    f.circle(cx, cy, r * 0.7, fill=BG, stroke=LINE, sw=SW_THIN)
 
 
 @figure("single_load_circuits_210-11_422-12", h=480, nec="210.11(C)(2), 210.52(F), 422.12",
@@ -19,28 +25,33 @@ def single_load(f):
     laundry = ["open-book-exam-#1-020"]
     f.title("Two dwelling circuits that serve one load each", y=34)
     f.panel(30, 80, 110, 230, label="panel", breakers=0)
-    _ocpd(f, 57, 110, 56, 60)
-    _ocpd(f, 57, 210, 56, 60)
+    f.breaker(57, 110, 56, 64)
+    f.breaker(57, 210, 56, 64)
     # Laundry.
-    f.line(113, 140, 470, 140, WIRE_HOT, SW_WIRE)
-    f.receptacle(500, 140, 56)
-    f.rect(580, 90, 110, 110, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
-    f.circle(635, 150, 32, fill="none", stroke=TEXT, sw=SW_OBJ)
-    f.text(635, 228, "washer", T_NOTE, MUTED)
-    b = f.text(160, 110, "laundry circuit:", T_NOTE, TEXT, "start", True)
-    f.value(b[0] + b[2] + 12, 110, "20 A", 26, anchor="start", records=laundry, pad=5)
-    f.text(160, 176, "no other outlets", T_MIN, MUTED, "start")
-    # Furnace.
-    f.line(113, 240, 560, 240, WIRE_HOT, SW_WIRE)
-    f.line(560, 240, 560, 280, WIRE_HOT, SW_WIRE)
-    f.rect(500, 280, 130, 130, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
+    f.line(113, 142, 472, 142, WIRE_HOT, SW_WIRE)
+    f.receptacle(500, 142, 60)
+    px, py = _plug_cap(f, 500, 156, 26)
+    f.cable([(px, py), (px + 6, py + 26), (560, py + 34), (600, py + 20)], TEXT, 4)
+    _washer(f, 590, 84, 110, 124)
+    f.text(645, 236, "washer", T_NOTE, MUTED)
+    b = f.text(160, 112, "laundry circuit:", T_NOTE, TEXT, "start", True)
+    f.value(b[0] + b[2] + 12, 112, "20 A", 26, anchor="start", records=laundry, pad=5)
+    f.text(160, 178, "no other outlets", T_MIN, MUTED, "start")
+    # Furnace: louvered burner door over a blower door, flue on top.
+    fx, fy, fw, fh = 520, 272, 110, 140
+    f.line(113, 242, 545, 242, WIRE_HOT, SW_WIRE)
+    f.line(545, 242, 545, fy, WIRE_HOT, SW_WIRE)
+    f.rect(fx + 74, fy - 34, 24, 36, fill=STEEL, stroke=LINE, sw=SW_THIN)
+    f.rect(fx, fy, fw, fh, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
+    f.rect(fx + 8, fy + 10, fw - 16, fh * 0.42, fill="none", stroke=EDGE, sw=SW_THIN, rx=3)
+    f.rect(fx + 8, fy + 18 + fh * 0.42, fw - 16, fh * 0.48 - 26, fill="none", stroke=EDGE, sw=SW_THIN, rx=3)
     for k in range(4):
-        f.line(520, 310 + k * 22, 610, 310 + k * 22, EDGE, 4)
-    f.text(565, 440, "gas furnace", T_NOTE, MUTED)
+        f.line(fx + 20, fy + 24 + k * 11, fx + fw - 20, fy + 24 + k * 11, EDGE, 3)
+    f.text(fx + fw / 2, fy + fh + 28, "gas furnace", T_NOTE, MUTED)
     f.text(160, 226, "furnace circuit:", T_NOTE, TEXT, "start", True)
     f.lines(160, 300, ["individual branch circuit;", "its pump, valve, humidifier,", "air cleaner or A/C may share it"],
             T_MIN, MUTED, "start", gap=1.2)
-    f.tag(f.w - 24, f.h - 10, "NEC 210.11(C)(2), 422.12", anchor="end")
+    f.tag(24, f.h - 10, "NEC 210.11(C)(2), 422.12")
 
 
 @figure("ocpd_vertical_240-33", h=480, when="after", nec="240.33, 240.81",
@@ -49,15 +60,16 @@ def ocpd_vertical(f):
     f.title("How an overcurrent device enclosure is mounted", y=34)
     f.dline(400, 70, 400, 370, EDGE, SW_THIN)
     # Vertical fused switch: OK.
-    f.rect(80, 90, 130, 200, fill=PANEL, stroke=TEXT, sw=SW_OBJ + 1, rx=5)
-    f.line(210, 150, 236, 120, TEXT, 6)
+    f.disconnect(80, 90, 130, 200, on=True)
     f.text(145, 320, "vertical", T_LABEL, OK, bold=True)
     f.mark_ok(145, 360)
-    # Horizontal fused switch: not OK.
-    f.rect(450, 110, 200, 120, fill=PANEL, stroke=TEXT, sw=SW_OBJ + 1, rx=5)
-    f.line(650, 150, 676, 124, TEXT, 6)
-    f.text(550, 262, "laid on its side", T_LABEL, NO, bold=True)
-    f.mark_no(550, 300)
+    # The same switch laid on its side: not OK.
+    cx, cy = 550, 180
+    f.add(f'<g transform="rotate(-90 {cx} {cy})">')
+    f.disconnect(cx - 60, cy - 100, 120, 200, on=True)
+    f.add("</g>")
+    f.text(550, 272, "laid on its side", T_LABEL, NO, bold=True)
+    f.mark_no(550, 312)
     f.lines(400, 408, ["Exceptions: breaker enclosures may lie horizontal if 'up' is still ON",
                        "(240.81); busway plug-in units follow the busway."], T_MIN, MUTED, gap=1.2)
     f.tag(f.w - 24, f.h - 8, "NEC 240.33", anchor="end")
@@ -73,15 +85,18 @@ def room_ac(f):
     for k in range(5):
         f.line(345, 140 + k * 16, 420, 140 + k * 16, EDGE, 3)
     f.text(440, 108, "room A/C", T_NOTE, TEXT, "start", True)
-    f.path("M 400 230 C 390 300, 300 300, 260 350", TEXT, 5)
-    f.receptacle(240, 370, 50)
-    f.rect(252, 342, 26, 22, fill=AMBER, rx=3)
+    f.path("M 400 230 C 390 300, 250 270, 250 340", TEXT, 5)
+    f.receptacle(250, 380, 70)
+    # LCDI plug head over the upper face: TEST and RESET buttons.
+    f.rect(226, 338, 48, 44, fill=EDGE, stroke=TEXT, sw=SW_THIN, rx=8)
+    f.rect(232, 356, 16, 10, fill=TEXT, rx=2)
+    f.rect(252, 356, 16, 10, fill=OK, rx=2)
     b = f.text(40, 150, "cord, 120 V unit:", T_NOTE, TEXT, "start", True)
     f.value(40, 190, "10 ft max", 28, anchor="start", pad=6)
     f.text(40, 230, "208 or 240 V unit: 6 ft max", T_NOTE, MUTED, "start")
     f.lines(540, 300, ["plug has LCDI, AFCI or", "HDCI protection within", "12 in of the plug (440.65)"],
             T_MIN, MUTED, "start", gap=1.2)
-    f.leader(536, 294, 280, 352, AMBER)
+    f.leader(536, 294, 276, 350)
     f.tag(f.w - 24, f.h - 8, "NEC 440.64", anchor="end")
 
 
@@ -122,25 +137,36 @@ def battery_vent(f):
         records={"open-book-exam-#4-019": {"terms": ["No. 6"]}})
 def box_screws(f):
     f.title("Light equipment on an ordinary box (section)", y=34)
-    f.wall(185, 60, 400, thick=110)
-    f.rect(160, 150, 60, 140, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ)
-    f.text(130, 138, "box", T_NOTE, MUTED, "end")
-    f.rect(220, 140, 22, 160, fill=EDGE, stroke=TEXT, sw=SW_THIN)
-    f.text(250, 128, "plaster ring", T_NOTE, MUTED, "start")
-    f.rect(242, 150, 16, 140, fill=STEEL, stroke=TEXT, sw=SW_THIN)
-    f.rect(258, 170, 150, 100, fill=PANEL, stroke=TEXT, sw=SW_OBJ, rx=10)
-    f.text(333, 228, "equipment", T_NOTE, TEXT, bold=True)
-    for y in (170, 270):
-        f.line(200, y, 262, y, AMBER, 6)
-        f.circle(262, y, 7, fill=AMBER)
+    dw0, dw1 = 226, 242
+    f.rect(dw0, 60, dw1 - dw0, 98, fill=PANEL_2, stroke=LINE, sw=SW_THIN)
+    f.rect(dw0, 282, dw1 - dw0, 118, fill=PANEL_2, stroke=LINE, sw=SW_THIN)
+    f.text(dw0 - 10, 86, "wall", T_NOTE, MUTED, "end")
+    # Box: open toward the room, the plaster ring on its front edge.
+    f.poly([(220, 150), (120, 150), (120, 290), (220, 290)], PANEL)
+    f.polyline([(220, 150), (120, 150), (120, 290), (220, 290)], TEXT, SW_OBJ + 1)
+    f.text(170, 138, "box", T_NOTE, MUTED)
+    f.rect(218, 140, 8, 160, fill=STEEL, stroke=TEXT, sw=SW_THIN)
+    for y in (158, 276):
+        f.rect(226, y, dw1 - dw0, 6, fill=STEEL, stroke=TEXT, sw=1)
+    for y in (164, 270):
+        f.rect(226, y - 1, 12, 14, fill=STEEL, stroke=TEXT, sw=1)
+    f.text(150, 330, "plaster ring", T_NOTE, MUTED)
+    f.leader(206, 320, 222, 300)
+    # Equipment on its yoke, held to the ring ears by two screws.
+    f.rect(dw1, 154, 10, 132, fill=STEEL, stroke=TEXT, sw=SW_THIN)
+    f.rect(dw1 + 10, 176, 150, 88, fill=PANEL, stroke=TEXT, sw=SW_OBJ, rx=10)
+    f.text(dw1 + 85, 228, "equipment", T_NOTE, TEXT, bold=True)
+    for y in (170, 276):
+        f.line(228, y, dw1 + 14, y, AMBER, 5)
+        f.rect(dw1 + 10, y - 7, 8, 14, fill=AMBER, rx=2)
     f.text(420, 330, "6 lb or less", T_LABEL, TEXT, "start", True)
-    b = f.text(420, 150, "yoke held by two", T_NOTE, TEXT, "start")
+    f.text(420, 150, "yoke held by two", T_NOTE, TEXT, "start")
     f.value(420, 190, "No. 6 or larger", 26, anchor="start", pad=6, what="the screw size")
     f.text(420, 228, "screws", T_NOTE, TEXT, "start")
-    f.leader(416, 184, 268, 170, AMBER)
-    f.lines(420, 380, ["heavier: the box must support it", "like a luminaire (314.27(A))"], T_MIN, MUTED, "start",
+    f.leader(412, 144, dw1 + 18, 168, AMBER)
+    f.lines(420, 366, ["heavier: the box must support it", "like a luminaire (314.27(A))"], T_MIN, MUTED, "start",
             gap=1.2)
-    f.tag(24, f.h - 8, "NEC 314.27(D) Ex.")
+    f.tag(f.w - 24, f.h - 8, "NEC 314.27(D) Ex.", anchor="end")
 
 
 @figure("equipment_airflow_110-13b", h=430, nec="110.13(B)",
@@ -175,28 +201,34 @@ def airflow(f):
         records={"open-book-exam-#10-006": {"terms": ["Remote Disconnect Control"]}})
 def relay_control(f):
     f.title("Pushbutton that opens a disconnecting means through a relay", y=34)
-    # Pushbutton station.
-    f.rect(40, 110, 110, 130, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
-    f.circle(95, 175, 30, fill=NO, stroke=TEXT, sw=SW_OBJ)
-    f.lines(95, 276, ["pushbutton", "(e.g. at the door)"], T_MIN, MUTED, gap=1.15)
-    # Control circuit to relay.
-    f.line(150, 160, 330, 160, AMBER, SW_WIRE - 1)
-    f.line(150, 190, 330, 190, AMBER, SW_WIRE - 1)
-    f.text(240, 146, "pushbutton circuit", T_MIN, AMBER)
-    f.rect(330, 130, 110, 90, fill=PANEL, stroke=TEXT, sw=SW_OBJ, rx=6)
-    f.path("M 350 175 q 10 -20 20 0 t 20 0 t 20 0 t 20 0", TEXT, 3)
-    f.text(385, 250, "relay", T_NOTE, MUTED)
-    f.line(440, 175, 560, 175, AMBER, SW_WIRE - 1)
-    # Disconnect.
-    f.rect(560, 90, 170, 190, fill=PANEL, stroke=TEXT, sw=SW_OBJ + 1, rx=6)
-    f.rect(590, 120, 110, 60, fill=PANEL_2, stroke=TEXT, sw=SW_THIN, rx=4)
-    f.text(645, 158, "operator", T_MIN, TEXT)
-    for k in range(3):
-        x = 600 + k * 45
-        f.line(x, 200, x, 225, TEXT, 4)
-        f.line(x, 225, x + 22, 250, TEXT, 4)
-    f.text(645, 310, "disconnecting means", T_NOTE, TEXT, bold=True)
-    f.text(645, 336, "(opens the power)", T_MIN, MUTED)
+    # Pushbutton station: mushroom head on its collar.
+    f.rect(46, 112, 100, 124, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
+    for sx, sy in ((58, 124), (134, 124), (58, 224), (134, 224)):
+        f.circle(sx, sy, 3, fill=EDGE)
+    f.circle(96, 174, 26, fill=EDGE, stroke=TEXT, sw=SW_THIN)
+    f.circle(96, 174, 20, fill=NO, stroke=TEXT, sw=SW_OBJ)
+    f.lines(96, 272, ["pushbutton", "(e.g. at the door)"], T_MIN, MUTED, gap=1.15)
+    # Control circuit to the relay coil; the relay contact operates the switch.
+    f.line(146, 160, 330, 160, AMBER, SW_WIRE - 1)
+    f.line(146, 190, 330, 190, AMBER, SW_WIRE - 1)
+    f.text(238, 146, "pushbutton circuit", T_MIN, AMBER)
+    f.rect(330, 124, 110, 102, fill=PANEL, stroke=TEXT, sw=SW_OBJ, rx=6)
+    f.line(330, 160, 356, 160, TEXT, 2)
+    f.line(330, 190, 356, 190, TEXT, 2)
+    f.path("M 356 160 a 7.5 7.5 0 0 1 0 15 a 7.5 7.5 0 0 1 0 15", TEXT, 3)
+    f.dline(366, 175, 418, 175, MUTED, SW_THIN, 5, 4)
+    f.circle(420, 160, 3, fill=TEXT)
+    f.circle(420, 190, 3, fill=TEXT)
+    f.line(420, 190, 432, 164, TEXT, 3)
+    f.line(420, 160, 440, 160, TEXT, 2)
+    f.line(420, 190, 440, 190, TEXT, 2)
+    f.text(385, 256, "relay", T_NOTE, MUTED)
+    f.line(440, 160, 580, 160, AMBER, SW_WIRE - 1)
+    f.line(440, 190, 580, 190, AMBER, SW_WIRE - 1)
+    # Disconnecting means, operated from the control signal.
+    f.disconnect(580, 92, 120, 170, on=True)
+    f.text(645, 300, "disconnecting means", T_NOTE, TEXT, bold=True)
+    f.text(645, 326, "(opens the power)", T_MIN, MUTED)
     b = f.text(40, 396, "The device and circuit together:", T_NOTE, TEXT, "start")
     f.value(b[0] + b[2] + 12, 396, "Remote Disconnect Control", T_NOTE, anchor="start", pad=5,
             what="the defined term")
@@ -277,18 +309,34 @@ def rv_park(f):
     pct = ["open-book-exam-#10-023"]
     feeder = ["final-exam-#3-002"]
     f.title("RV park: receptacles per site and a 3-phase feeder", y=34)
-    _card(f, 20, 56, 440, 400, "Sites with electrical supply")
-    for k in range(6):
-        x = 60 + (k % 3) * 130
-        y = 110 + (k // 3) * 100
-        f.rect(x, y, 90, 56, fill=PANEL_2, stroke=EDGE, sw=SW_THIN, rx=6)
-        f.rect(x + 36, y + 14, 18, 28, fill=AMBER, stroke=TEXT, sw=SW_THIN, rx=2)
-    f.text(36, 330, "every site: 20 A, 125 V", T_NOTE, TEXT, "start")
-    b = f.text(36, 368, "30 A, 125 V: at least", T_NOTE, TEXT, "start")
-    f.value(b[0] + b[2] + 10, 368, "70%", 26, anchor="start", records=pct, pad=5)
-    f.text(36, 406, "50 A, 125/250 V: 40% new, 20% existing", T_NOTE, TEXT, "start")
-    f.text(36, 438, "(all weather-resistant)", T_MIN, MUTED, "start")
-    _card(f, 480, 56, 300, 400, "208Y/120 V 3-phase feeder")
+    f.card(20, 56, 440, 400, "Site supply pedestal")
+    # Pedestal: head with three receptacles under flip covers, on its post.
+    px, pw = 44, 120
+    f.rect(px + 38, 380, pw - 76, 50, fill=STEEL, stroke=LINE, sw=SW_THIN)
+    f.line(36, 430, 180, 430, LINE, SW_STRUCT)
+    f.rect(px, 104, pw, 278, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=10)
+    f.rect(px - 4, 98, pw + 8, 14, fill=EDGE, stroke=TEXT, sw=SW_THIN, rx=4)
+    cx = px + pw / 2
+    rows = ((146, 20), (232, 26), (322, 30))
+    for k, (cy, r) in enumerate(rows):
+        f.rect(cx - r - 12, cy - r - 16, 2 * r + 24, 2 * r + 30, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=5)
+        f.line(cx - r - 6, cy - r - 10, cx + r + 6, cy - r - 10, LINE, 3)
+        if k == 0:
+            f.nema_face(cx, cy + 4, r, "5-20")
+        else:
+            f.circle(cx, cy + 4, r, fill=PANEL_2, stroke=TEXT, sw=2)
+            f.circle(cx, cy + 4, r * 0.76, fill=BG, stroke=EDGE, sw=SW_THIN)
+    tx = 186
+    f.text(tx, 140, "20 A, 125 V", T_NOTE, TEXT, "start", True)
+    f.text(tx, 166, "every site", T_NOTE, MUTED, "start")
+    f.text(tx, 226, "30 A, 125 V", T_NOTE, TEXT, "start", True)
+    b = f.text(tx, 254, "at least", T_NOTE, MUTED, "start")
+    f.value(b[0] + b[2] + 10, 254, "70%", 26, anchor="start", records=pct, pad=5)
+    f.text(tx, 282, "of the sites", T_NOTE, MUTED, "start")
+    f.text(tx, 316, "50 A, 125/250 V", T_NOTE, TEXT, "start", True)
+    f.lines(tx, 342, ["40% of new sites,", "20% of existing"], T_NOTE, MUTED, "start", gap=1.15)
+    f.text(tx, 430, "all weather-resistant", T_MIN, MUTED, "start")
+    f.card(480, 56, 300, 400, "208Y/120 V 3-phase feeder")
     cx, cy = 630, 220
     f.circle(cx, cy, 86, fill=PANEL, stroke=LINE, sw=SW_STRUCT)
     for (dx, dy), c in zip(((-30, -30), (30, -30), (-30, 30), (30, 30)), (WIRE_HOT, WIRE_HOT, "#f8fafc", WIRE_GND)):

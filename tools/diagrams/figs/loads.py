@@ -2,19 +2,6 @@
 from nec_style import *  # noqa: F401,F403
 
 
-def _card(f, x, y, w, h, title):
-    f.rect(x, y, w, h, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    f.text(x + 14, y + 30, title, T_NOTE, TEXT, "start", True)
-
-
-def _ocpd(f, x, y, w=56, h=64, label=None):
-    """Breaker/OCPD body with a handle, top-left at (x, y)."""
-    f.rect(x, y, w, h, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
-    f.rect(x + w * 0.3, y + h * 0.25, w * 0.4, h * 0.5, fill=EDGE, stroke=TEXT, sw=SW_THIN, rx=3)
-    if label:
-        f.text(x + w / 2, y - 12, label, T_LABEL, TEXT, bold=True)
-
-
 def _building(f, x, y, w, h, label):
     """Small elevation of a building: walls and a pitched roof."""
     f.rect(x, y, w, h, fill=PANEL, stroke=EDGE, sw=SW_OBJ)
@@ -79,11 +66,11 @@ def ampacity_derating(f):
         f.circle(cx + dx, cy + dy, 22, fill=WIRE_NEU, stroke=BG, sw=SW_THIN)
     f.circle(cx + 50, cy + 52, 14, fill=WIRE_GND, stroke=BG, sw=SW_THIN)
     f.text(cx, 68, "raceway, cut open", T_NOTE, MUTED)
-    f.lines(cx, 330, ["circuit conductors:", "count them"], T_NOTE, TEXT, bold=True)
-    f.text(cx - 76, 398, "EGC:", T_NOTE, WIRE_GND, "start", True)
-    f.value(cx - 18, 398, "not counted", T_NOTE, anchor="start", records=egc, pad=6,
+    f.text(cx - 76, 340, "EGC:", T_NOTE, WIRE_GND, "start", True)
+    f.value(cx - 18, 340, "not counted", T_NOTE, anchor="start", records=egc, pad=6,
             what="EGC not counted (310.15(F))")
-    f.leader(cx + 20, 380, cx + 50, cy + 66, WIRE_GND)
+    f.leader(cx + 50, 314, cx + 50, cy + 68, WIRE_GND)
+    f.lines(cx, 400, ["circuit conductors:", "count them"], T_NOTE, TEXT, bold=True)
     # Two worked columns.
     x0, x1, xa, xb = 290, 785, 540, 690
     f.rect(x0, 60, x1 - x0, 420, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
@@ -112,33 +99,53 @@ def ampacity_derating(f):
 def dwelling_service(f):
     pct = ["final-exam-#1-036", "open-book-exam-#4-022"]
     where = ["final-exam-#3-065"]
-    f.title("Service conductor sizing (one-line)", y=34)
-    y = 170
-    # Utility transformer.
-    for dy in (-18, 18):
-        f.circle(70, y + dy, 20, fill="none", stroke=TEXT, sw=SW_OBJ)
-    f.text(70, y + 72, "utility", T_NOTE, MUTED)
-    for k, yy in enumerate((y - 10, y, y + 10)):
-        f.line(92, yy, 280, yy, WIRE_NEU if k == 1 else WIRE_HOT, SW_WIRE - 1)
-    f.value_lines(186, 92, ["120/240 V,", "single-phase, 3-wire"], T_NOTE, TEXT, records=where, pad=6,
+    f.title("Service conductor sizing (elevation, not to scale)", y=34)
+    gy = 272
+    f.grade(gy, 20, 780, label=None)
+    # Utility pole with its pole-top transformer.
+    px = 60
+    f.line(px, gy, px, 64, WOOD, 12)
+    f.line(px - 30, 78, px + 30, 78, WOOD, 7)
+    f.transformer(px + 14, 110, 44, 62, kind="pole")
+    f.text(px + 36, 206, "utility", T_NOTE, MUTED)
+    # House: roof, wall, service mast with weatherhead.
+    hx0, hx1, wtop = 420, 770, 160
+    f.rect(hx0, wtop, hx1 - hx0, gy - wtop, fill=PANEL, stroke=LINE, sw=SW_OBJ)
+    f.polyline([(hx0 - 14, wtop), ((hx0 + hx1) / 2, 74), (hx1 + 10, wtop)], LINE, SW_OBJ)
+    mx, my = 462, 104
+    f.conduit(mx, my + 8, mx, 186, 10, couplings=())
+    f.path(f"M {mx - 9} {my + 10} Q {mx} {my - 6} {mx + 13} {my + 4}", TEXT, 5)
+    # Service drop, three conductors sagging from the transformer to the weatherhead.
+    for k, dy in enumerate((-6, 0, 6)):
+        f.path(f"M {px + 58} {128 + dy} Q 270 {176 + dy} {mx - 6} {my + 8 + dy * 0.5}",
+               WIRE_NEU if k == 1 else WIRE_HOT, 3)
+    f.value_lines(256, 214, ["120/240 V,", "single-phase, 3-wire"], T_NOTE, TEXT, records=where, pad=6,
                   what="the system the table is for")
-    # Meter and 200 A service disconnect.
-    f.circle(305, y, 26, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ)
-    f.text(305, y + 60, "meter", T_NOTE, MUTED)
-    for yy in (y - 10, y, y + 10):
-        f.line(331, yy, 420, yy, WIRE_HOT, SW_WIRE - 1)
-    _ocpd(f, 420, y - 34, 64, 68, "200 A")
-    f.text(452, y + 62, "service", T_NOTE, MUTED)
-    f.line(484, y, 560, y, WIRE_HOT, SW_WIRE)
-    _building(f, 560, y - 60, 180, 150, "")
-    f.value_lines(650, y + 20, ["individual", "dwelling unit"], T_NOTE, TEXT, records=where, pad=6,
+    # Meter on the outside wall, 200 A main inside.
+    f.meter(mx, 218, 18)
+    f.text(mx, 266, "meter", T_MIN, MUTED)
+    f.panel(536, 168, 64, 96, label=None, breakers=2, main=True)
+    f.line(mx + 21, 214, 536, 214, WIRE_HOT, SW_WIRE - 1)
+    f.text(568, 156, "200 A main", T_NOTE, TEXT, bold=True)
+    f.value_lines(690, 206, ["individual", "dwelling unit"], T_NOTE, TEXT, records=where, pad=6,
                   what="the occupancy the table is for")
     # The 83 percent rule.
-    _card(f, 30, 290, 740, 126, "Service conductors carrying the entire load, 100-400 A")
+    f.card(30, 290, 740, 126, "Service conductors carrying the entire load, 100-400 A")
     b = f.text(44, 360, "ampacity not less than", 26, TEXT, "start")
     f.value(b[0] + b[2] + 12, 360, "83% x 200 A = 166 A", 26, anchor="start", records=pct, pad=6)
     f.text(44, 398, "size from Table 310.12(A) when no correction or adjustment applies", T_MIN, MUTED, "start")
     f.tag(f.w - 24, f.h - 10, "NEC 310.12(A)", anchor="end")
+
+
+def _drill(f, x, y):
+    """Corded drill, side view, chuck to the left: (x, y) is the top-left of the chuck end."""
+    f.line(x - 14, y + 14, x + 6, y + 14, LINE, 3)
+    f.rect(x + 2, y + 6, 18, 16, fill=STEEL, stroke=TEXT, sw=1.5, rx=3)
+    f.poly([(x + 50, y + 24), (x + 72, y + 24), (x + 70, y + 64), (x + 52, y + 64)], PANEL_2, TEXT, SW_THIN)
+    f.rect(x + 18, y, 74, 28, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=10)
+    for k in range(3):
+        f.line(x + 72 + k * 6, y + 7, x + 72 + k * 6, y + 21, EDGE, 2)
+    f.rect(x + 44, y + 30, 6, 12, fill=TEXT, rx=2)
 
 
 @figure("branch_circuit_rating_210", h=500, nec="210.18, 210.19(B), Table 210.21(B)(2)",
@@ -153,31 +160,41 @@ def branch_circuit_rating(f):
     cord = ["final-exam-#3-014"]
     wire = ["open-book-exam-#7-011"]
     f.title("20 A multioutlet circuit, 15 A duplex receptacles", y=34)
-    f.panel(30, 70, 120, 190, label="", breakers=0)
-    f.text(90, 286, "panel", T_NOTE, MUTED)
-    _ocpd(f, 62, 150, 56, 64)
-    f.text(90, 136, "20 A", T_LABEL, TEXT, bold=True)
-    y = 182
-    f.line(118, y, 700, y, WIRE_HOT, SW_WIRE)
-    f.line(118, y + 16, 700, y + 16, WIRE_NEU, SW_WIRE)
+    f.panel(30, 70, 120, 190, label=None, breakers=0)
+    f.breaker(66, 136, 48, 70)
+    f.text(90, 124, "20 A", T_LABEL, TEXT, bold=True)
+    f.rect(48, 230, 84, 12, fill=STEEL, stroke=TEXT, sw=1.5, rx=2)
+    for k in range(5):
+        f.circle(58 + k * 16, 236, 3, fill=CLAMP)
+    y = 171
+    f.line(114, y, 700, y, WIRE_HOT, SW_WIRE)
+    f.polyline([(132, 236), (140, 236), (140, y + 16), (700, y + 16)], WIRE_NEU, SW_WIRE)
     for x in (330, 500, 670):
-        f.line(x - 8, y, x - 8, y + 44, WIRE_HOT, 3)
-        f.line(x + 8, y + 16, x + 8, y + 44, WIRE_NEU, 3)
-        f.receptacle(x, y + 70, 56)
-        f.text(x, y + 132, "15 A", T_NOTE, TEXT, bold=True)
-    # Cord-and-plug load on the last receptacle.
-    f.path(f"M 684 {y + 80} C 730 {y + 110}, 740 {y + 130}, 740 {y + 170}", TEXT, 4)
-    f.rect(716, y + 170, 48, 34, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
-    f.text(708, y + 194, "tool", T_MIN, MUTED, "end")
+        f.line(x - 8, y, x - 8, y + 42, WIRE_HOT, 3)
+        f.line(x + 8, y + 16, x + 8, y + 42, WIRE_NEU, 3)
+        f.receptacle(x, y + 76, 68)
+        f.text(x, y + 138, "15 A", T_NOTE, TEXT, bold=True)
+    # Portable drill plugged into the lower face of the last receptacle.
+    py = y + 76 + 68 * 0.23
+    f.plug(694, py - 12, 30, 24, facing="left")
+    f.path(f"M 724 {py} C 776 {py}, 784 300, 784 350 C 784 392, 762 404, 752 396", TEXT, 5)
+    _drill(f, 690, 334)
     f.text(420, y - 18, "#12 Cu conductors", T_NOTE, TEXT, bold=True)
     # Three tags.
-    f.value_lines(100, 350, ["circuit rating =", "OCPD rating"], T_NOTE, records=rating, pad=6, gap=1.15)
-    f.leader(100, 328, 90, 300)
-    f.value_lines(230, 404, ["conductor ampacity", ">= 20 A rating"], T_NOTE, records=wire, pad=6, gap=1.15)
-    f.leader(230, 382, 250, y + 18)
-    f.value(560, 412, "cord-and-plug load: 12 A max", T_NOTE, records=cord, pad=6)
-    f.leader(640, 392, 716, y + 200)
+    f.value_lines(90, 318, ["circuit rating =", "OCPD rating"], T_NOTE, records=rating, pad=6, gap=1.15)
+    f.leader(90, 296, 90, 210)
+    f.value_lines(256, 410, ["conductor ampacity", ">= 20 A rating"], T_NOTE, records=wire, pad=6, gap=1.15)
+    f.leader(256, 388, 256, y + 18)
+    f.value(520, 446, "cord-and-plug load: 12 A max", T_NOTE, records=cord, pad=6)
+    f.leader(640, 426, 700, 370)
     f.tag(f.w - 24, f.h - 10, "NEC 210.18, 210.19, 210.21", anchor="end")
+
+
+def _fed_building(f, x):
+    """Card picture: a building with its disconnect, supplied from the left."""
+    _building(f, x + 70, 190, 100, 80, "")
+    f.line(x + 18, 232, x + 98, 232, WIRE_HOT, SW_WIRE - 1)
+    f.disconnect(x + 98, 206, 38, 52)
 
 
 @figure("outbuilding_disconnect_225-39", h=490, nec="225.39, 225.39(A)-(D)",
@@ -188,17 +205,13 @@ def outbuilding_disconnect(f):
     cols = [(20, "one branch circuit,", "limited loads", "15 A min"),
             (280, "two 2-wire", "branch circuits", "30 A min")]
     for x, t1, t2, v in cols:
-        _card(f, x, 60, 240, 320, "")
+        f.card(x, 60, 240, 320)
         f.lines(x + 120, 94, [t1, t2], T_NOTE, TEXT, bold=True, gap=1.15)
-        _building(f, x + 70, 190, 100, 80, "")
-        f.rect(x + 100, 212, 40, 44, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=4)
-        f.line(x + 140, 222, x + 154, 206, TEXT, 5)
+        _fed_building(f, x)
         f.value(x + 120, 330, v, 28, what=f"'{v}'")
-    _card(f, 540, 60, 240, 320, "")
+    f.card(540, 60, 240, 320)
     f.lines(660, 94, ["feeder"], T_NOTE, TEXT, bold=True)
-    _building(f, 610, 190, 100, 80, "")
-    f.rect(640, 212, 40, 44, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=4)
-    f.line(680, 222, 694, 206, TEXT, 5)
+    _fed_building(f, 540)
     f.text(660, 318, "60 A min", 28, DIM, bold=True)
     f.lines(660, 342, ["one-family", "dwelling: 100 A"], T_MIN, MUTED, gap=1.05)
     b = f.text(30, 424, "Every case: rating not less than the", 26, TEXT, "start")
@@ -207,16 +220,26 @@ def outbuilding_disconnect(f):
     f.tag(f.w - 24, f.h - 12, "NEC 225.39", anchor="end")
 
 
-def _dryer(f, x, y, s=44):
-    f.rect(x, y, s, s, fill=PANEL_2, stroke=TEXT, sw=SW_THIN, rx=4)
-    f.circle(x + s / 2, y + s * 0.58, s * 0.28, fill="none", stroke=TEXT, sw=SW_THIN)
+def _dryer(f, x, y, w=48, h=60):
+    """Front-loading clothes dryer, front view: control strip with a knob, round door."""
+    f.rect(x, y, w, h, fill=PANEL_2, stroke=TEXT, sw=SW_THIN, rx=4)
+    f.line(x + 2, y + h * 0.22, x + w - 2, y + h * 0.22, EDGE, SW_THIN)
+    f.circle(x + w * 0.76, y + h * 0.11, h * 0.055, fill=TEXT)
+    f.rect(x + w * 0.14, y + h * 0.07, w * 0.36, h * 0.08, fill=BG, rx=1.5)
+    f.circle(x + w / 2, y + h * 0.6, w * 0.3, fill=BG, stroke=TEXT, sw=SW_THIN)
+    f.circle(x + w / 2, y + h * 0.6, w * 0.2, fill="none", stroke=EDGE, sw=1.5)
 
 
-def _range(f, x, y, s=64):
-    f.rect(x, y, s, s, fill=PANEL_2, stroke=TEXT, sw=SW_THIN, rx=4)
-    for dx in (0.3, 0.7):
-        for dy in (0.3, 0.62):
-            f.circle(x + s * dx, y + s * dy, s * 0.12, fill="none", stroke=TEXT, sw=SW_THIN)
+def _range(f, x, y, w=72, h=84):
+    """Freestanding electric range, front view: backguard with knobs, cooktop, oven door."""
+    f.rect(x, y, w, h * 0.16, fill=PANEL_2, stroke=TEXT, sw=SW_THIN, rx=3)
+    for k in range(4):
+        f.circle(x + w * (0.2 + 0.2 * k), y + h * 0.08, h * 0.035, fill=TEXT)
+    f.rect(x - 2, y + h * 0.16, w + 4, h * 0.06, fill=EDGE, stroke=TEXT, sw=1.5, rx=1.5)
+    f.rect(x, y + h * 0.22, w, h * 0.78, fill=PANEL_2, stroke=TEXT, sw=SW_THIN, rx=3)
+    f.rect(x + w * 0.16, y + h * 0.3, w * 0.68, h * 0.04, fill=TEXT, rx=1.5)
+    f.rect(x + w * 0.14, y + h * 0.42, w * 0.72, h * 0.36, fill=BG, stroke=EDGE, sw=1.5, rx=3)
+    f.line(x + 4, y + h * 0.88, x + w - 4, y + h * 0.88, EDGE, 1.5)
 
 
 @figure("appliance_demand_220-54_220-55", h=486, nec="Table 220.54, Table 220.55 and Note 1",
@@ -224,16 +247,16 @@ def _range(f, x, y, s=64):
                  "open-book-exam-#3-019": {"like": "final-exam-#1-021"}})
 def appliance_demand(f):
     f.title("Dwelling appliance demand (worked cards)", y=34)
-    _card(f, 20, 56, 370, 390, "Clothes dryers, Table 220.54")
+    f.card(20, 56, 370, 390, "Clothes dryers, Table 220.54")
     for k in range(5):
-        _dryer(f, 40 + k * 66, 110)
+        _dryer(f, 42 + k * 68, 104)
     f.lines(34, 200, ["5 dryers x 5 kW = 25 kW", "(5 kW each, or the nameplate", "if larger)"], T_NOTE,
             TEXT, "start", gap=1.2)
     f.text(34, 306, "demand factor, 5 dryers:", T_NOTE, MUTED, "start")
     f.value(34, 346, "85%", 30, anchor="start")
     f.value(34, 408, "25 kW x 0.85 = 21.25 kW", 26, anchor="start")
-    _card(f, 410, 56, 370, 390, "One range, Table 220.55")
-    _range(f, 430, 100)
+    f.card(410, 56, 370, 390, "One range, Table 220.55")
+    _range(f, 430, 100, 62, 88)
     f.lines(510, 124, ["14 kW range", "Column C: 8 kW"], T_NOTE, TEXT, "start", bold=True, gap=1.2)
     f.lines(424, 212, ["Note 1: over 12 kW, add 5%", "per kW (or major fraction)"], T_NOTE, TEXT,
             "start", gap=1.2)

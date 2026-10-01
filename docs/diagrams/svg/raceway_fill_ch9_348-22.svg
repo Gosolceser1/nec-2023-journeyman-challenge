@@ -1,7 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="800" height="536" viewBox="0 0 800 536">
 <rect x="0.0" y="0.0" width="800.0" height="536.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Raceway fill: which table?</text>
-<rect x="20.0" y="56.0" width="470.0" height="440.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="20.0" y="56.0" width="470.0" height="432.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="200.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="end">Chapter 9,</text>
 <text x="210.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">Table 1</text>
 <text x="255.0" y="116.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">percent of raceway area</text>
@@ -24,9 +24,26 @@
 <text x="34.0" y="410.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">LFNC:</text>
 <text x="112.0" y="410.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">356.22 sends you to Table 1</text>
 <text x="34.0" y="450.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">(most raceways work the same way)</text>
-<rect x="510.0" y="56.0" width="270.0" height="440.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="510.0" y="56.0" width="270.0" height="432.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="645.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">trade size 3/8 FMC</text>
-<circle cx="645.0" cy="190.0" r="54" fill="#0f172a" stroke="#64748b" stroke-width="10"/>
+<rect x="560.0" y="164.0" width="180.0" height="52.0" rx="4" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="575.0" y1="166.0" x2="569.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="586.0" y1="166.0" x2="580.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="597.0" y1="166.0" x2="591.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="608.0" y1="166.0" x2="602.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="619.0" y1="166.0" x2="613.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="630.0" y1="166.0" x2="624.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="641.0" y1="166.0" x2="635.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="652.0" y1="166.0" x2="646.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="663.0" y1="166.0" x2="657.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="674.0" y1="166.0" x2="668.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="685.0" y1="166.0" x2="679.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="696.0" y1="166.0" x2="690.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="707.0" y1="166.0" x2="701.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="718.0" y1="166.0" x2="712.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="729.0" y1="166.0" x2="723.0" y2="214.0" stroke="#94a3b8" stroke-width="2.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 560 164 a 11.44 26.0 0 1 0 0 52 a 11.44 26.0 0 1 0 0 -52" fill="#334155" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 560 171 a 7.8 19.0 0 1 0 0 38 a 7.8 19.0 0 1 0 0 -38" fill="#0f172a" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="524.0" y="290.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">too small for</text>
 <text x="524.0" y="316.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">Chapter 9: own table</text>
 <text x="524.0" y="348.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">Table 348.22</text>
