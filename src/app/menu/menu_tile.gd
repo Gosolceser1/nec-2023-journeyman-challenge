@@ -11,6 +11,9 @@ var badge_label: Label
 var detail_label: Label
 var meter: MeterBar
 var accent := AppTheme.SKY_400
+## Hover text that adds to what the tile shows ("Title • description"); with
+## none, the tile's own text shows on hover only when it is cut off.
+var tip := ""
 
 
 func _init(title_text: String, accent_color: Color, h: float, title_px: int, detail_px: int, with_meter: bool = true) -> void:
@@ -76,6 +79,27 @@ func set_status(detail: String, badge: String, badge_color: Color, fraction: flo
 	if meter != null:
 		meter.fraction = fraction
 		meter.tick = tick
+
+
+func _get_tooltip(_at_position: Vector2) -> String:
+	if tip != "":
+		return tip
+	return tooltip_text if is_clipped(title_label) or is_clipped(detail_label) else ""
+
+
+func _make_custom_tooltip(for_text: String) -> Object:
+	return Tooltip.make(for_text)
+
+
+## True when the label's text is cut off (ellipsis or lines past
+## max_lines_visible).
+static func is_clipped(l: Label) -> bool:
+	if l.text == "" or not l.is_visible_in_tree():
+		return false
+	if l.autowrap_mode != TextServer.AUTOWRAP_OFF:
+		return l.get_line_count() > l.get_visible_line_count()
+	var width := l.get_theme_font("font").get_string_size(l.text, HORIZONTAL_ALIGNMENT_LEFT, -1, l.get_theme_font_size("font_size")).x
+	return width > l.size.x + 0.5
 
 
 func _label(text_value: String, px: int, color: Color, weight: int) -> Label:

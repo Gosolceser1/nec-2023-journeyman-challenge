@@ -141,7 +141,7 @@ static func make_tool_button(main: Main, tool_id: String, h: float = MathUi.TILE
 	b.add_theme_constant_override("icon_max_width", 18)
 	for state in ["icon_normal_color", "icon_hover_color", "icon_pressed_color", "icon_focus_color"]:
 		b.add_theme_color_override(state, accent)
-	b.tooltip_text = str(t.get("description", ""))
+	b.tooltip_text = Tooltip.wrap(str(t.get("description", ""))) if not main.ui_mobile else ""
 	b.name = "Math_" + tool_id
 	return b
 

@@ -69,7 +69,7 @@
 			"title_compact": "{n} Q",
 			"detail": "{minutes} minutes timed",
 			"detail_compact": "{minutes} min",
-			"tooltip": "{blurb} • {minutes} minutes timed"
+			"tooltip": "{blurb} • {n} mixed questions, {minutes}-minute clock"
 		},
 		"area_drills": {
 			"header": "SUBJECT AREA DRILLS • {n} QUESTIONS EACH",

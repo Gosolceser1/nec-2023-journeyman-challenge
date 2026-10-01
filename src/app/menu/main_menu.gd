@@ -369,7 +369,7 @@ func _block_drill_sizes(parent: VBoxContainer, cfg: Dictionary) -> void:
 			AppTheme.SKY_400, host._start_quiz.bind(n, host._practice_time(n), true, "%d-Question Practice" % n), px(70, 72))
 		t.set_status(MenuModel.fill(str(cfg.get("detail_compact" if mobile() else "detail", cfg.get("detail", ""))), v), "", AppTheme.SLATE_400, 0.0)
 		t.meter.visible = false
-		t.tooltip_text = MenuModel.fill(str(cfg.get("tooltip", "")), v)
+		t.tip = MenuModel.fill(str(cfg.get("tooltip", "")), v)
 
 
 func _block_area_drills(parent: VBoxContainer, cfg: Dictionary) -> void:

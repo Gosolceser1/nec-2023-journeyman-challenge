@@ -159,7 +159,8 @@ static func build(host: Main, parent: VBoxContainer) -> Control:
 	host.reduce_motion_toggle.toggled.connect(host._on_reduce_motion_toggled)
 	host.audio_body.add_child(host.reduce_motion_toggle)
 	host.hunt_keywords_toggle = _make_toggle(host, "Highlight code-book keywords (Index hints; off in the Full Exam)" if not host.ui_mobile else "Keyword hints (off in Full Exam)", fs)
-	host.hunt_keywords_toggle.tooltip_text = "Colors the stem words to look up in the NEC Index and names the entry before you answer. " + HuntKeywords.EXAM_NOTE
+	if not host.ui_mobile:
+		host.hunt_keywords_toggle.tooltip_text = Tooltip.wrap("Colors the stem words to look up in the NEC Index and names the entry before you answer. " + HuntKeywords.EXAM_NOTE)
 	host.hunt_keywords_toggle.toggled.connect(host._on_hunt_keywords_toggled)
 	host.audio_body.add_child(host.hunt_keywords_toggle)
 	return section

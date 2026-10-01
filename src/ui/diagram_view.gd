@@ -75,8 +75,12 @@ func _init() -> void:
 	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	tooltip_text = "Click or tap to enlarge"
+	tooltip_text = "Click to enlarge"
 	resized.connect(_update_height)
+
+
+func _make_custom_tooltip(for_text: String) -> Object:
+	return Tooltip.make(for_text)
 
 
 static func _read_json(path: String) -> Dictionary:

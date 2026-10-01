@@ -46,6 +46,9 @@ const SUITES := [
 	{"name": "question deck (exam blueprint, reviews, saved state)", "path": "res://tools/tests/test_question_deck.gd"},
 	{"name": "study feedback (subject areas, pace, readiness, weakest-area drill)", "path": "res://tools/tests/test_study_feedback.gd"},
 	{"name": "app theme (palette, factories)", "path": "res://tools/tests/test_app_theme.gd"},
+	# The default tooltip was a see-through, borderless one-liner in Open Sans
+	# that read as loose text over the tile beneath, repeating it.
+	{"name": "tooltips (solid panel, readable size, wrap, only when they add, none on phones)", "path": "res://tools/tests/test_tooltips.gd"},
 	{"name": "nec reference (titles, lookup path)", "path": "res://tools/tests/test_nec_reference.gd"},
 	{"name": "app strings (edition and exam format from data, both layouts)", "path": "res://tools/tests/test_app_strings.gd"},
 	# An Android report showed a breadcrumb that did not match the question.

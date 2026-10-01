@@ -30,6 +30,13 @@
 
 ### Fixed
 
+- **Hover tips are readable.** They were Godot's default: a see-through,
+  borderless strip in a different font that read as loose text over the tile
+  beneath, often repeating it, and long tips ran off as one line. Tips now sit
+  on a solid slate card in the app font, at least 14 px on screen at any window
+  size, wrap at about 55 characters, and put the title in bold. Menu tiles show
+  a tip only when it adds something (a drill's purpose, or text cut off on the
+  tile); phones show none.
 - **Figures no longer give answers away.** Before you answer, a figure now
   hides every rule value the question doesn't state and every word or number
   from any answer choice, right or wrong, for every question that uses the

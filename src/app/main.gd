@@ -274,6 +274,7 @@ func _ready() -> void:
 		# Headless, a min size grows the fake 960x960 window the tests measure.
 		if DisplayServer.get_name() != "headless":
 			get_window().min_size = DESKTOP_MIN_WINDOW
+	Tooltip.attach(self, not ui_mobile)
 	speech.edge_client = EdgeTtsClient.new()
 	speech.edge_client.name = "EdgeTtsClient"
 	add_child(speech.edge_client)

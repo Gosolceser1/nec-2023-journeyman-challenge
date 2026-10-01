@@ -4,6 +4,7 @@ Main <Control> res://src/app/main.gd
   .anchor_bottom = 1.0
   .grow_horizontal = 2
   .grow_vertical = 2
+  .theme = Theme{TooltipLabel/colors/font_color=Color(0.8862745, 0.9098039, 0.9411765, 1), TooltipLabel/colors/font_shadow_color=Color(1, 1, 1, 0), TooltipLabel/constants/line_spacing=2, TooltipLabel/font_sizes/font_size=22, TooltipLabel/fonts/font=SystemFont{font_names=PackedStringArray("Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"), font_weight=500}, TooltipPanel/styles/panel=StyleBoxFlat{content_margin_left=20.0, content_margin_top=16.0, content_margin_right=20.0, content_margin_bottom=16.0, bg_color=Color(0.05882353, 0.09019608, 0.16470589, 0.97), border_width_left=1, border_width_top=1, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 0.45), corner_radius_top_left=8, corner_radius_top_right=8, corner_radius_bottom_right=8, corner_radius_bottom_left=8, expand_margin_left=-8.0, expand_margin_top=-8.0, expand_margin_right=-8.0, expand_margin_bottom=-8.0, shadow_color=Color(0, 0, 0, 0.55), shadow_size=8, shadow_offset=Vector2(0, 2)}}
   on child_order_changed -> lambda
   on item_rect_changed -> lambda
   on item_rect_changed -> lambda
@@ -773,7 +774,7 @@ Main <Control> res://src/app/main.gd
                   @Control@62 <Control> res://src/ui/diagram_view.gd
                     .texture_filter = 4
                     .size_flags_horizontal = 3
-                    .tooltip_text = "Click or tap to enlarge"
+                    .tooltip_text = "Click to enlarge"
                     .mouse_filter = 1
                     .mouse_default_cursor_shape = 2
                     on visibility_changed -> lambda
@@ -4228,7 +4229,7 @@ Main <Control> res://src/app/main.gd
                         .custom_minimum_size = Vector2(0, 70)
                         .clip_contents = true
                         .size_flags_horizontal = 3
-                        .tooltip_text = "Quick warm-up drill • 30 minutes timed"
+                        .tooltip_text = "10 QUESTIONS • 30 minutes timed"
                         .mouse_filter = 1
                         .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 0.4), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3), shadow_size=4, shadow_offset=Vector2(0, 2)}
                         .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.03666667, 0.060000006, 0.11000001, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
@@ -4336,7 +4337,7 @@ Main <Control> res://src/app/main.gd
                         .custom_minimum_size = Vector2(0, 70)
                         .clip_contents = true
                         .size_flags_horizontal = 3
-                        .tooltip_text = "Standard focused session • 60 minutes timed"
+                        .tooltip_text = "20 QUESTIONS • 60 minutes timed"
                         .mouse_filter = 1
                         .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 0.4), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3), shadow_size=4, shadow_offset=Vector2(0, 2)}
                         .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.03666667, 0.060000006, 0.11000001, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
@@ -4444,7 +4445,7 @@ Main <Control> res://src/app/main.gd
                         .custom_minimum_size = Vector2(0, 70)
                         .clip_contents = true
                         .size_flags_horizontal = 3
-                        .tooltip_text = "Extended study block • 90 minutes timed"
+                        .tooltip_text = "30 QUESTIONS • 90 minutes timed"
                         .mouse_filter = 1
                         .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 0.4), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3), shadow_size=4, shadow_offset=Vector2(0, 2)}
                         .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.03666667, 0.060000006, 0.11000001, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
@@ -4552,7 +4553,7 @@ Main <Control> res://src/app/main.gd
                         .custom_minimum_size = Vector2(0, 70)
                         .clip_contents = true
                         .size_flags_horizontal = 3
-                        .tooltip_text = "Half-length diagnostic test • 120 minutes timed"
+                        .tooltip_text = "40 QUESTIONS • 120 minutes timed"
                         .mouse_filter = 1
                         .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 0.4), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3), shadow_size=4, shadow_offset=Vector2(0, 2)}
                         .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.03666667, 0.060000006, 0.11000001, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
@@ -4660,7 +4661,7 @@ Main <Control> res://src/app/main.gd
                         .custom_minimum_size = Vector2(0, 70)
                         .clip_contents = true
                         .size_flags_horizontal = 3
-                        .tooltip_text = "Intensive endurance drill • 150 minutes timed"
+                        .tooltip_text = "50 QUESTIONS • 150 minutes timed"
                         .mouse_filter = 1
                         .theme_override_styles/normal = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.043137256, 0.07058824, 0.12941177, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 0.4), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3), shadow_size=4, shadow_offset=Vector2(0, 2)}
                         .theme_override_styles/pressed = StyleBoxFlat{content_margin_left=12.0, content_margin_top=8.0, content_margin_right=12.0, content_margin_bottom=8.0, bg_color=Color(0.03666667, 0.060000006, 0.11000001, 1), border_width_left=1, border_width_top=3, border_width_right=1, border_width_bottom=1, border_color=Color(0.21960784, 0.7411765, 0.972549, 1), corner_radius_top_left=12, corner_radius_top_right=12, corner_radius_bottom_right=12, corner_radius_bottom_left=12, shadow_color=Color(0, 0, 0, 0.3)}
@@ -6997,7 +6998,7 @@ Main <Control> res://src/app/main.gd
                             on toggled -> main._on_reduce_motion_toggled
                           @CheckButton@488 <CheckButton>
                             .custom_minimum_size = Vector2(0, 32)
-                            .tooltip_text = "Colors the stem words to look up in the NEC Index and names the entry before you answer. Off in the Full Exam, like the real test."
+                            .tooltip_text = "Colors the stem words to look up in the NEC Index\nand names the entry before you answer. Off in the\nFull Exam, like the real test."
                             .mouse_filter = 1
                             .theme_override_styles/normal = StyleBoxEmpty{content_margin_left=0.0, content_margin_right=0.0}
                             .theme_override_styles/pressed = StyleBoxEmpty{content_margin_left=0.0, content_margin_right=0.0}
