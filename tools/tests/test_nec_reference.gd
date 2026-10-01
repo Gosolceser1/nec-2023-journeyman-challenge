@@ -64,9 +64,32 @@ func _init() -> void:
 	eq(NecReference.lookup_path({"article": "Chapter 9, Table 8"}), book + "  ►  Chapter 9: Tables", "chapter only")
 	eq(NecReference.lookup_path({"article": "NFPA 70E"}),
 		"NFPA 70E  ►  Standard for Electrical Safety in the Workplace", "NFPA 70E")
-	eq(NecReference.lookup_path({"article": "General math"}), "CALCULATION  ►  Basic Ohm's Law / General Math", "math")
+	eq(NecReference.lookup_path({"article": "General math"}), "CALCULATION  ►  General Math", "math")
 	eq(NecReference.lookup_path({"article": "Trade practice", "formula": "P = I x E"}),
-		"CALCULATION  ►  Basic Ohm's Law / General Math", "formula record")
+		"CALCULATION  ►  Ohm's Law & Power", "formula record")
+	print("=== calculation topics ===")
+	var calc := func(formula: String, prompt: String) -> String:
+		return NecReference.lookup_path({"article": "General knowledge", "formula": formula, "prompt": prompt})
+	eq(calc.call("Percent / 100 = Fraction", "60% is equivalent to ___."), "CALCULATION  ►  Percentages & Fractions", "percent is not Ohm's law")
+	eq(calc.call("% Drop = ((V_panel - V_load) / V_panel) × 100", "You have 125 volts at the panel and 115 volts at the load."),
+		"CALCULATION  ►  Voltage Drop", "percent voltage drop")
+	eq(calc.call("Actual Feet = Drawing Inches × 4", "If the plans drawing has a scale of 1/4 inch = 1 foot"),
+		"CALCULATION  ►  Plan Scale & Measurement", "plan scale")
+	eq(calc.call("t = (Angle / 360) × (1 / Frequency)", "60 cycle frequency travels 90 degrees in how many seconds?"),
+		"CALCULATION  ►  AC Waveform & Frequency", "AC timing")
+	eq(calc.call("R_total = R_branch / Number of identical branches", "Two 2,000 ohm resistors connected in parallel."),
+		"CALCULATION  ►  Series & Parallel Circuits", "parallel resistors")
+	eq(calc.call("Divide the numerator by the denominator.", "The decimal equivalent for 11/16\" is ___."),
+		"CALCULATION  ►  Fractions & Decimals", "fraction to decimal")
+	eq(calc.call("R = K × L ÷ A", "A wire has a resistance of 5 ohms."), "CALCULATION  ►  Conductor Resistance", "wire resistance")
+	eq(calc.call("Ohm's power law: amps = watts ÷ volts.", "The power is 2 W and the voltage is 20 VDC."),
+		"CALCULATION  ►  Ohm's Law & Power", "Ohm's law")
+	eq(NecReference.lookup_path({"article": "General calculation", "prompt": "How many are left?"}), "CALCULATION  ►  General Math", "no topic words")
+	var vague := []
+	for r in BankLoader.load_records():
+		if NecReference.lookup_path(r) == "CALCULATION  ►  General Math":
+			vague.append(r.get("id", ""))
+	check(vague.is_empty(), "every bank calculation gets a specific topic (vague: %s)" % str(vague))
 	eq(NecReference.lookup_path({"article": "General knowledge"}),
 		"GENERAL TRADE KNOWLEDGE  ►  Standard Electrical Practice", "general knowledge")
 	eq(NecReference.lookup_path({"article": "Something else"}), "", "unknown")

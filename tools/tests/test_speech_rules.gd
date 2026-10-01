@@ -153,7 +153,12 @@ const GOLDEN := [
 	["mixed_number", "3 1/3", "3 and one third"],
 	["mixed_a_half", "3 1/2 and 1 1/4 in., 2 3/4", "3 and a half and 1 and a quarter inches, 2 and three quarters"],
 	["fraction", "1/3 of 3/5", "One third of three fifths"],
-	["fraction", "1/60", "1 over 60"],
+	["fraction", "1/60", "One sixtieth"],
+	["fraction", "the secondary is 1/20 of the primary", "The secondary is one twentieth of the primary"],
+	["fraction", "(1/60) ÷ 4 = 1/240", "(one sixtieth) divided by 4 equals one two-hundred-fortieth"],
+	["fraction_of_a_second", "1/60 second = 0.01667 s", "One sixtieth of a second equals 0.01667 seconds"],
+	["fraction_of_a_second", "1/240 seconds", "One two-hundred-fortieth of a second"],
+	["fraction_of_a_second", "1/2 second", "One half second"],
 	["fraction_inch_singular", "23.8 mm (15/16 in.)", "23.8 millimeters (fifteen sixteenths of an inch)"],
 	["unit_sq_ft", "3 VA per sq. ft. of area", "3 volt amperes per square feet of area"],
 	["unit_sq_in", "0.0133 sq in", "0.0133 square inches"],
@@ -301,6 +306,12 @@ func idempotent_and_safe() -> void:
 	t.eq(Rules.spoken_fraction("2", "5"), "two fifths", "fifths")
 	t.eq(Rules.spoken_fraction("1", "10"), "one tenth", "tenths")
 	t.eq(Rules.spoken_fraction("7", "9"), "7 over 9", "unlisted denominator falls back to 'over'")
+	t.eq(Rules.spoken_fraction("1", "7"), "one seventh", "a unit fraction is an ordinal")
+	t.eq(Rules.spoken_fraction("1", "120"), "one one-hundred-twentieth", "hundreds")
+	t.eq(Rules.spoken_fraction("1", "100"), "one one-hundredth", "round hundreds")
+	t.eq(Rules.spoken_fraction("1", "45"), "one forty-fifth", "compound tens")
+	t.eq(Rules.spoken_fraction("1", "1000"), "1 over 1000", "past 999 stays 'over'")
+	t.eq(Rules.normalize("1/R1 and 1/60"), "1 over R1 and one sixtieth", "a number over a symbol is still 'over'")
 
 
 func reading_order() -> void:

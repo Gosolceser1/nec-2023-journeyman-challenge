@@ -145,7 +145,7 @@ func _check_app() -> void:
 	main.menu_show_tab(0)
 	await _wait(0.3)
 	fx.last_ui = ""
-	for plain: BaseButton in [main.next_button, main.restart_button, main.mute_button, main.audio_toggle_button, main.menu.tab_buttons[2]]:
+	for plain: BaseButton in [main.next_button, main.restart_button, main.mute_button, main.preview_button, main.menu.tab_buttons[2]]:
 		plain.mouse_entered.emit()
 	await _frames()
 	check(fx.last_ui == "", "pointer over plain buttons and switches: no hover (menu cards only)")
@@ -157,7 +157,7 @@ func _check_app() -> void:
 	await _wait(0.3)
 	fx.last_ui = ""
 	fx.last_event = ""
-	main.audio_toggle_button.pressed.emit()
+	main.menu.tab_buttons[1].pressed.emit()
 	start_button.mouse_entered.emit()
 	start_button.pressed.emit()
 	await _wait(0.5)

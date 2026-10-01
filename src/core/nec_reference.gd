@@ -128,10 +128,30 @@ static func lookup_path(record: Dictionary) -> String:
 		return "NFPA 70E  ►  Standard for Electrical Safety in the Workplace"
 	var article_lower := code.to_lower()
 	if article_lower in ["general calculation", "general math"] or str(record.get("formula", "")) != "":
-		return "CALCULATION  ►  Basic Ohm's Law / General Math"
+		return "CALCULATION  ►  " + calc_topic(record)
 	if article_lower == "general knowledge":
 		return "GENERAL TRADE KNOWLEDGE  ►  Standard Electrical Practice"
 	return ""
+
+## A calculation's topic from its formula and stem (never the choices), first
+## match wins: [regex, title].
+const CALC_TOPICS := [
+	["drop", "Voltage Drop"],
+	["%|percent", "Percentages & Fractions"],
+	["\\bscale\\b|drawing", "Plan Scale & Measurement"],
+	["frequency|\\bcycles?\\b|hertz|\\bdegrees\\b", "AC Waveform & Frequency"],
+	["parallel|series", "Series & Parallel Circuits"],
+	["decimal|numerator|denominator", "Fractions & Decimals"],
+	["k × l|k x l|circular mils|length of", "Conductor Resistance"],
+	["ohm|watt|\\bvolts?\\b|\\bamps?\\b|\\bi = |\\bp = |\\be = ", "Ohm's Law & Power"],
+]
+
+static func calc_topic(record: Dictionary) -> String:
+	var text := (str(record.get("formula", "")) + "  " + str(record.get("prompt", ""))).to_lower()
+	for topic in CALC_TOPICS:
+		if RegEx.create_from_string(str(topic[0])).search(text) != null:
+			return str(topic[1])
+	return "General Math"
 
 static func is_reference_seeking(prompt: String, answers: Array = []) -> bool:
 	# True when the question asks for the reference itself ("Table ___ lists...",

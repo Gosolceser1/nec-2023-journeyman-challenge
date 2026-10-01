@@ -112,6 +112,11 @@ func _tabs() -> void:
 		await process_frame
 		var shown := range(main.menu_tab_count()).filter(func(j): return main.menu.pages[j].visible)
 		check(shown == [i] and main.menu.tab_buttons[i].button_pressed, "tab %s opens its page alone" % main.menu.tab_ids[i])
+	main.menu.tab_buttons[main.menu.tab_index("settings")].pressed.emit()
+	await process_frame
+	var buttons := _page("settings").find_children("*", "Button", true, false).filter(func(b): return b.is_visible_in_tree() and b.text in ["Done", "Change"])
+	check(main.audio_body.is_visible_in_tree() and main.audio_mode_buttons[0].is_visible_in_tree() and buttons.is_empty(),
+		"Settings: Audio & Voice is the page, always open, with nothing that folds it away")
 	main._last_go_back_msec = 0
 	main._on_go_back()
 	check(main.menu.current == 0 and main.menu_overlay.visible, "Android Back on another tab returns to Home, the app stays open")

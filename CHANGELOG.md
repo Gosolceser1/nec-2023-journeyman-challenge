@@ -146,6 +146,21 @@
 - Phones: study tool descriptions are no longer cut off.
 - The voice settings note now calls the full exam "Full Journeyman Exam", like
   the rest of the app.
+- Phones: the results report scrolls as one page instead of a scrolling box
+  inside a scrolling page.
+- Settings: Audio & Voice is always open. The Done button that folded it away
+  (and left the tab almost empty) is gone, on desktop and phones.
+- Voice: simple fractions are read the way you would say them: "one sixtieth
+  of a second", "one two-hundred-fortieth", "one twentieth of the primary"
+  (was "1 over 60"). "1/R1" is still "1 over R1". The 5 affected recordings
+  were re-recorded.
+- Calculation questions name their real topic above the question (for example
+  "CALCULATION ► Percentages & Fractions", "Voltage Drop", "Plan Scale") instead
+  of "Basic Ohm's Law / General Math" for every one.
+- The transformer figure's 240.21(C)(1) note now says a single-phase 2-wire or
+  delta-delta 3-wire (single-voltage) secondary, not just "two-wire".
+- GitHub checks use the current checkout, cache, setup-python and
+  upload-artifact versions (Node 24), so the Node 20 warning is gone.
 
 ## [1.0.5] - 2026-09-29
 

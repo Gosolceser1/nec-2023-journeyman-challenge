@@ -96,9 +96,6 @@ func show_tab(i: int) -> void:
 	for j in pages.size():
 		pages[j].visible = j == current
 		tab_buttons[j].set_pressed_no_signal(j == current)
-	if tab_ids[current] == "settings" and not host.audio_expanded:
-		host.audio_expanded = true
-		AudioSection.refresh(host)
 	host._fit_menu_spacing.call_deferred()
 	# A page shown for the first time measures its wrapped labels at width 0
 	# until it has been laid out once; fit again after that frame.

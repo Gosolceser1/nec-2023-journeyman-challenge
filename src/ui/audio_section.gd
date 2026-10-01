@@ -33,22 +33,9 @@ static func build(host: Main, parent: VBoxContainer) -> Control:
 	heading.add_theme_color_override("font_color", AppTheme.EMERALD_400)
 	heading.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	hdr.add_child(heading)
-	# Collapsed by default: one line says what is set, the full panel is a tap
-	# away, and the session buttons move up above the fold.
-	host.audio_summary_label = Label.new()
-	host.audio_summary_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	host.audio_summary_label.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	host.audio_summary_label.clip_text = true
-	host.audio_summary_label.add_theme_font_override("font", AppTheme.ui_font(600))
-	host.audio_summary_label.add_theme_font_size_override("font_size", fs)
-	host.audio_summary_label.add_theme_color_override("font_color", AppTheme.SLATE_300)
-	hdr.add_child(host.audio_summary_label)
-	host.audio_toggle_button = Widgets.make_dock_button("Change", 92.0 if host.ui_mobile else 84.0, 44.0 if host.ui_mobile else 32.0, fs, host._toggle_audio_section)
-	host.audio_toggle_button.add_theme_stylebox_override("focus", AppTheme.focus_ring(9))
-	hdr.add_child(host.audio_toggle_button)
+	# The panel is the Settings tab's whole content, so it is always open.
 	host.audio_body = VBoxContainer.new()
 	host.audio_body.add_theme_constant_override("separation", 10)
-	host.audio_body.visible = false
 	col.add_child(host.audio_body)
 
 	var modes := GridContainer.new()
@@ -196,18 +183,6 @@ static func refresh(host: Main) -> void:
 	for i in host.audio_pause_buttons.size():
 		host.audio_pause_buttons[i].set_pressed_no_signal(AudioSettings.THINK_PAUSES[i] == host.audio.think_pause)
 	host.audio_mode_blurb.text = AudioSettings.MODE_BLURBS[host.audio.mode]
-	if is_instance_valid(host.audio_summary_label):
-		var summary: String = AudioSettings.MODE_TITLES[host.audio.mode]
-		if host.audio.mode != AudioSettings.Mode.SILENT:
-			summary += "  ·  %s  ·  %s" % [host.speech._voice_short(), AudioSettings.speed_label(host.audio.speed)]
-			if host.audio.mode == AudioSettings.Mode.LISTEN:
-				summary += "  ·  %d s think" % host.audio.think_pause
-		summary += "  ·  " + AudioSettings.sfx_label(host.audio.sfx_enabled, host.audio.sfx_level)
-		host.audio_summary_label.text = summary
-		# Open, the chips below say the same thing in full.
-		host.audio_summary_label.modulate.a = 0.0 if host.audio_expanded else 1.0
-		host.audio_body.visible = host.audio_expanded
-		host.audio_toggle_button.text = "Done" if host.audio_expanded else "Change"
 	host.audio_details_box.visible = host.audio.mode != AudioSettings.Mode.SILENT
 	host.auto_teach_toggle.set_pressed_no_signal(host.audio.auto_teach)
 	if is_instance_valid(host.reduce_motion_toggle):

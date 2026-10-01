@@ -101,6 +101,8 @@ const PIPELINE := [
 	["cable_designation", "(?<![\\d/])([89]|[1-9]\\d)/([23])(?![\\d/])", "$1 slash $2"],
 	["mixed_number", ""],
 	["fraction", ""],
+	# "1/240 second": "one two-hundred-fortieth of a second".
+	["fraction_of_a_second", "\\b(one (?:[a-z]+-)*[a-z]+th) seconds?\\b", "$1 of a second"],
 	# How it is said: "one and a half inch", "two and a quarter".
 	["mixed_a_half", "\\b(\\d+) and one (half|quarter)\\b", "$1 and a $2"],
 	# Before the units: "2x30A" has no word boundary before 30 until x is a word.
@@ -369,7 +371,34 @@ static func spoken_fraction(top: String, bottom: String) -> String:
 		64:
 			return "one sixty-fourth" if one else "%s sixty-fourths" % num_str
 		_:
+			# "1/60 second", "1/20 of the primary": a unit fraction is said as one.
+			if one and int(bottom) > 1 and int(bottom) < 1000:
+				return "one " + _ordinal_words(int(bottom))
 			return "%s over %s" % [top, bottom]
+
+
+const CARDINAL_UNITS := ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten",
+	"eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
+const ORDINAL_UNITS := ["", "first", "second", "third", "fourth", "fifth", "sixth", "seventh", "eighth", "ninth", "tenth",
+	"eleventh", "twelfth", "thirteenth", "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", "nineteenth"]
+const CARDINAL_TENS := ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
+const ORDINAL_TENS := ["", "", "twentieth", "thirtieth", "fortieth", "fiftieth", "sixtieth", "seventieth", "eightieth", "ninetieth"]
+
+
+## 7 -> "seventh", 60 -> "sixtieth", 240 -> "two-hundred-fortieth" (1-999).
+static func _ordinal_words(n: int) -> String:
+	var head := ""
+	if n >= 100:
+		head = CARDINAL_UNITS[n / 100] + "-hundred"
+		n %= 100
+		if n == 0:
+			return head + "th"
+		head += "-"
+	if n < 20:
+		return head + ORDINAL_UNITS[n]
+	if n % 10 == 0:
+		return head + ORDINAL_TENS[n / 10]
+	return head + CARDINAL_TENS[n / 10] + "-" + ORDINAL_UNITS[n % 10]
 
 
 static func _re(pattern: String) -> RegEx:

@@ -33,6 +33,11 @@ static func show(host: Main) -> void:
 	host.fit.refresh_ref_column()
 	host.feedback_scroll.visible = true
 	host.feedback_scroll.scroll_vertical = 0
+	# Phone: the gauge and bars already push the page into its own scroll, so the
+	# report grows into that one scroll instead of a second box inside it.
+	host.feedback_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED if host.ui_mobile else ScrollContainer.SCROLL_MODE_AUTO
+	if is_instance_valid(host.quiz_scroll_box):
+		host.quiz_scroll_box.scroll_vertical = 0
 	host.fit.apply_level(0)
 	host._auto_token += 1
 	if is_instance_valid(host._listen_timer):

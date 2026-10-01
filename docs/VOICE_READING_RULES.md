@@ -136,7 +136,8 @@ so there is about 0.5 s between stem, choices and rule lines. Within a segment:
 | `3/4"`, `3/4-inch` | three quarter inch |
 | `3/8-inch`, `15/16 in.`, `1/16"` | three eighths of an inch, fifteen sixteenths of an inch, one sixteenth of an inch |
 | `1 1/2"`, `1 3/4 in.` | 1 and one half inches, 1 and three quarters inches |
-| `1/60` | 1 over 60 |
+| `1/60`, `1/20 of the primary`, `1/240` | one sixtieth, one twentieth of the primary, one two-hundred-fortieth (a unit fraction is an ordinal; `7/9` with an unlisted denominator stays "7 over 9", and a number over a symbol, `1/R1`, stays "1 over R1") |
+| `1/60 second`, `1/240 seconds` | one sixtieth of a second, one two-hundred-fortieth of a second |
 | `8'`, `5'9"`, `6 ft.`, `5-ft` | 8 feet, 5 feet 9 inches, 6 feet, 5-foot |
 | `20 A`, `1 A`, `5 mA`, `10 kA` | 20 amps, 1 amp, 5 milliamps, 10 kiloamps |
 | `200 A service`, `a 12 ft assembly`, `15 in. clearance`, `1 in. EMT` | 200-amp service, a 12-foot assembly, 15-inch clearance, 1-inch E M T (a unit used as an adjective is singular and hyphenated: any following word that is not in `ATTRIBUTIVE_STOP`) |

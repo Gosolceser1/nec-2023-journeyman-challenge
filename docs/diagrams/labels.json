@@ -13712,11 +13712,25 @@
    0.0511
   ],
   [
-   "Ex.: 240.21(C)(1) two-wire secondary may be protected on the primary.",
+   "Ex.: 240.21(C)(1) a single-phase 2-wire or a delta-delta 3-wire",
+   0.03,
+   0.8774,
+   0.685,
+   0.0426
+  ],
+  [
+   "(single-voltage) secondary may be protected on the primary.",
    0.03,
    0.9285,
-   0.7878,
+   0.6669,
    0.0426
+  ],
+  [
+   "Ex.: 240.21(C)(1) a single-phase 2-wire or a delta-delta 3-wire (single-voltage) secondary may be protected on the primary.",
+   0.03,
+   0.8774,
+   0.685,
+   0.0936
   ],
   [
    "NEC 408.36(B)",

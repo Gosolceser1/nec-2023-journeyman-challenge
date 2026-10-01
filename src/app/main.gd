@@ -199,10 +199,7 @@ var mute_button: Button
 var dock_panel: PanelContainer
 var key_hint_label: Label  # desktop only
 var _results_seq := 0
-var audio_summary_label: Label
-var audio_toggle_button: Button
 var audio_body: VBoxContainer
-var audio_expanded := false
 var quiz_scroll_box: ScrollContainer
 var answers_row: BoxContainer  # desktop only: choices | lookup material
 var ref_column: VBoxContainer  # desktop only
@@ -485,11 +482,6 @@ func _build_ui() -> void:
 		MobileLayout.build(self)
 	else:
 		DesktopLayout.build(self)
-
-func _toggle_audio_section() -> void:
-	audio_expanded = not audio_expanded
-	AudioSection.refresh(self)
-	_fit_menu_spacing.call_deferred()
 
 func _on_audio_mode_picked(m: int) -> void:
 	audio.mode = AudioSettings.sanitize_mode(m)
@@ -971,6 +963,7 @@ func _show_question() -> void:
 		dock_panel.visible = true
 	exam_pills_row.visible = not ui_mobile
 	feedback_scroll.visible = false
+	feedback_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	fit.refresh_ref_column()
 	fit.begin()
 	menu.study_hook("question", [self])

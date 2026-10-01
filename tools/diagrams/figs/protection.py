@@ -164,8 +164,10 @@ def transformer_panel(f):
     f.value_lines(500, 372, ["panel OCPD", "on this side"], T_NOTE, records=rid, gap=1.15,
                   what="panel OCPD between transformer and panel")
     f.panel(620, 110, 150, 200, label="panelboard", breakers=5)
-    f.value(24, f.h - 18, "Ex.: 240.21(C)(1) two-wire secondary may be protected on the primary.",
-            T_MIN, MUTED, anchor="start", bold=False, records=rid, pad=5, what="the exception note")
+    f.value_lines(24, f.h - 18 - T_MIN * 1.2,
+                  ["Ex.: 240.21(C)(1) a single-phase 2-wire or a delta-delta 3-wire",
+                   "(single-voltage) secondary may be protected on the primary."],
+                  T_MIN, MUTED, anchor="start", bold=False, records=rid, pad=5, what="the exception note")
     f.tag(f.w - 24, 64, "NEC 408.36(B)", anchor="end")
 
 @figure("panelboard_interior_408", h=530, nec="408.7, 408.41",

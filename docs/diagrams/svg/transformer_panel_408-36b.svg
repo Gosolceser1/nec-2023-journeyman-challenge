@@ -57,7 +57,8 @@
 <rect x="704.0" y="253.6" width="45.0" height="19.1" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
 <rect x="709.4" y="257.8" width="15.3" height="10.7" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="695.0" y="338.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">panelboard</text>
-<text x="24.0" y="452.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">Ex.: 240.21(C)(1) two-wire secondary may be protected on the primary.</text>
+<text x="24.0" y="428.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">Ex.: 240.21(C)(1) a single-phase 2-wire or a delta-delta 3-wire</text>
+<text x="24.0" y="452.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">(single-voltage) secondary may be protected on the primary.</text>
 <rect x="615.6" y="38.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
 <text x="625.6" y="66.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 408.36(B)</text>
 </svg>

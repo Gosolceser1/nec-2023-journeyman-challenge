@@ -221,6 +221,9 @@ func feedback_min_h() -> float:
 ## height; let the sheet give way (it scrolls inside), then the type steps
 ## down, before the page scrolls.
 func _fit_answered(gen: int) -> void:
+	# The phone report scrolls as one page; nothing there needs to give way.
+	if host.feedback_scroll.vertical_scroll_mode == ScrollContainer.SCROLL_MODE_DISABLED:
+		return
 	# Phone: the explanation is what you read now; a full-height figure left it a
 	# 150 px slot, so the figure gives way until the sheet has a readable share.
 	if host.ui_mobile and host.question_diagram_panel.visible and not host.question_diagram_view.compact:
