@@ -138,22 +138,6 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	get_viewport().set_input_as_handled()
 
 
-## The words of the current step, as read aloud.
-func step_text(i: int = -1) -> String:
-	var step: Dictionary = steps[index if i < 0 else i]
-	var parts: Array = [str(step.get("title", "")) + "."]
-	for field in ["text"]:
-		if str(step.get(field, "")) != "":
-			parts.append(str(step[field]))
-	for line in step.get("lines", []):
-		parts.append(str(line) + ".")
-	if str(step.get("note", "")) != "":
-		parts.append(str(step["note"]))
-	if str(step.get("keys", "")) != "":
-		parts.append("On the calculator: " + str(step["keys"]) + ".")
-	return " ".join(parts)
-
-
 ## What the voice says for a step (MathStepSpeech: every part a sentence, the
 ## calculator keys named one by one).
 func spoken_text(i: int = -1) -> String:

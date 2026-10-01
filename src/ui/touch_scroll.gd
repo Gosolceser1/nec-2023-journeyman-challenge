@@ -42,11 +42,6 @@ func _ready() -> void:
 	set_process(false)
 
 
-## True while a finger gesture belongs to a scroller.
-func is_dragging() -> bool:
-	return _dragging
-
-
 func _input(event: InputEvent) -> void:
 	if not is_instance_valid(root):
 		return

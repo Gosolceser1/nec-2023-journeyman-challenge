@@ -321,12 +321,6 @@ func _click() -> void:
 	sfx("click")
 
 
-## A button that clicks like the rest of the app.
-func with_click(b: BaseButton) -> BaseButton:
-	b.pressed.connect(_click)
-	return b
-
-
 func _over_quiz() -> bool:
 	return is_instance_valid(host) and not host.menu_overlay.visible and not host.order.is_empty()
 

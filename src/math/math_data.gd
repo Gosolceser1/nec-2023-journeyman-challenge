@@ -24,11 +24,6 @@ static func edition() -> Dictionary:
 	return _json(EDITION_PATH)
 
 
-## Short edition label for the UI, e.g. "NEC 2023".
-static func edition_label() -> String:
-	return str(edition().get("short", ""))
-
-
 static func tables_path() -> String:
 	return "res://data/%s/tables.json" % str(edition().get("dir", "nec/2023"))
 
@@ -49,11 +44,6 @@ static func value(key: String) -> Variant:
 static func constant(key: String) -> Variant:
 	var entry = _json(MATH_DIR + "constants.json").get("values", {}).get(key)
 	return entry.get("value") if entry is Dictionary else null
-
-
-static func constant_entry(key: String) -> Dictionary:
-	var entry = _json(MATH_DIR + "constants.json").get("values", {}).get(key)
-	return entry if entry is Dictionary else {}
 
 
 static func problems() -> Dictionary:

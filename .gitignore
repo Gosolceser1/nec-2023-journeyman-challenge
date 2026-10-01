@@ -1,10 +1,9 @@
 # Godot 4 — regenerate on open, never commit
 .godot/
-.import/
 export_presets.cfg.bak
 *.translation
 
-# Godot editor binaries live here but are 172MB of vendored toolchain.
+# Godot editor binaries live here but are ~180MB of vendored toolchain.
 # Keep them out of history; re-download or re-link if you need them.
 /Godot_v*.exe
 /Godot_v*.zip
@@ -20,11 +19,10 @@ export_presets.cfg.bak
 *.tmp
 
 # Generated speech is derived from question_bank.json + pregenerate_speech.py.
-# ~138MB of mp3s at 96 kbps. Regenerate with: python tools/speech/pregenerate_speech.py --bundle
+# ~360MB of mp3s at 96 kbps. Regenerate with: python tools/speech/pregenerate_speech.py --bundle
 /assets/speech/
 
 # Backups are throwaway; git history is the backup.
-/question_bank.bak*.json
 *.bak
 *.bak.*
 
@@ -33,8 +31,6 @@ __pycache__/
 /tools/**/*.png
 /tools/**/*.png.import
 /tools/*.txt
-/tools/anomalies.json
-/tools/out_*.txt
 
 # Local editor / OS noise
 /.vscode/

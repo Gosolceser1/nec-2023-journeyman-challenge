@@ -52,10 +52,6 @@ func start() -> bool:
 	return not is_offline()
 
 
-func is_usable() -> bool:
-	return not is_offline()
-
-
 func is_offline() -> bool:
 	return Time.get_ticks_msec() < offline_until_msec
 

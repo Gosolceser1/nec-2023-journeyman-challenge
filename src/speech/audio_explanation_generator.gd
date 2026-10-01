@@ -270,12 +270,6 @@ static func sentence_spans(body: String) -> Array[Vector2i]:
 		spans.append(Vector2i(from, body.length()))
 	return spans
 
-static func sentences_of(body: String) -> PackedStringArray:
-	var out := PackedStringArray()
-	for s in sentence_spans(body):
-		out.append(body.substr(s.x, s.y - s.x).strip_edges())
-	return out
-
 ## Ends a quoted line on a full stop: "conditions are met:" and a last list
 ## item with no period are both read (and shown) as a finished sentence.
 static func _sentence_end(text: String) -> String:
