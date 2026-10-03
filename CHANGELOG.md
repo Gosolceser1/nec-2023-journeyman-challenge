@@ -27,6 +27,16 @@
   of two to five panels for different rules, so it was hard to tell which one
   went with the question. Each of those figures is now split into single
   pictures, and every question shows only the one that matches what it asks.
+- **A real floor plan for the bedroom wall-space question.** The figure for
+  "wall space includes any space ___ or more in width" was a bare rectangle
+  with one door. It is now a bedroom plan with an entry door and a closet
+  doorway (with their swings), a fireplace and hearth, a built-in cabinet
+  and a window, with the wall-space runs in blue going around the corners
+  and stopping at each break. A short piece of wall between the cabinet and
+  the door is marked too short. Below the plan, the four walls are unfolded
+  along the floor line in the same order. The width tags and the section chip
+  stay "?" until you answer, and the chip now reads 210.52(A)(2), the same as
+  the question.
 
 ## [1.0.6] - 2026-10-03
 

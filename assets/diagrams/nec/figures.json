@@ -97,17 +97,17 @@
   "svg_sha1": "ee49c7d01712"
  },
  "final-exam-#1-011": {
-  "file": "res://assets/diagrams/nec/wall_space_210-52a.png",
-  "figure": "wall_space_210-52a",
+  "file": "res://assets/diagrams/nec/wall_space_210-52a2.png",
+  "figure": "wall_space_210-52a2",
   "source": "original",
   "style": "dark",
   "when": "before",
   "size": [
    1200,
-   630
+   678
   ],
-  "nec": "210.52(A)",
-  "svg_sha1": "2675b098dd70"
+  "nec": "210.52(A)(2)",
+  "svg_sha1": "d7e80d7e0a4d"
  },
  "final-exam-#1-012": {
   "file": "res://assets/diagrams/nec/gfci_dwelling_210-8a.png",
@@ -3766,17 +3766,17 @@
   "svg_sha1": "f05b43eccb4a"
  },
  "open-book-exam-#2-015": {
-  "file": "res://assets/diagrams/nec/wall_space_210-52a.png",
-  "figure": "wall_space_210-52a",
+  "file": "res://assets/diagrams/nec/wall_space_210-52a2.png",
+  "figure": "wall_space_210-52a2",
   "source": "original",
   "style": "dark",
   "when": "before",
   "size": [
    1200,
-   630
+   678
   ],
-  "nec": "210.52(A)",
-  "svg_sha1": "2675b098dd70"
+  "nec": "210.52(A)(2)",
+  "svg_sha1": "d7e80d7e0a4d"
  },
  "open-book-exam-#2-018": {
   "file": "res://assets/diagrams/nec/multioutlet_assembly_220-14h.png",

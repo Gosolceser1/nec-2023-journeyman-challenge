@@ -13,33 +13,144 @@ def _wall_receptacle(f, x, y, side, r=12):
     return cx, cy
 
 
-def _door_gap(f, x0, x1, y):
-    """Doorway in a horizontal wall: gap plus a door leaf hinged at x0, swung open into the room above."""
-    d = x1 - x0
-    f.line(x0, y, x1, y, BG, SW_STRUCT + 4)
-    f.line(x0, y, x0, y - d, TEXT, SW_OBJ)
-    f.path(f"M {x0} {y - d} A {d} {d} 0 0 1 {x1} {y}", EDGE, SW_THIN)
+def _wall_no(f, cx, cy, n):
+    f.circle(cx, cy, 13, fill=PANEL_2, stroke=MUTED, sw=SW_THIN)
+    f.text(cx, cy + 7, str(n), T_MIN, TEXT, bold=True)
 
 
-@figure("wall_space_210-52a", h=420, nec="210.52(A)",
+def _run_end(f, x, y, horizontal):
+    """Amber stop bar where a wall-space run meets a break; `horizontal` = the run's direction."""
+    if horizontal:
+        f.line(x, y - 9, x, y + 9, AMBER, SW_OBJ)
+    else:
+        f.line(x - 9, y, x + 9, y, AMBER, SW_OBJ)
+
+
+@figure("wall_space_210-52a2", h=452, nec="210.52(A)(2)",
         records={"final-exam-#1-011": {}, "open-book-exam-#2-015": {"like": "final-exam-#1-011"}})
 def wall_space(f):
-    f.title("Dwelling bedroom: what counts as wall space (plan view)", y=34)
-    x0, y0, x1, y1 = 80, 90, 720, 330
-    f.rect(x0, y0, x1 - x0, y1 - y0, fill=PANEL, op=0.6)
-    for a, b in (((x0, y0), (x1, y0)), ((x0, y0), (x0, y1)), ((x1, y0), (x1, y1)), ((x0, y1), (x1, y1))):
-        f.line(a[0], a[1], b[0], b[1], LINE, SW_STRUCT)
-    f.text(400, 150, "BEDROOM", T_LABEL, TEXT, bold=True)
-    d0, d1 = 110, 190
-    _door_gap(f, d0, d1, y1)
-    f.text(d0 + 8, y1 - 12, "door", T_MIN, MUTED, "start")
-    _wall_receptacle(f, 520, y1, "down")
-    f.ext(d1, y1 + 6, d1, 380)
-    f.ext(x1 - 2, y1 + 6, x1 - 2, 380)
-    f.dim_h(d1, x1 - 2, 370)
-    f.text((d1 + x1) / 2, 404, "wall space: unbroken along the floor line", T_NOTE, MUTED)
-    f.value_lines(400, 220, ["2 ft (24 in)", "or more wide"], 26, label="? in", what="the minimum width")
-    f.tag(f.w - 24, 64, "NEC 210.52(A)", anchor="end")
+    f.title("Dwelling bedroom: what counts as wall space", x=20, y=30)
+    # Plan, interior faces of the walls. Walls are numbered clockwise from the
+    # bottom-left corner, the order the strip below unfolds them in.
+    x0, y0, x1, y1, t = 190, 66, 610, 266, 12
+    f.rect(x0 - t, y0 - t, x1 - x0 + 2 * t, y1 - y0 + 2 * t, fill=PANEL_2, stroke=LINE, sw=SW_THIN)
+    f.rect(x0, y0, x1 - x0, y1 - y0, fill=PANEL, stroke=LINE, sw=SW_THIN)
+    cab = (y1 - 66, x0 + 36)                 # built-in cabinet on wall 1: top edge y, front x
+    win = (420, 540)                         # window in wall 2
+    hearth = (y0 + 50, y0 + 130)             # fireplace breast and hearth on wall 3
+    clo = (520, 580)                         # closet doorway in wall 4, hinge at clo[1]
+    door = (262, 342)                        # entry door in wall 4, hinge at door[0]
+    # Window: glass in the wall, the floor line runs on under it.
+    f.rect(win[0], y0 - t, win[1] - win[0], t, fill=BG, stroke=TEXT, sw=SW_THIN)
+    f.line(win[0], y0 - t / 2, win[1], y0 - t / 2, DIM, SW_THIN)
+    # Bed, faint, for scale.
+    f.rect(250, y0 + 2, 120, 96, fill="none", stroke=EDGE, sw=SW_THIN, rx=6)
+    for px in (258, 314):
+        f.rect(px, y0 + 10, 48, 20, fill="none", stroke=EDGE, sw=SW_THIN, rx=6)
+    f.text(310, y0 + 70, "bed", T_MIN, EDGE)
+    # Built-in cabinet, no countertop.
+    f.rect(x0, cab[0], cab[1] - x0, y1 - cab[0], fill=PANEL_2, stroke=TEXT, sw=SW_OBJ)
+    f.line(x0 + 6, (cab[0] + y1) / 2, cab[1] - 6, (cab[0] + y1) / 2, EDGE, SW_THIN)
+    # Fireplace: breast with the firebox, hearth in front.
+    f.rect(x1 - 24, hearth[0] + 8, 24, hearth[1] - hearth[0] - 16, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ)
+    f.poly([(x1 - 4, hearth[0] + 20), (x1 - 4, hearth[1] - 20), (x1 - 18, hearth[1] - 26),
+            (x1 - 18, hearth[0] + 26)], "#7c2d12", TEXT, SW_THIN)
+    f.rect(x1 - 52, hearth[0], 28, hearth[1] - hearth[0], fill=CONCRETE, stroke=TEXT, sw=SW_THIN, op=0.5)
+    # Doorways in wall 4: opening through the wall, leaf and swing.
+    for a, b, hinge in ((clo[0], clo[1], clo[1]), (door[0], door[1], door[0])):
+        f.rect(a, y1, b - a, t, fill=BG)
+        f.line(a, y1, a, y1 + t, TEXT, SW_THIN)
+        f.line(b, y1, b, y1 + t, TEXT, SW_THIN)
+        d = b - a
+        free = a if hinge == b else b
+        f.line(hinge, y1, hinge, y1 - d, TEXT, SW_OBJ)
+        sweep = 0 if hinge == b else 1
+        f.path(f"M {hinge} {y1 - d} A {d} {d} 0 0 {sweep} {free} {y1}", EDGE, SW_THIN)
+    # Wall-space runs along the floor line, continued around the corners.
+    o = 7
+    run = dict(stroke=ZONE, sw=6)
+    f.polyline([(x0 + o, cab[0]), (x0 + o, y0 + o), (x1 - o, y0 + o), (x1 - o, hearth[0])], **run)
+    f.polyline([(x1 - o, hearth[1]), (x1 - o, y1 - o), (clo[1], y1 - o)], **run)
+    f.line(door[1], y1 - o, clo[0], y1 - o, ZONE, 6)
+    _run_end(f, x0 + o, cab[0], False)
+    _run_end(f, x1 - o, hearth[0], False)
+    _run_end(f, x1 - o, hearth[1], False)
+    for x in (clo[1], clo[0], door[1]):
+        _run_end(f, x, y1 - o, True)
+    f.hatch(cab[1], y1 - o - 5, door[0] - cab[1], 10, MUTED, step=6, op=0.35)
+    # Wall numbers.
+    _wall_no(f, x0 - t - 20, (y0 + cab[0]) / 2, 1)
+    _wall_no(f, x0 + 30, y0 + 32, 2)
+    _wall_no(f, x1 - 32, y0 + 32, 3)
+    _wall_no(f, (door[1] + clo[0]) / 2, y1 + t + 18, 4)
+    # Callouts.
+    f.text((win[0] + win[1]) / 2 - 24, y0 + 36, "window: not a break", T_MIN, MUTED)
+    f.leader(x0 - t - 18, 214, x0 + 10, cab[0] + 14)
+    f.lines(x0 - t - 22, 196, ["built-in cabinet", "(no countertop)"], T_MIN, TEXT, "end", gap=1.1)
+    f.leader(x1 + t + 16, (hearth[0] + hearth[1]) / 2, x1 - 10, (hearth[0] + hearth[1]) / 2)
+    f.text(x1 + t + 20, (hearth[0] + hearth[1]) / 2 + 7, "fireplace", T_MIN, TEXT, "start")
+    f.leader(x1 + t + 16, y0 - 6, x1 - o, y0 + o)
+    f.lines(x1 + t + 20, y0, ["measured", "around corners"], T_MIN, DIM, "start", gap=1.1)
+    f.text((clo[0] + clo[1]) / 2, y1 + t + 24, "closet", T_MIN, MUTED)
+    f.text((door[0] + door[1]) / 2, y1 + t + 24, "door", T_MIN, MUTED)
+    f.leader(x0 - t - 18, y1 + 28, (cab[1] + door[0]) / 2, y1 - o)
+    f.text(x0 - t - 22, y1 + 34, "too short:", T_MIN, TEXT, "end", True)
+    f.text(x0 - t - 22, y1 + 56, "not wall space", T_MIN, MUTED, "end")
+    # Threshold on the shortest run that still counts.
+    f.ext(door[1], y1 - 14, door[1], y1 - 36)
+    f.ext(clo[0], y1 - 14, clo[0], y1 - 36)
+    f.dim_h(door[1], clo[0], y1 - 30)
+    f.value_lines((door[1] + clo[0]) / 2, y1 - 80, ["2 ft (24 in)", "or more"], 24, gap=1.1,
+                  what="the minimum width")
+    f.legend([(ZONE, "wall space"), (AMBER, "break")], x1 + t + 20, y1 - 46, T_MIN)
+    # The same walls unfolded along the floor line, 1-2-3-4.
+    sx0, sx1, top, fl = 20, 780, 352, 404
+    walls = [y1 - y0, x1 - x0, y1 - y0, x1 - x0]
+    k = (sx1 - sx0) / sum(walls)
+    starts = [sum(walls[:i]) for i in range(4)]
+
+    def sx(wall, d):
+        return sx0 + (starts[wall - 1] + d) * k
+
+    f.rect(sx0, top, sx1 - sx0, fl - top, fill=PANEL, stroke=EDGE, sw=SW_THIN)
+    for i in range(1, 4):
+        f.dline(sx(i + 1, 0), top + 4, sx(i + 1, 0), fl - 2, EDGE, SW_THIN, 6, 5)
+    f.line(sx0, fl, sx1, fl, LINE, SW_STRUCT)
+    free = [(y1 - cab[0] + y1 - y0) / 2, (win[0] - x0) / 2, (hearth[1] + y1) / 2 - y0,
+            (x1 - clo[0] + x1 - door[1]) / 2]
+    for i, d in enumerate(free):
+        _wall_no(f, sx(i + 1, d), top + 20, i + 1)
+
+    def cabinet(a, b):
+        f.rect(a, fl - 28, b - a, 28, fill=PANEL_2, stroke=TEXT, sw=SW_THIN)
+        f.line(a + 3, fl - 16, b - 3, fl - 16, EDGE, SW_THIN)
+
+    cabinet(sx(1, 0), sx(1, y1 - cab[0]))
+    cabinet(sx(4, x1 - x0 - (cab[1] - x0)), sx(4, x1 - x0))
+    wa, wb = sx(2, win[0] - x0), sx(2, win[1] - x0)
+    f.rect(wa, top + 8, wb - wa, fl - top - 30, fill=BG, stroke=TEXT, sw=SW_THIN)
+    f.line((wa + wb) / 2, top + 8, (wa + wb) / 2, fl - 22, TEXT, SW_THIN)
+    ha, hb = sx(3, hearth[0] - y0), sx(3, hearth[1] - y0)
+    f.rect(ha + 4, top + 4, hb - ha - 8, fl - top - 4, fill=PANEL_2, stroke=TEXT, sw=SW_THIN)
+    f.rect((ha + hb) / 2 - 12, fl - 22, 24, 18, fill="#7c2d12", stroke=TEXT, sw=SW_THIN)
+    f.rect(ha, fl - 4, hb - ha, 4, fill=CONCRETE)
+    for a, b in ((clo[1], clo[0]), (door[1], door[0])):
+        da, db = sx(4, x1 - a), sx(4, x1 - b)
+        f.rect(da, top + 6, db - da, fl - top - 6, fill=BG, stroke=TEXT, sw=SW_THIN)
+    by = fl + 10
+    runs = [(sx(1, y1 - cab[0]), sx(3, hearth[0] - y0)),
+            (sx(3, hearth[1] - y0), sx(4, x1 - clo[1])),
+            (sx(4, x1 - clo[0]), sx(4, x1 - door[1]))]
+    for a, b in runs:
+        f.line(a, by, b, by, ZONE, 6)
+        _run_end(f, a, by, True)
+        _run_end(f, b, by, True)
+    sa, sb = sx(4, x1 - door[0]), sx(4, x1 - cab[1])
+    f.hatch(sa, by - 5, sb - sa, 10, MUTED, step=6, op=0.35)
+    f.text(sx0, fl + 40, "the same walls unfolded along the floor line", T_MIN, MUTED, "start")
+    f.leader(sb - 40, fl + 33, (sa + sb) / 2, by + 6)
+    f.value(sb - 46, fl + 40, "less than 2 ft (24 in)", T_MIN, TEXT, "end", what="the too-short width")
+    f.tag(f.w - 20, 30, "NEC 210.52(A)(2)", anchor="end")
 
 
 @figure("garage_receptacles_210-52g", h=430, nec="210.52(G)",

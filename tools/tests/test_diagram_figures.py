@@ -126,6 +126,27 @@ class PreAnswerFigureTextTest(unittest.TestCase):
         self.assertGreater(chips, 150)
         self.assertEqual(bad, [], "\n".join(bad[:40]))
 
+    def test_bedroom_wall_space_figure(self):
+        """The 210.52(A)(2) bedroom plan: its chip cites what the questions cite, and the
+        threshold tag and the too-short note are both hidden until answered."""
+        import json
+        sys.path.insert(0, str(ROOT / "tools" / "diagrams"))
+        import leakscan
+        bank = {r["id"]: r for r in json.loads((ROOT / "data" / "question_bank.json").read_text(encoding="utf-8"))["records"]}
+        figs = json.loads((ROOT / "assets" / "diagrams" / "nec" / "figures.json").read_text(encoding="utf-8"))
+        masks = json.loads((ROOT / "data" / "diagram_masks.json").read_text(encoding="utf-8"))["records"]
+        labels = json.loads((ROOT / "docs" / "diagrams" / "labels.json").read_text(encoding="utf-8"))
+        for rid in ("final-exam-#1-011", "open-book-exam-#2-015"):
+            e = figs[rid]
+            self.assertEqual((e["figure"], e["when"]), ("wall_space_210-52a2", "before"))
+            self.assertEqual(e["nec"], bank[rid]["article"])
+            labs = labels[f"{e['figure']}.png"]
+            self.assertIn("NEC " + bank[rid]["article"], [t for t, *_ in labs])
+            numbered = [(t, box) for t, *box in labs if any(c.isdigit() for c in t) and len(t) > 1]
+            self.assertGreaterEqual(len(numbered), 4)
+            for text, box in numbered:
+                self.assertTrue(leakscan.covered(box, masks[rid]["masks"]), f"{rid}: {text!r} shows before answering")
+
 
 @unittest.skipUnless(importlib.util.find_spec("pymupdf") and importlib.util.find_spec("PIL"),
                      "PyMuPDF and Pillow draw the figures")
