@@ -185,7 +185,7 @@ def fcc_bottom_shield(f):
     _fcc_layer(f, 330, CONCRETE)
     f.text(460, 348, "floor", T_MIN, TEXT, "start", True)
     f.text(300, 404, "protects the cable from damage at the floor", T_MIN, MUTED)
-    f.tag(f.w - 24, 70, "NEC Art. 100", anchor="end")
+    f.tag(f.w - 24, 70, "NEC Article 100", anchor="end")
 
 
 @figure("fcc_transition_324-40d", h=420, nec="324.40(D)",
@@ -211,7 +211,7 @@ def fcc_transition(f):
     f.tag(f.w - 24, f.h - 10, "NEC 324.40(D)", anchor="end")
 
 
-@figure("cca_conductor_310-3b", h=440, nec="310.3(B)",
+@figure("cca_conductor_310-3b", h=440, nec="310.3(B)(3)",
         records={"open-book-exam-#10-015": {}, "final-exam-#2-045": {"like": "open-book-exam-#10-015"}})
 def cca_conductor(f):
     ccal = ["open-book-exam-#10-015"]
@@ -225,7 +225,7 @@ def cca_conductor(f):
     f.lines(470, 180, ["copper bonded to", "the aluminum core"], T_MIN, MUTED, "start", gap=1.15)
     f.text(470, 290, "copper share of area:", T_MIN, TEXT, "start", True)
     f.value(470, 334, "at least 10%", T_VALUE, anchor="start", records=ccal, pad=6, what="minimum copper share")
-    f.tag(f.w - 24, f.h - 10, "NEC 310.3(B)", anchor="end")
+    f.tag(f.w - 24, f.h - 10, "NEC 310.3(B)(3)", anchor="end")
 
 
 @figure("mc_cable_100", h=420, nec="Article 100 (Metal-Clad Cable)",
@@ -245,10 +245,10 @@ def mc_cable(f):
     f.text(560, 250, "insulated conductors", T_MIN, MUTED)
     f.text(390, 340, "Type", T_VALUE, TEXT, "end", True)
     f.value(402, 340, "MC", T_VALUE, anchor="start", records=mc, pad=6, what="the cable type")
-    f.tag(f.w - 24, f.h - 10, "NEC Art. 100", anchor="end")
+    f.tag(f.w - 24, f.h - 10, "NEC Article 100", anchor="end")
 
 
-@figure("mi_cable_332", h=440, nec="332.104", records=["final-exam-#5-020"])
+@figure("mi_cable_332", h=440, nec="Article 332", records=["final-exam-#5-020"])
 def mi_cable(f):
     mi = ["final-exam-#5-020"]
     f.title("Type MI cable (cross-section)", y=34)
@@ -265,7 +265,7 @@ def mi_cable(f):
                   pad=5, gap=1.1, what="what the sheath does")
     f.value_lines(410, 296, ["copper sheath: grounding", "path"], T_MIN, anchor="start", records=mi, pad=5,
                   gap=1.1, what="what else the sheath does")
-    f.tag(f.w - 24, f.h - 10, "NEC 332.104", anchor="end")
+    f.tag(f.w - 24, f.h - 10, "NEC Article 332", anchor="end")
 
 
 @figure("fmc_3-8_348-22", h=420, nec="348.22", records=["final-exam-#5-032", "final-exam-#3-048"])

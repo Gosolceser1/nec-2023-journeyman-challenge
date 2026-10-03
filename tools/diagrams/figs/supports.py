@@ -110,7 +110,7 @@ def strut_supports(f):
     f.tag(f.w - 20, f.h - 16, "NEC 384.30(A)", anchor="end")
 
 
-@figure("supports_rmc_344-30", h=400, nec="344.30(A), 344.30(B)(1)-(2), Table 344.30(B)",
+@figure("supports_rmc_344-30", h=400, nec="344.30(B)(2)",
         records=["final-exam-#3-053"])
 def rmc(f):
     y = 150
@@ -122,7 +122,7 @@ def rmc(f):
     _span(f, 200, 600, y, 210)
     f.value(400, 246, "every 12 ft max", 30, label="? ft")
     f.text(400, 310, "general rule, any coupling: every 10 ft", T_NOTE, MUTED)
-    f.tag(f.w - 20, f.h - 16, "NEC Table 344.30(B)", anchor="end")
+    f.tag(f.w - 20, f.h - 16, "NEC 344.30(B)(2)", anchor="end")
 
 
 @figure("supports_pvc_352-30", h=470, nec="352.30",
@@ -150,7 +150,7 @@ def pvc(f):
             f.text(cx, 400, val, 28, TEXT, bold=True)
         else:
             f.value(cx, 400, val, 28, records=recs, label="? ft")
-    f.tag(f.w - 20, f.h - 14, "NEC Table 352.30(B)", anchor="end")
+    f.tag(f.w - 20, f.h - 14, "NEC 352.30", anchor="end")
 
 
 def _ceiling_run(f, kind):

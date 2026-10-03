@@ -30,7 +30,7 @@ def _oneline(f, x):
     f.motor_symbol(x, 486, 36)
 
 
-@figure("motor_flc_430-250", h=420, nec="430.250",
+@figure("motor_flc_430-250", h=420, nec="Table 430.250",
         records={"final-exam-#1-070": {}, "open-book-exam-#6-010": {"like": "final-exam-#1-070"}},
         keep=[r"^480 V system: 460 V column$"])
 def motor_flc(f):
@@ -72,7 +72,7 @@ def motor_disconnect(f):
     f.tag(f.w - 24, f.h - 12, "NEC 430.101", anchor="end")
 
 
-@figure("motor_scgf_430-52", h=560, nec="430.52", records={"final-exam-#3-038": {"terms": ["starting"]}})
+@figure("motor_scgf_430-52", h=560, nec="430.52(B)", records={"final-exam-#3-038": {"terms": ["starting"]}})
 def motor_scgf(f):
     start = ["final-exam-#3-038"]
     f.title("Motor branch-circuit short-circuit and ground-fault device", y=34)
@@ -86,10 +86,10 @@ def motor_scgf(f):
     f.value(b[0] + b[2] + 8, 272, "starting current", T_NOTE, anchor="start", records=start, pad=5)
     f.text(lx, 324, "controller", T_NOTE, MUTED, "start")
     f.text(lx, 494, "motor", T_NOTE, MUTED, "start")
-    f.tag(f.w - 24, f.h - 12, "NEC 430.52", anchor="end")
+    f.tag(f.w - 24, f.h - 12, "NEC 430.52(B)", anchor="end")
 
 
-@figure("motor_overloads_430-37", h=470, nec="430.37", records=["final-exam-#3-052"])
+@figure("motor_overloads_430-37", h=470, nec="Table 430.37", records=["final-exam-#3-052"])
 def motor_overloads(f):
     ol = ["final-exam-#3-052"]
     f.title("Overload units on a three-phase motor", y=34)
@@ -111,7 +111,7 @@ def motor_overloads(f):
     f.tag(f.w - 24, f.h - 12, "NEC Table 430.37", anchor="end")
 
 
-@figure("motor_in_sight_430-102", h=540, nec="430.102",
+@figure("motor_in_sight_430-102", h=540, nec="430.102(B)",
         records={"final-exam-#3-019": {}, "final-exam-#2-064": {"when": "after"},
                  "open-book-exam-#11-022": {"when": "after"}, "open-book-exam-#6-009": {"when": "after"}})
 def motor_in_sight(f):
@@ -144,7 +144,7 @@ def motor_in_sight(f):
     for tx, ty in ((500, 352), (606, 326)):
         f.dline(388, 276, tx, ty, DIM, 2, 6, 5)
     f.lines(560, 250, ["in sight: visible and", "not more than 50 ft"], T_MIN, DIM, bold=True, gap=1.15)
-    f.tag(f.w - 24, f.h - 12, "NEC 430.102", anchor="end")
+    f.tag(f.w - 24, f.h - 12, "NEC 430.102(B)", anchor="end")
 
 
 @figure("ac_disconnect_440-14", h=500, nec="440.14", records=["open-book-exam-#1-025"])

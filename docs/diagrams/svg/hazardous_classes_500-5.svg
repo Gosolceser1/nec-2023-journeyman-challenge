@@ -57,6 +57,6 @@
 <path d="M 640 190 q 30 -24 60 0 t 60 0" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 <text x="652.0" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="end">Class</text>
 <text x="662.0" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="start">III</text>
-<rect x="658.4" y="322.0" width="127.6" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="668.4" y="350.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 500.5</text>
+<rect x="627.9" y="322.0" width="158.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="637.9" y="350.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 500.5(D)</text>
 </svg>

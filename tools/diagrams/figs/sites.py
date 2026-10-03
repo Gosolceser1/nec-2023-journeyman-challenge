@@ -89,7 +89,7 @@ def _ride(f, x, ground, w=70, h=64):
     f.poly([(x + w / 2, ground - h - 16), (x + w / 2 + 16, ground - h - 10), (x + w / 2, ground - h - 4)], AMBER)
 
 
-@figure("fair_structures_lines_525-5b", h=470, nec="525.5(B)",
+@figure("fair_structures_lines_525-5b", h=470, nec="525.5(B)(2)",
         records={FAIR[0]: {}, FAIR[1]: {"like": FAIR[0]}})
 def fair_structures(f):
     f.title("Rides and tents near overhead lines (elevation)", y=34)
@@ -116,7 +116,7 @@ def fair_structures(f):
     f.card(600, 120, 180, 200, "Keep out")
     f.lines(614, 186, ["not under the lines,", "nor within 15 ft", "sideways, all the", "way to grade"], T_MIN,
             TEXT, "start", gap=1.2)
-    f.tag(f.w - 24, f.h - 10, "NEC 525.5(B)", anchor="end")
+    f.tag(f.w - 24, f.h - 10, "NEC 525.5(B)(2)", anchor="end")
 
 
 FENCE = ["final-exam-#2-059", "open-book-exam-#11-007"]

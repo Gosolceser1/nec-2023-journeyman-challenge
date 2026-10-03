@@ -82,6 +82,6 @@
 <text x="640.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">minimum eight</text>
 <text x="640.0" y="405.3" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">receptacles</text>
 <text x="640.0" y="430.6" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">(4 duplex here)</text>
-<rect x="646.2" y="480.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="656.2" y="508.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 517.18</text>
+<rect x="588.7" y="480.0" width="197.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="598.7" y="508.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 517.18(B)(1)</text>
 </svg>

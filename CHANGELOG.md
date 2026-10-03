@@ -38,6 +38,32 @@
   stay "?" until you answer, and the chip now reads 210.52(A)(2), the same as
   the question.
 
+### Fixed
+
+- **Background notes that were about something else.** The bedroom wall-space
+  question's plain-language background talked about box fill. It now explains
+  how wall space is measured (along the floor line, around corners, broken by
+  doorways, fireplaces and fixed cabinets) without giving the width. A scan of
+  the whole bank found 75 more off-topic backgrounds (for example Ohm's law on
+  the firestopping question, GFCI on the motor fuse table, flexible cords on
+  the carnival-structure question); each now has a short note about its own
+  rule, written so it doesn't contain the answer. Two summaries were fixed
+  too: the outside-feeder disconnect one (it said "service equipment") and
+  the multiwire branch circuit one (it asked the wrong thing).
+- **Section chips agree with the question.** Every diagram's section chip
+  (shown after you answer) now names exactly the provision its question
+  cites, or for a diagram shared by several questions, the level they all
+  share. 39 diagrams were tightened (for example 310.6 to 310.6(C), 517.18 to
+  517.18(B)(1), "Art. 100" to "Article 100"), and the check now runs on every
+  build.
+- **Seven citations corrected.** The two wet-location receptacle questions
+  now cite 406.9(B)(1); the pool-motor GFCI question cites 680.5(B), where
+  NEC 2023 puts the 60-ampere limit (680.21(C) stays in the provision as
+  context); the two holiday-lighting tree questions cite the 590.4(J)
+  Exception; the taped gooseneck question cites the 230.54(B) Exception; and
+  the Class III question cites 500.5(D), where Class III locations are
+  defined, instead of the Article 503 scope.
+
 ## [1.0.6] - 2026-10-03
 
 ### Added

@@ -30,6 +30,6 @@
 <text x="230.0" y="342.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">40% of new sites,</text>
 <text x="230.0" y="367.3" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">20% of existing</text>
 <text x="230.0" y="430.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">all weather-resistant</text>
-<rect x="646.2" y="432.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="656.2" y="460.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 551.71</text>
+<rect x="615.6" y="432.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="625.6" y="460.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 551.71(B)</text>
 </svg>

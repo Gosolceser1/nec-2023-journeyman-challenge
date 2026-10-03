@@ -35,6 +35,6 @@
 <line x1="719.0" y1="221.0" x2="719.0" y2="265.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <line x1="737.0" y1="221.0" x2="737.0" y2="265.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <text x="595.0" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">Class III, Division 2</text>
-<rect x="627.9" y="362.0" width="158.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="637.9" y="390.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 500.5(D)</text>
+<rect x="601.0" y="362.0" width="185.0" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="611.0" y="390.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 500.5(D)(2)</text>
 </svg>

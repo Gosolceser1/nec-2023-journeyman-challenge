@@ -72,7 +72,7 @@ def crawl_space_light(f):
     f.tag(f.w - 24, f.h - 14, "NEC 210.8(C)", anchor="end")
 
 
-@figure("nondwelling_sink_210-8b", h=420, nec="210.8(B)", when="after", records=["open-book-exam-#1-012"])
+@figure("nondwelling_sink_210-8b", h=420, nec="210.8(B)(3)", when="after", records=["open-book-exam-#1-012"])
 def nondwelling_sink(f):
     f.title("Not a dwelling: a sink with food or beverage prep (elevation)", y=36)
     top, floor = 260, 380

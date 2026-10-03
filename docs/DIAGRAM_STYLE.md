@@ -32,9 +32,17 @@ there just for decoration.
   canvas or sit on top of a line.
 - **One figure, one rule.** A question shows one picture, and it is about
   the section the question cites. Don't put panels for different sections
-  side by side; give each its own figure. `nec=` names that one section,
-  every record on the figure cites it, and the tag chip shows one reference
-  (`build.py --check` and `test_diagram_figures.py` enforce this).
+  side by side; give each its own figure. `nec=` and the tag chip name
+  exactly what the figure's questions cite: one question's own citation
+  (`590.4(J) Ex.`, `Table 430.250`), or for several questions their deepest
+  common level (`210.8(A)` for 210.8(A)(2) and 210.8(A)(10)), which must
+  still be one section. Write it in the bank's format (`Article 100`, not
+  `Art. 100`; `Ex. 1`, not `Exception No. 1`). The only differences allowed
+  are the chip's "NEC " prefix, a topic note in `nec=` after a space
+  (`Article 100 (Sign Body)`), the order of a Chapter 9 table or note, and a
+  list that doesn't repeat its section (`210.12(B), (C), and (D)`). If a
+  question's citation is wrong, fix it in the bank overrides, not in the
+  figure (`build.py --check` and `test_diagram_figures.py` enforce this).
 - **No clutter.** Every mark answers a question, sets up the question or
   locates something. Leave out random texture, decorative icons and
   repeated legends.

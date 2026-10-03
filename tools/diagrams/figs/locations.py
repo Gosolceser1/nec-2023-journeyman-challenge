@@ -31,7 +31,7 @@ def _duplex(f, x, y, s, red=False):
     f.circle(x, y, max(2.0, s * 0.035), fill=LINE)
 
 
-@figure("hazardous_classes_500-5", h=360, nec="500.5",
+@figure("hazardous_classes_500-5", h=360, nec="500.5(D)",
         records={"open-book-exam-#10-017": {"terms": ["III"]}, "final-exam-#1-061": {"terms": ["III"]}})
 def hazardous_classes(f):
     f.title("Hazardous locations: what is in the air decides the class", y=34)
@@ -50,10 +50,10 @@ def hazardous_classes(f):
                 f.path(f"M {cx - 70 + k * 10} {cy - 30 + k * 12} q 30 -24 60 0 t 60 0", MUTED, 3)
         f.text(cx - 8, 270, "Class", T_LABEL, TEXT, "end", True)
         f.value(cx + 2, 270, num, T_LABEL, anchor="start", pad=6, what=f"class for {name}")
-    f.tag(f.w - 24, f.h - 12, "NEC 500.5", anchor="end")
+    f.tag(f.w - 24, f.h - 12, "NEC 500.5(D)", anchor="end")
 
 
-@figure("textile_divisions_500-5d", h=400, nec="500.5(D)", records={"final-exam-#3-008": {"terms": ["III", "Division 2", "Div. 2"]}})
+@figure("textile_divisions_500-5d", h=400, nec="500.5(D)(2)", records={"final-exam-#3-008": {"terms": ["III", "Division 2", "Div. 2"]}})
 def textile_divisions(f):
     f.title("Textile mill: fibers being made vs. fibers in storage", y=34)
     for x, w, lines_, d in ((20, 370, ["carding and spinning:", "fibers handled while", "being manufactured"],
@@ -75,7 +75,7 @@ def textile_divisions(f):
                 for sx in (bx + 13, bx + 31):
                     f.line(sx, 221, sx, 265, LINE, 2)
         f.value(x + w / 2, 306, d, T_NOTE, pad=5, what=f"'{d}'")
-    f.tag(f.w - 24, f.h - 12, "NEC 500.5(D)", anchor="end")
+    f.tag(f.w - 24, f.h - 12, "NEC 500.5(D)(2)", anchor="end")
 
 
 @figure("antenna_power_lines_810-16b", h=520, nec="810.16(B)", records=["open-book-exam-#10-011"])
@@ -116,7 +116,7 @@ def antenna_power_lines(f):
     f.tag(f.w - 24, f.h - 14, "NEC 810.16(B)", anchor="end")
 
 
-@figure("patient_bed_receptacles_517-18", h=520, nec="517.18(A), 517.18(B)",
+@figure("patient_bed_receptacles_517-18", h=520, nec="517.18(B)(1)",
         records={"open-book-exam-#10-019": {}, "final-exam-#2-048": {"like": "open-book-exam-#10-019"}})
 def patient_bed(f):
     f.title("Category 2 space: one patient bed location", y=34)
@@ -143,7 +143,7 @@ def patient_bed(f):
     f.lines(536, 300, ["all hospital grade,", "green dot (517.18(B)(2))"], T_MIN, TEXT, "start", gap=1.15)
     f.value_lines(640, 380, ["minimum eight", "receptacles", "(4 duplex here)"], T_NOTE, pad=6, gap=1.15,
                   what="receptacle count per bed")
-    f.tag(f.w - 24, f.h - 14, "NEC 517.18", anchor="end")
+    f.tag(f.w - 24, f.h - 14, "NEC 517.18(B)(1)", anchor="end")
 
 
 @figure("plaques_225-37", h=520, nec="225.37",
@@ -198,7 +198,7 @@ def sign_body(f):
     f.text(400, 310, "outer shell: weather cover only", T_NOTE, AMBER, bold=True)
     f.text(400, 380, "not an electrical enclosure; the defined term:", T_NOTE, TEXT)
     f.value(400, 430, "sign body", T_LABEL, pad=6)
-    f.tag(f.w - 24, f.h - 12, "NEC Art. 100", anchor="end")
+    f.tag(f.w - 24, f.h - 12, "NEC Article 100", anchor="end")
 
 
 @figure("sign_wood_600-9c", h=420, nec="600.9(C)", records=["final-exam-#1-069"])
@@ -219,7 +219,7 @@ def sign_wood(f):
     f.tag(f.w - 24, f.h - 12, "NEC 600.9(C)", anchor="end")
 
 
-@figure("busway_wall_368-234", h=480, nec="368.234(A), 368.234(B)",
+@figure("busway_wall_368-234", h=480, nec="368.234(A)",
         records={"final-exam-#5-050": {"terms": ["vapor", "seal"]}})
 def busway_wall(f):
     rid = ["final-exam-#5-050"]
@@ -245,7 +245,7 @@ def busway_wall(f):
     f.leader(510, 322, 350, y + 30)
     f.value(580, 440, "Ex.: forced-cooled busway", T_MIN, MUTED, bold=False, records=rid, pad=5,
             what="the exception")
-    f.tag(f.w - 24, 64, "NEC 368.234", anchor="end")
+    f.tag(f.w - 24, 64, "NEC 368.234(A)", anchor="end")
 
 
 @figure("rmc_cinder_344-10c", h=470, nec="344.10(C)", records=["final-exam-#5-068"])

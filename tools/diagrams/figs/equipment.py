@@ -40,7 +40,7 @@ def fuel_dispenser_shutoff(f):
     f.tag(f.w - 24, f.h - 14, "NEC 514.11(A)", anchor="end")
 
 
-@figure("conduit_stub_up_408-5", h=470, nec="408.5, Table 408.5",
+@figure("conduit_stub_up_408-5", h=470, nec="408.5",
         records={"final-exam-#1-029": {}, "open-book-exam-#3-008": {"like": "final-exam-#1-029"}})
 def conduit_stub_up(f):
     f.title("Section: conduits entering the bottom", y=36)
@@ -102,7 +102,7 @@ def mobile_home_disconnect(f):
     f.tag(f.w - 24, f.h - 10, "NEC 550.32(F)", anchor="end")
 
 
-@figure("se_cable_gooseneck_230-54b", h=450, nec="230.54(B) Exception",
+@figure("se_cable_gooseneck_230-54b", h=450, nec="230.54(B) Ex.",
         records={"final-exam-#3-047": {"when": "after", "terms": ["gooseneck"]}})
 def se_cable_gooseneck(f):
     wall = 420
@@ -134,7 +134,7 @@ def se_cable_gooseneck(f):
     f.tag(f.w - 24, f.h - 14, "NEC 230.54(B) Ex.", anchor="end")
 
 
-@figure("busway_reduction_368-17b", h=470, nec="368.17(B) and its Exception",
+@figure("busway_reduction_368-17b", h=470, nec="368.17(B)",
         records=["final-exam-#5-052"])
 def busway_reduction(f):
     rid = ["final-exam-#5-052"]
@@ -196,7 +196,7 @@ def raceway_supported_box(f):
     f.tag(f.w - 24, f.h - 14, "NEC 314.23(E)", anchor="end")
 
 
-@figure("nm_cable_sleeve_312-5c", h=470, nec="312.5(C) Exception No. 1",
+@figure("nm_cable_sleeve_312-5c", h=470, nec="312.5(C) Ex. 1",
         records=["open-book-exam-#4-018"])
 def nm_cable_sleeve(f):
     rx, rtop, px0, px1, ptop = 280, 110, 200, 360, 300

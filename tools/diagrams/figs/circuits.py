@@ -215,7 +215,7 @@ def icp_high_leg(f):
     f.highlight(px + 56, yb - 30, 180, 60)
 
 
-@figure("parallel_egc_250-122f", h=450, nec="250.122(F)(1)(b)",
+@figure("parallel_egc_250-122f", h=450, nec="250.122(F)(1)",
         records={"final-exam-#1-023": {}, "open-book-exam-#3-016": {"like": "final-exam-#1-023"}})
 def parallel_egc(f):
     f.title("Parallel sets in two raceways", x=40, y=40)

@@ -385,7 +385,7 @@ def transformer_turns(f):
     f.highlight(94, 50, 170, 70, records=["final-exam-#2-015"])
 
 
-@figure("resistance_scaling", h=380, nec="General knowledge (conductor resistance)", when="after",
+@figure("resistance_scaling", h=380, nec="General calculation (conductor resistance)", when="after",
         records=["final-exam-#2-019"])
 def resistance_scaling(f):
     f.title("Same material: 3 times as long, half the area", y=34)

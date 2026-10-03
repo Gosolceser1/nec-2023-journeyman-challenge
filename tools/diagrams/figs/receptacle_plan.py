@@ -153,7 +153,7 @@ def wall_space(f):
     f.tag(f.w - 20, 30, "NEC 210.52(A)(2)", anchor="end")
 
 
-@figure("garage_receptacles_210-52g", h=430, nec="210.52(G)",
+@figure("garage_receptacles_210-52g", h=430, nec="210.52(G)(1)",
         records={"final-exam-#1-022": {}, "open-book-exam-#3-017": {"like": "final-exam-#1-022"}})
 def garage_receptacles(f):
     f.title("Attached two-car garage (plan view)", y=34)
@@ -171,7 +171,7 @@ def garage_receptacles(f):
         _wall_receptacle(f, cx, top, "up")
     f.mask(gx0 + 6, top - 4, gx1 - gx0 - 12, 44, what="the receptacles drawn in each bay")
     f.value(bay_x, 150, "one in each vehicle bay", T_NOTE, what="the one-per-bay rule")
-    f.tag(f.w - 24, f.h - 12, "NEC 210.52(G)", anchor="end")
+    f.tag(f.w - 24, f.h - 12, "NEC 210.52(G)(1)", anchor="end")
 
 
 @figure("hallway_receptacle_210-52h", h=360, nec="210.52(H)",

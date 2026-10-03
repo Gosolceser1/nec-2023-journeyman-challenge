@@ -127,15 +127,15 @@
       "note": "Key, provision, notes, tip and headings match NEC 2023."
     },
     "final-exam-#1-016": {
-      "status": "verified",
-      "verified_on": "2026-09-28",
+      "status": "fixed",
+      "verified_on": "2026-10-03",
       "sections": [
-        "590.4(J)"
+        "590.4(J) Ex."
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#590",
       "provision": "600d939f793181a0",
       "correct_index": 2,
-      "note": "Key, provision, notes, tip and headings match NEC 2023."
+      "note": "Citation is the 590.4(J) Exception, which permits trees as support (the stem quotes it)."
     },
     "final-exam-#1-018": {
       "status": "verified",
@@ -302,14 +302,14 @@
     },
     "final-exam-#1-042": {
       "status": "fixed",
-      "verified_on": "2026-09-28",
+      "verified_on": "2026-10-03",
       "sections": [
         "406.9(B)(1)"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#406",
       "provision": "1040747cc8ce33fd",
       "correct_index": 3,
-      "note": "[reference_text] 406.9(B)(1) excerpt aligned with open-book-exam-#4-014 (both sentences of (B)(1))."
+      "note": "Citation narrowed to 406.9(B)(1), the paragraph the stem quotes (matches its figure)."
     },
     "final-exam-#1-043": {
       "status": "fixed",
@@ -874,15 +874,15 @@
       "note": "Not an NEC question (General knowledge); explanation reviewed for accuracy."
     },
     "final-exam-#3-047": {
-      "status": "verified",
-      "verified_on": "2026-09-28",
+      "status": "fixed",
+      "verified_on": "2026-10-03",
       "sections": [
-        "230.54(B)"
+        "230.54(B) Ex."
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/2/wiring-and-protection#230",
       "provision": "8e3daf4cebed4647",
       "correct_index": 1,
-      "note": "Key, provision, notes, tip and headings match NEC 2023."
+      "note": "Citation is the 230.54(B) Exception, which permits the taped gooseneck (the stem quotes it)."
     },
     "final-exam-#3-049": {
       "status": "fixed",
@@ -1922,16 +1922,15 @@
       "note": "Key, provision, notes, tip and headings match NEC 2023."
     },
     "open-book-exam-#1-024": {
-      "status": "verified",
-      "verified_on": "2026-09-28",
+      "status": "fixed",
+      "verified_on": "2026-10-03",
       "sections": [
-        "680.21(C)",
         "680.5(B)"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/6/special-equipment#680",
-      "provision": "47e8d0022176b27a",
+      "provision": "0a2910a309b278c6",
       "correct_index": 0,
-      "note": "Key, provision, notes, tip and headings match NEC 2023."
+      "note": "Citation is 680.5(B): in NEC 2023 the 150 V / 60 A Class A GFCI limit lives there; 680.21(C) only points to it and stays in the provision as context."
     },
     "open-book-exam-#1-025": {
       "status": "verified",
@@ -2092,14 +2091,14 @@
     },
     "open-book-exam-#4-014": {
       "status": "fixed",
-      "verified_on": "2026-09-28",
+      "verified_on": "2026-10-03",
       "sections": [
         "406.9(B)(1)"
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/4/equipment-for-general-use#406",
       "provision": "1040747cc8ce33fd",
       "correct_index": 3,
-      "note": "[reference_text] 406.9(B)(1): 2023 heading is \"Receptacles of 15 Amperes and 20 Amperes in a Wet Location\" and the text reads \"15 amperes and 20 amperes, 125 volts and 250 volts\"; the record's hood sentence (\"extra-duty\" only at other than one- or two-family dwellings) is 2020 text; replaced with the verbatim 2023 sentences needed for the answer."
+      "note": "Citation narrowed to 406.9(B)(1), the paragraph the stem quotes (matches its figure)."
     },
     "open-book-exam-#4-015": {
       "status": "verified",
@@ -2830,15 +2829,15 @@
       "note": "Key, provision, notes, tip and headings match NEC 2023."
     },
     "final-exam-#1-061": {
-      "status": "verified",
-      "verified_on": "2026-09-28",
+      "status": "fixed",
+      "verified_on": "2026-10-03",
       "sections": [
-        "503.1"
+        "500.5(D)"
       ],
-      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#503",
-      "provision": "a17bc3044cd6479b",
+      "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#500",
+      "provision": "b06fe879535f2aba",
       "correct_index": 2,
-      "note": "Key, provision, notes, tip and headings match NEC 2023."
+      "note": "Citation moved from 503.1 (Article 503 scope) to 500.5(D), where NEC 2023 defines Class III locations."
     },
     "final-exam-#1-023": {
       "status": "fixed",
@@ -5282,15 +5281,15 @@
       "note": "Countertop wall spaces in dwelling kitchens and similar areas (210.52(C)(1))."
     },
     "open-book-exam-#2-008": {
-      "status": "verified",
-      "verified_on": "2026-09-29",
+      "status": "fixed",
+      "verified_on": "2026-10-03",
       "sections": [
-        "590.4(J)"
+        "590.4(J) Ex."
       ],
       "url": "https://up.codes/viewer/nfpa/nfpa-70-2023/chapter/5/special-occupancies#590",
       "provision": "600d939f793181a0",
       "correct_index": 2,
-      "note": "Key, provision, notes, tip and headings match NEC 2023."
+      "note": "Citation is the 590.4(J) Exception, which permits trees as support (the stem quotes it)."
     },
     "open-book-exam-#2-009": {
       "status": "fixed",

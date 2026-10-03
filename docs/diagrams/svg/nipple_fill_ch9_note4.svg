@@ -71,6 +71,6 @@
 <text x="300.0" y="374.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">section</text>
 <text x="360.0" y="310.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">fill up to 60%</text>
 <text x="40.0" y="422.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">310.15(C)(1) adjustment factors need not apply</text>
-<rect x="517.9" y="414.0" width="268.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="527.9" y="442.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Chapter 9, Note (4)</text>
+<rect x="532.5" y="414.0" width="253.5" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="542.5" y="442.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Chapter 9, Note 4</text>
 </svg>

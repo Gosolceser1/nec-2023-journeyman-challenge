@@ -19,7 +19,7 @@ def _fan(f, x, y, half=70, dashed=False):
     f.line(x - half, y, x + half, y, TEXT, 7)
 
 
-@figure("spa_fan_height_680-43", h=450, nec="680.43(B)(1)(a), (B)(1)(b)", records=FAN)
+@figure("spa_fan_height_680-43", h=450, nec="680.43(B)(1)(a)", records=FAN)
 def spa_fan(f):
     ceil, deck, water, ft = 64, 380, 392, 24.75
     fx, half = 400, 70
@@ -54,7 +54,7 @@ def spa_fan(f):
     f.text(224, 272, "with GFCI", T_LABEL, TEXT, "end", True)
     f.lines(224, 308, ["7 ft 6 in", "(2.3 m)"], 28, DIM, "end", True)
     f.text(f.w - 24, 104, "not to scale", T_MIN, MUTED, "end")
-    f.tag(24, f.h - 18, "NEC 680.43(B)(1)")
+    f.tag(24, f.h - 18, "NEC 680.43(B)(1)(a)")
 
 
 @figure("fountain_receptacles_680-58", h=360, nec="680.58",

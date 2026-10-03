@@ -90,7 +90,7 @@ def pressure_connector(f):
     f.tag(f.w - 24, f.h - 6, "NEC 110.14(C)(2)", anchor="end")
 
 
-@figure("conductor_colors_310-6", h=470, when="after", nec="310.6",
+@figure("conductor_colors_310-6", h=470, when="after", nec="310.6(C)",
         records={"final-exam-#1-009": {}, "open-book-exam-#2-022": {"like": "final-exam-#1-009"}})
 def conductor_colors(f):
     f.title("Insulation colors by what the conductor does", y=34)
@@ -118,7 +118,7 @@ def conductor_colors(f):
             f.text(x + 75, y + 76, name, T_MIN, MUTED)
     f.lines(30, 430, ["Hot conductors must be clearly different from both groups above."],
             T_NOTE, TEXT, "start")
-    f.tag(f.w - 24, f.h - 8, "NEC 310.6", anchor="end")
+    f.tag(f.w - 24, f.h - 8, "NEC 310.6(C)", anchor="end")
 
 
 @figure("tc_bending_radius_336-24", h=470, nec="336.24",

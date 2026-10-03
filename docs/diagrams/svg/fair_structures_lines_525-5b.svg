@@ -97,6 +97,6 @@
 <text x="614.0" y="210.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">nor within 15 ft</text>
 <text x="614.0" y="234.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">sideways, all the</text>
 <text x="614.0" y="258.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">way to grade</text>
-<rect x="627.9" y="434.0" width="158.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="637.9" y="462.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 525.5(B)</text>
+<rect x="601.0" y="434.0" width="185.0" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="611.0" y="462.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 525.5(B)(2)</text>
 </svg>

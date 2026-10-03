@@ -87,6 +87,6 @@
 <line x1="602.4" y1="325.2" x2="606.0" y2="326.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <text x="560.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#38bdf8" text-anchor="middle">in sight: visible and</text>
 <text x="560.0" y="273.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#38bdf8" text-anchor="middle">not more than 50 ft</text>
-<rect x="633.9" y="502.0" width="152.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="643.9" y="530.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 430.102</text>
+<rect x="603.4" y="502.0" width="182.6" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="613.4" y="530.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 430.102(B)</text>
 </svg>

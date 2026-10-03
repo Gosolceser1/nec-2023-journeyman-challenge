@@ -62,6 +62,6 @@
 <polygon points="600.0,210.0 588.0,216.0 588.0,204.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="400.0" y="246.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="middle">every 12 ft max</text>
 <text x="400.0" y="310.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">general rule, any coupling: every 10 ft</text>
-<rect x="556.1" y="358.0" width="233.9" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="566.1" y="386.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Table 344.30(B)</text>
+<rect x="592.7" y="358.0" width="197.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="602.7" y="386.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 344.30(B)(2)</text>
 </svg>

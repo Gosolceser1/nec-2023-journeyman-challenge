@@ -3,8 +3,9 @@
 tools/diagrams/build.py --check redraws every figure in memory and fails if a
 record lacks a figure, a record's answer shows outside its masks (leak scan),
 a label runs off the canvas, or the committed SVG / figures.json / masks /
-labels are stale. Every question gets at most one figure, and each figure
-teaches the single section its questions cite.
+labels are stale. Every question gets at most one figure, each figure
+teaches the single section its questions cite, and its section chip names
+exactly what they cite (see build.topic_errors for the allowed formats).
 """
 import importlib.util
 import subprocess
@@ -178,14 +179,42 @@ class OneFigureOneRuleTest(unittest.TestCase):
         errors = [e for name, d in sorted(drawn.items()) for e in build.topic_errors(name, d, bank)]
         self.assertEqual(errors, [], "\n".join(errors[:40]))
 
-    def test_sections_parser(self):
+    def test_citation_parser(self):
         sys.path.insert(0, str(ROOT / "tools" / "diagrams"))
         import build
-        self.assertEqual(build.sections("210.52(C)(1)"), {"210.52"})
-        self.assertEqual(build.sections("Table 310.4(1)"), {"310.4"})
-        self.assertEqual(build.sections("Article 100 (Bottom Shield)"), {"100"})
-        self.assertEqual(build.sections("503.1"), {"500.5"})
-        self.assertEqual(len(build.sections("408.18(C), 408.3(A)(2)")), 2)
+        p = build.citation_paths
+        self.assertEqual(p("210.52(C)(1)"), [("210", "210.52", "(C)", "(1)")])
+        self.assertEqual(p("Table 310.4(1)"), [("310", "310.4", "(1)", "Table")])
+        self.assertEqual(p("NEC 590.4(J) Ex."), [("590", "590.4", "(J)", "Ex.")])
+        self.assertEqual(p("Article 100 (Bottom Shield)"), p("NEC Article 100"))
+        self.assertNotEqual(p("NEC Art. 100"), p("Article 100"))
+        self.assertEqual(p("General knowledge (AC theory)"), p("General knowledge"))
+        self.assertEqual(p("Table 4, Chapter 9"), p("Chapter 9, Table 4"))
+        self.assertEqual(p("210.12(B), (C), and (D)"), p("210.12(B), 210.12(C), and 210.12(D)"))
+        self.assertEqual(len(p("408.18(C), 408.3(A)(2)")), 2)
+        self.assertEqual(build.common_level(p("210.8(A)(2)") + p("210.8(A) Ex. 1")), p("210.8(A)")[0])
+        self.assertEqual(build.common_level(p("680.21(C) and 680.5(B)")), ("680",))
+
+    def test_chip_matches_citation(self):
+        """The figure's nec and tag chip name exactly what its questions cite (or their
+        common parent), never a narrower, wider or different provision."""
+        sys.path.insert(0, str(ROOT / "tools" / "diagrams"))
+        import build
+
+        class Fig:
+            def __init__(self, *chips):
+                self.labels = [(c, 0, 0, 1, 1) for c in chips]
+
+        bank = {"a": {"article": "406.9(B)"}, "b": {"article": "210.8(A)(2)"}, "c": {"article": "210.8(A)(10)"},
+                "d": {"article": "680.21(C) and 680.5(B)"}, "e": {"article": "210.12"}}
+        ok = lambda nec, chip, recs: build.topic_errors("t", {"nec": nec, "fig": Fig(chip), "records": recs}, bank)
+        self.assertTrue(ok("406.9(B)(1)", "NEC 406.9(B)(1)", ["a"]))
+        self.assertTrue(ok("406.9(B)", "NEC 406.9", ["a"]))
+        self.assertEqual(ok("406.9(B)", "NEC 406.9(B)", ["a"]), [])
+        self.assertEqual(ok("210.8(A)", "NEC 210.8(A)", ["b", "c"]), [])
+        self.assertTrue(ok("210.8(A)(2)", "NEC 210.8(A)(2)", ["b", "c"]))
+        self.assertTrue(ok("680.5(B)", "NEC 680.5(B)", ["d"]))
+        self.assertTrue(ok("Article 210", "NEC Article 210", ["b", "e"]))
 
 
 if __name__ == "__main__":

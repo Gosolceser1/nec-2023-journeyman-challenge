@@ -85,6 +85,6 @@
 <text x="485.0" y="400.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#e2e8f0" text-anchor="middle">6 ft</text>
 <text x="655.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">3 1/2 - 5</text>
 <text x="655.0" y="400.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#e2e8f0" text-anchor="middle">7 ft</text>
-<rect x="556.1" y="430.0" width="233.9" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="566.1" y="458.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Table 352.30(B)</text>
+<rect x="650.2" y="430.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="660.2" y="458.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 352.30</text>
 </svg>

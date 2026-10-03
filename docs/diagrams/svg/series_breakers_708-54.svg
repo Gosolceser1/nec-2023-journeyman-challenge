@@ -41,6 +41,6 @@
 <text x="220.0" y="434.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="middle">coordination not required</text>
 <text x="580.0" y="410.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#f87171" text-anchor="middle">something tapped in parallel:</text>
 <text x="580.0" y="434.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#f87171" text-anchor="middle">they must coordinate</text>
-<rect x="646.2" y="462.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="656.2" y="490.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 708.54</text>
+<rect x="607.0" y="462.0" width="179.0" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="617.0" y="490.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 708.54 Ex.</text>
 </svg>

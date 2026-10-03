@@ -19,7 +19,7 @@ def _insulator(f, x, top, bot, w=20):
         f.rect(x - w / 2, yy - 4, w, 8, fill=PANEL_2, stroke=LINE, sw=1.5, rx=4)
 
 
-@figure("nipple_fill_ch9_note4", h=450, nec="Chapter 9, Notes to Tables, Note (4)",
+@figure("nipple_fill_ch9_note4", h=450, nec="Chapter 9, Note 4",
         records={"final-exam-#1-067": {"when": "after"}, "open-book-exam-#6-014": {"like": "final-exam-#1-067"}})
 def nipple_fill(f):
     y = 200
@@ -49,7 +49,7 @@ def nipple_fill(f):
     f.text(cx, cy + r + 34, "section", T_NOTE, MUTED)
     f.value(360, 310, "fill up to 60%", 30, anchor="start", records=None)
     f.text(40, 422, "310.15(C)(1) adjustment factors need not apply", T_NOTE, MUTED, "start")
-    f.tag(f.w - 24, f.h - 10, "NEC Chapter 9, Note (4)", anchor="end")
+    f.tag(f.w - 24, f.h - 10, "NEC Chapter 9, Note 4", anchor="end")
 
 
 @figure("box_depth_314-24b5", h=450, nec="314.24(B)(5)", records=["final-exam-#3-034"])

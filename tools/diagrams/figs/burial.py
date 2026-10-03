@@ -2,7 +2,7 @@
 from nec_style import *  # noqa: F401,F403
 
 
-@figure("burial_under_concrete_300-5", h=450, nec="Table 300.5(A) Column 1, 300.5(A) cover definition",
+@figure("burial_under_concrete_300-5", h=450, nec="Table 300.5(A)",
         records={"final-exam-#1-049": {}, "open-book-exam-#4-004": {},
                  "open-book-exam-#7-013": {"when": "after"}})
 def burial(f):

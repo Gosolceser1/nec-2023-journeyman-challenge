@@ -64,6 +64,6 @@
 <text x="224.0" y="308.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#38bdf8" text-anchor="end">7 ft 6 in</text>
 <text x="224.0" y="343.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#38bdf8" text-anchor="end">(2.3 m)</text>
 <text x="776.0" y="104.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="end">not to scale</text>
-<rect x="14.0" y="406.0" width="197.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="24.0" y="434.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 680.43(B)(1)</text>
+<rect x="14.0" y="406.0" width="224.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="24.0" y="434.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 680.43(B)(1)(a)</text>
 </svg>

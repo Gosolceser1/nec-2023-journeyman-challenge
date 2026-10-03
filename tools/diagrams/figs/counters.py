@@ -46,7 +46,7 @@ def kitchen_counter(f):
     f.tag(f.w - 24, f.h - 12, "NEC 210.52(C)", anchor="end")
 
 
-@figure("small_appliance_circuits_210-52b", h=420, nec="210.52(B)", when="after", records=SABC)
+@figure("small_appliance_circuits_210-52b", h=420, nec="210.52(B)(2)", when="after", records=SABC)
 def small_appliance_circuits(f):
     f.title("Small-appliance branch circuits (two or more)", y=34)
     f.panel(40, 90, 110, 170, label="panel", breakers=4)

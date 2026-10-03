@@ -27,6 +27,6 @@
 <line x1="510.0" y1="322.0" x2="350.0" y2="260.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <circle cx="350.0" cy="260.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
 <text x="580.0" y="440.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">Ex.: forced-cooled busway</text>
-<rect x="633.9" y="38.0" width="152.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="643.9" y="66.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 368.234</text>
+<rect x="603.4" y="38.0" width="182.6" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="613.4" y="66.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 368.234(A)</text>
 </svg>

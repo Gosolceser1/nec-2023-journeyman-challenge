@@ -170,7 +170,7 @@
         "30 inches is not the threshold; wall space begins at 2 feet, which is 24 inches.",
         "36 inches is not the threshold; 210.52(A)(2) counts spaces 2 feet (24 inches) or wider."
       ],
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nBoxes are sized by volume, not vibes: every wire, clamp, and device yoke eats cubic inches, so a crowded box is a Code violation and a fire risk. Device boxes need minimum depth (a flush device needs room behind it), and unused breaker or knockout openings must be closed with listed fillers so fingers and sparks can't get in. Switchboards and panelboards add their own rules: conductors belong only in the section they terminate in, and rear-access gear must say so on the front.\n\nIn plain terms, the question is: \"In a dwelling bedroom, wall space includes any space ___ or more in width (including space measured around corners) and unbroken along the…\" Subject: dwelling unit. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\ndwelling unit",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nWall space is what the dwelling receptacle spacing rule is measured along. Measure along the floor line and keep going around corners; doorways, fireplaces and fixed cabinets without a countertop break the run, while fixed wall panels and fixed room dividers such as bar-type counters still count. A stretch narrower than the minimum width the Code sets does not need a receptacle of its own.\n\nIn plain terms, the question is: \"In a dwelling bedroom, wall space includes any space ___ or more in width (including space measured around corners) and unbroken along the…\" Subject: dwelling unit. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\ndwelling unit",
       "tip_title": "Receptacle placement",
       "prompt": "In a dwelling bedroom, wall space includes any space ___ or more in width (including space measured around corners) and unbroken along the floor line by doorways and similar openings, fireplaces, and fixed cabinets that do not have countertops or similar work surfaces.",
       "answers": [
@@ -755,7 +755,8 @@
       ],
       "prompt": "For general wiring, ___ type cable containing one or more conductors is approved for direct burial in earth.",
       "lookup_summary": "Lookup clues: cable, conductors. Start with 338.100, then read the matching subsection and exceptions.",
-      "gist": "Only some insulation types are built for direct burial in earth. The question asks which of these cable types is approved for it."
+      "gist": "Only some insulation types are built for direct burial in earth. The question asks which of these cable types is approved for it.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nService-entrance cable comes in more than one type. The type letters tell where each may go: some are for above ground on a building, and one is built with insulation and a jacket suited to direct burial in earth.\n\nThis asks which wiring-method rule fits this installation. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\ncable, conductors"
     },
     "final-exam-#5-023": {
       "reference_text": "336.24 Bending Radius\nBends in Type TC cable shall be made so as not to damage the cable. For Type TC cable without metal shielding, the minimum bending radius shall be as follows:\nFour times the overall diameter for cables 25 mm (1 in.) or less in diameter\nFive times the overall diameter for cables larger than 25 mm (1 in.) but not more than 50 mm (2 in.) in diameter\nSix times the overall diameter for cables larger than 50 mm (2 in.) in diameter\nType TC cables with metallic shielding shall have a minimum bending radius of not less than 12 times the cable overall diameter.",
@@ -797,7 +798,7 @@
         "358.14 permits aluminum fittings and enclosures with galvanized steel EMT where not severely corrosive."
       ],
       "prompt": "Aluminum fittings and enclosures shall be permitted to be used with ___.",
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nBoxes are sized by volume, not vibes: every wire, clamp, and device yoke eats cubic inches, so a crowded box is a Code violation and a fire risk. Device boxes need minimum depth (a flush device needs room behind it), and unused breaker or knockout openings must be closed with listed fillers so fingers and sparks can't get in. Switchboards and panelboards add their own rules: conductors belong only in the section they terminate in, and rear-access gear must say so on the front.\n\nIn plain terms, the question is: \"Aluminum fittings and enclosures shall be permitted to be used with ___.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nconduit",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nTwo different metals touching in the presence of moisture form a small battery, and the less noble metal corrodes away. The raceway articles say which mixes of conduit, fittings and boxes are allowed and under what conditions.\n\nIn plain terms, the question is: \"Aluminum fittings and enclosures shall be permitted to be used with ___.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nconduit",
       "gist": "Mixing metals can cause galvanic corrosion, so the Code names which fitting and raceway metals may be combined. The question asks what aluminum fittings and enclosures may be used with."
     },
     "final-exam-#5-037": {
@@ -1016,7 +1017,8 @@
         "470.11 requires a thermal barrier when spacing to combustibles is less than 305 mm (12 inches)."
       ],
       "gist": "Resistors and reactors run hot, so they need either distance from combustible material or a thermal barrier. The question asks the spacing below which a barrier is required.",
-      "tip_title": "Resistors and reactors"
+      "tip_title": "Resistors and reactors",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nResistors and reactors turn current into heat as part of their job, so they run hot all the time. Article 470 keeps them away from anything that can burn: either enough air space to combustible material, or a thermal barrier where they sit closer.\n\nThis is a minimum-limit question. The correct choice is the minimum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "final-exam-#5-066": {
       "article": "356.22",
@@ -1029,7 +1031,7 @@
         "356.22 limits LFNC fill to the percentages specified in Chapter 9, Table 1.",
         "Table 4 gives conduit dimensions and areas, not the allowable fill percentages."
       ],
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nThree formulas run the math questions. Ohm's law: volts = amps × ohms. Power: watts = volts × amps (so amps = watts ÷ volts). Resistors in parallel combine as the product over the sum. Voltage drop percent is volts lost ÷ source volts. And AC frequency: 60 cycles per second means one full 360° wave takes 1/60 s. To turn a percent into a fraction, write it over 100 and reduce.\n\nIn plain terms, the question is: \"The number of conductors allowed in LFNC must not exceed that permitted by the percentage fill specified…\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nconductors",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nConduit fill limits how much of a raceway's inside area the wires may take up, so they can be pulled in without damage and can shed heat. Tables at the back of the Code hold the tools: one table sets the allowed percentage by the number of conductors, another gives each raceway's internal area by trade size, and another gives each wire's area. Each raceway article points back to those tables.\n\nIn plain terms, the question is: \"The number of conductors allowed in LFNC must not exceed that permitted by the percentage fill specified…\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nconductors",
       "table_after_answer": true,
       "reference_table": [
         [
@@ -1152,7 +1154,8 @@
         "Plain NM needs only a flame-retardant, moisture-resistant jacket; fungus and corrosion resistance is NMC."
       ],
       "tip_title": "Cable types",
-      "gist": "Nonmetallic-sheathed cable comes in versions for dry and for damp or corrosive locations, and they have different jacket requirements. The question asks which type needs the flame, moisture, fungus, and corrosion-resistant covering."
+      "gist": "Nonmetallic-sheathed cable comes in versions for dry and for damp or corrosive locations, and they have different jacket requirements. The question asks which type needs the flame, moisture, fungus, and corrosion-resistant covering.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nEach cable article ends with construction specifications: what the conductors, the insulation and the outer jacket must be made of and what they must withstand. The nonmetallic-sheathed cable article has one such list per cable type, so match the jacket properties in the question to the type they describe.\n\nThis asks which wiring-method rule fits this installation. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\ncable"
     },
     "final-exam-#1-025": {
       "article": "630.12(A)",
@@ -1464,7 +1467,8 @@
         "225.39 requires a rating not less than the calculated load to be supplied.",
         "Maximum load is not the Code basis; 225.39 uses the calculated load."
       ],
-      "gist": "Service equipment must be rated not less than the total computed load. The question asks which load value sets its minimum size."
+      "gist": "A building supplied by an outside feeder or branch circuit needs its own disconnect, sized for what it serves. The question asks which load value sets that disconnect's minimum rating.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nEach building fed by an outside feeder or branch circuit gets its own disconnecting means, and it must be big enough for what it serves. The Code sets a general minimum based on the load, then fixed minimums for very small installations with only one or two branch circuits.\n\nThis is a minimum-limit question. Subject: disconnecting means. The correct choice is the minimum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nbranch circuit, feeder, load calculation, disconnecting means"
     },
     "open-book-exam-#7-011": {
       "reference_text": "210.19(B) Branch Circuits With More Than One Receptacle\nConductors of branch circuits supplying more than one receptacle for cord-and-plug-connected portable loads shall have an ampacity of not less than the rating of the branch circuit.",
@@ -1565,7 +1569,7 @@
     },
     "open-book-exam-#7-024": {
       "reference_text": "408.3(F)(1) High-Leg Identification\nA switchboard, switchgear, or panelboard containing a 4-wire, delta-connected system where the midpoint of one phase winding is grounded shall be legibly and permanently field marked as follows:\nCAUTION _____ PHASE HAS _____ VOLTS TO GROUND",
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nLoad calculations never just add everything up, because a home never runs all loads at once. Start with 3 VA per square foot of living space (outside dimensions, minus open porches and unfinished spaces), add 1,500 VA for each small-appliance and laundry circuit, then shrink the subtotal with the demand factor (first 3,000 VA at full value, 3,001 to 120,000 VA at 35%, the remainder at 25%). Ranges and dryers use their own tables — a range nameplate is only the starting point. Heat and AC: count the larger one, never both.\n\nThis asks about a required marking or label. Subject: switchboard. Decide what must be marked, where the marking goes, and what it must say — the answer is the location or wording the NEC specifies.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSome 4-wire systems have one winding center-tapped and grounded, which gives one phase (the high leg) noticeably more voltage to ground than the other two. A 120-volt load connected to it by mistake gets about 208 volts, so the Code makes that conductor easy to pick out wherever it can be reached.\n\nThis asks about a required marking or label. Subject: switchboard. Decide what must be marked, where the marking goes, and what it must say — the answer is the location or wording the NEC specifies.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
       "tip_short": "High-leg caution labels are for 4-wire delta systems with one winding center-tapped and grounded. Correct: C — delta. 408.3(F)(1) requires the high-leg caution marking for 4-wire delta systems. Not A: Series describes a circuit arrangement, not a transformer system connection. Not B: A wye system has no high leg because all phases are equal voltage to ground. Not D: Grounded is not a winding connection type; the Code specifies delta-connected.",
       "choice_notes": [
         "Series describes a circuit arrangement, not a transformer system connection.",
@@ -1683,7 +1687,8 @@
         "660.9 permits 18 or 16 AWG where protected by not larger than 20-ampere overcurrent devices.",
         "30 amperes exceeds the 20-ampere maximum in 660.9."
       ],
-      "gist": "Small-gauge X-ray control conductors require low-rated overcurrent protection. The question asks the biggest breaker allowed."
+      "gist": "Small-gauge X-ray control conductors require low-rated overcurrent protection. The question asks the biggest breaker allowed.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nX-ray units gulp enormous current for fractions of a second, so their big feeders are sized to momentary versus long-time demand — but the tiny control wires are a different story: fixture wire and flexible cords on control circuits still get overcurrent protection matched to their small size.\n\nIn plain terms, the question is: \"Size #18 or #16 fixture wires, and flexible cords shall be permitted for the control and operating circuits of X-ray and auxiliary…\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\novercurrent protection"
     },
     "open-book-exam-#10-015": {
       "reference_text": "310.3(B) Conductor Material\nConductors in this article shall be of copper, aluminum, or copper-clad aluminum, unless otherwise specified. Aluminum and copper-clad aluminum shall comply with the following:\n(3) For copper-clad aluminum conductors, the copper shall form a minimum 10 percent of the cross-sectional area of a solid conductor or each strand of a stranded conductor. The aluminum core of a copper-clad aluminum conductor shall be made of an AA-8000 series electrical grade aluminum alloy conductor material.",
@@ -2019,7 +2024,8 @@
         "424.20(A) requires that the circuit cannot energize automatically after being manually placed off."
       ],
       "tip_title": "Disconnecting means",
-      "gist": "A thermostat may serve as the disconnect only with a maintained OFF position requiring manual reset. The question asks what the Code demands of that switch."
+      "gist": "A thermostat may serve as the disconnect only with a maintained OFF position requiring manual reset. The question asks what the Code demands of that switch.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nFixed electric space heaters may use a thermostat with an off position as both the controller and the disconnecting means, but only if it meets the conditions a true disconnect must meet. The list covers how it is marked, what it opens, and how it behaves once someone switches it off.\n\nThis asks about the disconnect for this equipment. Subject: disconnecting means. Decide whether the question wants its location, its height, its rating, or who may access it.\n\nLOOKUP FOCUS\ngrounded conductor, conductors, disconnecting means"
     },
     "final-exam-#1-036": {
       "prompt": "For a service rated 100 through 400 amps, the service conductors supplying the entire load of a one family dwelling shall be permitted to have an ampacity of ___ of the service rating.",
@@ -2285,7 +2291,8 @@
         "Primary refers to transformer windings, not a load connection in 210.4(C).",
         "210.4(C) states multiwire branch circuits shall supply only line-to-neutral loads."
       ],
-      "gist": "In a multiwire circuit, all conductors must originate from the same equipment. The question asks what that equipment must contain."
+      "gist": "A multiwire branch circuit shares one grounded conductor among two or more ungrounded conductors, so the Code limits what it may feed. The question asks which kind of loads it may supply.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nA multiwire branch circuit shares one grounded conductor among two or more ungrounded conductors. Its conductors start in the same panelboard and its ungrounded conductors open together, so no leg stays live while someone works on the shared conductor, and the Code limits the kind of loads it may supply.\n\nThis asks about the disconnect for this equipment. Subject: panelboard. Decide whether the question wants its location, its height, its rating, or who may access it.\n\nLOOKUP FOCUS\nbranch circuit, overcurrent protection, conductors, load calculation"
     },
     "open-book-exam-#4-025": {
       "prompt": "Which of the following is a flexible cord type that is permitted in a wet location and is sunlight resistant?",
@@ -2354,7 +2361,8 @@
         "Termination is not the word used; 225.37 says disconnect location.",
         "Entrance is not the word used; 225.37 says disconnect location."
       ],
-      "gist": "A building with multiple supplies must document all sources at every shutoff point. The question asks where that plaque goes."
+      "gist": "A building with multiple supplies must document all sources at every shutoff point. The question asks where that plaque goes.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nA building fed by more than one supply (a service plus a feeder, or several feeders) can stay energized after a worker opens the first switch he finds. The Code requires a permanent plaque or directory that tells workers about every other supply and the area each one serves.\n\nIn plain terms, the question is: \"Where a building or structure has any combination of feeders, branch circuits, or services passing through it or supplying it, a permanent…\" Subject: feeder. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nbranch circuit, feeder, disconnecting means"
     },
     "open-book-exam-#10-010": {
       "prompt": "A commercial building has an opening door in the wall on the second floor through which materials are moved into and out of a storage area located on the second floor. An overhead 120v branch circuit is to be installed from the second floor area of the building to a pole on which a floodlight will be mounted. Which of the following best describes Code requirements for the installation of this branch circuit?",
@@ -2700,7 +2708,9 @@
         "Overhead clamps hold wiring rigidly; 590.4(J) requires strain relief to absorb vegetation movement."
       ],
       "prompt": "For temporary holiday lighting, trees shall be permitted for supporting overhead spans of conductors and cables if the overhead wiring is arranged with ___, tension take-up devices, or other approved means to avoid damage from live vegetation.",
-      "gist": "Vegetation moves with growth and wind, so outdoor wiring on trees requires flexible attachment means. The question asks what that hardware is called."
+      "gist": "Vegetation moves with growth and wind, so outdoor wiring on trees requires flexible attachment means. The question asks what that hardware is called.",
+      "article": "590.4(J) Ex.",
+      "lookup_summary": "Lookup clues: cable, conductors, temporary wiring. Start with 590.4(J) Ex., then read the matching subsection and exceptions."
     },
     "final-exam-#1-018": {
       "reference_text": "620.61(B)(1) Duty Rating on Elevator, Dumbwaiter, and Motor-Generator Sets Driving Motors\nDuty on elevator and dumbwaiter driving machine motors and driving motors of motor-generators used with generator field control shall be rated as intermittent. Such motors shall be permitted to be protected against overload in accordance with 430.33.",
@@ -2857,12 +2867,12 @@
     },
     "final-exam-#1-042": {
       "reference_text": "406.9(B) Wet Locations\n(1) Receptacles of 15 Amperes and 20 Amperes in a Wet Location\nReceptacles of 15 amperes and 20 amperes, 125 volts and 250 volts installed in a wet location shall have an enclosure that is weatherproof whether or not the attachment plug cap is inserted.\nAll 15- and 20-ampere, 125- and 250-volt nonlocking-type receptacles shall be listed and so identified as the weather-resistant type.",
-      "tip_short": "Wet location 15 and 20 ampere nonlocking receptacles must be listed weather-resistant, marked WR. Correct: D — weather resistant. 406.9(B) requires these receptacles to be listed and identified as the weather-resistant type. Not A: Weatherproof describes an enclosure or cover, not the listed receptacle type 406.9(B) requires. Not B: Waterproof is not a receptacle listing; 406.9(B) requires the weather-resistant type. Not C: Water resistant is not the Code term; 406.9(B) requires listed weather-resistant receptacles.",
+      "tip_short": "Wet location 15 and 20 ampere nonlocking receptacles must be listed weather-resistant, marked WR. Correct: D — weather resistant. 406.9(B)(1) requires these receptacles to be listed and identified as the weather-resistant type. Not A: Weatherproof describes an enclosure or cover, not the listed receptacle type 406.9(B)(1) requires. Not B: Waterproof is not a receptacle listing; 406.9(B)(1) requires the weather-resistant type. Not C: Water resistant is not the Code term; 406.9(B)(1) requires listed weather-resistant receptacles.",
       "choice_notes": [
-        "Weatherproof describes an enclosure or cover, not the listed receptacle type 406.9(B) requires.",
-        "Waterproof is not a receptacle listing; 406.9(B) requires the weather-resistant type.",
-        "Water resistant is not the Code term; 406.9(B) requires listed weather-resistant receptacles.",
-        "406.9(B) requires these receptacles to be listed and identified as the weather-resistant type."
+        "Weatherproof describes an enclosure or cover, not the listed receptacle type 406.9(B)(1) requires.",
+        "Waterproof is not a receptacle listing; 406.9(B)(1) requires the weather-resistant type.",
+        "Water resistant is not the Code term; 406.9(B)(1) requires listed weather-resistant receptacles.",
+        "406.9(B)(1) requires these receptacles to be listed and identified as the weather-resistant type."
       ],
       "answers": [
         "weatherproof",
@@ -2871,7 +2881,9 @@
         "weather resistant"
       ],
       "prompt": "All 15 and 20 amp, 125 and 250 volt, nonlocking receptacles located in a wet location shall be listed ___ type.",
-      "gist": "Outdoor receptacles exposed to weather require wet-location construction; several similar designations exist. The question asks which exact one the Code wants."
+      "gist": "Outdoor receptacles exposed to weather require wet-location construction; several similar designations exist. The question asks which exact one the Code wants.",
+      "article": "406.9(B)(1)",
+      "lookup_summary": "Lookup clues: receptacle outlet. Start with 406.9(B)(1), then read the matching subsection and exceptions."
     },
     "final-exam-#1-043": {
       "reference_text": "680.43(B)(1) Elevation\nLuminaires, except as covered in 680.43(B)(2), lighting outlets, and ceiling-suspended (paddle) fans located over the spa or hot tub or within 1.5 m (5 ft) from the inside walls of the spa or hot tub shall comply with the clearances specified in 680.43(B)(1)(a), (B)(1)(b), and (B)(1)(c) above the maximum water level.\n(a) Without GFCI. Where no GFCI protection is provided, the mounting height shall be not less than 3.7 m (12 ft).\n(b) With GFCI. Where GFCI protection is provided, the mounting height shall be permitted to be not less than 2.3 m (7 ft 6 in.).\n(c) Below 2.3 m (7 ft 6 in.). Luminaires meeting the requirements of item (1) or (2) and protected by a ground-fault circuit interrupter shall be permitted to be installed less than 2.3 m (7 ft 6 in.) over a spa or hot tub:\n(1) Recessed luminaires with a glass or plastic lens, nonmetallic or electrically isolated metal trim, and suitable for use in damp locations\n(2) Surface-mounted luminaires with a glass or plastic globe, a nonmetallic body, or a metallic body isolated from contact, and suitable for use in damp locations",
@@ -2926,7 +2938,7 @@
         "110.26(E)(1) says sprinkler protection shall be permitted for the dedicated space if the piping complies.",
         "Air-conditioning ducts are foreign systems that are not permitted in the dedicated electrical space."
       ],
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nBoxes are sized by volume, not vibes: every wire, clamp, and device yoke eats cubic inches, so a crowded box is a Code violation and a fire risk. Device boxes need minimum depth (a flush device needs room behind it), and unused breaker or knockout openings must be closed with listed fillers so fingers and sparks can't get in. Switchboards and panelboards add their own rules: conductors belong only in the section they terminate in, and rear-access gear must say so on the front.\n\nIn plain terms, the question is: \"___ is permitted in the dedicated electrical space above a panelboard.\" Subject: panelboard. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nAbove and below a panelboard the Code reserves a dedicated equipment space, as wide and deep as the equipment and up to the structural ceiling, for the raceways and cables that serve it. Foreign systems such as water pipes and ducts may not pass through it; only a few items are allowed in or above it.\n\nIn plain terms, the question is: \"___ is permitted in the dedicated electrical space above a panelboard.\" Subject: panelboard. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement",
       "prompt": "___ is permitted in the dedicated electrical space above a panelboard.",
       "gist": "The dedicated space above electrical equipment must remain clear of foreign systems. The question asks which one may share that space."
     },
@@ -3121,7 +3133,8 @@
           "24 A"
         ]
       ],
-      "gist": "A receptacle on a circuit rated higher than itself has a cap on the cord-and-plug load it may carry. The question asks that cap for a 15-amp receptacle on a 20-amp multi-outlet circuit."
+      "gist": "A receptacle on a circuit rated higher than itself has a cap on the cord-and-plug load it may carry. The question asks that cap for a 15-amp receptacle on a 20-amp multi-outlet circuit.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nA receptacle on a circuit with other outlets shouldn't be loaded to the full circuit rating by a single plug-in load. The Code limits the cord-and-plug load on each receptacle to a share of its rating, set by a table based on the circuit rating and the receptacle rating.\n\nThis is a maximum-limit question. Subject: receptacle. Numbers in the question: 15 amp, 20 amp. The correct choice is the maximum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nreceptacle outlet, load calculation"
     },
     "final-exam-#3-015": {
       "reference_text": "240.33 Vertical Position\nEnclosures for overcurrent devices shall be mounted in a vertical position. Circuit breaker enclosures shall be permitted to be installed horizontally where the circuit breaker is installed in accordance with 240.81. Listed busway plug-in units shall be permitted to be mounted in orientations corresponding to the busway mounting position.",
@@ -3218,7 +3231,8 @@
         "225.39(B) requires a rating of not less than 30 amperes for two 2-wire branch circuits."
       ],
       "prompt": "For installations consisting of not more than two 2-wire branch circuits, the building disconnecting means must have a rating of not less than ___ amps.",
-      "gist": "A building fed by only a couple of 2-wire branch circuits still needs a disconnect of some minimum rating. The question asks that minimum rating in amps."
+      "gist": "A building fed by only a couple of 2-wire branch circuits still needs a disconnect of some minimum rating. The question asks that minimum rating in amps.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nEach building fed by an outside feeder or branch circuit gets its own disconnecting means, and it must be big enough for what it serves. The Code sets a general minimum based on the load, then fixed minimums for very small installations with only one or two branch circuits.\n\nThis is a maximum-limit question. Subject: disconnecting means. The correct choice is the maximum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nbranch circuit, disconnecting means"
     },
     "final-exam-#3-025": {
       "reference_text": "240.10 Supplementary Overcurrent Protection\nWhere supplementary overcurrent protection is used for luminaires, appliances, and other equipment or for internal circuits and components of equipment, it shall not be used as a substitute for required branch-circuit overcurrent devices or in place of the required branch-circuit protection. Supplementary overcurrent devices shall not be required to be readily accessible.",
@@ -3319,7 +3333,10 @@
       ],
       "prompt": "Type SE cable is permitted to be formed in a ___ and taped with self-sealing weather-resistant thermoplastic.",
       "tip_title": "Services",
-      "gist": "Service-entrance cable normally ends in a listed service head, but an exception lets Type SE cable be bent into a shape and taped instead. The question asks what that shape is called."
+      "gist": "Service-entrance cable normally ends in a listed service head, but an exception lets Type SE cable be bent into a shape and taped instead. The question asks what that shape is called.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nService-entrance conductors at the point where they leave the building must be arranged so rain can't run along them into the raceway or cable. Where Type SE cable is used without a service head, the cable itself is shaped and taped so water drips off before it reaches the open end.\n\nThis asks which wiring-method rule fits this installation. Subject: Type SE cable. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\ncable",
+      "article": "230.54(B) Ex.",
+      "lookup_summary": "Lookup clues: cable. Start with 230.54(B) Ex., then read the matching subsection and exceptions."
     },
     "final-exam-#3-049": {
       "reference_text": "210.63 Equipment Requiring Servicing\nA 125-volt, single-phase, 15- or 20-ampere-rated receptacle outlet shall be installed at an accessible location within 7.5 m (25 ft) of the equipment as specified in 210.63(A) and (B).\nInformational Note: See 210.8(E) for requirements on GFCI protection.\n(A) Heating, Air-Conditioning, and Refrigeration Equipment\nThe required receptacle outlet shall be located on the same level as the heating, air-conditioning, and refrigeration equipment. The receptacle outlet shall not be connected to the load side of the equipment's branch-circuit disconnecting means.\nException: A receptacle outlet shall not be required at one- and two-family dwellings for the service of evaporative coolers.\n(B) Other Electrical Equipment\nIn other than one- and two-family dwellings, a receptacle outlet shall be located as specified in 210.63(B)(1) and (B)(2).\n(1) Indoor Service Equipment\nThe required receptacle outlet shall be located within the same room or area as the service equipment.\n(2) Indoor Equipment Requiring Dedicated Equipment Spaces\nWhere equipment, other than service equipment, requires dedicated equipment space as specified in 110.26(E), the required receptacle outlet shall be located within the same room or area as the electrical equipment and shall not be connected to the load side of the equipment's disconnecting means.",
@@ -3373,7 +3390,8 @@
         "30 amperes is the two-circuit minimum in 225.39(B), not the one-circuit minimum."
       ],
       "prompt": "The building disconnecting means for a one-circuit installation that supplies only limited loads of a single branch circuit must have a rating not less than ___.",
-      "gist": "A building served by a single branch circuit for limited loads still needs a disconnect of some minimum rating. The question asks that minimum."
+      "gist": "A building served by a single branch circuit for limited loads still needs a disconnect of some minimum rating. The question asks that minimum.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nEach building fed by an outside feeder or branch circuit gets its own disconnecting means, and it must be big enough for what it serves. The Code sets a general minimum based on the load, then fixed minimums for very small installations with only one or two branch circuits.\n\nThis is a minimum-limit question. Subject: disconnecting means. The correct choice is the minimum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nbranch circuit, load calculation, disconnecting means"
     },
     "final-exam-#3-060": {
       "reference_text": "480.10(A) Ventilation\nProvisions appropriate to the battery technology shall be made for sufficient diffusion and ventilation of gases from the battery, if present, to prevent the accumulation of an explosive mixture.\nInformational Note No. 1: See NFPA 1-2021, Fire Code, Chapter 52, for ventilation considerations for specific battery chemistries.\nInformational Note No. 2: Some battery technologies do not require ventilation.\nInformational Note No. 3: See IEEE Std 1635-2012/ASHRAE Guideline 21-2012, Guide for the Ventilation and Thermal Management of Batteries for Stationary Applications, for additional information on the ventilation of stationary battery systems.",
@@ -3644,7 +3662,8 @@
         "10",
         "12"
       ],
-      "gist": "Surface strut-type channel raceway is strapped to the wall at set intervals and near each box. The question asks the maximum spacing between straps."
+      "gist": "Surface strut-type channel raceway is strapped to the wall at set intervals and near each box. The question asks the maximum spacing between straps.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nStrut-type channel raceway is metal channel that doubles as raceway and support. Like other surface raceways, it must be secured at regular intervals and close to each outlet box so it can't sag or pull loose from its terminations.\n\nThis asks for the receptacle rule in this spot. Subject: outlet. Numbers in the question: 3 feet. Decide whether the question wants a location, a height, a count, or a protection requirement, then match that to the rule.\n\nLOOKUP FOCUS\nraceway, box / enclosure"
     },
     "final-exam-#5-054": {
       "reference_text": "395.30(A) Conductors\nDocumentation of the engineered design by a licensed professional engineer engaged primarily in the design of such systems for the spacing between conductors shall be available upon request of the authority having jurisdiction and shall include consideration of the following:\nApplied voltage\nConductor size\nDistance between support structures\nType of structure\nWind/ice loading\nSurge protection",
@@ -3656,7 +3675,8 @@
         "395.30(A) requires engineered spacing documentation for outdoor overhead conductors over 1000 volts."
       ],
       "prompt": "Documentation of engineered design by a licensed professional engineer engaged primarily in the design of such systems for the spacing between conductors shall be available upon request of the AHJ and this is stated in Article ___.",
-      "gist": "Engineered spacing documentation for overhead conductors belongs to one specific article. The question asks which article states it."
+      "gist": "Engineered spacing documentation for overhead conductors belongs to one specific article. The question asks which article states it.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nOverhead conductors over 1000 volts outdoors are spaced apart so wind, ice and sag can't bring them close enough to flash over. The Code gives fixed spacings but allows others where an engineered design backs them up.\n\nIn plain terms, the question is: \"Documentation of engineered design by a licensed professional engineer engaged primarily in the design of such systems for the spacing…\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nconductors"
     },
     "final-exam-#5-069": {
       "reference_text": "334.30(B) Unsupported Cables\nNonmetallic-sheathed cable shall be permitted to be unsupported where the cable:\n(1) Is fished between access points through concealed spaces in finished buildings or structures and supporting is impracticable.\n(2) Is not more than 1.4 m (4 1/2 ft) from the last point of cable support to the point of connection to a luminaire or other piece of electrical equipment and the cable and point of connection are within an accessible ceiling in one-, two-, or multifamily dwellings.",
@@ -3877,9 +3897,9 @@
       "gist": "Seasonal decorative lighting requires evidence of testing. The question asks what proof the Code wants on the product."
     },
     "open-book-exam-#1-024": {
-      "reference_text": "680.21(C) and 680.5(B)\n680.21(C) Ground-Fault Protection\nOutlets serving pool motors shall have ground-fault protection complying with 680.5(B) or (C), as applicable.\nException: Listed low-voltage motors not requiring grounding, with ratings not exceeding the low-voltage contact limit that are supplied by listed transformers or power supplies that comply with 680.23(A)(2), shall be permitted to be installed without ground-fault protection.\n680.5(B) 150 Volts or Less to Ground\nWhere required in this article, ground-fault protection of receptacles and outlets on branch circuits rated 150 volts or less to ground and 60 amperes or less, single- or 3-phase, shall be provided with a Class A GFCI.",
-      "article": "680.21(C) and 680.5(B)",
-      "lookup_summary": "Lookup clues: ground-fault circuit-interrupter, branch circuit, motor, pool / spa. Start with 680.21(C) and 680.5(B), then read the matching subsection and exceptions.",
+      "reference_text": "680.5(B) 150 Volts or Less to Ground\nWhere required in this article, ground-fault protection of receptacles and outlets on branch circuits rated 150 volts or less to ground and 60 amperes or less, single- or 3-phase, shall be provided with a Class A GFCI.\n680.21(C) Ground-Fault Protection\nOutlets serving pool motors shall have ground-fault protection complying with 680.5(B) or (C), as applicable.\nException: Listed low-voltage motors not requiring grounding, with ratings not exceeding the low-voltage contact limit that are supplied by listed transformers or power supplies that comply with 680.23(A)(2), shall be permitted to be installed without ground-fault protection.",
+      "article": "680.5(B)",
+      "lookup_summary": "Lookup clues: ground-fault circuit-interrupter, branch circuit, motor, pool / spa. Start with 680.5(B), then read the matching subsection and exceptions.",
       "tip_short": "Pool motor outlets need Class A GFCI up to 150 volts to ground and 60 amperes, single or 3 phase. Correct: A — 60. 680.5(B) applies Class A GFCI to circuits 150 volts or less to ground and 60 amperes or less. Not B: 50 amperes is the 210.8 limit for many receptacles; the pool rule in 680.5(B) goes to 60 amperes. Not C: 40 amperes understates the limit; 680.5(B) covers branch circuits up to 60 amperes. Not D: 30 amperes is too low; 680.5(B) extends Class A GFCI to 60-ampere branch circuits.",
       "choice_notes": [
         "680.5(B) applies Class A GFCI to circuits 150 volts or less to ground and 60 amperes or less.",
@@ -3987,12 +4007,12 @@
     },
     "open-book-exam-#4-014": {
       "reference_text": "406.9(B) Wet Locations\n(1) Receptacles of 15 Amperes and 20 Amperes in a Wet Location\nReceptacles of 15 amperes and 20 amperes, 125 volts and 250 volts installed in a wet location shall have an enclosure that is weatherproof whether or not the attachment plug cap is inserted.\nAll 15- and 20-ampere, 125- and 250-volt nonlocking-type receptacles shall be listed and so identified as the weather-resistant type.",
-      "tip_short": "Wet-location 15 and 20 ampere receptacles must be WR: listed and identified as weather-resistant, per 406.9(B). Correct: D — weather resistant. 406.9(B) says these nonlocking receptacles shall be listed and identified as the weather-resistant type. Not A: Weatherproof describes the enclosure or cover, not the listing of the receptacle itself. Not B: Waterproof is not a receptacle listing type used anywhere in 406.9(B). Not C: Water resistant is not the Code term; 406.9(B) requires the weather-resistant type.",
+      "tip_short": "Wet-location 15 and 20 ampere receptacles must be WR: listed and identified as weather-resistant, per 406.9(B)(1). Correct: D — weather resistant. 406.9(B)(1) says these nonlocking receptacles shall be listed and identified as the weather-resistant type. Not A: Weatherproof describes the enclosure or cover, not the listing of the receptacle itself. Not B: Waterproof is not a receptacle listing type used anywhere in 406.9(B)(1). Not C: Water resistant is not the Code term; 406.9(B)(1) requires the weather-resistant type.",
       "choice_notes": [
         "Weatherproof describes the enclosure or cover, not the listing of the receptacle itself.",
-        "Waterproof is not a receptacle listing type used anywhere in 406.9(B).",
-        "Water resistant is not the Code term; 406.9(B) requires the weather-resistant type.",
-        "406.9(B) says these nonlocking receptacles shall be listed and identified as the weather-resistant type."
+        "Waterproof is not a receptacle listing type used anywhere in 406.9(B)(1).",
+        "Water resistant is not the Code term; 406.9(B)(1) requires the weather-resistant type.",
+        "406.9(B)(1) says these nonlocking receptacles shall be listed and identified as the weather-resistant type."
       ],
       "answers": [
         "weatherproof",
@@ -4000,7 +4020,9 @@
         "water resistant",
         "weather resistant"
       ],
-      "gist": "Outdoor receptacles exposed to weather require wet-location construction; several similar designations exist. The question asks which exact one the Code wants."
+      "gist": "Outdoor receptacles exposed to weather require wet-location construction; several similar designations exist. The question asks which exact one the Code wants.",
+      "article": "406.9(B)(1)",
+      "lookup_summary": "Lookup clues: receptacle outlet. Start with 406.9(B)(1), then read the matching subsection and exceptions."
     },
     "open-book-exam-#4-016": {
       "reference_text": "430.8 Marking on Motor Controllers\nA motor controller that includes motor overload protection suitable for group motor application shall be marked with the motor overload protection and the maximum branch-circuit short-circuit and ground-fault protection for such applications.\nCombination motor controllers that employ adjustable instantaneous trip circuit breakers shall be clearly marked to indicate the ampere settings of the adjustable trip element.",
@@ -4223,7 +4245,8 @@
         "Corrosive particles are listed in 547.30, but so are dust and moisture.",
         "547.30 lists dust, moisture, and corrosive particles, so all of these is correct."
       ],
-      "gist": "Agricultural buildings contain dust that can enter motor enclosures. The question asks what the motor construction must exclude."
+      "gist": "Agricultural buildings contain dust that can enter motor enclosures. The question asks what the motor construction must exclude.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nAgricultural buildings are dirty, damp and corrosive places. Motors and other rotating machinery there must be enclosed or built to keep out whatever the building's air carries, so it can't build up on windings and hot parts.\n\nThis asks you to match this motor or transformer setup to its rule. Subject: motor. Identify whether the question is about protection size, conductor size, disconnect location, or marking.\n\nLOOKUP FOCUS\nmotor"
     },
     "open-book-exam-#10-005": {
       "reference_text": "300.5(F) Backfill\nBackfill that contains large rocks, paving materials, cinders, large or sharply angular substances, or corrosive material shall not be placed in an excavation where materials might damage raceways, cables, conductors, or other substructures or prevent adequate compaction of fill or contribute to corrosion of raceways, cables, or other substructures.\nWhere necessary to prevent physical damage to the raceway, cable, or conductor, protection shall be provided in the form of granular or selected material, suitable running boards, suitable sleeves, or other approved means.",
@@ -4285,7 +4308,7 @@
         "Class III",
         "Class II, Division 2"
       ],
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nYou cannot see electricity, so safety is a procedure, not a sense. Plan every job: identify all energy sources, lock and tag them open, verify zero voltage with a meter, and use insulated tools on anything that might be live. Treat pools, heaters, old panels, and anything unfamiliar as energized until your meter proves otherwise.\n\nIn plain terms, the question is: \"___ locations are those that are hazardous because of the presence of easily ignitible fibers or flyings.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nhazardous location",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nHazardous locations are sorted by what is in the air: flammable gases or vapors, combustible dust, or ignitable fibers and flyings. Each class has its own article and wiring rules, and the Division tells whether the hazard is present in normal operation or only when something fails.\n\nIn plain terms, the question is: \"___ locations are those that are hazardous because of the presence of easily ignitible fibers or flyings.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nhazardous location",
       "gist": "Gases, dusts, and fibers are assigned separate hazardous-location classes. The question describes fibers and flyings and asks which class that is."
     },
     "open-book-exam-#10-018": {
@@ -4331,7 +4354,8 @@
         "305.4 says conductors with nonshielded insulation at different voltage levels shall not share an enclosure.",
         "Silicone rubber is an insulation material; 305.4 restricts nonshielded insulation."
       ],
-      "gist": "Two voltage levels in one raceway require cable with suitable separation construction. The question asks which insulation type the rule covers."
+      "gist": "Two voltage levels in one raceway require cable with suitable separation construction. The question asks which insulation type the rule covers.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nOver 1000 volts, the Code is strict about which conductors may share an enclosure, cable or raceway. Insulation construction matters: without a shield to control the electric field, conductors of different voltages placed together can stress each other's insulation.\n\nThis asks which wiring-method rule fits this installation. Subject: raceway. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\nraceway, cable, conductors"
     },
     "open-book-exam-#10-023": {
       "reference_text": "551.71(B) 30-Ampere\nA minimum of 70 percent of all recreational vehicle sites with electrical supply shall each be equipped with a 30-ampere, 125-volt weather-resistant receptacle conforming to Figure 551.46(C)(1). This supply shall be permitted to include additional receptacle configurations conforming to 551.81. The remainder of all recreational vehicle sites with electrical supply shall be equipped with one or more of the receptacle configurations conforming to 551.81.",
@@ -4367,12 +4391,12 @@
       "gist": "Overcurrent devices are manufactured in standard ratings, and circuits are designated accordingly. The question asks which of these lists is the true standard set."
     },
     "final-exam-#1-061": {
-      "reference_text": "503.1 Scope\nThis article covers the requirements for electrical and electronic equipment and wiring for all voltages in Class III, Division 1 and Division 2 locations where fire or explosion hazards might exist due to nonmetal combustible fibers/flyings or ignitible fibers/flyings.",
-      "tip_short": "Class I is gas, Class II is dust, Class III is fibers and flyings, like cotton lint in a textile mill. Correct: C — Class III. 503.1 covers Class III locations, where the hazard is combustible or ignitible fibers or flyings. Not A: Class I locations involve flammable gases, vapors, or liquids, not fibers. Not B: Class II locations involve combustible dust, not fibers or flyings. Not D: Class II, Division 2 is a dust location, not a fiber or flyings location.",
+      "reference_text": "500.5(D) Class III Locations\nClass III locations shall be locations meeting the requirements of 500.5(D)(1) and (D)(2).\n(1) Class III, Division 1\nClass III, Division 1 locations shall include those locations specified in 500.5(D)(1)(a) and (D)(1)(b).\nCombustible Fibers/Flyings. Locations where nonmetal combustible fibers/flyings are in the air under normal operating conditions in quantities sufficient to produce explosible mixtures or where mechanical failure or abnormal operation of machinery or equipment might cause combustible fibers/flyings to be produced and might also provide a source of ignition through simultaneous failure of electrical equipment, through operation of protection devices, or from other causes shall be classified as Class III, Division 1. Locations where metal combustible fibers/flyings are present shall be classified as Class II, Division 1, Group E.",
+      "tip_short": "Class I is gas, Class II is dust, Class III is fibers and flyings, like cotton lint in a textile mill. Correct: C — Class III. 500.5(D) defines Class III locations, where the hazard is combustible or ignitible fibers or flyings. Not A: Class I locations involve flammable gases, vapors, or liquids, not fibers. Not B: Class II locations involve combustible dust, not fibers or flyings. Not D: Class II, Division 2 is a dust location, not a fiber or flyings location.",
       "choice_notes": [
         "Class I locations involve flammable gases, vapors, or liquids, not fibers.",
         "Class II locations involve combustible dust, not fibers or flyings.",
-        "503.1 covers Class III locations, where the hazard is combustible or ignitible fibers or flyings.",
+        "500.5(D) defines Class III locations, where the hazard is combustible or ignitible fibers or flyings.",
         "Class II, Division 2 is a dust location, not a fiber or flyings location."
       ],
       "prompt": "___ locations are those that are hazardous because of the presence of easily ignitible fibers or flyings.",
@@ -4382,8 +4406,10 @@
         "Class III",
         "Class II, Division 2"
       ],
-      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nYou cannot see electricity, so safety is a procedure, not a sense. Plan every job: identify all energy sources, lock and tag them open, verify zero voltage with a meter, and use insulated tools on anything that might be live. Treat pools, heaters, old panels, and anything unfamiliar as energized until your meter proves otherwise.\n\nIn plain terms, the question is: \"___ locations are those that are hazardous because of the presence of easily ignitible fibers or flyings.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nhazardous location",
-      "gist": "Gases, dusts, and fibers are assigned separate hazardous-location classes. The question describes fibers and flyings and asks which class that is."
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nHazardous locations are sorted by what is in the air: flammable gases or vapors, combustible dust, or ignitable fibers and flyings. Each class has its own article and wiring rules, and the Division tells whether the hazard is present in normal operation or only when something fails.\n\nIn plain terms, the question is: \"___ locations are those that are hazardous because of the presence of easily ignitible fibers or flyings.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nhazardous location",
+      "gist": "Gases, dusts, and fibers are assigned separate hazardous-location classes. The question describes fibers and flyings and asks which class that is.",
+      "article": "500.5(D)",
+      "lookup_summary": "Lookup clues: hazardous location. Start with 500.5(D), then read the matching subsection and exceptions."
     },
     "final-exam-#1-038": {
       "reference_text": "340.10 Uses Permitted\nType UF cable shall be permitted as follows:\n(1) For use underground, including direct burial in the earth.\n(2) As single-conductor cables. Where installed as single-conductor cables, all conductors of the feeder or branch circuit, including the grounded conductor and equipment grounding conductor, if any, shall be installed in accordance with 300.3.\n(3) For wiring in wet, dry, or corrosive locations.\n(4) Installed as nonmetallic-sheathed cable. Where so installed, the installation and conductor requirements shall comply with Parts II and III of Article 334, except for 334.12(B), and shall be of the multiconductor type.\n(5) As single-conductor cables as the nonheating leads for heating cables as provided in 424.43.\n(6) Supported by cable trays. Type UF cable supported by cable trays shall be of the multiconductor type.\nInformational Note: See 310.14(A)(3) for temperature limitation of conductors.",
@@ -4417,7 +4443,8 @@
         "1 1/2 inches exceeds the minimum; 300.4(D) requires only 1 1/4 inches."
       ],
       "gist": "Fasteners can penetrate cables secured flat against framing, so the Code requires a setback from the framing edge. The question asks that setback distance.",
-      "tip_title": "Cable protection"
+      "tip_title": "Cable protection",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSection 300.4 protects cables from nails and screws. A cable run along or through wood framing must sit far enough back from the face of the stud, joist or rafter that drywall screws and trim nails can't reach it; where it can't, a steel plate or sleeve covers it.\n\nThis is a minimum-limit question. Subject: NM cable. The correct choice is the minimum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\ncable"
     },
     "final-exam-#1-039": {
       "reference_text": "430.8 Marking on Motor Controllers\nA motor controller that includes motor overload protection suitable for group motor application shall be marked with the motor overload protection and the maximum branch-circuit short-circuit and ground-fault protection for such applications.\nCombination motor controllers that employ adjustable instantaneous trip circuit breakers shall be clearly marked to indicate the ampere settings of the adjustable trip element.",
@@ -4608,7 +4635,8 @@
         "300 volts is not the 525.5(B) dividing line; the rules split at 600 volts or less and over 600 volts.",
         "250 volts is not used in 525.5(B); the dividing line for overhead conductor clearance is 600 volts."
       ],
-      "tip_short": "Carnivals: never under or within 15 feet horizontally of overhead lines over 600 volts; at 600 volts or less keep 15 feet in any direction. Correct: B — 600."
+      "tip_short": "Carnivals: never under or within 15 feet horizontally of overhead lines over 600 volts; at 600 volts or less keep 15 feet in any direction. Correct: B — 600.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nRides, tents and booths at carnivals are set up and torn down fast, often by crews working near overhead lines. Article 525 keeps portable structures out from under, and a set distance away from, overhead conductors above a certain voltage.\n\nIn plain terms, the question is: \"Portable structures for fairs, carnivals and similar events shall not be located under or within a space 15 feet horizontally of conductors…\" Numbers in the question: 15 feet. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nconductors"
     },
     "final-exam-#2-002": {
       "gist": "A ceiling space used for return air is a plenum, and burning wiring materials there would pull smoke through the whole building. The question asks which of the listed wiring methods is kept out of that space.",
@@ -4687,7 +4715,8 @@
         "Terminations are not named in 225.37; the plaque belongs at each feeder and branch-circuit disconnect location.",
         "Entrance is not the 225.37 wording; the directory is installed at each disconnect location."
       ],
-      "tip_short": "Several supplies to one building: a permanent plaque or directory at each feeder and branch-circuit disconnect lists all the others. Correct: A — disconnect."
+      "tip_short": "Several supplies to one building: a permanent plaque or directory at each feeder and branch-circuit disconnect lists all the others. Correct: A — disconnect.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nA building fed by more than one supply (a service plus a feeder, or several feeders) can stay energized after a worker opens the first switch he finds. The Code requires a permanent plaque or directory that tells workers about every other supply and the area each one serves.\n\nIn plain terms, the question is: \"Where a building or structure has any combination of feeders, branch circuits, or services passing through it or supplying it, a permanent…\" Subject: feeder. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nbranch circuit, feeder, disconnecting means"
     },
     "final-exam-#2-009": {
       "prompt": "___ is the highest level that water can reach before it spills out.",
@@ -4872,7 +4901,8 @@
         "305.12 requires danger signs to be conspicuously posted at points of access to conductors in all raceway and cable systems."
       ],
       "tip_short": "High-voltage access points get DANGER-HIGH VOLTAGE-KEEP OUT signs, conspicuously posted and readily visible. Correct: D — conspicuously. Not A: Permanence is a 110.21(B) marking quality, but the word 305.12 uses for posting the signs is conspicuously. Not C: Legibility is a 110.21(B) marking quality; 305.12 says the signs shall be conspicuously posted.",
-      "prompt": "Danger signs shall be ___ posted at points of access to conductors in all raceway systems and cable systems. The sign(s) shall state the following: Danger-High Voltage-Keep Out."
+      "prompt": "Danger signs shall be ___ posted at points of access to conductors in all raceway systems and cable systems. The sign(s) shall state the following: Danger-High Voltage-Keep Out.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nOver 1000 volts, raceways and cable systems carry enough energy to kill without anyone touching a bare part. Where people could get at those conductors, warning signs must be posted so nobody opens the system thinking it is ordinary wiring.\n\nThis asks which wiring-method rule fits this installation. Subject: raceway. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\nconduit, cable, conductors"
     },
     "final-exam-#2-022": {
       "gist": "The grounding electrode conductor often runs outdoors or into soil where it can be eaten away over the years. The question asks what kind of site condition the chosen material must resist.",
@@ -4966,7 +4996,8 @@
         "Listed is not the word 250.12 uses; it requires fittings designed to make coating removal unnecessary.",
         "250.12 permits connection by fittings designed to make removal of nonconductive coatings unnecessary."
       ],
-      "tip_short": "Scrape paint off threads and contact surfaces, or use fittings designed to make that removal unnecessary. Correct: D — designed."
+      "tip_short": "Scrape paint off threads and contact surfaces, or use fittings designed to make that removal unnecessary. Correct: D — designed.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nBonding only works if metal touches metal. Paint, lacquer and enamel are insulators, so a fitting tightened over them can look solid and still leave the fault-current path open. That is why the coating comes off where the bond is made, unless the fitting itself cuts through it.\n\nIn plain terms, the question is: \"Nonconductive coatings (such as paint, lacquer, and enamel) on equipment to be grounded shall be removed from threads and other contact…\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "final-exam-#2-027": {
       "gist": "Conduit fill with mixed wire sizes needs the actual area of each insulated conductor. The question asks which reference gives those conductor dimensions.",
@@ -5002,7 +5033,8 @@
       ],
       "tip_short": "Chapter 9, Table 1: 53 percent for one conductor, 31 percent for two, and 40 percent for more than two. Correct: C — Table 1, Chapter 9. Chapter 9, Table 1 sets the percent of cross section: 53 percent for one, 31 percent for two, and 40 percent for over two. Not A: Chapter 9, Table 4 gives conduit and tubing dimensions and areas, which you use with the fill percentages. Not B: Chapter 9, Table 8 gives conductor properties such as circular mils and DC resistance. Not D: Chapter 9, Table 5 gives insulated conductor dimensions, not the fill percentages.",
       "lookup_summary": "Lookup clues: conduit, cable, conductors. Start with Chapter 9, Table 1, then read the matching subsection and exceptions.",
-      "tip_title": "Conduit fill"
+      "tip_title": "Conduit fill",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nConduit fill limits how much of a raceway's inside area the wires may take up, so they can be pulled in without damage and can shed heat. Tables at the back of the Code hold the tools: one table sets the allowed percentage by the number of conductors, another gives each raceway's internal area by trade size, and another gives each wire's area. Each raceway article points back to those tables.\n\nThis asks which wiring-method rule fits this installation. Subject: conduit. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\nconduit, cable, conductors"
     },
     "final-exam-#2-030": {
       "answers": [
@@ -5096,7 +5128,8 @@
         "Table 430.37 lists the number and location of overload units, not short-circuit device ratings.",
         "430.22 covers conductor sizing for a single motor; Table 430.22(E) is duty-cycle sizing, not protective devices."
       ],
-      "tip_short": "Motor short-circuit and ground-fault protection is sized with Table 430.52(C)(1) percentages of the motor full-load current. Correct: B — 430.52(C)(1)."
+      "tip_short": "Motor short-circuit and ground-fault protection is sized with Table 430.52(C)(1) percentages of the motor full-load current. Correct: B — 430.52(C)(1).",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nA motor's branch-circuit short-circuit and ground-fault device is sized from a table of percentages of the motor's full-load current. The percentage depends on the device (non-time-delay fuse, dual-element fuse, instantaneous-trip or inverse-time breaker) and on the motor type, because each device rides through starting current differently.\n\nThis is a maximum-limit question. Subject: motor. The correct choice is the maximum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nground fault, motor"
     },
     "final-exam-#2-038": {
       "gist": "A branch circuit takes its rating from the protective device, not from the wire. Adjustable breakers make a second word necessary. The question asks that word.",
@@ -5119,7 +5152,8 @@
         "Table 210.21(B)(3) lists receptacle ratings for circuits serving more than one receptacle, not the maximum load.",
         "220.3 is not a load-per-receptacle table; Article 220 covers load calculations."
       ],
-      "tip_short": "Table 210.21(B)(2) caps cord-and-plug load at 80 percent of the receptacle rating: 12, 16, or 24 amperes. Correct: A — 210.21(B)(2)."
+      "tip_short": "Table 210.21(B)(2) caps cord-and-plug load at 80 percent of the receptacle rating: 12, 16, or 24 amperes. Correct: A — 210.21(B)(2).",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nA receptacle on a circuit with other outlets shouldn't be loaded to the full circuit rating by a single plug-in load. The Code limits the cord-and-plug load on each receptacle to a share of its rating, set by a table based on the circuit rating and the receptacle rating.\n\nThis is a maximum-limit question. Subject: receptacle. The correct choice is the maximum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nreceptacle outlet, load calculation"
     },
     "final-exam-#2-040": {
       "gist": "Outdoor overhead conductors over 1000 volts must stay high enough above roads, rails, water, and fields for the traffic that passes beneath them. The question asks which table lists those clearances.",
@@ -5153,7 +5187,8 @@
         "344.10(A)(2) permits aluminum RMC only where approved for the environment, not under all conditions.",
         "344.10(A)(1) permits galvanized steel, stainless steel, and red brass RMC under all atmospheric conditions and occupancies."
       ],
-      "tip_short": "Galvanized steel, stainless steel, and red brass RMC are permitted in all conditions; aluminum RMC only where approved for the environment. Correct: D — Red brass."
+      "tip_short": "Galvanized steel, stainless steel, and red brass RMC are permitted in all conditions; aluminum RMC only where approved for the environment. Correct: D — Red brass.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nRigid metal conduit is made in several metals, and each resists corrosion differently. The uses-permitted section for RMC says which materials may go anywhere, in any atmosphere or occupancy, and which need extra protection where corrosion is a concern.\n\nIn plain terms, the question is: \"Galvanized steel, stainless steel, and ___ RMC shall be permitted under all atmospheric conditions and occupancies.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\npool / spa"
     },
     "final-exam-#2-043": {
       "gist": "Buried raceways corrode from aggressive backfill. The question asks what harmful backfill causes.",
@@ -5252,7 +5287,8 @@
         "305.4 says conductors with nonshielded insulation at different voltage levels shall not share an enclosure.",
         "Silicone rubber is an insulation material; 305.4 restricts nonshielded insulation."
       ],
-      "tip_short": "Over 1000 volts, nonshielded conductors at different voltages cannot share an enclosure, cable, or raceway. Correct: C — nonshielded."
+      "tip_short": "Over 1000 volts, nonshielded conductors at different voltages cannot share an enclosure, cable, or raceway. Correct: C — nonshielded.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nOver 1000 volts, the Code is strict about which conductors may share an enclosure, cable or raceway. Insulation construction matters: without a shield to control the electric field, conductors of different voltages placed together can stress each other's insulation.\n\nThis asks which wiring-method rule fits this installation. Subject: raceway. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\nraceway, cable, conductors"
     },
     "final-exam-#2-051": {
       "gist": "In AC circuits, coils and capacitors oppose current in addition to plain resistance. The question asks the name for the combined opposition.",
@@ -5421,7 +5457,8 @@
         "Readily accessible is not the condition; the 430.102(B) exception requires lockable per 110.25."
       ],
       "tip_short": "No motor disconnect is needed where it would add hazards, if the controller disconnect is lockable open per 110.25. Correct: C — lockable.",
-      "lookup_summary": "Lookup clues: motor, disconnecting means. Start with 430.102(B), then read the matching subsection and exceptions."
+      "lookup_summary": "Lookup clues: motor, disconnecting means. Start with 430.102(B), then read the matching subsection and exceptions.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nNormally a motor has a disconnect in sight of the motor itself, so a worker can see that it stays open. The Code allows exceptions where putting one there would be impractical or more hazardous, and then lists the conditions that make the remote controller disconnect acceptable instead.\n\nThis asks you to match this motor or transformer setup to its rule. Subject: motor. Identify whether the question is about protection size, conductor size, disconnect location, or marking.\n\nLOOKUP FOCUS\nmotor, disconnecting means"
     },
     "final-exam-#2-065": {
       "gist": "Box fill counts each device on a yoke as if it were a number of conductors, no matter how many terminals it has. The question asks how many conductors a three-way switch counts as.",
@@ -5477,7 +5514,8 @@
         "344.14 limits the mix only where influences are severe, not where there are any corrosive influences at all.",
         "Physical damage is a separate protection concern; 344.14 is about corrosion from dissimilar metals."
       ],
-      "tip_short": "Stainless RMC (344.14) mixes with galvanized or coated steel boxes only where there are no severe corrosive influences. Correct: A — severe corrosive influences."
+      "tip_short": "Stainless RMC (344.14) mixes with galvanized or coated steel boxes only where there are no severe corrosive influences. Correct: A — severe corrosive influences.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nTwo different metals touching in the presence of moisture form a small battery, and the less noble metal corrodes away. The raceway articles say which mixes of conduit, fittings and boxes are allowed and under what conditions.\n\nThis asks which wiring-method rule fits this installation. Subject: conduit. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\nconduit, box / enclosure"
     },
     "final-exam-#2-070": {
       "gist": "Flexible metallic tubing is a light, liquidtight tubing meant for short runs in dry, accessible places. The question asks the largest trade size made for it.",
@@ -5536,7 +5574,8 @@
         "220.14(I): a single piece of equipment with four or more receptacles is calculated at not less than 90 VA per receptacle."
       ],
       "tip_short": "Receptacle loads (220.14(I)): 180 VA per single or multiple receptacle on one yoke; one piece of equipment with four or more receptacles counts 90 VA per receptacle. Correct: D — four.",
-      "tip_title": "Receptacle loads"
+      "tip_title": "Receptacle loads",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nIn a load calculation for other than dwelling units, each receptacle outlet counts a set number of volt-amperes. A single piece of equipment with several receptacles counts each receptacle separately once it has enough of them.\n\nThis is a minimum-limit question. Subject: receptacle. Numbers in the question: 90 va. The correct choice is the minimum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nreceptacle outlet"
     },
     "final-exam-#4-005": {
       "gist": "Standard metal boxes that are not marked have their volume listed in the box table by trade size. The question asks the listed volume for this device box.",
@@ -5761,7 +5800,8 @@
         "522.28 limits continuous DC control circuits in wet contact areas to 30 volts maximum."
       ],
       "tip_short": "Amusement attraction control circuits (522.28): where wet contact is likely, ungrounded 2-wire DC circuits are limited to 30 V continuous or 12.4 V peak interrupted at 10 to 200 Hz. Correct: D — 30 volts. Not B: 0.031 volt-amperes is not a voltage and is not the 522.28 limit.",
-      "tip_title": "Amusement attractions"
+      "tip_title": "Amusement attractions",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nPermanent amusement attractions run a lot of control wiring where riders and staff can touch wet parts. Where wet contact is likely, the Code caps the voltage of ungrounded control circuits so a shock through wet skin stays below a dangerous level.\n\nThis is a maximum-limit question. Numbers in the question: 12.4 volts. The correct choice is the maximum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "final-exam-#4-019": {
       "gist": "Dwelling appliances fastened in place get a reduced demand when there are several, but some appliance types have their own rules. The question asks which listed ones qualify.",
@@ -6217,7 +6257,8 @@
         "220.41: the unit load includes all general-use receptacle outlets of 20 amperes or less, so no additional load is added."
       ],
       "tip_short": "Dwelling unit load (220.41): 3 VA per square foot already includes general-use receptacles of 20 A or less and lighting outlets, so no extra load is added for them. Correct: D — none of these. 220.41: the unit load includes all general-use receptacle outlets of 20 amperes or less, so no additional load is added. Not A: 36 VA has no basis; general-use dwelling receptacles add no load under 220.41. Not B: 1200 VA uses 100 VA per outlet, which does not apply to dwelling receptacles. Not C: 2160 VA uses 180 VA per outlet (220.14(I)), which does not apply to dwelling general-use receptacles.",
-      "tip_title": "Dwelling lighting load"
+      "tip_title": "Dwelling lighting load",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nIn a dwelling load calculation, the general lighting load is figured per square foot of floor area. Read what that per-square-foot figure is meant to cover before adding anything for individual outlets.\n\nThis asks for the receptacle rule in this spot. Subject: receptacle. Decide whether the question wants a location, a height, a count, or a protection requirement, then match that to the rule.\n\nLOOKUP FOCUS\nreceptacle outlet, load calculation"
     },
     "final-exam-#4-049": {
       "prompt": "The minimum demand load in kW for 15 - 3.5 kW ovens in an apartment complex would be ___ kW.",
@@ -6307,7 +6348,8 @@
       "tip_short": "Box fill (314.16(B)): each circuit conductor one allowance; up to four equipment grounding conductors together take one allowance, plus 1/4 for each one beyond four. Correct: B — 6.75.",
       "formula": "Circuit conductors × the Table 314.16(B)(1) allowance, plus one allowance for all the grounding conductors (up to four).",
       "worked": "2 × 2.25 + 2.25 = 6.75.",
-      "tip_title": "Box fill"
+      "tip_title": "Box fill",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nBoxes are sized by volume, not vibes: every wire, clamp, and device yoke eats cubic inches, so a crowded box is a Code violation and a fire risk. Device boxes need minimum depth (a flush device needs room behind it), and unused breaker or knockout openings must be closed with listed fillers so fingers and sparks can't get in. Switchboards and panelboards add their own rules: conductors belong only in the section they terminate in, and rear-access gear must say so on the front.\n\nThis asks you to name the grounding or bonding part in this installation. Trace the fault-current path: what connects the equipment back to the source?\n\nLOOKUP FOCUS\nequipment grounding conductor, conductors, box / enclosure"
     },
     "final-exam-#4-055": {
       "gist": "Equipment grounding conductors are sized from the overcurrent device ahead of them, using the next table row at or above that rating. The question asks the copper size for this breaker.",
@@ -6382,7 +6424,8 @@
       "formula": "40% area of the raceway (Table 4) − count × conductor area (Table 5).",
       "worked": "0.355 − 9 × 0.0181 = 0.355 − 0.1629 = 0.1921.",
       "tip_title": "Conduit fill",
-      "lookup_summary": "Lookup clues: conduit, conductors. Start with Table 4, Chapter 9, then read the matching subsection and exceptions."
+      "lookup_summary": "Lookup clues: conduit, conductors. Start with Table 4, Chapter 9, then read the matching subsection and exceptions.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nConduit fill limits how much of a raceway's inside area the wires may take up, so they can be pulled in without damage and can shed heat. Tables at the back of the Code hold the tools: one table sets the allowed percentage by the number of conductors, another gives each raceway's internal area by trade size, and another gives each wire's area. Each raceway article points back to those tables.\n\nThis asks which wiring-method rule fits this installation. Subject: conduit. Numbers in the question: 1\". Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\nconduit, conductors"
     },
     "final-exam-#4-060": {
       "article": "Table 4, Chapter 9",
@@ -6411,7 +6454,8 @@
       ],
       "tip_short": "Table 430.52(C)(1): find the motor type row and the device column; wound-rotor and DC motors take 150 percent for fuses and inverse time breakers. Correct: C — 150.",
       "tip_title": "Motor short-circuit protection",
-      "prompt": "A 5 hp, 230 volt, wound rotor motor would have nontime delay fuses sized at ___ percent."
+      "prompt": "A 5 hp, 230 volt, wound rotor motor would have nontime delay fuses sized at ___ percent.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nA motor's branch-circuit short-circuit and ground-fault device is sized from a table of percentages of the motor's full-load current. The percentage depends on the device (non-time-delay fuse, dual-element fuse, instantaneous-trip or inverse-time breaker) and on the motor type, because each device rides through starting current differently.\n\nThis asks you to match this motor or transformer setup to its rule. Subject: motor. Numbers in the question: 5 hp, 230 volt. Identify whether the question is about protection size, conductor size, disconnect location, or marking.\n\nLOOKUP FOCUS\nmotor"
     },
     "final-exam-#4-062": {
       "article": "Table 4, Chapter 9",
@@ -6571,7 +6615,8 @@
         "Marked is not the term in 408.7; the closures must be identified for the purpose."
       ],
       "tip_short": "Open breaker spaces in a panelboard get identified filler plates (or other approved means equal to the enclosure wall). Correct: B — identified.",
-      "tip_title": "Panelboards"
+      "tip_title": "Panelboards",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nAn empty breaker or switch space in a panel leaves live bus within reach of fingers and tools. The Code requires that space to be closed with a cover suited to the job, or another approved means that protects as well as the panel's own wall.\n\nThis is a straight math conversion — no NEC lookup needed. Convert the given value and match it to the equal choice.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "open-book-exam-#11-003": {
       "article": "Article 100",
@@ -6595,7 +6640,8 @@
         "230 volts exceeds the 210.6(A) limit of 120 volts for dwelling unit luminaires.",
         "240 volts is common in homes for appliances, but 210.6(A) limits luminaires to 120 volts."
       ],
-      "tip_short": "Dwelling units and hotel guest rooms: 120 volts maximum between conductors supplying luminaires and small cord-and-plug loads. Correct: A — 120."
+      "tip_short": "Dwelling units and hotel guest rooms: 120 volts maximum between conductors supplying luminaires and small cord-and-plug loads. Correct: A — 120.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nIn homes, people change lamps and handle cords without thinking about voltage, so the Code limits the voltage of circuits that supply luminaires and small cord-connected loads in dwelling units.\n\nIn plain terms, the question is: \"In dwelling units, circuits supplying luminaires may not exceed ___ volts, nominal, between any two conductors.\" Subject: luminaire. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nconductors, dwelling unit"
     },
     "open-book-exam-#11-005": {
       "article": "352.10",
@@ -6653,7 +6699,8 @@
         "8 inches is not the limit in 382.15(A); extensions must stay 2 inches off the floor.",
         "12 inches is not the limit in 382.15(A); extensions must stay 2 inches off the floor."
       ],
-      "tip_short": "Nonmetallic extensions may run any direction from an existing outlet but not on the floor or within 2 inches of it. Correct: A — 2\". 382.15(A) prohibits extensions on the floor or within 50 mm (2 inches) from the floor. Not B: 6 inches is not the limit in 382.15(A); extensions must stay 2 inches off the floor. Not C: 8 inches is not the limit in 382.15(A); extensions must stay 2 inches off the floor. Not D: 12 inches is not the limit in 382.15(A); extensions must stay 2 inches off the floor."
+      "tip_short": "Nonmetallic extensions may run any direction from an existing outlet but not on the floor or within 2 inches of it. Correct: A — 2\". 382.15(A) prohibits extensions on the floor or within 50 mm (2 inches) from the floor. Not B: 6 inches is not the limit in 382.15(A); extensions must stay 2 inches off the floor. Not C: 8 inches is not the limit in 382.15(A); extensions must stay 2 inches off the floor. Not D: 12 inches is not the limit in 382.15(A); extensions must stay 2 inches off the floor.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nNonmetallic extensions are surface-mounted cable assemblies that add outlets from an existing outlet in older buildings without opening walls. Because they sit exposed on the wall, the Code keeps them off the floor and out of the way of feet, furniture and vacuum cleaners near the floor line.\n\nThis asks for the receptacle rule in this spot. Subject: outlet. Decide whether the question wants a location, a height, a count, or a protection requirement, then match that to the rule.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "open-book-exam-#11-010": {
       "article": "334.10",
@@ -6725,7 +6772,8 @@
         "Factory testing does not satisfy 230.95(C); the system is tested when first installed on site.",
         "230.95(C) requires the ground-fault protection system to be performance tested when first installed on site."
       ],
-      "tip_short": "Service GFPE must be performance tested when first installed on site, by a qualified person using primary current injection, with a written record. Correct: D — when first installed on site. Not A: The AHJ does not perform the test; 230.95(C) requires a qualified person, with the record available to the AHJ. Not B: Design review is not a test; 230.95(C) requires performance testing when first installed on site. Not C: Factory testing does not satisfy 230.95(C); the system is tested when first installed on site."
+      "tip_short": "Service GFPE must be performance tested when first installed on site, by a qualified person using primary current injection, with a written record. Correct: D — when first installed on site. Not A: The AHJ does not perform the test; 230.95(C) requires a qualified person, with the record available to the AHJ. Not B: Design review is not a test; 230.95(C) requires performance testing when first installed on site. Not C: Factory testing does not satisfy 230.95(C); the system is tested when first installed on site.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nGround-fault protection of equipment opens a large service on a low-level arcing fault before it burns down the switchgear. A system that is never checked could be wired or set wrong, so the Code adds conditions about how it is checked and documented.\n\nThis is a maximum-limit question. Numbers in the question: 150 volts, 1000 volts, 1000 amp. The correct choice is the maximum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nground fault, disconnecting means"
     },
     "open-book-exam-#11-016": {
       "gist": "Hallway and lobby lights must stay on no matter what one tenant does with their own panel. The question asks what kind of individual space the common-area circuits must not be fed from.",
@@ -6795,7 +6843,8 @@
         "406.12(1) requires listed tamper-resistant receptacles in dwelling units, their accessory buildings, and common areas."
       ],
       "tip_short": "Tamper-resistant receptacles: all dwelling units plus their garages, accessory buildings, and common areas. Correct: D — all of these. 406.12(1) requires listed tamper-resistant receptacles in dwelling units, their accessory buildings, and common areas. Not B: Accessory buildings are covered, but 406.12(1) also includes the dwelling units and common areas. Not C: Common areas are covered, but 406.12(1) also includes dwelling units and accessory buildings.",
-      "tip_title": "Tamper-resistant receptacles"
+      "tip_title": "Tamper-resistant receptacles",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nTamper-resistant receptacles have spring shutters behind the slots that open only when both prongs of a plug push in together, so a child poking a key or hairpin into one slot hits plastic. The Code lists the occupancies where children are likely to be present and requires them there.\n\nThis asks for the receptacle rule in this spot. Subject: receptacle. Numbers in the question: 20 amp. Decide whether the question wants a location, a height, a count, or a protection requirement, then match that to the rule.\n\nLOOKUP FOCUS\nreceptacle outlet, dwelling unit"
     },
     "open-book-exam-#11-022": {
       "article": "430.102(B)",
@@ -6808,7 +6857,8 @@
         "Readily accessible is not the condition; the 430.102(B) exception requires lockable per 110.25."
       ],
       "tip_short": "No motor disconnect is needed where it would add hazards, if the controller disconnect is lockable open per 110.25. Correct: C — lockable.",
-      "lookup_summary": "Lookup clues: motor, disconnecting means. Start with 430.102(B), then read the matching subsection and exceptions."
+      "lookup_summary": "Lookup clues: motor, disconnecting means. Start with 430.102(B), then read the matching subsection and exceptions.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nNormally a motor has a disconnect in sight of the motor itself, so a worker can see that it stays open. The Code allows exceptions where putting one there would be impractical or more hazardous, and then lists the conditions that make the remote controller disconnect acceptable instead.\n\nThis asks you to match this motor or transformer setup to its rule. Subject: motor. Identify whether the question is about protection size, conductor size, disconnect location, or marking.\n\nLOOKUP FOCUS\nmotor, disconnecting means"
     },
     "open-book-exam-#11-023": {
       "gist": "Box fill counts each device on a yoke as if it were a number of conductors, no matter how many terminals it has. The question asks how many conductors a three-way switch counts as.",
@@ -6865,7 +6915,8 @@
         "Always is the opposite of 691.9, which exempts these buildings from 690.12."
       ],
       "tip_short": "Large-scale PV (Article 691): buildings that only house supply station equipment are exempt from 690.12 rapid shutdown, but written shutdown procedures must be on site. Correct: C — not be required to. Not B: 691.9 exempts these buildings; they are not required to comply with 690.12.",
-      "tip_title": "Solar PV systems"
+      "tip_title": "Solar PV systems",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nLarge-scale PV plants (5,000 kW and up) are built and run like utility generating stations: fenced, restricted and operated by qualified staff. Article 691 sets out which of the ordinary PV rules in Article 690 apply to them and which are modified.\n\nIn plain terms, the question is: \"For large-scale PV installations (5,000 kW or more), buildings whose sole purpose is to house supply station equipment shall ___ comply…\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "open-book-exam-#12-003": {
       "gist": "At a fuel dispenser, even a current-carrying conductor that is near ground potential can spark in the vapor area. The question asks which conductor the emergency shutoff must also open.",
@@ -6923,7 +6974,8 @@
         "Parallel (interactive) operation is the connected mode, the opposite of disconnecting.",
         "705.50 permits microgrid systems to disconnect from other sources and operate in island mode."
       ],
-      "tip_short": "Microgrids (705.50) run interactive with the utility or disconnect and operate in island mode. Correct: D — island mode. Not A: Standby describes a backup source, not the 705.50 operating mode of a disconnected microgrid. Not B: Stand-alone describes a system never connected to other sources; 705.50 calls this island mode."
+      "tip_short": "Microgrids (705.50) run interactive with the utility or disconnect and operate in island mode. Correct: D — island mode. Not A: Standby describes a backup source, not the 705.50 operating mode of a disconnected microgrid. Not B: Stand-alone describes a system never connected to other sources; 705.50 calls this island mode.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nA microgrid is a set of local sources and loads that can run connected to the utility or on its own. Article 705 covers how it separates from the utility and what it must do before it reconnects.\n\nThis asks about the disconnect for this equipment. Decide whether the question wants its location, its height, its rating, or who may access it.\n\nLOOKUP FOCUS\ndisconnecting means"
     },
     "open-book-exam-#12-008": {
       "gist": "A hole cut for a raceway can let fire and smoke pass through a rated assembly. The question asks which rated assemblies need their penetrations firestopped.",
@@ -6935,7 +6987,8 @@
         "300.21 requires firestopping of penetrations through fire-resistant-rated walls, partitions, floors, or ceilings."
       ],
       "tip_short": "Firestop every penetration through a fire-rated wall, partition, floor, or ceiling to keep its rating (300.21). Correct: D — all of these. 300.21 requires firestopping of penetrations through fire-resistant-rated walls, partitions, floors, or ceilings.",
-      "tip_title": "Fire-rated penetrations"
+      "tip_title": "Fire-rated penetrations",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nA fire-rated wall, floor or ceiling only works if it stays sealed. Every hole cut for a raceway, cable or box is a path for fire and smoke, so the opening around each penetration must be closed in a way that restores the assembly's fire-resistance rating.\n\nIn plain terms, the question is: \"Openings around electrical penetrations into or through fire-resistance rated ___ shall be firestopped using approved methods.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "open-book-exam-#12-009": {
       "gist": "PV dc circuits can stay energized whenever the sun shines, so they are kept apart from the ac side. The question asks where they may not share space with the ac conductors.",
@@ -6957,7 +7010,8 @@
         "Brown is a common phase color by custom, not the 110.15 alternative marking.",
         "110.15 requires an orange outer finish or other effective means on the high leg."
       ],
-      "tip_short": "High leg (110.15): mark it orange or by other effective means at every point where the grounded conductor is also present. Correct: D — other effective means."
+      "tip_short": "High leg (110.15): mark it orange or by other effective means at every point where the grounded conductor is also present. Correct: D — other effective means.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSome 4-wire systems have one winding center-tapped and grounded, which gives one phase (the high leg) noticeably more voltage to ground than the other two. A 120-volt load connected to it by mistake gets about 208 volts, so the Code makes that conductor easy to pick out wherever it can be reached.\n\nThis asks about a required marking or label. Decide what must be marked, where the marking goes, and what it must say — the answer is the location or wording the NEC specifies.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "open-book-exam-#12-011": {
       "gist": "A fire pump motor must deliver full pressure during a fire, and low voltage cuts its torque. The question asks the voltage drop limit while the motor runs at 115 percent of full-load current.",
@@ -7027,7 +7081,8 @@
         "344.14 limits the mix only where influences are severe, not where there are any corrosive influences at all.",
         "Physical damage is a separate protection concern; 344.14 is about corrosion from dissimilar metals."
       ],
-      "tip_short": "Stainless RMC (344.14) mixes with galvanized or coated steel boxes only where there are no severe corrosive influences. Correct: A — severe corrosive influences."
+      "tip_short": "Stainless RMC (344.14) mixes with galvanized or coated steel boxes only where there are no severe corrosive influences. Correct: A — severe corrosive influences.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nTwo different metals touching in the presence of moisture form a small battery, and the less noble metal corrodes away. The raceway articles say which mixes of conduit, fittings and boxes are allowed and under what conditions.\n\nThis asks which wiring-method rule fits this installation. Subject: conduit. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\nconduit, box / enclosure"
     },
     "open-book-exam-#12-017": {
       "prompt": "For a PV system, the rapid shutdown for conductors outside the array boundary must limit the voltage to not more than ___ volts within 30 seconds of the shutdown initiation.",
@@ -7050,7 +7105,8 @@
         "392.80(A)(3) permits the two fill percentages to total not more than 100 percent.",
         "125 percent would overfill the tray; 392.80(A)(3) caps the total at 100 percent."
       ],
-      "tip_short": "Mixed cable tray (392.80(A)(3)): the multiconductor share plus the single-conductor share of allowable fill may not exceed 100 percent. Correct: C — 100."
+      "tip_short": "Mixed cable tray (392.80(A)(3)): the multiconductor share plus the single-conductor share of allowable fill may not exceed 100 percent. Correct: C — 100.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nCable tray ampacity and fill go together: the more cable piled in a tray, the less heat each cable can shed. Article 392 limits how full a tray may be and ties the allowable ampacities to that fill.\n\nThis is a maximum-limit question. The correct choice is the maximum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\ncable"
     },
     "open-book-exam-#12-019": {
       "gist": "A battery energy storage system both charges and discharges, so it has a voltage rating each way. The question asks which rated voltage, along with the input, sets its maximum voltage.",
@@ -7143,7 +7199,8 @@
         "50 feet is not a 240.21(B) tap length.",
         "240.21(B)(4)(2) allows taps not over 25 feet horizontally and not over 100 feet total in high bay manufacturing buildings."
       ],
-      "tip_short": "Feeder taps (240.21(B)): 10 feet, 25 feet, and in high bay manufacturing buildings up to 25 feet horizontal and 100 feet total; outside taps (B)(5) have no length limit. Correct: D — 100 feet."
+      "tip_short": "Feeder taps (240.21(B)): 10 feet, 25 feet, and in high bay manufacturing buildings up to 25 feet horizontal and 100 feet total; outside taps (B)(5) have no length limit. Correct: D — 100 feet.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nA tap is a smaller conductor connected to a larger feeder without overcurrent protection at the tap point. The tap rules allow that only for limited lengths, and the allowed length depends on the conditions; high-bay manufacturing buildings with qualified maintenance get the longest allowance.\n\nThis is a maximum-limit question. Subject: feeder. The correct choice is the maximum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nfeeder"
     },
     "open-book-exam-#12-025": {
       "article": "225.18",
@@ -7240,7 +7297,7 @@
       "tip_short": "Countertop wall spaces: no point more than 24 inches from a receptacle, so a receptacle is needed at least every 4 feet. Correct: D — 24\". 210.52(C)(1) says no point along the countertop wall line may be more than 600 mm (24 inches) from a receptacle outlet. Not A: 10 inches is much closer than required; 210.52(C)(1) allows up to 600 mm (24 inches). Not B: 12 inches is the minimum countertop width that needs receptacles, not the 210.52(C)(1) spacing limit. Not C: 18 inches is not the countertop limit; 210.52(C)(1) allows up to 600 mm (24 inches)."
     },
     "open-book-exam-#2-008": {
-      "article": "590.4(J)",
+      "article": "590.4(J) Ex.",
       "gist": "Trees sway and grow, so temporary wiring hung from them needs hardware that gives with the movement. The question asks which devices the exception names besides tension take-up devices.",
       "reference_text": "590.4(J) Support\nException: For holiday lighting in accordance with 590.3(B), where the conductors or cables are arranged with strain relief devices, tension take-up devices, or other approved means to avoid damage from the movement of the live vegetation, trees shall be permitted to be used for support of overhead spans of branch-circuit conductors or cables.",
       "choice_notes": [
@@ -7251,7 +7308,7 @@
       ],
       "tip_short": "Trees may hold holiday lighting spans only with strain relief or tension take-up devices so moving limbs do no harm. Correct: C — strain relief devices.",
       "tip_title": "Temporary wiring",
-      "lookup_summary": "Lookup clues: cable, conductors, temporary wiring. Start with 590.4(J), then read the matching subsection and exceptions."
+      "lookup_summary": "Lookup clues: cable, conductors, temporary wiring. Start with 590.4(J) Ex., then read the matching subsection and exceptions."
     },
     "open-book-exam-#2-009": {
       "prompt": "At least one 125 volt, single-phase, 15 or 20 amp rated receptacle outlet shall be installed within ___ of the top of each show window, and no point along the top of the window shall be farther than 6 feet from a receptacle outlet.",
@@ -7264,7 +7321,8 @@
         "24 inches is too far; 210.62 requires the receptacle within 450 mm (18 inches) of the top of the window."
       ],
       "tip_short": "Show window receptacles go within 18 inches of the top of the window, with no point along the top more than 6 feet from one. Correct: C — 18\". 210.62 requires the receptacle outlet within 450 mm (18 inches) of the top of each show window. Not A: 10 inches is closer than required; 210.62 allows the receptacle within 450 mm (18 inches) of the top. Not B: 12 inches is closer than required; 210.62 sets the limit at 450 mm (18 inches) from the top of the window. Not D: 24 inches is too far; 210.62 requires the receptacle within 450 mm (18 inches) of the top of the window.",
-      "tip_title": "Receptacle placement"
+      "tip_title": "Receptacle placement",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nStore show windows get their own receptacle outlets so window displays don't end up on extension cords. The rule sets how close an outlet must be to the top of the window and how much window length each outlet may serve.\n\nThis is a minimum-limit question. Subject: receptacle. Numbers in the question: 125 volt, 20 amp, 6 feet. The correct choice is the minimum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nreceptacle outlet"
     },
     "open-book-exam-#2-010": {
       "prompt": "If festoon lighting is installed without a messenger, the smallest allowable overhead conductor is ___ AWG.",
@@ -7359,7 +7417,8 @@
       ],
       "tip_short": "In dwelling rooms, any wall space 2 feet (24 inches) or wider counts, including space around corners. Correct: B — 24\". 210.52(A)(2) defines wall space as any space 600 mm (2 feet) or more in width, and 2 feet is 24 inches. Not A: 18 inches is too narrow; 210.52(A)(2) counts wall space of 600 mm (2 feet), or 24 inches, and wider. Not C: 30 inches is not the threshold; 210.52(A)(2) wall space begins at 600 mm (2 feet), which is 24 inches. Not D: 36 inches is not the threshold; 210.52(A)(2) counts spaces 600 mm (2 feet), or 24 inches, and wider.",
       "tip_title": "Receptacle placement",
-      "lookup_summary": "Lookup clues: dwelling unit. Start with 210.52(A)(2), then read the matching subsection and exceptions."
+      "lookup_summary": "Lookup clues: dwelling unit. Start with 210.52(A)(2), then read the matching subsection and exceptions.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nWall space is what the dwelling receptacle spacing rule is measured along. Measure along the floor line and keep going around corners; doorways, fireplaces and fixed cabinets without a countertop break the run, while fixed wall panels and fixed room dividers such as bar-type counters still count. A stretch narrower than the minimum width the Code sets does not need a receptacle of its own.\n\nIn plain terms, the question is: \"In a dwelling bedroom, wall space includes any space ___ or more in width (including space measured around corners) and unbroken along the…\" Subject: dwelling unit. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\ndwelling unit"
     },
     "open-book-exam-#2-016": {
       "gist": "Large circuit breakers can let through enough fault energy to produce a severe arc flash, so the Code requires a way to shorten the clearing time. The question asks the trip setting where that rule begins.",
@@ -7558,7 +7617,8 @@
         "Four is more than the minimum; 210.60(B) requires at least two readily accessible outlets."
       ],
       "tip_short": "Hotel and motel guest rooms may place receptacles around the furniture, but at least two must be readily accessible. Correct: B — two.",
-      "tip_title": "Receptacle placement"
+      "tip_title": "Receptacle placement",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nIn hotel and motel guest rooms, receptacles may be placed to suit the permanent furniture layout instead of the dwelling spacing rule, but a minimum number must still be readily accessible, and outlets behind beds need protection from cord damage.\n\nThis is a minimum-limit question. Subject: receptacle. The correct choice is the minimum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nreceptacle outlet"
     },
     "open-book-exam-#3-006": {
       "gist": "Fixed appliances like dishwashers, disposals, and water heaters rarely all run at once, so a dwelling calculation may reduce their total. The question asks the wattage that makes an appliance count toward that reduction.",
@@ -7582,7 +7642,8 @@
         "424.20(A)(3) requires that the circuit cannot be energized automatically after the device is manually placed in the off position."
       ],
       "tip_short": "A thermostat used as a heater disconnect must have a marked off position, open all ungrounded conductors, and never switch back on by itself. Correct: D — be designed so that the circuit cannot be energized automatically after the device has been manually placed in the off position. 424.20(A)(3) requires that the circuit cannot be energized automatically after the device is manually placed in the off position. Not A: 424.20(A) expressly permits thermostats to serve as both controller and disconnecting means when they meet its conditions. Not B: 424.20(A) sets no 8 foot height limit; the device must be located per 424.19 and be accessible. Not C: 424.20(A)(2) requires opening all ungrounded conductors, not the grounded conductors.",
-      "tip_title": "Space heating"
+      "tip_title": "Space heating",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nFixed electric space heaters may use a thermostat with an off position as both the controller and the disconnecting means, but only if it meets the conditions a true disconnect must meet. The list covers how it is marked, what it opens, and how it behaves once someone switches it off.\n\nThis asks about the disconnect for this equipment. Subject: disconnecting means. Decide whether the question wants its location, its height, its rating, or who may access it.\n\nLOOKUP FOCUS\ngrounded conductor, conductors, disconnecting means"
     },
     "open-book-exam-#3-008": {
       "prompt": "Where conduits enter a floor-standing switchboard, switchgear, or panelboard at the bottom, the conduits, including their end fittings, shall not rise more than ___ inches above the bottom of the enclosure.",
@@ -7773,7 +7834,8 @@
         "12 feet is too long; 410.154 uses sections of not more than 1.2 m (4 feet)."
       ],
       "tip_short": "Lighting track: a single short section needs two supports, and each added section in a row, up to 4 feet long, needs one more support. Correct: A — 4.",
-      "tip_title": "Lighting"
+      "tip_title": "Lighting",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nTrack lighting is a long, thin assembly that carries both the circuit and the luminaires hung from it, so it has to be held up along its length, not just at the ends. The track article sets how the track is fastened and how often added supports are needed on longer continuous runs.\n\nThis is a maximum-limit question. The correct choice is the maximum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "open-book-exam-#3-019": {
       "gist": "A household range never runs every element at full power at once, so the calculation uses a demand value from a table, raised for larger ranges. The question asks the demand load for a range above the base rating.",
@@ -7825,7 +7887,8 @@
         "1 7/8 inches is more than required; the 410.10(F) minimum is 38 mm (1 1/2 inches)."
       ],
       "tip_short": "Luminaires under roof decking where subject to damage need at least 1 1/2 inches of space below the decking, the same spacing 300.4(E) sets for cables and raceways under metal-corrugated roof decking. Correct: B — 1 1/2\". 410.10(F) requires not less than 38 mm (1 1/2 inches) from the lowest surface of the roof decking to the top of the luminaire. Not A: 1 1/4 inches is less than the 38 mm (1 1/2 inches) 410.10(F) requires below roof decking. Not C: 1 3/4 inches is more than required; the 410.10(F) minimum is 38 mm (1 1/2 inches). Not D: 1 7/8 inches is more than required; the 410.10(F) minimum is 38 mm (1 1/2 inches).",
-      "tip_title": "Lighting"
+      "tip_title": "Lighting",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nRoofers drive screws and nails down through roof decking without seeing what is underneath. Luminaires and their wiring mounted under the decking must stay far enough below it that a fastener coming through can't reach them.\n\nThis is a minimum-limit question. Subject: luminaire. The correct choice is the minimum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "open-book-exam-#3-022": {
       "gist": "An elevator motor runs for a trip, stops, and runs again, which is a different pattern from a motor that runs steadily for hours. The question asks the duty rating the Code assigns.",
@@ -7881,7 +7944,8 @@
       ],
       "tip_short": "At the service, standard locknuts are never the only bonding means; impaired knockouts need bonding jumpers or bonding-type locknuts or bushings. Correct: D — bonding jumpers, and bonding-type locknuts or bushings. 250.92(B) requires bonding jumpers around concentric or eccentric knockouts, with listed bonding-type locknuts or bushings. Not A: A single standard locknut cannot be the only bonding means at the service under 250.92(B). Not B: Double standard locknuts are still standard locknuts; 250.92(B) does not accept them as the only bonding means. Not C: A standard locknut and bushing give a mechanical connection only; 250.92(B) requires bonding around impaired knockouts.",
       "tip_title": "Grounding and bonding",
-      "lookup_summary": "Lookup clues: bonding, service equipment, conduit, raceway. Start with 250.92(B), then read the matching subsection and exceptions."
+      "lookup_summary": "Lookup clues: bonding, service equipment, conduit, raceway. Start with 250.92(B), then read the matching subsection and exceptions.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nConcentric and eccentric knockouts leave thin rings of metal around a raceway entry, and those rings may not carry fault current reliably. At service equipment, where fault current is highest and no overcurrent device protects the service conductors, the raceway connection needs a bonding method that does not rely on those rings.\n\nThis asks which wiring-method rule fits this installation. Subject: conduit. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\nbonding, service equipment, conduit, raceway"
     },
     "open-book-exam-#5-001": {
       "gist": "Rides, tents and booths at a fair must stay clear of overhead power lines, and a no-go zone 15 feet out horizontally applies above a certain line voltage. The question asks the voltage above which that zone applies.",
@@ -7892,7 +7956,8 @@
         "300 volts is not the threshold; lines of 600 volts or less fall under the 15 feet in any direction rule of 525.5(B)(1).",
         "250 volts does not appear in the rule; 525.5(B)(2) applies to conductors operating in excess of 600 volts."
       ],
-      "tip_short": "Carnival structures: above 600 volts, stay out from under the line and 15 feet horizontally away; at 600 volts or less, keep 15 feet in any direction. Correct: B — 600."
+      "tip_short": "Carnival structures: above 600 volts, stay out from under the line and 15 feet horizontally away; at 600 volts or less, keep 15 feet in any direction. Correct: B — 600.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nRides, tents and booths at carnivals are set up and torn down fast, often by crews working near overhead lines. Article 525 keeps portable structures out from under, and a set distance away from, overhead conductors above a certain voltage.\n\nIn plain terms, the question is: \"Portable structures for fairs, carnivals and similar events shall not be located under or within a space 15 feet horizontally of conductors…\" Numbers in the question: 15 feet. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nconductors"
     },
     "open-book-exam-#5-002": {
       "prompt": "Which of the following is not required to be marked on the nameplate of a transformer?",
@@ -7926,7 +7991,8 @@
         "110.26(E)(1)(c) permits sprinkler protection for the dedicated space where the piping complies with the section.",
         "Ducts are named in 110.26(E)(1)(a) as not permitted in the dedicated electrical space."
       ],
-      "tip_short": "The dedicated space over a panelboard is for electrical only: no piping, ducts or leak protection apparatus, but sprinkler protection is permitted (110.26(E)(1)(c)). Correct: C — Sprinkler protection. Not A: 110.26(E)(1)(a) bars piping foreign to the electrical installation from the dedicated electrical space. Not D: Ducts are named in 110.26(E)(1)(a) as not permitted in the dedicated electrical space."
+      "tip_short": "The dedicated space over a panelboard is for electrical only: no piping, ducts or leak protection apparatus, but sprinkler protection is permitted (110.26(E)(1)(c)). Correct: C — Sprinkler protection. Not A: 110.26(E)(1)(a) bars piping foreign to the electrical installation from the dedicated electrical space. Not D: Ducts are named in 110.26(E)(1)(a) as not permitted in the dedicated electrical space.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nAbove and below a panelboard the Code reserves a dedicated equipment space, as wide and deep as the equipment and up to the structural ceiling, for the raceways and cables that serve it. Foreign systems such as water pipes and ducts may not pass through it; only a few items are allowed in or above it.\n\nIn plain terms, the question is: \"___ is permitted in the dedicated electrical space above a panelboard.\" Subject: panelboard. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "open-book-exam-#5-005": {
       "article": "408.41",
@@ -8004,7 +8070,8 @@
         "1 1/2 inches is more than the minimum; 300.4(D) requires 1 1/4 inches."
       ],
       "tip_short": "Cables run parallel to studs or joists stay at least 1 1/4 inches back from the edge, or get a 1/16-inch steel plate (300.4(D)). Correct: C — 1 1/4\". 300.4(D) requires the nearest outside surface of the cable to be at least 32 mm (1 1/4 inches) from the nearest edge of the framing member. Not A: 1/2 inch is too close to the edge; 300.4(D) requires at least 1 1/4 inches. Not B: 1 inch is less than the 1 1/4 inches required by 300.4(D). Not D: 1 1/2 inches is more than the minimum; 300.4(D) requires 1 1/4 inches.",
-      "tip_title": "Cable protection"
+      "tip_title": "Cable protection",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSection 300.4 protects cables from nails and screws. A cable run along or through wood framing must sit far enough back from the face of the stud, joist or rafter that drywall screws and trim nails can't reach it; where it can't, a steel plate or sleeve covers it.\n\nThis is a minimum-limit question. Subject: NM cable. The correct choice is the minimum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\ncable"
     },
     "open-book-exam-#5-011": {
       "gist": "A splice is the weak point of a cord, so cords are normally installed in one piece, with a repair allowance only for the tougher cord families. The question asks which second cord family may be repaired.",
@@ -8027,7 +8094,8 @@
         "20 mA is not the value in 682.15(B); the limit is 30 mA.",
         "18 mA is not the value in 682.15(B); the limit is 30 mA."
       ],
-      "tip_short": "Feeders and branch circuits on piers over natural or artificial bodies of water need ground-fault protection of 30 mA or less (682.15(B)). Correct: A — 30 mA."
+      "tip_short": "Feeders and branch circuits on piers over natural or artificial bodies of water need ground-fault protection of 30 mA or less (682.15(B)). Correct: A — 30 mA.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nDocks and piers stand over water, where leakage current from damaged wiring can energize the water itself and paralyze swimmers. The Code requires ground-fault protection on the feeders and branch circuits that run out onto piers.\n\nIn plain terms, the question is: \"Feeder and branch circuit conductors that are installed on piers shall be provided with ground-fault protection not exceeding ___.\" Subject: feeder. Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nground fault, branch circuit, feeder, conductors"
     },
     "open-book-exam-#5-013": {
       "gist": "Changing a fuse means touching its holder, so the Code wants a way to kill the supply first. All cartridge fuses need it, and plug fuses need it above a certain voltage to ground. The question asks that voltage.",
@@ -8171,7 +8239,8 @@
         "352.30(A) requires PVC conduit to be securely fastened within 900 mm (3 feet, or 36 inches) of each box, conduit body or termination.",
         "48 inches (4 feet) exceeds the 3-foot limit in 352.30(A)."
       ],
-      "tip_short": "PVC is fastened within 3 feet of every box, conduit body or termination (352.30(A)); support spacing then follows Table 352.30(B). Correct: C — 36\". 352.30(A) requires PVC conduit to be securely fastened within 900 mm (3 feet, or 36 inches) of each box, conduit body or termination. Not A: 24 inches is closer than required; 352.30(A) allows up to 3 feet (36 inches). Not B: 30 inches is not the value in 352.30(A); the limit is 3 feet (36 inches). Not D: 48 inches (4 feet) exceeds the 3-foot limit in 352.30(A)."
+      "tip_short": "PVC is fastened within 3 feet of every box, conduit body or termination (352.30(A)); support spacing then follows Table 352.30(B). Correct: C — 36\". 352.30(A) requires PVC conduit to be securely fastened within 900 mm (3 feet, or 36 inches) of each box, conduit body or termination. Not A: 24 inches is closer than required; 352.30(A) allows up to 3 feet (36 inches). Not B: 30 inches is not the value in 352.30(A); the limit is 3 feet (36 inches). Not D: 48 inches (4 feet) exceeds the 3-foot limit in 352.30(A).",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nEvery raceway type has a support rule with two parts: it must be fastened within a set distance of each box, cabinet or termination, and then at set intervals along the run. The distances differ by type because rigid PVC, flexible conduit and metal tubing behave differently.\n\nThis asks for the receptacle rule in this spot. Subject: outlet. Decide whether the question wants a location, a height, a count, or a protection requirement, then match that to the rule.\n\nLOOKUP FOCUS\nconduit, box / enclosure"
     },
     "open-book-exam-#5-025": {
       "prompt": "Equipment grounding conductors, grounding electrode conductors, and bonding jumpers shall not be connected by ___.",
@@ -8363,7 +8432,8 @@
         "16 inches exceeds the 12-inch limit in 350.30(A).",
         "24 inches is double the 12-inch limit in 350.30(A)."
       ],
-      "tip_short": "LFMC: fasten within 12 inches of each termination and at least every 4 1/2 feet (350.30(A)), the same as FMC. Correct: B — 12\". 350.30(A) requires LFMC to be securely fastened within 300 mm (12 inches) of each box, cabinet, conduit body or other termination. Not A: 8 inches is closer than required; 350.30(A) allows up to 12 inches. Not C: 16 inches exceeds the 12-inch limit in 350.30(A). Not D: 24 inches is double the 12-inch limit in 350.30(A)."
+      "tip_short": "LFMC: fasten within 12 inches of each termination and at least every 4 1/2 feet (350.30(A)), the same as FMC. Correct: B — 12\". 350.30(A) requires LFMC to be securely fastened within 300 mm (12 inches) of each box, cabinet, conduit body or other termination. Not A: 8 inches is closer than required; 350.30(A) allows up to 12 inches. Not C: 16 inches exceeds the 12-inch limit in 350.30(A). Not D: 24 inches is double the 12-inch limit in 350.30(A).",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nEvery raceway type has a support rule with two parts: it must be fastened within a set distance of each box, cabinet or termination, and then at set intervals along the run. The distances differ by type because rigid PVC, flexible conduit and metal tubing behave differently.\n\nThis asks which wiring-method rule fits this installation. Subject: conduit. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\nconduit, box / enclosure"
     },
     "open-book-exam-#6-014": {
       "prompt": "Conduit nipples not over 24 inches in length may be filled to a maximum of ___ of their CSA.",
@@ -8497,7 +8567,8 @@
         "300.21 requires openings around penetrations of fire-resistant-rated construction to be firestopped using approved methods."
       ],
       "tip_short": "Penetrations of fire-rated walls, floors and ceilings must be firestopped by approved methods, meaning acceptable to the authority having jurisdiction (300.21). Correct: D — approved.",
-      "tip_title": "Fire-rated penetrations"
+      "tip_title": "Fire-rated penetrations",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nA fire-rated wall, floor or ceiling only works if it stays sealed. Every hole cut for a raceway, cable or box is a path for fire and smoke, so the opening around each penetration must be closed in a way that restores the assembly's fire-resistance rating.\n\nIn plain terms, the question is: \"Openings around electrical penetrations into or through fire-resistant-rated walls, partitions, floors, or ceilings shall be firestopped…\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "open-book-exam-#6-021": {
       "gist": "Small snap switches in a panelboard cannot withstand a large fault, so the panel feeding them has a limit on its overcurrent protection. The question asks that limit.",
@@ -8593,7 +8664,8 @@
       ],
       "tip_short": "Field-applied hazard labels point to the ANSI Z535 safety-sign family; its part 4 covers product safety signs and labels. Correct: A — Z535.4. 110.21(B) Informational Note No. 2 cites this ANSI standard (2011, reaffirmed 2017), Product Safety Signs and Labels.",
       "lookup_summary": "Lookup clues: identify the equipment, location, and requirement. Start with 110.21(B), then read the matching subsection and exceptions.",
-      "tip_title": "Warning labels"
+      "tip_title": "Warning labels",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nField-applied warning labels must be durable and readable for the life of the installation. An informational note points to the national product-safety-sign standard for font size, signal words, colors and symbols.\n\nThis asks which conductor color the NEC allows here. Recall which colors are reserved (grounded, grounding) and which remain for ungrounded conductors.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "open-book-exam-#9-004": {
       "prompt": "Where there is equipment for more than one elevator car in the machine room, the heating and air-conditioning disconnecting means shall be numbered to correspond to the identifying number of the elevator car that they control. The disconnecting means shall be provided with a sign to identify the ___ of the supply side overcurrent protective device.",
@@ -8607,7 +8679,8 @@
         "Voltage is not the required content; 620.54 requires a sign identifying the location of the supply side device."
       ],
       "tip_short": "Elevator disconnecting means carry a sign that tells where the supply side overcurrent device is, so a worker can find it fast. Correct: C — location.",
-      "lookup_summary": "Lookup clues: overcurrent protection, load calculation, disconnecting means. Start with 620.54, then read the matching subsection and exceptions."
+      "lookup_summary": "Lookup clues: overcurrent protection, load calculation, disconnecting means. Start with 620.54, then read the matching subsection and exceptions.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nElevator and dumbwaiter motors have their own rules in Article 620, which size their conductors and protection from the motor's duty rating. Their machine rooms and controllers get the same disconnect-within-sight treatment as any motor.\n\nThis is a maximum-limit question. Subject: elevator. The correct choice is the maximum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\novercurrent protection, load calculation, disconnecting means"
     },
     "open-book-exam-#9-005": {
       "gist": "Chapter 9 holds several tables used together for raceway fill: one for the allowed fill percentage, others for raceway areas, conductor areas, and conductor properties. The question asks which one gives the allowed fill percentage.",
@@ -8619,7 +8692,8 @@
         "Chapter 9 Table 5 gives dimensions of insulated conductors and fixture wires, not fill percentages."
       ],
       "tip_short": "Chapter 9 Table 1 sets the fill percentage: 53 percent for one conductor, 31 percent for two, 40 percent for over two. Correct: C — Table 1, Chapter 9. Chapter 9 Table 1 lists the percent of cross section of conduit and tubing for conductors and cables. Not A: Chapter 9 Table 4 gives the dimensions and usable areas of conduit and tubing, not the fill percentages. Not B: Chapter 9 Table 8 gives conductor properties such as area and resistance, not fill percentages. Not D: Chapter 9 Table 5 gives dimensions of insulated conductors and fixture wires, not fill percentages.",
-      "tip_title": "Conduit fill"
+      "tip_title": "Conduit fill",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nConduit fill limits how much of a raceway's inside area the wires may take up, so they can be pulled in without damage and can shed heat. Tables at the back of the Code hold the tools: one table sets the allowed percentage by the number of conductors, another gives each raceway's internal area by trade size, and another gives each wire's area. Each raceway article points back to those tables.\n\nThis asks which wiring-method rule fits this installation. Subject: conduit. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\nconduit, cable, conductors"
     },
     "open-book-exam-#9-006": {
       "gist": "Below 800 amperes the Code lets you round up to the next standard device size, but above 800 amperes that allowance ends. The question asks how the conductor ampacity must compare with the device rating.",
@@ -8642,7 +8716,8 @@
         "Labeled is not the requirement in 300.6(A); the compound must be approved by the AHJ."
       ],
       "tip_short": "Field-cut threads on ferrous conduit get an approved electrically conductive, corrosion-resistant compound; approved means acceptable to the AHJ. Correct: A — Approved.",
-      "tip_title": "Corrosion protection"
+      "tip_title": "Corrosion protection",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSteel conduit is galvanized or coated to resist corrosion, and cutting new threads in the field strips that coating off. Where corrosion protection matters, the bare threads must be coated again with a compound that still lets the joint carry fault current.\n\nThis asks which wiring-method rule fits this installation. Subject: conduit. Focus on whether the question is about support spacing, fill, burial cover, protection from damage, or where the method is permitted.\n\nLOOKUP FOCUS\nconduit"
     },
     "open-book-exam-#9-008": {
       "prompt": "A permanent and legible ___ diagram of the local switching arrangement, clearly identifying each point of connection to the high-voltage section, shall be provided within sight of each point of connection.",
@@ -8655,7 +8730,8 @@
         "A connection diagram is not the required type; 495.25(B) specifies a single-line diagram."
       ],
       "tip_short": "Backfeed on over-1000-volt equipment: post a permanent single-line diagram of the switching within sight of each connection point. Correct: C — single-line.",
-      "tip_title": "Switching diagrams"
+      "tip_title": "Switching diagrams",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nSwitchgear over 1000 volts can be fed and switched in several ways, and a worker must know every point where it can be energized before opening anything. That is why the Code requires a permanent drawing of the switching arrangement posted at the equipment.\n\nThis asks which switch rule fits. Check whether the question is about the ampere rating, the type of load, or where and how the switch is installed.\n\nLOOKUP FOCUS\nidentify the equipment, location, and requirement"
     },
     "open-book-exam-#9-009": {
       "prompt": "For motors marked with design letters B, C, or D, conductors having a higher insulation rating shall be permitted to be used, provided the ampacity of such conductors does not exceed the ___ ampacity.",
@@ -8699,7 +8775,8 @@
         "430.22 covers conductor sizing for a single motor; Table 430.22(E) is duty-cycle sizing, not protective devices."
       ],
       "tip_short": "Motor short-circuit and ground-fault protection is sized with Table 430.52(C)(1) percentages of the motor full-load current. Correct: B — 430.52(C)(1).",
-      "lookup_summary": "Lookup clues: ground fault, motor. Start with Table 430.52(C)(1), then read the matching subsection and exceptions."
+      "lookup_summary": "Lookup clues: ground fault, motor. Start with Table 430.52(C)(1), then read the matching subsection and exceptions.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nA motor's branch-circuit short-circuit and ground-fault device is sized from a table of percentages of the motor's full-load current. The percentage depends on the device (non-time-delay fuse, dual-element fuse, instantaneous-trip or inverse-time breaker) and on the motor type, because each device rides through starting current differently.\n\nThis is a maximum-limit question. Subject: motor. The correct choice is the maximum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nground fault, motor"
     },
     "open-book-exam-#9-012": {
       "gist": "A branch circuit takes its rating from the protective device, not from the wire. Adjustable breakers make a second word necessary. The question asks that word.",
@@ -8724,7 +8801,8 @@
         "502.128(2) requires the outer ends to be screened against small animals or birds, not fitted with hinged openings."
       ],
       "tip_short": "Class II ventilating pipes: lead to clean outside air, be screened at the outer ends, and be protected against damage and corrosion. Correct: C — be protected against physical damage and against rusting or other corrosive influences. Not A: 502.128 sets no 360-degree bend limit for ventilating pipes; that is a raceway rule elsewhere. Not B: 502.128(1) requires the pipes to lead to a source of clean air outside of buildings, not into attic space. Not D: 502.128(2) requires the outer ends to be screened against small animals or birds, not fitted with hinged openings.",
-      "lookup_summary": "Lookup clues: motor. Start with 502.128, then read the matching subsection and exceptions."
+      "lookup_summary": "Lookup clues: motor. Start with 502.128, then read the matching subsection and exceptions.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nIn a Class II location the hazard is combustible dust, and a ventilating pipe for a motor or enclosure is a direct path for that dust to reach hot or sparking parts. The pipe must be tight and made of metal strong enough to stay that way.\n\nThis is a minimum-limit question. Subject: motor. Numbers in the question: 021 inch. The correct choice is the minimum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nmotor"
     },
     "open-book-exam-#9-014": {
       "gist": "On a circuit with two or more outlets, each receptacle is limited in how much cord-connected load it may carry. The question asks which table sets that limit.",
@@ -8736,7 +8814,8 @@
         "Table 210.21(B)(3) lists receptacle ratings for circuits serving more than one receptacle, not the maximum load.",
         "220.3 is not a load-per-receptacle table; Article 220 covers load calculations."
       ],
-      "tip_short": "Table 210.21(B)(2) caps cord-and-plug load at 80 percent of the receptacle rating: 12, 16, or 24 amperes. Correct: A — 210.21(B)(2)."
+      "tip_short": "Table 210.21(B)(2) caps cord-and-plug load at 80 percent of the receptacle rating: 12, 16, or 24 amperes. Correct: A — 210.21(B)(2).",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nA receptacle on a circuit with other outlets shouldn't be loaded to the full circuit rating by a single plug-in load. The Code limits the cord-and-plug load on each receptacle to a share of its rating, set by a table based on the circuit rating and the receptacle rating.\n\nThis is a maximum-limit question. Subject: receptacle. The correct choice is the maximum value the NEC allows — eliminate any choice on the wrong side of that limit.\n\nLOOKUP FOCUS\nreceptacle outlet, load calculation"
     },
     "open-book-exam-#9-015": {
       "prompt": "Boxes that enclose devices or utilization equipment that projects more than ___ rearward from the mounting plane of the box shall have a depth that is not less than the depth of the equipment plus 1/4 inch.",
@@ -8853,7 +8932,8 @@
         "344.10(A)(2) permits aluminum RMC only where approved for the environment, not under all conditions.",
         "344.10(A)(1) permits galvanized steel, stainless steel, and red brass RMC under all atmospheric conditions and occupancies."
       ],
-      "tip_short": "Galvanized steel, stainless steel, and red brass RMC are permitted in all conditions; aluminum RMC only where approved for the environment. Correct: D — Red brass."
+      "tip_short": "Galvanized steel, stainless steel, and red brass RMC are permitted in all conditions; aluminum RMC only where approved for the environment. Correct: D — Red brass.",
+      "info_tip": "WHAT THIS QUESTION MEANS\nPLAIN-LANGUAGE BACKGROUND\nRigid metal conduit is made in several metals, and each resists corrosion differently. The uses-permitted section for RMC says which materials may go anywhere, in any atmosphere or occupancy, and which need extra protection where corrosion is a concern.\n\nIn plain terms, the question is: \"Galvanized steel, stainless steel, and ___ RMC shall be permitted under all atmospheric conditions and occupancies.\" Break it into pieces — what equipment, what location or measurement, and what the NEC must say about it — then find the choice that satisfies every piece.\n\nLOOKUP FOCUS\npool / spa"
     },
     "open-book-exam-#9-025": {
       "article": "Article 100",

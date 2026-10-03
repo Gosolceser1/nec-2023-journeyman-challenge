@@ -54,7 +54,7 @@ def fault_path(f):
     f.line(640, 270, 640, 300, WIRE_GND, SW_WIRE + 1)
     f.lines(654, 298, ["hot touches", "the metal"], T_MIN, TEXT, "start", True, gap=1.1)
     f.value(400, 186, "ground fault", 30, records=None, label="? name", what="the name of this fault")
-    f.tag(f.w - 24, f.h - 16, "NEC Art. 100", anchor="end")
+    f.tag(f.w - 24, f.h - 16, "NEC Article 100", anchor="end")
 
 
 @figure("selective_coordination_100", h=520, nec="Article 100 (Selective Coordination)",
@@ -81,10 +81,10 @@ def selective_coordination(f):
     f.lines(516, 150, ["the breakers are chosen", "so the one nearest the", "fault opens first;",
                        "everything upstream", "keeps running"], T_MIN, TEXT, "start", gap=1.2)
     f.value(400, 494, "selective coordination", 28, records=None, label="? term", what="the defined term")
-    f.tag(f.w - 24, 360, "NEC Art. 100", anchor="end")
+    f.tag(f.w - 24, 360, "NEC Article 100", anchor="end")
 
 
-@figure("series_breakers_708-54", h=500, nec="708.54", records=["open-book-exam-#7-007"])
+@figure("series_breakers_708-54", h=500, nec="708.54 Ex.", records=["open-book-exam-#7-007"])
 def series_breakers(f):
     f.title("Two breakers in series: when must they coordinate?", y=34)
     for cx, tapped in ((220, False), (580, True)):
@@ -104,7 +104,7 @@ def series_breakers(f):
     f.value_lines(220, 410, ["no loads in parallel:", "coordination not required"], T_MIN, OK, pad=6, gap=1.2,
                   what="nothing tapped in parallel with the downstream breaker")
     f.lines(580, 410, ["something tapped in parallel:", "they must coordinate"], T_MIN, NO, bold=True, gap=1.2)
-    f.tag(f.w - 24, f.h - 12, "NEC 708.54", anchor="end")
+    f.tag(f.w - 24, f.h - 12, "NEC 708.54 Ex.", anchor="end")
 
 
 @figure("transformer_panel_408-36b", h=470, nec="408.36(B)",

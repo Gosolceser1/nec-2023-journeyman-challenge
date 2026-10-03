@@ -362,7 +362,7 @@ NIPPLE = ["final-exam-#4-060", "final-exam-#4-066"]
 HOW_MANY = ["final-exam-#4-062", "final-exam-#4-068"]
 
 
-@figure("conduit_fill_steps_ch9", h=520, nec="Chapter 9 Table 4", when="after",
+@figure("conduit_fill_steps_ch9", h=520, nec="Chapter 9", when="after",
         records=NIPPLE + HOW_MANY + ["final-exam-#4-022", "final-exam-#4-050", "final-exam-#4-057",
                                      "final-exam-#4-059", "final-exam-#4-065"])
 def conduit_fill_steps(f):

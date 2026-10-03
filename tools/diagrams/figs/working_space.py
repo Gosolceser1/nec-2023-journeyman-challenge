@@ -86,7 +86,7 @@ def working_space(f):
     f.tag(f.w - 24, f.h - 14, "NEC 110.26", anchor="end")
 
 
-@figure("dedicated_space_110-26e", h=500, nec="110.26(E)",
+@figure("dedicated_space_110-26e", h=500, nec="110.26(E)(1)",
         records={"final-exam-#1-057": {}, "open-book-exam-#5-004": {"like": "final-exam-#1-057"}})
 def dedicated_space(f):
     ceil, floor, ft = 96, 440, 40.0

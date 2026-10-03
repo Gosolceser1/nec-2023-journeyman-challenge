@@ -31,7 +31,7 @@ def service_bonding(f):
     mbj = ["open-book-exam-#1-002"]
     gec = ["open-book-exam-#10-024"]
     f.title("Service panel, cover off", y=30)
-    f.tag(f.w - 24, 40, "NEC Art. 100", anchor="end")
+    f.tag(f.w - 24, 40, "NEC Article 100", anchor="end")
     x0, y0, x1, y1 = 250, 96, 550, 496
     # Meter, and the service-entrance conductors in over the top of the can.
     mx, my = 110, 210

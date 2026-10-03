@@ -16,6 +16,6 @@
 <text x="410.0" y="228.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">protection</text>
 <text x="410.0" y="296.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">copper sheath: grounding</text>
 <text x="410.0" y="318.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">path</text>
-<rect x="633.9" y="404.0" width="152.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="643.9" y="432.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 332.104</text>
+<rect x="602.2" y="404.0" width="183.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="612.2" y="432.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Article 332</text>
 </svg>

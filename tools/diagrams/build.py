@@ -15,8 +15,9 @@ tools/diagrams/nec_style.py). Outputs:
 
 The build fails if a wired record has no figure, a record sits in two
 figures, a figure serves questions that cite different sections (one figure,
-one rule: see sections()), or any label shows a record's answer outside that
-record's masks (tools/diagrams/leakscan.py).
+one rule), a figure's `nec` or "NEC ..." tag chip differs from what its
+questions cite (see topic_errors()), or any label shows a record's answer
+outside that record's masks (tools/diagrams/leakscan.py).
 """
 import argparse
 import datetime
@@ -84,40 +85,88 @@ def draw_all(modules=None, every_tier=False, bank=None):
     return out
 
 
-# Two citations of one rule: 503.1 scopes the Class III locations that 500.5(D) defines.
-SAME_SECTION = {"503.1": "500.5"}
-_SECTION = re.compile(r"(?<![\d.])(\d{2,3}\.\d+)")
+_DESCRIPTOR = re.compile(r"\s+\((?![A-Za-z0-9]{1,4}\))[^()]*\)$")
+_PART = re.compile(r"^(Table\s+)?(\d{2,3})\.(\d+)((?:\([A-Za-z0-9]+\))*)\s*(.*)$")
+_RELATIVE = re.compile(r"^((?:\([A-Za-z0-9]+\))+)\s*(.*)$")
+_PAREN = re.compile(r"\([A-Za-z0-9]+\)")
 
 
-def sections(citation):
-    """The sections a citation names: '210.52(D)' -> {'210.52'}, 'Table 4, Chapter 9' ->
-    {'Chapter 9'}, 'Article 100' (a definition) -> {'100'}, 'General ...' -> {'general'}."""
-    c = citation.strip()
-    if c.lower().startswith("general"):
-        return {"general"}
-    found = {SAME_SECTION.get(s, s) for s in _SECTION.findall(c)}
-    if found:
-        return found
+def citation_paths(citation):
+    """The provisions a citation names, each as a path from the article down:
+    '210.8(A)(10)' -> [('210', '210.8', '(A)', '(10)')], 'Table 300.5(A) Column 1' ->
+    [('300', '300.5', '(A)', 'Table', 'Column 1')], '210.12(B), (C), and (D)' -> three
+    paths, 'Table 4, Chapter 9' -> [('Chapter 9', 'Table 4')], 'Article 100' -> [('100',)],
+    'General knowledge' -> [('general knowledge',)]. A trailing parenthetical after a
+    space only describes the topic ('Article 100 (Ground Fault)') and is dropped."""
+    c = _DESCRIPTOR.sub("", citation.strip().removeprefix("NEC ").strip())
+    low = c.lower()
+    if low.startswith("general"):
+        return [(" ".join(low.split()[:2]),)]
     if re.search(r"\bchapter\s+9\b", c, re.I):
-        return {"Chapter 9"}
-    if re.search(r"\barticle\s+100\b", c, re.I):
-        return {"100"}
-    return {c}
+        item = re.search(r"\b(Table|Note)\s+(\S+)", re.sub(r"(?i)\bchapter\s+9\b", "", c))
+        return [("Chapter 9",) + ((f"{item.group(1)} {item.group(2).strip(',')}",) if item else ())]
+    article = re.fullmatch(r"Article\s+(\d{2,3})", c)
+    if article:
+        return [(article.group(1),)]
+    paths, prev = [], None
+    for part in filter(None, re.split(r"\s*,\s*(?:and\s+)?|\s+and\s+", c)):
+        m = _PART.match(part)
+        if m:
+            table, art, sec, parens, rest = m.groups()
+            path = (art, f"{art}.{sec}") + tuple(_PAREN.findall(parens))
+            path += ("Table",) * bool(table) + ((rest,) if rest else ())
+        elif prev and _RELATIVE.match(part):
+            parens, rest = _RELATIVE.match(part).groups()
+            new = _PAREN.findall(parens)
+            first = new[0][1]
+            depth = 0 if first.isupper() else 1 if first.isdigit() else 2
+            levels = [t for t in prev[2:] if t.startswith("(")]
+            path = prev[:2] + tuple(levels[:depth]) + tuple(new) + ((rest,) if rest else ())
+        elif prev:
+            path = prev + (part,)
+        else:
+            path = (part,)
+        paths.append(path)
+        prev = path
+    return paths
+
+
+def common_level(paths):
+    """The deepest path every one of `paths` starts with (() when they share nothing)."""
+    out = []
+    for level in zip(*paths):
+        if any(t != level[0] for t in level):
+            break
+        out.append(level[0])
+    return tuple(out)
 
 
 def topic_errors(name, d, bank):
-    """A figure teaches one rule: its `nec` names one section, every question it serves
-    cites that section, and its tag chip names no second one."""
-    topic = sections(d["nec"])
-    if len(topic) != 1:
-        return [f"{name}: nec {d['nec']!r} names {len(topic)} sections; a figure teaches one"]
+    """A figure teaches one rule, and its `nec` and "NEC ..." tag chip say which:
+    exactly the deepest provision every question it serves cites. One question: its
+    own citation ('590.4(J) Ex.'). Several: their common parent ('210.8(A)' serves
+    210.8(A)(2) and 210.8(A)(10)), which must still be one section (Chapter 9 counts
+    as one: its tables work together in a fill calculation). Citations are
+    compared as citation_paths(), so the only format differences allowed are the
+    chip's "NEC " prefix, a descriptive parenthetical in `nec` ('Article 100 (Sign
+    Body)'), the order of a Chapter 9 table or note, and a list that leaves its
+    section unrepeated ('210.12(B), (C), and (D)')."""
+    cited = {rid: citation_paths(bank[rid].get("article", "")) for rid in d["records"] if rid in bank}
+    if not cited:
+        return []
+    paths = [p for ps in cited.values() for p in ps]
+    level = common_level(paths)
+    cites = sorted({bank[r]["article"] for r in cited})
     errors = []
-    for rid in sorted(d["records"]):
-        if rid in bank and not topic <= sections(bank[rid].get("article", "")):
-            errors.append(f"{name}: {rid} cites {bank[rid].get('article')!r}, not the figure's {d['nec']!r}")
+    if not level:
+        errors.append(f"{name}: its questions cite {cites}, which share no article; a figure teaches one rule")
+    elif len(cited) > 1 and level[0][0].isdigit() and len(level) < 2 and any(len(p) > 1 for p in paths):
+        errors.append(f"{name}: its questions cite different sections {cites}; a figure teaches one")
+    if citation_paths(d["nec"]) != [level]:
+        errors.append(f"{name}: nec {d['nec']!r} does not match what its questions cite {cites}")
     for text, *_ in d["fig"].labels:
-        if text.startswith("NEC ") and len(leakscan.location_refs(text)) > 1:
-            errors.append(f"{name}: tag chip {text!r} names more than one section")
+        if text.startswith("NEC ") and citation_paths(text) != [level]:
+            errors.append(f"{name}: tag chip {text!r} does not match what its questions cite {cites}")
     return errors
 
 

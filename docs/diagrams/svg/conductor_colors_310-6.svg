@@ -29,6 +29,6 @@
 <rect x="595.0" y="330.0" width="150.0" height="26.0" rx="13" fill="#f472b6" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
 <text x="670.0" y="386.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">pink</text>
 <text x="30.0" y="430.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">Hot conductors must be clearly different from both groups above.</text>
-<rect x="658.4" y="436.0" width="127.6" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="668.4" y="464.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 310.6</text>
+<rect x="627.9" y="436.0" width="158.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="637.9" y="464.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 310.6(C)</text>
 </svg>

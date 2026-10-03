@@ -11,6 +11,6 @@
 <text x="470.0" y="203.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">the aluminum core</text>
 <text x="470.0" y="290.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">copper share of area:</text>
 <text x="470.0" y="334.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">at least 10%</text>
-<rect x="627.9" y="404.0" width="158.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="637.9" y="432.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 310.3(B)</text>
+<rect x="601.0" y="404.0" width="185.0" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="611.0" y="432.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 310.3(B)(3)</text>
 </svg>

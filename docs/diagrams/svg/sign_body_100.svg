@@ -16,6 +16,6 @@
 <text x="400.0" y="310.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="middle">outer shell: weather cover only</text>
 <text x="400.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">not an electrical enclosure; the defined term:</text>
 <text x="400.0" y="430.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="middle">sign body</text>
-<rect x="632.7" y="422.0" width="153.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="642.7" y="450.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Art. 100</text>
+<rect x="602.2" y="422.0" width="183.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="612.2" y="450.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Article 100</text>
 </svg>

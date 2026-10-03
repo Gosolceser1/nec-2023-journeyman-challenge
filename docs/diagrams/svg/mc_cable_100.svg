@@ -62,6 +62,6 @@
 <text x="560.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">insulated conductors</text>
 <text x="390.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#e2e8f0" text-anchor="end">Type</text>
 <text x="402.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">MC</text>
-<rect x="632.7" y="384.0" width="153.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="642.7" y="412.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Art. 100</text>
+<rect x="602.2" y="384.0" width="183.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="612.2" y="412.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Article 100</text>
 </svg>

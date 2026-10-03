@@ -150,7 +150,7 @@ def battery_vent(f):
     f.tag(f.w - 24, f.h - 8, "NEC 480.10(A)", anchor="end")
 
 
-@figure("box_screws_314-27d", h=440, nec="314.27(D)",
+@figure("box_screws_314-27d", h=440, nec="314.27(D) Ex.",
         records={"open-book-exam-#4-019": {"terms": ["No. 6"]}})
 def box_screws(f):
     f.title("Light equipment on an ordinary box (section)", y=34)
@@ -290,7 +290,7 @@ def max_water(f):
     f.tag(f.w - 24, 90, "NEC Article 100", anchor="end")
 
 
-@figure("holiday_lighting_trees_590-4j", h=440, nec="590.4(J)",
+@figure("holiday_lighting_trees_590-4j", h=440, nec="590.4(J) Ex.",
         records={"final-exam-#1-016": {"terms": ["strain relief"]},
                  "open-book-exam-#2-008": {"like": "final-exam-#1-016"}})
 def holiday_trees(f):
@@ -337,7 +337,7 @@ def _pedestal(f, px=60, pw=130):
             f.circle(cx, cy + 4, r * 0.76, fill=BG, stroke=EDGE, sw=SW_THIN)
 
 
-@figure("rv_receptacles_551-71", h=470, nec="551.71", records=["open-book-exam-#10-023"])
+@figure("rv_receptacles_551-71", h=470, nec="551.71(B)", records=["open-book-exam-#10-023"])
 def rv_receptacles(f):
     f.title("RV park site supply pedestal", y=34)
     _pedestal(f)
@@ -351,7 +351,7 @@ def rv_receptacles(f):
     f.text(tx, 316, "50 A, 125/250 V", T_NOTE, TEXT, "start", True)
     f.lines(tx, 342, ["40% of new sites,", "20% of existing"], T_NOTE, MUTED, "start", gap=1.15)
     f.text(tx, 430, "all weather-resistant", T_MIN, MUTED, "start")
-    f.tag(f.w - 24, f.h - 12, "NEC 551.71", anchor="end")
+    f.tag(f.w - 24, f.h - 12, "NEC 551.71(B)", anchor="end")
 
 
 @figure("rv_feeder_551-72", h=420, nec="551.72(B)", records={"final-exam-#3-002": {"terms": ["two ungrounded"]}})

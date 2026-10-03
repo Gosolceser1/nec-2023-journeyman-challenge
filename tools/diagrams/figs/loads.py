@@ -119,7 +119,7 @@ def ccc_count(f):
     f.tag(f.w - 24, f.h - 12, "NEC 310.15(F)", anchor="end")
 
 
-@figure("dwelling_service_310-12", h=450, nec="310.12, 310.12(A)",
+@figure("dwelling_service_310-12", h=450, nec="310.12(A)",
         records={"final-exam-#1-036": {}, "open-book-exam-#4-022": {},
                  "final-exam-#3-065": {"terms": ["single-phase", "120/240"]}})
 def dwelling_service(f):
