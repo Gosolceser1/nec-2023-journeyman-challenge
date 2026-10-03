@@ -51,8 +51,10 @@ func _init() -> void:
 
 	print("=== format_reference ===")
 	eq(NecReference.format_reference({"article": "NEC 250.66", "article_title": "Grounding and Bonding"}),
-		"Article 250 Grounding and Bonding — NEC 250.66", "with title")
-	eq(NecReference.format_reference({"article": "NEC 230.79"}), "Article 230 Services — NEC 230.79", "title looked up")
+		"250.66 — Grounding and Bonding", "with title")
+	eq(NecReference.format_reference({"article": "NEC 230.79"}), "230.79 — Services", "title looked up")
+	eq(NecReference.format_reference({"article": "Table 310.15(B)(1)(1)", "article_title": "Conductors"}),
+		"Table 310.15(B)(1)(1) — Conductors", "a table keeps its real number")
 	eq(NecReference.format_reference({"article": "General math"}), "General math", "no article number")
 	eq(NecReference.format_reference({}), "General knowledge", "no article")
 

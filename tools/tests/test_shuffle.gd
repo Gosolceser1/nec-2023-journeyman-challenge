@@ -429,7 +429,6 @@ func _scene() -> void:
 			key.keycode = KEY_A + wrong
 			main._unhandled_input(key)
 			check(main.current_answered and main.missed_questions.size() > 0, "key %s answers the card in slot %s" % [LETTERS[wrong], LETTERS[wrong]])
-			check(main.feedback_body.text == "Correct answer: %s — %s" % [LETTERS[ci], shown["answers"][ci]], "verdict names the display letter: '%s'" % main.feedback_body.text)
 			check((cards[ci] as AnswerCard).current_state == AnswerCard.State.CORRECT and (cards[wrong] as AnswerCard).current_state == AnswerCard.State.WRONG, "the right cards turn green and red")
 			main.missed_questions.clear()
 			checked += 1

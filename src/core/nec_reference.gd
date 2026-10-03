@@ -70,17 +70,15 @@ static func article_title(reference: String) -> String:
 	var title := canonical_article_title(int(match.get_string(1)))
 	return title if title != "" else "NEC Article " + match.get_string(1)
 
-## The post-answer reference line: "Article 210 Branch Circuits — NEC 210.8(A)".
+## The post-answer reference line, the citation once: "210.8(A) — Branch Circuits".
 static func format_reference(record: Dictionary) -> String:
 	var reference := str(record.get("article", "General knowledge"))
 	var title := str(record.get("article_title", article_title(reference)))
 	if is_state_law(reference):
-		return "%s — %s" % [title, reference]
-	var match := RegEx.create_from_string("\\b(\\d{3})\\b").search(reference)
-	if match == null:
+		return "%s — %s" % [reference, title]
+	if RegEx.create_from_string("\\b(\\d{3})\\b").search(reference) == null:
 		return reference
-	var article_number := match.get_string(1)
-	return "Article %s %s — %s" % [article_number, title, reference]
+	return "%s — %s" % [reference.trim_prefix("NEC ").strip_edges(), title]
 
 ## The breadcrumb a record must show, built only from its primary citation and
 ## the canonical table (no stored title): what the validator and tests compare

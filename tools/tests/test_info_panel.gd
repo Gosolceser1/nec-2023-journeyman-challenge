@@ -54,6 +54,12 @@ func memory_tip_visibility() -> void:
 	var text := render(rec)
 	t.has(text, "MEMORY TIP — Fuses", "a tip with choice rows shows despite a short provision")
 	t.has(text, "A switch is not a fuse.", "the per-choice notes are shown")
+	t.has(text, "CODE PROVISION", "the provision is shown")
+	t.has(text, "✓ A   —", "the ✓ row keeps its letter and reason")
+	t.lacks(text, "A   fuse", "the ✓ row does not repeat the answer the green card shows")
+	t.has(text, "B   switch", "a ✗ row still names its choice")
+	for word in ["THE IDEA", "More", "Less", "INDEX"]:
+		t.lacks(text, word, "no %s in the panel" % word)
 	# The plain legacy tip keeps the declutter filter.
 	var legacy: Dictionary = rec.duplicate(true)
 	legacy.erase("tip_short")

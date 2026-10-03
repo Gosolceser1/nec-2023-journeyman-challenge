@@ -116,10 +116,8 @@ static func populate_table(
 		if not row is Array or row.is_empty():
 			continue
 		if is_note_row(row):
-			var note_text := _strip_note_prefix(str(row[0]))
-			if not is_feedback and highlight_answer != "":
-				note_text = AudioExplanationGenerator.redact_answer_spans(note_text, highlight_answer)
-			note_label.text = note_text
+			# A note states the factors and the method, so it waits for the answer.
+			note_label.text = _strip_note_prefix(str(row[0])) if is_feedback else ""
 			note_label.visible = note_label.text != ""
 		else:
 			visible_rows.append(row)

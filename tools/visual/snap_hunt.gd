@@ -2,14 +2,16 @@ extends SceneTree
 ## Screenshots of chosen questions in the real question screen, before and after
 ## answering (wrong pick), for the hunt-keyword highlights.
 ##   Godot --path . --script tools/visual/snap_hunt.gd -- [--mobile-ui] --win=540x960 \
-##       --out-dir=<abs dir> --ids=id1,id2 [--tag=before]
-## Shots: <out-dir>/<tag>_<desk|mob>_<WxH>_<id>_<pre|post>.png (id with '#' dropped)
+##       --out-dir=<abs dir> --ids=id1,id2 [--tag=before] [--modes=pre,right,wrong,timeout]
+## Shots: <out-dir>/<tag>_<desk|mob>_<WxH>_<id>_<mode>.png (id with '#' dropped);
+## the default modes are pre,post (post = a wrong pick).
 
 var main: Node
 var win := Vector2i(1280, 720)
 var out_dir := ""
 var tag := "shot"
 var ids: PackedStringArray = []
+var modes: PackedStringArray = ["pre", "post"]
 
 
 func _wait(sec: float) -> void:
@@ -35,6 +37,8 @@ func _initialize() -> void:
 			ids = a.trim_prefix("--ids=").split(",", false)
 		elif a.begins_with("--tag="):
 			tag = a.trim_prefix("--tag=")
+		elif a.begins_with("--modes="):
+			modes = a.trim_prefix("--modes=").split(",", false)
 	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	DisplayServer.window_set_size(win)
 	main = load("res://scenes/main.tscn").instantiate()
@@ -58,16 +62,26 @@ func _initialize() -> void:
 		if i < 0:
 			push_error("snap_hunt: unknown id " + qid)
 			continue
-		main.order = [i, (i + 1) % n] as Array[int]
-		main.current_index = 0
-		main._show_question()
-		main._auto_token += 1
-		await _wait(0.9)
-		_snap(qid, "pre")
-		var rec: Dictionary = main.session.display_record(i)
-		main._answer_selected((int(rec.get("correct_index", 0)) + 1) % (rec.get("answers", []) as Array).size())
-		main._auto_token += 1
-		main._stop_reading()
-		await _wait(1.0)
-		_snap(qid, "post")
+		for mode in modes:
+			main.order = [i, (i + 1) % n] as Array[int]
+			main.current_index = 0
+			main._show_question()
+			main._auto_token += 1
+			await _wait(0.9)
+			if mode == "pre":
+				_snap(qid, "pre")
+				continue
+			var rec: Dictionary = main.session.display_record(i)
+			var ci := int(rec.get("correct_index", 0))
+			var pick: int = {"right": ci, "timeout": -1}.get(mode, (ci + 1) % (rec.get("answers", []) as Array).size())
+			main._answer_selected(pick)
+			main._auto_token += 1
+			main._stop_reading()
+			await _wait(1.0)
+			_snap(qid, mode)
+			if "--print-panel" in OS.get_cmdline_user_args():
+				print("PANEL %s %s\n[%s] [%s] [%s]\n%s\nEND PANEL" % [qid, mode, main.feedback_title.text,
+						main.feedback_body.text if main.feedback_body.visible else "",
+						main.feedback_reference.text if main.feedback_reference.visible else "",
+						main.info_label.get_parsed_text()])
 	quit()

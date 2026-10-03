@@ -125,6 +125,15 @@ func _sweep(win: Vector2i, picked: Array[int]) -> void:
 				worst_at = what
 			t.check(pre <= TOL, "%s: no page scroll before answering (%.0f px over)" % [what, pre])
 			_table_whole(main.question_table_scroll, what + " before answering")
+			# One reference at a time: the figure is behind its tab, and fits too.
+			if main.ref_tabs.visible:
+				t.check(main.question_table_panel.visible and not main.question_diagram_panel.visible, "%s: the table shows first" % what)
+				main.ref_tabs.figure_tab.button_pressed = true
+				main.ref_tabs.figure_tab.pressed.emit()
+				await _frames(6)
+				t.check(main.question_diagram_panel.visible and not main.question_table_panel.visible, "%s: the Figure tab swaps in the figure" % what)
+				var fig_over := _overflow(scroll)
+				t.check(fig_over <= TOL, "%s: no page scroll on the Figure tab (%.0f px over)" % [what, fig_over])
 			var shown: Dictionary = main.session.display_record(i)
 			main._answer_selected((int(shown.get("correct_index", 0)) + 1) % (shown.get("answers", []) as Array).size())
 			main._auto_token += 1

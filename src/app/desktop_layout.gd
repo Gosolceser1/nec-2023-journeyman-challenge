@@ -59,11 +59,7 @@ static func build(host: Main) -> void:
 	title_box.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(title_box)
 
-	var title := Label.new()
-	title.text = MenuModel.fill(str(MenuModel.spec().get("title", "")), {"edition": Edition.short_label()})
-	title.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_BOLD))
-	title.add_theme_font_size_override("font_size", AppTheme.TYPE_BODY_LG)
-	title.add_theme_color_override("font_color", AppTheme.SLATE_50)
+	var title := Widgets.make_brand_title(MenuModel.fill(str(MenuModel.spec().get("title", "")), {"edition": Edition.short_label()}), AppTheme.TYPE_BODY_LG)
 	title_box.add_child(title)
 
 	host.progress_label = Label.new()
@@ -190,7 +186,8 @@ static func build(host: Main) -> void:
 
 	# Lookup Path Callout Box
 	host.lookup_box = PanelContainer.new()
-	var lookup_style := AppTheme.panel_style(AppTheme.LOOKUP_BG, AppTheme.HAIRLINE_BRIGHT, AppTheme.BORDER_HAIRLINE, AppTheme.RADIUS_INNER)
+	# No visible frame at rest; the hairline is there for the keyword pick's amber pulse.
+	var lookup_style := AppTheme.panel_style(AppTheme.LOOKUP_BG, AppTheme.LOOKUP_BG, AppTheme.BORDER_HAIRLINE, AppTheme.RADIUS_INNER)
 	host.lookup_box.add_theme_stylebox_override("panel", lookup_style)
 	question_column.add_child(host.lookup_box)
 	var lookup_margin := MarginContainer.new()
@@ -199,18 +196,20 @@ static func build(host: Main) -> void:
 	lookup_margin.add_theme_constant_override("margin_top", AppTheme.SPACE_XS + 2)
 	lookup_margin.add_theme_constant_override("margin_bottom", AppTheme.SPACE_XS + 2)
 	host.lookup_box.add_child(lookup_margin)
-	var lookup_lines := VBoxContainer.new()
-	lookup_lines.add_theme_constant_override("separation", 2)
+	# One "where to look" line: the breadcrumb, then the INDEX prompt beside it.
+	var lookup_lines := HBoxContainer.new()
+	lookup_lines.add_theme_constant_override("separation", AppTheme.SPACE_LG)
 	lookup_margin.add_child(lookup_lines)
-	host.index_hint_label = HuntView.make_index_label(AppTheme.TYPE_CAPTION)
-	lookup_lines.add_child(host.index_hint_label)
-
+	# The breadcrumb is as wide as its text, so the INDEX prompt starts right after it.
 	host.chapter_hint_label = Label.new()
-	host.chapter_hint_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	host.chapter_hint_label.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_MEDIUM))
 	host.chapter_hint_label.add_theme_font_size_override("font_size", AppTheme.TYPE_CAPTION)
 	host.chapter_hint_label.add_theme_color_override("font_color", AppTheme.SKY_400)
 	lookup_lines.add_child(host.chapter_hint_label)
+
+	host.index_hint_label = HuntView.make_index_label(AppTheme.TYPE_CAPTION)
+	host.index_hint_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	lookup_lines.add_child(host.index_hint_label)
 	host.lookup_box.visible = false
 
 	# Connect lookup box visibility to chapter hint
@@ -327,6 +326,9 @@ static func build(host: Main) -> void:
 	host.ref_column.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	host.ref_column.visible = false
 	host.answers_row.add_child(host.ref_column)
+	host.ref_tabs = RefTabs.new(26, AppTheme.TYPE_META)
+	host.ref_tabs.picked.connect(host._on_ref_tab_picked)
+	host.ref_column.add_child(host.ref_tabs)
 	for ref_panel in [host.question_table_panel, host.question_diagram_panel, host.formula_box]:
 		ref_panel.reparent(host.ref_column, false)
 

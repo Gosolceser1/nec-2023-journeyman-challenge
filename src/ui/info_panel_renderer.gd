@@ -126,13 +126,11 @@ func append_tip_rows(record: Dictionary, tip: String) -> bool:
 		label.pop()
 		label.pop()
 		label.pop()
-		label.push_color(AppTheme.GREEN_50 if is_correct else AppTheme.SLATE_300)
-		if is_correct:
-			label.push_bold()
-		label.add_text("  " + str(answers[i]))
-		if is_correct:
+		# The green card names the correct answer; its row gives the reason only.
+		if not is_correct:
+			label.push_color(AppTheme.SLATE_300)
+			label.add_text("  " + str(answers[i]))
 			label.pop()
-		label.pop()
 		var note := str(notes[i]).strip_edges()
 		if note != "":
 			label.push_color(AppTheme.EMERALD_200 if is_correct else AppTheme.SLATE_400)

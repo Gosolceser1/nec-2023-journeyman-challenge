@@ -72,6 +72,8 @@ BANK_RULES = [
     ("final-exam-#1-061", CHOICES, "is", "Class II, Division II"),
     ("final-exam-#1-066", GIST, "has", "flexible raceway"),
     ("final-exam-#1-070", STEM, "has", "3, 480v"),
+    ("final-exam-#1-045", ("article",), "is", "422.16(B)(1)(1)"),
+    ("open-book-exam-#4-006", ("article",), "is", "422.16(B)(1)(1)"),
     # Final Exam #3
     ("final-exam-#3-018", CHOICES, "is", '8"'),
     ("final-exam-#3-034", CHOICES, "is", '11/2"'),

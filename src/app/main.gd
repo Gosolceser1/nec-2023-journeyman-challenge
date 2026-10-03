@@ -76,6 +76,7 @@ var formula_box: PanelContainer
 var chapter_hint_label: Label
 var index_hint_label: Label
 var question_hint_row: HBoxContainer
+var ref_tabs: RefTabs
 var lookup_box: PanelContainer
 var question_panel: PanelContainer
 var article_label: Label
@@ -871,52 +872,30 @@ func _show_question() -> void:
 	question_table_panel.visible = question_table is Array and not question_table.is_empty() \
 			and not bool(record.get("table_after_answer", false))
 	if question_table_panel.visible:
-		var reference_lines := str(record.get("reference_text", "")).split("\n", false)
-		var table_title := reference_lines[0] if not reference_lines.is_empty() else str(record.get("article", "Reference table"))
-		# The title often IS the answer ("Table ___ lists..." + title "Table 300.5(A)...").
-		# Redact it pre-answer; blanked cells already hide in-table answers.
-		table_title = AudioExplanationGenerator.redact_answer_spans(table_title, current_correct_text)
-		if table_title.strip_edges() == "" or table_title.strip_edges() == "___":
-			table_title = "REFERENCE TABLE"
-		question_table_heading.text = "LOOK UP BEFORE ANSWERING  •  " + table_title
+		# The table's number is where the answer is: it waits for the answer.
+		question_table_heading.text = "REFERENCE TABLE"
 		_populate_reference_table(question_table_grid, question_table_note, question_table, current_correct_text, false, "")
 	question_diagram_panel.visible = question_diagram_view.show_record(record)
 	question_diagram_panel.add_theme_stylebox_override("panel", DiagramView.card_style(question_diagram_view.is_dark()))
-	var formula_str := str(record.get("formula", "")).strip_edges()
-	if formula_str != "":
-		# The formula box shows pre-answer: keep the method, blank a computed answer value.
-		question_formula_label.text = "FORMULA / METHOD:  " + AudioExplanationGenerator.redact_answer_spans(formula_str, current_correct_text)
-		question_formula_label.visible = true
-	else:
-		question_formula_label.visible = false
+	# Before answering the screen holds the stem, where to look, one reference
+	# and the choices. The gist, the table notes and the formula state the
+	# method (often the answer one multiplication away), so they wait for the
+	# explanation.
+	var both_refs := question_table_panel.visible and question_diagram_panel.visible
+	ref_tabs.show_for(both_refs)
+	question_table_heading.visible = not both_refs
+	if both_refs:
+		question_diagram_panel.visible = false
+	question_formula_label.visible = false
 	exam_label.text = "%s  |  %s  |  AVG %s / ITEM" % [session_name.to_upper(), ExamBlueprint.exam_name(), _format_time(ExamBlueprint.seconds_per_item())]
 	if is_instance_valid(exam_mode_pill):
 		exam_mode_pill.text = session_name.to_upper()
 	if is_instance_valid(exam_license_pill):
 		exam_license_pill.text = ExamBlueprint.exam_name()
-	# Pre-answer subtitle: the gist first; when empty, the info_tip's task-framing
-	# paragraph ("This asks...", never answer-bearing). Tips must NEVER stand in
-	# here — they name the answer ("Correct: B — ...") and blanking can hide the
-	# value but not the letter. Truly nothing to show means no subtitle row at all.
-	var gist := str(record.get("gist", "")).strip_edges()
-	if gist == "":
-		gist = _gist_task_sentence(record)
-	if gist != "" and current_correct_text != "":
-		# Blank EVERY mention: tips now name the answer (possibly twice), and the gist
-		# fallback would otherwise leak the second occurrence pre-answer.
-		var blank_guard := 0
-		while blank_guard < 8:
-			var match_info := AudioExplanationGenerator.find_match_in(gist, current_correct_text)
-			if match_info.is_empty():
-				break
-			var m_start := int(match_info["start"])
-			var m_len := int(match_info["length"])
-			gist = gist.substr(0, m_start) + "[ ___ ]" + gist.substr(m_start + m_len)
-			blank_guard += 1
-	article_label.text = gist
-	article_label.visible = gist != ""
+	article_label.text = ""
+	article_label.visible = false
 	if is_instance_valid(question_hint_row):
-		question_hint_row.visible = gist != ""
+		question_hint_row.visible = false
 	if NecReference.is_reference_seeking(str(record.get("prompt", "")), record.get("answers", [])):
 		# The stem asks WHICH table/article holds the rule — printing the article
 		# hands over the answer, so pre-answer navigation stops at chapter level.
@@ -925,7 +904,7 @@ func _show_question() -> void:
 		chapter_hint_label.text = AudioExplanationGenerator.redact_answer_spans(NecReference.lookup_path(record), current_correct_text)
 	chapter_hint_label.visible = chapter_hint_label.text != ""
 	hunt.show_question(record, current_correct_text)
-	formula_box.visible = question_formula_label.visible
+	formula_box.visible = false
 	progress_label.text = "QUESTION %02d OF %02d" % [current_index + 1, order.size()]
 	_update_score_badges()
 	timer_label.text = "TOTAL " + _format_time(maxi(time_left, 0)) if timed_session else "UNTIMED"
@@ -970,22 +949,14 @@ func _show_question() -> void:
 	_schedule_auto_read()
 	_update_key_hint()
 
-func _gist_task_sentence(record: Dictionary) -> String:
-	# info_tip layout: "WHAT THIS QUESTION MEANS / BACKGROUND / {background} //
-	# {task framing} // LOOKUP FOCUS / ...". The middle paragraph explains what the
-	# question asks without naming answers — safe pre-answer subtitle fallback.
-	var info := str(record.get("info_tip", ""))
-	if info == "":
-		return ""
-	var chunks := info.split("\n\n", false)
-	if chunks.size() < 3:
-		return ""
-	var task := chunks[1].strip_edges()
-	if task == "" or task.to_upper().begins_with("LOOKUP FOCUS"):
-		return ""
-	if not chunks[2].strip_edges().to_upper().begins_with("LOOKUP FOCUS"):
-		return ""
-	return task
+## Questions with a table and a figure: the tab picks which one shows.
+func _on_ref_tab_picked(figure: bool) -> void:
+	if current_answered:
+		return
+	question_table_panel.visible = not figure
+	question_diagram_panel.visible = figure
+	fit.refresh_ref_column()
+	fit.begin()
 
 func _answer_selected(selected: int) -> void:
 	var result := session.submit(selected, AudioSettings.grades_answers(session_audio_mode))
@@ -1011,26 +982,20 @@ func _answer_selected(selected: int) -> void:
 		QuizSession.Verdict.REVIEWED:
 			# Listen mode reviews, it does not test: no score, streak or missed list.
 			_set_feedback_verdict("Answer", AppTheme.SKY_400, "tip")
-			feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
-			feedback_body.visible = true
 		QuizSession.Verdict.TIMED_OUT:
 			_set_feedback_verdict("Time expired", AppTheme.RED_400, "clock")
-			feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
-			feedback_body.visible = true
 		QuizSession.Verdict.CORRECT:
 			_set_feedback_verdict("Correct", AppTheme.EMERALD_400, "check")
-			# The green card already shows the pick — a text echo of it is clutter.
-			feedback_body.text = ""
-			feedback_body.visible = false
 		QuizSession.Verdict.WRONG:
 			_set_feedback_verdict("Not quite", AppTheme.RED_400, "cross")
-			# One verdict line: your pick is already red on its card, no need to restate it.
-			feedback_body.text = "Correct answer: %s — %s" % [ANSWER_LETTERS[correct], correct_text]
-			feedback_body.visible = true
+	# The verdict is the whole line: the green card names the answer.
+	feedback_body.text = ""
+	feedback_body.visible = false
 	feedback_panel.visible = true
 	UiFx.reveal(feedback_panel, audio.reduce_motion)
 
 	question_table_panel.visible = false
+	ref_tabs.visible = false
 	# The figure stays up: the explanation talks about it by its labels. A
 	# teaching figure ("when": "after") appears now.
 	question_diagram_panel.visible = question_diagram_view.reveal(correct, audio.reduce_motion)
@@ -1054,7 +1019,13 @@ func _answer_selected(selected: int) -> void:
 	info_panel.show(record, correct_text, table_highlighted)
 	menu.study_hook("answered", [self, record, result["verdict"] == QuizSession.Verdict.CORRECT, result["verdict"] != QuizSession.Verdict.REVIEWED])
 	info_label.visible = true
+	if ui_mobile:
+		# The page already scrolls on a phone; the explanation grows into that
+		# one scroll rather than a second box inside it.
+		feedback_scroll.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	fit.compact_answered(correct, selected)
+	if ui_mobile:
+		feedback_scroll.custom_minimum_size.y = 0.0
 	# Answering always stops the readout in progress. The rule then plays by
 	# itself in Auto-read (unless "Also read the rule" is off) and in Listen;
 	# Tap to hear keeps it behind the "Hear the rule" button.

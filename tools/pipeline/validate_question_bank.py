@@ -203,9 +203,10 @@ def answer_in_text(answer: str, text: str) -> bool:
 
 
 def _pre_answer_tip(tip: str) -> str:
-    """The slice of info_tip the player sees BEFORE answering.
+    """The slice of info_tip that was the gist's pre-answer fallback.
 
-    Mirrors main.gd:_gist_task_sentence() exactly: split on blank lines, take
+    The app no longer shows the gist or this slice (before or after answering);
+    the check keeps the data safe should it return. Split on blank lines, take
     chunk[1] as the task framing, and only when chunk[2] begins with
     "LOOKUP FOCUS". Returns "" when the record has no safe pre-answer tip, so
     the caller checks nothing rather than everything.
@@ -247,7 +248,7 @@ def prompt_leak_excepted(record_id, prompt) -> bool:
 
 
 def pre_answer_visible_text(record: dict) -> str:
-    """Mirror main.gd: prefer gist; use the info_tip task only as its fallback."""
+    """The gist, else the info_tip task: the old pre-answer line (no longer shown)."""
     gist = record.get("gist")
     if isinstance(gist, str) and gist.strip():
         return gist.strip()
@@ -605,9 +606,8 @@ def check_records(data, rep: Report) -> dict:
                 )
 
         # answer leak into pre-answer text
-        # main.gd blanks the gist at runtime (AudioExplanationGenerator
-        # .find_match_in -> "[ ___ ]") before showing it, so a gist hit is a
-        # defect worth reporting but not one that ships a visible spoiler.
+        # The app never shows the gist (nor the info_tip task), so a hit there
+        # is a defect worth reporting but not one that ships a visible spoiler.
         # The prompt, by contrast, is displayed verbatim: a prompt leak is fatal.
         ci = rec.get("correct_index")
         if isinstance(answers, list) and isinstance(ci, int) and 0 <= ci < len(answers):
@@ -624,11 +624,11 @@ def check_records(data, rep: Report) -> dict:
                 if isinstance(v, str) and answer_in_text(ans, v):
                     rep.warn(
                         f"{rid}: correct answer {truncate(ans)!r} appears in 'gist' "
-                        f"(main.gd blanks gist at runtime, so no spoiler -- but the data is at risk)"
+                        f"(the gist is not shown, so no spoiler -- but the data is at risk)"
                     )
                 tip = rec.get("info_tip")
-                # main.gd uses the task paragraph only when gist is empty. Check
-                # that actual fallback, not a paragraph the learner won't see.
+                # The task paragraph was the fallback for an empty gist; check
+                # only that paragraph.
                 gist = rec.get("gist")
                 fallback = not (isinstance(gist, str) and gist.strip())
                 visible_tip = pre_answer_visible_text(rec) if fallback else ""
@@ -642,7 +642,7 @@ def check_records(data, rep: Report) -> dict:
                     )
                     rep.warn(
                         f"{rid}: correct answer {truncate(ans)!r} appears in info_tip "
-                        f"chapter '{chapter}' (shown before answering)"
+                        f"chapter '{chapter}' (the old pre-answer fallback)"
                     )
 
         stale = stale_stem_quote(rec.get("info_tip"), rec.get("prompt"))

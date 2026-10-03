@@ -460,7 +460,7 @@ func set_eliminated() -> void:
 	_lift_to(0.0)
 	mouse_default_cursor_shape = Control.CURSOR_ARROW
 	var tween: Tween = create_tween().set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
-	tween.tween_property(self, "modulate:a", 0.38, 0.22)
+	tween.tween_property(self, "modulate:a", 0.8, 0.22)
 	_apply_styling()
 	vector_state_icon.queue_redraw()
 
@@ -572,8 +572,8 @@ func _apply_styling() -> void:
 			accent_bar.color = Color(AppTheme.SLATE_500, 0.2)
 			pill_style.bg_color = AppTheme.GRAY_900
 			pill_style.border_color = AppTheme.CARD_ELIMINATED_PILL_BORDER
-			letter_label.add_theme_color_override("font_color", AppTheme.SLATE_600)
-			answer_label.add_theme_color_override("font_color", AppTheme.SLATE_500)
+			letter_label.add_theme_color_override("font_color", AppTheme.SLATE_400)
+			answer_label.add_theme_color_override("font_color", AppTheme.SLATE_300)
 		State.HOVER:
 			_state_style(style, AppTheme.CARD_HOVER_BG, AppTheme.SKY_300, AppTheme.BORDER_STRONG, AppTheme.ELEVATION_CARD, AppTheme.GLOW_CYAN)
 			accent_bar.color = AppTheme.SKY_300

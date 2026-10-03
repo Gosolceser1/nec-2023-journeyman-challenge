@@ -45,13 +45,8 @@ static func build(host: Main) -> void:
 	var title_box := HBoxContainer.new()
 	title_box.add_theme_constant_override("separation", AppTheme.SPACE_SM + 2)
 	header.add_child(title_box)
-	var title := Label.new()
-	title.text = MenuModel.fill(str(MenuModel.spec().get("title_short", "")), {"edition": Edition.short_label()})
+	var title := Widgets.make_brand_title(MenuModel.fill(str(MenuModel.spec().get("title_short", "")), {"edition": Edition.short_label()}), AppTheme.TYPE_BODY_LG - 1)
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title.clip_text = true
-	title.add_theme_font_override("font", AppTheme.ui_font(AppTheme.WEIGHT_BOLD))
-	title.add_theme_font_size_override("font_size", AppTheme.TYPE_BODY_LG - 1)
-	title.add_theme_color_override("font_color", AppTheme.SLATE_50)
 	title_box.add_child(title)
 	host.progress_label = Label.new()
 	host.progress_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
@@ -146,7 +141,8 @@ static func build(host: Main) -> void:
 	hint_hbox.add_child(host.article_label)
 
 	host.lookup_box = PanelContainer.new()
-	host.lookup_box.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.LOOKUP_BG, AppTheme.HAIRLINE_BRIGHT, AppTheme.BORDER_HAIRLINE, AppTheme.RADIUS_INNER))
+	# No visible frame at rest; the hairline is there for the keyword pick's amber pulse.
+	host.lookup_box.add_theme_stylebox_override("panel", AppTheme.panel_style(AppTheme.LOOKUP_BG, AppTheme.LOOKUP_BG, AppTheme.BORDER_HAIRLINE, AppTheme.RADIUS_INNER))
 	question_column.add_child(host.lookup_box)
 	var lookup_margin := MarginContainer.new()
 	lookup_margin.add_theme_constant_override("margin_left", AppTheme.SPACE_MD)
@@ -170,6 +166,10 @@ static func build(host: Main) -> void:
 		if is_instance_valid(host.lookup_box) and is_instance_valid(host.chapter_hint_label) and is_instance_valid(host.index_hint_label):
 			host.hunt.sync_lookup_box()
 	)
+
+	host.ref_tabs = RefTabs.new(36, AppTheme.TYPE_CAPTION)
+	host.ref_tabs.picked.connect(host._on_ref_tab_picked)
+	question_column.add_child(host.ref_tabs)
 
 	host.question_table_panel = PanelContainer.new()
 	host.question_table_panel.add_theme_stylebox_override("panel", AppTheme.surface(AppTheme.PAPER_BOTTOM, AppTheme.PAPER_BORDER, AppTheme.ELEVATION_REST, AppTheme.RADIUS_INNER))

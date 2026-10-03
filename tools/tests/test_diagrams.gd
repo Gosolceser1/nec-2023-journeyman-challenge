@@ -366,6 +366,10 @@ func _sweep() -> void:
 		main.current_index = 0
 		main._show_question()
 		main._auto_token += 1
+		# With a table too, one reference shows at a time: the figure is on its tab.
+		if main.ref_tabs.visible:
+			main.ref_tabs.figure_tab.button_pressed = true
+			main.ref_tabs.figure_tab.pressed.emit()
 		var view: DiagramView = main.question_diagram_view
 		var panel: Control = main.question_diagram_panel
 		var fig: Dictionary = m.get(qid, {})

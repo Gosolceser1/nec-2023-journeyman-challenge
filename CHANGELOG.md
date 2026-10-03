@@ -36,6 +36,24 @@
 
 ### Changed
 
+- **A calmer question screen that leaves the looking up to you.** Before you
+  answer the screen holds the question, one "where to look" line (the
+  NEC 2023 › Chapter › Article path with the INDEX prompt right beside it),
+  one reference and the choices. The gist line under the question, the
+  table's note and the FORMULA / METHOD strip now wait until you answer: they
+  spelled out the method, often leaving the answer one multiplication away.
+  The table is titled REFERENCE TABLE instead of by its number, and a
+  question with both a table and a figure shows the table with a Figure tab
+  instead of two stacked panels. The quiz header shows the Slash-Bolt mark
+  like the menu.
+- **The answer panel says each thing once.** After you answer, all four
+  choices stay on screen: the right one green, a wrong pick red, the others
+  dimmed but readable. The "Correct answer: C — 36 inches" line and the ✓
+  row's repeat of the answer are gone (the green card shows it), and the
+  reference reads "408.36(B) — Switchboards, Switchgear, and Panelboards"
+  instead of naming the article twice. Everything else in the panel is as
+  before. On a phone the explanation scrolls with the page instead of in a
+  box of its own.
 - **Study figures look like the real equipment.** Receptacles have proper
   5-15R/5-20R faces (GFCI test and reset buttons, hospital-grade dots),
   panelboards show their breakers, and disconnects, meters, transformers,
@@ -70,6 +88,8 @@
 
 ### Fixed
 
+- Two disposer-cord questions cited "422.16(B)(1)(1)"; they now cite
+  422.16(B)(1).
 - **Hover tips are readable.** They were Godot's default: a see-through,
   borderless strip in a different font that read as loose text over the tile
   beneath, often repeating it, and long tips ran off as one line. Tips now sit
