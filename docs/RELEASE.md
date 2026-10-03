@@ -1,9 +1,8 @@
 # Release
 
 How to build the shareable Windows zip, macOS zip and Android APK. Everything
-lands in `release/` (gitignored). Version 1.0.0 was the first release; 1.0.6 is
-current (CHANGELOG.md). The macOS zip is new after 1.0.6 and ships from the next
-release.
+lands in `release/` (gitignored). Version 1.0.0 was the first release; 1.0.7 is
+current (CHANGELOG.md). 1.0.7 is the first release with the macOS zip.
 
 ## What a recipient gets
 
@@ -96,8 +95,8 @@ Copy-Item "$real\editor_settings-4.7.tres" "$env:APPDATA\Godot\"
    ```powershell
    & $env:GODOT --headless --path . --import
    & $env:GODOT --headless --path . --export-release "Windows Desktop" "release/windows/NEC 2023 Journeyman Challenge.exe"
-   & $env:GODOT --headless --path . --export-release "Android Release" "release/android/NEC2023JourneymanChallenge_v1.0.6_Android.apk"
-   & $env:GODOT --headless --path . --export-release "macOS" "release/macos/NEC2023JourneymanChallenge_v1.0.6_macOS.zip"
+   & $env:GODOT --headless --path . --export-release "Android Release" "release/android/NEC2023JourneymanChallenge_v1.0.7_Android.apk"
+   & $env:GODOT --headless --path . --export-release "macOS" "release/macos/NEC2023JourneymanChallenge_v1.0.7_macOS.zip"
    ```
 
    Godot does not create output folders, so on a fresh clone run

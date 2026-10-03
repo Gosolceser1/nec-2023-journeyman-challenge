@@ -1,11 +1,11 @@
 # Changelog
 
-## [Unreleased]
+## [1.0.7] - 2026-10-03
 
 ### Added
 
-- **A Mac build.** The next release adds
-  `NEC2023JourneymanChallenge_v<version>_macOS.zip`: one app for Apple Silicon
+- **A Mac build.** This release adds
+  `NEC2023JourneymanChallenge_v1.0.7_macOS.zip`: one app for Apple Silicon
   and Intel Macs (macOS 11 or later on Apple Silicon, 10.13 or later on Intel),
   built on Windows like the others. It is ad-hoc signed but not notarized, so
   the first launch needs one confirmation: System Settings > Privacy &
