@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+<rect x="0.0" y="0.0" width="800.0" height="400.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Textile mill: fibers being made vs. fibers in storage</text>
+<rect x="20.0" y="70.0" width="370.0" height="260.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="4"/>
+<text x="205.0" y="112.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">carding and spinning:</text>
+<text x="205.0" y="138.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">fibers handled while</text>
+<text x="205.0" y="164.8" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">being manufactured</text>
+<rect x="60.0" y="220.0" width="84.0" height="46.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<circle cx="82.0" cy="243.0" r="13" fill="#0f172a" stroke="#94a3b8" stroke-width="2"/>
+<circle cx="122.0" cy="243.0" r="13" fill="#0f172a" stroke="#94a3b8" stroke-width="2"/>
+<rect x="164.0" y="220.0" width="84.0" height="46.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<circle cx="186.0" cy="243.0" r="13" fill="#0f172a" stroke="#94a3b8" stroke-width="2"/>
+<circle cx="226.0" cy="243.0" r="13" fill="#0f172a" stroke="#94a3b8" stroke-width="2"/>
+<rect x="268.0" y="220.0" width="84.0" height="46.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<circle cx="290.0" cy="243.0" r="13" fill="#0f172a" stroke="#94a3b8" stroke-width="2"/>
+<circle cx="330.0" cy="243.0" r="13" fill="#0f172a" stroke="#94a3b8" stroke-width="2"/>
+<text x="205.0" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">Class III, Division 1</text>
+<rect x="410.0" y="70.0" width="370.0" height="260.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="4"/>
+<text x="595.0" y="112.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">bale storage: fibers</text>
+<text x="595.0" y="138.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">stored or handled, not</text>
+<text x="595.0" y="164.8" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">manufactured</text>
+<rect x="450.0" y="220.0" width="44.0" height="46.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<line x1="463.0" y1="221.0" x2="463.0" y2="265.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="481.0" y1="221.0" x2="481.0" y2="265.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="514.0" y="220.0" width="44.0" height="46.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<line x1="527.0" y1="221.0" x2="527.0" y2="265.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="545.0" y1="221.0" x2="545.0" y2="265.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="578.0" y="220.0" width="44.0" height="46.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<line x1="591.0" y1="221.0" x2="591.0" y2="265.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="609.0" y1="221.0" x2="609.0" y2="265.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="642.0" y="220.0" width="44.0" height="46.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<line x1="655.0" y1="221.0" x2="655.0" y2="265.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="673.0" y1="221.0" x2="673.0" y2="265.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="706.0" y="220.0" width="44.0" height="46.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<line x1="719.0" y1="221.0" x2="719.0" y2="265.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="737.0" y1="221.0" x2="737.0" y2="265.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="595.0" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">Class III, Division 2</text>
+<rect x="627.9" y="362.0" width="158.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="637.9" y="390.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 500.5(D)</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="430" viewBox="0 0 800 430">
+<rect x="0.0" y="0.0" width="800.0" height="430.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Attached two-car garage (plan view)</text>
+<rect x="160.0" y="80.0" width="480.0" height="280.0" rx="0" fill="#1e293b" fill-opacity="0.6" stroke="none" stroke-width="2"/>
+<line x1="160.0" y1="80.0" x2="640.0" y2="80.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="160.0" y1="80.0" x2="160.0" y2="360.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="640.0" y1="80.0" x2="640.0" y2="360.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="174.0" y1="360.0" x2="190.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="198.0" y1="360.0" x2="214.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="222.0" y1="360.0" x2="238.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="246.0" y1="360.0" x2="262.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="270.0" y1="360.0" x2="286.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="294.0" y1="360.0" x2="310.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="318.0" y1="360.0" x2="334.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="342.0" y1="360.0" x2="358.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="366.0" y1="360.0" x2="382.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="390.0" y1="360.0" x2="406.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="414.0" y1="360.0" x2="430.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="438.0" y1="360.0" x2="454.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="462.0" y1="360.0" x2="478.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="486.0" y1="360.0" x2="502.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="510.0" y1="360.0" x2="526.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="534.0" y1="360.0" x2="550.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="558.0" y1="360.0" x2="574.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="582.0" y1="360.0" x2="598.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="606.0" y1="360.0" x2="622.0" y2="360.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="400.0" y="390.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">garage door</text>
+<line x1="400.0" y1="200.0" x2="400.0" y2="210.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="218.0" x2="400.0" y2="228.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="236.0" x2="400.0" y2="246.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="254.0" x2="400.0" y2="264.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="272.0" x2="400.0" y2="282.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="290.0" x2="400.0" y2="300.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="308.0" x2="400.0" y2="318.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="326.0" x2="400.0" y2="336.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="344.0" x2="400.0" y2="352.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="230.0" y="180.0" width="100.0" height="170.0" rx="18" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="3"/>
+<text x="280.0" y="272.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">car</text>
+<circle cx="280.0" cy="100.0" r="12" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="276.0" y1="88.0" x2="276.0" y2="81.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="284.0" y1="88.0" x2="284.0" y2="81.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="470.0" y="180.0" width="100.0" height="170.0" rx="18" fill="#334155" fill-opacity="1.0" stroke="#64748b" stroke-width="3"/>
+<text x="520.0" y="272.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">car</text>
+<circle cx="520.0" cy="100.0" r="12" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="516.0" y1="88.0" x2="516.0" y2="81.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="524.0" y1="88.0" x2="524.0" y2="81.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="400.0" y="150.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">one in each vehicle bay</text>
+<rect x="614.4" y="392.0" width="171.6" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="624.4" y="420.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 210.52(G)</text>
+</svg>

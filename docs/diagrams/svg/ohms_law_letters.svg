@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470">
+<rect x="0.0" y="0.0" width="800.0" height="470.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Ohm's law and the power formula</text>
+<circle cx="190.0" cy="250.0" r="150" fill="#1e293b" stroke="#94a3b8" stroke-width="4"/>
+<line x1="40.0" y1="250.0" x2="340.0" y2="250.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="190.0" y1="100.0" x2="190.0" y2="400.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="190.0" cy="250.0" r="56" fill="#334155" stroke="#e2e8f0" stroke-width="3"/>
+<text x="190.0" y="260.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">E I R P</text>
+<text x="112.0" y="164.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="middle">E =</text>
+<text x="112.0" y="194.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">I x R</text>
+<text x="112.0" y="217.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">P / I</text>
+<text x="268.0" y="164.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="middle">I =</text>
+<text x="268.0" y="194.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">E / R</text>
+<text x="268.0" y="217.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">P / E</text>
+<text x="112.0" y="296.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="middle">R =</text>
+<text x="112.0" y="326.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">E / I</text>
+<text x="112.0" y="349.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">E2 / P</text>
+<text x="268.0" y="296.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="middle">P =</text>
+<text x="268.0" y="326.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">E x I</text>
+<text x="268.0" y="349.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">I2 x R</text>
+<text x="190.0" y="434.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">E2 = E squared, I2 = I squared</text>
+<rect x="380.0" y="120.0" width="400.0" height="220.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="394.0" y="150.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">The letters</text>
+<text x="396.0" y="190.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">E = volts (electromotive force)</text>
+<text x="396.0" y="230.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">I = intensity of current, amps</text>
+<text x="396.0" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">R = ohms,  P (or W) = watts</text>
+<text x="396.0" y="312.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">W = E x I is the same as P = E x I</text>
+<rect x="656.8" y="432.0" width="129.2" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="666.8" y="460.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">Ohm's law</text>
+</svg>

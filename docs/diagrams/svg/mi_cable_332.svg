@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
+<rect x="0.0" y="0.0" width="800.0" height="440.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Type MI cable (cross-section)</text>
+<circle cx="200.0" cy="220.0" r="110" fill="#b45309" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="200.0" cy="220.0" r="94" fill="#e2e8f0" stroke="#ca8a04" stroke-width="1.5"/>
+<circle cx="164.0" cy="198.0" r="22" fill="#b45309" stroke="#ca8a04" stroke-width="2"/>
+<circle cx="236.0" cy="198.0" r="22" fill="#b45309" stroke="#ca8a04" stroke-width="2"/>
+<circle cx="200.0" cy="258.0" r="22" fill="#b45309" stroke="#ca8a04" stroke-width="2"/>
+<text x="200.0" y="370.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">mineral insulation packed around them</text>
+<line x1="400.0" y1="112.0" x2="250.0" y2="190.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="250.0" cy="190.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<text x="410.0" y="118.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">solid copper conductors</text>
+<line x1="400.0" y1="210.0" x2="304.0" y2="210.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="304.0" cy="210.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<text x="410.0" y="206.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">copper sheath: mechanical</text>
+<text x="410.0" y="228.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">protection</text>
+<text x="410.0" y="296.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">copper sheath: grounding</text>
+<text x="410.0" y="318.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">path</text>
+<rect x="633.9" y="404.0" width="152.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="643.9" y="432.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 332.104</text>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470">
+<rect x="0.0" y="0.0" width="800.0" height="470.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Overload units on a three-phase motor</text>
+<text x="240.0" y="80.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">L1</text>
+<line x1="240.0" y1="92.0" x2="240.0" y2="190.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="240.0" y1="250.0" x2="240.0" y2="330.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="340.0" y="80.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">L2</text>
+<line x1="340.0" y1="92.0" x2="340.0" y2="190.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="340.0" y1="250.0" x2="340.0" y2="330.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="440.0" y="80.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">L3</text>
+<line x1="440.0" y1="92.0" x2="440.0" y2="190.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="440.0" y1="250.0" x2="440.0" y2="330.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="210.0" y="190.0" width="60.0" height="60.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#fbbf24" stroke-width="3"/>
+<path d="M 222 220 q 6 -12 12 0 t 12 0 t 12 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="310.0" y="190.0" width="60.0" height="60.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#fbbf24" stroke-width="3"/>
+<path d="M 322 220 q 6 -12 12 0 t 12 0 t 12 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="410.0" y="190.0" width="60.0" height="60.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#fbbf24" stroke-width="3"/>
+<path d="M 422 220 q 6 -12 12 0 t 12 0 t 12 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="340.0" cy="380.0" r="50" fill="#334155" stroke="#e2e8f0" stroke-width="3"/>
+<text x="340.0" y="389.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">M</text>
+<polyline points="240.0,330.0 310.0,342.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="440.0,330.0 370.0,342.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="530.0" y="210.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">overload units:</text>
+<text x="530.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">three (one per phase)</text>
+<rect x="582.6" y="432.0" width="203.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="592.6" y="460.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Table 430.37</text>
+</svg>

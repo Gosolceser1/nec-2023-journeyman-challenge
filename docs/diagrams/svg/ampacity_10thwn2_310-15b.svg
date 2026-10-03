@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470">
+<rect x="0.0" y="0.0" width="800.0" height="470.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Three #10 THWN-2 conductors, 112 F ambient</text>
+<circle cx="150.0" cy="210.0" r="96" fill="#1e293b" stroke="#94a3b8" stroke-width="4"/>
+<circle cx="116.0" cy="180.0" r="22.0" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<circle cx="180.0" cy="180.0" r="22.0" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<circle cx="148.0" cy="236.0" r="22.0" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<text x="150.0" y="84.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">raceway, cut open</text>
+<text x="150.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">3 circuit</text>
+<text x="150.0" y="387.5" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">conductors</text>
+<rect x="300.0" y="60.0" width="480.0" height="340.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="316.0" y="96.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">#10 THWN-2</text>
+<line x1="310.0" y1="126.0" x2="770.0" y2="126.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="316.0" y="160.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">column</text>
+<text x="690.0" y="160.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#38bdf8" text-anchor="middle">90 C</text>
+<line x1="310.0" y1="180.0" x2="770.0" y2="180.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="316.0" y="214.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">table ampacity</text>
+<text x="690.0" y="214.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">40 A</text>
+<line x1="310.0" y1="234.0" x2="770.0" y2="234.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="316.0" y="268.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">x ambient factor</text>
+<text x="690.0" y="268.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">0.87</text>
+<line x1="310.0" y1="288.0" x2="770.0" y2="288.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="316.0" y="322.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">x count factor</text>
+<text x="690.0" y="322.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">1.00</text>
+<line x1="310.0" y1="342.0" x2="770.0" y2="342.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="316.0" y="376.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="start">= ampacity</text>
+<text x="690.0" y="376.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">34.8 A</text>
+<rect x="498.3" y="432.0" width="287.7" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="508.3" y="460.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Table 310.15(B)(1)(1)</text>
+</svg>

@@ -14,8 +14,9 @@ tools/diagrams/nec_style.py). Outputs:
   docs/diagrams/labels.json             every label's text and box (leak scan input)
 
 The build fails if a wired record has no figure, a record sits in two
-figures, or any label shows a record's answer outside that record's masks
-(tools/diagrams/leakscan.py).
+figures, a figure serves questions that cite different sections (one figure,
+one rule: see sections()), or any label shows a record's answer outside that
+record's masks (tools/diagrams/leakscan.py).
 """
 import argparse
 import datetime
@@ -81,6 +82,43 @@ def draw_all(modules=None, every_tier=False, bank=None):
         if bank is not None:
             strict_masks(out[name], bank)
     return out
+
+
+# Two citations of one rule: 503.1 scopes the Class III locations that 500.5(D) defines.
+SAME_SECTION = {"503.1": "500.5"}
+_SECTION = re.compile(r"(?<![\d.])(\d{2,3}\.\d+)")
+
+
+def sections(citation):
+    """The sections a citation names: '210.52(D)' -> {'210.52'}, 'Table 4, Chapter 9' ->
+    {'Chapter 9'}, 'Article 100' (a definition) -> {'100'}, 'General ...' -> {'general'}."""
+    c = citation.strip()
+    if c.lower().startswith("general"):
+        return {"general"}
+    found = {SAME_SECTION.get(s, s) for s in _SECTION.findall(c)}
+    if found:
+        return found
+    if re.search(r"\bchapter\s+9\b", c, re.I):
+        return {"Chapter 9"}
+    if re.search(r"\barticle\s+100\b", c, re.I):
+        return {"100"}
+    return {c}
+
+
+def topic_errors(name, d, bank):
+    """A figure teaches one rule: its `nec` names one section, every question it serves
+    cites that section, and its tag chip names no second one."""
+    topic = sections(d["nec"])
+    if len(topic) != 1:
+        return [f"{name}: nec {d['nec']!r} names {len(topic)} sections; a figure teaches one"]
+    errors = []
+    for rid in sorted(d["records"]):
+        if rid in bank and not topic <= sections(bank[rid].get("article", "")):
+            errors.append(f"{name}: {rid} cites {bank[rid].get('article')!r}, not the figure's {d['nec']!r}")
+    for text, *_ in d["fig"].labels:
+        if text.startswith("NEC ") and len(leakscan.location_refs(text)) > 1:
+            errors.append(f"{name}: tag chip {text!r} names more than one section")
+    return errors
 
 
 def strict_hits_for(d, rid, bank):
@@ -168,6 +206,7 @@ def validate(drawn, bank, check_missing=True):
     seen = {}
     for name, d in drawn.items():
         f = d["fig"]
+        errors += topic_errors(name, d, bank)
         for m in f.masks:
             for r in m.get("records") or []:
                 if r not in d["records"] and (wired(r) or not check_missing):

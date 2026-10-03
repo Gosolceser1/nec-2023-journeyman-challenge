@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
+<rect x="0.0" y="0.0" width="800.0" height="440.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Motor short-circuit and ground-fault device</text>
+<rect x="20.0" y="56.0" width="760.0" height="84.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="34.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Start: motor FLC from the table, not the nameplate (430.6(A)(1))</text>
+<text x="34.0" y="122.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">single-phase: Table 430.248, three-phase: Table 430.250</text>
+<rect x="20.0" y="156.0" width="760.0" height="266.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="34.0" y="186.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Maximum rating, percent of FLC</text>
+<text x="34.0" y="216.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="start"></text>
+<text x="364.0" y="216.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="start">others</text>
+<text x="554.0" y="216.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="start">wound rotor</text>
+<line x1="34.0" y1="225.0" x2="614.0" y2="225.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="34.0" y="252.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">nontime-delay fuse</text>
+<text x="364.0" y="252.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">300%</text>
+<text x="554.0" y="252.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">150%</text>
+<text x="34.0" y="288.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">dual-element fuse</text>
+<text x="364.0" y="288.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">175%</text>
+<text x="554.0" y="288.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">150%</text>
+<text x="34.0" y="324.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">inverse time breaker</text>
+<text x="364.0" y="324.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">250%</text>
+<text x="554.0" y="324.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">150%</text>
+<text x="34.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">instantaneous breaker</text>
+<text x="364.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">800%</text>
+<text x="554.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">800%</text>
+<text x="34.0" y="400.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">not a standard size: the next size up is allowed</text>
+</svg>

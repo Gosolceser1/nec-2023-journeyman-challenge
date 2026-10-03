@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+<rect x="0.0" y="0.0" width="800.0" height="420.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="36.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Industrial control panel with its own overcurrent protection</text>
+<rect x="44.0" y="110.0" width="78.0" height="72.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="57.0" cy="116.9" r="4.32" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="83.0" cy="116.9" r="4.32" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="109.0" cy="116.9" r="4.32" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="57.0" cy="175.1" r="4.32" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="83.0" cy="175.1" r="4.32" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="109.0" cy="175.1" r="4.32" fill="#64748b" stroke="none" stroke-width="2"/>
+<rect x="51.5" y="129.4" width="10.9" height="33.1" rx="2" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="52.9" y="131.4" width="8.3" height="15.2" rx="2" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="77.5" y="129.4" width="10.9" height="33.1" rx="2" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="78.9" y="131.4" width="8.3" height="15.2" rx="2" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="103.5" y="129.4" width="10.9" height="33.1" rx="2" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="104.9" y="131.4" width="8.3" height="15.2" rx="2" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<line x1="57.0" y1="139.0" x2="109.0" y2="139.0" stroke="#e2e8f0" stroke-width="2.6496000000000004" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="83.0" y="92.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">feeder OCPD</text>
+<polyline points="57.0,175.0 57.0,228.0 440.0,228.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="83.0,175.0 83.0,214.0 440.0,214.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="109.0,175.0 109.0,200.0 440.0,200.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="440.0" y="90.0" width="300.0" height="260.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<text x="590.0" y="124.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">industrial control panel</text>
+<rect x="470.0" y="180.0" width="70.0" height="64.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="481.7" cy="186.1" r="3.84" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="505.0" cy="186.1" r="3.84" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="528.3" cy="186.1" r="3.84" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="481.7" cy="237.9" r="3.84" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="505.0" cy="237.9" r="3.84" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="528.3" cy="237.9" r="3.84" fill="#64748b" stroke="none" stroke-width="2"/>
+<rect x="476.8" y="197.3" width="9.8" height="29.4" rx="2" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="477.9" y="199.0" width="7.4" height="13.5" rx="2" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="500.1" y="197.3" width="9.8" height="29.4" rx="2" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="501.3" y="199.0" width="7.4" height="13.5" rx="2" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="523.4" y="197.3" width="9.8" height="29.4" rx="2" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="524.6" y="199.0" width="7.4" height="13.5" rx="2" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<line x1="481.7" y1="205.8" x2="528.3" y2="205.8" stroke="#e2e8f0" stroke-width="2.3552" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="505.0" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#94a3b8" text-anchor="middle">panel OCPD</text>
+<rect x="580.0" y="160.0" width="130.0" height="34.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="580.0" y="210.0" width="130.0" height="34.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="580.0" y="260.0" width="130.0" height="34.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<text x="250.0" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">supply conductors:</text>
+<text x="250.0" y="296.4" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">feeders or taps</text>
+<text x="250.0" y="322.8" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">(see 240.21)</text>
+</svg>

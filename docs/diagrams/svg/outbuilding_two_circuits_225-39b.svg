@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470">
+<rect x="0.0" y="0.0" width="800.0" height="470.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Building supplied by two 2-wire branch circuits</text>
+<line x1="20.0" y1="330.0" x2="780.0" y2="330.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="50.0" y="170.0" width="220.0" height="160.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="3"/>
+<polyline points="42.0,170.0 160.0,106.0 278.0,170.0" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="160.0" y="356.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle"></text>
+<rect x="520.0" y="200.0" width="220.0" height="130.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="3"/>
+<polyline points="512.0,200.0 630.0,148.0 748.0,200.0" fill="none" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="630.0" y="356.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle"></text>
+<text x="200.0" y="318.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">main building</text>
+<text x="670.0" y="318.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">outbuilding</text>
+<rect x="80.0" y="200.0" width="56.0" height="90.0" rx="5" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<rect x="85.0" y="205.0" width="46.0" height="80.0" rx="3" fill="#334155" fill-opacity="0.55" stroke="#64748b" stroke-width="2"/>
+<circle cx="89.5" cy="209.5" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="126.5" cy="209.5" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="89.5" cy="280.5" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="126.5" cy="280.5" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<rect x="105.2" y="214.0" width="5.6" height="62.0" rx="2" fill="#0f172a" fill-opacity="0.6" stroke="none" stroke-width="2"/>
+<rect x="87.8" y="218.7" width="16.8" height="13.9" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="96.9" y="221.8" width="5.7" height="7.8" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="111.4" y="218.7" width="16.8" height="13.9" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="113.4" y="221.8" width="5.7" height="7.8" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="87.8" y="238.0" width="16.8" height="13.9" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="96.9" y="241.1" width="5.7" height="7.8" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="111.4" y="238.0" width="16.8" height="13.9" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="113.4" y="241.1" width="5.7" height="7.8" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="87.8" y="257.4" width="16.8" height="13.9" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="96.9" y="260.4" width="5.7" height="7.8" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="111.4" y="257.4" width="16.8" height="13.9" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="113.4" y="260.4" width="5.7" height="7.8" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="548.0" y="226.0" width="50.0" height="66.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<rect x="553.0" y="231.0" width="40.0" height="56.0" rx="3" fill="none" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="569.0" y="285.0" width="8.0" height="11.0" rx="2" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="596.0" y="240.5" width="8.0" height="10.6" rx="2" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="602.0" y1="245.8" x2="613.0" y2="232.6" stroke="#e2e8f0" stroke-width="5.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="613.0" cy="232.6" r="4.0" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="602.0" cy="245.8" r="4.0" fill="#1e293b" stroke="#e2e8f0" stroke-width="1.5"/>
+<polyline points="136.0,235.0 196.0,235.0 196.0,249.0 548.0,249.0" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="136.0,255.0 210.0,255.0 210.0,269.0 548.0,269.0" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="382.0" y="235.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">two 2-wire circuits</text>
+<text x="640.0" y="398.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">building disconnect rating:</text>
+<text x="640.0" y="440.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="middle">30 A min</text>
+<line x1="573.0" y1="378.0" x2="573.0" y2="292.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="573.0" cy="292.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<rect x="20.0" y="432.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="30.0" y="460.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 225.39(B)</text>
+</svg>

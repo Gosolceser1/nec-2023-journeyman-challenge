@@ -102,7 +102,7 @@ def mobile_home_disconnect(f):
     f.tag(f.w - 24, f.h - 10, "NEC 550.32(F)", anchor="end")
 
 
-@figure("se_cable_gooseneck_230-54b", h=450, nec="230.54(B) Exception, 230.54(C), 230.51(A)",
+@figure("se_cable_gooseneck_230-54b", h=450, nec="230.54(B) Exception",
         records={"final-exam-#3-047": {"when": "after", "terms": ["gooseneck"]}})
 def se_cable_gooseneck(f):
     wall = 420

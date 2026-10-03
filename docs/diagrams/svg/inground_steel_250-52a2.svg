@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect x="0.0" y="0.0" width="800.0" height="460.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="36.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">In-ground metal support structure (section view, not to scale)</text>
+<rect x="20.0" y="150.0" width="760.0" height="290.0" rx="0" fill="#3f2e1f" fill-opacity="0.75" stroke="none" stroke-width="2"/>
+<circle cx="32.0" cy="168.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="60.0" cy="424.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="88.0" cy="420.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="116.0" cy="416.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="144.0" cy="412.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="172.0" cy="408.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="200.0" cy="404.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="228.0" cy="400.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="256.0" cy="396.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="284.0" cy="392.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="312.0" cy="388.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="340.0" cy="384.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="368.0" cy="380.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="396.0" cy="376.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="424.0" cy="372.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="452.0" cy="368.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="480.0" cy="364.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="508.0" cy="360.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="536.0" cy="356.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="564.0" cy="352.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="592.0" cy="348.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="620.0" cy="344.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="648.0" cy="340.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="676.0" cy="336.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="704.0" cy="332.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="732.0" cy="328.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="760.0" cy="324.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="788.0" cy="320.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<line x1="20.0" y1="150.0" x2="780.0" y2="150.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="774.0" y="138.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="end">grade</text>
+<rect x="200.0" y="64.0" width="36.0" height="345.2" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<line x1="207.0" y1="66.0" x2="207.0" y2="407.2" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="229.0" y1="66.0" x2="229.0" y2="407.2" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="190.0" y="58.0" width="56.0" height="9.0" rx="1" fill="#64748b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<text x="250.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">steel column</text>
+<text x="250.0" y="113.5" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">of the building</text>
+<line x1="198.0" y1="409.2" x2="191.0" y2="409.2" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="185.0" y1="409.2" x2="178.0" y2="409.2" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="172.0" y1="409.2" x2="165.0" y2="409.2" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="159.0" y1="409.2" x2="152.0" y2="409.2" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="146.0" y1="409.2" x2="139.0" y2="409.2" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="133.0" y1="409.2" x2="126.0" y2="409.2" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="198.0" y1="150.0" x2="191.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="185.0" y1="150.0" x2="178.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="172.0" y1="150.0" x2="165.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="159.0" y1="150.0" x2="152.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="146.0" y1="150.0" x2="139.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="133.0" y1="150.0" x2="126.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="132.0" y1="156.0" x2="132.0" y2="403.2" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="132.0,150.0 138.0,162.0 126.0,162.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="132.0,409.2 126.0,397.2 138.0,397.2" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="120.0" y="280.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="end">10 ft</text>
+<text x="120.0" y="316.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="end">or more</text>
+<text x="256.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">in direct contact</text>
+<text x="256.0" y="328.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">with the earth</text>
+<rect x="470.0" y="190.0" width="300.0" height="170.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="484.0" y="220.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Permitted electrode</text>
+<text x="486.0" y="252.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">vertical, in the earth,</text>
+<text x="486.0" y="277.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">with or without</text>
+<text x="486.0" y="302.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">concrete encasement</text>
+<rect x="588.7" y="404.0" width="197.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="598.7" y="432.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 250.52(A)(2)</text>
+</svg>

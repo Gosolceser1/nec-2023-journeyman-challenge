@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+<rect x="0.0" y="0.0" width="800.0" height="420.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Back of a receptacle: what lands on each screw</text>
+<rect x="60.0" y="70.0" width="180.0" height="300.0" rx="16" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<text x="150.0" y="400.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">receptacle (back)</text>
+<circle cx="240.0" cy="130.0" r="16" fill="#d4a017" stroke="#e2e8f0" stroke-width="2"/>
+<text x="290.0" y="124.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">brass</text>
+<text x="290.0" y="150.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">hot conductor</text>
+<circle cx="240.0" cy="230.0" r="16" fill="#cbd5e1" stroke="#e2e8f0" stroke-width="2"/>
+<text x="290.0" y="224.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">silver</text>
+<text x="290.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">neutral (white)</text>
+<circle cx="240.0" cy="330.0" r="16" fill="#16a34a" stroke="#e2e8f0" stroke-width="2"/>
+<text x="290.0" y="324.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">green</text>
+<text x="290.0" y="356.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">EGC only (equipment grounding conductor)</text>
+<rect x="615.6" y="382.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="625.6" y="410.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 406.10(C)</text>
+</svg>

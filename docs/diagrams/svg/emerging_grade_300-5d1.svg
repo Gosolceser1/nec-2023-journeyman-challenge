@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+<rect x="0.0" y="0.0" width="800.0" height="480.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Direct-buried conductors rising up a pole (section view)</text>
+<rect x="20.0" y="330.0" width="760.0" height="130.0" rx="0" fill="#3f2e1f" fill-opacity="0.75" stroke="none" stroke-width="2"/>
+<circle cx="32.0" cy="348.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="60.0" cy="384.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="88.0" cy="420.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="116.0" cy="356.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="144.0" cy="392.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="172.0" cy="428.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="200.0" cy="364.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="228.0" cy="400.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="256.0" cy="436.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="284.0" cy="372.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="312.0" cy="408.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="340.0" cy="444.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="368.0" cy="380.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="396.0" cy="416.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="424.0" cy="352.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="452.0" cy="388.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="480.0" cy="424.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="508.0" cy="360.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="536.0" cy="396.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="564.0" cy="432.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="592.0" cy="368.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="620.0" cy="404.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="648.0" cy="440.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="676.0" cy="376.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="704.0" cy="412.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="732.0" cy="348.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="760.0" cy="384.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="788.0" cy="420.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<line x1="20.0" y1="330.0" x2="780.0" y2="330.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="774.0" y="320.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="end">finished grade</text>
+<line x1="260.0" y1="60.0" x2="260.0" y2="350.0" stroke="#a16207" stroke-width="20" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="282.0" y1="122.0" x2="282.0" y2="390.0" stroke="#94a3b8" stroke-width="16" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="282.0" y1="122.0" x2="282.0" y2="390.0" stroke="#64748b" stroke-width="12" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="279.4" y1="122.0" x2="279.4" y2="390.0" stroke="#e2e8f0" stroke-width="1.2000000000000002" stroke-linecap="round" stroke-opacity="0.35"/>
+<polyline points="282.0,390.0 282.0,430.0 662.0,430.0" fill="none" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="482.0" y="458.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">buried at the cover depth</text>
+<line x1="292.0" y1="122.0" x2="285.0" y2="122.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="279.0" y1="122.0" x2="272.0" y2="122.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="266.0" y1="122.0" x2="259.0" y2="122.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="253.0" y1="122.0" x2="246.0" y2="122.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="240.0" y1="122.0" x2="233.0" y2="122.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="227.0" y1="122.0" x2="220.0" y2="122.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="214.0" y1="122.0" x2="207.0" y2="122.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="201.0" y1="122.0" x2="194.0" y2="122.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="188.0" y1="122.0" x2="181.0" y2="122.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="175.0" y1="122.0" x2="168.0" y2="122.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="162.0" y1="122.0" x2="155.0" y2="122.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="149.0" y1="122.0" x2="142.0" y2="122.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="150.0" y1="128.0" x2="150.0" y2="324.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="150.0,122.0 156.0,134.0 144.0,134.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="150.0,330.0 144.0,318.0 156.0,318.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="136.0" y="234.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="end">8 ft</text>
+<text x="306.0" y="140.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">raceway or</text>
+<text x="306.0" y="164.2" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">enclosure</text>
+<line x1="342.0" y1="166.0" x2="290.0" y2="200.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="290.0" cy="200.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<text x="500.0" y="170.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">protected from</text>
+<text x="500.0" y="195.3" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">finished grade up</text>
+<text x="500.0" y="220.6" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">to the marked height</text>
+<rect x="601.0" y="38.0" width="185.0" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="611.0" y="66.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 300.5(D)(1)</text>
+</svg>

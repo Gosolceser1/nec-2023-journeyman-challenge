@@ -19,51 +19,52 @@ def _washer(f, x, y, w=110, h=124):
     f.circle(cx, cy, r * 0.7, fill=BG, stroke=LINE, sw=SW_THIN)
 
 
-@figure("single_load_circuits_210-11_422-12", h=480, nec="210.11(C)(2), 210.52(F), 422.12",
-        records={"open-book-exam-#1-020": {}, "final-exam-#3-039": {"when": "after"}})
-def single_load(f):
-    laundry = ["open-book-exam-#1-020"]
-    f.title("Two dwelling circuits that serve one load each", y=34)
-    f.panel(30, 80, 110, 230, label="panel", breakers=0)
-    f.breaker(57, 110, 56, 64)
-    f.breaker(57, 210, 56, 64)
-    # Laundry.
-    f.line(113, 142, 472, 142, WIRE_HOT, SW_WIRE)
-    f.receptacle(500, 142, 60)
-    px, py = _plug_cap(f, 500, 156, 26)
-    f.cable([(px, py), (px + 6, py + 26), (560, py + 34), (600, py + 20)], TEXT, 4)
-    _washer(f, 590, 84, 110, 124)
-    f.text(645, 236, "washer", T_NOTE, MUTED)
-    b = f.text(160, 112, "laundry circuit:", T_NOTE, TEXT, "start", True)
-    f.value(b[0] + b[2] + 12, 112, "20 A", 26, anchor="start", records=laundry, pad=5)
-    f.text(160, 178, "no other outlets", T_MIN, MUTED, "start")
-    # Furnace: louvered burner door over a blower door, flue on top.
-    fx, fy, fw, fh = 520, 272, 110, 140
-    f.line(113, 242, 545, 242, WIRE_HOT, SW_WIRE)
-    f.line(545, 242, 545, fy, WIRE_HOT, SW_WIRE)
-    f.rect(fx + 74, fy - 34, 24, 36, fill=STEEL, stroke=LINE, sw=SW_THIN)
+@figure("laundry_circuit_210-11c2", h=400, nec="210.11(C)(2)", records=["open-book-exam-#1-020"])
+def laundry_circuit(f):
+    f.title("Dwelling laundry: its own branch circuit", y=34)
+    f.panel(30, 90, 110, 200, label="panel", breakers=0)
+    f.breaker(57, 150, 56, 64)
+    f.line(113, 182, 472, 182, WIRE_HOT, SW_WIRE)
+    f.receptacle(500, 182, 70)
+    px, py = _plug_cap(f, 500, 198, 30)
+    f.cable([(px, py), (px + 6, py + 30), (580, py + 40), (620, py + 24)], TEXT, 4)
+    _washer(f, 610, 120, 130, 150)
+    f.text(675, 300, "washer", T_NOTE, MUTED)
+    b = f.text(170, 150, "laundry circuit:", T_NOTE, TEXT, "start", True)
+    f.value(b[0] + b[2] + 12, 150, "20 A", 26, anchor="start", pad=5, what="the circuit rating")
+    f.text(170, 220, "no other outlets on it", T_NOTE, MUTED, "start")
+    f.text(170, 248, "(in addition to the other circuits)", T_MIN, MUTED, "start")
+    f.tag(24, f.h - 12, "NEC 210.11(C)(2)")
+
+
+@figure("furnace_circuit_422-12", h=400, nec="422.12", when="after", records=["final-exam-#3-039"])
+def furnace_circuit(f):
+    f.title("Central heating equipment: its own branch circuit", y=34)
+    f.panel(30, 90, 110, 200, label="panel", breakers=0)
+    f.breaker(57, 150, 56, 64)
+    fx, fy, fw, fh = 560, 150, 130, 170
+    f.line(113, 182, fx, 182, WIRE_HOT, SW_WIRE)
+    f.rect(fx + 90, fy - 40, 26, 42, fill=STEEL, stroke=LINE, sw=SW_THIN)
     f.rect(fx, fy, fw, fh, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
     f.rect(fx + 8, fy + 10, fw - 16, fh * 0.42, fill="none", stroke=EDGE, sw=SW_THIN, rx=3)
     f.rect(fx + 8, fy + 18 + fh * 0.42, fw - 16, fh * 0.48 - 26, fill="none", stroke=EDGE, sw=SW_THIN, rx=3)
     for k in range(4):
-        f.line(fx + 20, fy + 24 + k * 11, fx + fw - 20, fy + 24 + k * 11, EDGE, 3)
-    f.text(fx + fw / 2, fy + fh + 28, "gas furnace", T_NOTE, MUTED)
-    f.text(160, 226, "furnace circuit:", T_NOTE, TEXT, "start", True)
-    f.lines(160, 300, ["individual branch circuit;", "its pump, valve, humidifier,", "air cleaner or A/C may share it"],
-            T_MIN, MUTED, "start", gap=1.2)
-    f.tag(24, f.h - 10, "NEC 210.11(C)(2), 422.12")
+        f.line(fx + 20, fy + 24 + k * 12, fx + fw - 20, fy + 24 + k * 12, EDGE, 3)
+    f.text(fx + fw / 2, fy + fh + 30, "gas furnace", T_NOTE, MUTED)
+    f.text(170, 160, "individual branch circuit", T_NOTE, OK, "start", True)
+    f.highlight(160, 132, 310, 40)
+    f.lines(170, 240, ["its pump, valve, humidifier,", "air cleaner or A/C", "may share it"], T_MIN, MUTED, "start",
+            gap=1.2)
+    f.tag(24, f.h - 12, "NEC 422.12")
 
 
-@figure("ocpd_vertical_240-33", h=480, when="after", nec="240.33, 240.81",
-        records={"final-exam-#3-015": {}, "open-book-exam-#2-001": {"like": "final-exam-#3-015"}})
+@figure("ocpd_vertical_240-33", h=480, when="after", nec="240.33", records=["final-exam-#3-015"])
 def ocpd_vertical(f):
     f.title("How an overcurrent device enclosure is mounted", y=34)
     f.dline(400, 70, 400, 370, EDGE, SW_THIN)
-    # Vertical fused switch: OK.
     f.disconnect(80, 90, 130, 200, on=True)
     f.text(145, 320, "vertical", T_LABEL, OK, bold=True)
     f.mark_ok(145, 360)
-    # The same switch laid on its side: not OK.
     cx, cy = 550, 180
     f.add(f'<g transform="rotate(-90 {cx} {cy})">')
     f.disconnect(cx - 60, cy - 100, 120, 200, on=True)
@@ -75,7 +76,23 @@ def ocpd_vertical(f):
     f.tag(f.w - 24, f.h - 8, "NEC 240.33", anchor="end")
 
 
-@figure("room_ac_cord_440-64", h=460, nec="440.64, 440.65",
+@figure("panelboard_faceup_408-43", h=420, when="after", nec="408.43", records=["open-book-exam-#2-001"])
+def panelboard_faceup(f):
+    f.title("Panelboard mounting position", y=34)
+    f.dline(400, 70, 400, 330, EDGE, SW_THIN)
+    f.wall(60, 70, 330, thick=18)
+    f.panel(100, 90, 130, 200, label=None, breakers=4)
+    f.text(165, 320, "on a wall", T_LABEL, OK, bold=True)
+    f.mark_ok(165, 362)
+    f.floor(260, 440, 780)
+    f.poly([(470, 260), (500, 232), (720, 232), (690, 260)], PANEL_2, TEXT, SW_OBJ)
+    f.poly([(500, 232), (520, 222), (700, 222), (720, 232)], PANEL, EDGE, SW_THIN)
+    f.text(595, 300, "face-up on the floor", T_LABEL, NO, bold=True)
+    f.mark_no(595, 346)
+    f.tag(f.w - 24, f.h - 10, "NEC 408.43", anchor="end")
+
+
+@figure("room_ac_cord_440-64", h=460, nec="440.64",
         records=["final-exam-#3-018"])
 def room_ac(f):
     f.title("Cord-connected room air conditioner (elevation)", y=34)
@@ -133,7 +150,7 @@ def battery_vent(f):
     f.tag(f.w - 24, f.h - 8, "NEC 480.10(A)", anchor="end")
 
 
-@figure("box_screws_314-27d", h=440, nec="314.27(D) Exception, 314.27(A)",
+@figure("box_screws_314-27d", h=440, nec="314.27(D)",
         records={"open-book-exam-#4-019": {"terms": ["No. 6"]}})
 def box_screws(f):
     f.title("Light equipment on an ordinary box (section)", y=34)
@@ -197,7 +214,7 @@ def airflow(f):
     f.tag(f.w - 24, 80, "NEC 110.13(B)", anchor="end")
 
 
-@figure("disconnect_relay_control_art100", h=440, nec="Article 100, 645.10",
+@figure("disconnect_relay_control_art100", h=440, nec="Article 100 (Remote Disconnect Control)",
         records={"open-book-exam-#10-006": {"terms": ["Remote Disconnect Control"]}})
 def relay_control(f):
     f.title("Pushbutton that opens a disconnecting means through a relay", y=34)
@@ -235,7 +252,7 @@ def relay_control(f):
     f.tag(f.w - 24, f.h - 8, "NEC Article 100", anchor="end")
 
 
-@figure("welding_tray_signs_630-42c", h=400, when="after", nec="630.42(A), 630.42(C)",
+@figure("welding_tray_signs_630-42c", h=400, when="after", nec="630.42(C)",
         records=["open-book-exam-#10-008"])
 def welding_tray(f):
     f.title("Dedicated cable tray for welding cables (elevation)", y=34)
@@ -255,7 +272,7 @@ def welding_tray(f):
     f.tag(24, 100, "NEC 630.42(C)")
 
 
-@figure("max_water_level_art100", h=420, nec="Article 100, 680.9, 680.22(B), 680.43(B)",
+@figure("max_water_level_art100", h=420, nec="Article 100 (Maximum Water Level)",
         records={"open-book-exam-#7-005": {"terms": ["Maximum Water Level"]},
                  "final-exam-#2-009": {"like": "open-book-exam-#7-005"}})
 def max_water(f):
@@ -273,7 +290,7 @@ def max_water(f):
     f.tag(f.w - 24, 90, "NEC Article 100", anchor="end")
 
 
-@figure("holiday_lighting_trees_590-4j", h=440, nec="590.4(J) Exception, 590.3(B)",
+@figure("holiday_lighting_trees_590-4j", h=440, nec="590.4(J)",
         records={"final-exam-#1-016": {"terms": ["strain relief"]},
                  "open-book-exam-#2-008": {"like": "final-exam-#1-016"}})
 def holiday_trees(f):
@@ -303,22 +320,14 @@ def holiday_trees(f):
     f.tag(f.w - 24, f.h - 10, "NEC 590.4(J) Ex.", anchor="end")
 
 
-@figure("rv_park_supply_551-71_551-72", h=500, nec="551.71(A)-(C), 551.72(B)",
-        records={"open-book-exam-#10-023": {}, "final-exam-#3-002": {"terms": ["two ungrounded"]}})
-def rv_park(f):
-    pct = ["open-book-exam-#10-023"]
-    feeder = ["final-exam-#3-002"]
-    f.title("RV park: receptacles per site and a 3-phase feeder", y=34)
-    f.card(20, 56, 440, 400, "Site supply pedestal")
-    # Pedestal: head with three receptacles under flip covers, on its post.
-    px, pw = 44, 120
-    f.rect(px + 38, 380, pw - 76, 50, fill=STEEL, stroke=LINE, sw=SW_THIN)
-    f.line(36, 430, 180, 430, LINE, SW_STRUCT)
+def _pedestal(f, px=60, pw=130):
+    """RV site supply pedestal: head with three receptacles under flip covers, on its post."""
+    f.rect(px + 40, 380, pw - 80, 50, fill=STEEL, stroke=LINE, sw=SW_THIN)
+    f.line(px - 20, 430, px + pw + 20, 430, LINE, SW_STRUCT)
     f.rect(px, 104, pw, 278, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=10)
     f.rect(px - 4, 98, pw + 8, 14, fill=EDGE, stroke=TEXT, sw=SW_THIN, rx=4)
     cx = px + pw / 2
-    rows = ((146, 20), (232, 26), (322, 30))
-    for k, (cy, r) in enumerate(rows):
+    for k, (cy, r) in enumerate(((146, 20), (232, 26), (322, 30))):
         f.rect(cx - r - 12, cy - r - 16, 2 * r + 24, 2 * r + 30, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=5)
         f.line(cx - r - 6, cy - r - 10, cx + r + 6, cy - r - 10, LINE, 3)
         if k == 0:
@@ -326,22 +335,35 @@ def rv_park(f):
         else:
             f.circle(cx, cy + 4, r, fill=PANEL_2, stroke=TEXT, sw=2)
             f.circle(cx, cy + 4, r * 0.76, fill=BG, stroke=EDGE, sw=SW_THIN)
-    tx = 186
+
+
+@figure("rv_receptacles_551-71", h=470, nec="551.71", records=["open-book-exam-#10-023"])
+def rv_receptacles(f):
+    f.title("RV park site supply pedestal", y=34)
+    _pedestal(f)
+    tx = 230
     f.text(tx, 140, "20 A, 125 V", T_NOTE, TEXT, "start", True)
     f.text(tx, 166, "every site", T_NOTE, MUTED, "start")
     f.text(tx, 226, "30 A, 125 V", T_NOTE, TEXT, "start", True)
     b = f.text(tx, 254, "at least", T_NOTE, MUTED, "start")
-    f.value(b[0] + b[2] + 10, 254, "70%", 26, anchor="start", records=pct, pad=5)
+    f.value(b[0] + b[2] + 10, 254, "70%", 26, anchor="start", pad=5, what="the share of sites")
     f.text(tx, 282, "of the sites", T_NOTE, MUTED, "start")
     f.text(tx, 316, "50 A, 125/250 V", T_NOTE, TEXT, "start", True)
     f.lines(tx, 342, ["40% of new sites,", "20% of existing"], T_NOTE, MUTED, "start", gap=1.15)
     f.text(tx, 430, "all weather-resistant", T_MIN, MUTED, "start")
-    f.card(480, 56, 300, 400, "208Y/120 V 3-phase feeder")
-    cx, cy = 630, 220
-    f.circle(cx, cy, 86, fill=PANEL, stroke=LINE, sw=SW_STRUCT)
-    for (dx, dy), c in zip(((-30, -30), (30, -30), (-30, 30), (30, 30)), (WIRE_HOT, WIRE_HOT, "#f8fafc", WIRE_GND)):
-        f.circle(cx + dx, cy + dy, 22, fill=c, stroke=BG, sw=SW_THIN)
-    f.lines(496, 350, ["2 ungrounded: permitted", "1 grounded conductor and", "1 EGC: both required"],
-            T_MIN, TEXT, "start", gap=1.25)
-    f.mask(490, 120, 280, 330, records=feeder, what="the feeder conductors")
-    f.tag(24, f.h - 12, "NEC 551.71, 551.72(B)")
+    f.tag(f.w - 24, f.h - 12, "NEC 551.71", anchor="end")
+
+
+@figure("rv_feeder_551-72", h=420, nec="551.72(B)", records={"final-exam-#3-002": {"terms": ["two ungrounded"]}})
+def rv_feeder(f):
+    f.title("RV park feeder from a 208Y/120 V, 3-phase system", y=34)
+    cx, cy = 220, 220
+    f.circle(cx, cy, 110, fill=PANEL, stroke=LINE, sw=SW_STRUCT)
+    f.text(cx, 362, "feeder raceway (section)", T_NOTE, MUTED)
+    for (dx, dy), c in zip(((-40, -40), (40, -40), (-40, 40), (40, 40)), (WIRE_HOT, WIRE_HOT, "#f8fafc", WIRE_GND)):
+        f.circle(cx + dx, cy + dy, 28, fill=c, stroke=BG, sw=SW_THIN)
+    f.mask(100, 100, 240, 240, what="the feeder conductors")
+    f.card(400, 90, 380, 220, "Permitted feeder")
+    f.value_lines(416, 160, ["2 ungrounded: permitted", "1 grounded conductor and", "1 EGC: both required"],
+                  T_MIN, TEXT, anchor="start", bold=False, pad=6, gap=1.3, what="the feeder conductors")
+    f.tag(f.w - 24, f.h - 12, "NEC 551.72(B)", anchor="end")

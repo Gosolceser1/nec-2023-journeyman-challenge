@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect x="0.0" y="0.0" width="800.0" height="460.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="36.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Underground wiring near a pool (plan view)</text>
+<rect x="150.0" y="70.0" width="440.0" height="330.0" rx="4" fill="#0ea5e9" fill-opacity="0.1" stroke="#0ea5e9" stroke-width="3"/>
+<rect x="150.0" y="70.0" width="440.0" height="330.0" rx="6" fill="none" fill-opacity="1.0" stroke="#0ea5e9" stroke-width="2"/>
+<rect x="260.0" y="180.0" width="220.0" height="110.0" rx="0" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="3"/>
+<text x="370.0" y="243.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">POOL</text>
+<text x="162.0" y="386.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#0ea5e9" text-anchor="start">zone around the pool</text>
+<line x1="420.0" y1="296.0" x2="420.0" y2="394.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="420.0,290.0 426.0,302.0 414.0,302.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="420.0,400.0 414.0,388.0 426.0,388.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="436.0" y="354.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="start">5 ft</text>
+<line x1="40.0" y1="110.0" x2="400.0" y2="110.0" stroke="#94a3b8" stroke-width="14" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="40.0" y1="110.0" x2="400.0" y2="110.0" stroke="#64748b" stroke-width="10" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="40.0" y1="107.8" x2="400.0" y2="107.8" stroke="#e2e8f0" stroke-width="1.0" stroke-linecap="round" stroke-opacity="0.35"/>
+<line x1="400.0" y1="104.0" x2="400.0" y2="178.0" stroke="#94a3b8" stroke-width="14" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="104.0" x2="400.0" y2="178.0" stroke="#64748b" stroke-width="10" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="397.8" y1="104.0" x2="397.8" y2="178.0" stroke="#e2e8f0" stroke-width="1.0" stroke-linecap="round" stroke-opacity="0.35"/>
+<text x="606.0" y="150.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">zone measured</text>
+<text x="606.0" y="174.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">horizontally from</text>
+<text x="606.0" y="198.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">the inside wall</text>
+<text x="606.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">LFMC listed for</text>
+<text x="606.0" y="274.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">direct burial is</text>
+<text x="606.0" y="298.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">permitted in it</text>
+<rect x="615.6" y="422.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="625.6" y="450.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 680.11(A)</text>
+</svg>

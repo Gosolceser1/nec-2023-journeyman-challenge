@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+<rect x="0.0" y="0.0" width="800.0" height="420.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="36.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Rebar you cannot reach without disturbing the concrete</text>
+<rect x="20.0" y="150.0" width="760.0" height="250.0" rx="0" fill="#3f2e1f" fill-opacity="0.75" stroke="none" stroke-width="2"/>
+<circle cx="32.0" cy="168.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="60.0" cy="324.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="88.0" cy="260.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="116.0" cy="196.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="144.0" cy="352.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="172.0" cy="288.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="200.0" cy="224.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="228.0" cy="380.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="256.0" cy="316.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="284.0" cy="252.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="312.0" cy="188.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="340.0" cy="344.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="368.0" cy="280.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="396.0" cy="216.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="424.0" cy="372.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="452.0" cy="308.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="480.0" cy="244.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="508.0" cy="180.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="536.0" cy="336.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="564.0" cy="272.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="592.0" cy="208.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="620.0" cy="364.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="648.0" cy="300.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="676.0" cy="236.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="704.0" cy="172.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="732.0" cy="328.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="760.0" cy="264.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="788.0" cy="200.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<line x1="20.0" y1="150.0" x2="780.0" y2="150.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="774.0" y="138.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="end">grade</text>
+<rect x="180.0" y="60.0" width="40.0" height="210.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<text x="240.0" y="90.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">foundation wall</text>
+<rect x="120.0" y="270.0" width="160.0" height="60.0" rx="0" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="128.0" cy="303.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="162.0" cy="297.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="196.0" cy="298.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="230.0" cy="299.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="264.0" cy="300.0" r="2.5" fill="#64748b" stroke="none" stroke-width="2"/>
+<line x1="134.0" y1="300.0" x2="266.0" y2="300.0" stroke="#64748b" stroke-width="7" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="300.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">rebar sealed in the footing:</text>
+<text x="300.0" y="326.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">not part of the electrode system</text>
+<text x="40.0" y="390.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">allowed where the building is</text>
+<text x="355.6" y="390.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">an existing building</text>
+<rect x="646.2" y="38.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="656.2" y="66.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 250.50</text>
+</svg>

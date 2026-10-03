@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+<rect x="0.0" y="0.0" width="800.0" height="420.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">RV park feeder from a 208Y/120 V, 3-phase system</text>
+<circle cx="220.0" cy="220.0" r="110" fill="#1e293b" stroke="#94a3b8" stroke-width="4"/>
+<text x="220.0" y="362.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">feeder raceway (section)</text>
+<circle cx="180.0" cy="180.0" r="28" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+<circle cx="260.0" cy="180.0" r="28" fill="#e2e8f0" stroke="#0f172a" stroke-width="2"/>
+<circle cx="180.0" cy="260.0" r="28" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+<circle cx="260.0" cy="260.0" r="28" fill="#86efac" stroke="#0f172a" stroke-width="2"/>
+<rect x="400.0" y="90.0" width="380.0" height="220.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="414.0" y="120.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Permitted feeder</text>
+<text x="416.0" y="160.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">2 ungrounded: permitted</text>
+<text x="416.0" y="186.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">1 grounded conductor and</text>
+<text x="416.0" y="212.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">1 EGC: both required</text>
+<rect x="615.6" y="382.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="625.6" y="410.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 551.72(B)</text>
+</svg>

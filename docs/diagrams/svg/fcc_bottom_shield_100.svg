@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
+<rect x="0.0" y="0.0" width="800.0" height="440.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Flat conductor cable layers (exploded, not to scale)</text>
+<polygon points="60.0,114.0 120.0,90.0 440.0,90.0 380.0,114.0" fill="#64748b" fill-opacity="0.85" stroke="#e2e8f0" stroke-width="2"/>
+<text x="460.0" y="108.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">top shield (metal)</text>
+<polygon points="60.0,194.0 120.0,170.0 440.0,170.0 380.0,194.0" fill="#cbd5e1" fill-opacity="0.85" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="128.5" y1="177.0" x2="396.5" y2="177.0" stroke="#b45309" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="116.0" y1="182.0" x2="384.0" y2="182.0" stroke="#b45309" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="103.5" y1="187.0" x2="371.5" y2="187.0" stroke="#b45309" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="460.0" y="188.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">FCC cable</text>
+<polygon points="60.0,274.0 120.0,250.0 440.0,250.0 380.0,274.0" fill="#64748b" fill-opacity="0.85" stroke="#e2e8f0" stroke-width="2"/>
+<text x="460.0" y="268.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">bottom shield</text>
+<polygon points="60.0,354.0 120.0,330.0 440.0,330.0 380.0,354.0" fill="#94a3b8" fill-opacity="0.85" stroke="#e2e8f0" stroke-width="2"/>
+<text x="460.0" y="348.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">floor</text>
+<text x="300.0" y="404.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">protects the cable from damage at the floor</text>
+<rect x="632.7" y="44.0" width="153.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="642.7" y="72.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Art. 100</text>
+</svg>

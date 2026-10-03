@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+<rect x="0.0" y="0.0" width="800.0" height="380.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Laundry: appliance receptacle outlet (plan view)</text>
+<rect x="80.0" y="80.0" width="640.0" height="240.0" rx="0" fill="#1e293b" fill-opacity="0.6" stroke="none" stroke-width="2"/>
+<line x1="80.0" y1="80.0" x2="720.0" y2="80.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="80.0" y1="80.0" x2="80.0" y2="320.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="720.0" y1="80.0" x2="720.0" y2="320.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="120.0" y="90.0" width="120.0" height="110.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="180.0" cy="145.0" r="40" fill="none" stroke="#64748b" stroke-width="2"/>
+<text x="180.0" y="152.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">washer</text>
+<circle cx="560.0" cy="100.0" r="12" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="556.0" y1="88.0" x2="556.0" y2="81.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="564.0" y1="88.0" x2="564.0" y2="81.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="240.0" y1="206.0" x2="240.0" y2="213.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="240.0" y1="219.0" x2="240.0" y2="226.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="240.0" y1="232.0" x2="240.0" y2="239.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="116.0" x2="560.0" y2="123.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="129.0" x2="560.0" y2="136.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="142.0" x2="560.0" y2="149.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="155.0" x2="560.0" y2="162.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="168.0" x2="560.0" y2="175.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="181.0" x2="560.0" y2="188.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="194.0" x2="560.0" y2="201.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="207.0" x2="560.0" y2="214.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="220.0" x2="560.0" y2="227.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="233.0" x2="560.0" y2="240.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="246.0" y1="230.0" x2="554.0" y2="230.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="240.0,230.0 252.0,224.0 252.0,236.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="560.0,230.0 548.0,236.0 548.0,224.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">within 6 ft (72 in)</text>
+<text x="80.0" y="350.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">measured from the intended appliance location</text>
+<rect x="615.6" y="344.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="625.6" y="372.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 210.50(C)</text>
+</svg>

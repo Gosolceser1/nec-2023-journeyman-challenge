@@ -14,58 +14,65 @@ def _rock(f, x0, x1, y):
     f.poly(pts, "#57534e", EDGE, SW_THIN)
 
 
-@figure("electrode_rod_pipe_ring_250-52_250-53a4", h=500,
-        nec="250.52(A)(4), 250.52(A)(5), 250.53(A)(4)",
-        records={RODS[0]: {}, RODS[1]: {"like": RODS[0]}, TRENCHES[0]: {}, TRENCHES[1]: {"like": TRENCHES[0]},
-                 PIPE[0]: {}, RING[0]: {}})
-def electrode_rod_pipe_ring(f):
-    f.title("Rod electrodes: three ways in, and the minimum sizes", y=34)
-    grade, ft = 150, 26.0
-    f.grade(grade, 20, 520, label=None, soil_h=f.h - grade - 70)
-    _rock(f, 170, 520, 330)
-    f.text(430, 368, "rock bottom", T_NOTE, TEXT, bold=True)
-    for x, cap in ((70, "vertical"), (240, "at an angle"), (430, "in a trench")):
+@figure("rod_rock_bottom_250-53a4", h=470, nec="250.53(A)(4)",
+        records={TRENCHES[0]: {}, TRENCHES[1]: {"like": TRENCHES[0]}})
+def rod_rock_bottom(f):
+    f.title("Driving a ground rod: three ways in (section view)", y=34)
+    grade, ft = 150, 28.0
+    f.grade(grade, 20, f.w - 20, label=None, soil_h=f.h - grade - 70)
+    _rock(f, 260, 780, 350)
+    f.text(640, 392, "rock bottom", T_NOTE, TEXT, bold=True)
+    for x, cap in ((100, "vertical"), (330, "at an angle"), (620, "in a trench")):
         f.text(x, 110, cap, T_NOTE, TEXT, bold=True)
-    # Vertical: the normal case.
-    rlen = 8 * ft
-    f.rod(70, grade, rlen)
-    f.ext(80, grade + rlen, 118, grade + rlen)
-    f.dim_v(110, grade, grade + rlen)
-    f.text(118, 266, "8 ft", T_VALUE, DIM, "start", True)
-    # Angled: rock bottom, no more than 45 degrees from vertical.
-    ax, run = 190, rlen * 0.7071
+    rlen = 7 * ft
+    f.rod(100, grade, rlen)
+    f.ext(110, grade + rlen, 158, grade + rlen)
+    f.dim_v(150, grade, grade + rlen)
+    f.lines(160, 260, ["8 ft", "in soil"], T_NOTE, DIM, "start", True, gap=1.1)
+    ax, run = 270, rlen * 0.7071
     f.dline(ax, grade, ax, grade + 170, MUTED, SW_THIN)
     f.line(ax, grade, ax + run, grade + run, ROD, 9)
     f.poly([(ax + run + 2, grade + run - 6), (ax + run - 6, grade + run + 2), (ax + run + 8, grade + run + 8)], ROD)
     f.path(f"M {ax} {grade + 80} A 80 80 0 0 0 {ax + 56.6:.1f} {grade + 56.6:.1f}", DIM, SW_THIN)
     f.lines(ax + 44, grade + 122, ["45 deg", "max"], T_MIN, DIM, bold=True, gap=1.0)
-    # Trench: rock bottom, laid flat.
-    tx0, tx1, depth = 360, 505, 2.5 * ft
+    tx0, tx1, depth = 520, 720, 2.5 * ft
     f.rect(tx0, grade, tx1 - tx0, depth, fill=TRENCH, stroke=EDGE, sw=SW_THIN)
     f.line(tx0 + 12, grade + depth - 8, tx1 - 12, grade + depth - 8, ROD, 9)
-    f.ext(tx1 + 2, grade + depth, 516, grade + depth)
-    f.dim_v(510, grade, grade + depth)
-    f.value(430, grade + depth + 40, "30 in", records=TRENCHES, what="the trench depth")
-    f.text(430, grade + depth + 70, "deep, or more", T_MIN, MUTED)
-    f.lines(34, 458, ["8 ft of rod in contact with soil in every case"], T_NOTE, MUTED, "start")
-    # Minimum sizes.
-    x0, y0 = 540, 56
-    f.rect(x0, y0, 240, 390, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    f.text(x0 + 14, y0 + 32, "Minimum sizes", T_NOTE, TEXT, "start", True)
-    f.text(x0 + 14, y0 + 78, "rod, coated steel", T_NOTE, TEXT, "start")
-    f.text(x0 + 14, y0 + 102, "or stainless:", T_NOTE, TEXT, "start")
-    f.value(x0 + 14, y0 + 140, "5/8 in dia.", 28, anchor="start", pad=6, records=RODS, what="the rod diameter")
-    f.line(x0 + 14, y0 + 164, x0 + 226, y0 + 164, EDGE, 1)
-    f.text(x0 + 14, y0 + 194, "pipe or conduit:", T_NOTE, TEXT, "start")
-    f.value(x0 + 14, y0 + 232, "trade size 3/4", 28, anchor="start", pad=6, records=PIPE,
-            what="the pipe trade size")
-    f.text(x0 + 14, y0 + 260, "steel: galvanized", T_MIN, MUTED, "start")
-    f.line(x0 + 14, y0 + 278, x0 + 226, y0 + 278, EDGE, 1)
-    f.text(x0 + 14, y0 + 308, "ground ring, bare:", T_NOTE, TEXT, "start")
-    f.value(x0 + 14, y0 + 346, "2 AWG copper", 28, anchor="start", pad=6, records=RING,
-            what="the ground ring size")
-    f.text(x0 + 14, y0 + 374, "20 ft or more long", T_MIN, MUTED, "start")
-    f.tag(f.w - 24, f.h - 14, "NEC 250.52(A), 250.53(A)", anchor="end")
+    f.ext(tx1 + 2, grade + depth, 746, grade + depth)
+    f.dim_v(740, grade, grade + depth)
+    f.value(620, grade + depth + 40, "30 in", what="the trench depth")
+    f.text(620, grade + depth + 70, "deep, or more", T_MIN, MUTED)
+    f.tag(24, f.h - 14, "NEC 250.53(A)(4)")
+
+
+@figure("rod_pipe_size_250-52a5", h=420, nec="250.52(A)(5)",
+        records={RODS[0]: {}, RODS[1]: {"like": RODS[0]}, PIPE[0]: {}})
+def rod_pipe_size(f):
+    f.title("Rod and pipe electrodes: minimum sizes", y=34)
+    f.rect(120, 80, 30, 280, fill=ROD, stroke=AMBER, sw=SW_THIN, rx=4)
+    f.poly([(120, 360), (150, 360), (135, 392)], ROD, AMBER, SW_THIN)
+    f.lines(190, 116, ["rod: copper-coated steel", "or stainless"], T_NOTE, TEXT, "start", True, gap=1.1)
+    f.value(190, 186, "5/8 in diameter", 28, anchor="start", pad=6, records=RODS, what="the rod diameter")
+    f.rect(520, 80, 60, 300, fill=STEEL, stroke=LINE, sw=SW_OBJ, rx=3)
+    f.rect(532, 80, 36, 300, fill=PANEL_2, stroke=LINE, sw=SW_THIN)
+    f.lines(600, 116, ["pipe or conduit", "electrode"], T_NOTE, TEXT, "start", True, gap=1.1)
+    f.value(600, 186, "trade size 3/4", 28, anchor="start", pad=6, records=PIPE, what="the pipe trade size")
+    f.lines(600, 240, ["steel: galvanized or", "metal-coated"], T_MIN, MUTED, "start", gap=1.1)
+    f.tag(f.w - 24, f.h - 14, "NEC 250.52(A)(5)", anchor="end")
+
+
+@figure("ground_ring_250-52a4", h=420, nec="250.52(A)(4)", records=RING)
+def ground_ring(f):
+    f.title("Ground ring around a building (plan view)", y=34)
+    f.rect(160, 110, 300, 200, fill=PANEL, stroke=LINE, sw=SW_STRUCT)
+    f.text(310, 218, "building", T_LABEL, TEXT, bold=True)
+    f.rect(120, 76, 380, 268, stroke=ROD, sw=6, rx=10)
+    f.text(310, 376, "bare copper ring in contact with the earth", T_NOTE, MUTED)
+    f.text(540, 130, "ring conductor:", T_NOTE, TEXT, "start", True)
+    f.value(540, 172, "2 AWG or larger", T_LABEL, anchor="start", pad=6, what="the ring size")
+    f.text(540, 236, "20 ft or more", T_NOTE, TEXT, "start", True)
+    f.text(540, 264, "of conductor", T_NOTE, MUTED, "start")
+    f.tag(f.w - 24, f.h - 14, "NEC 250.52(A)(4)", anchor="end")
 
 
 FAIR = ["final-exam-#2-001", "open-book-exam-#5-001"]
@@ -82,47 +89,33 @@ def _ride(f, x, ground, w=70, h=64):
     f.poly([(x + w / 2, ground - h - 16), (x + w / 2 + 16, ground - h - 10), (x + w / 2, ground - h - 4)], AMBER)
 
 
-@figure("fair_structures_lines_525-5b", h=470, nec="525.5(B)(1), 525.5(B)(2)",
+@figure("fair_structures_lines_525-5b", h=470, nec="525.5(B)",
         records={FAIR[0]: {}, FAIR[1]: {"like": FAIR[0]}})
 def fair_structures(f):
     f.title("Rides and tents near overhead lines (elevation)", y=34)
     ground = 410
     f.grade(ground, 20, f.w - 20, label=None, soil_h=40)
-    f.line(400, 60, 400, ground, EDGE, SW_THIN)
-    # Left: lower voltage, 15 ft in any direction.
-    cx, cy, r = 200, 232, 86
-    f.line(cx, cy - 20, cx, ground, WOOD, 12)
-    f.line(cx - 40, cy - 6, cx + 40, cy - 6, WOOD, 8)
-    # 15 ft in any direction from each conductor.
-    f.rect(cx - 30 - r, cy - 6 - r, 60 + 2 * r, 2 * r, fill=ZONE, op=0.12, stroke=ZONE, sw=SW_OBJ, rx=r)
-    for dx in (-30, 30):
-        f.circle(cx + dx, cy - 6, 8, fill=WIRE_HOT, stroke=BG, sw=SW_THIN)
-    f.arrow(cx + 36, cy - 12, cx + 30 + r * 0.707, cy - 6 - r * 0.707, DIM)
-    f.text(cx + 40, cy + 34, "15 ft", T_LABEL, DIM, "start", True)
-    v = f.value(40, 86, "600 V", 26, anchor="start", pad=5, what="the voltage limit")
-    f.text(v[0] + v[2] + 12, 86, "or less:", 26, TEXT, "start", True)
-    f.text(40, 116, "15 ft in any direction", T_NOTE, MUTED, "start")
-    _ride(f, 300, ground)
-    f.mark_ok(335, ground - 110)
-    # Right: higher voltage, a column 15 ft each side, down to grade.
-    tx, ty, half, oc = 600, 170, 76, 36
+    tx, ty, half, oc = 330, 160, 110, 40
     f.line(tx, ty - 10, tx, ground, STEEL, 12)
-    f.line(tx - 50, ty, tx + 50, ty, STEEL, 8)
+    f.line(tx - 60, ty, tx + 60, ty, STEEL, 8)
     f.hatch(tx - oc - half, ty, 2 * (oc + half), ground - ty)
     f.rect(tx - oc - half, ty, 2 * (oc + half), ground - ty, stroke=ZONE, sw=SW_OBJ)
     for dx in (-oc, 0, oc):
         f.circle(tx + dx, ty, 8, fill=WIRE_HOT, stroke=BG, sw=SW_THIN)
     f.ext(tx + oc, ty + 10, tx + oc, ty + 52)
+    f.ext(tx + oc + half, ty + 10, tx + oc + half, ty + 52)
     f.dim_h(tx + oc, tx + oc + half, ty + 40)
     f.text(tx + oc + half / 2, ty + 72, "15 ft", T_LABEL, DIM, bold=True)
-    b = f.text(430, 86, "over", 26, TEXT, "start", True)
+    b = f.text(40, 86, "conductors over", 26, TEXT, "start", True)
     f.value(b[0] + b[2] + 12, 86, "600 V", 26, anchor="start", pad=5, what="the voltage limit")
-    f.lines(430, 116, ["not under, nor within 15 ft", "sideways, down to grade"], T_NOTE, MUTED, "start", gap=1.1)
     _ride(f, tx - 60, ground)
     f.mark_no(tx - 25, ground - 110)
-    _ride(f, tx + oc + half + 14, ground, 54, 54)
-    f.mark_ok(tx + oc + half + 41, ground - 98)
-    f.text(335, ground + 28, "ride or tent", T_MIN, TEXT)
+    _ride(f, tx + oc + half + 40, ground)
+    f.mark_ok(tx + oc + half + 75, ground - 110)
+    f.text(tx + oc + half + 124, ground - 8, "ride or tent", T_MIN, TEXT, "start")
+    f.card(600, 120, 180, 200, "Keep out")
+    f.lines(614, 186, ["not under the lines,", "nor within 15 ft", "sideways, all the", "way to grade"], T_MIN,
+            TEXT, "start", gap=1.2)
     f.tag(f.w - 24, f.h - 10, "NEC 525.5(B)", anchor="end")
 
 
@@ -206,41 +199,49 @@ EMERGE = ["open-book-exam-#6-008"]
 LOOPS = ["open-book-exam-#5-020"]
 
 
-@figure("buried_conductors_grade_300-5d1_300-5j", h=520, nec="300.5(D)(1), 300.5(J)",
-        records=EMERGE + LOOPS)
-def buried_conductors(f):
-    f.title("Direct-buried conductors (section view)", y=34)
-    grade, ft = 300, 22.0
+@figure("emerging_grade_300-5d1", h=480, nec="300.5(D)(1)", records=EMERGE)
+def emerging_grade(f):
+    f.title("Direct-buried conductors rising up a pole (section view)", y=34)
+    grade, ft = 330, 26.0
     f.grade(grade, 20, f.w - 20, label=None, soil_h=f.h - grade - 20)
-    f.text(300, grade - 10, "finished grade", T_NOTE, MUTED, "start")
-    # Left: rising up a pole in a raceway.
-    px = 150
+    f.text(f.w - 26, grade - 10, "finished grade", T_NOTE, MUTED, "end")
+    px = 260
     f.line(px, 60, px, grade + 20, WOOD, 20)
     rx, top = px + 22, grade - 8 * ft
     f.conduit(rx, top, rx, grade + 60, 12)
-    f.cable([(rx, grade + 60), (rx, grade + 96), (rx + 260, grade + 96)], TEXT, 5)
-    f.text(rx + 150, grade + 124, "buried at the cover depth", T_MIN, MUTED)
-    f.ext(rx + 10, top, 60, top)
-    f.dim_v(66, top, grade)
-    f.value(78, (top + grade) / 2 - 4, "8 ft", 28, anchor="start", pad=6, records=EMERGE,
-            what="the protected height")
-    f.lines(rx + 18, 90, ["raceway or", "enclosure"], T_NOTE, TEXT, "start", True, gap=1.1)
-    f.leader(rx + 60, 116, rx + 6, 150)
-    f.lines(rx + 150, grade + 150, ["(protection need not go", "deeper than 18 in)"], T_MIN, MUTED, gap=1.1)
-    # Right: frost heave, slack at the raceway transition.
-    sx = 640
-    f.rect(sx + 34, grade - 190, 16, 210, fill=WOOD, op=0.8, stroke="#ca8a04", sw=SW_THIN)
-    f.conduit(sx, grade - 86, sx, grade + 50, 12)
-    f.disconnect(sx - 38, grade - 190, 76, 100)
-    f.text(sx - 52, grade - 132, "disconnect", T_NOTE, TEXT, "end", True)
-    loop = f"M {sx} {grade + 50} c 0 30 -70 20 -70 50 s 70 20 70 50 s -70 20 -40 30 L {sx - 180} {grade + 180}"
+    f.cable([(rx, grade + 60), (rx, grade + 100), (rx + 380, grade + 100)], TEXT, 5)
+    f.text(rx + 200, grade + 128, "buried at the cover depth", T_MIN, MUTED)
+    f.ext(rx + 10, top, 140, top)
+    f.dim_v(150, top, grade)
+    f.value(136, (top + grade) / 2 + 8, "8 ft", 28, anchor="end", pad=6, what="the protected height")
+    f.lines(rx + 24, 140, ["raceway or", "enclosure"], T_NOTE, TEXT, "start", True, gap=1.1)
+    f.leader(rx + 60, 166, rx + 8, 200)
+    f.lines(500, 170, ["protected from", "finished grade up", "to the marked height"], T_NOTE, MUTED, "start",
+            gap=1.15)
+    f.tag(f.w - 24, 64, "NEC 300.5(D)(1)", anchor="end")
+
+
+@figure("frost_s_loop_300-5j", h=440, nec="300.5(J)", records=LOOPS)
+def frost_s_loop(f):
+    f.title("Direct-buried cable where frost moves the soil (section view)", y=34)
+    grade = 230
+    f.grade(grade, 20, f.w - 20, label=None, soil_h=f.h - grade - 20)
+    f.text(f.w - 26, grade - 10, "grade", T_NOTE, MUTED, "end")
+    sx = 460
+    f.rect(sx + 34, grade - 170, 16, 190, fill=WOOD, op=0.8, stroke="#ca8a04", sw=SW_THIN)
+    f.conduit(sx, grade - 70, sx, grade + 50, 12)
+    f.disconnect(sx - 38, grade - 170, 76, 100)
+    f.text(sx - 52, grade - 112, "disconnect", T_NOTE, TEXT, "end", True)
+    loop = f"M {sx} {grade + 50} c 0 30 -70 20 -70 50 s 70 20 70 50 s -70 20 -40 30 L {sx - 300} {grade + 180}"
     f.path(loop, TEXT, 5)
-    f.mask(sx - 90, grade + 44, 110, 120, records=LOOPS, what="the slack loop in the cable")
-    f.lines(sx + 28, grade + 90, ["frost heave:", "leave slack"], T_MIN, MUTED, "start", gap=1.1)
-    f.value(sx + 28, grade + 150, "S loop", T_NOTE, anchor="start", pad=5, records=LOOPS, what="the name of the loop")
-    for k in range(3):
-        f.arrow(sx - 250 + k * 60, grade + 40, sx - 250 + k * 60, grade + 8, AMBER, SW_THIN)
-    f.tag(f.w - 24, 70, "NEC 300.5(D)(1), 300.5(J)", anchor="end")
+    f.mask(sx - 90, grade + 44, 110, 120, what="the slack loop in the cable")
+    f.lines(sx + 60, grade + 60, ["frost heave and", "settling soil:", "leave slack"], T_NOTE, MUTED, "start",
+            gap=1.15)
+    f.value(sx + 60, grade + 164, "S loop", T_NOTE, anchor="start", pad=5, what="the name of the loop")
+    for k in range(4):
+        f.arrow(100 + k * 60, grade + 40, 100 + k * 60, grade + 8, AMBER, SW_THIN)
+    f.text(190, grade + 70, "frost", T_NOTE, AMBER, bold=True)
+    f.tag(f.w - 24, 64, "NEC 300.5(J)", anchor="end")
 
 
 @figure("luminaire_roof_decking_410-10f", h=450, nec="410.10(F)", records=["open-book-exam-#3-021"])

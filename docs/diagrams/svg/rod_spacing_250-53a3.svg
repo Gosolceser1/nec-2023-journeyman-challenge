@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+<rect x="0.0" y="0.0" width="800.0" height="420.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="36.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Two driven ground rods (section view, not to scale)</text>
+<rect x="20.0" y="150.0" width="760.0" height="250.0" rx="0" fill="#3f2e1f" fill-opacity="0.75" stroke="none" stroke-width="2"/>
+<circle cx="32.0" cy="168.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="60.0" cy="324.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="88.0" cy="260.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="116.0" cy="196.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="144.0" cy="352.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="172.0" cy="288.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="200.0" cy="224.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="228.0" cy="380.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="256.0" cy="316.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="284.0" cy="252.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="312.0" cy="188.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="340.0" cy="344.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="368.0" cy="280.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="396.0" cy="216.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="424.0" cy="372.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="452.0" cy="308.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="480.0" cy="244.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="508.0" cy="180.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="536.0" cy="336.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="564.0" cy="272.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="592.0" cy="208.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="620.0" cy="364.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="648.0" cy="300.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="676.0" cy="236.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="704.0" cy="172.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="732.0" cy="328.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="760.0" cy="264.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="788.0" cy="200.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<line x1="20.0" y1="150.0" x2="780.0" y2="150.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="774.0" y="138.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="end">grade</text>
+<line x1="220.0" y1="164.0" x2="520.0" y2="164.0" stroke="#86efac" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="370.0" y="200.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">bonding jumper</text>
+<line x1="220.0" y1="150.0" x2="220.0" y2="326.4" stroke="#b45309" stroke-width="9" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="215.0,326.4 225.0,326.4 220.0,338.4" fill="#b45309" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="212.0" y="158.0" width="16.0" height="12.0" rx="3" fill="#ca8a04" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="228.0" y1="164.0" x2="233.0" y2="164.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="220.0" y="364.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">rod</text>
+<line x1="520.0" y1="150.0" x2="520.0" y2="326.4" stroke="#b45309" stroke-width="9" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="515.0,326.4 525.0,326.4 520.0,338.4" fill="#b45309" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="512.0" y="158.0" width="16.0" height="12.0" rx="3" fill="#ca8a04" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="528.0" y1="164.0" x2="533.0" y2="164.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="520.0" y="364.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">rod</text>
+<line x1="526.0" y1="326.4" x2="533.0" y2="326.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="539.0" y1="326.4" x2="546.0" y2="326.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="552.0" y1="326.4" x2="559.0" y2="326.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="565.0" y1="326.4" x2="572.0" y2="326.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="578.0" y1="326.4" x2="585.0" y2="326.4" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="580.0" y1="156.0" x2="580.0" y2="320.4" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="580.0,150.0 586.0,162.0 574.0,162.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="580.0,326.4 574.0,314.4 586.0,314.4" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="594.0" y="262.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#38bdf8" text-anchor="start">8 ft rods</text>
+<line x1="220.0" y1="146.0" x2="220.0" y2="139.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="220.0" y1="133.0" x2="220.0" y2="126.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="220.0" y1="120.0" x2="220.0" y2="113.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="220.0" y1="107.0" x2="220.0" y2="100.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="220.0" y1="94.0" x2="220.0" y2="92.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="520.0" y1="146.0" x2="520.0" y2="139.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="520.0" y1="133.0" x2="520.0" y2="126.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="520.0" y1="120.0" x2="520.0" y2="113.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="520.0" y1="107.0" x2="520.0" y2="100.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="520.0" y1="94.0" x2="520.0" y2="92.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="226.0" y1="100.0" x2="514.0" y2="100.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="220.0,100.0 232.0,94.0 232.0,106.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="520.0,100.0 508.0,106.0 508.0,94.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="370.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="middle">6 ft min</text>
+<rect x="588.7" y="364.0" width="197.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="598.7" y="392.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 250.53(A)(3)</text>
+</svg>

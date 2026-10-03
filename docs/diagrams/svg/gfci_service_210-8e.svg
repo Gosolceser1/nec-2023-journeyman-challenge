@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+<rect x="0.0" y="0.0" width="800.0" height="400.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Receptacle for equipment requiring servicing</text>
+<line x1="20.0" y1="340.0" x2="780.0" y2="340.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="120.0" y="140.0" width="200.0" height="200.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="134.0" y="156.0" width="172.0" height="80.0" rx="3" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<line x1="138.0" y1="167.4" x2="302.0" y2="167.4" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="138.0" y1="178.8" x2="302.0" y2="178.8" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="138.0" y1="190.2" x2="302.0" y2="190.2" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="138.0" y1="201.6" x2="302.0" y2="201.6" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="138.0" y1="213.0" x2="302.0" y2="213.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="138.0" y1="224.4" x2="302.0" y2="224.4" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="220.0" y="126.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">HVAC unit</text>
+<rect x="400.8" y="210.0" width="38.4" height="60.0" rx="6.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 414.2 214.2 L 425.8 214.2 A 10.2 10.2 0 0 1 425.8 231.0 L 414.2 231.0 A 10.2 10.2 0 0 1 414.2 214.2 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="416.1" y1="218.3" x2="416.1" y2="223.4" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="423.9" y1="218.8" x2="423.9" y2="222.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 418.4 229.0 V 226.7 A 1.6 1.6 0 0 1 421.6 226.7 V 229.0 Z" fill="none" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 414.2 249.0 L 425.8 249.0 A 10.2 10.2 0 0 1 425.8 265.8 L 414.2 265.8 A 10.2 10.2 0 0 1 414.2 249.0 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="416.1" y1="253.1" x2="416.1" y2="258.2" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="423.9" y1="253.6" x2="423.9" y2="257.7" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 418.4 263.8 V 261.5 A 1.6 1.6 0 0 1 421.6 261.5 V 263.8 Z" fill="none" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="405.4" y="237.0" width="13.1" height="6.0" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="421.5" y="237.0" width="13.1" height="6.0" rx="1.5" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="420.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">service receptacle</text>
+<rect x="500.0" y="110.0" width="280.0" height="170.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="516.0" y="160.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">receptacles for</text>
+<text x="516.0" y="187.5" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">equipment requiring</text>
+<text x="516.0" y="215.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">servicing: GFCI</text>
+</svg>

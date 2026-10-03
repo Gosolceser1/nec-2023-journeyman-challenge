@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+<rect x="0.0" y="0.0" width="800.0" height="420.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="30.0" y="40.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="start">Control panel on a 4-wire delta</text>
+<path d="M 250.0 140.0 a 13.3 13.3 0 0 0 0.0 26.7 a 13.3 13.3 0 0 0 0.0 26.7 a 13.3 13.3 0 0 0 0.0 26.7" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 250.0 220.0 a 13.3 13.3 0 0 0 0.0 26.7 a 13.3 13.3 0 0 0 0.0 26.7 a 13.3 13.3 0 0 0 0.0 26.7" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 250.0 300.0 a 14.9 14.9 0 0 0 -26.7 -13.3 a 14.9 14.9 0 0 0 -26.7 -13.3 a 14.9 14.9 0 0 0 -26.7 -13.3 a 14.9 14.9 0 0 0 -26.7 -13.3 a 14.9 14.9 0 0 0 -26.7 -13.3 a 14.9 14.9 0 0 0 -26.7 -13.3" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 90.0 220.0 a 14.9 14.9 0 0 0 26.7 -13.3 a 14.9 14.9 0 0 0 26.7 -13.3 a 14.9 14.9 0 0 0 26.7 -13.3 a 14.9 14.9 0 0 0 26.7 -13.3 a 14.9 14.9 0 0 0 26.7 -13.3 a 14.9 14.9 0 0 0 26.7 -13.3" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="250.0" cy="140.0" r="6" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="250.0" cy="300.0" r="6" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="90.0" cy="220.0" r="6" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="250.0" cy="220.0" r="7" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<text x="264.0" y="132.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">A</text>
+<text x="264.0" y="322.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">C</text>
+<text x="76.0" y="208.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">B</text>
+<line x1="250.0" y1="220.0" x2="215.0" y2="220.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="215.0" y1="220.0" x2="215.0" y2="240.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="201.0" y1="240.0" x2="229.0" y2="240.0" stroke="#86efac" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="206.0" y1="247.0" x2="224.0" y2="247.0" stroke="#86efac" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="211.0" y1="254.0" x2="219.0" y2="254.0" stroke="#86efac" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="250.0" y1="140.0" x2="520.0" y2="140.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="250.0" y1="220.0" x2="520.0" y2="220.0" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="250.0" y1="300.0" x2="520.0" y2="300.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<polyline points="90.0,220.0 90.0,350.0 520.0,350.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="520.0" y="60.0" width="250.0" height="330.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<text x="645.0" y="94.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">control panel terminals</text>
+<rect x="540.0" y="126.0" width="28.0" height="28.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<text x="554.0" y="148.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">A</text>
+<rect x="540.0" y="206.0" width="28.0" height="28.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<text x="554.0" y="228.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">N</text>
+<rect x="540.0" y="286.0" width="28.0" height="28.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<text x="554.0" y="308.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">C</text>
+<rect x="540.0" y="336.0" width="28.0" height="28.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<text x="554.0" y="358.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">B</text>
+<text x="584.0" y="346.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">high leg must</text>
+<text x="584.0" y="370.2" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">be phase B</text>
+</svg>

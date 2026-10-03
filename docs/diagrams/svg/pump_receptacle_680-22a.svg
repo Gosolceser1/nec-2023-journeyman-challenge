@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+<rect x="0.0" y="0.0" width="800.0" height="380.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="36.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Pool pump receptacle (plan view)</text>
+<rect x="40.0" y="100.0" width="200.0" height="200.0" rx="0" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="3"/>
+<text x="140.0" y="208.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">POOL</text>
+<line x1="402.0" y1="196.0" x2="426.6" y2="196.0" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="402.0" y1="204.0" x2="426.6" y2="204.0" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="420.0" cy="200.0" r="12" fill="none" stroke="#34d399" stroke-width="3"/>
+<circle cx="425.4" cy="200.0" r="3" fill="#34d399" stroke="none" stroke-width="2"/>
+<rect x="568.0" y="223.0" width="14.4" height="8.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="617.6" y="223.0" width="14.4" height="8.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="561.6" y1="232.5" x2="638.4" y2="232.5" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="560.0" y="175.0" width="80.0" height="50.0" rx="11.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="576.0" y1="183.3" x2="624.0" y2="183.3" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="576.0" y1="191.7" x2="624.0" y2="191.7" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="576.0" y1="200.0" x2="624.0" y2="200.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="576.0" y1="208.3" x2="624.0" y2="208.3" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="576.0" y1="216.7" x2="624.0" y2="216.7" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="571.2" y1="179.0" x2="571.2" y2="221.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="628.8" y1="179.0" x2="628.8" y2="221.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="542.4" y="195.5" width="17.6" height="9.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="587.2" y="163.0" width="25.6" height="13.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="534.0" cy="200.0" r="16" fill="#334155" stroke="#e2e8f0" stroke-width="2"/>
+<polyline points="430.0,194.0 460.0,150.0 600.0,150.0 600.0,164.0" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="600.0" y="262.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">circulation</text>
+<text x="600.0" y="289.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">pump motor</text>
+<text x="420.0" y="248.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">pump</text>
+<text x="420.0" y="275.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">receptacle</text>
+<line x1="240.0" y1="304.0" x2="240.0" y2="311.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="240.0" y1="317.0" x2="240.0" y2="324.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="240.0" y1="330.0" x2="240.0" y2="337.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="420.0" y1="290.0" x2="420.0" y2="297.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="420.0" y1="303.0" x2="420.0" y2="310.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="420.0" y1="316.0" x2="420.0" y2="323.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="420.0" y1="329.0" x2="420.0" y2="336.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="246.0" y1="332.0" x2="414.0" y2="332.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="240.0,332.0 252.0,326.0 252.0,338.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="420.0,332.0 408.0,338.0 408.0,326.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="330.0" y="316.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="middle">6 ft min</text>
+<rect x="588.7" y="344.0" width="197.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="598.7" y="372.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 680.22(A)(2)</text>
+</svg>

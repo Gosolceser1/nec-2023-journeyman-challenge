@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
+<rect x="0.0" y="0.0" width="800.0" height="440.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Five household clothes dryers, multifamily dwelling</text>
+<rect x="70.0" y="70.0" width="84.0" height="104.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="72.0" y1="92.9" x2="152.0" y2="92.9" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="133.8" cy="81.4" r="5.72" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="81.8" y="77.3" width="30.2" height="8.3" rx="1.5" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<circle cx="112.0" cy="132.4" r="25.2" fill="#0f172a" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="112.0" cy="132.4" r="16.8" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<rect x="206.0" y="70.0" width="84.0" height="104.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="208.0" y1="92.9" x2="288.0" y2="92.9" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="269.8" cy="81.4" r="5.72" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="217.8" y="77.3" width="30.2" height="8.3" rx="1.5" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<circle cx="248.0" cy="132.4" r="25.2" fill="#0f172a" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="248.0" cy="132.4" r="16.8" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<rect x="342.0" y="70.0" width="84.0" height="104.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="344.0" y1="92.9" x2="424.0" y2="92.9" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="405.8" cy="81.4" r="5.72" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="353.8" y="77.3" width="30.2" height="8.3" rx="1.5" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<circle cx="384.0" cy="132.4" r="25.2" fill="#0f172a" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="384.0" cy="132.4" r="16.8" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<rect x="478.0" y="70.0" width="84.0" height="104.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="480.0" y1="92.9" x2="560.0" y2="92.9" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="541.8" cy="81.4" r="5.72" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="489.8" y="77.3" width="30.2" height="8.3" rx="1.5" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<circle cx="520.0" cy="132.4" r="25.2" fill="#0f172a" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="520.0" cy="132.4" r="16.8" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<rect x="614.0" y="70.0" width="84.0" height="104.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="616.0" y1="92.9" x2="696.0" y2="92.9" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="677.8" cy="81.4" r="5.72" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="625.8" y="77.3" width="30.2" height="8.3" rx="1.5" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<circle cx="656.0" cy="132.4" r="25.2" fill="#0f172a" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="656.0" cy="132.4" r="16.8" fill="none" stroke="#64748b" stroke-width="1.5"/>
+<rect x="40.0" y="210.0" width="720.0" height="190.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="60.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">5 dryers x 5 kW = 25 kW</text>
+<text x="60.0" y="278.6" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">(5 kW each, or the nameplate if larger)</text>
+<text x="60.0" y="336.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">demand factor, 5 dryers:</text>
+<text x="330.0" y="336.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">85%</text>
+<text x="60.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">25 kW x 0.85 = 21.25 kW</text>
+<rect x="582.6" y="402.0" width="203.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="592.6" y="430.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Table 220.54</text>
+</svg>

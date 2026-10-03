@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="430" viewBox="0 0 800 430">
+<rect x="0.0" y="0.0" width="800.0" height="430.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Bare copper busbar, 1 1/2 sq in, unventilated enclosure</text>
+<rect x="160.0" y="90.0" width="480.0" height="60.0" rx="0" fill="#b45309" fill-opacity="1.0" stroke="#fbbf24" stroke-width="3"/>
+<text x="400.0" y="186.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">cross-section 1 1/2 sq in</text>
+<text x="160.0" y="236.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#e2e8f0" text-anchor="start">x</text>
+<text x="184.5" y="236.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">1,000 A per sq in</text>
+<text x="160.0" y="282.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#e2e8f0" text-anchor="start">=</text>
+<text x="187.2" y="282.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="start">1,500 A</text>
+<rect x="30.0" y="304.0" width="740.0" height="70.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="46.0" y="346.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">Continuous current limit: copper 1,000 A, aluminum 700 A per sq in</text>
+<rect x="615.6" y="392.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="625.6" y="420.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 366.23(A)</text>
+</svg>

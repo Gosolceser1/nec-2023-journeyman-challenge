@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470">
+<rect x="0.0" y="0.0" width="800.0" height="470.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">LFNC fill: the percent-of-area table</text>
+<text x="390.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="end">Chapter 9,</text>
+<text x="400.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">Table 1</text>
+<text x="400.0" y="120.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">percent of raceway area</text>
+<circle cx="200.0" cy="220.0" r="62" fill="#0f172a" stroke="#94a3b8" stroke-width="4"/>
+<circle cx="200.0" cy="220.0" r="34" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<text x="200.0" y="322.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">one</text>
+<text x="200.0" y="356.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#38bdf8" text-anchor="middle">53%</text>
+<circle cx="400.0" cy="220.0" r="62" fill="#0f172a" stroke="#94a3b8" stroke-width="4"/>
+<circle cx="376.0" cy="220.0" r="22" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<circle cx="424.0" cy="220.0" r="22" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<text x="400.0" y="322.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">two</text>
+<text x="400.0" y="356.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#38bdf8" text-anchor="middle">31%</text>
+<circle cx="600.0" cy="220.0" r="62" fill="#0f172a" stroke="#94a3b8" stroke-width="4"/>
+<circle cx="580.0" cy="200.0" r="17" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<circle cx="620.0" cy="200.0" r="17" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<circle cx="580.0" cy="240.0" r="17" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<circle cx="620.0" cy="240.0" r="17" fill="#cbd5e1" stroke="#0f172a" stroke-width="2"/>
+<text x="600.0" y="322.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">over two</text>
+<text x="600.0" y="356.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#38bdf8" text-anchor="middle">40%</text>
+<text x="400.0" y="412.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">LFNC conductor count stays within these limits</text>
+<rect x="646.2" y="434.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="656.2" y="462.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 356.22</text>
+</svg>

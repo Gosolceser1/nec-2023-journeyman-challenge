@@ -2,7 +2,7 @@
 from nec_style import *  # noqa: F401,F403
 
 
-@figure("egc_size_250-122", h=470, nec="250.122(A), Table 250.122",
+@figure("egc_size_250-122", h=470, nec="250.122",
         records={"final-exam-#1-068": {}, "final-exam-#3-017": {"terms": ["same size"]},
                  "open-book-exam-#6-012": {"like": "final-exam-#1-068"}, "final-exam-#4-055": {"when": "after"},
                  "open-book-exam-#12-023": {"when": "after"}})
@@ -37,13 +37,7 @@ def egc_size(f):
     f.tag(f.w - 24, f.h - 12, "NEC 250.122", anchor="end")
 
 
-@figure("termination_temp_110-14c", h=520, nec="310.15(A), 110.14(C), 110.14(C)(2), Table 310.16",
-        records={"open-book-exam-#7-015": {}, "open-book-exam-#7-017": {},
-                 "open-book-exam-#9-016": {"when": "after"}})
-def termination_temp(f):
-    term = ["open-book-exam-#7-015"]
-    conn = ["open-book-exam-#7-017"]
-    f.title("The lowest temperature rating on the conductor caps it", y=34)
+def _lug_circuit(f):
     f.breaker(40, 80, 64, 76)
     f.text(72, 184, "breaker lug", T_NOTE, TEXT, bold=True)
     f.text(72, 210, "marked 75 C", T_NOTE, AMBER, bold=True)
@@ -51,23 +45,52 @@ def termination_temp(f):
     f.text(330, 102, "#10 Cu THHN, 90 C insulation", T_NOTE, TEXT, bold=True)
     f.rect(560, 88, 70, 60, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
     f.text(595, 176, "load", T_NOTE, MUTED)
+
+
+@figure("termination_limit_310-15a", h=420, nec="310.15(A)", records=["open-book-exam-#7-015"],
+        keep=[r"^#10 Cu THHN", r"^#10 Cu ampacity", r"^derate from", r"^check: 32 A", r"^rating, so 32 A"])
+def termination_limit(f):
+    term = ["open-book-exam-#7-015"]
+    f.title("Correcting and adjusting a 90 C conductor", y=34)
+    _lug_circuit(f)
     f.text(330, 150, "4 current-carrying conductors in the raceway", T_MIN, MUTED)
-    f.card(20, 232, 760, 150, "")
-    f.text(36, 270, "Table 310.16, #10 Cu:  60 C = 30 A,  75 C = 35 A,  90 C = 40 A", T_NOTE, TEXT, "start")
+    f.card(20, 232, 760, 160, "")
+    f.text(36, 270, "#10 Cu ampacity:  60 C = 30 A,  75 C = 35 A,  90 C = 40 A", T_NOTE, TEXT, "start")
     f.text(36, 306, "derate from the 90 C column:  40 A x 0.80 = 32 A", T_NOTE, TEXT, "start")
     b = f.text(36, 342, "check: 32 A is not over 35 A, the 75 C", T_NOTE, TEXT, "start")
     f.value(b[0] + b[2] + 10, 342, "termination", T_NOTE, anchor="start", records=term, pad=5,
             what="what caps the ampacity")
-    f.text(36, 370, "rating, so 32 A is allowed", T_NOTE, TEXT, "start")
-    f.card(20, 396, 760, 96, "Separate pressure connector (e.g. a splicing block)")
-    b = f.text(36, 466, "ampacity not over its listed and", T_NOTE, TEXT, "start")
-    v = f.value(b[0] + b[2] + 10, 466, "identified", T_NOTE, anchor="start", records=conn, pad=5,
-            what="the rating word")
-    f.text(v[0] + v[2] + 10, 466, "temperature rating", T_NOTE, TEXT, "start")
-    f.tag(f.w - 24, f.h - 6, "NEC 110.14(C)", anchor="end")
+    f.text(36, 374, "rating, so 32 A is allowed", T_NOTE, TEXT, "start")
+    f.tag(f.w - 24, 64, "NEC 310.15(A)", anchor="end")
 
 
-@figure("conductor_colors_310-6", h=470, when="after", nec="310.6, 200.6(A), 250.119, 210.5(C)",
+@figure("pressure_connector_110-14c2", h=420, nec="110.14(C)(2)",
+        records={"open-book-exam-#7-017": {}, "open-book-exam-#9-016": {"when": "after"}})
+def pressure_connector(f):
+    conn = ["open-book-exam-#7-017"]
+    f.title("A separately installed splicing block", y=34)
+    bx, by, bw, bh = 300, 100, 200, 110
+    f.rect(bx, by, bw, bh, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=6)
+    for k in range(3):
+        x = bx + 40 + k * 60
+        f.rect(x - 16, by + 20, 32, 70, fill=CLAMP, stroke=TEXT, sw=1.5, rx=3)
+        f.circle(x, by + 34, 7, fill=STEEL, stroke=TEXT, sw=1.5)
+        f.line(x - 4, by + 34, x + 4, by + 34, BG, 2)
+    f.line(90, by + 70, bx + 24, by + 70, WIRE_HOT, SW_WIRE + 2)
+    for k, y in enumerate((by + 60, by + 76)):
+        f.line(bx + bw - 24, y, 710, y + (k * 2 - 1) * 26, WIRE_HOT, SW_WIRE)
+    f.text(140, by + 54, "feeder tap", T_MIN, MUTED)
+    f.text(400, by + bh + 34, "listed for 75 C", T_NOTE, AMBER, bold=True)
+    f.card(20, 290, 760, 100, "")
+    b = f.text(36, 330, "ampacity not over its listed and", T_NOTE, TEXT, "start")
+    v = f.value(b[0] + b[2] + 10, 330, "identified", T_NOTE, anchor="start", records=conn, pad=5,
+                what="the rating word")
+    f.text(v[0] + v[2] + 10, 330, "temperature rating", T_NOTE, TEXT, "start")
+    f.text(36, 368, "so these conductors are used at their 75 C ampacity", T_NOTE, MUTED, "start")
+    f.tag(f.w - 24, f.h - 6, "NEC 110.14(C)(2)", anchor="end")
+
+
+@figure("conductor_colors_310-6", h=470, when="after", nec="310.6",
         records={"final-exam-#1-009": {}, "open-book-exam-#2-022": {"like": "final-exam-#1-009"}})
 def conductor_colors(f):
     f.title("Insulation colors by what the conductor does", y=34)

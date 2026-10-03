@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470">
+<rect x="0.0" y="0.0" width="800.0" height="470.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="30.0" y="40.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="start">Dwelling: GFCI receptacles (section)</text>
+<line x1="18.0" y1="150.0" x2="750.0" y2="150.0" stroke="#94a3b8" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="22.0" y="150.0" width="16.0" height="250.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="222.0" y="150.0" width="16.0" height="250.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="692.0" y="150.0" width="16.0" height="250.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="425.0" y="150.0" width="10.0" height="250.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<line x1="20.0" y1="400.0" x2="780.0" y2="400.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="130.0" y="196.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">GARAGE</text>
+<rect x="114.0" y="275.0" width="32.0" height="50.0" rx="5.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 125.2 278.5 L 134.8 278.5 A 8.5 8.5 0 0 1 134.8 292.5 L 125.2 292.5 A 8.5 8.5 0 0 1 125.2 278.5 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="126.8" y1="281.9" x2="126.8" y2="286.2" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="133.2" y1="282.4" x2="133.2" y2="285.8" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="130.0" cy="289.6" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<path d="M 125.2 307.5 L 134.8 307.5 A 8.5 8.5 0 0 1 134.8 321.5 L 125.2 321.5 A 8.5 8.5 0 0 1 125.2 307.5 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="126.8" y1="310.9" x2="126.8" y2="315.2" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="133.2" y1="311.4" x2="133.2" y2="314.8" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="130.0" cy="318.6" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="117.6" y="297.5" width="10.9" height="5.0" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="131.5" y="297.5" width="10.9" height="5.0" rx="1.5" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="330.0" y="196.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">LAUNDRY</text>
+<rect x="258.0" y="314.0" width="84.0" height="86.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="261.0" y1="332.0" x2="339.0" y2="332.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="328.0" cy="323.0" r="3" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<circle cx="300.0" cy="366.0" r="24" fill="#64748b" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="300.0" cy="366.0" r="16" fill="#0f172a" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="375.3" y="277.0" width="29.4" height="46.0" rx="4.6000000000000005" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 385.5 280.2 L 394.5 280.2 A 7.8 7.8 0 0 1 394.5 293.1 L 385.5 293.1 A 7.8 7.8 0 0 1 385.5 280.2 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="387.0" y1="283.4" x2="387.0" y2="287.3" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="393.0" y1="283.8" x2="393.0" y2="286.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="390.0" cy="290.4" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<path d="M 385.5 306.9 L 394.5 306.9 A 7.8 7.8 0 0 1 394.5 319.8 L 385.5 319.8 A 7.8 7.8 0 0 1 385.5 306.9 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="387.0" y1="310.1" x2="387.0" y2="314.0" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="393.0" y1="310.4" x2="393.0" y2="313.6" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="390.0" cy="317.1" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="378.5" y="297.7" width="10.0" height="4.6" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="391.5" y="297.7" width="10.0" height="4.6" rx="1.5" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="565.0" y="196.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">BATHROOM</text>
+<rect x="444.0" y="350.0" width="116.0" height="50.0" rx="8" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="452.0" y="356.0" width="100.0" height="16.0" rx="4" fill="#0c4a6e" fill-opacity="1.0" stroke="#38bdf8" stroke-width="2"/>
+<text x="502.0" y="430.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">tub</text>
+<rect x="641.3" y="307.0" width="29.4" height="46.0" rx="4.6000000000000005" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 651.5 310.2 L 660.5 310.2 A 7.8 7.8 0 0 1 660.5 323.1 L 651.5 323.1 A 7.8 7.8 0 0 1 651.5 310.2 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="653.0" y1="313.4" x2="653.0" y2="317.3" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="659.0" y1="313.8" x2="659.0" y2="316.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="656.0" cy="320.4" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<path d="M 651.5 336.9 L 660.5 336.9 A 7.8 7.8 0 0 1 660.5 349.8 L 651.5 349.8 A 7.8 7.8 0 0 1 651.5 336.9 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="653.0" y1="340.1" x2="653.0" y2="344.0" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="659.0" y1="340.4" x2="659.0" y2="343.6" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="656.0" cy="347.1" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="644.5" y="327.7" width="10.0" height="4.6" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="657.5" y="327.7" width="10.0" height="4.6" rx="1.5" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<line x1="560.0" y1="348.0" x2="560.0" y2="341.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="335.0" x2="560.0" y2="328.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="322.0" x2="560.0" y2="315.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="309.0" x2="560.0" y2="302.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="296.0" x2="560.0" y2="289.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="283.0" x2="560.0" y2="276.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="270.0" x2="560.0" y2="263.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="257.0" x2="560.0" y2="250.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="560.0" y1="244.0" x2="560.0" y2="240.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="656.0" y1="304.0" x2="656.0" y2="297.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="656.0" y1="291.0" x2="656.0" y2="284.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="656.0" y1="278.0" x2="656.0" y2="271.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="656.0" y1="265.0" x2="656.0" y2="258.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="656.0" y1="252.0" x2="656.0" y2="245.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="566.0" y1="250.0" x2="650.0" y2="250.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="560.0,250.0 572.0,244.0 572.0,256.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="656.0,250.0 644.0,256.0 644.0,244.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="608.0" y="236.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="middle">6 ft</text>
+<text x="608.0" y="284.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">from the tub edge</text>
+<rect x="722.5" y="172.0" width="23.0" height="36.0" rx="3.6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 729.9 175.8 L 738.1 175.8 A 7.2 7.2 0 0 1 738.1 187.6 L 729.9 187.6 A 7.2 7.2 0 0 1 729.9 175.8 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="731.3" y1="178.7" x2="731.3" y2="182.3" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="736.7" y1="179.1" x2="736.7" y2="181.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="734.0" cy="185.2" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<path d="M 729.9 192.4 L 738.1 192.4 A 7.2 7.2 0 0 1 738.1 204.2 L 729.9 204.2 A 7.2 7.2 0 0 1 729.9 192.4 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="731.3" y1="195.3" x2="731.3" y2="198.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="736.7" y1="195.6" x2="736.7" y2="198.5" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="734.0" cy="201.7" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<line x1="734.0" y1="172.0" x2="734.0" y2="154.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="440.0" y="72.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">snow-melt receptacle, not readily</text>
+<text x="440.0" y="95.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">accessible, own circuit: exempt</text>
+<line x1="700.0" y1="104.0" x2="724.0" y2="178.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="724.0" cy="178.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<rect x="627.9" y="432.0" width="158.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="637.9" y="460.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 210.8(A)</text>
+</svg>

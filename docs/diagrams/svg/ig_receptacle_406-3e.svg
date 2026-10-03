@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect x="0.0" y="0.0" width="800.0" height="460.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Isolated ground receptacle: the face marking</text>
+<rect x="130.0" y="70.0" width="180.0" height="330.0" rx="16" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 190.4 107.4 L 249.6 107.4 A 52.0 52.0 0 0 1 249.6 192.6 L 190.4 192.6 A 52.0 52.0 0 0 1 190.4 107.4 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="4.16" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="200.2" y1="128.2" x2="200.2" y2="154.2" stroke="#e2e8f0" stroke-width="8.32" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="239.8" y1="130.8" x2="239.8" y2="151.6" stroke="#e2e8f0" stroke-width="8.32" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 211.7 182.4 V 170.8 A 8.3 8.3 0 0 1 228.3 170.8 V 182.4 Z" fill="none" stroke="#e2e8f0" stroke-width="4.68" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 190.4 277.4 L 249.6 277.4 A 52.0 52.0 0 0 1 249.6 362.6 L 190.4 362.6 A 52.0 52.0 0 0 1 190.4 277.4 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="4.16" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="200.2" y1="298.2" x2="200.2" y2="324.2" stroke="#e2e8f0" stroke-width="8.32" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="239.8" y1="300.8" x2="239.8" y2="321.6" stroke="#e2e8f0" stroke-width="8.32" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 211.7 352.4 V 340.8 A 8.3 8.3 0 0 1 228.3 340.8 V 352.4 Z" fill="none" stroke="#e2e8f0" stroke-width="4.68" stroke-linecap="round" stroke-linejoin="round"/>
+<polygon points="220.0,218.0 200.0,252.0 240.0,252.0" fill="#fb923c" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="220.0" y="436.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fb923c" text-anchor="middle">orange triangle</text>
+<rect x="380.0" y="90.0" width="390.0" height="250.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="394.0" y="120.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">What makes it different</text>
+<text x="396.0" y="160.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">its grounding terminal is</text>
+<text x="396.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">insulated from the yoke</text>
+<text x="396.0" y="208.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">and the box</text>
+<text x="396.0" y="264.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">used to cut electrical noise</text>
+<text x="396.0" y="288.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">on sensitive equipment</text>
+<rect x="629.1" y="422.0" width="156.9" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="639.1" y="450.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 406.3(E)</text>
+</svg>

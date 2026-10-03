@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+<rect x="0.0" y="0.0" width="800.0" height="420.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">A separately installed splicing block</text>
+<rect x="300.0" y="100.0" width="200.0" height="110.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="324.0" y="120.0" width="32.0" height="70.0" rx="3" fill="#ca8a04" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<circle cx="340.0" cy="134.0" r="7" fill="#64748b" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="336.0" y1="134.0" x2="344.0" y2="134.0" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="384.0" y="120.0" width="32.0" height="70.0" rx="3" fill="#ca8a04" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<circle cx="400.0" cy="134.0" r="7" fill="#64748b" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="396.0" y1="134.0" x2="404.0" y2="134.0" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="444.0" y="120.0" width="32.0" height="70.0" rx="3" fill="#ca8a04" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<circle cx="460.0" cy="134.0" r="7" fill="#64748b" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="456.0" y1="134.0" x2="464.0" y2="134.0" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="90.0" y1="170.0" x2="324.0" y2="170.0" stroke="#e2e8f0" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="476.0" y1="160.0" x2="710.0" y2="134.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="476.0" y1="176.0" x2="710.0" y2="202.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="140.0" y="154.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">feeder tap</text>
+<text x="400.0" y="244.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="middle">listed for 75 C</text>
+<rect x="20.0" y="290.0" width="760.0" height="100.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="36.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">ampacity not over its listed and</text>
+<text x="348.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">identified</text>
+<text x="455.8" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">temperature rating</text>
+<text x="36.0" y="368.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">so these conductors are used at their 75 C ampacity</text>
+<rect x="588.7" y="388.0" width="197.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="598.7" y="416.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 110.14(C)(2)</text>
+</svg>

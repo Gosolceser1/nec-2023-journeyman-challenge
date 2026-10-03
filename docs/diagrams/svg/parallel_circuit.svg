@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+<rect x="0.0" y="0.0" width="800.0" height="400.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Two unequal branches in parallel on 120 V</text>
+<polyline points="110.0,180.0 110.0,110.0 400.0,110.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<polyline points="110.0,230.0 110.0,300.0 400.0,300.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="110.0" cy="205.0" r="26" fill="#1e293b" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 96 205 q 7 -14 14 0 t 14 0" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="76.0" y="213.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="end">120 V</text>
+<line x1="250.0" y1="110.0" x2="250.0" y2="148.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="250.0" y1="262.0" x2="250.0" y2="300.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<polyline points="250.0,148.0 266.0,152.8 234.0,162.2 266.0,171.8 234.0,181.2 266.0,190.8 234.0,200.2 266.0,209.8 234.0,219.2 266.0,228.8 234.0,238.2 266.0,247.8 234.0,257.2 250.0,262.0" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="250.0" cy="110.0" r="5" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="250.0" cy="300.0" r="5" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<text x="274.0" y="200.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">10 ohm</text>
+<text x="274.0" y="228.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">12 A</text>
+<line x1="400.0" y1="110.0" x2="400.0" y2="148.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="262.0" x2="400.0" y2="300.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<polyline points="400.0,148.0 416.0,152.8 384.0,162.2 416.0,171.8 384.0,181.2 416.0,190.8 384.0,200.2 416.0,209.8 384.0,219.2 416.0,228.8 384.0,238.2 416.0,247.8 384.0,257.2 400.0,262.0" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="400.0" cy="110.0" r="5" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="400.0" cy="300.0" r="5" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<text x="424.0" y="200.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">30 ohm</text>
+<text x="424.0" y="228.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">4 A</text>
+<text x="255.0" y="350.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">120 V across each branch</text>
+<rect x="510.0" y="80.0" width="260.0" height="290.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="524.0" y="110.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Each branch</text>
+<text x="526.0" y="150.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">voltage: equal to</text>
+<text x="526.0" y="174.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">the source voltage</text>
+<text x="526.0" y="240.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">current and power</text>
+<text x="526.0" y="264.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">differ: 12 A and 4 A</text>
+<text x="526.0" y="330.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">total current 16 A</text>
+</svg>

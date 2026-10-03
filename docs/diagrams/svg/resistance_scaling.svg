@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+<rect x="0.0" y="0.0" width="800.0" height="380.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Same material: 3 times as long, half the area</text>
+<text x="40.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">original wire</text>
+<rect x="40.0" y="100.0" width="200.0" height="30.0" rx="6" fill="#b45309" fill-opacity="1.0" stroke="#fbbf24" stroke-width="2"/>
+<text x="256.0" y="124.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">5 ohm</text>
+<text x="40.0" y="186.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">3 x as long, half the area</text>
+<rect x="40.0" y="200.0" width="600.0" height="15.0" rx="4" fill="#b45309" fill-opacity="1.0" stroke="#fbbf24" stroke-width="2"/>
+<text x="656.0" y="216.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">?</text>
+<rect x="40.0" y="250.0" width="720.0" height="110.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="60.0" y="288.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">length x 3: ohms x 3</text>
+<text x="60.0" y="316.6" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">area x 1/2: ohms x 2</text>
+<text x="460.0" y="316.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">5 x 3 x 2 = 30 ohm</text>
+</svg>

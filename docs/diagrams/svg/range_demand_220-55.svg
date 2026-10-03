@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
+<rect x="0.0" y="0.0" width="800.0" height="440.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">One 14 kW household range in a dwelling</text>
+<rect x="70.0" y="70.0" width="120.0" height="24.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="94.0" cy="82.0" r="5.250000000000001" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="118.0" cy="82.0" r="5.250000000000001" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="142.0" cy="82.0" r="5.250000000000001" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="166.0" cy="82.0" r="5.250000000000001" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="68.0" y="94.0" width="124.0" height="9.0" rx="1.5" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="70.0" y="103.0" width="120.0" height="117.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="89.2" y="115.0" width="81.6" height="6.0" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="86.8" y="133.0" width="86.4" height="54.0" rx="3" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<line x1="74.0" y1="202.0" x2="186.0" y2="202.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="230.0" y="110.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">14 kW range</text>
+<text x="230.0" y="141.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">Column C: 8 kW</text>
+<text x="230.0" y="186.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">Note 1: over 12 kW, add 5%</text>
+<text x="230.0" y="213.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">per kW (or major fraction)</text>
+<rect x="40.0" y="250.0" width="720.0" height="150.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="60.0" y="292.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">14 - 12 = 2 kW over:</text>
+<text x="300.0" y="292.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">+10%</text>
+<text x="60.0" y="360.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">8 kW x 1.10 = 8.8 kW</text>
+<rect x="582.6" y="402.0" width="203.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="592.6" y="430.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Table 220.55</text>
+</svg>

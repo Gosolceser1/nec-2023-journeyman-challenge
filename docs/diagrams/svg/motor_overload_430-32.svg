@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+<rect x="0.0" y="0.0" width="800.0" height="380.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Motor running overload protection</text>
+<rect x="20.0" y="56.0" width="760.0" height="84.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="34.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Start: the motor nameplate current (430.6(A)(2))</text>
+<text x="34.0" y="122.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">overloads are sized from the nameplate, not the FLC tables</text>
+<rect x="82.0" y="288.0" width="21.6" height="12.8" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="156.4" y="288.0" width="21.6" height="12.8" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="72.4" y1="302.0" x2="187.6" y2="302.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="70.0" y="210.0" width="120.0" height="80.0" rx="17.6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="94.0" y1="223.3" x2="166.0" y2="223.3" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="94.0" y1="236.7" x2="166.0" y2="236.7" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="94.0" y1="250.0" x2="166.0" y2="250.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="94.0" y1="263.3" x2="166.0" y2="263.3" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="94.0" y1="276.7" x2="166.0" y2="276.7" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="86.8" y1="214.0" x2="86.8" y2="286.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="173.2" y1="214.0" x2="173.2" y2="286.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="190.0" y="242.8" width="26.4" height="14.4" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="110.8" y="190.8" width="38.4" height="20.8" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="130.0" y="259.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">M</text>
+<rect x="270.0" y="156.0" width="510.0" height="200.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="284.0" y="186.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Overload relay, maximum</text>
+<text x="284.0" y="226.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">SF 1.15 or more, or 40 C rise: 125%</text>
+<text x="284.0" y="254.6" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">all others: 115%</text>
+<text x="284.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">if the motor will not start (430.32(C)):</text>
+<text x="284.0" y="328.6" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">140% / 130%</text>
+</svg>

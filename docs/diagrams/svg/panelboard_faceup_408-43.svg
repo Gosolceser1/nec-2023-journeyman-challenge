@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+<rect x="0.0" y="0.0" width="800.0" height="420.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Panelboard mounting position</text>
+<line x1="400.0" y1="70.0" x2="400.0" y2="80.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="88.0" x2="400.0" y2="98.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="106.0" x2="400.0" y2="116.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="124.0" x2="400.0" y2="134.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="142.0" x2="400.0" y2="152.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="160.0" x2="400.0" y2="170.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="178.0" x2="400.0" y2="188.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="196.0" x2="400.0" y2="206.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="214.0" x2="400.0" y2="224.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="232.0" x2="400.0" y2="242.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="250.0" x2="400.0" y2="260.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="268.0" x2="400.0" y2="278.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="286.0" x2="400.0" y2="296.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="304.0" x2="400.0" y2="314.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="322.0" x2="400.0" y2="330.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="51.0" y="70.0" width="18.0" height="260.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="100.0" y="90.0" width="130.0" height="200.0" rx="5" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<rect x="109.1" y="99.1" width="111.8" height="181.8" rx="3" fill="#334155" fill-opacity="0.55" stroke="#64748b" stroke-width="2"/>
+<circle cx="117.3" cy="107.3" r="2.34" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="212.7" cy="107.3" r="2.34" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="117.3" cy="272.7" r="2.34" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="212.7" cy="272.7" r="2.34" fill="#64748b" stroke="none" stroke-width="2"/>
+<rect x="158.5" y="117.1" width="13.0" height="145.8" rx="2" fill="#0f172a" fill-opacity="0.6" stroke="none" stroke-width="2"/>
+<rect x="118.2" y="124.1" width="39.0" height="25.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="139.3" y="129.7" width="13.3" height="14.3" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="172.8" y="124.1" width="39.0" height="25.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="177.5" y="129.7" width="13.3" height="14.3" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="118.2" y="159.5" width="39.0" height="25.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="139.3" y="165.1" width="13.3" height="14.3" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="172.8" y="159.5" width="39.0" height="25.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="177.5" y="165.1" width="13.3" height="14.3" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="118.2" y="195.0" width="39.0" height="25.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="139.3" y="200.6" width="13.3" height="14.3" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="172.8" y="195.0" width="39.0" height="25.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="177.5" y="200.6" width="13.3" height="14.3" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="118.2" y="230.4" width="39.0" height="25.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="139.3" y="236.0" width="13.3" height="14.3" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="172.8" y="230.4" width="39.0" height="25.5" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="177.5" y="236.0" width="13.3" height="14.3" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="165.0" y="320.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="middle">on a wall</text>
+<circle cx="165.0" cy="362.0" r="18" fill="#34d399" stroke="none" stroke-width="2"/>
+<polyline points="156.9,362.0 162.8,368.8 174.0,355.2" fill="none" stroke="#0f172a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="440.0" y1="260.0" x2="780.0" y2="260.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="470.0,260.0 500.0,232.0 720.0,232.0 690.0,260.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<polygon points="500.0,232.0 520.0,222.0 700.0,222.0 720.0,232.0" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="595.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#f87171" text-anchor="middle">face-up on the floor</text>
+<circle cx="595.0" cy="346.0" r="18" fill="#f87171" stroke="none" stroke-width="2"/>
+<line x1="587.4" y1="338.4" x2="602.6" y2="353.6" stroke="#0f172a" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="587.4" y1="353.6" x2="602.6" y2="338.4" stroke="#0f172a" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="646.2" y="384.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="656.2" y="412.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 408.43</text>
+</svg>

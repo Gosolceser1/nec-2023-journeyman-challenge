@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="480" viewBox="0 0 800 480">
+<rect x="0.0" y="0.0" width="800.0" height="480.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<line x1="20.0" y1="440.0" x2="760.0" y2="440.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="250.0" y="40.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="middle">Overhead spans, 1000 V max</text>
+<rect x="53.0" y="62.0" width="14.0" height="378.0" rx="0" fill="#a16207" fill-opacity="0.8" stroke="#ca8a04" stroke-width="2"/>
+<line x1="34.0" y1="76.0" x2="86.0" y2="76.0" stroke="#a16207" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="413.0" y="62.0" width="14.0" height="378.0" rx="0" fill="#a16207" fill-opacity="0.8" stroke="#ca8a04" stroke-width="2"/>
+<line x1="394.0" y1="76.0" x2="446.0" y2="76.0" stroke="#a16207" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<polyline points="60.0,76.0 75.0,80.5 90.0,84.6 105.0,88.2 120.0,91.6 135.0,94.5 150.0,97.0 165.0,99.1 180.0,100.9 195.0,102.2 210.0,103.2 225.0,103.8 240.0,104.0 255.0,103.8 270.0,103.2 285.0,102.2 300.0,100.9 315.0,99.1 330.0,97.0 345.0,94.5 360.0,91.6 375.0,88.2 390.0,84.6 405.0,80.5 420.0,76.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="580.0" y1="440.0" x2="580.0" y2="97.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="570.0" y1="300.0" x2="590.0" y2="300.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="440.0" y1="300.0" x2="446.0" y2="300.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="452.0" y1="300.0" x2="458.0" y2="300.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="464.0" y1="300.0" x2="470.0" y2="300.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="476.0" y1="300.0" x2="482.0" y2="300.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="488.0" y1="300.0" x2="494.0" y2="300.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="500.0" y1="300.0" x2="506.0" y2="300.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="512.0" y1="300.0" x2="518.0" y2="300.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="524.0" y1="300.0" x2="530.0" y2="300.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="536.0" y1="300.0" x2="542.0" y2="300.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="548.0" y1="300.0" x2="554.0" y2="300.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="560.0" y1="300.0" x2="566.0" y2="300.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="564.0" y="292.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#38bdf8" text-anchor="end">10 ft</text>
+<text x="598.0" y="308.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">pedestrians, 150 V</text>
+<line x1="570.0" y1="272.0" x2="590.0" y2="272.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="440.0" y1="272.0" x2="446.0" y2="272.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="452.0" y1="272.0" x2="458.0" y2="272.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="464.0" y1="272.0" x2="470.0" y2="272.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="476.0" y1="272.0" x2="482.0" y2="272.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="488.0" y1="272.0" x2="494.0" y2="272.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="500.0" y1="272.0" x2="506.0" y2="272.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="512.0" y1="272.0" x2="518.0" y2="272.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="524.0" y1="272.0" x2="530.0" y2="272.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="536.0" y1="272.0" x2="542.0" y2="272.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="548.0" y1="272.0" x2="554.0" y2="272.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="560.0" y1="272.0" x2="566.0" y2="272.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="564.0" y="264.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#38bdf8" text-anchor="end">12 ft</text>
+<text x="598.0" y="280.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">residential, 300 V</text>
+<line x1="570.0" y1="230.0" x2="590.0" y2="230.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="440.0" y1="230.0" x2="446.0" y2="230.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="452.0" y1="230.0" x2="458.0" y2="230.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="464.0" y1="230.0" x2="470.0" y2="230.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="476.0" y1="230.0" x2="482.0" y2="230.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="488.0" y1="230.0" x2="494.0" y2="230.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="500.0" y1="230.0" x2="506.0" y2="230.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="512.0" y1="230.0" x2="518.0" y2="230.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="524.0" y1="230.0" x2="530.0" y2="230.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="536.0" y1="230.0" x2="542.0" y2="230.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="548.0" y1="230.0" x2="554.0" y2="230.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="560.0" y1="230.0" x2="566.0" y2="230.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="564.0" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#38bdf8" text-anchor="end">15 ft</text>
+<text x="598.0" y="238.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">same, over 300 V</text>
+<line x1="570.0" y1="188.0" x2="590.0" y2="188.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="440.0" y1="188.0" x2="446.0" y2="188.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="452.0" y1="188.0" x2="458.0" y2="188.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="464.0" y1="188.0" x2="470.0" y2="188.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="476.0" y1="188.0" x2="482.0" y2="188.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="488.0" y1="188.0" x2="494.0" y2="188.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="500.0" y1="188.0" x2="506.0" y2="188.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="512.0" y1="188.0" x2="518.0" y2="188.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="524.0" y1="188.0" x2="530.0" y2="188.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="536.0" y1="188.0" x2="542.0" y2="188.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="548.0" y1="188.0" x2="554.0" y2="188.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="560.0" y1="188.0" x2="566.0" y2="188.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="564.0" y="180.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#38bdf8" text-anchor="end">18 ft</text>
+<text x="598.0" y="196.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">streets, trucks</text>
+<line x1="570.0" y1="97.0" x2="590.0" y2="97.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="440.0" y1="97.0" x2="446.0" y2="97.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="452.0" y1="97.0" x2="458.0" y2="97.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="464.0" y1="97.0" x2="470.0" y2="97.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="476.0" y1="97.0" x2="482.0" y2="97.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="488.0" y1="97.0" x2="494.0" y2="97.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="500.0" y1="97.0" x2="506.0" y2="97.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="512.0" y1="97.0" x2="518.0" y2="97.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="524.0" y1="97.0" x2="530.0" y2="97.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="536.0" y1="97.0" x2="542.0" y2="97.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="548.0" y1="97.0" x2="554.0" y2="97.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="560.0" y1="97.0" x2="566.0" y2="97.0" stroke="#64748b" stroke-width="1.5" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="564.0" y="89.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#38bdf8" text-anchor="end">24 1/2 ft</text>
+<text x="598.0" y="105.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">railroad tracks</text>
+<text x="598.0" y="430.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">finished grade</text>
+<rect x="646.2" y="440.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="656.2" y="468.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 225.18</text>
+</svg>

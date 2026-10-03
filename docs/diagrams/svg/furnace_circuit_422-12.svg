@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+<rect x="0.0" y="0.0" width="800.0" height="400.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Central heating equipment: its own branch circuit</text>
+<rect x="30.0" y="90.0" width="110.0" height="200.0" rx="5" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<rect x="37.7" y="97.7" width="94.6" height="184.6" rx="3" fill="#334155" fill-opacity="0.55" stroke="#64748b" stroke-width="2"/>
+<circle cx="44.6" cy="104.6" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="125.4" cy="104.6" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="44.6" cy="275.4" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="125.4" cy="275.4" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<text x="85.0" y="318.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">panel</text>
+<rect x="57.0" y="150.0" width="56.0" height="64.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="85.0" cy="156.1" r="3.84" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="85.0" cy="207.9" r="3.84" fill="#64748b" stroke="none" stroke-width="2"/>
+<rect x="76.0" y="167.3" width="17.9" height="29.4" rx="2" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="78.2" y="169.0" width="13.6" height="13.5" rx="2" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<line x1="113.0" y1="182.0" x2="560.0" y2="182.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="650.0" y="110.0" width="26.0" height="42.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="560.0" y="150.0" width="130.0" height="170.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="568.0" y="160.0" width="114.0" height="71.4" rx="3" fill="none" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="568.0" y="239.4" width="114.0" height="55.6" rx="3" fill="none" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<line x1="580.0" y1="174.0" x2="670.0" y2="174.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="580.0" y1="186.0" x2="670.0" y2="186.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="580.0" y1="198.0" x2="670.0" y2="198.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="580.0" y1="210.0" x2="670.0" y2="210.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="625.0" y="350.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">gas furnace</text>
+<text x="170.0" y="160.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">individual branch circuit</text>
+<text x="170.0" y="240.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">its pump, valve, humidifier,</text>
+<text x="170.0" y="264.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">air cleaner or A/C</text>
+<text x="170.0" y="288.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">may share it</text>
+<rect x="14.0" y="362.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="24.0" y="390.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 422.12</text>
+</svg>

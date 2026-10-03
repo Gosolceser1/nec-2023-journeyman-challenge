@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect x="0.0" y="0.0" width="800.0" height="460.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Electric sign, cut open</text>
+<rect x="80.0" y="80.0" width="640.0" height="250.0" rx="10" fill="none" fill-opacity="1.0" stroke="#fbbf24" stroke-width="6"/>
+<rect x="120.0" y="130.0" width="170.0" height="110.0" rx="4" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<text x="205.0" y="178.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">electrical</text>
+<text x="205.0" y="202.2" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">enclosure</text>
+<rect x="386.0" y="160.0" width="28.0" height="46.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="400.0" cy="148.0" r="14" fill="#fbbf24" stroke="none" stroke-width="2"/>
+<rect x="486.0" y="160.0" width="28.0" height="46.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="500.0" cy="148.0" r="14" fill="#fbbf24" stroke="none" stroke-width="2"/>
+<rect x="586.0" y="160.0" width="28.0" height="46.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="600.0" cy="148.0" r="14" fill="#fbbf24" stroke="none" stroke-width="2"/>
+<line x1="290.0" y1="186.0" x2="600.0" y2="186.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="500.0" y="240.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">lampholders</text>
+<text x="400.0" y="310.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#fbbf24" text-anchor="middle">outer shell: weather cover only</text>
+<text x="400.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">not an electrical enclosure; the defined term:</text>
+<text x="400.0" y="430.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="middle">sign body</text>
+<rect x="632.7" y="422.0" width="153.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="642.7" y="450.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC Art. 100</text>
+</svg>

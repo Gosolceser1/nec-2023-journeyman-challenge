@@ -15,6 +15,7 @@ record's correct answer, so a shared drawing can't show a sibling's value
 that happens to answer the current question.
 """
 import math
+import re
 
 import pymupdf
 
@@ -619,7 +620,7 @@ class Fig:
         x0 = x - (tw / 2 if anchor == "middle" else tw if anchor == "end" else 0) - 10
         self.rect(x0, y - size - 4, tw + 20, size + 14, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
         self.text(x0 + 10, y + 2, s, size, DIM, "start", True)
-        refs = leakscan.location_refs(s)
+        refs = leakscan.location_refs(s) or re.findall(r"\bArt(?:icle|\.)\s*\d+", s)
         if refs:
             lead = s[:s.find(refs[0])].strip()
             self.mask(x0, y - size - 4, tw + 20, size + 14, label=f"{lead} ?" if lead else "?", ring=False,

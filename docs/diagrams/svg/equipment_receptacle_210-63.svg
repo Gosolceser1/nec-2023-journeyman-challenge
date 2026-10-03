@@ -48,7 +48,7 @@
 <rect x="517.2" y="261.4" width="11.3" height="5.2" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <rect x="531.5" y="261.4" width="11.3" height="5.2" rx="1.5" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="530.0" y="322.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">125 V, 15/20 A</text>
-<text x="530.0" y="345.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">GFCI 210.8(E)</text>
+<text x="530.0" y="345.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">GFCI</text>
 <text x="530.0" y="368.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="middle">accessible location</text>
 <line x1="254.0" y1="200.0" x2="254.0" y2="207.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
 <line x1="254.0" y1="213.0" x2="254.0" y2="220.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="330" viewBox="0 0 800 330">
+<rect x="0.0" y="0.0" width="800.0" height="330.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Feeder supplying two motors</text>
+<rect x="20.0" y="56.0" width="760.0" height="84.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="34.0" y="86.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Start: motor FLC from the table, not the nameplate (430.6(A)(1))</text>
+<text x="34.0" y="122.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">single-phase: Table 430.248, three-phase: Table 430.250</text>
+<rect x="52.0" y="268.0" width="21.6" height="12.8" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="126.4" y="268.0" width="21.6" height="12.8" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="42.4" y1="282.0" x2="157.6" y2="282.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="40.0" y="190.0" width="120.0" height="80.0" rx="17.6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="64.0" y1="203.3" x2="136.0" y2="203.3" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="64.0" y1="216.7" x2="136.0" y2="216.7" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="64.0" y1="230.0" x2="136.0" y2="230.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="64.0" y1="243.3" x2="136.0" y2="243.3" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="64.0" y1="256.7" x2="136.0" y2="256.7" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="56.8" y1="194.0" x2="56.8" y2="266.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="143.2" y1="194.0" x2="143.2" y2="266.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="160.0" y="222.8" width="26.4" height="14.4" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="80.8" y="170.8" width="38.4" height="20.8" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="100.0" y="239.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">M</text>
+<rect x="202.0" y="268.0" width="21.6" height="12.8" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="276.4" y="268.0" width="21.6" height="12.8" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="192.4" y1="282.0" x2="307.6" y2="282.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="190.0" y="190.0" width="120.0" height="80.0" rx="17.6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="214.0" y1="203.3" x2="286.0" y2="203.3" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="214.0" y1="216.7" x2="286.0" y2="216.7" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="214.0" y1="230.0" x2="286.0" y2="230.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="214.0" y1="243.3" x2="286.0" y2="243.3" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="214.0" y1="256.7" x2="286.0" y2="256.7" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="206.8" y1="194.0" x2="206.8" y2="266.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="293.2" y1="194.0" x2="293.2" y2="266.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="310.0" y="222.8" width="26.4" height="14.4" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="230.8" y="170.8" width="38.4" height="20.8" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="250.0" y="239.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">M</text>
+<rect x="340.0" y="160.0" width="440.0" height="140.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="354.0" y="190.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Feeder conductors</text>
+<text x="354.0" y="230.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">125% of the largest FLC</text>
+<text x="354.0" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">+ the FLC of every other motor</text>
+</svg>

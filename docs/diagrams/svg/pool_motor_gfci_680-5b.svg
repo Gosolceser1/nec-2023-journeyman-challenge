@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+<rect x="0.0" y="0.0" width="800.0" height="380.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="36.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Outlet for a pool pump motor</text>
+<rect x="40.0" y="90.0" width="110.0" height="170.0" rx="5" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<rect x="47.7" y="97.7" width="94.6" height="154.6" rx="3" fill="#334155" fill-opacity="0.55" stroke="#64748b" stroke-width="2"/>
+<circle cx="54.6" cy="104.6" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="135.4" cy="104.6" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="54.6" cy="245.4" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<circle cx="135.4" cy="245.4" r="2.0" fill="#64748b" stroke="none" stroke-width="2"/>
+<rect x="89.5" y="112.6" width="11.0" height="124.7" rx="2" fill="#0f172a" fill-opacity="0.6" stroke="none" stroke-width="2"/>
+<rect x="55.4" y="118.9" width="33.0" height="21.7" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="73.2" y="123.6" width="11.2" height="12.2" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="101.6" y="118.9" width="33.0" height="21.7" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="105.6" y="123.6" width="11.2" height="12.2" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="55.4" y="149.0" width="33.0" height="21.7" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="73.2" y="153.8" width="11.2" height="12.2" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="101.6" y="149.0" width="33.0" height="21.7" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="105.6" y="153.8" width="11.2" height="12.2" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="55.4" y="179.2" width="33.0" height="21.7" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="73.2" y="184.0" width="11.2" height="12.2" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="101.6" y="179.2" width="33.0" height="21.7" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="105.6" y="184.0" width="11.2" height="12.2" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="55.4" y="209.4" width="33.0" height="21.7" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="73.2" y="214.2" width="11.2" height="12.2" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="101.6" y="209.4" width="33.0" height="21.7" rx="1.5" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="1.5"/>
+<rect x="105.6" y="214.2" width="11.2" height="12.2" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="95.0" y="288.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">panel</text>
+<line x1="150.0" y1="170.0" x2="330.0" y2="170.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="240.0" y="156.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">branch circuit</text>
+<rect x="337.6" y="135.0" width="44.8" height="70.0" rx="7.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 353.2 139.9 L 366.8 139.9 A 11.9 11.9 0 0 1 366.8 159.5 L 353.2 159.5 A 11.9 11.9 0 0 1 353.2 139.9 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="355.5" y1="144.7" x2="355.5" y2="150.7" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="364.5" y1="145.3" x2="364.5" y2="150.1" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 358.1 157.1 V 154.5 A 1.9 1.9 0 0 1 361.9 154.5 V 157.1 Z" fill="none" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 353.2 180.5 L 366.8 180.5 A 11.9 11.9 0 0 1 366.8 200.1 L 353.2 200.1 A 11.9 11.9 0 0 1 353.2 180.5 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="355.5" y1="185.3" x2="355.5" y2="191.3" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="364.5" y1="185.9" x2="364.5" y2="190.7" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 358.1 197.7 V 195.1 A 1.9 1.9 0 0 1 361.9 195.1 V 197.7 Z" fill="none" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="343.3" y="166.5" width="15.2" height="7.0" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="361.5" y="166.5" width="15.2" height="7.0" rx="1.5" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polyline points="380.0,170.0 440.0,170.0 440.0,220.0 500.0,220.0" fill="none" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="516.0" y="253.0" width="19.8" height="11.2" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="584.2" y="253.0" width="19.8" height="11.2" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="507.2" y1="265.5" x2="612.8" y2="265.5" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="505.0" y="185.0" width="110.0" height="70.0" rx="15.4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="527.0" y1="196.7" x2="593.0" y2="196.7" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="527.0" y1="208.3" x2="593.0" y2="208.3" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="527.0" y1="220.0" x2="593.0" y2="220.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="527.0" y1="231.7" x2="593.0" y2="231.7" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="527.0" y1="243.3" x2="593.0" y2="243.3" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="520.4" y1="189.0" x2="520.4" y2="251.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="599.6" y1="189.0" x2="599.6" y2="251.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="615.0" y="213.7" width="24.2" height="12.6" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="542.4" y="168.2" width="35.2" height="18.2" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="560.0" y="229.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">M</text>
+<text x="560.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">permanently installed</text>
+<text x="560.0" y="324.2" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">pump motor</text>
+<rect x="40.0" y="300.0" width="450.0" height="64.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="56.0" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">GFCI: 150 V or less to ground and</text>
+<text x="368.6" y="340.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">60 A or less</text>
+<rect x="627.9" y="344.0" width="158.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="637.9" y="372.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 680.5(B)</text>
+</svg>

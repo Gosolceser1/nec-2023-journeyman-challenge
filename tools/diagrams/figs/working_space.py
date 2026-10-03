@@ -23,7 +23,7 @@ OPEN_DOORS = "open-book-exam-#7-022"
 GUARDED = "open-book-exam-#1-011"
 
 
-@figure("working_space_110-26", h=480, nec="110.26 (open doors), Table 110.26(A)(1) Condition 2, 110.26(B), 110.26(C)(3)",
+@figure("working_space_110-26", h=480, nec="110.26",
         records={**{r: {} for r in [DOOR_25, MASONRY, OPEN_DOORS, GUARDED]},
                  "final-exam-#2-046": {"like": MASONRY}, "open-book-exam-#5-017": {"like": DOOR_25}})
 def working_space(f):
@@ -86,7 +86,7 @@ def working_space(f):
     f.tag(f.w - 24, f.h - 14, "NEC 110.26", anchor="end")
 
 
-@figure("dedicated_space_110-26e", h=500, nec="110.26(A)(1)-(3), 110.26(E)(1)",
+@figure("dedicated_space_110-26e", h=500, nec="110.26(E)",
         records={"final-exam-#1-057": {}, "open-book-exam-#5-004": {"like": "final-exam-#1-057"}})
 def dedicated_space(f):
     ceil, floor, ft = 96, 440, 40.0

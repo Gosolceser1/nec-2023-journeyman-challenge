@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+<rect x="0.0" y="0.0" width="800.0" height="420.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="36.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Dwelling: outdoor outlets</text>
+<rect x="40.0" y="90.0" width="300.0" height="270.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="4"/>
+<text x="190.0" y="130.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">house wall</text>
+<rect x="20.0" y="360.0" width="760.0" height="50.0" rx="0" fill="#3f2e1f" fill-opacity="0.75" stroke="none" stroke-width="2"/>
+<circle cx="32.0" cy="378.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="60.0" cy="394.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="88.0" cy="390.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="116.0" cy="386.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="144.0" cy="382.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="172.0" cy="378.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="200.0" cy="394.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="228.0" cy="390.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="256.0" cy="386.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="284.0" cy="382.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="312.0" cy="378.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="340.0" cy="394.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="368.0" cy="390.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="396.0" cy="386.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="424.0" cy="382.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="452.0" cy="378.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="480.0" cy="394.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="508.0" cy="390.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="536.0" cy="386.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="564.0" cy="382.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="592.0" cy="378.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="620.0" cy="394.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="648.0" cy="390.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="676.0" cy="386.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="704.0" cy="382.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="732.0" cy="378.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="760.0" cy="394.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<circle cx="788.0" cy="390.0" r="3" fill="#78593a" stroke="none" stroke-width="2"/>
+<line x1="20.0" y1="360.0" x2="780.0" y2="360.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="114.0" y="235.0" width="32.0" height="50.0" rx="5.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 125.2 238.5 L 134.8 238.5 A 8.5 8.5 0 0 1 134.8 252.5 L 125.2 252.5 A 8.5 8.5 0 0 1 125.2 238.5 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="126.8" y1="241.9" x2="126.8" y2="246.2" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="133.2" y1="242.4" x2="133.2" y2="245.8" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="130.0" cy="249.6" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<path d="M 125.2 267.5 L 134.8 267.5 A 8.5 8.5 0 0 1 134.8 281.5 L 125.2 281.5 A 8.5 8.5 0 0 1 125.2 267.5 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="126.8" y1="270.9" x2="126.8" y2="275.2" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="133.2" y1="271.4" x2="133.2" y2="274.8" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="130.0" cy="278.6" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="117.6" y="257.5" width="10.9" height="5.0" rx="1.5" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<rect x="131.5" y="257.5" width="10.9" height="5.0" rx="1.5" fill="#34d399" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="130.0" y="316.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">receptacle</text>
+<rect x="420.0" y="250.0" width="120.0" height="110.0" rx="6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="480.0" cy="290.0" r="34" fill="#0f172a" stroke="#64748b" stroke-width="2"/>
+<line x1="452.0" y1="270.0" x2="508.0" y2="270.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="452.0" y1="283.0" x2="508.0" y2="283.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="452.0" y1="296.0" x2="508.0" y2="296.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="452.0" y1="309.0" x2="508.0" y2="309.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="480.0" y="394.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">A/C condenser</text>
+<rect x="350.0" y="200.0" width="50.0" height="70.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
+<rect x="355.0" y="205.0" width="40.0" height="60.0" rx="3" fill="none" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<rect x="371.0" y="263.0" width="8.0" height="11.0" rx="2" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="398.0" y="215.4" width="8.0" height="11.2" rx="2" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="404.0" y1="221.0" x2="415.0" y2="207.0" stroke="#e2e8f0" stroke-width="5.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="415.0" cy="207.0" r="4.0" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="404.0" cy="221.0" r="4.0" fill="#1e293b" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="400.0" y1="240.0" x2="420.0" y2="280.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="570.0" y="90.0" width="210.0" height="200.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="584.0" y="120.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">GFCI on outdoor</text>
+<text x="584.0" y="150.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">outlets fed by</text>
+<text x="584.0" y="174.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">single-phase circuits,</text>
+<text x="584.0" y="198.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">150 V to ground</text>
+<text x="584.0" y="222.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">or less, and</text>
+<text x="584.0" y="260.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">50 A or less</text>
+<rect x="630.3" y="380.0" width="155.7" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="640.3" y="408.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 210.8(F)</text>
+</svg>

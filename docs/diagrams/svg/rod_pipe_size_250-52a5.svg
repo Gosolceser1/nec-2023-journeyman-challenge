@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+<rect x="0.0" y="0.0" width="800.0" height="420.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Rod and pipe electrodes: minimum sizes</text>
+<rect x="120.0" y="80.0" width="30.0" height="280.0" rx="4" fill="#b45309" fill-opacity="1.0" stroke="#fbbf24" stroke-width="2"/>
+<polygon points="120.0,360.0 150.0,360.0 135.0,392.0" fill="#b45309" fill-opacity="1.0" stroke="#fbbf24" stroke-width="2"/>
+<text x="190.0" y="116.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">rod: copper-coated steel</text>
+<text x="190.0" y="140.2" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">or stainless</text>
+<text x="190.0" y="186.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="start">5/8 in diameter</text>
+<rect x="520.0" y="80.0" width="60.0" height="300.0" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="3"/>
+<rect x="532.0" y="80.0" width="36.0" height="300.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<text x="600.0" y="116.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">pipe or conduit</text>
+<text x="600.0" y="140.2" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">electrode</text>
+<text x="600.0" y="186.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#34d399" text-anchor="start">trade size 3/4</text>
+<text x="600.0" y="240.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">steel: galvanized or</text>
+<text x="600.0" y="262.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">metal-coated</text>
+<rect x="588.7" y="380.0" width="197.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="598.7" y="408.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 250.52(A)(5)</text>
+</svg>

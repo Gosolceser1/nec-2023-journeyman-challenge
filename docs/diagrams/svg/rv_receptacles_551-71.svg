@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="470" viewBox="0 0 800 470">
+<rect x="0.0" y="0.0" width="800.0" height="470.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">RV park site supply pedestal</text>
+<rect x="100.0" y="380.0" width="50.0" height="50.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<line x1="40.0" y1="430.0" x2="210.0" y2="430.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="60.0" y="104.0" width="130.0" height="278.0" rx="10" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="56.0" y="98.0" width="138.0" height="14.0" rx="4" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="93.0" y="110.0" width="64.0" height="70.0" rx="5" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<line x1="99.0" y1="116.0" x2="151.0" y2="116.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 113.6 133.6 L 136.4 133.6 A 20.0 20.0 0 0 1 136.4 166.4 L 113.6 166.4 A 20.0 20.0 0 0 1 113.6 133.6 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="117.4" y1="141.6" x2="117.4" y2="151.6" stroke="#e2e8f0" stroke-width="3.2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="132.6" y1="142.6" x2="132.6" y2="150.6" stroke="#e2e8f0" stroke-width="3.2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="117.4" y1="146.6" x2="112.4" y2="146.6" stroke="#e2e8f0" stroke-width="3.2" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 121.8 162.5 V 158.0 A 3.2 3.2 0 0 1 128.2 158.0 V 162.5 Z" fill="none" stroke="#e2e8f0" stroke-width="1.7999999999999998" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="87.0" y="190.0" width="76.0" height="82.0" rx="5" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<line x1="93.0" y1="196.0" x2="157.0" y2="196.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="125.0" cy="236.0" r="26" fill="#334155" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="125.0" cy="236.0" r="19.76" fill="#0f172a" stroke="#64748b" stroke-width="2"/>
+<rect x="83.0" y="276.0" width="84.0" height="90.0" rx="5" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<line x1="89.0" y1="282.0" x2="161.0" y2="282.0" stroke="#94a3b8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="125.0" cy="326.0" r="30" fill="#334155" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="125.0" cy="326.0" r="22.8" fill="#0f172a" stroke="#64748b" stroke-width="2"/>
+<text x="230.0" y="140.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">20 A, 125 V</text>
+<text x="230.0" y="166.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">every site</text>
+<text x="230.0" y="226.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">30 A, 125 V</text>
+<text x="230.0" y="254.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">at least</text>
+<text x="310.9" y="254.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">70%</text>
+<text x="230.0" y="282.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">of the sites</text>
+<text x="230.0" y="316.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">50 A, 125/250 V</text>
+<text x="230.0" y="342.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">40% of new sites,</text>
+<text x="230.0" y="367.3" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">20% of existing</text>
+<text x="230.0" y="430.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">all weather-resistant</text>
+<rect x="646.2" y="432.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="656.2" y="460.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 551.71</text>
+</svg>

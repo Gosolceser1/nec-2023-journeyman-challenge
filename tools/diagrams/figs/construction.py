@@ -33,193 +33,262 @@ def _rows(f, x, y, rows, size=T_MIN, gap=30):
         f.text(x + 56, y + i * gap, v, size, MUTED, "start")
 
 
-@figure("switchboard_sections_408", h=536, nec="408.18(C), 408.3(A)(2)",
-        records={"final-exam-#1-002": {"terms": ["front"]}, "open-book-exam-#1-015": {"terms": ["front"]},
-                 "open-book-exam-#1-007": {"when": "after"}})
-def switchboard_sections(f):
-    mark = ["final-exam-#1-002", "open-book-exam-#1-015"]
-    f.title("Switchboard: access marking and section wiring", y=34)
-    # Plan view (looking down) with all four sides hidden.
-    f.card(20, 56, 330, 432, "plan, looking down", align="middle")
-    x0, y0, w, h = 90, 214, 190, 120
+def _switchboard_plan(f, x0, y0, w, h):
     f.rect(x0, y0, w, h, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ + 1)
     for k in (1, 2):
         f.line(x0 + k * w / 3, y0, x0 + k * w / 3, y0 + h, EDGE, 2)
     f.text(x0 + w / 2, y0 + h / 2 + 8, "sections", T_MIN, TEXT, bold=True)
-    f.lines(185, 116, ["field connections need", "rear or side access"], T_MIN, AMBER, bold=True, gap=1.1)
-    sides = [(x0 + w / 2, y0 - 36, "rear", NO), (x0 - 38, y0 + h / 2 + 7, "left", NO),
-             (x0 + w + 36, y0 + h / 2 + 7, "right", NO), (x0 + w / 2, y0 + h + 44, "front", OK)]
-    for sx, sy, name, color in sides:
-        f.value(sx, sy, name, T_NOTE, color, records=mark, pad=6, what=f"the {name} side")
-    f.value_lines(185, 440, ["marking goes on the", "side seen before opening"], T_MIN, TEXT, records=mark,
-                  pad=6, gap=1.15, what="where the marking goes")
-    # Elevation: conductors stay in the section where they terminate.
-    f.card(370, 56, 410, 432, "elevation: three sections", align="middle")
-    sw_, top, bot = 116, 120, 400
-    xs = [396 + k * 126 for k in range(3)]
-    rows = [186 + j * 68 for j in range(3)]
+
+
+@figure("switchboard_marking_408-18c", h=470, nec="408.18(C)",
+        records={"final-exam-#1-002": {"terms": ["front"]}, "open-book-exam-#1-015": {"terms": ["front"]}})
+def switchboard_marking(f):
+    mark = ["final-exam-#1-002", "open-book-exam-#1-015"]
+    f.title("Switchboard, plan view: field connections from the rear", y=34)
+    x0, y0, w, h = 300, 190, 200, 120
+    _switchboard_plan(f, x0, y0, w, h)
+    f.text(x0 + w / 2, y0 - 70, "wall", T_MIN, MUTED)
+    f.line(x0 - 60, y0 - 54, x0 + w + 60, y0 - 54, LINE, SW_STRUCT)
+    f.lines(150, 110, ["field connections need", "rear or side access"], T_MIN, AMBER, bold=True, gap=1.1)
+    f.leader(150, 130, x0 + 20, y0 - 8)
+    sides = [(x0 + w / 2, y0 - 16, "rear"), (x0 - 50, y0 + h / 2 + 7, "left"),
+             (x0 + w + 50, y0 + h / 2 + 7, "right"), (x0 + w / 2, y0 + h + 40, "front")]
+    for sx, sy, name in sides:
+        f.value(sx, sy, name, T_NOTE, MUTED, records=mark, pad=6, what=f"the {name} side")
+    f.value(x0 + w / 2, 404, "the marking goes on the front", T_NOTE, records=mark, pad=6,
+            what="where the marking goes")
+    f.tag(f.w - 24, f.h - 10, "NEC 408.18(C)", anchor="end")
+
+
+@figure("switchboard_sections_408-3a", h=470, nec="408.3(A)(2)", when="after",
+        records=["open-book-exam-#1-007"])
+def switchboard_sections(f):
+    f.title("Switchboard elevation: conductors stay in their own section", y=34)
+    sw_, top, bot = 150, 110, 380
+    xs = [120 + k * 190 for k in range(3)]
+    rows = [176 + j * 66 for j in range(3)]
     for k, sx in enumerate(xs):
         f.rect(sx - 2, bot, sw_ + 4, 12, fill=STEEL, stroke=TEXT, sw=1.5)
         f.rect(sx, top, sw_, bot - top, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ + 1, rx=3)
-        f.line(sx, 172, sx + sw_, 172, EDGE, SW_THIN)
+        f.line(sx, 162, sx + sw_, 162, EDGE, SW_THIN)
         for cx in (sx + 12, sx + sw_ - 12):
             f.circle(cx, top + 12, 3, fill=EDGE)
             f.circle(cx, bot - 12, 3, fill=EDGE)
         if k == 0:
-            f.breaker(sx + 10, 200, 70, 130, poles=3)
+            f.breaker(sx + 14, 190, 80, 130, poles=3)
         else:
             for ry in rows:
-                f.breaker(sx + 10, ry, 70, 54, poles=3)
-    # Each section's own feed drops down its side gutter to the device it serves.
-    for sx, ty in ((xs[0], 265), (xs[1], rows[1] + 27), (xs[2], rows[0] + 27)):
-        f.polyline([(sx + 96, 96), (sx + 96, ty), (sx + 80, ty)], WIRE_HOT, SW_WIRE)
-    f.polyline([(xs[0] + 108, 96), (xs[0] + 108, 150), (xs[1] + 86, 150), (xs[1] + 86, rows[0] + 27),
-                (xs[1] + 80, rows[0] + 27)], NO, SW_WIRE)
-    f.mark_no(xs[0] + sw_ + 5, 150, 13)
-    f.lines(575, 446, ["only the conductors that end in a", "vertical section run in that section"],
+                f.breaker(sx + 14, ry, 80, 52, poles=3)
+    for sx, ty in ((xs[0], 255), (xs[1], rows[1] + 26), (xs[2], rows[0] + 26)):
+        f.polyline([(sx + 124, 80), (sx + 124, ty), (sx + 94, ty)], WIRE_HOT, SW_WIRE)
+    f.polyline([(xs[0] + 138, 80), (xs[0] + 138, 140), (xs[1] + 110, 140), (xs[1] + 110, rows[0] + 26),
+                (xs[1] + 94, rows[0] + 26)], NO, SW_WIRE)
+    f.mark_no(xs[0] + sw_ + 20, 140, 13)
+    f.lines(400, 420, ["only the conductors that end in a vertical", "section run in that section"],
             T_MIN, TEXT, gap=1.15)
-    f.tag(f.w - 24, f.h - 10, "NEC 408.18(C), 408.3(A)(2)", anchor="end")
+    f.tag(f.w - 24, 64, "NEC 408.3(A)(2)", anchor="end")
 
 
-@figure("type_letters_decoder", h=516, nec="Table 310.4(1), 338.100, Table 400.4",
-        records={"final-exam-#1-026": {}, "final-exam-#1-034": {}, "open-book-exam-#4-025": {},
-                 "final-exam-#5-022": {"terms": ["USE"]}, "open-book-exam-#3-011": {"like": "final-exam-#1-026"}})
-def type_letters(f):
+@figure("insulation_letters_310-4", h=450, nec="Table 310.4(1)",
+        records={"final-exam-#1-026": {}, "open-book-exam-#3-011": {"like": "final-exam-#1-026"}})
+def insulation_letters(f):
     dash2 = ["final-exam-#1-026"]
+    f.title("Reading the print on a building wire", y=34)
+    f.rect(60, 80, 560, 44, fill="#1f2937", stroke=TEXT, sw=SW_OBJ, rx=22)
+    f.rect(620, 92, 70, 20, fill=ROD, stroke=TEXT, sw=1.5, rx=4)
+    f.text(340, 110, "RHW-2", T_NOTE, TEXT, bold=True)
+    f.card(60, 156, 680, 230)
+    _rows(f, 90, 200, [("R", "thermoset insulation"), ("H", "75 C rated"), ("W", "wet locations")], T_NOTE, 40)
+    f.text(90, 330, "-2", T_VALUE, TEXT, "start", True)
+    f.value(160, 330, "90 C max, wet or dry", T_NOTE, anchor="start", records=dash2, pad=6,
+            what="what the -2 means")
+    f.tag(f.w - 24, f.h - 10, "NEC Table 310.4(1)", anchor="end")
+
+
+@figure("cord_letters_400-4", h=470, nec="Table 400.4",
+        records={"final-exam-#1-034": {}, "open-book-exam-#4-025": {}})
+def cord_letters(f):
     wet = ["final-exam-#1-034", "open-book-exam-#4-025"]
+    f.title("Flexible cord type letters", y=34)
+    f.rect(60, 76, 520, 50, fill="#111827", stroke=TEXT, sw=SW_OBJ, rx=25)
+    for k, color in enumerate((WIRE_HOT, WIRE_NEU, WIRE_GND)):
+        y = 88 + k * 13
+        f.polyline([(580, 101), (610, y), (660, y)], color, 9)
+        f.line(660, y, 690, y, ROD, 4)
+    f.text(320, 108, "hard-service cord", T_MIN, MUTED)
+    f.card(60, 150, 680, 270)
+    _rows(f, 90, 196, [("S", "hard service"), ("J", "junior (lighter duty)"), ("T", "thermoplastic")], T_MIN, 38)
+    _rows(f, 420, 196, [("P", "parallel"), ("O", "oil-resistant"), ("OO", "jacket and insulation")], T_MIN, 38)
+    f.text(90, 360, "W", T_VALUE, TEXT, "start", True)
+    f.value(146, 360, "wet location and sunlight resistant", T_NOTE, anchor="start", records=wet, pad=6,
+            what="what the W suffix means")
+    f.tag(f.w - 24, f.h - 10, "NEC Table 400.4", anchor="end")
+
+
+@figure("direct_burial_cable_338", h=430, nec="338.100", records={"final-exam-#5-022": {"terms": ["USE"]}})
+def direct_burial_cable(f):
     burial = ["final-exam-#5-022"]
-    f.title("Type letters decoder", y=34)
-    f.card(20, 56, 250, 412, "building wire", align="middle")
-    _rows(f, 34, 116, [("T", "thermoplastic"), ("R", "thermoset"), ("H", "75 C"), ("HH", "high heat,"),
-                        ("", "dry or damp")])
-    # On the cord questions the building-wire W and -2 rows would answer (or
-    # mislead on SPT-2) by analogy, so they are masked there too.
-    f.text(34, 266, "W", T_MIN, TEXT, "start", True)
-    f.value(90, 266, "wet", T_MIN, MUTED, anchor="start", bold=False, records=wet, pad=5,
-            what="what W means on building wire")
-    _rows(f, 34, 296, [("N", "nylon jacket")])
-    f.text(34, 340, "-2", T_NOTE, TEXT, "start", True)
-    f.value_lines(90, 340, ["90 C, wet", "or dry"], T_MIN, anchor="start", records=dash2 + wet, pad=6, gap=1.15,
-                  what="what the -2 means")
-    f.text(34, 440, "e.g. RHW-2, THWN-2", T_MIN, MUTED, "start")
-    f.card(285, 56, 230, 412, "cable", align="middle")
-    _rows(f, 299, 116, [("NM", "dry, inside"), ("UF", "wet, direct"), ("", "burial")])
-    f.text(299, 230, "service entrance:", T_MIN, MUTED, "start")
-    _rows(f, 299, 262, [("SE", "above grade")])
-    f.value_lines(299, 310, ["U = underground:", "USE, direct burial"], T_MIN, anchor="start", records=burial,
-                  pad=6, gap=1.15, what="the underground service-entrance cable")
-    f.card(530, 56, 250, 412, "flexible cord", align="middle")
-    _rows(f, 544, 116, [("S", "hard service"), ("J", "junior (300 V)"), ("T", "thermoplastic"),
-                         ("P", "parallel"), ("O", "oil-resistant"), ("OO", "jacket and")])
-    f.text(600, 296, "insulation", T_MIN, MUTED, "start")
-    f.text(544, 340, "W", T_NOTE, TEXT, "start", True)
-    f.value_lines(600, 340, ["wet location,", "sunlight", "resistant"], T_MIN, anchor="start", records=wet,
-                  pad=6, gap=1.15, what="what the W suffix means")
-    f.tag(f.w - 24, f.h - 10, "NEC 310.4, 338, 400.4", anchor="end")
+    f.title("Service-entrance cable buried directly in earth (section)", y=34)
+    g = 150
+    f.grade(g, soil_h=200, label="grade")
+    f.polyline([(120, g - 60), (120, g + 140), (680, g + 140)], "#111827", 16)
+    f.polyline([(120, g - 60), (120, g + 140), (680, g + 140)], EDGE, 2)
+    f.text(140, g - 70, "cable, no raceway", T_MIN, TEXT, "start", True)
+    f.text(400, g + 186, "in the earth", T_MIN, TEXT, bold=True)
+    f.text(560, 80, "type:", T_NOTE, TEXT, "end", True)
+    f.value(572, 80, "USE", T_VALUE, anchor="start", records=burial, pad=6, what="the cable type")
+    f.text(560, 120, "U = underground", T_MIN, MUTED, "end")
+    f.tag(f.w - 24, f.h - 10, "NEC 338.100", anchor="end")
 
 
-@figure("fcc_layers_324", h=540, nec="Article 100 (Bottom Shield, Top Shield, Transition Assembly), 324.40, 324.41",
-        records={"final-exam-#5-001": {"terms": ["release", "adhesive"]},
-                 "final-exam-#5-004": {"terms": ["transition"]},
-                 "final-exam-#5-007": {"terms": ["bottom", "shield"]}})
-def fcc_layers(f):
-    glue = ["final-exam-#5-001"]
-    trans = ["final-exam-#5-004"]
-    bot = ["final-exam-#5-007"]
-    f.title("Flat conductor cable under carpet squares (exploded, not to scale)", y=34)
-    layers = [(90, "#6d28d9", "carpet square, 1.0 m (39.37 in) max", None, None),
-              (150, AMBER, "release-type adhesive", glue, "how the square is held down"),
-              (210, STEEL, "top shield (metal)", bot, "the layer above the cable"),
-              (270, WIRE_NEU, "FCC cable (flat conductors)", None, None),
-              (330, STEEL, "bottom shield", bot, "the layer between floor and cable"),
-              (390, CONCRETE, "floor", None, None)]
-    for y, color, name, recs, what in layers:
-        f.poly([(60, y + 24), (120, y), (440, y), (380, y + 24)], color, TEXT, SW_THIN, 0.85)
-        if recs:
-            f.value(460, y + 18, name, T_MIN, TEXT, anchor="start", records=recs, pad=5, what=what)
-        else:
-            f.text(460, y + 18, name, T_MIN, TEXT, "start", True)
-    # Flat copper conductors run the length of the cable layer.
+def _fcc_layer(f, y, color):
+    f.poly([(60, y + 24), (120, y), (440, y), (380, y + 24)], color, TEXT, SW_THIN, 0.85)
+
+
+def _fcc_cable(f, y):
+    _fcc_layer(f, y, WIRE_NEU)
     for t in (7, 12, 17):
-        f.line(120 - 60 * t / 24 + 26, 270 + t, 440 - 60 * t / 24 - 26, 270 + t, ROD, 3)
-    # Transition to other wiring at the wall.
-    f.wall(760, 360, 520, 20)
-    f.rect(620, 440, 120, 50, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
-    f.rect(628, 448, 104, 34, fill="none", stroke=EDGE, sw=1.5, rx=3)
-    for sx, sy in ((636, 456), (724, 474)):
+        f.line(120 - 60 * t / 24 + 26, y + t, 440 - 60 * t / 24 - 26, y + t, ROD, 3)
+
+
+@figure("fcc_adhesive_324-41", h=420, nec="324.41",
+        records={"final-exam-#5-001": {"terms": ["release", "adhesive"]}})
+def fcc_adhesive(f):
+    glue = ["final-exam-#5-001"]
+    f.title("Carpet square over flat conductor cable (exploded)", y=34)
+    _fcc_layer(f, 90, "#6d28d9")
+    f.text(460, 108, "carpet square", T_MIN, TEXT, "start", True)
+    _fcc_layer(f, 160, AMBER)
+    f.value(460, 178, "release-type adhesive", T_MIN, TEXT, anchor="start", records=glue, pad=5,
+            what="how the square is held down")
+    _fcc_cable(f, 230)
+    f.text(460, 248, "FCC system", T_MIN, TEXT, "start", True)
+    _fcc_layer(f, 300, CONCRETE)
+    f.text(460, 318, "floor", T_MIN, TEXT, "start", True)
+    f.text(300, 380, "the square can be lifted to reach the cable", T_MIN, MUTED)
+    f.tag(f.w - 24, 70, "NEC 324.41", anchor="end")
+
+
+@figure("fcc_bottom_shield_100", h=440, nec="Article 100 (Bottom Shield)",
+        records={"final-exam-#5-007": {"terms": ["bottom", "shield"]}})
+def fcc_bottom_shield(f):
+    bot = ["final-exam-#5-007"]
+    f.title("Flat conductor cable layers (exploded, not to scale)", y=34)
+    _fcc_layer(f, 90, STEEL)
+    f.value(460, 108, "top shield (metal)", T_MIN, TEXT, anchor="start", records=bot, pad=5,
+            what="the layer above the cable")
+    _fcc_cable(f, 170)
+    f.text(460, 188, "FCC cable", T_MIN, TEXT, "start", True)
+    _fcc_layer(f, 250, STEEL)
+    f.value(460, 268, "bottom shield", T_MIN, TEXT, anchor="start", records=bot, pad=5,
+            what="the layer between floor and cable")
+    _fcc_layer(f, 330, CONCRETE)
+    f.text(460, 348, "floor", T_MIN, TEXT, "start", True)
+    f.text(300, 404, "protects the cable from damage at the floor", T_MIN, MUTED)
+    f.tag(f.w - 24, 70, "NEC Art. 100", anchor="end")
+
+
+@figure("fcc_transition_324-40d", h=420, nec="324.40(D)",
+        records={"final-exam-#5-004": {"terms": ["transition"]}})
+def fcc_transition(f):
+    trans = ["final-exam-#5-004"]
+    f.title("Where flat conductor cable meets other wiring", y=34)
+    f.floor(300, 20, 600, label="floor")
+    f.wall(600, 70, 360, 24)
+    f.rect(470, 240, 120, 56, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=5)
+    f.rect(478, 248, 104, 40, fill="none", stroke=EDGE, sw=1.5, rx=3)
+    for sx, sy in ((486, 256), (574, 280)):
         f.circle(sx, sy, 3, fill=LINE)
-    f.rect(440, 459, 180, 12, fill=WIRE_NEU, stroke=TEXT, sw=1)
-    for yy in (462.5, 465, 467.5):
-        f.line(446, yy, 614, yy, ROD, 1.5)
-    f.line(740, 465, 750, 465, WIRE_HOT, SW_WIRE)
-    f.value(600, 522, "transition assembly", T_MIN, records=trans, pad=5, what="where FCC meets other wiring")
-    f.mask(612, 432, 136, 66, records=trans, what="the box at the wall")
-    f.lines(300, 470, ["power feed and grounding", "connections to other wiring:"], T_MIN, MUTED, gap=1.15)
-    f.tag(f.w - 24, 70, "NEC 324", anchor="end")
+    f.rect(80, 286, 390, 12, fill=WIRE_NEU, stroke=TEXT, sw=1)
+    for yy in (289.5, 292, 294.5):
+        f.line(86, yy, 464, yy, ROD, 1.5)
+    f.text(240, 274, "FCC cable under carpet", T_MIN, MUTED)
+    f.conduit(600, 268, 760, 268, width=16)
+    f.lines(300, 120, ["power feed, grounding and shield", "connections to other wiring are in a:"],
+            T_MIN, TEXT, gap=1.15)
+    f.value(300, 196, "transition assembly", T_NOTE, records=trans, pad=6, what="where FCC meets other wiring")
+    f.mask(462, 232, 136, 72, records=trans, what="the box at the wall")
+    f.tag(f.w - 24, f.h - 10, "NEC 324.40(D)", anchor="end")
 
 
-@figure("cable_cutaways_332_310", h=536, nec="332.104, 332.108, 332.116, Article 100 (MC), 310.3(B)",
-        records={"final-exam-#5-020": {}, "open-book-exam-#10-015": {}, "final-exam-#5-003": {"terms": ["MC"]},
-                 "final-exam-#2-045": {"like": "open-book-exam-#10-015"}})
-def cable_cutaways(f):
-    mi = ["final-exam-#5-020"]
+@figure("cca_conductor_310-3b", h=440, nec="310.3(B)",
+        records={"open-book-exam-#10-015": {}, "final-exam-#2-045": {"like": "open-book-exam-#10-015"}})
+def cca_conductor(f):
     ccal = ["open-book-exam-#10-015"]
+    f.title("Copper-clad aluminum conductor (cross-section)", y=34)
+    cx, cy = 240, 230
+    f.circle(cx, cy, 120, fill=ROD, stroke=TEXT, sw=SW_OBJ)
+    f.circle(cx, cy, 104, fill=CONCRETE, stroke=CLAMP, sw=1.5)
+    f.text(cx, cy + 8, "aluminum core", T_NOTE, BG, bold=True)
+    f.text(470, 110, "copper layer", T_NOTE, TEXT, "start", True)
+    f.leader(466, 104, cx + 88, cy - 82)
+    f.lines(470, 180, ["copper bonded to", "the aluminum core"], T_MIN, MUTED, "start", gap=1.15)
+    f.text(470, 290, "copper share of area:", T_MIN, TEXT, "start", True)
+    f.value(470, 334, "at least 10%", T_VALUE, anchor="start", records=ccal, pad=6, what="minimum copper share")
+    f.tag(f.w - 24, f.h - 10, "NEC 310.3(B)", anchor="end")
+
+
+@figure("mc_cable_100", h=420, nec="Article 100 (Metal-Clad Cable)",
+        records={"final-exam-#5-003": {"terms": ["MC"]}})
+def mc_cable(f):
     mc = ["final-exam-#5-003"]
-    f.title("Cable and conductor cross-sections (not to scale)", y=34)
-    # MI cable.
-    f.card(20, 56, 250, 432, "Type MI", align="middle")
-    cx, cy = 145, 180
-    f.circle(cx, cy, 68, fill=ROD, stroke=TEXT, sw=SW_OBJ)
-    f.circle(cx, cy, 58, fill=TEXT, stroke=CLAMP, sw=1.5)
-    for dx, dy in ((-22, -14), (22, -14), (0, 24)):
-        f.circle(cx + dx, cy + dy, 13, fill=ROD, stroke=CLAMP, sw=SW_THIN)
-    f.text(cx, 278, "mineral insulation", T_MIN, MUTED)
-    f.value_lines(cx, 318, ["solid copper", "conductors"], T_MIN, records=mi, pad=5, gap=1.1)
-    f.value_lines(cx, 378, ["sheath: mechanical", "protection"], T_MIN, records=mi, pad=5, gap=1.1)
-    f.value_lines(cx, 438, ["sheath: grounding", "path"], T_MIN, records=mi, pad=5, gap=1.1)
-    # MC cable.
-    f.card(285, 56, 230, 432)
-    b = f.text(390, 86, "Type", T_NOTE, TEXT, "end", True)
-    f.value(398, 86, "MC", T_NOTE, anchor="start", records=mc, pad=5, what="the cable type")
-    _mc_armor(f, 302, 148, 136, 64)
+    f.title("Factory cable in interlocking metal tape armor", y=34)
+    _mc_armor(f, 80, 130, 400, 90)
     for k, color in enumerate((NO, WIRE_NEU, WIRE_GND)):
-        y = 166 + k * 14
-        f.polyline([(438, 180), (452, y), (488, y)], color, 10)
-        f.line(488, y, 502, y, ROD, 5)
-    f.path("M 438 148 a 10 32 0 1 1 0 64 a 10 32 0 1 1 0 -64", TEXT, SW_THIN, PANEL)
+        y = 154 + k * 20
+        f.polyline([(480, 175), (510, y), (600, y)], color, 13)
+        f.line(600, y, 630, y, ROD, 6)
+    f.path("M 480 130 a 14 45 0 1 1 0 90 a 14 45 0 1 1 0 -90", TEXT, SW_THIN, PANEL)
     for k, color in enumerate((NO, WIRE_NEU, WIRE_GND)):
-        f.circle(438, 168 + k * 12, 5, fill=color)
-    f.lines(400, 290, ["interlocking metal", "tape armor (or smooth /", "corrugated sheath)"], T_MIN, TEXT,
-            gap=1.15)
-    f.lines(400, 390, ["insulated conductors", "inside"], T_MIN, MUTED, gap=1.15)
-    # Copper-clad aluminum.
-    f.card(530, 56, 250, 432, "copper-clad aluminum", align="middle")
-    cx = 640
-    f.circle(cx, cy, 64, fill=ROD, stroke=TEXT, sw=SW_OBJ)
-    f.circle(cx, cy, 55, fill=CONCRETE, stroke=CLAMP, sw=1.5)
-    f.text(cx, cy + 8, "aluminum", T_MIN, BG, bold=True)
-    f.text(742, 134, "copper", T_MIN, TEXT, "middle", True)
-    f.leader(714, 140, cx + 42, cy - 42)
-    f.text(655, 278, "copper bonded to", T_MIN, MUTED)
-    f.text(655, 302, "an aluminum core", T_MIN, MUTED)
-    f.text(cx, 360, "copper share of area:", T_MIN, TEXT, bold=True)
-    f.value(cx, 400, "at least 10%", T_NOTE, records=ccal, pad=6, what="minimum copper share")
-    f.tag(f.w - 24, f.h - 10, "NEC 332, 310.3(B)", anchor="end")
+        f.circle(480, 157 + k * 18, 7, fill=color)
+    f.text(280, 270, "interlocking metal tape armor", T_MIN, TEXT, bold=True)
+    f.text(560, 250, "insulated conductors", T_MIN, MUTED)
+    f.text(390, 340, "Type", T_VALUE, TEXT, "end", True)
+    f.value(402, 340, "MC", T_VALUE, anchor="start", records=mc, pad=6, what="the cable type")
+    f.tag(f.w - 24, f.h - 10, "NEC Art. 100", anchor="end")
 
 
-@figure("raceway_fill_ch9_348-22", h=536, nec="Chapter 9 Table 1, 348.22, Table 348.22, 356.22",
-        records={"final-exam-#5-032": {}, "final-exam-#3-048": {}, "final-exam-#5-066": {},
-                 "final-exam-#4-003": {"like": "final-exam-#5-066"}})
-def raceway_fill(f):
+@figure("mi_cable_332", h=440, nec="332.104", records=["final-exam-#5-020"])
+def mi_cable(f):
+    mi = ["final-exam-#5-020"]
+    f.title("Type MI cable (cross-section)", y=34)
+    cx, cy = 200, 220
+    f.circle(cx, cy, 110, fill=ROD, stroke=TEXT, sw=SW_OBJ)
+    f.circle(cx, cy, 94, fill=TEXT, stroke=CLAMP, sw=1.5)
+    for dx, dy in ((-36, -22), (36, -22), (0, 38)):
+        f.circle(cx + dx, cy + dy, 22, fill=ROD, stroke=CLAMP, sw=SW_THIN)
+    f.text(cx, 370, "mineral insulation packed around them", T_MIN, MUTED)
+    f.leader(400, 112, cx + 50, cy - 30)
+    f.value(410, 118, "solid copper conductors", T_MIN, anchor="start", records=mi, pad=5, what="the conductors")
+    f.leader(400, 210, cx + 104, cy - 10)
+    f.value_lines(410, 206, ["copper sheath: mechanical", "protection"], T_MIN, anchor="start", records=mi,
+                  pad=5, gap=1.1, what="what the sheath does")
+    f.value_lines(410, 296, ["copper sheath: grounding", "path"], T_MIN, anchor="start", records=mi, pad=5,
+                  gap=1.1, what="what else the sheath does")
+    f.tag(f.w - 24, f.h - 10, "NEC 332.104", anchor="end")
+
+
+@figure("fmc_3-8_348-22", h=420, nec="348.22", records=["final-exam-#5-032", "final-exam-#3-048"])
+def fmc_3_8(f):
     big = ["final-exam-#5-032", "final-exam-#3-048"]
+    f.title("Trade size 3/8 flexible metal conduit", y=34)
+    _fmc_side(f, 120, 110, 460, 70)
+    f.text(350, 230, "too small for Chapter 9: it has its own table,", T_MIN, TEXT)
+    f.text(350, 262, "Table 348.22", T_NOTE, DIM, bold=True)
+    f.text(350, 320, "largest conductor allowed:", T_NOTE, TEXT, bold=True)
+    f.value(350, 372, "10 AWG", T_VALUE, records=big, pad=6, what="largest conductor")
+    f.tag(f.w - 24, f.h - 10, "NEC 348.22", anchor="end")
+
+
+@figure("lfnc_fill_356-22", h=470, nec="356.22",
+        records={"final-exam-#5-066": {}, "final-exam-#4-003": {"like": "final-exam-#5-066"}})
+def lfnc_fill(f):
     tab = ["final-exam-#5-066"]
-    f.title("Raceway fill: which table?", y=34)
-    f.card(20, 56, 470, 432)
-    b = f.text(200, 86, "Chapter 9,", T_NOTE, TEXT, "end", True)
-    f.value(210, 86, "Table 1", T_NOTE, anchor="start", records=tab, pad=5, what="the fill table")
-    f.text(255, 116, "percent of raceway area", T_MIN, MUTED)
-    for k, (cx, n, pct, label) in enumerate(((100, 1, "53%", "one"), (255, 2, "31%", "two"),
-                                             (410, 4, "40%", "over two"))):
+    f.title("LFNC fill: the percent-of-area table", y=34)
+    b = f.text(390, 86, "Chapter 9,", T_NOTE, TEXT, "end", True)
+    f.value(400, 86, "Table 1", T_NOTE, anchor="start", records=tab, pad=5, what="the fill table")
+    f.text(400, 120, "percent of raceway area", T_MIN, MUTED)
+    for cx, n, pct, label in ((200, 1, "53%", "one"), (400, 2, "31%", "two"), (600, 4, "40%", "over two")):
         f.circle(cx, 220, 62, fill=BG, stroke=LINE, sw=SW_STRUCT)
         spots = {1: [(0, 0, 34)], 2: [(-24, 0, 22), (24, 0, 22)],
                  4: [(-20, -20, 17), (20, -20, 17), (-20, 20, 17), (20, 20, 17)]}[n]
@@ -227,15 +296,5 @@ def raceway_fill(f):
             f.circle(cx + dx, 220 + dy, r, fill=WIRE_NEU, stroke=BG, sw=SW_THIN)
         f.text(cx, 322, label, T_NOTE, TEXT, bold=True)
         f.text(cx, 356, pct, T_VALUE, DIM, bold=True)
-    f.text(34, 410, "LFNC:", T_NOTE, TEXT, "start", True)
-    f.value(112, 410, "356.22 sends you to Table 1", T_MIN, anchor="start", records=tab, pad=5,
-            what="where LFNC fill comes from")
-    f.text(34, 450, "(most raceways work the same way)", T_MIN, MUTED, "start")
-    f.card(510, 56, 270, 432, "trade size 3/8 FMC", align="middle")
-    _fmc_side(f, 560, 164, 180, 52)
-    f.text(524, 290, "too small for", T_MIN, TEXT, "start")
-    f.text(524, 316, "Chapter 9: own table", T_MIN, TEXT, "start")
-    f.text(524, 348, "Table 348.22", T_NOTE, DIM, "start", True)
-    f.text(524, 392, "largest THHN:", T_MIN, TEXT, "start", True)
-    f.value(645, 440, "10 AWG", T_VALUE, records=big, pad=6, what="largest conductor")
-    f.tag(f.w - 24, f.h - 10, "NEC Ch. 9, 348.22", anchor="end")
+    f.text(400, 412, "LFNC conductor count stays within these limits", T_MIN, MUTED)
+    f.tag(f.w - 24, f.h - 10, "NEC 356.22", anchor="end")

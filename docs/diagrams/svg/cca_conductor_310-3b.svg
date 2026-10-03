@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
+<rect x="0.0" y="0.0" width="800.0" height="440.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Copper-clad aluminum conductor (cross-section)</text>
+<circle cx="240.0" cy="230.0" r="120" fill="#b45309" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="240.0" cy="230.0" r="104" fill="#94a3b8" stroke="#ca8a04" stroke-width="1.5"/>
+<text x="240.0" y="238.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#0f172a" text-anchor="middle">aluminum core</text>
+<text x="470.0" y="110.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">copper layer</text>
+<line x1="466.0" y1="104.0" x2="328.0" y2="148.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="328.0" cy="148.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<text x="470.0" y="180.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">copper bonded to</text>
+<text x="470.0" y="203.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">the aluminum core</text>
+<text x="470.0" y="290.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#e2e8f0" text-anchor="start">copper share of area:</text>
+<text x="470.0" y="334.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">at least 10%</text>
+<rect x="627.9" y="404.0" width="158.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="637.9" y="432.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 310.3(B)</text>
+</svg>

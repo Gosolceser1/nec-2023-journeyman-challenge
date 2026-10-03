@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
+<rect x="0.0" y="0.0" width="800.0" height="440.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="40.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Type NM cable to a luminaire in an accessible ceiling</text>
+<line x1="30.0" y1="90.0" x2="770.0" y2="90.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="40.0" y="76.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">structure</text>
+<polyline points="30.0,106.0 160.0,106.0 184.6,106.1 208.6,106.6 231.8,107.3 254.3,108.4 276.2,109.9 297.3,111.8 317.9,114.1 337.8,116.8 357.1,120.0 375.7,123.7 393.8,128.0 411.2,132.8 428.2,138.1 444.5,144.1 460.3,150.6 475.6,157.9 490.3,165.7 504.5,174.3 518.3,183.7 531.5,193.7 544.3,204.6 556.6,216.2 568.5,228.7 580.0,242.0" fill="none" stroke="#e2e8f0" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="155.0" y="91.0" width="10.0" height="30.0" rx="2" fill="#fbbf24" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="130.0" y="156.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">last support</text>
+<line x1="30.0" y1="300.0" x2="770.0" y2="300.0" stroke="#64748b" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="80.0" y1="300.0" x2="80.0" y2="290.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="220.0" y1="300.0" x2="220.0" y2="290.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="360.0" y1="300.0" x2="360.0" y2="290.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="760.0" y1="300.0" x2="760.0" y2="290.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="470.0,300.0 488.0,264.0 672.0,264.0 690.0,300.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="474.0" y="297.0" width="212.0" height="9.0" rx="2" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="562.0" y="242.0" width="36.0" height="22.0" rx="3" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<text x="580.0" y="334.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">luminaire</text>
+<text x="40.0" y="334.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">accessible ceiling</text>
+<text x="250.0" y="196.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">unsupported</text>
+<text x="400.0" y="390.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="end">max unsupported length:</text>
+<text x="414.0" y="390.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">4 1/2 ft</text>
+<rect x="592.7" y="400.0" width="197.3" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="602.7" y="428.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 334.30(B)(2)</text>
+</svg>

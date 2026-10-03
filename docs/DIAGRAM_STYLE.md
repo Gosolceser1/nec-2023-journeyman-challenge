@@ -30,6 +30,11 @@ there just for decoration.
   fullscreen zoom. Values are 28-32 canvas units, object labels 22-24, and
   nothing is under 20 (`T_MIN`). No label may overlap another, run off the
   canvas or sit on top of a line.
+- **One figure, one rule.** A question shows one picture, and it is about
+  the section the question cites. Don't put panels for different sections
+  side by side; give each its own figure. `nec=` names that one section,
+  every record on the figure cites it, and the tag chip shows one reference
+  (`build.py --check` and `test_diagram_figures.py` enforce this).
 - **No clutter.** Every mark answers a question, sets up the question or
   locates something. Leave out random texture, decorative icons and
   repeated legends.

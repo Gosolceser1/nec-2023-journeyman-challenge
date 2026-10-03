@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<rect x="0.0" y="0.0" width="800.0" height="450.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="40.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">NM cable run parallel to a stud (plan view)</text>
+<rect x="180.0" y="136.0" width="440.0" height="14.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<text x="180.0" y="124.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">drywall</text>
+<rect x="240.0" y="150.0" width="84.0" height="196.0" rx="0" fill="#a16207" fill-opacity="0.55" stroke="#ca8a04" stroke-width="2"/>
+<path d="M 244 199.0 q 21.0 -6 42.0 0 t 34.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 244 248.0 q 21.0 -6 42.0 0 t 34.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 244 297.0 q 21.0 -6 42.0 0 t 34.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="282.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">stud</text>
+<line x1="282.0" y1="70.0" x2="282.0" y2="190.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="271.0" y="64.0" width="22.0" height="7.0" rx="2" fill="#e2e8f0" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="302.0" y="84.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">screw</text>
+<rect x="380.0" y="220.0" width="36.0" height="18.0" rx="9.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="390.1" cy="229.0" r="3" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="398.0" cy="229.0" r="3" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="405.9" cy="229.0" r="3" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<text x="398.0" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">NM cable</text>
+<line x1="326.0" y1="150.0" x2="333.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="339.0" y1="150.0" x2="346.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="352.0" y1="150.0" x2="359.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="365.0" y1="150.0" x2="372.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="378.0" y1="150.0" x2="385.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="391.0" y1="150.0" x2="398.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="404.0" y1="150.0" x2="411.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="417.0" y1="150.0" x2="424.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="430.0" y1="150.0" x2="437.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="443.0" y1="150.0" x2="450.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="456.0" y1="150.0" x2="463.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="469.0" y1="150.0" x2="476.0" y2="150.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="418.0" y1="220.0" x2="425.0" y2="220.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="431.0" y1="220.0" x2="438.0" y2="220.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="444.0" y1="220.0" x2="451.0" y2="220.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="457.0" y1="220.0" x2="464.0" y2="220.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="470.0" y1="220.0" x2="477.0" y2="220.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="470.0" y1="156.0" x2="470.0" y2="214.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="470.0,150.0 476.0,162.0 464.0,162.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="470.0,220.0 464.0,208.0 476.0,208.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="484.0" y="206.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">1 1/4 in</text>
+<rect x="627.9" y="400.0" width="158.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="637.9" y="428.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 300.4(D)</text>
+</svg>

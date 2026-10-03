@@ -13,9 +13,8 @@ def _winding(f, x1, y1, x2, y2, loops, color=TEXT, sw=SW_OBJ):
                                               for _ in range(loops)), color, sw)
 
 
-@figure("feeder_tap_10ft_240-21b1", h=450, nec="240.21(B)(1), 409.21(B)",
+@figure("feeder_tap_10ft_240-21b1", h=450, nec="240.21(B)(1)",
         records={"final-exam-#1-032": {"terms": ["1/10", "one-tenth", "10 times"]},
-                 "open-book-exam-#10-004": {"when": "after"},
                  "open-book-exam-#3-002": {"like": "final-exam-#1-032"}})
 def feeder_tap_10ft(f):
     f.breaker(44, 70, 78, 72, poles=3)
@@ -49,10 +48,28 @@ def feeder_tap_10ft(f):
     f.tag(f.w - 24, f.h - 14, "NEC 240.21(B)(1)", anchor="end")
 
 
-@figure("multiwire_branch_circuit_210-4", h=470, nec="210.4(A)-(C)",
-        records={"open-book-exam-#1-001": {}, "open-book-exam-#4-008": {"terms": ["line-to-neutral"]},
-                 "open-book-exam-#2-002": {}})
-def multiwire_branch_circuit(f):
+@figure("icp_supply_409-21", h=420, nec="409.21", when="after", records=["open-book-exam-#10-004"])
+def icp_supply(f):
+    f.title("Industrial control panel with its own overcurrent protection", y=36)
+    f.breaker(44, 110, 78, 72, poles=3)
+    f.text(83, 92, "feeder OCPD", T_NOTE, TEXT, bold=True)
+    ys = (200, 214, 228)
+    for k, y in enumerate(reversed(ys)):
+        lx = 44 + 78 * (k + 0.5) / 3
+        f.polyline([(lx, 175), (lx, y), (440, y)], WIRE_HOT, SW_WIRE)
+    f.rect(440, 90, 300, 260, fill=PANEL, stroke=TEXT, sw=SW_OBJ + 1, rx=8)
+    f.text(590, 124, "industrial control panel", T_NOTE, TEXT, bold=True)
+    f.breaker(470, 180, 70, 64, poles=3)
+    f.text(505, 270, "panel OCPD", T_MIN, MUTED, bold=True)
+    for k in range(3):
+        f.rect(580, 160 + k * 50, 130, 34, fill=PANEL_2, stroke=LINE, sw=SW_THIN, rx=4)
+    f.lines(250, 270, ["supply conductors:", "feeders or taps", "(see 240.21)"], T_NOTE, OK, bold=True, gap=1.2)
+    f.highlight(140, 244, 220, 92)
+
+
+@figure("mwbc_210-4", h=470, nec="210.4",
+        records={"open-book-exam-#1-001": {}, "open-book-exam-#4-008": {"terms": ["line-to-neutral"]}})
+def mwbc(f):
     q1, q2 = ["open-book-exam-#1-001"], ["open-book-exam-#4-008"]
     h1, nn, h2 = 130, 260, 400
     f.rect(30, 80, 270, 360, fill=PANEL, stroke=TEXT, sw=SW_OBJ + 1, rx=8)
@@ -90,15 +107,28 @@ def multiwire_branch_circuit(f):
     f.tag(f.w - 24, f.h - 12, "NEC 210.4", anchor="end")
 
 
-@figure("high_leg_marking_408-3f1", h=470, nec="408.3(F)(1), 408.3(E)(1), 110.15",
-        records={"open-book-exam-#7-024": {"terms": ["delta", "high leg", "208"]},
-                 "open-book-exam-#5-007": {"when": "after"}, "open-book-exam-#12-010": {}})
-def high_leg_marking(f):
-    rid = ["open-book-exam-#7-024"]
-    f.title("4-wire system, midpoint of one winding grounded", y=40)
-    ya, yn, yc, yb = 140, 220, 300, 350
-    ax, bx = 250, 90
-    f.text(170, 96, "transformer secondary", T_NOTE, MUTED, bold=True)
+@figure("shared_yoke_210-7", h=490, nec="210.7", records=["open-book-exam-#2-002"])
+def shared_yoke(f):
+    f.title("Two circuits on one duplex receptacle (one yoke)", y=36)
+    f.rect(30, 80, 230, 300, fill=PANEL, stroke=TEXT, sw=SW_OBJ + 1, rx=8)
+    f.text(145, 404, "panel", T_NOTE, MUTED, bold=True)
+    for yy in (130, 180):
+        f.mini_breaker(110, yy, 90, 36, handle_left=True)
+    f.line(134, 138, 134, 208, AMBER, 7)
+    f.mask(118, 122, 32, 100, what="handle tie at the panel")
+    f.polyline([(200, 148), (600, 148), (600, 175)], WIRE_HOT, SW_WIRE)
+    f.polyline([(200, 198), (480, 198), (480, 290), (552, 290)], WIRE_HOT, SW_WIRE)
+    f.text(340, 136, "circuit 1", T_NOTE, TEXT, bold=True)
+    f.text(340, 226, "circuit 2", T_NOTE, TEXT, bold=True)
+    f.receptacle(600, 250, 150)
+    f.text(600, 360, "tab broken: one circuit per half", T_MIN, MUTED)
+    f.value(300, 446, "disconnect both where the circuits originate (the panel)", T_MIN, pad=5,
+            what="where the simultaneous disconnect goes")
+    f.tag(f.w - 24, f.h - 12, "NEC 210.7", anchor="end")
+
+
+def _open_delta(f, ax=250, bx=90, ya=140, yn=220, yc=300):
+    """4-wire delta secondary with the midpoint of the A-C winding grounded."""
     _winding(f, ax, ya, ax, yn, 3)
     _winding(f, ax, yn, ax, yc, 3)
     _winding(f, ax, yc, bx, yn, 6)
@@ -112,31 +142,77 @@ def high_leg_marking(f):
     f.line(215, yn, 215, 240, WIRE_NEU, 4)
     for i, w in enumerate((28, 18, 8)):
         f.line(215 - w / 2, 240 + i * 7, 215 + w / 2, 240 + i * 7, WIRE_GND, 3)
-    f.mask(56, 106, 250, 270, records=rid, what="the transformer winding connection")
+
+
+@figure("high_leg_label_408-3f1", h=470, nec="408.3(F)(1)",
+        records={"open-book-exam-#7-024": {"terms": ["delta", "high leg", "208"]}})
+def high_leg_label(f):
+    f.title("4-wire system, midpoint of one winding grounded", y=40)
+    ya, yn, yc, yb = 140, 220, 300, 350
+    ax, bx = 250, 90
+    f.text(170, 96, "transformer secondary", T_NOTE, MUTED, bold=True)
+    _open_delta(f, ax, bx, ya, yn, yc)
+    f.mask(56, 106, 250, 270, what="the transformer winding connection")
     px = 520
     f.line(ax, ya, px, ya, WIRE_HOT, SW_WIRE)
     f.line(ax, yn, px, yn, WIRE_NEU, SW_WIRE)
     f.line(ax, yc, px, yc, WIRE_HOT, SW_WIRE)
     f.polyline([(bx, yn), (bx, yb), (px, yb)], WIRE_HOT, SW_WIRE)
-    for tx in (446, 470):
-        f.rect(tx, yb - 8, 16, 16, fill=ORANGE, rx=2)
-    f.mask(436, yb - 20, 60, 40, records=rid, what="orange marking on the B conductor")
     for y, lab in ((ya, "A"), (yn, "N"), (yc, "C"), (yb, "B")):
         f.text(320, y - 10, lab, T_NOTE, TEXT, bold=True)
-    b = f.text(322, yb + 46, "high leg (orange)", T_NOTE, ORANGE, "start", True)
-    f.mask(b[0] - 8, b[1] - 6, b[2] + 16, b[3] + 12, records=rid, what="'high leg (orange)'")
     f.text(430, (ya + yn) / 2 + 8, "120 V", T_NOTE, DIM, bold=True)
     f.text(430, (yn + yc) / 2 + 8, "120 V", T_NOTE, DIM, bold=True)
     f.panel(px, 110, 250, 270, label="panelboard", breakers=0)
     f.rect(px + 20, 140, 210, 150, fill=BG, stroke=AMBER, sw=SW_OBJ, rx=6)
     f.text(px + 125, 176, "CAUTION", T_NOTE, AMBER, bold=True)
-    b = f.value(px + 50, 206, "B", T_NOTE, AMBER, "start", pad=6, records=rid, what="'B' phase on the sign")
+    b = f.value(px + 50, 206, "B", T_NOTE, AMBER, "start", pad=6, what="'B' phase on the sign")
     f.text(b[0] + b[2] + 12, 206, "PHASE HAS", T_NOTE, AMBER, "start", True)
-    b = f.value(px + 62, 236, "208", T_NOTE, AMBER, "start", pad=6, records=rid, what="'208' volts on the sign")
+    b = f.value(px + 62, 236, "208", T_NOTE, AMBER, "start", pad=6, what="'208' volts on the sign")
     f.text(b[0] + b[2] + 12, 236, "VOLTS", T_NOTE, AMBER, "start", True)
     f.text(px + 125, 266, "TO GROUND", T_NOTE, AMBER, bold=True)
     f.text(px + 125, 330, "(example values)", T_MIN, MUTED)
     f.tag(f.w - 24, f.h - 12, "NEC 408.3(F)(1)", anchor="end")
+
+
+@figure("high_leg_marking_110-15", h=440, nec="110.15", records=["open-book-exam-#12-010"])
+def high_leg_marking(f):
+    f.title("4-wire delta, midpoint grounded: mark the high leg", y=40)
+    ya, yn, yc, yb = 140, 220, 300, 350
+    ax, bx = 250, 90
+    _open_delta(f, ax, bx, ya, yn, yc)
+    px = 700
+    f.line(ax, ya, px, ya, WIRE_HOT, SW_WIRE)
+    f.line(ax, yn, px, yn, WIRE_NEU, SW_WIRE)
+    f.line(ax, yc, px, yc, WIRE_HOT, SW_WIRE)
+    f.polyline([(bx, yn), (bx, yb), (px, yb)], WIRE_HOT, SW_WIRE)
+    for y, lab in ((ya, "A"), (yn, "N"), (yc, "C"), (yb, "B")):
+        f.text(720, y + 8, lab, T_NOTE, TEXT, "start", True)
+    for tx in (446, 470, 494):
+        f.rect(tx, yb - 9, 16, 18, fill=ORANGE, rx=2)
+    f.text(480, yb + 44, "B: higher voltage to ground", T_NOTE, TEXT, bold=True)
+    f.card(340, 60, 330, 60)
+    f.value(505, 98, "orange, or other effective means", T_MIN, pad=5, what="the permitted markings")
+    f.tag(36, f.h - 12, "NEC 110.15")
+
+
+@figure("icp_high_leg_409-102b", h=420, nec="409.102(B)", when="after", records=["open-book-exam-#5-007"])
+def icp_high_leg(f):
+    f.title("Control panel on a 4-wire delta", x=30, y=40)
+    ya, yn, yc, yb = 140, 220, 300, 350
+    ax, bx = 250, 90
+    _open_delta(f, ax, bx, ya, yn, yc)
+    px = 520
+    f.line(ax, ya, px, ya, WIRE_HOT, SW_WIRE)
+    f.line(ax, yn, px, yn, WIRE_NEU, SW_WIRE)
+    f.line(ax, yc, px, yc, WIRE_HOT, SW_WIRE)
+    f.polyline([(bx, yn), (bx, yb), (px, yb)], WIRE_HOT, SW_WIRE)
+    f.rect(px, 60, 250, 330, fill=PANEL, stroke=TEXT, sw=SW_OBJ + 1, rx=8)
+    f.text(px + 125, 94, "control panel terminals", T_NOTE, TEXT, bold=True)
+    for y, lab in ((ya, "A"), (yn, "N"), (yc, "C"), (yb, "B")):
+        f.rect(px + 20, y - 14, 28, 28, fill=PANEL_2, stroke=LINE, sw=SW_THIN, rx=3)
+        f.text(px + 34, y + 8, lab, T_NOTE, TEXT, bold=True)
+    f.lines(px + 64, yb - 4, ["high leg must", "be phase B"], T_NOTE, OK, "start", True, gap=1.1)
+    f.highlight(px + 56, yb - 30, 180, 60)
 
 
 @figure("parallel_egc_250-122f", h=450, nec="250.122(F)(1)(b)",

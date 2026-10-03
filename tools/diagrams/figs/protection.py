@@ -23,12 +23,10 @@ def _spark(f, x, y, s=14):
     f.polyline([(x - s, y - s), (x + s * 0.2, y - s * 0.1), (x - s * 0.2, y + s * 0.1), (x + s, y + s)], AMBER, 4)
 
 
-@figure("fault_path_art100", h=600, nec="Article 100 (Ground Fault, Effective Ground-Fault Current Path)",
+@figure("fault_path_art100", h=420, nec="Article 100 (Ground Fault)",
         records={"final-exam-#1-044": {"terms": ["fault"]}, "open-book-exam-#4-009": {"terms": ["fault"]}})
 def fault_path(f):
-    f.title("Three circuit troubles: name the first one", y=34)
-    # (a) Hot conductor touching a metal enclosure; current returns on the EGC.
-    f.rect(20, 54, 760, 290, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
+    f.title("A hot conductor touches a metal enclosure: what is it called?", y=34)
     sx, top, bot = 80, 120, 244
     f.coils(sx, 180)
     f.line(sx, 150, sx, top, WIRE_HOT, SW_WIRE)
@@ -37,14 +35,12 @@ def fault_path(f):
     f.text(200, top - 36, "OCPD opens", T_NOTE, OK, bold=True)
     f.line(sx, 210, sx, bot, WIRE_NEU, SW_WIRE)
     f.text(420, bot - 10, "neutral", T_MIN, MUTED)
-    # Main bonding jumper at the source, EGC back from the enclosure.
     f.line(sx, bot, sx, 300, AMBER, SW_WIRE)
     f.line(sx, 300, 640, 300, WIRE_GND, SW_WIRE + 1)
     f.text(sx + 20, 290, "bonded at the source", T_MIN, AMBER, "start")
-    f.text(420, 326, "EGC", T_NOTE, WIRE_GND, bold=True)
+    f.text(420, 326, "EGC: the return path", T_NOTE, WIRE_GND, bold=True)
     for x in (560, 440, 320):
         f.arrow(x, 300, x - 60, 300, OK, 3)
-    # Metal enclosure with the loose hot touching the wall.
     f.rect(560, 90, 160, 180, fill=STEEL, stroke=TEXT, sw=SW_OBJ + 1, rx=6)
     f.rect(578, 108, 124, 144, fill=PANEL_2, stroke=EDGE, sw=SW_THIN, rx=4)
     f.text(640, 82, "metal enclosure", T_NOTE, TEXT, bold=True)
@@ -57,85 +53,61 @@ def fault_path(f):
     _spark(f, 572, 220)
     f.line(640, 270, 640, 300, WIRE_GND, SW_WIRE + 1)
     f.lines(654, 298, ["hot touches", "the metal"], T_MIN, TEXT, "start", True, gap=1.1)
-    f.value(400, 186, "ground fault", 30, records=None, label="? name", what="name of case (a)")
-    # (b) Open conductor and (c) hot-to-neutral, small.
-    for x0, name in ((20, "open circuit"), (410, "short circuit")):
-        f.rect(x0, 360, 370, 180, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-        f.coils(x0 + 44, 430, 14)
-        f.line(x0 + 44, 406, x0 + 44, 394, WIRE_HOT, 3)
-        f.line(x0 + 44, 454, x0 + 44, 466, WIRE_NEU, 3)
-        f.polyline([(x0 + 44, 466), (x0 + 320, 466), (x0 + 320, 456)], WIRE_NEU, 3)
-        f.motor_symbol(x0 + 320, 430, 26)
-        if x0 == 20:
-            f.line(x0 + 44, 394, x0 + 150, 394, WIRE_HOT, 3)
-            f.line(x0 + 180, 394, x0 + 320, 394, WIRE_HOT, 3)
-            f.line(x0 + 320, 394, x0 + 320, 404, WIRE_HOT, 3)
-            f.circle(x0 + 150, 394, 4, fill=NO)
-            f.circle(x0 + 180, 394, 4, fill=NO)
-            f.text(x0 + 165, 384, "broken", T_MIN, NO, bold=True)
-        else:
-            f.line(x0 + 44, 394, x0 + 320, 394, WIRE_HOT, 3)
-            f.line(x0 + 320, 394, x0 + 320, 404, WIRE_HOT, 3)
-            f.line(x0 + 200, 394, x0 + 200, 466, AMBER, 4)
-            _spark(f, x0 + 200, 430, 10)
-            f.text(x0 + 210, 384, "hot to neutral", T_MIN, AMBER, "start", True)
-        f.value(x0 + 185, 516, name, 26, records=None, label="?", what=f"name of this case ({name})")
-    f.tag(f.w - 24, f.h - 12, "NEC Art. 100", anchor="end")
-    f.text(f.w - 30, 76, "(a)", T_NOTE, MUTED, "end", True)
-    f.text(40, 384, "(b)", T_NOTE, MUTED, "start", True)
-    f.text(430, 384, "(c)", T_NOTE, MUTED, "start", True)
+    f.value(400, 186, "ground fault", 30, records=None, label="? name", what="the name of this fault")
+    f.tag(f.w - 24, f.h - 16, "NEC Art. 100", anchor="end")
 
 
-@figure("selective_coordination_700-32", h=600, nec="Article 100 (Selective Coordination), 700.32, 701.32, 708.54",
-        records={"final-exam-#3-029": {"terms": ["selective", "coordination"]}, "open-book-exam-#7-007": {}})
+@figure("selective_coordination_100", h=520, nec="Article 100 (Selective Coordination)",
+        records={"final-exam-#3-029": {"terms": ["selective", "coordination"]}})
 def selective_coordination(f):
-    term = ["final-exam-#3-029"]
-    loads = ["open-book-exam-#7-007"]
-    f.title("Only the device nearest the problem opens", y=34)
-    # Left: one-line with a fault on one branch.
-    x = 190
-    f.line(x, 70, x, 320, WIRE_HOT, SW_WIRE)
+    f.title("A fault on one branch: only its breaker opens", y=34)
+    x = 260
+    f.line(x, 70, x, 300, WIRE_HOT, SW_WIRE)
     _cb(f, x, 100)
     f.text(x + 34, 108, "service", T_NOTE, TEXT, "start")
     _cb(f, x, 190)
     f.text(x + 34, 198, "feeder", T_NOTE, TEXT, "start")
     f.text(x - 34, 108, "stays on", T_MIN, OK, "end", True)
     f.text(x - 34, 198, "stays on", T_MIN, OK, "end", True)
-    f.line(70, 320, 310, 320, WIRE_HOT, SW_WIRE)
-    for bx, name, opened in ((70, "lighting", False), (190, "motor", True), (310, "receptacles", False)):
-        f.line(bx, 320, bx, 440, WIRE_HOT, SW_WIRE)
-        _cb(f, bx, 370, color=NO if opened else TEXT, on=not opened)
-        f.text(bx, 470, name, T_MIN, TEXT, bold=True)
-    f.text(222, 378, "opens", T_MIN, NO, "start", True)
-    _spark(f, 190, 430)
-    f.text(214, 438, "fault", T_MIN, AMBER, "start", True)
-    f.value(190, 520, "selective coordination", 26, records=term, label="? term", what="the defined term")
-    # Right: the series exception.
-    f.rect(390, 56, 390, 490, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    f.text(585, 86, "Two devices in series", T_NOTE, TEXT, bold=True)
-    for cx, tapped in ((480, False), (680, True)):
-        f.line(cx, 110, cx, 380, WIRE_HOT, SW_WIRE)
-        _cb(f, cx, 150)
-        _cb(f, cx, 290)
-        f.text(cx, 412, "equipment", T_MIN, TEXT, bold=True)
-        f.rect(cx - 40, 380, 80, 12, fill=PANEL_2, stroke=TEXT, sw=SW_THIN)
+    f.line(100, 300, 420, 300, WIRE_HOT, SW_WIRE)
+    for bx, name, opened in ((100, "lighting", False), (260, "motor", True), (420, "receptacles", False)):
+        f.line(bx, 300, bx, 420, WIRE_HOT, SW_WIRE)
+        _cb(f, bx, 350, color=NO if opened else TEXT, on=not opened)
+        f.text(bx, 450, name, T_MIN, TEXT, bold=True)
+    f.text(292, 358, "opens", T_MIN, NO, "start", True)
+    _spark(f, 260, 410)
+    f.text(284, 418, "fault", T_MIN, AMBER, "start", True)
+    f.card(500, 80, 270, 230, "The outage stays local")
+    f.lines(516, 150, ["the breakers are chosen", "so the one nearest the", "fault opens first;",
+                       "everything upstream", "keeps running"], T_MIN, TEXT, "start", gap=1.2)
+    f.value(400, 494, "selective coordination", 28, records=None, label="? term", what="the defined term")
+    f.tag(f.w - 24, 360, "NEC Art. 100", anchor="end")
+
+
+@figure("series_breakers_708-54", h=500, nec="708.54", records=["open-book-exam-#7-007"])
+def series_breakers(f):
+    f.title("Two breakers in series: when must they coordinate?", y=34)
+    for cx, tapped in ((220, False), (580, True)):
+        f.rect(cx - 170, 56, 340, 390, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
+        f.line(cx, 90, cx, 340, WIRE_HOT, SW_WIRE)
+        _cb(f, cx, 130)
+        f.text(cx - 34, 138, "upstream", T_MIN, MUTED, "end")
+        _cb(f, cx, 260)
+        f.text(cx - 34, 268, "downstream", T_MIN, MUTED, "end")
+        f.rect(cx - 40, 340, 80, 12, fill=PANEL_2, stroke=TEXT, sw=SW_THIN)
+        f.text(cx, 374, "equipment", T_MIN, TEXT, bold=True)
         if tapped:
-            f.line(cx, 220, cx + 60, 220, WIRE_HOT, SW_WIRE)
-            f.line(cx + 60, 220, cx + 60, 250, WIRE_HOT, SW_WIRE)
-            f.rect(cx + 40, 250, 40, 24, fill=PANEL_2, stroke=TEXT, sw=SW_THIN)
-            f.value(cx + 40, 206, "load", T_MIN, AMBER, anchor="end", records=loads, pad=5,
-                    what="the load tapped between the devices")
-    f.value_lines(480, 452, ["no loads", "in parallel"], T_MIN, TEXT, records=loads, pad=6, gap=1.1,
-                  what="nothing tapped in parallel with the downstream device")
-    f.value_lines(480, 508, ["coordination", "not required"], T_MIN, OK, records=term, pad=5, gap=1.1,
-                  what="caption naming the term")
-    f.lines(680, 452, ["something tapped", "in parallel"], T_MIN, TEXT, gap=1.1)
-    f.value_lines(680, 508, ["must", "coordinate"], T_MIN, NO, records=term, pad=5, gap=1.1,
-                  what="caption naming the term")
-    f.tag(f.w - 24, f.h - 12, "NEC 700.32, 701.32, 708.54", anchor="end")
+            f.line(cx, 196, cx + 70, 196, WIRE_HOT, SW_WIRE)
+            f.line(cx + 70, 196, cx + 70, 226, WIRE_HOT, SW_WIRE)
+            f.rect(cx + 50, 226, 40, 24, fill=PANEL_2, stroke=TEXT, sw=SW_THIN)
+            f.value(cx + 70, 278, "load", T_MIN, AMBER, pad=5, what="the load tapped between the breakers")
+    f.value_lines(220, 410, ["no loads in parallel:", "coordination not required"], T_MIN, OK, pad=6, gap=1.2,
+                  what="nothing tapped in parallel with the downstream breaker")
+    f.lines(580, 410, ["something tapped in parallel:", "they must coordinate"], T_MIN, NO, bold=True, gap=1.2)
+    f.tag(f.w - 24, f.h - 12, "NEC 708.54", anchor="end")
 
 
-@figure("transformer_panel_408-36b", h=470, nec="408.36(B), 240.21(C)(1)",
+@figure("transformer_panel_408-36b", h=470, nec="408.36(B)",
         records={"open-book-exam-#7-021": {"terms": ["secondary", "primary"]}},
         keep=[r"^(feeder OCPD )?\(?480 V\)?$", r"^feeder OCPD$", r"^208Y/120 V$"])
 def transformer_panel(f):
@@ -170,107 +142,102 @@ def transformer_panel(f):
                   T_MIN, MUTED, anchor="start", bold=False, records=rid, pad=5, what="the exception note")
     f.tag(f.w - 24, 64, "NEC 408.36(B)", anchor="end")
 
-@figure("panelboard_interior_408", h=530, nec="408.7, 408.41",
-        records={"final-exam-#3-046": {}, "open-book-exam-#1-009": {},
-                 "open-book-exam-#11-002": {"like": "final-exam-#3-046"}})
-def panelboard_interior(f):
-    closure = ["final-exam-#3-046"]
-    term = ["open-book-exam-#1-009"]
-    f.title("Panelboard: unused spaces and the neutral bar", y=34)
-    # Dead front with breaker spaces.
-    f.panel(24, 60, 286, 380, label=None, breakers=0)
-    f.rect(158, 84, 18, 332, fill=BG, op=0.6, rx=2)
+
+@figure("unused_openings_408-7", h=480, nec="408.7",
+        records={"final-exam-#3-046": {}, "open-book-exam-#11-002": {"like": "final-exam-#3-046"}})
+def unused_openings(f):
+    f.title("Panelboard dead front: an unused breaker opening", y=34)
+    f.panel(40, 60, 286, 380, label=None, breakers=0)
+    f.rect(174, 84, 18, 332, fill=BG, op=0.6, rx=2)
     for i in range(6):
         y = 92 + i * 56
-        for x in (58, 178):
-            if i == 2 and x == 178:
-                # Open knockout: the bus stab behind it shows.
+        for x in (74, 194):
+            if i == 2 and x == 194:
                 f.rect(x, y, 98, 40, fill=BG, stroke=NO, sw=SW_OBJ, rx=3)
                 f.rect(x + 6, y + 12, 30, 16, fill=LINE, stroke=TEXT, sw=1.5, rx=2)
-            elif i == 4 and x == 178:
-                # Filler plate snapped into the opening.
+            elif i == 4 and x == 194:
                 f.rect(x, y, 98, 40, fill=STEEL, stroke=TEXT, sw=SW_THIN, rx=3)
                 for tx in (x + 10, x + 88):
                     f.line(tx, y + 10, tx, y + 30, TEXT, 2)
             else:
-                f.mini_breaker(x, y, 98, 40, handle_left=x > 167)
-    f.mark_no(338, 224, 16)
-    f.mark_ok(338, 336, 16)
-    f.text(30, 474, "open space: live parts exposed", T_MIN, NO, "start", True)
-    b = f.text(30, 510, "closed with:", T_MIN, TEXT, "start", True)
-    f.value(b[0] + b[2] + 10, 510, "identified closure", T_NOTE, anchor="start", records=closure, pad=5,
-            what="the closure plate type")
-    # Neutral bar close-up.
-    f.rect(360, 60, 420, 380, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    f.text(570, 92, "neutral terminal bar (close-up)", T_NOTE, TEXT, bold=True)
-    f.rect(400, 200, 340, 44, fill=STEEL, stroke=TEXT, sw=SW_OBJ, rx=4)
-    for k, x in enumerate((440, 520, 600, 690)):
-        f.circle(x, 222, 12, fill=LINE, stroke=TEXT, sw=SW_THIN)
-        f.line(x - 8, 222, x + 8, 222, BG, 3)
-        if k < 2:
-            f.line(x, 244, x, 330, WIRE_NEU, SW_WIRE)
-        elif k == 3:
-            f.line(x - 6, 244, x - 20, 330, WIRE_NEU, SW_WIRE)
-            f.line(x + 6, 244, x + 20, 330, WIRE_NEU, SW_WIRE)
-    f.mark_ok(480, 362, 18)
-    f.mark_no(690, 362, 18)
-    f.lines(480, 410, ["one conductor", "per terminal"], T_MIN, TEXT, bold=True, gap=1.1)
-    f.lines(690, 410, ["two under", "one screw"], T_MIN, TEXT, bold=True, gap=1.1)
-    b = f.text(380, 150, "each grounded conductor:", T_NOTE, TEXT, "start")
-    f.value(b[0] + b[2] + 10, 150, "individual", T_NOTE, anchor="start", records=term, pad=5,
-            what="its own terminal")
-    f.text(380, 178, "terminal, not shared", T_NOTE, TEXT, "start")
-    f.tag(f.w - 24, f.h - 12, "NEC 408.7, 408.41", anchor="end")
+                f.mini_breaker(x, y, 98, 40, handle_left=x > 183)
+    f.mark_no(354, 224, 16)
+    f.mark_ok(354, 336, 16)
+    f.leader(380, 212, 400, 160)
+    f.card(400, 90, 370, 110, "Left open", title_fill=NO)
+    f.text(416, 160, "the bus stab and live parts show", T_MIN, TEXT, "start")
+    f.leader(380, 336, 400, 300)
+    f.card(400, 250, 370, 140, "Closed", title_fill=OK)
+    f.text(416, 316, "unused opening closed with:", T_MIN, TEXT, "start")
+    f.value(416, 360, "identified closures", T_NOTE, anchor="start", pad=6, what="the closure type")
+    f.tag(f.w - 24, f.h - 16, "NEC 408.7", anchor="end")
 
 
-@figure("receptacle_markings_406", h=496, nec="406.3(E), 406.10(C)",
+@figure("neutral_terminals_408-41", h=440, nec="408.41", records={"open-book-exam-#1-009": {}})
+def neutral_terminals(f):
+    f.title("Panelboard neutral terminal bar (close-up)", y=34)
+    f.rect(130, 120, 540, 50, fill=STEEL, stroke=TEXT, sw=SW_OBJ, rx=4)
+    for k, x in enumerate((200, 300, 400, 560)):
+        f.circle(x, 145, 14, fill=LINE, stroke=TEXT, sw=SW_THIN)
+        f.line(x - 9, 145, x + 9, 145, BG, 3)
+        if k < 3:
+            f.line(x, 170, x, 270, WIRE_NEU, SW_WIRE)
+        else:
+            f.line(x - 6, 170, x - 24, 270, WIRE_NEU, SW_WIRE)
+            f.line(x + 6, 170, x + 24, 270, WIRE_NEU, SW_WIRE)
+    f.text(400, 100, "neutral (grounded) conductors land here", T_NOTE, MUTED)
+    f.mark_ok(300, 302, 18)
+    f.mark_no(560, 302, 18)
+    f.lines(300, 346, ["one conductor", "per terminal"], T_NOTE, TEXT, bold=True, gap=1.1)
+    f.lines(560, 346, ["two under", "one screw"], T_NOTE, TEXT, bold=True, gap=1.1)
+    b = f.text(40, 416, "each grounded conductor gets an", T_NOTE, TEXT, "start")
+    f.value(b[0] + b[2] + 10, 416, "individual", T_NOTE, anchor="start", pad=5, what="its own terminal")
+    f.tag(f.w - 24, f.h - 12, "NEC 408.41", anchor="end")
+
+
+@figure("ig_receptacle_406-3e", h=460, nec="406.3(E)",
         records={"open-book-exam-#4-007": {"terms": ["orange", "triangle"]},
-                 "open-book-exam-#10-003": {"terms": ["EGC", "equipment"]},
                  "open-book-exam-#10-018": {"terms": ["orange", "triangle"]},
                  "final-exam-#2-047": {"like": "open-book-exam-#10-018"}})
-def receptacle_markings(f):
-    ig = ["open-book-exam-#4-007", "open-book-exam-#10-018"]
-    gnd = ["open-book-exam-#10-003"]
-    f.title("Receptacle: face marking and back terminals", y=34)
-    # Face of an isolated-ground receptacle.
-    f.rect(40, 60, 320, 390, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    f.text(200, 92, "isolated ground receptacle", T_NOTE, TEXT, bold=True)
-    cx = 200
-    f.rect(cx - 70, 120, 140, 280, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=14)
-    for cy in (190, 330):
-        f.rect(cx - 46, cy - 42, 92, 84, fill=BG, stroke=TEXT, sw=SW_THIN, rx=40)
-        f.line(cx - 18, cy - 18, cx - 18, cy + 4, TEXT, 5)
-        f.line(cx + 18, cy - 18, cx + 18, cy + 4, TEXT, 5)
-        f.path(f"M {cx - 8} {cy + 26} a 8 8 0 0 1 16 0 v 8 h -16 z", TEXT, 3)
-    f.poly([(cx, 246), (cx - 16, 274), (cx + 16, 274)], ORANGE)
-    f.mask(cx - 30, 236, 60, 48, records=ig, what="the face marking")
-    f.value(200, 432, "orange triangle", T_NOTE, ORANGE, records=ig, pad=5)
-    # Back of any receptacle: the three terminal colors.
-    f.rect(400, 60, 380, 390, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    f.text(590, 92, "back: terminal screws", T_NOTE, TEXT, bold=True)
-    rows = [(160, "#d4a017", "brass", "ungrounded (hot)"), (250, "#cbd5e1", "silver", "grounded (neutral)")]
+def ig_receptacle(f):
+    f.title("Isolated ground receptacle: the face marking", y=34)
+    cx = 220
+    f.rect(cx - 90, 70, 180, 330, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=16)
+    for cy in (150, 320):
+        f.nema_face(cx, cy, 52, "5-15")
+    f.poly([(cx, 218), (cx - 20, 252), (cx + 20, 252)], ORANGE)
+    f.mask(cx - 34, 206, 68, 58, what="the face marking")
+    f.value(cx, 436, "orange triangle", T_NOTE, ORANGE, pad=5)
+    f.card(380, 90, 390, 250, "What makes it different")
+    f.lines(396, 160, ["its grounding terminal is", "insulated from the yoke", "and the box"], T_MIN, TEXT,
+            "start", gap=1.2)
+    f.lines(396, 264, ["used to cut electrical noise", "on sensitive equipment"], T_MIN, MUTED, "start", gap=1.2)
+    f.tag(f.w - 24, f.h - 12, "NEC 406.3(E)", anchor="end")
+
+
+@figure("grounding_terminal_406-10c", h=420, nec="406.10(C)",
+        records={"open-book-exam-#10-003": {"terms": ["EGC", "equipment"]}})
+def grounding_terminal(f):
+    f.title("Back of a receptacle: what lands on each screw", y=34)
+    f.rect(60, 70, 180, 300, fill=PANEL_2, stroke=TEXT, sw=SW_OBJ, rx=16)
+    f.text(150, 400, "receptacle (back)", T_NOTE, MUTED)
+    rows = [(130, "#d4a017", "brass", "hot conductor"), (230, "#cbd5e1", "silver", "neutral (white)")]
     for y, color, name, use in rows:
-        f.circle(440, y, 16, fill=color, stroke=TEXT, sw=SW_THIN)
-        f.text(470, y - 6, name, T_NOTE, TEXT, "start", True)
-        f.text(470, y + 20, use, T_MIN, MUTED, "start")
-    f.circle(440, 340, 16, fill="#16a34a", stroke=TEXT, sw=SW_THIN)
-    f.text(470, 334, "green", T_NOTE, TEXT, "start", True)
-    f.value_lines(470, 362, ["EGC only", "(equipment grounding)"], T_MIN, anchor="start", records=gnd, pad=5,
-                  gap=1.1, what="the only conductor on the green screw")
-    f.text(420, 430, "one conductor type per screw color", T_MIN, MUTED, "start")
-    f.tag(f.w - 24, f.h - 10, "NEC 406.3(E), 406.10", anchor="end")
+        f.circle(240, y, 16, fill=color, stroke=TEXT, sw=SW_THIN)
+        f.text(290, y - 6, name, T_NOTE, TEXT, "start", True)
+        f.text(290, y + 20, use, T_MIN, MUTED, "start")
+    f.circle(240, 330, 16, fill="#16a34a", stroke=TEXT, sw=SW_THIN)
+    f.text(290, 324, "green", T_NOTE, TEXT, "start", True)
+    f.value(290, 356, "EGC only (equipment grounding conductor)", T_MIN, anchor="start", pad=5,
+            what="the only conductor on the green screw")
+    f.tag(f.w - 24, f.h - 12, "NEC 406.10(C)", anchor="end")
 
 
-@figure("afci_tr_dwelling_210-12_406-12", h=560, nec="210.12(A)-(D), 406.12",
-        records={"final-exam-#1-048": {"terms": ["TR", "tamper"]},
-                 "open-book-exam-#4-005": {"terms": ["TR", "tamper"]},
-                 "open-book-exam-#4-012": {"terms": ["branch"]},
-                 "open-book-exam-#4-023": {"when": "after"},
-                 "open-book-exam-#2-011": {"when": "after"}, "open-book-exam-#11-021": {"when": "after"}})
-def afci_tr_dwelling(f):
-    tr = ["final-exam-#1-048", "open-book-exam-#4-005"]
-    extent = ["open-book-exam-#4-012"]
-    f.title("Dwelling plan: AFCI rooms and receptacle type (not to scale)", y=34)
+@figure("afci_dwelling_210-12", h=560, nec="210.12",
+        records={"open-book-exam-#4-012": {"terms": ["branch"]},
+                 "open-book-exam-#4-023": {"when": "after"}, "open-book-exam-#2-011": {"when": "after"}})
+def afci_dwelling(f):
+    f.title("Dwelling plan: rooms that need AFCI (not to scale)", y=34)
     rooms = [(30, 60, 170, 130, "bedroom", True), (200, 60, 150, 130, "bedroom", True),
              (350, 60, 100, 130, "bath", False), (30, 190, 170, 140, "living room", True),
              (200, 190, 250, 50, "hallway", True), (200, 240, 140, 90, "kitchen", True),
@@ -280,16 +247,11 @@ def afci_tr_dwelling(f):
             f.rect(x, y, w, h, fill=ZONE, op=0.22, stroke="none")
         f.rect(x, y, w, h, fill="none", stroke=LINE, sw=SW_OBJ)
         f.text(x + w / 2, y + (h / 2 + 8 if h > 60 else 32), name, T_MIN, TEXT, bold=True)
-    f.plan_receptacle(420, 222, 11)
     f.legend([(ZONE, "AFCI required", "box")], 604, 80, T_MIN)
-    f.lines(604, 124, ["also 210.12(C), (D):", "dorm units, guest", "rooms and suites,", "nursing patient",
-                       "sleeping rooms"], T_MIN, MUTED, "start", gap=1.15)
-    f.value_lines(690, 270, ["TR", "(tamper-", "resistant)"], T_NOTE, records=tr, pad=6, gap=1.1,
-                  what="hallway receptacle type")
-    f.leader(640, 262, 432, 222)
-    f.value_lines(604, 348, ["406.12: all 15/20 A,", "125/250 V dwelling", "receptacles"], T_MIN, MUTED,
-                  anchor="start", bold=False, records=tr, pad=5, gap=1.15, what="the 406.12 rule")
-    # Strip: panel to the last outlet.
+    f.lines(604, 124, ["also dorm units,", "guest rooms and", "suites, nursing", "patient sleeping",
+                       "rooms"], T_MIN, MUTED, "start", gap=1.15)
+    f.lines(604, 270, ["not required:", "bathrooms,", "garages"], T_MIN, NO, "start", True, gap=1.15)
+    f.highlight(596, 248, 180, 88)
     y = 470
     f.panel(30, y - 50, 80, 100, label="", breakers=0)
     f.breaker(50, y - 25, 40, 50)
@@ -299,7 +261,31 @@ def afci_tr_dwelling(f):
         f.plan_receptacle(x, y + 30, 11)
         f.line(x, y, x, y + 19, WIRE_HOT, 3)
     f.dim_h(70, 740, y - 36)
-    f.mask(56, y - 48, 700, 26, records=extent, what="the reach arrow")
-    f.value(420, y - 50, "protects the entire branch circuit", T_NOTE, records=extent, pad=6,
+    f.mask(56, y - 48, 700, 26, records=["open-book-exam-#4-012"], what="the reach arrow")
+    f.value(420, y - 50, "protects the entire branch circuit", T_NOTE, records=["open-book-exam-#4-012"], pad=6,
             what="how far AFCI protection reaches")
-    f.tag(f.w - 24, f.h - 10, "NEC 210.12, 406.12", anchor="end")
+    f.tag(f.w - 24, f.h - 10, "NEC 210.12", anchor="end")
+
+
+@figure("tr_receptacle_406-12", h=460, nec="406.12",
+        records={"final-exam-#1-048": {"terms": ["TR", "tamper"]},
+                 "open-book-exam-#4-005": {"terms": ["TR", "tamper"]},
+                 "open-book-exam-#11-021": {"when": "after"}})
+def tr_receptacle(f):
+    tr = ["final-exam-#1-048", "open-book-exam-#4-005"]
+    f.title("Dwelling hallway: 125 V, 15 A receptacle", y=34)
+    f.rect(40, 60, 360, 360, fill=PANEL, stroke=EDGE, sw=SW_THIN)
+    f.floor(420, 40, 400)
+    f.text(220, 90, "hallway wall", T_NOTE, MUTED)
+    f.receptacle(200, 300, 150, blank_center=True)
+    f.leader(300, 298, 246, 298)
+    f.value(310, 306, "TR", T_LABEL, TEXT, "start", records=tr, pad=6, what="the TR marking")
+    f.value_lines(220, 140, ["listed tamper-resistant", "(shutters behind the slots)"], T_NOTE, records=tr,
+                  pad=6, gap=1.15, what="the receptacle type")
+    f.card(440, 90, 330, 300, "Where the rule applies")
+    f.lines(456, 160, ["nonlocking 15 and 20 A,", "125 V through 250 V, in:", "- dwelling units",
+                       "- accessory buildings", "- multifamily common areas", "- and other listed places"],
+            T_MIN, TEXT, "start", gap=1.3)
+    f.mask(446, 130, 318, 254, records=tr, what="the tamper-resistant rule")
+    f.highlight(446, 130, 318, 254, records=["open-book-exam-#11-021"])
+    f.tag(f.w - 24, f.h - 12, "NEC 406.12", anchor="end")

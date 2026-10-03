@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="460" viewBox="0 0 800 460">
+<rect x="0.0" y="0.0" width="800.0" height="460.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Dwelling hallway: 125 V, 15 A receptacle</text>
+<rect x="40.0" y="60.0" width="360.0" height="360.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<line x1="40.0" y1="420.0" x2="400.0" y2="420.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="220.0" y="90.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">hallway wall</text>
+<rect x="152.0" y="225.0" width="96.0" height="150.0" rx="15.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 182.9 240.9 L 217.1 240.9 A 30.0 30.0 0 0 1 217.1 290.1 L 182.9 290.1 A 30.0 30.0 0 0 1 182.9 240.9 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="188.6" y1="252.9" x2="188.6" y2="267.9" stroke="#e2e8f0" stroke-width="4.8" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="211.4" y1="254.4" x2="211.4" y2="266.4" stroke="#e2e8f0" stroke-width="4.8" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 195.2 284.2 V 277.5 A 4.8 4.8 0 0 1 204.8 277.5 V 284.2 Z" fill="none" stroke="#e2e8f0" stroke-width="2.6999999999999997" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 182.9 309.9 L 217.1 309.9 A 30.0 30.0 0 0 1 217.1 359.1 L 182.9 359.1 A 30.0 30.0 0 0 1 182.9 309.9 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="188.6" y1="321.9" x2="188.6" y2="336.9" stroke="#e2e8f0" stroke-width="4.8" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="211.4" y1="323.4" x2="211.4" y2="335.4" stroke="#e2e8f0" stroke-width="4.8" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 195.2 353.2 V 346.5 A 4.8 4.8 0 0 1 204.8 346.5 V 353.2 Z" fill="none" stroke="#e2e8f0" stroke-width="2.6999999999999997" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="300.0" y1="298.0" x2="246.0" y2="298.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="246.0" cy="298.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<text x="310.0" y="306.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="start">TR</text>
+<text x="220.0" y="140.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">listed tamper-resistant</text>
+<text x="220.0" y="165.3" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">(shutters behind the slots)</text>
+<rect x="440.0" y="90.0" width="330.0" height="300.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="454.0" y="120.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Where the rule applies</text>
+<text x="456.0" y="160.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">nonlocking 15 and 20 A,</text>
+<text x="456.0" y="186.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">125 V through 250 V, in:</text>
+<text x="456.0" y="212.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">- dwelling units</text>
+<text x="456.0" y="238.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">- accessory buildings</text>
+<text x="456.0" y="264.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">- multifamily common areas</text>
+<text x="456.0" y="290.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">- and other listed places</text>
+<rect x="646.2" y="422.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="656.2" y="450.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 406.12</text>
+</svg>

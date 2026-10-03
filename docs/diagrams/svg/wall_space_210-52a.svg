@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="420" viewBox="0 0 800 420">
+<rect x="0.0" y="0.0" width="800.0" height="420.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Dwelling bedroom: what counts as wall space (plan view)</text>
+<rect x="80.0" y="90.0" width="640.0" height="240.0" rx="0" fill="#1e293b" fill-opacity="0.6" stroke="none" stroke-width="2"/>
+<line x1="80.0" y1="90.0" x2="720.0" y2="90.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="80.0" y1="90.0" x2="80.0" y2="330.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="720.0" y1="90.0" x2="720.0" y2="330.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="80.0" y1="330.0" x2="720.0" y2="330.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="400.0" y="150.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">BEDROOM</text>
+<line x1="110.0" y1="330.0" x2="190.0" y2="330.0" stroke="#0f172a" stroke-width="8" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="110.0" y1="330.0" x2="110.0" y2="250.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<path d="M 110 250 A 80 80 0 0 1 190 330" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="118.0" y="318.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">door</text>
+<circle cx="520.0" cy="310.0" r="12" fill="#0f172a" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="524.0" y1="322.0" x2="524.0" y2="329.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="516.0" y1="322.0" x2="516.0" y2="329.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="190.0" y1="336.0" x2="190.0" y2="343.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="190.0" y1="349.0" x2="190.0" y2="356.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="190.0" y1="362.0" x2="190.0" y2="369.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="190.0" y1="375.0" x2="190.0" y2="380.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="718.0" y1="336.0" x2="718.0" y2="343.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="718.0" y1="349.0" x2="718.0" y2="356.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="718.0" y1="362.0" x2="718.0" y2="369.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="718.0" y1="375.0" x2="718.0" y2="380.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="196.0" y1="370.0" x2="712.0" y2="370.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="190.0,370.0 202.0,364.0 202.0,376.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="718.0,370.0 706.0,376.0 706.0,364.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="455.0" y="404.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">wall space: unbroken along the floor line</text>
+<text x="400.0" y="220.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">2 ft (24 in)</text>
+<text x="400.0" y="251.2" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">or more wide</text>
+<rect x="615.6" y="38.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="625.6" y="66.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 210.52(A)</text>
+</svg>

@@ -1,5 +1,14 @@
 # Changelog
 
+## [Unreleased]
+
+### Changed
+
+- **One diagram per question.** About 200 questions used to show a figure made
+  of two to five panels for different rules, so it was hard to tell which one
+  went with the question. Each of those figures is now split into single
+  pictures, and every question shows only the one that matches what it asks.
+
 ## [1.0.6] - 2026-10-03
 
 ### Added

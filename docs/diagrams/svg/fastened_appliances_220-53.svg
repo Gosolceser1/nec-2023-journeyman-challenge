@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+<rect x="0.0" y="0.0" width="800.0" height="400.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Four or more fastened-in-place appliances</text>
+<rect x="50.0" y="140.0" width="60.0" height="110.0" rx="14" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="68.0" y1="126.0" x2="68.0" y2="140.0" stroke="#64748b" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="92.0" y1="126.0" x2="92.0" y2="140.0" stroke="#64748b" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="65.0" y="200.5" width="30.0" height="27.5" rx="3" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="126.0" y="140.0" width="60.0" height="110.0" rx="14" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="144.0" y1="126.0" x2="144.0" y2="140.0" stroke="#64748b" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="168.0" y1="126.0" x2="168.0" y2="140.0" stroke="#64748b" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="141.0" y="200.5" width="30.0" height="27.5" rx="3" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="202.0" y="140.0" width="60.0" height="110.0" rx="14" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="220.0" y1="126.0" x2="220.0" y2="140.0" stroke="#64748b" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="244.0" y1="126.0" x2="244.0" y2="140.0" stroke="#64748b" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="217.0" y="200.5" width="30.0" height="27.5" rx="3" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<rect x="278.0" y="140.0" width="60.0" height="110.0" rx="14" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<line x1="296.0" y1="126.0" x2="296.0" y2="140.0" stroke="#64748b" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="320.0" y1="126.0" x2="320.0" y2="140.0" stroke="#64748b" stroke-width="6" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="293.0" y="200.5" width="30.0" height="27.5" rx="3" fill="#0f172a" fill-opacity="1.0" stroke="#64748b" stroke-width="1.5"/>
+<text x="190.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">water heaters, dishwashers ...</text>
+<rect x="370.0" y="60.0" width="410.0" height="300.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="384.0" y="90.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Service demand (220.53)</text>
+<text x="386.0" y="130.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">4 or more on the same</text>
+<text x="386.0" y="156.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">service or feeder:</text>
+<text x="386.0" y="210.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">75% of the nameplate total</text>
+<text x="386.0" y="270.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">not ranges, dryers, space</text>
+<text x="386.0" y="296.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">heating or A/C</text>
+</svg>

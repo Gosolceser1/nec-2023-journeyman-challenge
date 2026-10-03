@@ -36,9 +36,9 @@
 <polygon points="300.0,213.3 306.0,225.3 294.0,225.3" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <polygon points="300.0,288.0 294.0,276.0 306.0,276.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="316.0" y="262.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="start">8 ft min</text>
-<text x="594.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">(A)(1) below power</text>
-<text x="594.0" y="277.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">if practicable</text>
-<text x="594.0" y="305.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">(A)(2) not on the</text>
+<text x="594.0" y="250.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">below power</text>
+<text x="594.0" y="277.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">if practicable;</text>
+<text x="594.0" y="305.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">not on the</text>
 <text x="594.0" y="332.5" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">power cross-arm</text>
 <line x1="600.0" y1="228.0" x2="680.0" y2="214.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
 <circle cx="680.0" cy="214.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>

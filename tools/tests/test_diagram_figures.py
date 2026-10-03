@@ -3,7 +3,8 @@
 tools/diagrams/build.py --check redraws every figure in memory and fails if a
 record lacks a figure, a record's answer shows outside its masks (leak scan),
 a label runs off the canvas, or the committed SVG / figures.json / masks /
-labels are stale.
+labels are stale. Every question gets at most one figure, and each figure
+teaches the single section its questions cite.
 """
 import importlib.util
 import subprocess
@@ -124,6 +125,46 @@ class PreAnswerFigureTextTest(unittest.TestCase):
                     bad.append(f"{rid} ({e['figure']}): {text!r}")
         self.assertGreater(chips, 150)
         self.assertEqual(bad, [], "\n".join(bad[:40]))
+
+
+@unittest.skipUnless(importlib.util.find_spec("pymupdf") and importlib.util.find_spec("PIL"),
+                     "PyMuPDF and Pillow draw the figures")
+class OneFigureOneRuleTest(unittest.TestCase):
+    """A question shows one diagram, and that diagram teaches the one rule its stem cites:
+    no record is claimed by two figures (or by a figure and a scanned crop), and no
+    figure is a composite of panels for different sections."""
+
+    def test_each_record_has_at_most_one_figure(self):
+        import json
+        sys.path.insert(0, str(ROOT / "tools" / "diagrams"))
+        import build
+        owners = {}
+        for name, spec in build.load_figs().items():
+            for rid in spec["records"]:
+                owners.setdefault(rid, []).append(name)
+        twice = {rid: names for rid, names in owners.items() if len(names) > 1}
+        self.assertEqual(twice, {}, "records drawn by more than one figure")
+        crops = json.loads((ROOT / "assets" / "diagrams" / "diagrams.json").read_text(encoding="utf-8"))
+        self.assertEqual(sorted(set(crops) & set(owners)), [], "records with a figure and a scanned crop")
+
+    def test_each_figure_teaches_one_section(self):
+        import json
+        sys.path.insert(0, str(ROOT / "tools" / "diagrams"))
+        import build
+        bank = {r["id"]: r for r in json.loads((ROOT / "data" / "question_bank.json").read_text(encoding="utf-8"))["records"]}
+        drawn = build.draw_all(every_tier=True)
+        self.assertGreater(len(drawn), 150)
+        errors = [e for name, d in sorted(drawn.items()) for e in build.topic_errors(name, d, bank)]
+        self.assertEqual(errors, [], "\n".join(errors[:40]))
+
+    def test_sections_parser(self):
+        sys.path.insert(0, str(ROOT / "tools" / "diagrams"))
+        import build
+        self.assertEqual(build.sections("210.52(C)(1)"), {"210.52"})
+        self.assertEqual(build.sections("Table 310.4(1)"), {"310.4"})
+        self.assertEqual(build.sections("Article 100 (Bottom Shield)"), {"100"})
+        self.assertEqual(build.sections("503.1"), {"500.5"})
+        self.assertEqual(len(build.sections("408.18(C), 408.3(A)(2)")), 2)
 
 
 if __name__ == "__main__":

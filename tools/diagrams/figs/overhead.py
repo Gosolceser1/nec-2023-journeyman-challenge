@@ -1,4 +1,4 @@
-"""Overhead spans: 225.18 / 225.19(D), 800.44 communications, 810.13 antenna lead-ins."""
+"""Overhead spans: outside branch circuits, communications, antenna lead-ins."""
 from nec_style import *  # noqa: F401,F403
 
 
@@ -27,30 +27,26 @@ RAIL = "final-exam-#1-053"
 OPENING = "open-book-exam-#10-010"
 
 
-@figure("overhead_clearances_225-18", h=480, nec="225.18, 225.19(D)(1)-(3)",
-        records={RAIL: {"when": "after"}, OPENING: {}, "open-book-exam-#5-014": {"like": RAIL},
-                 "open-book-exam-#6-005": {"like": RAIL}, "open-book-exam-#12-025": {"like": RAIL}})
-def overhead_225(f):
+@figure("building_opening_225-19", h=480, nec="225.19(D)", records=[OPENING])
+def building_opening(f):
     grade, ft = 440, 14.0
     y = lambda h: grade - h * ft  # noqa: E731
-    f.grade(grade, 20, 520, label=None)
-    # Building facade with a second-floor material-handling door.
-    bx0, bx1 = 20, 250
+    f.title("Final span beside a material-handling door", y=34)
+    f.grade(grade, 20, 760, label=None)
+    bx0, bx1 = 20, 330
     f.rect(bx0, y(24), bx1 - bx0, grade - y(24), fill=PANEL, stroke=EDGE, sw=SW_OBJ)
     f.line(bx0, y(12), bx1, y(12), EDGE, SW_THIN)
-    f.text(192, y(3), "BUILDING", T_NOTE, MUTED, bold=True)
-    dx0, dx1 = 60, 130
+    f.text(260, y(3), "BUILDING", T_NOTE, MUTED, bold=True)
+    dx0, dx1 = 90, 180
     f.hatch(dx0, y(20), dx1 - dx0, grade - y(20), NO, op=0.14)
     f.mark_no((dx0 + dx1) / 2, y(6))
     f.rect(dx0, y(20), dx1 - dx0, y(12) - y(20), fill=BG, stroke=TEXT, sw=SW_OBJ)
-    f.mask(dx0 - 6, y(12) + 2, dx1 - dx0 + 12, grade - y(12) - 4, records=[OPENING],
+    f.mask(dx0 - 6, y(12) + 2, dx1 - dx0 + 12, grade - y(12) + 2, records=[OPENING],
            what="keep-out zone below the material opening")
-    f.text(95, 96, "material door", T_NOTE, TEXT, bold=True)
-    # Final span attached 3 ft beside the door, out to the floodlight pole.
-    ax, ay = 172, y(16)
-    px = 400
+    f.text(135, y(20) - 14, "material door", T_NOTE, TEXT, bold=True)
+    ax, ay = 222, y(16)
+    px = 600
     _pole(f, px, y(22), grade)
-    # Floodlight on a bracket at the pole top, aimed down.
     ht = y(22) + 4
     f.line(px, ht + 8, px + 30, ht + 8, STEEL, 5)
     f.poly([(px + 22, ht - 6), (px + 58, ht - 6), (px + 64, ht + 20), (px + 16, ht + 20)], PANEL_2, TEXT, SW_THIN)
@@ -59,16 +55,30 @@ def overhead_225(f):
     span = _span((ax, ay), ((ax + px) / 2, y(14)), (px - 7, y(18)))
     f.polyline(span, WIRE_HOT, SW_WIRE)
     f.circle(ax, ay, 6, fill=TEXT)
-    f.lines(318, y(10), ["120 V", "branch circuit"], T_NOTE, TEXT)
+    f.lines(470, y(14) + 50, ["120 V", "branch circuit"], T_NOTE, TEXT)
     f.ext(dx1, y(20), dx1, y(21) - 10)
     f.ext(ax, ay - 8, ax, y(21) - 10)
     f.dim_h(dx1, ax, y(21))
-    f.text((dx1 + ax) / 2, y(21) - 14, "3 ft", 28, DIM, bold=True)
-    f.value_lines(250, 40, ["(D)(3): not beneath the opening", "and not obstructing it"], T_NOTE, NO,
-                  records=[OPENING], what="the 225.19(D)(3) building-opening rule")
-    # 225.18 ladder: minimum heights above finished grade.
+    f.text((dx1 + ax) / 2 + 30, y(21) - 14, "3 ft", 28, DIM, bold=True)
+    f.value_lines(455, 370, ["not beneath the opening", "and not obstructing it"], T_MIN, NO,
+                  records=[OPENING], what="the building-opening rule")
+    f.tag(f.w - 24, 64, "NEC 225.19(D)", anchor="end")
+
+
+@figure("clearance_225-18", h=480, nec="225.18",
+        records={RAIL: {"when": "after"}, "open-book-exam-#5-014": {"like": RAIL},
+                 "open-book-exam-#6-005": {"like": RAIL}, "open-book-exam-#12-025": {"like": RAIL}})
+def clearance_225(f):
+    grade, ft = 440, 14.0
+    y = lambda h: grade - h * ft  # noqa: E731
+    f.grade(grade, 20, 760, label=None)
+    f.text(250, 40, "Overhead spans, 1000 V max", T_NOTE, MUTED, bold=True)
+    for px in (60, 420):
+        _pole(f, px, y(27), grade)
+        f.line(px - 26, y(26), px + 26, y(26), WOOD, 6)
+    span = _span((60, y(26)), (240, y(22)), (420, y(26)))
+    f.polyline(span, WIRE_HOT, SW_WIRE)
     lx = 580
-    f.text(680, 40, "225.18, 1000 V max", T_NOTE, MUTED, bold=True)
     f.line(lx, grade, lx, y(24.5), LINE, SW_STRUCT)
     rows = [(10, "10 ft", "pedestrians, 150 V"), (12, "12 ft", "residential, 300 V"),
             (15, "15 ft", "same, over 300 V"), (18, "18 ft", "streets, trucks"),
@@ -76,20 +86,18 @@ def overhead_225(f):
     for h, val, what in rows:
         yy = y(h)
         f.line(lx - 10, yy, lx + 10, yy, LINE, SW_STRUCT)
-        if h == 24.5:
-            f.value(lx - 16, yy + 9, val, 26, DIM, anchor="end", records=[RAIL])
-        else:
-            f.text(lx - 16, yy + 9, val, 26, DIM, "end", True)
+        f.dline(440, yy, lx - 12, yy, EDGE, 1.5, 6, 6)
+        f.text(lx - 16, yy - 8, val, 26, DIM, "end", True)
         f.text(lx + 18, yy + 8, what, T_NOTE, TEXT, "start")
     f.text(lx + 18, grade - 10, "finished grade", T_NOTE, MUTED, "start")
-    f.tag(f.w - 24, f.h - 14, "NEC 225.18, 225.19(D)", anchor="end")
+    f.tag(f.w - 24, f.h - 14, "NEC 225.18", anchor="end")
 
 
 ROOF = "final-exam-#1-050"
 COMM = "final-exam-#3-031"
 
 
-@figure("communications_overhead_800-44", h=460, nec="800.44(A)(1), (A)(2), 800.44(B)",
+@figure("communications_overhead_800-44", h=460, nec="800.44",
         records={ROOF: {}, COMM: {"when": "after"}, "open-book-exam-#5-018": {"like": ROOF}})
 def communications_800(f):
     grade = 410
@@ -123,7 +131,7 @@ def communications_800(f):
     cy = _y_at(span, dx)
     f.dim_v(dx, cy, roof - 12)
     f.value(316, 262, "8 ft min", anchor="start", records=[ROOF, COMM], label="? ft")
-    b = f.lines(594, 250, ["(A)(1) below power", "if practicable", "(A)(2) not on the", "power cross-arm"],
+    b = f.lines(594, 250, ["below power", "if practicable;", "not on the", "power cross-arm"],
                 T_NOTE, MUTED, "middle")
     f.mask(b[0] - 8, b[1] - 8, b[2] + 16, b[3] + 16, records=[COMM], what="the 800.44(A) rules")
     f.leader(600, 228, px - 20, ca + 8)

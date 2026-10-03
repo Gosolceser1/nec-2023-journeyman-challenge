@@ -11,7 +11,8 @@ def _building(f, x, y, w, h, label):
 
 @figure("floor_area_220-5c", h=500, nec="220.5(C)",
         records={"open-book-exam-#1-003": {}, "open-book-exam-#10-002": {},
-                 "final-exam-#4-052": {"like": "open-book-exam-#1-003"}})
+                 "final-exam-#4-052": {"like": "open-book-exam-#1-003"},
+                 "final-exam-#4-027": {"when": "after"}})
 def floor_area(f):
     faces = ["open-book-exam-#1-003"]
     counts = ["open-book-exam-#10-002"]
@@ -51,46 +52,71 @@ def floor_area(f):
     f.tag(f.w - 24, f.h - 14, "NEC 220.5(C)", anchor="end")
 
 
-@figure("ampacity_derating_310-15", h=520, nec="310.15(B), 310.15(C)(1), 310.15(F), Table 310.16",
-        records={"final-exam-#1-014": {}, "final-exam-#1-027": {}, "final-exam-#3-057": {"terms": ["not counted"]},
-                 "open-book-exam-#2-012": {"like": "final-exam-#1-014"},
-                 "open-book-exam-#3-010": {"like": "final-exam-#1-027"}})
-def ampacity_derating(f):
-    calc = ["final-exam-#1-014", "final-exam-#1-027"]
-    egc = ["final-exam-#3-057"]
-    f.title("Ampacity: table value, then the two factors", y=34)
-    # Raceway cross-section.
-    cx, cy, r = 150, 200, 96
+def _raceway_section(f, cx, cy, r, ccc, egc=True):
+    """Raceway cut open: `ccc` circuit conductors (3 or 4) and, optionally, a green EGC.
+    Returns the EGC's centre."""
+    spots = {3: ((-34, -30), (30, -30), (-2, 26)), 4: ((-38, -34), (22, -44), (-44, 26), (18, 16))}[ccc]
+    k = r / 96
     f.circle(cx, cy, r, fill=PANEL, stroke=LINE, sw=SW_STRUCT)
-    for dx, dy in ((-38, -34), (22, -44), (-44, 26), (18, 16)):
-        f.circle(cx + dx, cy + dy, 22, fill=WIRE_NEU, stroke=BG, sw=SW_THIN)
-    f.circle(cx + 50, cy + 52, 14, fill=WIRE_GND, stroke=BG, sw=SW_THIN)
-    f.text(cx, 68, "raceway, cut open", T_NOTE, MUTED)
-    f.text(cx - 76, 340, "EGC:", T_NOTE, WIRE_GND, "start", True)
-    f.value(cx - 18, 340, "not counted", T_NOTE, anchor="start", records=egc, pad=6,
-            what="EGC not counted (310.15(F))")
-    f.leader(cx + 50, 314, cx + 50, cy + 68, WIRE_GND)
-    f.lines(cx, 400, ["circuit conductors:", "count them"], T_NOTE, TEXT, bold=True)
-    # Two worked columns.
-    x0, x1, xa, xb = 290, 785, 540, 690
-    f.rect(x0, 60, x1 - x0, 420, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
-    f.lines(xa, 92, ["#12 THWN", "86 F, 4 CCC"], T_NOTE, TEXT, bold=True, gap=1.15)
-    f.lines(xb, 92, ["#10 THWN-2", "112 F, 3 CCC"], T_NOTE, TEXT, bold=True, gap=1.15)
-    rows = [("column", ["75 C", "90 C"], False), ("Table 310.16", ["25 A", "40 A"], True),
-            ("x ambient factor", ["1.00", "0.87"], True), ("x count factor", ["0.80", "1.00"], True),
-            ("= ampacity", ["20 A", "34.8 A"], True)]
-    for i, (name, vals, hide) in enumerate(rows):
-        y = 170 + i * 56
+    for dx, dy in spots:
+        f.circle(cx + dx * k, cy + dy * k, 22 * k, fill=WIRE_NEU, stroke=BG, sw=SW_THIN)
+    gx, gy = cx + 50 * k, cy + 52 * k
+    if egc:
+        f.circle(gx, gy, 14 * k, fill=WIRE_GND, stroke=BG, sw=SW_THIN)
+    return gx, gy
+
+
+def _ampacity_card(f, heading, rows, tag):
+    """One worked ampacity column beside a raceway: rows of (step, value, hidden)."""
+    x0, x1, xv = 300, 780, 690
+    f.card(x0, 60, x1 - x0, 340)
+    f.text(x0 + 16, 96, heading, T_LABEL, TEXT, "start", True)
+    for i, (name, v, hide) in enumerate(rows):
+        y = 160 + i * 54
         f.line(x0 + 10, y - 34, x1 - 10, y - 34, EDGE, 1)
-        f.text(x0 + 14, y, name, T_NOTE, MUTED, "start", i == 4)
-        for x, v in zip((xa, xb), vals):
-            if hide:
-                f.value(x, y, v, 26, records=calc, pad=6)
-            else:
-                f.text(x, y, v, 26, DIM, bold=True)
-    f.text(x0 + 14, 428, "ambient: Table 310.15(B)(1)(1)", T_MIN, MUTED, "start")
-    f.text(x0 + 14, 456, "count: Table 310.15(C)(1)", T_MIN, MUTED, "start")
-    f.tag(f.w - 24, f.h - 10, "NEC 310.15, Table 310.16", anchor="end")
+        f.text(x0 + 16, y, name, T_NOTE, MUTED, "start", i == len(rows) - 1)
+        if hide:
+            f.value(xv, y, v, 26, pad=6)
+        else:
+            f.text(xv, y, v, 26, DIM, bold=True)
+    f.tag(f.w - 24, f.h - 12, tag, anchor="end")
+
+
+@figure("ampacity_12thwn_310-16", h=470, nec="Table 310.16",
+        records={"final-exam-#1-014": {}, "open-book-exam-#2-012": {"like": "final-exam-#1-014"}})
+def ampacity_12thwn(f):
+    f.title("#12 THWN, 86 F, four current-carrying conductors", y=34)
+    gx, gy = _raceway_section(f, 150, 210, 96, 4)
+    f.text(150, 84, "raceway, cut open", T_NOTE, MUTED)
+    f.lines(150, 360, ["4 circuit", "conductors"], T_NOTE, TEXT, bold=True)
+    _ampacity_card(f, "#12 THWN", [("column", "75 C", False), ("table ampacity", "25 A", True),
+                                   ("x ambient factor", "1.00", True), ("x count factor", "0.80", True),
+                                   ("= ampacity", "20 A", True)], "NEC Table 310.16")
+
+
+@figure("ampacity_10thwn2_310-15b", h=470, nec="Table 310.15(B)(1)(1)",
+        records={"final-exam-#1-027": {}, "open-book-exam-#3-010": {"like": "final-exam-#1-027"}})
+def ampacity_10thwn2(f):
+    f.title("Three #10 THWN-2 conductors, 112 F ambient", y=34)
+    _raceway_section(f, 150, 210, 96, 3, egc=False)
+    f.text(150, 84, "raceway, cut open", T_NOTE, MUTED)
+    f.lines(150, 360, ["3 circuit", "conductors"], T_NOTE, TEXT, bold=True)
+    _ampacity_card(f, "#10 THWN-2", [("column", "90 C", False), ("table ampacity", "40 A", True),
+                                     ("x ambient factor", "0.87", True), ("x count factor", "1.00", True),
+                                     ("= ampacity", "34.8 A", True)], "NEC Table 310.15(B)(1)(1)")
+
+
+@figure("ccc_count_310-15f", h=450, nec="310.15(F)",
+        records={"final-exam-#3-057": {"terms": ["not counted"]}})
+def ccc_count(f):
+    f.title("Raceway cut open: which conductors are counted?", y=34)
+    gx, gy = _raceway_section(f, 300, 230, 140, 4)
+    f.lines(600, 150, ["circuit conductors:", "count them"], T_LABEL, TEXT, bold=True)
+    f.leader(520, 170, 300 - 38 * 140 / 96 + 22, 230 - 34 * 140 / 96)
+    f.text(560, 340, "EGC:", T_LABEL, WIRE_GND, "start", True)
+    f.value(626, 340, "not counted", T_LABEL, anchor="start", pad=6, what="EGC not counted")
+    f.leader(552, 332, gx + 18, gy + 6, WIRE_GND)
+    f.tag(f.w - 24, f.h - 12, "NEC 310.15(F)", anchor="end")
 
 
 @figure("dwelling_service_310-12", h=450, nec="310.12, 310.12(A)",
@@ -148,21 +174,13 @@ def _drill(f, x, y):
     f.rect(x + 44, y + 30, 6, 12, fill=TEXT, rx=2)
 
 
-@figure("branch_circuit_rating_210", h=500, nec="210.18, 210.19(B), Table 210.21(B)(2)",
-        records={"final-exam-#1-059": {"terms": ["OCPD rating"]}, "final-exam-#3-014": {},
-                 "open-book-exam-#7-011": {"terms": ["not less than", ">="]},
-                 "open-book-exam-#6-024": {"like": "final-exam-#1-059"},
-                 "final-exam-#2-038": {"like": "final-exam-#1-059"},
-                 "open-book-exam-#9-012": {"like": "final-exam-#1-059"},
-                 "open-book-exam-#9-018": {"when": "after"}})
-def branch_circuit_rating(f):
-    rating = ["final-exam-#1-059"]
-    cord = ["final-exam-#3-014"]
-    wire = ["open-book-exam-#7-011"]
-    f.title("20 A multioutlet circuit, 15 A duplex receptacles", y=34)
+def _multioutlet_circuit(f, rating=None, receptacle=None, drill=True):
+    """A panel feeding three duplex receptacles; `rating` labels the breaker,
+    `receptacle` each receptacle. Returns the run's y."""
     f.panel(30, 70, 120, 190, label=None, breakers=0)
     f.breaker(66, 136, 48, 70)
-    f.text(90, 124, "20 A", T_LABEL, TEXT, bold=True)
+    if rating:
+        f.text(90, 124, rating, T_LABEL, TEXT, bold=True)
     f.rect(48, 230, 84, 12, fill=STEEL, stroke=TEXT, sw=1.5, rx=2)
     for k in range(5):
         f.circle(58 + k * 16, 236, 3, fill=CLAMP)
@@ -173,51 +191,113 @@ def branch_circuit_rating(f):
         f.line(x - 8, y, x - 8, y + 42, WIRE_HOT, 3)
         f.line(x + 8, y + 16, x + 8, y + 42, WIRE_NEU, 3)
         f.receptacle(x, y + 76, 68)
-        f.text(x, y + 138, "15 A", T_NOTE, TEXT, bold=True)
-    # Portable drill plugged into the lower face of the last receptacle.
-    py = y + 76 + 68 * 0.23
-    f.plug(694, py - 12, 30, 24, facing="left")
-    f.path(f"M 724 {py} C 776 {py}, 784 300, 784 350 C 784 392, 762 404, 752 396", TEXT, 5)
-    _drill(f, 690, 334)
-    f.text(420, y - 18, "#12 Cu conductors", T_NOTE, TEXT, bold=True)
-    # Three tags.
-    f.value_lines(90, 318, ["circuit rating =", "OCPD rating"], T_NOTE, records=rating, pad=6, gap=1.15)
+        if receptacle:
+            f.text(x, y + 138, receptacle, T_NOTE, TEXT, bold=True)
+    if drill:
+        py = y + 76 + 68 * 0.23
+        f.plug(694, py - 12, 30, 24, facing="left")
+        f.path(f"M 724 {py} C 776 {py}, 784 300, 784 350 C 784 392, 762 404, 752 396", TEXT, 5)
+        _drill(f, 690, 334)
+    return y
+
+
+@figure("branch_circuit_rating_210-18", h=440, nec="210.18",
+        records={"final-exam-#1-059": {"terms": ["OCPD rating"]},
+                 "open-book-exam-#6-024": {"like": "final-exam-#1-059"},
+                 "final-exam-#2-038": {"like": "final-exam-#1-059"},
+                 "open-book-exam-#9-012": {"like": "final-exam-#1-059"},
+                 "open-book-exam-#9-018": {"when": "after"}})
+def branch_circuit_rating(f):
+    f.title("A branch circuit and the device that protects it", y=34)
+    _multioutlet_circuit(f, drill=False)
+    f.value_lines(90, 318, ["circuit rating =", "OCPD rating"], T_NOTE, pad=6, gap=1.15)
     f.leader(90, 296, 90, 210)
-    f.value_lines(256, 410, ["conductor ampacity", ">= 20 A rating"], T_NOTE, records=wire, pad=6, gap=1.15)
-    f.leader(256, 388, 256, y + 18)
-    f.value(520, 446, "cord-and-plug load: 12 A max", T_NOTE, records=cord, pad=6)
-    f.leader(640, 426, 700, 370)
-    f.tag(f.w - 24, f.h - 10, "NEC 210.18, 210.19, 210.21", anchor="end")
+    f.text(500, 330, "receptacles, conductors and loads", T_NOTE, MUTED)
+    f.text(500, 358, "on the circuit", T_NOTE, MUTED)
+    f.tag(f.w - 24, f.h - 12, "NEC 210.18", anchor="end")
 
 
-def _fed_building(f, x):
-    """Card picture: a building with its disconnect, supplied from the left."""
-    _building(f, x + 70, 190, 100, 80, "")
-    f.line(x + 18, 232, x + 98, 232, WIRE_HOT, SW_WIRE - 1)
-    f.disconnect(x + 98, 206, 38, 52)
+@figure("branch_conductors_210-19", h=470, nec="210.19(B)",
+        records={"open-book-exam-#7-011": {"terms": ["not less than", ">="]}})
+def branch_conductors(f):
+    f.title("Several receptacles for portable tools on one circuit", y=34)
+    y = _multioutlet_circuit(f)
+    f.text(90, 124, "rating", T_NOTE, TEXT, bold=True)
+    f.text(420, y - 18, "branch-circuit conductors", T_NOTE, TEXT, bold=True)
+    f.value_lines(256, 400, ["conductor ampacity: not", "less than the rating"], T_NOTE, pad=6, gap=1.15)
+    f.leader(256, 378, 256, y + 18)
+    f.tag(f.w - 24, f.h - 12, "NEC 210.19(B)", anchor="end")
 
 
-@figure("outbuilding_disconnect_225-39", h=490, nec="225.39, 225.39(A)-(D)",
-        records=["final-exam-#3-024", "final-exam-#3-056", "open-book-exam-#7-009"])
-def outbuilding_disconnect(f):
-    calc = ["open-book-exam-#7-009"]
-    f.title("Building disconnect fed from another building: minimum rating", y=34)
-    cols = [(20, "one branch circuit,", "limited loads", "15 A min"),
-            (280, "two 2-wire", "branch circuits", "30 A min")]
-    for x, t1, t2, v in cols:
-        f.card(x, 60, 240, 320)
-        f.lines(x + 120, 94, [t1, t2], T_NOTE, TEXT, bold=True, gap=1.15)
-        _fed_building(f, x)
-        f.value(x + 120, 330, v, 28, what=f"'{v}'")
-    f.card(540, 60, 240, 320)
-    f.lines(660, 94, ["feeder"], T_NOTE, TEXT, bold=True)
-    _fed_building(f, 540)
-    f.text(660, 318, "60 A min", 28, DIM, bold=True)
-    f.lines(660, 342, ["one-family", "dwelling: 100 A"], T_MIN, MUTED, gap=1.05)
-    b = f.text(30, 424, "Every case: rating not less than the", 26, TEXT, "start")
-    f.value(b[0] + b[2] + 10, 424, "calculated", 26, anchor="start", records=calc, pad=6)
-    f.text(30, 460, "load (Article 220)", 26, TEXT, "start")
-    f.tag(f.w - 24, f.h - 12, "NEC 225.39", anchor="end")
+@figure("receptacle_cord_load_210-21b2", h=470, nec="Table 210.21(B)(2)",
+        records=["final-exam-#3-014"])
+def receptacle_cord_load(f):
+    f.title("20 A multioutlet circuit, 15 A duplex receptacles", y=34)
+    _multioutlet_circuit(f, rating="20 A", receptacle="15 A")
+    f.value(470, 436, "cord-and-plug load: 12 A max", T_NOTE, pad=6)
+    f.leader(620, 416, 700, 370)
+    f.tag(30, f.h - 12, "NEC Table 210.21(B)(2)")
+
+
+def _fed_outbuilding(f, link):
+    """Main building on the left feeding a second building on the right through `link`
+    (drawn between them); the second building's disconnect is just inside its wall.
+    Returns the disconnect's centre."""
+    gy = 330
+    f.grade(gy, 20, 780, label=None)
+    _building(f, 50, 170, 220, gy - 170, "")
+    _building(f, 520, 200, 220, gy - 200, "")
+    f.text(200, 318, "main building", T_NOTE, TEXT, bold=True)
+    f.text(670, 318, "outbuilding", T_NOTE, TEXT, bold=True)
+    f.panel(80, 200, 56, 90, label=None, breakers=3)
+    f.disconnect(548, 226, 50, 66)
+    link(f, 136, 245, 548, 259)
+    return 573, 226
+
+
+def _rating_callout(f, dx, dy, value):
+    f.text(640, 398, "building disconnect rating:", T_NOTE, TEXT)
+    f.value(640, 440, value, 28, pad=6)
+    f.leader(dx, 378, dx, dy + 66)
+
+
+@figure("outbuilding_one_circuit_225-39a", h=470, nec="225.39(A)", records=["final-exam-#3-056"])
+def outbuilding_one_circuit(f):
+    f.title("Building supplied by one branch circuit (limited loads)", y=34)
+
+    def link(f, x0, y0, x1, y1):
+        f.polyline([(x0, y0), (x0 + 60, y0), (x0 + 60, y1), (x1, y1)], WIRE_HOT, SW_WIRE - 1)
+        f.text((x0 + x1) / 2 + 30, y1 - 14, "one branch circuit", T_NOTE, TEXT, bold=True)
+    _rating_callout(f, *_fed_outbuilding(f, link), "15 A min")
+    f.tag(30, f.h - 12, "NEC 225.39(A)")
+
+
+@figure("outbuilding_two_circuits_225-39b", h=470, nec="225.39(B)", records=["final-exam-#3-024"])
+def outbuilding_two_circuits(f):
+    f.title("Building supplied by two 2-wire branch circuits", y=34)
+
+    def link(f, x0, y0, x1, y1):
+        for k, dy in enumerate((-10, 10)):
+            f.polyline([(x0, y0 + dy), (x0 + 60 + k * 14, y0 + dy), (x0 + 60 + k * 14, y1 + dy), (x1, y1 + dy)],
+                       WIRE_HOT, SW_WIRE - 1)
+        f.text((x0 + x1) / 2 + 40, y1 - 24, "two 2-wire circuits", T_NOTE, TEXT, bold=True)
+    _rating_callout(f, *_fed_outbuilding(f, link), "30 A min")
+    f.tag(30, f.h - 12, "NEC 225.39(B)")
+
+
+@figure("outbuilding_rating_225-39", h=470, nec="225.39", records=["open-book-exam-#7-009"])
+def outbuilding_rating(f):
+    f.title("Disconnect for a building fed from another building", y=34)
+
+    def link(f, x0, y0, x1, y1):
+        f.polyline([(x0, y0), (x0 + 60, y0), (x0 + 60, y1), (x1, y1)], WIRE_HOT, SW_WIRE + 1)
+        f.text((x0 + x1) / 2 + 30, y1 - 14, "feeder", T_NOTE, TEXT, bold=True)
+    dx, dy = _fed_outbuilding(f, link)
+    f.text(640, 398, "rating not less than the", T_NOTE, TEXT)
+    v = f.value(548, 436, "calculated", 26, anchor="start", pad=6)
+    f.text(v[0] + v[2] + 10, 436, "load", 26, TEXT, "start")
+    f.leader(dx, 378, dx, dy + 66)
+    f.tag(30, f.h - 12, "NEC 225.39")
 
 
 def _dryer(f, x, y, w=48, h=60):
@@ -242,25 +322,32 @@ def _range(f, x, y, w=72, h=84):
     f.line(x + 4, y + h * 0.88, x + w - 4, y + h * 0.88, EDGE, 1.5)
 
 
-@figure("appliance_demand_220-54_220-55", h=486, nec="Table 220.54, Table 220.55 and Note 1",
-        records={"final-exam-#1-040": {}, "open-book-exam-#4-015": {}, "final-exam-#1-021": {},
-                 "open-book-exam-#3-019": {"like": "final-exam-#1-021"}})
-def appliance_demand(f):
-    f.title("Dwelling appliance demand (worked cards)", y=34)
-    f.card(20, 56, 370, 390, "Clothes dryers, Table 220.54")
+@figure("dryer_demand_220-54", h=440, nec="Table 220.54",
+        records={"final-exam-#1-040": {}, "open-book-exam-#4-015": {"like": "final-exam-#1-040"}})
+def dryer_demand(f):
+    f.title("Five household clothes dryers, multifamily dwelling", y=34)
     for k in range(5):
-        _dryer(f, 42 + k * 68, 104)
-    f.lines(34, 200, ["5 dryers x 5 kW = 25 kW", "(5 kW each, or the nameplate", "if larger)"], T_NOTE,
-            TEXT, "start", gap=1.2)
-    f.text(34, 306, "demand factor, 5 dryers:", T_NOTE, MUTED, "start")
-    f.value(34, 346, "85%", 30, anchor="start")
-    f.value(34, 408, "25 kW x 0.85 = 21.25 kW", 26, anchor="start")
-    f.card(410, 56, 370, 390, "One range, Table 220.55")
-    _range(f, 430, 100, 62, 88)
-    f.lines(510, 124, ["14 kW range", "Column C: 8 kW"], T_NOTE, TEXT, "start", bold=True, gap=1.2)
-    f.lines(424, 212, ["Note 1: over 12 kW, add 5%", "per kW (or major fraction)"], T_NOTE, TEXT,
-            "start", gap=1.2)
-    f.text(424, 306, "14 - 12 = 2 kW over:", T_NOTE, MUTED, "start")
-    f.value(424, 346, "+10%", 30, anchor="start")
-    f.value(424, 408, "8 kW x 1.10 = 8.8 kW", 26, anchor="start")
-    f.tag(f.w - 24, f.h - 10, "NEC 220.54, 220.55", anchor="end")
+        _dryer(f, 70 + k * 136, 70, 84, 104)
+    f.card(40, 210, 720, 190)
+    f.lines(60, 250, ["5 dryers x 5 kW = 25 kW", "(5 kW each, or the nameplate if larger)"], T_NOTE, TEXT,
+            "start", gap=1.3)
+    f.text(60, 336, "demand factor, 5 dryers:", T_NOTE, MUTED, "start")
+    f.value(330, 336, "85%", 30, anchor="start")
+    f.value(60, 380, "25 kW x 0.85 = 21.25 kW", 26, anchor="start")
+    f.tag(f.w - 24, f.h - 12, "NEC Table 220.54", anchor="end")
+
+
+@figure("range_demand_220-55", h=440, nec="Table 220.55",
+        records={"final-exam-#1-021": {}, "open-book-exam-#3-019": {"like": "final-exam-#1-021"}})
+def range_demand(f):
+    f.title("One 14 kW household range in a dwelling", y=34)
+    _range(f, 70, 70, 120, 150)
+    f.text(230, 110, "14 kW range", T_LABEL, TEXT, "start", True)
+    f.text(230, 141, "Column C: 8 kW", T_LABEL, TEXT, "start", True)
+    f.lines(230, 186, ["Note 1: over 12 kW, add 5%", "per kW (or major fraction)"], T_NOTE, TEXT, "start",
+            gap=1.25)
+    f.card(40, 250, 720, 150)
+    f.text(60, 292, "14 - 12 = 2 kW over:", T_NOTE, MUTED, "start")
+    f.value(300, 292, "+10%", 30, anchor="start")
+    f.value(60, 360, "8 kW x 1.10 = 8.8 kW", 26, anchor="start")
+    f.tag(f.w - 24, f.h - 12, "NEC Table 220.55", anchor="end")

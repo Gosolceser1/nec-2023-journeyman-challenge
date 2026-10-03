@@ -77,34 +77,37 @@ def _armored(f, pts, step=9):
         carry = (carry + seg) % step
 
 
-@figure("supports_emt_strut_358-30", h=480, nec="358.30(A) incl. Exception No. 1, 384.30(A)",
-        records={"final-exam-#3-013": {}, "final-exam-#5-053": {},
-                 "open-book-exam-#12-022": {"like": "final-exam-#3-013"}})
-def emt_strut(f):
+@figure("emt_supports_358-30", h=330, nec="358.30(A)",
+        records={"final-exam-#3-013": {}, "open-book-exam-#12-022": {"like": "final-exam-#3-013"}})
+def emt_supports(f):
     exc_rec = ["final-exam-#3-013"]
-    every_rec = ["final-exam-#5-053"]
-    y = 120
-    f.title("EMT or surface strut-type channel raceway", y=40)
-    e0, e1 = _run(f, y, (200, 600), couplings=(470,))
-    _span(f, e0, 200, y, 186, "within 3 ft")
-    _span(f, 600, e1, y, 186, "within 3 ft")
-    _span(f, 200, 600, y, 186)
-    f.value(400, 222, "every 10 ft max", 30, records=every_rec, label="? ft")
-    # EMT Exception No. 1.
-    y2 = 356
-    f.line(30, 266, f.w - 30, 266, EDGE, SW_THIN)
-    f.text(40, 300, "EMT only, Exception No. 1: framing does not permit 3 ft", T_NOTE, MUTED, "start", True)
+    y2 = 170
+    f.title("EMT where the framing does not permit fastening within 3 ft", y=40)
     f.stud(330, y2 - 40, 30, 80)
     f.conduit(109, y2, f.w + 10, y2)
     _connector(f, 95, y2, 1)
     f.box(70, y2, 50)
+    f.text(70, y2 - 37, "box", T_NOTE, TEXT)
     _strap1(f, 345, y2, foot=-1)
     f.text(580, y2 - 26, "unbroken length", T_NOTE, TEXT)
     f.text(620, y2 + 50, "first framing member", T_NOTE, MUTED)
     f.leader(480, y2 + 44, 362, y2 + 30)
-    _span(f, 95, 345, y2, 408)
-    f.value(220, 448, "within 5 ft", 30, records=exc_rec, label="? ft")
-    f.tag(f.w - 20, f.h - 16, "NEC 358.30(A), 384.30(A)", anchor="end")
+    _span(f, 95, 345, y2, 222)
+    f.value(220, 262, "within 5 ft", 30, records=exc_rec, label="? ft")
+    f.tag(f.w - 20, f.h - 16, "NEC 358.30(A)", anchor="end")
+
+
+@figure("strut_supports_384-30", h=300, nec="384.30(A)", records=["final-exam-#5-053"])
+def strut_supports(f):
+    every_rec = ["final-exam-#5-053"]
+    y = 120
+    f.title("Surface strut-type channel raceway between two boxes", y=40)
+    e0, e1 = _run(f, y, (200, 600))
+    _span(f, e0, 200, y, 186, "within 3 ft")
+    _span(f, 600, e1, y, 186, "within 3 ft")
+    _span(f, 200, 600, y, 186)
+    f.value(400, 222, "every 10 ft max", 30, records=every_rec, label="? ft")
+    f.tag(f.w - 20, f.h - 16, "NEC 384.30(A)", anchor="end")
 
 
 @figure("supports_rmc_344-30", h=400, nec="344.30(A), 344.30(B)(1)-(2), Table 344.30(B)",
@@ -122,7 +125,7 @@ def rmc(f):
     f.tag(f.w - 20, f.h - 16, "NEC Table 344.30(B)", anchor="end")
 
 
-@figure("supports_pvc_352-30", h=470, nec="352.30(A), Table 352.30(B)",
+@figure("supports_pvc_352-30", h=470, nec="352.30",
         records={"final-exam-#5-070": {"when": "after"},
                  "open-book-exam-#5-024": {"like": "final-exam-#5-070"}, "open-book-exam-#6-016": {}})
 def pvc(f):
@@ -150,68 +153,79 @@ def pvc(f):
     f.tag(f.w - 20, f.h - 14, "NEC Table 352.30(B)", anchor="end")
 
 
-@figure("supports_unsupported_cable_320-330-334", h=480,
-        nec="320.30(D)(2)-(3), 330.30(D)(2), 334.30(B)(2)",
-        records={"final-exam-#1-066": {}, "final-exam-#5-069": {}, "final-exam-#5-006": {},
-                 "open-book-exam-#6-022": {"like": "final-exam-#1-066"}})
-def unsupported_cable(f):
-    mc = ["final-exam-#1-066"]
-    nm = ["final-exam-#5-069"]
-    ac_term = ["final-exam-#5-006"]
-    deck, ceil = 76, 262
-    # Left: accessible ceiling, last support to a luminaire.
-    f.line(30, deck, 500, deck, LINE, SW_STRUCT)
+def _ceiling_run(f, kind):
+    """Cable from its last support down to a lay-in luminaire in an accessible ceiling."""
+    deck, ceil = 90, 300
+    f.line(30, deck, f.w - 30, deck, LINE, SW_STRUCT)
     f.text(40, deck - 14, "structure", T_NOTE, MUTED, "start")
-    sx, lx0, lx1 = 110, 330, 480
-    cx = 380
+    sx, lx0, lx1, cx = 160, 470, 690, 580
     jt = ceil - 58
-    f.path(f"M 30 {deck + 16} L {sx} {deck + 16} C {sx + 120} {deck + 16} {cx - 60} {jt - 90} {cx} {jt}",
-           TEXT, 5)
+    pts = [(30, deck + 16), (sx, deck + 16)] + _bezier((sx, deck + 16), (sx + 200, deck + 16), (cx - 90, jt - 110),
+                                                        (cx, jt))[1:]
+    if kind == "armored":
+        _armored(f, pts)
+    else:
+        f.polyline(pts, TEXT, 7)
     f.strap(sx, deck + 16, size=30)
-    f.text(sx - 20, deck + 64, "last support", T_NOTE, TEXT, "start")
-    # Suspended ceiling: grid tees, and a lay-in troffer resting in the grid.
-    f.line(30, ceil, 500, ceil, EDGE, SW_OBJ)
-    for x in (60, 170, 280, 500 - 10):
+    f.text(sx - 30, deck + 66, "last support", T_NOTE, TEXT, "start")
+    f.line(30, ceil, f.w - 30, ceil, EDGE, SW_OBJ)
+    for x in (80, 220, 360, 760):
         f.line(x, ceil, x, ceil - 10, EDGE, SW_THIN)
     f.poly([(lx0, ceil), (lx0 + 18, ceil - 36), (lx1 - 18, ceil - 36), (lx1, ceil)], PANEL_2, TEXT, SW_OBJ)
     f.rect(lx0 + 4, ceil - 3, lx1 - lx0 - 8, 9, fill=LINE, stroke=TEXT, sw=1.5, rx=2)
     f.rect(cx - 18, jt, 36, 22, fill=PANEL_2, stroke=TEXT, sw=SW_THIN, rx=3)
     f.text((lx0 + lx1) / 2, ceil + 34, "luminaire", T_NOTE, TEXT, bold=True)
     f.text(40, ceil + 34, "accessible ceiling", T_NOTE, MUTED, "start")
-    f.text(40, 336, "max unsupported cable length:", T_NOTE, MUTED, "start", True)
-    rows = (("Type MC", "6 ft", mc), ("Type AC", "6 ft", mc), ("Type NM", "4 1/2 ft", nm))
-    for i, (name, val, recs) in enumerate(rows):
-        yy = 376 + i * 40
-        f.text(40, yy, name, T_LABEL, TEXT, "start", True)
-        f.value(160, yy, val, 28, anchor="start", records=recs, label="? ft")
-    f.text(290, 456, "(dwellings)", T_NOTE, MUTED, "start")
-    f.text(290, 118, "unsupported", T_NOTE, DIM, "start", True)
-    # Right: AC cable at a motor terminal box where flexibility is necessary.
-    f.dline(520, 30, 520, f.h - 60, EDGE, SW_THIN)
-    f.lines(650, 44, ["Type AC at a terminal,", "flexibility necessary"], T_NOTE, MUTED, bold=True, gap=1.1)
-    mx, my, mw, mh = 668, 376, 140, 66
+    f.text(250, 196, "unsupported", T_NOTE, DIM, "start", True)
+
+
+@figure("mc_unsupported_330-30", h=440, nec="330.30(D)(2)",
+        records={"final-exam-#1-066": {}, "open-book-exam-#6-022": {"like": "final-exam-#1-066"}})
+def mc_unsupported(f):
+    mc = ["final-exam-#1-066"]
+    f.title("Type MC cable to a luminaire in an accessible ceiling", y=40)
+    _ceiling_run(f, "armored")
+    f.text(400, 390, "max unsupported length:", T_NOTE, TEXT, "end", True)
+    f.value(414, 390, "6 ft", 30, anchor="start", records=mc, label="? ft")
+    f.tag(f.w - 20, f.h - 14, "NEC 330.30(D)(2)", anchor="end")
+
+
+@figure("nm_unsupported_334-30", h=440, nec="334.30(B)(2)", records=["final-exam-#5-069"])
+def nm_unsupported(f):
+    nm = ["final-exam-#5-069"]
+    f.title("Type NM cable to a luminaire in an accessible ceiling", y=40)
+    _ceiling_run(f, "sheathed")
+    f.text(400, 390, "max unsupported length:", T_NOTE, TEXT, "end", True)
+    f.value(414, 390, "4 1/2 ft", 30, anchor="start", records=nm, label="? ft")
+    f.tag(f.w - 20, f.h - 14, "NEC 334.30(B)(2)", anchor="end")
+
+
+@figure("ac_unsupported_320-30", h=440, nec="320.30(D)(2)", records=["final-exam-#5-006"])
+def ac_unsupported(f):
+    ac_term = ["final-exam-#5-006"]
+    f.title("Type AC cable at a terminal where flexibility is necessary", y=40)
+    mx, my, mw, mh = 520, 340, 180, 84
     tb = my - mh / 2 - mh * 0.24
     f.motor(mx, my, mw, mh)
-    _armored(f, [(556, 100), (556, 200)] + _bezier((556, 200), (556, 262), (mx, 252), (mx, tb))[1:])
-    f.strap(556, 190, horizontal=False, size=30)
-    f.text(574, 180, "last support", T_NOTE, TEXT, "start")
-    f.text(770, 236, "cable length", T_NOTE, DIM, "end", True)
-    f.leader(640, 242, 620, 262, DIM)
-    f.value(770, 284, "2 ft max", 28, anchor="end", records=ac_term, label="? ft")
-    f.tag(f.w - 20, f.h - 16, "NEC 320.30, 330.30, 334.30", anchor="end")
+    f.floor(my + mh / 2 + 14, 300, 740)
+    sx = 300
+    _armored(f, [(sx, 70), (sx, 180)] + _bezier((sx, 180), (sx, 250), (mx, 230), (mx, tb))[1:])
+    f.strap(sx, 170, horizontal=False, size=30)
+    f.text(sx - 20, 170, "last support", T_NOTE, TEXT, "end")
+    f.text(640, 170, "cable length", T_NOTE, DIM, "start", True)
+    f.leader(636, 176, 470, 232, DIM)
+    f.value(640, 214, "2 ft max", 30, anchor="start", records=ac_term, label="? ft")
+    f.tag(f.w - 20, f.h - 14, "NEC 320.30(D)(2)", anchor="end")
 
 
-@figure("supports_vertical_376-30_342-30", h=500, nec="376.30(B), 342.30(B)(3)",
-        records=["final-exam-#5-065", "final-exam-#5-067"])
-def vertical(f):
+@figure("wireway_vertical_376-30", h=470, nec="376.30(B)", records=["final-exam-#5-065"])
+def wireway_vertical(f):
     ww = ["final-exam-#5-065"]
-    imc = ["final-exam-#5-067"]
     ceil, floor = 70, 440
     f.ceiling(ceil)
     f.floor(floor)
-    # Left: vertical metal wireway on a wall: screw cover, one bolted joint.
-    f.text(195, 44, "VERTICAL METAL WIREWAY", T_LABEL, TEXT, bold=True)
-    wall_x, wx0, wx1 = 60, 92, 142
+    f.title("Vertical metal wireway on a wall", y=44)
+    wall_x, wx0, wx1 = 260, 292, 352
     f.wall(wall_x, ceil, floor)
     sy0, sy1, jy = 110, 390, 250
     for a, b in ((ceil, jy), (jy, floor)):
@@ -223,20 +237,28 @@ def vertical(f):
     for yy in (sy0, sy1):
         f.rect(wall_x + 8, yy - 7, wx1 - wall_x - 2, 14, fill=AMBER, stroke=CLAMP, sw=1.5, rx=2)
         f.circle(wall_x + 17, yy, 3.5, fill=BG)
-    f.text(wx1 + 14, jy - 14, "1 joint", T_NOTE, TEXT, "start")
+    f.text(wx1 + 14, jy - 14, "one joint", T_NOTE, TEXT, "start")
     f.text(wx1 + 14, sy0 - 16, "support", T_NOTE, AMBER, "start")
     f.text(wx1 + 14, sy1 + 32, "support", T_NOTE, AMBER, "start")
-    f.ext(wx1 + 8, sy0, 256, sy0)
-    f.ext(wx1 + 8, sy1, 256, sy1)
-    f.dim_v(246, sy0, sy1)
-    f.value(262, 312, "15 ft max", 30, anchor="start", records=ww, label="? ft")
-    # Right: IMC riser from industrial machinery.
-    f.text(610, 44, "IMC RISER FROM MACHINERY", T_LABEL, TEXT, bold=True)
-    rx = 640
-    f.rect(560, 366, 200, 66, fill=PANEL, stroke=TEXT, sw=SW_OBJ, rx=6)
-    f.rect(572, 432, 22, 8, fill=STEEL, stroke=TEXT, sw=1.5)
-    f.rect(726, 432, 22, 8, fill=STEEL, stroke=TEXT, sw=1.5)
-    f.lines(702, 394, ["industrial", "machine"], T_NOTE, TEXT, bold=True, gap=1.05)
+    f.ext(wx1 + 8, sy0, 486, sy0)
+    f.ext(wx1 + 8, sy1, 486, sy1)
+    f.dim_v(476, sy0, sy1)
+    f.value(492, 312, "15 ft max", 30, anchor="start", records=ww, label="? ft")
+    f.tag(f.w - 20, f.h - 40, "NEC 376.30(B)", anchor="end")
+
+
+@figure("imc_riser_342-30", h=470, nec="342.30(B)(3)", records=["final-exam-#5-067"])
+def imc_riser(f):
+    imc = ["final-exam-#5-067"]
+    ceil, floor = 70, 440
+    f.ceiling(ceil)
+    f.floor(floor)
+    f.title("Exposed IMC riser from industrial machinery", y=44)
+    rx = 400
+    f.rect(320, 366, 200, 66, fill=PANEL, stroke=TEXT, sw=SW_OBJ, rx=6)
+    f.rect(332, 432, 22, 8, fill=STEEL, stroke=TEXT, sw=1.5)
+    f.rect(486, 432, 22, 8, fill=STEEL, stroke=TEXT, sw=1.5)
+    f.lines(462, 394, ["industrial", "machine"], T_NOTE, TEXT, bold=True, gap=1.05)
     f.rect(rx - 26, 340, 52, 28, fill=PANEL_2, stroke=TEXT, sw=SW_THIN, rx=3)
     f.conduit(rx, ceil, rx, 326, couplings=(0.43, 0.74))
     _connector(f, rx, 340, -1, vertical=True)
@@ -246,9 +268,9 @@ def vertical(f):
     f.lines(rx + 26, 194, ["threaded", "couplings"], T_NOTE, TEXT, "start", gap=1.0)
     f.text(rx + 26, ty0 + 8, "fastened top", T_NOTE, AMBER, "start")
     f.text(rx + 26, ty1 + 8, "and bottom", T_NOTE, AMBER, "start")
-    f.ext(rx - 34, ty0, 570, ty0)
-    f.ext(rx - 34, ty1, 570, ty1)
-    f.dim_v(580, ty0, ty1)
-    f.value(566, 220, "20 ft max", 30, anchor="end", records=imc, label="? ft")
-    f.lines(390, 370, ["IMC: no other", "intermediate support", "readily available"], T_NOTE, MUTED, gap=1.1)
-    f.tag(f.w - 20, f.h - 12, "NEC 376.30(B), 342.30(B)", anchor="end")
+    f.ext(rx - 34, ty0, 330, ty0)
+    f.ext(rx - 34, ty1, 330, ty1)
+    f.dim_v(340, ty0, ty1)
+    f.value(326, 220, "20 ft max", 30, anchor="end", records=imc, label="? ft")
+    f.lines(650, 250, ["no other", "intermediate support", "readily available"], T_NOTE, MUTED, gap=1.1)
+    f.tag(f.w - 20, f.h - 40, "NEC 342.30(B)(3)", anchor="end")

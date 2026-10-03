@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="430" viewBox="0 0 800 430">
+<rect x="0.0" y="0.0" width="800.0" height="430.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Outdoor receptacles at the front and back (plan view)</text>
+<rect x="120.0" y="120.0" width="300.0" height="170.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#94a3b8" stroke-width="4"/>
+<text x="270.0" y="213.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">dwelling</text>
+<text x="270.0" y="76.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="middle">BACK</text>
+<text x="270.0" y="354.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#94a3b8" text-anchor="middle">FRONT</text>
+<line x1="202.0" y1="100.0" x2="226.6" y2="100.0" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="202.0" y1="108.0" x2="226.6" y2="108.0" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="220.0" cy="104.0" r="12" fill="none" stroke="#34d399" stroke-width="3"/>
+<circle cx="225.4" cy="104.0" r="3" fill="#34d399" stroke="none" stroke-width="2"/>
+<line x1="312.0" y1="302.0" x2="336.6" y2="302.0" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="312.0" y1="310.0" x2="336.6" y2="310.0" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="330.0" cy="306.0" r="12" fill="none" stroke="#34d399" stroke-width="3"/>
+<circle cx="335.4" cy="306.0" r="3" fill="#34d399" stroke="none" stroke-width="2"/>
+<rect x="460.0" y="90.0" width="320.0" height="200.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="476.0" y="130.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">one at the front and one</text>
+<text x="476.0" y="154.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">at the back, readily</text>
+<text x="476.0" y="178.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">accessible from grade</text>
+<text x="476.0" y="214.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">6 1/2 ft or less above grade</text>
+<text x="476.0" y="260.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#94a3b8" text-anchor="start">required on:</text>
+<text x="400.0" y="396.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">one- and two-family dwellings</text>
+<rect x="590.0" y="38.0" width="196.0" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="600.0" y="66.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 210.52(E)(1)</text>
+</svg>

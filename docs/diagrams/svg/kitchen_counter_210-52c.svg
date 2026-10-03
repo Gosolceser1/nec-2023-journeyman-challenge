@@ -1,89 +1,76 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
-<rect x="0.0" y="0.0" width="800.0" height="500.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="510" viewBox="0 0 800 510">
+<rect x="0.0" y="0.0" width="800.0" height="510.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
 <text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Kitchen counter receptacles (elevation)</text>
-<rect x="40.0" y="70.0" width="440.0" height="80.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<line x1="150.0" y1="70.0" x2="150.0" y2="150.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="370.0" y1="70.0" x2="370.0" y2="150.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
-<text x="260.0" y="118.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">upper cabinets</text>
-<rect x="40.0" y="300.0" width="440.0" height="14.0" rx="0" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
-<rect x="46.0" y="314.0" width="428.0" height="106.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<path d="M 200 300 q 0 30 30 30 h 50 q 30 0 30 -30" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-<text x="255.0" y="290.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">sink</text>
-<line x1="20.0" y1="420.0" x2="500.0" y2="420.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
-<rect x="112.5" y="222.0" width="23.0" height="36.0" rx="3.6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
-<path d="M 119.9 225.8 L 128.1 225.8 A 7.2 7.2 0 0 1 128.1 237.6 L 119.9 237.6 A 7.2 7.2 0 0 1 119.9 225.8 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="121.3" y1="228.7" x2="121.3" y2="232.3" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="126.7" y1="229.1" x2="126.7" y2="231.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
-<circle cx="124.0" cy="235.2" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
-<path d="M 119.9 242.4 L 128.1 242.4 A 7.2 7.2 0 0 1 128.1 254.2 L 119.9 254.2 A 7.2 7.2 0 0 1 119.9 242.4 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="121.3" y1="245.3" x2="121.3" y2="248.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="126.7" y1="245.6" x2="126.7" y2="248.5" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
-<circle cx="124.0" cy="251.7" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
-<rect x="280.5" y="222.0" width="23.0" height="36.0" rx="3.6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
-<path d="M 287.9 225.8 L 296.1 225.8 A 7.2 7.2 0 0 1 296.1 237.6 L 287.9 237.6 A 7.2 7.2 0 0 1 287.9 225.8 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="289.3" y1="228.7" x2="289.3" y2="232.3" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="294.7" y1="229.1" x2="294.7" y2="231.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
-<circle cx="292.0" cy="235.2" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
-<path d="M 287.9 242.4 L 296.1 242.4 A 7.2 7.2 0 0 1 296.1 254.2 L 287.9 254.2 A 7.2 7.2 0 0 1 287.9 242.4 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="289.3" y1="245.3" x2="289.3" y2="248.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="294.7" y1="245.6" x2="294.7" y2="248.5" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
-<circle cx="292.0" cy="251.7" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
-<rect x="427.5" y="222.0" width="23.0" height="36.0" rx="3.6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
-<path d="M 434.9 225.8 L 443.1 225.8 A 7.2 7.2 0 0 1 443.1 237.6 L 434.9 237.6 A 7.2 7.2 0 0 1 434.9 225.8 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="436.3" y1="228.7" x2="436.3" y2="232.3" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="441.7" y1="229.1" x2="441.7" y2="231.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
-<circle cx="439.0" cy="235.2" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
-<path d="M 434.9 242.4 L 443.1 242.4 A 7.2 7.2 0 0 1 443.1 254.2 L 434.9 254.2 A 7.2 7.2 0 0 1 434.9 242.4 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<line x1="436.3" y1="245.3" x2="436.3" y2="248.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="441.7" y1="245.6" x2="441.7" y2="248.5" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
-<circle cx="439.0" cy="251.7" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
-<line x1="40.0" y1="296.0" x2="40.0" y2="289.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="40.0" y1="283.0" x2="40.0" y2="276.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="40.0" y1="270.0" x2="40.0" y2="263.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="40.0" y1="257.0" x2="40.0" y2="250.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="40.0" y1="244.0" x2="40.0" y2="237.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="40.0" y1="231.0" x2="40.0" y2="224.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="40.0" y1="218.0" x2="40.0" y2="211.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="40.0" y1="205.0" x2="40.0" y2="198.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="40.0" y1="192.0" x2="40.0" y2="186.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="124.0" y1="220.0" x2="124.0" y2="213.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="124.0" y1="207.0" x2="124.0" y2="200.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="124.0" y1="194.0" x2="124.0" y2="187.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="46.0" y1="196.0" x2="118.0" y2="196.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<polygon points="40.0,196.0 52.0,190.0 52.0,202.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<polygon points="124.0,196.0 112.0,202.0 112.0,190.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<text x="82.0" y="182.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">24 in</text>
-<line x1="292.0" y1="220.0" x2="292.0" y2="213.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="292.0" y1="207.0" x2="292.0" y2="200.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="292.0" y1="194.0" x2="292.0" y2="187.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="130.0" y1="196.0" x2="286.0" y2="196.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<polygon points="124.0,196.0 136.0,190.0 136.0,202.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<polygon points="292.0,196.0 280.0,202.0 280.0,190.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<text x="208.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">midpoint</text>
-<line x1="208.0" y1="204.0" x2="208.0" y2="296.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
-<line x1="306.0" y1="240.0" x2="313.0" y2="240.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="319.0" y1="240.0" x2="326.0" y2="240.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="332.0" y1="240.0" x2="339.0" y2="240.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
-<line x1="332.0" y1="246.0" x2="332.0" y2="294.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
-<polygon points="332.0,240.0 338.0,252.0 326.0,252.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<polygon points="332.0,300.0 326.0,288.0 338.0,288.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
-<text x="344.0" y="274.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">20 in</text>
-<text x="344.0" y="298.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">max</text>
-<text x="40.0" y="452.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">No point along the counter wall line is farther</text>
-<text x="40.0" y="474.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">than the limit from a receptacle outlet.</text>
-<rect x="520.0" y="60.0" width="260.0" height="380.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="534.0" y="92.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Small-appliance</text>
-<text x="534.0" y="118.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">circuits (two or more)</text>
-<text x="534.0" y="156.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">serve the counters and</text>
-<text x="534.0" y="179.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">the walls of the kitchen,</text>
-<text x="534.0" y="202.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">pantry, breakfast room</text>
-<text x="534.0" y="225.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">and dining room</text>
-<line x1="534.0" y1="256.0" x2="766.0" y2="256.0" stroke="#64748b" stroke-width="1" stroke-linecap="round" stroke-opacity="1.0"/>
-<text x="534.0" y="286.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#34d399" text-anchor="start">Other outlets allowed:</text>
-<text x="534.0" y="316.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">- an electric clock outlet</text>
-<text x="534.0" y="339.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">- gas range, oven or</text>
-<text x="534.0" y="362.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">  cooktop accessories</text>
-<text x="534.0" y="414.0" font-family="Helvetica, Arial, sans-serif" font-size="20" font-weight="bold" fill="#f87171" text-anchor="start">nothing else</text>
-<rect x="572.9" y="464.0" width="213.1" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
-<text x="582.9" y="492.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 210.52(B), (C)</text>
+<rect x="60.0" y="70.0" width="680.0" height="80.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<line x1="230.0" y1="70.0" x2="230.0" y2="150.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="400.0" y1="70.0" x2="400.0" y2="150.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="570.0" y1="70.0" x2="570.0" y2="150.0" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="400.0" y="118.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">upper cabinets</text>
+<rect x="60.0" y="300.0" width="680.0" height="14.0" rx="0" fill="#94a3b8" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<rect x="66.0" y="314.0" width="668.0" height="106.0" rx="0" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<path d="M 560 300 q 0 30 30 30 h 60 q 30 0 30 -30" fill="none" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="620.0" y="290.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">sink</text>
+<line x1="20.0" y1="420.0" x2="780.0" y2="420.0" stroke="#94a3b8" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="168.5" y="222.0" width="23.0" height="36.0" rx="3.6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 175.9 225.8 L 184.1 225.8 A 7.2 7.2 0 0 1 184.1 237.6 L 175.9 237.6 A 7.2 7.2 0 0 1 175.9 225.8 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="177.3" y1="228.7" x2="177.3" y2="232.3" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="182.7" y1="229.1" x2="182.7" y2="231.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="180.0" cy="235.2" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<path d="M 175.9 242.4 L 184.1 242.4 A 7.2 7.2 0 0 1 184.1 254.2 L 175.9 254.2 A 7.2 7.2 0 0 1 175.9 242.4 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="177.3" y1="245.3" x2="177.3" y2="248.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="182.7" y1="245.6" x2="182.7" y2="248.5" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="180.0" cy="251.7" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="408.5" y="222.0" width="23.0" height="36.0" rx="3.6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 415.9 225.8 L 424.1 225.8 A 7.2 7.2 0 0 1 424.1 237.6 L 415.9 237.6 A 7.2 7.2 0 0 1 415.9 225.8 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="417.3" y1="228.7" x2="417.3" y2="232.3" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="422.7" y1="229.1" x2="422.7" y2="231.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="420.0" cy="235.2" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<path d="M 415.9 242.4 L 424.1 242.4 A 7.2 7.2 0 0 1 424.1 254.2 L 415.9 254.2 A 7.2 7.2 0 0 1 415.9 242.4 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="417.3" y1="245.3" x2="417.3" y2="248.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="422.7" y1="245.6" x2="422.7" y2="248.5" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="420.0" cy="251.7" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<rect x="648.5" y="222.0" width="23.0" height="36.0" rx="3.6" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 655.9 225.8 L 664.1 225.8 A 7.2 7.2 0 0 1 664.1 237.6 L 655.9 237.6 A 7.2 7.2 0 0 1 655.9 225.8 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="657.3" y1="228.7" x2="657.3" y2="232.3" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="662.7" y1="229.1" x2="662.7" y2="231.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="660.0" cy="235.2" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<path d="M 655.9 242.4 L 664.1 242.4 A 7.2 7.2 0 0 1 664.1 254.2 L 655.9 254.2 A 7.2 7.2 0 0 1 655.9 242.4 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="657.3" y1="245.3" x2="657.3" y2="248.9" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="662.7" y1="245.6" x2="662.7" y2="248.5" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="660.0" cy="251.7" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<line x1="60.0" y1="296.0" x2="60.0" y2="289.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="60.0" y1="283.0" x2="60.0" y2="276.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="60.0" y1="270.0" x2="60.0" y2="263.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="60.0" y1="257.0" x2="60.0" y2="250.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="60.0" y1="244.0" x2="60.0" y2="237.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="60.0" y1="231.0" x2="60.0" y2="224.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="60.0" y1="218.0" x2="60.0" y2="211.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="60.0" y1="205.0" x2="60.0" y2="198.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="60.0" y1="192.0" x2="60.0" y2="186.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="180.0" y1="220.0" x2="180.0" y2="213.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="180.0" y1="207.0" x2="180.0" y2="200.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="180.0" y1="194.0" x2="180.0" y2="187.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="66.0" y1="196.0" x2="174.0" y2="196.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="60.0,196.0 72.0,190.0 72.0,202.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="180.0,196.0 168.0,202.0 168.0,190.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="120.0" y="182.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="middle">24 in</text>
+<line x1="420.0" y1="220.0" x2="420.0" y2="213.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="420.0" y1="207.0" x2="420.0" y2="200.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="420.0" y1="194.0" x2="420.0" y2="187.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="186.0" y1="196.0" x2="414.0" y2="196.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="180.0,196.0 192.0,190.0 192.0,202.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="420.0,196.0 408.0,202.0 408.0,190.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="300.0" y="184.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">midpoint</text>
+<line x1="300.0" y1="204.0" x2="300.0" y2="296.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="434.0" y1="240.0" x2="441.0" y2="240.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="447.0" y1="240.0" x2="454.0" y2="240.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="460.0" y1="240.0" x2="467.0" y2="240.0" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-opacity="0.7"/>
+<line x1="460.0" y1="246.0" x2="460.0" y2="294.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="460.0,240.0 466.0,252.0 454.0,252.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polygon points="460.0,300.0 454.0,288.0 466.0,288.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="472.0" y="274.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">20 in</text>
+<text x="472.0" y="298.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">max</text>
+<text x="60.0" y="452.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#e2e8f0" text-anchor="start">No point along the counter wall line is farther than the limit from a receptacle outlet.</text>
+<rect x="615.6" y="472.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="625.6" y="500.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 210.52(C)</text>
 </svg>

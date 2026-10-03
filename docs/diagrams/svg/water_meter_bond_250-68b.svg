@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="380" viewBox="0 0 800 380">
+<rect x="0.0" y="0.0" width="800.0" height="380.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="36.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Bonding around a water meter</text>
+<line x1="760.0" y1="230.0" x2="40.0" y2="230.0" stroke="#38bdf8" stroke-width="16" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="760.0" y1="230.0" x2="40.0" y2="230.0" stroke="#0c4a6e" stroke-width="12" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="760.0" y1="227.4" x2="40.0" y2="227.4" stroke="#e2e8f0" stroke-width="1.2000000000000002" stroke-linecap="round" stroke-opacity="0.35"/>
+<text x="660.0" y="274.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">metal water pipe (electrode)</text>
+<rect x="356.0" y="218.0" width="12.0" height="24.0" rx="2" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="432.0" y="218.0" width="12.0" height="24.0" rx="2" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<rect x="369.0" y="210.0" width="62.0" height="40.0" rx="10" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<rect x="380.0" y="196.0" width="40.0" height="16.0" rx="5" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="400.0" cy="230.0" r="10" fill="#0f172a" stroke="#94a3b8" stroke-width="2"/>
+<line x1="400.0" y1="230.0" x2="406.0" y2="225.0" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="400.0" y="286.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="middle">water meter</text>
+<polyline points="300.0,217.0 300.0,150.0 500.0,150.0 500.0,217.0" fill="none" stroke="#fbbf24" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="293.0" y="219.0" width="14.0" height="22.0" rx="3" fill="#ca8a04" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="296.0" y1="230.0" x2="304.0" y2="230.0" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="493.0" y="219.0" width="14.0" height="22.0" rx="3" fill="#ca8a04" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="1.5"/>
+<line x1="496.0" y1="230.0" x2="504.0" y2="230.0" stroke="#0f172a" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="400.0" y="136.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">bonding jumper</text>
+<text x="400.0" y="100.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#34d399" text-anchor="middle">sufficient length</text>
+<text x="40.0" y="320.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">the meter can be removed</text>
+<text x="40.0" y="344.0" font-family="Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="start">while the bond stays connected</text>
+<rect x="615.6" y="340.0" width="170.4" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="625.6" y="368.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 250.68(B)</text>
+</svg>

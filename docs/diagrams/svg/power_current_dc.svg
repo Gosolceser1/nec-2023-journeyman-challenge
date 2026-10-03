@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="440" viewBox="0 0 800 440">
+<rect x="0.0" y="0.0" width="800.0" height="440.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">A 2 W load on a 20 VDC supply</text>
+<line x1="110.0" y1="100.0" x2="520.0" y2="100.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="110.0" y1="300.0" x2="520.0" y2="300.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="110.0" y1="100.0" x2="110.0" y2="172.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="110.0" y1="228.0" x2="110.0" y2="300.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="80.0" y1="176.0" x2="140.0" y2="176.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="93.0" y1="190.0" x2="127.0" y2="190.0" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="80.0" y1="206.0" x2="140.0" y2="206.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="93.0" y1="220.0" x2="127.0" y2="220.0" stroke="#e2e8f0" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="64.0" y="182.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">+</text>
+<text x="162.0" y="210.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">20 VDC</text>
+<line x1="520.0" y1="100.0" x2="520.0" y2="132.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<polyline points="520.0,132.0 502.0,140.0 538.0,155.0 502.0,170.0 538.0,185.0 502.0,200.0 538.0,215.0 502.0,230.0 538.0,245.0 520.0,268.0" fill="none" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="520.0" y1="268.0" x2="520.0" y2="300.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<text x="560.0" y="210.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">load: 2 W</text>
+<line x1="250.0" y1="78.0" x2="372.8" y2="78.0" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<polygon points="380.0,78.0 368.0,84.0 368.0,72.0" fill="#38bdf8" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="315.0" y="66.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="middle">I = ?</text>
+<rect x="40.0" y="330.0" width="720.0" height="90.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="60.0" y="384.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="bold" fill="#34d399" text-anchor="start">P = E x I, so I = P / E = 2 W / 20 V = 0.10 A</text>
+</svg>

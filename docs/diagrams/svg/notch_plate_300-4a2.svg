@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+<rect x="0.0" y="0.0" width="800.0" height="450.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="40.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">NM cable laid in a notched stud (side view)</text>
+<rect x="240.0" y="180.0" width="460.0" height="196.0" rx="0" fill="#a16207" fill-opacity="0.55" stroke="#ca8a04" stroke-width="2"/>
+<path d="M 244 229.0 q 115.0 -6 230.0 0 t 222.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 244 278.0 q 115.0 -6 230.0 0 t 222.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 244 327.0 q 115.0 -6 230.0 0 t 222.0 0" fill="none" stroke="#ca8a04" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="440.0" y="179.0" width="48.0" height="43.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<polyline points="440.0,180.0 440.0,222.0 488.0,222.0 488.0,180.0" fill="none" stroke="#ca8a04" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<rect x="446.0" y="202.0" width="36.0" height="18.0" rx="9.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<circle cx="456.1" cy="211.0" r="3" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="464.0" cy="211.0" r="3" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="471.9" cy="211.0" r="3" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<text x="470.0" y="410.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="middle">notched stud</text>
+<text x="230.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="end">NM cable</text>
+<line x1="232.0" y1="292.0" x2="448.0" y2="212.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="448.0" cy="212.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<rect x="406.0" y="171.0" width="116.0" height="9.0" rx="0" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="416.0" cy="175.5" r="3" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="512.0" cy="175.5" r="3" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<text x="396.0" y="164.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="end">steel plate</text>
+<text x="464.0" y="108.0" font-family="Helvetica, Arial, sans-serif" font-size="30" font-weight="bold" fill="#34d399" text-anchor="middle">1/16 in</text>
+<line x1="464.0" y1="120.0" x2="464.0" y2="170.0" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="464.0" cy="170.0" r="4" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<text x="538.0" y="124.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">plate thickness</text>
+<rect x="601.0" y="400.0" width="185.0" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="611.0" y="428.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 300.4(A)(2)</text>
+</svg>

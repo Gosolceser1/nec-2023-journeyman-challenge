@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="560" viewBox="0 0 800 560">
+<rect x="0.0" y="0.0" width="800.0" height="560.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Motor branch-circuit short-circuit and ground-fault device</text>
+<text x="250.0" y="66.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">feeder</text>
+<line x1="250.0" y1="76.0" x2="250.0" y2="110.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="250.0" cy="110.0" r="5" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="250.0" cy="150.0" r="5" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<line x1="250.0" y1="150.0" x2="272.0" y2="114.0" stroke="#e2e8f0" stroke-width="3" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="250.0" y1="150.0" x2="250.0" y2="196.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="238.0" y="196.0" width="24.0" height="50.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="250.0" y1="196.0" x2="250.0" y2="246.0" stroke="#e2e8f0" stroke-width="2" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="250.0" y1="246.0" x2="250.0" y2="290.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="206.0" y="290.0" width="88.0" height="52.0" rx="6" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<line x1="250.0" y1="290.0" x2="250.0" y2="308.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="232.0" y1="308.0" x2="268.0" y2="308.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="232.0" y1="324.0" x2="268.0" y2="324.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="250.0" y1="324.0" x2="250.0" y2="342.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="250.0" y1="342.0" x2="250.0" y2="376.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<rect x="216.0" y="376.0" width="68.0" height="40.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#fbbf24" stroke-width="3"/>
+<path d="M 230 396 q 6 -12 12 0 t 12 0 t 12 0" fill="none" stroke="#fbbf24" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="250.0" y1="416.0" x2="250.0" y2="450.0" stroke="#e2e8f0" stroke-width="4" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="250.0" cy="486.0" r="36" fill="#334155" stroke="#e2e8f0" stroke-width="3"/>
+<text x="250.0" y="495.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#e2e8f0" text-anchor="middle">M</text>
+<text x="320.0" y="138.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">disconnecting means</text>
+<text x="320.0" y="216.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">short-circuit and ground-fault</text>
+<text x="320.0" y="240.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">protective device (fuses)</text>
+<text x="320.0" y="272.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">must carry the</text>
+<text x="467.4" y="272.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">starting current</text>
+<text x="320.0" y="324.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">controller</text>
+<text x="320.0" y="494.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="start">motor</text>
+<rect x="646.2" y="522.0" width="139.8" height="36.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="656.2" y="550.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#38bdf8" text-anchor="start">NEC 430.52</text>
+</svg>

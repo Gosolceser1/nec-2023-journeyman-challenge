@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+<rect x="0.0" y="0.0" width="800.0" height="400.0" rx="0" fill="#0f172a" fill-opacity="1.0" stroke="none" stroke-width="2"/>
+<text x="400.0" y="34.0" font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="bold" fill="#94a3b8" text-anchor="middle">Dwelling small-appliance and laundry loads</text>
+<rect x="40.0" y="150.0" width="300.0" height="20.0" rx="0" fill="#334155" fill-opacity="1.0" stroke="#94a3b8" stroke-width="2"/>
+<rect x="67.2" y="96.0" width="25.6" height="40.0" rx="4.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 75.4 100.2 L 84.6 100.2 A 8.0 8.0 0 0 1 84.6 113.4 L 75.4 113.4 A 8.0 8.0 0 0 1 75.4 100.2 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="77.0" y1="103.4" x2="77.0" y2="107.4" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="83.0" y1="103.8" x2="83.0" y2="107.0" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="80.0" cy="110.6" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<path d="M 75.4 118.6 L 84.6 118.6 A 8.0 8.0 0 0 1 84.6 131.8 L 75.4 131.8 A 8.0 8.0 0 0 1 75.4 118.6 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="77.0" y1="121.8" x2="77.0" y2="125.8" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="83.0" y1="122.2" x2="83.0" y2="125.4" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="80.0" cy="129.0" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="80.0" cy="116.0" r="2.0" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<rect x="177.2" y="96.0" width="25.6" height="40.0" rx="4.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 185.4 100.2 L 194.6 100.2 A 8.0 8.0 0 0 1 194.6 113.4 L 185.4 113.4 A 8.0 8.0 0 0 1 185.4 100.2 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="187.0" y1="103.4" x2="187.0" y2="107.4" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="193.0" y1="103.8" x2="193.0" y2="107.0" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="190.0" cy="110.6" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<path d="M 185.4 118.6 L 194.6 118.6 A 8.0 8.0 0 0 1 194.6 131.8 L 185.4 131.8 A 8.0 8.0 0 0 1 185.4 118.6 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="187.0" y1="121.8" x2="187.0" y2="125.8" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="193.0" y1="122.2" x2="193.0" y2="125.4" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="190.0" cy="129.0" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="190.0" cy="116.0" r="2.0" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<rect x="287.2" y="96.0" width="25.6" height="40.0" rx="4.0" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
+<path d="M 295.4 100.2 L 304.6 100.2 A 8.0 8.0 0 0 1 304.6 113.4 L 295.4 113.4 A 8.0 8.0 0 0 1 295.4 100.2 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="297.0" y1="103.4" x2="297.0" y2="107.4" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="303.0" y1="103.8" x2="303.0" y2="107.0" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="300.0" cy="110.6" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<path d="M 295.4 118.6 L 304.6 118.6 A 8.0 8.0 0 0 1 304.6 131.8 L 295.4 131.8 A 8.0 8.0 0 0 1 295.4 118.6 Z" fill="#0f172a" stroke="#e2e8f0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="297.0" y1="121.8" x2="297.0" y2="125.8" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<line x1="303.0" y1="122.2" x2="303.0" y2="125.4" stroke="#e2e8f0" stroke-width="2.0" stroke-linecap="round" stroke-opacity="1.0"/>
+<circle cx="300.0" cy="129.0" r="1.4" fill="#e2e8f0" stroke="none" stroke-width="2"/>
+<circle cx="300.0" cy="116.0" r="2.0" fill="#94a3b8" stroke="none" stroke-width="2"/>
+<text x="190.0" y="206.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">kitchen counter</text>
+<rect x="120.0" y="236.0" width="86.0" height="100.0" rx="4" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
+<circle cx="163.0" cy="296.0" r="26" fill="#0f172a" stroke="#e2e8f0" stroke-width="2"/>
+<text x="163.0" y="366.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#94a3b8" text-anchor="middle">laundry</text>
+<rect x="370.0" y="60.0" width="410.0" height="300.0" rx="8" fill="#1e293b" fill-opacity="1.0" stroke="#64748b" stroke-width="2"/>
+<text x="384.0" y="90.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#e2e8f0" text-anchor="start">Service load (220.52)</text>
+<text x="386.0" y="130.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">1,500 VA per small-appliance</text>
+<text x="386.0" y="156.4" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">circuit (at least 2)</text>
+<text x="386.0" y="220.0" font-family="Helvetica, Arial, sans-serif" font-size="22" fill="#e2e8f0" text-anchor="start">+ 1,500 VA laundry circuit</text>
+<text x="386.0" y="300.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="start">2 x 1,500 + 1,500 = 4,500 VA</text>
+</svg>
