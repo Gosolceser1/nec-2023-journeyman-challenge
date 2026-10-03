@@ -62,7 +62,7 @@ var timer: Timer
 var progress_label: Label
 var pass_badge: PanelContainer
 var score_label: Label
-var streak_label: Label
+var tally_label: Label
 var question_label: RichTextLabel
 var question_table_panel: PanelContainer
 var question_table_heading: Label
@@ -980,7 +980,7 @@ func _answer_selected(selected: int) -> void:
 
 	match result["verdict"]:
 		QuizSession.Verdict.REVIEWED:
-			# Listen mode reviews, it does not test: no score, streak or missed list.
+			# Listen mode reviews, it does not test: no score or missed list.
 			_set_feedback_verdict("Answer", AppTheme.SKY_400, "tip")
 		QuizSession.Verdict.TIMED_OUT:
 			_set_feedback_verdict("Time expired", AppTheme.RED_400, "clock")
@@ -1093,40 +1093,40 @@ func _update_score_badges() -> void:
 		score_label.add_theme_color_override("font_color", AppTheme.SKY_300)
 		if is_instance_valid(pass_badge):
 			Widgets.tint_hud_segment(pass_badge, AppTheme.SKY_400)
-		streak_label.text = "%d / %d REVIEWED" % [answered_count, session_length]
-		streak_label.add_theme_color_override("font_color", AppTheme.SKY_300)
+		tally_label.text = "%d / %d REVIEWED" % [answered_count, session_length]
+		tally_label.add_theme_color_override("font_color", AppTheme.SKY_300)
 		return
 	if answered_count == 0:
 		score_label.text = "TARGET: %d%%" % ExamBlueprint.pass_percent()
 		score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
 		if is_instance_valid(pass_badge):
 			Widgets.tint_hud_segment(pass_badge, AppTheme.EMERALD_400)
-		streak_label.text = "0 / %d ITEMS" % session_length
-		streak_label.add_theme_color_override("font_color", AppTheme.SKY_300)
+		tally_label.text = "0 / %d ITEMS" % session_length
+		tally_label.add_theme_color_override("font_color", AppTheme.SKY_300)
 		return
 
 	var pct: float = (float(score) / float(answered_count)) * 100.0
 	var pct_int: int = roundi(pct)
-	streak_label.text = "%d/%d (%d%%)" % [score, answered_count, pct_int]
+	tally_label.text = "%d/%d (%d%%)" % [score, answered_count, pct_int]
 
 	if pct >= ExamBlueprint.pass_percent():
 		score_label.text = "PASSING: " + str(pct_int) + "%"
 		score_label.add_theme_color_override("font_color", AppTheme.EMERALD_300)
 		if is_instance_valid(pass_badge):
 			Widgets.tint_hud_segment(pass_badge, AppTheme.EMERALD_400)
-		streak_label.add_theme_color_override("font_color", AppTheme.EMERALD_400)
+		tally_label.add_theme_color_override("font_color", AppTheme.EMERALD_400)
 	elif pct >= ExamBlueprint.at_risk_percent():
 		score_label.text = "AT RISK: " + str(pct_int) + "%"
 		score_label.add_theme_color_override("font_color", AppTheme.YELLOW_300)
 		if is_instance_valid(pass_badge):
 			Widgets.tint_hud_segment(pass_badge, AppTheme.AMBER_400)
-		streak_label.add_theme_color_override("font_color", AppTheme.YELLOW_300)
+		tally_label.add_theme_color_override("font_color", AppTheme.YELLOW_300)
 	else:
 		score_label.text = "BELOW %d%%: %d%%" % [ExamBlueprint.pass_percent(), pct_int]
 		score_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
 		if is_instance_valid(pass_badge):
 			Widgets.tint_hud_segment(pass_badge, AppTheme.RED_400)
-		streak_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
+		tally_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
 
 
 # Speech entry points under their old names, for the harness and tests.

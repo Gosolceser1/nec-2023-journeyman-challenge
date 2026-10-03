@@ -9,9 +9,10 @@ Python and the NEC location audit, and for 1.0.4 the NEC 2023 content and
 tables/formulas audits, the diagram "?" masks and the `measure_fit.gd`
 crashes at mobile 1024x768 and desktop 540x960 (a `DiagramView` resize loop
 with the page scrollbar, docs/DIAGRAMS_AUDIT.md section 5), for 1.0.5 the
-figure and FORMULA-strip answer leaks, and since 1.0.5 (unreleased) the keyword hover and
-tap and the NEC 2023 answer re-check (docs/audits/UPCODES_ANSWER_CHECK.md),
-each pinned by a test or a validator guard.
+figure and FORMULA-strip answer leaks, and for 1.0.6 the keyword hover and
+tap, the NEC 2023 answer re-check (docs/audits/UPCODES_ANSWER_CHECK.md) and
+the section numbers in figures and reference tables before answering, each
+pinned by a test or a validator guard.
 
 ## Open: needs a real device
 
@@ -51,12 +52,12 @@ each pinned by a test or a validator guard.
   data, a question heard once replays in airplane mode, and in airplane mode an
   unheard question falls back to the recorded Andrew at once with the status
   line saying "no internet".
-- **1.0.5 and newer (unreleased) phone features were verified on desktop only.**
+- **1.0.5 and 1.0.6 phone features were verified on desktop only.**
   `test_hunt_keyword_input` pushes finger taps through the viewport and
   `test_math_ui` walks every math screen at phone sizes, but no phone was
   used. On a phone
   confirm: tapping a highlighted keyword shows just its Index entry and a
-  second tap brings back the full line; the five menu tabs fit; Show steps
+  second tap brings back the resting prompt; the five menu tabs fit; Show steps
   with Read, Voice off and Auto-read; "Try it on the calculator" lights the
   next key; the Math Trainer calculator answers with Check.
 - **The Edge read-aloud endpoint is unofficial.** `EdgeTtsClient` copies

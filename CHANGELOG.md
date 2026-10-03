@@ -1,6 +1,6 @@
 # Changelog
 
-## [Unreleased]
+## [1.0.6] - 2026-10-03
 
 ### Added
 
@@ -106,6 +106,11 @@
   until you answer; then it shows. The "?" boxes are tidier: none sit on top
   of each other any more (there were 145 overlaps), and harmless labels such
   as "480 V" stay visible.
+- **Reference tables don't say where the answer is either.** Before you
+  answer, a table cell that names a section or table number reads "?"
+  ("Table ? location", Code Section "?") on the 8 questions that had one,
+  such as the truck parking table that showed "626.11(A)". After you answer
+  the table shows them as before. A test checks every table.
 - Two disposer-cord questions cited "422.16(B)(1)(1)"; they now cite
   422.16(B)(1).
 - **Hover tips are readable.** They were Godot's default: a see-through,

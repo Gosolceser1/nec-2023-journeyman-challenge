@@ -83,6 +83,7 @@ func run() -> void:
 	match_in_semantics()
 	bank_wide_sweep()
 	figure_text_sweep()
+	table_text_sweep()
 	known_defects()
 	report()
 
@@ -535,6 +536,42 @@ func figure_text_sweep() -> void:
 	for s in ["Article 408", "12.5 ft", "155.5 A", "100 + 37.5 + 10", "480 V", "panelboard", "transformer"]:
 		t.check(figure_text_leaks(rec, [[s, 0.1, 0.1, 0.2, 0.05]], []).is_empty(), "sweep lets '%s' show" % s)
 	t.check(not figure_text_leaks(rec, [["on the secondary", 0.1, 0.1, 0.2, 0.05]], []).is_empty(), "sweep catches a choice word")
+
+
+# --------------------------------------------------------------------------
+# 8c. Reference tables before answering: no cell may name a section, table
+#     or Part number (TableViewer.pre_answer_text masks them as "?").
+# --------------------------------------------------------------------------
+func table_text_sweep() -> void:
+	print("=== reference tables: no section number visible before answering ===")
+	var cases := [
+		["626.11(A)", "?"], ["Table 300.5(A) location", "Table ? location"],
+		["Table 310.4(1), building wire", "Table ?, building wire"], ["240.4(D)(8)", "?"],
+		["36.4 A", "36.4 A"], ["120.5 V", "120.5 V"], ["Article 626", "Article 626"], ["11 kVA", "11 kVA"],
+	]
+	for c in cases:
+		t.eq(TableViewer.pre_answer_text(c[0]), c[1], "pre_answer_text(%s)" % c[0])
+	var loc := RegEx.create_from_string(FIG_LOCATION)
+	var bank = JSON.parse_string(FileAccess.get_file_as_string("res://data/question_bank.json"))
+	var tables := 0
+	var bad := PackedStringArray()
+	for r in (bank as Dictionary).get("records", []):
+		var rows: Array = r.get("reference_table", [])
+		if rows.is_empty():
+			continue
+		tables += 1
+		for row in rows:
+			if not row is Array or TableViewer.is_note_row(row):
+				continue
+			for cell in row:
+				var shown := TableViewer.pre_answer_text(str(cell))
+				var m := loc.search(shown)
+				if m != null:
+					bad.append("%s: '%s' names %s" % [r.get("id", ""), shown, m.get_string()])
+	t.check(tables > 30, "every reference table is swept (%d)" % tables)
+	for b in bad.slice(0, 20):
+		t.check(false, b)
+	t.check(bad.is_empty(), "no pre-answer table cell names a section or table number (%d found)" % bad.size())
 
 
 # --------------------------------------------------------------------------

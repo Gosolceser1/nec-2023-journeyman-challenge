@@ -5,7 +5,7 @@
     python tools/visual/make_showcase.py
 
 Reads .audit_tmp/shots/showcase/, writes docs/media/. The answer GIFs are made
-separately: snap_motion.gd -- --answers, then ffmpeg (crop 1280x340, 30 fps).
+separately: snap_motion.gd -- --answers, then ffmpeg (crop 1280x420, 30 fps).
 """
 import json
 from pathlib import Path
@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SHOTS = ROOT / ".audit_tmp" / "shots" / "showcase"
 OUT = ROOT / "docs" / "media"
 ICON = ROOT / "assets" / "branding" / "icon.png"
+MARK = ROOT / "assets" / "branding" / "mark.png"
 FONTS = Path("C:/Windows/Fonts")
 
 BG_TOP = (2, 4, 8)
@@ -27,14 +28,19 @@ HAIRLINE = (30, 58, 88)
 
 STILLS = {
     "desktop-menu.png": "desk_01_menu.png",
-    "desktop-table-question.png": "desk_02_table_question.png",
+    "desktop-table-question.png": "desk_02b_keyword_pinned.png",
     "desktop-correct.png": "desk_03_table_correct.png",
     "desktop-wrong.png": "desk_06_wrong.png",
     "desktop-diagram.png": "desk_07_diagram_question.png",
     "desktop-simulator.png": "desk_08_simulator.png",
     "desktop-results.png": "desk_09_results.png",
+    "desktop-settings.png": "desk_10_settings.png",
+    "desktop-math-trainer.png": "desk_11_math_trainer.png",
+    "desktop-math-steps.png": "desk_13_math_steps.png",
     "mobile-menu.png": "mob_01_menu.png",
-    "mobile-question.png": "mob_02_table_question.png",
+    "mobile-question.png": "mob_02b_keyword_pinned.png",
+    "mobile-correct.png": "mob_03_table_correct.png",
+    "mobile-math-trainer.png": "mob_11_math_trainer.png",
     "mobile-results.png": "mob_09_results.png",
 }
 
@@ -105,8 +111,11 @@ def hero() -> Image.Image:
     canvas.alpha_composite(icon, (80, 150))
     facts = hero_facts()
     d = ImageDraw.Draw(canvas)
-    d.text((82, 330), f"NFPA 70  •  {facts['edition']}  •  JOURNEYMAN EXAM PREP", font=font("seguisb.ttf", 18), fill=SKY_400)
-    d.text((78, 362), f"{facts['edition']} //", font=font("segoeuib.ttf", 58), fill=(255, 255, 255))
+    d.text((82, 330), f"{facts['edition']}  •  JOURNEYMAN EXAM PREP", font=font("seguisb.ttf", 18), fill=SKY_400)
+    title_font = font("segoeuib.ttf", 58)
+    d.text((78, 362), facts["edition"], font=title_font, fill=(255, 255, 255))
+    mark = Image.open(MARK).convert("RGBA").resize((70, 70), Image.LANCZOS)
+    canvas.alpha_composite(mark, (round(78 + d.textlength(facts["edition"] + " ", font=title_font)), 368))
     d.text((78, 432), "Journeyman", font=font("segoeuib.ttf", 58), fill=(255, 255, 255))
     d.text((78, 502), "Challenge", font=font("segoeuib.ttf", 58), fill=SKY_400)
     body = font("segoeui.ttf", 23)

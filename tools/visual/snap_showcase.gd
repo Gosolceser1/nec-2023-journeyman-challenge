@@ -121,6 +121,9 @@ func _initialize() -> void:
 	_show(_index_of(TABLE_ID))
 	await _wait(70)
 	_snap("02_table_question")
+	main.hunt._pick(0, false)
+	await _wait(70)
+	_snap("02b_keyword_pinned")
 	_answer(true)
 	await _wait(90)
 	_snap("03_table_correct")
@@ -171,10 +174,51 @@ func _initialize() -> void:
 		secs.append([i + 1, clampf(rng.randfn(150.0, 45.0), 45.0, 400.0)])
 	main.session.answer_seconds = secs
 	main._show_results()
-	_scroll(0)
 	await _wait(120)
+	for s in root.find_children("*", "ScrollContainer", true, false):
+		(s as ScrollContainer).scroll_vertical = 0
+	await _wait(8)
 	_snap("09_results")
 	_scroll(600)
 	await _wait(8)
 	_snap("09b_results_scrolled")
+
+	main._show_menu()
+	await _wait(30)
+	main.menu_show_tab(main.menu.tab_index("settings"))
+	await _wait(40)
+	_snap("10_settings")
+	main.menu_show_tab(0)
+
+	MathHub.open(main, "trainer")
+	var hub := MathHub.hub(main)
+	hub.rng.seed = 20261003
+	hub.level = 2
+	hub.push("Math trainer", "ENDLESS PRACTICE · STEP-BY-STEP HELP",
+		MathTrainerView.solve.bind(hub, MathTrainerView.trainer_skills()[0], ""))
+	await _wait(40)
+	var view := hub.current_screen() as MathTrainerView
+	var operands := RegEx.create_from_string("(\\d+) Ω is connected to (\\d+) volts").search(str(view.problem.get("prompt", "")))
+	if operands != null:
+		view.press_keys("%s ÷ %s" % [operands.get_string(2), operands.get_string(1)])
+	await _wait(20)
+	_snap("11_math_trainer")
+	var answer: Dictionary = view.problem.get("answer", {})
+	if str(answer.get("kind", "")) == "choice":
+		view._pick_choice(str(answer.get("value", "")))
+	else:
+		view._on_check()
+		if not view.answered:
+			view.press_keys(str(answer.get("value", "")))
+			view._on_check()
+	await _wait(60)
+	_snap("12_math_answered")
+	view._show_steps()
+	await _wait(20)
+	var steps: MathStepsView = view._steps
+	while not steps.is_last() and CalcEngine.pad_keys(steps.steps[steps.index]) == "":
+		steps._go(1)
+	steps.toggle_pad()
+	await _wait(60)
+	_snap("13_math_steps")
 	quit()

@@ -74,7 +74,7 @@ static func show(host: Main) -> void:
 		host.score_label.add_theme_color_override("font_color", AppTheme.ROSE_300)
 		if is_instance_valid(host.pass_badge):
 			Widgets.tint_hud_segment(host.pass_badge, AppTheme.RED_400)
-	host.streak_label.text = "FINAL: %d/%d (%d%%)" % [host.score, total, roundi(accuracy)]
+	host.tally_label.text = "FINAL: %d/%d (%d%%)" % [host.score, total, roundi(accuracy)]
 	for child in host.answers_box.get_children():
 		host.answers_box.remove_child(child)
 		child.queue_free()

@@ -1,7 +1,7 @@
 # Release
 
 How to build the shareable Windows zip and Android APK. Everything lands in
-`release/` (gitignored). Version 1.0.0 was the first release; 1.0.5 is current (CHANGELOG.md).
+`release/` (gitignored). Version 1.0.0 was the first release; 1.0.6 is current (CHANGELOG.md).
 
 ## What a recipient gets
 
@@ -81,7 +81,7 @@ Copy-Item "$real\editor_settings-4.7.tres" "$env:APPDATA\Godot\"
    ```powershell
    & $env:GODOT --headless --path . --import
    & $env:GODOT --headless --path . --export-release "Windows Desktop" "release/windows/NEC 2023 Journeyman Challenge.exe"
-   & $env:GODOT --headless --path . --export-release "Android Release" "release/android/NEC2023JourneymanChallenge_v1.0.5_Android.apk"
+   & $env:GODOT --headless --path . --export-release "Android Release" "release/android/NEC2023JourneymanChallenge_v1.0.6_Android.apk"
    ```
 
    Godot does not create output folders, so on a fresh clone run

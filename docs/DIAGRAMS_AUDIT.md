@@ -583,8 +583,9 @@ The `open-book-exam-#7-024` gist mentions "high leg" (weak).
 
 The 88 figures, the masks and the phone strip shipped in 1.0.4. For 1.0.5:
 the three required figures are redrawn, the second accuracy review is done
-and the leaks above are masked. Still open: the two FORMULA / METHOD strips
-above (question bank) and the stem wording flagged in section 6.
+and the leaks above are masked. Since 1.0.6 the FORMULA / METHOD strip and
+the gist line wait until the answer, which closes the two strips above. Still
+open: the stem wording flagged in section 6.
 
 ## 8. Batch 1 from the gap scan (72 more questions)
 

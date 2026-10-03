@@ -38,7 +38,7 @@ one as a child Godot process and reads its exit code. Slower than an in-process
 runner, but it exercises exactly the path a developer runs by hand, and one
 suite's failure cannot abort the rest.
 
-**Current status: about 150,800 Godot checks across 41 suites, 150 Python tests in 14 modules (listed in `tools/verify.sh`), 1 build-guard shell test, 0 documented product defects.** Most of the checks are whole-bank sweeps (every record, both layouts) and the math engine's generated problems. The scene harness runs on top of these in both layouts. The desktop Edge suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
+**Current status: about 161,000 Godot checks across 43 suites, 153 Python tests in 14 modules (listed in `tools/verify.sh`), 1 build-guard shell test, 0 documented product defects.** Most of the checks are whole-bank sweeps (every record, both layouts) and the math engine's generated problems. The scene harness runs on top of these in both layouts. The desktop Edge suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
 
 Every formerly pinned defect is fixed and promoted to a real assertion, so a
 regression fails its suite rather than appearing in the defect list. The test table prefix case is covered directly: `NOTED: x` must remain unchanged.
@@ -104,7 +104,7 @@ regression fails its suite rather than appearing in the defect list. The test ta
 
 ## What IS covered
 
-**The no-answer-leak guarantee** (`test_no_leak.gd`, 235 checks) — the highest-value
+**The no-answer-leak guarantee** (`test_no_leak.gd`, 262 checks) — the highest-value
 part of the suite:
 
 - `redact_answer_spans` as a table of `(text, answer) -> expected` cases, covering
@@ -125,6 +125,10 @@ part of the suite:
   `lookup_summary`, `article`, `article_title`) and assert the answer is then
   unfindable. Also asserts the reverse: every record's `lesson_lines` DO state the
   answer, so the teardown can actually teach it.
+- Every pre-answer study figure and every reference table: no visible label or
+  cell names a section, table or Part number (tables go through
+  `TableViewer.pre_answer_text`, which shows "?"), and no figure label shows a
+  choice.
 
 **TTS readability** (`test_speech_text.gd`, 470 checks) — `speakable()` is
 asserted against exact output for inches, feet, mixed numbers and fractions

@@ -7,6 +7,18 @@ extends RefCounted
 const CELL_PAD_X := [7, 6, 5, 4]
 const CELL_PAD_Y := [4, 3, 2, 1]
 const TEXT_LEVELS := 4
+## A section number ("626.11(A)", "Table 300.5(A)"), not a measured value
+## ("36.4 A", "120.5 V"). Mirrors FIG_LOCATION in tools/tests/test_no_leak.gd.
+const SECTION_REF := "(?<![\\w.])(?:90|\\d{3})\\.\\d+(?:\\([A-Za-z0-9]+\\))*(?![\\d.]*\\s*(?i:%|\"|'|in\\b|inch|ft\\b|feet|foot|mm\\b|m\\b|v\\b|volt|a\\b|amp|kva|va\\b|kw\\b|w\\b|hz|ohm|deg))"
+const SECTION_MASK := "?"
+static var _section_re: RegEx
+
+## Before answering, a cell may not say where the answer is in the book:
+## each section or table number reads "?" ("Table ? location").
+static func pre_answer_text(text: String) -> String:
+	if _section_re == null:
+		_section_re = RegEx.create_from_string(SECTION_REF)
+	return _section_re.sub(text, SECTION_MASK, true)
 
 ## The characters that may follow the word NOTE in a real note row: a colon,
 ## a number separator, or plain whitespace. Shared by is_note_row() and
@@ -155,6 +167,8 @@ static func populate_table(
 				if not is_feedback and cell_matches_answer:
 					display_text = "[ ___ ]"
 					cell_is_blanked = true
+				elif not is_feedback:
+					display_text = pre_answer_text(raw_value)
 				var cell_highlighted := is_feedback and cell_matches_answer
 				var cell := PanelContainer.new()
 				cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL

@@ -66,7 +66,7 @@ and only the result sound plays).
 | Next-question keys and the Listen loop advancing | Plays 80× in a full simulator; the voice reading the next question is the cue. |
 | Per-second countdown ticks | Nagging and stressful; replaced by the two exam-clock warnings. |
 | Per-item clock warnings | The item clock restarts every question: a cue there would fire constantly. The pulse and red color are enough. |
-| Streaks | It's a practice test, not a game: no streak cue, no rising pitch, no streak badge. |
+| Runs of right answers | It's a practice test, not a game: every right answer gets the same cue at the same pitch. |
 | Confetti sparkle | Doubles the pass sound; one result sound is enough. |
 | Listen mode answers | Ungraded, and the voice is about to read the answer. |
 
@@ -139,5 +139,5 @@ with the cue, lasts at most ~0.6 s and never delays grading or the layout.
 | 200–560 ms | | The right card, only now: its check draws in and a softer current runs around it |
 
 Every right answer gets the same cue at the same pitch and the same
-animation: there is no streak (a practice test, not a game). Reduce motion (Settings, or the system setting until changed there) shows the
+animation. Reduce motion (Settings, or the system setting until changed there) shows the
 final icons only; the sounds still play.
