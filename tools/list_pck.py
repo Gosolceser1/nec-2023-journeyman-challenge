@@ -81,7 +81,7 @@ def main():
         return [r for r in names if pred(r)]
 
     bad = shipped(lambda r: (
-        r.startswith(("tools/tests/", "tools/visual/", "tools/pipeline/", "docs/", "exams_source_pdf/", "build/"))
+        r.startswith(("tools/tests/", "tools/visual/", "tools/pipeline/", "docs/", "exams_source_pdf/", "build/", "notes/"))
         or r.startswith("tools/")
         or r.endswith((".pdf", ".md"))
         # Speech streams through EdgeTtsClient; no build runs Python.
