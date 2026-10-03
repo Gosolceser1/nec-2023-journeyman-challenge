@@ -94,8 +94,9 @@ def strict_hits_for(d, rid, bank):
     for lab in f.labels:
         text = lab[0]
         if any(k.search(text) for k in keep):
-            continue
-        hit = leakscan.strict_hits(text, given, vals, phrases)
+            hit = [f"section reference '{r}'" for r in leakscan.location_refs(text)]
+        else:
+            hit = leakscan.strict_hits(text, given, vals, phrases)
         if hit:
             out.append((lab, hit))
     return out
@@ -103,13 +104,16 @@ def strict_hits_for(d, rid, bank):
 
 def strict_masks(d, bank):
     """Mask, per pre-answer record, every label that states a rule value the stem
-    does not give, or any answer choice of any question on the figure."""
+    does not give, any answer choice of any question on the figure, or a section,
+    table or Part number. A whole multi-row note is masked before its rows, so
+    one badge covers it instead of a stack of overlapping ones."""
     f = d["fig"]
     for rid, opts in d["records"].items():
         if rid not in bank or opts.get("when", d["when"]) != "before":
             continue
         own = [m for m in f.masks if m.get("records") is None or rid in m["records"]]
-        for (text, x, y, w, h), hit in strict_hits_for(d, rid, bank):
+        hits = sorted(strict_hits_for(d, rid, bank), key=lambda lh: -lh[0][3] * lh[0][4])
+        for (text, x, y, w, h), hit in hits:
             if leakscan.covered([x, y, w, h], [m for m in own]):
                 continue
             m = f.mask(x - 6, y - 5, w + 12, h + 10, ring=False, records=[rid], what=f"'{text}' ({hit[0]})")

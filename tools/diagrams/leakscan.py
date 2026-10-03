@@ -149,9 +149,10 @@ def covered(box, masks):
 
 
 # ---------------------------------------------------------------- strict rule
-# Before answering, a figure may show neither a rule value nor any answer
-# choice (right or wrong: a visible distractor can be ruled out) of any
-# question it serves. Only what the question's own stem states may show.
+# Before answering, a figure may show neither a rule value, any answer choice
+# (right or wrong: a visible distractor can be ruled out) of any question it
+# serves, nor a section, table or Part number. Only what the question's own
+# stem states may show.
 
 MEASURE = {"len", "pct", "V", "A", "VA", "W", "deg", "Hz", "ohm", "awg"}
 _REF_RE = re.compile(r"(?:\b(?:Article|Art\.|Table|Tables|Chapter|Ch\.|Note|Figure|Part|Annex|NEC|NFPA)\s+)?"
@@ -165,6 +166,22 @@ _PAIR_RE = re.compile(r"\b(\d{2,})/(\d{2,})(\s*)([A-Za-z%]+)?")
 def _pairs(text):
     return _PAIR_RE.sub(lambda m: f"{m[1]}{m[3]}{m[4] or ''} / {m[2]}{m[3]}{m[4] or ''}", text)
 _BLAND = STOP | {"yes", "no", "true", "false", "never", "always", "same", "other", "none", "nec"}
+
+
+# Before answering, nothing may say where the answer is in the book: no section
+# ("408.36(B)", "90.2"), table or Part number. An Article number alone may show
+# (the breadcrumb names the article). Sections are Article 90 or three digits;
+# a decimal with a unit ("155.5 A") is a value.
+_UNIT_AFTER = r"(?![\d.]*\s*(?i:%|\"|'|in\b|inch|ft\b|feet|foot|mm\b|m\b|v\b|volt|a\b|amp|kva|va\b|kw\b|w\b|hz|ohm|deg))"
+_LOCATION_RE = re.compile(r"(?<![\w.])(?:90|\d{3})\.\d{1,3}[A-Z]?(?:\s*\([A-Za-z0-9]+\))*" + _UNIT_AFTER +
+                          r"|\b[Tt]ables?\s+\d+[A-Z]?(?:\.\d+)?(?:\s*\([A-Za-z0-9]+\))*")
+_PART_RE = re.compile(r"\b[Pp]art\s+[IVX]+\b")
+
+
+def location_refs(text):
+    """Section, table and Part references in text ('408.36(B)', 'Table 310.16', 'Part II')."""
+    t = str(text)
+    return [m.group(0).strip() for m in (*_LOCATION_RE.finditer(t), *_PART_RE.finditer(t))]
 
 
 def strip_refs(text):
@@ -219,9 +236,9 @@ def strict_keys(record, siblings=(), extra_terms=()):
 
 def strict_hits(text, given, vals, phrases):
     """Why `text` may not show before answering (empty list: it may)."""
+    hit = [f"section reference '{r}'" for r in location_refs(text)]
     t = strip_refs(text)
     lv = values(t)
-    hit = []
     for v in lv:
         if v[0] in MEASURE and not _any_same(v, given):
             hit.append(f"value {v[1]} {v[0]}")

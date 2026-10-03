@@ -45,12 +45,22 @@ class DiagramFiguresTest(unittest.TestCase):
         given, vals, phrases = leakscan.strict_keys(rec)
         for shown in ("6 ft 7 in max", "6'7\"", "79 in", "2.0 m", "2 m", "(2.0 m)", "7 ft", "96 in"):
             self.assertTrue(leakscan.strict_hits(shown, given, vals, phrases), shown)
-        for shown in ("handle grip", "NEC 550.32(F)", "Table 310.16", "Article 680", "finished grade"):
+        for shown in ("handle grip", "Article 680", "finished grade"):
             self.assertFalse(leakscan.strict_hits(shown, given, vals, phrases), shown)
         self.assertEqual(leakscan.strict_hits("120/240 V", {("V", 120.0), ("V", 240.0)}, set(), set()), [])
         sib = {"prompt": "x", "answers": ["GFCI", "AFCI", "LCDI", "none of these"], "correct_index": 0}
         _, vals, phrases = leakscan.strict_keys(rec, [sib])
         self.assertTrue(leakscan.strict_hits("AFCI breaker", set(), vals, phrases))
+
+    def test_section_numbers_never_show_before_answering(self):
+        sys.path.insert(0, str(ROOT / "tools" / "diagrams"))
+        import leakscan
+        for shown in ("NEC 408.36(B)", "NEC 550.32(F)", "Table 310.16", "Ex.: 240.21(C)(1) note",
+                      "Part II", "90.2", "NEC 700.32, 701.32, 708.54"):
+            self.assertTrue(leakscan.location_refs(shown), shown)
+            self.assertTrue(leakscan.strict_hits(shown, set(), set(), set()), shown)
+        for shown in ("Article 680", "NEC", "12.5 ft", "155.5 A", "34.8 A", "21.25 kW", "10.0", "part of"):
+            self.assertFalse(leakscan.location_refs(shown), shown)
 
 
 @unittest.skipUnless(importlib.util.find_spec("pymupdf"), "the figure registry imports PyMuPDF")
@@ -89,6 +99,30 @@ class PreAnswerFigureTextTest(unittest.TestCase):
                 if hit:
                     bad.append(f"{rid} ({e['figure']}): {text!r} {hit}")
         self.assertGreater(checked, 200)
+        self.assertEqual(bad, [], "\n".join(bad[:40]))
+
+    def test_no_section_table_or_part_visible_before_answering(self):
+        """Every label, title, section chip and note, kept or not: the section,
+        table or Part that holds the answer only shows once it is answered."""
+        import json
+        import re
+        sys.path.insert(0, str(ROOT / "tools" / "diagrams"))
+        import leakscan
+        loc = re.compile(r"(?<![\w.])(?:90|\d{3})\.\d+(?![\d.]*\s*(?i:%|\"|'|in\b|inch|ft\b|feet|foot|mm\b|m\b|v\b|"
+                         r"volt|a\b|amp|kva|va\b|kw\b|w\b|hz|ohm|deg))|\b[Tt]ables?\s+\d|\b[Pp]art\s+[IVX]+\b")
+        figs = json.loads((ROOT / "assets" / "diagrams" / "nec" / "figures.json").read_text(encoding="utf-8"))
+        masks = json.loads((ROOT / "data" / "diagram_masks.json").read_text(encoding="utf-8"))["records"]
+        labels = json.loads((ROOT / "docs" / "diagrams" / "labels.json").read_text(encoding="utf-8"))
+        bad, chips = [], 0
+        for rid, e in sorted(figs.items()):
+            if e["when"] != "before":
+                continue
+            ms = masks[rid]["masks"]
+            chips += any(m.get("label") == "NEC ?" for m in ms)
+            for text, *box in labels[f"{e['figure']}.png"]:
+                if loc.search(text) and not leakscan.covered(box, ms):
+                    bad.append(f"{rid} ({e['figure']}): {text!r}")
+        self.assertGreater(chips, 150)
         self.assertEqual(bad, [], "\n".join(bad[:40]))
 
 

@@ -136,7 +136,8 @@ def selective_coordination(f):
 
 
 @figure("transformer_panel_408-36b", h=470, nec="408.36(B), 240.21(C)(1)",
-        records={"open-book-exam-#7-021": {"terms": ["secondary", "primary"]}})
+        records={"open-book-exam-#7-021": {"terms": ["secondary", "primary"]}},
+        keep=[r"^(feeder OCPD )?\(?480 V\)?$", r"^feeder OCPD$", r"^208Y/120 V$"])
 def transformer_panel(f):
     rid = ["open-book-exam-#7-021"]
     f.title("Panelboard fed through a transformer: where is its OCPD?", y=34)
@@ -160,8 +161,7 @@ def transformer_panel(f):
     _ocpd(f, 500, y)
     for cx, what in ((230, "the 480 V side marked wrong"), (500, "panel OCPD between transformer and panel")):
         f.mask(cx - 30, y - 40, 60, 80, records=rid, what=what)
-    f.value(230, 380, "no", 28, NO, records=rid, what="OCPD for the panel not on the 480 V side")
-    f.value_lines(500, 372, ["panel OCPD", "on this side"], T_NOTE, records=rid, gap=1.15,
+    f.value_lines(500, 352, ["panel OCPD", "on this side"], T_NOTE, records=rid, gap=1.15,
                   what="panel OCPD between transformer and panel")
     f.panel(620, 110, 150, 200, label="panelboard", breakers=5)
     f.value_lines(24, f.h - 18 - T_MIN * 1.2,

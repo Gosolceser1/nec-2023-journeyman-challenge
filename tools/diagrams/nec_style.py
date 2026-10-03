@@ -18,6 +18,8 @@ import math
 
 import pymupdf
 
+import leakscan
+
 W = 800
 
 # Palette (Tailwind slate / sky, as the app theme).
@@ -610,12 +612,18 @@ class Fig:
         self.line(cx - d, cy + d, cx + d, cy - d, BG, 5)
 
     def tag(self, x, y, s, anchor="start"):
-        """Section reference chip, e.g. 'NEC 250.53(A)(3)'."""
+        """Section reference chip, e.g. 'NEC 250.53(A)(3)'. A section, table or Part
+        number says where the answer is, so the chip reads 'NEC ?' until answered."""
         size = T_NOTE
         tw = text_width(s, size, True)
         x0 = x - (tw / 2 if anchor == "middle" else tw if anchor == "end" else 0) - 10
         self.rect(x0, y - size - 4, tw + 20, size + 14, fill=PANEL, stroke=EDGE, sw=SW_THIN, rx=8)
         self.text(x0 + 10, y + 2, s, size, DIM, "start", True)
+        refs = leakscan.location_refs(s)
+        if refs:
+            lead = s[:s.find(refs[0])].strip()
+            self.mask(x0, y - size - 4, tw + 20, size + 14, label=f"{lead} ?" if lead else "?", ring=False,
+                      what="section reference")
 
     def title(self, s, x=None, y=40, size=T_LABEL, fill=MUTED):
         self.text(self.w / 2 if x is None else x, y, s, size, fill, "middle" if x is None else "start", True)

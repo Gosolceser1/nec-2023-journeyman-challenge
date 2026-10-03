@@ -101,13 +101,18 @@ masks any label that
 - states a rule value (length, percent, volts, amperes, VA, watts, degrees,
   hertz, ohms, AWG) the record's own stem doesn't give, or
 - contains any answer choice, right or wrong, of *any* question served by
-  the same figure. A visible distractor lets you rule it out.
+  the same figure. A visible distractor lets you rule it out, or
+- names a section, table or Part ("250.53(A)(3)", "Table 310.16",
+  "Part II"): that says where the answer is. An Article number alone
+  ("Article 680") may show, like the breadcrumb. The section chip from
+  `f.tag(...)` masks itself and reads "NEC ?" until answered.
 
 Lengths compare in inches with 3% slack, so 6 ft 7 in, 6'7", 79 in, 2.0 m
-and 2 m all match. Section references ("250.53(A)(3)", "Table 310.16") are
-ignored, and rating pairs ("120/240 V") count as two values. A figure whose
-labels are the question's own data (the required exam figures) lists them
-in `@figure(keep=[regex])`. `value()`/`mask()` still mark the answer
+and 2 m all match. Rating pairs ("120/240 V") count as two values. A
+multi-row note is masked whole, before its rows, so it gets one badge.
+A figure whose labels are the question's own data (the required exam
+figures, or a setup label like "480 V") lists them in
+`@figure(keep=[regex])`; a kept label still may not name a section. `value()`/`mask()` still mark the answer
 regions by hand and ring them after answering. The strict masks only hide
 text and reveal it after answering. `tools/tests/test_diagram_figures.py`
 rechecks the committed labels and masks against every record's choices.

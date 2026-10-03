@@ -26,9 +26,8 @@
 <line x1="221.6" y1="208.4" x2="238.4" y2="191.6" stroke="#0f172a" stroke-width="5" stroke-linecap="round" stroke-opacity="1.0"/>
 <rect x="478.0" y="173.0" width="44.0" height="54.0" rx="5" fill="#334155" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="3"/>
 <rect x="492.1" y="186.0" width="15.8" height="28.1" rx="3" fill="#64748b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="2"/>
-<text x="230.0" y="380.0" font-family="Helvetica, Arial, sans-serif" font-size="28" font-weight="bold" fill="#f87171" text-anchor="middle">no</text>
-<text x="500.0" y="372.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">panel OCPD</text>
-<text x="500.0" y="397.3" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">on this side</text>
+<text x="500.0" y="352.0" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">panel OCPD</text>
+<text x="500.0" y="377.3" font-family="Helvetica, Arial, sans-serif" font-size="22" font-weight="bold" fill="#34d399" text-anchor="middle">on this side</text>
 <rect x="620.0" y="110.0" width="150.0" height="200.0" rx="5" fill="#1e293b" fill-opacity="1.0" stroke="#e2e8f0" stroke-width="4"/>
 <rect x="630.5" y="120.5" width="129.0" height="179.0" rx="3" fill="#334155" fill-opacity="0.55" stroke="#64748b" stroke-width="2"/>
 <circle cx="640.0" cy="129.9" r="2.6999999999999997" fill="#64748b" stroke="none" stroke-width="2"/>

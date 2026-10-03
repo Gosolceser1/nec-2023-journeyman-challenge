@@ -82,6 +82,7 @@ func run() -> void:
 	redact_idempotence()
 	match_in_semantics()
 	bank_wide_sweep()
+	figure_text_sweep()
 	known_defects()
 	report()
 
@@ -437,6 +438,103 @@ func bank_wide_sweep() -> void:
 			if no_teach <= 10:
 				print("  no-teach: %s ans=%s lines=%s" % [field(rec2, "id"), ans2, str(lines)])
 	t.eq(no_teach, 0, "every record's lesson_lines state the answer")
+
+
+# --------------------------------------------------------------------------
+# 8b. Study figures before answering: no text left visible outside the
+#     question's masks (labels, titles, section chips, notes) may say where
+#     the answer is in the book (section, table or Part number; an Article
+#     number alone may show) or carry one of the question's choices.
+# --------------------------------------------------------------------------
+const FIG_LOCATION := "(?<![\\w.])(?:90|\\d{3})\\.\\d+(?![\\d.]*\\s*(?i:%|\"|'|in\\b|inch|ft\\b|feet|foot|mm\\b|m\\b|v\\b|volt|a\\b|amp|kva|va\\b|kw\\b|w\\b|hz|ohm|deg))|\\b[Tt]ables?\\s+\\d|\\b[Pp]art\\s+[IVX]+\\b"
+const FIG_BLAND := ["yes", "no", "true", "false", "never", "always", "same", "other", "none", "nec",
+		"all of the above", "none of the above", "both", "either"]
+
+
+static func _fig_words(s: String) -> String:
+	var out := PackedStringArray()
+	for m in RegEx.create_from_string("[a-z0-9]+").search_all(s.to_lower()):
+		out.append(m.get_string())
+	return " ".join(out)
+
+
+static func _fig_covered(box: Rect2, masks: Array) -> bool:
+	for mk in masks:
+		var r: Array = mk.get("rect", [0, 0, 0, 0])
+		var mr := Rect2(float(r[0]), float(r[1]), float(r[2]), float(r[3]))
+		if mr.grow(0.0001).has_point(box.get_center()) and box.intersection(mr).get_area() >= 0.6 * box.get_area():
+			return true
+	return false
+
+
+## Labels of `labels` ([text, x, y, w, h]) the record would see before answering
+## that name a section/table/Part or contain one of its (non-numeric) choices.
+static func figure_text_leaks(rec: Dictionary, labels: Array, masks: Array) -> PackedStringArray:
+	var out := PackedStringArray()
+	var loc := RegEx.create_from_string(FIG_LOCATION)
+	var digits := RegEx.create_from_string("\\d")
+	var stem := " " + _fig_words(str(rec.get("prompt", ""))) + " "
+	var choices := PackedStringArray()
+	for a in rec.get("answers", []):
+		var p := _fig_words(str(a))
+		if p.length() >= 3 and digits.search(p) == null and not p in FIG_BLAND and not stem.contains(" " + p + " "):
+			choices.append(p)
+	for lab in labels:
+		var box := Rect2(float(lab[1]), float(lab[2]), float(lab[3]), float(lab[4]))
+		if _fig_covered(box, masks):
+			continue
+		var text := str(lab[0])
+		var low := " " + _fig_words(text) + " "
+		var m := loc.search(text)
+		if m != null:
+			out.append("'%s' names %s" % [text, m.get_string()])
+		for p in choices:
+			if low.contains(" " + p + " "):
+				out.append("'%s' shows the choice '%s'" % [text, p])
+	return out
+
+
+func figure_text_sweep() -> void:
+	print("=== study figures: no section number or choice visible before answering ===")
+	var rd := func(p: String): return JSON.parse_string(FileAccess.get_file_as_string(p))
+	var figs = rd.call("res://assets/diagrams/nec/figures.json")
+	var masks = rd.call("res://data/diagram_masks.json")
+	var labels = rd.call("res://docs/diagrams/labels.json")
+	var bank = rd.call("res://data/question_bank.json")
+	t.check(figs is Dictionary and masks is Dictionary and labels is Dictionary and bank is Dictionary,
+			"figure map, masks, labels and bank parse")
+	if not (figs is Dictionary and masks is Dictionary and labels is Dictionary and bank is Dictionary):
+		return
+	var by_id := {}
+	for r in bank.get("records", []):
+		by_id[str(r.get("id", ""))] = r
+	var checked := 0
+	var bad := PackedStringArray()
+	for rid in figs:
+		var e: Dictionary = figs[rid]
+		if str(e.get("when", "")) != "before" or e.has("pdf"):
+			continue
+		checked += 1
+		var file := str(e.get("file", "")).get_file()
+		var ms: Array = masks.get("records", {}).get(rid, {}).get("masks", [])
+		for hit in figure_text_leaks(by_id.get(rid, {}), labels.get(file, []), ms):
+			bad.append("%s (%s): %s" % [rid, file, hit])
+	print("  %d pre-answer figure records swept" % checked)
+	t.check(checked > 200, "every pre-answer study figure is swept (%d)" % checked)
+	for b in bad.slice(0, 40):
+		t.check(false, b)
+	t.check(bad.is_empty(), "no pre-answer figure text names a section/table/Part or shows a choice (%d found)" % bad.size())
+	# The sweep must catch the 408.36(B) chip and a visible choice, and accept them masked.
+	var rec := {"prompt": "Where a panelboard is supplied through a transformer, the OCPD shall be on the ___ side.",
+			"answers": ["supply", "secondary", "high leg", "primary"], "correct_index": 1}
+	var chip := [["NEC 408.36(B)", 0.78, 0.08, 0.2, 0.05]]
+	t.check(not figure_text_leaks(rec, chip, []).is_empty(), "sweep catches a visible 'NEC 408.36(B)' chip")
+	t.check(figure_text_leaks(rec, chip, [{"rect": [0.77, 0.07, 0.22, 0.08]}]).is_empty(), "sweep accepts the chip under a mask")
+	for s in ["Table 310.16", "Part II", "Ex.: 240.21(C)(1)", "90.2"]:
+		t.check(not figure_text_leaks(rec, [[s, 0.1, 0.1, 0.2, 0.05]], []).is_empty(), "sweep catches '%s'" % s)
+	for s in ["Article 408", "12.5 ft", "155.5 A", "100 + 37.5 + 10", "480 V", "panelboard", "transformer"]:
+		t.check(figure_text_leaks(rec, [[s, 0.1, 0.1, 0.2, 0.05]], []).is_empty(), "sweep lets '%s' show" % s)
+	t.check(not figure_text_leaks(rec, [["on the secondary", 0.1, 0.1, 0.2, 0.05]], []).is_empty(), "sweep catches a choice word")
 
 
 # --------------------------------------------------------------------------

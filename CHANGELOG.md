@@ -100,6 +100,12 @@
 
 ### Fixed
 
+- **Figures don't say where the answer is before you answer.** The
+  "NEC 408.36(B)"-style badge on 83 study figures now reads "NEC ?", and any
+  other figure label that names a section, table or Part is covered too,
+  until you answer; then it shows. The "?" boxes are tidier: none sit on top
+  of each other any more (there were 145 overlaps), and harmless labels such
+  as "480 V" stay visible.
 - Two disposer-cord questions cited "422.16(B)(1)(1)"; they now cite
   422.16(B)(1).
 - **Hover tips are readable.** They were Godot's default: a see-through,
