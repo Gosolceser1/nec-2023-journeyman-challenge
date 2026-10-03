@@ -4,12 +4,13 @@ extends RefCounted
 ## words in the stem and the "INDEX ..." line above the lookup path. At rest
 ## the INDEX line is a dim prompt, never the list of entries. Hovering a
 ## keyword (desktop) puts just its entry there until the pointer leaves; a tap
-## or click pins it until a second tap or the next question. After answering
-## the keywords stay marked and the reference line is the usual section
-## breadcrumb.
+## or click pins it until a second tap or the next question. Entries name what
+## to look up, never where. After answering the keywords stay marked, the
+## reference line is the usual section breadcrumb and no INDEX text shows.
 
 ## Keyword looks: amber text on a faint amber tint (a highlighter mark, not a
-## link), a stronger tint under the pointer, and the singled-out keyword as a
+## link; fainter still on the non-primary keywords, HuntKeywords.secondary_tint),
+## a stronger tint under the pointer, and the singled-out keyword as a
 ## solid amber chip with dark text.
 const KEYWORD_COLOR := AppTheme.AMBER_200
 const KEYWORD_TINT := Color(AppTheme.AMBER_400, 0.14)
@@ -19,8 +20,8 @@ const FOCUS_COLOR := AppTheme.SLATE_900
 const FOCUS_TINT := Color(AppTheme.AMBER_400, 0.92)
 const INDEX_COLOR := AppTheme.AMBER_400
 const PROMPT_COLOR := AppTheme.SLATE_400
-const PROMPT_DESKTOP := "INDEX  Hover a colored word to see where to look it up"
-const PROMPT_PHONE := "INDEX  Tap a colored word to see where to look it up"
+const PROMPT_DESKTOP := "INDEX  Hover a colored word to see what to look up"
+const PROMPT_PHONE := "INDEX  Tap a colored word to see what to look up"
 ## A tap and the emulated click of the same finger (when a device emulates the
 ## mouse) arrive this close together; only the first counts.
 const DOUBLE_FIRE_MSEC := 400

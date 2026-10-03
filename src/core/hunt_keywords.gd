@@ -4,11 +4,14 @@ extends RefCounted
 ## Index, from data/<edition dir>/hunt_keywords.json (written by
 ## tools/pipeline/hunt_keywords.py, which also keeps them from naming the
 ## correct choice). Pre-answer the stem colors them and the lookup box names
-## the Index heading and article; the spoken question never changes.
+## the Index main entry and subentry, never a location (finding it is the
+## drill); after answering no INDEX text shows. The spoken question never
+## changes.
 
 const FILE_NAME := "hunt_keywords.json"
 ## The timed Full Exam is the real open-book exam: no hints there.
 const EXAM_NOTE := "Off in the Full Exam, like the real test."
+const SECONDARY_TINT_SCALE := 0.4
 
 static var _records: Dictionary = {}
 static var _loaded := false
@@ -23,8 +26,9 @@ static func records() -> Dictionary:
 	return _records
 
 
-## {"keywords": [{"text", "index", "article"}], "show_article": bool}, or {}
-## for records with nothing to look up (state law, math, trade knowledge).
+## {"keywords": [{"text", "index", "sub", "article", "try", "definition"}],
+## "primary": int}, or {} for records with nothing to look up
+## (state law, math, trade knowledge).
 static func for_record(record: Dictionary) -> Dictionary:
 	var entry = records().get(str(record.get("id", "")), {})
 	return entry if entry is Dictionary else {}
@@ -39,24 +43,32 @@ static func enabled(setting_on: bool, is_exam: bool) -> bool:
 	return setting_on and not is_exam
 
 
-## "Art. 680", "Chapter 9"; "" when the stem asks for the reference itself.
-static func article_label(record: Dictionary, keyword: Dictionary) -> String:
-	if not bool(for_record(record).get("show_article", false)):
-		return ""
-	var article := str(keyword.get("article", ""))
-	if article == "" or article.begins_with("Chapter"):
-		return article
-	return "Art. " + article
+## The keyword to start the lookup with, or -1.
+static func primary(record: Dictionary) -> int:
+	var i := int(for_record(record).get("primary", -1))
+	return i if i >= 0 and i < keywords(record).size() else -1
 
 
-## One Index entry: "Swimming pools → Art. 680" (heading only when hidden).
-static func entry_text(record: Dictionary, keyword: Dictionary) -> String:
-	var where := article_label(record, keyword)
-	var heading := str(keyword.get("index", ""))
-	return heading + ("  →  " + where if where != "" else "")
+## What to open in the Index, words only: "Disconnecting means › services".
+static func heading(keyword: Dictionary) -> String:
+	if bool(keyword.get("definition", false)):
+		return "Definitions"
+	var sub := str(keyword.get("sub", ""))
+	return str(keyword.get("index", "")) + (" › " + sub if sub != "" else "")
 
 
-## The lookup-box line: "INDEX  Swimming pools → Art. 680  ·  Receptacles → Art. 406".
+## One entry before answering: what to look up, never where it is (finding it
+## is the drill). Stem words that are not Index wording say so; a definition
+## is read A to Z rather than through the Index.
+static func entry_text(_record: Dictionary, keyword: Dictionary) -> String:
+	if bool(keyword.get("definition", false)):
+		return "Skip the Index: it's a definition, listed A to Z"
+	if bool(keyword.get("try", false)):
+		return "\"%s\" not listed? Try %s" % [str(keyword.get("text", "")), heading(keyword)]
+	return heading(keyword)
+
+
+## The lookup-box line: "INDEX  Swimming pools  ·  Receptacles › pools, spas, and fountains".
 static func index_line(record: Dictionary, only: int = -1) -> String:
 	var parts: Array[String] = []
 	var list := keywords(record)
@@ -66,11 +78,17 @@ static func index_line(record: Dictionary, only: int = -1) -> String:
 	return "INDEX  " + "  ·  ".join(parts) if not parts.is_empty() else ""
 
 
+## A code-book location (article, Part, section, table, chapter or annex);
+## none may show before answering.
+static func names_location(text: String) -> bool:
+	return RegEx.create_from_string("(?i)\\bArt(?:icle)?s?\\b\\.?\\s*\\d|\\bPart\\s+[IVX]+\\b|\\bChapter\\s+\\d|\\bAnnex(?:es)?\\s+[A-K]\\b|\\bTables?\\s+\\d|\\bSection\\s+\\d|\\d{3}\\.\\d|(?<![\\d.,])[1-8]\\d{2}(?![\\d.,])(?!\\s*(?:volts?|V)\\b)").search(text) != null
+
+
 ## One keyword's [hint] in the stem (KeywordStemLabel never shows it).
-static func tooltip(record: Dictionary, keyword: Dictionary) -> String:
-	var where := article_label(record, keyword)
-	var tip := "Look up \"%s\" in the Index" % str(keyword.get("index", ""))
-	return tip + (", then go to " + where if where != "" else "")
+static func tooltip(_record: Dictionary, keyword: Dictionary) -> String:
+	if bool(keyword.get("definition", false)):
+		return "Find \"%s\" among the definitions" % str(keyword.get("text", ""))
+	return "Look up \"%s\" in the Index" % heading(keyword)
 
 
 ## The [hint] a keyword carries in the stem; RichTextLabel.get_tooltip() at a
@@ -112,14 +130,22 @@ static func find_span(prompt: String, text: String, taken: Array = []) -> int:
 	return loose
 
 
+## The background of the keywords other than the primary one: the same mark,
+## fainter, so the word to start with stands out.
+static func secondary_tint(tint: Color) -> Color:
+	return Color(tint, tint.a * SECONDARY_TINT_SCALE)
+
+
 ## The stem as BBCode with each keyword colored once, as a whole word where the
 ## stem allows (a [url] and [hint] let hover and tap single it out); parsed
-## text equals `prompt` exactly. Keywords are `color` on a `tint` background;
-## `looks` maps a keyword index to its own [text color, background].
+## text equals `prompt` exactly. Keywords are `color` on a `tint` background,
+## the non-primary ones on secondary_tint(tint); `looks` maps a keyword index
+## to its own [text color, background].
 static func stem_bbcode(record: Dictionary, prompt: String, color: Color, show: bool,
 		tint := Color.TRANSPARENT, looks := {}) -> String:
 	var spans: Array = []
 	var list := keywords(record) if show else []
+	var first := primary(record)
 	for i in list.size():
 		var text := str(list[i].get("text", ""))
 		var at := find_span(prompt, text, spans)
@@ -131,7 +157,7 @@ static func stem_bbcode(record: Dictionary, prompt: String, color: Color, show: 
 	for span in spans:
 		out += escape_bbcode(prompt.substr(pos, span["start"] - pos))
 		var i: int = span["i"]
-		var look: Array = looks.get(i, [color, tint])
+		var look: Array = looks.get(i, [color, tint if i == first or first < 0 else secondary_tint(tint)])
 		var word := "[color=#%s]%s[/color]" % [(look[0] as Color).to_html(false), escape_bbcode(prompt.substr(span["start"], span["end"] - span["start"]))]
 		if (look[1] as Color).a > 0.0:
 			word = "[bgcolor=#%s]%s[/bgcolor]" % [(look[1] as Color).to_html(true), word]

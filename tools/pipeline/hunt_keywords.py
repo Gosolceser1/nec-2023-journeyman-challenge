@@ -2,9 +2,10 @@
 
 Reads the checked-in bank and the edition's curated vocabulary
 (data/nec/<year>/index_terms.json) and writes data/nec/<year>/hunt_keywords.json,
-which the app uses to color those words in the stem and to name the Index
-heading to open. The bank itself is not changed: every keyword is an exact
-phrase of its stem.
+which the app uses to color those words in the stem, to name the Index main
+entry and subentry to open before answering. Nothing of it shows after
+answering. The bank itself is not changed: every keyword is an exact phrase of
+its stem.
 
     python tools/pipeline/hunt_keywords.py            # write the file
     python tools/pipeline/hunt_keywords.py --check    # fail when it is stale or breaks a rule
@@ -13,13 +14,17 @@ Rules (also checked by --check on the written file):
 - only records that cite the NEC get keywords (1 to MAX_KEYWORDS each); the
   others are listed under no_lookup with the reason;
 - a keyword is a phrase of the stem, is not the correct choice, does not contain
-  it and is not part of it (unless every choice holds it); its Index heading does
-  not name the correct choice;
-- neither the keyword nor its Index heading holds any choice, distractors
-  included ('rear or side access' colors the choice 'rear');
-- its article is one the record cites and exists in the edition's articles.json;
-- show_article is false when the stem asks for the reference itself or the
-  correct choice holds the article number (the hint then names the heading only).
+  it and is not part of it (unless every choice holds it); its main entry and
+  subentry do not name the correct choice;
+- neither the keyword nor its main entry or subentry holds any choice,
+  distractors included ('rear or side access' colors the choice 'rear');
+- a heading is paired only with an article it leads to: one of its own
+  articles, or through a subentry that leads there; the article is one the
+  record cites and exists in the edition's articles.json;
+- what shows (main entry, subentry) names no location: no article, Part,
+  section, table, chapter or annex number; finding it is the drill ('article'
+  is for the rules above, never shown);
+- one keyword is the primary one, the word to start the lookup with.
 """
 from __future__ import annotations
 
@@ -36,9 +41,18 @@ ROOT = pipeline_paths.ROOT
 BANK_PATH = ROOT / "data" / "question_bank.json"
 MAX_KEYWORDS = 3
 CHAPTER_9 = "Chapter 9"
+DEFINITIONS = "100"
 STATE_LAW_RE = re.compile(r"^(?:Neb\. Rev\. Stat\.|Title \d+ NAC\b)")
 ARTICLE_RE = re.compile(r"(?<![\d.])(\d{3})(?![\d])")
 WORD_EDGE = r"A-Za-z0-9\-"
+# A citation in a bank reference: "Table 220.55", "210.52(E)(3)", "Article 100".
+CITATION_RE = re.compile(r"(?:Table\s+)?\d{3}\.\d+(?:\([A-Za-z0-9]+\))*|Article\s+\d{3}")
+CHAPTER_9_RE = re.compile(r"\b(Table\s+\d+|Note\s+\d+)\b")
+# Any code-book location; none may show before answering.
+LOCATION_RE = re.compile(
+    r"\bArt(?:icle)?s?\b\.?\s*\d|\bPart\s+[IVX]+\b|\bChapter\s+\d|\bAnnex(?:es)?\s+[A-K]\b|\bTables?\s+\d|\bSection\s+\d"
+    r"|\d{3}\.\d|(?<![\d.,])[1-8]\d{2}(?![\d.,])(?!\s*(?:volts?|V)\b)", re.IGNORECASE)
+OTHER_THAN_REACH = 30
 
 
 def terms_path() -> Path:
@@ -75,6 +89,10 @@ def contains_word_start(haystack: str, needle: str) -> bool:
     return re.search(r"(?<![a-z0-9])" + re.escape(n), h) is not None
 
 
+def names_location(text: str) -> bool:
+    return LOCATION_RE.search(text) is not None
+
+
 def cited_articles(reference: str, article_titles: dict) -> list[str]:
     """NEC articles a record cites, in order: '352.100, 352.12(B)' -> ['352']."""
     reference = reference.strip()
@@ -93,6 +111,26 @@ def cited_articles(reference: str, article_titles: dict) -> list[str]:
     return found
 
 
+def citation_for(reference: str, article: str) -> str:
+    """The first citation of `article` in the reference: '210.52(E)(3)', 'Table 4' (Chapter 9); '' for a whole article."""
+    if article == CHAPTER_9:
+        m = CHAPTER_9_RE.search(reference)
+        return m.group(1) if m else ""
+    for m in CITATION_RE.finditer(reference):
+        text = m.group(0)
+        if text.startswith("Article"):
+            continue
+        if section_of(text).split(".")[0] == article:
+            return text
+    return ""
+
+
+def section_of(citation: str) -> str:
+    """'Table 210.21(B)(2)' -> '210.21'."""
+    m = re.search(r"\d{3}\.\d+", citation)
+    return m.group(0) if m else ""
+
+
 def no_lookup_reason(record: dict, cited: list[str]) -> str:
     if record.get("section"):
         return "state law (not in the NEC)"
@@ -104,28 +142,6 @@ def no_lookup_reason(record: dict, cited: list[str]) -> str:
     if "calculation" in reference.lower():
         return "math (nothing to look up)"
     return "trade knowledge (not in the NEC)"
-
-
-CITATION_ANSWER = re.compile(r"^(?:NEC\s+)?(?:(?:Article|Table|Section)\s+\S|\d{3}\.\d+(?:\([A-Za-z0-9]+\))*$)")
-
-
-def is_reference_seeking(prompt: str, answers: list | None = None) -> bool:
-    """Same test as NecReference.is_reference_seeking in the app."""
-    lowered = prompt.lower()
-    if "___" in lowered and any(w in lowered for w in ("table", "article", "section")):
-        return True
-    return sum(1 for a in answers or [] if CITATION_ANSWER.search(str(a).strip())) >= 2
-
-
-def show_article(record: dict, cited: list[str]) -> bool:
-    if is_reference_seeking(str(record.get("prompt", "")), record.get("answers", [])):
-        return False
-    answer = correct_text(record)
-    for article in cited:
-        token = "9" if article == CHAPTER_9 else article
-        if re.search(r"(?<![\d.])" + re.escape(token) + r"(?![\d])", answer):
-            return False
-    return True
 
 
 def correct_text(record: dict) -> str:
@@ -140,7 +156,7 @@ def phrase_regex(phrase: str) -> re.Pattern:
 
 
 def leaks(record: dict, text: str, heading: str, synonyms: list[str]) -> str:
-    """Why a keyword would give the answer away, or '' when it is safe."""
+    """Why a keyword would give the answer away, or '' when it is safe. `heading` is the main entry and subentry."""
     answer = correct_text(record)
     if not norm(answer):
         return ""
@@ -165,12 +181,26 @@ def leaks(record: dict, text: str, heading: str, synonyms: list[str]) -> str:
     return ""
 
 
+def heading_text(index: str, sub: str) -> str:
+    return index + (" " + sub if sub else "")
+
+
+def excluded(prompt: str, start: int) -> bool:
+    """The phrase at `start` follows 'other than' in the same clause ('In other than one and two family dwellings')."""
+    before = prompt[max(0, start - OTHER_THAN_REACH):start].lower()
+    at = before.rfind("other than")
+    return at >= 0 and not re.search(r"[,;:.]", before[at:])
+
+
 def find_matches(prompt: str, terms: list[dict]) -> list[dict]:
-    """Every term phrase in the stem; the longest wins an overlap."""
+    """Every term phrase in the stem; the longest wins an overlap. A phrase right
+    after 'other than' is what the rule leaves out, not what to look up."""
     hits = []
     for term in terms:
         for phrase in term["match"]:
             for m in phrase_regex(phrase).finditer(prompt):
+                if excluded(prompt, m.start()):
+                    continue
                 hits.append({"start": m.start(), "end": m.end(), "text": m.group(0), "term": term})
     hits.sort(key=lambda h: (-(h["end"] - h["start"]), h["start"]))
     taken: list[dict] = []
@@ -182,39 +212,93 @@ def find_matches(prompt: str, terms: list[dict]) -> list[dict]:
     return taken
 
 
-def keywords_for(record: dict, cited: list[str], terms: list[dict], override: dict) -> list[dict]:
+def section_sub(subs: dict, section: str) -> str:
+    """The subentry keyed by the longest section prefix of `section` ('210.52' for 210.52), or ''."""
+    best = ""
+    for key in subs:
+        if "." in key and section.startswith(key) and not section[len(key):len(key) + 1].isdigit() and len(key) > len(best):
+            best = key
+    return subs[best] if best else ""
+
+
+def route(term: dict, article: str, reference: str):
+    """(subentry, via_home) when the term leads to `article` for this reference; None when it does not."""
+    subs = term.get("subs", {})
+    section = section_of(citation_for(reference, article))
+    sub = section_sub(subs, section) or subs.get(article, "")
+    if article in term.get("articles", []):
+        return (sub or subs.get("*", ""), True)
+    return (sub, False) if sub else None
+
+
+def keywords_for(record: dict, cited: list[str], terms: list[dict], override: dict) -> tuple[list[dict], int]:
     prompt = str(record.get("prompt", ""))
-    primary = cited[0]
+    reference = str(record.get("article", ""))
     dropped = {norm(t) for t in override.get("drop", [])}
-    specific, broad = [], []
+    by_index = {}
+    for term in terms:
+        by_index.setdefault(term["index"], term)
+    candidates = []
+    for add in override.get("add", []):
+        if add.get("definition"):
+            if DEFINITIONS in cited and not leaks(record, add["text"], "", []):
+                candidates.append({"entry": {"text": add["text"], "index": "", "article": DEFINITIONS, "definition": True},
+                                   "score": (3, 0, 0)})
+            continue
+        term = by_index.get(add["index"], {})
+        if "sub" in add or not term:
+            sub = add.get("sub", "")
+        else:
+            sub = (route(term, add["article"], reference) or ("", True))[0]
+        if leaks(record, add["text"], heading_text(add["index"], sub), []):
+            continue
+        entry = {"text": add["text"], "index": add["index"], "sub": sub, "article": add["article"]}
+        candidates.append({"entry": entry, "score": (2, 0, len(add["text"]))})
     for hit in find_matches(prompt, terms):
         term = hit["term"]
         if norm(hit["text"]) in dropped:
             continue
-        if primary == "100":
-            article = "100"
-        elif term.get("broad"):
-            if primary == CHAPTER_9 or primary not in term.get("seen_in", [primary]):
-                continue
-            article = primary
+        found = None
+        if cited[0] == DEFINITIONS:
+            found = (DEFINITIONS, "definition", True)
         else:
-            usable = [a for a in term["articles"] if a in cited]
-            if not usable:
-                continue
-            article = primary if primary in usable else usable[0]
-        if leaks(record, hit["text"], term["index"], term["match"]):
+            for article in cited:
+                way = route(term, article, reference)
+                if way is not None:
+                    found = (article, way[0], way[1])
+                    break
+        if found is None:
             continue
-        entry = {"text": hit["text"], "index": term["index"], "article": article}
-        (broad if term.get("broad") else specific).append(entry)
+        article, sub, via_home = found
+        if leaks(record, hit["text"], heading_text(term["index"], sub), term["match"]):
+            continue
+        entry = {"text": hit["text"], "index": term["index"], "sub": sub, "article": article}
+        if norm(hit["text"]) in {norm(u) for u in term.get("unlisted", [])}:
+            entry["try"] = True
+        breadth = len(term.get("articles", [])) + len(term.get("subs", {}))
+        lead = 2 if article == cited[0] else 1
+        candidates.append({"entry": entry, "score": (lead if via_home else lead - 0.5, -breadth, len(hit["text"]))})
     chosen: list[dict] = []
-    for entry in list(override.get("add", [])) + specific + broad:
-        if any(c["index"] == entry["index"] or overlaps(prompt, c["text"], entry["text"]) for c in chosen):
+    for cand in candidates:
+        entry = cand["entry"]
+        if any((c["entry"].get("index"), c["entry"].get("sub")) == (entry.get("index"), entry.get("sub"))
+               or c["entry"].get("definition") and entry.get("definition")
+               or overlaps(prompt, c["entry"]["text"], entry["text"]) for c in chosen):
             continue
-        chosen.append({"text": entry["text"], "index": entry["index"], "article": entry["article"]})
+        chosen.append(cand)
         if len(chosen) == MAX_KEYWORDS:
             break
-    chosen.sort(key=lambda e: prompt.find(e["text"]))
-    return chosen
+    if not chosen:
+        return [], -1
+    best = max(chosen, key=lambda c: c["score"])
+    chosen.sort(key=lambda c: prompt.find(c["entry"]["text"]))
+    out = []
+    for c in chosen:
+        e = dict(c["entry"])
+        if not e.get("sub"):
+            e.pop("sub", None)
+        out.append(e)
+    return out, chosen.index(best)
 
 
 def overlaps(prompt: str, a: str, b: str) -> bool:
@@ -235,15 +319,20 @@ def generate(bank: dict, vocab: dict, article_titles: dict) -> dict:
             no_lookup[rid] = reason
             continue
         override = overrides.get(rid, {})
-        entry = {
-            "keywords": [] if override.get("none") else keywords_for(record, cited, terms, override),
-            "show_article": show_article(record, cited),
-        }
         if override.get("none"):
-            entry["none"] = override["none"]
+            records[rid] = {"keywords": [], "none": override["none"]}
+            continue
+        keywords, primary = keywords_for(record, cited, terms, override)
+        entry = {"keywords": keywords}
+        if keywords:
+            entry["primary"] = primary
         records[rid] = entry
     return {
-        "about": "Generated by tools/pipeline/hunt_keywords.py from data/question_bank.json and index_terms.json; do not edit. Per record: the stem phrases to look up in the code book's Index ('text', exact stem text), the Index heading ('index') and the article it leads to ('article'); show_article false hides the article before answering.",
+        "about": "Generated by tools/pipeline/hunt_keywords.py from data/question_bank.json and index_terms.json; do not edit. "
+                 "Per record: the stem phrases to look up in the code book's Index ('text', exact stem text), the main entry "
+                 "('index') and subentry ('sub') in our own words, the article they lead to ('article'), 'try' when the stem "
+                 "word is not Index wording, 'definition' when the term is read in Article 100 rather than the Index; "
+                 "'primary' is the keyword to start with. Shown before answering only, never the article.",
         "records": records,
         "no_lookup": no_lookup,
     }
@@ -261,8 +350,26 @@ def render(data: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
-def problems(data: dict, bank: dict, article_titles: dict) -> list[str]:
+def leads_there(keyword: dict, record: dict, terms: list[dict], override: dict) -> bool:
+    """The keyword's main entry (and subentry) really lead to its article."""
+    if keyword.get("definition"):
+        return keyword.get("article") == DEFINITIONS
+    reference = str(record.get("article", ""))
+    if keyword.get("article") == DEFINITIONS and keyword.get("sub") == "definition":
+        return True
+    for term in terms:
+        if term["index"] != keyword.get("index"):
+            continue
+        way = route(term, keyword.get("article", ""), reference)
+        if way is not None and way[0] == keyword.get("sub", ""):
+            return True
+    return any(a.get("index") == keyword.get("index") and a.get("article") == keyword.get("article")
+               for a in override.get("add", []))
+
+
+def problems(data: dict, bank: dict, article_titles: dict, vocab: dict | None = None) -> list[str]:
     """Every rule the written file must meet (the leak rules included)."""
+    vocab = vocab if vocab is not None else load_json(terms_path())
     out: list[str] = []
     by_id = {r["id"]: r for r in bank["records"]}
     listed = set(data.get("records", {})) | set(data.get("no_lookup", {}))
@@ -278,28 +385,34 @@ def problems(data: dict, bank: dict, article_titles: dict) -> list[str]:
             continue
         cited = cited_articles(str(record.get("article", "")), article_titles)
         keywords = entry.get("keywords", [])
+        override = vocab.get("records", {}).get(rid, {})
         if entry.get("none"):
             if keywords:
                 out.append(f"{rid}: marked none ({entry['none']}) but has keywords")
         elif not 1 <= len(keywords) <= MAX_KEYWORDS:
             out.append(f"{rid}: {len(keywords)} keywords (want 1-{MAX_KEYWORDS})")
+        if keywords and not 0 <= entry.get("primary", -1) < len(keywords):
+            out.append(f"{rid}: no primary keyword")
         prompt = str(record.get("prompt", ""))
         for i, kw in enumerate(keywords):
             for other in keywords[i + 1:]:
                 if overlaps(prompt, kw.get("text", ""), other.get("text", "")):
                     out.append(f"{rid}: keywords {kw.get('text')!r} and {other.get('text')!r} overlap")
-            text, heading, article = kw.get("text", ""), kw.get("index", ""), kw.get("article", "")
+            text, article = kw.get("text", ""), kw.get("article", "")
+            heading = heading_text(kw.get("index", ""), kw.get("sub", ""))
             if not text or text not in prompt:
                 out.append(f"{rid}: keyword {text!r} is not in the stem")
             reason = leaks(record, text, heading, [])
             if reason:
                 out.append(f"{rid}: keyword {text!r}: {reason}")
+            if names_location(heading):
+                out.append(f"{rid}: keyword {text!r}: '{heading}' names a location before answering")
             if article != CHAPTER_9 and article not in article_titles:
                 out.append(f"{rid}: article {article!r} is not in the edition's articles.json")
             if article not in cited:
                 out.append(f"{rid}: article {article!r} is not cited by the record ({record.get('article')})")
-        if entry.get("show_article") and not show_article(record, cited):
-            out.append(f"{rid}: show_article must be false (the stem asks for the reference or the answer holds the article)")
+            if not leads_there(kw, record, vocab["terms"], override):
+                out.append(f"{rid}: '{heading}' does not lead to {article}")
     return out
 
 
@@ -309,12 +422,13 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--bank", type=Path, default=BANK_PATH)
     args = ap.parse_args(argv)
     bank = load_json(args.bank)
+    vocab = load_json(terms_path())
     article_titles = load_json(pipeline_paths.nec_data("articles.json"))["articles"]
-    fresh = render(generate(bank, load_json(terms_path()), article_titles))
+    fresh = render(generate(bank, vocab, article_titles))
     out = output_path()
     if args.check:
         current = out.read_text(encoding="utf-8") if out.exists() else ""
-        errors = problems(json.loads(current), bank, article_titles) if current else [f"{out} is missing"]
+        errors = problems(json.loads(current), bank, article_titles, vocab) if current else [f"{out} is missing"]
         if current != fresh:
             errors.append(f"{out.relative_to(ROOT)} is stale: run python tools/pipeline/hunt_keywords.py and review the diff")
         for e in errors:
@@ -323,7 +437,7 @@ def main(argv: list[str] | None = None) -> int:
         return 1 if errors else 0
     out.write_text(fresh, encoding="utf-8", newline="\n")
     data = json.loads(fresh)
-    errors = problems(data, bank, article_titles)
+    errors = problems(data, bank, article_titles, vocab)
     counts = [len(e["keywords"]) for e in data["records"].values()]
     print(f"wrote {out.relative_to(ROOT)}: {len(counts)} records with keywords ({sum(counts)} keywords), "
           f"{sum(1 for c in counts if c == 0)} without, {len(data['no_lookup'])} no_lookup; {len(errors)} problem(s)")
@@ -333,4 +447,4 @@ def main(argv: list[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(argv=None))

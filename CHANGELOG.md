@@ -17,8 +17,8 @@
   up) and says when you land on the step's number. Earlier steps' results and
   memory are already in it, so rows like "× 14 =" or "1 ÷ MR =" work as shown.
 - **The INDEX line shows one entry at a time.** Before you point at anything
-  it is a short dim prompt ("Hover a colored word to see where to look it
-  up", or "Tap ..." on a phone) instead of every keyword's entry at once.
+  it is a short dim prompt ("Hover a colored word to see what to look up",
+  or "Tap ..." on a phone) instead of every keyword's entry at once.
   Hover a colored word for its entry; a click or tap keeps it there until you
   tap it again or move to the next question.
 - **Picking a keyword lights the lookup box.** A click or tap on a colored
@@ -54,6 +54,18 @@
   instead of naming the article twice. Everything else in the panel is as
   before. On a phone the explanation scrolls with the page instead of in a
   box of its own.
+- **Keywords read like the printed Index, and finding the page is up to
+  you.** An entry names the main heading and the subentry to follow, the way
+  the book lists them ("Disconnecting means › services"), and never a
+  location: no article, Part, section, table or chapter number. The word to
+  look up first gets the full highlight; the others are fainter. A word the
+  Index doesn't use says what to try instead ("disconnect" not listed? Try
+  Disconnecting means › services), and a defined term says to look it up
+  among the definitions. After you answer there is no INDEX line at all.
+  383 of the 926 keyword pairings were corrected: 303 now name the subentry
+  that really leads to the rule, 44 moved to the right heading, and 36 that
+  led nowhere useful are gone (for example "dwellings" on a question about
+  other than dwellings).
 - **Study figures look like the real equipment.** Receptacles have proper
   5-15R/5-20R faces (GFCI test and reset buttons, hospital-grade dots),
   panelboards show their breakers, and disconnects, meters, transformers,

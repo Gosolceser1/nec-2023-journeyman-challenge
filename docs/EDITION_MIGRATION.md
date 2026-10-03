@@ -22,7 +22,7 @@ Files in `data/nec/<year>/`:
 | `content_audit.json` | validator: every NEC record audited against this edition | no |
 | `renumbered.json` | validator (old numbers must be called old), migration report | no |
 | `provisions.json`, `concepts.json`, `answer_glossary.json` | builder drafts for records the overlay does not cover | no |
-| `index_terms.json` | hunt-keyword vocabulary and per-question overrides (`tools/pipeline/hunt_keywords.py`); review headings and articles against the new book's Index | no |
+| `index_terms.json` | hunt-keyword vocabulary and per-question overrides (`tools/pipeline/hunt_keywords.py`); review headings, subentries and articles against the new book's Index | no |
 | `hunt_keywords.json` | stem keywords, Index heading and article per record; regenerate with `python tools/pipeline/hunt_keywords.py` | yes |
 
 ## Frozen on purpose

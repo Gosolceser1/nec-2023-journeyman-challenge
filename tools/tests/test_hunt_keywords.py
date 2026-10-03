@@ -48,9 +48,43 @@ class HuntKeywordsTest(unittest.TestCase):
                 for kw in entry["keywords"]:
                     self.assertIn(kw["text"], prompt)
                     self.assertFalse(hunt_keywords.contains_phrase(kw["text"], answer), kw)
-                    self.assertFalse(hunt_keywords.contains_phrase(kw["index"], answer), kw)
+                    self.assertFalse(hunt_keywords.contains_phrase(kw.get("index", ""), answer), kw)
+                    self.assertFalse(hunt_keywords.contains_phrase(kw.get("sub", ""), answer), kw)
                     self.assertTrue(kw["article"] == "Chapter 9" or kw["article"] in self.articles, kw)
+                if entry["keywords"]:
+                    self.assertTrue(0 <= entry["primary"] < len(entry["keywords"]))
+                self.assertNotIn("where", entry, "no location is stored to show, before or after answering")
         self.assertEqual(hunt_keywords.problems(self.data, self.bank, self.articles), [])
+
+    def test_nothing_before_answering_names_a_location(self):
+        # Finding the place in the book is the drill: main entry and subentry only.
+        for text in ("Art. 230", "Article 100", "Part VI", "230.70", "Table 250.122", "Chapter 9", "Annex C", "Section 8", "see 680"):
+            self.assertTrue(hunt_keywords.names_location(text), text)
+        for text in ("Disconnecting means services", "Cables, over 600 volts", "Outdoor overhead conductors over 1000 volts",
+                     "Receptacles pools, spas, and fountains", "Type NM cable"):
+            self.assertFalse(hunt_keywords.names_location(text), text)
+        for rid, entry in self.data["records"].items():
+            for kw in entry["keywords"]:
+                with self.subTest(rid=rid, keyword=kw["text"]):
+                    self.assertFalse(hunt_keywords.names_location(kw.get("index", "") + " " + kw.get("sub", "")))
+
+    def test_headings_only_lead_where_they_go(self):
+        panel = {"index": "Panelboards", "articles": ["408"], "subs": {"110.26": "working space"}}
+        self.assertEqual(hunt_keywords.route(panel, "408", "408.36(A)"), ("", True))
+        self.assertEqual(hunt_keywords.route(panel, "110", "110.26(E)(1)"), ("working space", False))
+        self.assertIsNone(hunt_keywords.route(panel, "110", "110.16(A)"))
+        loads = {"index": "Dwelling units", "articles": [], "subs": {"220.5": "floor area", "220.55": "range loads"}}
+        self.assertEqual(hunt_keywords.route(loads, "220", "Table 220.55"), ("range loads", False))
+        self.assertEqual(hunt_keywords.route(loads, "220", "220.5(C)"), ("floor area", False))
+        self.assertEqual(hunt_keywords.section_sub({"220.5": "x"}, "220.54"), "")
+        rec = {"id": "x", "prompt": "In other than dwelling units, panelboard working space shall be ___.",
+               "answers": ["30 in.", "36 in.", "42 in.", "48 in."], "correct_index": 0, "article": "110.26(A)(2)"}
+        terms = [{"index": "Dwelling units", "articles": [], "subs": {"110": "working space"}, "match": ["dwelling units"]},
+                 panel | {"match": ["panelboard"], "subs": {"110.26": "working space"}},
+                 {"index": "Working space", "articles": ["110"], "match": ["working space"]}]
+        keywords, primary = hunt_keywords.keywords_for(rec, ["110"], terms, {})
+        self.assertEqual([k["index"] for k in keywords], ["Panelboards", "Working space"], "'other than dwelling units' is no lookup")
+        self.assertEqual(keywords[primary]["index"], "Working space", "the heading that is the article's own topic starts")
 
     def test_leak_rules(self):
         rec = {"prompt": "Where installed in a wet location, the box shall be ___.",
@@ -90,16 +124,8 @@ class HuntKeywordsTest(unittest.TestCase):
                     with self.subTest(rid=rid, keyword=kw["text"], choice=choice):
                         self.assertNotEqual(hunt_keywords.norm(kw["text"]), hunt_keywords.norm(choice))
                         self.assertFalse(hunt_keywords.contains_phrase(kw["text"], choice))
-                        self.assertFalse(hunt_keywords.contains_phrase(kw["index"], choice))
-
-    def test_article_answers_hide_the_article(self):
-        rec = {"prompt": "Which article covers swimming pools?", "answers": ["680", "682", "690", "547"],
-               "correct_index": 0}
-        self.assertFalse(hunt_keywords.show_article(rec, ["680"]))
-        self.assertFalse(hunt_keywords.show_article({"prompt": "See Table ___ for fill.", "answers": ["1"],
-                                                     "correct_index": 0}, ["Chapter 9"]))
-        self.assertTrue(hunt_keywords.show_article({"prompt": "Pool lights need ___.", "answers": ["GFCI"],
-                                                    "correct_index": 0}, ["680"]))
+                        self.assertFalse(hunt_keywords.contains_phrase(kw.get("index", ""), choice))
+                        self.assertFalse(hunt_keywords.contains_phrase(kw.get("sub", ""), choice))
 
     def test_cited_articles(self):
         self.assertEqual(hunt_keywords.cited_articles("352.100, 352.12(B), and 352.60", self.articles), ["352"])

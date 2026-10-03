@@ -61,7 +61,7 @@ func _initialize() -> void:
 			await _hover_click_rules(multi)
 		await _drag_and_double_fire(multi)
 		await _fit_hidden_rules(multi)
-		await _pulse_rules(multi)
+		await _pulse_rules(await _find_resting_line(multi))
 		await _stale_and_answered(multi)
 	var child_ok := true
 	if not mobile:
@@ -153,7 +153,8 @@ func _look(i: int) -> String:
 		return "focus"
 	if code.contains(HuntView.HOVER_TINT.to_html(true)):
 		return "hover"
-	return "rest" if code.contains(HuntView.KEYWORD_TINT.to_html(true)) else "none"
+	var rest := [HuntView.KEYWORD_TINT, HuntKeywords.secondary_tint(HuntView.KEYWORD_TINT)]
+	return "rest" if rest.any(func(c): return code.contains((c as Color).to_html(true))) else "none"
 
 
 func _line(rec: Dictionary, only := -1) -> String:
@@ -167,6 +168,21 @@ func _find_multi() -> int:
 		if HuntKeywords.keywords(rec).size() >= 3 and not (table is Array and not (table as Array).is_empty()):
 			return i
 	return -1
+
+
+## Like _find_multi, but the INDEX line must show at rest: a long stem on a
+## phone hides it to fit, and then a pick rightly grows the box.
+func _find_resting_line(fallback: int) -> int:
+	for i in main.records.size():
+		var rec: Dictionary = main.records[i]
+		var table = rec.get("reference_table", [])
+		if HuntKeywords.keywords(rec).size() < 3 or (table is Array and not (table as Array).is_empty()):
+			continue
+		_show(i)
+		await _frames(3)
+		if main.index_hint_label.visible:
+			return i
+	return fallback
 
 
 ## Middle of keyword i on the stem label (label-local), found by its [hint];
@@ -475,6 +491,7 @@ func _pulse_rules(i: int) -> void:
 	var p1 := _spot(rec, 1)
 	var label: Label = main.index_hint_label
 	t.check(not main.hunt.pulsing() and not main.hunt.box_lit(), "pulse: nothing lit before a pick")
+	t.check(label.visible, "pulse: the INDEX line shows at rest")
 	await _msec_gap()
 	if not mobile:
 		_motion(p0)

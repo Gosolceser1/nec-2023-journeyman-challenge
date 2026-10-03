@@ -5,7 +5,10 @@ extends SceneTree
 ##   and a pick names that keyword's entry;
 ## - neither names the correct choice, and no keyword or its Index heading holds
 ##   any choice (distractors included); the answers box holds answer cards only;
-## - after answering the INDEX line goes and the reference line is unchanged;
+## - before answering no INDEX text names a location (article, Part, section,
+##   table, chapter or annex): finding it in the book is the drill;
+## - after answering no INDEX text shows anywhere on screen and the reference
+##   line is unchanged;
 ## - the spoken question is the same with the setting on or off;
 ## - the setting off, or the Full Exam, shows no keywords at all;
 ## - with the keywords on, the page does not scroll before answering at any
@@ -93,7 +96,7 @@ func _points_at_choice(rec: Dictionary, kw: Dictionary) -> String:
 		if choices.all(func(c): return _holds(str(c), str(choice))):
 			continue
 		if _words(str(kw.get("text", ""))) == _words(str(choice)) or _holds(str(kw.get("text", "")), str(choice)) \
-				or _holds(str(kw.get("index", "")), str(choice)):
+				or _holds(HuntKeywords.heading(kw), str(choice)):
 			return str(choice)
 	return ""
 
@@ -128,8 +131,14 @@ func _data_rules() -> void:
 		t.check(line.begins_with("INDEX  "), "%s: INDEX line '%s'" % [qid, line])
 		if answer.strip_edges().length() > 3 and not answer.strip_edges().is_valid_float():
 			t.check(not _names_answer(line, answer), "%s: INDEX line '%s' names the answer '%s'" % [qid, line, answer])
-		if not bool(HuntKeywords.for_record(rec).get("show_article", false)):
-			t.check(not line.contains("Art. "), "%s: article hidden when the stem asks for it ('%s')" % [qid, line])
+		t.check(not HuntKeywords.names_location(line), "%s: the INDEX line names a location before answering ('%s')" % [qid, line])
+		for i in list.size():
+			var entry := HuntKeywords.index_line(rec, i)
+			t.check(not HuntKeywords.names_location(entry), "%s: entry '%s' names a location before answering" % [qid, entry])
+		var tinted := HuntKeywords.stem_bbcode(rec, prompt, HuntView.KEYWORD_COLOR, true, HuntView.KEYWORD_TINT)
+		t.eq(tinted.count("[bgcolor=#%s]" % HuntView.KEYWORD_TINT.to_html(true)), 1, "%s: one primary keyword in the full mark" % qid)
+		t.eq(tinted.count("[bgcolor=#%s]" % HuntKeywords.secondary_tint(HuntView.KEYWORD_TINT).to_html(true)), list.size() - 1,
+				"%s: the other keywords in the fainter mark" % qid)
 	label.queue_free()
 	t.check(with_keywords >= 500, "most records have hunt keywords (%d)" % with_keywords)
 	print("  %d records with hunt keywords" % with_keywords)
@@ -189,12 +198,38 @@ func _screen_rules() -> void:
 		main._stop_reading()
 		t.check(not main.index_hint_label.visible and not main.lookup_box.visible, "%s: INDEX line gone after answering" % qid)
 		t.eq(main.feedback_reference.text, NecReference.format_reference(rec), "%s: reference line unchanged" % qid)
+		var leftover := _shown_index_text(list)
+		t.check(leftover == "", "%s: no INDEX text after answering ('%s')" % [qid, leftover])
 		main.audio.hunt_keywords = false
 		_show(i)
 		t.eq(JSON.stringify(SpeechText.speech_plan(main.session.display_record(i))), plan_on, "%s: spoken question unchanged by the setting" % qid)
 		t.check(not main.question_label.text.contains("[color=") and not main.index_hint_label.visible, "%s: setting off shows no keywords" % qid)
 	main.audio.hunt_keywords = true
 	await _frames(1)
+
+
+## The first visible text on screen that is INDEX text: the "INDEX" tag or an
+## entry with its subentry ("Disconnecting means › services"); "" when none.
+## The answers already say where the rule is; repeating it is clutter.
+func _shown_index_text(list: Array) -> String:
+	var entries: Array[String] = []
+	for kw in list:
+		if str(kw.get("sub", "")) != "":
+			entries.append(HuntKeywords.heading(kw))
+	for node in main.find_children("*", "Control", true, false):
+		var c := node as Control
+		if not c.is_visible_in_tree():
+			continue
+		var text := ""
+		if c is Label:
+			text = (c as Label).text
+		elif c is RichTextLabel:
+			text = (c as RichTextLabel).get_parsed_text()
+		elif c is Button:
+			text = (c as Button).text
+		if text.contains("INDEX") or entries.any(func(e): return text.contains(e)):
+			return "%s: %s" % [c.name, text.left(80)]
+	return ""
 
 
 func _page_scroll() -> ScrollContainer:

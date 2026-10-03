@@ -223,28 +223,37 @@ explanation sheet's first view; the sheet scrolls only for the text below it. `_
 The printed exam is open book, so each NEC question names the words to look
 up in the code book's Index. `tools/pipeline/hunt_keywords.py` writes
 `data/nec/<year>/hunt_keywords.json`: per record 1 to 3 exact stem phrases,
-the Index-style heading and the article, and `show_article` (false when the
-stem asks for the reference or the answer holds the article number). The
-curated vocabulary and per-question overrides live in `index_terms.json`
-(pipeline only). `--check` (run by `test_hunt_keywords.py` in verify.sh)
-fails when a keyword is not in the stem, holds the correct choice or starts a
-word of it, its heading names the choice, or its article is not one the record
-cites.
+each with its Index-style main entry, the subentry that leads to the cited
+article (`sub`, e.g. "Disconnecting means › services") and the article (for
+the checks, never shown), plus `primary` (the entry to look up first). A
+definition keyword says to skip the Index (definitions are listed A to Z); a
+`try` keyword is a common word the Index does not list ("disconnect"), shown
+as "Not listed? Try …". Finding the place is the drill, so
+`HuntKeywords.index_line` is words only, and after answering no INDEX text
+shows (the reference line already says where the rule is). The curated
+vocabulary (headings in our own words, their subentries per article or
+section, words the Index does not list) and per-question overrides live in
+`index_terms.json` (pipeline only).
+`--check` (run by `test_hunt_keywords.py` in verify.sh) fails when a keyword
+is not in the stem, holds the correct choice or starts a word of it, its
+heading names a choice or a location, its article is not one the record
+cites, or its heading does not lead to that article.
 
 The stem is a RichTextLabel (`HuntView.make_stem_label`); `HuntView.show_question`
 marks each keyword's first occurrence as a highlighter mark (amber text on a
-faint amber tint, stronger under the pointer; the parsed text is the bank stem
+faint amber tint, fainter still on all but the primary keyword, stronger under
+the pointer; the parsed text is the bank stem
 exactly) and fills the INDEX line (`host.index_hint_label`) above the chapter
 path in the lookup box. At rest the line is a dim prompt ("Hover/Tap a colored
-word to see where to look it up"), never the list of entries. Hovering a
+word to see what to look up"), never the list of entries. Hovering a
 keyword (desktop) puts just its entry in the INDEX line until the pointer
 leaves; a tap or click pins it, shown as a solid amber chip, until a second tap
 or the next question, and lights the lookup box briefly (amber border and tint
 easing back, colors only; under Reduce motion the box stays tinted while
 pinned). The line reserves the height of its tallest text (prompt or any one
 entry), so a pick never grows the box. No tooltip pops up. After answering the
-INDEX line goes with the lookup box, the keywords stay marked and the reference
-line is unchanged.
+INDEX line goes with the lookup box, the keywords stay marked and the
+reference line is unchanged; no INDEX text shows anywhere.
 Speech reads the record, never the label. `FitController` hides the INDEX line
 before the page would scroll; a pick still shows its entry. The
 setting is `AudioSettings.hunt_keywords` (audio.cfg `[study] hunt_keywords`,
