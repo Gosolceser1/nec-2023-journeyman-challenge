@@ -70,16 +70,19 @@ pinned by a test or a validator guard.
 - **Mac fonts.** A Mac has no Segoe UI. `AppTheme.ui_font_names()` asks a Mac
   for its system UI font (`.AppleSystemUIFont`, San Francisco) right after
   Segoe UI; if CoreText refuses that name the list falls through to Helvetica
-  Neue ("SF Pro Display" only when the user installed it). Both are a little
-  wider than Segoe UI. The layouts were checked on Windows with
+  Neue ("SF Pro Display" only when the user installed it). The `macos-smoke`
+  font probe on macOS 15 (Apple Silicon and Intel) found San Francisco
+  (`/System/Library/Fonts/SFNS.ttf`) and measured it about 5% narrower than
+  Segoe UI Semibold at the same size (611 against 644 px for the sample line;
+  646 against 666 in bold); Helvetica Neue would be about as wide as Segoe UI
+  (639). The layouts were also checked on Windows with
   `NEC_UI_FONT=Arial` (as wide as Segoe UI at regular weight, about 2% wider in
   bold) and `NEC_UI_FONT=Verdana` (11-21% wider, wider than any Mac font): all
   fit, table, menu, math, tooltip, safe-area, keyword and breadcrumb suites
   pass with Arial; with Verdana the only failure is
   `test_hunt_keyword_input`'s "the INDEX box keeps the prompt's height" for 4
-  long entries (a line more or less of wrap; nothing clips). The
-  `macos-smoke` font probe (`tools/visual/font_probe.gd`) prints which font
-  file a Mac really uses and how wide it sets a line.
+  long entries (a line more or less of wrap; nothing clips). Still open: no
+  one has read the Mac screens closely at real Retina sizes.
 - **Mac system voice untested.** When an Edge voice fails and a line has no
   recorded clip, the Mac falls back to its own voice through Godot's
   `DisplayServer` TTS. The US-English filter accepts macOS voices
