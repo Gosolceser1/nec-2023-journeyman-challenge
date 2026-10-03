@@ -1,7 +1,9 @@
 # Release
 
-How to build the shareable Windows zip and Android APK. Everything lands in
-`release/` (gitignored). Version 1.0.0 was the first release; 1.0.6 is current (CHANGELOG.md).
+How to build the shareable Windows zip, macOS zip and Android APK. Everything
+lands in `release/` (gitignored). Version 1.0.0 was the first release; 1.0.6 is
+current (CHANGELOG.md). The macOS zip is new after 1.0.6 and ships from the next
+release.
 
 ## What a recipient gets
 
@@ -12,7 +14,14 @@ How to build the shareable Windows zip and Android APK. Everything lands in
   the Edge voice, fonts, NFPA trademark note) and `THIRD_PARTY_LICENSES.txt`
   (Godot's MIT license and its components, generated from the engine).
 - `NEC2023JourneymanChallenge_v<ver>_Android.apk`: signed with the release key.
-- `SHA256SUMS.txt`: hashes of the zip, the exe and the APK.
+- `NEC2023JourneymanChallenge_v<ver>_macOS.zip`: one folder holding
+  `NEC 2023 Journeyman Challenge.app` (universal: Apple Silicon and Intel,
+  ad-hoc signed, not notarized), a Mac `README.txt` (install, the Gatekeeper
+  steps for Sequoia and older, the `xattr` fallback, where progress is saved;
+  from `tools/release/README_macOS.txt`), `CREDITS.txt` and
+  `THIRD_PARTY_LICENSES.txt`. The texts sit beside the `.app`, never inside it:
+  a file added inside the signed bundle makes macOS call the app "damaged".
+- `SHA256SUMS.txt`: hashes of the zips, the exe and the APK.
 
 Nothing a user sees says Godot: the exe icon and version resource, the window
 and taskbar icon, the boot splash, the title bar (no "(DEBUG)" in a release
@@ -48,6 +57,9 @@ The splash and banner text comes from `data/edition.json` and the bank.
 
 The Windows exporter writes its fixed set of 16/32/48/64/128/256 into the exe
 (pixel-identical to the `.ico`); it drops 24, which Windows then scales from 32.
+The macOS exporter builds the app's `.icns` (16 to 1024 px) from
+`source/png/icon_1024.png` (the macOS preset's `application/icon`); the source
+folder is never packed.
 
 ## Steps
 
@@ -64,15 +76,18 @@ $t = "$env:APPDATA\Godot\export_templates\4.7.2.stable"
 New-Item -ItemType Directory -Force $t | Out-Null
 foreach ($f in 'version.txt','icudt_godot.dat','windows_release_x86_64.exe','windows_debug_x86_64.exe',
                'windows_release_x86_64_console.exe','windows_debug_x86_64_console.exe',
-               'android_release.apk','android_debug.apk') {
+               'android_release.apk','android_debug.apk','macos.zip') {
     Copy-Item "$real\export_templates\4.7.2.stable\$f" $t }
 Copy-Item "$real\editor_settings-4.7.tres" "$env:APPDATA\Godot\"
 ```
 
-1. Bump the version if needed: `application/config/version` in
-   `project.godot`, `application/file_version` and `product_version` in the
-   Windows preset, `version/name` and `version/code` (+1 every release) in both
-   Android presets.
+1. Bump the version if needed: `python tools/release/bump_version.py <x.y.z>`
+   rewrites `application/config/version` in `project.godot`,
+   `application/file_version` and `product_version` in the Windows preset,
+   `version/name` and `version/code` (+1 every release) in both Android
+   presets, and `application/short_version` and the build number
+   (`application/version`, the same number as the Android code) in the macOS
+   preset. `--check` reports a copy that disagrees.
 2. Make sure the voice bundle exists (`assets/speech/`, see README); an export
    without it succeeds silently with no recorded voice.
 3. `bash tools/verify.sh` must end with ALL CHECKS PASSED.
@@ -82,18 +97,34 @@ Copy-Item "$real\editor_settings-4.7.tres" "$env:APPDATA\Godot\"
    & $env:GODOT --headless --path . --import
    & $env:GODOT --headless --path . --export-release "Windows Desktop" "release/windows/NEC 2023 Journeyman Challenge.exe"
    & $env:GODOT --headless --path . --export-release "Android Release" "release/android/NEC2023JourneymanChallenge_v1.0.6_Android.apk"
+   & $env:GODOT --headless --path . --export-release "macOS" "release/macos/NEC2023JourneymanChallenge_v1.0.6_macOS.zip"
    ```
 
    Godot does not create output folders, so on a fresh clone run
-   `New-Item -ItemType Directory -Force release/windows, release/android` first,
+   `New-Item -ItemType Directory -Force release/windows, release/android, release/macos` first,
    and put an empty `.gdignore` in `release/` so the editor never scans the builds.
+   Always export macOS to a `.zip`: a bare `.app` exported from Windows loses
+   the executable bit and does not launch.
 5. Check the pack: `python tools/list_pck.py "release/windows/NEC 2023 Journeyman Challenge.exe" --desktop`
    (reads the pack embedded in the exe; fails on tools/, docs, PDFs, `.md`,
-   any `.py` (no build runs Python) or a missing runtime file).
-6. Package: `python tools/release/make_release.py` (zip, APK copy, SHA256SUMS).
+   any `.py` (no build runs Python) or a missing runtime file). The macOS
+   preset uses the same exclude filter (`test_project_settings.gd` checks), so
+   its pack holds the same files.
+6. Package: `python tools/release/make_release.py` (Windows zip, APK copy,
+   macOS zip, SHA256SUMS). The macOS `.app` is copied entry by entry from
+   Godot's zip with its mode bits; the run fails if the executable lost its
+   executable bit or anything inside the bundle differs from what the ad-hoc
+   signature sealed (`check_macos_zip`, tested by `test_make_release.py`).
 7. Smoke test: run the exe with a temp `APPDATA`. stdout and stderr must stay
    empty, the title must read "NEC 2023 Journeyman Challenge", and the menu
-   footer must end in the version.
+   footer must end in the version. The Mac build cannot run on Windows:
+   publishing the release starts the `macos-smoke` GitHub workflow, which
+   downloads the release's macOS zip on an Apple Silicon and an Intel Mac,
+   checks both architectures, the signature and `Info.plist`, runs it headless
+   (stderr must stay empty), checks the save folder and uploads a screenshot.
+   Run it by hand from the Actions tab (`macos-smoke`, optional tag) any time;
+   a release without a macOS zip is tested with one exported from the checkout
+   (no voice bundle).
 
 ## Android signing
 
@@ -128,10 +159,24 @@ keystore. Confirm a build with
 `apksigner verify --print-certs <apk>`: the signer must be
 `CN=NEC 2023 Journeyman Challenge, O=Live Wire Training, C=US`.
 
+## macOS signing
+
+The macOS build is ad-hoc signed by Godot's built-in signer (Apple Silicon
+runs nothing unsigned) and not notarized, so Gatekeeper blocks a downloaded
+copy until the user allows it once (System Settings > Privacy & Security >
+Open Anyway on macOS 15 Sequoia and later, right-click > Open on older
+versions; the Mac `README.txt` and the main README give the steps). Opening
+without a warning needs an Apple Developer Program membership ($99 a year)
+for a Developer ID certificate and notarization. That works from Windows with
+rcodesign: set the macOS preset's Codesign and Notarization options to
+rcodesign (see Godot's "Exporting for macOS" page). Those credentials would
+live outside the repo like the Android keystore.
+
 ## Where progress is saved
 
 `application/config/use_custom_user_dir` puts `user://` at
-`%APPDATA%\NEC2023JourneymanChallenge` on Windows. Builds before 1.0 used
+`%APPDATA%\NEC2023JourneymanChallenge` on Windows and
+`~/Library/Application Support/NEC2023JourneymanChallenge` on macOS. Builds before 1.0 used
 `%APPDATA%\Godot\app_userdata\NEC 2023 Journeyman Challenge`; on the first
 launch `UserDirMigration` copies `audio.cfg`, `voice.cfg` and
 `question_bag.cfg` from there if the new folder has none of them, then writes

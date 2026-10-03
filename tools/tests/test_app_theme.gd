@@ -68,6 +68,13 @@ func _init() -> void:
 	var font := AppTheme.ui_font(700)
 	check(font.font_weight == 700 and font.font_names[0] == "Segoe UI", "ui_font weight and family")
 	check(AppTheme.ui_font().font_weight == 500, "ui_font default weight")
+	var desktop := PackedStringArray(["Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"])
+	check(AppTheme.ui_font_names("Windows", "") == desktop, "Windows keeps the font list as is")
+	check(AppTheme.ui_font_names("Android", "") == desktop, "Android keeps the font list as is")
+	var mac := AppTheme.ui_font_names("macOS", "")
+	check(mac[0] == "Segoe UI" and mac[1] == ".AppleSystemUIFont" and mac.slice(2) == desktop.slice(1),
+		"macOS asks for its system UI font right after Segoe UI: %s" % str(mac))
+	check(AppTheme.ui_font_names("Windows", "Arial")[0] == "Arial", "NEC_UI_FONT puts the forced font first (layout checks)")
 	check(AppTheme.monospace_font().font_names[0] == "Consolas", "monospace_font family")
 	var card := AppTheme.surface(AppTheme.SURFACE_BOTTOM, AppTheme.HAIRLINE, AppTheme.ELEVATION_CARD)
 	check(card.shadow_size == AppTheme.ELEVATION_CARD and card.shadow_color == AppTheme.SHADOW_CARD, "surface elevation sets the shadow")

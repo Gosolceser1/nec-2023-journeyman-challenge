@@ -357,6 +357,20 @@ static func focus_ring(radius: int = 10) -> StyleBoxFlat:
 
 static var _ui_fonts: Dictionary = {}
 
+## macOS has no Segoe UI, and CoreText finds "SF Pro Display" only if the user
+## installed it, so a Mac asks for its system UI font (San Francisco) by its
+## CoreText name before falling through to Helvetica Neue. Layout checks only:
+## NEC_UI_FONT=<family> puts that font first, so the fit suites can run with a
+## wider face than Segoe UI (docs/KNOWN_ISSUES.md, "Mac fonts").
+static func ui_font_names(os_name: String = OS.get_name(), forced: String = OS.get_environment("NEC_UI_FONT")) -> PackedStringArray:
+	var names := PackedStringArray(["Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"])
+	if os_name == "macOS":
+		names.insert(1, ".AppleSystemUIFont")
+	if forced != "":
+		names.insert(0, forced)
+	return names
+
+
 ## Shared per weight: every SystemFont resolves the OS font and keeps its own
 ## glyph cache, so building one per label stalled startup and each question.
 ## Callers must not mutate the returned font (duplicate() it first).
@@ -364,7 +378,7 @@ static func ui_font(weight: int = 500) -> SystemFont:
 	if _ui_fonts.has(weight):
 		return _ui_fonts[weight]
 	var font := SystemFont.new()
-	font.font_names = PackedStringArray(["Segoe UI", "SF Pro Display", "Inter", "Roboto", "Helvetica Neue", "Arial", "sans-serif"])
+	font.font_names = ui_font_names()
 	font.font_weight = weight
 	font.subpixel_positioning = TextServer.SUBPIXEL_POSITIONING_AUTO
 	_ui_fonts[weight] = font

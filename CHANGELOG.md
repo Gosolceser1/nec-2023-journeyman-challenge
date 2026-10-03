@@ -2,6 +2,25 @@
 
 ## [Unreleased]
 
+### Added
+
+- **A Mac build.** The next release adds
+  `NEC2023JourneymanChallenge_v<version>_macOS.zip`: one app for Apple Silicon
+  and Intel Macs (macOS 11 or later on Apple Silicon, 10.13 or later on Intel),
+  built on Windows like the others. It is ad-hoc signed but not notarized, so
+  the first launch needs one confirmation: System Settings > Privacy &
+  Security > Open Anyway on macOS 15 Sequoia and later, right-click > Open on
+  older versions. The zip's README and the main README give the steps and a
+  Terminal fallback. Progress is saved in
+  `~/Library/Application Support/NEC2023JourneymanChallenge`. On a Mac the
+  text uses the system font (San Francisco) instead of Segoe UI.
+- **The Mac build is checked on real Macs.** A `macos-smoke` GitHub workflow
+  runs when a release is published (or by hand): on an Apple Silicon and an
+  Intel Mac it checks both architectures, the signature and the app details,
+  runs the app for a few seconds, checks the save folder and takes a
+  screenshot. Packaging fails if the app lost its executable bit or anything
+  was added inside the signed app.
+
 ### Changed
 
 - **One diagram per question.** About 200 questions used to show a figure made

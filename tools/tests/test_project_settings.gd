@@ -71,6 +71,10 @@ func _init() -> void:
 	var presets := ConfigFile.new()
 	check(presets.load("res://export_presets.cfg") == OK, "export_presets.cfg parses")
 	var androids := 0
+	var macs := 0
+	var android_code := -1
+	var windows_exclude := ""
+	var mac_exclude := ""
 	for sec in presets.get_sections():
 		if sec.ends_with(".options") or not presets.has_section(sec + ".options"):
 			continue
@@ -84,12 +88,33 @@ func _init() -> void:
 			check(str(presets.get_value(opts, "package/unique_name", "")) == AppIdentity.android_package(),
 				"%s package id is the frozen android_package" % presets.get_value(sec, "name"))
 			check(str(presets.get_value(opts, "package/name", "")) == AppIdentity.display_name(), "%s app name" % presets.get_value(sec, "name"))
+			android_code = int(presets.get_value(opts, "version/code", -1))
+		elif platform == "macOS":
+			macs += 1
+			mac_exclude = str(presets.get_value(sec, "exclude_filter", ""))
+			check(str(presets.get_value(opts, "application/short_version", "")) == version, "macOS short_version is %s" % version)
+			check(str(presets.get_value(opts, "application/bundle_identifier", "")) == AppIdentity.macos_bundle_id(),
+				"macOS bundle id is the frozen macos_bundle_id")
+			check(str(presets.get_value(opts, "binary_format/architecture", "")) == "universal", "macOS build is universal (Apple Silicon + Intel)")
+			check(int(presets.get_value(opts, "codesign/codesign", 0)) == 1, "macOS is ad-hoc signed (built-in): Apple Silicon runs nothing unsigned")
+			check(bool(presets.get_value(opts, "display/high_res", false)), "macOS renders at Retina resolution")
+			var mac_icon := str(presets.get_value(opts, "application/icon", ""))
+			check(mac_icon.ends_with("icon_1024.png") and FileAccess.file_exists(mac_icon), "macOS icon is the 1024 px branding render (%s)" % mac_icon)
+			check(str(presets.get_value(sec, "export_path", "")).get_file() == "%s_v%s_macOS.zip" % [AppIdentity.file_stem(), version],
+				"macOS exports a .zip (a bare .app from Windows loses the executable bit)")
 		elif platform == "Windows Desktop":
+			windows_exclude = str(presets.get_value(sec, "exclude_filter", ""))
 			check(str(presets.get_value(opts, "application/file_version", "")) == version
 				and str(presets.get_value(opts, "application/product_version", "")) == version, "Windows file/product version is %s" % version)
 			check(str(presets.get_value(opts, "application/product_name", "")) == AppIdentity.display_name(), "Windows product name")
 			check(str(presets.get_value(sec, "export_path", "")).get_file() == AppIdentity.display_name() + ".exe", "Windows exe is named after the app")
 	check(androids == 2, "both Android presets checked (%d)" % androids)
+	check(macs == 1, "the macOS preset checked (%d)" % macs)
+	check(mac_exclude != "" and mac_exclude == windows_exclude, "macOS packs exactly what Windows packs (same exclude_filter)")
+	for sec in presets.get_sections():
+		if str(presets.get_value(sec, "platform", "")) == "macOS":
+			check(str(presets.get_value(sec + ".options", "application/version", "")) == str(android_code),
+				"macOS build number is the Android version/code (%d)" % android_code)
 
 	# No setting name may contain a comment character or a space: that is the
 	# signature of a "#" comment line fused onto the next key.

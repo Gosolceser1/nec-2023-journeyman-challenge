@@ -21,7 +21,9 @@ class RepoTests(unittest.TestCase):
         wheres = [w for w, _ in bump_version.copies(ROOT)]
         self.assertEqual(sum("file_version" in w or "product_version" in w for w in wheres), 2)
         self.assertEqual(sum("version/name" in w for w in wheres), 2)
+        self.assertEqual(sum("macOS: application/short_version" in w for w in wheres), 1)
         self.assertEqual(len(bump_version.android_codes(ROOT)), 2)
+        self.assertEqual(bump_version.macos_builds(ROOT), [str(bump_version.android_codes(ROOT)[0])])
 
 
 class FixtureTests(unittest.TestCase):
@@ -46,8 +48,10 @@ class FixtureTests(unittest.TestCase):
         self.assertEqual(bump_version.check(self.tmp), [])
         self.assertTrue(all(v == "9.8.7" for _, v in bump_version.copies(self.tmp)))
         self.assertEqual(bump_version.android_codes(self.tmp), [self.code + 1] * 2)
+        self.assertEqual(bump_version.macos_builds(self.tmp), [str(self.code + 1)])
         after = self.read("project.godot") + self.read("export_presets.cfg")
         self.assertIn("_v9.8.7_Android.apk", after)
+        self.assertIn("_v9.8.7_macOS.zip", after)
         self.assertNotIn(self.old, after)
         self.assertEqual(before.count("\r\n"), after.count("\r\n"))
         self.assertEqual(len(before.splitlines()), len(after.splitlines()))
@@ -55,6 +59,20 @@ class FixtureTests(unittest.TestCase):
     def test_same_version_keeps_the_code(self):
         self.assertEqual(bump_version.bump(self.old, self.tmp), [])
         self.assertEqual(bump_version.android_codes(self.tmp), [self.code] * 2)
+        self.assertEqual(bump_version.macos_builds(self.tmp), [str(self.code)])
+
+    def test_check_finds_a_stale_macos_copy(self):
+        path = self.tmp / "export_presets.cfg"
+        text = self.read("export_presets.cfg")
+        text = text.replace(f'application/short_version="{self.old}"', 'application/short_version="0.0.1"')
+        text = text.replace(f'application/version="{self.code}"', 'application/version="1"')
+        path.write_bytes(text.encode("utf-8"))
+        problems = bump_version.check(self.tmp)
+        self.assertEqual(len(problems), 2, problems)
+        self.assertTrue(any("short_version" in p for p in problems))
+        self.assertTrue(any("macOS build number" in p for p in problems))
+        bump_version.bump(self.old, self.tmp)
+        self.assertEqual(bump_version.check(self.tmp), [])
 
     def test_check_finds_a_stale_copy(self):
         path = self.tmp / "export_presets.cfg"

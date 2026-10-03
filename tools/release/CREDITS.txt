@@ -34,8 +34,8 @@ Microsoft Edge are trademarks of the Microsoft group of companies.
 FONTS
 -----
 The app draws its text with the fonts already installed on your computer
-(Segoe UI and Consolas on Windows, the system font on Android). No font files
-are included.
+(Segoe UI and Consolas on Windows, the system font on macOS and Android). No
+font files are included.
 
 
 SOFTWARE

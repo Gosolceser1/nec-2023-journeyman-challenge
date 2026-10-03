@@ -1,0 +1,178 @@
+name: macos-smoke
+
+# Launches the Mac build on a real Mac, Apple Silicon and Intel: the release's
+# macOS zip, or, when that release has none, one exported from this checkout
+# (no voice bundle: assets/speech is gitignored). Checks the bundle (both
+# architectures, ad-hoc signature, Info.plist), runs it headless for a few
+# seconds with stderr required empty, checks the save folder, and uploads a
+# windowed screenshot plus the font probe (tools/visual/font_probe.gd).
+# Separate from verify.yml so it never slows or breaks that job.
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to test (empty = the latest release)
+        required: false
+        default: ""
+  release:
+    types: [published]
+
+permissions:
+  contents: read
+
+jobs:
+  macos-smoke:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15
+            arch: arm64
+          - runner: macos-15-intel
+            arch: x86_64
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: ${{ github.event.release.tag_name || inputs.tag }}
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Names and versions (tools/godot.env, data/app.json)
+        run: |
+          . tools/godot.env
+          python3 - <<'EOF' >> "$GITHUB_ENV"
+          import sys
+          sys.path.insert(0, "tools/release")
+          from sync_identity import identity
+          i = identity()
+          print(f"APP_NAME={i['display_name']}")
+          print(f"USER_DIR={i['user_dir']}")
+          print(f"BUNDLE_ID={i['macos_bundle_id']}")
+          print(f"PROJECT_VERSION={i['version']}")
+          print(f"MAC_EXPORT={i['exports']['macOS']}")
+          EOF
+          echo "GODOT_VERSION=$GODOT_VERSION" >> "$GITHUB_ENV"
+          echo "GODOT=$PWD/godot/Godot.app/Contents/MacOS/Godot" >> "$GITHUB_ENV"
+
+      - name: macOS zip from the release
+        id: release
+        run: |
+          tag="$TAG"
+          [ -n "$tag" ] || tag=$(gh release view --repo "$GITHUB_REPOSITORY" --json tagName -q .tagName)
+          mkdir -p dist
+          if gh release download "$tag" --repo "$GITHUB_REPOSITORY" --pattern '*_macOS.zip' --dir dist; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+            echo "WANT_VERSION=${tag#v}" >> "$GITHUB_ENV"
+            echo "Testing the macOS zip of release $tag"
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "WANT_VERSION=$PROJECT_VERSION" >> "$GITHUB_ENV"
+            echo "::notice::Release $tag has no macOS zip; exporting one from this checkout (without the voice bundle)."
+          fi
+
+      - name: Cache Godot (macOS editor)
+        uses: actions/cache@v6
+        with:
+          path: godot
+          key: godot-${{ env.GODOT_VERSION }}-macos-universal
+
+      - name: Download Godot (macOS editor)
+        run: |
+          [ -x "$GODOT" ] && exit 0
+          curl -fsSL -o godot.zip "https://github.com/godotengine/godot/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_macos.universal.zip"
+          ditto -x -k godot.zip godot && rm godot.zip
+          test -x "$GODOT"
+
+      - name: Import
+        run: |
+          "$GODOT" --headless --path . --import > import.log 2>&1 || { tail -40 import.log; exit 1; }
+
+      - name: Font probe (what a Mac draws the UI with)
+        run: |
+          "$GODOT" --headless --path . --script tools/visual/font_probe.gd 2>&1 | grep -vE 'Unreferenced static string|string_name\.cpp' | tee font_probe.txt
+
+      - name: Export from this checkout (no macOS zip in the release)
+        if: steps.release.outputs.found != 'true'
+        run: |
+          dest="$HOME/Library/Application Support/Godot/export_templates/$GODOT_VERSION.stable"
+          mkdir -p "$dest"
+          curl -fsSL -o templates.tpz "https://github.com/godotengine/godot/releases/download/$GODOT_VERSION-stable/Godot_v$GODOT_VERSION-stable_export_templates.tpz"
+          unzip -j -o templates.tpz templates/macos.zip templates/version.txt -d "$dest"
+          rm templates.tpz
+          mkdir -p "$(dirname "$MAC_EXPORT")"
+          "$GODOT" --headless --path . --export-release macOS "$MAC_EXPORT" > export.log 2>&1 || { tail -40 export.log; exit 1; }
+          cp "$MAC_EXPORT" dist/
+
+      - name: Unzip with ditto
+        run: |
+          zip=$(ls dist/*_macOS.zip | head -1)
+          ditto -x -k "$zip" unpacked
+          app=$(find unpacked -maxdepth 2 -name '*.app' -type d | head -1)
+          [ -n "$app" ] || { echo "no .app in $zip"; exit 1; }
+          echo "APP=$PWD/$app" >> "$GITHUB_ENV"
+          echo "EXE=$PWD/$app/Contents/MacOS/$(/usr/libexec/PlistBuddy -c 'Print :CFBundleExecutable' "$app/Contents/Info.plist")" >> "$GITHUB_ENV"
+          ls -la "$(dirname "$app")"
+
+      - name: Architectures, signature, Info.plist
+        run: |
+          set -x
+          test -x "$EXE"
+          archs=$(lipo -archs "$EXE")
+          [[ "$archs" == *x86_64* && "$archs" == *arm64* ]] || { echo "not universal: $archs"; exit 1; }
+          codesign --verify --deep --strict --verbose=2 "$APP"
+          codesign -dv "$APP" 2>&1 | tee codesign.txt
+          grep -q 'Signature=adhoc' codesign.txt
+          plutil -p "$APP/Contents/Info.plist" | tee info_plist.txt
+          plist() { /usr/libexec/PlistBuddy -c "Print :$1" "$APP/Contents/Info.plist"; }
+          [ "$(plist CFBundleIdentifier)" = "$BUNDLE_ID" ]
+          [ "$(plist CFBundleShortVersionString)" = "$WANT_VERSION" ]
+          [ "$(plist CFBundleDisplayName)" = "$APP_NAME" ]
+          [ "$(plist NSHighResolutionCapable)" = "true" ]
+          [ "$(plist LSMinimumSystemVersionByArchitecture:arm64)" = "11.00" ]
+          # Not notarized, so Gatekeeper rejects a downloaded copy (users click Open Anyway).
+          spctl --assess --type execute -vv "$APP" || true
+
+      - name: Launch headless (stderr must stay empty)
+        run: |
+          rm -rf "$HOME/Library/Application Support/$USER_DIR"
+          set +e
+          perl -e 'alarm shift; exec @ARGV' 120 "$EXE" --headless --max-fps 60 --quit-after 300 > run_stdout.txt 2> run_stderr.txt
+          code=$?
+          set -e
+          echo "exit $code"; echo "--- stdout"; cat run_stdout.txt; echo "--- stderr"; cat run_stderr.txt
+          [ "$code" -eq 0 ]
+          [ ! -s run_stderr.txt ]
+          ls -la "$HOME/Library/Application Support/$USER_DIR"
+          test -f "$HOME/Library/Application Support/$USER_DIR/user_dir_migration.cfg"
+
+      - name: Windowed screenshot
+        continue-on-error: true
+        run: |
+          "$EXE" > win_stdout.txt 2> win_stderr.txt &
+          pid=$!
+          sleep 25
+          screencapture -x "shot-${{ matrix.arch }}.png"
+          kill "$pid" || true
+          ls -la shot-*.png
+
+      - name: Upload screenshot and logs
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: macos-smoke-${{ matrix.arch }}
+          path: |
+            shot-*.png
+            font_probe.txt
+            codesign.txt
+            info_plist.txt
+            run_stdout.txt
+            run_stderr.txt
+            win_stdout.txt
+            win_stderr.txt
+            import.log
+            export.log
+          if-no-files-found: ignore
+          retention-days: 14

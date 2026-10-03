@@ -5,7 +5,7 @@
 <p align="center">A study app for the <strong>NEC 2023</strong> <strong>journeyman electrician</strong> exam: timed drills, a full exam simulator built on the <strong>Nebraska</strong> exam blueprint, and a lesson after every answer.</p>
 <p align="center">
   <img src="https://img.shields.io/badge/version-1.0.6-38bdf8" alt="Version 1.0.6">
-  <img src="https://img.shields.io/badge/platform-Windows%20x64%20%7C%20Android-0b1221" alt="Platform: Windows x64 | Android">
+  <img src="https://img.shields.io/badge/platform-Windows%20x64%20%7C%20macOS%20%7C%20Android-0b1221" alt="Platform: Windows x64 | macOS | Android">
   <img src="https://img.shields.io/badge/engine-Godot%204.7-478cbf?logo=godotengine&logoColor=white" alt="Engine: Godot 4.7">
   <img src="https://img.shields.io/badge/NEC-2023-f59e0b" alt="NEC 2023">
 </p>
@@ -21,6 +21,7 @@ Get the latest build from the
 |---|---|---|
 | [`NEC2023JourneymanChallenge_v1.0.6_Windows.zip`](https://github.com/Gosolceser1/nec-2023-journeyman-challenge/releases/tag/v1.0.6) | Windows PCs | Windows 10/11, 64-bit; no install |
 | [`NEC2023JourneymanChallenge_v1.0.6_Android.apk`](https://github.com/Gosolceser1/nec-2023-journeyman-challenge/releases/tag/v1.0.6) | Android phones and tablets | Allow installs from unknown sources |
+| `NEC2023JourneymanChallenge_v<version>_macOS.zip` (from the next release) | Macs, Apple Silicon and Intel | macOS 11+ (Apple Silicon) or 10.13+ (Intel); not notarized, see below |
 
 **Windows:** unzip and run `NEC 2023 Journeyman Challenge.exe`. The app is not
 code-signed, so the first time you open it Windows SmartScreen may show
@@ -29,6 +30,25 @@ code-signed, so the first time you open it Windows SmartScreen may show
 **Android:** open the APK on the device and allow installs from unknown sources
 if Android asks. A new version installs over the old one and keeps your
 progress.
+
+**macOS:** unzip the download (Safari does it for you), drag
+`NEC 2023 Journeyman Challenge.app` into **Applications** and open it from
+there. The app is not notarized by Apple (that takes a paid developer
+account), so macOS stops it the first time:
+
+- **macOS 15 Sequoia and later:** double-click the app and click **Done** when
+  macOS says it could not verify it. Then open **System Settings > Privacy &
+  Security**, scroll to **Security**, click **Open Anyway** next to the app,
+  confirm with **Open Anyway** and your password.
+- **macOS 14 Sonoma and earlier:** right-click (or Control-click) the app,
+  choose **Open**, then click **Open**.
+- **If macOS says the app "is damaged"** or offers no Open Anyway, run this in
+  Terminal, then open the app normally:
+  `xattr -dr com.apple.quarantine "/Applications/NEC 2023 Journeyman Challenge.app"`
+
+macOS only asks once. Progress is saved in
+`~/Library/Application Support/NEC2023JourneymanChallenge`. The zip's
+`README.txt` repeats these steps.
 
 `SHA256SUMS.txt` on the release page lets you check the downloads.
 
@@ -87,8 +107,8 @@ progress.
 - **Read-aloud voice:** questions and lessons can be read by a recorded voice
   that ships with the app, including a hands-free Listen mode. With internet,
   Microsoft's natural online voices (Ava, Brian, Emma and more) can read too,
-  built in on Windows and Android with nothing extra to install (Windows also
-  offers the British Ryan). Without a connection the recorded voice takes over.
+  built in on Windows, macOS and Android with nothing extra to install (the
+  desktop builds also offer the British Ryan). Without a connection the recorded voice takes over.
 - **Reference tables and diagrams** right next to the question, with tables
   laid out to fit the screen. 346 questions have an original study figure,
   drawn to look like the real equipment in one shared style
@@ -276,16 +296,18 @@ python tools/pipeline/check_requirements.py                 # every table/calc q
 
 `GODOT` and `PYTHON` override the binaries verify.sh uses. A full run is about
 161,000 Godot checks in 43 suites (mostly whole-bank sweeps in both layouts,
-including the no-answer-leak guard), the scene harness in both layouts, 153
+including the no-answer-leak guard), the scene harness in both layouts, 165
 Python tests and the question-bank validator; with the voice bundle present it
 also checks that every question and math step has its clip
 ([tools/tests/README.md](tools/tests/README.md)).
 
 ## Export
 
-Presets live in `export_presets.cfg` (Windows Desktop, Android Debug/Release).
-Their exclude filters keep tests, tools, docs and source PDFs out of the build.
-The Windows export is a single exe with the pack embedded.
+Presets live in `export_presets.cfg` (Windows Desktop, Android Debug/Release,
+macOS). Their exclude filters keep tests, tools, docs and source PDFs out of the
+build. The Windows export is a single exe with the pack embedded; the macOS
+export is a universal (Apple Silicon + Intel), ad-hoc signed `.app` in a zip,
+built on Windows like the others.
 
 ```
 mkdir build

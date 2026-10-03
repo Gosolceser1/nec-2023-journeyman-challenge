@@ -10,11 +10,12 @@ Visible names are templates in data/app.json filled from data/edition.json
                       name), Windows product_name / file_description / company_name,
                       Android package/name
 
-The save folder (config/custom_user_dir_name) and the Android package id
-(package/unique_name) are FROZEN: this script only checks them against
-data/app.json and never writes them. A new folder name would leave existing
-installs without their progress; a new package id would install a second app
-instead of upgrading the old one.
+The save folder (config/custom_user_dir_name), the Android package id
+(package/unique_name) and the macOS bundle id (application/bundle_identifier)
+are FROZEN: this script only checks them against data/app.json and never writes
+them. A new folder name would leave existing installs without their progress; a
+new package or bundle id would install a second app instead of upgrading the
+old one.
 """
 from __future__ import annotations
 
@@ -69,6 +70,8 @@ def expected(ident: dict, presets_text: str) -> list[tuple[str, str, str, str, b
         elif platform == "Android":
             rows.append(("export_presets.cfg", opts, "package/name", name, False))
             rows.append(("export_presets.cfg", opts, "package/unique_name", ident["android_package"], True))
+        elif platform == "macOS":
+            rows.append(("export_presets.cfg", opts, "application/bundle_identifier", ident["macos_bundle_id"], True))
     return rows
 
 

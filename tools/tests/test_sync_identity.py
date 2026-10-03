@@ -22,6 +22,7 @@ class RepoTests(unittest.TestCase):
         ident = sync_identity.identity(ROOT)
         self.assertEqual(ident["user_dir"], "NEC2023JourneymanChallenge")
         self.assertEqual(ident["android_package"], "com.livewire.nec2023.trainer")
+        self.assertEqual(ident["macos_bundle_id"], "com.livewire.nec2023.trainer")
         self.assertIn("NEC 2023 Journeyman Challenge", ident["legacy_project_names"])
         self.assertIn("FROZEN", json.loads((ROOT / "data" / "app.json").read_text(encoding="utf-8"))["about"])
 
@@ -71,6 +72,8 @@ class FixtureTests(unittest.TestCase):
         self.assertIn('export_path="build/NEC2026JourneymanChallenge_debug.apk"', presets)
         version = sync_identity.project_version(self.tmp)
         self.assertIn(f'export_path="release/android/NEC2026JourneymanChallenge_v{version}_Android.apk"', presets)
+        self.assertIn(f'export_path="release/macos/NEC2026JourneymanChallenge_v{version}_macOS.zip"', presets)
+        self.assertIn('application/bundle_identifier="com.livewire.nec2023.trainer"', presets)
         self.assertIn('application/product_name="NEC 2026 Journeyman Challenge"', presets)
         self.assertEqual(presets.count('package/name="NEC 2026 Journeyman Challenge"'), 2)
         self.assertEqual(presets.count('package/unique_name="com.livewire.nec2023.trainer"'), 2)
@@ -92,10 +95,11 @@ class FixtureTests(unittest.TestCase):
         app = json.loads(path.read_text(encoding="utf-8"))
         app["user_dir"] = "SomethingElse"
         app["android_package"] = "com.example.other"
+        app["macos_bundle_id"] = "com.example.other"
         path.write_text(json.dumps(app), encoding="utf-8")
         before = self.read("project.godot") + self.read("export_presets.cfg")
         report = sync_identity.sync(self.tmp)
-        self.assertEqual(sum(r.startswith("FROZEN") for r in report), 3)
+        self.assertEqual(sum(r.startswith("FROZEN") for r in report), 4)
         self.assertEqual(before, self.read("project.godot") + self.read("export_presets.cfg"))
 
     def test_set_value_only_touches_its_section(self):

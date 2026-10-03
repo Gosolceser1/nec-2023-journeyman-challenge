@@ -60,6 +60,31 @@ pinned by a test or a validator guard.
   second tap brings back the resting prompt; the five menu tabs fit; Show steps
   with Read, Voice off and Auto-read; "Try it on the calculator" lights the
   next key; the Math Trainer calculator answers with Check.
+- **The Mac build was never used on a Mac by a person.** It is exported on
+  Windows; the `macos-smoke` workflow launches it on GitHub's Apple Silicon and
+  Intel Macs (bundle checks, a headless run with empty stderr, the save folder,
+  a screenshot), but nobody clicked through it. On a Mac confirm: the
+  Gatekeeper steps in the Mac README (Open Anyway on Sequoia, right-click >
+  Open on Sonoma), sharp text on a Retina screen, the menu and question
+  screens, Read with the recorded Andrew and an Edge voice, and Cmd+Q.
+- **Mac fonts.** A Mac has no Segoe UI. `AppTheme.ui_font_names()` asks a Mac
+  for its system UI font (`.AppleSystemUIFont`, San Francisco) right after
+  Segoe UI; if CoreText refuses that name the list falls through to Helvetica
+  Neue ("SF Pro Display" only when the user installed it). Both are a little
+  wider than Segoe UI. The layouts were checked on Windows with
+  `NEC_UI_FONT=Arial` (as wide as Segoe UI at regular weight, about 2% wider in
+  bold) and `NEC_UI_FONT=Verdana` (11-21% wider, wider than any Mac font): all
+  fit, table, menu, math, tooltip, safe-area, keyword and breadcrumb suites
+  pass with Arial; with Verdana the only failure is
+  `test_hunt_keyword_input`'s "the INDEX box keeps the prompt's height" for 4
+  long entries (a line more or less of wrap; nothing clips). The
+  `macos-smoke` font probe (`tools/visual/font_probe.gd`) prints which font
+  file a Mac really uses and how wide it sets a line.
+- **Mac system voice untested.** When an Edge voice fails and a line has no
+  recorded clip, the Mac falls back to its own voice through Godot's
+  `DisplayServer` TTS. The US-English filter accepts macOS voices
+  (`en_US`), but which voice it picks and how the reading highlight follows it
+  were never heard.
 - **The Edge read-aloud endpoint is unofficial.** `EdgeTtsClient` copies
   edge-tts 7.2.8: the trusted client token, the Chromium version in
   `Sec-MS-GEC-Version` and the Origin header. If Microsoft changes them, the
@@ -124,6 +149,15 @@ pinned by a test or a validator guard.
 - **The Windows exe is not code-signed**, so SmartScreen warns on first run
   ("More info", then "Run anyway"; the recipient README says so). Only a
   code-signing certificate removes that.
+- **The Mac app is ad-hoc signed, not notarized**, so Gatekeeper blocks a
+  downloaded copy once: System Settings > Privacy & Security > Open Anyway on
+  macOS 15 Sequoia and later (Apple removed the right-click bypass there),
+  right-click > Open on older versions, or `xattr -dr com.apple.quarantine`
+  (the Mac README and the main README say so). Only an Apple Developer ID
+  ($99 a year) and notarization remove that (docs/RELEASE.md, "macOS signing").
+- **The Mac small icon sizes are scaled from the 1024 px render.** Godot builds
+  the `.icns` from one image, so the 16 and 32 px entries are not the
+  hand-tuned `icon_small.svg` the Windows `.ico` uses.
 - **No 24 px image in the exe.** Godot's exporter writes 16/32/48/64/128/256
   into the exe's icon, dropping the `.ico`'s hand-made 24 px; Windows scales
   32 down for a 100% taskbar. The running window uses the full `.ico`

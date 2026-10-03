@@ -1,14 +1,16 @@
 {
-	"about": "The app's name and identifiers. Visible names are templates filled from data/edition.json ({year}, {short}) and project.godot ({version}); tools/release/sync_identity.py writes them into project.godot and export_presets.cfg (--check fails when those files disagree), and the release tools and AppIdentity read them from here. user_dir and android_package are FROZEN and never follow the edition: user_dir is the save folder (%APPDATA%\\<user_dir>, user:// on every platform), so renaming it would leave every existing install without its settings and study progress; android_package is the Android application id, and a different id installs as a separate app beside the old one instead of upgrading it in place. sync_identity.py only checks them. legacy_project_names are the names the project had while saves went to Godot's default folder (%APPDATA%\\Godot\\app_userdata\\<name>, before 1.0); UserDirMigration looks there, so later app renames cannot break that one-time copy.",
+	"about": "The app's name and identifiers. Visible names are templates filled from data/edition.json ({year}, {short}) and project.godot ({version}); tools/release/sync_identity.py writes them into project.godot and export_presets.cfg (--check fails when those files disagree), and the release tools and AppIdentity read them from here. user_dir, android_package and macos_bundle_id are FROZEN and never follow the edition: user_dir is the save folder (%APPDATA%\\<user_dir> on Windows, ~/Library/Application Support/<user_dir> on macOS, user:// on every platform), so renaming it would leave every existing install without its settings and study progress; android_package is the Android application id, and a different id installs as a separate app beside the old one instead of upgrading it in place; macos_bundle_id is the Mac app's CFBundleIdentifier, which macOS uses the same way. sync_identity.py only checks them. legacy_project_names are the names the project had while saves went to Godot's default folder (%APPDATA%\\Godot\\app_userdata\\<name>, before 1.0); UserDirMigration looks there, so later app renames cannot break that one-time copy.",
 	"display_name": "NEC {year} Journeyman Challenge",
 	"description": "NEC {year} journeyman electrician exam trainer.",
 	"file_stem": "NEC{year}JourneymanChallenge",
 	"company": "Live Wire Training",
 	"user_dir": "NEC2023JourneymanChallenge",
 	"android_package": "com.livewire.nec2023.trainer",
+	"macos_bundle_id": "com.livewire.nec2023.trainer",
 	"legacy_project_names": ["NEC 2023 Journeyman Challenge"],
 	"exports": {
 		"Windows Desktop": "release/windows/{display_name}.exe",
+		"macOS": "release/macos/{file_stem}_v{version}_macOS.zip",
 		"Android Debug": "build/{file_stem}_debug.apk",
 		"Android Release": "release/android/{file_stem}_v{version}_Android.apk"
 	}

@@ -38,7 +38,7 @@ one as a child Godot process and reads its exit code. Slower than an in-process
 runner, but it exercises exactly the path a developer runs by hand, and one
 suite's failure cannot abort the rest.
 
-**Current status: about 161,000 Godot checks across 43 suites, 153 Python tests in 14 modules (listed in `tools/verify.sh`), 1 build-guard shell test, 0 documented product defects.** Most of the checks are whole-bank sweeps (every record, both layouts) and the math engine's generated problems. The scene harness runs on top of these in both layouts. The desktop Edge suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
+**Current status: about 161,000 Godot checks across 43 suites, 165 Python tests in 15 modules (listed in `tools/verify.sh`), 1 build-guard shell test, 0 documented product defects.** Most of the checks are whole-bank sweeps (every record, both layouts) and the math engine's generated problems. The scene harness runs on top of these in both layouts. The desktop Edge suite needs a clip from the gitignored `assets/speech/` bundle; on a fresh clone it prints `SKIPPED` and passes with 0 checks.
 
 Every formerly pinned defect is fixed and promoted to a real assertion, so a
 regression fails its suite rather than appearing in the defect list. The test table prefix case is covered directly: `NOTED: x` must remain unchanged.
@@ -80,12 +80,12 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | `test_nec_reference.gd` | `NecReference`: article titles, the post-answer reference line and the pre-answer "where to look" path |
 | `test_audio_settings.gd` | `AudioSettings`: audio modes and the rules for when the app may speak (Silent by default, nothing narrates the answer before answering, the simulator never autoplays, a hand-edited config stays in range) |
 | `test_app_strings.gd` | screen text that names the NEC edition or the exam format comes from `data/edition.json` and `data/exam_blueprint.json`; a different edition or blueprint loaded in memory changes every title, clock and report header. Desktop and mobile |
-| `test_app_theme.gd` | `AppTheme`: the palette is the only place colors live, one name per value, and the style and font factories |
+| `test_app_theme.gd` | `AppTheme`: the palette is the only place colors live, one name per value, and the style and font factories (Windows and Android keep the font list; a Mac asks for its system UI font after Segoe UI; `NEC_UI_FONT` forces a font for layout checks) |
 | `test_fx.gd` | helpers behind the visual layer: NEC chapter mapping for the report, stats to rows, gauge tint, and a bank sweep that every article maps to a chapter |
 | `test_answer_card_input.gd` | answer card tap versus drag: a scroll never selects a card (grading cannot be undone) |
 | `test_touch_scroll.gd` | `TouchScroll`: a finger swipe scrolls every list and never presses a button or answers a card; a tap still presses |
 | `test_safe_area.gd` | `SafeArea.margins` with synthetic notch and cutout insets (the real function, not a copy of its math) |
-| `test_project_settings.gd` | `project.godot` keeps the settings the touch model depends on (ConfigFile reads only `;` comments), and the export presets match its version |
+| `test_project_settings.gd` | `project.godot` keeps the settings the touch model depends on (ConfigFile reads only `;` comments), and the export presets match its version; the macOS preset is universal, ad-hoc signed, Retina, exports a `.zip`, uses the frozen bundle id and the 1024 px icon, packs what Windows packs and carries the Android version code as its build number |
 | `test_figure_table_fit.gd` | every question with both a figure and a reference table, at every standard window size and two choice shuffles: no page scroll before answering, and neither table scrolls. Desktop and mobile |
 | `test_hunt_keywords.gd` | code-book keywords on every record: the stem reads exactly as the bank has it, each keyword is marked, the INDEX line at rest is the hover/tap prompt and a pick names its entry, no keyword or heading holds a choice, the INDEX line goes after answering, speech is the same with the setting on or off, none in the Full Exam or with the setting off, and no page scroll before answering |
 | `test_hunt_keyword_input.gd` | keyword hover and tap through real input events in the viewport: the rest line is a prompt naming no entry, hover shows one entry until the pointer leaves, a click or finger tap pins it, a second tap brings back the prompt, an entry never grows the box, a drag is not a tap; a pick pulses the lookup box (not on unselect, after answering or with Reduce motion) |
@@ -100,7 +100,8 @@ regression fails its suite rather than appearing in the defect list. The test ta
 | `test_speak_question.py` | `src/speech/speak_question.py`, the edge-tts helper that pregenerates the bundle (against a fake Edge) |
 | `test_hunt_keywords.py` | `tools/pipeline/hunt_keywords.py --check`: the keyword file is fresh and no keyword gives the answer away |
 | `test_edition_migration_report.py` | the 2023 to 2026 migration report: a dry run is empty, a renumbering fixture is found |
-| `test_sync_identity.py`, `test_bump_version.py`, `test_branding_text.py`, `test_godot_env.py` | the app name comes from `data/app.json`, the version from `project.godot`, splash and banner text from data, the Godot version from `tools/godot.env` |
+| `test_sync_identity.py`, `test_bump_version.py`, `test_branding_text.py`, `test_godot_env.py` | the app name comes from `data/app.json`, the version from `project.godot` (the macOS short version and build number included), splash and banner text from data, the Godot version from `tools/godot.env` |
+| `test_make_release.py` | the macOS zip: the `.app` is copied from Godot's zip with its Unix mode bits, the texts sit beside it, and `check_macos_zip` catches a lost executable bit, DOS-made entries, a file added inside the signed bundle and a resource changed after signing; the Mac README gives the Gatekeeper steps |
 
 ## What IS covered
 

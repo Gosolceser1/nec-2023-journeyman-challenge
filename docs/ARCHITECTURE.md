@@ -32,7 +32,7 @@ src/
   speech/ speech_controller.gd  SpeechController: bundled clips, Edge voices and cache,
                                 native TTS, play queue, teach gate, voice picker
           voice_catalog.gd      VoiceCatalog: voices.json, US device voice names (docs/ANDROID_VOICES.md), voice.cfg
-          edge_tts_client.gd    EdgeTtsClient node: Edge voices over WebSocket, no Python (Windows and Android)
+          edge_tts_client.gd    EdgeTtsClient node: Edge voices over WebSocket, no Python (Windows, macOS, Android)
           speak_question.py     dev tool: edge-tts synthesis for tools/speech/pregenerate_speech.py (not shipped)
           speech_text.gd  speech_rules.gd  audio_explanation_generator.gd  unit_matcher.gd
                                 what gets spoken (see docs/VOICE_READING_RULES.md)
@@ -63,7 +63,7 @@ data/     question_bank.json (never edited by hand)  voices.json (default voice 
           menu.json         the main menu tabs and blocks (see "Main menu" below)
           math/             problem types, formula cards, table drills, exam step inputs, study tools
           edition.json      the NEC edition (year, labels, data folder): the one place the year is written
-          app.json          app name templates; frozen save folder and Android id; legacy names
+          app.json          app name templates; frozen save folder, Android and macOS ids; legacy names
           nec/2023/         the edition's data: articles.json (chapter and article titles), tables.json
                             (table values for the math helpers and nec_calc.py), hunt_keywords.json
                             (generated); pipeline only (excluded from exports): content_audit.json,
@@ -122,11 +122,12 @@ UI through `main`. Two patterns hang off it:
 member fails at parse time, not at runtime.
 
 Saved state lives in `user://`, which `application/config/use_custom_user_dir`
-puts at `%APPDATA%\NEC2023JourneymanChallenge` on Windows. That folder name and
-the Android package id (`com.livewire.nec2023.trainer`) are frozen in
-`data/app.json` and do not follow the edition: a new folder would strand every
-install's progress, a new package id would install a second app instead of
-upgrading. The first thing `_ready` does is `UserDirMigration.run()`: on a first
+puts at `%APPDATA%\NEC2023JourneymanChallenge` on Windows and
+`~/Library/Application Support/NEC2023JourneymanChallenge` on macOS. That folder
+name, the Android package id and the macOS bundle id (both
+`com.livewire.nec2023.trainer`) are frozen in `data/app.json` and do not follow
+the edition: a new folder would strand every install's progress, a new package
+or bundle id would install a second app instead of upgrading. The first thing `_ready` does is `UserDirMigration.run()`: on a first
 launch it copies `audio.cfg`, `voice.cfg` and `question_bag.cfg` from the pre-1.0
 folder (`%APPDATA%\Godot\app_userdata\<legacy project name>`, names listed in
 `data/app.json`), never deleting them, and leaves a marker so it runs once. The version shown in the menu footer

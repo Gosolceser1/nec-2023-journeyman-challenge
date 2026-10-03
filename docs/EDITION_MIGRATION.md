@@ -37,6 +37,8 @@ These stay as they are across editions (`data/app.json`, checked by
 - **Android package id** `com.livewire.nec2023.trainer`. A different id
   installs as a second app beside the old one instead of upgrading it, and the
   old app keeps the progress.
+- **macOS bundle id** `com.livewire.nec2023.trainer`
+  (`application/bundle_identifier`), for the same reason.
 - **Record ids** (`final-exam-#1-004`, ...) and the `id_prefix` values in
   `tools/pipeline/sources/exams/families.json`. The overlay, audits, masks,
   speech clips and saved progress are keyed by them.

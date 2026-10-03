@@ -6,9 +6,11 @@
 The version lives in project.godot (application/config/version; the app shows
 it via Main.version_label()). Copies rewritten here:
   export_presets.cfg  Windows file_version / product_version, Android version/name,
-                      Android version/code (one number for both presets, +1 per
-                      new version: Android refuses to upgrade to a lower or equal code),
-                      the release APK export_path (through sync_identity.py)
+                      macOS short_version, Android version/code (one number for both
+                      presets, +1 per new version: Android refuses to upgrade to a
+                      lower or equal code) and the macOS build number
+                      (application/version, the same number), the release APK and
+                      macOS zip export_paths (through sync_identity.py)
 Setting the current version again rewrites the copies without a new code.
 CHANGELOG.md, README.md and docs/ are written by hand at release time.
 """
@@ -26,6 +28,17 @@ from sync_identity import get_value, presets, set_value  # noqa: E402
 ROOT = Path(__file__).resolve().parents[2]
 VERSION_RE = re.compile(r"^\d+\.\d+\.\d+$")
 WINDOWS_KEYS = ("application/file_version", "application/product_version")
+MACOS_BUILD_KEY = "application/version"
+
+
+def _version_keys(platform: str) -> tuple[str, ...]:
+    if platform == "Windows Desktop":
+        return WINDOWS_KEYS
+    if platform == "Android":
+        return ("version/name",)
+    if platform == "macOS":
+        return ("application/short_version",)
+    return ()
 
 
 def _read(root: Path, name: str) -> str:
@@ -43,10 +56,16 @@ def copies(root: Path = ROOT) -> list[tuple[str, str]]:
     out = []
     for section, name, platform in presets(text):
         opts = section + ".options"
-        keys = WINDOWS_KEYS if platform == "Windows Desktop" else ("version/name",) if platform == "Android" else ()
-        for key in keys:
+        for key in _version_keys(platform):
             out.append((f"export_presets.cfg {name}: {key}", get_value(text, opts, key) or ""))
     return out
+
+
+def macos_builds(root: Path = ROOT) -> list[str]:
+    """application/version (CFBundleVersion) of every macOS preset."""
+    text = _read(root, "export_presets.cfg")
+    return [get_value(text, section + ".options", MACOS_BUILD_KEY) or ""
+            for section, _name, platform in presets(text) if platform == "macOS"]
 
 
 def android_codes(root: Path = ROOT) -> list[int]:
@@ -73,6 +92,8 @@ def check(root: Path = ROOT) -> list[str]:
     codes = android_codes(root)
     if len(set(codes)) > 1:
         problems.append(f"Android presets disagree on version/code: {codes}")
+    problems += [f"macOS build number (application/version) is {b!r}, the Android version/code is {codes[0]}"
+                 for b in macos_builds(root) if codes and b != str(codes[0])]
     problems += [p for p in sync_identity.sync(root, check=True) if "export_path" in p]
     return problems
 
@@ -92,11 +113,13 @@ def bump(new: str, root: Path = ROOT) -> list[str]:
     code = max(codes, default=0) + (1 if old != new else 0)
     for section, name, platform in presets(text):
         opts = section + ".options"
-        keys = WINDOWS_KEYS if platform == "Windows Desktop" else ("version/name",) if platform == "Android" else ()
-        for key in keys:
+        for key in _version_keys(platform):
             if get_value(text, opts, key) != new:
                 text = set_value(text, opts, key, new)
                 changes.append(f"{name}: {key} -> {new}")
+        if platform == "macOS" and get_value(text, opts, MACOS_BUILD_KEY) != str(code):
+            text = set_value(text, opts, MACOS_BUILD_KEY, str(code))
+            changes.append(f"{name}: {MACOS_BUILD_KEY} -> {code}")
         if platform == "Android":
             body = _section_text(text, opts)
             new_body = re.sub(r"^version/code=\d+(\r?)$", rf"version/code={code}\g<1>", body, count=1, flags=re.M)
